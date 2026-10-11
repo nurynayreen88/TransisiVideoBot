@@ -8,7 +8,7 @@ import tempfile
 from pathlib import Path
 
 from PIL import Image, ImageOps
-from telegram import Update
+from telegram import Update, ReplyKeyboardMarkup
 from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters
 
 logging.basicConfig(level=logging.INFO)
@@ -19,6 +19,8 @@ WIDTH = int(os.environ.get('VIDEO_WIDTH', '480'))
 HEIGHT = int(os.environ.get('VIDEO_HEIGHT', '854'))
 FPS = int(os.environ.get('VIDEO_FPS', '24'))
 STYLES = {'cinematic': 'fade', 'hybrid': 'smoothleft', 'morph': 'pixelize'}
+MENU = ReplyKeyboardMarkup([['🎬 Jana Video', '🎨 Pilih Gaya'], ['📋 Semak Gambar', '🗑 Mula Semula']], resize_keyboard=True, is_persistent=True)
+STYLE_MENU = ReplyKeyboardMarkup([['✨ Hybrid', '🎥 Cinematic'], ['🌀 Morph', '↩️ Menu Utama']], resize_keyboard=True, is_persistent=True)
 
 
 def render_video(images: list[Path], output: Path, music: Path | None = None, style: str = 'hybrid'):
@@ -102,16 +104,16 @@ def reset(context):
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     reset(context)
-    await update.message.reply_text('🎬 Bot Video Transisi V2 Hybrid\n\nHantar 1–5 gambar sebagai foto, satu demi satu. Hantar audio MP3 jika mahu muzik latar. Pilih /hybrid (default, gerakan sinematik lembut), /cinematic atau /morph, kemudian /jana. Morph ialah kesan visual, bukan AI generatif.\n\n/periksa — bilangan gambar\n/reset — mula semula')
+    await update.message.reply_text('🎬 TransisiVideoBot V2\n\n1. Hantar 1–5 gambar.\n2. Pilih gaya (pilihan).\n3. Tekan 🎬 Jana Video.\n\nBoleh juga hantar MP3 untuk muzik latar. Hybrid ialah pilihan asal; Morph ialah kesan visual, bukan AI generatif.', reply_markup=MENU)
 
 
 async def photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
     ids = context.user_data.setdefault('photos', [])
     if len(ids) >= MAX_IMAGES:
-        await update.message.reply_text(f'Maksimum {MAX_IMAGES} gambar. Taip /jana atau /reset.')
+        await update.message.reply_text(f'Maksimum {MAX_IMAGES} gambar. Tekan 🎬 Jana Video atau 🗑 Mula Semula.', reply_markup=MENU)
         return
     ids.append(update.message.photo[-1].file_id)
-    await update.message.reply_text(f'✅ Gambar {len(ids)}/{MAX_IMAGES} diterima. Hantar lagi atau /jana.')
+    await update.message.reply_text(f'✅ Gambar {len(ids)}/{MAX_IMAGES} diterima. Hantar lagi atau tekan 🎬 Jana Video.', reply_markup=MENU)
 
 
 async def audio(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -128,11 +130,34 @@ async def audio(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def choose_style(update: Update, context: ContextTypes.DEFAULT_TYPE):
     style = update.message.text.lstrip('/').split('@')[0].lower()
     context.user_data['style'] = style
-    await update.message.reply_text(f'Gaya {style} dipilih. Hantar gambar dan taip /jana.')
+    await update.message.reply_text(f'✅ Gaya {style} dipilih. Hantar gambar dan tekan 🎬 Jana Video.', reply_markup=MENU)
 
 
 async def status(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(f"Gambar: {len(context.user_data.get('photos', []))}/{MAX_IMAGES}. Muzik: {'ya' if context.user_data.get('music') else 'tiada'}. Durasi: {DURATION}s. Gaya: {context.user_data.get('style', 'hybrid')}.")
+
+
+async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    value = update.message.text.strip()
+    if value == '🎬 Jana Video':
+        await generate(update, context)
+    elif value == '🎨 Pilih Gaya':
+        await update.message.reply_text('Pilih gaya video:', reply_markup=STYLE_MENU)
+    elif value in ('✨ Hybrid', '🎥 Cinematic', '🌀 Morph'):
+        style = {'✨ Hybrid':'hybrid', '🎥 Cinematic':'cinematic', '🌀 Morph':'morph'}[value]
+        context.user_data['style'] = style
+        await update.message.reply_text(f'✅ Gaya {style} dipilih.', reply_markup=MENU)
+    elif value == '📋 Semak Gambar':
+        await status(update, context)
+    elif value == '🗑 Mula Semula':
+        if context.user_data.get('busy'):
+            await update.message.reply_text('Tunggu proses video semasa selesai dahulu.', reply_markup=MENU)
+        else:
+            await start(update, context)
+    elif value == '↩️ Menu Utama':
+        await update.message.reply_text('Menu utama:', reply_markup=MENU)
+    else:
+        await update.message.reply_text('Gunakan butang menu atau hantar gambar.', reply_markup=MENU)
 
 
 async def generate(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -188,6 +213,7 @@ def main():
     app.add_handler(CommandHandler('jana', generate, block=False))
     for style in STYLES:
         app.add_handler(CommandHandler(style, choose_style))
+    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, menu_text))
     app.add_handler(MessageHandler(filters.PHOTO, photo))
     app.add_handler(MessageHandler(filters.AUDIO | filters.Document.MimeType('audio/mpeg'), audio))
     url = os.environ.get('WEBHOOK_URL', '').rstrip('/')
