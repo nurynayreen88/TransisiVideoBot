@@ -8,7 +8,7 @@ import tempfile
 from pathlib import Path
 
 from PIL import Image, ImageOps
-from telegram import Update
+from telegram import Update, ReplyKeyboardMarkup
 from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters
 
 logging.basicConfig(level=logging.INFO)
@@ -18,15 +18,20 @@ DURATION = int(os.environ.get('VIDEO_SECONDS', '10'))
 WIDTH = int(os.environ.get('VIDEO_WIDTH', '480'))
 HEIGHT = int(os.environ.get('VIDEO_HEIGHT', '854'))
 FPS = int(os.environ.get('VIDEO_FPS', '24'))
+STYLES = {'cinematic': 'fade', 'hybrid': 'smoothleft', 'morph': 'pixelize'}
+MENU = ReplyKeyboardMarkup([['🎬 Jana Video', '🎨 Pilih Gaya'], ['📋 Semak Gambar', '🗑 Mula Semula']], resize_keyboard=True, is_persistent=True)
+STYLE_MENU = ReplyKeyboardMarkup([['✨ Hybrid', '🎥 Cinematic'], ['🌀 Morph', '↩️ Menu Utama']], resize_keyboard=True, is_persistent=True)
 
 
-def render_video(images: list[Path], output: Path, music: Path | None = None):
-    """Produce a crossfaded MP4 with gentle Ken Burns motion."""
+def render_video(images: list[Path], output: Path, music: Path | None = None, style: str = 'hybrid'):
+    """Produce CPU-friendly Ken Burns transitions. Morph is an approximation, not generative AI."""
+    if style not in STYLES:
+        raise ValueError("Unknown style")
     if not images:
         raise ValueError('No images')
     n = len(images)
     # Keep fades short enough for any image count and total duration.
-    fade = min(0.5, DURATION / (n * 4)) if n > 1 else 0
+    fade = min(0.7, DURATION / (n * 4)) if n > 1 else 0
     clip_duration = (DURATION + (n - 1) * fade) / n
     frames = max(1, round(clip_duration * FPS))
     with tempfile.TemporaryDirectory(prefix='render_') as td:
@@ -35,13 +40,27 @@ def render_video(images: list[Path], output: Path, music: Path | None = None):
         for i, path in enumerate(images):
             with Image.open(path) as original:
                 img = ImageOps.exif_transpose(original).convert('RGB')
-                img = ImageOps.fit(img, (WIDTH, HEIGHT), method=Image.Resampling.LANCZOS)
+                # Preserve framing: modest overscan gives zoompan room to move.
+                img = ImageOps.fit(img, (round(WIDTH * 1.12), round(HEIGHT * 1.12)), method=Image.Resampling.LANCZOS)
                 still = temp / f'still_{i}.jpg'
                 img.save(still, quality=90)
             clip = temp / f'clip_{i}.mp4'
-            # Alternate zoom in/out; zoompan generates smooth frame-by-frame movement.
-            zoom = "min(zoom+0.0008,1.12)" if i % 2 == 0 else "max(1.12-on*0.0008,1.0)"
-            vf = (f"zoompan=z='{zoom}':x='(iw-iw/zoom)/2':y='(ih-ih/zoom)/2':"
+            # Subtle editorial motion: vary direction, keep zoom under 8%.
+            # Expressions use the output-frame index 'on'; avoid abrupt jumps.
+            progress = f'min(on/{max(frames - 1, 1)},1)'
+            if i % 3 == 0:
+                zoom = f'1+0.075*{progress}'
+                x = '(iw-iw/zoom)/2'
+                y = '(ih-ih/zoom)/2'
+            elif i % 3 == 1:
+                zoom = f'1.075-0.055*{progress}'
+                x = f'(iw-iw/zoom)*(0.30+0.40*{progress})'
+                y = '(ih-ih/zoom)/2'
+            else:
+                zoom = f'1.025+0.045*{progress}'
+                x = '(iw-iw/zoom)/2'
+                y = f'(ih-ih/zoom)*(0.65-0.30*{progress})'
+            vf = (f"zoompan=z='{zoom}':x='{x}':y='{y}':"
                   f"d={frames}:s={WIDTH}x{HEIGHT}:fps={FPS},format=yuv420p")
             cmd = ['ffmpeg','-hide_banner','-loglevel','error','-y','-loop','1','-i',str(still),
                    '-vf',vf,'-frames:v',str(frames),'-an','-c:v','libx264',
@@ -60,7 +79,8 @@ def render_video(images: list[Path], output: Path, music: Path | None = None):
             for i in range(1,n):
                 label = f'[v{i}]'
                 offset = i * (clip_duration - fade)
-                chains.append(f'{last}[{i}:v]xfade=transition=fade:duration={fade:.4f}:offset={offset:.4f}{label}')
+                transition = ('fade' if style == 'cinematic' else ('fade' if i % 2 else 'smoothleft') if style == 'hybrid' else 'pixelize')
+                chains.append(f'{last}[{i}:v]xfade=transition={transition}:duration={fade:.4f}:offset={offset:.4f}{label}')
                 last = label
             cmd += ['-filter_complex',';'.join(chains),'-map',last,'-an','-c:v','libx264',
                     '-preset','veryfast','-crf','25','-pix_fmt','yuv420p',str(video)]
@@ -79,20 +99,21 @@ def render_video(images: list[Path], output: Path, music: Path | None = None):
 def reset(context):
     context.user_data['photos'] = []
     context.user_data['music'] = None
+    context.user_data['style'] = 'hybrid'
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     reset(context)
-    await update.message.reply_text('🎬 Bot Video Transisi V1\n\nHantar 1–5 gambar sebagai foto, satu demi satu. Hantar audio MP3 jika mahu muzik latar. Kemudian taip /jana.\n\n/periksa — bilangan gambar\n/reset — mula semula')
+    await update.message.reply_text('🎬 TransisiVideoBot V2\n\n1. Hantar 1–5 gambar.\n2. Pilih gaya (pilihan).\n3. Tekan 🎬 Jana Video.\n\nBoleh juga hantar MP3 untuk muzik latar. Hybrid ialah pilihan asal; Morph ialah kesan visual, bukan AI generatif.', reply_markup=MENU)
 
 
 async def photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
     ids = context.user_data.setdefault('photos', [])
     if len(ids) >= MAX_IMAGES:
-        await update.message.reply_text(f'Maksimum {MAX_IMAGES} gambar. Taip /jana atau /reset.')
+        await update.message.reply_text(f'Maksimum {MAX_IMAGES} gambar. Tekan 🎬 Jana Video atau 🗑 Mula Semula.', reply_markup=MENU)
         return
     ids.append(update.message.photo[-1].file_id)
-    await update.message.reply_text(f'✅ Gambar {len(ids)}/{MAX_IMAGES} diterima. Hantar lagi atau /jana.')
+    await update.message.reply_text(f'✅ Gambar {len(ids)}/{MAX_IMAGES} diterima. Hantar lagi atau tekan 🎬 Jana Video.', reply_markup=MENU)
 
 
 async def audio(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -106,8 +127,37 @@ async def audio(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text('🎵 Muzik disimpan untuk video ini.')
 
 
+async def choose_style(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    style = update.message.text.lstrip('/').split('@')[0].lower()
+    context.user_data['style'] = style
+    await update.message.reply_text(f'✅ Gaya {style} dipilih. Hantar gambar dan tekan 🎬 Jana Video.', reply_markup=MENU)
+
+
 async def status(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text(f"Gambar: {len(context.user_data.get('photos', []))}/{MAX_IMAGES}. Muzik: {'ya' if context.user_data.get('music') else 'tiada'}. Durasi: {DURATION}s.")
+    await update.message.reply_text(f"Gambar: {len(context.user_data.get('photos', []))}/{MAX_IMAGES}. Muzik: {'ya' if context.user_data.get('music') else 'tiada'}. Durasi: {DURATION}s. Gaya: {context.user_data.get('style', 'hybrid')}.")
+
+
+async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    value = update.message.text.strip()
+    if value == '🎬 Jana Video':
+        await generate(update, context)
+    elif value == '🎨 Pilih Gaya':
+        await update.message.reply_text('Pilih gaya video:', reply_markup=STYLE_MENU)
+    elif value in ('✨ Hybrid', '🎥 Cinematic', '🌀 Morph'):
+        style = {'✨ Hybrid':'hybrid', '🎥 Cinematic':'cinematic', '🌀 Morph':'morph'}[value]
+        context.user_data['style'] = style
+        await update.message.reply_text(f'✅ Gaya {style} dipilih.', reply_markup=MENU)
+    elif value == '📋 Semak Gambar':
+        await status(update, context)
+    elif value == '🗑 Mula Semula':
+        if context.user_data.get('busy'):
+            await update.message.reply_text('Tunggu proses video semasa selesai dahulu.', reply_markup=MENU)
+        else:
+            await start(update, context)
+    elif value == '↩️ Menu Utama':
+        await update.message.reply_text('Menu utama:', reply_markup=MENU)
+    else:
+        await update.message.reply_text('Gunakan butang menu atau hantar gambar.', reply_markup=MENU)
 
 
 async def generate(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -138,7 +188,7 @@ async def generate(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 music = folder / 'music.mp3'
                 await (await context.bot.get_file(context.user_data['music'])).download_to_drive(music)
             result = folder / 'video.mp4'
-            await asyncio.to_thread(render_video, paths, result, music)
+            await asyncio.to_thread(render_video, paths, result, music, context.user_data.get('style', 'hybrid'))
             with result.open('rb') as f:
                 await update.message.reply_video(video=f, caption='🎬 Video transisi siap!', supports_streaming=True,
                                                  read_timeout=120, write_timeout=120)
@@ -161,6 +211,9 @@ def main():
     app.add_handler(CommandHandler('reset', start))
     app.add_handler(CommandHandler('periksa', status))
     app.add_handler(CommandHandler('jana', generate, block=False))
+    for style in STYLES:
+        app.add_handler(CommandHandler(style, choose_style))
+    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, menu_text))
     app.add_handler(MessageHandler(filters.PHOTO, photo))
     app.add_handler(MessageHandler(filters.AUDIO | filters.Document.MimeType('audio/mpeg'), audio))
     url = os.environ.get('WEBHOOK_URL', '').rstrip('/')
