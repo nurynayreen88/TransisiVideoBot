@@ -241,7 +241,44 @@ def main():
     app.add_handler(CommandHandler('jana', generate, block=False))
     for style in STYLES:
         app.add_handler(CommandHandler(style, choose_style))
-    app.add_handler(CallbackQueryHandler(buttons, pattern='^(make|styles|check|reset|home|style:(hybrid|cinematic|morph))
+    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(make|styles|check|reset|home|style:(hybrid|cinematic|morph))    app.add_handler(MessageHandler(filters.PHOTO, photo))
+    app.add_handler(MessageHandler(filters.AUDIO | filters.Document.MimeType('audio/mpeg'), audio))
+    url = os.environ.get('WEBHOOK_URL', '').rstrip('/')
+    secret = os.environ.get('WEBHOOK_SECRET', '')
+    if not url.startswith('https://') or not secret:
+        raise RuntimeError('WEBHOOK_URL (https) dan WEBHOOK_SECRET wajib ditetapkan')
+    app.run_webhook(
+        listen='0.0.0.0',
+        port=int(os.environ.get('PORT', '10000')),
+        url_path='telegram',
+        webhook_url=url + '/telegram',
+        secret_token=secret,
+        drop_pending_updates=True,
+    )
+
+if __name__ == '__main__':
+    main()
+))
+    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, menu_text))
+    app.add_handler(MessageHandler(filters.PHOTO, photo))
+    app.add_handler(MessageHandler(filters.AUDIO | filters.Document.MimeType('audio/mpeg'), audio))
+    url = os.environ.get('WEBHOOK_URL', '').rstrip('/')
+    secret = os.environ.get('WEBHOOK_SECRET', '')
+    if not url.startswith('https://') or not secret:
+        raise RuntimeError('WEBHOOK_URL (https) dan WEBHOOK_SECRET wajib ditetapkan')
+    app.run_webhook(
+        listen='0.0.0.0',
+        port=int(os.environ.get('PORT', '10000')),
+        url_path='telegram',
+        webhook_url=url + '/telegram',
+        secret_token=secret,
+        drop_pending_updates=True,
+    )
+
+if __name__ == '__main__':
+    main()
+))
+    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, menu_text))
     app.add_handler(MessageHandler(filters.PHOTO, photo))
     app.add_handler(MessageHandler(filters.AUDIO | filters.Document.MimeType('audio/mpeg'), audio))
     url = os.environ.get('WEBHOOK_URL', '').rstrip('/')
