@@ -18,10 +18,13 @@ DURATION = int(os.environ.get('VIDEO_SECONDS', '10'))
 WIDTH = int(os.environ.get('VIDEO_WIDTH', '480'))
 HEIGHT = int(os.environ.get('VIDEO_HEIGHT', '854'))
 FPS = int(os.environ.get('VIDEO_FPS', '24'))
+STYLES = {'cinematic': 'fade', 'hybrid': 'smoothleft', 'morph': 'pixelize'}
 
 
-def render_video(images: list[Path], output: Path, music: Path | None = None):
-    """Produce a crossfaded MP4 with gentle Ken Burns motion."""
+def render_video(images: list[Path], output: Path, music: Path | None = None, style: str = 'hybrid'):
+    """Produce CPU-friendly Ken Burns transitions. Morph is an approximation, not generative AI."""
+    if style not in STYLES:
+        raise ValueError("Unknown style")
     if not images:
         raise ValueError('No images')
     n = len(images)
@@ -60,7 +63,8 @@ def render_video(images: list[Path], output: Path, music: Path | None = None):
             for i in range(1,n):
                 label = f'[v{i}]'
                 offset = i * (clip_duration - fade)
-                chains.append(f'{last}[{i}:v]xfade=transition=fade:duration={fade:.4f}:offset={offset:.4f}{label}')
+                transition = ('fade' if style == 'cinematic' else ('pixelize' if i % 2 else 'smoothleft') if style == 'hybrid' else 'pixelize')
+                chains.append(f'{last}[{i}:v]xfade=transition={transition}:duration={fade:.4f}:offset={offset:.4f}{label}')
                 last = label
             cmd += ['-filter_complex',';'.join(chains),'-map',last,'-an','-c:v','libx264',
                     '-preset','veryfast','-crf','25','-pix_fmt','yuv420p',str(video)]
@@ -79,11 +83,12 @@ def render_video(images: list[Path], output: Path, music: Path | None = None):
 def reset(context):
     context.user_data['photos'] = []
     context.user_data['music'] = None
+    context.user_data['style'] = 'hybrid'
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     reset(context)
-    await update.message.reply_text('🎬 Bot Video Transisi V1\n\nHantar 1–5 gambar sebagai foto, satu demi satu. Hantar audio MP3 jika mahu muzik latar. Kemudian taip /jana.\n\n/periksa — bilangan gambar\n/reset — mula semula')
+    await update.message.reply_text('🎬 Bot Video Transisi V2 Hybrid\n\nHantar 1–5 gambar sebagai foto, satu demi satu. Hantar audio MP3 jika mahu muzik latar. Pilih /hybrid (default), /cinematic atau /morph, kemudian /jana. Morph ialah kesan visual, bukan AI generatif.\n\n/periksa — bilangan gambar\n/reset — mula semula')
 
 
 async def photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -106,8 +111,14 @@ async def audio(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text('🎵 Muzik disimpan untuk video ini.')
 
 
+async def choose_style(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    style = update.message.text.lstrip('/').split('@')[0].lower()
+    context.user_data['style'] = style
+    await update.message.reply_text(f'Gaya {style} dipilih. Hantar gambar dan taip /jana.')
+
+
 async def status(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text(f"Gambar: {len(context.user_data.get('photos', []))}/{MAX_IMAGES}. Muzik: {'ya' if context.user_data.get('music') else 'tiada'}. Durasi: {DURATION}s.")
+    await update.message.reply_text(f"Gambar: {len(context.user_data.get('photos', []))}/{MAX_IMAGES}. Muzik: {'ya' if context.user_data.get('music') else 'tiada'}. Durasi: {DURATION}s. Gaya: {context.user_data.get('style', 'hybrid')}.")
 
 
 async def generate(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -138,7 +149,7 @@ async def generate(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 music = folder / 'music.mp3'
                 await (await context.bot.get_file(context.user_data['music'])).download_to_drive(music)
             result = folder / 'video.mp4'
-            await asyncio.to_thread(render_video, paths, result, music)
+            await asyncio.to_thread(render_video, paths, result, music, context.user_data.get('style', 'hybrid'))
             with result.open('rb') as f:
                 await update.message.reply_video(video=f, caption='🎬 Video transisi siap!', supports_streaming=True,
                                                  read_timeout=120, write_timeout=120)
@@ -161,6 +172,8 @@ def main():
     app.add_handler(CommandHandler('reset', start))
     app.add_handler(CommandHandler('periksa', status))
     app.add_handler(CommandHandler('jana', generate, block=False))
+    for style in STYLES:
+        app.add_handler(CommandHandler(style, choose_style))
     app.add_handler(MessageHandler(filters.PHOTO, photo))
     app.add_handler(MessageHandler(filters.AUDIO | filters.Document.MimeType('audio/mpeg'), audio))
     url = os.environ.get('WEBHOOK_URL', '').rstrip('/')
