@@ -29,7 +29,7 @@ def render_video(images: list[Path], output: Path, music: Path | None = None, st
         raise ValueError('No images')
     n = len(images)
     # Keep fades short enough for any image count and total duration.
-    fade = min(0.5, DURATION / (n * 4)) if n > 1 else 0
+    fade = min(0.7, DURATION / (n * 4)) if n > 1 else 0
     clip_duration = (DURATION + (n - 1) * fade) / n
     frames = max(1, round(clip_duration * FPS))
     with tempfile.TemporaryDirectory(prefix='render_') as td:
@@ -38,13 +38,27 @@ def render_video(images: list[Path], output: Path, music: Path | None = None, st
         for i, path in enumerate(images):
             with Image.open(path) as original:
                 img = ImageOps.exif_transpose(original).convert('RGB')
-                img = ImageOps.fit(img, (WIDTH, HEIGHT), method=Image.Resampling.LANCZOS)
+                # Preserve framing: modest overscan gives zoompan room to move.
+                img = ImageOps.fit(img, (round(WIDTH * 1.12), round(HEIGHT * 1.12)), method=Image.Resampling.LANCZOS)
                 still = temp / f'still_{i}.jpg'
                 img.save(still, quality=90)
             clip = temp / f'clip_{i}.mp4'
-            # Alternate zoom in/out; zoompan generates smooth frame-by-frame movement.
-            zoom = "min(zoom+0.0008,1.12)" if i % 2 == 0 else "max(1.12-on*0.0008,1.0)"
-            vf = (f"zoompan=z='{zoom}':x='(iw-iw/zoom)/2':y='(ih-ih/zoom)/2':"
+            # Subtle editorial motion: vary direction, keep zoom under 8%.
+            # Expressions use the output-frame index 'on'; avoid abrupt jumps.
+            progress = f'min(on/{max(frames - 1, 1)},1)'
+            if i % 3 == 0:
+                zoom = f'1+0.075*{progress}'
+                x = '(iw-iw/zoom)/2'
+                y = '(ih-ih/zoom)/2'
+            elif i % 3 == 1:
+                zoom = f'1.075-0.055*{progress}'
+                x = f'(iw-iw/zoom)*(0.30+0.40*{progress})'
+                y = '(ih-ih/zoom)/2'
+            else:
+                zoom = f'1.025+0.045*{progress}'
+                x = '(iw-iw/zoom)/2'
+                y = f'(ih-ih/zoom)*(0.65-0.30*{progress})'
+            vf = (f"zoompan=z='{zoom}':x='{x}':y='{y}':"
                   f"d={frames}:s={WIDTH}x{HEIGHT}:fps={FPS},format=yuv420p")
             cmd = ['ffmpeg','-hide_banner','-loglevel','error','-y','-loop','1','-i',str(still),
                    '-vf',vf,'-frames:v',str(frames),'-an','-c:v','libx264',
@@ -63,7 +77,7 @@ def render_video(images: list[Path], output: Path, music: Path | None = None, st
             for i in range(1,n):
                 label = f'[v{i}]'
                 offset = i * (clip_duration - fade)
-                transition = ('fade' if style == 'cinematic' else ('pixelize' if i % 2 else 'smoothleft') if style == 'hybrid' else 'pixelize')
+                transition = ('fade' if style == 'cinematic' else ('fade' if i % 2 else 'smoothleft') if style == 'hybrid' else 'pixelize')
                 chains.append(f'{last}[{i}:v]xfade=transition={transition}:duration={fade:.4f}:offset={offset:.4f}{label}')
                 last = label
             cmd += ['-filter_complex',';'.join(chains),'-map',last,'-an','-c:v','libx264',
@@ -88,7 +102,7 @@ def reset(context):
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     reset(context)
-    await update.message.reply_text('🎬 Bot Video Transisi V2 Hybrid\n\nHantar 1–5 gambar sebagai foto, satu demi satu. Hantar audio MP3 jika mahu muzik latar. Pilih /hybrid (default), /cinematic atau /morph, kemudian /jana. Morph ialah kesan visual, bukan AI generatif.\n\n/periksa — bilangan gambar\n/reset — mula semula')
+    await update.message.reply_text('🎬 Bot Video Transisi V2 Hybrid\n\nHantar 1–5 gambar sebagai foto, satu demi satu. Hantar audio MP3 jika mahu muzik latar. Pilih /hybrid (default, gerakan sinematik lembut), /cinematic atau /morph, kemudian /jana. Morph ialah kesan visual, bukan AI generatif.\n\n/periksa — bilangan gambar\n/reset — mula semula')
 
 
 async def photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
