@@ -188,7 +188,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await cleanup.delete()
     except Exception:
         logging.debug('Unable to delete keyboard cleanup message', exc_info=True)
-    await update.effective_message.reply_text('🎬 VIDEO SHOPEE AFFILIATE\n\nPilih fungsi di bawah:', reply_markup=main_menu())
+    await update.effective_message.reply_text('🎬 KLIPPO\nVideo Menarik, Semudah Klik.\n\nPilih fungsi di bawah:', reply_markup=main_menu())
 
 
 async def photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -319,7 +319,7 @@ async def convert_upload(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 await (await context.bot.get_file(item.file_id)).download_to_drive(source)
                 await asyncio.to_thread(convert_shopee, source, destination)
                 with destination.open('rb') as handle:
-                    await update.message.reply_document(document=handle, filename='TransisiVideoBot_Shopee_HQ.mp4', caption='✅ MP4 berkualiti tinggi. Muat turun sebagai fail untuk mengelakkan pemampatan tambahan. Kelulusan Shopee tertakluk pada peraturan platform.', reply_markup=main_menu())
+                    await update.message.reply_document(document=handle, filename='Klippo_Shopee_HQ.mp4', caption='✅ MP4 berkualiti tinggi. Muat turun sebagai fail untuk mengelakkan pemampatan tambahan. Kelulusan Shopee tertakluk pada peraturan platform.', reply_markup=main_menu())
         except Exception:
             logging.exception('Shopee conversion failed')
             await update.message.reply_text('Penukaran gagal. Cuba video MP4 yang lebih pendek atau kecil.', reply_markup=main_menu())
@@ -347,7 +347,7 @@ async def generate_merge(update: Update, context: ContextTypes.DEFAULT_TYPE, sty
                 output = Path(folder) / 'gabungan.mp4'
                 await asyncio.to_thread(merge_videos, paths, output, style)
                 with output.open('rb') as file:
-                    await query.message.reply_document(document=file, filename='TransisiVideoBot_Gabungan.mp4', caption='✅ Video siap digabung. Audio asal dikekalkan dan dipadankan dengan transisi.', reply_markup=main_menu())
+                    await query.message.reply_document(document=file, filename='Klippo_Gabungan.mp4', caption='✅ Video siap digabung. Audio asal dikekalkan dan dipadankan dengan transisi.', reply_markup=main_menu())
         except Exception:
             logging.exception('Video merge failed')
             await query.message.reply_text('Gabungan gagal. Cuba klip MP4 lebih pendek.', reply_markup=main_menu())
@@ -474,7 +474,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif action == 'confirm' and stage == 'confirm':
         await generate(update, context)
     elif action == 'subscription':
-        await query.message.reply_text('💎 LANGGANAN TRANSISIVIDEOBOT\n\nCadangan pelan Penyokong Awal: RM5 / 30 hari, sehingga 30 video sebulan.\n\nPembayaran dan pengaktifan VIP belum dibuka. Kami tidak akan meminta bayaran sebelum fungsi langganan siap.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
+        await query.message.reply_text('💎 LANGGANAN KLIPPO\n\nCadangan pelan Penyokong Awal: RM5 / 30 hari, sehingga 30 video sebulan.\n\nPembayaran dan pengaktifan VIP belum dibuka. Kami tidak akan meminta bayaran sebelum fungsi langganan siap.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
     elif action == 'account':
         await query.message.reply_text(f'👤 AKAUN SAYA\n\nID Telegram: {query.from_user.id}\nStatus: Akses percubaan (langganan belum diaktifkan).', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📋 Semak Bahan', callback_data='check'), InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
     elif action == 'help':
