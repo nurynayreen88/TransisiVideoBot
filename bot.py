@@ -279,7 +279,7 @@ def main():
     app.add_handler(CommandHandler('jana', generate, block=False))
     for style in STYLES:
         app.add_handler(CommandHandler(style, choose_style))
-    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(make|styles|music|check|reset|home|style:(hybrid|cinematic|morph)|music:(auto|cinematic|energetic|happy|luxury|nature|beauty|none|custom))))
+    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(make|styles|music|check|reset|home|style:(hybrid|cinematic|morph)|music:(auto|cinematic|energetic|happy|luxury|nature|beauty|none|custom))$'))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, menu_text))
     app.add_handler(MessageHandler(filters.PHOTO, photo))
     app.add_handler(MessageHandler(filters.AUDIO | filters.Document.MimeType('audio/mpeg'), audio))
