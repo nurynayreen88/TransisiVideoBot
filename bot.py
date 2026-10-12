@@ -348,9 +348,16 @@ async def generate_merge(update: Update, context: ContextTypes.DEFAULT_TYPE, sty
                 await asyncio.to_thread(merge_videos, paths, output, style)
                 with output.open('rb') as file:
                     await query.message.reply_document(document=file, filename='TransisiVideoBot_Gabungan.mp4', caption='✅ Video siap digabung. Audio asal dikekalkan dan dipadankan dengan transisi.', reply_markup=main_menu())
-        except Exception:
+        except Exception as exc:
             logging.exception('Video merge failed')
-            await query.message.reply_text('Gabungan gagal. Cuba klip MP4 lebih pendek.', reply_markup=main_menu())
+            detail = str(exc)
+            if 'FFmpeg merge error:' in detail:
+                reason = 'FFmpeg tidak dapat memproses gabungan. Semak log Render untuk mesej ralat sebenar.'
+            elif isinstance(exc, TimeoutError):
+                reason = 'Pemprosesan melebihi had masa pelayan.'
+            else:
+                reason = f'Jenis ralat: {type(exc).__name__}.'
+            await query.message.reply_text('❌ Gabungan video gagal. ' + reason + '\n\nSila cuba semula. Jika berulang, hantarkan log Render kepada pembangun.', reply_markup=main_menu())
         finally:
             context.user_data['busy'] = False
             reset(context)
