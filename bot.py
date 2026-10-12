@@ -278,7 +278,13 @@ async def convert_upload(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await update.message.reply_text('Maksimum 5 video. Tekan Selesai.')
             return
         clips.append(item.file_id)
-        await update.message.reply_text(f'Video {len(clips)}/5 diterima.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('✅ Selesai', callback_data='merge_done')]]))
+        context.user_data['stage'] = 'merge_wait_next'
+        rows = []
+        if len(clips) < 5:
+            rows.append([InlineKeyboardButton(f'➕ Hantar Video {len(clips) + 1}', callback_data='merge_next')])
+        if len(clips) >= 2:
+            rows.append([InlineKeyboardButton('✅ Selesai & Pilih Transisi', callback_data='merge_done')])
+        await update.message.reply_text(f'✅ Video {len(clips)} diterima dan disimpan sebagai urutan #{len(clips)}. Pilih langkah seterusnya.', reply_markup=InlineKeyboardMarkup(rows))
         return
     if context.user_data.get('stage') != 'convert':
         await update.message.reply_text('Tekan Tukar Video dahulu.', reply_markup=main_menu())
@@ -337,7 +343,7 @@ async def generate_merge(update: Update, context: ContextTypes.DEFAULT_TYPE, sty
                 output = Path(folder) / 'gabungan.mp4'
                 await asyncio.to_thread(merge_videos, paths, output, style)
                 with output.open('rb') as file:
-                    await query.message.reply_document(document=file, filename='TransisiVideoBot_Gabungan.mp4', caption='✅ Video siap digabung. Versi pertama tanpa audio asal.', reply_markup=main_menu())
+                    await query.message.reply_document(document=file, filename='TransisiVideoBot_Gabungan.mp4', caption='✅ Video siap digabung. Audio asal dikekalkan dan dipadankan dengan transisi.', reply_markup=main_menu())
         except Exception:
             logging.exception('Video merge failed')
             await query.message.reply_text('Gabungan gagal. Cuba klip MP4 lebih pendek.', reply_markup=main_menu())
@@ -380,9 +386,15 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         reset(context)
         context.user_data['stage'] = 'merge_upload'
         context.user_data['merge_files'] = []
-        await query.message.reply_text('🎞️ Hantar 2–5 video MP4 mengikut urutan. Maksimum 19 MB dan 20 saat setiap video. Gunakan 📎 → File untuk kualiti terbaik.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('✅ Selesai', callback_data='merge_done')], [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
+        await query.message.reply_text('🎞️ Hantar Video 1 dahulu sebagai MP4. Selepas diterima, tekan Hantar Video 2 dan seterusnya. Maksimum 5 video, 19 MB dan 20 saat setiap klip. Audio asal dikekalkan.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('✅ Selesai', callback_data='merge_done')], [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
+    elif action == 'merge_next':
+        if stage != 'merge_wait_next':
+            await query.message.reply_text('Sila mulakan Gabung Video dahulu.')
+            return
+        context.user_data['stage'] = 'merge_upload'
+        await query.message.reply_text(f"📤 Hantar Video {len(context.user_data.get('merge_files', [])) + 1} sebagai File / Document.")
     elif action == 'merge_done':
-        if stage != 'merge_upload' or len(context.user_data.get('merge_files', [])) < 2:
+        if stage not in ('merge_upload', 'merge_wait_next') or len(context.user_data.get('merge_files', [])) < 2:
             await query.message.reply_text('Hantar sekurang-kurangnya 2 video dahulu.')
             return
         context.user_data['stage'] = 'merge_style'
@@ -593,7 +605,7 @@ def main():
     app.add_handler(CommandHandler('jana', generate, block=False))
     for style in STYLES:
         app.add_handler(CommandHandler(style, choose_style))
-    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(make|convert|merge|merge_done|merge_style:(fade|smoothleft|slideleft|zoomin)|prompt|motion:(orbit|push|side|static)|photos_done|confirm|styles|music|music_previews|subscription|account|help|check|reset|home|preview:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|listen:(cinematic|energetic|happy|luxury|nature|beauty)|style:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|music:(auto|cinematic|energetic|happy|luxury|nature|beauty|none|custom))$'))
+    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(make|convert|merge|merge_next|merge_done|merge_style:(fade|smoothleft|slideleft|zoomin)|prompt|motion:(orbit|push|side|static)|photos_done|confirm|styles|music|music_previews|subscription|account|help|check|reset|home|preview:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|listen:(cinematic|energetic|happy|luxury|nature|beauty)|style:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|music:(auto|cinematic|energetic|happy|luxury|nature|beauty|none|custom))$'))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, menu_text))
     app.add_handler(MessageHandler(filters.PHOTO, photo))
     app.add_handler(MessageHandler(filters.VIDEO | filters.Document.MimeType('video/mp4'), convert_upload))
