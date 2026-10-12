@@ -315,21 +315,21 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif action == 'prompt':
         reset(context)
         context.user_data['stage'] = 'prompt_product'
-        await query.message.reply_text('✍️ PROMPT VIDEO AFFILIATE\\n\\nLangkah 1/3: Nyatakan produk secara tepat: nama, warna, bentuk, bahan, logo dan ciri yang mesti kekal sama. Contoh: Beg tote hitam kulit PU, zip emas, logo kecil di tengah.')
+        await query.message.reply_text('✍️ PROMPT VIDEO AFFILIATE\n\nLangkah 1/3: Nyatakan produk secara tepat: nama, warna, bentuk, bahan, logo dan ciri yang mesti kekal sama. Contoh: Beg tote hitam kulit PU, zip emas, logo kecil di tengah.')
     elif action.startswith('motion:') and stage == 'prompt_motion':
         motion = action.split(':', 1)[1]
-        motions = {\'orbit\': \'A controlled 30-degree camera arc around the product, not a full 360-degree rotation; preserve the visible product geometry.\', \'push\': \'A slow forward dolly-in with gentle parallax; no object deformation.\', \'side\': \'A smooth left-to-right camera slide with stable product proportions.\', \'static\': \'A locked camera with subtle studio lighting changes only.\'}
+        motions = {'orbit': 'A controlled 30-degree camera arc around the product, not a full 360-degree rotation; preserve the visible product geometry.', 'push': 'A slow forward dolly-in with gentle parallax; no object deformation.', 'side': 'A smooth left-to-right camera slide with stable product proportions.', 'static': 'A locked camera with subtle studio lighting changes only.'}
         if motion in motions:
-            product = context.user_data.get(\'prompt_product\', \'the reference product\')
-            scene = context.user_data.get(\'prompt_scene\', \'clean studio background\')
-            prompt = (f\'Create a 10-second vertical 9:16 product affiliate video. PRODUCT REFERENCE: {product}. '
-                      f\'SCENE: {scene}. CAMERA: {motions[motion]} '
-                      \'Use the uploaded product image as the strict visual reference. Keep the exact identity, shape, color, proportions, branding, labels and number of parts unchanged throughout every frame. '
-                      \'The product remains the hero, fully visible and sharply focused. Use realistic lighting and smooth physically plausible movement. '
-                      \'Do not invent extra accessories, alter text or logos, morph the object, duplicate it, introduce people or hands, add captions, watermarks or UI. '
-                      \'If unseen sides of the product are not provided, do not fabricate them; use only a modest camera arc. No abrupt cuts or flicker. Output 10 seconds, portrait 9:16, high quality.\')
-            context.user_data[\'stage\'] = \'prompt_done\'
-            await query.message.reply_text(\'✅ PROMPT SIAP (salin teks di bawah):\\n\\n\' + prompt, reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(\'✍️ Prompt Baharu\', callback_data=\'prompt\'), InlineKeyboardButton(\'↩️ Menu Utama\', callback_data=\'home\')]]))
+            product = context.user_data.get('prompt_product', 'the reference product')
+            scene = context.user_data.get('prompt_scene', 'clean studio background')
+            prompt = (f'Create a 10-second vertical 9:16 product affiliate video. PRODUCT REFERENCE: {product}. '
+                      f'SCENE: {scene}. CAMERA: {motions[motion]} '
+                      'Use the uploaded product image as the strict visual reference. Keep the exact identity, shape, color, proportions, branding, labels and number of parts unchanged throughout every frame. '
+                      'The product remains the hero, fully visible and sharply focused. Use realistic lighting and smooth physically plausible movement. '
+                      'Do not invent extra accessories, alter text or logos, morph the object, duplicate it, introduce people or hands, add captions, watermarks or UI. '
+                      'If unseen sides of the product are not provided, do not fabricate them; use only a modest camera arc. No abrupt cuts or flicker. Output 10 seconds, portrait 9:16, high quality.')
+            context.user_data['stage'] = 'prompt_done'
+            await query.message.reply_text('✅ PROMPT SIAP (salin teks di bawah):\n\n' + prompt, reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('✍️ Prompt Baharu', callback_data='prompt'), InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
     elif action == 'convert':
         reset(context)
         context.user_data['stage'] = 'convert'
