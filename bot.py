@@ -9,6 +9,7 @@ from pathlib import Path
 
 from PIL import Image, ImageOps
 from video_merge import merge_videos
+from fusion_animation import fusion_gif
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardRemove
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler, ContextTypes, MessageHandler, filters
 
@@ -176,6 +177,14 @@ def reset(context):
     context.user_data['music_choice'] = 'auto'
     context.user_data['style'] = 'hybrid'
     context.user_data['stage'] = 'home'
+
+
+async def admin(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    allowed = os.environ.get('ADMIN_USER_IDS', '37141287').split(',')
+    if str(update.effective_user.id) not in [x.strip() for x in allowed]:
+        await update.effective_message.reply_text('Akses tidak dibenarkan.')
+        return
+    await update.effective_message.reply_text('🛡️ KLIPPO ADMIN\\n\\n🎞️ Gabung Video: Aktif\\n🎬 Jana Video: Aktif\\n🔄 Tukar Format: Aktif\\n💎 Langganan: Belum aktif')
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -604,6 +613,7 @@ def main():
         raise RuntimeError('FFmpeg belum dipasang')
     app = Application.builder().token(TOKEN).build()
     app.add_handler(CommandHandler('start', start))
+    app.add_handler(CommandHandler('admin', admin))
     app.add_handler(CommandHandler('reset', start))
     app.add_handler(CommandHandler('periksa', status))
     app.add_handler(CommandHandler('jana', generate, block=False))
