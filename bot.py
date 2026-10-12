@@ -346,7 +346,11 @@ async def generate_merge(update: Update, context: ContextTypes.DEFAULT_TYPE, sty
     async with lock:
         context.user_data['busy'] = True
         try:
-            await query.message.reply_text('⏳ Sedang menggabungkan video...')
+            animation = None
+            try:
+                animation = await query.message.reply_animation(animation=fusion_gif(), caption='⚡ Watak Klippo cuba bergabung... tunggu sebentar.')
+            except Exception:
+                logging.exception('Fusion animation unavailable')
             with tempfile.TemporaryDirectory(prefix='merge_') as folder:
                 paths = []
                 for index, file_id in enumerate(context.user_data['merge_files']):
