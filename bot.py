@@ -8,7 +8,7 @@ import tempfile
 from pathlib import Path
 
 from PIL import Image, ImageOps
-from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler, ContextTypes, MessageHandler, filters
 
 logging.basicConfig(level=logging.INFO)
@@ -36,6 +36,15 @@ STYLE_LABELS = {
 }
 MUSIC_CHOICES = ('auto', 'cinematic', 'energetic', 'happy', 'luxury', 'nature', 'beauty', 'none', 'custom')
 MUSIC_DIR = Path(__file__).resolve().parent / 'music'
+
+def bottom_menu():
+    return ReplyKeyboardMarkup([
+        ['🎬 Jana Video Affiliate', '🔄 Tukar Format Video'],
+        ['✍️ Sediakan Prompt Video'],
+        ['💎 Langganan', '👤 Akaun Saya'],
+        ['❓ Bantuan'],
+    ], resize_keyboard=True, is_persistent=True)
+
 
 def photos_menu():
     return InlineKeyboardMarkup([[InlineKeyboardButton('✅ Selesai Hantar Gambar', callback_data='photos_done')], [InlineKeyboardButton('🗑 Mula Semula', callback_data='reset')]])
@@ -181,7 +190,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.effective_message.reply_text('Video sedang diproses. Sila tunggu.')
         return
     reset(context)
-    await update.effective_message.reply_text('🎬 VIDEO SHOPEE AFFILIATE\n\nTekan Jana Video untuk bermula.', reply_markup=main_menu())
+    await update.effective_message.reply_text('🎬 VIDEO SHOPEE AFFILIATE\n\nPilih fungsi menggunakan butang di bawah.', reply_markup=bottom_menu())
 
 
 async def photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -417,6 +426,38 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
     stage = context.user_data.get('stage')
     value = update.message.text.strip()
+    shortcuts = {
+        '🎬 Jana Video Affiliate': 'make',
+        '🔄 Tukar Format Video': 'convert',
+        '✍️ Sediakan Prompt Video': 'prompt',
+        '💎 Langganan': 'subscription',
+        '👤 Akaun Saya': 'account',
+        '❓ Bantuan': 'help',
+        '🗑 Mula Semula': 'home',
+    }
+    if value in shortcuts:
+        action = shortcuts[value]
+        if action == 'make':
+            reset(context)
+            context.user_data['stage'] = 'photos'
+            await update.message.reply_text('Langkah 1/4 — Hantar 1–5 gambar produk. Tekan Selesai apabila cukup.', reply_markup=photos_menu())
+        elif action == 'convert':
+            reset(context)
+            context.user_data['stage'] = 'convert'
+            await update.message.reply_text('🔄 TUKAR FORMAT VIDEO\n\nTekan 📎 → File / Fail → pilih video MP4 asal. Bot akan memprosesnya secara automatik.', reply_markup=main_menu())
+        elif action == 'prompt':
+            reset(context)
+            context.user_data['stage'] = 'prompt_product'
+            await update.message.reply_text('✍️ PROMPT VIDEO AFFILIATE\n\nLangkah 1/3: Terangkan produk dengan tepat termasuk warna, bentuk, bahan dan logo.')
+        elif action == 'subscription':
+            await update.message.reply_text('💎 LANGGANAN\n\nPelan RM5 / 30 hari masih cadangan. Pembayaran belum diaktifkan.')
+        elif action == 'account':
+            await update.message.reply_text(f'👤 AKAUN SAYA\n\nID Telegram: {update.effective_user.id}\nLangganan belum diaktifkan.')
+        elif action == 'help':
+            await update.message.reply_text('❓ BANTUAN\n\nJana Video: hantar gambar, pilih gaya dan muzik.\nTukar Format: hantar MP4.\nPrompt: terangkan produk dan pilih gerakan kamera.')
+        else:
+            await start(update, context)
+        return
     if stage == 'prompt_product':
         if len(value) < 8:
             await update.message.reply_text('Sila beri penerangan produk yang lebih khusus (sekurang-kurangnya 8 aksara).')
