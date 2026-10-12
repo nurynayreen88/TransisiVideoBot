@@ -183,7 +183,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.effective_message.reply_text('Video sedang diproses. Sila tunggu.')
         return
     reset(context)
-    await update.effective_message.reply_text('⌨️ Menu papan kekunci lama ditutup.', reply_markup=ReplyKeyboardRemove())
+    await update.effective_message.reply_text('​', reply_markup=ReplyKeyboardRemove(), disable_notification=True)
     await update.effective_message.reply_text('🎬 VIDEO SHOPEE AFFILIATE\n\nPilih fungsi di bawah:', reply_markup=main_menu())
 
 
