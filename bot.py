@@ -18,7 +18,22 @@ DURATION = int(os.environ.get('VIDEO_SECONDS', '10'))
 WIDTH = int(os.environ.get('VIDEO_WIDTH', '480'))
 HEIGHT = int(os.environ.get('VIDEO_HEIGHT', '854'))
 FPS = int(os.environ.get('VIDEO_FPS', '24'))
-STYLES = {'cinematic': 'fade', 'hybrid': 'smoothleft', 'morph': 'pixelize'}
+STYLES = {
+    'hybrid': ('smoothleft', 'smoothup', 'fade'),
+    'cinematic': ('fade', 'fadeblack'),
+    'luxury': ('fadeblack', 'circleopen'),
+    'dynamic': ('slideleft', 'slideright', 'slideup'),
+    'zoom': ('zoomin', 'circleopen'),
+    'smooth': ('smoothleft', 'smoothright', 'smoothup'),
+    'creative': ('wipeleft', 'wiperight', 'radial'),
+    'morph': ('pixelize', 'circleopen'),
+}
+STYLE_LABELS = {
+    'hybrid': '✨ Hybrid', 'cinematic': '🎥 Cinematic',
+    'luxury': '💎 Luxury Reveal', 'dynamic': '⚡ Dynamic',
+    'zoom': '🔍 Zoom Reveal', 'smooth': '🌊 Smooth Flow',
+    'creative': '🎨 Creative Wipe', 'morph': '🌀 Morph-style',
+}
 MUSIC_CHOICES = ('auto', 'cinematic', 'energetic', 'happy', 'luxury', 'nature', 'beauty', 'none', 'custom')
 MUSIC_DIR = Path(__file__).resolve().parent / 'music'
 
@@ -28,20 +43,22 @@ def photos_menu():
 
 def main_menu():
     return InlineKeyboardMarkup([
-        [InlineKeyboardButton('🎬 Jana Video Produk', callback_data='make')],
-        [InlineKeyboardButton('🔄 Tukar Video ke Format Shopee', callback_data='convert')],
+        [InlineKeyboardButton('🎬 Jana Video Affiliate', callback_data='make')],
+        [InlineKeyboardButton('🔄 Tukar Format Video', callback_data='convert')],
         [InlineKeyboardButton('💎 Langganan', callback_data='subscription'), InlineKeyboardButton('👤 Akaun Saya', callback_data='account')],
         [InlineKeyboardButton('❓ Bantuan', callback_data='help')],
     ])
 
 
 def style_menu():
-    return InlineKeyboardMarkup([
-        [InlineKeyboardButton('▶️ Contoh Hybrid', callback_data='preview:hybrid'), InlineKeyboardButton('✨ Pilih Hybrid', callback_data='style:hybrid')],
-        [InlineKeyboardButton('▶️ Contoh Cinematic', callback_data='preview:cinematic'), InlineKeyboardButton('🎥 Pilih Cinematic', callback_data='style:cinematic')],
-        [InlineKeyboardButton('▶️ Contoh Morph', callback_data='preview:morph'), InlineKeyboardButton('🌀 Pilih Morph', callback_data='style:morph')],
-        [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
-    ])
+    rows = []
+    for key, label in STYLE_LABELS.items():
+        rows.append([
+            InlineKeyboardButton('▶️ Contoh', callback_data=f'preview:{key}'),
+            InlineKeyboardButton(label, callback_data=f'style:{key}'),
+        ])
+    rows.append([InlineKeyboardButton('↩️ Menu Utama', callback_data='home')])
+    return InlineKeyboardMarkup(rows)
 
 
 def music_menu():
@@ -133,7 +150,7 @@ def render_video(images: list[Path], output: Path, music: Path | None = None, st
             for i in range(1,n):
                 label = f'[v{i}]'
                 offset = i * (clip_duration - fade)
-                transition = ('fadeblack' if style == 'cinematic' and i % 2 == 0 else 'fade' if style == 'cinematic' else ('smoothleft' if i % 2 else 'smoothup') if style == 'hybrid' else ('circleopen' if i % 2 else 'zoomin'))
+                transition = STYLES[style][(i - 1) % len(STYLES[style])]
                 chains.append(f'{last}[{i}:v]xfade=transition={transition}:duration={fade:.4f}:offset={offset:.4f}{label}')
                 last = label
             cmd += ['-filter_complex',';'.join(chains),'-map',last,'-an','-c:v','libx264',
@@ -163,7 +180,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.effective_message.reply_text('Video sedang diproses. Sila tunggu.')
         return
     reset(context)
-    await update.effective_message.reply_text('🎬 PEMBUAT VIDEO MUDAH\n\nTekan Jana Video untuk bermula.', reply_markup=main_menu())
+    await update.effective_message.reply_text('🎬 VIDEO SHOPEE AFFILIATE\n\nTekan Jana Video untuk bermula.', reply_markup=main_menu())
 
 
 async def photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -245,7 +262,7 @@ def convert_shopee(source: Path, destination: Path):
 
 async def convert_upload(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if context.user_data.get('stage') != 'convert':
-        await update.message.reply_text('Tekan Tukar Video ke Format Shopee dahulu.', reply_markup=main_menu())
+        await update.message.reply_text('Tekan Tukar Video dahulu.', reply_markup=main_menu())
         return
     if context.user_data.get('busy'):
         await update.message.reply_text('Pemprosesan sedang berjalan.')
@@ -297,7 +314,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif action == 'convert':
         reset(context)
         context.user_data['stage'] = 'convert'
-        await query.message.reply_text('🔄 TUKAR VIDEO KE FORMAT SHOPEE\n\nUntuk kualiti terbaik:\n1. Tekan ikon 📎 di ruang mesej.\n2. Pilih File / Fail (bukan Gallery / Video).\n3. Pilih video MP4 asal Gemini dan hantar.\n\nBot akan menukar format secara automatik dan menghantar hasil sebagai fail MP4.\n\nNota: Telegram mungkin memampatkan video yang dihantar melalui Gallery / Video.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
+        await query.message.reply_text('🔄 TUKAR FORMAT VIDEO UNTUK AFFILIATE\n\nUntuk kualiti terbaik:\n1. Tekan ikon 📎 di ruang mesej.\n2. Pilih File / Fail (bukan Gallery / Video).\n3. Pilih video MP4 asal dan hantar.\n\nBot akan menukar format secara automatik dan menghantar hasil sebagai fail MP4.\n\nNota: Telegram mungkin memampatkan video yang dihantar melalui Gallery / Video.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
     elif action == 'photos_done':
         if stage != 'photos' or not context.user_data.get('photos'):
             await query.message.reply_text('Hantar sekurang-kurangnya satu gambar dahulu.', reply_markup=photos_menu())
@@ -444,7 +461,7 @@ def main():
     app.add_handler(CommandHandler('jana', generate, block=False))
     for style in STYLES:
         app.add_handler(CommandHandler(style, choose_style))
-    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(make|convert|photos_done|confirm|styles|music|music_previews|subscription|account|help|check|reset|home|preview:(hybrid|cinematic|morph)|listen:(cinematic|energetic|happy|luxury|nature|beauty)|style:(hybrid|cinematic|morph)|music:(auto|cinematic|energetic|happy|luxury|nature|beauty|none|custom))$'))
+    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(make|convert|photos_done|confirm|styles|music|music_previews|subscription|account|help|check|reset|home|preview:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|listen:(cinematic|energetic|happy|luxury|nature|beauty)|style:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|music:(auto|cinematic|energetic|happy|luxury|nature|beauty|none|custom))$'))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, menu_text))
     app.add_handler(MessageHandler(filters.PHOTO, photo))
     app.add_handler(MessageHandler(filters.VIDEO | filters.Document.MimeType('video/mp4'), convert_upload))
