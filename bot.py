@@ -258,7 +258,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif action.startswith('style:') and stage == 'style':
         context.user_data['style'] = action.split(':', 1)[1]
         context.user_data['stage'] = 'music'
-        await query.message.reply_text(f"✅ Gaya {context.user_data['style']} dipilih.\\nLangkah 3/4 — Pilih muzik:", reply_markup=music_menu())
+        await query.message.reply_text(f"✅ Gaya {context.user_data['style']} dipilih.\nLangkah 3/4 — Pilih muzik:", reply_markup=music_menu())
     elif action == 'music' and stage in ('music', 'confirm'):
         context.user_data['stage'] = 'music'
         await query.message.reply_text('Langkah 3/4 — Pilih muzik:', reply_markup=music_menu())
@@ -280,7 +280,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             if choice != 'custom':
                 context.user_data['music'] = None
             context.user_data['stage'] = 'confirm'
-            await query.message.reply_text(('Hantar MP3 sendiri, kemudian tekan Hasilkan Video.' if choice == 'custom' else f'✅ Muzik {choice} dipilih.\\nLangkah 4/4 — Semak dan hasilkan.'), reply_markup=confirm_menu())
+            await query.message.reply_text(('Hantar MP3 sendiri, kemudian tekan Hasilkan Video.' if choice == 'custom' else f'✅ Muzik {choice} dipilih.\nLangkah 4/4 — Semak dan hasilkan.'), reply_markup=confirm_menu())
     elif action == 'confirm' and stage == 'confirm':
         await generate(update, context)
     elif action == 'check':
@@ -359,7 +359,7 @@ def main():
     app.add_handler(CommandHandler('jana', generate, block=False))
     for style in STYLES:
         app.add_handler(CommandHandler(style, choose_style))
-    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(make|photos_done|confirm|styles|music|music_previews|check|reset|home|preview:(hybrid|cinematic|morph)|listen:(cinematic|energetic|happy|luxury|nature|beauty)|style:(hybrid|cinematic|morph)|music:(auto|cinematic|energetic|happy|luxury|nature|beauty|none|custom))))
+    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(make|photos_done|confirm|styles|music|music_previews|check|reset|home|preview:(hybrid|cinematic|morph)|listen:(cinematic|energetic|happy|luxury|nature|beauty)|style:(hybrid|cinematic|morph)|music:(auto|cinematic|energetic|happy|luxury|nature|beauty|none|custom))$'))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, menu_text))
     app.add_handler(MessageHandler(filters.PHOTO, photo))
     app.add_handler(MessageHandler(filters.AUDIO | filters.Document.MimeType('audio/mpeg'), audio))
