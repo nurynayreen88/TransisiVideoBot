@@ -227,7 +227,7 @@ def convert_shopee(source: Path, destination: Path):
         cmd += ['-f', 'lavfi', '-i', 'anullsrc=channel_layout=stereo:sample_rate=44100',
                 '-map', '1:a:0', '-c:a', 'aac', '-b:a', '128k', '-shortest']
     cmd += ['-vf', vf, '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '23',
-            '-profile:v', 'high', '-level:v', '3.1', '-pix_fmt', 'yuv420p',
+            '-profile:v', 'high', '-level:v', '3.2', '-pix_fmt', 'yuv420p',
             '-movflags', '+faststart', '-max_muxing_queue_size', '1024', str(destination)]
     subprocess.run(cmd, check=True, timeout=240)
 
