@@ -9,6 +9,7 @@ from pathlib import Path
 
 from PIL import Image, ImageOps
 from video_merge import merge_videos
+from fusion_animation import fusion_gif
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardRemove
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler, ContextTypes, MessageHandler, filters
 
@@ -178,6 +179,14 @@ def reset(context):
     context.user_data['stage'] = 'home'
 
 
+async def admin(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    allowed = os.environ.get('ADMIN_USER_IDS', '37141287').split(',')
+    if str(update.effective_user.id) not in [x.strip() for x in allowed]:
+        await update.effective_message.reply_text('Akses tidak dibenarkan.')
+        return
+    await update.effective_message.reply_text('🛡️ KLIPPO ADMIN\\n\\n🎞️ Gabung Video: Aktif\\n🎬 Jana Video: Aktif\\n🔄 Tukar Format: Aktif\\n💎 Langganan: Belum aktif')
+
+
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if context.user_data.get('busy'):
         await update.effective_message.reply_text('Video sedang diproses. Sila tunggu.')
@@ -337,7 +346,11 @@ async def generate_merge(update: Update, context: ContextTypes.DEFAULT_TYPE, sty
     async with lock:
         context.user_data['busy'] = True
         try:
-            await query.message.reply_text('⏳ Sedang menggabungkan video...')
+            animation = None
+            try:
+                animation = await query.message.reply_animation(animation=fusion_gif(), caption='⚡ Watak Klippo cuba bergabung... tunggu sebentar.')
+            except Exception:
+                logging.exception('Fusion animation unavailable')
             with tempfile.TemporaryDirectory(prefix='merge_') as folder:
                 paths = []
                 for index, file_id in enumerate(context.user_data['merge_files']):
@@ -346,6 +359,10 @@ async def generate_merge(update: Update, context: ContextTypes.DEFAULT_TYPE, sty
                     paths.append(path)
                 output = Path(folder) / 'gabungan.mp4'
                 await asyncio.to_thread(merge_videos, paths, output, style)
+                try:
+                    if animation: await animation.delete()
+                    await query.message.reply_animation(animation=fusion_gif(True))
+                except Exception: logging.exception('Fusion completion display failed')
                 with output.open('rb') as file:
                     await query.message.reply_document(document=file, filename='Klippo_Gabungan.mp4', caption='✅ Video siap digabung. Audio asal dikekalkan dan dipadankan dengan transisi.', reply_markup=main_menu(), write_timeout=240, read_timeout=120, connect_timeout=30)
         except Exception:
@@ -604,6 +621,7 @@ def main():
         raise RuntimeError('FFmpeg belum dipasang')
     app = Application.builder().token(TOKEN).build()
     app.add_handler(CommandHandler('start', start))
+    app.add_handler(CommandHandler('admin', admin))
     app.add_handler(CommandHandler('reset', start))
     app.add_handler(CommandHandler('periksa', status))
     app.add_handler(CommandHandler('jana', generate, block=False))
