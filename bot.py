@@ -329,7 +329,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                       'Do not invent extra accessories, alter text or logos, morph the object, duplicate it, introduce people or hands, add captions, watermarks or UI. '
                       'If unseen sides of the product are not provided, do not fabricate them; use only a modest camera arc. No abrupt cuts or flicker. Output 10 seconds, portrait 9:16, high quality.')
             context.user_data['stage'] = 'prompt_done'
-            await query.message.reply_text('✅ PROMPT SIAP (salin teks di bawah):\n\n' + prompt, reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('✍️ Prompt Baharu', callback_data='prompt'), InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
+            await query.message.reply_text('✅ PROMPT SIAP (salin teks di bawah):\n\n' + prompt, reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('🤖 Buka NexaBot', url='https://t.me/aigeneratornexa_bot?start=ref37141287'), InlineKeyboardButton('✨ Buka Gemini', url='https://gemini.google.com/')], [InlineKeyboardButton('✍️ Prompt Baharu', callback_data='prompt'), InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
     elif action == 'convert':
         reset(context)
         context.user_data['stage'] = 'convert'
