@@ -347,7 +347,7 @@ async def generate_merge(update: Update, context: ContextTypes.DEFAULT_TYPE, sty
                 output = Path(folder) / 'gabungan.mp4'
                 await asyncio.to_thread(merge_videos, paths, output, style)
                 with output.open('rb') as file:
-                    await query.message.reply_document(document=file, filename='Klippo_Gabungan.mp4', caption='✅ Video siap digabung. Audio asal dikekalkan dan dipadankan dengan transisi.', reply_markup=main_menu())
+                    await query.message.reply_document(document=file, filename='Klippo_Gabungan.mp4', caption='✅ Video siap digabung. Audio asal dikekalkan dan dipadankan dengan transisi.', reply_markup=main_menu(), write_timeout=240, read_timeout=120, connect_timeout=30)
         except Exception:
             logging.exception('Video merge failed')
             await query.message.reply_text('Gabungan gagal. Cuba klip MP4 lebih pendek.', reply_markup=main_menu())
