@@ -345,8 +345,9 @@ async def generate_merge(update: Update, context: ContextTypes.DEFAULT_TYPE, sty
         return
     async with lock:
         context.user_data['busy'] = True
+        animation = None
+        success_animation = None
         try:
-            animation = None
             try:
                 animation = await query.message.reply_animation(animation=fusion_gif(), caption='⚡ Watak Klippo cuba bergabung... tunggu sebentar.')
             except Exception:
@@ -360,15 +361,31 @@ async def generate_merge(update: Update, context: ContextTypes.DEFAULT_TYPE, sty
                 output = Path(folder) / 'gabungan.mp4'
                 await asyncio.to_thread(merge_videos, paths, output, style)
                 try:
-                    if animation: await animation.delete()
-                    await query.message.reply_animation(animation=fusion_gif(True))
-                except Exception: logging.exception('Fusion completion display failed')
+                    if animation:
+                        await animation.delete()
+                        animation = None
+                    success_animation = await query.message.reply_animation(animation=fusion_gif(True))
+                    await asyncio.sleep(2)
+                except Exception:
+                    logging.exception('Fusion completion display failed')
                 with output.open('rb') as file:
                     await query.message.reply_document(document=file, filename='Klippo_Gabungan.mp4', caption='✅ Video siap digabung. Audio asal dikekalkan dan dipadankan dengan transisi.', reply_markup=main_menu(), write_timeout=240, read_timeout=120, connect_timeout=30)
+                if success_animation:
+                    try:
+                        await success_animation.delete()
+                        success_animation = None
+                    except Exception:
+                        logging.debug('Could not remove success animation', exc_info=True)
         except Exception:
             logging.exception('Video merge failed')
             await query.message.reply_text('Gabungan gagal. Cuba klip MP4 lebih pendek.', reply_markup=main_menu())
         finally:
+            for item in (animation, success_animation):
+                if item:
+                    try:
+                        await item.delete()
+                    except Exception:
+                        logging.debug('Could not remove temporary animation', exc_info=True)
             context.user_data['busy'] = False
             reset(context)
 
