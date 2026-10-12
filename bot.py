@@ -212,8 +212,20 @@ async def status(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 def convert_shopee(source: Path, destination: Path):
     """Normalize a source video to a broadly compatible vertical MP4."""
-    vf = ("scale=720:1280:force_original_aspect_ratio=decrease,"
-          "pad=720:1280:(ow-iw)/2:(oh-ih)/2:color=black,"
+    # Retain native 1080p detail; only upscale smaller portrait sources to 720p.
+    dimensions = subprocess.run(
+        ['ffprobe', '-v', 'error', '-select_streams', 'v:0',
+         '-show_entries', 'stream=width,height', '-of', 'csv=p=0:s=x', str(source)],
+        capture_output=True, text=True, check=True, timeout=20).stdout.strip()
+    width, height = map(int, dimensions.split('x'))
+    if width <= 0 or height <= 0:
+        raise ValueError('Invalid input dimensions')
+    if width >= 1080 and height >= 1920:
+        target_w, target_h = 1080, 1920
+    else:
+        target_w, target_h = 720, 1280
+    vf = (f"scale={target_w}:{target_h}:force_original_aspect_ratio=decrease,"
+          f"pad={target_w}:{target_h}:(ow-iw)/2:(oh-ih)/2:color=black,"
           "setsar=1,fps=30,format=yuv420p")
     probe = subprocess.run(
         ['ffprobe', '-v', 'error', '-select_streams', 'a:0',
@@ -226,7 +238,7 @@ def convert_shopee(source: Path, destination: Path):
         cmd += ['-f', 'lavfi', '-i', 'anullsrc=channel_layout=stereo:sample_rate=44100',
                 '-map', '0:v:0', '-map', '1:a:0', '-c:a', 'aac', '-b:a', '128k', '-shortest']
     cmd += ['-vf', vf, '-c:v', 'libx264', '-preset', 'medium', '-crf', '18',
-            '-profile:v', 'high', '-level:v', '3.2', '-pix_fmt', 'yuv420p',
+            '-profile:v', 'high', '-pix_fmt', 'yuv420p',
             '-movflags', '+faststart', '-max_muxing_queue_size', '1024', str(destination)]
     subprocess.run(cmd, check=True, timeout=240)
 
