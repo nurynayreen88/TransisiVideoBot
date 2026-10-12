@@ -211,7 +211,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await query.message.reply_text('Langkah 1/3 — Pilih gaya video:', reply_markup=style_menu())
     elif action.startswith('style:'):
         context.user_data['style'] = action.split(':', 1)[1]
-        await query.message.reply_text(f"✅ Gaya {context.user_data['style']} dipilih.\\nLangkah 2/3 — Pilih muzik:", reply_markup=music_menu())
+        await query.message.reply_text(f"✅ Gaya {context.user_data['style']} dipilih.\nLangkah 2/3 — Pilih muzik:", reply_markup=music_menu())
     elif action == 'music':
         await query.message.reply_text('Langkah 2/3 — Pilih muzik:', reply_markup=music_menu())
     elif action.startswith('music:'):
@@ -223,7 +223,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             if choice == 'custom':
                 await query.message.reply_text('Hantar fail MP3, kemudian tekan Hasilkan Video.', reply_markup=confirm_menu())
             else:
-                await query.message.reply_text(f'✅ Muzik {choice} dipilih.\\nLangkah 3/3 — Sedia untuk dijana.', reply_markup=confirm_menu())
+                await query.message.reply_text(f'✅ Muzik {choice} dipilih.\nLangkah 3/3 — Sedia untuk dijana.', reply_markup=confirm_menu())
     elif action == 'confirm':
         await generate(update, context)
     elif action == 'check':
