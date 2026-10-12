@@ -22,19 +22,24 @@ STYLES = {'cinematic': 'fade', 'hybrid': 'smoothleft', 'morph': 'pixelize'}
 MUSIC_CHOICES = ('auto', 'cinematic', 'energetic', 'happy', 'luxury', 'nature', 'beauty', 'none', 'custom')
 MUSIC_DIR = Path(__file__).resolve().parent / 'music'
 
+def photos_menu():
+    return InlineKeyboardMarkup([[InlineKeyboardButton('✅ Selesai Hantar Gambar', callback_data='photos_done')], [InlineKeyboardButton('🗑 Mula Semula', callback_data='reset')]])
+
+
 def main_menu():
     return InlineKeyboardMarkup([
         [InlineKeyboardButton('🎬 Jana Video', callback_data='make')],
-        [InlineKeyboardButton('🎨 Gaya Video', callback_data='styles'), InlineKeyboardButton('🎵 Muzik', callback_data='music')],
-        [InlineKeyboardButton('📋 Semak', callback_data='check'), InlineKeyboardButton('🗑 Mula Semula', callback_data='reset')],
+        [InlineKeyboardButton('💎 Langganan', callback_data='subscription'), InlineKeyboardButton('👤 Akaun Saya', callback_data='account')],
+        [InlineKeyboardButton('❓ Bantuan', callback_data='help')],
     ])
 
 
 def style_menu():
     return InlineKeyboardMarkup([
-        [InlineKeyboardButton('✨ Hybrid (disyorkan)', callback_data='style:hybrid')],
-        [InlineKeyboardButton('🎥 Cinematic', callback_data='style:cinematic'), InlineKeyboardButton('🌀 Morph', callback_data='style:morph')],
-        [InlineKeyboardButton('↩️ Kembali', callback_data='home')],
+        [InlineKeyboardButton('▶️ Contoh Hybrid', callback_data='preview:hybrid'), InlineKeyboardButton('✨ Pilih Hybrid', callback_data='style:hybrid')],
+        [InlineKeyboardButton('▶️ Contoh Cinematic', callback_data='preview:cinematic'), InlineKeyboardButton('🎥 Pilih Cinematic', callback_data='style:cinematic')],
+        [InlineKeyboardButton('▶️ Contoh Morph', callback_data='preview:morph'), InlineKeyboardButton('🌀 Pilih Morph', callback_data='style:morph')],
+        [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
     ])
 
 
@@ -44,7 +49,20 @@ def music_menu():
         [InlineKeyboardButton('🎬 Cinematic', callback_data='music:cinematic'), InlineKeyboardButton('⚡ Energetic', callback_data='music:energetic')],
         [InlineKeyboardButton('😊 Happy', callback_data='music:happy'), InlineKeyboardButton('💎 Luxury', callback_data='music:luxury')],
         [InlineKeyboardButton('🌿 Nature', callback_data='music:nature'), InlineKeyboardButton('🌸 Beauty', callback_data='music:beauty')],
+        [InlineKeyboardButton('▶️ Dengar Pilihan Muzik', callback_data='music_previews')],
         [InlineKeyboardButton('📎 MP3 Sendiri', callback_data='music:custom')],
+        [InlineKeyboardButton('↩️ Tukar Gaya', callback_data='styles')],
+    ])
+
+
+def music_preview_menu():
+    return InlineKeyboardMarkup([[InlineKeyboardButton('▶️ ' + name.title(), callback_data='listen:' + name)] for name in ('cinematic', 'energetic', 'happy', 'luxury', 'nature', 'beauty')] + [[InlineKeyboardButton('↩️ Pilih Muzik', callback_data='music')]])
+
+
+def confirm_menu():
+    return InlineKeyboardMarkup([
+        [InlineKeyboardButton('✅ Hasilkan Video', callback_data='confirm')],
+        [InlineKeyboardButton('🎨 Tukar Gaya', callback_data='styles'), InlineKeyboardButton('🎵 Tukar Muzik', callback_data='music')],
         [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
     ])
 
@@ -136,6 +154,7 @@ def reset(context):
     context.user_data['music'] = None
     context.user_data['music_choice'] = 'auto'
     context.user_data['style'] = 'hybrid'
+    context.user_data['stage'] = 'home'
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -143,21 +162,22 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.effective_message.reply_text('Video sedang diproses. Sila tunggu.')
         return
     reset(context)
-    await update.effective_message.reply_text(
-        '🎬 PEMBUAT VIDEO MUDAH\\n\\nHantar 1–5 gambar, kemudian tekan Jana Video.\\n'
-        'Gaya Hybrid dan muzik Auto dipilih secara automatik. Boleh juga hantar MP3 sendiri.', reply_markup=main_menu())
+    await update.effective_message.reply_text('🎬 PEMBUAT VIDEO MUDAH\n\nTekan Jana Video untuk bermula.', reply_markup=main_menu())
 
 
 async def photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if context.user_data.get('busy'):
         await update.message.reply_text('Video sedang diproses. Sila tunggu.')
         return
+    if context.user_data.get('stage') != 'photos':
+        await update.message.reply_text('Tekan 🎬 Jana Video dahulu.', reply_markup=main_menu())
+        return
     ids = context.user_data.setdefault('photos', [])
     if len(ids) >= MAX_IMAGES:
-        await update.message.reply_text(f'Maksimum {MAX_IMAGES} gambar.', reply_markup=main_menu())
+        await update.message.reply_text(f'Maksimum {MAX_IMAGES} gambar.', reply_markup=photos_menu())
         return
     ids.append(update.message.photo[-1].file_id)
-    await update.message.reply_text(f'✅ {len(ids)}/{MAX_IMAGES} gambar diterima. Hantar lagi atau jana video.', reply_markup=main_menu())
+    await update.message.reply_text(f'✅ {len(ids)}/{MAX_IMAGES} gambar diterima. Hantar lagi atau tekan Selesai Hantar Gambar.', reply_markup=photos_menu())
 
 
 async def audio(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -172,7 +192,7 @@ async def audio(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
     context.user_data['music'] = item.file_id
     context.user_data['music_choice'] = 'custom'
-    await update.message.reply_text('🎵 Muzik diterima.', reply_markup=main_menu())
+    await update.message.reply_text('🎵 Muzik diterima. Tekan Hasilkan Video.', reply_markup=confirm_menu())
 
 
 async def choose_style(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -192,28 +212,92 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
     await query.answer()
     action = query.data
+    if context.user_data.get('busy'):
+        await query.message.reply_text('Video sedang diproses. Sila tunggu.')
+        return
+    stage = context.user_data.get('stage', 'home')
     if action == 'make':
-        await generate(update, context)
-    elif action == 'music':
-        await query.message.reply_text('Pilih muzik latar:', reply_markup=music_menu())
-    elif action.startswith('music:'):
+        reset(context)
+        context.user_data['stage'] = 'photos'
+        await query.message.reply_text('Langkah 1/4 — Hantar 1–5 gambar produk. Tekan Selesai apabila cukup.', reply_markup=photos_menu())
+    elif action == 'photos_done':
+        if stage != 'photos' or not context.user_data.get('photos'):
+            await query.message.reply_text('Hantar sekurang-kurangnya satu gambar dahulu.', reply_markup=photos_menu())
+            return
+        context.user_data['stage'] = 'style'
+        await query.message.reply_text('Langkah 2/4 — Lihat contoh dan pilih gaya:', reply_markup=style_menu())
+    elif action == 'styles' and stage in ('style', 'music', 'confirm'):
+        context.user_data['stage'] = 'style'
+        await query.message.reply_text('Langkah 2/4 — Pilih gaya:', reply_markup=style_menu())
+    elif action.startswith('preview:') and stage == 'style':
+        chosen = action.split(':', 1)[1]
+        if chosen not in STYLES:
+            return
+        lock = context.application.bot_data.setdefault('render_lock', asyncio.Lock())
+        if lock.locked():
+            await query.message.reply_text('Server sedang sibuk. Cuba preview sebentar lagi.')
+            return
+        async with lock:
+            context.user_data['busy'] = True
+            try:
+                with tempfile.TemporaryDirectory(prefix='preview_') as td:
+                    folder = Path(td)
+                    paths = []
+                    for i, fid in enumerate(context.user_data['photos'][:2]):
+                        path = folder / f'{i}.jpg'
+                        await (await context.bot.get_file(fid)).download_to_drive(path)
+                        paths.append(path)
+                    video = folder / 'preview.mp4'
+                    await asyncio.to_thread(render_video, paths, video, None, chosen)
+                    with video.open('rb') as handle:
+                        await query.message.reply_video(video=handle, caption=f'▶️ Contoh {chosen}. Pilih gaya di bawah.', reply_markup=style_menu(), supports_streaming=True)
+            except Exception:
+                logging.exception('Style preview failed')
+                await query.message.reply_text('Preview gagal. Sila pilih gaya atau cuba semula.', reply_markup=style_menu())
+            finally:
+                context.user_data['busy'] = False
+    elif action.startswith('style:') and stage == 'style':
+        context.user_data['style'] = action.split(':', 1)[1]
+        context.user_data['stage'] = 'music'
+        await query.message.reply_text(f"✅ Gaya {context.user_data['style']} dipilih.\nLangkah 3/4 — Pilih muzik:", reply_markup=music_menu())
+    elif action == 'music' and stage in ('music', 'confirm'):
+        context.user_data['stage'] = 'music'
+        await query.message.reply_text('Langkah 3/4 — Pilih muzik:', reply_markup=music_menu())
+    elif action == 'music_previews' and stage == 'music':
+        await query.message.reply_text('Tekan untuk mendengar contoh muzik:', reply_markup=music_preview_menu())
+    elif action.startswith('listen:') and stage == 'music':
+        name = action.split(':', 1)[1]
+        if name in MUSIC_CHOICES and name not in ('auto', 'none', 'custom'):
+            path = resolve_music(name, context.user_data.get('style', 'hybrid'))
+            if path:
+                with path.open('rb') as handle:
+                    await query.message.reply_audio(audio=handle, title=name.title(), reply_markup=music_preview_menu())
+            else:
+                await query.message.reply_text('Fail muzik belum tersedia pada server.')
+    elif action.startswith('music:') and stage == 'music':
         choice = action.split(':', 1)[1]
         if choice in MUSIC_CHOICES:
             context.user_data['music_choice'] = choice
             if choice != 'custom':
                 context.user_data['music'] = None
-            await query.message.reply_text(('Hantar fail MP3 sekarang.' if choice == 'custom' else f'✅ Muzik {choice} dipilih.'), reply_markup=main_menu())
-    elif action == 'styles':
-        await query.message.reply_text('Pilih gaya video:', reply_markup=style_menu())
-    elif action.startswith('style:'):
-        context.user_data['style'] = action.split(':', 1)[1]
-        await query.message.reply_text(f"✅ Gaya {context.user_data['style']} dipilih.", reply_markup=main_menu())
+            context.user_data['stage'] = 'confirm'
+            await query.message.reply_text(('Hantar MP3 sendiri, kemudian tekan Hasilkan Video.' if choice == 'custom' else f'✅ Muzik {choice} dipilih.\nLangkah 4/4 — Semak dan hasilkan.'), reply_markup=confirm_menu())
+    elif action == 'confirm' and stage == 'confirm':
+        await generate(update, context)
+    elif action == 'subscription':
+        await query.message.reply_text('💎 LANGGANAN TRANSISIVIDEOBOT\n\nCadangan pelan Penyokong Awal: RM5 / 30 hari, sehingga 30 video sebulan.\n\nPembayaran dan pengaktifan VIP belum dibuka. Kami tidak akan meminta bayaran sebelum fungsi langganan siap.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
+    elif action == 'account':
+        await query.message.reply_text(f'👤 AKAUN SAYA\n\nID Telegram: {query.from_user.id}\nStatus: Akses percubaan (langganan belum diaktifkan).', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📋 Semak Bahan', callback_data='check'), InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
+    elif action == 'help':
+        await query.message.reply_text('❓ CARA GUNA\n\n1. Tekan Jana Video.\n2. Hantar 1–5 gambar, kemudian tekan Selesai.\n3. Lihat contoh dan pilih gaya.\n4. Dengar contoh dan pilih muzik.\n5. Tekan Hasilkan Video.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
     elif action == 'check':
         await status(update, context)
     elif action == 'reset':
         await start(update, context)
     elif action == 'home':
-        await query.message.reply_text('Menu utama:', reply_markup=main_menu())
+        await start(update, context)
+    else:
+        await query.message.reply_text('Pilihan lama telah tamat. Mulakan semula melalui menu utama.', reply_markup=main_menu())
 
 
 async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -282,7 +366,7 @@ def main():
     app.add_handler(CommandHandler('jana', generate, block=False))
     for style in STYLES:
         app.add_handler(CommandHandler(style, choose_style))
-    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(make|styles|music|check|reset|home|style:(hybrid|cinematic|morph)|music:(auto|cinematic|energetic|happy|luxury|nature|beauty|none|custom))$'))
+    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(make|photos_done|confirm|styles|music|music_previews|subscription|account|help|check|reset|home|preview:(hybrid|cinematic|morph)|listen:(cinematic|energetic|happy|luxury|nature|beauty)|style:(hybrid|cinematic|morph)|music:(auto|cinematic|energetic|happy|luxury|nature|beauty|none|custom))$'))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, menu_text))
     app.add_handler(MessageHandler(filters.PHOTO, photo))
     app.add_handler(MessageHandler(filters.AUDIO | filters.Document.MimeType('audio/mpeg'), audio))
