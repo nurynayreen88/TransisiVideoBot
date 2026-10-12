@@ -183,7 +183,11 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.effective_message.reply_text('Video sedang diproses. Sila tunggu.')
         return
     reset(context)
-    await update.effective_message.reply_text('​', reply_markup=ReplyKeyboardRemove(), disable_notification=True)
+    cleanup = await update.effective_message.reply_text('Menu dikemas kini.', reply_markup=ReplyKeyboardRemove(), disable_notification=True)
+    try:
+        await cleanup.delete()
+    except Exception:
+        logging.debug('Unable to delete keyboard cleanup message', exc_info=True)
     await update.effective_message.reply_text('🎬 VIDEO SHOPEE AFFILIATE\n\nPilih fungsi di bawah:', reply_markup=main_menu())
 
 
