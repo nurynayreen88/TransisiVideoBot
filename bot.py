@@ -28,7 +28,8 @@ def photos_menu():
 
 def main_menu():
     return InlineKeyboardMarkup([
-        [InlineKeyboardButton('🎬 Jana Video', callback_data='make')],
+        [InlineKeyboardButton('🎬 Jana Video Produk', callback_data='make')],
+        [InlineKeyboardButton('🔄 Tukar Video ke Format Shopee', callback_data='convert')],
         [InlineKeyboardButton('💎 Langganan', callback_data='subscription'), InlineKeyboardButton('👤 Akaun Saya', callback_data='account')],
         [InlineKeyboardButton('❓ Bantuan', callback_data='help')],
     ])
@@ -208,6 +209,66 @@ async def status(update: Update, context: ContextTypes.DEFAULT_TYPE):
         f"Gaya: {context.user_data.get('style', 'hybrid')} | {DURATION}s.", reply_markup=main_menu())
 
 
+
+def convert_shopee(source: Path, destination: Path):
+    """Normalize a source video to a broadly compatible vertical MP4."""
+    vf = ("scale=720:1280:force_original_aspect_ratio=decrease,"
+          "pad=720:1280:(ow-iw)/2:(oh-ih)/2:color=black,"
+          "setsar=1,fps=30,format=yuv420p")
+    probe = subprocess.run(
+        ['ffprobe', '-v', 'error', '-select_streams', 'a:0',
+         '-show_entries', 'stream=index', '-of', 'csv=p=0', str(source)],
+        capture_output=True, text=True, check=True, timeout=20)
+    cmd = ['ffmpeg', '-hide_banner', '-loglevel', 'error', '-y', '-i', str(source),
+           '-map', '0:v:0']
+    if probe.stdout.strip():
+        cmd += ['-map', '0:a:0', '-c:a', 'aac', '-b:a', '128k', '-ar', '44100', '-ac', '2']
+    else:
+        cmd += ['-f', 'lavfi', '-i', 'anullsrc=channel_layout=stereo:sample_rate=44100',
+                '-map', '1:a:0', '-c:a', 'aac', '-b:a', '128k', '-shortest']
+    cmd += ['-vf', vf, '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '23',
+            '-profile:v', 'high', '-level:v', '3.1', '-pix_fmt', 'yuv420p',
+            '-movflags', '+faststart', '-max_muxing_queue_size', '1024', str(destination)]
+    subprocess.run(cmd, check=True, timeout=240)
+
+
+async def convert_upload(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if context.user_data.get('stage') != 'convert':
+        await update.message.reply_text('Tekan Tukar Video ke Format Shopee dahulu.', reply_markup=main_menu())
+        return
+    if context.user_data.get('busy'):
+        await update.message.reply_text('Pemprosesan sedang berjalan.')
+        return
+    item = update.message.video or update.message.document
+    if not item or (update.message.document and item.mime_type != 'video/mp4'):
+        await update.message.reply_text('Sila hantar fail MP4.')
+        return
+    if item.file_size and item.file_size > 19 * 1024 * 1024:
+        await update.message.reply_text('Fail melebihi had muat turun bot ini (19 MB). Sila gunakan video lebih kecil.')
+        return
+    lock = context.application.bot_data.setdefault('render_lock', asyncio.Lock())
+    if lock.locked():
+        await update.message.reply_text('Server sedang memproses video lain. Cuba sebentar lagi.')
+        return
+    async with lock:
+        context.user_data['busy'] = True
+        try:
+            await update.message.reply_text('⏳ Sedang menukar video kepada MP4 mesra Shopee...')
+            with tempfile.TemporaryDirectory(prefix='shopee_') as td:
+                source = Path(td) / 'input.mp4'
+                destination = Path(td) / 'shopee.mp4'
+                await (await context.bot.get_file(item.file_id)).download_to_drive(source)
+                await asyncio.to_thread(convert_shopee, source, destination)
+                with destination.open('rb') as handle:
+                    await update.message.reply_video(video=handle, caption='✅ Video telah ditukar kepada profil eksport mesra Shopee. Kelulusan muat naik bergantung pada peraturan Shopee.', supports_streaming=True, reply_markup=main_menu())
+        except Exception:
+            logging.exception('Shopee conversion failed')
+            await update.message.reply_text('Penukaran gagal. Cuba video MP4 yang lebih pendek atau kecil.', reply_markup=main_menu())
+        finally:
+            context.user_data['busy'] = False
+            context.user_data['stage'] = 'home'
+
+
 async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
     await query.answer()
@@ -220,6 +281,10 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         reset(context)
         context.user_data['stage'] = 'photos'
         await query.message.reply_text('Langkah 1/4 — Hantar 1–5 gambar produk. Tekan Selesai apabila cukup.', reply_markup=photos_menu())
+    elif action == 'convert':
+        reset(context)
+        context.user_data['stage'] = 'convert'
+        await query.message.reply_text('🔄 Hantar satu video MP4 untuk ditukar secara automatik ke profil eksport Shopee (720×1280, H.264, AAC, 30 FPS).', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
     elif action == 'photos_done':
         if stage != 'photos' or not context.user_data.get('photos'):
             await query.message.reply_text('Hantar sekurang-kurangnya satu gambar dahulu.', reply_markup=photos_menu())
@@ -366,9 +431,10 @@ def main():
     app.add_handler(CommandHandler('jana', generate, block=False))
     for style in STYLES:
         app.add_handler(CommandHandler(style, choose_style))
-    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(make|photos_done|confirm|styles|music|music_previews|subscription|account|help|check|reset|home|preview:(hybrid|cinematic|morph)|listen:(cinematic|energetic|happy|luxury|nature|beauty)|style:(hybrid|cinematic|morph)|music:(auto|cinematic|energetic|happy|luxury|nature|beauty|none|custom))$'))
+    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(make|convert|photos_done|confirm|styles|music|music_previews|subscription|account|help|check|reset|home|preview:(hybrid|cinematic|morph)|listen:(cinematic|energetic|happy|luxury|nature|beauty)|style:(hybrid|cinematic|morph)|music:(auto|cinematic|energetic|happy|luxury|nature|beauty|none|custom))$'))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, menu_text))
     app.add_handler(MessageHandler(filters.PHOTO, photo))
+    app.add_handler(MessageHandler(filters.VIDEO | filters.Document.MimeType('video/mp4'), convert_upload))
     app.add_handler(MessageHandler(filters.AUDIO | filters.Document.MimeType('audio/mpeg'), audio))
     url = os.environ.get('WEBHOOK_URL', '').rstrip('/')
     secret = os.environ.get('WEBHOOK_SECRET', '')
