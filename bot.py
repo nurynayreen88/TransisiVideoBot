@@ -268,6 +268,15 @@ def convert_shopee(source: Path, destination: Path):
     subprocess.run(cmd, check=True, timeout=240)
 
 
+async def progress_update(message, title, step, total, description):
+    """Edit one Telegram progress message; steps are phases, not encoding percentages."""
+    bar = '🟩' * step + '⬜' * (total - step)
+    try:
+        await message.edit_text(f'🎬 {title}\\n\\n{bar}\\n\\n{description}\\n\\n✨ Sila tunggu, video sedang disiapkan.')
+    except Exception:
+        logging.debug('Progress message edit skipped', exc_info=True)
+
+
 async def convert_upload(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if context.user_data.get('stage') == 'merge_upload':
         item = update.message.video or update.message.document
@@ -312,12 +321,15 @@ async def convert_upload(update: Update, context: ContextTypes.DEFAULT_TYPE):
     async with lock:
         context.user_data['busy'] = True
         try:
-            await update.message.reply_text('⏳ Sedang menukar video kepada MP4 mesra Shopee...')
+            progress = await update.message.reply_text('🎬 Menyediakan video...')
+            await progress_update(progress, 'TUKAR FORMAT VIDEO', 1, 3, '📥 Memuat turun fail asal')
             with tempfile.TemporaryDirectory(prefix='shopee_') as td:
                 source = Path(td) / 'input.mp4'
                 destination = Path(td) / 'shopee.mp4'
                 await (await context.bot.get_file(item.file_id)).download_to_drive(source)
+                await progress_update(progress, 'TUKAR FORMAT VIDEO', 2, 3, '🎞️ Mengeksport MP4 berkualiti tinggi')
                 await asyncio.to_thread(convert_shopee, source, destination)
+                await progress_update(progress, 'TUKAR FORMAT VIDEO', 3, 3, '📤 Menghantar video siap')
                 with destination.open('rb') as handle:
                     await update.message.reply_document(document=handle, filename='TransisiVideoBot_Shopee_HQ.mp4', caption='✅ MP4 berkualiti tinggi. Muat turun sebagai fail untuk mengelakkan pemampatan tambahan. Kelulusan Shopee tertakluk pada peraturan platform.', reply_markup=main_menu())
         except Exception:
@@ -337,7 +349,8 @@ async def generate_merge(update: Update, context: ContextTypes.DEFAULT_TYPE, sty
     async with lock:
         context.user_data['busy'] = True
         try:
-            await query.message.reply_text('⏳ Sedang menggabungkan video...')
+            progress = await query.message.reply_text('🎬 Menyediakan gabungan...')
+            await progress_update(progress, 'GABUNG VIDEO', 1, 3, '📥 Mengambil klip mengikut urutan')
             with tempfile.TemporaryDirectory(prefix='merge_') as folder:
                 paths = []
                 for index, file_id in enumerate(context.user_data['merge_files']):
@@ -345,7 +358,9 @@ async def generate_merge(update: Update, context: ContextTypes.DEFAULT_TYPE, sty
                     await (await context.bot.get_file(file_id)).download_to_drive(path)
                     paths.append(path)
                 output = Path(folder) / 'gabungan.mp4'
+                await progress_update(progress, 'GABUNG VIDEO', 2, 3, '✨ Menyambung transisi dan audio')
                 await asyncio.to_thread(merge_videos, paths, output, style)
+                await progress_update(progress, 'GABUNG VIDEO', 3, 3, '📤 Menghantar gabungan siap')
                 with output.open('rb') as file:
                     await query.message.reply_document(document=file, filename='TransisiVideoBot_Gabungan.mp4', caption='✅ Video siap digabung. Audio asal dikekalkan dan dipadankan dengan transisi.', reply_markup=main_menu())
         except Exception:
@@ -562,7 +577,8 @@ async def generate(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
     await lock.acquire()
     context.user_data['busy'] = True
-    await message.reply_text('⏳ Menjana video, sila tunggu...')
+    progress = await message.reply_text('🎬 Menyediakan video...')
+    await progress_update(progress, 'JANA VIDEO AFFILIATE', 1, 3, '📥 Menyediakan gambar dan muzik')
     try:
         with tempfile.TemporaryDirectory(prefix='telegram_video_') as td:
             folder = Path(td)
@@ -583,7 +599,9 @@ async def generate(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 if music is None:
                     await message.reply_text('Muzik pilihan belum tersedia pada server. Video akan dijana tanpa muzik.')
             result = folder / 'video.mp4'
+            await progress_update(progress, 'JANA VIDEO AFFILIATE', 2, 3, '🎨 Menghasilkan gerakan dan transisi')
             await asyncio.to_thread(render_video, paths, result, music, context.user_data.get('style', 'hybrid'))
+            await progress_update(progress, 'JANA VIDEO AFFILIATE', 3, 3, '📤 Menghantar hasil video')
             with result.open('rb') as f:
                 await message.reply_video(video=f, caption='🎬 Video siap! Hantar gambar baharu untuk video seterusnya.', supports_streaming=True,
                                                  read_timeout=120, write_timeout=120)
