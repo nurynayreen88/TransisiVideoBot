@@ -162,7 +162,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.effective_message.reply_text('Video sedang diproses. Sila tunggu.')
         return
     reset(context)
-    await update.effective_message.reply_text('🎬 PEMBUAT VIDEO MUDAH\\n\\nTekan Jana Video untuk bermula.', reply_markup=main_menu())
+    await update.effective_message.reply_text('🎬 PEMBUAT VIDEO MUDAH\n\nTekan Jana Video untuk bermula.', reply_markup=main_menu())
 
 
 async def photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -285,11 +285,11 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif action == 'confirm' and stage == 'confirm':
         await generate(update, context)
     elif action == 'subscription':
-        await query.message.reply_text('💎 LANGGANAN TRANSISIVIDEOBOT\\n\\nCadangan pelan Penyokong Awal: RM5 / 30 hari, sehingga 30 video sebulan.\\n\\nPembayaran dan pengaktifan VIP belum dibuka. Kami tidak akan meminta bayaran sebelum fungsi langganan siap.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
+        await query.message.reply_text('💎 LANGGANAN TRANSISIVIDEOBOT\n\nCadangan pelan Penyokong Awal: RM5 / 30 hari, sehingga 30 video sebulan.\n\nPembayaran dan pengaktifan VIP belum dibuka. Kami tidak akan meminta bayaran sebelum fungsi langganan siap.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
     elif action == 'account':
-        await query.message.reply_text(f'👤 AKAUN SAYA\\n\\nID Telegram: {query.from_user.id}\\nStatus: Akses percubaan (langganan belum diaktifkan).', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📋 Semak Bahan', callback_data='check'), InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
+        await query.message.reply_text(f'👤 AKAUN SAYA\n\nID Telegram: {query.from_user.id}\nStatus: Akses percubaan (langganan belum diaktifkan).', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📋 Semak Bahan', callback_data='check'), InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
     elif action == 'help':
-        await query.message.reply_text('❓ CARA GUNA\\n\\n1. Tekan Jana Video.\\n2. Hantar 1–5 gambar, kemudian tekan Selesai.\\n3. Lihat contoh dan pilih gaya.\\n4. Dengar contoh dan pilih muzik.\\n5. Tekan Hasilkan Video.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
+        await query.message.reply_text('❓ CARA GUNA\n\n1. Tekan Jana Video.\n2. Hantar 1–5 gambar, kemudian tekan Selesai.\n3. Lihat contoh dan pilih gaya.\n4. Dengar contoh dan pilih muzik.\n5. Tekan Hasilkan Video.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
     elif action == 'check':
         await status(update, context)
     elif action == 'reset':
