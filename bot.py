@@ -18,7 +18,22 @@ DURATION = int(os.environ.get('VIDEO_SECONDS', '10'))
 WIDTH = int(os.environ.get('VIDEO_WIDTH', '480'))
 HEIGHT = int(os.environ.get('VIDEO_HEIGHT', '854'))
 FPS = int(os.environ.get('VIDEO_FPS', '24'))
-STYLES = {'cinematic': 'fade', 'hybrid': 'smoothleft', 'morph': 'pixelize'}
+STYLES = {
+    'hybrid': ('smoothleft', 'smoothup', 'fade'),
+    'cinematic': ('fade', 'fadeblack'),
+    'luxury': ('fadeblack', 'circleopen'),
+    'dynamic': ('slideleft', 'slideright', 'slideup'),
+    'zoom': ('zoomin', 'circleopen'),
+    'smooth': ('smoothleft', 'smoothright', 'smoothup'),
+    'creative': ('wipeleft', 'wiperight', 'radial'),
+    'morph': ('pixelize', 'circleopen'),
+}
+STYLE_LABELS = {
+    'hybrid': '✨ Hybrid', 'cinematic': '🎥 Cinematic',
+    'luxury': '💎 Luxury Reveal', 'dynamic': '⚡ Dynamic',
+    'zoom': '🔍 Zoom Reveal', 'smooth': '🌊 Smooth Flow',
+    'creative': '🎨 Creative Wipe', 'morph': '🌀 Morph-style',
+}
 MUSIC_CHOICES = ('auto', 'cinematic', 'energetic', 'happy', 'luxury', 'nature', 'beauty', 'none', 'custom')
 MUSIC_DIR = Path(__file__).resolve().parent / 'music'
 
@@ -36,12 +51,14 @@ def main_menu():
 
 
 def style_menu():
-    return InlineKeyboardMarkup([
-        [InlineKeyboardButton('▶️ Contoh Hybrid', callback_data='preview:hybrid'), InlineKeyboardButton('✨ Pilih Hybrid', callback_data='style:hybrid')],
-        [InlineKeyboardButton('▶️ Contoh Cinematic', callback_data='preview:cinematic'), InlineKeyboardButton('🎥 Pilih Cinematic', callback_data='style:cinematic')],
-        [InlineKeyboardButton('▶️ Contoh Morph', callback_data='preview:morph'), InlineKeyboardButton('🌀 Pilih Morph', callback_data='style:morph')],
-        [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
-    ])
+    rows = []
+    for key, label in STYLE_LABELS.items():
+        rows.append([
+            InlineKeyboardButton('▶️ Contoh', callback_data=f'preview:{key}'),
+            InlineKeyboardButton(label, callback_data=f'style:{key}'),
+        ])
+    rows.append([InlineKeyboardButton('↩️ Menu Utama', callback_data='home')])
+    return InlineKeyboardMarkup(rows)
 
 
 def music_menu():
@@ -133,7 +150,7 @@ def render_video(images: list[Path], output: Path, music: Path | None = None, st
             for i in range(1,n):
                 label = f'[v{i}]'
                 offset = i * (clip_duration - fade)
-                transition = ('fadeblack' if style == 'cinematic' and i % 2 == 0 else 'fade' if style == 'cinematic' else ('smoothleft' if i % 2 else 'smoothup') if style == 'hybrid' else ('circleopen' if i % 2 else 'zoomin'))
+                transition = STYLES[style][(i - 1) % len(STYLES[style])]
                 chains.append(f'{last}[{i}:v]xfade=transition={transition}:duration={fade:.4f}:offset={offset:.4f}{label}')
                 last = label
             cmd += ['-filter_complex',';'.join(chains),'-map',last,'-an','-c:v','libx264',
@@ -444,7 +461,7 @@ def main():
     app.add_handler(CommandHandler('jana', generate, block=False))
     for style in STYLES:
         app.add_handler(CommandHandler(style, choose_style))
-    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(make|convert|photos_done|confirm|styles|music|music_previews|subscription|account|help|check|reset|home|preview:(hybrid|cinematic|morph)|listen:(cinematic|energetic|happy|luxury|nature|beauty)|style:(hybrid|cinematic|morph)|music:(auto|cinematic|energetic|happy|luxury|nature|beauty|none|custom))$'))
+    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(make|convert|photos_done|confirm|styles|music|music_previews|subscription|account|help|check|reset|home|preview:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|listen:(cinematic|energetic|happy|luxury|nature|beauty)|style:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|music:(auto|cinematic|energetic|happy|luxury|nature|beauty|none|custom))$'))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, menu_text))
     app.add_handler(MessageHandler(filters.PHOTO, photo))
     app.add_handler(MessageHandler(filters.VIDEO | filters.Document.MimeType('video/mp4'), convert_upload))
