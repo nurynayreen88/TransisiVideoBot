@@ -6,7 +6,9 @@ from pathlib import Path
 ALLOWED = {"fade", "smoothleft", "slideleft", "zoomin"}
 
 def run(args, timeout=180):
-    subprocess.run(args, check=True, timeout=timeout, capture_output=True)
+    result = subprocess.run(args, check=False, timeout=timeout, capture_output=True, text=True)
+    if result.returncode:
+        raise RuntimeError('FFmpeg merge error: ' + (result.stderr or 'unknown')[-1800:])
 
 def duration(path):
     p = subprocess.run(
