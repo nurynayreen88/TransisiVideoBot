@@ -8,6 +8,7 @@ import tempfile
 from pathlib import Path
 
 from PIL import Image, ImageOps
+from video_merge import merge_videos
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardRemove
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler, ContextTypes, MessageHandler, filters
 
@@ -45,6 +46,7 @@ def main_menu():
     return InlineKeyboardMarkup([
         [InlineKeyboardButton('🎬 Jana Video Affiliate', callback_data='make')],
         [InlineKeyboardButton('🔄 Tukar Format Video', callback_data='convert')],
+        [InlineKeyboardButton('🎞️ Gabung Video', callback_data='merge')],
         [InlineKeyboardButton('✍️ Sediakan Prompt Video', callback_data='prompt')],
         [InlineKeyboardButton('💎 Langganan', callback_data='subscription'), InlineKeyboardButton('👤 Akaun Saya', callback_data='account')],
         [InlineKeyboardButton('❓ Bantuan', callback_data='help')],
@@ -263,6 +265,21 @@ def convert_shopee(source: Path, destination: Path):
 
 
 async def convert_upload(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if context.user_data.get('stage') == 'merge_upload':
+        item = update.message.video or update.message.document
+        if not item or (update.message.document and item.mime_type != 'video/mp4'):
+            await update.message.reply_text('Sila hantar video MP4.')
+            return
+        if item.file_size and item.file_size > 19 * 1024 * 1024:
+            await update.message.reply_text('Fail melebihi 19 MB.')
+            return
+        clips = context.user_data.setdefault('merge_files', [])
+        if len(clips) >= 5:
+            await update.message.reply_text('Maksimum 5 video. Tekan Selesai.')
+            return
+        clips.append(item.file_id)
+        await update.message.reply_text(f'Video {len(clips)}/5 diterima.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('✅ Selesai', callback_data='merge_done')]]))
+        return
     if context.user_data.get('stage') != 'convert':
         await update.message.reply_text('Tekan Tukar Video dahulu.', reply_markup=main_menu())
         return
@@ -301,6 +318,34 @@ async def convert_upload(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['stage'] = 'home'
 
 
+async def generate_merge(update: Update, context: ContextTypes.DEFAULT_TYPE, style: str):
+    query = update.callback_query
+    lock = context.application.bot_data.setdefault('render_lock', asyncio.Lock())
+    if lock.locked():
+        await query.message.reply_text('Server sedang sibuk. Cuba sebentar lagi.')
+        return
+    async with lock:
+        context.user_data['busy'] = True
+        try:
+            await query.message.reply_text('⏳ Sedang menggabungkan video...')
+            with tempfile.TemporaryDirectory(prefix='merge_') as folder:
+                paths = []
+                for index, file_id in enumerate(context.user_data['merge_files']):
+                    path = Path(folder) / f'input_{index}.mp4'
+                    await (await context.bot.get_file(file_id)).download_to_drive(path)
+                    paths.append(path)
+                output = Path(folder) / 'gabungan.mp4'
+                await asyncio.to_thread(merge_videos, paths, output, style)
+                with output.open('rb') as file:
+                    await query.message.reply_document(document=file, filename='TransisiVideoBot_Gabungan.mp4', caption='✅ Video siap digabung. Versi pertama tanpa audio asal.', reply_markup=main_menu())
+        except Exception:
+            logging.exception('Video merge failed')
+            await query.message.reply_text('Gabungan gagal. Cuba klip MP4 lebih pendek.', reply_markup=main_menu())
+        finally:
+            context.user_data['busy'] = False
+            reset(context)
+
+
 async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
     await query.answer()
@@ -331,6 +376,19 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                       'If unseen sides of the product are not provided, do not fabricate them; use only a modest camera arc. No abrupt cuts or flicker. Output 10 seconds, portrait 9:16, high quality.')
             context.user_data['stage'] = 'prompt_done'
             await query.message.reply_text('✅ PROMPT SIAP (salin teks di bawah):\n\n' + prompt, reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('🤖 Buka NexaBot', url='https://t.me/aigeneratornexa_bot?start=ref37141287'), InlineKeyboardButton('✨ Buka Gemini', url='https://gemini.google.com/')], [InlineKeyboardButton('✍️ Prompt Baharu', callback_data='prompt'), InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
+    elif action == 'merge':
+        reset(context)
+        context.user_data['stage'] = 'merge_upload'
+        context.user_data['merge_files'] = []
+        await query.message.reply_text('🎞️ Hantar 2–5 video MP4 mengikut urutan. Maksimum 19 MB dan 20 saat setiap video. Gunakan 📎 → File untuk kualiti terbaik.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('✅ Selesai', callback_data='merge_done')], [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
+    elif action == 'merge_done':
+        if stage != 'merge_upload' or len(context.user_data.get('merge_files', [])) < 2:
+            await query.message.reply_text('Hantar sekurang-kurangnya 2 video dahulu.')
+            return
+        context.user_data['stage'] = 'merge_style'
+        await query.message.reply_text('Pilih transisi:', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('✨ Fade', callback_data='merge_style:fade'), InlineKeyboardButton('🌊 Smooth', callback_data='merge_style:smoothleft')], [InlineKeyboardButton('⚡ Slide', callback_data='merge_style:slideleft'), InlineKeyboardButton('🔍 Zoom', callback_data='merge_style:zoomin')]]))
+    elif action.startswith('merge_style:') and stage == 'merge_style':
+        await generate_merge(update, context, action.split(':', 1)[1])
     elif action == 'convert':
         reset(context)
         context.user_data['stage'] = 'convert'
@@ -535,7 +593,7 @@ def main():
     app.add_handler(CommandHandler('jana', generate, block=False))
     for style in STYLES:
         app.add_handler(CommandHandler(style, choose_style))
-    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(make|convert|prompt|motion:(orbit|push|side|static)|photos_done|confirm|styles|music|music_previews|subscription|account|help|check|reset|home|preview:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|listen:(cinematic|energetic|happy|luxury|nature|beauty)|style:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|music:(auto|cinematic|energetic|happy|luxury|nature|beauty|none|custom))$'))
+    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(make|convert|merge|merge_done|merge_style:(fade|smoothleft|slideleft|zoomin)|prompt|motion:(orbit|push|side|static)|photos_done|confirm|styles|music|music_previews|subscription|account|help|check|reset|home|preview:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|listen:(cinematic|energetic|happy|luxury|nature|beauty)|style:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|music:(auto|cinematic|energetic|happy|luxury|nature|beauty|none|custom))$'))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, menu_text))
     app.add_handler(MessageHandler(filters.PHOTO, photo))
     app.add_handler(MessageHandler(filters.VIDEO | filters.Document.MimeType('video/mp4'), convert_upload))
