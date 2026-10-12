@@ -224,7 +224,7 @@ async def generate(update: Update, context: ContextTypes.DEFAULT_TYPE):
     message = update.effective_message
     ids = context.user_data.get('photos', [])
     if not ids:
-        await message.reply_text('Hantar gambar dahulu.')
+        await message.reply_text('Hantar gambar dahulu.', reply_markup=main_menu())
         return
     if context.user_data.get('busy'):
         await message.reply_text('Video sedang diproses.')
@@ -248,6 +248,9 @@ async def generate(update: Update, context: ContextTypes.DEFAULT_TYPE):
             if context.user_data.get('music_choice') == 'custom' and context.user_data.get('music'):
                 music = folder / 'music.mp3'
                 await (await context.bot.get_file(context.user_data['music'])).download_to_drive(music)
+            elif context.user_data.get('music_choice') == 'custom':
+                await message.reply_text('Sila hantar MP3 sendiri dahulu, atau pilih muzik lain.', reply_markup=music_menu())
+                return
             elif context.user_data.get('music_choice', 'auto') != 'none':
                 music = resolve_music(context.user_data.get('music_choice', 'auto'), context.user_data.get('style', 'hybrid'))
                 if music is None:
