@@ -8,7 +8,7 @@ import tempfile
 from pathlib import Path
 
 from PIL import Image, ImageOps
-from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardRemove
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler, ContextTypes, MessageHandler, filters
 
 logging.basicConfig(level=logging.INFO)
@@ -45,6 +45,7 @@ def main_menu():
     return InlineKeyboardMarkup([
         [InlineKeyboardButton('🎬 Jana Video Affiliate', callback_data='make')],
         [InlineKeyboardButton('🔄 Tukar Format Video', callback_data='convert')],
+        [InlineKeyboardButton('✍️ Sediakan Prompt Video', callback_data='prompt')],
         [InlineKeyboardButton('💎 Langganan', callback_data='subscription'), InlineKeyboardButton('👤 Akaun Saya', callback_data='account')],
         [InlineKeyboardButton('❓ Bantuan', callback_data='help')],
     ])
@@ -180,7 +181,8 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.effective_message.reply_text('Video sedang diproses. Sila tunggu.')
         return
     reset(context)
-    await update.effective_message.reply_text('🎬 VIDEO SHOPEE AFFILIATE\n\nTekan Jana Video untuk bermula.', reply_markup=main_menu())
+    await update.effective_message.reply_text('⌨️ Menu papan kekunci lama ditutup.', reply_markup=ReplyKeyboardRemove())
+    await update.effective_message.reply_text('🎬 VIDEO SHOPEE AFFILIATE\n\nPilih fungsi di bawah:', reply_markup=main_menu())
 
 
 async def photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -311,6 +313,24 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         reset(context)
         context.user_data['stage'] = 'photos'
         await query.message.reply_text('Langkah 1/4 — Hantar 1–5 gambar produk. Tekan Selesai apabila cukup.', reply_markup=photos_menu())
+    elif action == 'prompt':
+        reset(context)
+        context.user_data['stage'] = 'prompt_product'
+        await query.message.reply_text('✍️ PROMPT VIDEO AFFILIATE\n\nLangkah 1/3: Nyatakan produk secara tepat: nama, warna, bentuk, bahan, logo dan ciri yang mesti kekal sama. Contoh: Beg tote hitam kulit PU, zip emas, logo kecil di tengah.')
+    elif action.startswith('motion:') and stage == 'prompt_motion':
+        motion = action.split(':', 1)[1]
+        motions = {'orbit': 'A controlled 30-degree camera arc around the product, not a full 360-degree rotation; preserve the visible product geometry.', 'push': 'A slow forward dolly-in with gentle parallax; no object deformation.', 'side': 'A smooth left-to-right camera slide with stable product proportions.', 'static': 'A locked camera with subtle studio lighting changes only.'}
+        if motion in motions:
+            product = context.user_data.get('prompt_product', 'the reference product')
+            scene = context.user_data.get('prompt_scene', 'clean studio background')
+            prompt = (f'Create a 10-second vertical 9:16 product affiliate video. PRODUCT REFERENCE: {product}. '
+                      f'SCENE: {scene}. CAMERA: {motions[motion]} '
+                      'Use the uploaded product image as the strict visual reference. Keep the exact identity, shape, color, proportions, branding, labels and number of parts unchanged throughout every frame. '
+                      'The product remains the hero, fully visible and sharply focused. Use realistic lighting and smooth physically plausible movement. '
+                      'Do not invent extra accessories, alter text or logos, morph the object, duplicate it, introduce people or hands, add captions, watermarks or UI. '
+                      'If unseen sides of the product are not provided, do not fabricate them; use only a modest camera arc. No abrupt cuts or flicker. Output 10 seconds, portrait 9:16, high quality.')
+            context.user_data['stage'] = 'prompt_done'
+            await query.message.reply_text('✅ PROMPT SIAP (salin teks di bawah):\n\n' + prompt, reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('🤖 Buka NexaBot', url='https://t.me/aigeneratornexa_bot?start=ref37141287'), InlineKeyboardButton('✨ Buka Gemini', url='https://gemini.google.com/')], [InlineKeyboardButton('✍️ Prompt Baharu', callback_data='prompt'), InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
     elif action == 'convert':
         reset(context)
         context.user_data['stage'] = 'convert'
@@ -396,7 +416,61 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text('Hantar gambar atau gunakan butang di bawah.', reply_markup=main_menu())
+    stage = context.user_data.get('stage')
+    value = update.message.text.strip()
+    shortcuts = {
+        '🎬 Jana Video Affiliate': 'make',
+        '🔄 Tukar Format Video': 'convert',
+        '✍️ Sediakan Prompt Video': 'prompt',
+        '💎 Langganan': 'subscription',
+        '👤 Akaun Saya': 'account',
+        '❓ Bantuan': 'help',
+        '🗑 Mula Semula': 'home',
+    }
+    if value in shortcuts:
+        action = shortcuts[value]
+        if action == 'make':
+            reset(context)
+            context.user_data['stage'] = 'photos'
+            await update.message.reply_text('Langkah 1/4 — Hantar 1–5 gambar produk. Tekan Selesai apabila cukup.', reply_markup=photos_menu())
+        elif action == 'convert':
+            reset(context)
+            context.user_data['stage'] = 'convert'
+            await update.message.reply_text('🔄 TUKAR FORMAT VIDEO\n\nTekan 📎 → File / Fail → pilih video MP4 asal. Bot akan memprosesnya secara automatik.', reply_markup=main_menu())
+        elif action == 'prompt':
+            reset(context)
+            context.user_data['stage'] = 'prompt_product'
+            await update.message.reply_text('✍️ PROMPT VIDEO AFFILIATE\n\nLangkah 1/3: Terangkan produk dengan tepat termasuk warna, bentuk, bahan dan logo.')
+        elif action == 'subscription':
+            await update.message.reply_text('💎 LANGGANAN\n\nPelan RM5 / 30 hari masih cadangan. Pembayaran belum diaktifkan.')
+        elif action == 'account':
+            await update.message.reply_text(f'👤 AKAUN SAYA\n\nID Telegram: {update.effective_user.id}\nLangganan belum diaktifkan.')
+        elif action == 'help':
+            await update.message.reply_text('❓ BANTUAN\n\nJana Video: hantar gambar, pilih gaya dan muzik.\nTukar Format: hantar MP4.\nPrompt: terangkan produk dan pilih gerakan kamera.')
+        else:
+            await start(update, context)
+        return
+    if stage == 'prompt_product':
+        if len(value) < 8:
+            await update.message.reply_text('Sila beri penerangan produk yang lebih khusus (sekurang-kurangnya 8 aksara).')
+            return
+        context.user_data['prompt_product'] = value[:600]
+        context.user_data['stage'] = 'prompt_scene'
+        await update.message.reply_text('Langkah 2/3: Nyatakan latar dan suasana yang dikehendaki. Contoh: meja marmar putih, cahaya studio lembut, latar premium tanpa manusia.')
+    elif stage == 'prompt_scene':
+        if len(value) < 5:
+            await update.message.reply_text('Sila terangkan latar dengan lebih jelas.')
+            return
+        context.user_data['prompt_scene'] = value[:400]
+        context.user_data['stage'] = 'prompt_motion'
+        await update.message.reply_text('Langkah 3/3: Pilih gerakan kamera:', reply_markup=InlineKeyboardMarkup([
+            [InlineKeyboardButton('🔄 Orbit Terkawal', callback_data='motion:orbit')],
+            [InlineKeyboardButton('🔍 Zoom Masuk', callback_data='motion:push')],
+            [InlineKeyboardButton('↔️ Gerak Sisi', callback_data='motion:side')],
+            [InlineKeyboardButton('✨ Studio Statik', callback_data='motion:static')],
+        ]))
+    else:
+        await update.message.reply_text('Gunakan butang menu di bawah.', reply_markup=main_menu())
 
 
 async def generate(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -461,7 +535,7 @@ def main():
     app.add_handler(CommandHandler('jana', generate, block=False))
     for style in STYLES:
         app.add_handler(CommandHandler(style, choose_style))
-    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(make|convert|photos_done|confirm|styles|music|music_previews|subscription|account|help|check|reset|home|preview:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|listen:(cinematic|energetic|happy|luxury|nature|beauty)|style:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|music:(auto|cinematic|energetic|happy|luxury|nature|beauty|none|custom))$'))
+    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(make|convert|prompt|motion:(orbit|push|side|static)|photos_done|confirm|styles|music|music_previews|subscription|account|help|check|reset|home|preview:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|listen:(cinematic|energetic|happy|luxury|nature|beauty)|style:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|music:(auto|cinematic|energetic|happy|luxury|nature|beauty|none|custom))$'))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, menu_text))
     app.add_handler(MessageHandler(filters.PHOTO, photo))
     app.add_handler(MessageHandler(filters.VIDEO | filters.Document.MimeType('video/mp4'), convert_upload))
