@@ -239,6 +239,8 @@ async def convert_upload(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text('Pemprosesan sedang berjalan.')
         return
     item = update.message.video or update.message.document
+    if update.message.video:
+        await update.message.reply_text('ℹ️ Video dihantar melalui pilihan Video. Telegram mungkin telah memampatkan fail asal. Untuk kualiti terbaik pada masa depan, gunakan 📎 → File / Fail. Saya akan terus proses video ini.')
     if not item or (update.message.document and item.mime_type != 'video/mp4'):
         await update.message.reply_text('Sila hantar fail MP4.')
         return
@@ -283,7 +285,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif action == 'convert':
         reset(context)
         context.user_data['stage'] = 'convert'
-        await query.message.reply_text('🔄 Hantar satu video MP4 sebagai Fail/Document (bukan video termampat) untuk eksport Shopee berkualiti tinggi.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
+        await query.message.reply_text('🔄 TUKAR VIDEO KE FORMAT SHOPEE\n\nUntuk kualiti terbaik:\n1. Tekan ikon 📎 di ruang mesej.\n2. Pilih File / Fail (bukan Gallery / Video).\n3. Pilih video MP4 asal Gemini dan hantar.\n\nBot akan menukar format secara automatik dan menghantar hasil sebagai fail MP4.\n\nNota: Telegram mungkin memampatkan video yang dihantar melalui Gallery / Video.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
     elif action == 'photos_done':
         if stage != 'photos' or not context.user_data.get('photos'):
             await query.message.reply_text('Hantar sekurang-kurangnya satu gambar dahulu.', reply_markup=photos_menu())
