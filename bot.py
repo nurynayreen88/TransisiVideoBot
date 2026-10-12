@@ -8,7 +8,7 @@ import tempfile
 from pathlib import Path
 
 from PIL import Image, ImageOps
-from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardRemove
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler, ContextTypes, MessageHandler, filters
 
 logging.basicConfig(level=logging.INFO)
@@ -36,15 +36,6 @@ STYLE_LABELS = {
 }
 MUSIC_CHOICES = ('auto', 'cinematic', 'energetic', 'happy', 'luxury', 'nature', 'beauty', 'none', 'custom')
 MUSIC_DIR = Path(__file__).resolve().parent / 'music'
-
-def bottom_menu():
-    return ReplyKeyboardMarkup([
-        ['🎬 Jana Video Affiliate', '🔄 Tukar Format Video'],
-        ['✍️ Sediakan Prompt Video'],
-        ['💎 Langganan', '👤 Akaun Saya'],
-        ['❓ Bantuan'],
-    ], resize_keyboard=True, is_persistent=True)
-
 
 def photos_menu():
     return InlineKeyboardMarkup([[InlineKeyboardButton('✅ Selesai Hantar Gambar', callback_data='photos_done')], [InlineKeyboardButton('🗑 Mula Semula', callback_data='reset')]])
@@ -190,7 +181,8 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.effective_message.reply_text('Video sedang diproses. Sila tunggu.')
         return
     reset(context)
-    await update.effective_message.reply_text('🎬 VIDEO SHOPEE AFFILIATE\n\nPilih fungsi menggunakan butang di bawah.', reply_markup=bottom_menu())
+    await update.effective_message.reply_text('⌨️ Menu papan kekunci lama ditutup.', reply_markup=ReplyKeyboardRemove())
+    await update.effective_message.reply_text('🎬 VIDEO SHOPEE AFFILIATE\n\nPilih fungsi di bawah:', reply_markup=main_menu())
 
 
 async def photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
