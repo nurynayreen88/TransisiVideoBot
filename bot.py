@@ -219,13 +219,12 @@ def convert_shopee(source: Path, destination: Path):
         ['ffprobe', '-v', 'error', '-select_streams', 'a:0',
          '-show_entries', 'stream=index', '-of', 'csv=p=0', str(source)],
         capture_output=True, text=True, check=True, timeout=20)
-    cmd = ['ffmpeg', '-hide_banner', '-loglevel', 'error', '-y', '-i', str(source),
-           '-map', '0:v:0']
+    cmd = ['ffmpeg', '-hide_banner', '-loglevel', 'error', '-y', '-i', str(source)]
     if probe.stdout.strip():
-        cmd += ['-map', '0:a:0', '-c:a', 'aac', '-b:a', '128k', '-ar', '44100', '-ac', '2']
+        cmd += ['-map', '0:v:0', '-map', '0:a:0', '-c:a', 'aac', '-b:a', '128k', '-ar', '44100', '-ac', '2']
     else:
         cmd += ['-f', 'lavfi', '-i', 'anullsrc=channel_layout=stereo:sample_rate=44100',
-                '-map', '1:a:0', '-c:a', 'aac', '-b:a', '128k', '-shortest']
+                '-map', '0:v:0', '-map', '1:a:0', '-c:a', 'aac', '-b:a', '128k', '-shortest']
     cmd += ['-vf', vf, '-c:v', 'libx264', '-preset', 'medium', '-crf', '18',
             '-profile:v', 'high', '-level:v', '3.2', '-pix_fmt', 'yuv420p',
             '-movflags', '+faststart', '-max_muxing_queue_size', '1024', str(destination)]
