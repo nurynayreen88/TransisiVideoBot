@@ -219,14 +219,13 @@ def convert_shopee(source: Path, destination: Path):
         ['ffprobe', '-v', 'error', '-select_streams', 'a:0',
          '-show_entries', 'stream=index', '-of', 'csv=p=0', str(source)],
         capture_output=True, text=True, check=True, timeout=20)
-    cmd = ['ffmpeg', '-hide_banner', '-loglevel', 'error', '-y', '-i', str(source),
-           '-map', '0:v:0']
+    cmd = ['ffmpeg', '-hide_banner', '-loglevel', 'error', '-y', '-i', str(source)]
     if probe.stdout.strip():
-        cmd += ['-map', '0:a:0', '-c:a', 'aac', '-b:a', '128k', '-ar', '44100', '-ac', '2']
+        cmd += ['-map', '0:v:0', '-map', '0:a:0', '-c:a', 'aac', '-b:a', '128k', '-ar', '44100', '-ac', '2']
     else:
         cmd += ['-f', 'lavfi', '-i', 'anullsrc=channel_layout=stereo:sample_rate=44100',
-                '-map', '1:a:0', '-c:a', 'aac', '-b:a', '128k', '-shortest']
-    cmd += ['-vf', vf, '-c:v', 'libx264', '-preset', 'veryfast', '-crf', '23',
+                '-map', '0:v:0', '-map', '1:a:0', '-c:a', 'aac', '-b:a', '128k', '-shortest']
+    cmd += ['-vf', vf, '-c:v', 'libx264', '-preset', 'medium', '-crf', '18',
             '-profile:v', 'high', '-level:v', '3.2', '-pix_fmt', 'yuv420p',
             '-movflags', '+faststart', '-max_muxing_queue_size', '1024', str(destination)]
     subprocess.run(cmd, check=True, timeout=240)
@@ -260,7 +259,7 @@ async def convert_upload(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 await (await context.bot.get_file(item.file_id)).download_to_drive(source)
                 await asyncio.to_thread(convert_shopee, source, destination)
                 with destination.open('rb') as handle:
-                    await update.message.reply_video(video=handle, caption='✅ Video telah ditukar kepada profil eksport mesra Shopee. Kelulusan muat naik bergantung pada peraturan Shopee.', supports_streaming=True, reply_markup=main_menu())
+                    await update.message.reply_document(document=handle, filename='TransisiVideoBot_Shopee_HQ.mp4', caption='✅ MP4 berkualiti tinggi. Muat turun sebagai fail untuk mengelakkan pemampatan tambahan. Kelulusan Shopee tertakluk pada peraturan platform.', reply_markup=main_menu())
         except Exception:
             logging.exception('Shopee conversion failed')
             await update.message.reply_text('Penukaran gagal. Cuba video MP4 yang lebih pendek atau kecil.', reply_markup=main_menu())
@@ -284,7 +283,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif action == 'convert':
         reset(context)
         context.user_data['stage'] = 'convert'
-        await query.message.reply_text('🔄 Hantar satu video MP4 untuk ditukar secara automatik ke profil eksport Shopee (720×1280, H.264, AAC, 30 FPS).', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
+        await query.message.reply_text('🔄 Hantar satu video MP4 sebagai Fail/Document (bukan video termampat) untuk eksport Shopee berkualiti tinggi.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
     elif action == 'photos_done':
         if stage != 'photos' or not context.user_data.get('photos'):
             await query.message.reply_text('Hantar sekurang-kurangnya satu gambar dahulu.', reply_markup=photos_menu())
