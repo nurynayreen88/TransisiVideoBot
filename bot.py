@@ -28,8 +28,8 @@ def photos_menu():
 
 def main_menu():
     return InlineKeyboardMarkup([
-        [InlineKeyboardButton('🎬 Jana Video Produk', callback_data='make')],
-        [InlineKeyboardButton('🔄 Tukar Video ke Format Shopee', callback_data='convert')],
+        [InlineKeyboardButton('🎬 Jana Video Affiliate', callback_data='make')],
+        [InlineKeyboardButton('🔄 Tukar Video Gemini', callback_data='convert')],
         [InlineKeyboardButton('💎 Langganan', callback_data='subscription'), InlineKeyboardButton('👤 Akaun Saya', callback_data='account')],
         [InlineKeyboardButton('❓ Bantuan', callback_data='help')],
     ])
@@ -163,7 +163,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.effective_message.reply_text('Video sedang diproses. Sila tunggu.')
         return
     reset(context)
-    await update.effective_message.reply_text('🎬 PEMBUAT VIDEO MUDAH\n\nTekan Jana Video untuk bermula.', reply_markup=main_menu())
+    await update.effective_message.reply_text('🎬 VIDEO SHOPEE AFFILIATE\n\nTekan Jana Video untuk bermula.', reply_markup=main_menu())
 
 
 async def photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -245,7 +245,7 @@ def convert_shopee(source: Path, destination: Path):
 
 async def convert_upload(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if context.user_data.get('stage') != 'convert':
-        await update.message.reply_text('Tekan Tukar Video ke Format Shopee dahulu.', reply_markup=main_menu())
+        await update.message.reply_text('Tekan Tukar Video Gemini dahulu.', reply_markup=main_menu())
         return
     if context.user_data.get('busy'):
         await update.message.reply_text('Pemprosesan sedang berjalan.')
@@ -297,7 +297,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif action == 'convert':
         reset(context)
         context.user_data['stage'] = 'convert'
-        await query.message.reply_text('🔄 TUKAR VIDEO KE FORMAT SHOPEE\n\nUntuk kualiti terbaik:\n1. Tekan ikon 📎 di ruang mesej.\n2. Pilih File / Fail (bukan Gallery / Video).\n3. Pilih video MP4 asal Gemini dan hantar.\n\nBot akan menukar format secara automatik dan menghantar hasil sebagai fail MP4.\n\nNota: Telegram mungkin memampatkan video yang dihantar melalui Gallery / Video.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
+        await query.message.reply_text('🔄 TUKAR VIDEO GEMINI UNTUK AFFILIATE\n\nUntuk kualiti terbaik:\n1. Tekan ikon 📎 di ruang mesej.\n2. Pilih File / Fail (bukan Gallery / Video).\n3. Pilih video MP4 asal Gemini dan hantar.\n\nBot akan menukar format secara automatik dan menghantar hasil sebagai fail MP4.\n\nNota: Telegram mungkin memampatkan video yang dihantar melalui Gallery / Video.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
     elif action == 'photos_done':
         if stage != 'photos' or not context.user_data.get('photos'):
             await query.message.reply_text('Hantar sekurang-kurangnya satu gambar dahulu.', reply_markup=photos_menu())
