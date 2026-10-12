@@ -19,11 +19,14 @@ WIDTH = int(os.environ.get('VIDEO_WIDTH', '480'))
 HEIGHT = int(os.environ.get('VIDEO_HEIGHT', '854'))
 FPS = int(os.environ.get('VIDEO_FPS', '24'))
 STYLES = {'cinematic': 'fade', 'hybrid': 'smoothleft', 'morph': 'pixelize'}
+MUSIC_CHOICES = ('auto', 'cinematic', 'energetic', 'happy', 'luxury', 'nature', 'beauty', 'none', 'custom')
+MUSIC_DIR = Path(__file__).resolve().parent / 'music'
+
 def main_menu():
     return InlineKeyboardMarkup([
         [InlineKeyboardButton('🎬 Jana Video', callback_data='make')],
-        [InlineKeyboardButton('🎨 Pilih Gaya', callback_data='styles'), InlineKeyboardButton('📋 Semak', callback_data='check')],
-        [InlineKeyboardButton('🗑 Mula Semula', callback_data='reset')],
+        [InlineKeyboardButton('🎨 Gaya Video', callback_data='styles'), InlineKeyboardButton('🎵 Muzik', callback_data='music')],
+        [InlineKeyboardButton('📋 Semak', callback_data='check'), InlineKeyboardButton('🗑 Mula Semula', callback_data='reset')],
     ])
 
 
@@ -33,6 +36,26 @@ def style_menu():
         [InlineKeyboardButton('🎥 Cinematic', callback_data='style:cinematic'), InlineKeyboardButton('🌀 Morph', callback_data='style:morph')],
         [InlineKeyboardButton('↩️ Kembali', callback_data='home')],
     ])
+
+
+def music_menu():
+    return InlineKeyboardMarkup([
+        [InlineKeyboardButton('✨ Auto', callback_data='music:auto'), InlineKeyboardButton('🔇 Tanpa Muzik', callback_data='music:none')],
+        [InlineKeyboardButton('🎬 Cinematic', callback_data='music:cinematic'), InlineKeyboardButton('⚡ Energetic', callback_data='music:energetic')],
+        [InlineKeyboardButton('😊 Happy', callback_data='music:happy'), InlineKeyboardButton('💎 Luxury', callback_data='music:luxury')],
+        [InlineKeyboardButton('🌿 Nature', callback_data='music:nature'), InlineKeyboardButton('🌸 Beauty', callback_data='music:beauty')],
+        [InlineKeyboardButton('📎 MP3 Sendiri', callback_data='music:custom')],
+        [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
+    ])
+
+
+def resolve_music(choice: str, style: str) -> Path | None:
+    if choice == 'none' or choice == 'custom':
+        return None
+    name = ({'hybrid': 'happy', 'cinematic': 'cinematic', 'morph': 'energetic'}.get(style, 'happy')
+            if choice == 'auto' else choice)
+    path = MUSIC_DIR / (name + '.mp3')
+    return path if path.is_file() else None
 
 
 def render_video(images: list[Path], output: Path, music: Path | None = None, style: str = 'hybrid'):
@@ -111,6 +134,7 @@ def render_video(images: list[Path], output: Path, music: Path | None = None, st
 def reset(context):
     context.user_data['photos'] = []
     context.user_data['music'] = None
+    context.user_data['music_choice'] = 'auto'
     context.user_data['style'] = 'hybrid'
 
 
@@ -121,7 +145,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     reset(context)
     await update.effective_message.reply_text(
         '🎬 PEMBUAT VIDEO MUDAH\\n\\nHantar 1–5 gambar, kemudian tekan Jana Video.\\n'
-        'Gaya Hybrid dipilih secara automatik. MP3 muzik latar adalah pilihan.', reply_markup=main_menu())
+        'Gaya Hybrid dan muzik Auto dipilih secara automatik. Boleh juga hantar MP3 sendiri.', reply_markup=main_menu())
 
 
 async def photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -147,6 +171,7 @@ async def audio(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text('Audio terlalu besar. Maksimum 12 MB.')
         return
     context.user_data['music'] = item.file_id
+    context.user_data['music_choice'] = 'custom'
     await update.message.reply_text('🎵 Muzik diterima.', reply_markup=main_menu())
 
 
@@ -159,7 +184,7 @@ async def choose_style(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def status(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.effective_message.reply_text(
         f"Gambar: {len(context.user_data.get('photos', []))}/{MAX_IMAGES} | "
-        f"Muzik: {'ya' if context.user_data.get('music') else 'tiada'} | "
+        f"Muzik: {context.user_data.get('music_choice', 'auto')} | "
         f"Gaya: {context.user_data.get('style', 'hybrid')} | {DURATION}s.", reply_markup=main_menu())
 
 
@@ -169,6 +194,15 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     action = query.data
     if action == 'make':
         await generate(update, context)
+    elif action == 'music':
+        await query.message.reply_text('Pilih muzik latar:', reply_markup=music_menu())
+    elif action.startswith('music:'):
+        choice = action.split(':', 1)[1]
+        if choice in MUSIC_CHOICES:
+            context.user_data['music_choice'] = choice
+            if choice != 'custom':
+                context.user_data['music'] = None
+            await query.message.reply_text(('Hantar fail MP3 sekarang.' if choice == 'custom' else f'✅ Muzik {choice} dipilih.'), reply_markup=main_menu())
     elif action == 'styles':
         await query.message.reply_text('Pilih gaya video:', reply_markup=style_menu())
     elif action.startswith('style:'):
@@ -211,9 +245,13 @@ async def generate(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 await (await context.bot.get_file(fid)).download_to_drive(p)
                 paths.append(p)
             music = None
-            if context.user_data.get('music'):
+            if context.user_data.get('music_choice') == 'custom' and context.user_data.get('music'):
                 music = folder / 'music.mp3'
                 await (await context.bot.get_file(context.user_data['music'])).download_to_drive(music)
+            elif context.user_data.get('music_choice', 'auto') != 'none':
+                music = resolve_music(context.user_data.get('music_choice', 'auto'), context.user_data.get('style', 'hybrid'))
+                if music is None:
+                    await message.reply_text('Muzik pilihan belum tersedia pada server. Video akan dijana tanpa muzik.')
             result = folder / 'video.mp4'
             await asyncio.to_thread(render_video, paths, result, music, context.user_data.get('style', 'hybrid'))
             with result.open('rb') as f:
@@ -241,7 +279,83 @@ def main():
     app.add_handler(CommandHandler('jana', generate, block=False))
     for style in STYLES:
         app.add_handler(CommandHandler(style, choose_style))
-    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(make|styles|check|reset|home|style:(hybrid|cinematic|morph))$'))
+    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(make|styles|music|check|reset|home|style:(hybrid|cinematic|morph)|music:(auto|cinematic|energetic|happy|luxury|nature|beauty|none|custom))))
+    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, menu_text))
+    app.add_handler(MessageHandler(filters.PHOTO, photo))
+    app.add_handler(MessageHandler(filters.AUDIO | filters.Document.MimeType('audio/mpeg'), audio))
+    url = os.environ.get('WEBHOOK_URL', '').rstrip('/')
+    secret = os.environ.get('WEBHOOK_SECRET', '')
+    if not url.startswith('https://') or not secret:
+        raise RuntimeError('WEBHOOK_URL (https) dan WEBHOOK_SECRET wajib ditetapkan')
+    app.run_webhook(
+        listen='0.0.0.0',
+        port=int(os.environ.get('PORT', '10000')),
+        url_path='telegram',
+        webhook_url=url + '/telegram',
+        secret_token=secret,
+        drop_pending_updates=True,
+    )
+
+if __name__ == '__main__':
+    main()
+))
+    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, menu_text))
+    app.add_handler(MessageHandler(filters.PHOTO, photo))
+    app.add_handler(MessageHandler(filters.AUDIO | filters.Document.MimeType('audio/mpeg'), audio))
+    url = os.environ.get('WEBHOOK_URL', '').rstrip('/')
+    secret = os.environ.get('WEBHOOK_SECRET', '')
+    if not url.startswith('https://') or not secret:
+        raise RuntimeError('WEBHOOK_URL (https) dan WEBHOOK_SECRET wajib ditetapkan')
+    app.run_webhook(
+        listen='0.0.0.0',
+        port=int(os.environ.get('PORT', '10000')),
+        url_path='telegram',
+        webhook_url=url + '/telegram',
+        secret_token=secret,
+        drop_pending_updates=True,
+    )
+
+if __name__ == '__main__':
+    main()
+))
+    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, menu_text))
+    app.add_handler(MessageHandler(filters.PHOTO, photo))
+    app.add_handler(MessageHandler(filters.AUDIO | filters.Document.MimeType('audio/mpeg'), audio))
+    url = os.environ.get('WEBHOOK_URL', '').rstrip('/')
+    secret = os.environ.get('WEBHOOK_SECRET', '')
+    if not url.startswith('https://') or not secret:
+        raise RuntimeError('WEBHOOK_URL (https) dan WEBHOOK_SECRET wajib ditetapkan')
+    app.run_webhook(
+        listen='0.0.0.0',
+        port=int(os.environ.get('PORT', '10000')),
+        url_path='telegram',
+        webhook_url=url + '/telegram',
+        secret_token=secret,
+        drop_pending_updates=True,
+    )
+
+if __name__ == '__main__':
+    main()
+))
+    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, menu_text))
+    app.add_handler(MessageHandler(filters.PHOTO, photo))
+    app.add_handler(MessageHandler(filters.AUDIO | filters.Document.MimeType('audio/mpeg'), audio))
+    url = os.environ.get('WEBHOOK_URL', '').rstrip('/')
+    secret = os.environ.get('WEBHOOK_SECRET', '')
+    if not url.startswith('https://') or not secret:
+        raise RuntimeError('WEBHOOK_URL (https) dan WEBHOOK_SECRET wajib ditetapkan')
+    app.run_webhook(
+        listen='0.0.0.0',
+        port=int(os.environ.get('PORT', '10000')),
+        url_path='telegram',
+        webhook_url=url + '/telegram',
+        secret_token=secret,
+        drop_pending_updates=True,
+    )
+
+if __name__ == '__main__':
+    main()
+))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, menu_text))
     app.add_handler(MessageHandler(filters.PHOTO, photo))
     app.add_handler(MessageHandler(filters.AUDIO | filters.Document.MimeType('audio/mpeg'), audio))
