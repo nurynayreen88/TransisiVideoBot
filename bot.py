@@ -657,34 +657,12 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     filename=prompt_file.name,
                     caption='📋 PROMPT PENUH — buka fail .txt ini, kemudian Select All → Copy. Semua arahan ada dalam satu fail.'
                 )
-                if mode_name == 'storyboard':
-                    await query.message.reply_text(
-                        '🎬 Untuk salin semua babak sekali gus, buka fail .txt di atas. '
-                        'Paparan mesej di bawah hanya untuk bacaan.'
-                    )
-                # Never use a zero-width regex to split prompt content: it can
-                # produce one Telegram message per character.
-                remaining = prompt
-                sent_parts = 0
-                while remaining:
-                    if len(remaining) <= 3000:
-                        chunk, remaining = remaining, ''
-                    else:
-                        cut = remaining.rfind('\\n\\n', 1000, 3000)
-                        if cut < 0:
-                            cut = remaining.rfind('\\n', 1000, 3000)
-                        if cut < 0:
-                            cut = 3000
-                        chunk, remaining = remaining[:cut], remaining[cut:].lstrip('\\n')
-                    if not chunk.strip():
-                        continue
-                    sent_parts += 1
-                    if sent_parts > 12:
-                        await query.message.reply_text('Baki prompt tersedia dalam fail .txt lengkap di atas.')
-                        break
-                    await query.message.reply_text(
-                        '<pre>' + html.escape(chunk) + '</pre>', parse_mode='HTML'
-                    )
+                # The complete TXT is the single source of truth. Avoid sending
+                # lengthy chat copies that can trigger Telegram flood control.
+                await query.message.reply_text(
+                    '📋 Prompt penuh sudah dihantar sebagai fail .txt di atas. '
+                    'Buka fail → Select All → Copy. Tiada babak atau arahan yang dipotong.'
+                )
                 await query.message.reply_text('Pilih tindakan seterusnya:', reply_markup=InlineKeyboardMarkup([
                     [InlineKeyboardButton('🤖 Buka NexaBot', url='https://t.me/aigeneratornexa_bot?start=ref37141287'), InlineKeyboardButton('✨ Buka Gemini', url='https://gemini.google.com/')],
                     [InlineKeyboardButton('✍️ Prompt Baharu', callback_data='prompt'), InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]
