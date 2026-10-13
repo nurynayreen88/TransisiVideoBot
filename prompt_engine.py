@@ -70,7 +70,7 @@ def build_prompt(mode, product, scene, motion, style='auto'):
         )
         return (
             "KLIPPO | STORYBOARD | " + style_name + "\n"
-            "OUTPUT: One cohesive vertical 9:16 product advertisement; white doodle reference style targets approximately 18 seconds, other styles 10 seconds.\n\n"
+            "OUTPUT: One cohesive vertical 9:16 product advertisement. " + ("Target approximately 18 seconds for the reference-style white doodle edit. " if doodle else "Target 10 seconds. ") + "\n\n"
             "PRODUCT REFERENCE: " + product + "\n\n" + identity + "\n\n"
             "STYLE FROM KLIPPO CATALOG: " + style_template + "\n\n"
             "SETTING: " + scene + "\n"
