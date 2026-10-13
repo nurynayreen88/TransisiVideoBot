@@ -81,7 +81,7 @@ def build_prompt(mode, product, scene, motion, style='auto', duration=10):
             )
         return (
             "KLIPPO | STORYBOARD | " + style_name + "\n"
-            "OUTPUT: One cohesive vertical 9:16 product advertisement, EXACT DURATION: " + str(duration) + " seconds.\\n\\n"
+            "OUTPUT: One cohesive vertical 9:16 product advertisement, EXACT DURATION: " + str(duration) + " seconds.\n\n"
             "PRODUCT REFERENCE: " + product + "\n\n" + identity + "\n\n"
             "STYLE FROM KLIPPO CATALOG: " + style_template + "\n\n"
             "SETTING: " + scene + "\n"
@@ -131,9 +131,18 @@ def build_prompt(mode, product, scene, motion, style='auto', duration=10):
             "physically plausible parallax and natural material response. Maintain one consistent studio space "
             "and color grade throughout; avoid frantic motion, jump cuts, fake rotations or excessive effects."
         )
+    if duration == 20:
+        direction = (
+            "DIRECTOR'S SINGLE-TAKE 20-SECOND BRIEF: 0-4s establish the reference-facing product in its setting; "
+            "4-8s restrained camera push or lateral movement with realistic parallax; "
+            "8-12s emphasize a genuinely visible detail using subtle focus and light; "
+            "12-16s ease back to a complete recognizable product view with the same identity and background; "
+            "16-20s elegant hero hold and gentle fade. Keep continuity, avoid new unseen angles, "
+            "avoid added text or invented features. This is one coherent commercial, not a slideshow."
+        )
     return (
         "KLIPPO | PROFESSIONAL IMAGE-TO-VIDEO PRODUCTION PROMPT\n"
-        "OUTPUT: 10 seconds; portrait 9:16; high-quality realistic product commercial; "
+        "OUTPUT: " + str(duration) + " seconds; portrait 9:16; high-quality realistic product commercial; "
         "one coherent deliverable; no on-screen text.\n\n"
         "PRODUCT: " + product + "\n\n" + identity + "\n\n" + art + "\n\n"
         + direction + "\n\n" + negative + "\n\n"
