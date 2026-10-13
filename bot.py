@@ -641,6 +641,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await query.message.reply_text('✍️ HASILKAN PROMPT — Pilih jenis:', reply_markup=InlineKeyboardMarkup([
             [InlineKeyboardButton('✨ Prompt Biasa', callback_data='prompt_type:normal')],
             [InlineKeyboardButton('🎞️ Prompt Storyboard (6 Babak)', callback_data='prompt_type:storyboard')],
+            [InlineKeyboardButton('✏️ White Doodle Storyboard', callback_data='prompt_type:doodle')],
             [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
         ]))
     elif action.startswith('prompt_type:') and stage == 'prompt_type':
@@ -691,7 +692,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 scene = context.user_data.get('prompt_scene', 'clean studio background')
                 prompt = build_prompt(context.user_data.get('prompt_mode', 'normal'), product, scene, motion)
                 context.user_data['stage'] = 'prompt_done'
-                mode_name = 'storyboard' if context.user_data.get('prompt_mode') == 'storyboard' else 'biasa'
+                mode_name = context.user_data.get('prompt_mode', 'normal')
                 actions = InlineKeyboardMarkup([
                     [InlineKeyboardButton('🤖 NexaBot', url='https://t.me/aigeneratornexa_bot?start=ref37141287'), InlineKeyboardButton('✨ Gemini', url='https://gemini.google.com/')],
                     [InlineKeyboardButton('✍️ Prompt Baharu', callback_data='prompt'), InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]
@@ -1002,7 +1003,7 @@ def main():
     app.add_handler(CommandHandler('jana', generate, block=False))
     for style in STYLES:
         app.add_handler(CommandHandler(style, choose_style))
-    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(photos_order|photos_undo|photos_more|photo_up:[0-4]|photo_down:[0-4]|photo_remove:[0-4]|duration:(10|15|20)|admin_pending|admin_approve:[0-9]+|admin_reject:[0-9]+|admin|receipt_upload|subscription_qr|make|storyboard|doodle:(auto|white|sparkle|motion|all|none)|convert|merge|merge_next|merge_done|merge_style:(fade|smoothleft|slideleft|zoomin)|prompt|prompt_type:(normal|storyboard)|prompt_details:(add|skip)|scene:(auto|studio|dark|home|nature|minimal)|motion:(orbit|push|side|static)|photos_done|confirm|styles|music|music_previews|subscription|account|help|check|reset|home|preview:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|listen:(cinematic|energetic|happy|luxury|nature|beauty)|style:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|music:(auto|cinematic|energetic|happy|luxury|nature|beauty|none|custom))$'))
+    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(photos_order|photos_undo|photos_more|photo_up:[0-4]|photo_down:[0-4]|photo_remove:[0-4]|duration:(10|15|20)|admin_pending|admin_approve:[0-9]+|admin_reject:[0-9]+|admin|receipt_upload|subscription_qr|make|storyboard|doodle:(auto|white|sparkle|motion|all|none)|convert|merge|merge_next|merge_done|merge_style:(fade|smoothleft|slideleft|zoomin)|prompt|prompt_type:(normal|storyboard|doodle)|prompt_details:(add|skip)|scene:(auto|studio|dark|home|nature|minimal)|motion:(orbit|push|side|static)|photos_done|confirm|styles|music|music_previews|subscription|account|help|check|reset|home|preview:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|listen:(cinematic|energetic|happy|luxury|nature|beauty)|style:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|music:(auto|cinematic|energetic|happy|luxury|nature|beauty|none|custom))$'))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, menu_text))
     app.add_handler(MessageHandler(filters.PHOTO, photo))
     app.add_handler(MessageHandler(filters.Document.IMAGE | filters.Document.MimeType('application/pdf'), receive_receipt))
