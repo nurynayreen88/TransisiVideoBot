@@ -217,6 +217,20 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.effective_message.reply_text('🎬 KLIPPO | Studio Video Affiliate\n\nHasilkan video produk daripada gambar, gabungkan klip mengikut susunan, tukar video kepada format MP4 menegak untuk affiliate, atau sediakan prompt video.\n\n✨ Apa yang boleh dibuat:\n• Jana Video — gambar produk menjadi video dengan pilihan gaya dan muzik.\n• Tukar Format — sediakan video untuk muat naik affiliate.\n• Gabung Video — cantum sehingga 5 klip dengan pilihan transisi.\n• Sediakan Prompt — bina arahan video produk yang lebih terperinci.\n\n💎 Langganan: Pelan Penyokong Awal RM5 / 30 hari. Bayar melalui QR DuitNow dan upload resit untuk semakan manual. Pengaktifan bukan automatik.\n\n👇 Pilih fungsi untuk bermula:', reply_markup=main_menu(update.effective_user.id))
 
 
+async def account_info(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    user_id = update.effective_user.id
+    if not klippo_db.configured():
+        await update.effective_message.reply_text(f'👤 AKAUN SAYA\\n\\nID Telegram: {user_id}\\nStatus langganan belum dapat disemak.')
+        return
+    try:
+        data = await asyncio.to_thread(klippo_db.subscription, user_id)
+        status = 'Tiada langganan' if not data else f"{data['status']} (tamat: {data.get('expires_at') or '-'})"
+        await update.effective_message.reply_text(f'👤 AKAUN SAYA\\n\\nID Telegram: {user_id}\\nLangganan: {status}')
+    except Exception:
+        logging.exception('Account lookup failed')
+        await update.effective_message.reply_text('⚠️ Status langganan tidak dapat disemak sekarang.')
+
+
 async def receive_receipt(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if context.user_data.get('stage') != 'receipt_upload':
         return
@@ -229,12 +243,23 @@ async def receive_receipt(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if (item.file_size or 0) > 10 * 1024 * 1024:
         await update.message.reply_text('Resit terlalu besar. Maksimum 10 MB.')
         return
+    if not klippo_db.configured():
+        await update.message.reply_text('⚠️ Sistem resit belum tersedia. Sila cuba selepas konfigurasi selesai.')
+        return
+    try:
+        receipt = await asyncio.to_thread(klippo_db.submit_receipt,
+            update.effective_user.id, update.effective_user.full_name,
+            item.file_id, 'photo' if update.message.photo else 'document')
+    except Exception:
+        logging.exception('Could not save receipt')
+        await update.message.reply_text('⚠️ Resit belum berjaya direkodkan. Sila cuba semula.')
+        return
     admins = [x.strip() for x in os.environ.get('ADMIN_USER_IDS', '37141287').split(',') if x.strip().isdigit()]
     delivered = False
     for admin_id in admins:
         try:
             await context.bot.send_message(chat_id=int(admin_id), text=(
-                f'🧾 RESIT LANGGANAN KLIPPO\n'
+                f'🧾 RESIT LANGGANAN KLIPPO #{receipt["id"]}\n'
                 f'Pengguna: {update.effective_user.full_name}\n'
                 f'ID Telegram: {update.effective_user.id}\n'
                 'Status: Menunggu semakan manual. Jangan aktifkan tanpa mengesahkan transaksi.'
@@ -247,7 +272,8 @@ async def receive_receipt(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data['stage'] = None
         await update.message.reply_text('✅ Resit diterima dan dihantar kepada admin untuk semakan. Langganan belum aktif sehingga disahkan.', reply_markup=main_menu())
     else:
-        await update.message.reply_text('⚠️ Resit belum berjaya dihantar kepada admin. Sila cuba semula sebentar lagi.')
+        context.user_data['stage'] = None
+        await update.message.reply_text(f'🧾 Resit #{receipt["id"]} direkodkan dan menunggu semakan. Admin belum dapat menerima salinan di Telegram; sila hubungi admin.', reply_markup=main_menu())
 
 
 async def photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -652,7 +678,7 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
         elif action == 'subscription':
             await update.message.reply_text('💎 LANGGANAN KLIPPO\n\nPelan Penyokong Awal: RM5 / 30 hari, sehingga 30 video sebulan. Pengaktifan manual selepas resit disemak.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📱 Papar QR DuitNow', callback_data='subscription_qr')]]))
         elif action == 'account':
-            await update.message.reply_text(f'👤 AKAUN SAYA\n\nID Telegram: {update.effective_user.id}\nLangganan belum diaktifkan.')
+            await account_info(update, context)
         elif action == 'help':
             await update.message.reply_text('❓ BANTUAN\n\nJana Video: hantar gambar, pilih gaya dan muzik.\nTukar Format: hantar MP4.\nPrompt: terangkan produk dan pilih gerakan kamera.')
         else:
