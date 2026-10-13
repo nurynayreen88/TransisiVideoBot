@@ -58,20 +58,20 @@ def resolve(key):
             raise ValueError("Unknown storyboard style")
         return row
 
-# Keyword-to-hook mappings are deterministic templates, not an additional AI request.
+# Conservative category hooks: product identity only, never invented benefits or hype.
 HOOKS = {
-    "lampu": (("lampu", "light", "lighting", "lantern"), ("SUDUT INI NAMPAK BERBEZA!", "TENGOK REKAAN LAMPU INI!")),
-    "beg": (("beg", "bag", "handbag", "backpack", "purse"), ("DETAIL BEG INI MENARIK!", "JOM TENGOK BEG INI!")),
-    "kasut": (("kasut", "shoe", "sneaker", "sandal"), ("TENGOK GAYA KASUT INI!", "DETAIL KASUT INI MENARIK!")),
-    "botol": (("botol", "bottle", "tumbler", "flask"), ("BOTOL INI CURI PERHATIAN!", "TENGOK REKAAN BOTOL INI!")),
-    "jam": (("jam", "watch", "clock"), ("DETAIL JAM INI MENARIK!", "JOM TENGOK JAM INI!")),
-    "kerusi": (("kerusi", "chair", "sofa"), ("TENGOK REKAAN INI!", "SUDUT RUANG NAMPAK BERBEZA!")),
-    "meja": (("meja", "table", "desk"), ("JOM TENGOK REKAAN MEJA!", "DETAIL MEJA INI MENARIK!")),
-    "telefon": (("telefon", "phone", "smartphone"), ("TENGOK AKSESORI INI!", "DETAIL PRODUK INI MENARIK!")),
-    "kipas": (("kipas", "fan"), ("TENGOK REKAAN KIPAS INI!", "DETAIL KIPAS INI MENARIK!")),
-    "katil": (("katil", "mattress", "bed"), ("TENGOK REKAAN INI!", "IDEA UNTUK RUANG ANDA!")),
-    "pakaian": (("baju", "shirt", "dress", "clothing", "jacket"), ("DETAIL PAKAIAN INI MENARIK!", "JOM TENGOK GAYA INI!")),
-    "alat_dapur": (("dapur", "kitchen", "pan", "pot", "blender"), ("JOM TENGOK ITEM DAPUR INI!", "DETAIL PRODUK DAPUR INI!")),
+    "lampu": (("lampu", "lantern", "lighting"), ("TENGOK LAMPU INI",)),
+    "beg": (("beg", "bag", "handbag", "backpack", "purse"), ("TENGOK BEG INI",)),
+    "kasut": (("kasut", "shoe", "sneaker", "sandal"), ("TENGOK KASUT INI",)),
+    "botol": (("botol", "bottle", "tumbler", "flask"), ("TENGOK BOTOL INI",)),
+    "jam": (("jam", "watch", "clock"), ("TENGOK JAM INI",)),
+    "kerusi": (("kerusi", "chair", "sofa"), ("TENGOK KERUSI INI",)),
+    "meja": (("meja", "table", "desk"), ("TENGOK MEJA INI",)),
+    "telefon": (("telefon", "phone", "smartphone"), ("TENGOK TELEFON INI",)),
+    "kipas": (("kipas", "fan"), ("TENGOK KIPAS INI",)),
+    "katil": (("katil", "mattress", "bed"), ("TENGOK PRODUK INI",)),
+    "pakaian": (("baju", "shirt", "dress", "clothing", "jacket"), ("TENGOK PAKAIAN INI",)),
+    "alat_dapur": (("dapur", "kitchen", "pan", "pot", "blender"), ("TENGOK PRODUK DAPUR INI",)),
 }
 HOOK_SCHEMA = """CREATE TABLE IF NOT EXISTS storyboard_hooks (
     category TEXT PRIMARY KEY, keywords TEXT NOT NULL, hooks TEXT NOT NULL,
@@ -79,6 +79,7 @@ HOOK_SCHEMA = """CREATE TABLE IF NOT EXISTS storyboard_hooks (
 )"""
 
 def product_hook(description):
+    """Return a conservative category hook or None if product identity is unclear."""
     import json
     with connect() as db:
         db.execute(HOOK_SCHEMA)
@@ -86,15 +87,36 @@ def product_hook(description):
             "INSERT OR IGNORE INTO storyboard_hooks(category, keywords, hooks) VALUES (?, ?, ?)",
             [(category, json.dumps(keywords), json.dumps(hooks)) for category, (keywords, hooks) in HOOKS.items()]
         )
+        # Only migrate untouched old stock rows; preserve user-customized database entries.
+        old = {
+            "lampu": ("SUDUT INI NAMPAK BERBEZA!", "TENGOK REKAAN LAMPU INI!"),
+            "beg": ("DETAIL BEG INI MENARIK!", "JOM TENGOK BEG INI!"),
+            "kasut": ("TENGOK GAYA KASUT INI!", "DETAIL KASUT INI MENARIK!"),
+            "botol": ("BOTOL INI CURI PERHATIAN!", "TENGOK REKAAN BOTOL INI!"),
+            "jam": ("DETAIL JAM INI MENARIK!", "JOM TENGOK JAM INI!"),
+            "kerusi": ("TENGOK REKAAN INI!", "SUDUT RUANG NAMPAK BERBEZA!"),
+            "meja": ("JOM TENGOK REKAAN MEJA!", "DETAIL MEJA INI MENARIK!"),
+            "telefon": ("TENGOK AKSESORI INI!", "DETAIL PRODUK INI MENARIK!"),
+            "kipas": ("TENGOK REKAAN KIPAS INI!", "DETAIL KIPAS INI MENARIK!"),
+            "katil": ("TENGOK REKAAN INI!", "IDEA UNTUK RUANG ANDA!"),
+            "pakaian": ("DETAIL PAKAIAN INI MENARIK!", "JOM TENGOK GAYA INI!"),
+            "alat_dapur": ("JOM TENGOK ITEM DAPUR INI!", "DETAIL PRODUK DAPUR INI!"),
+        }
+        for category, (_, hooks) in HOOKS.items():
+            db.execute(
+                "UPDATE storyboard_hooks SET hooks=?, version=2 WHERE category=? AND version=1 AND hooks=?",
+                (json.dumps(hooks), category, json.dumps(old[category]))
+            )
         db.commit()
         rows = db.execute("SELECT keywords, hooks FROM storyboard_hooks WHERE active=1 ORDER BY rowid").fetchall()
     words = set(re.findall(r"[a-zA-ZÀ-ÿ]+", (description or "").lower()))
-    options = None
+    if not words or "tidak dapat dipastikan" in (description or "").lower():
+        return None
+    matches = []
     for keywords, hooks in rows:
         if words.intersection(json.loads(keywords)):
-            options = json.loads(hooks)
-            break
-    if not options:
-        options = ["TENGOK DETAIL PRODUK INI!", "REKAAN INI CURI PERHATIAN!", "JOM LIHAT LEBIH DEKAT!"]
-    digest = hashlib.sha256((description or "").encode("utf-8")).digest()
-    return options[int.from_bytes(digest[:4], "big") % len(options)]
+            matches.append(json.loads(hooks))
+    # Multiple categories can occur in one description; do not guess which is the product.
+    if len(matches) != 1 or not matches[0]:
+        return None
+    return matches[0][0]
