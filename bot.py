@@ -90,13 +90,12 @@ def is_admin(user_id):
 
 def main_menu(user_id=None):
     rows = [
-        [InlineKeyboardButton('1. 🎬 Jana Video Transisi', callback_data='make')],
-        [InlineKeyboardButton('2. ✍️ Hasilkan Prompt', callback_data='prompt')],
-        [InlineKeyboardButton('3. 🎞️ Gabung Video', callback_data='merge')],
-        [InlineKeyboardButton('4. 🔄 Tukar Format Video', callback_data='convert')],
-        [InlineKeyboardButton('5. 💎 Langganan', callback_data='subscription')],
-        [InlineKeyboardButton('6. 👤 Akaun Saya', callback_data='account')],
-        [InlineKeyboardButton('7. ❓ Bantuan', callback_data='help')],
+        [InlineKeyboardButton('🎬 Jana Video Transisi', callback_data='make')],
+        [InlineKeyboardButton('✍️ Hasilkan Prompt', callback_data='prompt')],
+        [InlineKeyboardButton('🎞️ Gabung Video', callback_data='merge')],
+        [InlineKeyboardButton('🔄 Tukar Format Video', callback_data='convert')],
+        [InlineKeyboardButton('💎 Langganan', callback_data='subscription'), InlineKeyboardButton('👤 Akaun Saya', callback_data='account')],
+        [InlineKeyboardButton('❓ Bantuan', callback_data='help')],
     ]
     if user_id is not None and is_admin(user_id):
         rows.append([InlineKeyboardButton('🛡️ Panel Admin', callback_data='admin')])
