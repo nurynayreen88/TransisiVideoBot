@@ -161,19 +161,19 @@ def render_video(images: list[Path], output: Path, music: Path | None = None, st
                 still = temp / f'still_{i}.jpg'
                 img.save(still, quality=90)
             clip = temp / f'clip_{i}.mp4'
-            # Subtle editorial motion: vary direction, keep zoom under 8%.
+            # Subtle editorial motion: vary direction, limit zoom change to 7.5%.
             # Expressions use the output-frame index 'on'; avoid abrupt jumps.
             progress = f'min(on/{max(frames - 1, 1)},1)'
             if i % 3 == 0:
-                zoom = f'1.03+0.15*{progress}'
+                zoom = f'1.03+0.075*{progress}'
                 x = '(iw-iw/zoom)/2'
                 y = '(ih-ih/zoom)/2'
             elif i % 3 == 1:
-                zoom = f'1.18-0.12*{progress}'
+                zoom = f'1.11-0.075*{progress}'
                 x = f'(iw-iw/zoom)*(0.30+0.40*{progress})'
                 y = '(ih-ih/zoom)/2'
             else:
-                zoom = f'1.04+0.12*{progress}'
+                zoom = f'1.04+0.075*{progress}'
                 x = '(iw-iw/zoom)/2'
                 y = f'(ih-ih/zoom)*(0.65-0.30*{progress})'
             vf = (f"zoompan=z='{zoom}':x='{x}':y='{y}':"
