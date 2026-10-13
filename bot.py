@@ -565,13 +565,13 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await query.message.reply_text('Langkah 1/4 — Hantar 1–5 gambar produk. Tekan Selesai apabila cukup.', reply_markup=photos_menu())
     elif action == 'prompt':
         reset(context)
-        context.user_data['stage'] = 'prompt_product'
-        await query.message.reply_text('✍️ PROMPT VIDEO AFFILIATE\n\nLangkah 1/3: Nyatakan produk secara tepat: nama, warna, bentuk, bahan, logo dan ciri yang mesti kekal sama. Contoh: Beg tote hitam kulit PU, zip emas, logo kecil di tengah.')
+        context.user_data['stage'] = 'prompt_scene'
+        await query.message.reply_text('✍️ PROMPT VIDEO AFFILIATE\n\nTak perlu taip butiran produk. Gunakan gambar produk sebagai rujukan visual dalam penjana AI.\n\nLangkah 1/2: Nyatakan latar pilihan (contoh: studio premium), atau taip Auto.')
     elif action.startswith('motion:') and stage == 'prompt_motion':
         motion = action.split(':', 1)[1]
         motions = {'orbit': 'A controlled 30-degree camera arc around the product, not a full 360-degree rotation; preserve the visible product geometry.', 'push': 'A slow forward dolly-in with gentle parallax; no object deformation.', 'side': 'A smooth left-to-right camera slide with stable product proportions.', 'static': 'A locked camera with subtle studio lighting changes only.'}
         if motion in motions:
-            product = context.user_data.get('prompt_product', 'the reference product')
+            product = 'the product in the uploaded reference image'
             scene = context.user_data.get('prompt_scene', 'clean studio background')
             prompt = (f'Create a 10-second vertical 9:16 product affiliate video. PRODUCT REFERENCE: {product}. '
                       f'SCENE: {scene}. CAMERA: {motions[motion]} '
@@ -767,8 +767,8 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await update.message.reply_text('🔄 TUKAR FORMAT VIDEO\n\nTekan 📎 → File / Fail → pilih video MP4 asal. Bot akan memprosesnya secara automatik.', reply_markup=main_menu())
         elif action == 'prompt':
             reset(context)
-            context.user_data['stage'] = 'prompt_product'
-            await update.message.reply_text('✍️ PROMPT VIDEO AFFILIATE\n\nLangkah 1/3: Terangkan produk dengan tepat termasuk warna, bentuk, bahan dan logo.')
+            context.user_data['stage'] = 'prompt_scene'
+            await update.message.reply_text('✍️ PROMPT VIDEO AFFILIATE\n\nTak perlu terangkan produk. Gunakan gambar produk sebagai rujukan visual dalam penjana AI.\n\nLangkah 1/2: Nyatakan latar pilihan atau taip Auto.')
         elif action == 'subscription':
             await update.message.reply_text('💎 LANGGANAN KLIPPO\n\nPelan Penyokong Awal: RM5 / 30 hari, sehingga 30 video sebulan. Pengaktifan manual selepas resit disemak.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📱 Papar QR DuitNow', callback_data='subscription_qr')]]))
         elif action == 'account':
@@ -778,20 +778,13 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
         else:
             await start(update, context)
         return
-    if stage == 'prompt_product':
-        if len(value) < 8:
-            await update.message.reply_text('Sila beri penerangan produk yang lebih khusus (sekurang-kurangnya 8 aksara).')
+    if stage == 'prompt_scene':
+        if len(value) < 5 and value.lower() != 'auto':
+            await update.message.reply_text('Nyatakan latar ringkas atau taip Auto.')
             return
-        context.user_data['prompt_product'] = value[:600]
-        context.user_data['stage'] = 'prompt_scene'
-        await update.message.reply_text('Langkah 2/3: Nyatakan latar dan suasana yang dikehendaki. Contoh: meja marmar putih, cahaya studio lembut, latar premium tanpa manusia.')
-    elif stage == 'prompt_scene':
-        if len(value) < 5:
-            await update.message.reply_text('Sila terangkan latar dengan lebih jelas.')
-            return
-        context.user_data['prompt_scene'] = value[:400]
+        context.user_data['prompt_scene'] = 'clean premium studio background' if value.lower() == 'auto' else value[:400]
         context.user_data['stage'] = 'prompt_motion'
-        await update.message.reply_text('Langkah 3/3: Pilih gerakan kamera:', reply_markup=InlineKeyboardMarkup([
+        await update.message.reply_text('Langkah 2/2: Pilih gerakan kamera:', reply_markup=InlineKeyboardMarkup([
             [InlineKeyboardButton('🔄 Orbit Terkawal', callback_data='motion:orbit')],
             [InlineKeyboardButton('🔍 Zoom Masuk', callback_data='motion:push')],
             [InlineKeyboardButton('↔️ Gerak Sisi', callback_data='motion:side')],
