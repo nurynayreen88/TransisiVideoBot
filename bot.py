@@ -197,7 +197,17 @@ def render_video(images: list[Path], output: Path, music: Path | None = None, st
         raise ValueError("Unknown style")
     if not images:
         raise ValueError('No images')
-    n = len(images)
+    # Build a short multi-shot sequence even when the user supplies only 1–2 photos.
+    # Reuse the original pixels; no fabricated alternate product views.
+    source_count = len(images)
+    if source_count == 1:
+        shots = [(images[0], 0), (images[0], 1), (images[0], 2)]
+    elif source_count == 2:
+        shots = [(images[0], 0), (images[0], 1),
+                 (images[1], 2), (images[1], 3)]
+    else:
+        shots = [(path, i % 4) for i, path in enumerate(images)]
+    n = len(shots)
     # Keep fades short enough for any image count and total duration.
     fade = min(0.65, duration / (n * 4.0)) if n > 1 else 0
     clip_duration = (duration + (n - 1) * fade) / n
@@ -205,7 +215,7 @@ def render_video(images: list[Path], output: Path, music: Path | None = None, st
     with tempfile.TemporaryDirectory(prefix='render_') as td:
         temp = Path(td)
         clips = []
-        for i, path in enumerate(images):
+        for i, (path, motion) in enumerate(shots):
             with Image.open(path) as original:
                 img = ImageOps.exif_transpose(original).convert('RGB')
                 # Preserve framing: modest overscan gives zoompan room to move.
@@ -217,18 +227,22 @@ def render_video(images: list[Path], output: Path, music: Path | None = None, st
             # Expressions use the output-frame index 'on'; avoid abrupt jumps.
             t = f'min(on/{max(frames - 1, 1)},1)'
             progress = f'({t}*{t}*(3-2*{t}))'  # Smoothstep easing, gentle start and stop.
-            if i % 3 == 0:
+            if motion == 0:
                 zoom = f'1.03+0.075*{progress}'
                 x = '(iw-iw/zoom)/2'
                 y = '(ih-ih/zoom)/2'
-            elif i % 3 == 1:
+            elif motion == 1:
                 zoom = f'1.11-0.075*{progress}'
                 x = f'(iw-iw/zoom)*(0.30+0.40*{progress})'
                 y = '(ih-ih/zoom)/2'
-            else:
+            elif motion == 2:
                 zoom = f'1.04+0.075*{progress}'
                 x = '(iw-iw/zoom)/2'
                 y = f'(ih-ih/zoom)*(0.65-0.30*{progress})'
+            else:
+                zoom = f'1.10-0.06*{progress}'
+                x = f'(iw-iw/zoom)*(0.68-0.36*{progress})'
+                y = f'(ih-ih/zoom)*(0.35+0.25*{progress})'
             vf = (f"zoompan=z='{zoom}':x='{x}':y='{y}':"
                   f"d={frames}:s={WIDTH}x{HEIGHT}:fps={FPS},format=yuv420p")
             cmd = ['ffmpeg','-hide_banner','-loglevel','error','-y','-loop','1','-i',str(still),
@@ -248,7 +262,9 @@ def render_video(images: list[Path], output: Path, music: Path | None = None, st
             for i in range(1,n):
                 label = f'[v{i}]'
                 offset = i * (clip_duration - fade)
-                transition = STYLES[style][(i - 1) % len(STYLES[style])]
+                # Same-source cuts get a gentle dissolve; different photos use the selected style.
+                same_photo = shots[i - 1][0] == shots[i][0]
+                transition = 'fade' if same_photo else STYLES[style][(i - 1) % len(STYLES[style])]
                 chains.append(f'{last}[{i}:v]xfade=transition={transition}:duration={fade:.4f}:offset={offset:.4f}{label}')
                 last = label
             cmd += ['-filter_complex',';'.join(chains),'-map',last,'-an','-c:v','libx264',
