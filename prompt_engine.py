@@ -8,7 +8,8 @@ CAMERAS = {
     "static": "A locked premium studio composition with delicate lighting movement and a subtle focus transition.",
 }
 
-def build_prompt(mode, product, scene, motion, style='auto'):
+def build_prompt(mode, product, scene, motion, style='auto', duration=10):
+    duration = 20 if duration == 20 else 10
     camera = CAMERAS.get(motion, CAMERAS["push"])
     identity = (
         "REFERENCE LOCK: Treat the uploaded photograph as the sole visual source of truth. "
@@ -35,42 +36,52 @@ def build_prompt(mode, product, scene, motion, style='auto'):
         hook = product_hook(product)
         hook_direction = (
             "ON-SCREEN HOOK TEXT (REQUIRED): Show the EXACT Malay words '" + hook + "' in large clean bold legible typography "
-            "at the top safe area during 0.2-2.0s, with a smooth pop-in or handwriting reveal. "
+            "at the top safe area during the opening 0-2s, with a smooth pop-in or handwriting reveal. "
             "Keep the product unobstructed. This is an intentional graphic overlay, NOT an unwanted subtitle. "
             "Spell every character exactly; do not generate other claims, prices, brand names or random text. "
             "For white doodle, animate a short white underline and two sparkle marks around the hook. "
             "If reliable text rendering is unavailable, leave a clear top safe area so the exact hook can be overlaid in editing. "
         )
-        rules = (
-            "REFERENCE VIDEO STYLE: authentic warm lifestyle UGC product advert, natural handheld-feeling framing, "
-            "soft beige home setting where appropriate, clean white handwritten doodles and concise Malay feature callouts. "
-            "Do not depict a phone screen, phone bezel, playback controls or a person filming a phone: reproduce the AD CONTENT, not the device displaying it. "
-            "TIMELINE FOR AN APPROXIMATELY 18-SECOND VIDEO (if generator limits duration, proportionally compress while preserving the order): "
-            "0-3s: visually clear opening product close-up with a short PRODUCT-SPECIFIC Malay hook at top; "
-            "draw a few small white sparkles and a curved hand-drawn accent beside the product. "
-            "3-7s: reveal the real product or packaging in an appealing reference-safe composition; animate 2-3 separate white "
-            "handwritten-style callout labels with tiny outlined icons and thin curved leader lines to corresponding ACTUALLY VISIBLE details. "
-            "Use concise truthful words based only on readable packaging, visible features or verified user details; "
-            "if no verifiable feature is available, use neutral labels such as 'Rekaan menarik' or omit the label, NEVER invent health, performance or numerical claims. "
-            "7-10s: change to a reference-safe detail shot, with a white dotted path and a brief looping flourish near the detail. "
-            "10-14s: full product hero shot; DRAW A WHITE DASHED OR SLIGHTLY IRREGULAR CONTOUR JUST OUTSIDE THE REAL PRODUCT SILHOUETTE, "
-            "following its left, top, right and lower visible edges, so the line CLEARLY WRAPS AROUND THE PRODUCT rather than the frame or background. "
-            "Trace progressively, hold it visibly for 2 seconds, and add two small sparkles OUTSIDE the outline. "
-            "14-18s: clean full-product packshot with a restrained white swoosh; fade the graphic elements gracefully. "
-            "OVERLAY DESIGN: thin white hand-drawn 2D line art, small organic stars, checkmark or icon outlines, dotted contours, "
-            "rounded casual handwritten callout typography, consistent stroke width and legible contrast; keep product and branding uncovered. "
-            "Callout text must be supplied exactly in Malay, not invented by the video generator; where reliable spelling cannot be guaranteed, "
-            "leave deliberate negative space for an editor to overlay the approved text. "
-            "No floating physical white wires, no fake product parts, no random decorative scribbles, no forced 360-degree rotation. "
-            "Prioritize readable callouts, recognizable product, and contour that visibly surrounds the product over camera movement."
-            if doodle else
-            "TIMELINE: 0-2s engaging opening; 2-4s reveal the unchanged complete product; "
-            "4-6s focus on one genuinely visible detail; 6-8s tasteful visual emphasis; "
-            "8-10s clean stable full-product hero closing. Use one coherent visual setting and no more than two gentle cuts."
-        )
+        if doodle:
+            if duration == 10:
+                rules = (
+                    "WHITE DOODLE 10s: 0-2s close-up with product-specific Malay hook and two white sparkles; "
+                    "2-4s full product reveal with ONE truthful short feature callout, small white icon and curved leader arrow "
+                    "to a genuinely visible detail; 4-7s progressively draw a thin white dashed contour JUST OUTSIDE the "
+                    "ACTUAL PRODUCT silhouette, following its left, top, right and bottom edges, NOT the frame; "
+                    "hold completed contour for at least 1 second; 7-10s dotted accent, clean product hero, gentle doodle fade. "
+                )
+            else:
+                rules = (
+                    "WHITE DOODLE 20s: 0-3s close-up with product-specific Malay hook and white sparkles; "
+                    "3-7s full product reveal with up to TWO truthful concise feature callouts, tiny outlined icons "
+                    "and curved leader arrows to genuinely visible details; 7-11s detail shot with dotted trail; "
+                    "11-16s progressively draw a thin white dashed contour JUST OUTSIDE the ACTUAL PRODUCT silhouette "
+                    "following left, top, right and bottom edges, NOT the frame, hold at least 2 seconds; "
+                    "16-20s clean full-product packshot, restrained white swoosh and graceful doodle fade. "
+                )
+            rules += (
+                "Warm authentic UGC product-ad look, thin white handwritten 2D graphics tracked to the product. "
+                "No phone bezel, no invented product claims, no branding obstruction. Only approved hook and verified "
+                "short feature labels may appear; reserve space for editing overlays if text rendering is unreliable. "
+                "Prioritize the visible surrounding product contour over camera movement."
+            )
+        elif duration == 10:
+            rules = (
+                "STORYBOARD 10s: 0-2s product-specific Malay hook; 2-4s full-product reveal; "
+                "4-7s one genuinely visible detail and tasteful style-specific emphasis; "
+                "7-10s stable full-product hero closing. Coherent setting and gentle transitions."
+            )
+        else:
+            rules = (
+                "STORYBOARD 20s: 0-3s product-specific Malay hook; 3-7s full-product reveal; "
+                "7-11s one genuinely visible detail; 11-15s complementary reference-safe composition "
+                "and style-specific emphasis; 15-20s stable full-product hero closing and gentle fade. "
+                "No invented product angles or claims."
+            )
         return (
             "KLIPPO | STORYBOARD | " + style_name + "\n"
-            "OUTPUT: One cohesive vertical 9:16 product advertisement. " + ("Target approximately 18 seconds for the reference-style white doodle edit. " if doodle else "Target 10 seconds. ") + "\n\n"
+            "OUTPUT: One cohesive vertical 9:16 product advertisement, EXACT DURATION: " + str(duration) + " seconds.\\n\\n"
             "PRODUCT REFERENCE: " + product + "\n\n" + identity + "\n\n"
             "STYLE FROM KLIPPO CATALOG: " + style_template + "\n\n"
             "SETTING: " + scene + "\n"
@@ -100,7 +111,7 @@ def build_prompt(mode, product, scene, motion, style='auto'):
                      "to product recognition, detail appreciation and a memorable closing hero image.")
     else:
         direction = (
-            "DIRECTOR'S SINGLE-TAKE BRIEF: Create one sophisticated uninterrupted 10-second commercial, "
+            "DIRECTOR'S SINGLE-TAKE BRIEF: Create one sophisticated uninterrupted " + str(duration) + "-second commercial, "
             "not a slideshow, montage or set of disconnected AI shots. Keep the product almost stationary while the camera or light moves gently; one primary camera move only. The visual story progresses from "
             "anticipation to discovery and finally a confident product hero moment.\n\n"
             "0.0–2.0s | OPENING: Begin with a deliberately composed medium-wide shot. Establish the selected "
