@@ -485,7 +485,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             for receipt in pending:
                 rid = receipt['id']
                 await query.message.reply_text(
-                    f"🧾 Resit #{rid}\\nPengguna: {receipt.get('telegram_name') or '-'}\\nID: {receipt['telegram_user_id']}\\nSila semak resit yang dihantar ke chat admin dan pastikan bayaran diterima sebelum meluluskan.",
+                    f"🧾 Resit #{rid}\nPengguna: {receipt.get('telegram_name') or '-'}\nID: {receipt['telegram_user_id']}\nSila semak resit yang dihantar ke chat admin dan pastikan bayaran diterima sebelum meluluskan.",
                     reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('✅ Lulus', callback_data=f'admin_approve:{rid}'), InlineKeyboardButton('❌ Tolak', callback_data=f'admin_reject:{rid}')]]))
         except Exception:
             logging.exception('Pending receipt lookup failed')
@@ -509,7 +509,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         except Exception:
             logging.exception('Receipt review failed')
             await query.message.reply_text('Gagal memproses resit. Mungkin sudah disemak atau sambungan database bermasalah.')
-    if action == 'admin':
+    elif action == 'admin':
         await admin(update, context)
     elif action == 'make':
         reset(context)
@@ -633,7 +633,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data['stage'] = 'receipt_upload'
         await query.message.reply_text('📎 Sila upload gambar atau fail resit pembayaran di sini. Resit akan dihantar kepada admin untuk semakan manual.')
     elif action == 'account':
-        await query.message.reply_text(f'👤 AKAUN SAYA\n\nID Telegram: {query.from_user.id}\nStatus: Akses percubaan (langganan belum diaktifkan).', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📋 Semak Bahan', callback_data='check'), InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
+        await account_info(update, context)
     elif action == 'help':
         await query.message.reply_text('❓ CARA GUNA\n\n1. Tekan Jana Video.\n2. Hantar 1–5 gambar, kemudian tekan Selesai.\n3. Lihat contoh dan pilih gaya.\n4. Dengar contoh dan pilih muzik.\n5. Tekan Hasilkan Video.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
     elif action == 'check':
