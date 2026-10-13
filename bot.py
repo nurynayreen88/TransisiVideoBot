@@ -282,11 +282,15 @@ async def admin(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """Always show the main menu with a single Telegram API message."""
+    """Restore persistent Telegram keyboard and display inline menu."""
     if not context.user_data.get('busy'):
         reset(context)
     await update.effective_message.reply_text(
-        '🏠 KLIPPO | Menu Utama\\n\\nPilih fungsi di bawah:',
+        '🏠 Butang Menu Utama tersedia di bawah ruang menaip.',
+        reply_markup=home_keyboard()
+    )
+    await update.effective_message.reply_text(
+        '🎬 KLIPPO | Menu Utama - Pilih fungsi:',
         reply_markup=main_menu(update.effective_user.id)
     )
 
