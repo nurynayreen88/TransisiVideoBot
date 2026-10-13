@@ -13,6 +13,7 @@ from fusion_animation import fusion_gif
 import klippo_db
 from storyboard_engine import build_storyboard, format_storyboard, source_sequence
 from storyboard_overlay import apply_overlay
+from gemini_vision import describe_photo
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler, ContextTypes, MessageHandler, filters
 
@@ -329,7 +330,16 @@ async def photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if context.user_data.get('stage') == 'prompt_photo':
         context.user_data['prompt_photo_id'] = update.message.photo[-1].file_id
         context.user_data['stage'] = 'prompt_details_choice'
-        await update.message.reply_text('Gambar diterima. Mahu tambah maklumat produk secara pilihan?', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('✍️ Tambah Maklumat', callback_data='prompt_details:add')], [InlineKeyboardButton('✨ Teruskan Dengan Gambar Sahaja', callback_data='prompt_details:skip')]]))
+        description = None
+        if os.environ.get('GEMINI_API_KEY'):
+            try:
+                image_file = await context.bot.get_file(context.user_data['prompt_photo_id'])
+                image_bytes = bytes(await image_file.download_as_bytearray())
+                description = await describe_photo(image_bytes)
+            except Exception:
+                logging.exception('Product image analysis unavailable')
+        context.user_data['prompt_vision'] = description or ''
+        await update.message.reply_text(('🔎 AI mengenal pasti: ' + description + '\\n\\n' if description else '📷 Gambar diterima. AI Vision tidak tersedia; prompt masih boleh digunakan bersama gambar rujukan.\\n\\n') + 'Mahu tambah maklumat produk secara pilihan?', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('✍️ Tambah Maklumat', callback_data='prompt_details:add')], [InlineKeyboardButton('✨ Teruskan Dengan Gambar Sahaja', callback_data='prompt_details:skip')]]))
         return
     if context.user_data.get('stage') != 'photos':
         await update.message.reply_text('Tekan 🎬 Jana Video dahulu.', reply_markup=main_menu())
@@ -584,7 +594,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         motion = action.split(':', 1)[1]
         motions = {'orbit': 'A controlled 30-degree camera arc around the product, not a full 360-degree rotation; preserve the visible product geometry.', 'push': 'A slow forward dolly-in with gentle parallax; no object deformation.', 'side': 'A smooth left-to-right camera slide with stable product proportions.', 'static': 'A locked camera with subtle studio lighting changes only.'}
         if motion in motions:
-            product = 'the product in the uploaded reference image. ' + context.user_data.get('prompt_product', '')
+            product = ('the product in the uploaded reference image. Visible observations (verify against reference image): ' + context.user_data.get('prompt_vision', '') + '. Optional user details: ' + context.user_data.get('prompt_product', ''))
             scene = context.user_data.get('prompt_scene', 'clean studio background')
             prompt = (f'Create a 10-second vertical 9:16 product affiliate video. PRODUCT REFERENCE: {product}. '
                       f'SCENE: {scene}. CAMERA: {motions[motion]} '
