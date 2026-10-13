@@ -504,7 +504,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif action == 'subscription':
         await query.message.reply_text('💎 LANGGANAN KLIPPO\\n\\nPelan Penyokong Awal: RM5 / 30 hari, sehingga 30 video sebulan.\\n\\nBayaran melalui DuitNow QR. Pengaktifan akaun dibuat secara manual selepas resit disemak; bayaran tidak mengaktifkan VIP secara automatik.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📱 Papar QR DuitNow', callback_data='subscription_qr')], [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
     elif action == 'subscription_qr':
-        qr_path = Path(__file__).resolve().parent / 'payment_assets' / 'klippo_qr.jpg'
+        qr_path = Path(__file__).resolve().parent / 'klippo_qr.jpg'
         if not qr_path.is_file():
             await query.message.reply_text('QR pembayaran belum tersedia. Sila cuba lagi kemudian.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
         else:
