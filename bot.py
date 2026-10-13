@@ -924,17 +924,7 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data['stage'] = 'prompt_scene'
         await update.message.reply_text('🎨 Maklumat disimpan. Pilih latar video:', reply_markup=prompt_scene_menu())
     elif stage == 'prompt_scene':
-        if len(value) < 5 and value.lower() != 'auto':
-            await update.message.reply_text('Nyatakan latar ringkas atau taip Auto.')
-            return
-        context.user_data['prompt_scene'] = 'clean premium studio background' if value.lower() == 'auto' else value[:400]
-        context.user_data['stage'] = 'prompt_motion'
-        await update.message.reply_text('Langkah 2/2: Pilih gerakan kamera:', reply_markup=InlineKeyboardMarkup([
-            [InlineKeyboardButton('🔄 Orbit Terkawal', callback_data='motion:orbit')],
-            [InlineKeyboardButton('🔍 Zoom Masuk', callback_data='motion:push')],
-            [InlineKeyboardButton('↔️ Gerak Sisi', callback_data='motion:side')],
-            [InlineKeyboardButton('✨ Studio Statik', callback_data='motion:static')],
-        ]))
+        await update.message.reply_text('🎨 Pilih latar menggunakan butang:', reply_markup=prompt_scene_menu())
     else:
         await update.message.reply_text('Gunakan butang menu di bawah.', reply_markup=main_menu())
 
