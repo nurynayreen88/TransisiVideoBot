@@ -603,7 +603,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                       'Do not invent extra accessories, alter text or logos, morph the object, duplicate it, introduce people or hands, add captions, watermarks or UI. '
                       'If unseen sides of the product are not provided, do not fabricate them; use only a modest camera arc. No abrupt cuts or flicker. Output 10 seconds, portrait 9:16, high quality.')
             context.user_data['stage'] = 'prompt_done'
-            await query.message.reply_text('✅ PROMPT SIAP — gunakan bersama gambar produk yang diupload. Bot belum menganalisis imej menggunakan model vision; prompt mengarahkan penjana AI merujuk gambar tersebut.\n\n' + prompt, reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('🤖 Buka NexaBot', url='https://t.me/aigeneratornexa_bot?start=ref37141287'), InlineKeyboardButton('✨ Buka Gemini', url='https://gemini.google.com/')], [InlineKeyboardButton('✍️ Prompt Baharu', callback_data='prompt'), InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
+            await query.message.reply_text('✅ PROMPT SIAP — gunakan bersama gambar produk yang diupload. Jika AI Vision tersedia, pemerhatian visual telah dimasukkan; semak ketepatannya. Gunakan prompt bersama gambar rujukan.\n\n' + prompt, reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('🤖 Buka NexaBot', url='https://t.me/aigeneratornexa_bot?start=ref37141287'), InlineKeyboardButton('✨ Buka Gemini', url='https://gemini.google.com/')], [InlineKeyboardButton('✍️ Prompt Baharu', callback_data='prompt'), InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
     elif action == 'merge':
         reset(context)
         context.user_data['stage'] = 'merge_upload'
@@ -797,7 +797,7 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
         elif action == 'account':
             await account_info(update, context)
         elif action == 'help':
-            await update.message.reply_text('❓ BANTUAN\n\nJana Video: hantar gambar, pilih gaya dan muzik.\nTukar Format: hantar MP4.\nPrompt: terangkan produk dan pilih gerakan kamera.')
+            await update.message.reply_text('❓ BANTUAN\n\nJana Video: hantar gambar, pilih gaya dan muzik.\nTukar Format: hantar MP4.\nPrompt: upload gambar, maklumat tambahan pilihan, kemudian pilih latar dan gerakan kamera.')
         else:
             await start(update, context)
         return
