@@ -657,7 +657,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     filename=prompt_file.name,
                     caption='📋 PROMPT PENUH — buka fail .txt ini, kemudian Select All → Copy. Semua arahan ada dalam satu fail.'
                 )
-                    if mode_name == 'storyboard':
+                if mode_name == 'storyboard':
                     await query.message.reply_text(
                         '🎬 Untuk salin semua babak sekali gus, buka fail .txt di atas. '
                         'Paparan mesej di bawah hanya untuk bacaan.'
