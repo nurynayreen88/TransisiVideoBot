@@ -283,7 +283,7 @@ async def admin(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if context.user_data.get('busy'):
-        await update.effective_message.reply_text('Video sedang diproses. Sila tunggu.')
+        await update.effective_message.reply_text('⏳ Video masih diproses. Menu utama boleh digunakan sementara menunggu.', reply_markup=main_menu(update.effective_user.id))
         return
     reset(context)
     await update.effective_message.reply_text('🏠 Menu Utama Klippo', reply_markup=home_keyboard())
@@ -557,6 +557,9 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
     await query.answer()
     action = query.data
+    if action == 'home':
+        await query.message.reply_text('🏠 Menu Utama Klippo', reply_markup=main_menu(update.effective_user.id))
+        return
     if context.user_data.get('busy'):
         await query.message.reply_text('Video sedang diproses. Sila tunggu.')
         return
