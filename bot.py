@@ -349,7 +349,7 @@ async def generate_merge(update: Update, context: ContextTypes.DEFAULT_TYPE, sty
         success_animation = None
         try:
             try:
-                animation = await query.message.reply_animation(animation=fusion_gif(), caption='⚡ Watak Klippo cuba bergabung... tunggu sebentar.')
+                animation = await query.message.reply_animation(animation=fusion_gif(), caption='⏳ Dalam proses...')
             except Exception:
                 logging.exception('Fusion animation unavailable')
             with tempfile.TemporaryDirectory(prefix='merge_') as folder:
@@ -364,23 +364,16 @@ async def generate_merge(update: Update, context: ContextTypes.DEFAULT_TYPE, sty
                     if animation:
                         await animation.delete()
                         animation = None
-                    success_animation = await query.message.reply_animation(animation=fusion_gif(True))
-                    await asyncio.sleep(2)
+                    success_animation = await query.message.reply_animation(animation=fusion_gif(True), caption='✅ Gabungan selesai!')
                 except Exception:
                     logging.exception('Fusion completion display failed')
                 with output.open('rb') as file:
                     await query.message.reply_document(document=file, filename='Klippo_Gabungan.mp4', caption='✅ Video siap digabung. Audio asal dikekalkan dan dipadankan dengan transisi.', reply_markup=main_menu(), write_timeout=240, read_timeout=120, connect_timeout=30)
-                if success_animation:
-                    try:
-                        await success_animation.delete()
-                        success_animation = None
-                    except Exception:
-                        logging.debug('Could not remove success animation', exc_info=True)
         except Exception:
             logging.exception('Video merge failed')
             await query.message.reply_text('Gabungan gagal. Cuba klip MP4 lebih pendek.', reply_markup=main_menu())
         finally:
-            for item in (animation, success_animation):
+            for item in (animation,):
                 if item:
                     try:
                         await item.delete()
