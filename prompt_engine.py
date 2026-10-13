@@ -14,7 +14,7 @@ def build_prompt(mode, product, scene, motion, style='auto', duration=10):
         chosen_style = resolve(style)[0] if mode == 'storyboard' else style
         first = _build_single_prompt(mode, product, scene, motion, chosen_style, part=1)
         second = _build_single_prompt(mode, product, scene, motion, chosen_style, part=2)
-        return first + "\\n\\n=== KLIPPO PART 2 ===\\n\\n" + second
+        return first + "\n\n=== KLIPPO PART 2 ===\n\n" + second
     return _build_single_prompt(mode, product, scene, motion, style, part=0)
 
 
