@@ -11,7 +11,7 @@ import subprocess
 import tempfile
 from pathlib import Path
 
-from PIL import Image, ImageOps, ImageDraw
+from PIL import Image, ImageOps, ImageDraw, ImageFont
 from video_merge import merge_videos
 from fusion_animation import fusion_gif
 import klippo_db
@@ -191,7 +191,42 @@ def resolve_music(choice: str, style: str) -> Path | None:
     return path if path.is_file() else None
 
 
-def render_video(images: list[Path], output: Path, music: Path | None = None, style: str = 'hybrid', duration: int = DURATION, doodle: str = 'none'):
+def verified_video_hook(info: str) -> str | None:
+    """Conservative, local text-only hook. Never send product photos to a hook AI."""
+    info = ' '.join((info or '').split())[:100]
+    if not info or not re.fullmatch(r"[\\w\\s.,&+()/-]+", info, flags=re.UNICODE):
+        return None
+    if len(info) > 48:
+        info = info[:48].rsplit(' ', 1)[0]
+    return 'KENALI ' + info.upper() if info else None
+
+
+def hook_card(still: Path, hook: str) -> None:
+    """Place a readable factual headline in the top safe area of the first shot."""
+    with Image.open(still) as source:
+        image = source.convert('RGB')
+    draw = ImageDraw.Draw(image, 'RGBA')
+    w, h = image.size
+    font_path = next((p for p in (
+        '/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf',
+        '/usr/share/fonts/truetype/liberation2/LiberationSans-Bold.ttf'
+    ) if Path(p).is_file()), None)
+    font = ImageFont.truetype(font_path, max(20, round(w * .046))) if font_path else ImageFont.load_default()
+    max_width = round(w * .85)
+    while draw.textbbox((0, 0), hook, font=font)[2] > max_width and getattr(font, 'size', 12) > 19:
+        font = ImageFont.truetype(font_path, font.size - 2)
+    top = round(h * .095)
+    text_box = draw.textbbox((0, 0), hook, font=font)
+    text_w = text_box[2] - text_box[0]
+    text_h = text_box[3] - text_box[1]
+    x = (w - text_w) // 2
+    draw.rounded_rectangle((x-22, top-14, x+text_w+22, top+text_h+22),
+                           radius=18, fill=(14, 20, 29, 195))
+    draw.text((x, top-text_box[1]), hook, font=font, fill=(255, 255, 255, 255))
+    image.save(still, quality=96, subsampling=0)
+
+
+def render_video(images: list[Path], output: Path, music: Path | None = None, style: str = 'hybrid', duration: int = DURATION, doodle: str = 'none', hook: str | None = None):
     """Produce CPU-friendly Ken Burns transitions. Morph is an approximation, not generative AI."""
     if style not in STYLES:
         raise ValueError("Unknown style")
@@ -222,6 +257,8 @@ def render_video(images: list[Path], output: Path, music: Path | None = None, st
                 img = ImageOps.fit(img, (round(WIDTH * 1.22), round(HEIGHT * 1.22)), method=Image.Resampling.LANCZOS)
                 still = temp / f'still_{i}.jpg'
                 img.save(still, quality=96, subsampling=0, optimize=True)
+                if i == 0 and hook:
+                    hook_card(still, hook)
             clip = temp / f'clip_{i}.mp4'
             # Subtle editorial motion: vary direction, limit zoom change to 7.5%.
             # Expressions use the output-frame index 'on'; avoid abrupt jumps.
@@ -294,6 +331,7 @@ def reset(context):
     context.user_data['doodle_choice'] = 'none'
     context.user_data['storyboard_mode'] = False
     context.user_data['prompt_mode'] = 'normal'
+    context.user_data['video_product_info'] = ''
     context.user_data['prompt_vision'] = ''
     context.user_data['prompt_product'] = ''
     context.user_data['stage'] = 'home'
@@ -983,7 +1021,12 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
         else:
             await start(update, context)
         return
-    if stage == 'prompt_details_text':
+    if stage == 'photos' and value.lower().startswith('produk:'):
+        info = value.split(':', 1)[1].strip()[:100]
+        context.user_data['video_product_info'] = info
+        hook = verified_video_hook(info)
+        await update.message.reply_text(('✅ Cadangan hook: ' + hook if hook else 'Maklumat produk tidak cukup jelas; video akan dijana tanpa hook.'), reply_markup=photos_menu())
+    elif stage == 'prompt_details_text':
         context.user_data['prompt_product'] = value[:600]
         context.user_data['stage'] = 'prompt_scene'
         await update.message.reply_text('🎨 Maklumat disimpan. Pilih latar video:', reply_markup=prompt_scene_menu())
@@ -1040,7 +1083,7 @@ async def generate(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 selected_style = context.user_data.get('style', 'hybrid')
                 doodle = 'none'
             await progress_update(progress, 40, 'Bahan siap. Sedang render video (peratus dikemas kini selepas render selesai)...')
-            await asyncio.to_thread(render_video, paths, result, music, selected_style, context.user_data.get('duration', 10), doodle)
+            await asyncio.to_thread(render_video, paths, result, music, selected_style, context.user_data.get('duration', 10), doodle, verified_video_hook(context.user_data.get('video_product_info', '')))
             await progress_update(progress, 90, 'Render selesai. Menghantar video ke Telegram...')
             with result.open('rb') as f:
                 await message.reply_video(video=f, caption='🎬 Video siap! Hantar gambar baharu untuk video seterusnya.', supports_streaming=True,
