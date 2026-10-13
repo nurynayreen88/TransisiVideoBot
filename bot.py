@@ -270,10 +270,10 @@ async def receive_receipt(update: Update, context: ContextTypes.DEFAULT_TYPE):
             logging.exception('Could not deliver subscription receipt to admin %s', admin_id)
     if delivered:
         context.user_data['stage'] = None
-        await update.message.reply_text('✅ Resit diterima dan dihantar kepada admin untuk semakan. Langganan belum aktif sehingga disahkan.', reply_markup=main_menu())
+        await update.message.reply_text('🧾 Resit diterima. Status: Dalam semakan. Kami akan maklumkan selepas admin membuat keputusan.', reply_markup=main_menu())
     else:
         context.user_data['stage'] = None
-        await update.message.reply_text(f'🧾 Resit #{receipt["id"]} direkodkan dan menunggu semakan. Admin belum dapat menerima salinan di Telegram; sila hubungi admin.', reply_markup=main_menu())
+        await update.message.reply_text(f'🧾 Resit #{receipt["id"]} direkodkan. Status: Dalam semakan. Salinan Telegram kepada admin gagal dihantar; sila hubungi admin untuk semakan.', reply_markup=main_menu())
 
 
 async def photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -621,7 +621,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif action == 'confirm' and stage == 'confirm':
         await generate(update, context)
     elif action == 'subscription':
-        await query.message.reply_text('💎 LANGGANAN KLIPPO\n\nPelan Penyokong Awal: RM5 / 30 hari, sehingga 30 video sebulan.\n\nBayaran melalui DuitNow QR. Pengaktifan akaun dibuat secara manual selepas resit disemak; bayaran tidak mengaktifkan VIP secara automatik.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📱 Papar QR DuitNow', callback_data='subscription_qr')], [InlineKeyboardButton('📎 Upload Resit', callback_data='receipt_upload')], [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
+        await query.message.reply_text('💎 LANGGANAN KLIPPO\n\nRM5 / 30 hari\nSehingga 30 video sebulan.\n\nBayar melalui QR DuitNow. Selepas pembayaran, upload resit untuk semakan admin.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📱 Papar QR DuitNow', callback_data='subscription_qr')], [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
     elif action == 'subscription_qr':
         qr_path = Path(__file__).resolve().parent / 'klippo_qr.jpg'
         if not qr_path.is_file():
@@ -631,7 +631,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 await query.message.reply_photo(photo=qr_file, caption='💎 KLIPPO — DuitNow QR\n\nPelan Penyokong Awal: RM5 / 30 hari (sehingga 30 video sebulan).\n\nTekan 📎 Upload Resit selepas pembayaran. Pengaktifan adalah manual selepas semakan.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📎 Upload Resit', callback_data='receipt_upload')], [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
     elif action == 'receipt_upload':
         context.user_data['stage'] = 'receipt_upload'
-        await query.message.reply_text('📎 Sila upload gambar atau fail resit pembayaran di sini. Resit akan dihantar kepada admin untuk semakan manual.')
+        await query.message.reply_text('📎 Sila hantar gambar atau fail PDF resit pembayaran di sini.')
     elif action == 'account':
         await account_info(update, context)
     elif action == 'help':
