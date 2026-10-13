@@ -609,7 +609,23 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             scene = context.user_data.get('prompt_scene', 'clean studio background')
             prompt = build_prompt(context.user_data.get('prompt_mode', 'normal'), product, scene, motion)
             context.user_data['stage'] = 'prompt_done'
-            await query.message.reply_text('✅ PROMPT SIAP — gunakan bersama gambar produk yang diupload. Semak ketepatan pemerhatian AI Vision jika tersedia.\n\n' + prompt, reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('🤖 Buka NexaBot', url='https://t.me/aigeneratornexa_bot?start=ref37141287'), InlineKeyboardButton('✨ Buka Gemini', url='https://gemini.google.com/')], [InlineKeyboardButton('✍️ Prompt Baharu', callback_data='prompt'), InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
+            await query.message.reply_text('✅ PROMPT SIAP — gunakan bersama gambar produk. Semak ketepatan pemerhatian AI Vision jika tersedia.')
+            # Telegram limits messages to 4096 characters. Preserve the full prompt by sending chunks.
+            remaining = prompt
+            while remaining:
+                if len(remaining) <= 3500:
+                    chunk, remaining = remaining, ''
+                else:
+                    split_at = remaining.rfind('\\n\\n', 0, 3500)
+                    if split_at < 1000:
+                        split_at = 3500
+                    chunk, remaining = remaining[:split_at], remaining[split_at:].lstrip()
+                await query.message.reply_text(chunk)
+            await query.message.reply_text('Pilih tindakan seterusnya:', reply_markup=InlineKeyboardMarkup([
+                [InlineKeyboardButton('🤖 Buka NexaBot', url='https://t.me/aigeneratornexa_bot?start=ref37141287'), InlineKeyboardButton('✨ Buka Gemini', url='https://gemini.google.com/')],
+                [InlineKeyboardButton('✍️ Prompt Baharu', callback_data='prompt'), InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]
+            ]))
+
     elif action == 'merge':
         reset(context)
         context.user_data['stage'] = 'merge_upload'
