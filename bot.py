@@ -11,6 +11,9 @@ from PIL import Image, ImageOps
 from video_merge import merge_videos
 from fusion_animation import fusion_gif
 import klippo_db
+from storyboard_engine import build_storyboard, format_storyboard, source_sequence
+from storyboard_overlay import apply_overlay
+from gemini_vision import describe_photo
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler, ContextTypes, MessageHandler, filters
 
@@ -39,6 +42,10 @@ STYLE_LABELS = {
 }
 MUSIC_CHOICES = ('auto', 'cinematic', 'energetic', 'happy', 'luxury', 'nature', 'beauty', 'none', 'custom')
 MUSIC_DIR = Path(__file__).resolve().parent / 'music'
+
+DOODLE_OPTIONS = {'auto':'✨ Auto', 'white':'🤍 White Doodle', 'sparkle':'✨ Sparkle', 'motion':'🌀 Motion Lines', 'all':'🎨 Gabungan Semua', 'none':'🚫 Tanpa Efek'}
+def doodle_menu():
+    return InlineKeyboardMarkup([[InlineKeyboardButton(label, callback_data='doodle:'+key)] for key,label in DOODLE_OPTIONS.items()])
 
 def photos_menu():
     return InlineKeyboardMarkup([
@@ -84,6 +91,7 @@ def is_admin(user_id):
 def main_menu(user_id=None):
     rows = [
         [InlineKeyboardButton('🎬 Jana Video Affiliate', callback_data='make')],
+        [InlineKeyboardButton('🎞️ Video Storyboard (6 Babak)', callback_data='storyboard')],
         [InlineKeyboardButton('🔄 Tukar Format Video', callback_data='convert')],
         [InlineKeyboardButton('🎞️ Gabung Video', callback_data='merge')],
         [InlineKeyboardButton('✍️ Sediakan Prompt Video', callback_data='prompt')],
@@ -139,7 +147,7 @@ def resolve_music(choice: str, style: str) -> Path | None:
     return path if path.is_file() else None
 
 
-def render_video(images: list[Path], output: Path, music: Path | None = None, style: str = 'hybrid', duration: int = DURATION):
+def render_video(images: list[Path], output: Path, music: Path | None = None, style: str = 'hybrid', duration: int = DURATION, doodle: str = 'none'):
     """Produce CPU-friendly Ken Burns transitions. Morph is an approximation, not generative AI."""
     if style not in STYLES:
         raise ValueError("Unknown style")
@@ -201,14 +209,18 @@ def render_video(images: list[Path], output: Path, music: Path | None = None, st
             cmd += ['-filter_complex',';'.join(chains),'-map',last,'-an','-c:v','libx264',
                     '-preset','veryfast','-crf','25','-pix_fmt','yuv420p',str(video)]
             subprocess.run(cmd, check=True, timeout=240)
+        if doodle != 'none':
+            decorated = temp / 'decorated.mp4'
+            apply_overlay(video, decorated, doodle, WIDTH, HEIGHT, duration)
+            video = decorated
         if music:
             subprocess.run(['ffmpeg','-hide_banner','-loglevel','error','-y','-i',str(video),
                             '-stream_loop','-1','-i',str(music),'-map','0:v:0','-map','1:a:0',
-                            '-t',str(DURATION),'-c:v','copy','-c:a','aac','-b:a','128k',
+                            '-t',str(duration),'-c:v','copy','-c:a','aac','-b:a','128k',
                             '-movflags','+faststart',str(output)],check=True,timeout=180)
         else:
             subprocess.run(['ffmpeg','-hide_banner','-loglevel','error','-y','-i',str(video),
-                            '-t',str(DURATION),'-c','copy','-movflags','+faststart',str(output)],
+                            '-t',str(duration),'-c','copy','-movflags','+faststart',str(output)],
                            check=True,timeout=180)
 
 
@@ -218,6 +230,8 @@ def reset(context):
     context.user_data['music_choice'] = 'auto'
     context.user_data['style'] = 'hybrid'
     context.user_data['duration'] = 10
+    context.user_data['doodle_choice'] = 'none'
+    context.user_data['storyboard_mode'] = False
     context.user_data['stage'] = 'home'
 
 
@@ -312,6 +326,20 @@ async def photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
     if context.user_data.get('stage') == 'receipt_upload':
         await receive_receipt(update, context)
+        return
+    if context.user_data.get('stage') == 'prompt_photo':
+        context.user_data['prompt_photo_id'] = update.message.photo[-1].file_id
+        context.user_data['stage'] = 'prompt_details_choice'
+        description = None
+        if os.environ.get('GEMINI_API_KEY'):
+            try:
+                image_file = await context.bot.get_file(context.user_data['prompt_photo_id'])
+                image_bytes = bytes(await image_file.download_as_bytearray())
+                description = await describe_photo(image_bytes)
+            except Exception:
+                logging.exception('Product image analysis unavailable')
+        context.user_data['prompt_vision'] = description or ''
+        await update.message.reply_text(('🔎 AI mengenal pasti: ' + description + '\n\n' if description else '📷 Gambar diterima. AI Vision tidak tersedia; prompt masih boleh digunakan bersama gambar rujukan.\n\n') + 'Mahu tambah maklumat produk secara pilihan?', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('✍️ Tambah Maklumat', callback_data='prompt_details:add')], [InlineKeyboardButton('✨ Teruskan Dengan Gambar Sahaja', callback_data='prompt_details:skip')]]))
         return
     if context.user_data.get('stage') != 'photos':
         await update.message.reply_text('Tekan 🎬 Jana Video dahulu.', reply_markup=main_menu())
@@ -541,19 +569,32 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await query.message.reply_text('Gagal memproses resit. Mungkin sudah disemak atau sambungan database bermasalah.')
     elif action == 'admin':
         await admin(update, context)
+    elif action == 'storyboard':
+        reset(context)
+        context.user_data['storyboard_mode'] = True
+        context.user_data['stage'] = 'photos'
+        await query.message.reply_text('🎞️ STORYBOARD V1 — Hantar 1–5 gambar produk. Bot akan susun enam babak sinematik. Tekan Selesai apabila cukup.', reply_markup=photos_menu())
     elif action == 'make':
         reset(context)
         context.user_data['stage'] = 'photos'
         await query.message.reply_text('Langkah 1/4 — Hantar 1–5 gambar produk. Tekan Selesai apabila cukup.', reply_markup=photos_menu())
     elif action == 'prompt':
         reset(context)
-        context.user_data['stage'] = 'prompt_product'
-        await query.message.reply_text('✍️ PROMPT VIDEO AFFILIATE\n\nLangkah 1/3: Nyatakan produk secara tepat: nama, warna, bentuk, bahan, logo dan ciri yang mesti kekal sama. Contoh: Beg tote hitam kulit PU, zip emas, logo kecil di tengah.')
+        context.user_data['stage'] = 'prompt_photo'
+        await query.message.reply_text('✍️ PROMPT VIDEO AFFILIATE\n\n📷 Upload satu gambar produk dahulu. Maklumat produk boleh ditambah kemudian, tetapi tidak wajib.')
+    elif action.startswith('prompt_details:') and stage == 'prompt_details_choice':
+        if action == 'prompt_details:add':
+            context.user_data['stage'] = 'prompt_details_text'
+            await query.message.reply_text('Masukkan maklumat tambahan produk (pilihan), seperti nama atau ciri penting:')
+        elif action == 'prompt_details:skip':
+            context.user_data['prompt_product'] = ''
+            context.user_data['stage'] = 'prompt_scene'
+            await query.message.reply_text('Pilih latar atau taip Auto:')
     elif action.startswith('motion:') and stage == 'prompt_motion':
         motion = action.split(':', 1)[1]
         motions = {'orbit': 'A controlled 30-degree camera arc around the product, not a full 360-degree rotation; preserve the visible product geometry.', 'push': 'A slow forward dolly-in with gentle parallax; no object deformation.', 'side': 'A smooth left-to-right camera slide with stable product proportions.', 'static': 'A locked camera with subtle studio lighting changes only.'}
         if motion in motions:
-            product = context.user_data.get('prompt_product', 'the reference product')
+            product = ('the product in the uploaded reference image. Visible observations (verify against reference image): ' + context.user_data.get('prompt_vision', '') + '. Optional user details: ' + context.user_data.get('prompt_product', ''))
             scene = context.user_data.get('prompt_scene', 'clean studio background')
             prompt = (f'Create a 10-second vertical 9:16 product affiliate video. PRODUCT REFERENCE: {product}. '
                       f'SCENE: {scene}. CAMERA: {motions[motion]} '
@@ -562,7 +603,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                       'Do not invent extra accessories, alter text or logos, morph the object, duplicate it, introduce people or hands, add captions, watermarks or UI. '
                       'If unseen sides of the product are not provided, do not fabricate them; use only a modest camera arc. No abrupt cuts or flicker. Output 10 seconds, portrait 9:16, high quality.')
             context.user_data['stage'] = 'prompt_done'
-            await query.message.reply_text('✅ PROMPT SIAP (salin teks di bawah):\n\n' + prompt, reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('🤖 Buka NexaBot', url='https://t.me/aigeneratornexa_bot?start=ref37141287'), InlineKeyboardButton('✨ Buka Gemini', url='https://gemini.google.com/')], [InlineKeyboardButton('✍️ Prompt Baharu', callback_data='prompt'), InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
+            await query.message.reply_text('✅ PROMPT SIAP — gunakan bersama gambar produk yang diupload. Jika AI Vision tersedia, pemerhatian visual telah dimasukkan; semak ketepatannya. Gunakan prompt bersama gambar rujukan.\n\n' + prompt, reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('🤖 Buka NexaBot', url='https://t.me/aigeneratornexa_bot?start=ref37141287'), InlineKeyboardButton('✨ Buka Gemini', url='https://gemini.google.com/')], [InlineKeyboardButton('✍️ Prompt Baharu', callback_data='prompt'), InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
     elif action == 'merge':
         reset(context)
         context.user_data['stage'] = 'merge_upload'
@@ -660,8 +701,18 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 context.user_data['busy'] = False
     elif action.startswith('style:') and stage == 'style':
         context.user_data['style'] = action.split(':', 1)[1]
-        context.user_data['stage'] = 'music'
-        await query.message.reply_text(f"✅ Gaya {context.user_data['style']} dipilih.\nLangkah 3/4 — Pilih muzik:", reply_markup=music_menu())
+        if context.user_data.get('storyboard_mode'):
+            context.user_data['stage'] = 'doodle'
+            await query.message.reply_text('Pilih efek garisan / doodle untuk prompt storyboard:', reply_markup=doodle_menu())
+        else:
+            context.user_data['stage'] = 'music'
+            await query.message.reply_text(f"✅ Gaya {context.user_data['style']} dipilih.\\nLangkah 3/4 — Pilih muzik:", reply_markup=music_menu())
+    elif action.startswith('doodle:') and stage == 'doodle' and context.user_data.get('storyboard_mode'):
+        choice = action.split(':', 1)[1]
+        if choice in DOODLE_OPTIONS:
+            context.user_data['doodle_choice'] = choice
+            context.user_data['stage'] = 'music'
+            await query.message.reply_text('✅ Efek untuk storyboard: '+DOODLE_OPTIONS[choice]+'\\nEfek pilihan akan dimasukkan ke dalam MP4.\\nPilih muzik:', reply_markup=music_menu())
     elif action == 'music' and stage in ('music', 'confirm'):
         context.user_data['stage'] = 'music'
         await query.message.reply_text('Langkah 3/4 — Pilih muzik:', reply_markup=music_menu())
@@ -739,31 +790,28 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await update.message.reply_text('🔄 TUKAR FORMAT VIDEO\n\nTekan 📎 → File / Fail → pilih video MP4 asal. Bot akan memprosesnya secara automatik.', reply_markup=main_menu())
         elif action == 'prompt':
             reset(context)
-            context.user_data['stage'] = 'prompt_product'
-            await update.message.reply_text('✍️ PROMPT VIDEO AFFILIATE\n\nLangkah 1/3: Terangkan produk dengan tepat termasuk warna, bentuk, bahan dan logo.')
+            context.user_data['stage'] = 'prompt_photo'
+            await update.message.reply_text('✍️ PROMPT VIDEO AFFILIATE\n\n📷 Upload satu gambar produk dahulu. Maklumat produk boleh ditambah kemudian, tetapi tidak wajib.')
         elif action == 'subscription':
             await update.message.reply_text('💎 LANGGANAN KLIPPO\n\nPelan Penyokong Awal: RM5 / 30 hari, sehingga 30 video sebulan. Pengaktifan manual selepas resit disemak.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📱 Papar QR DuitNow', callback_data='subscription_qr')]]))
         elif action == 'account':
             await account_info(update, context)
         elif action == 'help':
-            await update.message.reply_text('❓ BANTUAN\n\nJana Video: hantar gambar, pilih gaya dan muzik.\nTukar Format: hantar MP4.\nPrompt: terangkan produk dan pilih gerakan kamera.')
+            await update.message.reply_text('❓ BANTUAN\n\nJana Video: hantar gambar, pilih gaya dan muzik.\nTukar Format: hantar MP4.\nPrompt: upload gambar, maklumat tambahan pilihan, kemudian pilih latar dan gerakan kamera.')
         else:
             await start(update, context)
         return
-    if stage == 'prompt_product':
-        if len(value) < 8:
-            await update.message.reply_text('Sila beri penerangan produk yang lebih khusus (sekurang-kurangnya 8 aksara).')
-            return
+    if stage == 'prompt_details_text':
         context.user_data['prompt_product'] = value[:600]
         context.user_data['stage'] = 'prompt_scene'
-        await update.message.reply_text('Langkah 2/3: Nyatakan latar dan suasana yang dikehendaki. Contoh: meja marmar putih, cahaya studio lembut, latar premium tanpa manusia.')
+        await update.message.reply_text('Maklumat tambahan disimpan. Pilih latar atau taip Auto:')
     elif stage == 'prompt_scene':
-        if len(value) < 5:
-            await update.message.reply_text('Sila terangkan latar dengan lebih jelas.')
+        if len(value) < 5 and value.lower() != 'auto':
+            await update.message.reply_text('Nyatakan latar ringkas atau taip Auto.')
             return
-        context.user_data['prompt_scene'] = value[:400]
+        context.user_data['prompt_scene'] = 'clean premium studio background' if value.lower() == 'auto' else value[:400]
         context.user_data['stage'] = 'prompt_motion'
-        await update.message.reply_text('Langkah 3/3: Pilih gerakan kamera:', reply_markup=InlineKeyboardMarkup([
+        await update.message.reply_text('Langkah 2/2: Pilih gerakan kamera:', reply_markup=InlineKeyboardMarkup([
             [InlineKeyboardButton('🔄 Orbit Terkawal', callback_data='motion:orbit')],
             [InlineKeyboardButton('🔍 Zoom Masuk', callback_data='motion:push')],
             [InlineKeyboardButton('↔️ Gerak Sisi', callback_data='motion:side')],
@@ -809,7 +857,16 @@ async def generate(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 if music is None:
                     await message.reply_text('Muzik pilihan belum tersedia pada server. Video akan dijana tanpa muzik.')
             result = folder / 'video.mp4'
-            await asyncio.to_thread(render_video, paths, result, music, context.user_data.get('style', 'hybrid'), context.user_data.get('duration', 10))
+            if context.user_data.get('storyboard_mode'):
+                plan = build_storyboard(len(paths), context.user_data.get('duration', 10))
+                await message.reply_text(format_storyboard(plan) + '\n\nEfek prompt: ' + DOODLE_OPTIONS[context.user_data.get('doodle_choice', 'none')] + '\nArahan AI: Tambah efek pilihan secara halus di luar label dan logo produk. Jangan ubah identiti produk. (Efek overlay turut dirender pada MP4.)')
+                paths = [paths[i] for i in source_sequence(plan)]
+                selected_style = 'cinematic'
+                doodle = context.user_data.get('doodle_choice', 'none')
+            else:
+                selected_style = context.user_data.get('style', 'hybrid')
+                doodle = 'none'
+            await asyncio.to_thread(render_video, paths, result, music, selected_style, context.user_data.get('duration', 10), doodle)
             with result.open('rb') as f:
                 await message.reply_video(video=f, caption='🎬 Video siap! Hantar gambar baharu untuk video seterusnya.', supports_streaming=True,
                                                  read_timeout=120, write_timeout=120)
@@ -836,7 +893,7 @@ def main():
     app.add_handler(CommandHandler('jana', generate, block=False))
     for style in STYLES:
         app.add_handler(CommandHandler(style, choose_style))
-    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(photos_order|photos_undo|photos_more|photo_up:[0-4]|photo_down:[0-4]|photo_remove:[0-4]|duration:(10|15|20)|admin_pending|admin_approve:[0-9]+|admin_reject:[0-9]+|admin|receipt_upload|subscription_qr|make|convert|merge|merge_next|merge_done|merge_style:(fade|smoothleft|slideleft|zoomin)|prompt|motion:(orbit|push|side|static)|photos_done|confirm|styles|music|music_previews|subscription|account|help|check|reset|home|preview:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|listen:(cinematic|energetic|happy|luxury|nature|beauty)|style:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|music:(auto|cinematic|energetic|happy|luxury|nature|beauty|none|custom))$'))
+    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(photos_order|photos_undo|photos_more|photo_up:[0-4]|photo_down:[0-4]|photo_remove:[0-4]|duration:(10|15|20)|admin_pending|admin_approve:[0-9]+|admin_reject:[0-9]+|admin|receipt_upload|subscription_qr|make|storyboard|doodle:(auto|white|sparkle|motion|all|none)|convert|merge|merge_next|merge_done|merge_style:(fade|smoothleft|slideleft|zoomin)|prompt|prompt_details:(add|skip)|motion:(orbit|push|side|static)|photos_done|confirm|styles|music|music_previews|subscription|account|help|check|reset|home|preview:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|listen:(cinematic|energetic|happy|luxury|nature|beauty)|style:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|music:(auto|cinematic|energetic|happy|luxury|nature|beauty|none|custom))$'))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, menu_text))
     app.add_handler(MessageHandler(filters.PHOTO, photo))
     app.add_handler(MessageHandler(filters.Document.IMAGE | filters.Document.MimeType('application/pdf'), receive_receipt))
