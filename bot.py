@@ -19,6 +19,7 @@ from storyboard_engine import build_storyboard, format_storyboard, source_sequen
 from storyboard_overlay import apply_overlay
 from gemini_vision import describe_photo
 from prompt_engine import build_prompt
+from prompt_catalog import choices as storyboard_styles
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler, ContextTypes, MessageHandler, filters
 
@@ -640,14 +641,27 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data['stage'] = 'prompt_type'
         await query.message.reply_text('✍️ HASILKAN PROMPT — Pilih jenis:', reply_markup=InlineKeyboardMarkup([
             [InlineKeyboardButton('✨ Prompt Biasa', callback_data='prompt_type:normal')],
-            [InlineKeyboardButton('🎞️ Prompt Storyboard (6 Babak)', callback_data='prompt_type:storyboard')],
-            [InlineKeyboardButton('✏️ White Doodle Storyboard', callback_data='prompt_type:doodle')],
+            [InlineKeyboardButton('🎞️ Prompt Storyboard', callback_data='prompt_type:storyboard')],
             [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
         ]))
     elif action.startswith('prompt_type:') and stage == 'prompt_type':
-        context.user_data['prompt_mode'] = action.split(':', 1)[1]
-        context.user_data['stage'] = 'prompt_photo'
-        await query.message.reply_text('📷 Hantar satu gambar produk. Maklumat tambahan boleh dimasukkan kemudian, tetapi tidak wajib.')
+        selected = action.split(':', 1)[1]
+        context.user_data['prompt_mode'] = 'storyboard' if selected == 'doodle' else selected
+        if context.user_data['prompt_mode'] == 'storyboard':
+            context.user_data['stage'] = 'prompt_style'
+            rows = [[InlineKeyboardButton('🎲 Auto / Random', callback_data='prompt_style:auto')]]
+            rows.extend([[InlineKeyboardButton(label, callback_data='prompt_style:' + key)] for key, label in storyboard_styles()])
+            await query.message.reply_text('🎨 Pilih gaya Prompt Storyboard:', reply_markup=InlineKeyboardMarkup(rows))
+        else:
+            context.user_data['stage'] = 'prompt_photo'
+            await query.message.reply_text('📷 Hantar satu gambar produk. Maklumat tambahan boleh dimasukkan kemudian, tetapi tidak wajib.')
+    elif action.startswith('prompt_style:') and stage == 'prompt_style':
+        selected = action.split(':', 1)[1]
+        valid = {'auto'} | {key for key, _ in storyboard_styles()}
+        if selected in valid:
+            context.user_data['prompt_style'] = selected
+            context.user_data['stage'] = 'prompt_photo'
+            await query.message.reply_text('📷 Hantar satu gambar produk. AI hanya membaca ciri produk yang kelihatan jika tersedia.')
     elif action.startswith('prompt_details:') and stage == 'prompt_details_choice':
         if action == 'prompt_details:add':
             context.user_data['stage'] = 'prompt_details_text'
@@ -690,7 +704,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             try:
                 product = ('the product in the uploaded reference image. Visible observations (verify against reference image): ' + context.user_data.get('prompt_vision', '') + '. Optional user details: ' + context.user_data.get('prompt_product', ''))
                 scene = context.user_data.get('prompt_scene', 'clean studio background')
-                prompt = build_prompt(context.user_data.get('prompt_mode', 'normal'), product, scene, motion)
+                prompt = build_prompt(context.user_data.get('prompt_mode', 'normal'), product, scene, motion, context.user_data.get('prompt_style', 'auto'))
                 context.user_data['stage'] = 'prompt_done'
                 mode_name = context.user_data.get('prompt_mode', 'normal')
                 actions = InlineKeyboardMarkup([
@@ -1003,7 +1017,7 @@ def main():
     app.add_handler(CommandHandler('jana', generate, block=False))
     for style in STYLES:
         app.add_handler(CommandHandler(style, choose_style))
-    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(photos_order|photos_undo|photos_more|photo_up:[0-4]|photo_down:[0-4]|photo_remove:[0-4]|duration:(10|15|20)|admin_pending|admin_approve:[0-9]+|admin_reject:[0-9]+|admin|receipt_upload|subscription_qr|make|storyboard|doodle:(auto|white|sparkle|motion|all|none)|convert|merge|merge_next|merge_done|merge_style:(fade|smoothleft|slideleft|zoomin)|prompt|prompt_type:(normal|storyboard|doodle)|prompt_details:(add|skip)|scene:(auto|studio|dark|home|nature|minimal)|motion:(orbit|push|side|static)|photos_done|confirm|styles|music|music_previews|subscription|account|help|check|reset|home|preview:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|listen:(cinematic|energetic|happy|luxury|nature|beauty)|style:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|music:(auto|cinematic|energetic|happy|luxury|nature|beauty|none|custom))$'))
+    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(photos_order|photos_undo|photos_more|photo_up:[0-4]|photo_down:[0-4]|photo_remove:[0-4]|duration:(10|15|20)|admin_pending|admin_approve:[0-9]+|admin_reject:[0-9]+|admin|receipt_upload|subscription_qr|make|storyboard|doodle:(auto|white|sparkle|motion|all|none)|convert|merge|merge_next|merge_done|merge_style:(fade|smoothleft|slideleft|zoomin)|prompt|prompt_type:(normal|storyboard|doodle)|prompt_style:(auto|white_doodle|cinematic|minimal|dynamic|luxury)|prompt_details:(add|skip)|scene:(auto|studio|dark|home|nature|minimal)|motion:(orbit|push|side|static)|photos_done|confirm|styles|music|music_previews|subscription|account|help|check|reset|home|preview:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|listen:(cinematic|energetic|happy|luxury|nature|beauty)|style:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|music:(auto|cinematic|energetic|happy|luxury|nature|beauty|none|custom))$'))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, menu_text))
     app.add_handler(MessageHandler(filters.PHOTO, photo))
     app.add_handler(MessageHandler(filters.Document.IMAGE | filters.Document.MimeType('application/pdf'), receive_receipt))
