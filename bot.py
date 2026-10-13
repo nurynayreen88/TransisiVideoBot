@@ -502,7 +502,14 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif action == 'confirm' and stage == 'confirm':
         await generate(update, context)
     elif action == 'subscription':
-        await query.message.reply_text('💎 LANGGANAN KLIPPO\n\nCadangan pelan Penyokong Awal: RM5 / 30 hari, sehingga 30 video sebulan.\n\nPembayaran dan pengaktifan VIP belum dibuka. Kami tidak akan meminta bayaran sebelum fungsi langganan siap.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
+        await query.message.reply_text('💎 LANGGANAN KLIPPO\n\nPelan Penyokong Awal: RM5 / 30 hari, sehingga 30 video sebulan.\n\nBayaran melalui DuitNow QR. Pengaktifan akaun dibuat secara manual selepas resit disemak; bayaran tidak mengaktifkan VIP secara automatik.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📱 Papar QR DuitNow', callback_data='subscription_qr')], [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
+    elif action == 'subscription_qr':
+        qr_path = Path(__file__).resolve().parent / 'klippo_qr.jpg'
+        if not qr_path.is_file():
+            await query.message.reply_text('QR pembayaran belum tersedia. Sila cuba lagi kemudian.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
+        else:
+            with qr_path.open('rb') as qr_file:
+                await query.message.reply_photo(photo=qr_file, caption='💎 KLIPPO — DuitNow QR\n\nPelan Penyokong Awal: RM5 / 30 hari (sehingga 30 video sebulan).\n\nSimpan resit pembayaran untuk semakan admin. Pengaktifan adalah manual, bukan automatik.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
     elif action == 'account':
         await query.message.reply_text(f'👤 AKAUN SAYA\n\nID Telegram: {query.from_user.id}\nStatus: Akses percubaan (langganan belum diaktifkan).', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📋 Semak Bahan', callback_data='check'), InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
     elif action == 'help':
@@ -547,7 +554,7 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['stage'] = 'prompt_product'
             await update.message.reply_text('✍️ PROMPT VIDEO AFFILIATE\n\nLangkah 1/3: Terangkan produk dengan tepat termasuk warna, bentuk, bahan dan logo.')
         elif action == 'subscription':
-            await update.message.reply_text('💎 LANGGANAN\n\nPelan RM5 / 30 hari masih cadangan. Pembayaran belum diaktifkan.')
+            await update.message.reply_text('💎 LANGGANAN KLIPPO\n\nPelan Penyokong Awal: RM5 / 30 hari, sehingga 30 video sebulan. Pengaktifan manual selepas resit disemak.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📱 Papar QR DuitNow', callback_data='subscription_qr')]]))
         elif action == 'account':
             await update.message.reply_text(f'👤 AKAUN SAYA\n\nID Telegram: {update.effective_user.id}\nLangganan belum diaktifkan.')
         elif action == 'help':
@@ -641,7 +648,7 @@ def main():
     app.add_handler(CommandHandler('jana', generate, block=False))
     for style in STYLES:
         app.add_handler(CommandHandler(style, choose_style))
-    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(make|convert|merge|merge_next|merge_done|merge_style:(fade|smoothleft|slideleft|zoomin)|prompt|motion:(orbit|push|side|static)|photos_done|confirm|styles|music|music_previews|subscription|account|help|check|reset|home|preview:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|listen:(cinematic|energetic|happy|luxury|nature|beauty)|style:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|music:(auto|cinematic|energetic|happy|luxury|nature|beauty|none|custom))$'))
+    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(subscription_qr|make|convert|merge|merge_next|merge_done|merge_style:(fade|smoothleft|slideleft|zoomin)|prompt|motion:(orbit|push|side|static)|photos_done|confirm|styles|music|music_previews|subscription|account|help|check|reset|home|preview:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|listen:(cinematic|energetic|happy|luxury|nature|beauty)|style:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|music:(auto|cinematic|energetic|happy|luxury|nature|beauty|none|custom))$'))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, menu_text))
     app.add_handler(MessageHandler(filters.PHOTO, photo))
     app.add_handler(MessageHandler(filters.VIDEO | filters.Document.MimeType('video/mp4'), convert_upload))
