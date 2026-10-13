@@ -103,6 +103,14 @@ def is_admin(user_id):
     return str(user_id) in [x.strip() for x in os.environ.get('ADMIN_USER_IDS', '37141287').split(',')]
 
 
+async def progress_update(message, percent, detail):
+    """Milestone-based progress, not an invented time or FFmpeg frame estimate."""
+    try:
+        await message.edit_text(f"⏳ DALAM PROSES — {percent}%\\n{detail}")
+    except Exception:
+        logging.debug('Progress message edit unavailable', exc_info=True)
+
+
 def prompt_wait_animation():
     """Build a lightweight animated waiting GIF locally, without an external API."""
     frames = []
@@ -515,14 +523,17 @@ async def convert_upload(update: Update, context: ContextTypes.DEFAULT_TYPE):
     async with lock:
         context.user_data['busy'] = True
         try:
-            await update.message.reply_text('⏳ Sedang menukar video kepada MP4 mesra Shopee...')
+            progress = await update.message.reply_text('⏳ DALAM PROSES — 0%\\nMenyediakan fail video...')
             with tempfile.TemporaryDirectory(prefix='shopee_') as td:
                 source = Path(td) / 'input.mp4'
                 destination = Path(td) / 'shopee.mp4'
                 await (await context.bot.get_file(item.file_id)).download_to_drive(source)
+                await progress_update(progress, 40, 'Fail diterima. Sedang menukar format video...')
                 await asyncio.to_thread(convert_shopee, source, destination)
+                await progress_update(progress, 90, 'Penukaran selesai. Menghantar fail...')
                 with destination.open('rb') as handle:
                     await update.message.reply_document(document=handle, filename='Klippo_Shopee_HQ.mp4', caption='✅ MP4 berkualiti tinggi. Muat turun sebagai fail untuk mengelakkan pemampatan tambahan. Kelulusan Shopee tertakluk pada peraturan platform.', reply_markup=main_menu())
+                await progress_update(progress, 100, 'Video berjaya dihantar.')
         except Exception:
             logging.exception('Shopee conversion failed')
             await update.message.reply_text('Penukaran gagal. Cuba video MP4 yang lebih pendek atau kecil.', reply_markup=main_menu())
@@ -541,19 +552,24 @@ async def generate_merge(update: Update, context: ContextTypes.DEFAULT_TYPE, sty
         context.user_data['busy'] = True
         animation = None
         success_animation = None
+        progress = None
         try:
             try:
                 animation = await query.message.reply_animation(animation=fusion_gif(), caption='⏳ Dalam proses...')
             except Exception:
                 logging.exception('Fusion animation unavailable')
+            progress = await query.message.reply_text('⏳ DALAM PROSES — 0%\\nMenyediakan video untuk gabungan...')
             with tempfile.TemporaryDirectory(prefix='merge_') as folder:
                 paths = []
                 for index, file_id in enumerate(context.user_data['merge_files']):
                     path = Path(folder) / f'input_{index}.mp4'
                     await (await context.bot.get_file(file_id)).download_to_drive(path)
                     paths.append(path)
+                    await progress_update(progress, round(30 * (index + 1) / len(context.user_data['merge_files'])), 'Memuat turun klip...')
                 output = Path(folder) / 'gabungan.mp4'
+                await progress_update(progress, 40, 'Klip tersedia. Sedang menggabungkan video...')
                 await asyncio.to_thread(merge_videos, paths, output, style)
+                await progress_update(progress, 90, 'Gabungan selesai. Menghantar fail...')
                 try:
                     if animation:
                         await animation.delete()
@@ -563,6 +579,7 @@ async def generate_merge(update: Update, context: ContextTypes.DEFAULT_TYPE, sty
                     logging.exception('Fusion completion display failed')
                 with output.open('rb') as file:
                     await query.message.reply_document(document=file, filename='Klippo_Gabungan.mp4', caption='✅ Video siap digabung. Audio asal dikekalkan dan dipadankan dengan transisi.', reply_markup=main_menu(), write_timeout=240, read_timeout=120, connect_timeout=30)
+                await progress_update(progress, 100, 'Video gabungan berjaya dihantar.')
         except Exception:
             logging.exception('Video merge failed')
             await query.message.reply_text('Gabungan gagal. Cuba klip MP4 lebih pendek.', reply_markup=main_menu())
@@ -711,14 +728,15 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             try:
                 waiting = await query.message.reply_animation(
                     animation=prompt_wait_animation(),
-                    caption='✨ KLIPPO sedang menyusun prompt anda. Sila tunggu sebentar...'
+                    caption='⏳ DALAM PROSES — 0% | Menyusun prompt...'
                 )
             except Exception:
-                waiting = await query.message.reply_text('⏳ KLIPPO sedang menyediakan prompt anda...')
+                waiting = await query.message.reply_text('⏳ DALAM PROSES — 0%\\nMenyusun prompt...')
             try:
                 product = ('the product in the uploaded reference image. Visible observations (verify against reference image): ' + context.user_data.get('prompt_vision', '') + '. Optional user details: ' + context.user_data.get('prompt_product', ''))
                 scene = context.user_data.get('prompt_scene', 'clean studio background')
                 prompt = build_prompt(context.user_data.get('prompt_mode', 'normal'), product, scene, motion, context.user_data.get('prompt_style', 'auto'), context.user_data.get('prompt_duration', 10))
+                await progress_update(waiting, 70, 'Prompt siap disusun. Menghantar hasil...') if waiting and not waiting.animation else None
                 context.user_data['stage'] = 'prompt_done'
                 mode_name = context.user_data.get('prompt_mode', 'normal')
                 actions = InlineKeyboardMarkup([
@@ -979,7 +997,7 @@ async def generate(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
     await lock.acquire()
     context.user_data['busy'] = True
-    await message.reply_text('⏳ Menjana video, sila tunggu...')
+    progress = await message.reply_text('⏳ DALAM PROSES — 0%\\nMenyediakan fail...')
     try:
         with tempfile.TemporaryDirectory(prefix='telegram_video_') as td:
             folder = Path(td)
@@ -988,6 +1006,7 @@ async def generate(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 p = folder / f'{i}.jpg'
                 await (await context.bot.get_file(fid)).download_to_drive(p)
                 paths.append(p)
+                await progress_update(progress, round(25 * (i + 1) / len(ids)), 'Memuat turun gambar...')
             music = None
             if context.user_data.get('music_choice') == 'custom' and context.user_data.get('music'):
                 music = folder / 'music.mp3'
@@ -1009,10 +1028,13 @@ async def generate(update: Update, context: ContextTypes.DEFAULT_TYPE):
             else:
                 selected_style = context.user_data.get('style', 'hybrid')
                 doodle = 'none'
+            await progress_update(progress, 40, 'Bahan siap. Sedang render video (peratus dikemas kini selepas render selesai)...')
             await asyncio.to_thread(render_video, paths, result, music, selected_style, context.user_data.get('duration', 10), doodle)
+            await progress_update(progress, 90, 'Render selesai. Menghantar video ke Telegram...')
             with result.open('rb') as f:
                 await message.reply_video(video=f, caption='🎬 Video siap! Hantar gambar baharu untuk video seterusnya.', supports_streaming=True,
                                                  read_timeout=120, write_timeout=120)
+        await progress_update(progress, 100, 'Video berjaya dihantar.')
         reset(context)
         await message.reply_text('Mahu buat video lagi? Hantar gambar baharu.', reply_markup=main_menu())
     except Exception:
