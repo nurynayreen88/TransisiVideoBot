@@ -8,7 +8,7 @@ from pathlib import Path
 
 DB_PATH = Path(os.getenv("KLIPPO_PROMPT_DB", str(Path(__file__).with_name("prompt_catalog.sqlite3"))))
 STYLES = {
-    "white_doodle": ("✏️ White Doodle", "MANDATORY HERO EFFECT: a continuous animated white hand-drawn contour/halo must wrap AROUND THE ENTIRE OUTER SILHOUETTE of the visible product, not merely decorate the empty background. Follow the real 2D outline with a narrow consistent 3-6% product-width gap; begin at lower left, travel up the left edge, across the top, down the right edge and curve under the base to nearly close the loop. Make the line visibly draw on progressively and remain readable for at least 2 seconds. This is a flat composited overlay, not a physical ring, not an oval over the center, not a line crossing the product. Secondary thin white dotted trails, curved feature arrow and 2-3 tiny sparkle stars may appear OUTSIDE the contour. Do not add a visible pen, invented text or random disconnected decoration."),
+    "white_doodle": ("✏️ White Doodle", "Reference-style warm UGC product advertisement with product-specific Malay hook, small white handwritten feature callouts, outlined icons, curved leader arrows, tiny sparkle doodles, and a later animated white dashed contour tracing around the actual product silhouette. Show product/detail/hero compositions with realistic continuity. Graphics are flat tracked 2D overlays; keep branding visible. Never invent claims or recreate the phone bezel from the reference video."),
     "cinematic": ("🎬 Cinematic Premium", "Premium realistic commercial: soft key light, restrained highlights, natural shadows, slow camera push, consistent product and environment."),
     "minimal": ("✨ Minimal Motion Graphic", "Bright uncluttered product framing, subtle geometric accent lines and smooth minimal graphic reveals, elegant spacing and gentle motion."),
     "dynamic": ("⚡ Dynamic Affiliate", "Engaging but controlled affiliate pacing: striking opening crop, feature emphasis with clean graphic accents, smooth match cuts and clear final hero shot."),
@@ -35,6 +35,10 @@ def connect():
         "UPDATE storyboard_prompt_styles SET template=?, version=2 WHERE style_key='white_doodle' AND version=1 AND template=?",
         (STYLES["white_doodle"][1], old_doodle)
     )
+    # Migrate only untouched v2 seed; preserve user-edited templates.
+    prior_v2 = "MANDATORY HERO EFFECT: a continuous animated white hand-drawn contour/halo must wrap AROUND THE ENTIRE OUTER SILHOUETTE of the visible product, not merely decorate the empty background. Follow the real 2D outline with a narrow consistent 3-6% product-width gap; begin at lower left, travel up the left edge, across the top, down the right edge and curve under the base to nearly close the loop. Make the line visibly draw on progressively and remain readable for at least 2 seconds. This is a flat composited overlay, not a physical ring, not an oval over the center, not a line crossing the product. Secondary thin white dotted trails, curved feature arrow and 2-3 tiny sparkle stars may appear OUTSIDE the contour. Do not add a visible pen, invented text or random disconnected decoration."
+    db.execute("UPDATE storyboard_prompt_styles SET template=?, version=3 WHERE style_key='white_doodle' AND version=2 AND template=?",
+               (STYLES["white_doodle"][1], prior_v2))
     db.commit()
     return db
 
