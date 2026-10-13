@@ -40,6 +40,14 @@ STYLE_LABELS = {
 MUSIC_CHOICES = ('auto', 'cinematic', 'energetic', 'happy', 'luxury', 'nature', 'beauty', 'none', 'custom')
 MUSIC_DIR = Path(__file__).resolve().parent / 'music'
 
+def video_mode_menu():
+    return InlineKeyboardMarkup([
+        [InlineKeyboardButton('✨ Video Studio', callback_data='make_studio')],
+        [InlineKeyboardButton('🪄 Video AI (Limited)', callback_data='make_ai')],
+        [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
+    ])
+
+
 def photos_menu():
     return InlineKeyboardMarkup([[InlineKeyboardButton('✅ Selesai Hantar Gambar', callback_data='photos_done')], [InlineKeyboardButton('🗑 Mula Semula', callback_data='reset')]])
 
@@ -512,9 +520,16 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif action == 'admin':
         await admin(update, context)
     elif action == 'make':
+        await query.message.reply_text('🎬 JANA VIDEO\\n\\nPilih jenis video:', reply_markup=video_mode_menu())
+    elif action == 'make_studio':
         reset(context)
         context.user_data['stage'] = 'photos'
-        await query.message.reply_text('Langkah 1/4 — Hantar 1–5 gambar produk. Tekan Selesai apabila cukup.', reply_markup=photos_menu())
+        await query.message.reply_text('Hantar 1–5 gambar produk. Tekan Selesai apabila cukup.', reply_markup=photos_menu())
+    elif action == 'make_ai':
+        await query.message.reply_text('🪄 Video AI (Limited)\\n\\nPenjanaan Video AI belum tersedia. Sila gunakan Video Studio buat masa ini.', reply_markup=InlineKeyboardMarkup([
+            [InlineKeyboardButton('✨ Video Studio', callback_data='make_studio')],
+            [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
+        ]))
     elif action == 'prompt':
         reset(context)
         context.user_data['stage'] = 'prompt_product'
@@ -770,7 +785,7 @@ def main():
     app.add_handler(CommandHandler('jana', generate, block=False))
     for style in STYLES:
         app.add_handler(CommandHandler(style, choose_style))
-    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(admin_pending|admin_approve:[0-9]+|admin_reject:[0-9]+|admin|receipt_upload|subscription_qr|make|convert|merge|merge_next|merge_done|merge_style:(fade|smoothleft|slideleft|zoomin)|prompt|motion:(orbit|push|side|static)|photos_done|confirm|styles|music|music_previews|subscription|account|help|check|reset|home|preview:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|listen:(cinematic|energetic|happy|luxury|nature|beauty)|style:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|music:(auto|cinematic|energetic|happy|luxury|nature|beauty|none|custom))$'))
+    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(make_studio|make_ai|admin_pending|admin_approve:[0-9]+|admin_reject:[0-9]+|admin|receipt_upload|subscription_qr|make|convert|merge|merge_next|merge_done|merge_style:(fade|smoothleft|slideleft|zoomin)|prompt|motion:(orbit|push|side|static)|photos_done|confirm|styles|music|music_previews|subscription|account|help|check|reset|home|preview:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|listen:(cinematic|energetic|happy|luxury|nature|beauty)|style:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|music:(auto|cinematic|energetic|happy|luxury|nature|beauty|none|custom))$'))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, menu_text))
     app.add_handler(MessageHandler(filters.PHOTO, photo))
     app.add_handler(MessageHandler(filters.Document.IMAGE | filters.Document.MimeType('application/pdf'), receive_receipt))
