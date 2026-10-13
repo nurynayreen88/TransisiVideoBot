@@ -32,6 +32,15 @@ def build_prompt(mode, product, scene, motion, style='auto'):
     if mode == "storyboard":
         style_key, style_name, style_template = resolve(style)
         doodle = style_key == "white_doodle"
+        hook = "KENAPA RAMAI SUKA?" if doodle else "JOM TENGOK!"
+        hook_direction = (
+            "ON-SCREEN HOOK TEXT (REQUIRED): Show the EXACT Malay words '" + hook + "' in large clean bold legible typography "
+            "at the top safe area during 0.2-2.0s, with a smooth pop-in or handwriting reveal. "
+            "Keep the product unobstructed. This is an intentional graphic overlay, NOT an unwanted subtitle. "
+            "Spell every character exactly; do not generate other claims, prices, brand names or random text. "
+            "For white doodle, animate a short white underline and two sparkle marks around the hook. "
+            "If reliable text rendering is unavailable, leave a clear top safe area so the exact hook can be overlaid in editing. "
+        )
         rules = (
             "WHITE DOODLE TIMELINE: 0-2s draw a curved white swoosh and two tiny sparkle stars beside the product; "
             "2-4s animate a dotted white trail and a curved arrow to one genuinely visible feature; "
@@ -39,7 +48,7 @@ def build_prompt(mode, product, scene, motion, style='auto'):
             "6-8s return to the full product with subtle sparkle doodles; "
             "8-10s gently erase the doodles in reverse order and hold a clean product hero shot. "
             "Use consistent thin hand-drawn white strokes, 2D overlays anchored to the product, no visible hand or pen. "
-            "Do not add generated lettering, captions or invented feature claims."
+            "Only the exact approved hook text is allowed; no extra captions or invented feature claims."
             if doodle else
             "TIMELINE: 0-2s engaging opening; 2-4s reveal the unchanged complete product; "
             "4-6s focus on one genuinely visible detail; 6-8s tasteful visual emphasis; "
@@ -52,7 +61,7 @@ def build_prompt(mode, product, scene, motion, style='auto'):
             "STYLE FROM KLIPPO CATALOG: " + style_template + "\n\n"
             "SETTING: " + scene + "\n"
             "CAMERA: " + camera + " Stay reference-facing; never invent unseen sides.\n\n"
-            + rules + "\n\n"
+            + hook_direction + "\n\n" + rules + "\n\n"
             "CONTINUITY: Preserve exact shape, color, visible logo and count across the entire video. "
             "Use soft physically believable lighting and stable background. "
             "Do not morph the object, invent accessories or cover its visible branding. "
