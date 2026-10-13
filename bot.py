@@ -646,15 +646,26 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         ]))
     elif action.startswith('prompt_type:') and stage == 'prompt_type':
         selected = action.split(':', 1)[1]
-        context.user_data['prompt_mode'] = 'storyboard' if selected == 'doodle' else selected
-        if context.user_data['prompt_mode'] == 'storyboard':
-            context.user_data['stage'] = 'prompt_style'
-            rows = [[InlineKeyboardButton('🎲 Auto / Random', callback_data='prompt_style:auto')]]
-            rows.extend([[InlineKeyboardButton(label, callback_data='prompt_style:' + key)] for key, label in storyboard_styles()])
-            await query.message.reply_text('🎨 Pilih gaya Prompt Storyboard:', reply_markup=InlineKeyboardMarkup(rows))
-        else:
-            context.user_data['stage'] = 'prompt_photo'
-            await query.message.reply_text('📷 Hantar satu gambar produk. Maklumat tambahan boleh dimasukkan kemudian, tetapi tidak wajib.')
+        if selected in ('normal', 'storyboard', 'doodle'):
+            context.user_data['prompt_mode'] = 'storyboard' if selected == 'doodle' else selected
+            context.user_data['stage'] = 'prompt_duration'
+            await query.message.reply_text('⏱️ Pilih durasi prompt video:', reply_markup=InlineKeyboardMarkup([
+                [InlineKeyboardButton('🎬 10 Saat', callback_data='prompt_duration:10'),
+                 InlineKeyboardButton('🎞️ 20 Saat', callback_data='prompt_duration:20')],
+                [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]
+            ]))
+    elif action.startswith('prompt_duration:') and stage == 'prompt_duration':
+        selected = action.split(':', 1)[1]
+        if selected in ('10', '20'):
+            context.user_data['prompt_duration'] = int(selected)
+            if context.user_data.get('prompt_mode') == 'storyboard':
+                context.user_data['stage'] = 'prompt_style'
+                rows = [[InlineKeyboardButton('🎲 Auto / Random', callback_data='prompt_style:auto')]]
+                rows.extend([[InlineKeyboardButton(label, callback_data='prompt_style:' + key)] for key, label in storyboard_styles()])
+                await query.message.reply_text('🎨 Pilih gaya Prompt Storyboard:', reply_markup=InlineKeyboardMarkup(rows))
+            else:
+                context.user_data['stage'] = 'prompt_photo'
+                await query.message.reply_text('📷 Hantar satu gambar produk. Maklumat tambahan boleh dimasukkan kemudian, tetapi tidak wajib.')
     elif action.startswith('prompt_style:') and stage == 'prompt_style':
         selected = action.split(':', 1)[1]
         valid = {'auto'} | {key for key, _ in storyboard_styles()}
@@ -707,7 +718,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             try:
                 product = ('the product in the uploaded reference image. Visible observations (verify against reference image): ' + context.user_data.get('prompt_vision', '') + '. Optional user details: ' + context.user_data.get('prompt_product', ''))
                 scene = context.user_data.get('prompt_scene', 'clean studio background')
-                prompt = build_prompt(context.user_data.get('prompt_mode', 'normal'), product, scene, motion, context.user_data.get('prompt_style', 'auto'))
+                prompt = build_prompt(context.user_data.get('prompt_mode', 'normal'), product, scene, motion, context.user_data.get('prompt_style', 'auto'), context.user_data.get('prompt_duration', 10))
                 context.user_data['stage'] = 'prompt_done'
                 mode_name = context.user_data.get('prompt_mode', 'normal')
                 actions = InlineKeyboardMarkup([
@@ -1020,7 +1031,7 @@ def main():
     app.add_handler(CommandHandler('jana', generate, block=False))
     for style in STYLES:
         app.add_handler(CommandHandler(style, choose_style))
-    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(photos_order|photos_undo|photos_more|photo_up:[0-4]|photo_down:[0-4]|photo_remove:[0-4]|duration:(10|15|20)|admin_pending|admin_approve:[0-9]+|admin_reject:[0-9]+|admin|receipt_upload|subscription_qr|make|storyboard|doodle:(auto|white|sparkle|motion|all|none)|convert|merge|merge_next|merge_done|merge_style:(fade|smoothleft|slideleft|zoomin)|prompt|prompt_type:(normal|storyboard|doodle)|prompt_style:(auto|white_doodle|cinematic|minimal|dynamic|luxury)|prompt_details:(add|skip)|scene:(auto|studio|dark|home|nature|minimal)|motion:(orbit|push|side|static)|photos_done|confirm|styles|music|music_previews|subscription|account|help|check|reset|home|preview:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|listen:(cinematic|energetic|happy|luxury|nature|beauty)|style:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|music:(auto|cinematic|energetic|happy|luxury|nature|beauty|none|custom))$'))
+    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(photos_order|photos_undo|photos_more|photo_up:[0-4]|photo_down:[0-4]|photo_remove:[0-4]|duration:(10|15|20)|admin_pending|admin_approve:[0-9]+|admin_reject:[0-9]+|admin|receipt_upload|subscription_qr|make|storyboard|doodle:(auto|white|sparkle|motion|all|none)|convert|merge|merge_next|merge_done|merge_style:(fade|smoothleft|slideleft|zoomin)|prompt|prompt_type:(normal|storyboard|doodle)|prompt_duration:(10|20)|prompt_style:(auto|white_doodle|cinematic|minimal|dynamic|luxury)|prompt_details:(add|skip)|scene:(auto|studio|dark|home|nature|minimal)|motion:(orbit|push|side|static)|photos_done|confirm|styles|music|music_previews|subscription|account|help|check|reset|home|preview:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|listen:(cinematic|energetic|happy|luxury|nature|beauty)|style:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|music:(auto|cinematic|energetic|happy|luxury|nature|beauty|none|custom))$'))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, menu_text))
     app.add_handler(MessageHandler(filters.PHOTO, photo))
     app.add_handler(MessageHandler(filters.Document.IMAGE | filters.Document.MimeType('application/pdf'), receive_receipt))
