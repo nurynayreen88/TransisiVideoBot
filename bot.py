@@ -10,7 +10,7 @@ from pathlib import Path
 from PIL import Image, ImageOps
 from video_merge import merge_videos
 from fusion_animation import fusion_gif
-from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardRemove
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler, ContextTypes, MessageHandler, filters
 
 logging.basicConfig(level=logging.INFO)
@@ -41,6 +41,10 @@ MUSIC_DIR = Path(__file__).resolve().parent / 'music'
 
 def photos_menu():
     return InlineKeyboardMarkup([[InlineKeyboardButton('✅ Selesai Hantar Gambar', callback_data='photos_done')], [InlineKeyboardButton('🗑 Mula Semula', callback_data='reset')]])
+
+
+def home_keyboard():
+    return ReplyKeyboardMarkup([['🏠 Menu Utama']], resize_keyboard=True, is_persistent=True)
 
 
 def main_menu():
@@ -520,6 +524,9 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
     stage = context.user_data.get('stage')
     value = update.message.text.strip()
+    if value == '🏠 Menu Utama':
+        await start(update, context)
+        return
     shortcuts = {
         '🎬 Jana Video Affiliate': 'make',
         '🔄 Tukar Format Video': 'convert',
