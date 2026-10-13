@@ -725,18 +725,24 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     [InlineKeyboardButton('🤖 NexaBot', url='https://t.me/aigeneratornexa_bot?start=ref37141287'), InlineKeyboardButton('✨ Gemini', url='https://gemini.google.com/')],
                     [InlineKeyboardButton('✍️ Prompt Baharu', callback_data='prompt'), InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]
                 ])
-                # One copyable Telegram message when possible; otherwise one complete TXT.
-                if len(prompt) <= 3900:
-                    await query.message.reply_text(prompt, reply_markup=actions)
-                else:
-                    prompt_file = BytesIO(prompt.encode('utf-8'))
-                    prompt_file.name = f'KLIPPO_prompt_{mode_name}.txt'
-                    await query.message.reply_document(
-                        document=prompt_file,
-                        filename=prompt_file.name,
-                        caption='📋 Prompt penuh dalam satu fail: buka → Select All → Copy.',
-                        reply_markup=actions
-                    )
+                # For 20s, send two individually copyable 10s prompts in order.
+                sections = prompt.split('=== KLIPPO PART 2 ===') if context.user_data.get('prompt_duration') == 20 else [prompt]
+                for index, section in enumerate(sections, 1):
+                    section = section.strip()
+                    caption = ('Bahagian ' + str(index) + '/2 — jana klip 10 saat ini secara berasingan. '
+                               + ('Gunakan bingkai akhir Bahagian 1 sebagai rujukan sambungan.' if index == 2 else
+                                  'Simpan bingkai terakhir untuk sambungan Bahagian 2.')) if len(sections) == 2 else ''
+                    if len(section) <= 3900:
+                        await query.message.reply_text((caption + '\\n\\n' if caption else '') + section, reply_markup=actions)
+                    else:
+                        prompt_file = BytesIO(section.encode('utf-8'))
+                        prompt_file.name = f'KLIPPO_prompt_{mode_name}_part{index}.txt'
+                        await query.message.reply_document(
+                            document=prompt_file,
+                            filename=prompt_file.name,
+                            caption=caption or '📋 Prompt penuh dalam satu fail: buka → Select All → Copy.',
+                            reply_markup=actions
+                        )
 
             finally:
                 if waiting is not None:
