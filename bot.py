@@ -145,7 +145,11 @@ def render_video(images: list[Path], output: Path, music: Path | None = None, st
         raise ValueError("Unknown style")
     if not images:
         raise ValueError('No images')
-    n = len(images)
+    # One photograph becomes a three-shot commercial storyboard, not one long zoom.
+    # Multi-image inputs use one distinct shot per submitted image.
+    single_story = len(images) == 1
+    shots = images * 3 if single_story else images
+    n = len(shots)
     # Keep fades short enough for any image count and total duration.
     fade = min(0.95, duration / (n * 3.2)) if n > 1 else 0
     clip_duration = (duration + (n - 1) * fade) / n
@@ -153,11 +157,11 @@ def render_video(images: list[Path], output: Path, music: Path | None = None, st
     with tempfile.TemporaryDirectory(prefix='render_') as td:
         temp = Path(td)
         clips = []
-        for i, path in enumerate(images):
+        for i, path in enumerate(shots):
             with Image.open(path) as original:
                 img = ImageOps.exif_transpose(original).convert('RGB')
                 # Preserve framing: modest overscan gives zoompan room to move.
-                img = ImageOps.fit(img, (round(WIDTH * 1.22), round(HEIGHT * 1.22)), method=Image.Resampling.LANCZOS)
+                img = ImageOps.fit(img, (round(WIDTH * 1.30), round(HEIGHT * 1.30)), method=Image.Resampling.LANCZOS)
                 still = temp / f'still_{i}.jpg'
                 img.save(still, quality=90)
             clip = temp / f'clip_{i}.mp4'
@@ -165,15 +169,15 @@ def render_video(images: list[Path], output: Path, music: Path | None = None, st
             # Expressions use the output-frame index 'on'; avoid abrupt jumps.
             progress = f'min(on/{max(frames - 1, 1)},1)'
             if i % 3 == 0:
-                zoom = f'1.03+0.075*{progress}'
+                zoom = f'1.02+0.06*{progress}'
                 x = '(iw-iw/zoom)/2'
                 y = '(ih-ih/zoom)/2'
             elif i % 3 == 1:
-                zoom = f'1.11-0.075*{progress}'
+                zoom = f'1.32-0.06*{progress}'
                 x = f'(iw-iw/zoom)*(0.30+0.40*{progress})'
                 y = '(ih-ih/zoom)/2'
             else:
-                zoom = f'1.04+0.075*{progress}'
+                zoom = f'1.14-0.09*{progress}'
                 x = '(iw-iw/zoom)/2'
                 y = f'(ih-ih/zoom)*(0.65-0.30*{progress})'
             vf = (f"zoompan=z='{zoom}':x='{x}':y='{y}':"
@@ -195,7 +199,7 @@ def render_video(images: list[Path], output: Path, music: Path | None = None, st
             for i in range(1,n):
                 label = f'[v{i}]'
                 offset = i * (clip_duration - fade)
-                transition = STYLES[style][(i - 1) % len(STYLES[style])]
+                transition = ('fade', 'fadeblack')[(i - 1) % 2] if single_story else STYLES[style][(i - 1) % len(STYLES[style])]
                 chains.append(f'{last}[{i}:v]xfade=transition={transition}:duration={fade:.4f}:offset={offset:.4f}{label}')
                 last = label
             cmd += ['-filter_complex',';'.join(chains),'-map',last,'-an','-c:v','libx264',
@@ -204,11 +208,11 @@ def render_video(images: list[Path], output: Path, music: Path | None = None, st
         if music:
             subprocess.run(['ffmpeg','-hide_banner','-loglevel','error','-y','-i',str(video),
                             '-stream_loop','-1','-i',str(music),'-map','0:v:0','-map','1:a:0',
-                            '-t',str(DURATION),'-c:v','copy','-c:a','aac','-b:a','128k',
+                            '-t',str(duration),'-c:v','copy','-c:a','aac','-b:a','128k',
                             '-movflags','+faststart',str(output)],check=True,timeout=180)
         else:
             subprocess.run(['ffmpeg','-hide_banner','-loglevel','error','-y','-i',str(video),
-                            '-t',str(DURATION),'-c','copy','-movflags','+faststart',str(output)],
+                            '-t',str(duration),'-c','copy','-movflags','+faststart',str(output)],
                            check=True,timeout=180)
 
 
