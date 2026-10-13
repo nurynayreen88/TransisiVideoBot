@@ -580,8 +580,16 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await query.message.reply_text('Langkah 1/4 — Hantar 1–5 gambar produk. Tekan Selesai apabila cukup.', reply_markup=photos_menu())
     elif action == 'prompt':
         reset(context)
+        context.user_data['stage'] = 'prompt_type'
+        await query.message.reply_text('✍️ HASILKAN PROMPT — Pilih jenis:', reply_markup=InlineKeyboardMarkup([
+            [InlineKeyboardButton('✨ Prompt Biasa', callback_data='prompt_type:normal')],
+            [InlineKeyboardButton('🎞️ Prompt Storyboard (6 Babak)', callback_data='prompt_type:storyboard')],
+            [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
+        ]))
+    elif action.startswith('prompt_type:') and stage == 'prompt_type':
+        context.user_data['prompt_mode'] = action.split(':', 1)[1]
         context.user_data['stage'] = 'prompt_photo'
-        await query.message.reply_text('✨ VIDEO AI — PROMPT + GAMBAR\n\nKLIPPO menyediakan prompt AI, bukan merender video AI secara terus. Upload satu gambar produk dahulu. Maklumat produk boleh ditambah kemudian, tetapi tidak wajib.')
+        await query.message.reply_text('📷 Hantar satu gambar produk. Maklumat tambahan boleh dimasukkan kemudian, tetapi tidak wajib.')
     elif action.startswith('prompt_details:') and stage == 'prompt_details_choice':
         if action == 'prompt_details:add':
             context.user_data['stage'] = 'prompt_details_text'
@@ -893,7 +901,7 @@ def main():
     app.add_handler(CommandHandler('jana', generate, block=False))
     for style in STYLES:
         app.add_handler(CommandHandler(style, choose_style))
-    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(photos_order|photos_undo|photos_more|photo_up:[0-4]|photo_down:[0-4]|photo_remove:[0-4]|duration:(10|15|20)|admin_pending|admin_approve:[0-9]+|admin_reject:[0-9]+|admin|receipt_upload|subscription_qr|make|storyboard|doodle:(auto|white|sparkle|motion|all|none)|convert|merge|merge_next|merge_done|merge_style:(fade|smoothleft|slideleft|zoomin)|prompt|prompt_details:(add|skip)|motion:(orbit|push|side|static)|photos_done|confirm|styles|music|music_previews|subscription|account|help|check|reset|home|preview:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|listen:(cinematic|energetic|happy|luxury|nature|beauty)|style:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|music:(auto|cinematic|energetic|happy|luxury|nature|beauty|none|custom))$'))
+    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(photos_order|photos_undo|photos_more|photo_up:[0-4]|photo_down:[0-4]|photo_remove:[0-4]|duration:(10|15|20)|admin_pending|admin_approve:[0-9]+|admin_reject:[0-9]+|admin|receipt_upload|subscription_qr|make|storyboard|doodle:(auto|white|sparkle|motion|all|none)|convert|merge|merge_next|merge_done|merge_style:(fade|smoothleft|slideleft|zoomin)|prompt|prompt_type:(normal|storyboard)|prompt_details:(add|skip)|motion:(orbit|push|side|static)|photos_done|confirm|styles|music|music_previews|subscription|account|help|check|reset|home|preview:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|listen:(cinematic|energetic|happy|luxury|nature|beauty)|style:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|music:(auto|cinematic|energetic|happy|luxury|nature|beauty|none|custom))$'))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, menu_text))
     app.add_handler(MessageHandler(filters.PHOTO, photo))
     app.add_handler(MessageHandler(filters.Document.IMAGE | filters.Document.MimeType('application/pdf'), receive_receipt))
