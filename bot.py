@@ -197,7 +197,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
     reset(context)
     await update.effective_message.reply_text('🏠 Menu Utama Klippo', reply_markup=home_keyboard())
-    await update.effective_message.reply_text('🎬 KLIPPO\nVideo Menarik, Semudah Klik.\n\nPilih fungsi di bawah:', reply_markup=main_menu())
+    await update.effective_message.reply_text('🎬 KLIPPO | Studio Video Affiliate\n\nHasilkan video produk daripada gambar, gabungkan klip mengikut susunan, tukar video kepada format MP4 menegak untuk affiliate, atau sediakan prompt video.\n\n✨ Apa yang boleh dibuat:\n• Jana Video — gambar produk menjadi video dengan pilihan gaya dan muzik.\n• Tukar Format — sediakan video untuk muat naik affiliate.\n• Gabung Video — cantum sehingga 5 klip dengan pilihan transisi.\n• Sediakan Prompt — bina arahan video produk yang lebih terperinci.\n\n💎 Langganan: Pelan Penyokong Awal RM5 / 30 hari (cadangan). Pembayaran dan VIP belum dibuka. Tekan Langganan untuk maklumat lanjut.\n\n👇 Pilih fungsi untuk bermula:', reply_markup=main_menu())
 
 
 async def photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
