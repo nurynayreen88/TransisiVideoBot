@@ -34,6 +34,18 @@ def build_prompt(mode, product, scene, motion, style='auto', duration=10):
         style_key, style_name, style_template = resolve(style)
         doodle = style_key == "white_doodle"
         hook = product_hook(product)
+        evidence_rules = (
+            "PRODUCT EVIDENCE PRIORITY: NAMA_PRODUK is the exact printed product name only if marked legible; "
+            "preserve its spelling, brand and model verbatim. TEKS_DISAHKAN and CIRI_BERTULIS are claims printed "
+            "on packaging, NOT independently proven benefits: attribute them to the label if used. "
+            "CIRI_VISUAL lists only features directly visible in the image. "
+            "Do not replace precise visible product details with generic marketing adjectives. "
+            "Use a feature callout only if it can be traced to a specific CIRI_VISUAL, a legible CIRI_BERTULIS, "
+            "or explicit user-provided information consistent with the photo. "
+            "If evidence is missing or uncertain, omit that callout entirely; never fill a slot with a guessed feature. "
+            "Never reconstruct blurry letters or invent an exact model number. "
+        )
+
         hook_direction = (
             "ON-SCREEN HOOK (VERIFIED CATEGORY ONLY): Display EXACTLY '" + hook + "' at the top safe area "
             "in the opening 0-2s. This wording identifies the product only and makes no unsupported benefit claim. "
@@ -89,7 +101,7 @@ def build_prompt(mode, product, scene, motion, style='auto', duration=10):
             "STYLE FROM KLIPPO CATALOG: " + style_template + "\n\n"
             "SETTING: " + scene + "\n"
             "CAMERA: " + camera + " Stay reference-facing; never invent unseen sides.\n\n"
-            + hook_direction + "\n\n" + rules + "\n\n"
+            + evidence_rules + "\n\n" + hook_direction + "\n\n" + rules + "\n\n"
             "CONTINUITY: Preserve exact shape, color, visible logo and count across the entire video. "
             "Use soft physically believable lighting and stable background. "
             "Do not morph the object, invent accessories or cover its visible branding. "
