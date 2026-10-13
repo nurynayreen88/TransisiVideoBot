@@ -282,12 +282,13 @@ async def admin(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if context.user_data.get('busy'):
-        await update.effective_message.reply_text('⏳ Video masih diproses. Menu utama boleh digunakan sementara menunggu.', reply_markup=main_menu(update.effective_user.id))
-        return
-    reset(context)
-    await update.effective_message.reply_text('🏠 Menu Utama Klippo', reply_markup=home_keyboard())
-    await update.effective_message.reply_text('🎬 KLIPPO | Studio Video Affiliate\n\nHasilkan video produk daripada gambar, gabungkan klip mengikut susunan, tukar video kepada format MP4 menegak untuk affiliate, atau sediakan prompt video.\n\n✨ Apa yang boleh dibuat:\n• Jana Video Transisi — jana MP4 daripada gambar, gaya dan muzik.\n• Tukar Format — sediakan video untuk muat naik affiliate.\n• Gabung Video — cantum sehingga 5 klip dengan pilihan transisi.\n• Hasilkan Prompt — pilih Prompt Biasa atau Prompt Storyboard. Gemini membaca gambar jika tersedia; penjanaan video AI dibuat di platform luar.\n\n💎 Langganan: Pelan Penyokong Awal RM5 / 30 hari. Bayar melalui QR DuitNow dan upload resit untuk semakan manual. Pengaktifan bukan automatik.\n\n👇 Pilih fungsi untuk bermula:', reply_markup=main_menu(update.effective_user.id))
+    """Always show the main menu with a single Telegram API message."""
+    if not context.user_data.get('busy'):
+        reset(context)
+    await update.effective_message.reply_text(
+        '🏠 KLIPPO | Menu Utama\\n\\nPilih fungsi di bawah:',
+        reply_markup=main_menu(update.effective_user.id)
+    )
 
 
 async def account_info(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -558,7 +559,9 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await query.answer()
     action = query.data
     if action == 'home':
-        await query.message.reply_text('🏠 Menu Utama Klippo', reply_markup=main_menu(update.effective_user.id))
+        if not context.user_data.get('busy'):
+            reset(context)
+        await query.message.reply_text('🏠 KLIPPO | Menu Utama\\n\\nPilih fungsi di bawah:', reply_markup=main_menu(update.effective_user.id))
         return
     if context.user_data.get('busy'):
         await query.message.reply_text('Video sedang diproses. Sila tunggu.')
@@ -837,7 +840,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
     stage = context.user_data.get('stage')
     value = update.message.text.strip()
-    if value == '🏠 Menu Utama':
+    if value in ('🏠 Menu Utama', 'Menu Utama', 'menu', 'MENU', '/menu'):
         await start(update, context)
         return
     shortcuts = {
@@ -964,6 +967,7 @@ def main():
         raise RuntimeError('FFmpeg belum dipasang')
     app = Application.builder().token(TOKEN).build()
     app.add_handler(CommandHandler('start', start))
+    app.add_handler(CommandHandler('menu', start))
     app.add_handler(CommandHandler('admin', admin))
     app.add_handler(CommandHandler('reset', start))
     app.add_handler(CommandHandler('periksa', status))
