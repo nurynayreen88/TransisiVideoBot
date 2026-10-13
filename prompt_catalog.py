@@ -1,5 +1,7 @@
 """Versioned, additive local SQLite catalog of storyboard prompt styles."""
 import os
+import hashlib
+import re
 import random
 import sqlite3
 from pathlib import Path
@@ -45,3 +47,44 @@ def resolve(key):
         if row is None:
             raise ValueError("Unknown storyboard style")
         return row
+
+# Keyword-to-hook mappings are deterministic templates, not an additional AI request.
+HOOKS = {
+    "lampu": (("lampu", "light", "lighting", "lantern"), ("SUDUT INI NAMPAK BERBEZA!", "TENGOK REKAAN LAMPU INI!")),
+    "beg": (("beg", "bag", "handbag", "backpack", "purse"), ("DETAIL BEG INI MENARIK!", "JOM TENGOK BEG INI!")),
+    "kasut": (("kasut", "shoe", "sneaker", "sandal"), ("TENGOK GAYA KASUT INI!", "DETAIL KASUT INI MENARIK!")),
+    "botol": (("botol", "bottle", "tumbler", "flask"), ("BOTOL INI CURI PERHATIAN!", "TENGOK REKAAN BOTOL INI!")),
+    "jam": (("jam", "watch", "clock"), ("DETAIL JAM INI MENARIK!", "JOM TENGOK JAM INI!")),
+    "kerusi": (("kerusi", "chair", "sofa"), ("TENGOK REKAAN INI!", "SUDUT RUANG NAMPAK BERBEZA!")),
+    "meja": (("meja", "table", "desk"), ("JOM TENGOK REKAAN MEJA!", "DETAIL MEJA INI MENARIK!")),
+    "telefon": (("telefon", "phone", "smartphone"), ("TENGOK AKSESORI INI!", "DETAIL PRODUK INI MENARIK!")),
+    "kipas": (("kipas", "fan"), ("TENGOK REKAAN KIPAS INI!", "DETAIL KIPAS INI MENARIK!")),
+    "katil": (("katil", "mattress", "bed"), ("TENGOK REKAAN INI!", "IDEA UNTUK RUANG ANDA!")),
+    "pakaian": (("baju", "shirt", "dress", "clothing", "jacket"), ("DETAIL PAKAIAN INI MENARIK!", "JOM TENGOK GAYA INI!")),
+    "alat_dapur": (("dapur", "kitchen", "pan", "pot", "blender"), ("JOM TENGOK ITEM DAPUR INI!", "DETAIL PRODUK DAPUR INI!")),
+}
+HOOK_SCHEMA = """CREATE TABLE IF NOT EXISTS storyboard_hooks (
+    category TEXT PRIMARY KEY, keywords TEXT NOT NULL, hooks TEXT NOT NULL,
+    version INTEGER NOT NULL DEFAULT 1, active INTEGER NOT NULL DEFAULT 1
+)"""
+
+def product_hook(description):
+    import json
+    with connect() as db:
+        db.execute(HOOK_SCHEMA)
+        db.executemany(
+            "INSERT OR IGNORE INTO storyboard_hooks(category, keywords, hooks) VALUES (?, ?, ?)",
+            [(category, json.dumps(keywords), json.dumps(hooks)) for category, (keywords, hooks) in HOOKS.items()]
+        )
+        db.commit()
+        rows = db.execute("SELECT keywords, hooks FROM storyboard_hooks WHERE active=1 ORDER BY rowid").fetchall()
+    words = set(re.findall(r"[a-zA-ZÀ-ÿ]+", (description or "").lower()))
+    options = None
+    for keywords, hooks in rows:
+        if words.intersection(json.loads(keywords)):
+            options = json.loads(hooks)
+            break
+    if not options:
+        options = ["TENGOK DETAIL PRODUK INI!", "REKAAN INI CURI PERHATIAN!", "JOM LIHAT LEBIH DEKAT!"]
+    digest = hashlib.sha256((description or "").encode("utf-8")).digest()
+    return options[int.from_bytes(digest[:4], "big") % len(options)]
