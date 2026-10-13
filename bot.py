@@ -291,13 +291,14 @@ async def convert_upload(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await update.message.reply_text('Maksimum 5 video. Tekan Selesai.')
             return
         clips.append(item.file_id)
-        context.user_data['stage'] = 'merge_wait_next'
         rows = []
-        if len(clips) < 5:
-            rows.append([InlineKeyboardButton(f'➕ Hantar Video {len(clips) + 1}', callback_data='merge_next')])
         if len(clips) >= 2:
             rows.append([InlineKeyboardButton('✅ Selesai & Pilih Transisi', callback_data='merge_done')])
-        await update.message.reply_text(f'✅ Video {len(clips)} diterima dan disimpan sebagai urutan #{len(clips)}. Pilih langkah seterusnya.', reply_markup=InlineKeyboardMarkup(rows))
+        if len(clips) < 5:
+            message = f'✅ Video {len(clips)} diterima (urutan #{len(clips)}).\\n\\n📤 Terus hantar Video {len(clips) + 1} sebagai File / Document.'
+        else:
+            message = '✅ Video 5 diterima. Maksimum 5 video. Tekan Selesai untuk pilih transisi.'
+        await update.message.reply_text(message, reply_markup=InlineKeyboardMarkup(rows) if rows else None)
         return
     if context.user_data.get('stage') != 'convert':
         await update.message.reply_text('Tekan Tukar Video dahulu.', reply_markup=main_menu())
@@ -417,9 +418,9 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         reset(context)
         context.user_data['stage'] = 'merge_upload'
         context.user_data['merge_files'] = []
-        await query.message.reply_text('🎞️ Hantar Video 1 dahulu sebagai MP4. Selepas diterima, tekan Hantar Video 2 dan seterusnya. Maksimum 5 video, 19 MB dan 20 saat setiap klip. Audio asal dikekalkan.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('✅ Selesai', callback_data='merge_done')], [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
+        await query.message.reply_text('🎞️ Hantar Video 1 dahulu sebagai MP4. Selepas diterima, terus hantar Video 2, 3 dan seterusnya tanpa menekan butang tambahan. Maksimum 5 video, 19 MB dan 20 saat setiap klip. Audio asal dikekalkan.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('✅ Selesai', callback_data='merge_done')], [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
     elif action == 'merge_next':
-        if stage != 'merge_wait_next':
+        if stage not in ('merge_wait_next', 'merge_upload'):
             await query.message.reply_text('Sila mulakan Gabung Video dahulu.')
             return
         context.user_data['stage'] = 'merge_upload'
