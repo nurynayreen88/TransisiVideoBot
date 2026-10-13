@@ -10,6 +10,7 @@ from pathlib import Path
 from PIL import Image, ImageOps
 from video_merge import merge_videos
 from fusion_animation import fusion_gif
+import klippo_db
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler, ContextTypes, MessageHandler, filters
 
@@ -194,7 +195,17 @@ async def admin(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not is_admin(update.effective_user.id):
         await update.effective_message.reply_text('Akses tidak dibenarkan.')
         return
-    await update.effective_message.reply_text('🛡️ KLIPPO ADMIN\\n\\n🎞️ Gabung Video: Aktif\\n🎬 Jana Video: Aktif\\n🔄 Tukar Format: Aktif\\n💎 Langganan: Belum aktif')
+    if not klippo_db.configured():
+        await update.effective_message.reply_text('🛡️ KLIPPO ADMIN\\n\\n⚠️ Sambungan Supabase belum ditetapkan di Render.')
+        return
+    try:
+        pending = await asyncio.to_thread(klippo_db.pending_receipts)
+        await update.effective_message.reply_text(
+            f'🛡️ KLIPPO ADMIN\\n\\n🧾 Resit menunggu: {len(pending)} (10 terawal dipaparkan)\\n💎 Kelulusan langganan: Manual',
+            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('🧾 Semak Resit', callback_data='admin_pending')], [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
+    except Exception:
+        logging.exception('Admin Supabase error')
+        await update.effective_message.reply_text('⚠️ Gagal menghubungi database. Semak konfigurasi Supabase di Render.')
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -204,6 +215,20 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     reset(context)
     await update.effective_message.reply_text('🏠 Menu Utama Klippo', reply_markup=home_keyboard())
     await update.effective_message.reply_text('🎬 KLIPPO | Studio Video Affiliate\n\nHasilkan video produk daripada gambar, gabungkan klip mengikut susunan, tukar video kepada format MP4 menegak untuk affiliate, atau sediakan prompt video.\n\n✨ Apa yang boleh dibuat:\n• Jana Video — gambar produk menjadi video dengan pilihan gaya dan muzik.\n• Tukar Format — sediakan video untuk muat naik affiliate.\n• Gabung Video — cantum sehingga 5 klip dengan pilihan transisi.\n• Sediakan Prompt — bina arahan video produk yang lebih terperinci.\n\n💎 Langganan: Pelan Penyokong Awal RM5 / 30 hari. Bayar melalui QR DuitNow dan upload resit untuk semakan manual. Pengaktifan bukan automatik.\n\n👇 Pilih fungsi untuk bermula:', reply_markup=main_menu(update.effective_user.id))
+
+
+async def account_info(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    user_id = update.effective_user.id
+    if not klippo_db.configured():
+        await update.effective_message.reply_text(f'👤 AKAUN SAYA\\n\\nID Telegram: {user_id}\\nStatus langganan belum dapat disemak.')
+        return
+    try:
+        data = await asyncio.to_thread(klippo_db.subscription, user_id)
+        status = 'Tiada langganan' if not data else f"{data['status']} (tamat: {data.get('expires_at') or '-'})"
+        await update.effective_message.reply_text(f'👤 AKAUN SAYA\\n\\nID Telegram: {user_id}\\nLangganan: {status}')
+    except Exception:
+        logging.exception('Account lookup failed')
+        await update.effective_message.reply_text('⚠️ Status langganan tidak dapat disemak sekarang.')
 
 
 async def receive_receipt(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -218,12 +243,23 @@ async def receive_receipt(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if (item.file_size or 0) > 10 * 1024 * 1024:
         await update.message.reply_text('Resit terlalu besar. Maksimum 10 MB.')
         return
+    if not klippo_db.configured():
+        await update.message.reply_text('⚠️ Sistem resit belum tersedia. Sila cuba selepas konfigurasi selesai.')
+        return
+    try:
+        receipt = await asyncio.to_thread(klippo_db.submit_receipt,
+            update.effective_user.id, update.effective_user.full_name,
+            item.file_id, 'photo' if update.message.photo else 'document')
+    except Exception:
+        logging.exception('Could not save receipt')
+        await update.message.reply_text('⚠️ Resit belum berjaya direkodkan. Sila cuba semula.')
+        return
     admins = [x.strip() for x in os.environ.get('ADMIN_USER_IDS', '37141287').split(',') if x.strip().isdigit()]
     delivered = False
     for admin_id in admins:
         try:
             await context.bot.send_message(chat_id=int(admin_id), text=(
-                f'🧾 RESIT LANGGANAN KLIPPO\n'
+                f'🧾 RESIT LANGGANAN KLIPPO #{receipt["id"]}\n'
                 f'Pengguna: {update.effective_user.full_name}\n'
                 f'ID Telegram: {update.effective_user.id}\n'
                 'Status: Menunggu semakan manual. Jangan aktifkan tanpa mengesahkan transaksi.'
@@ -236,7 +272,8 @@ async def receive_receipt(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data['stage'] = None
         await update.message.reply_text('✅ Resit diterima dan dihantar kepada admin untuk semakan. Langganan belum aktif sehingga disahkan.', reply_markup=main_menu())
     else:
-        await update.message.reply_text('⚠️ Resit belum berjaya dihantar kepada admin. Sila cuba semula sebentar lagi.')
+        context.user_data['stage'] = None
+        await update.message.reply_text(f'🧾 Resit #{receipt["id"]} direkodkan dan menunggu semakan. Admin belum dapat menerima salinan di Telegram; sila hubungi admin.', reply_markup=main_menu())
 
 
 async def photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -437,7 +474,42 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await query.message.reply_text('Video sedang diproses. Sila tunggu.')
         return
     stage = context.user_data.get('stage', 'home')
-    if action == 'admin':
+    if action == 'admin_pending':
+        if not is_admin(update.effective_user.id):
+            await query.message.reply_text('Akses tidak dibenarkan.')
+            return
+        try:
+            pending = await asyncio.to_thread(klippo_db.pending_receipts)
+            if not pending:
+                await query.message.reply_text('Tiada resit menunggu.')
+            for receipt in pending:
+                rid = receipt['id']
+                await query.message.reply_text(
+                    f"🧾 Resit #{rid}\nPengguna: {receipt.get('telegram_name') or '-'}\nID: {receipt['telegram_user_id']}\nSila semak resit yang dihantar ke chat admin dan pastikan bayaran diterima sebelum meluluskan.",
+                    reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('✅ Lulus', callback_data=f'admin_approve:{rid}'), InlineKeyboardButton('❌ Tolak', callback_data=f'admin_reject:{rid}')]]))
+        except Exception:
+            logging.exception('Pending receipt lookup failed')
+            await query.message.reply_text('Gagal mendapatkan resit. Semak sambungan database.')
+    elif action.startswith(('admin_approve:', 'admin_reject:')):
+        if not is_admin(update.effective_user.id):
+            await query.message.reply_text('Akses tidak dibenarkan.')
+            return
+        approve = action.startswith('admin_approve:')
+        rid = int(action.split(':', 1)[1])
+        try:
+            result = await asyncio.to_thread(klippo_db.review, rid, update.effective_user.id, approve)
+            await query.edit_message_reply_markup(reply_markup=None)
+            await query.message.reply_text(f"Resit #{rid}: {'Diluluskan' if approve else 'Ditolak'}.")
+            try:
+                await context.bot.send_message(chat_id=result['user_id'], text=(
+                    f"✅ Bayaran disahkan. Langganan Klippo aktif sehingga {result['expiry']}." if approve
+                    else '❌ Resit tidak diluluskan. Sila hubungi admin jika pembayaran telah berjaya.'))
+            except Exception:
+                logging.exception('Could not notify subscriber')
+        except Exception:
+            logging.exception('Receipt review failed')
+            await query.message.reply_text('Gagal memproses resit. Mungkin sudah disemak atau sambungan database bermasalah.')
+    elif action == 'admin':
         await admin(update, context)
     elif action == 'make':
         reset(context)
@@ -561,7 +633,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data['stage'] = 'receipt_upload'
         await query.message.reply_text('📎 Sila upload gambar atau fail resit pembayaran di sini. Resit akan dihantar kepada admin untuk semakan manual.')
     elif action == 'account':
-        await query.message.reply_text(f'👤 AKAUN SAYA\n\nID Telegram: {query.from_user.id}\nStatus: Akses percubaan (langganan belum diaktifkan).', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📋 Semak Bahan', callback_data='check'), InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
+        await account_info(update, context)
     elif action == 'help':
         await query.message.reply_text('❓ CARA GUNA\n\n1. Tekan Jana Video.\n2. Hantar 1–5 gambar, kemudian tekan Selesai.\n3. Lihat contoh dan pilih gaya.\n4. Dengar contoh dan pilih muzik.\n5. Tekan Hasilkan Video.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
     elif action == 'check':
@@ -606,7 +678,7 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
         elif action == 'subscription':
             await update.message.reply_text('💎 LANGGANAN KLIPPO\n\nPelan Penyokong Awal: RM5 / 30 hari, sehingga 30 video sebulan. Pengaktifan manual selepas resit disemak.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📱 Papar QR DuitNow', callback_data='subscription_qr')]]))
         elif action == 'account':
-            await update.message.reply_text(f'👤 AKAUN SAYA\n\nID Telegram: {update.effective_user.id}\nLangganan belum diaktifkan.')
+            await account_info(update, context)
         elif action == 'help':
             await update.message.reply_text('❓ BANTUAN\n\nJana Video: hantar gambar, pilih gaya dan muzik.\nTukar Format: hantar MP4.\nPrompt: terangkan produk dan pilih gerakan kamera.')
         else:
@@ -698,7 +770,7 @@ def main():
     app.add_handler(CommandHandler('jana', generate, block=False))
     for style in STYLES:
         app.add_handler(CommandHandler(style, choose_style))
-    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(admin|receipt_upload|subscription_qr|make|convert|merge|merge_next|merge_done|merge_style:(fade|smoothleft|slideleft|zoomin)|prompt|motion:(orbit|push|side|static)|photos_done|confirm|styles|music|music_previews|subscription|account|help|check|reset|home|preview:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|listen:(cinematic|energetic|happy|luxury|nature|beauty)|style:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|music:(auto|cinematic|energetic|happy|luxury|nature|beauty|none|custom))$'))
+    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(admin_pending|admin_approve:[0-9]+|admin_reject:[0-9]+|admin|receipt_upload|subscription_qr|make|convert|merge|merge_next|merge_done|merge_style:(fade|smoothleft|slideleft|zoomin)|prompt|motion:(orbit|push|side|static)|photos_done|confirm|styles|music|music_previews|subscription|account|help|check|reset|home|preview:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|listen:(cinematic|energetic|happy|luxury|nature|beauty)|style:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|music:(auto|cinematic|energetic|happy|luxury|nature|beauty|none|custom))$'))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, menu_text))
     app.add_handler(MessageHandler(filters.PHOTO, photo))
     app.add_handler(MessageHandler(filters.Document.IMAGE | filters.Document.MimeType('application/pdf'), receive_receipt))
