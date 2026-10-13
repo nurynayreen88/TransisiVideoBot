@@ -200,9 +200,45 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.effective_message.reply_text('🎬 KLIPPO | Studio Video Affiliate\n\nHasilkan video produk daripada gambar, gabungkan klip mengikut susunan, tukar video kepada format MP4 menegak untuk affiliate, atau sediakan prompt video.\n\n✨ Apa yang boleh dibuat:\n• Jana Video — gambar produk menjadi video dengan pilihan gaya dan muzik.\n• Tukar Format — sediakan video untuk muat naik affiliate.\n• Gabung Video — cantum sehingga 5 klip dengan pilihan transisi.\n• Sediakan Prompt — bina arahan video produk yang lebih terperinci.\n\n💎 Langganan: Pelan Penyokong Awal RM5 / 30 hari (cadangan). Pembayaran dan VIP belum dibuka. Tekan Langganan untuk maklumat lanjut.\n\n👇 Pilih fungsi untuk bermula:', reply_markup=main_menu())
 
 
+async def receive_receipt(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if context.user_data.get('stage') != 'receipt_upload':
+        return
+    item = update.message.photo[-1] if update.message.photo else update.message.document
+    if not item or (update.message.document and not (
+        (item.mime_type or '').startswith('image/') or item.mime_type == 'application/pdf'
+    )):
+        await update.message.reply_text('Sila hantar gambar atau fail PDF resit.')
+        return
+    if (item.file_size or 0) > 10 * 1024 * 1024:
+        await update.message.reply_text('Resit terlalu besar. Maksimum 10 MB.')
+        return
+    admins = [x.strip() for x in os.environ.get('ADMIN_USER_IDS', '37141287').split(',') if x.strip().isdigit()]
+    delivered = False
+    for admin_id in admins:
+        try:
+            await context.bot.send_message(chat_id=int(admin_id), text=(
+                f'🧾 RESIT LANGGANAN KLIPPO\n'
+                f'Pengguna: {update.effective_user.full_name}\n'
+                f'ID Telegram: {update.effective_user.id}\n'
+                'Status: Menunggu semakan manual. Jangan aktifkan tanpa mengesahkan transaksi.'
+            ))
+            await update.message.forward(chat_id=int(admin_id))
+            delivered = True
+        except Exception:
+            logging.exception('Could not deliver subscription receipt to admin %s', admin_id)
+    if delivered:
+        context.user_data['stage'] = None
+        await update.message.reply_text('✅ Resit diterima dan dihantar kepada admin untuk semakan. Langganan belum aktif sehingga disahkan.', reply_markup=main_menu())
+    else:
+        await update.message.reply_text('⚠️ Resit belum berjaya dihantar kepada admin. Sila cuba semula sebentar lagi.')
+
+
 async def photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if context.user_data.get('busy'):
         await update.message.reply_text('Video sedang diproses. Sila tunggu.')
+        return
+    if context.user_data.get('stage') == 'receipt_upload':
+        await receive_receipt(update, context)
         return
     if context.user_data.get('stage') != 'photos':
         await update.message.reply_text('Tekan 🎬 Jana Video dahulu.', reply_markup=main_menu())
@@ -278,6 +314,9 @@ def convert_shopee(source: Path, destination: Path):
 
 
 async def convert_upload(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if context.user_data.get('stage') == 'receipt_upload':
+        await receive_receipt(update, context)
+        return
     if context.user_data.get('stage') == 'merge_upload':
         item = update.message.video or update.message.document
         if not item or (update.message.document and item.mime_type != 'video/mp4'):
@@ -502,14 +541,17 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif action == 'confirm' and stage == 'confirm':
         await generate(update, context)
     elif action == 'subscription':
-        await query.message.reply_text('💎 LANGGANAN KLIPPO\n\nPelan Penyokong Awal: RM5 / 30 hari, sehingga 30 video sebulan.\n\nBayaran melalui DuitNow QR. Pengaktifan akaun dibuat secara manual selepas resit disemak; bayaran tidak mengaktifkan VIP secara automatik.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📱 Papar QR DuitNow', callback_data='subscription_qr')], [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
+        await query.message.reply_text('💎 LANGGANAN KLIPPO\n\nPelan Penyokong Awal: RM5 / 30 hari, sehingga 30 video sebulan.\n\nBayaran melalui DuitNow QR. Pengaktifan akaun dibuat secara manual selepas resit disemak; bayaran tidak mengaktifkan VIP secara automatik.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📱 Papar QR DuitNow', callback_data='subscription_qr')], [InlineKeyboardButton('📎 Upload Resit', callback_data='receipt_upload')], [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
     elif action == 'subscription_qr':
         qr_path = Path(__file__).resolve().parent / 'klippo_qr.jpg'
         if not qr_path.is_file():
             await query.message.reply_text('QR pembayaran belum tersedia. Sila cuba lagi kemudian.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
         else:
             with qr_path.open('rb') as qr_file:
-                await query.message.reply_photo(photo=qr_file, caption='💎 KLIPPO — DuitNow QR\n\nPelan Penyokong Awal: RM5 / 30 hari (sehingga 30 video sebulan).\n\nSimpan resit pembayaran untuk semakan admin. Pengaktifan adalah manual, bukan automatik.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
+                await query.message.reply_photo(photo=qr_file, caption='💎 KLIPPO — DuitNow QR\n\nPelan Penyokong Awal: RM5 / 30 hari (sehingga 30 video sebulan).\n\nTekan 📎 Upload Resit selepas pembayaran. Pengaktifan adalah manual selepas semakan.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📎 Upload Resit', callback_data='receipt_upload')], [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
+    elif action == 'receipt_upload':
+        context.user_data['stage'] = 'receipt_upload'
+        await query.message.reply_text('📎 Sila upload gambar atau fail resit pembayaran di sini. Resit akan dihantar kepada admin untuk semakan manual.')
     elif action == 'account':
         await query.message.reply_text(f'👤 AKAUN SAYA\n\nID Telegram: {query.from_user.id}\nStatus: Akses percubaan (langganan belum diaktifkan).', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📋 Semak Bahan', callback_data='check'), InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
     elif action == 'help':
@@ -648,9 +690,10 @@ def main():
     app.add_handler(CommandHandler('jana', generate, block=False))
     for style in STYLES:
         app.add_handler(CommandHandler(style, choose_style))
-    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(subscription_qr|make|convert|merge|merge_next|merge_done|merge_style:(fade|smoothleft|slideleft|zoomin)|prompt|motion:(orbit|push|side|static)|photos_done|confirm|styles|music|music_previews|subscription|account|help|check|reset|home|preview:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|listen:(cinematic|energetic|happy|luxury|nature|beauty)|style:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|music:(auto|cinematic|energetic|happy|luxury|nature|beauty|none|custom))$'))
+    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(receipt_upload|subscription_qr|make|convert|merge|merge_next|merge_done|merge_style:(fade|smoothleft|slideleft|zoomin)|prompt|motion:(orbit|push|side|static)|photos_done|confirm|styles|music|music_previews|subscription|account|help|check|reset|home|preview:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|listen:(cinematic|energetic|happy|luxury|nature|beauty)|style:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|music:(auto|cinematic|energetic|happy|luxury|nature|beauty|none|custom))$'))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, menu_text))
     app.add_handler(MessageHandler(filters.PHOTO, photo))
+    app.add_handler(MessageHandler(filters.Document.IMAGE | filters.Document.MimeType('application/pdf'), receive_receipt))
     app.add_handler(MessageHandler(filters.VIDEO | filters.Document.MimeType('video/mp4'), convert_upload))
     app.add_handler(MessageHandler(filters.AUDIO | filters.Document.MimeType('audio/mpeg'), audio))
     url = os.environ.get('WEBHOOK_URL', '').rstrip('/')
