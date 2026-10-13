@@ -724,19 +724,12 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         motion = action.split(':', 1)[1]
         motions = {'orbit': 'A controlled 30-degree camera arc around the product, not a full 360-degree rotation; preserve the visible product geometry.', 'push': 'A slow forward dolly-in with gentle parallax; no object deformation.', 'side': 'A smooth left-to-right camera slide with stable product proportions.', 'static': 'A locked camera with subtle studio lighting changes only.'}
         if motion in motions:
-            waiting = None
-            try:
-                waiting = await query.message.reply_animation(
-                    animation=prompt_wait_animation(),
-                    caption='⏳ DALAM PROSES — 0% | Menyusun prompt...'
-                )
-            except Exception:
-                waiting = await query.message.reply_text('⏳ DALAM PROSES — 0%\\nMenyusun prompt...')
+            waiting = await query.message.reply_text('⏳ DALAM PROSES — 0%\\nMenyusun prompt...')
             try:
                 product = ('the product in the uploaded reference image. Visible observations (verify against reference image): ' + context.user_data.get('prompt_vision', '') + '. Optional user details: ' + context.user_data.get('prompt_product', ''))
                 scene = context.user_data.get('prompt_scene', 'clean studio background')
                 prompt = build_prompt(context.user_data.get('prompt_mode', 'normal'), product, scene, motion, context.user_data.get('prompt_style', 'auto'), context.user_data.get('prompt_duration', 10))
-                await progress_update(waiting, 70, 'Prompt siap disusun. Menghantar hasil...') if waiting and not waiting.animation else None
+                await progress_update(waiting, 70, 'Prompt siap disusun. Menghantar hasil...')
                 context.user_data['stage'] = 'prompt_done'
                 mode_name = context.user_data.get('prompt_mode', 'normal')
                 actions = InlineKeyboardMarkup([
@@ -762,6 +755,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                             reply_markup=actions
                         )
 
+                await progress_update(waiting, 100, 'Prompt berjaya dihantar.')
             finally:
                 if waiting is not None:
                     try:
