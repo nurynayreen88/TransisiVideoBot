@@ -9,7 +9,17 @@ CAMERAS = {
 }
 
 def build_prompt(mode, product, scene, motion, style='auto', duration=10):
-    duration = 20 if duration == 20 else 10
+    if duration == 20:
+        # Resolve Auto/Random once so both clips use exactly the same style.
+        chosen_style = resolve(style)[0] if mode == 'storyboard' else style
+        first = _build_single_prompt(mode, product, scene, motion, chosen_style, part=1)
+        second = _build_single_prompt(mode, product, scene, motion, chosen_style, part=2)
+        return first + "\\n\\n=== KLIPPO PART 2 ===\\n\\n" + second
+    return _build_single_prompt(mode, product, scene, motion, style, part=0)
+
+
+def _build_single_prompt(mode, product, scene, motion, style='auto', part=0):
+    duration = 10
     camera = CAMERAS.get(motion, CAMERAS["push"])
     identity = (
         "REFERENCE LOCK: Treat the uploaded photograph as the sole visual source of truth. "
@@ -58,22 +68,22 @@ def build_prompt(mode, product, scene, motion, style='auto', duration=10):
             "Never guess a category, benefit, price, popularity or product name."
         )
         if doodle:
-            if duration == 10:
+            if part == 2:
                 rules = (
-                    "WHITE DOODLE 10s: 0-2s close-up with verified category hook IF AVAILABLE and two white sparkles; "
-                    "2-4s full product reveal with ONE truthful short feature callout, small white icon and curved leader arrow "
-                    "to a genuinely visible detail; 4-7s progressively draw a thin white dashed contour JUST OUTSIDE the "
-                    "ACTUAL PRODUCT silhouette, following its left, top, right and bottom edges, NOT the frame; "
-                    "hold completed contour for at least 1 second; 7-10s dotted accent, clean product hero, gentle doodle fade. "
+                    "SECOND CLIP 10s: 0-2s resume from the exact final full-product framing of Part 1; "
+                    "2-6s progressively draw a thin white dashed contour just OUTSIDE the actual product silhouette, "
+                    "following its visible left, top, right and bottom edges; hold completed outline at least 2 seconds. "
+                    "6-8s add one small white dotted arrow or sparkle beside a genuinely visible detail; "
+                    "8-10s clean full-product hero packshot, gracefully fade the doodle. Do NOT repeat the opening hook. "
                 )
             else:
                 rules = (
-                    "WHITE DOODLE 20s: 0-3s close-up with verified category hook IF AVAILABLE and white sparkles; "
-                    "3-7s full product reveal with up to TWO truthful concise feature callouts, tiny outlined icons "
-                    "and curved leader arrows to genuinely visible details; 7-11s detail shot with dotted trail; "
-                    "11-16s progressively draw a thin white dashed contour JUST OUTSIDE the ACTUAL PRODUCT silhouette "
-                    "following left, top, right and bottom edges, NOT the frame, hold at least 2 seconds; "
-                    "16-20s clean full-product packshot, restrained white swoosh and graceful doodle fade. "
+                    "FIRST CLIP 10s: 0-2s close-up with verified product-name/category hook IF AVAILABLE and white sparkles; "
+                    "2-5s full product reveal with up to TWO short factual feature labels only when grounded in visible "
+                    "or legible packaging evidence, with tiny white icons and curved arrows; "
+                    "5-8s detail shot with small dotted flourish; "
+                    "8-10s settle into a steady full-product composition and HOLD the final frame for a seamless Part 2 handoff. "
+                    "Do not perform the main surrounding contour yet. "
                 )
             rules += (
                 "Warm authentic UGC product-ad look, thin white handwritten 2D graphics tracked to the product. "
@@ -81,27 +91,28 @@ def build_prompt(mode, product, scene, motion, style='auto', duration=10):
                 "short feature labels may appear; reserve space for editing overlays if text rendering is unreliable. "
                 "Prioritize the visible surrounding product contour over camera movement."
             )
-        elif duration == 10:
+        elif part == 2:
             rules = (
-                "STORYBOARD 10s: 0-2s product-specific Malay hook; 2-4s full-product reveal; "
-                "4-7s one genuinely visible detail and tasteful style-specific emphasis; "
-                "7-10s stable full-product hero closing. Coherent setting and gentle transitions."
+                "SECOND CLIP 10s: 0-2s continue the exact full-product frame held at the end of Part 1; "
+                "2-5s emphasize a second genuinely visible detail without inventing an angle; "
+                "5-8s elegant style-specific visual emphasis; 8-10s full-product hero closing and fade. "
+                "Do NOT repeat the opening hook."
             )
         else:
             rules = (
-                "STORYBOARD 20s: 0-3s verified category hook IF AVAILABLE; 3-7s full-product reveal; "
-                "7-11s one genuinely visible detail; 11-15s complementary reference-safe composition "
-                "and style-specific emphasis; 15-20s stable full-product hero closing and gentle fade. "
-                "No invented product angles or claims."
+                "FIRST CLIP 10s: 0-2s verified product-name/category hook IF AVAILABLE; "
+                "2-5s full-product reveal; 5-8s one genuinely visible detail; "
+                "8-10s settle into a stable full-product frame and HOLD for a seamless Part 2 handoff. "
+                "No closing fade in Part 1."
             )
         return (
-            "KLIPPO | STORYBOARD | " + style_name + "\n"
+            "KLIPPO | STORYBOARD | " + style_name + (" | BAHAGIAN " + str(part) + "/2" if part else "") + "\n"
             "OUTPUT: One cohesive vertical 9:16 product advertisement, EXACT DURATION: " + str(duration) + " seconds.\n\n"
             "PRODUCT REFERENCE: " + product + "\n\n" + identity + "\n\n"
             "STYLE FROM KLIPPO CATALOG: " + style_template + "\n\n"
             "SETTING: " + scene + "\n"
             "CAMERA: " + camera + " Stay reference-facing; never invent unseen sides.\n\n"
-            + evidence_rules + "\n\n" + hook_direction + "\n\n" + rules + "\n\n"
+            + evidence_rules + "\n\n" + (hook_direction if part != 2 else "NO REPEATED OPENING HOOK in Part 2.") + "\n\n" + rules + "\n\n"
             "CONTINUITY: Preserve exact shape, color, visible logo and count across the entire video. "
             "Use soft physically believable lighting and stable background. "
             "Do not morph the object, invent accessories or cover its visible branding. "
@@ -155,8 +166,17 @@ def build_prompt(mode, product, scene, motion, style='auto', duration=10):
             "16-20s elegant hero hold and gentle fade. Keep continuity, avoid new unseen angles, "
             "avoid added text or invented features. This is one coherent commercial, not a slideshow."
         )
+    if part == 1:
+        direction = ("FIRST CLIP 10s: 0-2s establish the product; 2-5s gentle reference-facing movement; "
+                     "5-8s focus on one genuinely visible detail; 8-10s return to a stable full-product frame, "
+                     "hold the final frame without fade to connect directly into Part 2.")
+    elif part == 2:
+        direction = ("SECOND CLIP 10s: start with the EXACT held full-product final frame from Part 1, "
+                     "matching crop, product position, orientation, setting, lighting and color. "
+                     "0-3s resume gentle camera movement; 3-7s highlight another visible detail; "
+                     "7-10s full-product hero finish with graceful fade. No new product, scene or angle.")
     return (
-        "KLIPPO | PROFESSIONAL IMAGE-TO-VIDEO PRODUCTION PROMPT\n"
+        "KLIPPO | PROFESSIONAL IMAGE-TO-VIDEO PRODUCTION PROMPT" + (" | BAHAGIAN " + str(part) + "/2" if part else "") + "\n"
         "OUTPUT: " + str(duration) + " seconds; portrait 9:16; high-quality realistic product commercial; "
         "one coherent deliverable; no on-screen text.\n\n"
         "PRODUCT: " + product + "\n\n" + identity + "\n\n" + art + "\n\n"
