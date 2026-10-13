@@ -11,6 +11,7 @@ from PIL import Image, ImageOps
 from video_merge import merge_videos
 from fusion_animation import fusion_gif
 import klippo_db
+from storyboard_engine import build_storyboard, format_storyboard, source_sequence
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler, ContextTypes, MessageHandler, filters
 
@@ -84,6 +85,7 @@ def is_admin(user_id):
 def main_menu(user_id=None):
     rows = [
         [InlineKeyboardButton('🎬 Jana Video Affiliate', callback_data='make')],
+        [InlineKeyboardButton('🎞️ Video Storyboard (6 Babak)', callback_data='storyboard')],
         [InlineKeyboardButton('🔄 Tukar Format Video', callback_data='convert')],
         [InlineKeyboardButton('🎞️ Gabung Video', callback_data='merge')],
         [InlineKeyboardButton('✍️ Sediakan Prompt Video', callback_data='prompt')],
@@ -204,11 +206,11 @@ def render_video(images: list[Path], output: Path, music: Path | None = None, st
         if music:
             subprocess.run(['ffmpeg','-hide_banner','-loglevel','error','-y','-i',str(video),
                             '-stream_loop','-1','-i',str(music),'-map','0:v:0','-map','1:a:0',
-                            '-t',str(DURATION),'-c:v','copy','-c:a','aac','-b:a','128k',
+                            '-t',str(duration),'-c:v','copy','-c:a','aac','-b:a','128k',
                             '-movflags','+faststart',str(output)],check=True,timeout=180)
         else:
             subprocess.run(['ffmpeg','-hide_banner','-loglevel','error','-y','-i',str(video),
-                            '-t',str(DURATION),'-c','copy','-movflags','+faststart',str(output)],
+                            '-t',str(duration),'-c','copy','-movflags','+faststart',str(output)],
                            check=True,timeout=180)
 
 
@@ -541,6 +543,11 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await query.message.reply_text('Gagal memproses resit. Mungkin sudah disemak atau sambungan database bermasalah.')
     elif action == 'admin':
         await admin(update, context)
+    elif action == 'storyboard':
+        reset(context)
+        context.user_data['storyboard_mode'] = True
+        context.user_data['stage'] = 'photos'
+        await query.message.reply_text('🎞️ STORYBOARD V1 — Hantar 1–5 gambar produk. Bot akan susun enam babak sinematik. Tekan Selesai apabila cukup.', reply_markup=photos_menu())
     elif action == 'make':
         reset(context)
         context.user_data['stage'] = 'photos'
@@ -809,7 +816,14 @@ async def generate(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 if music is None:
                     await message.reply_text('Muzik pilihan belum tersedia pada server. Video akan dijana tanpa muzik.')
             result = folder / 'video.mp4'
-            await asyncio.to_thread(render_video, paths, result, music, context.user_data.get('style', 'hybrid'), context.user_data.get('duration', 10))
+            if context.user_data.get('storyboard_mode'):
+                plan = build_storyboard(len(paths), context.user_data.get('duration', 10))
+                await message.reply_text(format_storyboard(plan))
+                paths = [paths[i] for i in source_sequence(plan)]
+                selected_style = 'cinematic'
+            else:
+                selected_style = context.user_data.get('style', 'hybrid')
+            await asyncio.to_thread(render_video, paths, result, music, selected_style, context.user_data.get('duration', 10))
             with result.open('rb') as f:
                 await message.reply_video(video=f, caption='🎬 Video siap! Hantar gambar baharu untuk video seterusnya.', supports_streaming=True,
                                                  read_timeout=120, write_timeout=120)
@@ -836,7 +850,7 @@ def main():
     app.add_handler(CommandHandler('jana', generate, block=False))
     for style in STYLES:
         app.add_handler(CommandHandler(style, choose_style))
-    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(photos_order|photos_undo|photos_more|photo_up:[0-4]|photo_down:[0-4]|photo_remove:[0-4]|duration:(10|15|20)|admin_pending|admin_approve:[0-9]+|admin_reject:[0-9]+|admin|receipt_upload|subscription_qr|make|convert|merge|merge_next|merge_done|merge_style:(fade|smoothleft|slideleft|zoomin)|prompt|motion:(orbit|push|side|static)|photos_done|confirm|styles|music|music_previews|subscription|account|help|check|reset|home|preview:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|listen:(cinematic|energetic|happy|luxury|nature|beauty)|style:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|music:(auto|cinematic|energetic|happy|luxury|nature|beauty|none|custom))$'))
+    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(photos_order|photos_undo|photos_more|photo_up:[0-4]|photo_down:[0-4]|photo_remove:[0-4]|duration:(10|15|20)|admin_pending|admin_approve:[0-9]+|admin_reject:[0-9]+|admin|receipt_upload|subscription_qr|make|storyboard|convert|merge|merge_next|merge_done|merge_style:(fade|smoothleft|slideleft|zoomin)|prompt|motion:(orbit|push|side|static)|photos_done|confirm|styles|music|music_previews|subscription|account|help|check|reset|home|preview:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|listen:(cinematic|energetic|happy|luxury|nature|beauty)|style:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|music:(auto|cinematic|energetic|happy|luxury|nature|beauty|none|custom))$'))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, menu_text))
     app.add_handler(MessageHandler(filters.PHOTO, photo))
     app.add_handler(MessageHandler(filters.Document.IMAGE | filters.Document.MimeType('application/pdf'), receive_receipt))
