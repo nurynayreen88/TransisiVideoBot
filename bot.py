@@ -232,6 +232,9 @@ def reset(context):
     context.user_data['duration'] = 10
     context.user_data['doodle_choice'] = 'none'
     context.user_data['storyboard_mode'] = False
+    context.user_data['prompt_mode'] = 'normal'
+    context.user_data['prompt_vision'] = ''
+    context.user_data['prompt_product'] = ''
     context.user_data['stage'] = 'home'
 
 
@@ -610,6 +613,15 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                       'The product remains the hero, fully visible and sharply focused. Use realistic lighting and smooth physically plausible movement. '
                       'Do not invent extra accessories, alter text or logos, morph the object, duplicate it, introduce people or hands, add captions, watermarks or UI. '
                       'If unseen sides of the product are not provided, do not fabricate them; use only a modest camera arc. No abrupt cuts or flicker. Output 10 seconds, portrait 9:16, high quality.')
+            if context.user_data.get('prompt_mode') == 'storyboard':
+                plan = build_storyboard(1, 10)
+                prompt = ('Generate one continuous 10-second vertical 9:16 AI product video using the uploaded image as strict reference. '
+                          + product + '. BACKGROUND: ' + scene + '. SIX-SHOT STORYBOARD:\n'
+                          + format_storyboard(plan)
+                          + '\nUse the storyboard as a cinematic shot sequence, not six separate outputs. '
+                          'Keep product identity, colors, proportions, readable labels and branding consistent. '
+                          'Use subtle camera motion and smooth transitions. Never invent unseen product sides, '
+                          'accessories, features, people, text or logos. No watermark.')
             context.user_data['stage'] = 'prompt_done'
             await query.message.reply_text('✅ PROMPT SIAP — gunakan bersama gambar produk yang diupload. Jika AI Vision tersedia, pemerhatian visual telah dimasukkan; semak ketepatannya. Gunakan prompt bersama gambar rujukan.\n\n' + prompt, reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('🤖 Buka NexaBot', url='https://t.me/aigeneratornexa_bot?start=ref37141287'), InlineKeyboardButton('✨ Buka Gemini', url='https://gemini.google.com/')], [InlineKeyboardButton('✍️ Prompt Baharu', callback_data='prompt'), InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
     elif action == 'merge':
