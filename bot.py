@@ -90,11 +90,11 @@ def is_admin(user_id):
 
 def main_menu(user_id=None):
     rows = [
-        [InlineKeyboardButton('🎬 Jana Video Affiliate', callback_data='make')],
-        [InlineKeyboardButton('🎞️ Video Storyboard (6 Babak)', callback_data='storyboard')],
+        [InlineKeyboardButton('🎬 Video Transisi', callback_data='make')],
+        [InlineKeyboardButton('🎞️ Transisi Storyboard (6 Babak)', callback_data='storyboard')],
         [InlineKeyboardButton('🔄 Tukar Format Video', callback_data='convert')],
         [InlineKeyboardButton('🎞️ Gabung Video', callback_data='merge')],
-        [InlineKeyboardButton('✍️ Sediakan Prompt Video', callback_data='prompt')],
+        [InlineKeyboardButton('✨ Video AI (Prompt + Gambar)', callback_data='prompt')],
         [InlineKeyboardButton('💎 Langganan', callback_data='subscription'), InlineKeyboardButton('👤 Akaun Saya', callback_data='account')],
         [InlineKeyboardButton('❓ Bantuan', callback_data='help')],
     ]
@@ -258,7 +258,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
     reset(context)
     await update.effective_message.reply_text('🏠 Menu Utama Klippo', reply_markup=home_keyboard())
-    await update.effective_message.reply_text('🎬 KLIPPO | Studio Video Affiliate\n\nHasilkan video produk daripada gambar, gabungkan klip mengikut susunan, tukar video kepada format MP4 menegak untuk affiliate, atau sediakan prompt video.\n\n✨ Apa yang boleh dibuat:\n• Jana Video — gambar produk menjadi video dengan pilihan gaya dan muzik.\n• Tukar Format — sediakan video untuk muat naik affiliate.\n• Gabung Video — cantum sehingga 5 klip dengan pilihan transisi.\n• Sediakan Prompt — bina arahan video produk yang lebih terperinci.\n\n💎 Langganan: Pelan Penyokong Awal RM5 / 30 hari. Bayar melalui QR DuitNow dan upload resit untuk semakan manual. Pengaktifan bukan automatik.\n\n👇 Pilih fungsi untuk bermula:', reply_markup=main_menu(update.effective_user.id))
+    await update.effective_message.reply_text('🎬 KLIPPO | Studio Video Affiliate\n\nHasilkan video produk daripada gambar, gabungkan klip mengikut susunan, tukar video kepada format MP4 menegak untuk affiliate, atau sediakan prompt video.\n\n✨ Apa yang boleh dibuat:\n• Video Transisi — jana MP4 daripada gambar, gaya dan muzik; Storyboard ialah versi enam babak.\n• Tukar Format — sediakan video untuk muat naik affiliate.\n• Gabung Video — cantum sehingga 5 klip dengan pilihan transisi.\n• Video AI — Gemini membaca gambar jika tersedia dan bot membina prompt; video AI dijana di platform luar, bukan MP4 terus daripada KLIPPO.\n\n💎 Langganan: Pelan Penyokong Awal RM5 / 30 hari. Bayar melalui QR DuitNow dan upload resit untuk semakan manual. Pengaktifan bukan automatik.\n\n👇 Pilih fungsi untuk bermula:', reply_markup=main_menu(update.effective_user.id))
 
 
 async def account_info(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -342,7 +342,7 @@ async def photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text(('🔎 AI mengenal pasti: ' + description + '\n\n' if description else '📷 Gambar diterima. AI Vision tidak tersedia; prompt masih boleh digunakan bersama gambar rujukan.\n\n') + 'Mahu tambah maklumat produk secara pilihan?', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('✍️ Tambah Maklumat', callback_data='prompt_details:add')], [InlineKeyboardButton('✨ Teruskan Dengan Gambar Sahaja', callback_data='prompt_details:skip')]]))
         return
     if context.user_data.get('stage') != 'photos':
-        await update.message.reply_text('Tekan 🎬 Jana Video dahulu.', reply_markup=main_menu())
+        await update.message.reply_text('Tekan 🎬 Video Transisi dahulu.', reply_markup=main_menu())
         return
     ids = context.user_data.setdefault('photos', [])
     if len(ids) >= MAX_IMAGES:
@@ -581,7 +581,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif action == 'prompt':
         reset(context)
         context.user_data['stage'] = 'prompt_photo'
-        await query.message.reply_text('✍️ PROMPT VIDEO AFFILIATE\n\n📷 Upload satu gambar produk dahulu. Maklumat produk boleh ditambah kemudian, tetapi tidak wajib.')
+        await query.message.reply_text('✨ VIDEO AI — PROMPT + GAMBAR\n\nKLIPPO menyediakan prompt AI, bukan merender video AI secara terus. Upload satu gambar produk dahulu. Maklumat produk boleh ditambah kemudian, tetapi tidak wajib.')
     elif action.startswith('prompt_details:') and stage == 'prompt_details_choice':
         if action == 'prompt_details:add':
             context.user_data['stage'] = 'prompt_details_text'
@@ -797,7 +797,7 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
         elif action == 'account':
             await account_info(update, context)
         elif action == 'help':
-            await update.message.reply_text('❓ BANTUAN\n\nJana Video: hantar gambar, pilih gaya dan muzik.\nTukar Format: hantar MP4.\nPrompt: upload gambar, maklumat tambahan pilihan, kemudian pilih latar dan gerakan kamera.')
+            await update.message.reply_text('❓ BANTUAN\n\nJana Video: hantar gambar, pilih gaya dan muzik.\nTukar Format: hantar MP4.\nVideo AI: upload gambar, tambah maklumat jika mahu, kemudian pilih latar dan gerakan kamera. Prompt digunakan bersama gambar di penjana video luar.')
         else:
             await start(update, context)
         return
