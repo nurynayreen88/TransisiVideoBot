@@ -27,9 +27,9 @@ logging.basicConfig(level=logging.INFO)
 TOKEN = os.environ.get('BOT_TOKEN', '')
 MAX_IMAGES = int(os.environ.get('MAX_IMAGES', '5'))
 DURATION = int(os.environ.get('VIDEO_SECONDS', '10'))
-WIDTH = int(os.environ.get('VIDEO_WIDTH', '480'))
-HEIGHT = int(os.environ.get('VIDEO_HEIGHT', '854'))
-FPS = int(os.environ.get('VIDEO_FPS', '24'))
+WIDTH = int(os.environ.get('VIDEO_WIDTH', '720'))
+HEIGHT = int(os.environ.get('VIDEO_HEIGHT', '1280'))
+FPS = int(os.environ.get('VIDEO_FPS', '30'))
 STYLES = {
     'hybrid': ('smoothleft', 'smoothup', 'fade'),
     'cinematic': ('fade', 'fadeblack'),
@@ -199,7 +199,7 @@ def render_video(images: list[Path], output: Path, music: Path | None = None, st
         raise ValueError('No images')
     n = len(images)
     # Keep fades short enough for any image count and total duration.
-    fade = min(0.95, duration / (n * 3.2)) if n > 1 else 0
+    fade = min(0.65, duration / (n * 4.0)) if n > 1 else 0
     clip_duration = (duration + (n - 1) * fade) / n
     frames = max(1, round(clip_duration * FPS))
     with tempfile.TemporaryDirectory(prefix='render_') as td:
@@ -211,11 +211,12 @@ def render_video(images: list[Path], output: Path, music: Path | None = None, st
                 # Preserve framing: modest overscan gives zoompan room to move.
                 img = ImageOps.fit(img, (round(WIDTH * 1.22), round(HEIGHT * 1.22)), method=Image.Resampling.LANCZOS)
                 still = temp / f'still_{i}.jpg'
-                img.save(still, quality=90)
+                img.save(still, quality=96, subsampling=0, optimize=True)
             clip = temp / f'clip_{i}.mp4'
             # Subtle editorial motion: vary direction, limit zoom change to 7.5%.
             # Expressions use the output-frame index 'on'; avoid abrupt jumps.
-            progress = f'min(on/{max(frames - 1, 1)},1)'
+            t = f'min(on/{max(frames - 1, 1)},1)'
+            progress = f'({t}*{t}*(3-2*{t}))'  # Smoothstep easing, gentle start and stop.
             if i % 3 == 0:
                 zoom = f'1.03+0.075*{progress}'
                 x = '(iw-iw/zoom)/2'
@@ -232,7 +233,7 @@ def render_video(images: list[Path], output: Path, music: Path | None = None, st
                   f"d={frames}:s={WIDTH}x{HEIGHT}:fps={FPS},format=yuv420p")
             cmd = ['ffmpeg','-hide_banner','-loglevel','error','-y','-loop','1','-i',str(still),
                    '-vf',vf,'-frames:v',str(frames),'-an','-c:v','libx264',
-                   '-preset','veryfast','-crf','25','-pix_fmt','yuv420p',str(clip)]
+                   '-preset','medium','-crf','19','-pix_fmt','yuv420p','-movflags','+faststart',str(clip)]
             subprocess.run(cmd, check=True, timeout=180)
             clips.append(clip)
         if n == 1:
@@ -251,7 +252,7 @@ def render_video(images: list[Path], output: Path, music: Path | None = None, st
                 chains.append(f'{last}[{i}:v]xfade=transition={transition}:duration={fade:.4f}:offset={offset:.4f}{label}')
                 last = label
             cmd += ['-filter_complex',';'.join(chains),'-map',last,'-an','-c:v','libx264',
-                    '-preset','veryfast','-crf','25','-pix_fmt','yuv420p',str(video)]
+                    '-preset','medium','-crf','19','-pix_fmt','yuv420p','-movflags','+faststart',str(video)]
             subprocess.run(cmd, check=True, timeout=240)
         if doodle != 'none':
             decorated = temp / 'decorated.mp4'
