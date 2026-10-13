@@ -14,6 +14,7 @@ import klippo_db
 from storyboard_engine import build_storyboard, format_storyboard, source_sequence
 from storyboard_overlay import apply_overlay
 from gemini_vision import describe_photo
+from prompt_engine import build_prompt
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler, ContextTypes, MessageHandler, filters
 
@@ -606,23 +607,9 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if motion in motions:
             product = ('the product in the uploaded reference image. Visible observations (verify against reference image): ' + context.user_data.get('prompt_vision', '') + '. Optional user details: ' + context.user_data.get('prompt_product', ''))
             scene = context.user_data.get('prompt_scene', 'clean studio background')
-            prompt = (f'Create a 10-second vertical 9:16 product affiliate video. PRODUCT REFERENCE: {product}. '
-                      f'SCENE: {scene}. CAMERA: {motions[motion]} '
-                      'Use the uploaded product image as the strict visual reference. Keep the exact identity, shape, color, proportions, branding, labels and number of parts unchanged throughout every frame. '
-                      'The product remains the hero, fully visible and sharply focused. Use realistic lighting and smooth physically plausible movement. '
-                      'Do not invent extra accessories, alter text or logos, morph the object, duplicate it, introduce people or hands, add captions, watermarks or UI. '
-                      'If unseen sides of the product are not provided, do not fabricate them; use only a modest camera arc. No abrupt cuts or flicker. Output 10 seconds, portrait 9:16, high quality.')
-            if context.user_data.get('prompt_mode') == 'storyboard':
-                plan = build_storyboard(1, 10)
-                prompt = ('Generate one continuous 10-second vertical 9:16 AI product video using the uploaded image as strict reference. '
-                          + product + '. BACKGROUND: ' + scene + '. SIX-SHOT STORYBOARD:\n'
-                          + format_storyboard(plan)
-                          + '\nUse the storyboard as a cinematic shot sequence, not six separate outputs. '
-                          'Keep product identity, colors, proportions, readable labels and branding consistent. '
-                          'Use subtle camera motion and smooth transitions. Never invent unseen product sides, '
-                          'accessories, features, people, text or logos. No watermark.')
+            prompt = build_prompt(context.user_data.get('prompt_mode', 'normal'), product, scene, motion)
             context.user_data['stage'] = 'prompt_done'
-            await query.message.reply_text('✅ PROMPT SIAP — gunakan bersama gambar produk yang diupload. Jika AI Vision tersedia, pemerhatian visual telah dimasukkan; semak ketepatannya. Gunakan prompt bersama gambar rujukan.\n\n' + prompt, reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('🤖 Buka NexaBot', url='https://t.me/aigeneratornexa_bot?start=ref37141287'), InlineKeyboardButton('✨ Buka Gemini', url='https://gemini.google.com/')], [InlineKeyboardButton('✍️ Prompt Baharu', callback_data='prompt'), InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
+            await query.message.reply_text('✅ PROMPT SIAP — gunakan bersama gambar produk yang diupload. Semak ketepatan pemerhatian AI Vision jika tersedia.\n\n' + prompt, reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('🤖 Buka NexaBot', url='https://t.me/aigeneratornexa_bot?start=ref37141287'), InlineKeyboardButton('✨ Buka Gemini', url='https://gemini.google.com/')], [InlineKeyboardButton('✍️ Prompt Baharu', callback_data='prompt'), InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
     elif action == 'merge':
         reset(context)
         context.user_data['stage'] = 'merge_upload'
