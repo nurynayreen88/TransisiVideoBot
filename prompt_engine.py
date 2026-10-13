@@ -1,4 +1,4 @@
-from prompt_catalog import resolve
+from prompt_catalog import resolve, product_hook
 """Detailed, reference-safe AI video prompt templates for KLIPPO."""
 
 CAMERAS = {
@@ -32,7 +32,7 @@ def build_prompt(mode, product, scene, motion, style='auto'):
     if mode == "storyboard":
         style_key, style_name, style_template = resolve(style)
         doodle = style_key == "white_doodle"
-        hook = "TENGOK YANG INI!" if doodle else "JOM TENGOK!"
+        hook = product_hook(product)
         hook_direction = (
             "ON-SCREEN HOOK TEXT (REQUIRED): Show the EXACT Malay words '" + hook + "' in large clean bold legible typography "
             "at the top safe area during 0.2-2.0s, with a smooth pop-in or handwriting reveal. "
