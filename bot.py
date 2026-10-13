@@ -654,26 +654,23 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 scene = context.user_data.get('prompt_scene', 'clean studio background')
                 prompt = build_prompt(context.user_data.get('prompt_mode', 'normal'), product, scene, motion)
                 context.user_data['stage'] = 'prompt_done'
-                await query.message.reply_text('✅ PROMPT SIAP — gunakan bersama gambar produk. Semak ketepatan pemerhatian AI Vision jika tersedia.')
-                # A single text attachment is the authoritative, complete copyable prompt.
                 mode_name = 'storyboard' if context.user_data.get('prompt_mode') == 'storyboard' else 'biasa'
-                prompt_file = BytesIO(prompt.encode('utf-8'))
-                prompt_file.name = f'KLIPPO_prompt_{mode_name}.txt'
-                await query.message.reply_document(
-                    document=prompt_file,
-                    filename=prompt_file.name,
-                    caption='📋 PROMPT PENUH — buka fail .txt ini, kemudian Select All → Copy. Semua arahan ada dalam satu fail.'
-                )
-                # The complete TXT is the single source of truth. Avoid sending
-                # lengthy chat copies that can trigger Telegram flood control.
-                await query.message.reply_text(
-                    '📋 Prompt penuh sudah dihantar sebagai fail .txt di atas. '
-                    'Buka fail → Select All → Copy. Tiada babak atau arahan yang dipotong.'
-                )
-                await query.message.reply_text('Pilih tindakan seterusnya:', reply_markup=InlineKeyboardMarkup([
-                    [InlineKeyboardButton('🤖 Buka NexaBot', url='https://t.me/aigeneratornexa_bot?start=ref37141287'), InlineKeyboardButton('✨ Buka Gemini', url='https://gemini.google.com/')],
+                actions = InlineKeyboardMarkup([
+                    [InlineKeyboardButton('🤖 NexaBot', url='https://t.me/aigeneratornexa_bot?start=ref37141287'), InlineKeyboardButton('✨ Gemini', url='https://gemini.google.com/')],
                     [InlineKeyboardButton('✍️ Prompt Baharu', callback_data='prompt'), InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]
-                ]))
+                ])
+                # One copyable Telegram message when possible; otherwise one complete TXT.
+                if len(prompt) <= 3900:
+                    await query.message.reply_text(prompt, reply_markup=actions)
+                else:
+                    prompt_file = BytesIO(prompt.encode('utf-8'))
+                    prompt_file.name = f'KLIPPO_prompt_{mode_name}.txt'
+                    await query.message.reply_document(
+                        document=prompt_file,
+                        filename=prompt_file.name,
+                        caption='📋 Prompt penuh dalam satu fail: buka → Select All → Copy.',
+                        reply_markup=actions
+                    )
 
             finally:
                 if waiting is not None:
