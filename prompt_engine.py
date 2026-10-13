@@ -29,33 +29,42 @@ def build_prompt(mode, product, scene, motion):
         "Do not attempt a full 360-degree rotation from one reference image."
     )
     if mode == "storyboard":
-        direction = (
-            "STORYBOARD: Produce ONE continuous 10-second 9:16 video with six clearly motivated shots, "
-            "not six disconnected clips. Maintain the same product and set throughout.\n"
-            "SHOT 1 | 0.0-1.5s | HOOK: A striking but faithful tight crop on a visible defining detail; "
-            "controlled punch-in and a refined light sweep.\n"
-            "SHOT 2 | 1.5-3.0s | REVEAL: Transition into a full-product hero composition; "
-            "slow lateral reveal, preserve all reference proportions.\n"
-            "SHOT 3 | 3.0-5.0s | CONTEXT: Show the product in the selected environment with a grounded "
-            "contact shadow and gentle parallax, without adding unsupported usage claims or props.\n"
-            "SHOT 4 | 5.0-7.0s | DETAIL: Highlight only a texture, finish, component or label actually "
-            "visible in the source image. Slow macro-style push; keep details accurate.\n"
-            "SHOT 5 | 7.0-8.5s | HERO: Premium centered three-quarter-feel composition using only "
-            "supported visible geometry. Camera direction: " + camera + "\n"
-            "SHOT 6 | 8.5-10.0s | CLOSING: Settle on a clean full-product packshot, gentle pull-back "
-            "and graceful fade, leaving uncluttered space without generating any text.\n"
-            "TRANSITIONS: Motivated match cuts, soft dissolves or subtle movement continuity; "
-            "no distracting spins or excessive effects. Each shot must flow naturally into the next."
-        )
+        shots = [
+            ("01 | HOOK | 0.0–1.5s", "Start with a visually arresting close crop of a genuinely visible feature. Establish the product's material and silhouette with a soft directional highlight. Camera: precise micro push-in, no sudden jump. Keep focus locked on the visible feature. End with movement that motivates the reveal."),
+            ("02 | REVEAL | 1.5–3.0s", "Reveal the complete product in a carefully balanced frame. Camera: slow lateral slide or controlled pull-back, maintaining exact scale and shape. Let the background separate naturally through restrained depth and contact shadow. Transition from the hook with matching movement and consistent lighting."),
+            ("03 | CONTEXT | 3.0–5.0s", "Place the unchanged product in the selected setting without suggesting an unsupported function or inventing props. Show convincing surface contact, natural reflections and realistic perspective. Use a gentle camera drift to create depth while keeping the reference-facing product geometry recognizable. Transition through a subtle dissolve or match cut."),
+            ("04 | DETAIL | 5.0–7.0s", "Select one authentic detail visible in the uploaded photograph: texture, finish, seam, component, packaging or label. Use a measured macro-style push, controlled depth of field and soft grazing light. Never reconstruct illegible lettering or manufacture additional details. Transition by matching the detail's position into the next hero composition."),
+            ("05 | HERO | 7.0–8.5s", "Present the product as the unmistakable visual centerpiece. Camera instruction: " + camera + " Use restrained premium edge lighting, realistic material response and uncluttered negative space. The product must remain completely consistent with the reference, including its visible branding. Build visual emphasis without aggressive spinning or deformation."),
+            ("06 | CLOSING | 8.5–10.0s", "Return to a clean full-product packshot with balanced framing. Slow the movement into a confident hold, then apply a subtle graceful fade. Preserve a clear product silhouette and stable highlights. Do not invent a slogan, price, call-to-action text or new logo.")
+        ]
+        direction = ("DIRECTOR'S SIX-SHOT STORYBOARD: Deliver a SINGLE cohesive commercial, not six separate videos. "
+                     "Keep the same product identity, spatial orientation, visual palette and believable light direction in every shot.\\n\\n"
+                     + "\\n\\n".join(title + "\\nVISUAL AND CAMERA BRIEF: " + detail for title, detail in shots)
+                     + "\\n\\nEDITING AND CONTINUITY: Respect the specified timing as closely as the generator permits. "
+                     "Use purposeful motion-matched cuts, restrained dissolves and gentle easing. Avoid flashy templates, "
+                     "random zooms and inconsistent set geometry. Every cut should advance the viewer from curiosity "
+                     "to product recognition, detail appreciation and a memorable closing hero image.")
     else:
         direction = (
-            "SINGLE-SCENE CREATIVE DIRECTION: One continuous 10-second cinematic product shot with "
-            "a clear beginning, development and closing, not a slideshow. Start with a balanced "
-            "medium-wide composition and a moment of visual anticipation (0-2s); develop with "
-            "this camera movement (2-7s): " + camera + " End on a clean, steady hero packshot "
-            "(7-10s) with refined easing and a subtle light accent. Keep the product sharp and "
-            "recognizable, with believable depth, natural reflections and deliberate composition. "
-            "No cuts or invented viewpoints."
+            "DIRECTOR'S SINGLE-TAKE BRIEF: Create one sophisticated uninterrupted 10-second commercial, "
+            "not a slideshow, montage or set of disconnected AI shots. The visual story progresses from "
+            "anticipation to discovery and finally a confident product hero moment.\\n\\n"
+            "0.0–2.0s | OPENING: Begin with a deliberately composed medium-wide shot. Establish the selected "
+            "environment with natural perspective, restrained highlights and believable grounding. Introduce "
+            "the product using a delicate light reveal rather than sudden object appearance. Keep its visible "
+            "branding and outline stable from the first frame.\\n\\n"
+            "2.0–5.0s | DEVELOPMENT: Start the requested camera move with gradual acceleration: " + camera +
+            " Build depth through the background and lighting rather than bending or reconstructing the object. "
+            "Hold a clean focal plane on the product. Show only surfaces genuinely supported by the reference.\\n\\n"
+            "5.0–7.5s | VISUAL EMPHASIS: Refine the composition around a visible material, finish or design detail. "
+            "Use subtle controlled light falloff and accurate reflections. Preserve the exact packaging and "
+            "typography, without enhancing unreadable text into invented words. Keep movement continuous and natural.\\n\\n"
+            "7.5–10.0s | HERO FINISH: Ease the camera into a balanced full-product composition. Let the product "
+            "remain clearly legible, with polished edge separation and a stable contact shadow. Finish on a "
+            "brief confident hold with an understated lighting accent. No added caption, CTA or watermark.\\n\\n"
+            "CINEMATOGRAPHY: Premium commercial lens language, elegant motion curves, coherent depth of field, "
+            "physically plausible parallax and natural material response. Maintain one consistent studio space "
+            "and color grade throughout; avoid frantic motion, jump cuts, fake rotations or excessive effects."
         )
     return (
         "KLIPPO | PROFESSIONAL IMAGE-TO-VIDEO PRODUCTION PROMPT\n"
