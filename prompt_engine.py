@@ -1,3 +1,4 @@
+from prompt_catalog import resolve
 """Detailed, reference-safe AI video prompt templates for KLIPPO."""
 
 CAMERAS = {
@@ -7,7 +8,7 @@ CAMERAS = {
     "static": "A locked premium studio composition with delicate lighting movement and a subtle focus transition.",
 }
 
-def build_prompt(mode, product, scene, motion):
+def build_prompt(mode, product, scene, motion, style='auto'):
     camera = CAMERAS.get(motion, CAMERAS["push"])
     identity = (
         "REFERENCE LOCK: Treat the uploaded photograph as the sole visual source of truth. "
@@ -28,28 +29,35 @@ def build_prompt(mode, product, scene, motion):
         "flicker, jitter, abrupt exposure shifts, captions, subtitles, UI or watermarks. "
         "Do not attempt a full 360-degree rotation from one reference image."
     )
-    if mode == "doodle":
+    if mode == "storyboard":
+        style_key, style_name, style_template = resolve(style)
+        doodle = style_key == "white_doodle"
+        rules = (
+            "WHITE DOODLE TIMELINE: 0-2s draw a curved white swoosh and two tiny sparkle stars beside the product; "
+            "2-4s animate a dotted white trail and a curved arrow to one genuinely visible feature; "
+            "4-6s draw a white oval around that feature, then two short accent strokes; "
+            "6-8s return to the full product with subtle sparkle doodles; "
+            "8-10s gently erase the doodles in reverse order and hold a clean product hero shot. "
+            "Use consistent thin hand-drawn white strokes, 2D overlays anchored to the product, no visible hand or pen. "
+            "Do not add generated lettering, captions or invented feature claims."
+            if doodle else
+            "TIMELINE: 0-2s engaging opening; 2-4s reveal the unchanged complete product; "
+            "4-6s focus on one genuinely visible detail; 6-8s tasteful visual emphasis; "
+            "8-10s clean stable full-product hero closing. Use one coherent visual setting and no more than two gentle cuts."
+        )
         return (
-            "KLIPPO | WHITE DOODLE AFFILIATE STORYBOARD\n"
-            "Create ONE cohesive 10-second vertical 9:16 product video using the uploaded reference image. "
-            "The distinctive visual treatment MUST be animated WHITE HAND-DRAWN DOODLE OVERLAYS, not merely cinematic camera movement. "
-            "The product remains photorealistic and identical to the reference throughout.\n\n"
-            "PRODUCT: " + product + "\n\n" + identity + "\n\n" + art + "\n\n"
-            "DOODLE STYLE: Thin slightly organic bright-white marker strokes, elegant hand-drawn line-reveal animation, "
-            "curved arrows pointing to genuinely visible details, small sparkle stars, dotted trails and an occasional hand-drawn oval. "
-            "Graphics are flat 2D overlays anchored to the product's visible position, never physical accessories. "
-            "Maintain a coherent line thickness and clean composition. White doodles must be clearly visible against the chosen background.\n\n"
-            "TIMED STORYBOARD:\n"
-            "00.0–02.0s HOOK: Start with a clear full-product view. Animate a short white curved doodle stroke and two tiny sparkle stars beside the product, drawn progressively by an invisible pen.\n"
-            "02.0–04.0s FEATURE: A white dotted trail grows towards one ACTUALLY VISIBLE feature; a hand-drawn curved arrow traces itself towards that detail. Subtle camera push, stable product geometry.\n"
-            "04.0–06.0s EMPHASIS: Trace one imperfect white oval around the authentic feature, then add two brief white accent lines. Hold long enough for the viewer to understand the focus.\n"
-            "06.0–08.0s HERO: Return to the complete product with a restrained camera move: " + camera + " Add a balanced cluster of small white sparkle doodles and a short animated swoosh; never cover branding.\n"
-            "08.0–10.0s FINISH: Gradually erase the doodle strokes in reverse drawing order, leaving a clean, stable full-product hero shot with a short final hold.\n\n"
-            "GRAPHIC RULES: Doodles should visibly DRAW ON over time, not pop in as stickers. No visible hand or pen. "
-            "No generated text, labels, subtitles, prices, logos or claims: AI-generated lettering is unreliable. "
-            "If the generator cannot reliably render timed overlays, preserve the clean product footage for adding white doodles in post-production.\n\n"
-            + negative + "\n\n"
-            "PRIORITY: recognizable animated white doodle overlays, faithful reference product, readable pacing, smooth timing, no object morphing."
+            "KLIPPO | STORYBOARD | " + style_name + "\\n"
+            "OUTPUT: One cohesive 10-second vertical 9:16 product advertisement.\\n\\n"
+            "PRODUCT REFERENCE: " + product + "\\n\\n" + identity + "\\n\\n"
+            "STYLE FROM KLIPPO CATALOG: " + style_template + "\\n\\n"
+            "SETTING: " + scene + "\\n"
+            "CAMERA: " + camera + " Stay reference-facing; never invent unseen sides.\\n\\n"
+            + rules + "\\n\\n"
+            "CONTINUITY: Preserve exact shape, color, visible logo and count across the entire video. "
+            "Use soft physically believable lighting and stable background. "
+            "Do not morph the object, invent accessories or cover its visible branding. "
+            "For white doodle, the graphic overlays are explicitly REQUIRED and are not captions or UI. "
+            "If the video generator cannot render precise overlays, generate clean product footage and add doodles in post-production."
         )
     if mode == "storyboard":
         shots = [
