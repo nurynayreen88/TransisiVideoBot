@@ -556,7 +556,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data['stage'] = 'photos'
         await query.message.reply_text('Hantar 1–5 gambar produk. Tekan Selesai apabila cukup.', reply_markup=photos_menu())
     elif action == 'make_ai':
-        await query.message.reply_text('🪄 Video AI (Limited)\n\nPenjanaan Video AI belum tersedia. Sila gunakan Video Studio buat masa ini.', reply_markup=InlineKeyboardMarkup([
+        await query.message.reply_text('🪄 Video AI (Limited)\n\nEnjin gabungan 10 saat sedang disediakan. Penjanaan AI belum tersedia sehingga sambungan GPU diuji. Sila gunakan Video Studio buat masa ini.', reply_markup=InlineKeyboardMarkup([
             [InlineKeyboardButton('✨ Video Studio', callback_data='make_studio')],
             [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
         ]))
