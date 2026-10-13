@@ -12,6 +12,7 @@ from video_merge import merge_videos
 from fusion_animation import fusion_gif
 import klippo_db
 from storyboard_engine import build_storyboard, format_storyboard, source_sequence
+from storyboard_overlay import apply_overlay
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler, ContextTypes, MessageHandler, filters
 
@@ -145,7 +146,7 @@ def resolve_music(choice: str, style: str) -> Path | None:
     return path if path.is_file() else None
 
 
-def render_video(images: list[Path], output: Path, music: Path | None = None, style: str = 'hybrid', duration: int = DURATION):
+def render_video(images: list[Path], output: Path, music: Path | None = None, style: str = 'hybrid', duration: int = DURATION, doodle: str = 'none'):
     """Produce CPU-friendly Ken Burns transitions. Morph is an approximation, not generative AI."""
     if style not in STYLES:
         raise ValueError("Unknown style")
@@ -207,6 +208,10 @@ def render_video(images: list[Path], output: Path, music: Path | None = None, st
             cmd += ['-filter_complex',';'.join(chains),'-map',last,'-an','-c:v','libx264',
                     '-preset','veryfast','-crf','25','-pix_fmt','yuv420p',str(video)]
             subprocess.run(cmd, check=True, timeout=240)
+        if doodle != 'none':
+            decorated = temp / 'decorated.mp4'
+            apply_overlay(video, decorated, doodle, WIDTH, HEIGHT, duration)
+            video = decorated
         if music:
             subprocess.run(['ffmpeg','-hide_banner','-loglevel','error','-y','-i',str(video),
                             '-stream_loop','-1','-i',str(music),'-map','0:v:0','-map','1:a:0',
@@ -684,7 +689,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if choice in DOODLE_OPTIONS:
             context.user_data['doodle_choice'] = choice
             context.user_data['stage'] = 'music'
-            await query.message.reply_text('✅ Efek untuk storyboard: '+DOODLE_OPTIONS[choice]+'\\nNota: pilihan ini direkodkan dalam prompt; renderer MP4 doodle belum diaktifkan.\\nPilih muzik:', reply_markup=music_menu())
+            await query.message.reply_text('✅ Efek untuk storyboard: '+DOODLE_OPTIONS[choice]+'\\nEfek pilihan akan dimasukkan ke dalam MP4.\\nPilih muzik:', reply_markup=music_menu())
     elif action == 'music' and stage in ('music', 'confirm'):
         context.user_data['stage'] = 'music'
         await query.message.reply_text('Langkah 3/4 — Pilih muzik:', reply_markup=music_menu())
@@ -834,12 +839,14 @@ async def generate(update: Update, context: ContextTypes.DEFAULT_TYPE):
             result = folder / 'video.mp4'
             if context.user_data.get('storyboard_mode'):
                 plan = build_storyboard(len(paths), context.user_data.get('duration', 10))
-                await message.reply_text(format_storyboard(plan) + '\n\nEfek prompt: ' + DOODLE_OPTIONS[context.user_data.get('doodle_choice', 'none')] + '\nArahan AI: Tambah efek pilihan secara halus di luar label dan logo produk. Jangan ubah identiti produk. (Efek overlay belum dirender dalam MP4 V1.)')
+                await message.reply_text(format_storyboard(plan) + '\n\nEfek prompt: ' + DOODLE_OPTIONS[context.user_data.get('doodle_choice', 'none')] + '\nArahan AI: Tambah efek pilihan secara halus di luar label dan logo produk. Jangan ubah identiti produk. (Efek overlay turut dirender pada MP4.)')
                 paths = [paths[i] for i in source_sequence(plan)]
                 selected_style = 'cinematic'
+                doodle = context.user_data.get('doodle_choice', 'none')
             else:
                 selected_style = context.user_data.get('style', 'hybrid')
-            await asyncio.to_thread(render_video, paths, result, music, selected_style, context.user_data.get('duration', 10))
+                doodle = 'none'
+            await asyncio.to_thread(render_video, paths, result, music, selected_style, context.user_data.get('duration', 10), doodle)
             with result.open('rb') as f:
                 await message.reply_video(video=f, caption='🎬 Video siap! Hantar gambar baharu untuk video seterusnya.', supports_streaming=True,
                                                  read_timeout=120, write_timeout=120)
