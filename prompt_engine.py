@@ -35,17 +35,20 @@ def build_prompt(mode, product, scene, motion, style='auto', duration=10):
         doodle = style_key == "white_doodle"
         hook = product_hook(product)
         hook_direction = (
-            "ON-SCREEN HOOK TEXT (REQUIRED): Show the EXACT Malay words '" + hook + "' in large clean bold legible typography "
-            "at the top safe area during the opening 0-2s, with a smooth pop-in or handwriting reveal. "
-            "Keep the product unobstructed. This is an intentional graphic overlay, NOT an unwanted subtitle. "
-            "Spell every character exactly; do not generate other claims, prices, brand names or random text. "
-            "For white doodle, animate a short white underline and two sparkle marks around the hook. "
-            "If reliable text rendering is unavailable, leave a clear top safe area so the exact hook can be overlaid in editing. "
+            "ON-SCREEN HOOK (VERIFIED CATEGORY ONLY): Display EXACTLY '" + hook + "' at the top safe area "
+            "in the opening 0-2s. This wording identifies the product only and makes no unsupported benefit claim. "
+            "Keep the product unobstructed; for white doodle add a small white underline and two sparkles. "
+            "Do not generate any additional unverified promotional copy. If text rendering is unreliable, "
+            "reserve space for accurate text overlay in editing. "
+        ) if hook else (
+            "NO ON-SCREEN HOOK TEXT: The product identity is not sufficiently verified. "
+            "Begin with the product image and decorative white doodle only; leave out all headline text. "
+            "Never guess a category, benefit, price, popularity or product name."
         )
         if doodle:
             if duration == 10:
                 rules = (
-                    "WHITE DOODLE 10s: 0-2s close-up with product-specific Malay hook and two white sparkles; "
+                    "WHITE DOODLE 10s: 0-2s close-up with verified category hook IF AVAILABLE and two white sparkles; "
                     "2-4s full product reveal with ONE truthful short feature callout, small white icon and curved leader arrow "
                     "to a genuinely visible detail; 4-7s progressively draw a thin white dashed contour JUST OUTSIDE the "
                     "ACTUAL PRODUCT silhouette, following its left, top, right and bottom edges, NOT the frame; "
@@ -53,7 +56,7 @@ def build_prompt(mode, product, scene, motion, style='auto', duration=10):
                 )
             else:
                 rules = (
-                    "WHITE DOODLE 20s: 0-3s close-up with product-specific Malay hook and white sparkles; "
+                    "WHITE DOODLE 20s: 0-3s close-up with verified category hook IF AVAILABLE and white sparkles; "
                     "3-7s full product reveal with up to TWO truthful concise feature callouts, tiny outlined icons "
                     "and curved leader arrows to genuinely visible details; 7-11s detail shot with dotted trail; "
                     "11-16s progressively draw a thin white dashed contour JUST OUTSIDE the ACTUAL PRODUCT silhouette "
@@ -62,7 +65,7 @@ def build_prompt(mode, product, scene, motion, style='auto', duration=10):
                 )
             rules += (
                 "Warm authentic UGC product-ad look, thin white handwritten 2D graphics tracked to the product. "
-                "No phone bezel, no invented product claims, no branding obstruction. Only approved hook and verified "
+                "No phone bezel, no invented product claims, no branding obstruction. Only verified hook (if available) and verified "
                 "short feature labels may appear; reserve space for editing overlays if text rendering is unreliable. "
                 "Prioritize the visible surrounding product contour over camera movement."
             )
@@ -74,7 +77,7 @@ def build_prompt(mode, product, scene, motion, style='auto', duration=10):
             )
         else:
             rules = (
-                "STORYBOARD 20s: 0-3s product-specific Malay hook; 3-7s full-product reveal; "
+                "STORYBOARD 20s: 0-3s verified category hook IF AVAILABLE; 3-7s full-product reveal; "
                 "7-11s one genuinely visible detail; 11-15s complementary reference-safe composition "
                 "and style-specific emphasis; 15-20s stable full-product hero closing and gentle fade. "
                 "No invented product angles or claims."
