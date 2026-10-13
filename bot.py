@@ -418,7 +418,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         reset(context)
         context.user_data['stage'] = 'merge_upload'
         context.user_data['merge_files'] = []
-        await query.message.reply_text('🎞️ Hantar Video 1 dahulu sebagai MP4. Selepas diterima, terus hantar Video 2, 3 dan seterusnya tanpa menekan butang tambahan. Maksimum 5 video, 19 MB dan 20 saat setiap klip. Audio asal dikekalkan.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('✅ Selesai', callback_data='merge_done')], [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
+        await query.message.reply_text('🎞️ Hantar Video 1 sebagai fail MP4.\n\nTekan 📎 → File / Fail → pilih video dan hantar.\n\nMaksimum 5 video (19 MB dan 20 saat setiap klip).', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('✅ Selesai', callback_data='merge_done')], [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
     elif action == 'merge_next':
         if stage not in ('merge_wait_next', 'merge_upload'):
             await query.message.reply_text('Sila mulakan Gabung Video dahulu.')
