@@ -41,6 +41,10 @@ STYLE_LABELS = {
 MUSIC_CHOICES = ('auto', 'cinematic', 'energetic', 'happy', 'luxury', 'nature', 'beauty', 'none', 'custom')
 MUSIC_DIR = Path(__file__).resolve().parent / 'music'
 
+DOODLE_OPTIONS = {'auto':'✨ Auto', 'white':'🤍 White Doodle', 'sparkle':'✨ Sparkle', 'motion':'🌀 Motion Lines', 'all':'🎨 Gabungan Semua', 'none':'🚫 Tanpa Efek'}
+def doodle_menu():
+    return InlineKeyboardMarkup([[InlineKeyboardButton(label, callback_data='doodle:'+key)] for key,label in DOODLE_OPTIONS.items()])
+
 def photos_menu():
     return InlineKeyboardMarkup([
         [InlineKeyboardButton('📋 Semak Susunan', callback_data='photos_order')],
@@ -220,6 +224,8 @@ def reset(context):
     context.user_data['music_choice'] = 'auto'
     context.user_data['style'] = 'hybrid'
     context.user_data['duration'] = 10
+    context.user_data['doodle_choice'] = 'none'
+    context.user_data['storyboard_mode'] = False
     context.user_data['stage'] = 'home'
 
 
@@ -667,8 +673,18 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 context.user_data['busy'] = False
     elif action.startswith('style:') and stage == 'style':
         context.user_data['style'] = action.split(':', 1)[1]
-        context.user_data['stage'] = 'music'
-        await query.message.reply_text(f"✅ Gaya {context.user_data['style']} dipilih.\nLangkah 3/4 — Pilih muzik:", reply_markup=music_menu())
+        if context.user_data.get('storyboard_mode'):
+            context.user_data['stage'] = 'doodle'
+            await query.message.reply_text('Pilih efek garisan / doodle untuk prompt storyboard:', reply_markup=doodle_menu())
+        else:
+            context.user_data['stage'] = 'music'
+            await query.message.reply_text(f"✅ Gaya {context.user_data['style']} dipilih.\\nLangkah 3/4 — Pilih muzik:", reply_markup=music_menu())
+    elif action.startswith('doodle:') and stage == 'doodle' and context.user_data.get('storyboard_mode'):
+        choice = action.split(':', 1)[1]
+        if choice in DOODLE_OPTIONS:
+            context.user_data['doodle_choice'] = choice
+            context.user_data['stage'] = 'music'
+            await query.message.reply_text('✅ Efek untuk storyboard: '+DOODLE_OPTIONS[choice]+'\\nNota: pilihan ini direkodkan dalam prompt; renderer MP4 doodle belum diaktifkan.\\nPilih muzik:', reply_markup=music_menu())
     elif action == 'music' and stage in ('music', 'confirm'):
         context.user_data['stage'] = 'music'
         await query.message.reply_text('Langkah 3/4 — Pilih muzik:', reply_markup=music_menu())
@@ -818,7 +834,7 @@ async def generate(update: Update, context: ContextTypes.DEFAULT_TYPE):
             result = folder / 'video.mp4'
             if context.user_data.get('storyboard_mode'):
                 plan = build_storyboard(len(paths), context.user_data.get('duration', 10))
-                await message.reply_text(format_storyboard(plan))
+                await message.reply_text(format_storyboard(plan) + '\n\nEfek prompt: ' + DOODLE_OPTIONS[context.user_data.get('doodle_choice', 'none')] + '\nArahan AI: Tambah efek pilihan secara halus di luar label dan logo produk. Jangan ubah identiti produk. (Efek overlay belum dirender dalam MP4 V1.)')
                 paths = [paths[i] for i in source_sequence(plan)]
                 selected_style = 'cinematic'
             else:
@@ -850,7 +866,7 @@ def main():
     app.add_handler(CommandHandler('jana', generate, block=False))
     for style in STYLES:
         app.add_handler(CommandHandler(style, choose_style))
-    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(photos_order|photos_undo|photos_more|photo_up:[0-4]|photo_down:[0-4]|photo_remove:[0-4]|duration:(10|15|20)|admin_pending|admin_approve:[0-9]+|admin_reject:[0-9]+|admin|receipt_upload|subscription_qr|make|storyboard|convert|merge|merge_next|merge_done|merge_style:(fade|smoothleft|slideleft|zoomin)|prompt|motion:(orbit|push|side|static)|photos_done|confirm|styles|music|music_previews|subscription|account|help|check|reset|home|preview:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|listen:(cinematic|energetic|happy|luxury|nature|beauty)|style:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|music:(auto|cinematic|energetic|happy|luxury|nature|beauty|none|custom))$'))
+    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(photos_order|photos_undo|photos_more|photo_up:[0-4]|photo_down:[0-4]|photo_remove:[0-4]|duration:(10|15|20)|admin_pending|admin_approve:[0-9]+|admin_reject:[0-9]+|admin|receipt_upload|subscription_qr|make|storyboard|doodle:(auto|white|sparkle|motion|all|none)|convert|merge|merge_next|merge_done|merge_style:(fade|smoothleft|slideleft|zoomin)|prompt|motion:(orbit|push|side|static)|photos_done|confirm|styles|music|music_previews|subscription|account|help|check|reset|home|preview:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|listen:(cinematic|energetic|happy|luxury|nature|beauty)|style:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|music:(auto|cinematic|energetic|happy|luxury|nature|beauty|none|custom))$'))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, menu_text))
     app.add_handler(MessageHandler(filters.PHOTO, photo))
     app.add_handler(MessageHandler(filters.Document.IMAGE | filters.Document.MimeType('application/pdf'), receive_receipt))
