@@ -261,7 +261,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
     reset(context)
     await update.effective_message.reply_text('🏠 Menu Utama Klippo', reply_markup=home_keyboard())
-    await update.effective_message.reply_text('🎬 KLIPPO | Studio Video Affiliate\n\nHasilkan video produk daripada gambar, gabungkan klip mengikut susunan, tukar video kepada format MP4 menegak untuk affiliate, atau sediakan prompt video.\n\n✨ Apa yang boleh dibuat:\n• Video Transisi — jana MP4 daripada gambar, gaya dan muzik; Storyboard ialah versi enam babak.\n• Tukar Format — sediakan video untuk muat naik affiliate.\n• Gabung Video — cantum sehingga 5 klip dengan pilihan transisi.\n• Video AI — Gemini membaca gambar jika tersedia dan bot membina prompt; video AI dijana di platform luar, bukan MP4 terus daripada KLIPPO.\n\n💎 Langganan: Pelan Penyokong Awal RM5 / 30 hari. Bayar melalui QR DuitNow dan upload resit untuk semakan manual. Pengaktifan bukan automatik.\n\n👇 Pilih fungsi untuk bermula:', reply_markup=main_menu(update.effective_user.id))
+    await update.effective_message.reply_text('🎬 KLIPPO | Studio Video Affiliate\n\nHasilkan video produk daripada gambar, gabungkan klip mengikut susunan, tukar video kepada format MP4 menegak untuk affiliate, atau sediakan prompt video.\n\n✨ Apa yang boleh dibuat:\n• Jana Video Transisi — jana MP4 daripada gambar, gaya dan muzik.\n• Tukar Format — sediakan video untuk muat naik affiliate.\n• Gabung Video — cantum sehingga 5 klip dengan pilihan transisi.\n• Hasilkan Prompt — pilih Prompt Biasa atau Prompt Storyboard. Gemini membaca gambar jika tersedia; penjanaan video AI dibuat di platform luar.\n\n💎 Langganan: Pelan Penyokong Awal RM5 / 30 hari. Bayar melalui QR DuitNow dan upload resit untuk semakan manual. Pengaktifan bukan automatik.\n\n👇 Pilih fungsi untuk bermula:', reply_markup=main_menu(update.effective_user.id))
 
 
 async def account_info(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -791,8 +791,10 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
     shortcuts = {
         '🎬 Jana Video Affiliate': 'make',
+        '🎬 Jana Video Transisi': 'make',
         '🔄 Tukar Format Video': 'convert',
         '✍️ Sediakan Prompt Video': 'prompt',
+        '✍️ Hasilkan Prompt': 'prompt',
         '💎 Langganan': 'subscription',
         '👤 Akaun Saya': 'account',
         '❓ Bantuan': 'help',
@@ -810,8 +812,12 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await update.message.reply_text('🔄 TUKAR FORMAT VIDEO\n\nTekan 📎 → File / Fail → pilih video MP4 asal. Bot akan memprosesnya secara automatik.', reply_markup=main_menu())
         elif action == 'prompt':
             reset(context)
-            context.user_data['stage'] = 'prompt_photo'
-            await update.message.reply_text('✍️ PROMPT VIDEO AFFILIATE\n\n📷 Upload satu gambar produk dahulu. Maklumat produk boleh ditambah kemudian, tetapi tidak wajib.')
+            context.user_data['stage'] = 'prompt_type'
+            await update.message.reply_text('✍️ HASILKAN PROMPT — Pilih jenis:', reply_markup=InlineKeyboardMarkup([
+                [InlineKeyboardButton('✨ Prompt Biasa', callback_data='prompt_type:normal')],
+                [InlineKeyboardButton('🎞️ Prompt Storyboard (6 Babak)', callback_data='prompt_type:storyboard')],
+                [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
+            ]))
         elif action == 'subscription':
             await update.message.reply_text('💎 LANGGANAN KLIPPO\n\nPelan Penyokong Awal: RM5 / 30 hari, sehingga 30 video sebulan. Pengaktifan manual selepas resit disemak.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📱 Papar QR DuitNow', callback_data='subscription_qr')]]))
         elif action == 'account':
