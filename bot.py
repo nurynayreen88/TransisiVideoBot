@@ -270,7 +270,7 @@ async def receive_receipt(update: Update, context: ContextTypes.DEFAULT_TYPE):
             logging.exception('Could not deliver subscription receipt to admin %s', admin_id)
     if delivered:
         context.user_data['stage'] = None
-        await update.message.reply_text('🧾 Resit diterima. Status: Dalam semakan. Kami akan maklumkan selepas admin membuat keputusan.', reply_markup=main_menu())
+        await update.message.reply_text('🧾 Resit diterima. Status: Dalam semakan.', reply_markup=main_menu())
     else:
         context.user_data['stage'] = None
         await update.message.reply_text(f'🧾 Resit #{receipt["id"]} direkodkan. Status: Dalam semakan. Salinan Telegram kepada admin gagal dihantar; sila hubungi admin untuk semakan.', reply_markup=main_menu())
