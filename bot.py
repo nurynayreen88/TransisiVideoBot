@@ -683,13 +683,16 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if selected in scenes:
             context.user_data['prompt_scene'] = scenes[selected]
             context.user_data['stage'] = 'prompt_motion'
-            await query.message.reply_text('🎥 Pilih gerakan kamera:', reply_markup=InlineKeyboardMarkup([
+            if context.user_data.get('prompt_mode') == 'storyboard':
+                action = 'motion:static' if context.user_data.get('prompt_style') == 'white_doodle' else 'motion:push'
+            else:
+                await query.message.reply_text('🎥 Pilih gerakan kamera:', reply_markup=InlineKeyboardMarkup([
                 [InlineKeyboardButton('🔄 Orbit Terkawal', callback_data='motion:orbit')],
                 [InlineKeyboardButton('🔍 Zoom Masuk', callback_data='motion:push')],
                 [InlineKeyboardButton('↔️ Gerak Sisi', callback_data='motion:side')],
                 [InlineKeyboardButton('✨ Studio Statik', callback_data='motion:static')]
             ]))
-    elif action.startswith('motion:') and stage == 'prompt_motion':
+    if action.startswith('motion:') and context.user_data.get('stage') == 'prompt_motion':
         motion = action.split(':', 1)[1]
         motions = {'orbit': 'A controlled 30-degree camera arc around the product, not a full 360-degree rotation; preserve the visible product geometry.', 'push': 'A slow forward dolly-in with gentle parallax; no object deformation.', 'side': 'A smooth left-to-right camera slide with stable product proportions.', 'static': 'A locked camera with subtle studio lighting changes only.'}
         if motion in motions:
