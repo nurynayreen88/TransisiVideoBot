@@ -85,6 +85,15 @@ def duration_menu():
     ])
 
 
+def prompt_scene_menu():
+    return InlineKeyboardMarkup([
+        [InlineKeyboardButton('✨ Auto (Disyorkan)', callback_data='scene:auto')],
+        [InlineKeyboardButton('📸 Studio Premium', callback_data='scene:studio'), InlineKeyboardButton('🌑 Mewah Gelap', callback_data='scene:dark')],
+        [InlineKeyboardButton('🏡 Ruang Rumah', callback_data='scene:home'), InlineKeyboardButton('🌿 Alam Semula Jadi', callback_data='scene:nature')],
+        [InlineKeyboardButton('☀️ Cerah Minimalis', callback_data='scene:minimal')]
+    ])
+
+
 def home_keyboard():
     return ReplyKeyboardMarkup([['🏠 Menu Utama']], resize_keyboard=True, is_persistent=True)
 
@@ -645,7 +654,26 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         elif action == 'prompt_details:skip':
             context.user_data['prompt_product'] = ''
             context.user_data['stage'] = 'prompt_scene'
-            await query.message.reply_text('Pilih latar atau taip Auto:')
+            await query.message.reply_text('🎨 Pilih latar video:', reply_markup=prompt_scene_menu())
+    elif action.startswith('scene:') and stage == 'prompt_scene':
+        scenes = {
+            'auto': 'clean premium studio background, selected to complement the exact product reference',
+            'studio': 'premium photography studio, soft neutral backdrop and realistic contact shadows',
+            'dark': 'dark luxury studio, controlled rim lighting and understated premium contrast',
+            'home': 'tasteful modern home interior, natural ambient lighting and believable product placement',
+            'nature': 'restrained natural setting with soft daylight, without obscuring the product',
+            'minimal': 'bright minimalist setting with clean neutral surfaces and soft daylight'
+        }
+        selected = action.split(':', 1)[1]
+        if selected in scenes:
+            context.user_data['prompt_scene'] = scenes[selected]
+            context.user_data['stage'] = 'prompt_motion'
+            await query.message.reply_text('🎥 Pilih gerakan kamera:', reply_markup=InlineKeyboardMarkup([
+                [InlineKeyboardButton('🔄 Orbit Terkawal', callback_data='motion:orbit')],
+                [InlineKeyboardButton('🔍 Zoom Masuk', callback_data='motion:push')],
+                [InlineKeyboardButton('↔️ Gerak Sisi', callback_data='motion:side')],
+                [InlineKeyboardButton('✨ Studio Statik', callback_data='motion:static')]
+            ]))
     elif action.startswith('motion:') and stage == 'prompt_motion':
         motion = action.split(':', 1)[1]
         motions = {'orbit': 'A controlled 30-degree camera arc around the product, not a full 360-degree rotation; preserve the visible product geometry.', 'push': 'A slow forward dolly-in with gentle parallax; no object deformation.', 'side': 'A smooth left-to-right camera slide with stable product proportions.', 'static': 'A locked camera with subtle studio lighting changes only.'}
@@ -894,7 +922,7 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if stage == 'prompt_details_text':
         context.user_data['prompt_product'] = value[:600]
         context.user_data['stage'] = 'prompt_scene'
-        await update.message.reply_text('Maklumat tambahan disimpan. Pilih latar atau taip Auto:')
+        await update.message.reply_text('🎨 Maklumat disimpan. Pilih latar video:', reply_markup=prompt_scene_menu())
     elif stage == 'prompt_scene':
         if len(value) < 5 and value.lower() != 'auto':
             await update.message.reply_text('Nyatakan latar ringkas atau taip Auto.')
@@ -984,7 +1012,7 @@ def main():
     app.add_handler(CommandHandler('jana', generate, block=False))
     for style in STYLES:
         app.add_handler(CommandHandler(style, choose_style))
-    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(photos_order|photos_undo|photos_more|photo_up:[0-4]|photo_down:[0-4]|photo_remove:[0-4]|duration:(10|15|20)|admin_pending|admin_approve:[0-9]+|admin_reject:[0-9]+|admin|receipt_upload|subscription_qr|make|storyboard|doodle:(auto|white|sparkle|motion|all|none)|convert|merge|merge_next|merge_done|merge_style:(fade|smoothleft|slideleft|zoomin)|prompt|prompt_type:(normal|storyboard)|prompt_details:(add|skip)|motion:(orbit|push|side|static)|photos_done|confirm|styles|music|music_previews|subscription|account|help|check|reset|home|preview:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|listen:(cinematic|energetic|happy|luxury|nature|beauty)|style:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|music:(auto|cinematic|energetic|happy|luxury|nature|beauty|none|custom))$'))
+    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(photos_order|photos_undo|photos_more|photo_up:[0-4]|photo_down:[0-4]|photo_remove:[0-4]|duration:(10|15|20)|admin_pending|admin_approve:[0-9]+|admin_reject:[0-9]+|admin|receipt_upload|subscription_qr|make|storyboard|doodle:(auto|white|sparkle|motion|all|none)|convert|merge|merge_next|merge_done|merge_style:(fade|smoothleft|slideleft|zoomin)|prompt|prompt_type:(normal|storyboard)|prompt_details:(add|skip)|scene:(auto|studio|dark|home|nature|minimal)|motion:(orbit|push|side|static)|photos_done|confirm|styles|music|music_previews|subscription|account|help|check|reset|home|preview:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|listen:(cinematic|energetic|happy|luxury|nature|beauty)|style:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|music:(auto|cinematic|energetic|happy|luxury|nature|beauty|none|custom))$'))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, menu_text))
     app.add_handler(MessageHandler(filters.PHOTO, photo))
     app.add_handler(MessageHandler(filters.Document.IMAGE | filters.Document.MimeType('application/pdf'), receive_receipt))
