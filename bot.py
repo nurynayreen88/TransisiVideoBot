@@ -4,6 +4,7 @@ import html
 from io import BytesIO
 import logging
 import os
+import re
 import shutil
 import subprocess
 import tempfile
@@ -612,26 +613,39 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             prompt = build_prompt(context.user_data.get('prompt_mode', 'normal'), product, scene, motion)
             context.user_data['stage'] = 'prompt_done'
             await query.message.reply_text('✅ PROMPT SIAP — gunakan bersama gambar produk. Semak ketepatan pemerhatian AI Vision jika tersedia.')
-            # Send a complete downloadable UTF-8 text file for one-step copying.
+            # A single text attachment is the authoritative, complete copyable prompt.
             mode_name = 'storyboard' if context.user_data.get('prompt_mode') == 'storyboard' else 'biasa'
             prompt_file = BytesIO(prompt.encode('utf-8'))
             prompt_file.name = f'KLIPPO_prompt_{mode_name}.txt'
             await query.message.reply_document(
                 document=prompt_file,
                 filename=prompt_file.name,
-                caption='📋 Prompt penuh dalam satu fail .txt — buka dan salin semuanya tanpa kehilangan bahagian.'
+                caption='📋 PROMPT PENUH — buka fail .txt ini, kemudian Select All → Copy. Semua arahan ada dalam satu fail.'
             )
-            # Telegram renders <pre> as a copy-friendly block. Split long text safely.
-            remaining = prompt
-            while remaining:
-                if len(remaining) <= 3000:
-                    chunk, remaining = remaining, ''
-                else:
-                    split_at = remaining.rfind('\\n\\n', 0, 3000)
-                    if split_at < 1000:
-                        split_at = 3000
-                    chunk, remaining = remaining[:split_at], remaining[split_at:].lstrip('\\n')
-                await query.message.reply_text('<pre>' + html.escape(chunk) + '</pre>', parse_mode='HTML')
+            if mode_name == 'storyboard':
+                await query.message.reply_text(
+                    '🎬 Storyboard panjang: untuk salin SEMUA babak sekali gus, gunakan fail .txt di atas. '
+                    'Di bawah ialah paparan mengikut bahagian supaya mudah dibaca atau disalin satu demi satu.'
+                )
+                # Split at actual shot headings instead of arbitrary character counts.
+                sections = re.split(r'(?=\\b0[1-6] \\| (?:HOOK|REVEAL|CONTEXT|DETAIL|HERO|CLOSING) \\|)', prompt)
+            else:
+                sections = [prompt]
+            for section in sections:
+                remaining = section.strip()
+                while remaining:
+                    if len(remaining) <= 3000:
+                        chunk, remaining = remaining, ''
+                    else:
+                        split_at = remaining.rfind('\\n\\n', 0, 3000)
+                        if split_at < 1000:
+                            split_at = remaining.rfind('\\n', 0, 3000)
+                        if split_at < 1000:
+                            split_at = 3000
+                        chunk, remaining = remaining[:split_at], remaining[split_at:].lstrip('\\n')
+                    await query.message.reply_text(
+                        '<pre>' + html.escape(chunk) + '</pre>', parse_mode='HTML'
+                    )
             await query.message.reply_text('Pilih tindakan seterusnya:', reply_markup=InlineKeyboardMarkup([
                 [InlineKeyboardButton('🤖 Buka NexaBot', url='https://t.me/aigeneratornexa_bot?start=ref37141287'), InlineKeyboardButton('✨ Buka Gemini', url='https://gemini.google.com/')],
                 [InlineKeyboardButton('✍️ Prompt Baharu', callback_data='prompt'), InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]
