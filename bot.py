@@ -41,7 +41,36 @@ MUSIC_CHOICES = ('auto', 'cinematic', 'energetic', 'happy', 'luxury', 'nature', 
 MUSIC_DIR = Path(__file__).resolve().parent / 'music'
 
 def photos_menu():
-    return InlineKeyboardMarkup([[InlineKeyboardButton('✅ Selesai Hantar Gambar', callback_data='photos_done')], [InlineKeyboardButton('🗑 Mula Semula', callback_data='reset')]])
+    return InlineKeyboardMarkup([
+        [InlineKeyboardButton('📋 Semak Susunan', callback_data='photos_order')],
+        [InlineKeyboardButton('↩️ Buang Gambar Terakhir', callback_data='photos_undo')],
+        [InlineKeyboardButton('✅ Selesai Hantar Gambar', callback_data='photos_done')],
+        [InlineKeyboardButton('🗑 Mula Semula', callback_data='reset')],
+    ])
+
+
+def order_menu(count):
+    rows = []
+    for i in range(count):
+        controls = []
+        if i:
+            controls.append(InlineKeyboardButton(f'⬆️ {i+1}', callback_data=f'photo_up:{i}'))
+        if i < count - 1:
+            controls.append(InlineKeyboardButton(f'⬇️ {i+1}', callback_data=f'photo_down:{i}'))
+        controls.append(InlineKeyboardButton(f'❌ {i+1}', callback_data=f'photo_remove:{i}'))
+        rows.append(controls)
+    rows.append([InlineKeyboardButton('📤 Tambah Gambar', callback_data='photos_more'),
+                 InlineKeyboardButton('✅ Selesai', callback_data='photos_done')])
+    return InlineKeyboardMarkup(rows)
+
+
+def duration_menu():
+    return InlineKeyboardMarkup([
+        [InlineKeyboardButton('⏱️ 10 saat', callback_data='duration:10'),
+         InlineKeyboardButton('⏱️ 15 saat', callback_data='duration:15')],
+        [InlineKeyboardButton('⏱️ 20 saat', callback_data='duration:20')],
+        [InlineKeyboardButton('↩️ Semak Gambar', callback_data='photos_order')],
+    ])
 
 
 def home_keyboard():
@@ -110,7 +139,7 @@ def resolve_music(choice: str, style: str) -> Path | None:
     return path if path.is_file() else None
 
 
-def render_video(images: list[Path], output: Path, music: Path | None = None, style: str = 'hybrid'):
+def render_video(images: list[Path], output: Path, music: Path | None = None, style: str = 'hybrid', duration: int = DURATION):
     """Produce CPU-friendly Ken Burns transitions. Morph is an approximation, not generative AI."""
     if style not in STYLES:
         raise ValueError("Unknown style")
@@ -118,8 +147,8 @@ def render_video(images: list[Path], output: Path, music: Path | None = None, st
         raise ValueError('No images')
     n = len(images)
     # Keep fades short enough for any image count and total duration.
-    fade = min(0.95, DURATION / (n * 3.2)) if n > 1 else 0
-    clip_duration = (DURATION + (n - 1) * fade) / n
+    fade = min(0.95, duration / (n * 3.2)) if n > 1 else 0
+    clip_duration = (duration + (n - 1) * fade) / n
     frames = max(1, round(clip_duration * FPS))
     with tempfile.TemporaryDirectory(prefix='render_') as td:
         temp = Path(td)
@@ -188,6 +217,7 @@ def reset(context):
     context.user_data['music'] = None
     context.user_data['music_choice'] = 'auto'
     context.user_data['style'] = 'hybrid'
+    context.user_data['duration'] = 10
     context.user_data['stage'] = 'home'
 
 
@@ -319,7 +349,7 @@ async def status(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.effective_message.reply_text(
         f"Gambar: {len(context.user_data.get('photos', []))}/{MAX_IMAGES} | "
         f"Muzik: {context.user_data.get('music_choice', 'auto')} | "
-        f"Gaya: {context.user_data.get('style', 'hybrid')} | {DURATION}s.", reply_markup=main_menu())
+        f"Gaya: {context.user_data.get('style', 'hybrid')} | {context.user_data.get('duration', 10)}s.", reply_markup=main_menu())
 
 
 
@@ -556,12 +586,48 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         reset(context)
         context.user_data['stage'] = 'convert'
         await query.message.reply_text('🔄 TUKAR FORMAT VIDEO UNTUK AFFILIATE\n\nUntuk kualiti terbaik:\n1. Tekan ikon 📎 di ruang mesej.\n2. Pilih File / Fail (bukan Gallery / Video).\n3. Pilih video MP4 asal dan hantar.\n\nBot akan menukar format secara automatik dan menghantar hasil sebagai fail MP4.\n\nNota: Telegram mungkin memampatkan video yang dihantar melalui Gallery / Video.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
+    elif action == 'photos_order' and stage in ('photos', 'duration'):
+        ids = context.user_data.get('photos', [])
+        if not ids:
+            await query.message.reply_text('Belum ada gambar. Sila hantar gambar dahulu.', reply_markup=photos_menu())
+        else:
+            for index, file_id in enumerate(ids, 1):
+                await query.message.reply_photo(photo=file_id, caption=f'Gambar {index}')
+            await query.message.reply_text('📋 Susunan semasa. Gunakan ⬆️ ⬇️ atau ❌ untuk menyusun:', reply_markup=order_menu(len(ids)))
+    elif action == 'photos_undo' and stage == 'photos':
+        ids = context.user_data.get('photos', [])
+        if ids:
+            ids.pop()
+        await query.message.reply_text(f'Gambar terakhir dibuang. Baki: {len(ids)}.', reply_markup=photos_menu())
+    elif action.startswith(('photo_up:', 'photo_down:', 'photo_remove:')) and stage in ('photos', 'duration'):
+        ids = context.user_data.get('photos', [])
+        action_type, index_text = action.split(':', 1)
+        index = int(index_text)
+        if index >= len(ids):
+            await query.message.reply_text('Susunan telah berubah. Semak semula.', reply_markup=order_menu(len(ids)))
+        else:
+            if action_type == 'photo_remove':
+                ids.pop(index)
+            elif action_type == 'photo_up' and index > 0:
+                ids[index-1], ids[index] = ids[index], ids[index-1]
+            elif action_type == 'photo_down' and index < len(ids)-1:
+                ids[index+1], ids[index] = ids[index], ids[index+1]
+            await query.message.reply_text(f'📋 Susunan dikemas kini. {len(ids)} gambar.', reply_markup=order_menu(len(ids)) if ids else photos_menu())
+    elif action == 'photos_more' and stage in ('photos', 'duration'):
+        context.user_data['stage'] = 'photos'
+        await query.message.reply_text('📤 Hantar gambar seterusnya.', reply_markup=photos_menu())
+    elif action.startswith('duration:') and stage == 'duration':
+        duration = int(action.split(':', 1)[1])
+        if duration in (10, 15, 20):
+            context.user_data['duration'] = duration
+            context.user_data['stage'] = 'style'
+            await query.message.reply_text(f'⏱️ {duration} saat dipilih. Pilih gaya:', reply_markup=style_menu())
     elif action == 'photos_done':
-        if stage != 'photos' or not context.user_data.get('photos'):
+        if stage not in ('photos', 'duration') or not context.user_data.get('photos'):
             await query.message.reply_text('Hantar sekurang-kurangnya satu gambar dahulu.', reply_markup=photos_menu())
             return
-        context.user_data['stage'] = 'style'
-        await query.message.reply_text('Langkah 2/4 — Lihat contoh dan pilih gaya:', reply_markup=style_menu())
+        context.user_data['stage'] = 'duration'
+        await query.message.reply_text('⏱️ Pilih durasi video:', reply_markup=duration_menu())
     elif action == 'styles' and stage in ('style', 'music', 'confirm'):
         context.user_data['stage'] = 'style'
         await query.message.reply_text('Langkah 2/4 — Pilih gaya:', reply_markup=style_menu())
@@ -743,7 +809,7 @@ async def generate(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 if music is None:
                     await message.reply_text('Muzik pilihan belum tersedia pada server. Video akan dijana tanpa muzik.')
             result = folder / 'video.mp4'
-            await asyncio.to_thread(render_video, paths, result, music, context.user_data.get('style', 'hybrid'))
+            await asyncio.to_thread(render_video, paths, result, music, context.user_data.get('style', 'hybrid'), context.user_data.get('duration', 10))
             with result.open('rb') as f:
                 await message.reply_video(video=f, caption='🎬 Video siap! Hantar gambar baharu untuk video seterusnya.', supports_streaming=True,
                                                  read_timeout=120, write_timeout=120)
@@ -770,7 +836,7 @@ def main():
     app.add_handler(CommandHandler('jana', generate, block=False))
     for style in STYLES:
         app.add_handler(CommandHandler(style, choose_style))
-    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(admin_pending|admin_approve:[0-9]+|admin_reject:[0-9]+|admin|receipt_upload|subscription_qr|make|convert|merge|merge_next|merge_done|merge_style:(fade|smoothleft|slideleft|zoomin)|prompt|motion:(orbit|push|side|static)|photos_done|confirm|styles|music|music_previews|subscription|account|help|check|reset|home|preview:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|listen:(cinematic|energetic|happy|luxury|nature|beauty)|style:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|music:(auto|cinematic|energetic|happy|luxury|nature|beauty|none|custom))$'))
+    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(photos_order|photos_undo|photos_more|photo_up:[0-4]|photo_down:[0-4]|photo_remove:[0-4]|duration:(10|15|20)|admin_pending|admin_approve:[0-9]+|admin_reject:[0-9]+|admin|receipt_upload|subscription_qr|make|convert|merge|merge_next|merge_done|merge_style:(fade|smoothleft|slideleft|zoomin)|prompt|motion:(orbit|push|side|static)|photos_done|confirm|styles|music|music_previews|subscription|account|help|check|reset|home|preview:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|listen:(cinematic|energetic|happy|luxury|nature|beauty)|style:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|music:(auto|cinematic|energetic|happy|luxury|nature|beauty|none|custom))$'))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, menu_text))
     app.add_handler(MessageHandler(filters.PHOTO, photo))
     app.add_handler(MessageHandler(filters.Document.IMAGE | filters.Document.MimeType('application/pdf'), receive_receipt))
