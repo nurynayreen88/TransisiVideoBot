@@ -502,14 +502,14 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif action == 'confirm' and stage == 'confirm':
         await generate(update, context)
     elif action == 'subscription':
-        await query.message.reply_text('💎 LANGGANAN KLIPPO\\n\\nPelan Penyokong Awal: RM5 / 30 hari, sehingga 30 video sebulan.\\n\\nBayaran melalui DuitNow QR. Pengaktifan akaun dibuat secara manual selepas resit disemak; bayaran tidak mengaktifkan VIP secara automatik.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📱 Papar QR DuitNow', callback_data='subscription_qr')], [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
+        await query.message.reply_text('💎 LANGGANAN KLIPPO\n\nPelan Penyokong Awal: RM5 / 30 hari, sehingga 30 video sebulan.\n\nBayaran melalui DuitNow QR. Pengaktifan akaun dibuat secara manual selepas resit disemak; bayaran tidak mengaktifkan VIP secara automatik.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📱 Papar QR DuitNow', callback_data='subscription_qr')], [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
     elif action == 'subscription_qr':
         qr_path = Path(__file__).resolve().parent / 'klippo_qr.jpg'
         if not qr_path.is_file():
             await query.message.reply_text('QR pembayaran belum tersedia. Sila cuba lagi kemudian.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
         else:
             with qr_path.open('rb') as qr_file:
-                await query.message.reply_photo(photo=qr_file, caption='💎 KLIPPO — DuitNow QR\\n\\nPelan Penyokong Awal: RM5 / 30 hari (sehingga 30 video sebulan).\\n\\nSimpan resit pembayaran untuk semakan admin. Pengaktifan adalah manual, bukan automatik.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
+                await query.message.reply_photo(photo=qr_file, caption='💎 KLIPPO — DuitNow QR\n\nPelan Penyokong Awal: RM5 / 30 hari (sehingga 30 video sebulan).\n\nSimpan resit pembayaran untuk semakan admin. Pengaktifan adalah manual, bukan automatik.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
     elif action == 'account':
         await query.message.reply_text(f'👤 AKAUN SAYA\n\nID Telegram: {query.from_user.id}\nStatus: Akses percubaan (langganan belum diaktifkan).', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📋 Semak Bahan', callback_data='check'), InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
     elif action == 'help':
