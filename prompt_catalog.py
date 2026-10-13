@@ -29,6 +29,12 @@ def connect():
     # Seed missing styles only: preserve any previously edited or added rows.
     db.executemany("INSERT OR IGNORE INTO storyboard_prompt_styles(style_key, display_name, template) VALUES (?, ?, ?)",
                    [(k, *v) for k, v in STYLES.items()])
+    # Upgrade only the original bundled doodle seed, never a user-customized row.
+    old_doodle = "Animated thin white hand-drawn arrows, dotted paths, sparkle stars, and feature circles. Every stroke visibly draws itself over time as a flat 2D overlay; no visible pen, no invented text."
+    db.execute(
+        "UPDATE storyboard_prompt_styles SET template=?, version=2 WHERE style_key='white_doodle' AND version=1 AND template=?",
+        (STYLES["white_doodle"][1], old_doodle)
+    )
     db.commit()
     return db
 
