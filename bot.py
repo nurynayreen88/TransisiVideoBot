@@ -217,9 +217,9 @@ async def receive_receipt(update: Update, context: ContextTypes.DEFAULT_TYPE):
     for admin_id in admins:
         try:
             await context.bot.send_message(chat_id=int(admin_id), text=(
-                f'🧾 RESIT LANGGANAN KLIPPO\\n'
-                f'Pengguna: {update.effective_user.full_name}\\n'
-                f'ID Telegram: {update.effective_user.id}\\n'
+                f'🧾 RESIT LANGGANAN KLIPPO\n'
+                f'Pengguna: {update.effective_user.full_name}\n'
+                f'ID Telegram: {update.effective_user.id}\n'
                 'Status: Menunggu semakan manual. Jangan aktifkan tanpa mengesahkan transaksi.'
             ))
             await update.message.forward(chat_id=int(admin_id))
@@ -548,7 +548,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await query.message.reply_text('QR pembayaran belum tersedia. Sila cuba lagi kemudian.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
         else:
             with qr_path.open('rb') as qr_file:
-                await query.message.reply_photo(photo=qr_file, caption='💎 KLIPPO — DuitNow QR\n\nPelan Penyokong Awal: RM5 / 30 hari (sehingga 30 video sebulan).\n\nTekan 📎 Upload Resit selepas pembayaran. Pengaktifan adalah manual selepas semakan.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
+                await query.message.reply_photo(photo=qr_file, caption='💎 KLIPPO — DuitNow QR\n\nPelan Penyokong Awal: RM5 / 30 hari (sehingga 30 video sebulan).\n\nTekan 📎 Upload Resit selepas pembayaran. Pengaktifan adalah manual selepas semakan.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📎 Upload Resit', callback_data='receipt_upload')], [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
     elif action == 'receipt_upload':
         context.user_data['stage'] = 'receipt_upload'
         await query.message.reply_text('📎 Sila upload gambar atau fail resit pembayaran di sini. Resit akan dihantar kepada admin untuk semakan manual.')
