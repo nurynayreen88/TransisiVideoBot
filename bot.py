@@ -197,7 +197,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
     reset(context)
     await update.effective_message.reply_text('🏠 Menu Utama Klippo', reply_markup=home_keyboard())
-    await update.effective_message.reply_text('🎬 KLIPPO\\nVideo Menarik, Semudah Klik.\\n\\nPilih fungsi di bawah:', reply_markup=main_menu())
+    await update.effective_message.reply_text('🎬 KLIPPO\nVideo Menarik, Semudah Klik.\n\nPilih fungsi di bawah:', reply_markup=main_menu())
 
 
 async def photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
