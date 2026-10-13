@@ -196,12 +196,8 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.effective_message.reply_text('Video sedang diproses. Sila tunggu.')
         return
     reset(context)
-    cleanup = await update.effective_message.reply_text('Menu dikemas kini.', reply_markup=ReplyKeyboardRemove(), disable_notification=True)
-    try:
-        await cleanup.delete()
-    except Exception:
-        logging.debug('Unable to delete keyboard cleanup message', exc_info=True)
-    await update.effective_message.reply_text('🎬 KLIPPO\nVideo Menarik, Semudah Klik.\n\nPilih fungsi di bawah:', reply_markup=main_menu())
+    await update.effective_message.reply_text('🏠 Menu Utama Klippo', reply_markup=home_keyboard())
+    await update.effective_message.reply_text('🎬 KLIPPO\\nVideo Menarik, Semudah Klik.\\n\\nPilih fungsi di bawah:', reply_markup=main_menu())
 
 
 async def photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
