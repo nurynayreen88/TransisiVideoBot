@@ -591,7 +591,9 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if not ids:
             await query.message.reply_text('Belum ada gambar. Sila hantar gambar dahulu.', reply_markup=photos_menu())
         else:
-            await query.message.reply_text('📋 Susunan gambar (mengikut nombor diterima):', reply_markup=order_menu(len(ids)))
+            for index, file_id in enumerate(ids, 1):
+                await query.message.reply_photo(photo=file_id, caption=f'Gambar {index}')
+            await query.message.reply_text('📋 Susunan semasa. Gunakan ⬆️ ⬇️ atau ❌ untuk menyusun:', reply_markup=order_menu(len(ids)))
     elif action == 'photos_undo' and stage == 'photos':
         ids = context.user_data.get('photos', [])
         if ids:
@@ -621,7 +623,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['stage'] = 'style'
             await query.message.reply_text(f'⏱️ {duration} saat dipilih. Pilih gaya:', reply_markup=style_menu())
     elif action == 'photos_done':
-        if stage != 'photos' or not context.user_data.get('photos'):
+        if stage not in ('photos', 'duration') or not context.user_data.get('photos'):
             await query.message.reply_text('Hantar sekurang-kurangnya satu gambar dahulu.', reply_markup=photos_menu())
             return
         context.user_data['stage'] = 'duration'
