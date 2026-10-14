@@ -339,7 +339,7 @@ def style_menu():
 
 
 def motion_menu():
-    return InlineKeyboardMarkup([[InlineKeyboardButton(label,callback_data='motion:'+key)] for key,label in [('auto','✨ Auto Creative (Disyorkan)'),('stop','🎞️ Stop Motion Pop'),('spin','🌀 Spin-In'),('smooth','🎬 Smooth Motion')]])
+    return InlineKeyboardMarkup([[InlineKeyboardButton(label,callback_data='motion:'+key)] for key,label in [('auto','✨ Auto Creative (Disyorkan)'),('stop','🎞️ Stop Motion Pop'),('spin','🌀 Spin-In'),('smooth','🎬 Smooth Motion'),('hand','🖐️ Cute Hand Place & Exit')]])
 
 
 def music_menu():
@@ -580,6 +580,31 @@ def render_product_motion(layers, output, music, duration, on_progress=None, doo
         subprocess.run(cmd, check=True, timeout=180, capture_output=True, text=True)
 
 
+def _hand_place_asset(width, variant, direction):
+    """Simple transparent flat hand PNG-like layer, translated as a whole."""
+    w = max(120, int(width))
+    h = round(w * .46)
+    im = Image.new('RGBA', (w, h), (0, 0, 0, 0))
+    draw = ImageDraw.Draw(im)
+    skins = ((238,185,146,255),(182,125,91,255),(244,207,177,255),(139,91,68,255),(214,155,119,255))
+    sleeves = ((235,151,173,255),(134,178,210,255),(187,167,215,255),(139,185,157,255),(234,195,126,255))
+    skin = skins[variant % len(skins)]
+    sleeve = sleeves[(variant // 2) % len(sleeves)]
+    draw.rounded_rectangle((0,int(h*.23),int(w*.57),int(h*.78)),radius=int(h*.13),fill=sleeve)
+    draw.rounded_rectangle((int(w*.43),int(h*.29),int(w*.80),int(h*.73)),radius=int(h*.17),fill=skin)
+    for a,b in ((.27,.39),(.42,.54),(.56,.68)):
+        draw.rounded_rectangle((int(w*.66),int(h*a),int(w*.96),int(h*b)),radius=max(2,int(h*.045)),fill=skin)
+    if variant % 3 == 1:
+        draw.line((int(w*.15),int(h*.25),int(w*.15),int(h*.75)),fill=(255,255,255,170),width=3)
+    if direction[0] > 0:
+        im = ImageOps.mirror(im)
+    if direction[0] == 0:
+        im = im.rotate(-90 if direction[1] < 0 else 90,expand=True)
+    elif direction[1]:
+        im = im.rotate((-30 if direction[1] < 0 else 30) * (1 if direction[0] < 0 else -1),expand=True)
+    return im
+
+
 def render_creative_motion(layers, output, music, duration, on_progress=None, doodle='none', mode='auto'):
     """Deliberate held-pose stop motion; source cutout only, no invented 3D views."""
     import math
@@ -603,6 +628,12 @@ def render_creative_motion(layers, output, music, duration, on_progress=None, do
                      (0, .75, 38), (-.70, -.50, -42), (.70, -.50, 42),
                      (-.70, .50, -35), (.70, .50, 35))
         entrance = entrances[int(variant_hash.hexdigest()[4:8], 16) % len(entrances)]
+        hand_place = mode == 'hand'
+        if hand_place:
+            import secrets
+            entrance = entrances[secrets.randbelow(len(entrances))]
+            hand_variant = secrets.randbelow(15)
+            entrance = (entrance[0], entrance[1], 0)
         entrance_seconds = min(1.65, max(.9, duration * .12))
         hold = 1
         sources = []
@@ -619,6 +650,7 @@ def render_creative_motion(layers, output, music, duration, on_progress=None, do
             fg.putalpha(alpha)
             fg.thumbnail((round(WIDTH*.65),round(HEIGHT*.48)),Image.Resampling.LANCZOS)
             sources.append((fg,choice))
+        hand_image = _hand_place_asset(WIDTH*.37, hand_variant, entrance) if hand_place else None
         for n in range(0,total,hold):
             t = n / FPS
             phase = t / max(duration, .01)
@@ -654,6 +686,15 @@ def render_creative_motion(layers, output, music, duration, on_progress=None, do
             product_layer = Image.new('RGBA', canvas.size, (0, 0, 0, 0))
             product_layer.paste(transformed, (x, y))
             canvas = Image.alpha_composite(canvas, product_layer)
+            if hand_place and t < entrance_seconds + .82:
+                retreat = max(0.0, min(1.0, (t-entrance_seconds-.10)/.65))
+                retreat = retreat*retreat*(3-2*retreat)
+                hx = round((WIDTH-hand_image.width)/2 + WIDTH*entrance[0]*((1-ease)+retreat))
+                hy = round((HEIGHT-hand_image.height)/2 + HEIGHT*entrance[1]*((1-ease)+retreat))
+                hand_layer = Image.new('RGBA',canvas.size,(0,0,0,0))
+                hand_layer.paste(hand_image,(hx,hy),hand_image)
+                canvas = Image.alpha_composite(canvas,hand_layer)
+                canvas = Image.alpha_composite(canvas,product_layer)
             frame = canvas.convert('RGB')
             for k in range(n,min(total,n+hold)):
                 frame.save(frames_dir / f'{k:05d}.png',compress_level=1)
@@ -681,7 +722,7 @@ def render_creative_motion(layers, output, music, duration, on_progress=None, do
 def render_video(images: list[Path], output: Path, music: Path | None = None, style: str = 'hybrid', duration: int = DURATION, doodle: str = 'none', hook: str | None = None, on_progress=None, product_layers=None, motion='auto'):
     """Produce CPU-friendly Ken Burns transitions. Morph is an approximation, not generative AI."""
     if product_layers:
-        if motion in ('auto','stop','spin','smooth'):
+        if motion in ('auto','stop','spin','smooth','hand'):
             return render_creative_motion(product_layers, output, music, duration, on_progress, doodle, motion)
         return render_product_motion(product_layers, output, music, duration, on_progress, doodle)
     if style not in STYLES:
