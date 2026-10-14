@@ -175,9 +175,11 @@ def replace_background(source: Path, destination: Path, choice: str, foreground_
 TOKEN = os.environ.get('BOT_TOKEN', '')
 MAX_IMAGES = int(os.environ.get('MAX_IMAGES', '5'))
 DURATION = int(os.environ.get('VIDEO_SECONDS', '10'))
-WIDTH = min(720, int(os.environ.get('VIDEO_WIDTH', '480')))
-HEIGHT = min(1280, int(os.environ.get('VIDEO_HEIGHT', '854')))
-FPS = min(30, int(os.environ.get('VIDEO_FPS', '24')))
+WIDTH = max(240, min(720, int(os.environ.get('VIDEO_WIDTH', '720'))))
+WIDTH -= WIDTH % 2
+HEIGHT = max(426, min(1280, int(os.environ.get('VIDEO_HEIGHT', '1280'))))
+HEIGHT -= HEIGHT % 2
+FPS = max(15, min(30, int(os.environ.get('VIDEO_FPS', '30'))))
 STYLES = {
     'hybrid': ('smoothleft', 'smoothup', 'fade'),
     'cinematic': ('fade', 'fadeblack'),
@@ -533,7 +535,7 @@ def render_product_motion(layers, output, music, duration, on_progress=None, doo
                    '-loop','1','-framerate',str(FPS),'-i',str(fg_path),
                    '-filter_complex',f"[0:v]scale=iw*2:ih*2:flags=lanczos[bg];[1:v]scale=iw*2:ih*2:flags=lanczos[fg];[bg][fg]overlay=x='{x}':y='{y}':eval=frame:shortest=1,scale={WIDTH}:{HEIGHT}:flags=lanczos,format=yuv420p[v]",
                    '-map','[v]','-frames:v',str(frames),'-an','-c:v','libx264',
-                   '-preset','ultrafast','-crf','22','-pix_fmt','yuv420p',str(clip)]
+                   '-preset','veryfast','-crf','19','-pix_fmt','yuv420p',str(clip)]
             subprocess.run(cmd, check=True, timeout=120, capture_output=True, text=True)
             clips.append(clip)
             if on_progress:
@@ -544,7 +546,7 @@ def render_product_motion(layers, output, music, duration, on_progress=None, doo
             cmd += ['-i',str(clip)]
         chain = ''.join(f'[{i}:v]' for i in range(len(clips)))+f'concat=n={len(clips)}:v=1:a=0,format=yuv420p[v]'
         cmd += ['-filter_complex',chain,'-map','[v]','-an','-c:v','libx264',
-                '-preset','veryfast','-crf','21','-pix_fmt','yuv420p',str(joined)]
+                '-preset','veryfast','-crf','19','-pix_fmt','yuv420p',str(joined)]
         subprocess.run(cmd, check=True, timeout=150, capture_output=True, text=True)
         if doodle != 'none':
             decorated = tmp / 'decorated.mp4'
@@ -642,13 +644,13 @@ def render_creative_motion(layers, output, music, duration, on_progress=None, do
             canvas = Image.alpha_composite(canvas, product_layer)
             frame = canvas.convert('RGB')
             for k in range(n,min(total,n+hold)):
-                frame.save(frames_dir / f'{k:05d}.jpg',quality=91)
+                frame.save(frames_dir / f'{k:05d}.jpg',quality=95,subsampling=0)
             if on_progress and (n == 0 or n % max(hold,round(FPS*2/hold)*hold) == 0):
                 on_progress(45+round(30*n/total),'Membina babak Creative Stop Motion...')
         joined = tmp / 'creative.mp4'
         subprocess.run(['ffmpeg','-hide_banner','-loglevel','error','-y','-framerate',str(FPS),
                         '-i',str(frames_dir/'%05d.jpg'),'-c:v','libx264','-preset','veryfast',
-                        '-crf','23','-pix_fmt','yuv420p',str(joined)],check=True,timeout=240,capture_output=True,text=True)
+                        '-crf','19','-pix_fmt','yuv420p','-movflags','+faststart',str(joined)],check=True,timeout=240,capture_output=True,text=True)
         if doodle != 'none':
             decorated = tmp / 'decorated.mp4'
             apply_overlay(joined,decorated,doodle,WIDTH,HEIGHT,duration,background=layers[0][1])
@@ -753,7 +755,7 @@ def render_video(images: list[Path], output: Path, music: Path | None = None, st
                   f"d={frames}:s={WIDTH}x{HEIGHT}:fps={FPS},format=yuv420p")
             cmd = ['ffmpeg','-hide_banner','-loglevel','error','-y','-threads','1','-filter_threads','1','-framerate','1','-i',str(still),
                    '-vf',vf,'-frames:v',str(frames),'-an','-c:v','libx264',
-                   '-preset','ultrafast','-crf','22','-pix_fmt','yuv420p','-movflags','+faststart',str(clip)]
+                   '-preset','veryfast','-crf','19','-pix_fmt','yuv420p','-movflags','+faststart',str(clip)]
             subprocess.run(cmd, check=True, timeout=100, capture_output=True, text=True)
             logging.info('KLIPPO render shot %s/%s complete (%s bytes)', i + 1, n, clip.stat().st_size)
             if on_progress:
@@ -777,7 +779,7 @@ def render_video(images: list[Path], output: Path, music: Path | None = None, st
                 chains.append(f'{last}[{i}:v]xfade=transition={transition}:duration={fade:.4f}:offset={offset:.4f}{label}')
                 last = label
             cmd += ['-filter_complex',';'.join(chains),'-map',last,'-an','-c:v','libx264',
-                    '-preset','veryfast','-crf','20','-pix_fmt','yuv420p','-movflags','+faststart',str(video)]
+                    '-preset','veryfast','-crf','19','-pix_fmt','yuv420p','-movflags','+faststart',str(video)]
             logging.info('KLIPPO joining %s rendered shots', n)
             if on_progress:
                 on_progress(80, 'Menggabungkan babak video...')
