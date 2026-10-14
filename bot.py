@@ -660,13 +660,13 @@ def render_creative_motion(layers, output, music, duration, on_progress=None, do
             canvas = Image.alpha_composite(canvas, product_layer)
             frame = canvas.convert('RGB')
             for k in range(n,min(total,n+hold)):
-                frame.save(frames_dir / f'{k:05d}.jpg',quality=95,subsampling=0)
+                frame.save(frames_dir / f'{k:05d}.png',compress_level=1)
             if on_progress and (n == 0 or n % max(hold,round(FPS*2/hold)*hold) == 0):
                 on_progress(45+round(30*n/total),'Membina babak Creative Stop Motion...')
         joined = tmp / 'creative.mp4'
         subprocess.run(['ffmpeg','-hide_banner','-loglevel','error','-y','-framerate',str(FPS),
-                        '-i',str(frames_dir/'%05d.jpg'),'-c:v','libx264','-preset','veryfast',
-                        '-crf','19','-pix_fmt','yuv420p','-movflags','+faststart',str(joined)],check=True,timeout=240,capture_output=True,text=True)
+                        '-i',str(frames_dir/'%05d.png'),'-c:v','libx264','-preset','veryfast',
+                        '-crf','18','-pix_fmt','yuv420p','-movflags','+faststart',str(joined)],check=True,timeout=240,capture_output=True,text=True)
         if doodle != 'none':
             decorated = tmp / 'decorated.mp4'
             apply_overlay(joined,decorated,doodle,WIDTH,HEIGHT,duration,background=layers[0][1])
@@ -704,7 +704,7 @@ def render_video(images: list[Path], output: Path, music: Path | None = None, st
         shots = [(path, (i * 3 + i // 2) % 8) for i, path in enumerate(images)]
     n = len(shots)
     # Keep fades short enough for any image count and total duration.
-    fade = min(0.65, duration / (n * 4.0)) if n > 1 else 0
+    fade = min(0.42, duration / (n * 6.0)) if n > 1 else 0
     clip_duration = (duration + (n - 1) * fade) / n
     frames = max(1, round(clip_duration * FPS))
     with tempfile.TemporaryDirectory(prefix='render_') as td:
@@ -717,7 +717,7 @@ def render_video(images: list[Path], output: Path, music: Path | None = None, st
                 # Preserve framing: modest overscan gives zoompan room to move.
                 img = smart_frame(img, motion)
                 still = temp / f'still_{i}.jpg'
-                img.save(still, quality=96, subsampling=0, optimize=True)
+                img.save(still, quality=97, subsampling=0, optimize=True)
                 # Product-only video: no generated text on any frame.
             clip = temp / f'clip_{i}.mp4'
             # Subtle editorial motion: vary direction, limit zoom change to 7.5%.
@@ -771,7 +771,7 @@ def render_video(images: list[Path], output: Path, music: Path | None = None, st
                   f"d={frames}:s={WIDTH}x{HEIGHT}:fps={FPS},format=yuv420p")
             cmd = ['ffmpeg','-hide_banner','-loglevel','error','-y','-threads','1','-filter_threads','1','-framerate','1','-i',str(still),
                    '-vf',vf,'-frames:v',str(frames),'-an','-c:v','libx264',
-                   '-preset','veryfast','-crf','19','-pix_fmt','yuv420p','-movflags','+faststart',str(clip)]
+                   '-preset','veryfast','-crf','18','-pix_fmt','yuv420p','-movflags','+faststart',str(clip)]
             subprocess.run(cmd, check=True, timeout=100, capture_output=True, text=True)
             logging.info('KLIPPO render shot %s/%s complete (%s bytes)', i + 1, n, clip.stat().st_size)
             if on_progress:
@@ -791,11 +791,11 @@ def render_video(images: list[Path], output: Path, music: Path | None = None, st
                 offset = i * (clip_duration - fade)
                 # Same-source cuts get a gentle dissolve; different photos use the selected style.
                 same_photo = shots[i - 1][0] == shots[i][0]
-                transition = ('fade', 'smoothleft', 'fadeblack')[(i - 1) % 3] if same_photo else STYLES[style][(i - 1) % len(STYLES[style])]
+                transition = 'fade' if same_photo else STYLES[style][(i - 1) % len(STYLES[style])]
                 chains.append(f'{last}[{i}:v]xfade=transition={transition}:duration={fade:.4f}:offset={offset:.4f}{label}')
                 last = label
             cmd += ['-filter_complex',';'.join(chains),'-map',last,'-an','-c:v','libx264',
-                    '-preset','veryfast','-crf','19','-pix_fmt','yuv420p','-movflags','+faststart',str(video)]
+                    '-preset','veryfast','-crf','18','-pix_fmt','yuv420p','-movflags','+faststart',str(video)]
             logging.info('KLIPPO joining %s rendered shots', n)
             if on_progress:
                 on_progress(80, 'Menggabungkan babak video...')
