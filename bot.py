@@ -1248,15 +1248,16 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         reset(context)
         context.user_data['stage'] = 'video_input'
         await query.message.reply_text('🎬 Pilih cara masukkan produk:', reply_markup=video_input_menu())
-    elif action == 'video_input:photos' and stage == 'video_input':
+    elif action == 'video_input:photos':
         context.user_data['stage'] = 'photos'
         await query.message.reply_text('📷 Hantar 1–5 gambar produk. Tekan Selesai apabila cukup.', reply_markup=photos_menu())
-    elif action == 'video_input:shopee' and stage == 'video_input':
+    elif action == 'video_input:shopee':
         context.user_data['stage'] = 'shopee_link'
         await query.message.reply_text('🔗 MASUKKAN PAUTAN PRODUK SHOPEE\n\n1. Buka aplikasi Shopee dan pilih produk.\n2. Tekan Kongsi → Salin Pautan.\n3. Tampal pautan halaman produk Shopee Malaysia yang lengkap dalam ruang menaip mesej di bawah.\n4. Tekan Hantar (➤).\n\nContoh format: https://shopee.com.my/product/123456/789012\n\n⏳ Selepas dihantar, KLIPPO akan cuba mengambil gambar awam produk secara automatik. Jika gagal, bot akan meminta gambar sendiri.\n\n👇 Tampal pautan sekarang:', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📷 Tukar kepada Upload Gambar', callback_data='video_input:back')], [InlineKeyboardButton('🏠 Menu Utama', callback_data='home')]]))
-    elif action == 'video_input:back' and stage in ('shopee_link', 'photos'):
-        context.user_data['stage'] = 'video_input'
-        await query.message.reply_text('🎬 Pilih cara masukkan produk:', reply_markup=video_input_menu())
+    elif action == 'video_input:back':
+        context.user_data['stage'] = 'photos'
+        context.user_data.pop('shopee_url', None)
+        await query.message.reply_text('📷 Hantar 1–5 gambar produk. Tekan Selesai apabila cukup.', reply_markup=photos_menu())
     elif action == 'prompt':
         reset(context)
         context.user_data['stage'] = 'prompt_type'
