@@ -203,6 +203,14 @@ DOODLE_OPTIONS = {'auto':'✨ Auto (Ikut Latar)', 'black':'🖤 Hitam', 'white':
 def doodle_menu():
     return InlineKeyboardMarkup([[InlineKeyboardButton(label, callback_data='doodle:'+key)] for key,label in DOODLE_OPTIONS.items()])
 
+def prompt_input_menu():
+    return InlineKeyboardMarkup([
+        [InlineKeyboardButton('📷 Upload Gambar', callback_data='prompt_input:photo')],
+        [InlineKeyboardButton('🔗 Masukkan Pautan Shopee', callback_data='prompt_input:shopee')],
+        [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
+    ])
+
+
 def video_input_menu():
     return InlineKeyboardMarkup([
         [InlineKeyboardButton('📷 Upload Gambar', callback_data='video_input:photos')],
@@ -1240,15 +1248,24 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 rows.extend([[InlineKeyboardButton(label, callback_data='prompt_style:' + key)] for key, label in storyboard_styles()])
                 await query.message.reply_text('🎨 Pilih gaya Prompt Storyboard:', reply_markup=InlineKeyboardMarkup(rows))
             else:
-                context.user_data['stage'] = 'prompt_photo'
-                await query.message.reply_text('📷 Hantar satu gambar produk. Maklumat tambahan boleh dimasukkan kemudian, tetapi tidak wajib.')
+                context.user_data['stage'] = 'prompt_input'
+                await query.message.reply_text('✍️ Pilih cara masukkan produk untuk prompt:', reply_markup=prompt_input_menu())
     elif action.startswith('prompt_style:') and stage == 'prompt_style':
         selected = action.split(':', 1)[1]
         valid = {'auto'} | {key for key, _ in storyboard_styles()}
         if selected in valid:
             context.user_data['prompt_style'] = selected
-            context.user_data['stage'] = 'prompt_photo'
-            await query.message.reply_text('📷 Hantar satu gambar produk. AI hanya membaca ciri produk yang kelihatan jika tersedia.')
+            context.user_data['stage'] = 'prompt_input'
+            await query.message.reply_text('✍️ Pilih cara masukkan produk untuk prompt:', reply_markup=prompt_input_menu())
+    elif action == 'prompt_input:photo' and stage == 'prompt_input':
+        context.user_data['stage'] = 'prompt_photo'
+        await query.message.reply_text('📷 Hantar satu gambar produk. Maklumat tambahan boleh dimasukkan kemudian.')
+    elif action == 'prompt_input:shopee' and stage == 'prompt_input':
+        context.user_data['stage'] = 'prompt_shopee_link'
+        await query.message.reply_text('🔗 MASUKKAN PAUTAN PRODUK SHOPEE\\n\\n1. Buka produk di Shopee.\\n2. Tekan Kongsi → Salin Pautan.\\n3. Tampal pautan produk Shopee Malaysia dalam ruang mesej dan tekan Hantar.\\n\\n👇 Tampal pautan sekarang:', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('↩️ Tukar Cara Input', callback_data='prompt_input:back')], [InlineKeyboardButton('🏠 Menu Utama', callback_data='home')]]))
+    elif action == 'prompt_input:back' and stage == 'prompt_shopee_link':
+        context.user_data['stage'] = 'prompt_input'
+        await query.message.reply_text('✍️ Pilih cara masukkan produk untuk prompt:', reply_markup=prompt_input_menu())
     elif action.startswith('prompt_details:') and stage == 'prompt_details_choice':
         if action == 'prompt_details:add':
             context.user_data['stage'] = 'prompt_details_text'
@@ -1584,6 +1601,16 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data['video_product_info'] = info
         hook = verified_video_hook(info)
         await update.message.reply_text(('✅ Cadangan hook: ' + hook if hook else 'Maklumat produk tidak cukup jelas; video akan dijana tanpa hook.'), reply_markup=photos_menu())
+    elif stage == 'prompt_shopee_link':
+        link = _shopee_link(value)
+        if not link:
+            await update.message.reply_text('⚠️ Pautan tidak dikenali. Tampal URL halaman produk Shopee Malaysia yang lengkap.')
+            return
+        context.user_data['shopee_url'] = link
+        context.user_data['prompt_product'] = 'Product reference URL (do not invent unverified specifications): ' + link
+        context.user_data['prompt_vision'] = ''
+        context.user_data['stage'] = 'prompt_details_text'
+        await update.message.reply_text('✅ Pautan diterima. Untuk prompt yang tepat, masukkan nama produk dan ciri utama daripada halaman Shopee (contoh: jenama, model, warna). Pautan sahaja tidak menjamin AI boleh membaca halaman produk.')
     elif stage == 'prompt_details_text':
         context.user_data['prompt_product'] = value[:600]
         context.user_data['stage'] = 'prompt_scene'
