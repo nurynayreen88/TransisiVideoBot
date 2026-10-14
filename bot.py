@@ -490,6 +490,24 @@ def render_product_motion(layers, output, music, duration, on_progress=None):
             if not bbox:
                 raise ValueError('Produk tidak dapat dikesan dalam imej lutsinar')
             fg = fg.crop(bbox)
+            # Gentle detail enhancement preserves the product's original colors.
+            from PIL import ImageEnhance
+            alpha = fg.getchannel('A')
+            rgb = Image.merge('RGB', fg.split()[:3])
+            rgb = ImageEnhance.Contrast(rgb).enhance(1.055)
+            rgb = ImageEnhance.Sharpness(rgb).enhance(1.12)
+            fg = rgb.convert('RGBA')
+            fg.putalpha(alpha)
+            # Soft contact shadow follows the product instead of remaining on the backdrop.
+            pad = max(12, round(max(fg.size) * .07))
+            shadow_alpha = Image.new('L', (fg.width + 2*pad, fg.height + 2*pad), 0)
+            shadow_alpha.paste(alpha, (pad, pad + pad//3))
+            shadow_alpha = shadow_alpha.filter(ImageFilter.GaussianBlur(max(5, pad//2)))
+            shadow_alpha = shadow_alpha.point(lambda v: round(v * .24))
+            shadow = Image.new('RGBA', shadow_alpha.size, (0, 0, 0, 0))
+            shadow.putalpha(shadow_alpha)
+            shadow.alpha_composite(fg, (pad, pad))
+            fg = shadow
             # Clearly distinct framing, not tiny jitter. Never fabricate another view.
             scale = (.63, .76, .70)[i % 3]
             fg.thumbnail((int(WIDTH * scale), int(HEIGHT * .66)), Image.Resampling.LANCZOS)
