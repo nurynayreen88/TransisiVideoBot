@@ -1404,7 +1404,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # callbacks must continue into the second chain.
     if action in ('admin_pending', 'admin', 'storyboard', 'make', 'prompt') or action.startswith(
         ('admin_approve:', 'admin_reject:', 'prompt_type:', 'prompt_duration:',
-         'prompt_style:', 'prompt_details:')
+         'prompt_style:', 'prompt_details:', 'video_input:', 'prompt_input:')
     ):
         return
     if action.startswith('motion:') and context.user_data.get('stage') == 'prompt_motion':
