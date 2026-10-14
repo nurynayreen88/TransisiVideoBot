@@ -572,7 +572,14 @@ def render_creative_motion(layers, output, music, duration, on_progress=None, do
         frames_dir.mkdir()
         total = max(1, round(duration * FPS))
         import hashlib
-        variant = int(hashlib.sha256(('|'.join(str(p) for p,c in layers)+str(duration)).encode()).hexdigest()[:4],16) % 4
+        variant_hash = hashlib.sha256()
+        for product_path, background_choice in layers:
+            with open(product_path, 'rb') as product_file:
+                for chunk in iter(lambda: product_file.read(65536), b''):
+                    variant_hash.update(chunk)
+            variant_hash.update(background_choice.encode('utf-8'))
+        variant_hash.update(str(duration).encode('ascii'))
+        variant = int(variant_hash.hexdigest()[:4], 16) % 4
         poses_per_second = (6,7,8,9)[variant] if mode == 'stop' else (8,9,10,11)[variant]
         hold = max(2, round(FPS / poses_per_second))
         sources = []
@@ -626,8 +633,13 @@ def render_creative_motion(layers, output, music, duration, on_progress=None, do
                       else Image.new('RGBA',(WIDTH,HEIGHT),BACKGROUNDS[choice]+(255,)))
             x = round((WIDTH-transformed.width)/2)+dx
             y = round((HEIGHT-transformed.height)/2)+dy
-            canvas.alpha_composite(shadow,(x+7,y+11))
-            canvas.alpha_composite(transformed,(x,y))
+            # Clip overlays safely when a pose extends outside the canvas.
+            shadow_layer = Image.new('RGBA', canvas.size, (0, 0, 0, 0))
+            shadow_layer.paste(shadow, (x+7, y+11))
+            canvas = Image.alpha_composite(canvas, shadow_layer)
+            product_layer = Image.new('RGBA', canvas.size, (0, 0, 0, 0))
+            product_layer.paste(transformed, (x, y))
+            canvas = Image.alpha_composite(canvas, product_layer)
             frame = canvas.convert('RGB')
             for k in range(n,min(total,n+hold)):
                 frame.save(frames_dir / f'{k:05d}.jpg',quality=91)
@@ -643,7 +655,9 @@ def render_creative_motion(layers, output, music, duration, on_progress=None, do
             joined = decorated
         cmd=['ffmpeg','-hide_banner','-loglevel','error','-y','-i',str(joined)]
         if music:
-            cmd += ['-stream_loop','-1','-i',str(music),'-map','0:v:0','-map','1:a:0','-c:a','aac','-b:a','128k']
+            cmd += ['-stream_loop','-1','-i',str(music),'-map','0:v:0','-map','1:a:0',
+                    '-af',f'afade=t=out:st={max(0,duration-0.35):.3f}:d=0.35',
+                    '-c:a','aac','-b:a','128k']
         else:
             cmd += ['-map','0:v:0']
         cmd += ['-t',str(duration),'-c:v','copy','-movflags','+faststart',str(output)]
@@ -777,6 +791,7 @@ def render_video(images: list[Path], output: Path, music: Path | None = None, st
         if music:
             subprocess.run(['ffmpeg','-hide_banner','-loglevel','error','-y','-i',str(video),
                             '-stream_loop','-1','-i',str(music),'-map','0:v:0','-map','1:a:0',
+                            '-af',f'afade=t=out:st={max(0,duration-0.35):.3f}:d=0.35',
                             '-t',str(duration),'-c:v','copy','-c:a','aac','-b:a','128k',
                             '-movflags','+faststart',str(output)],check=True,timeout=180)
         else:
