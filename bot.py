@@ -799,6 +799,7 @@ def reset(context):
     context.user_data['prompt_mode'] = 'normal'
     context.user_data['video_product_info'] = ''
     context.user_data['product_description'] = ''
+    context.user_data['shopee_url'] = ''
     context.user_data['prompt_vision'] = ''
     context.user_data['prompt_product'] = ''
     context.user_data['stage'] = 'home'
@@ -1373,7 +1374,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await query.message.reply_text('Hantar sekurang-kurangnya satu gambar dahulu.', reply_markup=photos_menu())
             return
         context.user_data['stage'] = 'product_description'
-        await query.message.reply_text('📋 Tampal tajuk atau penerangan produk daripada Shopee/TikTok Shop (pilihan). Teks ini membantu mengenal pasti model produk. Gambar tidak dihantar kepada Gemini.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('⏭️ Langkau',callback_data='description:skip')]]))
+        await query.message.reply_text('📋 Tampal tajuk/penerangan produk dan pautan Shopee produk yang sama (pilihan). Jika gambar terlalu kompleks, KLIPPO akan cuba foto awam halaman itu. Gambar tidak dihantar kepada Gemini.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('⏭️ Langkau',callback_data='description:skip')]]))
     elif action == 'description:skip' and stage == 'product_description':
         context.user_data['stage'] = 'background'
         await query.message.reply_text('🖼️ Pilih latar produk:',reply_markup=background_menu())
@@ -1531,6 +1532,7 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await start(update, context)
         return
     if stage == 'product_description':
+        context.user_data['shopee_url'] = _shopee_link(value)
         context.user_data['product_description'] = value[:1800]
         context.user_data['video_product_info'] = value[:600]
         context.user_data['stage'] = 'background'
@@ -1549,6 +1551,67 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
     else:
         await update.message.reply_text('Gunakan butang menu di bawah.', reply_markup=main_menu())
 
+
+
+
+def _shopee_link(value):
+    """Only accept an explicit Shopee product URL; never fetch arbitrary pasted URLs."""
+    from urllib.parse import urlparse
+    for candidate in re.findall(r'https?://[^\\s<>]+', value):
+        candidate = candidate.rstrip('.,);]')
+        parsed = urlparse(candidate)
+        host = (parsed.hostname or '').lower()
+        if parsed.scheme == 'https' and (host == 'shopee.com.my' or host.endswith('.shopee.com.my')) and (re.search(r'/product/\\d+/\\d+', parsed.path) or re.search(r'-i\\.\\d+\\.\\d+', parsed.path)):
+            return candidate
+    return ''
+
+
+def _shopee_public_photo(url, destination, description):
+    """Best-effort public OG photo only; no login, private API or image AI."""
+    from urllib.request import Request, urlopen
+    from urllib.parse import urlparse
+    from PIL import Image
+    if not _shopee_link(url):
+        return False
+    try:
+        req = Request(url, headers={'User-Agent': 'Mozilla/5.0 KLIPPO/1.0'})
+        with urlopen(req, timeout=7) as response:
+            if not (response.geturl().startswith('https://shopee.com.my/') or response.geturl().startswith('https://www.shopee.com.my/')):
+                return False
+            if 'text/html' not in response.headers.get('Content-Type', '').lower():
+                return False
+            page = response.read(350000).decode('utf-8', 'replace')
+        from html import unescape
+        def meta(name):
+            for tag in re.findall(r'<meta\\b[^>]*>', page, re.I):
+                if re.search(r'(?:property|name)=[\\"\\\']'+re.escape(name)+r'[\\"\\\']', tag, re.I):
+                    match = re.search(r'content=[\\"\\\']([^\\"\\\']+)', tag, re.I)
+                    if match:
+                        return unescape(match.group(1))
+            return ''
+        title, image_url = meta('og:title'), meta('og:image')
+        words = [w.lower() for w in re.findall(r'[A-Za-z0-9]{4,}', description) if not w.isdigit()]
+        if not title or not image_url or not words or not any(w in title.lower() for w in words[:8]):
+            return False
+        parsed = urlparse(image_url)
+        if parsed.scheme != 'https' or not (parsed.hostname or '').lower().endswith(('.shopee.com.my', '.shopee.sg', '.shopeemobile.com', '.shopeeusercontent.com')):
+            return False
+        with urlopen(Request(image_url, headers={'User-Agent': 'Mozilla/5.0'}), timeout=7) as response:
+            if not response.headers.get('Content-Type', '').lower().startswith('image/'):
+                return False
+            data = response.read(6000001)
+        if len(data) > 6000000:
+            return False
+        with Image.open(BytesIO(data)) as opened:
+            opened.verify()
+        with Image.open(BytesIO(data)) as opened:
+            if min(opened.size) < 350:
+                return False
+            ImageOps.exif_transpose(opened).convert('RGB').save(destination, 'JPEG', quality=92)
+        return True
+    except Exception as exc:
+        logging.info('Public Shopee image unavailable: %s', exc)
+        return False
 
 async def generate(update: Update, context: ContextTypes.DEFAULT_TYPE):
     message = update.effective_message
@@ -1585,6 +1648,18 @@ async def generate(update: Update, context: ContextTypes.DEFAULT_TYPE):
                         await asyncio.to_thread(replace_background, path, prepared, background, foreground_path)
                     except ValueError as exc:
                         logging.warning('Background removal declined: %s', exc)
+                        alternative = folder / f'shopee_alternative_{i}.jpg'
+                        link = context.user_data.get('shopee_url', '')
+                        description = context.user_data.get('product_description', '')
+                        found = bool(link and await asyncio.to_thread(_shopee_public_photo, link, alternative, description))
+                        if found:
+                            try:
+                                await asyncio.to_thread(replace_background, alternative, prepared, background, foreground_path)
+                                paths[i] = prepared
+                                product_layers.append((foreground_path, background))
+                                continue
+                            except ValueError:
+                                logging.info('Shopee public thumbnail is also unsuitable for segmentation')
                         await message.reply_text('⚠️ Gambar ini terlalu kompleks untuk pengasingan produk yang selamat. KLIPPO akan menggunakan gambar asal tanpa menggantikannya dengan gambar produk lain yang belum disahkan.')
                         product_layers = []
                         paths = [folder / f'{j}.jpg' for j in range(len(ids))]
