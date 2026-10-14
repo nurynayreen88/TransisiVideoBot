@@ -343,18 +343,19 @@ def confirm_menu():
     ])
 
 
-def make_promo_beat() -> Path | None:
+def make_promo_beat(variant=0) -> Path | None:
     """Generate an original upbeat instrumental loop, with no external music licensing."""
     import math
     import wave
     from array import array
     import random
-    target = Path(tempfile.gettempdir()) / 'klippo_promo_beat_v1.wav'
+    bpm = (124, 116, 128, 120, 132)[variant % 5]
+    target = Path(tempfile.gettempdir()) / f'klippo_promo_beat_{bpm}_v2.wav'
     if target.is_file() and target.stat().st_size > 50000:
         return target
-    rate, seconds, bpm = 22050, 24, 124
+    rate, seconds = 22050, 24
     beat = 60 / bpm
-    rng = random.Random(124)
+    rng = random.Random(124 + variant)
     samples = array('h')
     for n in range(rate * seconds):
         t = n / rate
@@ -387,7 +388,8 @@ def resolve_music(choice: str, style: str) -> Path | None:
     if choice == 'none' or choice == 'custom':
         return None
     if choice == 'auto':
-        return make_promo_beat()
+        import random
+        return make_promo_beat(random.SystemRandom().randrange(5))
     name = choice
     path = MUSIC_DIR / (name + '.mp3')
     return path if path.is_file() else None
