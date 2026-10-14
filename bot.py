@@ -203,6 +203,14 @@ DOODLE_OPTIONS = {'auto':'✨ Auto (Ikut Latar)', 'black':'🖤 Hitam', 'white':
 def doodle_menu():
     return InlineKeyboardMarkup([[InlineKeyboardButton(label, callback_data='doodle:'+key)] for key,label in DOODLE_OPTIONS.items()])
 
+def video_input_menu():
+    return InlineKeyboardMarkup([
+        [InlineKeyboardButton('📷 Upload Gambar', callback_data='video_input:photos')],
+        [InlineKeyboardButton('🔗 Masukkan Pautan Shopee', callback_data='video_input:shopee')],
+        [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
+    ])
+
+
 def photos_menu():
     return InlineKeyboardMarkup([
         [InlineKeyboardButton('📋 Semak Susunan', callback_data='photos_order')],
@@ -944,7 +952,7 @@ async def photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text(('🔎 AI mengenal pasti: ' + description + '\n\n' if description else '📷 Gambar diterima. AI Vision tidak tersedia; prompt masih boleh digunakan bersama gambar rujukan.\n\n') + 'Mahu tambah maklumat produk secara pilihan?', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('✍️ Tambah Maklumat', callback_data='prompt_details:add')], [InlineKeyboardButton('✨ Teruskan Dengan Gambar Sahaja', callback_data='prompt_details:skip')]]))
         return
     if context.user_data.get('stage') != 'photos':
-        await update.message.reply_text('Tekan 🎬 Video Transisi dahulu.', reply_markup=main_menu())
+        await update.message.reply_text('Pilih 📷 Upload Gambar dahulu melalui menu Video Transisi.', reply_markup=main_menu())
         return
     ids = context.user_data.setdefault('photos', [])
     if len(ids) >= MAX_IMAGES:
@@ -1193,8 +1201,17 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await query.message.reply_text('🎞️ STORYBOARD V1 — Hantar 1–5 gambar produk. Bot akan susun enam babak sinematik. Tekan Selesai apabila cukup.', reply_markup=photos_menu())
     elif action == 'make':
         reset(context)
+        context.user_data['stage'] = 'video_input'
+        await query.message.reply_text('🎬 Pilih cara masukkan produk:', reply_markup=video_input_menu())
+    elif action == 'video_input:photos' and stage == 'video_input':
         context.user_data['stage'] = 'photos'
-        await query.message.reply_text('Langkah 1/4 — Hantar 1–5 gambar produk. Tekan Selesai apabila cukup.', reply_markup=photos_menu())
+        await query.message.reply_text('📷 Hantar 1–5 gambar produk. Tekan Selesai apabila cukup.', reply_markup=photos_menu())
+    elif action == 'video_input:shopee' and stage == 'video_input':
+        context.user_data['stage'] = 'shopee_link'
+        await query.message.reply_text('🔗 Tampal pautan halaman produk Shopee di ruang mesej Telegram. KLIPPO akan cuba mendapatkan gambar awam produk secara automatik.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('↩️ Tukar Cara Input', callback_data='video_input:back')]]))
+    elif action == 'video_input:back' and stage in ('shopee_link', 'photos'):
+        context.user_data['stage'] = 'video_input'
+        await query.message.reply_text('🎬 Pilih cara masukkan produk:', reply_markup=video_input_menu())
     elif action == 'prompt':
         reset(context)
         context.user_data['stage'] = 'prompt_type'
@@ -1527,8 +1544,8 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
         action = shortcuts[value]
         if action == 'make':
             reset(context)
-            context.user_data['stage'] = 'photos'
-            await update.message.reply_text('Langkah 1/4 — Tampal pautan produk Shopee ATAU hantar 1–5 gambar produk. Untuk gambar, tekan Selesai apabila cukup.', reply_markup=photos_menu())
+            context.user_data['stage'] = 'video_input'
+            await update.message.reply_text('🎬 Pilih cara masukkan produk:', reply_markup=video_input_menu())
         elif action == 'convert':
             reset(context)
             context.user_data['stage'] = 'convert'
@@ -1550,10 +1567,12 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
         else:
             await start(update, context)
         return
-    if stage == 'photos' and _shopee_link(value):
+    if stage == 'shopee_link' and _shopee_link(value):
         context.user_data['shopee_url'] = _shopee_link(value)
         context.user_data['stage'] = 'background'
         await update.message.reply_text('🔗 Pautan Shopee diterima. KLIPPO akan cuba mengambil foto awam produk tanpa Gemini. Jika akses disekat, bot akan meminta gambar sendiri. Pilih latar:', reply_markup=background_menu())
+    elif stage == 'shopee_link':
+        await update.message.reply_text('⚠️ Pautan tidak dikenali. Tampal URL halaman produk Shopee Malaysia yang lengkap (https://shopee.com.my/...).')
     elif stage == 'product_description':
         context.user_data['shopee_url'] = _shopee_link(value)
         context.user_data['product_description'] = value[:1800]
