@@ -808,7 +808,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 [InlineKeyboardButton('↔️ Gerak Sisi', callback_data='motion:side')],
                 [InlineKeyboardButton('✨ Studio Statik', callback_data='motion:static')]
             ]))
-    if action.startswith('motion:') and context.user_data.get('stage') == 'prompt_motion':
+    # The first callback chain has already handled its action. Only the prompt\n    # motion continuation may proceed into the second chain (including storyboard auto-motion).\n    if not (action.startswith('motion:') and context.user_data.get('stage') == 'prompt_motion'):\n        return\n    if action.startswith('motion:') and context.user_data.get('stage') == 'prompt_motion':
         motion = action.split(':', 1)[1]
         motions = {'orbit': 'A controlled 30-degree camera arc around the product, not a full 360-degree rotation; preserve the visible product geometry.', 'push': 'A slow forward dolly-in with gentle parallax; no object deformation.', 'side': 'A smooth left-to-right camera slide with stable product proportions.', 'static': 'A locked camera with subtle studio lighting changes only.'}
         if motion in motions:
