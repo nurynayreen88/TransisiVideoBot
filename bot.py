@@ -214,7 +214,6 @@ def prompt_input_menu():
 def video_input_menu():
     return InlineKeyboardMarkup([
         [InlineKeyboardButton('📷 Upload Gambar', callback_data='video_input:photos')],
-        [InlineKeyboardButton('🔗 Masukkan Pautan Shopee', callback_data='video_input:shopee')],
         [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
     ])
 
@@ -1268,7 +1267,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif action == 'make':
         reset(context)
         context.user_data['stage'] = 'video_input'
-        await query.message.reply_text('🎬 Pilih cara masukkan produk:', reply_markup=video_input_menu())
+        await query.message.reply_text('🎬 Upload 1–5 gambar produk dahulu. Selepas itu, salin dan tampal tajuk produk daripada Shopee.', reply_markup=video_input_menu())
     elif action == 'video_input:photos':
         context.user_data['stage'] = 'photos'
         await query.message.reply_text('📷 Hantar 1–5 gambar produk. Tekan Selesai apabila cukup.', reply_markup=photos_menu())
@@ -1486,10 +1485,9 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await query.message.reply_text('Hantar sekurang-kurangnya satu gambar dahulu.', reply_markup=photos_menu())
             return
         context.user_data['stage'] = 'product_description'
-        await query.message.reply_text('📋 Tampal tajuk/penerangan produk dan pautan Shopee produk yang sama (pilihan). Jika gambar terlalu kompleks, KLIPPO akan cuba foto awam halaman itu. Gambar tidak dihantar kepada Gemini.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('⏭️ Langkau',callback_data='description:skip')]]))
+        await query.message.reply_text('📝 WAJIB: Buka produk di Shopee → salin TAJUK produk → tampal tajuk penuh di ruang mesej ini dan tekan Hantar. Tidak perlu pautan. Tajuk digunakan untuk tulisan video.')
     elif action == 'description:skip' and stage == 'product_description':
-        context.user_data['stage'] = 'background'
-        await query.message.reply_text('🖼️ Pilih latar produk:',reply_markup=background_menu())
+        await query.message.reply_text('📝 Tajuk produk Shopee wajib diisi. Sila salin dan tampal tajuk penuh produk di ruang mesej.')
     elif action.startswith('background:') and stage == 'background':
         choice = action.split(':', 1)[1]
         if choice in ('original', 'white', 'beige', 'dark', 'pastel', 'gradient', 'pattern', 'duotone', 'mist'):
@@ -1650,11 +1648,14 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif stage == 'shopee_link':
         await update.message.reply_text('⚠️ Pautan tidak dikenali. Tampal URL halaman produk Shopee Malaysia yang lengkap (https://shopee.com.my/...).')
     elif stage == 'product_description':
-        context.user_data['shopee_url'] = _shopee_link(value)
+        if len(value.strip()) < 5 or _shopee_link(value) or value.lower().startswith(('http://', 'https://')):
+            await update.message.reply_text('⚠️ Tampal TAJUK produk Shopee (bukan pautan). Tajuk wajib diisi sebelum meneruskan.')
+            return
+        context.user_data['shopee_url'] = ''
         context.user_data['product_description'] = value[:1800]
         context.user_data['video_product_info'] = value[:600]
         context.user_data['stage'] = 'background'
-        await update.message.reply_text('✅ Penerangan diterima. Gambar tidak dihantar kepada Gemini. Pilih latar produk:',reply_markup=background_menu())
+        await update.message.reply_text('✅ Tajuk produk diterima. Pilih latar produk:',reply_markup=background_menu())
     elif stage == 'photos' and value.lower().startswith('produk:'):
         info = value.split(':', 1)[1].strip()[:100]
         context.user_data['video_product_info'] = info
@@ -1744,6 +1745,9 @@ def _shopee_public_photo(url, destination, description):
 async def generate(update: Update, context: ContextTypes.DEFAULT_TYPE):
     message = update.effective_message
     ids = context.user_data.get('photos', [])
+    if ids and not context.user_data.get('video_product_info', '').strip() and not context.user_data.get('storyboard_mode'):
+        await message.reply_text('📝 Tajuk produk Shopee wajib diisi. Sila lengkapkan langkah selepas Selesai Hantar Gambar.')
+        return
     if not ids and not context.user_data.get('shopee_url'):
         await message.reply_text('Hantar gambar atau pautan produk Shopee dahulu.', reply_markup=main_menu())
         return
