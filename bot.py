@@ -196,7 +196,7 @@ STYLE_LABELS = {
 MUSIC_CHOICES = ('auto', 'custom')
 MUSIC_DIR = Path(__file__).resolve().parent / 'music'
 
-DOODLE_OPTIONS = {'auto':'✨ Auto Doodle', 'white':'🤍 White Doodle', 'sparkle':'✨ Sparkle', 'motion':'🌀 Motion Lines', 'circle':'◯ Circle Highlight', 'pop':'✳️ Pop Burst', 'all':'🎨 Gabungan Semua', 'none':'🚫 Tanpa Efek'}
+DOODLE_OPTIONS = {'auto':'✨ Auto (Ikut Latar)', 'black':'🖤 Hitam', 'white':'🤍 Putih', 'gold':'🟡 Emas', 'pastel':'🌸 Pastel', 'sparkle':'✨ Sparkle', 'motion':'🌀 Motion Lines', 'circle':'◯ Circle Highlight', 'pop':'✳️ Pop Burst', 'all':'🎨 Gabungan Semua', 'none':'🚫 Tanpa Efek'}
 def doodle_menu():
     return InlineKeyboardMarkup([[InlineKeyboardButton(label, callback_data='doodle:'+key)] for key,label in DOODLE_OPTIONS.items()])
 
@@ -526,7 +526,7 @@ def render_product_motion(layers, output, music, duration, on_progress=None, doo
             cmd = ['ffmpeg','-hide_banner','-loglevel','error','-y','-threads','1',
                    '-loop','1','-framerate',str(FPS),'-i',str(bg_path),
                    '-loop','1','-framerate',str(FPS),'-i',str(fg_path),
-                   '-filter_complex',f"[0:v][1:v]overlay=x='{x}':y='{y}':eval=frame:shortest=1,format=yuv420p[v]",
+                   '-filter_complex',f"[0:v]scale=iw*2:ih*2:flags=lanczos[bg];[1:v]scale=iw*2:ih*2:flags=lanczos[fg];[bg][fg]overlay=x='{x}':y='{y}':eval=frame:shortest=1,scale={WIDTH}:{HEIGHT}:flags=lanczos,format=yuv420p[v]",
                    '-map','[v]','-frames:v',str(frames),'-an','-c:v','libx264',
                    '-preset','ultrafast','-crf','22','-pix_fmt','yuv420p',str(clip)]
             subprocess.run(cmd, check=True, timeout=120, capture_output=True, text=True)
@@ -543,7 +543,7 @@ def render_product_motion(layers, output, music, duration, on_progress=None, doo
         subprocess.run(cmd, check=True, timeout=150, capture_output=True, text=True)
         if doodle != 'none':
             decorated = tmp / 'decorated.mp4'
-            apply_overlay(joined, decorated, doodle, WIDTH, HEIGHT, duration)
+            apply_overlay(joined, decorated, doodle, WIDTH, HEIGHT, duration, background=layers[0][1])
             joined = decorated
         if music:
             cmd = ['ffmpeg','-hide_banner','-loglevel','error','-y','-i',str(joined),
@@ -676,7 +676,7 @@ def render_video(images: list[Path], output: Path, music: Path | None = None, st
             logging.info('KLIPPO shot joining complete (%s bytes)', video.stat().st_size)
         if doodle != 'none':
             decorated = temp / 'decorated.mp4'
-            apply_overlay(video, decorated, doodle, WIDTH, HEIGHT, duration)
+            apply_overlay(video, decorated, doodle, WIDTH, HEIGHT, duration, background='original')
             video = decorated
         logging.info('KLIPPO finalizing video; music=%s', bool(music))
         if music:
