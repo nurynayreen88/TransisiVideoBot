@@ -669,7 +669,7 @@ def render_creative_motion(layers, output, music, duration, on_progress=None, do
                         '-crf','18','-pix_fmt','yuv420p','-movflags','+faststart',str(joined)],check=True,timeout=240,capture_output=True,text=True)
         if doodle != 'none':
             decorated = tmp / 'decorated.mp4'
-            apply_overlay(joined,decorated,doodle,WIDTH,HEIGHT,duration,background=layers[0][1])
+            apply_overlay(joined,decorated,doodle,WIDTH,HEIGHT,duration,background=layers[0][1],seed=variant_hash.hexdigest())
             joined = decorated
         cmd=['ffmpeg','-hide_banner','-loglevel','error','-y','-i',str(joined)]
         if music:
