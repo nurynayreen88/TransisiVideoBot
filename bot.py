@@ -24,7 +24,8 @@ from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ReplyKe
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler, ContextTypes, MessageHandler, filters
 
 logging.basicConfig(level=logging.INFO)
-# Background engine is bundled here so single-file Render deployments work.\nfrom collections import deque
+# Background engine is bundled here so single-file Render deployments work.
+from collections import deque
 from io import BytesIO
 import os
 import logging
@@ -1244,6 +1245,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 [InlineKeyboardButton('↔️ Gerak Sisi', callback_data='motion:side')],
                 [InlineKeyboardButton('✨ Studio Statik', callback_data='motion:static')]
             ]))
+                return
     # Return only for actions handled by the first chain. Video workflow
     # callbacks must continue into the second chain.
     if action in ('admin_pending', 'admin', 'storyboard', 'make', 'prompt') or action.startswith(
