@@ -319,7 +319,7 @@ def main_menu(user_id=None):
         [InlineKeyboardButton('🎞️ Gabung Video', callback_data='merge')],
         [InlineKeyboardButton('🔄 Tukar Format Video', callback_data='convert')],
         [InlineKeyboardButton('💎 Langganan', callback_data='subscription'), InlineKeyboardButton('👤 Akaun Saya', callback_data='account')],
-        [InlineKeyboardButton('❓ Bantuan', callback_data='help')],
+        [InlineKeyboardButton('❓ FAQ', callback_data='help')],
     ]
     if user_id is not None and is_admin(user_id):
         rows.append([InlineKeyboardButton('🛡️ Panel Admin', callback_data='admin')])
@@ -1631,7 +1631,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif action == 'account':
         await account_info(update, context)
     elif action == 'help':
-        await query.message.reply_text('❓ CARA GUNA\n\n1. Tekan Jana Video.\n2. Hantar 1–5 gambar, kemudian tekan Selesai.\n3. Lihat contoh dan pilih gaya.\n4. Dengar contoh dan pilih muzik.\n5. Tekan Hasilkan Video.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
+        await query.message.reply_text('❓ SOALAN LAZIM (FAQ)\n\n*1. Bagaimana nak jana video?*\nTekan Jana Video Transisi, upload 1–5 gambar dan tekan Selesai. Tampal tajuk penuh produk Shopee (bukan pautan), kemudian pilih latar, tempoh, pergerakan dan muzik sebelum jana.\n\n*2. Perlu masukkan pautan Shopee?*\nTidak. Untuk Jana Video, hanya tajuk produk diperlukan selepas upload gambar.\n\n*3. Berapa lama video?*\nPilih 10, 15 atau 20 saat. Masa pemprosesan bergantung pada gambar dan kesibukan pelayan.\n\n*4. Boleh guna gambar berlatar asal?*\nBoleh. Pilih Kekalkan Asal. Pengasingan produk pada latar kompleks mungkin tidak sempurna.\n\n*5. Apa fungsi Prompt?*\nMembantu menyediakan arahan video berdasarkan maklumat atau gambar produk; bukan video siap.\n\n*6. Video gagal dijana?*\nCuba gambar yang lebih jelas, kurangkan bilangan gambar atau ulang semula. Jika masih gagal, simpan mesej ralat untuk semakan.\n\n*7. Adakah hasil video AI generatif?*\nTidak. KLIPPO menyunting dan menganimasikan gambar asal menggunakan efek video; ia tidak mencipta rakaman produk baharu.', parse_mode='Markdown', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
     elif action == 'check':
         await status(update, context)
     elif action == 'reset':
