@@ -84,6 +84,10 @@ def background_menu():
          InlineKeyboardButton('🟤 Studio Beige', callback_data='background:beige')],
         [InlineKeyboardButton('⬛ Luxury Gelap', callback_data='background:dark'),
          InlineKeyboardButton('🌸 Pastel', callback_data='background:pastel')],
+        [InlineKeyboardButton('🏡 Ruang Tamu', callback_data='background:living'),
+         InlineKeyboardButton('🍳 Dapur', callback_data='background:kitchen')],
+        [InlineKeyboardButton('🛏️ Bilik Tidur', callback_data='background:bedroom'),
+         InlineKeyboardButton('🌿 Taman', callback_data='background:garden')],
         [InlineKeyboardButton('↩️ Semak Gambar', callback_data='photos_order')],
     ])
 
@@ -971,14 +975,14 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 context.user_data['stage'] = 'music'
                 await query.message.reply_text(f'⏱️ {duration} saat dipilih. Pilih muzik:', reply_markup=music_menu())
     elif action == 'photos_done':
-        if stage not in ('photos', 'duration') or not context.user_data.get('photos'):
+        if stage not in ('photos', 'duration', 'background') or not context.user_data.get('photos'):
             await query.message.reply_text('Hantar sekurang-kurangnya satu gambar dahulu.', reply_markup=photos_menu())
             return
         context.user_data['stage'] = 'background'
         await query.message.reply_text('🖼️ Pilih latar produk. Latar baharu akan cuba mengasingkan produk daripada gambar asal:', reply_markup=background_menu())
     elif action.startswith('background:') and stage == 'background':
         choice = action.split(':', 1)[1]
-        if choice in ('original', 'white', 'beige', 'dark', 'pastel'):
+        if choice in ('original', 'white', 'beige', 'dark', 'pastel', 'living', 'kitchen', 'bedroom', 'garden'):
             context.user_data['background'] = choice
             context.user_data['stage'] = 'duration'
             await query.message.reply_text('⏱️ Pilih durasi video:', reply_markup=duration_menu())
