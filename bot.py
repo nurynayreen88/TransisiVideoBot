@@ -1116,7 +1116,7 @@ async def generate(update: Update, context: ContextTypes.DEFAULT_TYPE):
             else:
                 selected_style = context.user_data.get('style', 'hybrid')
                 doodle = 'none'
-            await progress_update(progress, 40, 'Bahan siap. Sedang render video (peratus dikemas kini selepas render selesai)...')
+            await progress_update(progress, 40, 'Bahan siap. Sedang render video...')
             await asyncio.to_thread(render_video, paths, result, music, selected_style, context.user_data.get('duration', 10), doodle, verified_video_hook(context.user_data.get('video_product_info', '')))
             await progress_update(progress, 90, 'Render selesai. Menghantar video ke Telegram...')
             with result.open('rb') as f:
