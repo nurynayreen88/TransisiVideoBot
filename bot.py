@@ -625,9 +625,9 @@ def _premium_studio_background(size, choice):
         t = y / max(1, h-1)
         t = t*t*(3-2*t)
         # Wide overhead softbox: brightest behind the product, darker at the edges.
-        for x0 in range(0, w, 4):
-            x1 = min(w-1, x0+3)
-            dx = (x0 + 1.5 - w*.50) / max(1, w*.72)
+        for x0 in range(0, w, 12):
+            x1 = min(w-1, x0+11)
+            dx = (x0 + 5.5 - w*.50) / max(1, w*.72)
             dy = (y-h*.37) / max(1, h*.76)
             light = max(0.0, 1.0-dx*dx-dy*dy)*.105
             edge = min(1.0, dx*dx*.12 + ((y/h)-.42)**2*.055)
@@ -665,9 +665,9 @@ def render_creative_motion(layers, output, music, duration, on_progress=None, do
         variant_hash.update(str(duration).encode('ascii'))
         variant = int(variant_hash.hexdigest()[:4], 16) % 4
         # Distinct, deterministic entrance per product; never shake the hero shot.
-        entrances = ((-.85, 0, -52), (.85, 0, 52), (0, -.75, -38),
-                     (0, .75, 38), (-.70, -.50, -42), (.70, -.50, 42),
-                     (-.70, .50, -35), (.70, .50, 35))
+        entrances = ((-.72, 0, -12), (.72, 0, 12), (0, -.58, -9),
+                     (0, .58, 9), (-.56, -.38, -10), (.56, -.38, 10),
+                     (-.56, .38, -8), (.56, .38, 8))
         entrance = entrances[int(variant_hash.hexdigest()[4:8], 16) % len(entrances)]
         hand_place = mode == 'hand'
         if hand_place:
@@ -703,7 +703,7 @@ def render_creative_motion(layers, output, music, duration, on_progress=None, do
             ease = 1 - (1-u)**3
             if u < 1:
                 angle = entrance[2] * (1-ease)
-                scale = .76 + .24*ease
+                scale = .88 + .12*ease
                 dx = round(WIDTH * entrance[0] * (1-ease))
                 dy = round(HEIGHT * entrance[1] * (1-ease))
             else:
@@ -717,7 +717,7 @@ def render_creative_motion(layers, output, music, duration, on_progress=None, do
             transformed = fg.resize(size,Image.Resampling.LANCZOS).rotate(angle,Image.Resampling.BICUBIC,expand=True)
             alpha = transformed.getchannel('A')
             shadow_alpha = alpha.filter(ImageFilter.GaussianBlur(max(5,round(WIDTH*.022))))
-            shadow_alpha = shadow_alpha.point(lambda a: round(a*.23))
+            shadow_alpha = shadow_alpha.point(lambda a: round(a*.16))
             shadow = Image.new('RGBA',transformed.size,(0,0,0,0))
             shadow.putalpha(shadow_alpha)
             canvas = studio_backgrounds[choice].copy()
@@ -725,7 +725,7 @@ def render_creative_motion(layers, output, music, duration, on_progress=None, do
             y = round((HEIGHT-transformed.height)/2)+dy
             # Clip overlays safely when a pose extends outside the canvas.
             shadow_layer = Image.new('RGBA', canvas.size, (0, 0, 0, 0))
-            shadow_layer.paste(shadow, (x+7, y+11))
+            shadow_layer.paste(shadow, (x+round(WIDTH*.008), y+round(HEIGHT*.012)))
             canvas = Image.alpha_composite(canvas, shadow_layer)
             product_layer = Image.new('RGBA', canvas.size, (0, 0, 0, 0))
             product_layer.paste(transformed, (x, y))
