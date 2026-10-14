@@ -283,7 +283,7 @@ def render_video(images: list[Path], output: Path, music: Path | None = None, st
         shots = [(images[0], 0), (images[0], 1),
                  (images[1], 2), (images[1], 3)]
     else:
-        shots = [(path, i % 4) for i, path in enumerate(images)]
+        shots = [(path, i % 6) for i, path in enumerate(images)]
     n = len(shots)
     # Keep fades short enough for any image count and total duration.
     fade = min(0.65, duration / (n * 4.0)) if n > 1 else 0
@@ -307,22 +307,39 @@ def render_video(images: list[Path], output: Path, music: Path | None = None, st
             # Expressions use the output-frame index 'on'; avoid abrupt jumps.
             t = f'min(on/{max(frames - 1, 1)},1)'
             progress = f'({t}*{t}*(3-2*{t}))'  # Smoothstep easing, gentle start and stop.
-            if motion == 0:
-                zoom = f'1.03+0.075*{progress}'
+            # Distinct camera movements, not merely different xfade effects.
+            # All movements use only the original visible product photograph.
+            if motion == 0:  # slow push-in, centered
+                motion_name = 'push-in'
+                zoom = f'1.02+0.13*{progress}'
                 x = '(iw-iw/zoom)/2'
                 y = '(ih-ih/zoom)/2'
-            elif motion == 1:
-                zoom = f'1.11-0.075*{progress}'
-                x = f'(iw-iw/zoom)*(0.30+0.40*{progress})'
+            elif motion == 1:  # left-to-right tracking
+                motion_name = 'track-right'
+                zoom = '1.17'
+                x = f'(iw-iw/zoom)*(0.10+0.80*{progress})'
                 y = '(ih-ih/zoom)/2'
-            elif motion == 2:
-                zoom = f'1.04+0.075*{progress}'
+            elif motion == 2:  # slow pull-out, centered
+                motion_name = 'pull-out'
+                zoom = f'1.16-0.13*{progress}'
                 x = '(iw-iw/zoom)/2'
-                y = f'(ih-ih/zoom)*(0.65-0.30*{progress})'
-            else:
-                zoom = f'1.10-0.06*{progress}'
-                x = f'(iw-iw/zoom)*(0.68-0.36*{progress})'
-                y = f'(ih-ih/zoom)*(0.35+0.25*{progress})'
+                y = '(ih-ih/zoom)/2'
+            elif motion == 3:  # vertical reveal, bottom-to-top
+                motion_name = 'rise'
+                zoom = '1.17'
+                x = '(iw-iw/zoom)/2'
+                y = f'(ih-ih/zoom)*(0.90-0.80*{progress})'
+            elif motion == 4:  # right-to-left tracking
+                motion_name = 'track-left'
+                zoom = '1.17'
+                x = f'(iw-iw/zoom)*(0.90-0.80*{progress})'
+                y = '(ih-ih/zoom)/2'
+            else:  # gentle diagonal motion
+                motion_name = 'diagonal'
+                zoom = f'1.12+0.04*{progress}'
+                x = f'(iw-iw/zoom)*(0.18+0.64*{progress})'
+                y = f'(ih-ih/zoom)*(0.20+0.60*{progress})'
+            logging.info('KLIPPO shot %s movement: %s', i + 1, motion_name)
             vf = (f"zoompan=z='{zoom}':x='{x}':y='{y}':"
                   f"d={frames}:s={WIDTH}x{HEIGHT}:fps={FPS},format=yuv420p")
             cmd = ['ffmpeg','-hide_banner','-loglevel','error','-y','-threads','1','-filter_threads','1','-framerate','1','-i',str(still),
