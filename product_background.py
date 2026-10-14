@@ -95,41 +95,35 @@ def _remove_bg_api(image):
 
 
 def _scene_background(size, choice):
-    """Simple local interior illustrations, no external assets or added text."""
+    """Minimal studio backgrounds; no rooms, logos, labels or text."""
     w, h = size
     palettes = {
-        'living': ((228, 217, 203), (170, 139, 112), (244, 237, 225)),
-        'kitchen': ((231, 232, 222), (171, 174, 159), (248, 246, 235)),
-        'bedroom': ((222, 215, 220), (164, 146, 158), (242, 234, 232)),
-        'garden': ((184, 205, 173), (84, 126, 78), (226, 219, 187)),
+        'gradient': ((251, 248, 241), (221, 205, 184)),
+        'pattern': ((248, 246, 242), (229, 223, 214)),
+        'duotone': ((241, 232, 219), (210, 190, 171)),
+        'mist': ((246, 247, 248), (210, 216, 221)),
     }
-    wall, accent, floor = palettes[choice]
-    canvas = Image.new('RGBA', size, wall + (255,))
+    top, bottom = palettes[choice]
+    canvas = Image.new('RGBA', size)
     draw = ImageDraw.Draw(canvas)
-    horizon = int(h * .69)
-    draw.rectangle((0, horizon, w, h), fill=floor + (255,))
-    if choice == 'living':
-        draw.rounded_rectangle((int(w*.08), int(h*.20), int(w*.36), int(h*.50)), radius=max(3,w//80), fill=accent+(255,))
-        draw.rectangle((int(w*.11),int(h*.23),int(w*.33),int(h*.47)),fill=(241,232,214,255))
-        draw.rounded_rectangle((int(w*.64),int(h*.44),int(w*.96),int(h*.70)),radius=max(4,w//35),fill=(190,171,150,255))
-    elif choice == 'kitchen':
-        draw.rectangle((0,int(h*.31),w,int(h*.36)),fill=(250,249,242,255))
-        draw.rectangle((0,int(h*.38),int(w*.28),int(h*.66)),fill=accent+(255,))
-        draw.rectangle((int(w*.72),int(h*.38),w,int(h*.66)),fill=accent+(255,))
-        draw.rectangle((0,int(h*.66),w,int(h*.70)),fill=(247,245,238,255))
-    elif choice == 'bedroom':
-        draw.rounded_rectangle((int(w*.62),int(h*.43),w,int(h*.69)),radius=max(4,w//40),fill=accent+(255,))
-        draw.rounded_rectangle((int(w*.57),int(h*.56),w,int(h*.70)),radius=max(4,w//40),fill=(244,235,229,255))
-        draw.rectangle((int(w*.12),int(h*.22),int(w*.36),int(h*.46)),fill=(245,240,234,255))
-    else:
-        draw.ellipse((int(-w*.1),int(h*.30),int(w*.42),int(h*.72)),fill=(99,142,87,255))
-        draw.ellipse((int(w*.68),int(h*.23),int(w*1.12),int(h*.69)),fill=(107,151,94,255))
-        draw.rectangle((0,int(h*.67),w,h),fill=(209,199,166,255))
+    for y in range(h):
+        t = y / max(1, h - 1)
+        if choice == 'duotone':
+            t = 0 if t < .62 else 1
+        color = tuple(round(top[k] * (1 - t) + bottom[k] * t) for k in range(3))
+        draw.line((0, y, w, y), fill=color + (255,))
+    if choice == 'pattern':
+        ink = (224, 216, 205, 255)
+        step = max(48, w // 5)
+        for x in range(-step, w + step, step):
+            for y in range(-step, h + step, step):
+                radius = max(7, step // 6)
+                draw.ellipse((x-radius, y-radius, x+radius, y+radius), outline=ink, width=max(1,w//400))
     return canvas
 
 
 def replace_background(source: Path, destination: Path, choice: str) -> Path:
-    if choice not in BACKGROUNDS and choice not in ('living', 'kitchen', 'bedroom', 'garden'):
+    if choice not in BACKGROUNDS and choice not in ('gradient', 'pattern', 'duotone', 'mist'):
         raise ValueError('Unknown background')
     with Image.open(source) as opened:
         image = ImageOps.exif_transpose(opened).convert('RGB')
