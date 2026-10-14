@@ -335,7 +335,7 @@ def confirm_menu():
     return InlineKeyboardMarkup([
         [InlineKeyboardButton('✅ Hasilkan Video', callback_data='confirm')],
         [InlineKeyboardButton('✨ Tukar Efek', callback_data='effects')],
-        [InlineKeyboardButton('🎨 Tukar Gaya', callback_data='styles'), InlineKeyboardButton('🎵 Tukar Muzik', callback_data='music')],
+        [InlineKeyboardButton('🎞️ Tukar Pergerakan', callback_data='motions'), InlineKeyboardButton('🎵 Tukar Muzik', callback_data='music')],
         [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
     ])
 
@@ -570,7 +570,9 @@ def render_creative_motion(layers, output, music, duration, on_progress=None, do
         frames_dir = tmp / 'frames'
         frames_dir.mkdir()
         total = max(1, round(duration * FPS))
-        poses_per_second = 7 if mode == 'stop' else 10
+        import hashlib
+        variant = int(hashlib.sha256(('|'.join(str(p) for p,c in layers)+str(duration)).encode()).hexdigest()[:4],16) % 4
+        poses_per_second = (6,7,8,9)[variant] if mode == 'stop' else (8,9,10,11)[variant]
         hold = max(2, round(FPS / poses_per_second))
         sources = []
         for cutout_path, choice in layers:
@@ -604,10 +606,10 @@ def render_creative_motion(layers, output, music, duration, on_progress=None, do
                 dy = round(HEIGHT*.018*math.cos(t*.8))
             elif mode == 'stop' or (mode == 'auto' and section in (1,2)):
                 step = int(t*poses_per_second)
-                angle = (-7,0,6,0)[step%4]
+                angle = ((-7,0,6,0),(-5,3,8,-2),(-9,0,4,2),(-4,5,0,-6))[variant][step%4]
                 scale = (.92,1.0,1.055,1.0)[step%4]
-                dx = round(WIDTH*(-.075,0,.075,0)[step%4])
-                dy = round(HEIGHT*(.025,-.018,0,-.012)[step%4])
+                dx = round(WIDTH*((-.075,0,.075,0),(.06,-.04,0,.04),(-.04,.05,.08,0),(0,-.07,.04,.07))[variant][step%4])
+                dy = round(HEIGHT*((.025,-.018,0,-.012),(0,-.025,.015,0),(.015,0,-.02,.01),(0,.02,-.015,0))[variant][step%4])
             else:
                 angle = 0
                 scale = 1.0
@@ -1354,12 +1356,17 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 context.user_data['style'] = 'smooth'
                 context.user_data['stage'] = 'motion'
                 await query.message.reply_text(f'⏱️ {duration} saat dipilih. Pilih pergerakan produk:', reply_markup=motion_menu())
-    elif action.startswith('motion:') and stage == 'motion':
+    elif action.startswith('motion:') and stage in ('motion', 'duration', 'music', 'confirm'):
         motion = action.split(':',1)[1]
         if motion in ('auto','stop','spin','smooth'):
             context.user_data['motion_choice'] = motion
             context.user_data['stage'] = 'music'
             await query.message.reply_text('✅ Pergerakan dipilih. Pilih muzik:',reply_markup=music_menu())
+        else:
+            await query.message.reply_text('Pilihan pergerakan tidak dikenali. Pilih semula:',reply_markup=motion_menu())
+    elif action == 'motions' and stage in ('motion','music','doodle','confirm'):
+        context.user_data['stage'] = 'motion'
+        await query.message.reply_text('🎞️ Pilih pergerakan produk:',reply_markup=motion_menu())
     elif action == 'photos_done':
         if stage not in ('photos', 'duration', 'background') or not context.user_data.get('photos'):
             await query.message.reply_text('Hantar sekurang-kurangnya satu gambar dahulu.', reply_markup=photos_menu())
@@ -1372,7 +1379,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['background'] = choice
             context.user_data['stage'] = 'duration'
             await query.message.reply_text('⏱️ Pilih durasi video:', reply_markup=duration_menu())
-    elif action == 'styles' and stage in ('style', 'music', 'confirm'):
+    elif action == 'styles' and stage in ('style', 'music', 'confirm', 'motion', 'doodle'):
         context.user_data['stage'] = 'style'
         await query.message.reply_text('🎨 Tukar gaya (pilihan). Smooth digunakan secara lalai:', reply_markup=style_menu())
     elif action.startswith('preview:') and stage == 'style':
@@ -1424,7 +1431,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             else:
                 context.user_data['stage'] = 'confirm'
                 await query.message.reply_text('✅ Efek: '+DOODLE_OPTIONS[choice]+'\nSemak dan hasilkan video.', reply_markup=confirm_menu())
-    elif action == 'music' and stage in ('music', 'confirm'):
+    elif action == 'music' and stage in ('music', 'confirm', 'doodle', 'motion'):
         context.user_data['stage'] = 'music'
         await query.message.reply_text('🎵 Pilih muzik:', reply_markup=music_menu())
     elif action == 'music_previews' and stage == 'music':
