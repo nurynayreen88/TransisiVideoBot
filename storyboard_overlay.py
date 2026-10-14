@@ -9,18 +9,31 @@ CHOICES = ('auto','black','white','gold','pastel','sparkle','motion','circle','p
 
 def make_overlay(path: Path, width: int, height: int, choice: str, background='original', seed=''):
     if choice not in CHOICES: raise ValueError('Unknown doodle option')
+    rng_seed = hashlib.sha256((str(seed)+choice+background).encode()).digest()
     if choice == 'auto':
-        ink = 'white' if background in ('dark',) else 'black'
+        # Contrast-aware palettes selected for the actual chosen studio background.
+        palettes = {
+            'dark': ((255,244,220,235),(255,195,104,235),(187,225,255,235)),
+            'white': ((38,53,72,225),(66,115,130,225),(156,83,116,225)),
+            'beige': ((84,61,49,230),(143,86,64,225),(76,103,88,225)),
+            'pastel': ((75,62,91,225),(122,72,107,225),(56,99,105,225)),
+            'gradient': ((86,63,59,230),(123,79,105,225),(55,102,108,225)),
+            'mist': ((42,62,81,230),(77,88,130,225),(102,63,89,225)),
+            'duotone': ((46,57,72,235),(93,63,101,225),(47,100,94,225)),
+            'pattern': ((53,67,82,235),(117,76,89,225),(48,103,97,225)),
+            'original': ((36,42,52,230),(86,63,101,225),(51,91,100,225)),
+        }
+        white = palettes.get(background, palettes['original'])[rng_seed[0] % 3]
         choice = 'all'
     else:
         ink = choice if choice in ('black','white','gold','pastel') else ('white' if background == 'dark' else 'black')
+        white = {'black':(30,33,38,215),'white':(255,255,255,225),'gold':(212,155,45,230),'pastel':(218,102,158,225)}[ink]
     if choice in ('black','white','gold','pastel'):
         choice = 'all'
     rng = random.Random(hashlib.sha256((str(seed)+choice+background).encode()).digest())
     variant = rng.randrange(5)
     img = Image.new('RGBA',(width,height),(0,0,0,0))
     d = ImageDraw.Draw(img)
-    white={'black':(30,33,38,215),'white':(255,255,255,225),'gold':(212,155,45,230),'pastel':(218,102,158,225)}[ink]
     thin=max(2,width//180)
     # Restrict decorative strokes to peripheral safe zones, away from central labels.
     if choice in ('white','all'):
