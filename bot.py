@@ -319,6 +319,10 @@ def style_menu():
     ])
 
 
+def motion_menu():
+    return InlineKeyboardMarkup([[InlineKeyboardButton(label,callback_data='motion:'+key)] for key,label in [('auto','✨ Auto Creative (Disyorkan)'),('stop','🎞️ Stop Motion Pop'),('spin','🌀 Spin-In'),('smooth','🎬 Smooth Motion')]])
+
+
 def music_menu():
     return InlineKeyboardMarkup([
         [InlineKeyboardButton('⚡ Auto Beat', callback_data='music:auto')],
@@ -557,9 +561,97 @@ def render_product_motion(layers, output, music, duration, on_progress=None, doo
         subprocess.run(cmd, check=True, timeout=180, capture_output=True, text=True)
 
 
-def render_video(images: list[Path], output: Path, music: Path | None = None, style: str = 'hybrid', duration: int = DURATION, doodle: str = 'none', hook: str | None = None, on_progress=None, product_layers=None):
+def render_creative_motion(layers, output, music, duration, on_progress=None, doodle='none', mode='auto'):
+    """Deliberate held-pose stop motion; source cutout only, no invented 3D views."""
+    import math
+    from PIL import ImageEnhance
+    with tempfile.TemporaryDirectory(prefix='klippo_creative_') as td:
+        tmp = Path(td)
+        frames_dir = tmp / 'frames'
+        frames_dir.mkdir()
+        total = max(1, round(duration * FPS))
+        poses_per_second = 7 if mode == 'stop' else 10
+        hold = max(2, round(FPS / poses_per_second))
+        sources = []
+        for cutout_path, choice in layers:
+            with Image.open(cutout_path) as opened:
+                fg = opened.convert('RGBA')
+            bbox = fg.getchannel('A').getbbox()
+            if not bbox:
+                raise ValueError('Produk tidak dapat diasingkan')
+            fg = fg.crop(bbox)
+            alpha = fg.getchannel('A')
+            rgb = ImageEnhance.Contrast(fg.convert('RGB')).enhance(1.045)
+            fg = rgb.convert('RGBA')
+            fg.putalpha(alpha)
+            fg.thumbnail((round(WIDTH*.65),round(HEIGHT*.48)),Image.Resampling.LANCZOS)
+            sources.append((fg,choice))
+        for n in range(0,total,hold):
+            t = n / FPS
+            phase = t / max(duration, .01)
+            section = min(3, int(phase * 4))
+            fg, choice = sources[min(len(sources)-1, int(phase*len(sources)))]
+            if mode == 'spin' or (mode == 'auto' and section == 0):
+                u = min(1,t / max(1,duration*.25))
+                angle = -28*(1-u)
+                scale = .68+.32*u
+                dx = round(WIDTH*.22*(1-u))
+                dy = round(HEIGHT*.09*(1-u))
+            elif mode == 'smooth':
+                angle = 2*math.sin(t*.85)
+                scale = .96+.035*math.sin(t*.65)
+                dx = round(WIDTH*.045*math.sin(t*.8))
+                dy = round(HEIGHT*.018*math.cos(t*.8))
+            elif mode == 'stop' or (mode == 'auto' and section in (1,2)):
+                step = int(t*poses_per_second)
+                angle = (-7,0,6,0)[step%4]
+                scale = (.92,1.0,1.055,1.0)[step%4]
+                dx = round(WIDTH*(-.075,0,.075,0)[step%4])
+                dy = round(HEIGHT*(.025,-.018,0,-.012)[step%4])
+            else:
+                angle = 0
+                scale = 1.0
+                dx = dy = 0
+            size = (max(1,round(fg.width*scale)),max(1,round(fg.height*scale)))
+            transformed = fg.resize(size,Image.Resampling.LANCZOS).rotate(angle,Image.Resampling.BICUBIC,expand=True)
+            alpha = transformed.getchannel('A')
+            shadow_alpha = alpha.filter(ImageFilter.GaussianBlur(max(5,round(WIDTH*.022))))
+            shadow_alpha = shadow_alpha.point(lambda a: round(a*.23))
+            shadow = Image.new('RGBA',transformed.size,(0,0,0,0))
+            shadow.putalpha(shadow_alpha)
+            canvas = (_scene_background((WIDTH,HEIGHT),choice) if choice not in BACKGROUNDS
+                      else Image.new('RGBA',(WIDTH,HEIGHT),BACKGROUNDS[choice]+(255,)))
+            x = round((WIDTH-transformed.width)/2)+dx
+            y = round((HEIGHT-transformed.height)/2)+dy
+            canvas.alpha_composite(shadow,(x+7,y+11))
+            canvas.alpha_composite(transformed,(x,y))
+            frame = canvas.convert('RGB')
+            for k in range(n,min(total,n+hold)):
+                frame.save(frames_dir / f'{k:05d}.jpg',quality=91)
+            if on_progress and (n == 0 or n % max(hold,round(FPS*2/hold)*hold) == 0):
+                on_progress(45+round(30*n/total),'Membina babak Creative Stop Motion...')
+        joined = tmp / 'creative.mp4'
+        subprocess.run(['ffmpeg','-hide_banner','-loglevel','error','-y','-framerate',str(FPS),
+                        '-i',str(frames_dir/'%05d.jpg'),'-c:v','libx264','-preset','veryfast',
+                        '-crf','23','-pix_fmt','yuv420p',str(joined)],check=True,timeout=240,capture_output=True,text=True)
+        if doodle != 'none':
+            decorated = tmp / 'decorated.mp4'
+            apply_overlay(joined,decorated,doodle,WIDTH,HEIGHT,duration,background=layers[0][1])
+            joined = decorated
+        cmd=['ffmpeg','-hide_banner','-loglevel','error','-y','-i',str(joined)]
+        if music:
+            cmd += ['-stream_loop','-1','-i',str(music),'-map','0:v:0','-map','1:a:0','-c:a','aac','-b:a','128k']
+        else:
+            cmd += ['-map','0:v:0']
+        cmd += ['-t',str(duration),'-c:v','copy','-movflags','+faststart',str(output)]
+        subprocess.run(cmd,check=True,timeout=180,capture_output=True,text=True)
+
+
+def render_video(images: list[Path], output: Path, music: Path | None = None, style: str = 'hybrid', duration: int = DURATION, doodle: str = 'none', hook: str | None = None, on_progress=None, product_layers=None, motion='auto'):
     """Produce CPU-friendly Ken Burns transitions. Morph is an approximation, not generative AI."""
     if product_layers:
+        if motion in ('auto','stop','spin','smooth'):
+            return render_creative_motion(product_layers, output, music, duration, on_progress, doodle, motion)
         return render_product_motion(product_layers, output, music, duration, on_progress, doodle)
     if style not in STYLES:
         raise ValueError("Unknown style")
@@ -697,6 +789,7 @@ def reset(context):
     context.user_data['music'] = None
     context.user_data['music_choice'] = 'auto'
     context.user_data['style'] = 'smooth'
+    context.user_data['motion_choice'] = 'auto'
     context.user_data['duration'] = 10
     context.user_data['background'] = 'original'
     context.user_data['doodle_choice'] = 'auto'
@@ -1259,8 +1352,14 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 await query.message.reply_text(f'⏱️ {duration} saat dipilih. Pilih gaya storyboard:', reply_markup=style_menu())
             else:
                 context.user_data['style'] = 'smooth'
-                context.user_data['stage'] = 'music'
-                await query.message.reply_text(f'⏱️ {duration} saat dipilih. Pilih muzik:', reply_markup=music_menu())
+                context.user_data['stage'] = 'motion'
+                await query.message.reply_text(f'⏱️ {duration} saat dipilih. Pilih pergerakan produk:', reply_markup=motion_menu())
+    elif action.startswith('motion:') and stage == 'motion':
+        motion = action.split(':',1)[1]
+        if motion in ('auto','stop','spin','smooth'):
+            context.user_data['motion_choice'] = motion
+            context.user_data['stage'] = 'music'
+            await query.message.reply_text('✅ Pergerakan dipilih. Pilih muzik:',reply_markup=music_menu())
     elif action == 'photos_done':
         if stage not in ('photos', 'duration', 'background') or not context.user_data.get('photos'):
             await query.message.reply_text('Hantar sekurang-kurangnya satu gambar dahulu.', reply_markup=photos_menu())
@@ -1500,7 +1599,7 @@ async def generate(update: Update, context: ContextTypes.DEFAULT_TYPE):
             loop = asyncio.get_running_loop()
             def render_progress(percent, detail):
                 asyncio.run_coroutine_threadsafe(progress_update(progress, percent, detail), loop)
-            await asyncio.to_thread(render_video, paths, result, music, selected_style, context.user_data.get('duration', 10), doodle, None, render_progress, product_layers if not context.user_data.get('storyboard_mode') else None)
+            await asyncio.to_thread(render_video, paths, result, music, selected_style, context.user_data.get('duration', 10), doodle, None, render_progress, product_layers if not context.user_data.get('storyboard_mode') else None, context.user_data.get('motion_choice','auto'))
             await progress_update(progress, 90, 'Render selesai. Menghantar video ke Telegram...')
             with result.open('rb') as f:
                 await message.reply_video(video=f, caption='🎬 Video siap! Hantar gambar baharu untuk video seterusnya.', supports_streaming=True,
