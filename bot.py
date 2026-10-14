@@ -598,8 +598,13 @@ def render_creative_motion(layers, output, music, duration, on_progress=None, do
             variant_hash.update(background_choice.encode('utf-8'))
         variant_hash.update(str(duration).encode('ascii'))
         variant = int(variant_hash.hexdigest()[:4], 16) % 4
-        poses_per_second = (6,7,8,9)[variant] if mode == 'stop' else (8,9,10,11)[variant]
-        hold = max(2, round(FPS / poses_per_second))
+        # Distinct, deterministic entrance per product; never shake the hero shot.
+        entrances = ((-.85, 0, -52), (.85, 0, 52), (0, -.75, -38),
+                     (0, .75, 38), (-.70, -.50, -42), (.70, -.50, 42),
+                     (-.70, .50, -35), (.70, .50, 35))
+        entrance = entrances[int(variant_hash.hexdigest()[4:8], 16) % len(entrances)]
+        entrance_seconds = min(1.65, max(.9, duration * .12))
+        hold = 1
         sources = []
         for cutout_path, choice in layers:
             with Image.open(cutout_path) as opened:
@@ -619,23 +624,14 @@ def render_creative_motion(layers, output, music, duration, on_progress=None, do
             phase = t / max(duration, .01)
             section = min(3, int(phase * 4))
             fg, choice = sources[min(len(sources)-1, int(phase*len(sources)))]
-            if mode == 'spin' or (mode == 'auto' and section == 0):
-                u = min(1,t / max(1,duration*.25))
-                angle = -28*(1-u)
-                scale = .68+.32*u
-                dx = round(WIDTH*.22*(1-u))
-                dy = round(HEIGHT*.09*(1-u))
-            elif mode == 'smooth':
-                angle = 2*math.sin(t*.85)
-                scale = .96+.035*math.sin(t*.65)
-                dx = round(WIDTH*.045*math.sin(t*.8))
-                dy = round(HEIGHT*.018*math.cos(t*.8))
-            elif mode == 'stop' or (mode == 'auto' and section in (1,2)):
-                step = int(t*poses_per_second)
-                angle = ((-7,0,6,0),(-5,3,8,-2),(-9,0,4,2),(-4,5,0,-6))[variant][step%4]
-                scale = (.92,1.0,1.055,1.0)[step%4]
-                dx = round(WIDTH*((-.075,0,.075,0),(.06,-.04,0,.04),(-.04,.05,.08,0),(0,-.07,.04,.07))[variant][step%4])
-                dy = round(HEIGHT*((.025,-.018,0,-.012),(0,-.025,.015,0),(.015,0,-.02,.01),(0,.02,-.015,0))[variant][step%4])
+            # One smooth 2D entrance. Full stop at centre; no periodic wobble.
+            u = min(1.0, t / entrance_seconds)
+            ease = 1 - (1-u)**3
+            if u < 1:
+                angle = entrance[2] * (1-ease)
+                scale = .76 + .24*ease
+                dx = round(WIDTH * entrance[0] * (1-ease))
+                dy = round(HEIGHT * entrance[1] * (1-ease))
             else:
                 angle = 0
                 scale = 1.0
