@@ -313,6 +313,60 @@ def prompt_wait_animation():
     return output
 
 
+FAQ_ITEMS = (
+    ('Cara jana video', 'Upload 1-5 gambar, tekan Selesai, masukkan tajuk penuh produk Shopee, kemudian pilih latar, tempoh, gerakan dan muzik.', ('GAMBAR PRODUK', 'TAJUK PRODUK', 'PILIH GAYA', 'JANA VIDEO')),
+    ('Perlu pautan Shopee?', 'Tidak. Masukkan tajuk penuh produk, bukan URL atau pautan Shopee.', ('GAMBAR PRODUK', 'TAJUK PENUH', 'BUKAN PAUTAN')),
+    ('Tempoh video', 'Pilih 10, 15 atau 20 saat. Masa menunggu bergantung pada gambar dan kesibukan pelayan.', ('10 SAAT', '15 SAAT', '20 SAAT')),
+    ('Latar gambar', 'Anda boleh kekalkan latar asal atau pilih latar lain. Gambar berlatar kompleks mungkin tidak dapat diasingkan dengan sempurna.', ('LATAR ASAL', 'LATAR STUDIO', 'SEMAK HASIL')),
+    ('Fungsi Prompt', 'Prompt menyediakan arahan teks untuk penjana video AI lain. Ia bukan fail video yang telah siap.', ('PILIH PROMPT', 'ISI MAKLUMAT', 'SALIN TEKS')),
+    ('Video gagal dijana', 'Cuba gambar yang lebih jelas, kurangkan bilangan gambar dan jana semula. Simpan mesej ralat jika masalah berulang.', ('SEMAK GAMBAR', 'CUBA SEMULA', 'SIMPAN RALAT')),
+    ('Adakah video generatif?', 'Tidak. KLIPPO menyunting gambar asal dengan animasi 2D, transisi dan muzik; ia tidak mencipta rakaman produk baharu.', ('GAMBAR ASAL', 'EFEK 2D', 'VIDEO MP4')),
+)
+
+
+def faq_menu():
+    rows = [[InlineKeyboardButton(f'{i+1}. {item[0]}', callback_data=f'faq:{i}')] for i, item in enumerate(FAQ_ITEMS)]
+    rows.append([InlineKeyboardButton('🏠 Menu Utama', callback_data='home')])
+    return InlineKeyboardMarkup(rows)
+
+
+def faq_example(index):
+    """Create a lightweight, original illustrated flow for each FAQ; no external assets."""
+    from PIL import Image, ImageDraw, ImageFont
+    title, _, steps = FAQ_ITEMS[index]
+    w, h = 720, 540
+    im = Image.new('RGB', (w, h), (245, 247, 252))
+    d = ImageDraw.Draw(im)
+    fonts = ('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf',
+             '/usr/share/fonts/truetype/liberation2/LiberationSans-Regular.ttf')
+    font_path = next((p for p in fonts if Path(p).is_file()), None)
+    def font(size):
+        return ImageFont.truetype(font_path, size) if font_path else ImageFont.load_default()
+    d.rounded_rectangle((24, 24, 696, 516), radius=28, fill=(255, 255, 255), outline=(218, 225, 236), width=2)
+    d.text((54, 50), 'KLIPPO  /  FAQ', font=font(22), fill=(69, 87, 115))
+    d.text((54, 98), title, font=font(32), fill=(27, 38, 58))
+    d.line((54, 155, 666, 155), fill=(225, 230, 240), width=2)
+    count = len(steps)
+    box_w = min(550, (612 - (count - 1) * 12) // count)
+    start_x = (w - (count * box_w + (count - 1) * 12)) // 2
+    for i, label in enumerate(steps):
+        x = start_x + i * (box_w + 12)
+        d.rounded_rectangle((x, 218, x + box_w, 352), radius=17, fill=(235, 242, 253), outline=(170, 194, 229), width=2)
+        d.ellipse((x + box_w//2 - 20, 234, x + box_w//2 + 20, 274), fill=(55, 103, 181))
+        num = str(i + 1)
+        bb = d.textbbox((0, 0), num, font=font(23))
+        d.text((x + box_w//2 - (bb[2]-bb[0])//2, 239), num, font=font(23), fill='white')
+        label_font = font(15 if box_w < 145 else 18)
+        bb = d.textbbox((0, 0), label, font=label_font)
+        d.text((x + box_w//2 - (bb[2]-bb[0])//2, 296), label, font=label_font, fill=(30, 49, 80))
+    d.text((54, 432), 'Contoh ilustrasi aliran penggunaan', font=font(19), fill=(99, 113, 136))
+    output = BytesIO()
+    im.save(output, format='PNG')
+    output.seek(0)
+    output.name = f'klippo_faq_{index+1}.png'
+    return output
+
+
 def main_menu(user_id=None):
     rows = [
         [InlineKeyboardButton('🎬 Jana Video Transisi', callback_data='make'), InlineKeyboardButton('✍️ Prompt', callback_data='prompt')],
@@ -1631,7 +1685,23 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif action == 'account':
         await account_info(update, context)
     elif action == 'help':
-        await query.message.reply_text('❓ SOALAN LAZIM (FAQ)\n\n*1. Bagaimana nak jana video?*\nTekan Jana Video Transisi, upload 1–5 gambar dan tekan Selesai. Tampal tajuk penuh produk Shopee (bukan pautan), kemudian pilih latar, tempoh, pergerakan dan muzik sebelum jana.\n\n*2. Perlu masukkan pautan Shopee?*\nTidak. Untuk Jana Video, hanya tajuk produk diperlukan selepas upload gambar.\n\n*3. Berapa lama video?*\nPilih 10, 15 atau 20 saat. Masa pemprosesan bergantung pada gambar dan kesibukan pelayan.\n\n*4. Boleh guna gambar berlatar asal?*\nBoleh. Pilih Kekalkan Asal. Pengasingan produk pada latar kompleks mungkin tidak sempurna.\n\n*5. Apa fungsi Prompt?*\nMembantu menyediakan arahan video berdasarkan maklumat atau gambar produk; bukan video siap.\n\n*6. Video gagal dijana?*\nCuba gambar yang lebih jelas, kurangkan bilangan gambar atau ulang semula. Jika masih gagal, simpan mesej ralat untuk semakan.\n\n*7. Adakah hasil video AI generatif?*\nTidak. KLIPPO menyunting dan menganimasikan gambar asal menggunakan efek video; ia tidak mencipta rakaman produk baharu.', parse_mode='Markdown', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
+        await query.message.reply_text('❓ FAQ KLIPPO\\n\\nTekan persoalan untuk melihat jawapan dan gambar contoh:', reply_markup=faq_menu())
+    elif action.startswith('faq:'):
+        try:
+            index = int(action.split(':', 1)[1])
+            title, answer, _ = FAQ_ITEMS[index]
+        except (ValueError, IndexError):
+            await query.message.reply_text('Soalan tidak ditemui.', reply_markup=faq_menu())
+            return
+        keyboard = InlineKeyboardMarkup([
+            [InlineKeyboardButton('↩️ Kembali ke FAQ', callback_data='help')],
+            [InlineKeyboardButton('🏠 Menu Utama', callback_data='home')],
+        ])
+        picture = faq_example(index)
+        try:
+            await query.message.reply_photo(photo=picture, caption=f'❓ {title}\\n\\n{answer}', reply_markup=keyboard)
+        finally:
+            picture.close()
     elif action == 'check':
         await status(update, context)
     elif action == 'reset':
