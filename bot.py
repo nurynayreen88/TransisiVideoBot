@@ -765,7 +765,7 @@ def render_creative_motion(layers, output, music, duration, on_progress=None, do
         for i in range(3):
             start = min(max(0, duration-1.1), reveal_start+i*.72)
             end = max(start+.2, duration-.12)
-            graph.append(f'[{i+1}:v]format=rgba,fade=t=in:st={start:.2f}:d=.48:alpha=1[ink{i}]')
+            graph.append(f'[{i+1}:v]format=rgba,fade=t=in:st={start:.2f}:d=0.48:alpha=1[ink{i}]')
             graph.append(f'[{prev}][ink{i}]overlay=0:0:shortest=1:enable=\'between(t,{start:.2f},{end:.2f})\'[v{i}]')
             prev = f'v{i}'
         label_cmd += ['-filter_complex',';'.join(graph)+f';[{prev}]format=yuv420p[final]',
