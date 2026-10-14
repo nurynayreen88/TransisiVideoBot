@@ -758,7 +758,7 @@ def render_creative_motion(layers, output, music, duration, on_progress=None, do
         labelled = tmp / 'labelled.mp4'
         label_cmd = ['ffmpeg','-hide_banner','-loglevel','error','-y','-i',str(joined)]
         for label_path in labels:
-            label_cmd += ['-loop','1','-i',str(label_path)]
+            label_cmd += ['-framerate',str(FPS),'-loop','1','-i',str(label_path)]
         reveal_start = entrance_seconds + (1.0 if hand_place else .25)
         graph = []
         prev = '0:v'
@@ -768,7 +768,9 @@ def render_creative_motion(layers, output, music, duration, on_progress=None, do
             graph.append(f'[{i+1}:v]format=rgba,fade=t=in:st={start:.2f}:d=0.48:alpha=1[ink{i}]')
             graph.append(f'[{prev}][ink{i}]overlay=0:0:shortest=1:enable=\'between(t,{start:.2f},{end:.2f})\'[v{i}]')
             prev = f'v{i}'
-        label_cmd += ['-filter_complex',';'.join(graph)+f';[{prev}]format=yuv420p[final]',
+        # One final grade and a short cinematic exit, without another encoding pass.
+        graph.append(f'[{prev}]eq=contrast=1.025:saturation=1.045,fade=t=out:st={max(0,duration-.28):.2f}:d=.28,format=yuv420p[final]')
+        label_cmd += ['-filter_complex',';'.join(graph),
                       '-map','[final]','-an','-t',str(duration),'-c:v','libx264',
                       '-preset','veryfast','-crf','18','-pix_fmt','yuv420p',str(labelled)]
         subprocess.run(label_cmd,check=True,timeout=240,capture_output=True,text=True)
@@ -776,7 +778,7 @@ def render_creative_motion(layers, output, music, duration, on_progress=None, do
         cmd=['ffmpeg','-hide_banner','-loglevel','error','-y','-i',str(joined)]
         if music:
             cmd += ['-stream_loop','-1','-i',str(music),'-map','0:v:0','-map','1:a:0',
-                    '-af',f'afade=t=out:st={max(0,duration-0.35):.3f}:d=0.35',
+                    '-af',f'afade=t=in:st=0:d=.18,afade=t=out:st={max(0,duration-0.35):.3f}:d=0.35',
                     '-c:a','aac','-b:a','128k']
         else:
             cmd += ['-map','0:v:0']
