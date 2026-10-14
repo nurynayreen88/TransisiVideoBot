@@ -226,6 +226,38 @@ def hook_card(still: Path, hook: str) -> None:
     image.save(still, quality=96, subsampling=0)
 
 
+def smart_frame(img, motion):
+    """Conservative crop for plain backgrounds, otherwise preserve the entire photo."""
+    target = (round(WIDTH * 1.22), round(HEIGHT * 1.22))
+    thumb = img.resize((80, 80), Image.Resampling.BILINEAR)
+    corners = [thumb.getpixel(p) for p in ((0, 0), (79, 0), (0, 79), (79, 79))]
+    bg = tuple(sum(c[k] for c in corners) // 4 for k in range(3))
+    spread = max(max(c[k] for c in corners) - min(c[k] for c in corners) for k in range(3))
+    if spread < 24:
+        mask = Image.new('L', (80, 80))
+        pixels = mask.load()
+        for y in range(80):
+            for x in range(80):
+                rgb = thumb.getpixel((x, y))
+                pixels[x, y] = 255 if max(abs(rgb[k] - bg[k]) for k in range(3)) > 45 else 0
+        box = mask.getbbox()
+        if box:
+            l, t, r, b = box
+            area = (r-l)*(b-t)/6400
+            if .04 < area < .75 and l > 3 and t > 3 and r < 77 and b < 77:
+                pad = .18 if motion in (0, 2) else .12
+                dx, dy = (r-l)*pad, (b-t)*pad
+                box = (max(0, int((l-dx)*img.width/80)),
+                       max(0, int((t-dy)*img.height/80)),
+                       min(img.width, int((r+dx)*img.width/80)),
+                       min(img.height, int((b+dy)*img.height/80)))
+                img = img.crop(box)
+    fitted = ImageOps.contain(img, target, method=Image.Resampling.LANCZOS)
+    canvas = Image.new('RGB', target, bg if spread < 24 else (242, 242, 242))
+    canvas.paste(fitted, ((target[0]-fitted.width)//2, (target[1]-fitted.height)//2))
+    return canvas
+
+
 def render_video(images: list[Path], output: Path, music: Path | None = None, style: str = 'hybrid', duration: int = DURATION, doodle: str = 'none', hook: str | None = None):
     """Produce CPU-friendly Ken Burns transitions. Morph is an approximation, not generative AI."""
     if style not in STYLES:
@@ -254,7 +286,7 @@ def render_video(images: list[Path], output: Path, music: Path | None = None, st
             with Image.open(path) as original:
                 img = ImageOps.exif_transpose(original).convert('RGB')
                 # Preserve framing: modest overscan gives zoompan room to move.
-                img = ImageOps.fit(img, (round(WIDTH * 1.22), round(HEIGHT * 1.22)), method=Image.Resampling.LANCZOS)
+                img = smart_frame(img, motion)
                 still = temp / f'still_{i}.jpg'
                 img.save(still, quality=96, subsampling=0, optimize=True)
                 if i == 0 and hook:
