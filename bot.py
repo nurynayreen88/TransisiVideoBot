@@ -106,7 +106,7 @@ def is_admin(user_id):
 async def progress_update(message, percent, detail):
     """Milestone-based progress, not an invented time or FFmpeg frame estimate."""
     try:
-        await message.edit_text(f"⏳ DALAM PROSES — {percent}%\\n{detail}")
+        await message.edit_text(f"⏳ DALAM PROSES — {percent}%\n{detail}")
     except Exception:
         logging.debug('Progress message edit unavailable', exc_info=True)
 
@@ -381,12 +381,12 @@ async def admin(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.effective_message.reply_text('Akses tidak dibenarkan.')
         return
     if not klippo_db.configured():
-        await update.effective_message.reply_text('🛡️ KLIPPO ADMIN\\n\\n⚠️ Sambungan Supabase belum ditetapkan di Render.')
+        await update.effective_message.reply_text('🛡️ KLIPPO ADMIN\n\n⚠️ Sambungan Supabase belum ditetapkan di Render.')
         return
     try:
         pending = await asyncio.to_thread(klippo_db.pending_receipts)
         await update.effective_message.reply_text(
-            f'🛡️ KLIPPO ADMIN\\n\\n🧾 Resit menunggu: {len(pending)} (10 terawal dipaparkan)\\n💎 Kelulusan langganan: Manual',
+            f'🛡️ KLIPPO ADMIN\n\n🧾 Resit menunggu: {len(pending)} (10 terawal dipaparkan)\n💎 Kelulusan langganan: Manual',
             reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('🧾 Semak Resit', callback_data='admin_pending')], [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
     except Exception:
         logging.exception('Admin Supabase error')
@@ -419,12 +419,12 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def account_info(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = update.effective_user.id
     if not klippo_db.configured():
-        await update.effective_message.reply_text(f'👤 AKAUN SAYA\\n\\nID Telegram: {user_id}\\nStatus langganan belum dapat disemak.')
+        await update.effective_message.reply_text(f'👤 AKAUN SAYA\n\nID Telegram: {user_id}\nStatus langganan belum dapat disemak.')
         return
     try:
         data = await asyncio.to_thread(klippo_db.subscription, user_id)
         status = 'Tiada langganan' if not data else f"{data['status']} (tamat: {data.get('expires_at') or '-'})"
-        await update.effective_message.reply_text(f'👤 AKAUN SAYA\\n\\nID Telegram: {user_id}\\nLangganan: {status}')
+        await update.effective_message.reply_text(f'👤 AKAUN SAYA\n\nID Telegram: {user_id}\nLangganan: {status}')
     except Exception:
         logging.exception('Account lookup failed')
         await update.effective_message.reply_text('⚠️ Status langganan tidak dapat disemak sekarang.')
@@ -590,7 +590,7 @@ async def convert_upload(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if len(clips) >= 2:
             rows.append([InlineKeyboardButton('✅ Selesai & Pilih Transisi', callback_data='merge_done')])
         if len(clips) < 5:
-            message = f'✅ Video {len(clips)} diterima (urutan #{len(clips)}).\\n\\n📤 Terus hantar Video {len(clips) + 1} sebagai File / Document.'
+            message = f'✅ Video {len(clips)} diterima (urutan #{len(clips)}).\n\n📤 Terus hantar Video {len(clips) + 1} sebagai File / Document.'
         else:
             message = '✅ Video 5 diterima. Maksimum 5 video. Tekan Selesai untuk pilih transisi.'
         await update.message.reply_text(message, reply_markup=InlineKeyboardMarkup(rows) if rows else None)
@@ -617,7 +617,7 @@ async def convert_upload(update: Update, context: ContextTypes.DEFAULT_TYPE):
     async with lock:
         context.user_data['busy'] = True
         try:
-            progress = await update.message.reply_text('⏳ DALAM PROSES — 0%\\nMenyediakan fail video...')
+            progress = await update.message.reply_text('⏳ DALAM PROSES — 0%\nMenyediakan fail video...')
             with tempfile.TemporaryDirectory(prefix='shopee_') as td:
                 source = Path(td) / 'input.mp4'
                 destination = Path(td) / 'shopee.mp4'
@@ -652,7 +652,7 @@ async def generate_merge(update: Update, context: ContextTypes.DEFAULT_TYPE, sty
                 animation = await query.message.reply_animation(animation=fusion_gif(), caption='⏳ Dalam proses...')
             except Exception:
                 logging.exception('Fusion animation unavailable')
-            progress = await query.message.reply_text('⏳ DALAM PROSES — 0%\\nMenyediakan video untuk gabungan...')
+            progress = await query.message.reply_text('⏳ DALAM PROSES — 0%\nMenyediakan video untuk gabungan...')
             with tempfile.TemporaryDirectory(prefix='merge_') as folder:
                 paths = []
                 for index, file_id in enumerate(context.user_data['merge_files']):
@@ -696,7 +696,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if action == 'home':
         if not context.user_data.get('busy'):
             reset(context)
-        await query.message.reply_text('🏠 KLIPPO | Menu Utama\\n\\nPilih fungsi di bawah:', reply_markup=main_menu(update.effective_user.id))
+        await query.message.reply_text('🏠 KLIPPO | Menu Utama\n\nPilih fungsi di bawah:', reply_markup=main_menu(update.effective_user.id))
         return
     if context.user_data.get('busy'):
         await query.message.reply_text('Video sedang diproses. Sila tunggu.')
@@ -819,7 +819,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         motion = action.split(':', 1)[1]
         motions = {'orbit': 'A controlled 30-degree camera arc around the product, not a full 360-degree rotation; preserve the visible product geometry.', 'push': 'A slow forward dolly-in with gentle parallax; no object deformation.', 'side': 'A smooth left-to-right camera slide with stable product proportions.', 'static': 'A locked camera with subtle studio lighting changes only.'}
         if motion in motions:
-            waiting = await query.message.reply_text('⏳ DALAM PROSES — 0%\\nMenyusun prompt...')
+            waiting = await query.message.reply_text('⏳ DALAM PROSES — 0%\nMenyusun prompt...')
             try:
                 product = ('the product in the uploaded reference image. Visible observations (verify against reference image): ' + context.user_data.get('prompt_vision', '') + '. Optional user details: ' + context.user_data.get('prompt_product', ''))
                 scene = context.user_data.get('prompt_scene', 'clean studio background')
@@ -839,7 +839,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                                + ('Gunakan bingkai akhir Bahagian 1 sebagai rujukan sambungan.' if index == 2 else
                                   'Simpan bingkai terakhir untuk sambungan Bahagian 2.')) if len(sections) == 2 else ''
                     if len(section) <= 3900:
-                        await query.message.reply_text((caption + '\\n\\n' if caption else '') + section, reply_markup=actions)
+                        await query.message.reply_text((caption + '\n\n' if caption else '') + section, reply_markup=actions)
                     else:
                         prompt_file = BytesIO(section.encode('utf-8'))
                         prompt_file.name = f'KLIPPO_prompt_{mode_name}_part{index}.txt'
@@ -960,13 +960,13 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await query.message.reply_text('Pilih efek garisan / doodle untuk prompt storyboard:', reply_markup=doodle_menu())
         else:
             context.user_data['stage'] = 'music'
-            await query.message.reply_text(f"✅ Gaya {context.user_data['style']} dipilih.\\nLangkah 3/4 — Pilih muzik:", reply_markup=music_menu())
+            await query.message.reply_text(f"✅ Gaya {context.user_data['style']} dipilih.\nLangkah 3/4 — Pilih muzik:", reply_markup=music_menu())
     elif action.startswith('doodle:') and stage == 'doodle' and context.user_data.get('storyboard_mode'):
         choice = action.split(':', 1)[1]
         if choice in DOODLE_OPTIONS:
             context.user_data['doodle_choice'] = choice
             context.user_data['stage'] = 'music'
-            await query.message.reply_text('✅ Efek untuk storyboard: '+DOODLE_OPTIONS[choice]+'\\nEfek pilihan akan dimasukkan ke dalam MP4.\\nPilih muzik:', reply_markup=music_menu())
+            await query.message.reply_text('✅ Efek untuk storyboard: '+DOODLE_OPTIONS[choice]+'\nEfek pilihan akan dimasukkan ke dalam MP4.\nPilih muzik:', reply_markup=music_menu())
     elif action == 'music' and stage in ('music', 'confirm'):
         context.user_data['stage'] = 'music'
         await query.message.reply_text('Langkah 3/4 — Pilih muzik:', reply_markup=music_menu())
@@ -1092,7 +1092,7 @@ async def generate(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
     await lock.acquire()
     context.user_data['busy'] = True
-    progress = await message.reply_text('⏳ DALAM PROSES — 0%\\nMenyediakan fail...')
+    progress = await message.reply_text('⏳ DALAM PROSES — 0%\nMenyediakan fail...')
     try:
         with tempfile.TemporaryDirectory(prefix='telegram_video_') as td:
             folder = Path(td)
