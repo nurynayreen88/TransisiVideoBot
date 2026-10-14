@@ -28,6 +28,7 @@ def _plain_background_mask(image):
     bg = tuple(sum(c[k] for c in corners)//4 for k in range(3))
     pix = sample.load()
     visited = bytearray(w*h)
+    background_pixels = bytearray(w*h)
     queue = deque()
     for x in range(w):
         queue.append((x, 0)); queue.append((x, h-1))
@@ -42,12 +43,12 @@ def _plain_background_mask(image):
         rgb = pix[x, y]
         if max(abs(rgb[k]-bg[k]) for k in range(3)) > 43:
             continue
-        pix[x, y] = (0, 0, 0)
+        background_pixels[pos] = 1
         for xx, yy in ((x-1,y),(x+1,y),(x,y-1),(x,y+1)):
             if 0 <= xx < w and 0 <= yy < h and not visited[yy*w+xx]:
                 queue.append((xx, yy))
     mask = Image.new('L', (w, h))
-    mask.putdata([0 if pix[x,y] == (0,0,0) and visited[y*w+x] else 255
+    mask.putdata([0 if background_pixels[y*w+x] else 255
                   for y in range(h) for x in range(w)])
     bbox = mask.getbbox()
     if not bbox or bbox[0] == 0 or bbox[1] == 0 or bbox[2] == w or bbox[3] == h:
