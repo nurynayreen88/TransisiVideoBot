@@ -1528,7 +1528,7 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if action == 'make':
             reset(context)
             context.user_data['stage'] = 'photos'
-            await update.message.reply_text('Langkah 1/4 — Hantar 1–5 gambar produk. Tekan Selesai apabila cukup.', reply_markup=photos_menu())
+            await update.message.reply_text('Langkah 1/4 — Tampal pautan produk Shopee ATAU hantar 1–5 gambar produk. Untuk gambar, tekan Selesai apabila cukup.', reply_markup=photos_menu())
         elif action == 'convert':
             reset(context)
             context.user_data['stage'] = 'convert'
@@ -1550,7 +1550,11 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
         else:
             await start(update, context)
         return
-    if stage == 'product_description':
+    if stage == 'photos' and _shopee_link(value):
+        context.user_data['shopee_url'] = _shopee_link(value)
+        context.user_data['stage'] = 'background'
+        await update.message.reply_text('🔗 Pautan Shopee diterima. KLIPPO akan cuba mengambil foto awam produk tanpa Gemini. Jika akses disekat, bot akan meminta gambar sendiri. Pilih latar:', reply_markup=background_menu())
+    elif stage == 'product_description':
         context.user_data['shopee_url'] = _shopee_link(value)
         context.user_data['product_description'] = value[:1800]
         context.user_data['video_product_info'] = value[:600]
@@ -1610,7 +1614,7 @@ def _shopee_public_photo(url, destination, description):
             return ''
         title, image_url = meta('og:title'), meta('og:image')
         words = [w.lower() for w in re.findall(r'[A-Za-z0-9]{4,}', description) if not w.isdigit()]
-        if not title or not image_url or not words or not any(w in title.lower() for w in words[:8]):
+        if not title or not image_url or (words and not any(w in title.lower() for w in words[:8])):
             return False
         parsed = urlparse(image_url)
         if parsed.scheme != 'https' or not (parsed.hostname or '').lower().endswith(('.shopee.com.my', '.shopee.sg', '.shopeemobile.com', '.shopeeusercontent.com')):
@@ -1635,8 +1639,8 @@ def _shopee_public_photo(url, destination, description):
 async def generate(update: Update, context: ContextTypes.DEFAULT_TYPE):
     message = update.effective_message
     ids = context.user_data.get('photos', [])
-    if not ids:
-        await message.reply_text('Hantar gambar dahulu.', reply_markup=main_menu())
+    if not ids and not context.user_data.get('shopee_url'):
+        await message.reply_text('Hantar gambar atau pautan produk Shopee dahulu.', reply_markup=main_menu())
         return
     if context.user_data.get('busy'):
         await message.reply_text('Video sedang diproses.')
@@ -1657,6 +1661,15 @@ async def generate(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 await (await context.bot.get_file(fid)).download_to_drive(p)
                 paths.append(p)
                 await progress_update(progress, round(25 * (i + 1) / len(ids)), 'Memuat turun gambar...')
+            if not paths and context.user_data.get('shopee_url'):
+                product_photo = folder / 'shopee_product.jpg'
+                available = await asyncio.to_thread(_shopee_public_photo, context.user_data['shopee_url'], product_photo, context.user_data.get('product_description', ''))
+                if not available:
+                    context.user_data['stage'] = 'photos'
+                    await message.reply_text('⚠️ Shopee tidak menyediakan gambar awam yang dapat diakses atau disahkan untuk pautan ini. Sila hantar 1–5 gambar produk sendiri, kemudian tekan Selesai.', reply_markup=photos_menu())
+                    return
+                paths.append(product_photo)
+                await progress_update(progress, 25, 'Gambar produk Shopee diterima...')
             background = context.user_data.get('background', 'original')
             product_layers = []
             if background != 'original':
@@ -1681,7 +1694,7 @@ async def generate(update: Update, context: ContextTypes.DEFAULT_TYPE):
                                 logging.info('Shopee public thumbnail is also unsuitable for segmentation')
                         await message.reply_text('⚠️ Gambar ini terlalu kompleks untuk pengasingan produk yang selamat. KLIPPO akan menggunakan gambar asal tanpa menggantikannya dengan gambar produk lain yang belum disahkan.')
                         product_layers = []
-                        paths = [folder / f'{j}.jpg' for j in range(len(ids))]
+                        paths = [folder / f'{j}.jpg' for j in range(len(ids))] if ids else [folder / 'shopee_product.jpg']
                         break
                     paths[i] = prepared
                     product_layers.append((foreground_path, background))
