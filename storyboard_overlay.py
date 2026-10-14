@@ -3,11 +3,11 @@ import subprocess
 from pathlib import Path
 from PIL import Image, ImageDraw
 
-CHOICES = ('auto','white','sparkle','motion','all','none')
+CHOICES = ('auto','white','sparkle','motion','circle','pop','all','none')
 
 def make_overlay(path: Path, width: int, height: int, choice: str):
     if choice not in CHOICES: raise ValueError('Unknown doodle option')
-    if choice == 'auto': choice = 'white'
+    if choice == 'auto': choice = 'all'
     img = Image.new('RGBA',(width,height),(0,0,0,0))
     d = ImageDraw.Draw(img)
     white=(255,255,255,215)
@@ -28,6 +28,14 @@ def make_overlay(path: Path, width: int, height: int, choice: str):
             cx,cy,rr=int(width*x),int(height*y),max(4,int(width*r))
             d.line((cx-rr,cy,cx+rr,cy),fill=white,width=thin)
             d.line((cx,cy-rr,cx,cy+rr),fill=white,width=thin)
+    if choice in ('circle','all'):
+        d.arc((width*.06,height*.31,width*.32,height*.48),30,320,fill=white,width=thin)
+        d.arc((width*.70,height*.49,width*.94,height*.65),195,485,fill=white,width=thin)
+    if choice in ('pop','all'):
+        for x,y in ((.18,.25),(.83,.72)):
+            cx,cy=int(width*x),int(height*y)
+            for dx,dy in ((-1,0),(1,0),(0,-1),(0,1),(-.7,-.7),(.7,.7)):
+                d.line((cx+int(dx*12),cy+int(dy*12),cx+int(dx*26),cy+int(dy*26)),fill=white,width=thin)
     img.save(path)
 
 def apply_overlay(source: Path, target: Path, choice: str, width: int, height: int, duration: int):
@@ -36,7 +44,7 @@ def apply_overlay(source: Path, target: Path, choice: str, width: int, height: i
     overlay=target.with_suffix('.overlay.png')
     make_overlay(overlay,width,height,choice)
     # Animate appearance/disappearance in brief beats rather than covering the whole video.
-    enable="+".join(f"between(t,{start:.2f},{min(duration,start+1.15):.2f})"
+    enable="+".join(f"between(t,{start:.2f},{min(duration,start+0.65):.2f})"
                     for start in (0.55, duration*.34, duration*.68) if start<duration)
     cmd=['ffmpeg','-hide_banner','-loglevel','error','-y','-i',str(source),
          '-loop','1','-i',str(overlay),
