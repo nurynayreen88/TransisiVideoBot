@@ -148,14 +148,13 @@ def main_menu(user_id=None):
 
 
 def style_menu():
-    rows = []
-    for key, label in STYLE_LABELS.items():
-        rows.append([
-            InlineKeyboardButton('▶️ Contoh', callback_data=f'preview:{key}'),
-            InlineKeyboardButton(label, callback_data=f'style:{key}'),
-        ])
-    rows.append([InlineKeyboardButton('↩️ Menu Utama', callback_data='home')])
-    return InlineKeyboardMarkup(rows)
+    """Simple optional styles; retain all legacy render styles internally."""
+    return InlineKeyboardMarkup([
+        [InlineKeyboardButton('✨ Auto Cantik (Disyorkan)', callback_data='style:hybrid')],
+        [InlineKeyboardButton('🎬 Smooth & Premium', callback_data='style:smooth')],
+        [InlineKeyboardButton('⚡ Dynamic', callback_data='style:dynamic')],
+        [InlineKeyboardButton('↩️ Pilih Muzik', callback_data='music')],
+    ])
 
 
 def music_menu():
@@ -915,8 +914,13 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         duration = int(action.split(':', 1)[1])
         if duration in (10, 15, 20):
             context.user_data['duration'] = duration
-            context.user_data['stage'] = 'style'
-            await query.message.reply_text(f'⏱️ {duration} saat dipilih. Pilih gaya:', reply_markup=style_menu())
+            if context.user_data.get('storyboard_mode'):
+                context.user_data['stage'] = 'style'
+                await query.message.reply_text(f'⏱️ {duration} saat dipilih. Pilih gaya storyboard:', reply_markup=style_menu())
+            else:
+                context.user_data['style'] = 'hybrid'
+                context.user_data['stage'] = 'music'
+                await query.message.reply_text(f'⏱️ {duration} saat dipilih. ✨ Auto Cantik diaktifkan. Pilih muzik:', reply_markup=music_menu())
     elif action == 'photos_done':
         if stage not in ('photos', 'duration') or not context.user_data.get('photos'):
             await query.message.reply_text('Hantar sekurang-kurangnya satu gambar dahulu.', reply_markup=photos_menu())
@@ -925,7 +929,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await query.message.reply_text('⏱️ Pilih durasi video:', reply_markup=duration_menu())
     elif action == 'styles' and stage in ('style', 'music', 'confirm'):
         context.user_data['stage'] = 'style'
-        await query.message.reply_text('Langkah 2/4 — Pilih gaya:', reply_markup=style_menu())
+        await query.message.reply_text('🎨 Tukar gaya (pilihan). Auto Cantik digunakan secara lalai:', reply_markup=style_menu())
     elif action.startswith('preview:') and stage == 'style':
         chosen = action.split(':', 1)[1]
         if chosen not in STYLES:
@@ -969,7 +973,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await query.message.reply_text('✅ Efek untuk storyboard: '+DOODLE_OPTIONS[choice]+'\nEfek pilihan akan dimasukkan ke dalam MP4.\nPilih muzik:', reply_markup=music_menu())
     elif action == 'music' and stage in ('music', 'confirm'):
         context.user_data['stage'] = 'music'
-        await query.message.reply_text('Langkah 3/4 — Pilih muzik:', reply_markup=music_menu())
+        await query.message.reply_text('🎵 Pilih muzik:', reply_markup=music_menu())
     elif action == 'music_previews' and stage == 'music':
         await query.message.reply_text('Tekan untuk mendengar contoh muzik:', reply_markup=music_preview_menu())
     elif action.startswith('listen:') and stage == 'music':
