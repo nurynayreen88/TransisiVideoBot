@@ -258,7 +258,7 @@ def smart_frame(img, motion):
     return canvas
 
 
-def render_video(images: list[Path], output: Path, music: Path | None = None, style: str = 'hybrid', duration: int = DURATION, doodle: str = 'none', hook: str | None = None):
+def render_video(images: list[Path], output: Path, music: Path | None = None, style: str = 'hybrid', duration: int = DURATION, doodle: str = 'none', hook: str | None = None, on_progress=None):
     """Produce CPU-friendly Ken Burns transitions. Morph is an approximation, not generative AI."""
     if style not in STYLES:
         raise ValueError("Unknown style")
@@ -283,6 +283,7 @@ def render_video(images: list[Path], output: Path, music: Path | None = None, st
         temp = Path(td)
         clips = []
         for i, (path, motion) in enumerate(shots):
+            logging.info('KLIPPO render shot %s/%s start', i + 1, n)
             with Image.open(path) as original:
                 img = ImageOps.exif_transpose(original).convert('RGB')
                 # Preserve framing: modest overscan gives zoompan room to move.
@@ -316,8 +317,11 @@ def render_video(images: list[Path], output: Path, music: Path | None = None, st
                   f"d={frames}:s={WIDTH}x{HEIGHT}:fps={FPS},format=yuv420p")
             cmd = ['ffmpeg','-hide_banner','-loglevel','error','-y','-loop','1','-i',str(still),
                    '-vf',vf,'-frames:v',str(frames),'-an','-c:v','libx264',
-                   '-preset','medium','-crf','19','-pix_fmt','yuv420p','-movflags','+faststart',str(clip)]
-            subprocess.run(cmd, check=True, timeout=180)
+                   '-preset','veryfast','-crf','20','-pix_fmt','yuv420p','-movflags','+faststart',str(clip)]
+            subprocess.run(cmd, check=True, timeout=100)
+            logging.info('KLIPPO render shot %s/%s complete', i + 1, n)
+            if on_progress:
+                on_progress(40 + round(35 * (i + 1) / n), f'Merender babak {i + 1}/{n}...')
             clips.append(clip)
         if n == 1:
             video = clips[0]
@@ -337,8 +341,11 @@ def render_video(images: list[Path], output: Path, music: Path | None = None, st
                 chains.append(f'{last}[{i}:v]xfade=transition={transition}:duration={fade:.4f}:offset={offset:.4f}{label}')
                 last = label
             cmd += ['-filter_complex',';'.join(chains),'-map',last,'-an','-c:v','libx264',
-                    '-preset','medium','-crf','19','-pix_fmt','yuv420p','-movflags','+faststart',str(video)]
-            subprocess.run(cmd, check=True, timeout=240)
+                    '-preset','veryfast','-crf','20','-pix_fmt','yuv420p','-movflags','+faststart',str(video)]
+            logging.info('KLIPPO joining %s rendered shots', n)
+            if on_progress:
+                on_progress(80, 'Menggabungkan babak video...')
+            subprocess.run(cmd, check=True, timeout=150)
         if doodle != 'none':
             decorated = temp / 'decorated.mp4'
             apply_overlay(video, decorated, doodle, WIDTH, HEIGHT, duration)
@@ -1117,7 +1124,10 @@ async def generate(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 selected_style = context.user_data.get('style', 'hybrid')
                 doodle = 'none'
             await progress_update(progress, 40, 'Bahan siap. Sedang render video...')
-            await asyncio.to_thread(render_video, paths, result, music, selected_style, context.user_data.get('duration', 10), doodle, verified_video_hook(context.user_data.get('video_product_info', '')))
+            loop = asyncio.get_running_loop()
+            def render_progress(percent, detail):
+                asyncio.run_coroutine_threadsafe(progress_update(progress, percent, detail), loop)
+            await asyncio.to_thread(render_video, paths, result, music, selected_style, context.user_data.get('duration', 10), doodle, verified_video_hook(context.user_data.get('video_product_info', '')), render_progress)
             await progress_update(progress, 90, 'Render selesai. Menghantar video ke Telegram...')
             with result.open('rb') as f:
                 await message.reply_video(video=f, caption='🎬 Video siap! Hantar gambar baharu untuk video seterusnya.', supports_streaming=True,
