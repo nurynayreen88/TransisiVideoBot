@@ -367,7 +367,11 @@ def make_promo_beat(variant=0) -> Path | None:
         snare = (rng.random() * 2 - 1) * math.exp(-snare_phase * 31) * .16
         hat = (rng.random() * 2 - 1) * math.exp(-half * 110) * .075
         # Bright major pentatonic synth pluck, deliberately short and rhythmic.
-        notes = (220.0, 277.18, 329.63, 440.0, 329.63, 277.18, 246.94, 329.63)
+        notes = ((220.0,277.18,329.63,440.0,329.63,277.18,246.94,329.63),
+                 (261.63,329.63,392.0,329.63,293.66,392.0,440.0,392.0),
+                 (196.0,246.94,293.66,392.0,293.66,246.94,220.0,293.66),
+                 (246.94,311.13,369.99,493.88,369.99,311.13,277.18,369.99),
+                 (220.0,329.63,440.0,329.63,277.18,329.63,246.94,277.18))[variant % 5]
         step = int(t / (beat / 2)) % len(notes)
         p = t % (beat / 2)
         freq = notes[step]
@@ -466,7 +470,9 @@ def render_product_motion(layers, output, music, duration, on_progress=None):
     """Product-only advertising: deliberate moves on musical phrases, clean beat cuts."""
     # The built-in promotional beat is 124 BPM. For custom music use evenly spaced
     # editorial cuts; do not claim to detect beats in arbitrary uploaded audio.
-    bpm = 124 if music and 'klippo_promo_beat' in str(music) else None
+    import re
+    tempo_match = re.search(r'klippo_promo_beat_([0-9]+)_v2', str(music)) if music else None
+    bpm = int(tempo_match.group(1)) if tempo_match else None
     if bpm:
         phrase = 8 * 60 / bpm
         boundaries = [0, phrase, phrase * 2, duration] if duration >= phrase * 2 + 1 else [0, duration / 2, duration]
