@@ -143,7 +143,7 @@ def _scene_background(size, choice):
     return canvas
 
 
-def replace_background(source: Path, destination: Path, choice: str) -> Path:
+def replace_background(source: Path, destination: Path, choice: str, foreground_destination: Path | None = None) -> Path:
     if choice not in BACKGROUNDS and choice not in ('gradient', 'pattern', 'duotone', 'mist'):
         raise ValueError('Unknown background')
     with Image.open(source) as opened:
@@ -165,6 +165,8 @@ def replace_background(source: Path, destination: Path, choice: str) -> Path:
                 raise ValueError('No product detected')
     background = (_scene_background(foreground.size, choice) if choice not in BACKGROUNDS
                   else Image.new('RGBA', foreground.size, BACKGROUNDS[choice] + (255,)))
+    if foreground_destination is not None:
+        foreground.save(foreground_destination, 'PNG')
     background.alpha_composite(foreground)
     background.convert('RGB').save(destination, 'PNG')
     return destination
@@ -1311,16 +1313,19 @@ async def generate(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 paths.append(p)
                 await progress_update(progress, round(25 * (i + 1) / len(ids)), 'Memuat turun gambar...')
             background = context.user_data.get('background', 'original')
+            product_layers = []
             if background != 'original':
                 for i, path in enumerate(paths):
                     prepared = folder / f'product_bg_{i}.png'
+                    foreground_path = folder / f'product_cutout_{i}.png'
                     try:
-                        await asyncio.to_thread(replace_background, path, prepared, background)
+                        await asyncio.to_thread(replace_background, path, prepared, background, foreground_path)
                     except ValueError as exc:
                         logging.warning('Background removal declined: %s', exc)
                         await message.reply_text('⚠️ Produk tidak dapat diasingkan dengan yakin daripada latar gambar ini. Guna gambar produk berlatar ringkas atau pilih Kekalkan Asal.')
                         return
                     paths[i] = prepared
+                    product_layers.append((foreground_path, background))
                 await progress_update(progress, 30, 'Produk diasingkan dan latar baharu disediakan...')
             music = None
             if context.user_data.get('music_choice') == 'custom' and context.user_data.get('music'):
