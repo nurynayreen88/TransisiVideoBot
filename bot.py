@@ -278,7 +278,7 @@ def render_video(images: list[Path], output: Path, music: Path | None = None, st
     # Reuse the original pixels; no fabricated alternate product views.
     source_count = len(images)
     if source_count == 1:
-        shots = [(images[0], 0), (images[0], 1), (images[0], 2)]
+        shots = [(images[0], 0), (images[0], 1), (images[0], 2), (images[0], 3)]
     elif source_count == 2:
         shots = [(images[0], 0), (images[0], 1),
                  (images[1], 2), (images[1], 3)]
@@ -347,7 +347,7 @@ def render_video(images: list[Path], output: Path, music: Path | None = None, st
                 offset = i * (clip_duration - fade)
                 # Same-source cuts get a gentle dissolve; different photos use the selected style.
                 same_photo = shots[i - 1][0] == shots[i][0]
-                transition = 'fade' if same_photo else STYLES[style][(i - 1) % len(STYLES[style])]
+                transition = ('fade', 'smoothleft', 'fadeblack')[(i - 1) % 3] if same_photo else STYLES[style][(i - 1) % len(STYLES[style])]
                 chains.append(f'{last}[{i}:v]xfade=transition={transition}:duration={fade:.4f}:offset={offset:.4f}{label}')
                 last = label
             cmd += ['-filter_complex',';'.join(chains),'-map',last,'-an','-c:v','libx264',
