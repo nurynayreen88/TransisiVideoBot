@@ -196,7 +196,7 @@ STYLE_LABELS = {
 MUSIC_CHOICES = ('auto', 'custom')
 MUSIC_DIR = Path(__file__).resolve().parent / 'music'
 
-DOODLE_OPTIONS = {'auto':'✨ Auto', 'white':'🤍 White Doodle', 'sparkle':'✨ Sparkle', 'motion':'🌀 Motion Lines', 'all':'🎨 Gabungan Semua', 'none':'🚫 Tanpa Efek'}
+DOODLE_OPTIONS = {'auto':'✨ Auto Doodle', 'white':'🤍 White Doodle', 'sparkle':'✨ Sparkle', 'motion':'🌀 Motion Lines', 'circle':'◯ Circle Highlight', 'pop':'✳️ Pop Burst', 'all':'🎨 Gabungan Semua', 'none':'🚫 Tanpa Efek'}
 def doodle_menu():
     return InlineKeyboardMarkup([[InlineKeyboardButton(label, callback_data='doodle:'+key)] for key,label in DOODLE_OPTIONS.items()])
 
@@ -330,6 +330,7 @@ def music_menu():
 def confirm_menu():
     return InlineKeyboardMarkup([
         [InlineKeyboardButton('✅ Hasilkan Video', callback_data='confirm')],
+        [InlineKeyboardButton('✨ Tukar Efek', callback_data='effects')],
         [InlineKeyboardButton('🎨 Tukar Gaya', callback_data='styles'), InlineKeyboardButton('🎵 Tukar Muzik', callback_data='music')],
         [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
     ])
@@ -458,7 +459,7 @@ def smart_frame(img, motion):
     return canvas
 
 
-def render_product_motion(layers, output, music, duration, on_progress=None):
+def render_product_motion(layers, output, music, duration, on_progress=None, doodle='none'):
     """Product-only advertising: deliberate moves on musical phrases, clean beat cuts."""
     # Built-in promotional beats have known BPM. For custom music use evenly spaced
     # editorial cuts; do not claim to detect beats in arbitrary uploaded audio.
@@ -540,6 +541,10 @@ def render_product_motion(layers, output, music, duration, on_progress=None):
         cmd += ['-filter_complex',chain,'-map','[v]','-an','-c:v','libx264',
                 '-preset','veryfast','-crf','21','-pix_fmt','yuv420p',str(joined)]
         subprocess.run(cmd, check=True, timeout=150, capture_output=True, text=True)
+        if doodle != 'none':
+            decorated = tmp / 'decorated.mp4'
+            apply_overlay(joined, decorated, doodle, WIDTH, HEIGHT, duration)
+            joined = decorated
         if music:
             cmd = ['ffmpeg','-hide_banner','-loglevel','error','-y','-i',str(joined),
                    '-stream_loop','-1','-i',str(music),'-map','0:v:0','-map','1:a:0',
@@ -554,8 +559,8 @@ def render_product_motion(layers, output, music, duration, on_progress=None):
 
 def render_video(images: list[Path], output: Path, music: Path | None = None, style: str = 'hybrid', duration: int = DURATION, doodle: str = 'none', hook: str | None = None, on_progress=None, product_layers=None):
     """Produce CPU-friendly Ken Burns transitions. Morph is an approximation, not generative AI."""
-    if product_layers and doodle == 'none':
-        return render_product_motion(product_layers, output, music, duration, on_progress)
+    if product_layers:
+        return render_product_motion(product_layers, output, music, duration, on_progress, doodle)
     if style not in STYLES:
         raise ValueError("Unknown style")
     if not images:
@@ -694,7 +699,7 @@ def reset(context):
     context.user_data['style'] = 'smooth'
     context.user_data['duration'] = 10
     context.user_data['background'] = 'original'
-    context.user_data['doodle_choice'] = 'none'
+    context.user_data['doodle_choice'] = 'auto'
     context.user_data['storyboard_mode'] = False
     context.user_data['prompt_mode'] = 'normal'
     context.user_data['video_product_info'] = ''
@@ -1306,12 +1311,20 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         else:
             context.user_data['stage'] = 'music'
             await query.message.reply_text(f"✅ Gaya {context.user_data['style']} dipilih.\nLangkah 3/4 — Pilih muzik:", reply_markup=music_menu())
-    elif action.startswith('doodle:') and stage == 'doodle' and context.user_data.get('storyboard_mode'):
+    elif action == 'effects' and stage == 'confirm':
+        context.user_data['stage'] = 'doodle'
+        await query.message.reply_text('✨ Pilih efek video:', reply_markup=doodle_menu())
+    elif action.startswith('doodle:') and stage == 'doodle':
         choice = action.split(':', 1)[1]
         if choice in DOODLE_OPTIONS:
             context.user_data['doodle_choice'] = choice
             context.user_data['stage'] = 'music'
-            await query.message.reply_text('✅ Efek untuk storyboard: '+DOODLE_OPTIONS[choice]+'\nEfek pilihan akan dimasukkan ke dalam MP4.\nPilih muzik:', reply_markup=music_menu())
+            if context.user_data.get('storyboard_mode'):
+                context.user_data['stage'] = 'music'
+                await query.message.reply_text('✅ Efek storyboard: '+DOODLE_OPTIONS[choice]+'\nPilih muzik:', reply_markup=music_menu())
+            else:
+                context.user_data['stage'] = 'confirm'
+                await query.message.reply_text('✅ Efek: '+DOODLE_OPTIONS[choice]+'\nSemak dan hasilkan video.', reply_markup=confirm_menu())
     elif action == 'music' and stage in ('music', 'confirm'):
         context.user_data['stage'] = 'music'
         await query.message.reply_text('🎵 Pilih muzik:', reply_markup=music_menu())
@@ -1332,8 +1345,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['music_choice'] = choice
             if choice != 'custom':
                 context.user_data['music'] = None
-            context.user_data['stage'] = 'confirm'
-            await query.message.reply_text(('Hantar MP3 sendiri, kemudian tekan Hasilkan Video.' if choice == 'custom' else f'✅ Muzik {choice} dipilih.\nLangkah 4/4 — Semak dan hasilkan.'), reply_markup=confirm_menu())
+            context.user_data['stage'] = 'doodle'
+            await query.message.reply_text(('📎 Hantar MP3 sendiri. ' if choice == 'custom' else '✅ Muzik dipilih. ') + 'Pilih efek video (bayang produk automatik untuk latar studio):', reply_markup=doodle_menu())
     elif action == 'confirm' and stage == 'confirm':
         await generate(update, context)
     elif action == 'subscription':
@@ -1482,7 +1495,7 @@ async def generate(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 doodle = context.user_data.get('doodle_choice', 'none')
             else:
                 selected_style = context.user_data.get('style', 'hybrid')
-                doodle = 'none'
+                doodle = context.user_data.get('doodle_choice', 'auto')
             await progress_update(progress, 40, 'Bahan siap. Sedang render video...')
             loop = asyncio.get_running_loop()
             def render_progress(percent, detail):
