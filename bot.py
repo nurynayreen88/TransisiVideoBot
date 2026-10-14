@@ -798,6 +798,7 @@ def reset(context):
     context.user_data['storyboard_mode'] = False
     context.user_data['prompt_mode'] = 'normal'
     context.user_data['video_product_info'] = ''
+    context.user_data['product_description'] = ''
     context.user_data['prompt_vision'] = ''
     context.user_data['prompt_product'] = ''
     context.user_data['stage'] = 'home'
@@ -1371,8 +1372,11 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if stage not in ('photos', 'duration', 'background') or not context.user_data.get('photos'):
             await query.message.reply_text('Hantar sekurang-kurangnya satu gambar dahulu.', reply_markup=photos_menu())
             return
+        context.user_data['stage'] = 'product_description'
+        await query.message.reply_text('📋 Tampal tajuk atau penerangan produk daripada Shopee/TikTok Shop (pilihan). Teks ini membantu mengenal pasti model produk. Gambar tidak dihantar kepada Gemini.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('⏭️ Langkau',callback_data='description:skip')]]))
+    elif action == 'description:skip' and stage == 'product_description':
         context.user_data['stage'] = 'background'
-        await query.message.reply_text('🖼️ Pilih latar produk. Latar baharu akan cuba mengasingkan produk daripada gambar asal:', reply_markup=background_menu())
+        await query.message.reply_text('🖼️ Pilih latar produk:',reply_markup=background_menu())
     elif action.startswith('background:') and stage == 'background':
         choice = action.split(':', 1)[1]
         if choice in ('original', 'white', 'beige', 'dark', 'pastel', 'gradient', 'pattern', 'duotone', 'mist'):
@@ -1526,7 +1530,12 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
         else:
             await start(update, context)
         return
-    if stage == 'photos' and value.lower().startswith('produk:'):
+    if stage == 'product_description':
+        context.user_data['product_description'] = value[:1800]
+        context.user_data['video_product_info'] = value[:600]
+        context.user_data['stage'] = 'background'
+        await update.message.reply_text('✅ Penerangan diterima. Gambar tidak dihantar kepada Gemini. Pilih latar produk:',reply_markup=background_menu())
+    elif stage == 'photos' and value.lower().startswith('produk:'):
         info = value.split(':', 1)[1].strip()[:100]
         context.user_data['video_product_info'] = info
         hook = verified_video_hook(info)
@@ -1576,8 +1585,10 @@ async def generate(update: Update, context: ContextTypes.DEFAULT_TYPE):
                         await asyncio.to_thread(replace_background, path, prepared, background, foreground_path)
                     except ValueError as exc:
                         logging.warning('Background removal declined: %s', exc)
-                        await message.reply_text('⚠️ Produk tidak dapat diasingkan dengan yakin daripada latar gambar ini. Guna gambar produk berlatar ringkas atau pilih Kekalkan Asal.')
-                        return
+                        await message.reply_text('⚠️ Gambar ini terlalu kompleks untuk pengasingan produk yang selamat. KLIPPO akan menggunakan gambar asal tanpa menggantikannya dengan gambar produk lain yang belum disahkan.')
+                        product_layers = []
+                        paths = [folder / f'{j}.jpg' for j in range(len(ids))]
+                        break
                     paths[i] = prepared
                     product_layers.append((foreground_path, background))
                 await progress_update(progress, 30, 'Produk diasingkan dan latar baharu disediakan...')
