@@ -468,11 +468,12 @@ def smart_frame(img, motion):
 
 def render_product_motion(layers, output, music, duration, on_progress=None):
     """Product-only advertising: deliberate moves on musical phrases, clean beat cuts."""
-    # The built-in promotional beat is 124 BPM. For custom music use evenly spaced
+    # Built-in promotional beats have known BPM. For custom music use evenly spaced
     # editorial cuts; do not claim to detect beats in arbitrary uploaded audio.
     import re
     tempo_match = re.search(r'klippo_promo_beat_([0-9]+)_v2', str(music)) if music else None
     bpm = int(tempo_match.group(1)) if tempo_match else None
+    motion_variant = ((bpm or 124) // 4) % 3
     if bpm:
         phrase = 8 * 60 / bpm
         boundaries = [0, phrase, phrase * 2, duration] if duration >= phrase * 2 + 1 else [0, duration / 2, duration]
@@ -509,7 +510,7 @@ def render_product_motion(layers, output, music, duration, on_progress=None):
             shadow.alpha_composite(fg, (pad, pad))
             fg = shadow
             # Clearly distinct framing, not tiny jitter. Never fabricate another view.
-            scale = (.63, .76, .70)[i % 3]
+            scale = ((.63, .76, .70), (.70, .64, .77), (.67, .78, .69))[motion_variant][i % 3]
             fg.thumbnail((int(WIDTH * scale), int(HEIGHT * .66)), Image.Resampling.LANCZOS)
             fg_path = tmp / f'product_{i}.png'
             fg.save(fg_path)
@@ -522,7 +523,8 @@ def render_product_motion(layers, output, music, duration, on_progress=None):
             ease = f'({p}*{p}*(3-2*{p}))'
             cx, cy = '(W-w)/2', '(H-h)/2'
             if i % 3 == 0:  # confident entrance on the first musical phrase
-                x, y = f'{cx}+W*.22*(1-{ease})', f'{cy}+H*.035*(1-{ease})'
+                direction = -1 if motion_variant == 1 else 1
+                x, y = f'{cx}+W*{direction * .22}*(1-{ease})', f'{cy}+H*.035*(1-{ease})'
             elif i % 3 == 1:  # closer product detail, gentle lift
                 x, y = f'{cx}-W*.035*{ease}', f'{cy}+H*.045*(1-{ease})'
             else:  # stable hero finish
