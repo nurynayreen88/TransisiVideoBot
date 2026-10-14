@@ -193,7 +193,7 @@ STYLE_LABELS = {
     'zoom': '🔍 Zoom Reveal', 'smooth': '🌊 Smooth Flow',
     'creative': '🎨 Creative Wipe', 'morph': '🌀 Morph-style',
 }
-MUSIC_CHOICES = ('auto', 'cinematic', 'energetic', 'happy', 'luxury', 'nature', 'beauty', 'none', 'custom')
+MUSIC_CHOICES = ('auto', 'custom')
 MUSIC_DIR = Path(__file__).resolve().parent / 'music'
 
 DOODLE_OPTIONS = {'auto':'✨ Auto', 'white':'🤍 White Doodle', 'sparkle':'✨ Sparkle', 'motion':'🌀 Motion Lines', 'all':'🎨 Gabungan Semua', 'none':'🚫 Tanpa Efek'}
@@ -321,18 +321,10 @@ def style_menu():
 
 def music_menu():
     return InlineKeyboardMarkup([
-        [InlineKeyboardButton('⚡ Auto Promo Beat', callback_data='music:auto'), InlineKeyboardButton('🔇 Tanpa Muzik', callback_data='music:none')],
-        [InlineKeyboardButton('🎬 Cinematic', callback_data='music:cinematic'), InlineKeyboardButton('⚡ Energetic', callback_data='music:energetic')],
-        [InlineKeyboardButton('😊 Happy', callback_data='music:happy'), InlineKeyboardButton('💎 Luxury', callback_data='music:luxury')],
-        [InlineKeyboardButton('🌿 Nature', callback_data='music:nature'), InlineKeyboardButton('🌸 Beauty', callback_data='music:beauty')],
-        [InlineKeyboardButton('▶️ Dengar Pilihan Muzik', callback_data='music_previews')],
-        [InlineKeyboardButton('📎 MP3 Sendiri', callback_data='music:custom')],
+        [InlineKeyboardButton('⚡ Auto Beat', callback_data='music:auto')],
+        [InlineKeyboardButton('📎 Upload Muzik Sendiri', callback_data='music:custom')],
         [InlineKeyboardButton('↩️ Tukar Gaya', callback_data='styles')],
     ])
-
-
-def music_preview_menu():
-    return InlineKeyboardMarkup([[InlineKeyboardButton('▶️ ' + name.title(), callback_data='listen:' + name)] for name in ('cinematic', 'energetic', 'happy', 'luxury', 'nature', 'beauty')] + [[InlineKeyboardButton('↩️ Pilih Muzik', callback_data='music')]])
 
 
 def confirm_menu():
