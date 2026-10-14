@@ -321,7 +321,7 @@ def style_menu():
 
 def music_menu():
     return InlineKeyboardMarkup([
-        [InlineKeyboardButton('✨ Auto', callback_data='music:auto'), InlineKeyboardButton('🔇 Tanpa Muzik', callback_data='music:none')],
+        [InlineKeyboardButton('⚡ Auto Promo Beat', callback_data='music:auto'), InlineKeyboardButton('🔇 Tanpa Muzik', callback_data='music:none')],
         [InlineKeyboardButton('🎬 Cinematic', callback_data='music:cinematic'), InlineKeyboardButton('⚡ Energetic', callback_data='music:energetic')],
         [InlineKeyboardButton('😊 Happy', callback_data='music:happy'), InlineKeyboardButton('💎 Luxury', callback_data='music:luxury')],
         [InlineKeyboardButton('🌿 Nature', callback_data='music:nature'), InlineKeyboardButton('🌸 Beauty', callback_data='music:beauty')],
@@ -343,11 +343,52 @@ def confirm_menu():
     ])
 
 
+def make_promo_beat() -> Path | None:
+    """Generate an original upbeat instrumental loop, with no external music licensing."""
+    import math
+    import wave
+    from array import array
+    import random
+    target = Path(tempfile.gettempdir()) / 'klippo_promo_beat_v1.wav'
+    if target.is_file() and target.stat().st_size > 50000:
+        return target
+    rate, seconds, bpm = 22050, 24, 124
+    beat = 60 / bpm
+    rng = random.Random(124)
+    samples = array('h')
+    for n in range(rate * seconds):
+        t = n / rate
+        phase = t % beat
+        half = t % (beat / 2)
+        kick_env = math.exp(-phase * 23)
+        kick = math.sin(2 * math.pi * (54 * phase + 55 * phase * phase)) * kick_env * .55
+        snare_phase = (t - beat) % (2 * beat)
+        snare = (rng.random() * 2 - 1) * math.exp(-snare_phase * 31) * .16
+        hat = (rng.random() * 2 - 1) * math.exp(-half * 110) * .075
+        # Bright major pentatonic synth pluck, deliberately short and rhythmic.
+        notes = (220.0, 277.18, 329.63, 440.0, 329.63, 277.18, 246.94, 329.63)
+        step = int(t / (beat / 2)) % len(notes)
+        p = t % (beat / 2)
+        freq = notes[step]
+        pluck = (math.sin(2*math.pi*freq*p) + .28*math.sin(2*math.pi*freq*2*p)) * math.exp(-p*9) * .12
+        bass_note = (110.0, 138.59, 164.81, 123.47)[int(t/(beat*4))%4]
+        bass = math.sin(2*math.pi*bass_note*phase) * math.exp(-phase*4) * .16
+        amp = max(-.92, min(.92, kick + snare + hat + pluck + bass))
+        samples.append(int(amp * 32767))
+    with wave.open(str(target), 'wb') as wav:
+        wav.setnchannels(1)
+        wav.setsampwidth(2)
+        wav.setframerate(rate)
+        wav.writeframes(samples.tobytes())
+    return target
+
+
 def resolve_music(choice: str, style: str) -> Path | None:
     if choice == 'none' or choice == 'custom':
         return None
-    name = ({'hybrid': 'happy', 'cinematic': 'cinematic', 'morph': 'energetic'}.get(style, 'happy')
-            if choice == 'auto' else choice)
+    if choice == 'auto':
+        return make_promo_beat()
+    name = choice
     path = MUSIC_DIR / (name + '.mp3')
     return path if path.is_file() else None
 
