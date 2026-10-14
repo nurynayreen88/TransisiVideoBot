@@ -34,9 +34,9 @@ STYLES = {
     'hybrid': ('smoothleft', 'smoothup', 'fade'),
     'cinematic': ('fade', 'fadeblack'),
     'luxury': ('fadeblack', 'circleopen'),
-    'dynamic': ('slideleft', 'slideright', 'slideup'),
+    'dynamic': ('smoothleft', 'slideleft', 'fade'),
     'zoom': ('zoomin', 'circleopen'),
-    'smooth': ('smoothleft', 'smoothright', 'smoothup'),
+    'smooth': ('fade', 'smoothleft', 'fade'),
     'creative': ('wipeleft', 'wiperight', 'radial'),
     'morph': ('pixelize', 'circleopen'),
 }
@@ -325,11 +325,11 @@ def render_video(images: list[Path], output: Path, music: Path | None = None, st
                 y = f'(ih-ih/zoom)*(0.35+0.25*{progress})'
             vf = (f"zoompan=z='{zoom}':x='{x}':y='{y}':"
                   f"d={frames}:s={WIDTH}x{HEIGHT}:fps={FPS},format=yuv420p")
-            cmd = ['ffmpeg','-hide_banner','-loglevel','error','-y','-threads','1','-filter_threads','1','-loop','1','-i',str(still),
+            cmd = ['ffmpeg','-hide_banner','-loglevel','error','-y','-threads','1','-filter_threads','1','-framerate','1','-i',str(still),
                    '-vf',vf,'-frames:v',str(frames),'-an','-c:v','libx264',
                    '-preset','ultrafast','-crf','22','-pix_fmt','yuv420p','-movflags','+faststart',str(clip)]
-            subprocess.run(cmd, check=True, timeout=100)
-            logging.info('KLIPPO render shot %s/%s complete', i + 1, n)
+            subprocess.run(cmd, check=True, timeout=100, capture_output=True, text=True)
+            logging.info('KLIPPO render shot %s/%s complete (%s bytes)', i + 1, n, clip.stat().st_size)
             if on_progress:
                 on_progress(40 + round(35 * (i + 1) / n), f'Merender babak {i + 1}/{n}...')
             clips.append(clip)
@@ -355,8 +355,8 @@ def render_video(images: list[Path], output: Path, music: Path | None = None, st
             logging.info('KLIPPO joining %s rendered shots', n)
             if on_progress:
                 on_progress(80, 'Menggabungkan babak video...')
-            subprocess.run(cmd, check=True, timeout=150)
-            logging.info('KLIPPO shot joining complete')
+            subprocess.run(cmd, check=True, timeout=150, capture_output=True, text=True)
+            logging.info('KLIPPO shot joining complete (%s bytes)', video.stat().st_size)
         if doodle != 'none':
             decorated = temp / 'decorated.mp4'
             apply_overlay(video, decorated, doodle, WIDTH, HEIGHT, duration)
@@ -1181,6 +1181,9 @@ async def generate(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await progress_update(progress, 100, 'Video berjaya dihantar.')
         reset(context)
         await message.reply_text('Mahu buat video lagi? Hantar gambar baharu.', reply_markup=main_menu())
+    except subprocess.CalledProcessError as exc:
+        logging.error('KLIPPO FFmpeg failed: %s', (exc.stderr or str(exc))[-1800:])
+        await message.reply_text('❌ Proses video gagal pada FFmpeg. Semak log KLIPPO FFmpeg failed di Render.')
     except Exception:
         logging.exception('Video generation failed')
         await message.reply_text('❌ Gagal menjana video. Cuba kurangkan gambar atau semak log FFmpeg.')
