@@ -1162,6 +1162,7 @@ def main():
         webhook_url=url + '/telegram',
         secret_token=secret,
         drop_pending_updates=True,
+        bootstrap_retries=5,  # Retry transient Telegram getMe / webhook gateway failures at startup.
     )
 
 if __name__ == '__main__':
