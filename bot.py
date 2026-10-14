@@ -84,10 +84,10 @@ def background_menu():
          InlineKeyboardButton('🟤 Studio Beige', callback_data='background:beige')],
         [InlineKeyboardButton('⬛ Luxury Gelap', callback_data='background:dark'),
          InlineKeyboardButton('🌸 Pastel', callback_data='background:pastel')],
-        [InlineKeyboardButton('🏡 Ruang Tamu', callback_data='background:living'),
-         InlineKeyboardButton('🍳 Dapur', callback_data='background:kitchen')],
-        [InlineKeyboardButton('🛏️ Bilik Tidur', callback_data='background:bedroom'),
-         InlineKeyboardButton('🌿 Taman', callback_data='background:garden')],
+        [InlineKeyboardButton('✨ Gradient Krim', callback_data='background:gradient'),
+         InlineKeyboardButton('◯ Corak Halus', callback_data='background:pattern')],
+        [InlineKeyboardButton('◐ Dua Tona', callback_data='background:duotone'),
+         InlineKeyboardButton('🌫️ Kelabu Lembut', callback_data='background:mist')],
         [InlineKeyboardButton('↩️ Semak Gambar', callback_data='photos_order')],
     ])
 
@@ -982,7 +982,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await query.message.reply_text('🖼️ Pilih latar produk. Latar baharu akan cuba mengasingkan produk daripada gambar asal:', reply_markup=background_menu())
     elif action.startswith('background:') and stage == 'background':
         choice = action.split(':', 1)[1]
-        if choice in ('original', 'white', 'beige', 'dark', 'pastel', 'living', 'kitchen', 'bedroom', 'garden'):
+        if choice in ('original', 'white', 'beige', 'dark', 'pastel', 'gradient', 'pattern', 'duotone', 'mist'):
             context.user_data['background'] = choice
             context.user_data['stage'] = 'duration'
             await query.message.reply_text('⏱️ Pilih durasi video:', reply_markup=duration_menu())
