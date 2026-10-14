@@ -36,7 +36,7 @@ STYLES = {
     'luxury': ('fadeblack', 'circleopen'),
     'dynamic': ('smoothleft', 'slideleft', 'fade'),
     'zoom': ('zoomin', 'circleopen'),
-    'smooth': ('fade', 'smoothleft', 'fade'),
+    'smooth': ('fade', 'fadeblack', 'fade'),
     'creative': ('wipeleft', 'wiperight', 'radial'),
     'morph': ('pixelize', 'circleopen'),
 }
@@ -278,12 +278,12 @@ def render_video(images: list[Path], output: Path, music: Path | None = None, st
     # Reuse the original pixels; no fabricated alternate product views.
     source_count = len(images)
     if source_count == 1:
-        shots = [(images[0], 0), (images[0], 1), (images[0], 2), (images[0], 3)]
+        shots = [(images[0], 0), (images[0], 5), (images[0], 2), (images[0], 7)]
     elif source_count == 2:
-        shots = [(images[0], 0), (images[0], 1),
-                 (images[1], 2), (images[1], 3)]
+        shots = [(images[0], 0), (images[0], 4),
+                 (images[1], 6), (images[1], 2)]
     else:
-        shots = [(path, i % 6) for i, path in enumerate(images)]
+        shots = [(path, (i * 3 + i // 2) % 8) for i, path in enumerate(images)]
     n = len(shots)
     # Keep fades short enough for any image count and total duration.
     fade = min(0.65, duration / (n * 4.0)) if n > 1 else 0
@@ -300,8 +300,7 @@ def render_video(images: list[Path], output: Path, music: Path | None = None, st
                 img = smart_frame(img, motion)
                 still = temp / f'still_{i}.jpg'
                 img.save(still, quality=96, subsampling=0, optimize=True)
-                if i == 0 and hook:
-                    hook_card(still, hook)
+                # Product-only video: no generated text on any frame.
             clip = temp / f'clip_{i}.mp4'
             # Subtle editorial motion: vary direction, limit zoom change to 7.5%.
             # Expressions use the output-frame index 'on'; avoid abrupt jumps.
@@ -334,11 +333,21 @@ def render_video(images: list[Path], output: Path, music: Path | None = None, st
                 zoom = '1.17'
                 x = f'(iw-iw/zoom)*(0.90-0.80*{progress})'
                 y = '(ih-ih/zoom)/2'
-            else:  # gentle diagonal motion
-                motion_name = 'diagonal'
+            elif motion == 5:  # restrained diagonal glide
+                motion_name = 'diagonal-glide'
                 zoom = f'1.12+0.04*{progress}'
                 x = f'(iw-iw/zoom)*(0.18+0.64*{progress})'
                 y = f'(ih-ih/zoom)*(0.20+0.60*{progress})'
+            elif motion == 6:  # top-to-bottom editorial tilt
+                motion_name = 'descend'
+                zoom = '1.16'
+                x = '(iw-iw/zoom)/2'
+                y = f'(ih-ih/zoom)*(0.10+0.80*{progress})'
+            else:  # reverse diagonal reveal
+                motion_name = 'reverse-diagonal'
+                zoom = f'1.16-0.035*{progress}'
+                x = f'(iw-iw/zoom)*(0.80-0.60*{progress})'
+                y = f'(ih-ih/zoom)*(0.80-0.60*{progress})'
             logging.info('KLIPPO shot %s movement: %s', i + 1, motion_name)
             vf = (f"zoompan=z='{zoom}':x='{x}':y='{y}':"
                   f"d={frames}:s={WIDTH}x{HEIGHT}:fps={FPS},format=yuv420p")
@@ -1190,7 +1199,7 @@ async def generate(update: Update, context: ContextTypes.DEFAULT_TYPE):
             loop = asyncio.get_running_loop()
             def render_progress(percent, detail):
                 asyncio.run_coroutine_threadsafe(progress_update(progress, percent, detail), loop)
-            await asyncio.to_thread(render_video, paths, result, music, selected_style, context.user_data.get('duration', 10), doodle, verified_video_hook(context.user_data.get('video_product_info', '')), render_progress)
+            await asyncio.to_thread(render_video, paths, result, music, selected_style, context.user_data.get('duration', 10), doodle, None, render_progress)
             await progress_update(progress, 90, 'Render selesai. Menghantar video ke Telegram...')
             with result.open('rb') as f:
                 await message.reply_video(video=f, caption='🎬 Video siap! Hantar gambar baharu untuk video seterusnya.', supports_streaming=True,
