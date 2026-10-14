@@ -3,7 +3,7 @@ import subprocess
 import hashlib
 import random
 from pathlib import Path
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFont
 
 CHOICES = ('auto','black','white','gold','pastel','sparkle','motion','circle','pop','all','none')
 
@@ -91,3 +91,55 @@ def apply_overlay(source: Path, target: Path, choice: str, width: int, height: i
          '-map','[v]','-an','-t',str(duration),'-c:v','libx264','-preset','veryfast',
          '-crf','18','-pix_fmt','yuv420p',str(target)]
     subprocess.run(cmd,check=True,timeout=240)
+
+
+def make_handwriting_labels(directory, width, height, background='original', seed='', product_info=''):
+    """Create three short, peripheral handwritten-style labels; never invent product claims."""
+    import re
+    rng = random.Random(hashlib.sha256((str(seed)+'handwriting').encode()).digest())
+    palettes = {
+        'dark': (255, 244, 220, 245), 'white': (39, 54, 73, 245),
+        'beige': (76, 55, 48, 245), 'pastel': (72, 54, 86, 245),
+        'original': (255, 255, 255, 245),
+    }
+    ink = palettes.get(background, (46, 54, 75, 245))
+    # Use only user-provided words; otherwise neutral, non-claim labels.
+    cleaned = re.sub(r'[^\\w\\s&+/-]', ' ', product_info or '', flags=re.UNICODE)
+    words = [w for w in cleaned.split() if len(w) > 1][:7]
+    labels = [' '.join(words[:3]), ' '.join(words[3:5]), ' '.join(words[5:7])]
+    defaults = ('DETAIL PRODUK', 'LIHAT DEKAT', 'PILIHAN ANDA')
+    labels = [label if label else defaults[i] for i, label in enumerate(labels)]
+    fonts = ('/usr/share/fonts/truetype/dejavu/DejaVuSans-Oblique.ttf',
+             '/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf')
+    font = None
+    for font_path in fonts:
+        try:
+            font = ImageFont.truetype(font_path, max(19, int(width*.038)))
+            break
+        except OSError:
+            continue
+    if font is None:
+        font = ImageFont.load_default()
+    positions = ((.07,.25),(.65,.39),(.07,.73))
+    result = []
+    for i, (label, (px,py)) in enumerate(zip(labels, positions)):
+        img = Image.new('RGBA',(width,height),(0,0,0,0))
+        d = ImageDraw.Draw(img)
+        x,y = int(width*px),int(height*py)
+        max_text_width = int(width*.30)
+        while d.textbbox((0,0),label,font=font)[2] > max_text_width and len(label)>5:
+            label = label[:-2].rstrip() + '…'
+        d.text((x,y),label,font=font,fill=ink,stroke_width=1,stroke_fill=ink)
+        tw = d.textbbox((x,y),label,font=font)[2]-x
+        underline_y = y+max(25,int(width*.05))
+        d.arc((x,underline_y-6,x+tw,underline_y+5),5,165,fill=ink,width=max(2,width//250))
+        # Small hand-drawn pointer, entirely in the side margin.
+        direction = 1 if i != 1 else -1
+        ax = x+min(tw,max_text_width)//2
+        ay = underline_y+14
+        d.line((ax,ay,ax+direction*16,ay+15,ax+direction*26,ay+9),fill=ink,width=max(2,width//280),joint='curve')
+        d.line((ax+direction*26,ay+9,ax+direction*18,ay+8),fill=ink,width=max(2,width//280))
+        path = directory / f'handwriting_{i}.png'
+        img.save(path)
+        result.append(path)
+    return result
