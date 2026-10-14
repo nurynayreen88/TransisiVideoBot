@@ -16,7 +16,7 @@ from video_merge import merge_videos
 from fusion_animation import fusion_gif
 import klippo_db
 from storyboard_engine import build_storyboard, format_storyboard, source_sequence
-from storyboard_overlay import apply_overlay
+from storyboard_overlay import apply_overlay, make_handwriting_labels
 from gemini_vision import describe_photo
 from prompt_engine import build_prompt
 from prompt_catalog import choices as storyboard_styles
@@ -605,7 +605,7 @@ def _hand_place_asset(width, variant, direction):
     return im
 
 
-def render_creative_motion(layers, output, music, duration, on_progress=None, doodle='none', mode='auto'):
+def render_creative_motion(layers, output, music, duration, on_progress=None, doodle='none', mode='auto', product_info=''):
     """Deliberate held-pose stop motion; source cutout only, no invented 3D views."""
     import math
     from PIL import ImageEnhance
@@ -708,6 +708,27 @@ def render_creative_motion(layers, output, music, duration, on_progress=None, do
             decorated = tmp / 'decorated.mp4'
             apply_overlay(joined,decorated,doodle,WIDTH,HEIGHT,duration,background=layers[0][1],seed=variant_hash.hexdigest())
             joined = decorated
+        # Three staggered handwriting reveals after the product settles / hand exits.
+        labels = make_handwriting_labels(tmp, WIDTH, HEIGHT, background=layers[0][1],
+                                         seed=variant_hash.hexdigest(), product_info=product_info)
+        labelled = tmp / 'labelled.mp4'
+        label_cmd = ['ffmpeg','-hide_banner','-loglevel','error','-y','-i',str(joined)]
+        for label_path in labels:
+            label_cmd += ['-loop','1','-i',str(label_path)]
+        reveal_start = entrance_seconds + (1.0 if hand_place else .25)
+        graph = []
+        prev = '0:v'
+        for i in range(3):
+            start = min(max(0, duration-1.1), reveal_start+i*.72)
+            end = max(start+.2, duration-.12)
+            graph.append(f'[{i+1}:v]format=rgba,fade=t=in:st={start:.2f}:d=.48:alpha=1[ink{i}]')
+            graph.append(f'[{prev}][ink{i}]overlay=0:0:shortest=1:enable=\'between(t,{start:.2f},{end:.2f})\'[v{i}]')
+            prev = f'v{i}'
+        label_cmd += ['-filter_complex',';'.join(graph)+f';[{prev}]format=yuv420p[final]',
+                      '-map','[final]','-an','-t',str(duration),'-c:v','libx264',
+                      '-preset','veryfast','-crf','18','-pix_fmt','yuv420p',str(labelled)]
+        subprocess.run(label_cmd,check=True,timeout=240,capture_output=True,text=True)
+        joined = labelled
         cmd=['ffmpeg','-hide_banner','-loglevel','error','-y','-i',str(joined)]
         if music:
             cmd += ['-stream_loop','-1','-i',str(music),'-map','0:v:0','-map','1:a:0',
@@ -719,11 +740,11 @@ def render_creative_motion(layers, output, music, duration, on_progress=None, do
         subprocess.run(cmd,check=True,timeout=180,capture_output=True,text=True)
 
 
-def render_video(images: list[Path], output: Path, music: Path | None = None, style: str = 'hybrid', duration: int = DURATION, doodle: str = 'none', hook: str | None = None, on_progress=None, product_layers=None, motion='auto'):
+def render_video(images: list[Path], output: Path, music: Path | None = None, style: str = 'hybrid', duration: int = DURATION, doodle: str = 'none', hook: str | None = None, on_progress=None, product_layers=None, motion='auto', product_info=''):
     """Produce CPU-friendly Ken Burns transitions. Morph is an approximation, not generative AI."""
     if product_layers:
         if motion in ('auto','stop','spin','smooth','hand'):
-            return render_creative_motion(product_layers, output, music, duration, on_progress, doodle, motion)
+            return render_creative_motion(product_layers, output, music, duration, on_progress, doodle, motion, product_info)
         return render_product_motion(product_layers, output, music, duration, on_progress, doodle)
     if style not in STYLES:
         raise ValueError("Unknown style")
@@ -1808,7 +1829,7 @@ async def generate(update: Update, context: ContextTypes.DEFAULT_TYPE):
             loop = asyncio.get_running_loop()
             def render_progress(percent, detail):
                 asyncio.run_coroutine_threadsafe(progress_update(progress, percent, detail), loop)
-            await asyncio.to_thread(render_video, paths, result, music, selected_style, context.user_data.get('duration', 10), doodle, None, render_progress, product_layers if not context.user_data.get('storyboard_mode') else None, context.user_data.get('motion_choice','auto'))
+            await asyncio.to_thread(render_video, paths, result, music, selected_style, context.user_data.get('duration', 10), doodle, None, render_progress, product_layers if not context.user_data.get('storyboard_mode') else None, context.user_data.get('motion_choice','auto'), context.user_data.get('video_product_info',''))
             await progress_update(progress, 90, 'Render selesai. Menghantar video ke Telegram...')
             with result.open('rb') as f:
                 await message.reply_video(video=f, caption='🎬 Video siap! Hantar gambar baharu untuk video seterusnya.', supports_streaming=True,
