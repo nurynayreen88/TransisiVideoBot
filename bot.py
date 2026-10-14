@@ -24,6 +24,19 @@ from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ReplyKe
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler, ContextTypes, MessageHandler, filters
 
 logging.basicConfig(level=logging.INFO)
+# Deployment diagnostic: reveal a missing local module at startup, not after
+# the user has uploaded photos. Never log environment variable values.
+def check_background_module():
+    import importlib.util
+    base = Path(__file__).resolve().parent
+    module_file = base / 'product_background.py'
+    logging.info('KLIPPO startup directory=%s background_file_exists=%s', base, module_file.is_file())
+    if not module_file.is_file():
+        logging.error('KLIPPO DEPLOYMENT INCOMPLETE: product_background.py missing from %s. Verify Render repository, branch and root directory.', base)
+    elif importlib.util.find_spec('product_background') is None:
+        logging.error('KLIPPO IMPORT PATH ERROR: module exists but Python cannot import it. Check start command and PYTHONPATH.')
+check_background_module()
+
 TOKEN = os.environ.get('BOT_TOKEN', '')
 MAX_IMAGES = int(os.environ.get('MAX_IMAGES', '5'))
 DURATION = int(os.environ.get('VIDEO_SECONDS', '10'))
