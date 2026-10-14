@@ -419,8 +419,86 @@ def smart_frame(img, motion):
     return canvas
 
 
-def render_video(images: list[Path], output: Path, music: Path | None = None, style: str = 'hybrid', duration: int = DURATION, doodle: str = 'none', hook: str | None = None, on_progress=None):
+def render_product_motion(layers, output, music, duration, on_progress=None):
+    """Two or three slow product-only movements against a locked studio backdrop."""
+    count = 2 if duration <= 10 else 3
+    fade = .45
+    clip_duration = (duration + (count - 1) * fade) / count
+    with tempfile.TemporaryDirectory(prefix='klippo_motion_') as td:
+        tmp = Path(td)
+        clips = []
+        for i in range(count):
+            cutout_path, choice = layers[i % len(layers)]
+            with Image.open(cutout_path) as opened:
+                fg = opened.convert('RGBA')
+            alpha_box = fg.getchannel('A').getbbox()
+            if not alpha_box:
+                raise ValueError('Produk tidak dapat dikesan dalam imej lutsinar')
+            fg = fg.crop(alpha_box)
+            scale = (.68, .73, .78)[i % 3]
+            fg.thumbnail((int(WIDTH * scale), int(HEIGHT * .66)), Image.Resampling.LANCZOS)
+            fg_path = tmp / f'foreground_{i}.png'
+            fg.save(fg_path)
+            bg = (_scene_background((WIDTH, HEIGHT), choice) if choice not in BACKGROUNDS
+                  else Image.new('RGBA', (WIDTH, HEIGHT), BACKGROUNDS[choice] + (255,)))
+            bg_path = tmp / f'background_{i}.png'
+            bg.convert('RGB').save(bg_path)
+            # overlay expressions evaluate for each video frame; background stays still.
+            # A shot lasts several seconds; movement starts and stops softly.
+            frames = max(1, round(clip_duration * FPS))
+            p = f'min(n/{max(frames-1,1)},1)'
+            ease = f'({p}*{p}*(3-2*{p}))'
+            center_x = '(W-w)/2'
+            center_y = '(H-h)/2'
+            if i % 3 == 0:
+                x = f'{center_x}+W*.045*(1-{ease})'
+                y = f'{center_y}+H*.018*(1-{ease})'
+            elif i % 3 == 1:
+                x = f'{center_x}+W*.014*sin(PI*{ease})'
+                y = f'{center_y}+H*.025*sin(2*PI*{ease})'
+            else:
+                x = f'{center_x}-W*.035*(1-{ease})'
+                y = f'{center_y}-H*.018*(1-{ease})'
+            clip = tmp / f'shot_{i}.mp4'
+            cmd = ['ffmpeg','-hide_banner','-loglevel','error','-y','-threads','1',
+                   '-loop','1','-framerate',str(FPS),'-i',str(bg_path),
+                   '-loop','1','-framerate',str(FPS),'-i',str(fg_path),
+                   '-filter_complex',f"[0:v][1:v]overlay=x='{x}':y='{y}':eval=frame:shortest=1,format=yuv420p[v]",
+                   '-map','[v]','-frames:v',str(frames),'-an','-c:v','libx264',
+                   '-preset','ultrafast','-crf','22','-pix_fmt','yuv420p',str(clip)]
+            subprocess.run(cmd, check=True, timeout=120, capture_output=True, text=True)
+            clips.append(clip)
+            if on_progress:
+                on_progress(45 + round(30*(i+1)/count), f'Gerakan produk {i+1}/{count}...')
+        joined = tmp / 'joined.mp4'
+        cmd = ['ffmpeg','-hide_banner','-loglevel','error','-y']
+        for clip in clips:
+            cmd.extend(['-i',str(clip)])
+        chain = []
+        prev = '[0:v]'
+        for i in range(1,len(clips)):
+            nxt = f'[v{i}]'
+            offset = i * (clip_duration - fade)
+            chain.append(f'{prev}[{i}:v]xfade=transition=fade:duration={fade}:offset={offset:.4f}{nxt}')
+            prev = nxt
+        cmd += ['-filter_complex',';'.join(chain),'-map',prev,'-an','-c:v','libx264',
+                '-preset','veryfast','-crf','21','-pix_fmt','yuv420p',str(joined)]
+        subprocess.run(cmd, check=True, timeout=150, capture_output=True, text=True)
+        if music:
+            cmd = ['ffmpeg','-hide_banner','-loglevel','error','-y','-i',str(joined),
+                   '-stream_loop','-1','-i',str(music),'-map','0:v:0','-map','1:a:0',
+                   '-t',str(duration),'-c:v','copy','-c:a','aac','-b:a','128k',
+                   '-movflags','+faststart',str(output)]
+        else:
+            cmd = ['ffmpeg','-hide_banner','-loglevel','error','-y','-i',str(joined),
+                   '-t',str(duration),'-c','copy','-movflags','+faststart',str(output)]
+        subprocess.run(cmd, check=True, timeout=180, capture_output=True, text=True)
+
+
+def render_video(images: list[Path], output: Path, music: Path | None = None, style: str = 'hybrid', duration: int = DURATION, doodle: str = 'none', hook: str | None = None, on_progress=None, product_layers=None):
     """Produce CPU-friendly Ken Burns transitions. Morph is an approximation, not generative AI."""
+    if product_layers and doodle == 'none':
+        return render_product_motion(product_layers, output, music, duration, on_progress)
     if style not in STYLES:
         raise ValueError("Unknown style")
     if not images:
@@ -1352,7 +1430,7 @@ async def generate(update: Update, context: ContextTypes.DEFAULT_TYPE):
             loop = asyncio.get_running_loop()
             def render_progress(percent, detail):
                 asyncio.run_coroutine_threadsafe(progress_update(progress, percent, detail), loop)
-            await asyncio.to_thread(render_video, paths, result, music, selected_style, context.user_data.get('duration', 10), doodle, None, render_progress)
+            await asyncio.to_thread(render_video, paths, result, music, selected_style, context.user_data.get('duration', 10), doodle, None, render_progress, product_layers if not context.user_data.get('storyboard_mode') else None)
             await progress_update(progress, 90, 'Render selesai. Menghantar video ke Telegram...')
             with result.open('rb') as f:
                 await message.reply_video(video=f, caption='🎬 Video siap! Hantar gambar baharu untuk video seterusnya.', supports_streaming=True,
