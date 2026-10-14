@@ -27,9 +27,9 @@ logging.basicConfig(level=logging.INFO)
 TOKEN = os.environ.get('BOT_TOKEN', '')
 MAX_IMAGES = int(os.environ.get('MAX_IMAGES', '5'))
 DURATION = int(os.environ.get('VIDEO_SECONDS', '10'))
-WIDTH = int(os.environ.get('VIDEO_WIDTH', '720'))
-HEIGHT = int(os.environ.get('VIDEO_HEIGHT', '1280'))
-FPS = int(os.environ.get('VIDEO_FPS', '30'))
+WIDTH = min(720, int(os.environ.get('VIDEO_WIDTH', '480')))
+HEIGHT = min(1280, int(os.environ.get('VIDEO_HEIGHT', '854')))
+FPS = min(30, int(os.environ.get('VIDEO_FPS', '24')))
 STYLES = {
     'hybrid': ('smoothleft', 'smoothup', 'fade'),
     'cinematic': ('fade', 'fadeblack'),
@@ -150,8 +150,8 @@ def main_menu(user_id=None):
 def style_menu():
     """Simple optional styles; retain all legacy render styles internally."""
     return InlineKeyboardMarkup([
-        [InlineKeyboardButton('✨ Auto Cantik (Disyorkan)', callback_data='style:hybrid')],
-        [InlineKeyboardButton('🎬 Smooth & Premium', callback_data='style:smooth')],
+        [InlineKeyboardButton('🎬 Smooth (Disyorkan)', callback_data='style:smooth')],
+        [InlineKeyboardButton('✨ Premium', callback_data='style:cinematic')],
         [InlineKeyboardButton('⚡ Dynamic', callback_data='style:dynamic')],
         [InlineKeyboardButton('↩️ Pilih Muzik', callback_data='music')],
     ])
@@ -314,9 +314,9 @@ def render_video(images: list[Path], output: Path, music: Path | None = None, st
                 y = f'(ih-ih/zoom)*(0.35+0.25*{progress})'
             vf = (f"zoompan=z='{zoom}':x='{x}':y='{y}':"
                   f"d={frames}:s={WIDTH}x{HEIGHT}:fps={FPS},format=yuv420p")
-            cmd = ['ffmpeg','-hide_banner','-loglevel','error','-y','-loop','1','-i',str(still),
+            cmd = ['ffmpeg','-hide_banner','-loglevel','error','-y','-threads','1','-filter_threads','1','-loop','1','-i',str(still),
                    '-vf',vf,'-frames:v',str(frames),'-an','-c:v','libx264',
-                   '-preset','veryfast','-crf','20','-pix_fmt','yuv420p','-movflags','+faststart',str(clip)]
+                   '-preset','ultrafast','-crf','22','-pix_fmt','yuv420p','-movflags','+faststart',str(clip)]
             subprocess.run(cmd, check=True, timeout=100)
             logging.info('KLIPPO render shot %s/%s complete', i + 1, n)
             if on_progress:
@@ -326,7 +326,7 @@ def render_video(images: list[Path], output: Path, music: Path | None = None, st
             video = clips[0]
         else:
             video = temp / 'joined.mp4'
-            cmd = ['ffmpeg','-hide_banner','-loglevel','error','-y']
+            cmd = ['ffmpeg','-hide_banner','-loglevel','error','-y','-filter_complex_threads','1']
             for clip in clips:
                 cmd += ['-i',str(clip)]
             chains = []
@@ -345,10 +345,12 @@ def render_video(images: list[Path], output: Path, music: Path | None = None, st
             if on_progress:
                 on_progress(80, 'Menggabungkan babak video...')
             subprocess.run(cmd, check=True, timeout=150)
+            logging.info('KLIPPO shot joining complete')
         if doodle != 'none':
             decorated = temp / 'decorated.mp4'
             apply_overlay(video, decorated, doodle, WIDTH, HEIGHT, duration)
             video = decorated
+        logging.info('KLIPPO finalizing video; music=%s', bool(music))
         if music:
             subprocess.run(['ffmpeg','-hide_banner','-loglevel','error','-y','-i',str(video),
                             '-stream_loop','-1','-i',str(music),'-map','0:v:0','-map','1:a:0',
@@ -359,12 +361,14 @@ def render_video(images: list[Path], output: Path, music: Path | None = None, st
                             '-t',str(duration),'-c','copy','-movflags','+faststart',str(output)],
                            check=True,timeout=180)
 
+    logging.info('KLIPPO video output complete: %s bytes', output.stat().st_size)
+
 
 def reset(context):
     context.user_data['photos'] = []
     context.user_data['music'] = None
     context.user_data['music_choice'] = 'auto'
-    context.user_data['style'] = 'hybrid'
+    context.user_data['style'] = 'smooth'
     context.user_data['duration'] = 10
     context.user_data['doodle_choice'] = 'none'
     context.user_data['storyboard_mode'] = False
@@ -918,9 +922,9 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 context.user_data['stage'] = 'style'
                 await query.message.reply_text(f'⏱️ {duration} saat dipilih. Pilih gaya storyboard:', reply_markup=style_menu())
             else:
-                context.user_data['style'] = 'hybrid'
+                context.user_data['style'] = 'smooth'
                 context.user_data['stage'] = 'music'
-                await query.message.reply_text(f'⏱️ {duration} saat dipilih. ✨ Auto Cantik diaktifkan. Pilih muzik:', reply_markup=music_menu())
+                await query.message.reply_text(f'⏱️ {duration} saat dipilih. Pilih muzik:', reply_markup=music_menu())
     elif action == 'photos_done':
         if stage not in ('photos', 'duration') or not context.user_data.get('photos'):
             await query.message.reply_text('Hantar sekurang-kurangnya satu gambar dahulu.', reply_markup=photos_menu())
@@ -929,7 +933,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await query.message.reply_text('⏱️ Pilih durasi video:', reply_markup=duration_menu())
     elif action == 'styles' and stage in ('style', 'music', 'confirm'):
         context.user_data['stage'] = 'style'
-        await query.message.reply_text('🎨 Tukar gaya (pilihan). Auto Cantik digunakan secara lalai:', reply_markup=style_menu())
+        await query.message.reply_text('🎨 Tukar gaya (pilihan). Smooth digunakan secara lalai:', reply_markup=style_menu())
     elif action.startswith('preview:') and stage == 'style':
         chosen = action.split(':', 1)[1]
         if chosen not in STYLES:
