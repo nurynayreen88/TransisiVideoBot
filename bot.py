@@ -461,45 +461,46 @@ def smart_frame(img, motion):
 
 
 def render_product_motion(layers, output, music, duration, on_progress=None):
-    """Two or three slow product-only movements against a locked studio backdrop."""
-    count = 2 if duration <= 10 else 3
-    fade = .45
-    clip_duration = (duration + (count - 1) * fade) / count
+    """Product-only advertising: deliberate moves on musical phrases, clean beat cuts."""
+    # The built-in promotional beat is 124 BPM. For custom music use evenly spaced
+    # editorial cuts; do not claim to detect beats in arbitrary uploaded audio.
+    bpm = 124 if music and 'klippo_promo_beat' in str(music) else None
+    if bpm:
+        phrase = 8 * 60 / bpm
+        boundaries = [0, phrase, phrase * 2, duration] if duration >= phrase * 2 + 1 else [0, duration / 2, duration]
+    else:
+        count = 2 if duration <= 10 else 3
+        boundaries = [duration * i / count for i in range(count + 1)]
     with tempfile.TemporaryDirectory(prefix='klippo_motion_') as td:
         tmp = Path(td)
         clips = []
-        for i in range(count):
+        for i in range(len(boundaries)-1):
             cutout_path, choice = layers[i % len(layers)]
             with Image.open(cutout_path) as opened:
                 fg = opened.convert('RGBA')
-            alpha_box = fg.getchannel('A').getbbox()
-            if not alpha_box:
+            bbox = fg.getchannel('A').getbbox()
+            if not bbox:
                 raise ValueError('Produk tidak dapat dikesan dalam imej lutsinar')
-            fg = fg.crop(alpha_box)
-            scale = (.68, .73, .78)[i % 3]
+            fg = fg.crop(bbox)
+            # Clearly distinct framing, not tiny jitter. Never fabricate another view.
+            scale = (.63, .76, .70)[i % 3]
             fg.thumbnail((int(WIDTH * scale), int(HEIGHT * .66)), Image.Resampling.LANCZOS)
-            fg_path = tmp / f'foreground_{i}.png'
+            fg_path = tmp / f'product_{i}.png'
             fg.save(fg_path)
             bg = (_scene_background((WIDTH, HEIGHT), choice) if choice not in BACKGROUNDS
                   else Image.new('RGBA', (WIDTH, HEIGHT), BACKGROUNDS[choice] + (255,)))
             bg_path = tmp / f'background_{i}.png'
             bg.convert('RGB').save(bg_path)
-            # overlay expressions evaluate for each video frame; background stays still.
-            # A shot lasts several seconds; movement starts and stops softly.
-            frames = max(1, round(clip_duration * FPS))
+            frames = max(1, round((boundaries[i+1]-boundaries[i])*FPS))
             p = f'min(n/{max(frames-1,1)},1)'
             ease = f'({p}*{p}*(3-2*{p}))'
-            center_x = '(W-w)/2'
-            center_y = '(H-h)/2'
-            if i % 3 == 0:
-                x = f'{center_x}+W*.045*(1-{ease})'
-                y = f'{center_y}+H*.018*(1-{ease})'
-            elif i % 3 == 1:
-                x = f'{center_x}+W*.014*sin(PI*{ease})'
-                y = f'{center_y}+H*.025*sin(2*PI*{ease})'
-            else:
-                x = f'{center_x}-W*.035*(1-{ease})'
-                y = f'{center_y}-H*.018*(1-{ease})'
+            cx, cy = '(W-w)/2', '(H-h)/2'
+            if i % 3 == 0:  # confident entrance on the first musical phrase
+                x, y = f'{cx}+W*.22*(1-{ease})', f'{cy}+H*.035*(1-{ease})'
+            elif i % 3 == 1:  # closer product detail, gentle lift
+                x, y = f'{cx}-W*.035*{ease}', f'{cy}+H*.045*(1-{ease})'
+            else:  # stable hero finish
+                x, y = cx, f'{cy}+H*.025*(1-{ease})'
             clip = tmp / f'shot_{i}.mp4'
             cmd = ['ffmpeg','-hide_banner','-loglevel','error','-y','-threads','1',
                    '-loop','1','-framerate',str(FPS),'-i',str(bg_path),
@@ -510,24 +511,19 @@ def render_product_motion(layers, output, music, duration, on_progress=None):
             subprocess.run(cmd, check=True, timeout=120, capture_output=True, text=True)
             clips.append(clip)
             if on_progress:
-                on_progress(45 + round(30*(i+1)/count), f'Gerakan produk {i+1}/{count}...')
+                on_progress(45+round(30*(i+1)/(len(boundaries)-1)), f'Gerakan ikut frasa muzik {i+1}/{len(boundaries)-1}...')
         joined = tmp / 'joined.mp4'
         cmd = ['ffmpeg','-hide_banner','-loglevel','error','-y']
         for clip in clips:
-            cmd.extend(['-i',str(clip)])
-        chain = []
-        prev = '[0:v]'
-        for i in range(1,len(clips)):
-            nxt = f'[v{i}]'
-            offset = i * (clip_duration - fade)
-            chain.append(f'{prev}[{i}:v]xfade=transition=fade:duration={fade}:offset={offset:.4f}{nxt}')
-            prev = nxt
-        cmd += ['-filter_complex',';'.join(chain),'-map',prev,'-an','-c:v','libx264',
+            cmd += ['-i',str(clip)]
+        chain = ''.join(f'[{i}:v]' for i in range(len(clips)))+f'concat=n={len(clips)}:v=1:a=0,format=yuv420p[v]'
+        cmd += ['-filter_complex',chain,'-map','[v]','-an','-c:v','libx264',
                 '-preset','veryfast','-crf','21','-pix_fmt','yuv420p',str(joined)]
         subprocess.run(cmd, check=True, timeout=150, capture_output=True, text=True)
         if music:
             cmd = ['ffmpeg','-hide_banner','-loglevel','error','-y','-i',str(joined),
                    '-stream_loop','-1','-i',str(music),'-map','0:v:0','-map','1:a:0',
+                   '-af',f'afade=t=out:st={max(0,duration-.35):.3f}:d=.35',
                    '-t',str(duration),'-c:v','copy','-c:a','aac','-b:a','128k',
                    '-movflags','+faststart',str(output)]
         else:
