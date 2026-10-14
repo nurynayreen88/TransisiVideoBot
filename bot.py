@@ -685,6 +685,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
     await query.answer()
     action = query.data
+    logging.info('KLIPPO callback action=%r stage=%r user=%s', action, context.user_data.get('stage'), update.effective_user.id)
     if action == 'home':
         if not context.user_data.get('busy'):
             reset(context)
@@ -1006,7 +1007,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif action == 'home':
         await start(update, context)
     else:
-        await query.message.reply_text('Pilihan lama telah tamat. Mulakan semula melalui menu utama.', reply_markup=main_menu())
+        logging.warning('Unhandled KLIPPO callback action=%r stage=%r', action, stage)
+        await query.message.reply_text('Pilihan ini tidak lagi aktif. Gunakan butang terkini di bawah.', reply_markup=main_menu(update.effective_user.id))
 
 
 async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
