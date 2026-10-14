@@ -604,6 +604,48 @@ def _hand_place_asset(width, variant, direction):
     return im
 
 
+def _premium_studio_background(size, choice):
+    """CPU-friendly studio light and floor; computed once per render, not per frame."""
+    import math
+    w, h = size
+    palettes = {
+        'white': ((252, 251, 248), (226, 224, 220)),
+        'beige': ((250, 241, 225), (202, 179, 153)),
+        'dark': ((65, 65, 73), (20, 21, 27)),
+        'pastel': ((252, 238, 244), (218, 194, 209)),
+        'gradient': ((253, 247, 236), (215, 195, 170)),
+        'pattern': ((251, 248, 241), (222, 213, 199)),
+        'duotone': ((247, 237, 222), (199, 180, 161)),
+        'mist': ((249, 250, 250), (203, 212, 219)),
+    }
+    top, bottom = palettes.get(choice, palettes['gradient'])
+    canvas = Image.new('RGBA', size)
+    draw = ImageDraw.Draw(canvas)
+    for y in range(h):
+        t = y / max(1, h-1)
+        t = t*t*(3-2*t)
+        # Wide overhead softbox: brightest behind the product, darker at the edges.
+        for x0 in range(0, w, 4):
+            x1 = min(w-1, x0+3)
+            dx = (x0 + 1.5 - w*.50) / max(1, w*.72)
+            dy = (y-h*.37) / max(1, h*.76)
+            light = max(0.0, 1.0-dx*dx-dy*dy)*.105
+            edge = min(1.0, dx*dx*.12 + ((y/h)-.42)**2*.055)
+            color = tuple(max(0,min(255,round(top[k]*(1-t)+bottom[k]*t + 255*light - 255*edge))) for k in range(3))
+            draw.rectangle((x0,y,x1,y), fill=color+(255,))
+    # Elliptical floor reflection anchors the product instead of a flat color card.
+    floor = Image.new('RGBA', size, (0,0,0,0))
+    fd = ImageDraw.Draw(floor)
+    cx, cy = w//2, round(h*.765)
+    for i in range(15, 0, -1):
+        rx = round(w*(.34 + i*.009))
+        ry = round(h*(.018 + i*.002))
+        a = round((16-i)*.38)
+        fd.ellipse((cx-rx,cy-ry,cx+rx,cy+ry), fill=(0,0,0,a))
+    floor = floor.filter(ImageFilter.GaussianBlur(max(3,w//45)))
+    return Image.alpha_composite(canvas, floor)
+
+
 def render_creative_motion(layers, output, music, duration, on_progress=None, doodle='none', mode='auto', product_info=''):
     """Deliberate held-pose stop motion; source cutout only, no invented 3D views."""
     import math
@@ -649,6 +691,7 @@ def render_creative_motion(layers, output, music, duration, on_progress=None, do
             fg.putalpha(alpha)
             fg.thumbnail((round(WIDTH*.65),round(HEIGHT*.48)),Image.Resampling.LANCZOS)
             sources.append((fg,choice))
+        studio_backgrounds = {choice: _premium_studio_background((WIDTH, HEIGHT), choice) for _, choice in layers}
         hand_image = _hand_place_asset(WIDTH*.37, hand_variant, entrance) if hand_place else None
         for n in range(0,total,hold):
             t = n / FPS
@@ -665,7 +708,10 @@ def render_creative_motion(layers, output, music, duration, on_progress=None, do
                 dy = round(HEIGHT * entrance[1] * (1-ease))
             else:
                 angle = 0
-                scale = 1.0
+                # Gentle editorial push-in after the entrance; no constant wobble.
+                hero_u = min(1.0, max(0.0, (t-entrance_seconds)/max(.5,duration-entrance_seconds)))
+                hero_ease = hero_u*hero_u*(3-2*hero_u)
+                scale = 1.0 + .035*hero_ease
                 dx = dy = 0
             size = (max(1,round(fg.width*scale)),max(1,round(fg.height*scale)))
             transformed = fg.resize(size,Image.Resampling.LANCZOS).rotate(angle,Image.Resampling.BICUBIC,expand=True)
@@ -674,8 +720,7 @@ def render_creative_motion(layers, output, music, duration, on_progress=None, do
             shadow_alpha = shadow_alpha.point(lambda a: round(a*.23))
             shadow = Image.new('RGBA',transformed.size,(0,0,0,0))
             shadow.putalpha(shadow_alpha)
-            canvas = (_scene_background((WIDTH,HEIGHT),choice) if choice not in BACKGROUNDS
-                      else Image.new('RGBA',(WIDTH,HEIGHT),BACKGROUNDS[choice]+(255,)))
+            canvas = studio_backgrounds[choice].copy()
             x = round((WIDTH-transformed.width)/2)+dx
             y = round((HEIGHT-transformed.height)/2)+dy
             # Clip overlays safely when a pose extends outside the canvas.
