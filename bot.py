@@ -523,7 +523,7 @@ def render_product_motion(layers, output, music, duration, on_progress=None):
         if music:
             cmd = ['ffmpeg','-hide_banner','-loglevel','error','-y','-i',str(joined),
                    '-stream_loop','-1','-i',str(music),'-map','0:v:0','-map','1:a:0',
-                   '-af',f'afade=t=out:st={max(0,duration-.35):.3f}:d=.35',
+                   '-af',f'afade=t=out:st={max(0,duration-0.35):.3f}:d=0.35',
                    '-t',str(duration),'-c:v','copy','-c:a','aac','-b:a','128k',
                    '-movflags','+faststart',str(output)]
         else:
