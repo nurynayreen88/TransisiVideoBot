@@ -1775,6 +1775,32 @@ async def generate(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     return
                 paths.append(product_photo)
                 await progress_update(progress, 25, 'Gambar produk Shopee diterima...')
+            # Optional vision reads the actual uploaded product photo before background removal.
+            # Never make the video depend on an external AI service being available.
+            image_label_info = ''
+            if os.environ.get('GEMINI_API_KEY') and paths:
+                verified_parts = []
+                for photo_path in paths[:3]:
+                    try:
+                        vision = await describe_photo(photo_path.read_bytes())
+                        if not vision:
+                            continue
+                        for line in vision.splitlines():
+                            key, separator, value = line.partition(':')
+                            if separator and key.strip() in ('NAMA_PRODUK', 'KATEGORI', 'TEKS_DISAHKAN', 'CIRI_VISUAL'):
+                                value = value.strip()
+                                if value and value.upper() not in ('TIADA', 'TIDAK PASTI', 'NONE'):
+                                    if key.strip() == 'TEKS_DISAHKAN':
+                                        verified_parts.extend(v.strip() for v in value.split(';') if v.strip())
+                                    elif key.strip() == 'CIRI_VISUAL':
+                                        verified_parts.extend(v.strip() for v in value.split(';') if v.strip())
+                                    else:
+                                        verified_parts.append(value)
+                    except Exception:
+                        logging.exception('Optional image label analysis failed')
+                image_label_info = ' '.join(dict.fromkeys(verified_parts))[:240]
+            supplied_info = context.user_data.get('video_product_info', '').strip()
+            label_info = ' '.join(part for part in (supplied_info, image_label_info) if part)[:320]
             background = context.user_data.get('background', 'original')
             product_layers = []
             if background != 'original':
@@ -1829,7 +1855,7 @@ async def generate(update: Update, context: ContextTypes.DEFAULT_TYPE):
             loop = asyncio.get_running_loop()
             def render_progress(percent, detail):
                 asyncio.run_coroutine_threadsafe(progress_update(progress, percent, detail), loop)
-            await asyncio.to_thread(render_video, paths, result, music, selected_style, context.user_data.get('duration', 10), doodle, None, render_progress, product_layers if not context.user_data.get('storyboard_mode') else None, context.user_data.get('motion_choice','auto'), context.user_data.get('video_product_info',''))
+            await asyncio.to_thread(render_video, paths, result, music, selected_style, context.user_data.get('duration', 10), doodle, None, render_progress, product_layers if not context.user_data.get('storyboard_mode') else None, context.user_data.get('motion_choice','auto'), label_info)
             await progress_update(progress, 90, 'Render selesai. Menghantar video ke Telegram...')
             with result.open('rb') as f:
                 await message.reply_video(video=f, caption='🎬 Video siap! Hantar gambar baharu untuk video seterusnya.', supports_streaming=True,
