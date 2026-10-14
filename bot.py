@@ -77,6 +77,17 @@ def order_menu(count):
     return InlineKeyboardMarkup(rows)
 
 
+def background_menu():
+    return InlineKeyboardMarkup([
+        [InlineKeyboardButton('📷 Kekalkan Asal', callback_data='background:original')],
+        [InlineKeyboardButton('⬜ Studio Putih', callback_data='background:white'),
+         InlineKeyboardButton('🟤 Studio Beige', callback_data='background:beige')],
+        [InlineKeyboardButton('⬛ Luxury Gelap', callback_data='background:dark'),
+         InlineKeyboardButton('🌸 Pastel', callback_data='background:pastel')],
+        [InlineKeyboardButton('↩️ Semak Gambar', callback_data='photos_order')],
+    ])
+
+
 def duration_menu():
     return InlineKeyboardMarkup([
         [InlineKeyboardButton('⏱️ 10 saat', callback_data='duration:10'),
@@ -370,6 +381,7 @@ def reset(context):
     context.user_data['music_choice'] = 'auto'
     context.user_data['style'] = 'smooth'
     context.user_data['duration'] = 10
+    context.user_data['background'] = 'original'
     context.user_data['doodle_choice'] = 'none'
     context.user_data['storyboard_mode'] = False
     context.user_data['prompt_mode'] = 'normal'
@@ -818,7 +830,14 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 [InlineKeyboardButton('↔️ Gerak Sisi', callback_data='motion:side')],
                 [InlineKeyboardButton('✨ Studio Statik', callback_data='motion:static')]
             ]))
-    # The first callback chain has already handled its action. Only the prompt\n    # motion continuation may proceed into the second chain (including storyboard auto-motion).\n    if not (action.startswith('motion:') and context.user_data.get('stage') == 'prompt_motion'):\n        return\n    if action.startswith('motion:') and context.user_data.get('stage') == 'prompt_motion':
+    # Return only for actions handled by the first chain. Video workflow
+    # callbacks must continue into the second chain.
+    if action in ('admin_pending', 'admin', 'storyboard', 'make', 'prompt') or action.startswith(
+        ('admin_approve:', 'admin_reject:', 'prompt_type:', 'prompt_duration:',
+         'prompt_style:', 'prompt_details:')
+    ):
+        return
+    if action.startswith('motion:') and context.user_data.get('stage') == 'prompt_motion':
         motion = action.split(':', 1)[1]
         motions = {'orbit': 'A controlled 30-degree camera arc around the product, not a full 360-degree rotation; preserve the visible product geometry.', 'push': 'A slow forward dolly-in with gentle parallax; no object deformation.', 'side': 'A smooth left-to-right camera slide with stable product proportions.', 'static': 'A locked camera with subtle studio lighting changes only.'}
         if motion in motions:
@@ -929,8 +948,14 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if stage not in ('photos', 'duration') or not context.user_data.get('photos'):
             await query.message.reply_text('Hantar sekurang-kurangnya satu gambar dahulu.', reply_markup=photos_menu())
             return
-        context.user_data['stage'] = 'duration'
-        await query.message.reply_text('⏱️ Pilih durasi video:', reply_markup=duration_menu())
+        context.user_data['stage'] = 'background'
+        await query.message.reply_text('🖼️ Pilih latar produk. Latar baharu akan cuba mengasingkan produk daripada gambar asal:', reply_markup=background_menu())
+    elif action.startswith('background:') and stage == 'background':
+        choice = action.split(':', 1)[1]
+        if choice in ('original', 'white', 'beige', 'dark', 'pastel'):
+            context.user_data['background'] = choice
+            context.user_data['stage'] = 'duration'
+            await query.message.reply_text('⏱️ Pilih durasi video:', reply_markup=duration_menu())
     elif action == 'styles' and stage in ('style', 'music', 'confirm'):
         context.user_data['stage'] = 'style'
         await query.message.reply_text('🎨 Tukar gaya (pilihan). Smooth digunakan secara lalai:', reply_markup=style_menu())
@@ -1110,6 +1135,19 @@ async def generate(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 await (await context.bot.get_file(fid)).download_to_drive(p)
                 paths.append(p)
                 await progress_update(progress, round(25 * (i + 1) / len(ids)), 'Memuat turun gambar...')
+            background = context.user_data.get('background', 'original')
+            if background != 'original':
+                from product_background import replace_background
+                for i, path in enumerate(paths):
+                    prepared = folder / f'product_bg_{i}.png'
+                    try:
+                        await asyncio.to_thread(replace_background, path, prepared, background)
+                    except ValueError as exc:
+                        logging.warning('Background removal declined: %s', exc)
+                        await message.reply_text('⚠️ Produk tidak dapat diasingkan dengan yakin daripada latar gambar ini. Guna gambar produk berlatar ringkas atau pilih Kekalkan Asal.')
+                        return
+                    paths[i] = prepared
+                await progress_update(progress, 30, 'Produk diasingkan dan latar baharu disediakan...')
             music = None
             if context.user_data.get('music_choice') == 'custom' and context.user_data.get('music'):
                 music = folder / 'music.mp3'
