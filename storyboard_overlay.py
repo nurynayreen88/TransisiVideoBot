@@ -3,14 +3,20 @@ import subprocess
 from pathlib import Path
 from PIL import Image, ImageDraw
 
-CHOICES = ('auto','white','sparkle','motion','circle','pop','all','none')
+CHOICES = ('auto','black','white','gold','pastel','sparkle','motion','circle','pop','all','none')
 
-def make_overlay(path: Path, width: int, height: int, choice: str):
+def make_overlay(path: Path, width: int, height: int, choice: str, background='original'):
     if choice not in CHOICES: raise ValueError('Unknown doodle option')
-    if choice == 'auto': choice = 'all'
+    if choice == 'auto':
+        ink = 'white' if background in ('dark',) else 'black'
+        choice = 'all'
+    else:
+        ink = choice if choice in ('black','white','gold','pastel') else ('white' if background == 'dark' else 'black')
+    if choice in ('black','white','gold','pastel'):
+        choice = 'all'
     img = Image.new('RGBA',(width,height),(0,0,0,0))
     d = ImageDraw.Draw(img)
-    white=(255,255,255,215)
+    white={'black':(30,33,38,215),'white':(255,255,255,225),'gold':(212,155,45,230),'pastel':(218,102,158,225)}[ink]
     thin=max(2,width//180)
     # Restrict decorative strokes to peripheral safe zones, away from central labels.
     if choice in ('white','all'):
@@ -38,11 +44,11 @@ def make_overlay(path: Path, width: int, height: int, choice: str):
                 d.line((cx+int(dx*12),cy+int(dy*12),cx+int(dx*26),cy+int(dy*26)),fill=white,width=thin)
     img.save(path)
 
-def apply_overlay(source: Path, target: Path, choice: str, width: int, height: int, duration: int):
+def apply_overlay(source: Path, target: Path, choice: str, width: int, height: int, duration: int, background='original'):
     if choice == 'none':
         raise ValueError('No overlay requested')
     overlay=target.with_suffix('.overlay.png')
-    make_overlay(overlay,width,height,choice)
+    make_overlay(overlay,width,height,choice,background)
     # Animate appearance/disappearance in brief beats rather than covering the whole video.
     enable="+".join(f"between(t,{start:.2f},{min(duration,start+0.65):.2f})"
                     for start in (0.55, duration*.34, duration*.68) if start<duration)
