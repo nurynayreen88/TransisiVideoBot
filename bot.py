@@ -315,8 +315,7 @@ def prompt_wait_animation():
 
 def main_menu(user_id=None):
     rows = [
-        [InlineKeyboardButton('🎬 Jana Video Transisi', callback_data='make')],
-        [InlineKeyboardButton('✍️ Hasilkan Prompt', callback_data='prompt')],
+        [InlineKeyboardButton('🎬 Jana Video Transisi', callback_data='make'), InlineKeyboardButton('✍️ Prompt', callback_data='prompt')],
         [InlineKeyboardButton('🎞️ Gabung Video', callback_data='merge')],
         [InlineKeyboardButton('🔄 Tukar Format Video', callback_data='convert')],
         [InlineKeyboardButton('💎 Langganan', callback_data='subscription'), InlineKeyboardButton('👤 Akaun Saya', callback_data='account')],
