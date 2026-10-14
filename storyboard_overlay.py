@@ -1,11 +1,13 @@
 """Lightweight optional white motion-graphics overlays for storyboard videos."""
 import subprocess
+import hashlib
+import random
 from pathlib import Path
 from PIL import Image, ImageDraw
 
 CHOICES = ('auto','black','white','gold','pastel','sparkle','motion','circle','pop','all','none')
 
-def make_overlay(path: Path, width: int, height: int, choice: str, background='original'):
+def make_overlay(path: Path, width: int, height: int, choice: str, background='original', seed=''):
     if choice not in CHOICES: raise ValueError('Unknown doodle option')
     if choice == 'auto':
         ink = 'white' if background in ('dark',) else 'black'
@@ -14,6 +16,8 @@ def make_overlay(path: Path, width: int, height: int, choice: str, background='o
         ink = choice if choice in ('black','white','gold','pastel') else ('white' if background == 'dark' else 'black')
     if choice in ('black','white','gold','pastel'):
         choice = 'all'
+    rng = random.Random(hashlib.sha256((str(seed)+choice+background).encode()).digest())
+    variant = rng.randrange(5)
     img = Image.new('RGBA',(width,height),(0,0,0,0))
     d = ImageDraw.Draw(img)
     white={'black':(30,33,38,215),'white':(255,255,255,225),'gold':(212,155,45,230),'pastel':(218,102,158,225)}[ink]
@@ -42,13 +46,29 @@ def make_overlay(path: Path, width: int, height: int, choice: str, background='o
             cx,cy=int(width*x),int(height*y)
             for dx,dy in ((-1,0),(1,0),(0,-1),(0,1),(-.7,-.7),(.7,.7)):
                 d.line((cx+int(dx*12),cy+int(dy*12),cx+int(dx*26),cy+int(dy*26)),fill=white,width=thin)
+    # Product-specific peripheral accents; deterministic for the same source, varied across products.
+    for j in range(3 + variant):
+        side = j % 2
+        x = width * (rng.uniform(.07,.23) if side == 0 else rng.uniform(.77,.93))
+        y = height * rng.uniform(.16,.84)
+        radius = max(5, int(width*rng.uniform(.009,.023)))
+        motif = (j + variant) % 4
+        if motif == 0:
+            d.arc((x-radius*2,y-radius*2,x+radius*2,y+radius*2),rng.randrange(0,90),rng.randrange(220,340),fill=white,width=thin)
+        elif motif == 1:
+            d.line((x-radius,y,x+radius,y),fill=white,width=thin)
+            d.line((x,y-radius,x,y+radius),fill=white,width=thin)
+        elif motif == 2:
+            d.ellipse((x-radius/2,y-radius/2,x+radius/2,y+radius/2),outline=white,width=thin)
+        else:
+            d.arc((x-radius,y-radius,x+radius,y+radius),25,280,fill=white,width=thin)
     img.save(path)
 
-def apply_overlay(source: Path, target: Path, choice: str, width: int, height: int, duration: int, background='original'):
+def apply_overlay(source: Path, target: Path, choice: str, width: int, height: int, duration: int, background='original', seed=''):
     if choice == 'none':
         raise ValueError('No overlay requested')
     overlay=target.with_suffix('.overlay.png')
-    make_overlay(overlay,width,height,choice,background)
+    make_overlay(overlay,width,height,choice,background,seed=seed)
     # Animate appearance/disappearance in brief beats rather than covering the whole video.
     enable="+".join(f"between(t,{start:.2f},{min(duration,start+0.65):.2f})"
                     for start in (0.55, duration*.34, duration*.68) if start<duration)
@@ -56,5 +76,5 @@ def apply_overlay(source: Path, target: Path, choice: str, width: int, height: i
          '-loop','1','-i',str(overlay),
          '-filter_complex',f"[0:v][1:v]overlay=0:0:shortest=1:enable='{enable}',format=yuv420p[v]",
          '-map','[v]','-an','-t',str(duration),'-c:v','libx264','-preset','veryfast',
-         '-crf','25','-pix_fmt','yuv420p',str(target)]
+         '-crf','18','-pix_fmt','yuv420p',str(target)]
     subprocess.run(cmd,check=True,timeout=240)
