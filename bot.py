@@ -1,6 +1,7 @@
 """Telegram slideshow bot: no paid API, FFmpeg required on PATH."""
 import asyncio
 import html
+import json
 from io import BytesIO
 import logging
 import os
