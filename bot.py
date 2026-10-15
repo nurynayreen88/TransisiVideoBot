@@ -814,7 +814,7 @@ def render_creative_motion(layers, output, music, duration, on_progress=None, do
             y = round((HEIGHT-transformed.height)/2)+dy
             # Clip overlays safely when a pose extends outside the canvas.
             shadow_layer = Image.new('RGBA', canvas.size, (0, 0, 0, 0))
-            shadow_layer.paste(shadow, (x+round(WIDTH*.008), y+round(HEIGHT*.012)), shadow)
+            shadow_layer.paste(shadow, (x+round(WIDTH*.008), y+round(HEIGHT*.012)))
             canvas = Image.alpha_composite(canvas, shadow_layer)
             product_layer = Image.new('RGBA', canvas.size, (0, 0, 0, 0))
             product_layer.paste(transformed, (x, y))
