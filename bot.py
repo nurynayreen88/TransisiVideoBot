@@ -177,11 +177,11 @@ TOKEN = os.environ.get('BOT_TOKEN', '')
 MAX_IMAGES = int(os.environ.get('MAX_IMAGES', '5'))
 DURATION = int(os.environ.get('VIDEO_SECONDS', '10'))
 # Conservative defaults for Render free-tier RAM; override with env vars if capacity allows.
-WIDTH = max(240, min(720, int(os.environ.get('VIDEO_WIDTH', '540'))))
+WIDTH = max(240, min(720, int(os.environ.get('VIDEO_WIDTH', '360'))))
 WIDTH -= WIDTH % 2
-HEIGHT = max(426, min(1280, int(os.environ.get('VIDEO_HEIGHT', '960'))))
+HEIGHT = max(426, min(1280, int(os.environ.get('VIDEO_HEIGHT', '640'))))
 HEIGHT -= HEIGHT % 2
-FPS = max(15, min(30, int(os.environ.get('VIDEO_FPS', '24'))))
+FPS = max(15, min(30, int(os.environ.get('VIDEO_FPS', '20'))))
 STYLES = {
     'hybrid': ('smoothleft', 'smoothup', 'fade'),
     'cinematic': ('fade', 'fadeblack'),
@@ -603,7 +603,7 @@ def render_product_motion(layers, output, music, duration, on_progress=None, doo
             cmd = ['ffmpeg','-hide_banner','-loglevel','error','-y','-threads','1',
                    '-loop','1','-framerate',str(FPS),'-i',str(bg_path),
                    '-loop','1','-framerate',str(FPS),'-i',str(fg_path),
-                   '-filter_complex',f"[0:v]scale=iw*2:ih*2:flags=lanczos[bg];[1:v]scale=iw*2:ih*2:flags=lanczos[fg];[bg][fg]overlay=x='{x}':y='{y}':eval=frame:shortest=1,scale={WIDTH}:{HEIGHT}:flags=lanczos,format=yuv420p[v]",
+                   '-filter_complex',f"[0:v]format=rgba[bg];[1:v]format=rgba[fg];[bg][fg]overlay=x='{x}':y='{y}':eval=frame:shortest=1,format=yuv420p[v]",
                    '-map','[v]','-frames:v',str(frames),'-an','-c:v','libx264',
                    '-preset','veryfast','-crf','19','-pix_fmt','yuv420p',str(clip)]
             subprocess.run(cmd, check=True, timeout=120, capture_output=True, text=True)
