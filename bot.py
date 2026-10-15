@@ -391,7 +391,7 @@ def style_menu():
 
 
 def motion_menu():
-    return InlineKeyboardMarkup([[InlineKeyboardButton(label,callback_data='motion:'+key)] for key,label in [('auto','✨ Auto Creative (Disyorkan)'),('stop','🎞️ Stop Motion Pop'),('spin','🌀 Spin-In'),('smooth','🎬 Smooth Motion'),('hand','🖐️ Cute Hand Place & Exit')]])
+    return InlineKeyboardMarkup([[InlineKeyboardButton(label,callback_data='motion:'+key)] for key,label in [('auto','✨ Auto Creative (Disyorkan)'),('stop','🎞️ Stop Motion Pop'),('spin','🌀 Spin-In'),('smooth','🎬 Smooth Motion'),('hand','🖐️ Cute Hand Place & Exit'),('hero','💎 Hero Close-up'),('minimal','🤍 Minimal Studio')]])
 
 
 def music_menu():
@@ -728,6 +728,14 @@ def render_creative_motion(layers, output, music, duration, on_progress=None, do
             entrance = entrances[secrets.randbelow(len(entrances))]
             hand_variant = secrets.randbelow(15)
             entrance = (entrance[0], entrance[1], 0)
+        if mode == 'minimal':
+            entrance = (0, .12, 0)
+        elif mode == 'hero':
+            entrance = (0, .22, 0)
+        elif mode == 'smooth':
+            entrance = (entrance[0]*.35, entrance[1]*.35, entrance[2]*.25)
+        elif mode == 'spin':
+            entrance = (entrance[0]*.42, entrance[1]*.42, 28 if entrance[2] >= 0 else -28)
         entrance_seconds = min(1.65, max(.9, duration * .12))
         hold = 1
         sources = []
@@ -756,7 +764,7 @@ def render_creative_motion(layers, output, music, duration, on_progress=None, do
             ease = 1 - (1-u)**3
             if u < 1:
                 angle = entrance[2] * (1-ease)
-                scale = .88 + .12*ease
+                scale = (.96 + .04*ease) if mode == 'minimal' else ((.79 + .21*ease) if mode == 'hero' else (.88 + .12*ease))
                 dx = round(WIDTH * entrance[0] * (1-ease))
                 dy = round(HEIGHT * entrance[1] * (1-ease))
             else:
@@ -764,8 +772,12 @@ def render_creative_motion(layers, output, music, duration, on_progress=None, do
                 # Gentle editorial push-in after the entrance; no constant wobble.
                 hero_u = min(1.0, max(0.0, (t-entrance_seconds)/max(.5,duration-entrance_seconds)))
                 hero_ease = hero_u*hero_u*(3-2*hero_u)
-                scale = 1.0 + .035*hero_ease
+                push = .11 if mode == 'hero' else (.008 if mode == 'minimal' else (.022 if mode == 'stop' else .035))
+                scale = 1.0 + push*hero_ease
                 dx = dy = 0
+            if mode == 'stop':
+                # Intentional held poses, rather than a continuous camera move.
+                scale = round(scale * 12) / 12
             size = (max(1,round(fg.width*scale)),max(1,round(fg.height*scale)))
             transformed = fg.resize(size,Image.Resampling.LANCZOS).rotate(angle,Image.Resampling.BICUBIC,expand=True)
             alpha = transformed.getchannel('A')
@@ -842,7 +854,7 @@ def render_creative_motion(layers, output, music, duration, on_progress=None, do
 def render_video(images: list[Path], output: Path, music: Path | None = None, style: str = 'hybrid', duration: int = DURATION, doodle: str = 'none', hook: str | None = None, on_progress=None, product_layers=None, motion='auto', product_info=''):
     """Produce CPU-friendly Ken Burns transitions. Morph is an approximation, not generative AI."""
     if product_layers:
-        if motion in ('auto','stop','spin','smooth','hand'):
+        if motion in ('auto','stop','spin','smooth','hand','hero','minimal'):
             return render_creative_motion(product_layers, output, music, duration, on_progress, doodle, motion, product_info)
         return render_product_motion(product_layers, output, music, duration, on_progress, doodle)
     if style not in STYLES:
@@ -1571,7 +1583,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 await query.message.reply_text(f'⏱️ {duration} saat dipilih. Pilih pergerakan produk:', reply_markup=motion_menu())
     elif action.startswith('motion:') and stage in ('motion', 'duration', 'music', 'confirm'):
         motion = action.split(':',1)[1]
-        if motion in ('auto','stop','spin','smooth','hand'):
+        if motion in ('auto','stop','spin','smooth','hand','hero','minimal'):
             context.user_data['motion_choice'] = motion
             context.user_data['stage'] = 'music'
             await query.message.reply_text('✅ Pergerakan dipilih. Pilih muzik:',reply_markup=music_menu())
