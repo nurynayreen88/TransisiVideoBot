@@ -176,11 +176,12 @@ def replace_background(source: Path, destination: Path, choice: str, foreground_
 TOKEN = os.environ.get('BOT_TOKEN', '')
 MAX_IMAGES = int(os.environ.get('MAX_IMAGES', '5'))
 DURATION = int(os.environ.get('VIDEO_SECONDS', '10'))
-WIDTH = max(240, min(720, int(os.environ.get('VIDEO_WIDTH', '720'))))
+# Conservative defaults for Render free-tier RAM; override with env vars if capacity allows.
+WIDTH = max(240, min(720, int(os.environ.get('VIDEO_WIDTH', '540'))))
 WIDTH -= WIDTH % 2
-HEIGHT = max(426, min(1280, int(os.environ.get('VIDEO_HEIGHT', '1280'))))
+HEIGHT = max(426, min(1280, int(os.environ.get('VIDEO_HEIGHT', '960'))))
 HEIGHT -= HEIGHT % 2
-FPS = max(15, min(30, int(os.environ.get('VIDEO_FPS', '30'))))
+FPS = max(15, min(30, int(os.environ.get('VIDEO_FPS', '24'))))
 STYLES = {
     'hybrid': ('smoothleft', 'smoothup', 'fade'),
     'cinematic': ('fade', 'fadeblack'),
