@@ -5,6 +5,7 @@ import json
 import logging
 import os
 import urllib.request
+import urllib.error
 
 def _describe(data: bytes):
     key=os.environ.get('GEMINI_API_KEY','').strip()
@@ -34,8 +35,14 @@ def _describe(data: bytes):
         parts=result.get('candidates',[{}])[0].get('content',{}).get('parts',[])
         description=' '.join(p.get('text','') for p in parts).strip()
         return description[:1800] or None
-    except Exception:
-        logging.exception('Optional Gemini vision unavailable; use reference-only prompt')
+    except urllib.error.HTTPError as exc:
+        if exc.code == 404:
+            logging.warning('Optional Gemini Vision model %s not found (HTTP 404). Check GEMINI_VISION_MODEL; continuing without image analysis.', model)
+        else:
+            logging.warning('Optional Gemini Vision HTTP %s; continuing without image analysis.', exc.code)
+        return None
+    except Exception as exc:
+        logging.warning('Optional Gemini Vision unavailable (%s); continuing without image analysis.', type(exc).__name__)
         return None
 
 async def describe_photo(data: bytes):
