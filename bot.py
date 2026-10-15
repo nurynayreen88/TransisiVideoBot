@@ -750,9 +750,13 @@ def render_creative_motion(layers, output, music, duration, on_progress=None, do
             rgb = ImageEnhance.Contrast(fg.convert('RGB')).enhance(1.045)
             fg = rgb.convert('RGBA')
             fg.putalpha(alpha)
-            fg.thumbnail((round(WIDTH*.65),round(HEIGHT*.48)),Image.Resampling.LANCZOS)
+            # Fill the hero area proportionally without cropping the real product.
+            # Leave the upper and lower safe zones available for handwritten captions.
+            fg.thumbnail((round(WIDTH*.76),round(HEIGHT*.53)),Image.Resampling.LANCZOS)
             sources.append((fg,choice))
         studio_backgrounds = {choice: _premium_studio_background((WIDTH, HEIGHT), choice) for _, choice in layers}
+        # A subtle ground shadow is pre-rendered once per product size, not blurred every frame.
+        shadow_cache = {}
         hand_image = _hand_place_asset(WIDTH*.37, hand_variant, entrance) if hand_place else None
         previous_frame = None
         previous_shot = -1
@@ -794,16 +798,23 @@ def render_creative_motion(layers, output, music, duration, on_progress=None, do
             size = (max(1,round(fg.width*scale)),max(1,round(fg.height*scale)))
             transformed = fg.resize(size,Image.Resampling.LANCZOS).rotate(angle,Image.Resampling.BICUBIC,expand=True)
             alpha = transformed.getchannel('A')
-            shadow_alpha = alpha.filter(ImageFilter.GaussianBlur(max(5,round(WIDTH*.022))))
-            shadow_alpha = shadow_alpha.point(lambda a: round(a*.16))
-            shadow = Image.new('RGBA',transformed.size,(0,0,0,0))
-            shadow.putalpha(shadow_alpha)
+            shadow_key = (shot, transformed.size, round(angle, 1))
+            shadow = shadow_cache.get(shadow_key)
+            if shadow is None:
+                shadow_alpha = alpha.filter(ImageFilter.GaussianBlur(max(5,round(WIDTH*.022))))
+                shadow_alpha = shadow_alpha.point(lambda a: round(a*.16))
+                shadow = Image.new('RGBA',transformed.size,(0,0,0,0))
+                shadow.putalpha(shadow_alpha)
+                # Bound memory use on long videos with many unique camera positions.
+                if len(shadow_cache) >= 24:
+                    shadow_cache.clear()
+                shadow_cache[shadow_key] = shadow
             canvas = studio_backgrounds[choice].copy()
             x = round((WIDTH-transformed.width)/2)+dx
             y = round((HEIGHT-transformed.height)/2)+dy
             # Clip overlays safely when a pose extends outside the canvas.
             shadow_layer = Image.new('RGBA', canvas.size, (0, 0, 0, 0))
-            shadow_layer.paste(shadow, (x+round(WIDTH*.008), y+round(HEIGHT*.012)))
+            shadow_layer.paste(shadow, (x+round(WIDTH*.008), y+round(HEIGHT*.012)), shadow)
             canvas = Image.alpha_composite(canvas, shadow_layer)
             product_layer = Image.new('RGBA', canvas.size, (0, 0, 0, 0))
             product_layer.paste(transformed, (x, y))
