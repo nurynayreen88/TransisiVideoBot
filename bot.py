@@ -760,21 +760,26 @@ def render_creative_motion(layers, output, music, duration, on_progress=None, do
         for n in range(0,total,hold):
             t = n / FPS
             phase = t / max(duration, .01)
-            section = min(3, int(phase * 4))
             shot = min(len(sources)-1, int(phase*len(sources)))
             fg, choice = sources[shot]
             shot_start = duration * shot / len(sources)
             shot_length = duration / len(sources)
             shot_t = max(0.0, t-shot_start)
+            # Alternate restrained entrance direction between photos; keep hero and minimal centred.
+            shot_entrance_vector = entrance
+            if shot and mode not in ('hero', 'minimal', 'hand'):
+                direction = -1 if shot % 2 else 1
+                shot_entrance_vector = (entrance[0]*direction, entrance[1]*direction,
+                                        entrance[2]*direction)
             # Reset the restrained reveal per shot, not just at video start.
             shot_entrance = min(entrance_seconds, max(.28, shot_length*.36))
             u = min(1.0, shot_t / shot_entrance)
             ease = 1 - (1-u)**3
             if u < 1:
-                angle = entrance[2] * (1-ease)
+                angle = shot_entrance_vector[2] * (1-ease)
                 scale = (.96 + .04*ease) if mode == 'minimal' else ((.79 + .21*ease) if mode == 'hero' else (.88 + .12*ease))
-                dx = round(WIDTH * entrance[0] * (1-ease))
-                dy = round(HEIGHT * entrance[1] * (1-ease))
+                dx = round(WIDTH * shot_entrance_vector[0] * (1-ease))
+                dy = round(HEIGHT * shot_entrance_vector[1] * (1-ease))
             else:
                 angle = 0
                 # Gentle editorial push-in after the entrance; no constant wobble.
@@ -814,7 +819,7 @@ def render_creative_motion(layers, output, music, duration, on_progress=None, do
                 canvas = Image.alpha_composite(canvas,product_layer)
             frame = canvas.convert('RGB')
             if shot != previous_shot:
-                transition_from = previous_frame if previous_shot >= 0 else None
+                transition_from = previous_frame.copy() if previous_shot >= 0 and previous_frame is not None else None
                 previous_shot = shot
             # Cross-dissolve from the preceding shot, avoiding a hard cut.
             if transition_from is not None:
@@ -829,7 +834,7 @@ def render_creative_motion(layers, output, music, duration, on_progress=None, do
             for k in range(n,min(total,n+hold)):
                 frame.save(frames_dir / f'{k:05d}.png',compress_level=1)
             if on_progress and (n == 0 or n % max(hold,round(FPS*2/hold)*hold) == 0):
-                on_progress(45+round(30*n/total),'Membina babak Creative Stop Motion...')
+                on_progress(45+round(30*n/total),'Membina video produk dan transisi...')
         joined = tmp / 'creative.mp4'
         subprocess.run(['ffmpeg','-hide_banner','-loglevel','error','-y','-framerate',str(FPS),
                         '-i',str(frames_dir/'%05d.png'),'-c:v','libx264','-preset','veryfast',
