@@ -872,7 +872,7 @@ def render_creative_motion(layers, output, music, duration, on_progress=None, do
             graph.append(f'[{prev}][ink{i}]overlay=0:0:shortest=1:enable=\'between(t,{start:.2f},{end:.2f})\'[v{i}]')
             prev = f'v{i}'
         # One final grade and a short cinematic exit, without another encoding pass.
-        graph.append(f'[{prev}]eq=contrast=1.025:saturation=1.045,fade=t=out:st={max(0,duration-.28):.2f}:d=.28,format=yuv420p[final]')
+        graph.append(f'[{prev}]eq=contrast=1.025:saturation=1.045,fade=t=out:st={max(0,duration-.28):.2f}:d=0.28,format=yuv420p[final]')
         label_cmd += ['-filter_complex',';'.join(graph),
                       '-map','[final]','-an','-t',str(duration),'-c:v','libx264',
                       '-preset','veryfast','-crf','18','-pix_fmt','yuv420p',str(labelled)]
