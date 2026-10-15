@@ -1907,6 +1907,29 @@ def _shopee_public_photo(url, destination, description):
         logging.info('Public Shopee image unavailable: %s', exc)
         return False
 
+def validate_rendered_video(path, expected_duration):
+    """Reject truncated/invalid MP4 before reporting success to a paying user."""
+    if not path.is_file() or path.stat().st_size < 20_000:
+        raise RuntimeError('Fail video kosong atau terlalu kecil.')
+    probe = subprocess.run(
+        ['ffprobe', '-v', 'error', '-show_entries',
+         'format=duration:stream=codec_type,width,height',
+         '-of', 'json', str(path)],
+        capture_output=True, text=True, timeout=25, check=True)
+    metadata = json.loads(probe.stdout)
+    duration = float(metadata.get('format', {}).get('duration') or 0)
+    video_streams = [stream for stream in metadata.get('streams', [])
+                     if stream.get('codec_type') == 'video']
+    if not video_streams:
+        raise RuntimeError('Fail output tidak mempunyai trek video.')
+    stream = video_streams[0]
+    if int(stream.get('width') or 0) < 480 or int(stream.get('height') or 0) < 720:
+        raise RuntimeError('Resolusi video tidak mencapai tahap minimum.')
+    if abs(duration - expected_duration) > max(.8, expected_duration*.08):
+        raise RuntimeError('Tempoh video tidak lengkap.')
+    return metadata
+
+
 async def generate(update: Update, context: ContextTypes.DEFAULT_TYPE):
     message = update.effective_message
     ids = context.user_data.get('photos', [])
@@ -2025,7 +2048,8 @@ async def generate(update: Update, context: ContextTypes.DEFAULT_TYPE):
             def render_progress(percent, detail):
                 asyncio.run_coroutine_threadsafe(progress_update(progress, percent, detail), loop)
             await asyncio.to_thread(render_video, paths, result, music, selected_style, context.user_data.get('duration', 10), doodle, None, render_progress, product_layers if not context.user_data.get('storyboard_mode') else None, context.user_data.get('motion_choice','auto'), label_info)
-            await progress_update(progress, 90, 'Render selesai. Menghantar video ke Telegram...')
+            await asyncio.to_thread(validate_rendered_video, result, context.user_data.get('duration', 10))
+            await progress_update(progress, 90, 'Video lulus semakan fail. Menghantar ke Telegram...')
             with result.open('rb') as f:
                 await message.reply_video(video=f, caption='🎬 Video siap! Hantar gambar baharu untuk video seterusnya.', supports_streaming=True,
                                                  read_timeout=120, write_timeout=120)
