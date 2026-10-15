@@ -754,13 +754,21 @@ def render_creative_motion(layers, output, music, duration, on_progress=None, do
             sources.append((fg,choice))
         studio_backgrounds = {choice: _premium_studio_background((WIDTH, HEIGHT), choice) for _, choice in layers}
         hand_image = _hand_place_asset(WIDTH*.37, hand_variant, entrance) if hand_place else None
+        previous_frame = None
+        previous_shot = -1
+        transition_from = None
         for n in range(0,total,hold):
             t = n / FPS
             phase = t / max(duration, .01)
             section = min(3, int(phase * 4))
-            fg, choice = sources[min(len(sources)-1, int(phase*len(sources)))]
-            # One smooth 2D entrance. Full stop at centre; no periodic wobble.
-            u = min(1.0, t / entrance_seconds)
+            shot = min(len(sources)-1, int(phase*len(sources)))
+            fg, choice = sources[shot]
+            shot_start = duration * shot / len(sources)
+            shot_length = duration / len(sources)
+            shot_t = max(0.0, t-shot_start)
+            # Reset the restrained reveal per shot, not just at video start.
+            shot_entrance = min(entrance_seconds, max(.28, shot_length*.36))
+            u = min(1.0, shot_t / shot_entrance)
             ease = 1 - (1-u)**3
             if u < 1:
                 angle = entrance[2] * (1-ease)
@@ -770,7 +778,7 @@ def render_creative_motion(layers, output, music, duration, on_progress=None, do
             else:
                 angle = 0
                 # Gentle editorial push-in after the entrance; no constant wobble.
-                hero_u = min(1.0, max(0.0, (t-entrance_seconds)/max(.5,duration-entrance_seconds)))
+                hero_u = min(1.0, max(0.0, (shot_t-shot_entrance)/max(.25,shot_length-shot_entrance)))
                 hero_ease = hero_u*hero_u*(3-2*hero_u)
                 push = .11 if mode == 'hero' else (.008 if mode == 'minimal' else (.022 if mode == 'stop' else .035))
                 scale = 1.0 + push*hero_ease
@@ -795,8 +803,8 @@ def render_creative_motion(layers, output, music, duration, on_progress=None, do
             product_layer = Image.new('RGBA', canvas.size, (0, 0, 0, 0))
             product_layer.paste(transformed, (x, y))
             canvas = Image.alpha_composite(canvas, product_layer)
-            if hand_place and t < entrance_seconds + .82:
-                retreat = max(0.0, min(1.0, (t-entrance_seconds-.10)/.65))
+            if hand_place and shot_t < shot_entrance + .82:
+                retreat = max(0.0, min(1.0, (shot_t-shot_entrance-.10)/.65))
                 retreat = retreat*retreat*(3-2*retreat)
                 hx = round((WIDTH-hand_image.width)/2 + WIDTH*entrance[0]*((1-ease)+retreat))
                 hy = round((HEIGHT-hand_image.height)/2 + HEIGHT*entrance[1]*((1-ease)+retreat))
@@ -805,6 +813,19 @@ def render_creative_motion(layers, output, music, duration, on_progress=None, do
                 canvas = Image.alpha_composite(canvas,hand_layer)
                 canvas = Image.alpha_composite(canvas,product_layer)
             frame = canvas.convert('RGB')
+            if shot != previous_shot:
+                transition_from = previous_frame if previous_shot >= 0 else None
+                previous_shot = shot
+            # Cross-dissolve from the preceding shot, avoiding a hard cut.
+            if transition_from is not None:
+                fade_seconds = min(.32, shot_length*.16)
+                mix = min(1.0, shot_t / max(.01, fade_seconds))
+                mix = mix*mix*(3-2*mix)
+                if mix < 1.0:
+                    frame = Image.blend(transition_from, frame, mix)
+                else:
+                    transition_from = None
+            previous_frame = frame
             for k in range(n,min(total,n+hold)):
                 frame.save(frames_dir / f'{k:05d}.png',compress_level=1)
             if on_progress and (n == 0 or n % max(hold,round(FPS*2/hold)*hold) == 0):
