@@ -815,21 +815,17 @@ def render_creative_motion(layers, output, music, duration, on_progress=None, do
             x = round((WIDTH-transformed.width)/2)+dx
             y = round((HEIGHT-transformed.height)/2)+dy
             # Clip overlays safely when a pose extends outside the canvas.
-            shadow_layer = Image.new('RGBA', canvas.size, (0, 0, 0, 0))
-            shadow_layer.paste(shadow, (x+round(WIDTH*.008), y+round(HEIGHT*.012)))
-            canvas = Image.alpha_composite(canvas, shadow_layer)
-            product_layer = Image.new('RGBA', canvas.size, (0, 0, 0, 0))
-            product_layer.paste(transformed, (x, y))
-            canvas = Image.alpha_composite(canvas, product_layer)
+            # Composite directly onto the RGB canvas. Full-canvas RGBA layers
+            # multiplied peak RAM on small Render instances.
+            canvas.paste(shadow, (x+round(WIDTH*.008), y+round(HEIGHT*.012)), shadow)
+            canvas.paste(transformed, (x, y), transformed)
             if hand_place and shot_t < shot_entrance + .82:
                 retreat = max(0.0, min(1.0, (shot_t-shot_entrance-.10)/.65))
                 retreat = retreat*retreat*(3-2*retreat)
                 hx = round((WIDTH-hand_image.width)/2 + WIDTH*entrance[0]*((1-ease)+retreat))
                 hy = round((HEIGHT-hand_image.height)/2 + HEIGHT*entrance[1]*((1-ease)+retreat))
-                hand_layer = Image.new('RGBA',canvas.size,(0,0,0,0))
-                hand_layer.paste(hand_image,(hx,hy),hand_image)
-                canvas = Image.alpha_composite(canvas,hand_layer)
-                canvas = Image.alpha_composite(canvas,product_layer)
+                canvas.paste(hand_image, (hx, hy), hand_image)
+                canvas.paste(transformed, (x, y), transformed)
             frame = canvas.convert('RGB')
             if shot != previous_shot:
                 transition_from = previous_frame.copy() if previous_shot >= 0 and previous_frame is not None else None
@@ -849,9 +845,9 @@ def render_creative_motion(layers, output, music, duration, on_progress=None, do
             if on_progress and (n == 0 or n % max(hold,round(FPS*2/hold)*hold) == 0):
                 on_progress(45+round(30*n/total),'Membina video produk dan transisi...')
         joined = tmp / 'creative.mp4'
-        subprocess.run(['ffmpeg','-hide_banner','-loglevel','error','-y','-framerate',str(FPS),
-                        '-i',str(frames_dir/'%05d.png'),'-c:v','libx264','-preset','veryfast',
-                        '-crf','18','-pix_fmt','yuv420p','-movflags','+faststart',str(joined)],check=True,timeout=240,capture_output=True,text=True)
+        subprocess.run(['ffmpeg','-hide_banner','-loglevel','error','-y','-threads','1','-filter_threads','1',
+                        '-framerate',str(FPS),'-i',str(frames_dir/'%05d.png'),'-c:v','libx264','-threads','1',
+                        '-preset','veryfast','-crf','20','-pix_fmt','yuv420p','-movflags','+faststart',str(joined)],check=True,timeout=240,capture_output=True,text=True)
         if doodle != 'none':
             decorated = tmp / 'decorated.mp4'
             apply_overlay(joined,decorated,doodle,WIDTH,HEIGHT,duration,background=layers[0][1],seed=variant_hash.hexdigest())
