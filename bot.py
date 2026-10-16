@@ -254,10 +254,31 @@ def prompt_duration_menu():
     ])
 
 
-def prompt_style_menu():
+# Keep the style picker relevant to the selected product instead of showing
+# unrelated options (for example, Mirror Selfie for a food product).
+PRODUCT_STYLE_KEYS = {
+    'fashion': {'mirror_selfie', 'fashion_editorial', 'golden_hour', 'lifestyle', 'ugc_review', 'dynamic', 'fast_cut', 'reaction_hook', 'creative_reveal', 'white_doodle', 'cinematic', 'luxury', 'minimal', 'playful_viral', 'studio_360_safe'},
+    'bag': {'luxury', 'flatlay', 'unboxing', 'lifestyle', 'ugc_review', 'studio_360_safe', 'creative_reveal', 'fast_cut', 'white_doodle', 'cinematic', 'minimal', 'dynamic'},
+    'hijab': {'mirror_selfie', 'fashion_editorial', 'golden_hour', 'lifestyle', 'ugc_review', 'dynamic', 'fast_cut', 'reaction_hook', 'creative_reveal', 'white_doodle', 'cinematic', 'luxury', 'minimal'},
+    'shoes': {'dynamic', 'fast_cut', 'pov_demo', 'studio_360_safe', 'lifestyle', 'ugc_review', 'creative_reveal', 'white_doodle', 'cinematic', 'minimal', 'playful_viral'},
+    'beauty': {'beauty_macro', 'ugc_review', 'luxury', 'cinematic', 'white_doodle', 'minimal', 'fast_cut', 'creative_reveal', 'lifestyle', 'flatlay', 'unboxing'},
+    'food': {'food_appetite', 'flatlay', 'lifestyle', 'dynamic', 'fast_cut', 'creative_reveal', 'white_doodle', 'minimal', 'ugc_review', 'nature_fresh', 'playful_viral'},
+    'gadget': {'tech_demo', 'unboxing', 'cinematic', 'minimal', 'fast_cut', 'creative_reveal', 'ugc_review', 'flatlay', 'luxury', 'studio_360_safe', 'dynamic'},
+    'home': {'cozy_home', 'flatlay', 'lifestyle', 'creative_reveal', 'cinematic', 'minimal', 'fast_cut', 'pov_demo', 'unboxing', 'white_doodle', 'ugc_review'},
+    'accessory': {'luxury', 'beauty_macro', 'flatlay', 'cinematic', 'studio_360_safe', 'fashion_editorial', 'golden_hour', 'white_doodle', 'minimal', 'unboxing'},
+    'other': {'cinematic', 'minimal', 'dynamic', 'luxury', 'lifestyle', 'ugc_review', 'flatlay', 'unboxing', 'creative_reveal', 'studio_360_safe', 'white_doodle', 'fast_cut', 'playful_viral'},
+}
+
+def prompt_style_menu(product_type='other'):
+    available = storyboard_styles()
+    allowed = PRODUCT_STYLE_KEYS.get(product_type, PRODUCT_STYLE_KEYS['other'])
+    matching = [(key, label) for key, label in available if key in allowed]
+    # If catalog entries are customized, never leave the user with an empty style menu.
+    if not matching:
+        matching = available
     rows = [[InlineKeyboardButton('🎲 Auto (Disyorkan)', callback_data='prompt_style:auto')]]
     rows.extend([[InlineKeyboardButton(label, callback_data='prompt_style:' + key)]
-                 for key, label in storyboard_styles()])
+                 for key, label in matching])
     rows.append([InlineKeyboardButton('↩️ Menu Utama', callback_data='home')])
     return InlineKeyboardMarkup(rows)
 
@@ -1629,7 +1650,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['stage'] = 'prompt_style'
             await query.message.reply_text(
                 '🎨 Pilih gaya visual untuk prompt yang sama:',
-                reply_markup=prompt_style_menu()
+                reply_markup=prompt_style_menu(context.user_data.get('prompt_product_type', 'other'))
             )
     elif action.startswith('prompt_style:') and stage == 'prompt_style':
         selected = action.split(':', 1)[1]
@@ -2277,7 +2298,7 @@ def main():
     app.add_handler(CommandHandler('jana', generate, block=False))
     for style in STYLES:
         app.add_handler(CommandHandler(style, choose_style))
-    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(photos_order|photos_undo|photos_more|photo_up:[0-4]|photo_down:[0-4]|photo_remove:[0-4]|duration:(10|15|20)|admin_pending|admin_approve:[0-9]+|admin_reject:[0-9]+|admin|receipt_upload|subscription_qr|make|video_input:(photos|shopee|back)|prompt_input:(photo|shopee|back)|storyboard|doodle:(auto|white|sparkle|motion|all|none)|convert|merge|merge_next|merge_done|merge_style:(fade|smoothleft|slideleft|zoomin)|prompt|prompt_type:(normal|storyboard|doodle|library)|prompt_categories|pcat:[a-z0-9_]+|ptpl:[a-z0-9_]+|prompt_duration:(10|20)|prompt_style:(auto|white_doodle|cinematic|minimal|dynamic|luxury)|prompt_idea:(yes|skip)|prompt_details:(add|skip)|description:skip|scene:(auto|studio|dark|home|nature|minimal)|motion:(orbit|push|side|static|auto|stop|spin|smooth|hand)|photos_done|background:(original|white|beige|dark|pastel|gradient|pattern|duotone|mist)|confirm|styles|music|music_previews|subscription|account|help|check|reset|home|preview:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|listen:(cinematic|energetic|happy|luxury|nature|beauty)|style:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|music:(auto|cinematic|energetic|happy|luxury|nature|beauty|none|custom))$'))
+    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(photos_order|photos_undo|photos_more|photo_up:[0-4]|photo_down:[0-4]|photo_remove:[0-4]|duration:(10|15|20)|admin_pending|admin_approve:[0-9]+|admin_reject:[0-9]+|admin|receipt_upload|subscription_qr|make|video_input:(photos|shopee|back)|prompt_input:(photo|shopee|back)|storyboard|doodle:(auto|white|sparkle|motion|all|none)|convert|merge|merge_next|merge_done|merge_style:(fade|smoothleft|slideleft|zoomin)|prompt|prompt_type:(normal|storyboard|doodle|library)|prompt_categories|pcat:[a-z0-9_]+|ptpl:[a-z0-9_]+|prompt_duration:(10|20)|prompt_product_type:[a-z0-9_]+|prompt_style:[a-z0-9_]+|prompt_idea:(yes|skip)|prompt_details:(add|skip)|description:skip|scene:(auto|studio|dark|home|nature|minimal)|motion:(orbit|push|side|static|auto|stop|spin|smooth|hand)|photos_done|background:(original|white|beige|dark|pastel|gradient|pattern|duotone|mist)|confirm|styles|music|music_previews|subscription|account|help|check|reset|home|preview:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|listen:(cinematic|energetic|happy|luxury|nature|beauty)|style:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|music:(auto|cinematic|energetic|happy|luxury|nature|beauty|none|custom))$'))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, menu_text))
     app.add_handler(MessageHandler(filters.PHOTO, photo))
     app.add_handler(MessageHandler(filters.Document.IMAGE | filters.Document.MimeType('application/pdf'), handle_image_or_receipt_document))
