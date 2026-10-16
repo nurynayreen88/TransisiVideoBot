@@ -223,6 +223,30 @@ def prompt_input_menu():
     ])
 
 
+def prompt_duration_menu():
+    return InlineKeyboardMarkup([
+        [InlineKeyboardButton('🎬 10 Saat', callback_data='prompt_duration:10'),
+         InlineKeyboardButton('🎞️ 20 Saat', callback_data='prompt_duration:20')],
+        [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
+    ])
+
+
+def prompt_style_menu():
+    rows = [[InlineKeyboardButton('🎲 Auto (Disyorkan)', callback_data='prompt_style:auto')]]
+    rows.extend([[InlineKeyboardButton(label, callback_data='prompt_style:' + key)]
+                 for key, label in storyboard_styles()])
+    rows.append([InlineKeyboardButton('↩️ Menu Utama', callback_data='home')])
+    return InlineKeyboardMarkup(rows)
+
+
+def prompt_idea_choice_menu():
+    return InlineKeyboardMarkup([
+        [InlineKeyboardButton('🎬 Tambah idea video siap (pilihan)', callback_data='prompt_idea:yes')],
+        [InlineKeyboardButton('➡️ Teruskan tanpa idea tambahan', callback_data='prompt_idea:skip')],
+        [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
+    ])
+
+
 def prompt_category_menu():
     rows = []
     categories = PROMPT_LIBRARY.get('categories', [])
@@ -1097,6 +1121,7 @@ def reset(context):
     context.user_data['prompt_reference_photo'] = ''
     context.user_data['prompt_library_details'] = ''
     context.user_data['prompt_category'] = ''
+    context.user_data['prompt_concept'] = ''
     context.user_data['stage'] = 'home'
 
 
@@ -1501,13 +1526,14 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await query.message.reply_text('📷 Hantar 1–5 gambar produk. Tekan Selesai apabila cukup.', reply_markup=photos_menu())
     elif action == 'prompt':
         reset(context)
-        context.user_data['stage'] = 'prompt_type'
-        await query.message.reply_text('✍️ HASILKAN PROMPT — Pilih jenis:', reply_markup=InlineKeyboardMarkup([
-            [InlineKeyboardButton('✨ Prompt Biasa', callback_data='prompt_type:normal')],
-            [InlineKeyboardButton('🎞️ Prompt Storyboard', callback_data='prompt_type:storyboard')],
-            [InlineKeyboardButton('📚 Prompt Pilihan Siap', callback_data='prompt_type:library')],
-            [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
-        ]))
+        context.user_data['prompt_mode'] = 'storyboard'
+        context.user_data['prompt_style'] = 'auto'
+        context.user_data['prompt_concept'] = ''
+        context.user_data['stage'] = 'prompt_duration'
+        await query.message.reply_text(
+            '✍️ KLIPPO ONE PROMPT — Satu aliran untuk semua produk. Pilih tempoh video:',
+            reply_markup=prompt_duration_menu()
+        )
     elif action.startswith('prompt_type:') and stage == 'prompt_type':
         selected = action.split(':', 1)[1]
         if selected == 'library':
@@ -1539,50 +1565,51 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         prompt_id = action.split(':', 1)[1]
         template = PROMPTS_BY_ID.get(prompt_id)
         category_id = context.user_data.get('prompt_category', '')
-        category = CATEGORIES_BY_ID.get(category_id, {})
         if not template or template.get('category') != category_id:
-            await query.message.reply_text('Prompt ini tidak ditemui dalam kategori tersebut. Sila pilih semula.', reply_markup=prompt_options_menu(category_id))
-        else:
-            prompt_text = inject_product_details(template.get('prompt', ''), context.user_data.get('prompt_library_details', ''))
-            prompt_text = 'PROMPT VIDEO — 10 SAAT\n\n' + prompt_text
-            buttons = [
-                [InlineKeyboardButton('✨ Buka Gemini', url='https://gemini.google.com/app')],
-                [InlineKeyboardButton('🎬 Prompt Lain Dalam Kategori', callback_data=f'pcat:{category_id}')],
-                [InlineKeyboardButton('🗂️ Tukar Kategori', callback_data='prompt_categories')],
-                [InlineKeyboardButton('🔄 Prompt Baharu', callback_data='prompt')],
-                [InlineKeyboardButton('🏠 Menu Utama', callback_data='home')],
-            ]
             await query.message.reply_text(
-                'Cara guna: buka Gemini, muat naik gambar produk yang sama, kemudian salin prompt di bawah dan tampal di Gemini.'
+                'Idea video tidak ditemui dalam kategori tersebut. Sila pilih semula.',
+                reply_markup=prompt_options_menu(category_id)
             )
-            # Telegram text messages are limited to 4096 characters. Send the full
-            # selected template in ordered chunks instead of silently truncating it.
-            chunks = [prompt_text[index:index + 3800] for index in range(0, len(prompt_text), 3800)] or [prompt_text]
-            for index, chunk in enumerate(chunks):
-                await query.message.reply_text(
-                    chunk,
-                    reply_markup=InlineKeyboardMarkup(buttons) if index == len(chunks) - 1 else None,
-                    disable_web_page_preview=True
-                )
+        else:
+            # Curated entries are creative concepts for the same universal prompt,
+            # not standalone prompt types.
+            context.user_data['prompt_concept'] = (
+                (template.get('label', '') + ': ' + template.get('description', '')).strip(': ')
+            )
+            context.user_data['stage'] = 'prompt_input'
+            await query.message.reply_text(
+                '✅ Idea video ditambah. Sekarang hantar satu gambar produk; idea hanya mengarah aksi dan tidak mengubah rupa produk.',
+                reply_markup=prompt_input_menu()
+            )
     elif action.startswith('prompt_duration:') and stage == 'prompt_duration':
         selected = action.split(':', 1)[1]
         if selected in ('10', '20'):
             context.user_data['prompt_duration'] = int(selected)
-            if context.user_data.get('prompt_mode') == 'storyboard':
-                context.user_data['stage'] = 'prompt_style'
-                rows = [[InlineKeyboardButton('🎲 Auto / Random', callback_data='prompt_style:auto')]]
-                rows.extend([[InlineKeyboardButton(label, callback_data='prompt_style:' + key)] for key, label in storyboard_styles()])
-                await query.message.reply_text('🎨 Pilih gaya Prompt Storyboard:', reply_markup=InlineKeyboardMarkup(rows))
-            else:
-                context.user_data['stage'] = 'prompt_input'
-                await query.message.reply_text('✍️ Pilih cara masukkan produk untuk prompt:', reply_markup=prompt_input_menu())
+            context.user_data['stage'] = 'prompt_style'
+            await query.message.reply_text(
+                '🎨 Pilih gaya visual untuk prompt yang sama:',
+                reply_markup=prompt_style_menu()
+            )
     elif action.startswith('prompt_style:') and stage == 'prompt_style':
         selected = action.split(':', 1)[1]
         valid = {'auto'} | {key for key, _ in storyboard_styles()}
         if selected in valid:
             context.user_data['prompt_style'] = selected
-            context.user_data['stage'] = 'prompt_input'
-            await query.message.reply_text('✍️ Pilih cara masukkan produk untuk prompt:', reply_markup=prompt_input_menu())
+            context.user_data['stage'] = 'prompt_idea_choice'
+            await query.message.reply_text(
+                '💡 Mahu tambah satu idea aksi daripada koleksi prompt siap? Ia akan digabungkan ke dalam prompt yang sama.',
+                reply_markup=prompt_idea_choice_menu()
+            )
+    elif action == 'prompt_idea:yes' and stage == 'prompt_idea_choice':
+        context.user_data['stage'] = 'prompt_category'
+        await query.message.reply_text(
+            '📚 Pilih kategori untuk idea video (bukan prompt berasingan):',
+            reply_markup=prompt_category_menu()
+        )
+    elif action == 'prompt_idea:skip' and stage == 'prompt_idea_choice':
+        context.user_data['prompt_concept'] = ''
+        context.user_data['stage'] = 'prompt_input'
+        await query.message.reply_text('📷 Sekarang pilih cara masukkan produk:', reply_markup=prompt_input_menu())
     elif action == 'prompt_input:photo' and stage == 'prompt_input':
         context.user_data['stage'] = 'prompt_photo'
         await query.message.reply_text('📷 Hantar satu gambar produk. Maklumat tambahan boleh dimasukkan kemudian.')
@@ -1621,7 +1648,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # callbacks must continue into the second chain.
     if action in ('admin_pending', 'admin', 'storyboard', 'make', 'prompt', 'prompt_categories') or action.startswith(
         ('admin_approve:', 'admin_reject:', 'prompt_type:', 'prompt_duration:',
-         'prompt_style:', 'prompt_details:', 'video_input:', 'prompt_input:', 'pcat:', 'ptpl:')
+         'prompt_style:', 'prompt_idea:', 'prompt_details:', 'video_input:', 'prompt_input:', 'pcat:', 'ptpl:')
     ):
         return
     if action.startswith('motion:') and context.user_data.get('stage') == 'prompt_motion':
@@ -1632,7 +1659,12 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             try:
                 product = ('the product in the uploaded reference image. Visible observations (verify against reference image): ' + context.user_data.get('prompt_vision', '') + '. Optional user details: ' + context.user_data.get('prompt_product', ''))
                 scene = context.user_data.get('prompt_scene', 'clean studio background')
-                prompt = build_prompt(context.user_data.get('prompt_mode', 'normal'), product, scene, motion, context.user_data.get('prompt_style', 'auto'), context.user_data.get('prompt_duration', 10))
+                prompt = build_prompt(
+                    'storyboard', product, scene, motion,
+                    context.user_data.get('prompt_style', 'auto'),
+                    context.user_data.get('prompt_duration', 10),
+                    context.user_data.get('prompt_concept', '')
+                )
                 await progress_update(waiting, 70, 'Prompt siap disusun. Menghantar hasil...')
                 context.user_data['stage'] = 'prompt_done'
                 mode_name = context.user_data.get('prompt_mode', 'normal')
@@ -1910,13 +1942,14 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await update.message.reply_text('🔄 TUKAR FORMAT VIDEO\n\nTekan 📎 → File / Fail → pilih video MP4 asal. Bot akan memprosesnya secara automatik.', reply_markup=main_menu())
         elif action == 'prompt':
             reset(context)
-            context.user_data['stage'] = 'prompt_type'
-            await update.message.reply_text('✍️ HASILKAN PROMPT — Pilih jenis:', reply_markup=InlineKeyboardMarkup([
-                [InlineKeyboardButton('✨ Prompt Biasa', callback_data='prompt_type:normal')],
-                [InlineKeyboardButton('🎞️ Prompt Storyboard (6 Babak)', callback_data='prompt_type:storyboard')],
-                [InlineKeyboardButton('📚 Prompt Pilihan Siap', callback_data='prompt_type:library')],
-                [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
-            ]))
+            context.user_data['prompt_mode'] = 'storyboard'
+            context.user_data['prompt_style'] = 'auto'
+            context.user_data['prompt_concept'] = ''
+            context.user_data['stage'] = 'prompt_duration'
+            await update.message.reply_text(
+                '✍️ KLIPPO ONE PROMPT — Satu aliran untuk semua produk. Pilih tempoh video:',
+                reply_markup=prompt_duration_menu()
+            )
         elif action == 'subscription':
             await update.message.reply_text('💎 LANGGANAN KLIPPO\n\nPelan Penyokong Awal: RM5 / 30 hari, sehingga 30 video sebulan. Pengaktifan manual selepas resit disemak.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📱 Papar QR DuitNow', callback_data='subscription_qr')]]))
         elif action == 'account':
@@ -2201,7 +2234,7 @@ def main():
     app.add_handler(CommandHandler('jana', generate, block=False))
     for style in STYLES:
         app.add_handler(CommandHandler(style, choose_style))
-    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(photos_order|photos_undo|photos_more|photo_up:[0-4]|photo_down:[0-4]|photo_remove:[0-4]|duration:(10|15|20)|admin_pending|admin_approve:[0-9]+|admin_reject:[0-9]+|admin|receipt_upload|subscription_qr|make|video_input:(photos|shopee|back)|prompt_input:(photo|shopee|back)|storyboard|doodle:(auto|white|sparkle|motion|all|none)|convert|merge|merge_next|merge_done|merge_style:(fade|smoothleft|slideleft|zoomin)|prompt|prompt_type:(normal|storyboard|doodle|library)|prompt_categories|pcat:[a-z0-9_]+|ptpl:[a-z0-9_]+|prompt_duration:(10|20)|prompt_style:(auto|white_doodle|cinematic|minimal|dynamic|luxury)|prompt_details:(add|skip)|description:skip|scene:(auto|studio|dark|home|nature|minimal)|motion:(orbit|push|side|static|auto|stop|spin|smooth|hand)|photos_done|background:(original|white|beige|dark|pastel|gradient|pattern|duotone|mist)|confirm|styles|music|music_previews|subscription|account|help|check|reset|home|preview:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|listen:(cinematic|energetic|happy|luxury|nature|beauty)|style:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|music:(auto|cinematic|energetic|happy|luxury|nature|beauty|none|custom))$'))
+    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(photos_order|photos_undo|photos_more|photo_up:[0-4]|photo_down:[0-4]|photo_remove:[0-4]|duration:(10|15|20)|admin_pending|admin_approve:[0-9]+|admin_reject:[0-9]+|admin|receipt_upload|subscription_qr|make|video_input:(photos|shopee|back)|prompt_input:(photo|shopee|back)|storyboard|doodle:(auto|white|sparkle|motion|all|none)|convert|merge|merge_next|merge_done|merge_style:(fade|smoothleft|slideleft|zoomin)|prompt|prompt_type:(normal|storyboard|doodle|library)|prompt_categories|pcat:[a-z0-9_]+|ptpl:[a-z0-9_]+|prompt_duration:(10|20)|prompt_style:(auto|white_doodle|cinematic|minimal|dynamic|luxury)|prompt_idea:(yes|skip)|prompt_details:(add|skip)|description:skip|scene:(auto|studio|dark|home|nature|minimal)|motion:(orbit|push|side|static|auto|stop|spin|smooth|hand)|photos_done|background:(original|white|beige|dark|pastel|gradient|pattern|duotone|mist)|confirm|styles|music|music_previews|subscription|account|help|check|reset|home|preview:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|listen:(cinematic|energetic|happy|luxury|nature|beauty)|style:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|music:(auto|cinematic|energetic|happy|luxury|nature|beauty|none|custom))$'))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, menu_text))
     app.add_handler(MessageHandler(filters.PHOTO, photo))
     app.add_handler(MessageHandler(filters.Document.IMAGE | filters.Document.MimeType('application/pdf'), handle_image_or_receipt_document))
