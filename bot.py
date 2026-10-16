@@ -1155,6 +1155,8 @@ def reset(context):
     context.user_data['shopee_url'] = ''
     context.user_data['prompt_vision'] = ''
     context.user_data['prompt_product'] = ''
+    context.user_data['prompt_product_name'] = ''
+    context.user_data['prompt_motion_choice'] = ''
     context.user_data['prompt_reference_photo'] = ''
     context.user_data['prompt_library_details'] = ''
     context.user_data['prompt_category'] = ''
@@ -1614,9 +1616,9 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['prompt_concept'] = (
                 (template.get('label', '') + ': ' + template.get('description', '')).strip(': ')
             )
-            context.user_data['stage'] = 'prompt_photo'
+            context.user_data['stage'] = 'prompt_product_name'
             await query.message.reply_text(
-                '✅ Idea video ditambah. Terus hantar satu gambar produk di sini. Idea hanya mengarah aksi dan tidak mengubah rupa produk.'
+                '🛍️ Masukkan nama produk daripada Shopee. Buka Shopee, copy dan paste nama produk di sini. Nama sahaja — tidak perlu pautan.\n\nContoh: VELLA Beg Tangan Wanita Besar Sling Shoulder Women Luxury Handbags'
             )
     elif action.startswith('prompt_product_type:'):
         # Handle the product callback even if the in-memory stage is stale.
@@ -1662,8 +1664,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
     elif action == 'prompt_idea:skip' and stage == 'prompt_idea_choice':
         context.user_data['prompt_concept'] = ''
-        context.user_data['stage'] = 'prompt_photo'
-        await query.message.reply_text('📷 Terus hantar satu gambar produk di sini. Tiada menu pilihan tambahan diperlukan.')
+        context.user_data['stage'] = 'prompt_product_name'
+        await query.message.reply_text('🛍️ Masukkan nama produk daripada Shopee. Buka Shopee, copy dan paste nama produk di sini. Nama sahaja — tidak perlu pautan.\n\nContoh: VELLA Beg Tangan Wanita Besar Sling Shoulder Women Luxury Handbags')
     elif action == 'prompt_input:photo' and stage == 'prompt_input':
         context.user_data['stage'] = 'prompt_photo'
         await query.message.reply_text('📷 Hantar satu gambar produk. Maklumat tambahan boleh dimasukkan kemudian.')
@@ -1702,19 +1704,57 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # callbacks must continue into the second chain.
     if action in ('admin_pending', 'admin', 'storyboard', 'make', 'prompt', 'prompt_categories') or action.startswith(
         ('admin_approve:', 'admin_reject:', 'prompt_type:', 'prompt_product_type:', 'prompt_duration:',
-         'prompt_style:', 'prompt_idea:', 'prompt_details:', 'video_input:', 'prompt_input:', 'pcat:', 'ptpl:')
+         'prompt_style:', 'prompt_idea:', 'prompt_details:', 'prompt_generate:', 'video_input:', 'prompt_input:', 'pcat:', 'ptpl:')
     ):
         return
     if action.startswith('motion:') and context.user_data.get('stage') == 'prompt_motion':
         motion = action.split(':', 1)[1]
         motions = {'orbit': 'A controlled 30-degree camera arc around the product, not a full 360-degree rotation; preserve the visible product geometry.', 'push': 'A slow forward dolly-in with gentle parallax; no object deformation.', 'side': 'A smooth left-to-right camera slide with stable product proportions.', 'static': 'A locked camera with subtle studio lighting changes only.'}
         if motion in motions:
-            waiting = await query.message.reply_text('⏳ DALAM PROSES — 0%\nMenyusun prompt...')
+            context.user_data['prompt_motion_choice'] = motion
+            context.user_data['stage'] = 'prompt_confirm'
+            style_key = context.user_data.get('prompt_style', 'auto')
+            style_labels = dict(storyboard_styles())
+            style_name = 'Auto (Disyorkan)' if style_key == 'auto' else style_labels.get(style_key, style_key)
+            concept = context.user_data.get('prompt_concept', '').strip() or 'Tiada — tanpa idea tambahan'
+            product_name = context.user_data.get('prompt_product_name', '').strip() or 'Tidak diisi'
+            scene = context.user_data.get('prompt_scene', 'clean studio background')
+            scene_labels = {
+                'clean premium studio background, selected to complement the exact product reference': 'Auto — studio premium',
+                'premium photography studio, soft neutral backdrop and realistic contact shadows': 'Studio Premium',
+                'dark luxury studio, controlled rim lighting and understated premium contrast': 'Mewah Gelap',
+                'tasteful modern home interior, natural ambient lighting and believable product placement': 'Ruang Rumah',
+                'restrained natural setting with soft daylight, without obscuring the product': 'Alam Semula Jadi',
+                'bright minimalist setting with clean neutral surfaces and soft daylight': 'Cerah Minimalis',
+            }
+            motion_labels = {'orbit': 'Orbit Terkawal', 'push': 'Zoom Masuk', 'side': 'Gerak Sisi', 'static': 'Studio Statik'}
+            summary = (
+                '🧾 SEMAK PILIHAN SEBELUM JANA PROMPT\\n\\n'
+                f'🛍️ Nama produk: {product_name}\\n'
+                f'📦 Jenis produk: {PRODUCT_TYPES.get(context.user_data.get("prompt_product_type", "other"), "Produk lain")}\\n'
+                f'⏱️ Tempoh: {context.user_data.get("prompt_duration", 10)} saat\\n'
+                f'🎨 Gaya visual: {style_name}\\n'
+                f'💡 Idea video: {concept}\\n'
+                f'🖼️ Latar: {scene_labels.get(scene, scene)}\\n'
+                f'🎥 Gerakan kamera: {motion_labels[motion]}\\n\\n'
+                'Semak semua pilihan di atas. Tekan Jana Prompt untuk meneruskan.'
+            )
+            await query.message.reply_text(summary, reply_markup=InlineKeyboardMarkup([
+                [InlineKeyboardButton('✅ Jana Prompt', callback_data='prompt_generate:confirm')],
+                [InlineKeyboardButton('🔁 Mula Semula / Tukar Pilihan', callback_data='prompt')],
+                [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
+            ]))
+    elif action == 'prompt_generate:confirm' and context.user_data.get('stage') == 'prompt_confirm':
+        motion = context.user_data.get('prompt_motion_choice', 'push')
+        motions = {'orbit': 'A controlled 30-degree camera arc around the product, not a full 360-degree rotation; preserve the visible product geometry.', 'push': 'A slow forward dolly-in with gentle parallax; no object deformation.', 'side': 'A smooth left-to-right camera slide with stable product proportions.', 'static': 'A locked camera with subtle studio lighting changes only.'}
+        if motion in motions:
+            waiting = await query.message.reply_text('⏳ DALAM PROSES — 0%\\nMenyusun prompt...')
             try:
-                product = ('the product in the uploaded reference image. Visible observations (verify against reference image): ' + context.user_data.get('prompt_vision', '') + '. Optional user details: ' + context.user_data.get('prompt_product', ''))
+                product_name = context.user_data.get('prompt_product_name', '').strip()
+                product = ('Product name supplied by user: ' + product_name + '. The uploaded reference image is the sole visual source of truth; preserve the exact product appearance. Visible observations (verify against reference image): ' + context.user_data.get('prompt_vision', '') + '. Optional user details: ' + context.user_data.get('prompt_product', ''))
                 scene = context.user_data.get('prompt_scene', 'clean studio background')
                 prompt = build_prompt(
-                    'storyboard', product, scene, motion,
+                    'storyboard', product, scene, motions[motion],
                     context.user_data.get('prompt_style', 'auto'),
                     context.user_data.get('prompt_duration', 10),
                     context.user_data.get('prompt_concept', ''),
@@ -1727,7 +1767,6 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     [InlineKeyboardButton('🤖 NexaBot', url='https://t.me/aigeneratornexa_bot?start=ref37141287'), InlineKeyboardButton('✨ Gemini', url='https://gemini.google.com/')],
                     [InlineKeyboardButton('✍️ Prompt Baharu', callback_data='prompt'), InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]
                 ])
-                # For 20s, send two individually copyable 10s prompts in order.
                 sections = prompt.split('=== KLIPPO PART 2 ===') if context.user_data.get('prompt_duration') == 20 else [prompt]
                 for index, section in enumerate(sections, 1):
                     section = section.strip()
@@ -1735,7 +1774,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                                + ('Gunakan bingkai akhir Bahagian 1 sebagai rujukan sambungan.' if index == 2 else
                                   'Simpan bingkai terakhir untuk sambungan Bahagian 2.')) if len(sections) == 2 else ''
                     if len(section) <= 3900:
-                        await query.message.reply_text((caption + '\n\n' if caption else '') + section, reply_markup=actions)
+                        await query.message.reply_text((caption + '\\n\\n' if caption else '') + section, reply_markup=actions)
                     else:
                         prompt_file = BytesIO(section.encode('utf-8'))
                         prompt_file.name = f'KLIPPO_prompt_{mode_name}_part{index}.txt'
@@ -1745,15 +1784,12 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                             caption=caption or '📋 Prompt penuh dalam satu fail: buka → Select All → Copy.',
                             reply_markup=actions
                         )
-
                 await progress_update(waiting, 100, 'Prompt berjaya dihantar.')
             finally:
-                if waiting is not None:
-                    try:
-                        await waiting.delete()
-                    except Exception:
-                        pass
-
+                try:
+                    await waiting.delete()
+                except Exception:
+                    pass
     elif action == 'merge':
         reset(context)
         context.user_data['stage'] = 'merge_upload'
@@ -1973,6 +2009,14 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data['prompt_library_details'] = details[:1200]
         context.user_data['stage'] = 'prompt_category'
         await update.message.reply_text('📚 Maklumat diterima. Pilih kategori produk untuk melihat prompt siap:', reply_markup=prompt_category_menu())
+        return
+    if stage == 'prompt_product_name':
+        if len(value) < 2 or value.lower().startswith(('http://', 'https://')):
+            await update.message.reply_text('⚠️ Masukkan nama produk sahaja. Buka Shopee, copy nama produk dan paste di sini; pautan tidak diperlukan.')
+            return
+        context.user_data['prompt_product_name'] = value[:240]
+        context.user_data['stage'] = 'prompt_photo'
+        await update.message.reply_text('✅ Nama produk disimpan: ' + value[:240] + '\\n\\n📷 Sekarang hantar satu gambar produk. Gambar ini akan menjadi rujukan utama untuk rupa produk.')
         return
     shortcuts = {
         '🎬 Jana Video Affiliate': 'make',
@@ -2290,7 +2334,7 @@ def main():
     app.add_handler(CommandHandler('jana', generate, block=False))
     for style in STYLES:
         app.add_handler(CommandHandler(style, choose_style))
-    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(photos_order|photos_undo|photos_more|photo_up:[0-4]|photo_down:[0-4]|photo_remove:[0-4]|duration:(10|15|20)|admin_pending|admin_approve:[0-9]+|admin_reject:[0-9]+|admin|receipt_upload|subscription_qr|make|video_input:(photos|shopee|back)|prompt_input:(photo|shopee|back)|storyboard|doodle:(auto|white|sparkle|motion|all|none)|convert|merge|merge_next|merge_done|merge_style:(fade|smoothleft|slideleft|zoomin)|prompt|prompt_type:(normal|storyboard|doodle|library)|prompt_categories|pcat:[a-z0-9_]+|ptpl:[a-z0-9_]+|prompt_duration:(10|20)|prompt_product_type:[a-z0-9_]+|prompt_style:[a-z0-9_]+|prompt_idea:(yes|skip)|prompt_details:(add|skip)|description:skip|scene:(auto|studio|dark|home|nature|minimal)|motion:(orbit|push|side|static|auto|stop|spin|smooth|hand)|photos_done|background:(original|white|beige|dark|pastel|gradient|pattern|duotone|mist)|confirm|styles|music|music_previews|subscription|account|help|check|reset|home|preview:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|listen:(cinematic|energetic|happy|luxury|nature|beauty)|style:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|music:(auto|cinematic|energetic|happy|luxury|nature|beauty|none|custom))$'))
+    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(photos_order|photos_undo|photos_more|photo_up:[0-4]|photo_down:[0-4]|photo_remove:[0-4]|duration:(10|15|20)|admin_pending|admin_approve:[0-9]+|admin_reject:[0-9]+|admin|receipt_upload|subscription_qr|make|video_input:(photos|shopee|back)|prompt_input:(photo|shopee|back)|storyboard|doodle:(auto|white|sparkle|motion|all|none)|convert|merge|merge_next|merge_done|merge_style:(fade|smoothleft|slideleft|zoomin)|prompt|prompt_type:(normal|storyboard|doodle|library)|prompt_categories|pcat:[a-z0-9_]+|ptpl:[a-z0-9_]+|prompt_duration:(10|20)|prompt_product_type:[a-z0-9_]+|prompt_style:[a-z0-9_]+|prompt_idea:(yes|skip)|prompt_details:(add|skip)|prompt_generate:confirm|description:skip|scene:(auto|studio|dark|home|nature|minimal)|motion:(orbit|push|side|static|auto|stop|spin|smooth|hand)|photos_done|background:(original|white|beige|dark|pastel|gradient|pattern|duotone|mist)|confirm|styles|music|music_previews|subscription|account|help|check|reset|home|preview:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|listen:(cinematic|energetic|happy|luxury|nature|beauty)|style:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|music:(auto|cinematic|energetic|happy|luxury|nature|beauty|none|custom))$'))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, menu_text))
     app.add_handler(MessageHandler(filters.PHOTO, photo))
     app.add_handler(MessageHandler(filters.Document.IMAGE | filters.Document.MimeType('application/pdf'), handle_image_or_receipt_document))
