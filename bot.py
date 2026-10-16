@@ -1611,7 +1611,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['prompt_product_type'] = selected
             context.user_data['stage'] = 'prompt_duration'
             await query.message.reply_text(
-                f"🛍️ Jenis produk: {PRODUCT_TYPES[selected]}\\n\\n⏱️ Pilih tempoh video:",
+                f"🛍️ Jenis produk: {PRODUCT_TYPES[selected]}\n\n⏱️ Pilih tempoh video:",
                 reply_markup=prompt_duration_menu()
             )
     elif action.startswith('prompt_duration:') and stage == 'prompt_duration':
