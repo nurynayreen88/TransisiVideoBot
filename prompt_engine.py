@@ -14,6 +14,10 @@ def build_prompt(mode, product, scene, motion, style='auto', duration=10, user_c
     # the same setting, mood, camera and lighting; Part 2 only changes its action beat.
     variation = choose_variation(product, scene, motion, style, mode, part=1 if duration == 20 else 0,
                                  user_concept=user_concept)
+    # When the user selects Auto, use the selected variation as the actual scene
+    # instead of leaving contradictory "studio" wording in the base prompt.
+    if "selected to complement" in (scene or "").lower():
+        scene = variation["setting"]
     if duration == 20:
         chosen_style = resolve(style)[0] if mode == 'storyboard' else style
         second_variation = dict(variation)
