@@ -60,7 +60,7 @@ jobs:
               )
               text = prompt["prompt"].casefold()
               for required in (
-                  "no uploaded image", "no ai image analysis", "strict output rules:", "no on-screen text",
+                  "no uploaded image", "text only", "strict output rules:", "no on-screen text",
                   "logos", "exactly 10 seconds", "vertical 9:16"
               ):
                   assert required in text, (
