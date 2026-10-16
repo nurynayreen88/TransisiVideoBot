@@ -62,15 +62,12 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, var
         doodle = style_key == "white_doodle"
         hook = product_hook(product)
         evidence_rules = (
-            "PRODUCT EVIDENCE PRIORITY: NAMA_PRODUK is the exact printed product name only if marked legible; "
-            "preserve its spelling, brand and model verbatim. TEKS_DISAHKAN and CIRI_BERTULIS are claims printed "
-            "on packaging, NOT independently proven benefits: attribute them to the label if used. "
-            "CIRI_VISUAL lists only features directly visible in the image. "
-            "Do not replace precise visible product details with generic marketing adjectives. "
-            "Use a feature callout only if it can be traced to a specific CIRI_VISUAL, a legible CIRI_BERTULIS, "
-            "or explicit user-provided information consistent with the photo. "
-            "If evidence is missing or uncertain, omit that callout entirely; never fill a slot with a guessed feature. "
-            "Never reconstruct blurry letters or invent an exact model number. "
+            "PRODUCT EVIDENCE RULE: Use only product details that are clearly visible in the uploaded reference "
+            "or explicitly supplied by the user and consistent with it. Preserve any legible printed name, brand, "
+            "model and label exactly as shown. Treat packaging claims as label text, not independently verified benefits. "
+            "Describe visual features only when directly supported by the image. If the name, category, feature or text "
+            "cannot be verified, omit it rather than guessing. Never invent a model number, reconstruct blurry letters, "
+            "or print internal analysis labels, empty fields, placeholders or variable names in the final prompt. "
         )
 
         hook_direction = (
@@ -80,9 +77,10 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, var
             "Do not generate any additional unverified promotional copy. If text rendering is unreliable, "
             "reserve space for accurate text overlay in editing. "
         ) if hook else (
-            "NO ON-SCREEN HOOK TEXT: The product identity is not sufficiently verified. "
-            "Begin with the product image and decorative white doodle only; leave out all headline text. "
-            "Never guess a category, benefit, price, popularity or product name."
+            "NO ON-SCREEN HOOK TEXT: The product name/category is not sufficiently verified. "
+            + ("Begin with the product image and decorative white doodle only; leave out all headline text. "
+               if doodle else "Begin with the product image only; do not add headline text or decorative doodles. ")
+            + "Never guess a category, benefit, price, popularity or product name."
         )
         if doodle:
             if part == 2:
@@ -129,7 +127,6 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, var
             "STYLE FROM KLIPPO CATALOG: " + style_template + "\n\n"
             "SETTING: " + scene + "\n"
             "CAMERA: " + camera + " Stay reference-facing; never invent unseen sides.\n\n"
-            + format_variation(variation) + "\n\n"
             + evidence_rules + "\n\n" + (hook_direction if part != 2 else "NO REPEATED OPENING HOOK in Part 2.") + "\n\n" + rules + "\n\n"
             "CONTINUITY: Preserve exact shape, color, visible logo and count across the entire video. "
             "Use soft physically believable lighting and stable background. "
