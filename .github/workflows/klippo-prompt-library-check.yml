@@ -267,6 +267,13 @@ jobs:
                   "Product names must not be rendered as on-screen text"
               )
 
+              generic_prompt = build_prompt(
+                  "video", verified, "clean premium studio background",
+                  "push", "cinematic", 10
+              )
+              assert "NO ON-SCREEN TEXT" in generic_prompt
+              assert "Only show a product name or exact wording" not in generic_prompt
+
               paired = build_prompt(
                   "storyboard", uncertain, "clean premium studio background",
                   "push", "white_doodle", 20
