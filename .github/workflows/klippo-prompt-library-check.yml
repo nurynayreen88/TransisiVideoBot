@@ -38,6 +38,17 @@ jobs:
           prompts = data.get("prompts", [])
           assert categories, "No categories found"
           assert prompts, "No prompts found"
+          category_ids_present = {item.get("id") for item in categories}
+          required_new_categories = {
+              "travel", "pets", "automotive", "garden",
+              "kitchen", "furniture", "baby", "crafts",
+          }
+          assert required_new_categories <= category_ids_present, (
+              f"New product categories missing: {required_new_categories - category_ids_present}"
+          )
+          assert data.get("storyboard_spec", {}).get("copy_ready_output"), (
+              "Copy-ready output rule missing from library metadata"
+          )
 
           prompt_ids = [item.get("id") for item in prompts]
           assert all(prompt_ids), "A prompt is missing its id"
@@ -186,7 +197,11 @@ jobs:
               )
               assert "=== KLIPPO PART 2 ===" in paired_curated
               assert "CONTINUITY BRIDGE" in paired_curated
+              assert "CONTINUATION ACTION" in paired_curated
               assert "Do not repeat the opening hook" in paired_curated
+              assert "\\n\\n" not in curated_prompt, (
+                  "Generated prompt contains literal escaped newlines instead of copy-ready formatting"
+              )
 
               assert ("white_doodle", "✏️ White Doodle") in choices()
               style_key, style_name, style_template = resolve("white_doodle")
