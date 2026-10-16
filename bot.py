@@ -216,13 +216,6 @@ DOODLE_OPTIONS = {'auto':'✨ Auto (Ikut Latar)', 'black':'🖤 Hitam', 'white':
 def doodle_menu():
     return InlineKeyboardMarkup([[InlineKeyboardButton(label, callback_data='doodle:'+key)] for key,label in DOODLE_OPTIONS.items()])
 
-def prompt_input_menu():
-    return InlineKeyboardMarkup([
-        [InlineKeyboardButton('📷 Upload Gambar', callback_data='prompt_input:photo')],
-        [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
-    ])
-
-
 PRODUCT_TYPES = {
     'fashion': '👗 Pakaian / Fesyen',
     'bag': '👜 Beg & Dompet',
@@ -1623,8 +1616,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             )
             context.user_data['stage'] = 'prompt_input'
             await query.message.reply_text(
-                '✅ Idea video ditambah. Sekarang hantar satu gambar produk; idea hanya mengarah aksi dan tidak mengubah rupa produk.',
-                reply_markup=prompt_input_menu()
+                '✅ Idea video ditambah. Terus hantar satu gambar produk di sini. Idea hanya mengarah aksi dan tidak mengubah rupa produk.'
             )
     elif action.startswith('prompt_product_type:'):
         # Handle the product callback even if the in-memory stage is stale.
@@ -1671,7 +1663,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif action == 'prompt_idea:skip' and stage == 'prompt_idea_choice':
         context.user_data['prompt_concept'] = ''
         context.user_data['stage'] = 'prompt_input'
-        await query.message.reply_text('📷 Sekarang pilih cara masukkan produk:', reply_markup=prompt_input_menu())
+        await query.message.reply_text('📷 Terus hantar satu gambar produk di sini. Tiada menu pilihan tambahan diperlukan.')
     elif action == 'prompt_input:photo' and stage == 'prompt_input':
         context.user_data['stage'] = 'prompt_photo'
         await query.message.reply_text('📷 Hantar satu gambar produk. Maklumat tambahan boleh dimasukkan kemudian.')
