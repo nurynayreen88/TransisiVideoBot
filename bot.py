@@ -1598,9 +1598,9 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 return
     # Return only for actions handled by the first chain. Video workflow
     # callbacks must continue into the second chain.
-    if action in ('admin_pending', 'admin', 'storyboard', 'make', 'prompt') or action.startswith(
+    if action in ('admin_pending', 'admin', 'storyboard', 'make', 'prompt', 'prompt_categories') or action.startswith(
         ('admin_approve:', 'admin_reject:', 'prompt_type:', 'prompt_duration:',
-         'prompt_style:', 'prompt_details:', 'video_input:', 'prompt_input:', 'pcat:', 'ptpl:') or action == 'prompt_categories'
+         'prompt_style:', 'prompt_details:', 'video_input:', 'prompt_input:', 'pcat:', 'ptpl:')
     ):
         return
     if action.startswith('motion:') and context.user_data.get('stage') == 'prompt_motion':
