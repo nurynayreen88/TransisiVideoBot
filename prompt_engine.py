@@ -188,6 +188,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
                 "consistent throughout. Finish on a stable, clean hero frame."
             )
         return (
+            "PROMPT VIDEO — 10 SAAT\\n"
             "KLIPPO | UNIVERSAL PRODUCT VIDEO PROMPT | " + style_name + (" | BAHAGIAN " + str(part) + "/2" if part else "") + "\n"
             "OUTPUT: One cohesive vertical 9:16 product advertisement, EXACT DURATION: " + str(duration) + " seconds.\n\n"
             "PRODUCT NAME: " + product + "\n" + category_direction + "\n\n" + identity + "\n\n"
