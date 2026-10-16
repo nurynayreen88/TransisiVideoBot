@@ -1513,6 +1513,42 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                  InlineKeyboardButton('🎞️ 20 Saat', callback_data='prompt_duration:20')],
                 [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]
             ]))
+    elif action == 'prompt_categories':
+        context.user_data['stage'] = 'prompt_category'
+        await query.message.reply_text('📚 Pilih kategori produk:', reply_markup=prompt_category_menu())
+    elif action.startswith('pcat:') and stage in ('prompt_category', 'prompt_category_options'):
+        category_id = action.split(':', 1)[1]
+        if category_id not in CATEGORIES_BY_ID:
+            await query.message.reply_text('Kategori tidak ditemui. Sila pilih semula.', reply_markup=prompt_category_menu())
+        else:
+            context.user_data['prompt_category'] = category_id
+            context.user_data['stage'] = 'prompt_category_options'
+            await query.message.reply_text(
+                f"🎬 Prompt siap — {CATEGORIES_BY_ID[category_id].get('label', category_id)}. Pilih gaya:",
+                reply_markup=prompt_options_menu(category_id)
+            )
+    elif action.startswith('ptpl:') and stage == 'prompt_category_options':
+        prompt_id = action.split(':', 1)[1]
+        template = PROMPTS_BY_ID.get(prompt_id)
+        category_id = context.user_data.get('prompt_category', '')
+        category = CATEGORIES_BY_ID.get(category_id, {})
+        if not template or template.get('category') != category_id:
+            await query.message.reply_text('Prompt ini tidak ditemui dalam kategori tersebut. Sila pilih semula.', reply_markup=prompt_options_menu(category_id))
+        else:
+            prompt_text = inject_product_details(template.get('prompt', ''), context.user_data.get('prompt_library_details', ''))
+            prompt_text = 'PROMPT VIDEO — 10 SAAT\\n\\n' + prompt_text
+            buttons = [
+                [InlineKeyboardButton('✨ Buka Gemini', url='https://gemini.google.com/app')],
+                [InlineKeyboardButton('🎬 Prompt Lain Dalam Kategori', callback_data=f'pcat:{category_id}')],
+                [InlineKeyboardButton('🗂️ Tukar Kategori', callback_data='prompt_categories')],
+                [InlineKeyboardButton('🔄 Prompt Baharu', callback_data='prompt')],
+                [InlineKeyboardButton('🏠 Menu Utama', callback_data='home')],
+            ]
+            await query.message.reply_text(
+                prompt_text[:4000],
+                reply_markup=InlineKeyboardMarkup(buttons),
+                disable_web_page_preview=True
+            )
     elif action.startswith('prompt_duration:') and stage == 'prompt_duration':
         selected = action.split(':', 1)[1]
         if selected in ('10', '20'):
