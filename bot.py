@@ -2394,6 +2394,92 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 # Keep the existing premium video prompt and show it only after the user
                 # has used the image prompt, so the workflow is clearly image -> video.
                 context.user_data['prompt_video_ready'] = prompt
+                if mode_name == 'storyboard':
+                    # Storyboard mode must start with the storyboard itself, not an image-prompt step.
+                    duration = int(context.user_data.get('prompt_duration', 10))
+                    image_ids = context.user_data.get('prompt_reference_photos', [])
+                    if not image_ids:
+                        raise RuntimeError('Tiada gambar rujukan. Sila mulakan semula dan hantar gambar produk.')
+                    await progress_update(waiting, 25, 'Menyediakan gambar rujukan untuk storyboard...')
+                    images = []
+                    for file_id in image_ids[:4]:
+                        telegram_file = await context.bot.get_file(file_id)
+                        image_bytes = bytes(await telegram_file.download_as_bytearray())
+                        if image_bytes:
+                            images.append(image_bytes)
+                    if not images:
+                        raise RuntimeError('Gambar rujukan tidak dapat dimuat turun daripada Telegram.')
+                    language = context.user_data.get('prompt_language', 'Malay')
+                    language_label = {'Malay': 'Bahasa Melayu', 'English': 'English', 'none': 'Bahasa Melayu untuk penerangan; jangan cadangkan teks pada skrin'}.get(language, 'Bahasa Melayu')
+                    voiceover_mode = context.user_data.get('prompt_voiceover_mode', 'none')
+                    voiceover = context.user_data.get('prompt_voiceover_script', '').strip()
+                    if voiceover_mode == 'script' and voiceover:
+                        voiceover_instruction = 'Gunakan skrip dialog/voiceover pengguna ini tepat tanpa mengubahnya: ' + voiceover
+                    elif voiceover_mode == 'ai':
+                        voiceover_instruction = 'Cadangkan dialog/voiceover ringkas dan semula jadi dalam ' + language_label + ' hanya jika sesuai; muzik latar tidak boleh menenggelamkan suara.'
+                    else:
+                        voiceover_instruction = 'Dialog tidak wajib. Utamakan penceritaan visual; nyatakan “Tanpa dialog” jika dialog tidak diperlukan.'
+                    model_instruction = prompt_creative_settings(context.user_data)
+                    prompt_instruction = (
+                        'Anda ialah pengarah kreatif iklan produk. Analisis gambar rujukan yang dilampirkan dan hasilkan storyboard video produk yang boleh terus digunakan sebagai arahan penjana video AI. '
+                        'Tulis hasil dalam ' + language_label + '. Durasi tepat ' + str(duration) + ' saat, format menegak 9:16. '
+                        + ('Bina 4 babak berturutan dalam satu helaian storyboard.' if duration <= 10 else 'Bina 8 babak berturutan dalam dua helaian storyboard; babak 5–8 mesti bersambung daripada babak 1–4.')
+                        + ' Untuk setiap babak, nyatakan masa mula–akhir, aksi spesifik, framing dan gerakan kamera, ekspresi/pergerakan model jika ada, serta peralihan/kesinambungan. '
+                        'Kekalkan identiti produk tepat seperti gambar. Jangan mereka warna, logo, corak, ciri atau bahan yang tidak kelihatan. Jangan tambah teks pada skrin, sari kata, logo tambahan atau watermark. '
+                        + voiceover_instruction + '\n\nPILIHAN PENGGUNA:\n' + model_instruction
+                        + '\n\nFormat output: tajuk ringkas, konsep, kemudian senarai babak bernombor. Jangan hasilkan prompt video penuh dahulu.'
+                    )
+                    await progress_update(waiting, 40, 'Menjana storyboard...')
+                    storyboard = await generate_storyboard(images, prompt_instruction)
+                    if not storyboard:
+                        raise RuntimeError('Gemini tidak memulangkan storyboard.')
+                    context.user_data['stage'] = 'prompt_storyboard_ready'
+                    storyboard_actions = InlineKeyboardMarkup([
+                        [InlineKeyboardButton('➡️ Jana Prompt Video Klippo', callback_data='prompt_continue_video')],
+                        [InlineKeyboardButton('🔁 Jana Storyboard Baharu', callback_data='prompt_chatgpt_storyboard')],
+                        [InlineKeyboardButton('🏠 Menu Utama', callback_data='home')]
+                    ])
+                    scene_count = 4 if duration <= 10 else 8
+                    sheet_count = (scene_count + 3) // 4
+                    visual_error = None
+                    await progress_update(waiting, 65, 'Menjana helaian storyboard bergambar...')
+                    for sheet_number in range(1, sheet_count + 1):
+                        try:
+                            sheet_bytes = await asyncio.to_thread(
+                                generate_storyboard_sheet, images, storyboard, duration, sheet_number, language_label
+                            )
+                            sheet_file = BytesIO(sheet_bytes)
+                            sheet_file.name = f'KLIPPO_STORYBOARD_HELAIAN_{sheet_number}.png'
+                            await query.message.reply_photo(
+                                photo=sheet_file,
+                                caption=f'🎬 STORYBOARD BERGAMBAR — HELAIAN {sheet_number}/{sheet_count}\\n'
+                                        f'Video {duration} saat · Babak {min((sheet_number-1)*4+1, scene_count)}–{min(sheet_number*4, scene_count)}',
+                                reply_markup=storyboard_actions if sheet_number == sheet_count else None
+                            )
+                        except GeminiStoryboardImageError as exc:
+                            visual_error = str(exc)
+                            logging.warning('Visual storyboard sheet %s failed: %s', sheet_number, type(exc).__name__)
+                            break
+                        except Exception:
+                            visual_error = 'Helaian storyboard bergambar tidak dapat dijana kali ini.'
+                            logging.exception('Visual storyboard generation failed')
+                            break
+                    await query.message.reply_text(
+                        ('🎬 STORYBOARD BERGAMBAR SIAP' if not visual_error else '📝 STORYBOARD TEKS SIAP') +
+                        '\\n\\nStoryboard dijana terus berdasarkan gambar produk anda. Prompt video ialah pilihan seterusnya, bukan langkah wajib sebelum storyboard.',
+                        reply_markup=storyboard_actions
+                    )
+                    if len(storyboard) <= 3900:
+                        await query.message.reply_text(storyboard, reply_markup=storyboard_actions)
+                    else:
+                        storyboard_file = BytesIO(storyboard.encode('utf-8'))
+                        storyboard_file.name = 'KLIPPO_STORYBOARD.txt'
+                        await query.message.reply_document(document=storyboard_file, filename=storyboard_file.name,
+                                                           caption='Penerangan penuh babak storyboard.', reply_markup=storyboard_actions)
+                    if visual_error:
+                        await query.message.reply_text('⚠️ Helaian bergambar belum tersedia: ' + visual_error)
+                    await progress_update(waiting, 100, 'Storyboard siap.')
+                    return
                 if mode_name == 'normal':
                     context.user_data['stage'] = 'prompt_video_ready'
                     sections = prompt.split('=== KLIPPO PART 2 ===') if context.user_data.get('prompt_duration') == 20 else [prompt]
