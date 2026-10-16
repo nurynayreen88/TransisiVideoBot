@@ -243,7 +243,7 @@ async def photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data['prompt_reference_photo'] = photo_item.file_id
         context.user_data['stage'] = 'prompt_category'
         await update.message.reply_text(
-            '✅ Gambar produk diterima.\\n\\nLangkah 2/3 — Pilih kategori supaya Klippo memaparkan prompt yang direka khusus untuk produk tersebut:',
+            '✅ Gambar produk diterima.\n\nLangkah 2/3 — Pilih kategori supaya Klippo memaparkan prompt yang direka khusus untuk produk tersebut:',
             reply_markup=prompt_category_menu()
         )
         return
