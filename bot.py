@@ -236,7 +236,7 @@ def detect_bag_subtype(product_name: str) -> str:
         return 'wallet'
     if any(k in name for k in ('backpack', 'back pack', 'beg galas', 'beg sekolah', 'beg laptop', 'rucksack')):
         return 'backpack'
-    if any(k in name for k in ('sling bag', 'crossbody', 'cross-body', 'beg silang', 'beg sandang', 'shoulder sling')):
+    if any(k in name for k in ('sling bag', 'sling shoulder', 'shoulder sling', 'shoulder sling bag', 'crossbody', 'cross-body', 'beg silang', 'beg sandang')):
         return 'sling_bag'
     if any(k in name for k in ('handbag', 'hand bag', 'beg tangan', 'shoulder bag', 'tote bag', 'tote', 'top handle')):
         return 'handbag'
