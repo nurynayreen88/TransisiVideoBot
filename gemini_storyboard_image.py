@@ -76,8 +76,12 @@ def generate_storyboard_sheet(images: list[bytes], storyboard_text: str,
             "responseFormat": {"image": {"aspectRatio": "4:3", "imageSize": "1K"}},
         },
     }
-    model = os.environ.get("GEMINI_STORYBOARD_IMAGE_MODEL", "gemini-3.1-flash-image").strip()
-    if not model or not all(c.isalnum() or c in ".-_" for c in model):
+    model = os.environ.get("GEMINI_STORYBOARD_IMAGE_MODEL", "").strip()
+    if not model:
+        raise GeminiStoryboardImageError(
+            "Penjanaan helaian bergambar memerlukan model Gemini Image yang tiada dalam Free Tier. Belum diaktifkan untuk mengelakkan caj tanpa kebenaran. Sahkan dahulu jika mahu mengaktifkannya."
+        )
+    if not all(c.isalnum() or c in ".-_" for c in model):
         raise GeminiStoryboardImageError("Nama model imej Gemini tidak sah.")
     request = urllib.request.Request(
         "https://generativelanguage.googleapis.com/v1beta/models/" + model + ":generateContent",
