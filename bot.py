@@ -1941,6 +1941,44 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 [InlineKeyboardButton('🔁 Mula Semula / Tukar Pilihan', callback_data='prompt')],
                 [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
             ]))
+    elif action == 'prompt_continue_video':
+        prompt = context.user_data.get('prompt_video_ready', '')
+        if not prompt:
+            await query.message.reply_text('⚠️ Prompt video belum tersedia. Sila jana prompt semula.', reply_markup=InlineKeyboardMarkup([
+                [InlineKeyboardButton('🎬 Jana Prompt Semula', callback_data='prompt')],
+                [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]
+            ]))
+        else:
+            context.user_data['stage'] = 'prompt_video_ready'
+            sections = prompt.split('=== KLIPPO PART 2 ===') if context.user_data.get('prompt_duration') == 20 else [prompt]
+            video_actions = InlineKeyboardMarkup([
+                [InlineKeyboardButton('🤖 NexaBot', url='https://t.me/aigeneratornexa_bot?start=ref37141287'),
+                 InlineKeyboardButton('✨ Gemini', url='https://gemini.google.com/')],
+                [InlineKeyboardButton('🖼️ Buka ChatGPT', url='https://chatgpt.com/')],
+                [InlineKeyboardButton('✍️ Prompt Baharu', callback_data='prompt'),
+                 InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]
+            ])
+            await query.message.reply_text(
+                '🎬 LANGKAH 2 — PROMPT VIDEO\\n\\n'
+                '1. Muat naik imej yang dijana dalam Langkah 1 ke platform AI pilihan.\\n'
+                '2. Salin prompt video di bawah dan tampal pada platform tersebut.\\n'
+                '3. Untuk 20 saat, jana Bahagian 1 dahulu. Gunakan bingkai akhir Bahagian 1 sebagai rujukan Bahagian 2.\\n\\n'
+                'PENTING: Gunakan imej baharu yang dijana daripada PROMPT IMAGE sebagai MASTER reference.',
+                reply_markup=video_actions
+            )
+            for index, section in enumerate(sections, 1):
+                section = section.strip()
+                caption = ('BAHAGIAN ' + str(index) + '/2 — jana klip 10 saat secara berasingan. ' +
+                           ('Simpan bingkai akhir untuk sambungan Bahagian 2.' if index == 1 else
+                            'Gunakan bingkai akhir Bahagian 1 sebagai rujukan kesinambungan.')) if len(sections) == 2 else ''
+                if len(section) <= 3900:
+                    await query.message.reply_text(section, reply_markup=video_actions)
+                else:
+                    prompt_file = BytesIO(section.encode('utf-8'))
+                    prompt_file.name = f'KLIPPO_PROMPT_VIDEO_PART{index}.txt'
+                    await query.message.reply_document(document=prompt_file, filename=prompt_file.name,
+                                                       caption=caption or '📋 PROMPT VIDEO penuh — buka fail dan salin semua teks.',
+                                                       reply_markup=video_actions)
     elif action == 'prompt_generate:confirm' and context.user_data.get('stage') == 'prompt_confirm':
         motion = context.user_data.get('prompt_motion_choice', 'push')
         motions = {'orbit': 'A controlled 30-degree camera arc around the product, not a full 360-degree rotation; preserve the visible product geometry.', 'push': 'A slow forward dolly-in with gentle parallax; no object deformation.', 'side': 'A smooth left-to-right camera slide with stable product proportions.', 'static': 'A locked camera with subtle studio lighting changes only.'}
@@ -1968,33 +2006,58 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     product_type=context.user_data.get('prompt_product_type', 'other'),
                     storyboard_override=context.user_data.get('prompt_library_storyboard') or None
                 )
-                await progress_update(waiting, 70, 'Prompt siap disusun. Menghantar hasil...')
+                await progress_update(waiting, 70, 'Menyediakan PROMPT IMAGE dan PROMPT VIDEO...')
                 context.user_data['stage'] = 'prompt_done'
                 mode_name = context.user_data.get('prompt_mode', 'normal')
-                actions = InlineKeyboardMarkup([
-                    [InlineKeyboardButton('🤖 NexaBot', url='https://t.me/aigeneratornexa_bot?start=ref37141287'), InlineKeyboardButton('✨ Gemini', url='https://gemini.google.com/')],
-                    [InlineKeyboardButton('✍️ Prompt Baharu', callback_data='prompt'), InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]
+                # Keep the existing premium video prompt and show it only after the user
+                # has used the image prompt, so the workflow is clearly image -> video.
+                context.user_data['prompt_video_ready'] = prompt
+                product_name = context.user_data.get('prompt_product_name', '').strip() or 'product shown in the uploaded reference photo'
+                category_label = CATEGORIES_BY_ID.get(context.user_data.get('prompt_category', ''), {}).get('label', 'product')
+                image_prompt = (
+                    'PROMPT IMAGE — PREMIUM PRODUCT CAMPAIGN\\n\\n'
+                    'Use the uploaded product photograph as the sole MASTER product reference. '
+                    'Create one ultra-realistic premium commercial product photograph in vertical 9:16. '
+                    'The product is: ' + product_name + '. Category: ' + category_label + '.\\n\\n'
+                    'VISUAL DIRECTION: Create a believable, elegant lifestyle advertising scene suited to this product. '
+                    'If the product is clothing, show a realistic adult model wearing the exact item naturally in a suitable setting. '
+                    'If it is a bag, accessory, beauty item, gadget, food or home product, compose a premium scene that showcases the actual item clearly. '
+                    'Use soft natural or studio light, realistic shadows, refined composition, authentic textures, and a photographic—not CGI—finish. '
+                    'Keep the product prominent and leave enough clear space around it.\\n\\n'
+                    'PRODUCT LOCK: Preserve the exact product identity from the uploaded photo, including its visible shape, colour, print, pattern, cut, packaging, proportions, hardware and details. '
+                    'Do not redesign, recolour, replace, add or remove product features. Do not invent logos, labels, accessories, materials or claims. '
+                    'For clothing, keep the garment print, neckline, sleeves, fit and fabric appearance faithful to the reference. '
+                    'A model or environment may be added only to present the same product; do not let styling obscure it.\\n\\n'
+                    'OUTPUT: One cohesive, photorealistic vertical 9:16 image, premium editorial quality. '
+                    'No collage, split screen, poster layout, captions, promotional text, watermark or extra logos. '
+                    'Avoid distorted hands, unnatural faces, plastic skin, warped product geometry and artificial CGI appearance.'
+                )
+                context.user_data['prompt_image_ready'] = image_prompt
+                image_actions = InlineKeyboardMarkup([
+                    [InlineKeyboardButton('✨ ChatGPT Image', url='https://chatgpt.com/'),
+                     InlineKeyboardButton('🌟 Google Gemini', url='https://gemini.google.com/')],
+                    [InlineKeyboardButton('🎨 Microsoft Designer', url='https://designer.microsoft.com/')],
+                    [InlineKeyboardButton('➡️ Jana Prompt Video', callback_data='prompt_continue_video')],
+                    [InlineKeyboardButton('✍️ Prompt Baharu', callback_data='prompt'),
+                     InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]
                 ])
-                sections = prompt.split('=== KLIPPO PART 2 ===') if context.user_data.get('prompt_duration') == 20 else [prompt]
-                for index, section in enumerate(sections, 1):
-                    section = section.strip()
-                    caption = ('Bahagian ' + str(index) + '/2 — jana klip 10 saat ini secara berasingan. '
-                               + ('Gunakan bingkai akhir Bahagian 1 sebagai rujukan sambungan.' if index == 2 else
-                                  'Simpan bingkai terakhir untuk sambungan Bahagian 2.')) if len(sections) == 2 else ''
-                    if len(section) <= 3900:
-                        # Keep the prompt message itself clean and copy-ready. The connection
-                        # instructions are already embedded in the two generated 10-second prompts.
-                        await query.message.reply_text(section, reply_markup=actions)
-                    else:
-                        prompt_file = BytesIO(section.encode('utf-8'))
-                        prompt_file.name = f'KLIPPO_prompt_{mode_name}_part{index}.txt'
-                        await query.message.reply_document(
-                            document=prompt_file,
-                            filename=prompt_file.name,
-                            caption=caption or '📋 Prompt penuh dalam satu fail: buka → Select All → Copy.',
-                            reply_markup=actions
-                        )
-                await progress_update(waiting, 100, 'Prompt berjaya dihantar.')
+                await query.message.reply_text(
+                    '🖼️ LANGKAH 1 — PROMPT IMAGE\\n\\n'
+                    '1. Salin prompt di bawah.\\n'
+                    '2. Buka salah satu laman AI melalui butang.\\n'
+                    '3. Muat naik gambar produk asal dan tampal PROMPT IMAGE.\\n'
+                    '4. Jana imej, kemudian simpan imej yang terhasil.\\n\\n'
+                    'Selepas imej siap, tekan “Jana Prompt Video” untuk mendapatkan prompt video yang menggunakan imej baharu itu sebagai rujukan.',
+                    reply_markup=image_actions
+                )
+                if len(image_prompt) <= 3900:
+                    await query.message.reply_text(image_prompt)
+                else:
+                    image_file = BytesIO(image_prompt.encode('utf-8'))
+                    image_file.name = 'KLIPPO_PROMPT_IMAGE.txt'
+                    await query.message.reply_document(document=image_file, filename=image_file.name,
+                                                       caption='📋 PROMPT IMAGE penuh — buka fail dan salin semua teks.')
+                await progress_update(waiting, 100, 'PROMPT IMAGE siap. Seterusnya jana PROMPT VIDEO.')
             except Exception:
                 logging.exception('Klippo prompt generation failed')
                 await query.message.reply_text('❌ Prompt tidak berjaya dijana. Sila tekan Jana Prompt sekali lagi. Jika masalah berulang, maklumkan admin Klippo.')
