@@ -86,7 +86,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
         "No invented features, extra accessories, duplicated products, fabricated logos or labels, random props that imply included items, "
         "floating geometry, distorted edges, flicker, jitter, abrupt exposure shifts, plastic-looking surfaces or unnatural hands. "
         "Do not add subtitles, UI, watermarks or promotional wording not explicitly requested. "
-        "Do not claim to reproduce unseen or verified details because no reference image is provided."
+        "Do not invent unseen angles or claim features that are not visible in the reference image(s)."
     )
     if mode == "storyboard":
         style_key, style_name, style_template = resolve(style)
@@ -116,9 +116,9 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
         if doodle:
             if part == 2:
                 rules = (
-                    "SECOND CLIP 10s: 0-2s resume from the exact final full-product framing of Part 1; "
-                    "2-6s progressively draw a thin white dashed contour just OUTSIDE the actual product silhouette, "
-                    "following its visible left, top, right and bottom edges; hold completed outline at least 2 seconds. "
+                    "SECOND CLIP 10s, five 2-second panels: 0-2s resume from the exact final full-product framing of Part 1; "
+                    "2-4s begin drawing a thin white dashed contour just OUTSIDE the actual product silhouette; "
+                    "following only visible product edges; 4-6s complete and hold the contour. "
                     "6-8s add one small white dotted arrow or sparkle beside a genuinely visible detail; "
                     "8-10s clean full-product hero packshot, gracefully fade the doodle. Do NOT repeat the opening hook. "
                 )
@@ -173,7 +173,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
                 ]
             curated_direction = (
                 "DIRECTOR'S CURATED PREMIUM STORYBOARD: Use this selected GitHub library storyboard as the primary shot plan. "
-                "Exactly four timed beats. Preserve the same product identity, packaging, color, scale and coherent set. "
+                "Expand the four selected creative beats into exactly five connected panels of 2 seconds each; distribute the selected beats across the panels and add a reference-safe opening or closing panel where needed. Preserve the same product identity, packaging, color, scale and coherent set. "
                 "NO ON-SCREEN TEXT, captions, added logos, watermarks, dialogue or voice-over unless explicitly requested.\n\n"
                 + "\n\n".join(
                     str(item.get("time", "")) + " | " + str(item.get("shot", "")) + "\n"
@@ -280,7 +280,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
     return (
         "KLIPPO | PROFESSIONAL IMAGE-TO-VIDEO PRODUCTION PROMPT" + (" | BAHAGIAN " + str(part) + "/2" if part else "") + "\n"
         "OUTPUT: " + str(duration) + " seconds; portrait 9:16; high-quality realistic product commercial; "
-        "one coherent deliverable. ON-SCREEN TEXT: Only show a product name or exact wording if it is explicitly supplied in Optional user details; preserve spelling exactly, use a small elegant pop-up around 3–5 seconds, keep it away from the product, then fade it out. If no exact wording is supplied, show no text.\n\n"
+        "one coherent deliverable. ON-SCREEN TEXT: Follow the KLIPPO GUIDED CREATIVE SETTINGS language choice. If the language is none, show no text. Otherwise, use at most the exact product name supplied by the user unless exact wording is provided; do not invent marketing claims or promotional copy. Preserve spelling, keep text brief and legible, and place it away from the product.\n\n"
         "PRODUCT: " + product + "\n" + category_direction + "\n\n" + identity + "\n\n" + art + "\n\n"
         + direction + "\n\n" + negative + "\n\n"
         "FINAL QUALITY CHECK: Consistent identity in every frame, natural physics, clean edges, "
