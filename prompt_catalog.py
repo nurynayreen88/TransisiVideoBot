@@ -122,13 +122,13 @@ def product_hook(description):
         db.commit()
         rows = db.execute("SELECT keywords, hooks FROM storyboard_hooks WHERE active=1 ORDER BY rowid").fetchall()
     description = description or ""
-    name_match = re.search(r"(?im)^NAMA_PRODUK:\\s*(.+)$", description)
+    name_match = re.search(r"(?im)^NAMA_PRODUK:\s*(.+)$", description)
     if name_match:
         name = name_match.group(1).strip()
         if name and name.upper() not in ("TIDAK PASTI", "TIADA", "TIDAK DAPAT DIPASTIKAN", "UNKNOWN", "NONE"):
             # Exact observed printed name: never generate a speculative product claim.
             return "KENALI " + name
-    category_match = re.search(r"(?im)^KATEGORI:\\s*(.+)$", description)
+    category_match = re.search(r"(?im)^KATEGORI:\s*(.+)$", description)
     if not category_match:
         return None
     category = category_match.group(1).strip()
