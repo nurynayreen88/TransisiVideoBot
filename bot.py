@@ -2339,14 +2339,21 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 [InlineKeyboardButton('✍️ Prompt Baharu', callback_data='prompt'),
                  InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]
             ])
-            await query.message.reply_text(
-                '🎬 LANGKAH 2 — PROMPT VIDEO\\n\\n'
-                '1. Muat naik imej yang dijana dalam Langkah 1 ke platform AI pilihan.\\n'
-                '2. Salin prompt video di bawah dan tampal pada platform tersebut.\\n'
-                '3. Untuk 20 saat, jana Bahagian 1 dahulu. Gunakan bingkai akhir Bahagian 1 sebagai rujukan Bahagian 2.\\n\\n'
-                'PENTING: Gunakan imej baharu yang dijana daripada PROMPT IMAGE sebagai MASTER reference.',
-                reply_markup=video_actions
-            )
+            if context.user_data.get('prompt_mode') == 'storyboard':
+                video_intro = (
+                    '🎬 PROMPT VIDEO — LANGKAH PILIHAN\\n\\n'
+                    'Storyboard telah dijana dahulu. Muat naik gambar produk asal yang sama sebagai rujukan, kemudian salin prompt video di bawah.\\n'
+                    'Untuk 20 saat, jana Bahagian 1 dahulu dan gunakan bingkai akhir Bahagian 1 sebagai rujukan Bahagian 2.'
+                )
+            else:
+                video_intro = (
+                    '🎬 LANGKAH 2 — PROMPT VIDEO\\n\\n'
+                    '1. Muat naik imej yang dijana dalam Langkah 1 ke platform AI pilihan.\\n'
+                    '2. Salin prompt video di bawah dan tampal pada platform tersebut.\\n'
+                    '3. Untuk 20 saat, jana Bahagian 1 dahulu. Gunakan bingkai akhir Bahagian 1 sebagai rujukan Bahagian 2.\\n\\n'
+                    'PENTING: Gunakan imej baharu yang dijana daripada PROMPT IMAGE sebagai MASTER reference.'
+                )
+            await query.message.reply_text(video_intro, reply_markup=video_actions)
             for index, section in enumerate(sections, 1):
                 section = section.strip()
                 caption = ('BAHAGIAN ' + str(index) + '/2 — jana klip 10 saat secara berasingan. ' +
