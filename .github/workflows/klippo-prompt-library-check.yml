@@ -366,6 +366,6 @@ jobs:
           print(
               f"Validated {len(categories)} categories, {len(prompts)} prompt-library entries, "
               f"{generated_cases} generated library cases, flow markers, and White Doodle v5 "
-              "evidence/continuity behavior."
+              "evidence/continuity and opt-in text behavior."
           )
           PY
