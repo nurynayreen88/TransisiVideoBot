@@ -238,23 +238,24 @@ async def photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if context.user_data.get('busy'):
         await update.message.reply_text('Video sedang diproses. Sila tunggu.')
         return
-    if context.user_data.get('stage') != 'photos':
-        await update.message.reply_text('Tekan 🎬 Jana Video dahulu.', reply_markup=main_menu())
-        return
     if context.user_data.get('stage') == 'prompt_upload':
         photo_item = update.message.photo[-1] if update.message.photo else update.message.document
         context.user_data['prompt_reference_photo'] = photo_item.file_id
         context.user_data['stage'] = 'prompt_category'
         await update.message.reply_text(
-            '✅ Gambar produk diterima.\n\nLangkah 2/3 — Pilih kategori supaya Klippo memaparkan prompt yang direka khusus untuk produk tersebut:',
+            '✅ Gambar produk diterima.\\n\\nLangkah 2/3 — Pilih kategori supaya Klippo memaparkan prompt yang direka khusus untuk produk tersebut:',
             reply_markup=prompt_category_menu()
         )
+        return
+    if context.user_data.get('stage') != 'photos':
+        await update.message.reply_text('Tekan 🎬 Jana Video dahulu.', reply_markup=main_menu())
         return
     ids = context.user_data.setdefault('photos', [])
     if len(ids) >= MAX_IMAGES:
         await update.message.reply_text(f'Maksimum {MAX_IMAGES} gambar.', reply_markup=photos_menu())
         return
-    ids.append(update.message.photo[-1].file_id)
+    photo_item = update.message.photo[-1] if update.message.photo else update.message.document
+    ids.append(photo_item.file_id)
     await update.message.reply_text(f'✅ {len(ids)}/{MAX_IMAGES} gambar diterima. Hantar lagi atau tekan Selesai Hantar Gambar.', reply_markup=photos_menu())
 
 
