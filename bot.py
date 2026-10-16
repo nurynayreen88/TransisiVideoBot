@@ -1776,7 +1776,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                                + ('Gunakan bingkai akhir Bahagian 1 sebagai rujukan sambungan.' if index == 2 else
                                   'Simpan bingkai terakhir untuk sambungan Bahagian 2.')) if len(sections) == 2 else ''
                     if len(section) <= 3900:
-                        await query.message.reply_text((caption + '\\n\\n' if caption else '') + section, reply_markup=actions)
+                        await query.message.reply_text((caption + chr(10) * 2 if caption else '') + section, reply_markup=actions)
                     else:
                         prompt_file = BytesIO(section.encode('utf-8'))
                         prompt_file.name = f'KLIPPO_prompt_{mode_name}_part{index}.txt'
@@ -2021,7 +2021,7 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
             return
         context.user_data['prompt_product_name'] = value[:240]
         context.user_data['stage'] = 'prompt_photo'
-        await update.message.reply_text('✅ Nama produk disimpan: ' + value[:240] + '\\n\\n📷 Sekarang hantar satu gambar produk. Gambar ini akan menjadi rujukan utama untuk rupa produk.')
+        await update.message.reply_text('✅ Nama produk disimpan: ' + value[:240] + chr(10) * 2 + '📷 Sekarang hantar satu gambar produk. Gambar ini akan menjadi rujukan utama untuk rupa produk.')
         return
     shortcuts = {
         '🎬 Jana Video Affiliate': 'make',
