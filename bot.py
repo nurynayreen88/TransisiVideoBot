@@ -1958,6 +1958,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 f'⏱️ Tempoh: {context.user_data.get("prompt_duration", 10)} saat',
                 f'🎨 Gaya visual: {style_name}',
                 f'💡 Idea video: {concept}',
+                f'📝 Mod teks: {"Dengan teks" if context.user_data.get("prompt_text_mode") == "with" else "Tanpa teks"}',
+                *([f'✍️ Teks tepat: {context.user_data.get("prompt_on_screen_text", "")}'] if context.user_data.get("prompt_text_mode") == "with" else []),
                 f'🖼️ Latar: {scene_labels.get(scene, scene)}',
                 f'🎥 Gerakan kamera: {motion_labels[motion]}',
                 '',
@@ -2375,7 +2377,10 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if not value.strip():
             await update.message.reply_text('⚠️ Sila masukkan teks yang mahu dipaparkan, atau pilih Tanpa Teks untuk video tanpa tulisan.')
             return
-        context.user_data['prompt_on_screen_text'] = value.strip()[:240]
+        if len(value.strip()) > 240:
+            await update.message.reply_text('⚠️ Teks terlalu panjang. Had maksimum ialah 240 aksara supaya AI lebih mudah memaparkannya dengan jelas. Sila pendekkan teks tanpa mengubah maksudnya.')
+            return
+        context.user_data['prompt_on_screen_text'] = value.strip()
         context.user_data['stage'] = 'prompt_text_info'
         await update.message.reply_text('📝 Teks disimpan tepat seperti yang diberikan. Ada maklumat produk tambahan untuk membantu AI memahami konteks? Jika tiada, tekan Langkau.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('➡️ Langkau maklumat tambahan', callback_data='prompt_text_info:skip')], [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
         return
