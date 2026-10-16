@@ -67,10 +67,11 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
     }
     category_direction = product_type_directions.get(product_type, product_type_directions['other'])
     identity = (
-        "PRODUCT IDENTITY RULE: This prompt is generated from the product name and category without a reference image. "
-        "Keep the named product as the clear hero and use a plausible, generic presentation. Do not invent exact brand marks, "
-        "model numbers, materials, technical specifications, included accessories, product claims, compartments or hidden features. "
-        "Where the name alone does not establish a detail, leave it neutral rather than guessing."
+        "PRODUCT IDENTITY / MASTER REFERENCE RULE: Use the uploaded image as the MASTER visual reference and sole source of truth for visible product identity. "
+        "Preserve exact shape, proportions, color, pattern, packaging, visible labels or branding, and every visible component. "
+        "Treat the product name, category and written details as supplementary context only; they must never override the image. "
+        "Do not invent unseen sides, materials, compartments, accessories, functions, technical specifications or claims. "
+        "If a detail is not visible or supplied, keep it neutral rather than guessing."
     )
     art = (
         f"ART DIRECTION: Premium commercial product cinematography. Environment: {scene}. "
@@ -85,7 +86,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
         "No invented features, extra accessories, duplicated products, fabricated logos or labels, random props that imply included items, "
         "floating geometry, distorted edges, flicker, jitter, abrupt exposure shifts, plastic-looking surfaces or unnatural hands. "
         "Do not add subtitles, UI, watermarks or promotional wording not explicitly requested. "
-        "Do not claim to reproduce unseen or verified details because no reference image is provided."
+        "Do not fabricate unseen sides or details; if a surface is not visible in the reference, keep it hidden or neutral."
     )
     if mode == "storyboard":
         style_key, style_name, style_template = resolve(style)
@@ -93,18 +94,15 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
         hook = product_hook(product)
         evidence_rules = (
             "PRODUCT NAME RULE: Preserve the user-provided product name and spelling. "
-            "The name is the only product evidence available; do not claim to have inspected a photo or packaging. "
-            "Use only features explicitly stated in the name or optional user text. "
+            "The uploaded image is the visual evidence for visible product appearance; do not claim details beyond what is shown or supplied in writing. "
+            "Use visible features from the reference image and treat written details as supplementary context. "
             "Do not invent materials, dimensions, compartments, accessories, product benefits, model numbers or specifications. "
             "If a detail is unknown, keep it neutral and omit the claim."
         )
 
         hook_direction = (
-            "ON-SCREEN HOOK: Display EXACTLY '" + hook + "' at the top safe area in the opening 0-2s. "
-            "This is a neutral category/name hook only, not a product benefit claim. "
-            "Keep the product unobstructed and do not add any other unverified promotional copy. "
-        ) if hook else (
-            "NO ON-SCREEN HOOK TEXT: Begin with a clean product reveal and no headline. "
+            "NO ON-SCREEN HOOK TEXT: Do not render the product name, headline, captions, labels, logos or watermark. "
+            "Use the product name only to identify the subject, never as visible text. "
             "Never guess a category, benefit, price, popularity or product name."
         )
         if storyboard_override:
@@ -123,17 +121,16 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
                 )
             else:
                 rules = (
-                    "FIRST CLIP 10s: 0-2s close-up with verified product-name/category hook IF AVAILABLE and white sparkles; "
-                    "2-5s full product reveal with up to TWO short factual feature labels only when grounded in visible "
-                    "or legible packaging evidence, with tiny white icons and curved arrows; "
-                    "5-8s detail shot with small dotted flourish; "
+                    "FIRST CLIP 10s: 0-2s clean visual hook with white sparkles and NO WORDS; "
+                    "2-5s full product reveal with tiny white icons and curved arrows only, never labels, letters or numbers; "
+                    "5-8s detail shot with a small dotted flourish; "
                     "8-10s settle into a steady full-product composition and HOLD the final frame for a seamless Part 2 handoff. "
                     "Do not perform the main surrounding contour yet. "
                 )
             rules += (
                 "Warm authentic UGC product-ad look, thin white handwritten 2D graphics tracked to the product. "
-                "No phone bezel, no invented product claims, no branding obstruction. Only verified hook (if available) and verified "
-                "short feature labels may appear; reserve space for editing overlays if text rendering is unreliable. "
+                "No phone bezel, no invented product claims, no added words, labels, logos or branding. "
+                "Use only flat white doodle graphics such as arrows, sparkles and a dashed contour. "
                 "Prioritize the visible surrounding product contour over camera movement."
             )
         elif part == 2:
@@ -285,7 +282,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
     return (
         "KLIPPO | PROFESSIONAL IMAGE-TO-VIDEO PRODUCTION PROMPT" + (" | BAHAGIAN " + str(part) + "/2" if part else "") + "\n"
         "OUTPUT: " + str(duration) + " seconds; portrait 9:16; high-quality realistic product commercial; "
-        "one coherent deliverable. ON-SCREEN TEXT: Only show a product name or exact wording if it is explicitly supplied in Optional user details; preserve spelling exactly, use a small elegant pop-up around 3–5 seconds, keep it away from the product, then fade it out. If no exact wording is supplied, show no text.\n\n"
+        "one coherent deliverable. NO ON-SCREEN TEXT: Do not render product names, captions, labels, logos, UI or watermarks. Preserve only branding already visible in the reference image; never add written content.\n\n"
         "PRODUCT: " + product + "\n" + category_direction + "\n\n" + identity + "\n\n" + art + "\n\n"
         + direction + "\n\n" + negative + "\n\n"
         "FINAL QUALITY CHECK: Consistent identity in every frame, natural physics, clean edges, "
