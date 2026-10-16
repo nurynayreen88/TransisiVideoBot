@@ -38,7 +38,7 @@ def _text_direction(text_mode='without', on_screen_text='', part=0):
     exact_text = (on_screen_text or '').strip()
     if text_mode != 'with' or not exact_text:
         return (
-            "NO ON-SCREEN TEXT: STRICTLY NONE. Do not generate words, captions, headlines,
+            "NO ON-SCREEN TEXT: STRICTLY NONE. Do not generate words, captions, headlines, "
             "subtitles, labels, call-to-action text or decorative lettering. Preserve only "
             "branding already visible in the reference image."
         )
