@@ -282,7 +282,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
     return (
         "KLIPPO | PROFESSIONAL IMAGE-TO-VIDEO PRODUCTION PROMPT" + (" | BAHAGIAN " + str(part) + "/2" if part else "") + "\n"
         "OUTPUT: " + str(duration) + " seconds; portrait 9:16; high-quality realistic product commercial; "
-        "one coherent deliverable. NO ON-SCREEN TEXT: Do not render product names, captions, labels, logos, UI or watermarks. Preserve only branding already visible in the reference image; never add written content.\\n\\n"
+        "one coherent deliverable. NO ON-SCREEN TEXT: Do not render product names, captions, labels, logos, UI or watermarks. Preserve only branding already visible in the reference image; never add written content.\n\n"
         "PRODUCT: " + product + "\n" + category_direction + "\n\n" + identity + "\n\n" + art + "\n\n"
         + direction + "\n\n" + negative + "\n\n"
         "FINAL QUALITY CHECK: Consistent identity in every frame, natural physics, clean edges, "
