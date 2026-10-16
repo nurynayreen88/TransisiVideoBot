@@ -244,6 +244,43 @@ jobs:
                   "Verified product name should create the exact conservative hook"
               )
 
+              # Exercise the normal handbag style with a concrete affiliate-product example.
+              # This checks the generated prompt itself, not merely the catalog entry.
+              handbag_prompt = build_prompt(
+                  "storyboard",
+                  "NAMA_PRODUK: Beg VELLA",
+                  "clean premium studio background",
+                  "A slow forward dolly-in with gentle parallax; no object deformation.",
+                  "handbag_showcase",
+                  10,
+                  product_type="bag",
+              )
+              for required in (
+                  "Beg VELLA",
+                  "PRODUCT CATEGORY DIRECTION: Treat this as a bag",
+                  "Keep handles and straps plausible",
+                  "Do not assume exact materials, compartments, hardware or accessories",
+                  "No invented features",
+                  "vertical 9:16",
+              ):
+                  assert required.casefold() in handbag_prompt.casefold(), (
+                      f"Handbag prompt missing identity/safety direction: {required}"
+                  )
+
+              handbag_pair = build_prompt(
+                  "storyboard",
+                  "NAMA_PRODUK: Beg VELLA",
+                  "clean premium studio background",
+                  "A slow forward dolly-in with gentle parallax; no object deformation.",
+                  "handbag_showcase",
+                  20,
+                  product_type="bag",
+              )
+              assert handbag_pair.count("PROMPT VIDEO — 10 SAAT") == 2
+              assert "=== KLIPPO PART 2 ===" in handbag_pair
+              assert "SECOND CLIP 10s" in handbag_pair
+              assert "Do NOT repeat the opening hook" in handbag_pair
+
               paired = build_prompt(
                   "storyboard", uncertain, "clean premium studio background",
                   "push", "white_doodle", 20
