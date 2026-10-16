@@ -207,6 +207,26 @@ jobs:
                   )
               assert "ON-SCREEN HOOK: Display EXACTLY" not in curated_prompt
 
+              # Exercise every curated storyboard through the actual two-part 20s builder.
+              for prompt_entry in prompts:
+                  paired_entry = build_prompt(
+                      "storyboard",
+                      "NAMA_PRODUK: Example " + prompt_entry["category"],
+                      "clean premium studio background",
+                      "push",
+                      "cinematic",
+                      20,
+                      product_type="other",
+                      storyboard_override=prompt_entry["storyboard"],
+                  )
+                  assert paired_entry.count("PROMPT VIDEO — 10 SAAT") == 2, prompt_entry["id"]
+                  assert "=== KLIPPO PART 2 ===" in paired_entry, prompt_entry["id"]
+                  assert "CONTINUITY BRIDGE" in paired_entry, prompt_entry["id"]
+                  assert "CONTINUATION ACTION" in paired_entry, prompt_entry["id"]
+                  assert "NO ON-SCREEN TEXT" in paired_entry, prompt_entry["id"]
+                  assert "MASTER visual reference" in paired_entry, prompt_entry["id"]
+                  assert "ON-SCREEN HOOK: Display EXACTLY" not in paired_entry, prompt_entry["id"]
+
               paired_curated = build_prompt(
                   "storyboard",
                   "NAMA_PRODUK: Example beauty product",
