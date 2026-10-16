@@ -1704,7 +1704,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # callbacks must continue into the second chain.
     if action in ('admin_pending', 'admin', 'storyboard', 'make', 'prompt', 'prompt_categories') or action.startswith(
         ('admin_approve:', 'admin_reject:', 'prompt_type:', 'prompt_product_type:', 'prompt_duration:',
-         'prompt_style:', 'prompt_idea:', 'prompt_details:', 'prompt_generate:', 'video_input:', 'prompt_input:', 'pcat:', 'ptpl:')
+         'prompt_style:', 'prompt_idea:', 'prompt_details:', 'video_input:', 'prompt_input:', 'pcat:', 'ptpl:')
     ):
         return
     if action.startswith('motion:') and context.user_data.get('stage') == 'prompt_motion':
@@ -1785,6 +1785,9 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                             reply_markup=actions
                         )
                 await progress_update(waiting, 100, 'Prompt berjaya dihantar.')
+            except Exception:
+                logging.exception('Klippo prompt generation failed')
+                await query.message.reply_text('❌ Prompt tidak berjaya dijana. Sila tekan Jana Prompt sekali lagi. Jika masalah berulang, maklumkan admin Klippo.')
             finally:
                 try:
                     await waiting.delete()
