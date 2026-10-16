@@ -101,6 +101,8 @@ jobs:
               "PROMPT_LIBRARY_PATH",
               "prompt_category_menu()",
               "prompt_options_menu(category_id)",
+              "context.user_data['prompt_library_storyboard'] = template.get('storyboard', [])",
+              "storyboard_override=context.user_data.get('prompt_library_storyboard') or None",
               "prompt_categories|pcat:[a-z0-9_]+|ptpl:[a-z0-9_]+",
             "async def handle_image_or_receipt_document(",
             "filters.Document.IMAGE | filters.Document.MimeType('application/pdf'), handle_image_or_receipt_document",
@@ -149,6 +151,42 @@ jobs:
               os.environ["KLIPPO_PROMPT_DB"] = str(Path(tmp) / "prompt_catalog.sqlite3")
               from prompt_catalog import choices, resolve, DB_PATH
               from prompt_engine import build_prompt
+
+              # Verify the selected GitHub storyboard is used by the actual final prompt.
+              curated = next(item for item in prompts if item.get("storyboard"))
+              curated_prompt = build_prompt(
+                  "storyboard",
+                  "NAMA_PRODUK: Example beauty product",
+                  "premium clean studio",
+                  "push",
+                  "cinematic",
+                  10,
+                  "Test curated storyboard",
+                  product_type="beauty",
+                  storyboard_override=curated["storyboard"],
+              )
+              assert "DIRECTOR'S CURATED PREMIUM STORYBOARD" in curated_prompt
+              assert "NO ON-SCREEN TEXT" in curated_prompt
+              for shot in curated["storyboard"]:
+                  assert shot["direction"] in curated_prompt, (
+                      f"Selected storyboard shot was not used: {curated['id']} / {shot['time']}"
+                  )
+              assert "ON-SCREEN HOOK: Display EXACTLY" not in curated_prompt
+
+              paired_curated = build_prompt(
+                  "storyboard",
+                  "NAMA_PRODUK: Example beauty product",
+                  "premium clean studio",
+                  "push",
+                  "cinematic",
+                  20,
+                  "Test curated storyboard",
+                  product_type="beauty",
+                  storyboard_override=curated["storyboard"],
+              )
+              assert "=== KLIPPO PART 2 ===" in paired_curated
+              assert "CONTINUITY BRIDGE" in paired_curated
+              assert "Do not repeat the opening hook" in paired_curated
 
               assert ("white_doodle", "✏️ White Doodle") in choices()
               style_key, style_name, style_template = resolve("white_doodle")
