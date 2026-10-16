@@ -1578,8 +1578,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif action.startswith('prompt_type:') and stage == 'prompt_type':
         selected = action.split(':', 1)[1]
         if selected == 'library':
-            context.user_data['stage'] = 'prompt_upload'
-            await query.message.reply_text('📷 Hantar satu gambar produk. Gambar ini menjadi rujukan utama; selepas itu tampal nama produk atau maklumat produk daripada Shopee (nama sahaja pun memadai).')
+            context.user_data['stage'] = 'prompt_library_details'
+            await query.message.reply_text('🛍️ Tampal nama produk daripada Shopee. Gambar tidak diperlukan. Klippo akan mengesan jenis produk daripada nama, contohnya beg tangan, sling bag, beg galas atau dompet.')
         elif selected in ('normal', 'storyboard', 'doodle'):
             context.user_data['prompt_mode'] = 'storyboard' if selected == 'doodle' else selected
             context.user_data['stage'] = 'prompt_duration'
@@ -2013,16 +2013,33 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if stage == 'prompt_library_details':
         details = '' if value in ('-', '—', 'tiada', 'Tiada') else value
         context.user_data['prompt_library_details'] = details[:1200]
+        if details:
+            context.user_data['prompt_product_name'] = details[:240]
+            lower_name = details.casefold()
+            if any(k in lower_name for k in ('wallet', 'dompet', 'card holder', 'cardholder', 'coin purse')):
+                category_id = 'wallets'
+            elif any(k in lower_name for k in ('bag', 'beg', 'handbag', 'tote', 'sling', 'crossbody', 'backpack', 'purse')):
+                category_id = 'bags'
+            else:
+                category_id = ''
+            context.user_data['prompt_detected_category'] = category_id
+        else:
+            context.user_data['prompt_detected_category'] = ''
         context.user_data['stage'] = 'prompt_category'
-        await update.message.reply_text('📚 Maklumat diterima. Pilih kategori produk untuk melihat prompt siap:', reply_markup=prompt_category_menu())
+        await update.message.reply_text('📚 Nama produk diterima. Klippo akan gunakan nama untuk mengesan kategori. Pilih koleksi prompt:', reply_markup=prompt_category_menu())
         return
     if stage == 'prompt_product_name':
         if len(value) < 2 or value.lower().startswith(('http://', 'https://')):
             await update.message.reply_text('⚠️ Masukkan nama produk sahaja. Buka Shopee, copy nama produk dan paste di sini; pautan tidak diperlukan.')
             return
         context.user_data['prompt_product_name'] = value[:240]
-        context.user_data['stage'] = 'prompt_photo'
-        await update.message.reply_text('✅ Nama produk disimpan: ' + value[:240] + chr(10) * 2 + '📷 Sekarang hantar satu gambar produk. Gambar ini akan menjadi rujukan utama untuk rupa produk.')
+        product_lower = value.casefold()
+        bag_subtype = ('wallet' if any(k in product_lower for k in ('wallet', 'dompet', 'card holder', 'cardholder', 'coin purse', 'purse kecil')) else 'backpack' if any(k in product_lower for k in ('backpack', 'beg galas', 'beg sekolah', 'beg laptop')) else 'sling_bag' if any(k in product_lower for k in ('sling bag', 'crossbody', 'cross-body', 'beg silang', 'beg sandang')) else 'handbag' if any(k in product_lower for k in ('handbag', 'hand bag', 'beg tangan', 'shoulder bag', 'tote bag', 'tote')) else '')
+        context.user_data['prompt_bag_subtype'] = bag_subtype
+        if bag_subtype:
+            context.user_data['prompt_concept'] = (context.user_data.get('prompt_concept', '') + ' | Product-name category detection: ' + bag_subtype.replace('_', ' ') + '. Choose a visual presentation suited to this subtype; do not assume unmentioned features.').strip(' |')
+        context.user_data['stage'] = 'prompt_scene'
+        await update.message.reply_text('✅ Nama produk disimpan: ' + value[:240] + chr(10) * 2 + '📌 Gambar tidak diperlukan. Klippo mengesan jenis produk melalui nama dan akan memilih arahan visual yang sesuai. Pilih latar video:', reply_markup=prompt_scene_menu())
         return
     shortcuts = {
         '🎬 Jana Video Affiliate': 'make',
