@@ -3,7 +3,7 @@ name: Klippo prompt library checks
 on:
   push:
     branches:
-      - staging/klippo-library-main-port
+      - "staging/**"
   pull_request:
     branches:
       - main
@@ -25,7 +25,7 @@ jobs:
         with:
           python-version: "3.11"
       - name: Check Python syntax
-        run: python -m py_compile bot.py
+        run: python -m py_compile bot.py prompt_catalog.py prompt_engine.py
       - name: Validate prompt library structure
         run: |
           python - <<'PY'
