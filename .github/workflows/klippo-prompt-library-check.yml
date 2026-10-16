@@ -155,11 +155,7 @@ jobs:
               assert "HOLD the final frame" in first
               assert "Never guess a category, benefit, price, popularity or product name." in first
 
-              verified = (
-                  "NAMA_PRODUK: Beg VELLA\\n"
-                  "KATEGORI: beg\\n"
-                  "CIRI_VISUAL: Bentuk beg dan tali bahu jelas kelihatan"
-              )
+              verified = "NAMA_PRODUK: Beg VELLA"
               verified_prompt = build_prompt(
                   "storyboard", verified, "clean premium studio background",
                   "push", "white_doodle", 10
