@@ -101,11 +101,8 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
         )
 
         hook_direction = (
-            "ON-SCREEN HOOK: Display EXACTLY '" + hook + "' at the top safe area in the opening 0-2s. "
-            "This is a neutral category/name hook only, not a product benefit claim. "
-            "Keep the product unobstructed and do not add any other unverified promotional copy. "
-        ) if hook else (
-            "NO ON-SCREEN HOOK TEXT: Begin with a clean product reveal and no headline. "
+            "NO ON-SCREEN HOOK TEXT: Do not render the product name, headline, captions, labels, logos or watermark. "
+            "Use the product name only to identify the subject, never as visible text. "
             "Never guess a category, benefit, price, popularity or product name."
         )
         if storyboard_override:
@@ -124,17 +121,16 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
                 )
             else:
                 rules = (
-                    "FIRST CLIP 10s: 0-2s close-up with verified product-name/category hook IF AVAILABLE and white sparkles; "
-                    "2-5s full product reveal with up to TWO short factual feature labels only when grounded in visible "
-                    "or legible packaging evidence, with tiny white icons and curved arrows; "
-                    "5-8s detail shot with small dotted flourish; "
+                    "FIRST CLIP 10s: 0-2s clean visual hook with white sparkles and NO WORDS; "
+                    "2-5s full product reveal with tiny white icons and curved arrows only, never labels, letters or numbers; "
+                    "5-8s detail shot with a small dotted flourish; "
                     "8-10s settle into a steady full-product composition and HOLD the final frame for a seamless Part 2 handoff. "
                     "Do not perform the main surrounding contour yet. "
                 )
             rules += (
                 "Warm authentic UGC product-ad look, thin white handwritten 2D graphics tracked to the product. "
-                "No phone bezel, no invented product claims, no branding obstruction. Only verified hook (if available) and verified "
-                "short feature labels may appear; reserve space for editing overlays if text rendering is unreliable. "
+                "No phone bezel, no invented product claims, no added words, labels, logos or branding. "
+                "Use only flat white doodle graphics such as arrows, sparkles and a dashed contour. "
                 "Prioritize the visible surrounding product contour over camera movement."
             )
         elif part == 2:
