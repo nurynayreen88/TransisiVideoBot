@@ -2372,7 +2372,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     [InlineKeyboardButton('🎨 Microsoft Designer', url='https://designer.microsoft.com/')],
                 ]
                 if context.user_data.get('prompt_mode') == 'storyboard':
-                    image_action_rows.append([InlineKeyboardButton('🎬 Minta ChatGPT Buat Storyboard', callback_data='prompt_chatgpt_storyboard')])
+                    image_action_rows.append([InlineKeyboardButton('🎬 Jana Storyboard Gemini', callback_data='prompt_chatgpt_storyboard')])
                 image_action_rows.extend([
                     [InlineKeyboardButton('➡️ Jana Prompt Video', callback_data='prompt_continue_video')],
                     [InlineKeyboardButton('✍️ Prompt Baharu', callback_data='prompt'),
