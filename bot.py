@@ -1,5 +1,6 @@
 """Telegram slideshow bot: no paid API, FFmpeg required on PATH."""
 import asyncio
+import json
 import logging
 import os
 import shutil
@@ -38,6 +39,39 @@ STYLE_LABELS = {
 }
 MUSIC_CHOICES = ('auto', 'cinematic', 'energetic', 'happy', 'luxury', 'nature', 'beauty', 'none', 'custom')
 MUSIC_DIR = Path(__file__).resolve().parent / 'music'
+PROMPT_LIBRARY_PATH = Path(__file__).resolve().parent / 'prompts' / 'prompt_library.json'
+try:
+    with PROMPT_LIBRARY_PATH.open('r', encoding='utf-8') as handle:
+        PROMPT_LIBRARY = json.load(handle)
+except (OSError, json.JSONDecodeError):
+    logging.exception('Klippo prompt library could not be loaded')
+    PROMPT_LIBRARY = {'categories': [], 'prompts': []}
+PROMPTS_BY_ID = {item['id']: item for item in PROMPT_LIBRARY.get('prompts', [])}
+CATEGORIES_BY_ID = {item['id']: item for item in PROMPT_LIBRARY.get('categories', [])}
+
+def prompt_category_menu():
+    rows = []
+    categories = PROMPT_LIBRARY.get('categories', [])
+    for index in range(0, len(categories), 2):
+        pair = categories[index:index + 2]
+        rows.append([
+            InlineKeyboardButton(f"{item.get('emoji', '🎬')} {item['label']}", callback_data=f"pcat:{item['id']}")
+            for item in pair
+        ])
+    rows.append([InlineKeyboardButton('↩️ Menu Utama', callback_data='home')])
+    return InlineKeyboardMarkup(rows)
+
+
+def prompt_options_menu(category_id: str):
+    category = CATEGORIES_BY_ID.get(category_id, {})
+    rows = []
+    for prompt_id in category.get('prompt_ids', []):
+        prompt = PROMPTS_BY_ID.get(prompt_id)
+        if prompt:
+            rows.append([InlineKeyboardButton(f"🎬 {prompt['label']}", callback_data=f"ptpl:{prompt_id}")])
+    rows.append([InlineKeyboardButton('↩️ Tukar Kategori', callback_data='prompt_categories')])
+    return InlineKeyboardMarkup(rows)
+
 
 def photos_menu():
     return InlineKeyboardMarkup([[InlineKeyboardButton('✅ Selesai Hantar Gambar', callback_data='photos_done')], [InlineKeyboardButton('🗑 Mula Semula', callback_data='reset')]])
@@ -206,6 +240,15 @@ async def photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
     if context.user_data.get('stage') != 'photos':
         await update.message.reply_text('Tekan 🎬 Jana Video dahulu.', reply_markup=main_menu())
+        return
+    if context.user_data.get('stage') == 'prompt_upload':
+        photo_item = update.message.photo[-1] if update.message.photo else update.message.document
+        context.user_data['prompt_reference_photo'] = photo_item.file_id
+        context.user_data['stage'] = 'prompt_category'
+        await update.message.reply_text(
+            '✅ Gambar produk diterima.\n\nLangkah 2/3 — Pilih kategori supaya Klippo memaparkan prompt yang direka khusus untuk produk tersebut:',
+            reply_markup=prompt_category_menu()
+        )
         return
     ids = context.user_data.setdefault('photos', [])
     if len(ids) >= MAX_IMAGES:
@@ -404,8 +447,39 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await query.message.reply_text('Langkah 1/4 — Hantar 1–5 gambar produk. Tekan Selesai apabila cukup.', reply_markup=photos_menu())
     elif action == 'prompt':
         reset(context)
-        context.user_data['stage'] = 'prompt_product'
-        await query.message.reply_text('✍️ PROMPT VIDEO AFFILIATE\n\nLangkah 1/3: Nyatakan produk secara tepat: nama, warna, bentuk, bahan, logo dan ciri yang mesti kekal sama. Contoh: Beg tote hitam kulit PU, zip emas, logo kecil di tengah.')
+        context.user_data['stage'] = 'prompt_upload'
+        await query.message.reply_text('✍️ PROMPT VIDEO AFFILIATE\n\nLangkah 1/3 — Upload satu gambar produk yang akan digunakan sebagai rujukan utama di Gemini. Selepas gambar diterima, pilih kategori dan gaya prompt yang sesuai.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
+    elif action == 'prompt_categories' and stage in ('prompt_category', 'prompt_template', 'prompt_done'):
+        context.user_data['stage'] = 'prompt_category'
+        await query.message.reply_text('Pilih kategori produk:', reply_markup=prompt_category_menu())
+    elif action.startswith('pcat:') and stage in ('prompt_category', 'prompt_template', 'prompt_done'):
+        category_id = action.split(':', 1)[1]
+        category = CATEGORIES_BY_ID.get(category_id)
+        if not category:
+            await query.message.reply_text('Kategori tidak ditemui. Sila pilih semula.', reply_markup=prompt_category_menu())
+            return
+        context.user_data['prompt_category'] = category_id
+        context.user_data['stage'] = 'prompt_template'
+        await query.message.reply_text(
+            f"{category.get('emoji', '🎬')} {category['label']} — pilih gaya video:",
+            reply_markup=prompt_options_menu(category_id)
+        )
+    elif action.startswith('ptpl:') and stage in ('prompt_template', 'prompt_done'):
+        prompt_id = action.split(':', 1)[1]
+        prompt = PROMPTS_BY_ID.get(prompt_id)
+        if not prompt or prompt.get('category') != context.user_data.get('prompt_category'):
+            await query.message.reply_text('Prompt tidak sepadan dengan kategori. Sila pilih semula.', reply_markup=prompt_options_menu(context.user_data.get('prompt_category', '')))
+            return
+        context.user_data['stage'] = 'prompt_done'
+        await query.message.reply_text(
+            f"✅ PROMPT SIAP — {prompt['label']}\n\nSalin keseluruhan prompt di bawah dan gunakan bersama gambar produk asal di Gemini:\n\n{prompt['prompt']}",
+            reply_markup=InlineKeyboardMarkup([
+                [InlineKeyboardButton('✨ Buka Gemini', url='https://gemini.google.com/')],
+                [InlineKeyboardButton('🔁 Pilih Gaya Lain', callback_data=f"pcat:{prompt['category']}")],
+                [InlineKeyboardButton('↩️ Tukar Kategori', callback_data='prompt_categories')],
+                [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]
+            ])
+        )
     elif action.startswith('motion:') and stage == 'prompt_motion':
         motion = action.split(':', 1)[1]
         motions = {'orbit': 'A controlled 30-degree camera arc around the product, not a full 360-degree rotation; preserve the visible product geometry.', 'push': 'A slow forward dolly-in with gentle parallax; no object deformation.', 'side': 'A smooth left-to-right camera slide with stable product proportions.', 'static': 'A locked camera with subtle studio lighting changes only.'}
@@ -547,8 +621,8 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await update.message.reply_text('🔄 TUKAR FORMAT VIDEO\n\nTekan 📎 → File / Fail → pilih video MP4 asal. Bot akan memprosesnya secara automatik.', reply_markup=main_menu())
         elif action == 'prompt':
             reset(context)
-            context.user_data['stage'] = 'prompt_product'
-            await update.message.reply_text('✍️ PROMPT VIDEO AFFILIATE\n\nLangkah 1/3: Terangkan produk dengan tepat termasuk warna, bentuk, bahan dan logo.')
+            context.user_data['stage'] = 'prompt_upload'
+            await update.message.reply_text('✍️ PROMPT VIDEO AFFILIATE\n\nLangkah 1/3 — Upload satu gambar produk sebagai rujukan utama. Selepas itu, pilih kategori dan gaya prompt yang sesuai.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
         elif action == 'subscription':
             await update.message.reply_text('💎 LANGGANAN\n\nPelan RM5 / 30 hari masih cadangan. Pembayaran belum diaktifkan.')
         elif action == 'account':
@@ -644,9 +718,9 @@ def main():
     app.add_handler(CommandHandler('jana', generate, block=False))
     for style in STYLES:
         app.add_handler(CommandHandler(style, choose_style))
-    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(make|convert|merge|merge_next|merge_done|merge_style:(fade|smoothleft|slideleft|zoomin)|prompt|motion:(orbit|push|side|static)|photos_done|confirm|styles|music|music_previews|subscription|account|help|check|reset|home|preview:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|listen:(cinematic|energetic|happy|luxury|nature|beauty)|style:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|music:(auto|cinematic|energetic|happy|luxury|nature|beauty|none|custom))$'))
+    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(make|convert|merge|merge_next|merge_done|merge_style:(fade|smoothleft|slideleft|zoomin)|prompt|prompt_categories|pcat:(clothing|bags|shoes|beauty|gadgets|home)|ptpl:[a-z0-9_]+|motion:(orbit|push|side|static)|photos_done|confirm|styles|music|music_previews|subscription|account|help|check|reset|home|preview:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|listen:(cinematic|energetic|happy|luxury|nature|beauty)|style:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|music:(auto|cinematic|energetic|happy|luxury|nature|beauty|none|custom))$'))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, menu_text))
-    app.add_handler(MessageHandler(filters.PHOTO, photo))
+    app.add_handler(MessageHandler(filters.PHOTO | filters.Document.IMAGE, photo))
     app.add_handler(MessageHandler(filters.VIDEO | filters.Document.MimeType('video/mp4'), convert_upload))
     app.add_handler(MessageHandler(filters.AUDIO | filters.Document.MimeType('audio/mpeg'), audio))
     url = os.environ.get('WEBHOOK_URL', '').rstrip('/')
