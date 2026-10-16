@@ -2038,19 +2038,19 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     'crafts': "Arrange the exact craft item or kit neatly on a work surface; preserve colors and visible components and add no unlisted contents.",
                 }
                 image_prompt = (
-                    'PROMPT IMAGE — PREMIUM PRODUCT CAMPAIGN\\n\\n'
+                    'PROMPT IMAGE — PREMIUM PRODUCT CAMPAIGN\n\n'
                     'Use the uploaded product photograph as the sole MASTER product reference. '
                     'Create one ultra-realistic premium commercial product photograph in vertical 9:16. '
-                    'The product is: ' + product_name + '. Category: ' + category_label + '.\\n\\n'
+                    'The product is: ' + product_name + '. Category: ' + category_label + '.\n\n'
                     'VISUAL DIRECTION: ' + image_scene_by_category.get(
                         category_id,
                         'Present the exact product in a believable, category-appropriate premium scene at realistic scale.'
                     ) + ' Use soft natural or studio light, realistic shadows, refined composition, authentic textures, and a photographic—not CGI—finish. '
-                    'Keep the product prominent and leave enough clear space around it.\\n\\n'
+                    'Keep the product prominent and leave enough clear space around it.\n\n'
                     'PRODUCT LOCK: Preserve the exact product identity from the uploaded photo, including its visible shape, colour, print, pattern, cut, packaging, proportions, hardware and details. '
                     'Do not redesign, recolour, replace, add or remove product features. Do not invent logos, labels, accessories, materials or claims. '
                     'For clothing, keep the garment print, neckline, sleeves, fit and fabric appearance faithful to the reference. '
-                    'A model or environment may be added only to present the same product; do not let styling obscure it.\\n\\n'
+                    'A model or environment may be added only to present the same product; do not let styling obscure it.\n\n'
                     'OUTPUT: One cohesive, photorealistic vertical 9:16 image, premium editorial quality. '
                     'No collage, split screen, poster layout, captions, promotional text, watermark or extra logos. '
                     'Avoid distorted hands, unnatural faces, plastic skin, warped product geometry and artificial CGI appearance.'
