@@ -97,6 +97,11 @@ jobs:
           assert "food or drink" not in by_id_for_quality["beauty_texture_demo_v1"]["storyboard"][0]["direction"].casefold()
           assert "footwear" not in by_id_for_quality["bags_sling_crossbody_v1"]["storyboard"][0]["direction"].casefold()
           assert "outsole" not in by_id_for_quality["bags_sling_crossbody_v1"]["storyboard"][2]["direction"].casefold()
+          assert "named bag or wallet" not in by_id_for_quality["fashion_sit_stand_transition_v1"]["storyboard"][0]["direction"].casefold()
+          assert "named bag or wallet" not in by_id_for_quality["accessories_tabletop_macro_v1"]["storyboard"][0]["direction"].casefold()
+          assert "footwear" not in by_id_for_quality["accessories_necklace_drape_v1"]["storyboard"][0]["direction"].casefold()
+          assert "lace, heel" not in by_id_for_quality["accessories_wrist_lifestyle_v1"]["storyboard"][2]["direction"].casefold()
+          assert "visible stitching, closure, strap" not in by_id_for_quality["wallets_everyday_carry_v1"]["storyboard"][2]["direction"].casefold()
 
           # Every curated entry must carry its own timed premium storyboard.
           storyboard_signatures = set()
