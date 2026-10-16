@@ -16,7 +16,7 @@ def _clean_product_reference(product):
     value = (product or "").strip()
     # Empty visual-analysis slots must never leak into the final prompt.
     value = re.sub(
-        r"\s*[.;]?\s*Visible observations(?:\s*\([^)]*\))?\s*:\s*(?=[.;]?\s*(?:Optional user details\s*:)?\s*$)",
+        r"\s*[.;]?\s*Visible observations(?:\s*\([^)]*\))?\s*:\s*(?=\s*[.;]?\s*(?:Optional user details\s*:)?\s*$)",
         "",
         value,
         flags=re.IGNORECASE,
