@@ -1547,11 +1547,15 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await query.message.reply_text(
                 'Cara guna: buka Gemini, muat naik gambar produk yang sama, kemudian salin prompt di bawah dan tampal di Gemini.'
             )
-            await query.message.reply_text(
-                prompt_text[:4000],
-                reply_markup=InlineKeyboardMarkup(buttons),
-                disable_web_page_preview=True
-            )
+            # Telegram text messages are limited to 4096 characters. Send the full
+            # selected template in ordered chunks instead of silently truncating it.
+            chunks = [prompt_text[index:index + 3800] for index in range(0, len(prompt_text), 3800)] or [prompt_text]
+            for index, chunk in enumerate(chunks):
+                await query.message.reply_text(
+                    chunk,
+                    reply_markup=InlineKeyboardMarkup(buttons) if index == len(chunks) - 1 else None,
+                    disable_web_page_preview=True
+                )
     elif action.startswith('prompt_duration:') and stage == 'prompt_duration':
         selected = action.split(':', 1)[1]
         if selected in ('10', '20'):
