@@ -19,6 +19,6 @@ jobs:
         with:
           python-version: "3.11"
       - name: Compile prompt modules
-        run: python -m py_compile prompt_engine.py smart_prompt_engine.py tests/test_smart_prompt_engine.py
-      - name: Run variation regression tests
+        run: python -m py_compile bot.py prompt_engine.py prompt_library.py smart_prompt_engine.py tests/test_smart_prompt_engine.py tests/test_curated_prompt_library.py
+      - name: Run prompt library and regression tests
         run: python -m unittest discover -s tests -v
