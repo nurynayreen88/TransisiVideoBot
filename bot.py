@@ -229,6 +229,31 @@ PRODUCT_TYPES = {
     'other': '📦 Produk Lain / Auto',
 }
 
+def detect_bag_subtype(product_name: str) -> str:
+    """Infer bag/wallet subtype from product name only; no image or AI call."""
+    name = (product_name or '').casefold()
+    if any(k in name for k in ('wallet', 'dompet', 'card holder', 'cardholder', 'coin purse', 'purse kecil', 'money clip')):
+        return 'wallet'
+    if any(k in name for k in ('backpack', 'back pack', 'beg galas', 'beg sekolah', 'beg laptop', 'rucksack')):
+        return 'backpack'
+    if any(k in name for k in ('sling bag', 'crossbody', 'cross-body', 'beg silang', 'beg sandang', 'shoulder sling')):
+        return 'sling_bag'
+    if any(k in name for k in ('handbag', 'hand bag', 'beg tangan', 'shoulder bag', 'tote bag', 'tote', 'top handle')):
+        return 'handbag'
+    if any(k in name for k in ('bag', 'beg', 'purse')):
+        return 'bag'
+    return ''
+
+
+def detect_prompt_library_category(product_name: str) -> str:
+    subtype = detect_bag_subtype(product_name)
+    if subtype == 'wallet':
+        return 'wallets'
+    if subtype in ('backpack', 'sling_bag', 'handbag', 'bag'):
+        return 'bags'
+    return ''
+
+
 def prompt_product_type_menu():
     items = list(PRODUCT_TYPES.items())
     rows = []
@@ -251,7 +276,8 @@ def prompt_duration_menu():
 # unrelated options (for example, Mirror Selfie for a food product).
 PRODUCT_STYLE_KEYS = {
     'fashion': {'mirror_selfie', 'fashion_editorial', 'golden_hour', 'lifestyle', 'ugc_review', 'dynamic', 'fast_cut', 'reaction_hook', 'creative_reveal', 'white_doodle', 'cinematic', 'luxury', 'minimal', 'playful_viral', 'studio_360_safe'},
-    'bag': {'luxury', 'flatlay', 'unboxing', 'lifestyle', 'ugc_review', 'studio_360_safe', 'creative_reveal', 'fast_cut', 'white_doodle', 'cinematic', 'minimal', 'dynamic'},
+    'bag': {'handbag_showcase', 'bag_detail_macro', 'bag_flatlay', 'bag_daily_carry', 'bag_tabletop_reveal', 'sling_bag_lifestyle', 'backpack_demo', 'wallet_luxury_macro', 'wallet_open_close', 'wallet_daily_carry', 'wallet_flatlay', 'wallet_gift_reveal', 'luxury', 'flatlay', 'unboxing', 'lifestyle', 'ugc_review', 'studio_360_safe', 'creative_reveal', 'fast_cut', 'white_doodle', 'cinematic', 'minimal', 'dynamic'},
+    'wallet': {'wallet_luxury_macro', 'wallet_open_close', 'wallet_daily_carry', 'wallet_flatlay', 'wallet_gift_reveal', 'luxury', 'flatlay', 'unboxing', 'studio_360_safe', 'minimal', 'cinematic'},
     'hijab': {'mirror_selfie', 'fashion_editorial', 'golden_hour', 'lifestyle', 'ugc_review', 'dynamic', 'fast_cut', 'reaction_hook', 'creative_reveal', 'white_doodle', 'cinematic', 'luxury', 'minimal'},
     'shoes': {'dynamic', 'fast_cut', 'pov_demo', 'studio_360_safe', 'lifestyle', 'ugc_review', 'creative_reveal', 'white_doodle', 'cinematic', 'minimal', 'playful_viral'},
     'beauty': {'beauty_macro', 'ugc_review', 'luxury', 'cinematic', 'white_doodle', 'minimal', 'fast_cut', 'creative_reveal', 'lifestyle', 'flatlay', 'unboxing'},
@@ -1617,10 +1643,18 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['prompt_concept'] = (
                 (template.get('label', '') + ': ' + template.get('description', '')).strip(': ')
             )
-            context.user_data['stage'] = 'prompt_product_name'
-            await query.message.reply_text(
-                '🛍️ Masukkan nama produk daripada Shopee. Buka Shopee, copy dan paste nama produk di sini. Nama sahaja — tidak perlu pautan.\n\nContoh: VELLA Beg Tangan Wanita Besar Sling Shoulder Women Luxury Handbags'
-            )
+            if context.user_data.get('prompt_product_name'):
+                product_name = context.user_data['prompt_product_name']
+                subtype = detect_bag_subtype(product_name)
+                context.user_data['prompt_bag_subtype'] = subtype
+                context.user_data['stage'] = 'prompt_scene'
+                await query.message.reply_text(
+                    '✅ Nama produk: ' + product_name + '\n🔎 Jenis dikesan: ' + (subtype.replace('_', ' ') if subtype else category_id) + '\n\n🎨 Pilih latar video:',
+                    reply_markup=prompt_scene_menu()
+                )
+            else:
+                context.user_data['stage'] = 'prompt_product_name'
+                await query.message.reply_text('🛍️ Masukkan nama produk daripada Shopee. Nama sahaja — gambar dan pautan tidak diperlukan.')
     elif action.startswith('prompt_product_type:'):
         # Handle the product callback even if the in-memory stage is stale.
         # Telegram callbacks can outlive a menu redraw or a session state change.
@@ -1754,7 +1788,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             waiting = await query.message.reply_text('⏳ DALAM PROSES — 0%' + chr(10) + 'Menyusun prompt...')
             try:
                 product_name = context.user_data.get('prompt_product_name', '').strip()
-                product = ('Product name supplied by user: ' + product_name + '. The uploaded reference image is the sole visual source of truth; preserve the exact product appearance. Visible observations (verify against reference image): ' + context.user_data.get('prompt_vision', '') + '. Optional user details: ' + context.user_data.get('prompt_product', ''))
+                product = 'PRODUCT NAME SUPPLIED BY USER: ' + product_name + '. Use the product name as the source of truth; no reference image or AI image analysis is used. Optional user details: ' + context.user_data.get('prompt_product', '')
                 scene = context.user_data.get('prompt_scene', 'clean studio background')
                 prompt = build_prompt(
                     'storyboard', product, scene, motions[motion],
@@ -2015,31 +2049,36 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data['prompt_library_details'] = details[:1200]
         if details:
             context.user_data['prompt_product_name'] = details[:240]
-            lower_name = details.casefold()
-            if any(k in lower_name for k in ('wallet', 'dompet', 'card holder', 'cardholder', 'coin purse')):
-                category_id = 'wallets'
-            elif any(k in lower_name for k in ('bag', 'beg', 'handbag', 'tote', 'sling', 'crossbody', 'backpack', 'purse')):
-                category_id = 'bags'
-            else:
-                category_id = ''
+            subtype = detect_bag_subtype(details)
+            category_id = detect_prompt_library_category(details)
+            context.user_data['prompt_bag_subtype'] = subtype
             context.user_data['prompt_detected_category'] = category_id
-        else:
-            context.user_data['prompt_detected_category'] = ''
+            if category_id:
+                context.user_data['prompt_category'] = category_id
+                context.user_data['stage'] = 'prompt_category_options'
+                await update.message.reply_text(
+                    '🔎 Klippo mengesan jenis produk: ' + subtype.replace('_', ' ') + '. Pilih gaya video dalam koleksi ' + CATEGORIES_BY_ID[category_id].get('label', category_id) + ':',
+                    reply_markup=prompt_options_menu(category_id)
+                )
+                return
         context.user_data['stage'] = 'prompt_category'
-        await update.message.reply_text('📚 Nama produk diterima. Klippo akan gunakan nama untuk mengesan kategori. Pilih koleksi prompt:', reply_markup=prompt_category_menu())
+        await update.message.reply_text('📚 Nama produk diterima. Pilih koleksi prompt:', reply_markup=prompt_category_menu())
         return
     if stage == 'prompt_product_name':
         if len(value) < 2 or value.lower().startswith(('http://', 'https://')):
             await update.message.reply_text('⚠️ Masukkan nama produk sahaja. Buka Shopee, copy nama produk dan paste di sini; pautan tidak diperlukan.')
             return
         context.user_data['prompt_product_name'] = value[:240]
-        product_lower = value.casefold()
-        bag_subtype = ('wallet' if any(k in product_lower for k in ('wallet', 'dompet', 'card holder', 'cardholder', 'coin purse', 'purse kecil')) else 'backpack' if any(k in product_lower for k in ('backpack', 'beg galas', 'beg sekolah', 'beg laptop')) else 'sling_bag' if any(k in product_lower for k in ('sling bag', 'crossbody', 'cross-body', 'beg silang', 'beg sandang')) else 'handbag' if any(k in product_lower for k in ('handbag', 'hand bag', 'beg tangan', 'shoulder bag', 'tote bag', 'tote')) else '')
+        bag_subtype = detect_bag_subtype(value)
         context.user_data['prompt_bag_subtype'] = bag_subtype
+        if bag_subtype == 'wallet':
+            context.user_data['prompt_product_type'] = 'wallet'
+        elif bag_subtype in ('handbag', 'sling_bag', 'backpack', 'bag'):
+            context.user_data['prompt_product_type'] = 'bag'
         if bag_subtype:
-            context.user_data['prompt_concept'] = (context.user_data.get('prompt_concept', '') + ' | Product-name category detection: ' + bag_subtype.replace('_', ' ') + '. Choose a visual presentation suited to this subtype; do not assume unmentioned features.').strip(' |')
+            context.user_data['prompt_concept'] = (context.user_data.get('prompt_concept', '') + ' | Product-name category detection: ' + bag_subtype.replace('_', ' ') + '. Use the matching visual style without guessing product features.').strip(' |')
         context.user_data['stage'] = 'prompt_scene'
-        await update.message.reply_text('✅ Nama produk disimpan: ' + value[:240] + chr(10) * 2 + '📌 Gambar tidak diperlukan. Klippo mengesan jenis produk melalui nama dan akan memilih arahan visual yang sesuai. Pilih latar video:', reply_markup=prompt_scene_menu())
+        await update.message.reply_text('✅ Nama produk disimpan: ' + value[:240] + chr(10) * 2 + '📌 Gambar dan analisis AI tidak diperlukan. Klippo mengesan jenis produk daripada nama dan memilih arahan visual yang sesuai. Pilih latar video:', reply_markup=prompt_scene_menu())
         return
     shortcuts = {
         '🎬 Jana Video Affiliate': 'make',
