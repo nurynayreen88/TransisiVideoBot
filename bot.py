@@ -218,7 +218,7 @@ def doodle_menu():
 
 PRODUCT_TYPES = {
     'fashion': '👗 Pakaian / Fesyen',
-    'bag': '👜 Beg & Dompet',
+    'bag': '👜 Beg / Dompet — auto kesan daripada nama',
     'hijab': '🧕 Tudung / Hijab',
     'shoes': '👟 Kasut',
     'beauty': '💄 Kecantikan / Skincare',
@@ -228,6 +228,160 @@ PRODUCT_TYPES = {
     'accessory': '⌚ Aksesori / Barang Kemas',
     'other': '📦 Produk Lain / Auto',
 }
+
+def detect_bag_subtype(product_name: str) -> str:
+    """Infer bag/wallet subtype from product name only; no image or AI call."""
+    name = (product_name or '').casefold()
+    if any(k in name for k in ('wallet', 'dompet', 'card holder', 'cardholder', 'coin purse', 'purse kecil', 'money clip')):
+        return 'wallet'
+    if any(k in name for k in ('backpack', 'back pack', 'beg galas', 'beg sekolah', 'beg laptop', 'rucksack')):
+        return 'backpack'
+    if any(k in name for k in ('sling bag', 'sling shoulder', 'shoulder sling', 'shoulder sling bag', 'crossbody', 'cross-body', 'beg silang', 'beg sandang')):
+        return 'sling_bag'
+    if any(k in name for k in ('handbag', 'hand bag', 'beg tangan', 'shoulder bag', 'tote bag', 'tote', 'top handle')):
+        return 'handbag'
+    if any(k in name for k in ('bag', 'beg', 'purse')):
+        return 'bag'
+    return ''
+
+
+def detect_product_subtype(product_name: str) -> str:
+    """Infer a curated prompt subtype from product-name text only; never calls AI or image analysis."""
+    name = (product_name or '').casefold()
+    rules = [
+        ('beauty', 'lip_gloss', ('lip gloss', 'lipgloss')),
+        ('beauty', 'lipstick', ('lipstick', 'lip stick', 'gincu')),
+        ('beauty', 'facial_cleanser', ('facial cleanser', 'face cleanser', 'cleanser', 'pencuci muka', 'sabun muka', 'pencuci wajah', 'face wash')),
+        ('beauty', 'powder', ('face powder', 'loose powder', 'compact powder', 'setting powder', 'bedak', 'cushion powder')),
+        ('beauty', 'serum', ('serum', 'ampoule')),
+        ('beauty', 'sunscreen', ('sunscreen', 'sun screen', 'sunblock', 'spf')),
+        ('beauty', 'mascara', ('mascara', 'maskara')),
+        ('beauty', 'perfume', ('perfume', 'fragrance', 'minyak wangi', 'eau de parfum', 'eau de toilette')),
+        ('beauty', 'moisturizer', ('moisturizer', 'moisturiser', 'moisturizing cream', 'pelembap', 'moisture cream')),
+        ('beauty', 'toner', ('toner', 'facial mist')),
+        ('beauty', 'blush', ('blush', 'blusher', 'rouge', 'pemerah pipi')),
+        ('beauty', 'sheet_mask', ('sheet mask', 'masker muka', 'face mask')),
+        ('clothing', 'hijab', ('hijab', 'tudung', 'shawl', 'bawal')),
+        ('clothing', 'baju_kurung', ('baju kurung', 'kurung moden', 'kurung kedah')),
+        ('clothing', 'dress', ('dress', 'gown', 'maxi dress')),
+        ('clothing', 'shirt', ('shirt', 'blouse', 'kemeja', 'baju lelaki', 't-shirt', 'tshirt')),
+        ('shoes', 'running_shoes', ('running shoes', 'kasut larian', 'jogging shoes')),
+        ('shoes', 'sneakers', ('sneaker', 'trainers', 'kasut sukan')),
+        ('shoes', 'heels', ('high heels', 'heels', 'kasut tumit', 'stiletto')),
+        ('shoes', 'sandals', ('sandals', 'sandal', 'selipar', 'slippers')),
+        ('gadgets', 'earbuds', ('earbuds', 'ear buds', 'wireless earphone', 'bluetooth earphone', 'earphones', 'earphone')),
+        ('gadgets', 'phone_stand', ('phone stand', 'phone holder', 'stand telefon', 'holder telefon')),
+        ('gadgets', 'smartwatch', ('smartwatch', 'smart watch', 'jam pintar')),
+        ('gadgets', 'keyboard', ('keyboard', 'papan kekunci')),
+        ('gadgets', 'powerbank', ('power bank', 'powerbank', 'portable charger')),
+        ('home', 'kitchen_organizer', ('kitchen organizer', 'kitchen rack', 'rak dapur', 'organizer dapur')),
+        ('home', 'cleaning_tool', ('mop', 'brush cleaner', 'cleaning brush', 'alat pembersih', 'penyapu', 'squeegee')),
+        ('home', 'bedding', ('bedsheet', 'bed sheet', 'bedding', 'cadar', 'comforter', 'sarung bantal')),
+        ('home', 'lamp', ('lampu', 'desk lamp', 'table lamp', 'night lamp', 'lamp')),
+        ('accessories', 'watch', ('wristwatch', 'watch women', 'watch men', 'jam tangan')),
+        ('accessories', 'earrings', ('earring', 'earrings', 'anting-anting', 'anting')),
+        ('accessories', 'necklace', ('necklace', 'pendant', 'kalung', 'rantai leher')),
+        ('accessories', 'sunglasses', ('sunglasses', 'sun glasses', 'cermin mata hitam')),
+        ('food', 'snack', ('snack', 'kerepek', 'chips', 'crackers', 'snek')),
+        ('food', 'drink', ('drink', 'beverage', 'juice', 'jus', 'kopi', 'coffee', 'tea', 'teh', 'minuman')),
+        ('food', 'sauce', ('sauce', 'sos', 'sambal', 'condiment')),
+        ('food', 'biscuits', ('biscuit', 'biscuits', 'cookies', 'biskut')),
+        ('stationery', 'pen', ('pen ', 'ballpoint', 'ball pen', 'gel pen', 'fountain pen')),
+        ('stationery', 'notebook', ('notebook', 'journal', 'buku nota', 'notepad')),
+        ('stationery', 'marker', ('marker', 'highlighter', 'pen marker')),
+        ('stationery', 'pencil_case', ('pencil case', 'pencil pouch', 'bekas pensel', 'kotak pensel')),
+        ('sports', 'sports_gear', ('sports gear', 'football', 'soccer ball', 'badminton racket', 'racket badminton', 'dumbbell', 'skipping rope', 'jump rope', 'gym equipment', 'gym bag', 'beg sukan')),
+        ('sports', 'water_bottle', ('sports bottle', 'water bottle', 'botol air')),
+        ('sports', 'yoga_mat', ('yoga mat', 'alas yoga')),
+        ('sports', 'resistance_band', ('resistance band', 'exercise band', 'getah senaman')),
+        ('travel', 'luggage', ('luggage', 'suitcase', 'beg pakaian', 'beg travel', 'travel bag', 'cabin bag')),
+        ('travel', 'packing_cubes', ('packing cube', 'packing cubes', 'travel organizer')),
+        ('travel', 'travel_pillow', ('travel pillow', 'neck pillow', 'bantal travel')),
+        ('travel', 'passport_holder', ('passport holder', 'pemegang pasport')),
+        ('travel', 'toiletry_bag', ('toiletry bag', 'beg toiletries', 'beg mandian')),
+        ('travel', 'luggage_tag', ('luggage tag', 'tag bagasi')),
+        ('pets', 'pet_bed', ('pet bed', 'cat bed', 'dog bed', 'katil kucing', 'katil anjing')),
+        ('pets', 'pet_leash', ('pet leash', 'dog leash', 'tali anjing', 'tali haiwan')),
+        ('pets', 'pet_feeder', ('pet feeder', 'pet bowl', 'cat feeder', 'dog feeder', 'mangkuk haiwan')),
+        ('pets', 'pet_toy', ('pet toy', 'cat toy', 'dog toy', 'mainan kucing', 'mainan anjing')),
+        ('pets', 'grooming_brush', ('pet grooming brush', 'cat brush', 'dog brush', 'berus bulu haiwan')),
+        ('pets', 'pet_carrier', ('pet carrier', 'cat carrier', 'dog carrier', 'beg pembawa haiwan')),
+        ('automotive', 'phone_mount', ('car phone mount', 'car phone holder', 'pemegang telefon kereta')),
+        ('automotive', 'car_organizer', ('car organizer', 'car organiser', 'car storage', 'organizer kereta')),
+        ('automotive', 'car_vacuum', ('car vacuum', 'vacuum kereta', 'vakum kereta')),
+        ('automotive', 'sunshade', ('car sunshade', 'sun shade kereta', 'pelindung matahari kereta')),
+        ('automotive', 'car_diffuser', ('car diffuser', 'car air freshener', 'pewangi kereta')),
+        ('automotive', 'seat_cushion', ('car seat cushion', 'cushion kereta', 'kusyen kereta')),
+        ('garden', 'planter', ('planter pot', 'plant pot', 'pasu bunga', 'pasu tanaman')),
+        ('garden', 'watering_can', ('watering can', 'penyiram pokok', 'bekas siram')),
+        ('garden', 'gardening_gloves', ('gardening gloves', 'garden gloves', 'sarung tangan kebun')),
+        ('garden', 'pruning_shears', ('pruning shears', 'secateurs', 'gunting pokok')),
+        ('garden', 'grow_light', ('grow light', 'plant light', 'lampu tanaman')),
+        ('garden', 'plant_stand', ('plant stand', 'rak pasu', 'stand pasu')),
+        ('kitchen', 'lunchbox', ('lunchbox', 'lunch box', 'bekas makanan')),
+        ('kitchen', 'cookware', ('cookware', 'frying pan', 'saucepan', 'periuk', 'kuali')),
+        ('kitchen', 'spice_rack', ('spice rack', 'rak rempah')),
+        ('kitchen', 'cutting_board', ('cutting board', 'chopping board', 'papan pemotong')),
+        ('kitchen', 'tumbler', ('tumbler', 'travel tumbler', 'bekas minuman')),
+        ('kitchen', 'small_appliance', ('air fryer', 'blender', 'toaster', 'rice cooker', 'coffee maker')),
+        ('furniture', 'chair', ('dining chair', 'office chair', 'kerusi')),
+        ('furniture', 'side_table', ('side table', 'meja sisi')),
+        ('furniture', 'bookshelf', ('bookshelf', 'book shelf', 'rak buku')),
+        ('furniture', 'desk', ('writing desk', 'study desk', 'meja belajar', 'meja kerja')),
+        ('furniture', 'drawer_organizer', ('drawer organizer', 'drawer organiser', 'organizer laci')),
+        ('furniture', 'decor_mirror', ('decor mirror', 'wall mirror', 'cermin dinding')),
+        ('baby', 'diaper_bag', ('diaper bag', 'beg lampin')),
+        ('baby', 'baby_blanket', ('baby blanket', 'selimut bayi')),
+        ('baby', 'baby_bottle', ('baby bottle', 'botol susu bayi')),
+        ('baby', 'high_chair', ('high chair', 'kerusi makan bayi')),
+        ('baby', 'soft_toy', ('soft toy', 'plush toy', 'boneka lembut')),
+        ('baby', 'stroller_accessory', ('stroller accessory', 'aksesori stroller')),
+        ('crafts', 'yarn', ('yarn', 'benang kait')),
+        ('crafts', 'crochet_kit', ('crochet kit', 'set mengait')),
+        ('crafts', 'beads', ('craft beads', 'manik kraf')),
+        ('crafts', 'paint_set', ('paint set', 'watercolor set', 'set cat air')),
+        ('crafts', 'sewing_kit', ('sewing kit', 'set jahitan')),
+        ('crafts', 'clay_tools', ('clay tools', 'alat tanah liat')),
+    ]
+    for category, subtype, keywords in rules:
+        if any(keyword in name for keyword in keywords):
+            return subtype
+    bag_subtype = detect_bag_subtype(name)
+    if bag_subtype:
+        return bag_subtype
+    return ''
+
+
+def detect_prompt_library_category(product_name: str) -> str:
+    """Map common product-name keywords to a curated GitHub prompt-library category."""
+    subtype = detect_product_subtype(product_name)
+    category_by_subtype = {
+        'lip_gloss': 'beauty', 'lipstick': 'beauty', 'facial_cleanser': 'beauty',
+        'powder': 'beauty', 'serum': 'beauty', 'sunscreen': 'beauty', 'mascara': 'beauty',
+        'perfume': 'beauty', 'moisturizer': 'beauty', 'toner': 'beauty', 'blush': 'beauty',
+        'sheet_mask': 'beauty', 'hijab': 'clothing', 'baju_kurung': 'clothing',
+        'dress': 'clothing', 'shirt': 'clothing', 'running_shoes': 'shoes',
+        'sneakers': 'shoes', 'heels': 'shoes', 'sandals': 'shoes', 'earbuds': 'gadgets',
+        'phone_stand': 'gadgets', 'smartwatch': 'gadgets', 'keyboard': 'gadgets',
+        'powerbank': 'gadgets', 'kitchen_organizer': 'home', 'cleaning_tool': 'home',
+        'bedding': 'home', 'lamp': 'home', 'watch': 'accessories', 'earrings': 'accessories',
+        'necklace': 'accessories', 'sunglasses': 'accessories', 'snack': 'food',
+        'drink': 'food', 'sauce': 'food', 'biscuits': 'food', 'pen': 'stationery',
+        'notebook': 'stationery', 'marker': 'stationery', 'pencil_case': 'stationery',
+        'sports_gear': 'sports', 'water_bottle': 'sports', 'yoga_mat': 'sports', 'resistance_band': 'sports',
+        'luggage': 'travel', 'packing_cubes': 'travel', 'travel_pillow': 'travel', 'passport_holder': 'travel', 'toiletry_bag': 'travel', 'luggage_tag': 'travel',
+        'pet_bed': 'pets', 'pet_leash': 'pets', 'pet_feeder': 'pets', 'pet_toy': 'pets', 'grooming_brush': 'pets', 'pet_carrier': 'pets',
+        'phone_mount': 'automotive', 'car_organizer': 'automotive', 'car_vacuum': 'automotive', 'sunshade': 'automotive', 'car_diffuser': 'automotive', 'seat_cushion': 'automotive',
+        'planter': 'garden', 'watering_can': 'garden', 'gardening_gloves': 'garden', 'pruning_shears': 'garden', 'grow_light': 'garden', 'plant_stand': 'garden',
+        'lunchbox': 'kitchen', 'cookware': 'kitchen', 'spice_rack': 'kitchen', 'cutting_board': 'kitchen', 'tumbler': 'kitchen', 'small_appliance': 'kitchen',
+        'chair': 'furniture', 'side_table': 'furniture', 'bookshelf': 'furniture', 'desk': 'furniture', 'drawer_organizer': 'furniture', 'decor_mirror': 'furniture',
+        'diaper_bag': 'baby', 'baby_blanket': 'baby', 'baby_bottle': 'baby', 'high_chair': 'baby', 'soft_toy': 'baby', 'stroller_accessory': 'baby',
+        'yarn': 'crafts', 'crochet_kit': 'crafts', 'beads': 'crafts', 'paint_set': 'crafts', 'sewing_kit': 'crafts', 'clay_tools': 'crafts',
+        'wallet': 'wallets', 'backpack': 'bags', 'sling_bag': 'bags',
+        'handbag': 'bags', 'bag': 'bags',
+    }
+    return category_by_subtype.get(subtype, '')
+
 
 def prompt_product_type_menu():
     items = list(PRODUCT_TYPES.items())
@@ -251,7 +405,8 @@ def prompt_duration_menu():
 # unrelated options (for example, Mirror Selfie for a food product).
 PRODUCT_STYLE_KEYS = {
     'fashion': {'mirror_selfie', 'fashion_editorial', 'golden_hour', 'lifestyle', 'ugc_review', 'dynamic', 'fast_cut', 'reaction_hook', 'creative_reveal', 'white_doodle', 'cinematic', 'luxury', 'minimal', 'playful_viral', 'studio_360_safe'},
-    'bag': {'luxury', 'flatlay', 'unboxing', 'lifestyle', 'ugc_review', 'studio_360_safe', 'creative_reveal', 'fast_cut', 'white_doodle', 'cinematic', 'minimal', 'dynamic'},
+    'bag': {'handbag_showcase', 'bag_detail_macro', 'bag_flatlay', 'bag_daily_carry', 'bag_tabletop_reveal', 'sling_bag_lifestyle', 'backpack_demo', 'wallet_luxury_macro', 'wallet_open_close', 'wallet_daily_carry', 'wallet_flatlay', 'wallet_gift_reveal', 'luxury', 'flatlay', 'unboxing', 'lifestyle', 'ugc_review', 'studio_360_safe', 'creative_reveal', 'fast_cut', 'white_doodle', 'cinematic', 'minimal', 'dynamic'},
+    'wallet': {'wallet_luxury_macro', 'wallet_open_close', 'wallet_daily_carry', 'wallet_flatlay', 'wallet_gift_reveal', 'luxury', 'flatlay', 'unboxing', 'studio_360_safe', 'minimal', 'cinematic'},
     'hijab': {'mirror_selfie', 'fashion_editorial', 'golden_hour', 'lifestyle', 'ugc_review', 'dynamic', 'fast_cut', 'reaction_hook', 'creative_reveal', 'white_doodle', 'cinematic', 'luxury', 'minimal'},
     'shoes': {'dynamic', 'fast_cut', 'pov_demo', 'studio_360_safe', 'lifestyle', 'ugc_review', 'creative_reveal', 'white_doodle', 'cinematic', 'minimal', 'playful_viral'},
     'beauty': {'beauty_macro', 'ugc_review', 'luxury', 'cinematic', 'white_doodle', 'minimal', 'fast_cut', 'creative_reveal', 'lifestyle', 'flatlay', 'unboxing'},
@@ -294,10 +449,21 @@ def prompt_category_menu():
     return InlineKeyboardMarkup(rows)
 
 
-def prompt_options_menu(category_id: str):
+def prompt_options_menu(category_id: str, subtype: str = ''):
     category = CATEGORIES_BY_ID.get(category_id, {})
     rows = []
-    for prompt_id in category.get('prompt_ids', []):
+    prompt_ids = category.get('prompt_ids', [])
+    if subtype:
+        # Prefer exact subtype prompts plus category-wide concepts. Hide prompts for
+        # unrelated subtypes (e.g. cleanser prompts when the title says lipstick).
+        matching = [
+            prompt_id for prompt_id in prompt_ids
+            if (PROMPTS_BY_ID.get(prompt_id, {}).get('subtype') in ('', subtype)
+                or 'subtype' not in PROMPTS_BY_ID.get(prompt_id, {}))
+        ]
+        if matching:
+            prompt_ids = matching
+    for prompt_id in prompt_ids:
         prompt = PROMPTS_BY_ID.get(prompt_id)
         if prompt:
             rows.append([InlineKeyboardButton(f"🎬 {prompt['label']}", callback_data=f"ptpl:{prompt_id}")])
@@ -1161,6 +1327,8 @@ def reset(context):
     context.user_data['prompt_library_details'] = ''
     context.user_data['prompt_category'] = ''
     context.user_data['prompt_concept'] = ''
+    context.user_data['prompt_library_id'] = ''
+    context.user_data['prompt_library_storyboard'] = []
     context.user_data['stage'] = 'home'
 
 
@@ -1288,18 +1456,8 @@ async def photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text('✅ Gambar diterima sebagai rujukan utama. Sekarang tampal nama produk atau maklumat produk daripada Shopee. Nama sahaja memadai; tidak perlu pautan. Jika tidak mahu tambah maklumat, hantar tanda - .')
         return
     if context.user_data.get('stage') == 'prompt_photo':
-        context.user_data['prompt_photo_id'] = update.message.photo[-1].file_id
-        context.user_data['stage'] = 'prompt_details_choice'
-        description = None
-        if os.environ.get('GEMINI_API_KEY'):
-            try:
-                image_file = await context.bot.get_file(context.user_data['prompt_photo_id'])
-                image_bytes = bytes(await image_file.download_as_bytearray())
-                description = await describe_photo(image_bytes)
-            except Exception:
-                logging.exception('Product image analysis unavailable')
-        context.user_data['prompt_vision'] = description or ''
-        await update.message.reply_text(('🔎 AI mengenal pasti: ' + description + '\n\n' if description else '📷 Gambar diterima. AI Vision tidak tersedia; prompt masih boleh digunakan bersama gambar rujukan.\n\n') + 'Mahu tambah maklumat produk secara pilihan?', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('✍️ Tambah Maklumat', callback_data='prompt_details:add')], [InlineKeyboardButton('✨ Teruskan Dengan Gambar Sahaja', callback_data='prompt_details:skip')]]))
+        context.user_data['stage'] = 'prompt_product_name'
+        await update.message.reply_text('📌 Klippo kini menggunakan prompt berasaskan nama produk sahaja. Gambar tidak diproses. Tampal nama produk daripada Shopee di sini.')
         return
     if context.user_data.get('stage') != 'photos':
         await update.message.reply_text('Pilih 📷 Upload Gambar dahulu melalui menu Video Transisi.', reply_markup=main_menu())
@@ -1568,6 +1726,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data['prompt_mode'] = 'storyboard'
         context.user_data['prompt_style'] = 'auto'
         context.user_data['prompt_concept'] = ''
+        context.user_data['prompt_library_id'] = ''
+        context.user_data['prompt_library_storyboard'] = []
         context.user_data['stage'] = 'prompt_product_type'
         context.user_data['prompt_product_type'] = 'other'
         await query.message.reply_text(
@@ -1577,8 +1737,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif action.startswith('prompt_type:') and stage == 'prompt_type':
         selected = action.split(':', 1)[1]
         if selected == 'library':
-            context.user_data['stage'] = 'prompt_upload'
-            await query.message.reply_text('📷 Hantar satu gambar produk. Gambar ini menjadi rujukan utama; selepas itu tampal nama produk atau maklumat produk daripada Shopee (nama sahaja pun memadai).')
+            context.user_data['stage'] = 'prompt_library_details'
+            await query.message.reply_text('🛍️ Tampal nama produk daripada Shopee. Gambar tidak diperlukan. Klippo akan mengesan jenis produk daripada nama, contohnya beg tangan, sling bag, beg galas atau dompet.')
         elif selected in ('normal', 'storyboard', 'doodle'):
             context.user_data['prompt_mode'] = 'storyboard' if selected == 'doodle' else selected
             context.user_data['stage'] = 'prompt_duration'
@@ -1616,10 +1776,45 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['prompt_concept'] = (
                 (template.get('label', '') + ': ' + template.get('description', '')).strip(': ')
             )
-            context.user_data['stage'] = 'prompt_product_name'
-            await query.message.reply_text(
-                '🛍️ Masukkan nama produk daripada Shopee. Buka Shopee, copy dan paste nama produk di sini. Nama sahaja — tidak perlu pautan.\n\nContoh: VELLA Beg Tangan Wanita Besar Sling Shoulder Women Luxury Handbags'
-            )
+            context.user_data['prompt_library_id'] = prompt_id
+            context.user_data['prompt_library_storyboard'] = template.get('storyboard', [])
+            if context.user_data.get('prompt_product_name'):
+                product_name = context.user_data['prompt_product_name']
+                subtype = detect_product_subtype(product_name)
+                context.user_data['prompt_bag_subtype'] = detect_bag_subtype(product_name)
+                category_product_type = {
+                    'clothing': 'fashion',
+                    'bags': 'bag',
+                    'wallets': 'wallet',
+                    'shoes': 'shoes',
+                    'beauty': 'beauty',
+                    'gadgets': 'gadget',
+                    'home': 'home',
+                    'accessories': 'accessory',
+                    'food': 'food',
+                    'stationery': 'other',
+                    'sports': 'other',
+                    'travel': 'travel',
+                    'pets': 'pet',
+                    'automotive': 'automotive',
+                    'garden': 'garden',
+                    'kitchen': 'kitchen',
+                    'furniture': 'furniture',
+                    'baby': 'baby',
+                    'crafts': 'crafts',
+                }
+                if subtype == 'hijab':
+                    context.user_data['prompt_product_type'] = 'hijab'
+                else:
+                    context.user_data['prompt_product_type'] = category_product_type.get(category_id, 'other')
+                context.user_data['stage'] = 'prompt_scene'
+                await query.message.reply_text(
+                    '✅ Nama produk: ' + product_name + '\n🔎 Jenis dikesan: ' + (subtype.replace('_', ' ') if subtype else category_id) + '\n\n🎨 Pilih latar video:',
+                    reply_markup=prompt_scene_menu()
+                )
+            else:
+                context.user_data['stage'] = 'prompt_product_name'
+                await query.message.reply_text('🛍️ Masukkan nama produk daripada Shopee. Nama sahaja — gambar dan pautan tidak diperlukan.')
     elif action.startswith('prompt_product_type:'):
         # Handle the product callback even if the in-memory stage is stale.
         # Telegram callbacks can outlive a menu redraw or a session state change.
@@ -1667,8 +1862,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data['stage'] = 'prompt_product_name'
         await query.message.reply_text('🛍️ Masukkan nama produk daripada Shopee. Buka Shopee, copy dan paste nama produk di sini. Nama sahaja — tidak perlu pautan.\n\nContoh: VELLA Beg Tangan Wanita Besar Sling Shoulder Women Luxury Handbags')
     elif action == 'prompt_input:photo' and stage == 'prompt_input':
-        context.user_data['stage'] = 'prompt_photo'
-        await query.message.reply_text('📷 Hantar satu gambar produk. Maklumat tambahan boleh dimasukkan kemudian.')
+        context.user_data['stage'] = 'prompt_product_name'
+        await query.message.reply_text('🛍️ Mod prompt Klippo tidak menggunakan gambar atau analisis AI. Tampal nama produk sahaja untuk mengesan kategori secara automatik.')
     elif action.startswith('prompt_details:') and stage == 'prompt_details_choice':
         if action == 'prompt_details:add':
             context.user_data['stage'] = 'prompt_details_text'
@@ -1679,7 +1874,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await query.message.reply_text('🎨 Pilih latar video:', reply_markup=prompt_scene_menu())
     elif action.startswith('scene:') and stage == 'prompt_scene':
         scenes = {
-            'auto': 'clean premium studio background, selected to complement the exact product reference',
+            'auto': 'clean premium studio background, selected to complement the named product',
             'studio': 'premium photography studio, soft neutral backdrop and realistic contact shadows',
             'dark': 'dark luxury studio, controlled rim lighting and understated premium contrast',
             'home': 'tasteful modern home interior, natural ambient lighting and believable product placement',
@@ -1753,14 +1948,25 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             waiting = await query.message.reply_text('⏳ DALAM PROSES — 0%' + chr(10) + 'Menyusun prompt...')
             try:
                 product_name = context.user_data.get('prompt_product_name', '').strip()
-                product = ('Product name supplied by user: ' + product_name + '. The uploaded reference image is the sole visual source of truth; preserve the exact product appearance. Visible observations (verify against reference image): ' + context.user_data.get('prompt_vision', '') + '. Optional user details: ' + context.user_data.get('prompt_product', ''))
+                product = 'NAMA_PRODUK: ' + product_name + chr(10) + 'Optional user details: ' + context.user_data.get('prompt_product', '')
                 scene = context.user_data.get('prompt_scene', 'clean studio background')
+                style_choice = context.user_data.get('prompt_style', 'auto')
+                if style_choice == 'auto':
+                    subtype = context.user_data.get('prompt_bag_subtype', '')
+                    style_choice = {
+                        'wallet': 'wallet_luxury_macro',
+                        'backpack': 'backpack_demo',
+                        'sling_bag': 'sling_bag_lifestyle',
+                        'handbag': 'handbag_showcase',
+                        'bag': 'bag_tabletop_reveal',
+                    }.get(subtype, 'auto')
                 prompt = build_prompt(
                     'storyboard', product, scene, motions[motion],
-                    context.user_data.get('prompt_style', 'auto'),
+                    style_choice,
                     context.user_data.get('prompt_duration', 10),
                     context.user_data.get('prompt_concept', ''),
-                    product_type=context.user_data.get('prompt_product_type', 'other')
+                    product_type=context.user_data.get('prompt_product_type', 'other'),
+                    storyboard_override=context.user_data.get('prompt_library_storyboard') or None
                 )
                 await progress_update(waiting, 70, 'Prompt siap disusun. Menghantar hasil...')
                 context.user_data['stage'] = 'prompt_done'
@@ -1776,7 +1982,9 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                                + ('Gunakan bingkai akhir Bahagian 1 sebagai rujukan sambungan.' if index == 2 else
                                   'Simpan bingkai terakhir untuk sambungan Bahagian 2.')) if len(sections) == 2 else ''
                     if len(section) <= 3900:
-                        await query.message.reply_text((caption + chr(10) * 2 if caption else '') + section, reply_markup=actions)
+                        # Keep the prompt message itself clean and copy-ready. The connection
+                        # instructions are already embedded in the two generated 10-second prompts.
+                        await query.message.reply_text(section, reply_markup=actions)
                     else:
                         prompt_file = BytesIO(section.encode('utf-8'))
                         prompt_file.name = f'KLIPPO_prompt_{mode_name}_part{index}.txt'
@@ -2012,16 +2220,42 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if stage == 'prompt_library_details':
         details = '' if value in ('-', '—', 'tiada', 'Tiada') else value
         context.user_data['prompt_library_details'] = details[:1200]
+        if details:
+            context.user_data['prompt_product_name'] = details[:240]
+            subtype = detect_product_subtype(details)
+            category_id = detect_prompt_library_category(details)
+            context.user_data['prompt_bag_subtype'] = subtype
+            context.user_data['prompt_detected_category'] = category_id
+            if category_id == 'wallets':
+                context.user_data['prompt_product_type'] = 'wallet'
+            elif category_id == 'bags':
+                context.user_data['prompt_product_type'] = 'bag'
+            if category_id:
+                context.user_data['prompt_category'] = category_id
+                context.user_data['stage'] = 'prompt_category_options'
+                await update.message.reply_text(
+                    '🔎 Klippo mengesan jenis produk: ' + subtype.replace('_', ' ') + '. Pilih prompt khusus dalam koleksi ' + CATEGORIES_BY_ID[category_id].get('label', category_id) + ':',
+                    reply_markup=prompt_options_menu(category_id, subtype)
+                )
+                return
         context.user_data['stage'] = 'prompt_category'
-        await update.message.reply_text('📚 Maklumat diterima. Pilih kategori produk untuk melihat prompt siap:', reply_markup=prompt_category_menu())
+        await update.message.reply_text('📚 Nama produk diterima. Pilih koleksi prompt:', reply_markup=prompt_category_menu())
         return
     if stage == 'prompt_product_name':
         if len(value) < 2 or value.lower().startswith(('http://', 'https://')):
             await update.message.reply_text('⚠️ Masukkan nama produk sahaja. Buka Shopee, copy nama produk dan paste di sini; pautan tidak diperlukan.')
             return
         context.user_data['prompt_product_name'] = value[:240]
-        context.user_data['stage'] = 'prompt_photo'
-        await update.message.reply_text('✅ Nama produk disimpan: ' + value[:240] + chr(10) * 2 + '📷 Sekarang hantar satu gambar produk. Gambar ini akan menjadi rujukan utama untuk rupa produk.')
+        bag_subtype = detect_bag_subtype(value)
+        context.user_data['prompt_bag_subtype'] = bag_subtype
+        if bag_subtype == 'wallet':
+            context.user_data['prompt_product_type'] = 'wallet'
+        elif bag_subtype in ('handbag', 'sling_bag', 'backpack', 'bag'):
+            context.user_data['prompt_product_type'] = 'bag'
+        if bag_subtype:
+            context.user_data['prompt_concept'] = (context.user_data.get('prompt_concept', '') + ' | Product-name category detection: ' + bag_subtype.replace('_', ' ') + '. Use the matching visual style without guessing product features.').strip(' |')
+        context.user_data['stage'] = 'prompt_scene'
+        await update.message.reply_text('✅ Nama produk disimpan: ' + value[:240] + chr(10) * 2 + '📌 Gambar dan analisis AI tidak diperlukan. Klippo mengesan jenis produk daripada nama dan memilih arahan visual yang sesuai. Pilih latar video:', reply_markup=prompt_scene_menu())
         return
     shortcuts = {
         '🎬 Jana Video Affiliate': 'make',

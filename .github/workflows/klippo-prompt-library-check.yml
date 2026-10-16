@@ -38,6 +38,17 @@ jobs:
           prompts = data.get("prompts", [])
           assert categories, "No categories found"
           assert prompts, "No prompts found"
+          category_ids_present = {item.get("id") for item in categories}
+          required_new_categories = {
+              "travel", "pets", "automotive", "garden",
+              "kitchen", "furniture", "baby", "crafts",
+          }
+          assert required_new_categories <= category_ids_present, (
+              f"New product categories missing: {required_new_categories - category_ids_present}"
+          )
+          assert data.get("storyboard_spec", {}).get("copy_ready_output"), (
+              "Copy-ready output rule missing from library metadata"
+          )
 
           prompt_ids = [item.get("id") for item in prompts]
           assert all(prompt_ids), "A prompt is missing its id"
@@ -60,12 +71,38 @@ jobs:
               )
               text = prompt["prompt"].casefold()
               for required in (
-                  "uploaded", "image", "strict output rules:", "no on-screen text",
+                  "no uploaded image", "text only", "strict output rules:", "no on-screen text",
                   "logos", "exactly 10 seconds", "vertical 9:16"
               ):
                   assert required in text, (
                       f"Prompt {prompt['id']} is missing required reference/output rule: {required}"
                   )
+          # Every curated entry must carry its own timed premium storyboard.
+          storyboard_signatures = set()
+          for prompt in prompts:
+              storyboard = prompt.get("storyboard", [])
+              assert len(storyboard) == 4, (
+                  f"Prompt {prompt['id']} must have four timed storyboard shots"
+              )
+              expected_times = ["0–2s", "2–6s", "6–8s", "8–10s"]
+              actual_times = [shot.get("time") for shot in storyboard]
+              assert actual_times == expected_times, (
+                  f"Prompt {prompt['id']} has invalid storyboard timing: {actual_times}"
+              )
+              assert all(shot.get("shot") and shot.get("direction") for shot in storyboard), (
+                  f"Prompt {prompt['id']} has an incomplete storyboard"
+              )
+              assert "PREMIUM STORYBOARD — EXACTLY 10 SECONDS:" in prompt["prompt"], (
+                  f"Prompt {prompt['id']} is missing its embedded storyboard"
+              )
+              assert "CINEMATOGRAPHY & CONTINUITY:" in prompt["prompt"], (
+                  f"Prompt {prompt['id']} is missing premium continuity direction"
+              )
+              storyboard_signatures.add("|".join(shot["direction"] for shot in storyboard))
+          assert len(storyboard_signatures) == len(prompts), (
+              "Every prompt must have a unique product-specific storyboard"
+          )
+
           bot = Path("bot.py").read_text(encoding="utf-8")
           required_flow_markers = [
               "if context.user_data.get('stage') == 'prompt_upload':",
@@ -75,6 +112,8 @@ jobs:
               "PROMPT_LIBRARY_PATH",
               "prompt_category_menu()",
               "prompt_options_menu(category_id)",
+              "context.user_data['prompt_library_storyboard'] = template.get('storyboard', [])",
+              "storyboard_override=context.user_data.get('prompt_library_storyboard') or None",
               "prompt_categories|pcat:[a-z0-9_]+|ptpl:[a-z0-9_]+",
             "async def handle_image_or_receipt_document(",
             "filters.Document.IMAGE | filters.Document.MimeType('application/pdf'), handle_image_or_receipt_document",
@@ -90,8 +129,8 @@ jobs:
                   return prompt_text
               note = (
                   "PRODUCT NAME / DETAILS FROM USER: " + details +
-                  ". Use these details only as supporting context. The uploaded image "
-                  "remains the sole visual source of truth; never invent or alter product features.\\n\\n"
+                  ". The product name is the source of truth; do not invent or alter unprovided product features. "
+                  "\\n\\n"
               )
               first_sentence_end = prompt_text.find(". ")
               if first_sentence_end >= 0:
@@ -100,18 +139,18 @@ jobs:
 
           generated_cases = 0
           for prompt in prompts:
-              for details in ("", "Example product name; use exact appearance in reference image"):
+              for details in ("", "Example product name; do not assume unprovided features"):
                   generated = "PROMPT VIDEO — 10 SAAT\\n\\n" + inject_details(prompt["prompt"], details)
                   assert generated.startswith("PROMPT VIDEO — 10 SAAT\\n\\n")
                   assert "STRICT OUTPUT RULES:" in generated
-                  assert "Preserve the exact product shape" in generated
-                  assert "branding, logos, and printed details shown in the uploaded image" in generated
+                  assert "Keep the product presentation consistent" in generated
+                  assert "no uploaded image" in generated
                   chunks = [generated[index:index + 3800] for index in range(0, len(generated), 3800)] or [generated]
                   assert "".join(chunks) == generated, f"Prompt was truncated: {prompt['id']}"
                   assert all(len(chunk) <= 3800 for chunk in chunks), f"Unsafe chunk length: {prompt['id']}"
                   if details:
                       assert "PRODUCT NAME / DETAILS FROM USER:" in generated
-                      assert "sole visual source of truth" in generated
+                      assert "product name is the source of truth" in generated
                   generated_cases += 1
 
           # Regression checks for the reusable White Doodle storyboard style.
@@ -123,6 +162,47 @@ jobs:
               os.environ["KLIPPO_PROMPT_DB"] = str(Path(tmp) / "prompt_catalog.sqlite3")
               from prompt_catalog import choices, resolve, DB_PATH
               from prompt_engine import build_prompt
+
+              # Verify the selected GitHub storyboard is used by the actual final prompt.
+              curated = next(item for item in prompts if item.get("storyboard"))
+              curated_prompt = build_prompt(
+                  "storyboard",
+                  "NAMA_PRODUK: Example beauty product",
+                  "premium clean studio",
+                  "push",
+                  "cinematic",
+                  10,
+                  "Test curated storyboard",
+                  product_type="beauty",
+                  storyboard_override=curated["storyboard"],
+              )
+              assert curated_prompt.startswith("PROMPT VIDEO — 10 SAAT")
+              assert "DIRECTOR'S CURATED PREMIUM STORYBOARD" in curated_prompt
+              assert "NO ON-SCREEN TEXT" in curated_prompt
+              for shot in curated["storyboard"]:
+                  assert shot["direction"] in curated_prompt, (
+                      f"Selected storyboard shot was not used: {curated['id']} / {shot['time']}"
+                  )
+              assert "ON-SCREEN HOOK: Display EXACTLY" not in curated_prompt
+
+              paired_curated = build_prompt(
+                  "storyboard",
+                  "NAMA_PRODUK: Example beauty product",
+                  "premium clean studio",
+                  "push",
+                  "cinematic",
+                  20,
+                  "Test curated storyboard",
+                  product_type="beauty",
+                  storyboard_override=curated["storyboard"],
+              )
+              assert "=== KLIPPO PART 2 ===" in paired_curated
+              assert "CONTINUITY BRIDGE" in paired_curated
+              assert "CONTINUATION ACTION" in paired_curated
+              assert "Do not repeat the opening hook" in paired_curated
+              assert "\\n\\n" not in curated_prompt, (
+                  "Generated prompt contains literal escaped newlines instead of copy-ready formatting"
+              )
 
               assert ("white_doodle", "✏️ White Doodle") in choices()
               style_key, style_name, style_template = resolve("white_doodle")
@@ -143,7 +223,7 @@ jobs:
                   assert version == 4, f"Unexpected White Doodle template version: {version}"
 
               uncertain = (
-                  "Visible observations (verify against reference image): . "
+                  "PRODUCT NAME: unknown. "
                   "Optional user details: "
               )
               first = build_prompt(
