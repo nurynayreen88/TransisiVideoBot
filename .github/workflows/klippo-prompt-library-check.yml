@@ -56,6 +56,14 @@ jobs:
               assert prompt.get("label") and prompt.get("prompt"), (
                   f"Prompt missing label/text: {prompt.get('id')}"
               )
+              text = prompt["prompt"].casefold()
+              for required in (
+                  "uploaded", "image", "strict output rules:", "no on-screen text",
+                  "logos", "exactly 10 seconds", "vertical 9:16"
+              ):
+                  assert required in text, (
+                      f"Prompt {prompt['id']} is missing required reference/output rule: {required}"
+                  )
           bot = Path("bot.py").read_text(encoding="utf-8")
           required_flow_markers = [
               "if context.user_data.get('stage') == 'prompt_upload':",
