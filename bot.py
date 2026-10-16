@@ -1614,7 +1614,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['prompt_concept'] = (
                 (template.get('label', '') + ': ' + template.get('description', '')).strip(': ')
             )
-            context.user_data['stage'] = 'prompt_input'
+            context.user_data['stage'] = 'prompt_photo'
             await query.message.reply_text(
                 '✅ Idea video ditambah. Terus hantar satu gambar produk di sini. Idea hanya mengarah aksi dan tidak mengubah rupa produk.'
             )
@@ -1662,7 +1662,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
     elif action == 'prompt_idea:skip' and stage == 'prompt_idea_choice':
         context.user_data['prompt_concept'] = ''
-        context.user_data['stage'] = 'prompt_input'
+        context.user_data['stage'] = 'prompt_photo'
         await query.message.reply_text('📷 Terus hantar satu gambar produk di sini. Tiada menu pilihan tambahan diperlukan.')
     elif action == 'prompt_input:photo' and stage == 'prompt_input':
         context.user_data['stage'] = 'prompt_photo'
