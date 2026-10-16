@@ -162,7 +162,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
             curated_direction = (
                 "DIRECTOR'S CURATED PREMIUM STORYBOARD: Use this selected GitHub library storyboard as the primary shot plan. "
                 "Exactly four timed beats. Preserve the same product identity, packaging, color, scale and coherent set. "
-                "No on-screen text, captions, added logos, watermarks, dialogue or voice-over unless explicitly requested.\n\n"
+                "NO ON-SCREEN TEXT, captions, added logos, watermarks, dialogue or voice-over unless explicitly requested.\n\n"
                 + "\n\n".join(
                     str(item.get("time", "")) + " | " + str(item.get("shot", "")) + "\n"
                     + "VISUAL AND CAMERA BRIEF: " + str(item.get("direction", ""))
