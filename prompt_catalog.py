@@ -46,6 +46,11 @@ def connect():
         "UPDATE storyboard_prompt_styles SET template=?, version=4 WHERE style_key='white_doodle' AND version=3 AND template=?",
         (STYLES["white_doodle"][1], previous_v3)
     )
+    # A v2-to-v3 migration above uses the current seed; normalize that exact row to v4.
+    db.execute(
+        "UPDATE storyboard_prompt_styles SET version=4 WHERE style_key='white_doodle' AND version=3 AND template=?",
+        (STYLES["white_doodle"][1],)
+    )
     # Fresh databases seed the current template at the default version; mark that exact seed as v4.
     db.execute(
         "UPDATE storyboard_prompt_styles SET version=4 WHERE style_key='white_doodle' AND version=1 AND template=?",
