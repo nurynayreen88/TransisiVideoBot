@@ -158,12 +158,12 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
         shots = [
             ("01 | HOOK | 0.0–1.5s", "Start with a visually arresting close crop suited to the named product. Use a soft directional highlight without asserting a specific material. Camera: precise micro push-in, no sudden jump. End with movement that motivates the reveal."),
             ("02 | REVEAL | 1.5–3.0s", "Reveal the complete named product in a carefully balanced frame. Camera: controlled pull-back with believable scale and shape. Let the background separate naturally through restrained depth and contact shadow. Transition from the hook with matching movement and consistent lighting."),
-            ("03 | CONTEXT | 3.0–5.0s", "Keep the unchanged product in the same selected setting without suggesting an unsupported function or inventing props. Show convincing surface contact, natural reflections and realistic perspective. Use a gentle camera drift to create depth while keeping the reference-facing product geometry recognizable. Transition through a subtle dissolve or match cut."),
+            ("03 | CONTEXT | 3.0–5.0s", "Keep the named product in the same selected setting without suggesting an unsupported function or inventing props. Show convincing surface contact, natural reflections and realistic perspective. Use a gentle camera drift to create depth while keeping the product presentation recognizable. Transition through a subtle dissolve or match cut."),
             ("04 | DETAIL | 5.0–7.0s", "Select one plausible generic detail view suited to the product category, such as silhouette, edge, handle or closure when applicable. Use a measured macro-style push, controlled depth of field and soft grazing light. Do not invent materials, labels or hidden features. Transition by matching the detail's position into the next hero composition."),
             ("05 | HERO | 7.0–8.5s", "Present the product as the unmistakable visual centerpiece. Camera instruction: use a restrained, reference-safe variation of the primary movement: " + camera + " Use restrained premium edge lighting, realistic material response and uncluttered negative space. Keep the product presentation consistent with its name and do not fabricate branding. Build visual emphasis without aggressive spinning or deformation."),
             ("06 | CLOSING | 8.5–10.0s", "Return to a clean full-product hero frame with balanced framing. Slow the movement into a confident hold, then apply a subtle graceful fade. Preserve a clear product silhouette and stable highlights. Do not invent a slogan, price, call-to-action text or new logo.")
         ]
-        direction = ("DIRECTOR'S SIX-SHOT STORYBOARD: Deliver one cohesive commercial using the SAME reference-facing product view throughout. Treat the six shots as framing and editing beats, not six newly generated product angles. "
+        direction = ("DIRECTOR'S SIX-SHOT STORYBOARD: Deliver one cohesive commercial using a consistent product presentation throughout. Treat the six shots as framing and editing beats, not six newly invented product designs. "
                      "Keep the same product identity, spatial orientation, visual palette and believable light direction in every shot.\n\n"
                      + "\n\n".join(title + "\nVISUAL AND CAMERA BRIEF: " + detail for title, detail in shots)
                      + "\n\nEDITING AND CONTINUITY: Respect the specified timing as closely as the generator permits. "
@@ -194,7 +194,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
         )
     if duration == 20:
         direction = (
-            "DIRECTOR'S SINGLE-TAKE 20-SECOND BRIEF: 0-4s establish the reference-facing product in its setting; "
+            "DIRECTOR'S SINGLE-TAKE 20-SECOND BRIEF: 0-4s establish the named product in its setting; "
             "4-8s restrained camera push or lateral movement with realistic parallax; "
             "8-12s emphasize a genuinely visible detail using subtle focus and light; "
             "12-16s ease back to a complete recognizable product view with the same identity and background; "
@@ -202,7 +202,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
             "avoid added text or invented features. This is one coherent commercial, not a slideshow."
         )
     if part == 1:
-        direction = ("FIRST CLIP 10s: 0-2s establish the product; 2-5s gentle reference-facing movement; "
+        direction = ("FIRST CLIP 10s: 0-2s establish the product; 2-5s gentle product-focused movement; "
                      "5-8s focus on one genuinely visible detail; 8-10s return to a stable full-product frame, "
                      "hold the final frame without fade to connect directly into Part 2.")
     elif part == 2:
@@ -218,14 +218,14 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
     if is_fashion and mode != "storyboard" and part == 0 and duration != 20:
         direction = (
             "DIRECTOR'S NATURAL FASHION TRY-ON BRIEF: Create one continuous, believable 10-second vertical fashion video, "
-            "like authentic iPhone footage filmed at home before going out. If a person is visible in the reference, keep the same person and natural appearance; "
-            "if no person is visible, do not invent one. If the reference shows a mirror selfie, retain the mirror-selfie viewpoint and phone. "
-            "0–2s | ESTABLISH: Begin with the same outfit, person, pose and room as the reference; use soft natural morning light and realistic skin and fabric texture. "
+            "like authentic iPhone footage filmed at home before going out. If a person is included in the scene, keep their appearance and outfit consistent; "
+            "if no person is needed for the scene, do not add one. For a mirror-selfie style, use a believable mirror and phone composition. "
+            "0–2s | ESTABLISH: Use a simple, consistent outfit and believable room setting; use soft natural morning light and realistic skin and fabric texture. "
             "2–5s | NATURAL ACTION: The person makes one small, relaxed movement appropriate to the reference, such as gently lowering the phone a little to reveal more of the outfit or making a slight body turn. "
-            "Do not force an action that the reference cannot support. 5–8s | OUTFIT DETAIL: Let the camera or person move subtly to show the real visible fabric pattern, sleeve, neckline and cut; never fabricate hidden garment details. "
+            "Keep actions simple and plausible. 5–8s | OUTFIT DETAIL: Let the camera or person move subtly to show the stated garment style; never fabricate hidden garment details. "
             "8–10s | FINISH: Return to a relaxed, natural pose and hold briefly. Keep movement subtle, human and physically plausible; no dancing, exaggerated posing or scene changes. "
             "FASHION PRODUCT LOCK: The exact garment must remain unchanged frame to frame—same color, print, pattern placement, neckline, sleeves, cut, fit, fabric, accessories and proportions. "
-            "Keep the same hijab style and handbag only if they are visible in the reference. Never redesign, recolor, reshape, add or remove outfit details. "
+            "Keep the chosen hijab style and handbag presentation consistent. Never redesign, recolor, reshape, add or remove stated outfit details. "
             "Use one consistent home setting, authentic phone-camera perspective, soft daylight and crisp fabric detail. No collage, split screen, poster layout, outfit change, plastic skin or CGI."
         )
     return (
@@ -236,6 +236,6 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
         + direction + "\n\n" + negative + "\n\n"
         "FINAL QUALITY CHECK: Consistent identity in every frame, natural physics, clean edges, "
         "stable illumination, smooth temporal coherence and polished affiliate-ad aesthetics. "
-        "If the reference does not support a requested viewpoint, use a safe crop or modest "
+        "If the product name does not support a requested feature or viewpoint, use a safe crop or modest "
         "2D camera movement instead of hallucinating the product."
     )
