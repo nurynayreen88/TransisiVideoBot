@@ -63,6 +63,7 @@ def _clean_reference(product):
         if sep and key.strip().upper() in {
             "NAMA_PRODUK", "KATEGORI", "TEKS_DISAHKAN", "CIRI_BERTULIS",
             "CIRI_VISUAL", "VISIBLE OBSERVATIONS", "OPTIONAL USER DETAILS",
+            "VERIFIED IMAGE OBSERVATIONS", "USER-PROVIDED PRODUCT DETAILS",
         }:
             val = val.strip()
             if val and val.upper() not in {
