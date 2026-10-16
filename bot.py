@@ -1781,7 +1781,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             waiting = await query.message.reply_text('⏳ DALAM PROSES — 0%' + chr(10) + 'Menyusun prompt...')
             try:
                 product_name = context.user_data.get('prompt_product_name', '').strip()
-                product = 'NAMA_PRODUK: ' + product_name + '. Optional user details: ' + context.user_data.get('prompt_product', '')
+                product = 'NAMA_PRODUK: ' + product_name + chr(10) + 'Optional user details: ' + context.user_data.get('prompt_product', '')
                 scene = context.user_data.get('prompt_scene', 'clean studio background')
                 prompt = build_prompt(
                     'storyboard', product, scene, motions[motion],
