@@ -26,6 +26,8 @@ jobs:
           python-version: "3.11"
       - name: Check Python syntax
         run: python -m py_compile bot.py prompt_catalog.py prompt_engine.py product_reference_sheet.py
+      - name: Install image-processing test dependency
+        run: python -m pip install 'Pillow>=10.4,<12'
       - name: Test product reference sheet and ChatGPT handoff prompt
         run: python -m unittest discover -s tests -p 'test_*.py'
       - name: Validate prompt library structure
