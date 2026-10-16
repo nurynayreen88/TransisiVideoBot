@@ -260,7 +260,7 @@ jobs:
                   "PRODUCT CATEGORY DIRECTION: Treat this as a bag",
                   "Keep handles and straps plausible",
                   "Do not assume exact materials, compartments, hardware or accessories",
-                  "No invented features",
+                  "Do not invent material, branding or hardware",
                   "vertical 9:16",
               ):
                   assert required.casefold() in handbag_prompt.casefold(), (
