@@ -66,6 +66,32 @@ jobs:
                   assert required in text, (
                       f"Prompt {prompt['id']} is missing required reference/output rule: {required}"
                   )
+          # Every curated entry must carry its own timed premium storyboard.
+          storyboard_signatures = set()
+          for prompt in prompts:
+              storyboard = prompt.get("storyboard", [])
+              assert len(storyboard) == 4, (
+                  f"Prompt {prompt['id']} must have four timed storyboard shots"
+              )
+              expected_times = ["0–2s", "2–6s", "6–8s", "8–10s"]
+              actual_times = [shot.get("time") for shot in storyboard]
+              assert actual_times == expected_times, (
+                  f"Prompt {prompt['id']} has invalid storyboard timing: {actual_times}"
+              )
+              assert all(shot.get("shot") and shot.get("direction") for shot in storyboard), (
+                  f"Prompt {prompt['id']} has an incomplete storyboard"
+              )
+              assert "PREMIUM STORYBOARD — EXACTLY 10 SECONDS:" in prompt["prompt"], (
+                  f"Prompt {prompt['id']} is missing its embedded storyboard"
+              )
+              assert "CINEMATOGRAPHY & CONTINUITY:" in prompt["prompt"], (
+                  f"Prompt {prompt['id']} is missing premium continuity direction"
+              )
+              storyboard_signatures.add("|".join(shot["direction"] for shot in storyboard))
+          assert len(storyboard_signatures) >= int(len(prompts) * 0.7), (
+              "Storyboard diversity is too low; most prompts appear to reuse the same shot plan"
+          )
+
           bot = Path("bot.py").read_text(encoding="utf-8")
           required_flow_markers = [
               "if context.user_data.get('stage') == 'prompt_upload':",
