@@ -65,42 +65,36 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
     art = (
         f"ART DIRECTION: Premium commercial product cinematography. Environment: {scene}. "
         "Clean, intentional negative space; product is the unmistakable hero. Soft large-key illumination, "
-        "controlled fill, realistic contact shadow and restrained edge highlights. Preserve true-to-reference "
-        "surface texture and legibility; avoid excessive bloom or artificial plastic shine. "
+        "controlled fill, realistic contact shadow and restrained edge highlights. Use neutral, plausible "
+        "surface rendering without claiming unprovided materials. Avoid excessive bloom or artificial plastic shine. "
         "Use elegant pacing, physically plausible movement and stable framing."
     )
     negative = (
-        "STRICT EXCLUSIONS: Preserve the exact reference identity and proportions. No dramatic spinning, flying product, aggressive morph transitions or scene changes. "
-        "No invented features, extra accessories, duplicated products, changing logos, altered garment patterns, changed clothing, random props, floating geometry, distorted edges, "
-        "flicker, jitter, abrupt exposure shifts, plastic skin or unnatural hands. Do not add subtitles, UI, watermarks or promotional wording not explicitly requested. "
-        "If the reference contains a person, preserve that same person's visible identity, face, hairstyle, skin tone and outfit; do not replace them with another person. "
-        "Never invent unseen product surfaces or attempt a full 360-degree rotation from one reference image."
+        "STRICT EXCLUSIONS: Keep the product presentation plausible and visually consistent with the supplied product name. "
+        "No dramatic spinning, flying product, aggressive morph transitions or abrupt scene changes. "
+        "No invented features, extra accessories, duplicated products, fabricated logos or labels, random props that imply included items, "
+        "floating geometry, distorted edges, flicker, jitter, abrupt exposure shifts, plastic-looking surfaces or unnatural hands. "
+        "Do not add subtitles, UI, watermarks or promotional wording not explicitly requested. "
+        "Do not claim to reproduce unseen or verified details because no reference image is provided."
     )
     if mode == "storyboard":
         style_key, style_name, style_template = resolve(style)
         doodle = style_key == "white_doodle"
         hook = product_hook(product)
         evidence_rules = (
-            "PRODUCT EVIDENCE PRIORITY: NAMA_PRODUK is the exact printed product name only if marked legible; "
-            "preserve its spelling, brand and model verbatim. TEKS_DISAHKAN and CIRI_BERTULIS are claims printed "
-            "on packaging, NOT independently proven benefits: attribute them to the label if used. "
-            "CIRI_VISUAL lists only features directly visible in the image. "
-            "Do not replace precise visible product details with generic marketing adjectives. "
-            "Use a feature callout only if it can be traced to a specific CIRI_VISUAL, a legible CIRI_BERTULIS, "
-            "or explicit user-provided information consistent with the photo. "
-            "If evidence is missing or uncertain, omit that callout entirely; never fill a slot with a guessed feature. "
-            "Never reconstruct blurry letters or invent an exact model number. "
+            "PRODUCT NAME RULE: Preserve the user-provided product name and spelling. "
+            "The name is the only product evidence available; do not claim to have inspected a photo or packaging. "
+            "Use only features explicitly stated in the name or optional user text. "
+            "Do not invent materials, dimensions, compartments, accessories, product benefits, model numbers or specifications. "
+            "If a detail is unknown, keep it neutral and omit the claim."
         )
 
         hook_direction = (
-            "ON-SCREEN HOOK (VERIFIED CATEGORY ONLY): Display EXACTLY '" + hook + "' at the top safe area "
-            "in the opening 0-2s. This wording identifies the product only and makes no unsupported benefit claim. "
-            "Keep the product unobstructed; for white doodle add a small white underline and two sparkles. "
-            "Do not generate any additional unverified promotional copy. If text rendering is unreliable, "
-            "reserve space for accurate text overlay in editing. "
+            "ON-SCREEN HOOK: Display EXACTLY '" + hook + "' at the top safe area in the opening 0-2s. "
+            "This is a neutral category/name hook only, not a product benefit claim. "
+            "Keep the product unobstructed and do not add any other unverified promotional copy. "
         ) if hook else (
-            "NO ON-SCREEN HOOK TEXT: The product identity is not sufficiently verified. "
-            "Begin with the product image and decorative white doodle only; leave out all headline text. "
+            "NO ON-SCREEN HOOK TEXT: Begin with a clean product reveal and no headline. "
             "Never guess a category, benefit, price, popularity or product name."
         )
         if doodle:
@@ -152,7 +146,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
             + (("OPTIONAL CREATIVE CONCEPT: " + concept + ". Use it only to guide a suitable, physically plausible action or story beat; "
                  "do not treat it as proof of product features, benefits, included accessories or unseen details. "
                  "If the idea conflicts with the reference image, ignore the conflicting part.\n\n") if concept else "")
-            + "CONTINUITY: Preserve exact shape, color, visible logo and count across the entire video. "
+            +  "CONTINUITY: Keep a consistent, plausible presentation of the named product throughout the video. "
             "Use soft physically believable lighting and stable background. "
             "Do not morph the object, invent accessories or cover its visible branding. "
             "For white doodle, the graphic overlays are explicitly REQUIRED and are not captions or UI. "
@@ -163,9 +157,9 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
             ("01 | HOOK | 0.0–1.5s", "Start with a visually arresting close crop of a genuinely visible feature. Establish the product's material and silhouette with a soft directional highlight. Camera: precise micro push-in, no sudden jump. Keep focus locked on the visible feature. End with movement that motivates the reveal."),
             ("02 | REVEAL | 1.5–3.0s", "Reveal the complete product in a carefully balanced frame. Camera: controlled pull-back within the original reference-facing view, maintaining exact scale and shape. Let the background separate naturally through restrained depth and contact shadow. Transition from the hook with matching movement and consistent lighting."),
             ("03 | CONTEXT | 3.0–5.0s", "Keep the unchanged product in the same selected setting without suggesting an unsupported function or inventing props. Show convincing surface contact, natural reflections and realistic perspective. Use a gentle camera drift to create depth while keeping the reference-facing product geometry recognizable. Transition through a subtle dissolve or match cut."),
-            ("04 | DETAIL | 5.0–7.0s", "Select one authentic detail visible in the uploaded photograph: texture, finish, seam, component, packaging or label. Use a measured macro-style push, controlled depth of field and soft grazing light. Never reconstruct illegible lettering or manufacture additional details. Transition by matching the detail's position into the next hero composition."),
-            ("05 | HERO | 7.0–8.5s", "Present the product as the unmistakable visual centerpiece. Camera instruction: use a restrained, reference-safe variation of the primary movement: " + camera + " Use restrained premium edge lighting, realistic material response and uncluttered negative space. The product must remain completely consistent with the reference, including its visible branding. Build visual emphasis without aggressive spinning or deformation."),
-            ("06 | CLOSING | 8.5–10.0s", "Return to a clean full-product packshot with balanced framing. Slow the movement into a confident hold, then apply a subtle graceful fade. Preserve a clear product silhouette and stable highlights. Do not invent a slogan, price, call-to-action text or new logo.")
+            ("04 | DETAIL | 5.0–7.0s", "Select one plausible generic detail view suited to the product category, such as silhouette, edge, handle or closure when applicable. Use a measured macro-style push, controlled depth of field and soft grazing light. Do not invent materials, labels or hidden features. Transition by matching the detail's position into the next hero composition."),
+            ("05 | HERO | 7.0–8.5s", "Present the product as the unmistakable visual centerpiece. Camera instruction: use a restrained, reference-safe variation of the primary movement: " + camera + " Use restrained premium edge lighting, realistic material response and uncluttered negative space. Keep the product presentation consistent with its name and do not fabricate branding. Build visual emphasis without aggressive spinning or deformation."),
+            ("06 | CLOSING | 8.5–10.0s", "Return to a clean full-product hero frame with balanced framing. Slow the movement into a confident hold, then apply a subtle graceful fade. Preserve a clear product silhouette and stable highlights. Do not invent a slogan, price, call-to-action text or new logo.")
         ]
         direction = ("DIRECTOR'S SIX-SHOT STORYBOARD: Deliver one cohesive commercial using the SAME reference-facing product view throughout. Treat the six shots as framing and editing beats, not six newly generated product angles. "
                      "Keep the same product identity, spatial orientation, visual palette and believable light direction in every shot.\n\n"
