@@ -60,7 +60,7 @@ jobs:
               )
               text = prompt["prompt"].casefold()
               for required in (
-                  "uploaded", "image", "strict output rules:", "no on-screen text",
+                  "no uploaded image", "no ai image analysis", "strict output rules:", "no on-screen text",
                   "logos", "exactly 10 seconds", "vertical 9:16"
               ):
                   assert required in text, (
@@ -90,8 +90,8 @@ jobs:
                   return prompt_text
               note = (
                   "PRODUCT NAME / DETAILS FROM USER: " + details +
-                  ". Use these details only as supporting context. The uploaded image "
-                  "remains the sole visual source of truth; never invent or alter product features.\\n\\n"
+                  ". The product name is the source of truth; do not invent or alter unprovided product features. "
+                  "\\n\\n"
               )
               first_sentence_end = prompt_text.find(". ")
               if first_sentence_end >= 0:
@@ -100,18 +100,18 @@ jobs:
 
           generated_cases = 0
           for prompt in prompts:
-              for details in ("", "Example product name; use exact appearance in reference image"):
+              for details in ("", "Example product name; do not assume unprovided features"):
                   generated = "PROMPT VIDEO — 10 SAAT\\n\\n" + inject_details(prompt["prompt"], details)
                   assert generated.startswith("PROMPT VIDEO — 10 SAAT\\n\\n")
                   assert "STRICT OUTPUT RULES:" in generated
-                  assert "Preserve the exact product shape" in generated
-                  assert "branding, logos, and printed details shown in the uploaded image" in generated
+                  assert "Keep the product presentation consistent" in generated
+                  assert "no uploaded image" in generated
                   chunks = [generated[index:index + 3800] for index in range(0, len(generated), 3800)] or [generated]
                   assert "".join(chunks) == generated, f"Prompt was truncated: {prompt['id']}"
                   assert all(len(chunk) <= 3800 for chunk in chunks), f"Unsafe chunk length: {prompt['id']}"
                   if details:
                       assert "PRODUCT NAME / DETAILS FROM USER:" in generated
-                      assert "sole visual source of truth" in generated
+                      assert "product name is the source of truth" in generated
                   generated_cases += 1
 
           # Regression checks for the reusable White Doodle storyboard style.
@@ -143,7 +143,7 @@ jobs:
                   assert version == 4, f"Unexpected White Doodle template version: {version}"
 
               uncertain = (
-                  "Visible observations (verify against reference image): . "
+                  "PRODUCT NAME: unknown. "
                   "Optional user details: "
               )
               first = build_prompt(
