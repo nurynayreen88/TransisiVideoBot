@@ -3252,6 +3252,8 @@
       "6-8s",
       "8-10s"
     ],
-    "rule": "Each prompt entry carries its own product-specific storyboard, shot actions, premium cinematography, continuity and strict text-only product identity constraints. Timings and actions must remain specific to the concept."
+    "rule": "Each prompt entry carries its own product-specific storyboard, shot actions, premium cinematography, continuity and strict text-only product identity constraints. Timings and actions must remain specific to the concept.",
+    "unique_storyboards": true,
+    "unique_shot_plans_required": true
   }
 }
