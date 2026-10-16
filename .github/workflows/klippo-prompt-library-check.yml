@@ -1,0 +1,119 @@
+name: Klippo prompt library checks
+
+on:
+  push:
+    branches:
+      - staging/klippo-library-main-port
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "bot.py"
+      - "prompts/prompt_library.json"
+      - ".github/workflows/klippo-prompt-library-check.yml"
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Check Python syntax
+        run: python -m py_compile bot.py
+      - name: Validate prompt library structure
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          path = Path("prompts/prompt_library.json")
+          data = json.loads(path.read_text(encoding="utf-8"))
+          categories = data.get("categories", [])
+          prompts = data.get("prompts", [])
+          assert categories, "No categories found"
+          assert prompts, "No prompts found"
+
+          prompt_ids = [item.get("id") for item in prompts]
+          assert all(prompt_ids), "A prompt is missing its id"
+          assert len(prompt_ids) == len(set(prompt_ids)), "Duplicate prompt ids found"
+          by_id = {item["id"]: item for item in prompts}
+
+          category_ids = [item.get("id") for item in categories]
+          assert len(category_ids) == len(set(category_ids)), "Duplicate category ids found"
+          for category in categories:
+              assert category.get("label"), f"Category missing label: {category}"
+              for prompt_id in category.get("prompt_ids", []):
+                  assert prompt_id in by_id, f"Missing prompt referenced by {category['id']}: {prompt_id}"
+                  assert by_id[prompt_id].get("category") == category["id"], (
+                      f"Category mismatch for prompt {prompt_id}"
+                  )
+
+          for prompt in prompts:
+              assert prompt.get("label") and prompt.get("prompt"), (
+                  f"Prompt missing label/text: {prompt.get('id')}"
+              )
+              text = prompt["prompt"].casefold()
+              for required in (
+                  "uploaded", "image", "strict output rules:", "no on-screen text",
+                  "logos", "exactly 10 seconds", "vertical 9:16"
+              ):
+                  assert required in text, (
+                      f"Prompt {prompt['id']} is missing required reference/output rule: {required}"
+                  )
+          bot = Path("bot.py").read_text(encoding="utf-8")
+          required_flow_markers = [
+              "if context.user_data.get('stage') == 'prompt_upload':",
+              "elif action == 'prompt_categories':",
+              "elif action.startswith('pcat:')",
+              "elif action.startswith('ptpl:')",
+              "PROMPT_LIBRARY_PATH",
+              "prompt_category_menu()",
+              "prompt_options_menu(category_id)",
+              "prompt_categories|pcat:[a-z0-9_]+|ptpl:[a-z0-9_]+",
+            "async def handle_image_or_receipt_document(",
+            "filters.Document.IMAGE | filters.Document.MimeType('application/pdf'), handle_image_or_receipt_document",
+          ]
+          missing = [marker for marker in required_flow_markers if marker not in bot]
+          assert not missing, f"Prompt-library flow markers missing from bot.py: {missing}"
+
+          # Exercise prompt generation for every library entry, with and without user details.
+          # Keep this in sync with inject_product_details() and Telegram's ordered chunking.
+          def inject_details(prompt_text, details):
+              details = " ".join((details or "").split()).strip()
+              if not details:
+                  return prompt_text
+              note = (
+                  "PRODUCT NAME / DETAILS FROM USER: " + details +
+                  ". Use these details only as supporting context. The uploaded image "
+                  "remains the sole visual source of truth; never invent or alter product features.\\n\\n"
+              )
+              first_sentence_end = prompt_text.find(". ")
+              if first_sentence_end >= 0:
+                  return prompt_text[:first_sentence_end + 2] + note + prompt_text[first_sentence_end + 2:]
+              return note + prompt_text
+
+          generated_cases = 0
+          for prompt in prompts:
+              for details in ("", "Example product name; use exact appearance in reference image"):
+                  generated = "PROMPT VIDEO — 10 SAAT\\n\\n" + inject_details(prompt["prompt"], details)
+                  assert generated.startswith("PROMPT VIDEO — 10 SAAT\\n\\n")
+                  assert "STRICT OUTPUT RULES:" in generated
+                  assert "Preserve the exact product shape" in generated
+                  assert "branding, logos, and printed details shown in the uploaded image" in generated
+                  chunks = [generated[index:index + 3800] for index in range(0, len(generated), 3800)] or [generated]
+                  assert "".join(chunks) == generated, f"Prompt was truncated: {prompt['id']}"
+                  assert all(len(chunk) <= 3800 for chunk in chunks), f"Unsafe chunk length: {prompt['id']}"
+                  if details:
+                      assert "PRODUCT NAME / DETAILS FROM USER:" in generated
+                      assert "sole visual source of truth" in generated
+                  generated_cases += 1
+
+          print(
+              f"Validated {len(categories)} categories, {len(prompts)} prompts, "
+              f"{generated_cases} generated prompt cases, and prompt-library flow markers."
+          )
+          PY

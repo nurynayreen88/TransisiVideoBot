@@ -1,0 +1,509 @@
+{
+  "schema_version": "1.0.0",
+  "title": "Klippo Category-Specific Video Prompt Library",
+  "language": "en",
+  "default_duration_seconds": 10,
+  "default_aspect_ratio": "9:16",
+  "usage_notes": [
+    "These are reusable, fixed prompt templates; do not randomly rewrite them at runtime.",
+    "Use the user's uploaded product image as the master visual reference.",
+    "Show category-specific prompt options after the user uploads a product image and chooses or confirms the category.",
+    "This file only adds a prompt library; it does not change video generation, menus, storage, billing, or deployment.",
+    "Prompts are for external image-to-video tools such as Gemini; Klippo's existing FFmpeg slideshow renderer does not animate the product as generative video.",
+    "Additional category templates are reusable prompts. Review category fit and product-lock behavior with sample products before production use."
+  ],
+  "categories": [
+    {
+      "id": "clothing",
+      "label": "Pakaian",
+      "emoji": "👗",
+      "prompt_ids": [
+        "fashion_walking_ootd_v1",
+        "fashion_mirror_selfie_v1",
+        "fashion_detail_showcase_v1",
+        "fashion_sit_stand_transition_v1",
+        "fashion_walk_past_camera_v1"
+      ]
+    },
+    {
+      "id": "bags",
+      "label": "Beg",
+      "emoji": "👜",
+      "prompt_ids": [
+        "bags_handheld_showcase_v1",
+        "bags_luxury_closeup_v1",
+        "bags_daily_carry_v1",
+        "bags_tabletop_pickup_v1",
+        "bags_office_storyboard_v1"
+      ]
+    },
+    {
+      "id": "shoes",
+      "label": "Kasut",
+      "emoji": "👟",
+      "prompt_ids": [
+        "shoes_on_feet_walk_v1",
+        "shoes_clean_product_reveal_v1",
+        "shoes_lace_and_step_v1",
+        "shoes_side_profile_reveal_v1"
+      ]
+    },
+    {
+      "id": "beauty",
+      "label": "Kosmetik & Kecantikan",
+      "emoji": "💄",
+      "prompt_ids": [
+        "beauty_texture_demo_v1",
+        "beauty_vanity_hero_v1",
+        "beauty_hand_swatches_v1",
+        "beauty_get_ready_counter_v1"
+      ]
+    },
+    {
+      "id": "gadgets",
+      "label": "Gajet & Elektronik",
+      "emoji": "📱",
+      "prompt_ids": [
+        "gadgets_real_use_demo_v1",
+        "gadgets_detail_reveal_v1",
+        "gadgets_unbox_on_desk_v1",
+        "gadgets_handheld_scale_v1"
+      ]
+    },
+    {
+      "id": "home",
+      "label": "Barangan Rumah",
+      "emoji": "🏠",
+      "prompt_ids": [
+        "home_before_after_use_v1",
+        "home_lifestyle_hero_v1",
+        "home_problem_solution_demo_v1",
+        "home_space_saver_demo_v1"
+      ]
+    },
+    {
+      "id": "accessories",
+      "label": "Jam & Aksesori",
+      "emoji": "⌚",
+      "prompt_ids": [
+        "jewellery_wrist_or_neck_detail_v1",
+        "accessories_tabletop_macro_v1",
+        "accessories_wrist_lifestyle_v1",
+        "accessories_gift_reveal_v1"
+      ]
+    },
+    {
+      "id": "food",
+      "label": "Makanan & Minuman",
+      "emoji": "🍱",
+      "prompt_ids": [
+        "food_packaging_to_serving_v1",
+        "food_texture_closeup_v1",
+        "food_pour_serve_v1",
+        "food_snack_opening_v1"
+      ]
+    },
+    {
+      "id": "stationery",
+      "label": "Alat Tulis & Keperluan Belajar",
+      "emoji": "✏️",
+      "prompt_ids": [
+        "stationery_desk_use_v1",
+        "stationery_organised_flatlay_v1",
+        "stationery_writing_demo_v1",
+        "stationery_schoolbag_pack_v1"
+      ]
+    },
+    {
+      "id": "sports",
+      "label": "Sukan & Aktiviti Luar",
+      "emoji": "🏃",
+      "prompt_ids": [
+        "sports_gear_ready_to_use_v1",
+        "sports_gear_detail_hero_v1",
+        "sports_gear_pack_ready_v1",
+        "sports_outdoor_hero_v1"
+      ]
+    }
+  ],
+  "prompts": [
+    {
+      "id": "fashion_walking_ootd_v1",
+      "category": "clothing",
+      "label": "Walking OOTD",
+      "duration_seconds": 10,
+      "style": "natural_ugc",
+      "description": "Model berjalan secara semula jadi untuk menunjukkan keseluruhan pakaian dan jatuhan kain.",
+      "prompt": "Create one continuous 10-second vertical 9:16 ultra-realistic fashion affiliate video using the uploaded image as the MASTER product reference. A real adult woman wears the exact outfit shown. ACTION: 0–2s: Start immediately with the model in a natural full-body frame, taking one relaxed step toward the camera. 2–5s: She walks slowly past the camera's center, allowing the outfit to move naturally; keep the full garment visible. 5–8s: She pauses and turns gently to a three-quarter angle, showing the silhouette and side cutting without exaggerated posing. 8–10s: She faces the camera again and finishes with a relaxed, confident stance. CAMERA: ordinary handheld phone footage, subtle natural camera movement, soft daylight in a believable home or walkway, realistic skin and fabric motion, crisp outfit details. PRODUCT LOCK: preserve the exact colour, print, print placement, neckline, sleeves, seams, length, cutting, fabric appearance, accessories and proportions visible in the reference. Do not redesign, recolour, add, remove or invent details. Keep the same adult model and outfit throughout. No text, captions, logos, watermark, cuts, transitions, split screen, outfit change, warped limbs, extra fingers, plastic skin or CGI look. One continuous take, exactly 10 seconds, vertical 9:16.\n\nSTRICT OUTPUT RULES: No on-screen text overlays, captions, subtitles, UI overlays, watermarks, or added/fabricated logos. Preserve the exact product shape, colour, material, pattern, packaging, and visible labels, branding, logos, and printed details shown in the uploaded image. Do not remove, rewrite, distort, or invent product marks. Do not invent product features or extra accessories. Keep movement natural, hands anatomically correct, and the product clearly in focus. Output exactly 10 seconds in vertical 9:16 format."
+    },
+    {
+      "id": "fashion_mirror_selfie_v1",
+      "category": "clothing",
+      "label": "Mirror Selfie",
+      "duration_seconds": 10,
+      "style": "casual_ugc",
+      "description": "Rakaman mirror selfie santai dengan gerakan telefon yang kecil dan realistik.",
+      "prompt": "Use the uploaded image as the MASTER reference. Create an exactly 10-second vertical 9:16 ultra-realistic iPhone mirror-selfie video of the same adult woman wearing the exact outfit. ACTION: 0–2s: She stands naturally before a full-length mirror, phone visible, as if filming an outfit check before leaving home. 2–5s: She gently lowers the phone to show the outfit from neckline to upper thigh or hem, according to garment length. 5–8s: She makes a small natural three-quarter turn so the silhouette and visible print can be seen. 8–10s: She returns to a relaxed mirror-selfie pose. Keep motion subtle and believable. ENVIRONMENT: soft natural window light, realistic lived-in Malaysian home, authentic phone footage, natural skin and hands, accurate mirror reflection, sharp fabric detail. PRODUCT LOCK: preserve the exact reference colour, print, neckline, sleeves, cut, length, material, proportions and visible accessories. Do not alter or invent any garment feature. Keep identity and hijab styling consistent if present in the reference. No text overlays, logos, watermarks, scene changes, outfit changes, split screens, distorted reflection, extra fingers, artificial face or CGI. One continuous shot.\n\nSTRICT OUTPUT RULES: No on-screen text overlays, captions, subtitles, UI overlays, watermarks, or added/fabricated logos. Preserve the exact product shape, colour, material, pattern, packaging, and visible labels, branding, logos, and printed details shown in the uploaded image. Do not remove, rewrite, distort, or invent product marks. Do not invent product features or extra accessories. Keep movement natural, hands anatomically correct, and the product clearly in focus. Output exactly 10 seconds in vertical 9:16 format."
+    },
+    {
+      "id": "fashion_detail_showcase_v1",
+      "category": "clothing",
+      "label": "Fabric & Cutting Detail",
+      "duration_seconds": 10,
+      "style": "product_detail_ugc",
+      "description": "Fokus kepada corak, tekstur dan potongan tanpa mereka butiran yang tidak kelihatan.",
+      "prompt": "Create a 10-second vertical 9:16 realistic fashion product video from the uploaded image, preserving the exact outfit. ACTION: Begin with a clear medium-full view of the model wearing the garment. The camera makes a slow, gentle push-in toward visible fabric details, then tracks slightly along the garment to reveal its real print, neckline, sleeve and cutting as visible in the reference. The model may lightly smooth one side of the garment once, using natural hands and minimal movement. End by easing back to show the overall silhouette. Use soft daylight and ordinary handheld smartphone footage, not a glossy CGI commercial. PRODUCT LOCK: exact original colour, pattern, pattern placement, fabric, seams, neckline, sleeve design, proportions and fit; no redesign, recolouring, embellishments or fabricated details. Do not zoom so close that the garment's identity is lost. Keep the face and hands realistic. No text, captions, logos, watermarks, cuts, transitions, outfit changes, deformed hands, plastic skin or CGI. One continuous take, exactly 10 seconds, vertical 9:16.\n\nSTRICT OUTPUT RULES: No on-screen text overlays, captions, subtitles, UI overlays, watermarks, or added/fabricated logos. Preserve the exact product shape, colour, material, pattern, packaging, and visible labels, branding, logos, and printed details shown in the uploaded image. Do not remove, rewrite, distort, or invent product marks. Do not invent product features or extra accessories. Keep movement natural, hands anatomically correct, and the product clearly in focus. Output exactly 10 seconds in vertical 9:16 format."
+    },
+    {
+      "id": "bags_handheld_showcase_v1",
+      "category": "bags",
+      "label": "Handbag Showcase",
+      "duration_seconds": 10,
+      "style": "natural_ugc",
+      "description": "Model memegang dan menunjukkan beg dari sudut yang munasabah.",
+      "prompt": "Use the uploaded product image as the MASTER reference. Create one 10-second vertical 9:16 ultra-realistic handbag affiliate video. A real adult woman naturally holds the exact same bag in a bright, believable lifestyle setting. ACTION: 0–2s: Start with the bag clearly visible at waist level, front facing camera. 2–5s: She gently lifts it and adjusts her grip to show the front panel and handles without covering key details. 5–8s: She turns the bag slightly to reveal only a modest side angle; do not invent unseen sides or hardware. 8–10s: She holds it steady in a clean hero view. CAMERA: natural handheld phone footage, soft daylight, realistic hands and shadows, sharp focus on the bag. PRODUCT LOCK: preserve exact bag shape, size, colour, material, texture, stitching, handle count, hardware, logo, label and visible compartments. Do not add/remove pockets, change branding, distort proportions or fabricate details. No text, extra logos, watermarks, fast cuts, floating objects, extra fingers, morphing, CGI or fake reflections.\n\nSTRICT OUTPUT RULES: No on-screen text overlays, captions, subtitles, UI overlays, watermarks, or added/fabricated logos. Preserve the exact product shape, colour, material, pattern, packaging, and visible labels, branding, logos, and printed details shown in the uploaded image. Do not remove, rewrite, distort, or invent product marks. Do not invent product features or extra accessories. Keep movement natural, hands anatomically correct, and the product clearly in focus. Output exactly 10 seconds in vertical 9:16 format."
+    },
+    {
+      "id": "bags_luxury_closeup_v1",
+      "category": "bags",
+      "label": "Luxury Detail Close-Up",
+      "duration_seconds": 10,
+      "style": "premium_product",
+      "description": "Rakaman dekat pada material, jahitan dan perkakasan yang benar-benar kelihatan.",
+      "prompt": "Create a 10-second vertical 9:16 premium yet photorealistic product video using the uploaded bag image as the sole visual source of truth. Start with a well-lit full view of the bag on a simple elegant surface. Slowly push the camera toward the material texture, stitching, handles and visible hardware, then slide gently across the front panel and finish with the entire bag back in frame. Use controlled natural window light, soft realistic shadows and a real camera-lens look. PRODUCT LOCK: retain the exact shape, proportions, colour, material, stitching, logo, hardware, handle construction and all visible details. Never invent unseen surfaces, compartments or labels; only show details supported by the reference. No hands unless they already appear in the reference. No text, captions, added branding, watermark, dramatic transformation, 360-degree rotation, object deformation, floating parts or CGI. One continuous shot, exactly 10 seconds, vertical 9:16.\n\nSTRICT OUTPUT RULES: No on-screen text overlays, captions, subtitles, UI overlays, watermarks, or added/fabricated logos. Preserve the exact product shape, colour, material, pattern, packaging, and visible labels, branding, logos, and printed details shown in the uploaded image. Do not remove, rewrite, distort, or invent product marks. Do not invent product features or extra accessories. Keep movement natural, hands anatomically correct, and the product clearly in focus. Output exactly 10 seconds in vertical 9:16 format."
+    },
+    {
+      "id": "shoes_on_feet_walk_v1",
+      "category": "shoes",
+      "label": "On-Foot Walk Test",
+      "duration_seconds": 10,
+      "style": "natural_ugc",
+      "description": "Kasut dipakai dan diperlihatkan melalui beberapa langkah perlahan.",
+      "prompt": "Create one exactly 10-second vertical 9:16 ultra-realistic footwear affiliate video based on the uploaded product image. Show an adult wearing the exact pair of shoes with simple neutral clothing that does not distract from the product. ACTION: Begin with a low camera angle showing both shoes clearly. The person takes two or three slow natural steps on a clean, level surface, pauses, then gently pivots one foot to show the visible side profile and toe shape, finishing with both shoes in frame. CAMERA: realistic handheld smartphone footage, daylight, natural foot movement and accurate contact shadows. PRODUCT LOCK: preserve the exact shoe design, colour, sole shape, laces/straps, stitching, logo and material from the reference. Keep left and right shoes consistent. Do not add design elements or invent hidden details. No running, jumping, unsafe movement, text, logos beyond the real product, watermark, cuts, warped feet, extra toes, floating shoes or CGI.\n\nSTRICT OUTPUT RULES: No on-screen text overlays, captions, subtitles, UI overlays, watermarks, or added/fabricated logos. Preserve the exact product shape, colour, material, pattern, packaging, and visible labels, branding, logos, and printed details shown in the uploaded image. Do not remove, rewrite, distort, or invent product marks. Do not invent product features or extra accessories. Keep movement natural, hands anatomically correct, and the product clearly in focus. Output exactly 10 seconds in vertical 9:16 format."
+    },
+    {
+      "id": "shoes_clean_product_reveal_v1",
+      "category": "shoes",
+      "label": "Clean Product Reveal",
+      "duration_seconds": 10,
+      "style": "studio_product",
+      "description": "Produk kasut dipaparkan atas permukaan bersih dengan gerakan kamera perlahan.",
+      "prompt": "Use the uploaded shoe image as the MASTER reference and create a 10-second vertical 9:16 photorealistic product showcase. Place the exact shoe or pair on a clean, understated surface with soft studio daylight. The camera begins with a clear three-quarter view, slowly slides from left to right to reveal the visible shape, sole, stitching and fastening, then eases back to a stable full-product view. Product stays grounded with realistic shadows and no unexplained rotation. PRODUCT LOCK: exact colour, shape, sole profile, upper material, laces, straps, stitching, logo and proportions. Do not add a second shoe unless a pair is shown in the reference; do not alter branding or fabricate unseen areas. No text, captions, watermarks, extra accessories, floating objects, morphing, abrupt cuts or CGI. Exactly 10 seconds, vertical 9:16.\n\nSTRICT OUTPUT RULES: No on-screen text overlays, captions, subtitles, UI overlays, watermarks, or added/fabricated logos. Preserve the exact product shape, colour, material, pattern, packaging, and visible labels, branding, logos, and printed details shown in the uploaded image. Do not remove, rewrite, distort, or invent product marks. Do not invent product features or extra accessories. Keep movement natural, hands anatomically correct, and the product clearly in focus. Output exactly 10 seconds in vertical 9:16 format."
+    },
+    {
+      "id": "beauty_texture_demo_v1",
+      "category": "beauty",
+      "label": "Texture & Application",
+      "duration_seconds": 10,
+      "style": "beauty_ugc",
+      "description": "Demonstrasi tekstur atau sapuan kecil dengan rupa produk dan pembungkusan kekal tepat.",
+      "prompt": "Create an exactly 10-second vertical 9:16 realistic beauty affiliate video using the uploaded product image as the MASTER reference. Keep the product packaging clearly visible and unchanged. If the reference supports it, show a clean close-up of the product beside a small realistic texture swatch on the back of an adult hand; otherwise keep the product closed and showcase the packaging only. ACTION: Start with the product facing camera, move closer to reveal its real packaging and visible texture, then return to a clean product hero frame. Use soft daylight, natural skin texture, accurate shadows and a neat everyday vanity setting. PRODUCT LOCK: exact packaging, bottle/jar/tube shape, cap, label, colour, logo and proportions. Do not invent ingredients, claims, shades, results or text. Do not show application on face unless clearly requested and supported. No added captions, claims, watermark, label distortion, extra fingers, unrealistic skin, CGI or abrupt cuts.\n\nSTRICT OUTPUT RULES: No on-screen text overlays, captions, subtitles, UI overlays, watermarks, or added/fabricated logos. Preserve the exact product shape, colour, material, pattern, packaging, and visible labels, branding, logos, and printed details shown in the uploaded image. Do not remove, rewrite, distort, or invent product marks. Do not invent product features or extra accessories. Keep movement natural, hands anatomically correct, and the product clearly in focus. Output exactly 10 seconds in vertical 9:16 format."
+    },
+    {
+      "id": "beauty_vanity_hero_v1",
+      "category": "beauty",
+      "label": "Vanity Hero Shot",
+      "duration_seconds": 10,
+      "style": "premium_lifestyle",
+      "description": "Produk kosmetik dalam suasana meja solek minimal dengan fokus pada label sebenar.",
+      "prompt": "Create a 10-second vertical 9:16 ultra-realistic beauty product hero video using the uploaded image as the exact product reference. Place the same product on a tidy, minimal vanity with soft morning light and subtle natural reflections. The camera performs a gentle push-in, a small side slide, then settles into a front-facing view where the original packaging and visible label remain legible and undistorted. Keep the background understated and never let props obscure the product. PRODUCT LOCK: exact product silhouette, packaging colour, cap, label, logo, typography and proportions. Do not rewrite or hallucinate label text, add claims, change shade names or invent extra products. No text overlays, watermarks, dramatic particles, floating objects, fake liquid splashes, CGI plastic appearance or scene changes. Exactly 10 seconds, vertical 9:16, realistic camera optics.\n\nSTRICT OUTPUT RULES: No on-screen text overlays, captions, subtitles, UI overlays, watermarks, or added/fabricated logos. Preserve the exact product shape, colour, material, pattern, packaging, and visible labels, branding, logos, and printed details shown in the uploaded image. Do not remove, rewrite, distort, or invent product marks. Do not invent product features or extra accessories. Keep movement natural, hands anatomically correct, and the product clearly in focus. Output exactly 10 seconds in vertical 9:16 format."
+    },
+    {
+      "id": "gadgets_real_use_demo_v1",
+      "category": "gadgets",
+      "label": "Everyday Use Demo",
+      "duration_seconds": 10,
+      "style": "tech_ugc",
+      "description": "Demonstrasi ringkas fungsi yang jelas dan munasabah untuk gajet.",
+      "prompt": "Create one 10-second vertical 9:16 realistic tech affiliate video using the uploaded gadget image as the MASTER product reference. Show the exact device on a clean desk in a believable everyday setting. ACTION: Start with a clear hero view, then show one simple, physically plausible interaction using a hand only if appropriate for the device. Move the camera slightly closer to the real buttons, ports or screen details visible in the reference, and finish with the full device clearly framed. PRODUCT LOCK: exact model appearance, shape, colour, buttons, ports, screen layout, logo and proportions. Do not invent functions, interfaces, accessories or specifications. If the screen content is not shown in the reference, keep it neutral rather than fabricating text. Realistic reflections and finger movement. No floating components, impossible physics, text overlays, watermark, extra fingers, UI hallucinations, morphing or CGI.\n\nSTRICT OUTPUT RULES: No on-screen text overlays, captions, subtitles, UI overlays, watermarks, or added/fabricated logos. Preserve the exact product shape, colour, material, pattern, packaging, and visible labels, branding, logos, and printed details shown in the uploaded image. Do not remove, rewrite, distort, or invent product marks. Do not invent product features or extra accessories. Keep movement natural, hands anatomically correct, and the product clearly in focus. Output exactly 10 seconds in vertical 9:16 format."
+    },
+    {
+      "id": "gadgets_detail_reveal_v1",
+      "category": "gadgets",
+      "label": "Tech Detail Reveal",
+      "duration_seconds": 10,
+      "style": "premium_product",
+      "description": "Kamera memperlihatkan bentuk dan butiran fizikal tanpa mendakwa fungsi yang tidak disahkan.",
+      "prompt": "Use the uploaded image as the sole visual source of truth and create a 10-second vertical 9:16 photorealistic gadget product reveal. Place the exact device on a simple neutral surface. Begin with a stable three-quarter hero shot, slowly slide the camera across the visible physical details, then make a subtle push-in toward the most distinctive visible feature and finish on a full view. Keep the device stationary; camera movement creates the effect. PRODUCT LOCK: preserve exact dimensions, shape, colour, finish, branding, buttons, ports and visible screen details. Never add accessories, alter the interface or invent unseen sides. Natural studio light, realistic contact shadow, crisp edges. No text, captions, watermarks, fake sparks, holograms, floating parts, rapid cuts, distortion or CGI. Exactly 10 seconds, vertical 9:16.\n\nSTRICT OUTPUT RULES: No on-screen text overlays, captions, subtitles, UI overlays, watermarks, or added/fabricated logos. Preserve the exact product shape, colour, material, pattern, packaging, and visible labels, branding, logos, and printed details shown in the uploaded image. Do not remove, rewrite, distort, or invent product marks. Do not invent product features or extra accessories. Keep movement natural, hands anatomically correct, and the product clearly in focus. Output exactly 10 seconds in vertical 9:16 format."
+    },
+    {
+      "id": "home_before_after_use_v1",
+      "category": "home",
+      "label": "Before & After Use",
+      "duration_seconds": 10,
+      "style": "lifestyle_demo",
+      "description": "Tunjuk penggunaan produk rumah melalui perubahan kecil yang realistik tanpa montaj keterlaluan.",
+      "prompt": "Create a 10-second vertical 9:16 ultra-realistic home-product affiliate video using the uploaded product image as the MASTER reference. Show the exact product in a believable, tidy home setting. ACTION: Start with the product clearly visible in its normal state. Demonstrate one simple, safe, plausible use that matches the product's visible purpose, with natural hand movement if needed. End with the product in use or neatly positioned so its design remains clearly visible. Keep the camera at a practical human viewpoint with subtle smartphone movement and natural daylight. PRODUCT LOCK: exact shape, colour, materials, components, branding and proportions. Do not invent functions, attachments, results or hidden parts. Avoid exaggerated before/after claims. No text overlays, watermarks, impossible physics, extra fingers, object morphing, floating objects or CGI. One continuous shot, exactly 10 seconds.\n\nSTRICT OUTPUT RULES: No on-screen text overlays, captions, subtitles, UI overlays, watermarks, or added/fabricated logos. Preserve the exact product shape, colour, material, pattern, packaging, and visible labels, branding, logos, and printed details shown in the uploaded image. Do not remove, rewrite, distort, or invent product marks. Do not invent product features or extra accessories. Keep movement natural, hands anatomically correct, and the product clearly in focus. Output exactly 10 seconds in vertical 9:16 format."
+    },
+    {
+      "id": "home_lifestyle_hero_v1",
+      "category": "home",
+      "label": "Lifestyle Product Hero",
+      "duration_seconds": 10,
+      "style": "warm_lifestyle",
+      "description": "Produk ditampilkan dalam ruang rumah sebenar dengan gerakan kamera perlahan.",
+      "prompt": "Create one 10-second vertical 9:16 photorealistic lifestyle product video using the uploaded product image as the exact MASTER reference. Place the product naturally in a relevant, uncluttered home environment with soft window light. The camera begins at a medium view, slowly pushes in to reveal the product's real materials and visible design, then gently shifts sideways and settles on a clear hero frame. Add no props that imply unverified features or block the product. PRODUCT LOCK: preserve exact product identity, colour, form, materials, labels, components and proportions. Do not redesign, recolour, duplicate or invent details. Realistic shadows and camera optics; no text, captions, watermarks, sudden cuts, floating items, artificial glow or CGI. Exactly 10 seconds, vertical 9:16.\n\nSTRICT OUTPUT RULES: No on-screen text overlays, captions, subtitles, UI overlays, watermarks, or added/fabricated logos. Preserve the exact product shape, colour, material, pattern, packaging, and visible labels, branding, logos, and printed details shown in the uploaded image. Do not remove, rewrite, distort, or invent product marks. Do not invent product features or extra accessories. Keep movement natural, hands anatomically correct, and the product clearly in focus. Output exactly 10 seconds in vertical 9:16 format."
+    },
+    {
+      "id": "fashion_sit_stand_transition_v1",
+      "category": "clothing",
+      "label": "Sit-to-Stand Outfit Reveal",
+      "duration_seconds": 10,
+      "style": "everyday_ugc",
+      "description": "Model duduk dan berdiri secara semula jadi untuk menunjukkan bagaimana pakaian jatuh ketika bergerak.",
+      "prompt": "Create one exactly 10-second vertical 9:16 photorealistic fashion affiliate video using the uploaded image as the MASTER reference. Show the same adult model wearing the exact garment in a bright, ordinary home setting. ACTION: 0–2s: Begin with the model seated naturally on a simple chair, outfit clearly visible. 2–5s: She stands up calmly and smooths the garment once with a natural hand movement. 5–8s: She takes one small step back and turns slightly to show the silhouette and fabric drape. 8–10s: She settles into a relaxed standing pose. CAMERA: ordinary handheld smartphone footage, one continuous take, soft daylight, realistic body movement and fabric physics. PRODUCT LOCK: preserve exact colour, print and placement, neckline, sleeves, seams, length, fit, fabric appearance and visible accessories from the reference. Do not redesign, recolour, add or remove details. Keep the same model and outfit throughout. No text, captions, logos, watermark, cuts, transitions, outfit changes, distorted anatomy, extra fingers, plastic skin or CGI. Exactly 10 seconds, vertical 9:16.\n\nSTRICT OUTPUT RULES: No on-screen text overlays, captions, subtitles, UI overlays, watermarks, or added/fabricated logos. Preserve the exact product shape, colour, material, pattern, packaging, and visible labels, branding, logos, and printed details shown in the uploaded image. Do not remove, rewrite, distort, or invent product marks. Do not invent product features or extra accessories. Keep movement natural, hands anatomically correct, and the product clearly in focus. Output exactly 10 seconds in vertical 9:16 format."
+    },
+    {
+      "id": "fashion_walk_past_camera_v1",
+      "category": "clothing",
+      "label": "Walk-Past Camera",
+      "duration_seconds": 10,
+      "style": "candid_ugc",
+      "description": "Rakaman biasa seolah-olah rakan merakam model berjalan melintasi kamera.",
+      "prompt": "Use the uploaded image as the MASTER product reference. Create one 10-second vertical 9:16 ultra-realistic candid fashion affiliate video. A real adult model wears the exact outfit and walks naturally across a simple, believable home entrance or shaded walkway. ACTION: Start with a full-body view. The model walks past the camera at a relaxed pace, pauses a few steps away, then turns her upper body slightly toward the camera so the outfit remains visible. End with a natural candid pose, not a runway pose. CAMERA: a friend filming on a phone, gentle handheld movement, natural daylight, authentic UGC style, realistic fabric sway and accurate proportions. PRODUCT LOCK: exact garment colour, pattern placement, neckline, sleeves, length, cutting, fabric and visible accessories. Do not change, invent, remove or duplicate details. Keep face and hands natural. No text, logos, watermarks, transitions, scene changes, fast motion, distorted limbs, plastic skin or CGI. One continuous shot, exactly 10 seconds, 9:16.\n\nSTRICT OUTPUT RULES: No on-screen text overlays, captions, subtitles, UI overlays, watermarks, or added/fabricated logos. Preserve the exact product shape, colour, material, pattern, packaging, and visible labels, branding, logos, and printed details shown in the uploaded image. Do not remove, rewrite, distort, or invent product marks. Do not invent product features or extra accessories. Keep movement natural, hands anatomically correct, and the product clearly in focus. Output exactly 10 seconds in vertical 9:16 format."
+    },
+    {
+      "id": "bags_daily_carry_v1",
+      "category": "bags",
+      "label": "Everyday Carry",
+      "duration_seconds": 10,
+      "style": "lifestyle_ugc",
+      "description": "Beg ditunjukkan sebagai sebahagian rutin harian tanpa menambah barang yang tidak disahkan.",
+      "prompt": "Create an exactly 10-second vertical 9:16 realistic handbag affiliate video using the uploaded image as the MASTER reference. Show an adult woman carrying the exact bag in a simple everyday setting such as a home entrance or quiet café corner. ACTION: Begin with the bag clearly visible at her side. She lifts it naturally by its existing handle or strap, carries it for two relaxed steps, then pauses and brings it forward for a clear front view. Keep the bag unobstructed. PRODUCT LOCK: preserve exact silhouette, colour, material, texture, stitching, handles, strap, hardware, logo and visible pockets. Do not add contents, compartments or accessories not shown in the reference. Natural phone footage, soft daylight, realistic grip and shadows. No text overlays, added branding, watermark, bag morphing, floating objects, extra fingers, abrupt cuts or CGI. One continuous take, exactly 10 seconds.\n\nSTRICT OUTPUT RULES: No on-screen text overlays, captions, subtitles, UI overlays, watermarks, or added/fabricated logos. Preserve the exact product shape, colour, material, pattern, packaging, and visible labels, branding, logos, and printed details shown in the uploaded image. Do not remove, rewrite, distort, or invent product marks. Do not invent product features or extra accessories. Keep movement natural, hands anatomically correct, and the product clearly in focus. Output exactly 10 seconds in vertical 9:16 format."
+    },
+    {
+      "id": "bags_tabletop_pickup_v1",
+      "category": "bags",
+      "label": "Tabletop Pick-Up",
+      "duration_seconds": 10,
+      "style": "product_lifestyle",
+      "description": "Beg bermula di atas meja sebelum diangkat dengan gerakan yang munasabah.",
+      "prompt": "Use the uploaded bag image as the sole product reference. Create a 10-second vertical 9:16 photorealistic product video. Place the exact bag on a clean tabletop near a window. ACTION: Start with a steady full view. An adult hand enters naturally, holds the existing handle or strap, and gently lifts the bag a short distance before setting it back down. The camera makes a subtle push-in to reveal visible material, stitching and hardware, then finishes on the complete bag. PRODUCT LOCK: exact shape, colour, dimensions, handles, strap, seams, hardware, logo and visible details. Do not invent unseen sides or compartments, alter branding, or make the bag float. Soft natural light, realistic contact shadows and phone-camera optics. No text, captions, watermarks, extra fingers, morphing, fast cuts or CGI. Exactly 10 seconds, vertical 9:16.\n\nSTRICT OUTPUT RULES: No on-screen text overlays, captions, subtitles, UI overlays, watermarks, or added/fabricated logos. Preserve the exact product shape, colour, material, pattern, packaging, and visible labels, branding, logos, and printed details shown in the uploaded image. Do not remove, rewrite, distort, or invent product marks. Do not invent product features or extra accessories. Keep movement natural, hands anatomically correct, and the product clearly in focus. Output exactly 10 seconds in vertical 9:16 format."
+    },
+    {
+      "id": "shoes_lace_and_step_v1",
+      "category": "shoes",
+      "label": "Lace-Up & First Steps",
+      "duration_seconds": 10,
+      "style": "footwear_ugc",
+      "description": "Kasut dipakai, tali atau pengikat disentuh hanya jika memang ada pada produk.",
+      "prompt": "Create an exactly 10-second vertical 9:16 realistic footwear affiliate video based on the uploaded shoe image. Show an adult seated on a chair wearing the exact shoes. ACTION: Start with both shoes visible. If the reference shows laces or an adjustable strap, the person makes one small, plausible adjustment; otherwise they simply place both feet flat on the floor. The person then stands and takes two slow steps, ending with both shoes clearly in frame. PRODUCT LOCK: preserve exact colour, toe shape, sole profile, material, stitching, laces or straps, logo and proportions. Never add laces or closures absent from the reference. Natural low camera angle, believable foot contact and daylight. No text, watermarks, running, jumping, deformed feet, extra toes, floating shoes or CGI. One continuous take, 10 seconds, vertical 9:16.\n\nSTRICT OUTPUT RULES: No on-screen text overlays, captions, subtitles, UI overlays, watermarks, or added/fabricated logos. Preserve the exact product shape, colour, material, pattern, packaging, and visible labels, branding, logos, and printed details shown in the uploaded image. Do not remove, rewrite, distort, or invent product marks. Do not invent product features or extra accessories. Keep movement natural, hands anatomically correct, and the product clearly in focus. Output exactly 10 seconds in vertical 9:16 format."
+    },
+    {
+      "id": "shoes_side_profile_reveal_v1",
+      "category": "shoes",
+      "label": "Side Profile Reveal",
+      "duration_seconds": 10,
+      "style": "clean_product_ugc",
+      "description": "Kamera rendah bergerak perlahan untuk menunjukkan profil kasut dan tapak.",
+      "prompt": "Use the uploaded image as the MASTER reference and create a 10-second vertical 9:16 photorealistic shoe showcase. Place the exact shoe or pair on a clean, level surface. Start with a clear three-quarter view, then move the camera slowly to a modest side angle to reveal the visible profile, sole and fastening. Finish with the full shoe or pair in a stable hero frame. Keep the shoes stationary; move the camera rather than rotating or morphing the product. PRODUCT LOCK: exact colour, shape, sole thickness, upper material, stitching, logo and all visible features. Do not add a second shoe unless the reference shows a pair. Soft realistic shadows, crisp detail, no text, captions, watermark, floating product, abrupt cuts, warped geometry or CGI. Exactly 10 seconds, vertical 9:16.\n\nSTRICT OUTPUT RULES: No on-screen text overlays, captions, subtitles, UI overlays, watermarks, or added/fabricated logos. Preserve the exact product shape, colour, material, pattern, packaging, and visible labels, branding, logos, and printed details shown in the uploaded image. Do not remove, rewrite, distort, or invent product marks. Do not invent product features or extra accessories. Keep movement natural, hands anatomically correct, and the product clearly in focus. Output exactly 10 seconds in vertical 9:16 format."
+    },
+    {
+      "id": "beauty_hand_swatches_v1",
+      "category": "beauty",
+      "label": "Hand Swatch Close-Up",
+      "duration_seconds": 10,
+      "style": "beauty_ugc",
+      "description": "Sapuan kecil di tangan hanya jika tekstur atau warna produk boleh ditunjukkan secara munasabah.",
+      "prompt": "Create an exactly 10-second vertical 9:16 photorealistic beauty product video using the uploaded image as the MASTER reference. Keep the original product package in frame and unchanged. If the product is visibly a cream, lotion, lipstick or similar swatchable cosmetic, show one small, realistic swatch on the back of an adult hand beside the product; otherwise do not invent a swatch and simply show the packaging. Slowly move closer to the product and visible texture, then return to a clean hero view. PRODUCT LOCK: exact package shape, cap, label, colour, logo and proportions. Do not invent ingredients, shade names, skin results or product claims. Natural skin and fingers, soft daylight, no text overlays, fake labels, watermarks, unrealistic liquid effects, extra fingers or CGI. Exactly 10 seconds, vertical 9:16.\n\nSTRICT OUTPUT RULES: No on-screen text overlays, captions, subtitles, UI overlays, watermarks, or added/fabricated logos. Preserve the exact product shape, colour, material, pattern, packaging, and visible labels, branding, logos, and printed details shown in the uploaded image. Do not remove, rewrite, distort, or invent product marks. Do not invent product features or extra accessories. Keep movement natural, hands anatomically correct, and the product clearly in focus. Output exactly 10 seconds in vertical 9:16 format."
+    },
+    {
+      "id": "beauty_get_ready_counter_v1",
+      "category": "beauty",
+      "label": "Get-Ready Counter Scene",
+      "duration_seconds": 10,
+      "style": "everyday_beauty",
+      "description": "Produk diletakkan di meja solek dengan tangan dewasa mengambil dan meletakkannya semula.",
+      "prompt": "Use the uploaded image as the MASTER product reference. Create one 10-second vertical 9:16 ultra-realistic beauty UGC video on a tidy everyday vanity. Start with the exact product standing upright and facing camera. An adult hand gently picks it up, holds it briefly at a readable angle without bending or changing the package, then places it back in its original position. Keep the real label as faithful as possible and avoid close-ups that distort typography. PRODUCT LOCK: exact packaging, cap, label, logo, colours, dimensions and visible contents. Do not add products, rewrite label text, invent benefits or show unsupported application. Soft morning light, realistic shadows, natural hand movement. No captions, extra branding, watermarks, label warping, extra fingers or CGI. One continuous take, exactly 10 seconds.\n\nSTRICT OUTPUT RULES: No on-screen text overlays, captions, subtitles, UI overlays, watermarks, or added/fabricated logos. Preserve the exact product shape, colour, material, pattern, packaging, and visible labels, branding, logos, and printed details shown in the uploaded image. Do not remove, rewrite, distort, or invent product marks. Do not invent product features or extra accessories. Keep movement natural, hands anatomically correct, and the product clearly in focus. Output exactly 10 seconds in vertical 9:16 format."
+    },
+    {
+      "id": "gadgets_unbox_on_desk_v1",
+      "category": "gadgets",
+      "label": "Desk Unbox Reveal",
+      "duration_seconds": 10,
+      "style": "tech_ugc",
+      "description": "Peranti dan aksesori hanya dikeluarkan jika jelas terdapat dalam gambar rujukan.",
+      "prompt": "Create a 10-second vertical 9:16 realistic tech product reveal using the uploaded image as the MASTER reference. Place the exact gadget on a neat desk. If the reference clearly includes its box or accessories, keep those same items; otherwise show only the device. ACTION: Start with the product and any reference-supported packaging in view. An adult hand gently moves the packaging aside only if it is present, then presents the device in a stable front or three-quarter view. The camera makes a subtle push-in to reveal visible buttons, ports and finish. PRODUCT LOCK: exact device shape, colour, logo, buttons, ports, screen and proportions; do not invent accessories or specifications. Natural lighting, realistic contact shadows, no text overlays, fake UI, watermarks, floating parts, morphing, extra fingers or CGI. Exactly 10 seconds, vertical 9:16.\n\nSTRICT OUTPUT RULES: No on-screen text overlays, captions, subtitles, UI overlays, watermarks, or added/fabricated logos. Preserve the exact product shape, colour, material, pattern, packaging, and visible labels, branding, logos, and printed details shown in the uploaded image. Do not remove, rewrite, distort, or invent product marks. Do not invent product features or extra accessories. Keep movement natural, hands anatomically correct, and the product clearly in focus. Output exactly 10 seconds in vertical 9:16 format."
+    },
+    {
+      "id": "gadgets_handheld_scale_v1",
+      "category": "gadgets",
+      "label": "Handheld Size & Finish",
+      "duration_seconds": 10,
+      "style": "tech_ugc",
+      "description": "Peranti dipegang secara semula jadi untuk menunjukkan saiz relatif tanpa membesar atau mengecil.",
+      "prompt": "Use the uploaded gadget image as the sole visual source of truth. Create an exactly 10-second vertical 9:16 photorealistic product video. An adult hand gently picks up the exact device, holds it at a natural distance for a brief size reference, then returns it to a clean desk. Keep the camera steady with subtle handheld phone movement and focus on the device's real finish and visible controls. PRODUCT LOCK: preserve exact shape, colour, dimensions relative to the hand, branding, buttons, ports and screen details. Do not activate screens or invent interfaces unless visible in the reference. Realistic grip and shadows. No text, watermarks, impossible hand positions, extra fingers, object deformation, floating objects or CGI. One continuous take, exactly 10 seconds, vertical 9:16.\n\nSTRICT OUTPUT RULES: No on-screen text overlays, captions, subtitles, UI overlays, watermarks, or added/fabricated logos. Preserve the exact product shape, colour, material, pattern, packaging, and visible labels, branding, logos, and printed details shown in the uploaded image. Do not remove, rewrite, distort, or invent product marks. Do not invent product features or extra accessories. Keep movement natural, hands anatomically correct, and the product clearly in focus. Output exactly 10 seconds in vertical 9:16 format."
+    },
+    {
+      "id": "home_problem_solution_demo_v1",
+      "category": "home",
+      "label": "Simple Problem-Solution Demo",
+      "duration_seconds": 10,
+      "style": "practical_demo",
+      "description": "Demonstrasi masalah dan kegunaan yang jelas, tanpa dakwaan hasil keterlaluan.",
+      "prompt": "Create a 10-second vertical 9:16 realistic home-product affiliate video using the uploaded product image as the MASTER reference. Show one ordinary, safe, plausible use that matches the product's clearly visible purpose. Start with the product in a normal setting, demonstrate one simple action, then show the practical result without exaggeration. Use a continuous take where possible, natural hand movement, soft home lighting and a clear view of the product. PRODUCT LOCK: exact form, colour, materials, components, labels and proportions. Do not invent features, attachments, performance claims or dramatic before-and-after results. If the product's purpose is unclear, show a clean lifestyle hero shot instead of guessing. No text overlays, watermarks, impossible physics, floating objects, extra fingers or CGI. Exactly 10 seconds, vertical 9:16.\n\nSTRICT OUTPUT RULES: No on-screen text overlays, captions, subtitles, UI overlays, watermarks, or added/fabricated logos. Preserve the exact product shape, colour, material, pattern, packaging, and visible labels, branding, logos, and printed details shown in the uploaded image. Do not remove, rewrite, distort, or invent product marks. Do not invent product features or extra accessories. Keep movement natural, hands anatomically correct, and the product clearly in focus. Output exactly 10 seconds in vertical 9:16 format."
+    },
+    {
+      "id": "home_space_saver_demo_v1",
+      "category": "home",
+      "label": "Space-Saving Showcase",
+      "duration_seconds": 10,
+      "style": "home_ugc",
+      "description": "Produk rumah ditunjukkan dalam ruang sebenar dengan skala dan fungsi yang munasabah.",
+      "prompt": "Use the uploaded image as the MASTER product reference. Create one exactly 10-second vertical 9:16 photorealistic home-product video in a believable tidy room. Start with the exact product in its natural place. The camera slowly moves closer as an adult demonstrates one simple, physically plausible feature that is visibly supported by the reference, then widens to show the product in context. Keep the room understated and product unobstructed. PRODUCT LOCK: preserve exact dimensions, shape, materials, colour, parts, branding and proportions. Do not invent folding mechanisms, storage space, attachments or results not supported by the reference. Natural daylight, realistic shadows, no text, captions, watermarks, morphing, impossible physics or CGI. One continuous take, 10 seconds, vertical 9:16.\n\nSTRICT OUTPUT RULES: No on-screen text overlays, captions, subtitles, UI overlays, watermarks, or added/fabricated logos. Preserve the exact product shape, colour, material, pattern, packaging, and visible labels, branding, logos, and printed details shown in the uploaded image. Do not remove, rewrite, distort, or invent product marks. Do not invent product features or extra accessories. Keep movement natural, hands anatomically correct, and the product clearly in focus. Output exactly 10 seconds in vertical 9:16 format."
+    },
+    {
+      "id": "jewellery_wrist_or_neck_detail_v1",
+      "category": "accessories",
+      "label": "Jewellery on Model",
+      "duration_seconds": 10,
+      "style": "premium_ugc",
+      "description": "Aksesori dipakai secara ringkas sambil mengekalkan reka bentuk dan bilangan komponen.",
+      "prompt": "Create an exactly 10-second vertical 9:16 photorealistic accessories affiliate video using the uploaded image as the MASTER reference. If the item is a watch or bracelet, show it naturally on an adult wrist; if it is a necklace or earrings, use a suitable adult model framing. If wearing it cannot be done reliably from the reference, show it on a simple display stand instead. Use a slow camera push-in and a small natural movement to catch realistic light on the actual material. PRODUCT LOCK: exact shape, colour, stone count, links, clasp, dial, markings, logo and visible details. Do not add gems, change the number of pieces or invent branding. No text, watermarks, excessive sparkle effects, distorted anatomy, extra fingers, morphing or CGI. Exactly 10 seconds, vertical 9:16.\n\nSTRICT OUTPUT RULES: No on-screen text overlays, captions, subtitles, UI overlays, watermarks, or added/fabricated logos. Preserve the exact product shape, colour, material, pattern, packaging, and visible labels, branding, logos, and printed details shown in the uploaded image. Do not remove, rewrite, distort, or invent product marks. Do not invent product features or extra accessories. Keep movement natural, hands anatomically correct, and the product clearly in focus. Output exactly 10 seconds in vertical 9:16 format."
+    },
+    {
+      "id": "accessories_tabletop_macro_v1",
+      "category": "accessories",
+      "label": "Accessory Detail Shot",
+      "duration_seconds": 10,
+      "style": "premium_product",
+      "description": "Paparan dekat aksesori di atas permukaan neutral dengan pantulan realistik.",
+      "prompt": "Use the uploaded accessory image as the sole visual source of truth. Create a 10-second vertical 9:16 premium photorealistic product video. Place the exact accessory on a neutral, elegant surface. The camera makes a slow, controlled slide and subtle push-in to reveal the real finish, texture, clasp and visible design, then returns to a complete product view. Keep all pieces grounded and stationary. PRODUCT LOCK: preserve exact shape, size, colour, material, stones, logo, markings, number of parts and proportions. Never add gems, change metal colour or fabricate unseen details. Soft studio daylight, realistic reflections and shadows. No text, captions, watermarks, magical sparkle, floating pieces, morphing or CGI. Exactly 10 seconds, vertical 9:16.\n\nSTRICT OUTPUT RULES: No on-screen text overlays, captions, subtitles, UI overlays, watermarks, or added/fabricated logos. Preserve the exact product shape, colour, material, pattern, packaging, and visible labels, branding, logos, and printed details shown in the uploaded image. Do not remove, rewrite, distort, or invent product marks. Do not invent product features or extra accessories. Keep movement natural, hands anatomically correct, and the product clearly in focus. Output exactly 10 seconds in vertical 9:16 format."
+    },
+    {
+      "id": "food_packaging_to_serving_v1",
+      "category": "food",
+      "label": "Packaging to Serving",
+      "duration_seconds": 10,
+      "style": "food_ugc",
+      "description": "Produk makanan dipaparkan dari bungkusan ke hidangan hanya jika penyediaan sesuai dan tidak mereka kandungan.",
+      "prompt": "Create an exactly 10-second vertical 9:16 appetising but photorealistic food affiliate video using the uploaded image as the MASTER reference. Begin with the exact food product and its original packaging clearly visible. If the product is ready to serve and the reference supports it, show a simple transition by placing a small serving beside the package; otherwise keep the package closed and showcase it attractively. Use a gentle camera push-in and natural kitchen light. PRODUCT LOCK: preserve exact package design, brand, label, food appearance and visible quantity. Do not invent ingredients, nutrition claims, flavours or contents hidden by the packaging. No added text, fake labels, watermarks, impossible food transformations, exaggerated steam or CGI. Exactly 10 seconds, vertical 9:16.\n\nSTRICT OUTPUT RULES: No on-screen text overlays, captions, subtitles, UI overlays, watermarks, or added/fabricated logos. Preserve the exact product shape, colour, material, pattern, packaging, and visible labels, branding, logos, and printed details shown in the uploaded image. Do not remove, rewrite, distort, or invent product marks. Do not invent product features or extra accessories. Keep movement natural, hands anatomically correct, and the product clearly in focus. Output exactly 10 seconds in vertical 9:16 format."
+    },
+    {
+      "id": "food_texture_closeup_v1",
+      "category": "food",
+      "label": "Texture & Appetite Close-Up",
+      "duration_seconds": 10,
+      "style": "food_product",
+      "description": "Rakaman dekat tekstur makanan sebenar tanpa menambah bahan atau hiasan yang tidak ditunjukkan.",
+      "prompt": "Use the uploaded food image as the MASTER reference and create a 10-second vertical 9:16 photorealistic food product video. Start with a clean view of the actual product, then make a slow close-up move to show its visible texture, surface and real colour before easing back to a complete view. Keep the food and packaging consistent with the reference. Add no garnish, sauce, filling, steam or ingredients unless they are visible in the supplied image. Natural appetising light, realistic detail and shadows, no dramatic transformations. Do not alter the brand label or package text. No captions, watermarks, floating food, excessive gloss, cartoon look or CGI. Exactly 10 seconds, vertical 9:16.\n\nSTRICT OUTPUT RULES: No on-screen text overlays, captions, subtitles, UI overlays, watermarks, or added/fabricated logos. Preserve the exact product shape, colour, material, pattern, packaging, and visible labels, branding, logos, and printed details shown in the uploaded image. Do not remove, rewrite, distort, or invent product marks. Do not invent product features or extra accessories. Keep movement natural, hands anatomically correct, and the product clearly in focus. Output exactly 10 seconds in vertical 9:16 format."
+    },
+    {
+      "id": "stationery_desk_use_v1",
+      "category": "stationery",
+      "label": "Desk Use Demonstration",
+      "duration_seconds": 10,
+      "style": "study_ugc",
+      "description": "Alat tulis ditunjukkan digunakan di meja belajar tanpa teks rekaan yang mengganggu.",
+      "prompt": "Create an exactly 10-second vertical 9:16 realistic stationery affiliate video using the uploaded product image as the MASTER reference. Place the exact stationery item on a tidy study desk with simple paper and neutral supplies only if they do not distract. An adult hand picks up or uses the item in one plausible way supported by its design, then places it back beside the reference product. Keep the product clearly visible and preserve all markings and branding. PRODUCT LOCK: exact shape, colour, dimensions, cap, nib, clips, buttons, label and visible features. Do not invent functions or write legible generated text on paper. Soft daylight, natural hand movement, no text overlays, watermark, extra fingers, morphing or CGI. One continuous shot, 10 seconds, vertical 9:16.\n\nSTRICT OUTPUT RULES: No on-screen text overlays, captions, subtitles, UI overlays, watermarks, or added/fabricated logos. Preserve the exact product shape, colour, material, pattern, packaging, and visible labels, branding, logos, and printed details shown in the uploaded image. Do not remove, rewrite, distort, or invent product marks. Do not invent product features or extra accessories. Keep movement natural, hands anatomically correct, and the product clearly in focus. Output exactly 10 seconds in vertical 9:16 format."
+    },
+    {
+      "id": "stationery_organised_flatlay_v1",
+      "category": "stationery",
+      "label": "Organised Flat-Lay Reveal",
+      "duration_seconds": 10,
+      "style": "clean_product",
+      "description": "Produk alat tulis dipaparkan dari sudut atas dengan susunan kemas dan tanpa aksesori yang mengelirukan.",
+      "prompt": "Use the uploaded stationery image as the MASTER product reference. Create a 10-second vertical 9:16 photorealistic overhead product video. Start with the exact product neatly placed on a clean desk. The camera glides slowly across it and gently tilts to a shallow angle, revealing the visible shape, texture and details, then settles on a clear hero frame. Only include additional objects if they are neutral and do not imply they come with the product. PRODUCT LOCK: preserve exact colour, form, branding, labels, dimensions and number of pieces. Do not add accessories, alter printed text or fabricate features. Natural soft light and contact shadows. No captions, watermarks, floating items, warped typography, abrupt cuts or CGI. Exactly 10 seconds, vertical 9:16.\n\nSTRICT OUTPUT RULES: No on-screen text overlays, captions, subtitles, UI overlays, watermarks, or added/fabricated logos. Preserve the exact product shape, colour, material, pattern, packaging, and visible labels, branding, logos, and printed details shown in the uploaded image. Do not remove, rewrite, distort, or invent product marks. Do not invent product features or extra accessories. Keep movement natural, hands anatomically correct, and the product clearly in focus. Output exactly 10 seconds in vertical 9:16 format."
+    },
+    {
+      "id": "sports_gear_ready_to_use_v1",
+      "category": "sports",
+      "label": "Ready-to-Use Demo",
+      "duration_seconds": 10,
+      "style": "active_lifestyle",
+      "description": "Peralatan sukan ditunjukkan melalui satu aksi ringan dan selamat yang sesuai dengan produk.",
+      "prompt": "Create an exactly 10-second vertical 9:16 photorealistic sports gear affiliate video using the uploaded image as the MASTER reference. Show the exact product in a clean, safe, everyday exercise setting. Demonstrate one simple, low-intensity use that is clearly appropriate for the item, then return to a stable product view. Avoid risky stunts or claims about performance. PRODUCT LOCK: preserve exact shape, colour, materials, grip, straps, stitching, logos and visible components. Do not add accessories or invent specifications. Use natural light, realistic movement and accurate contact shadows. No text, watermarks, impossible physics, deformed anatomy, floating gear, extra fingers or CGI. Exactly 10 seconds, vertical 9:16.\n\nSTRICT OUTPUT RULES: No on-screen text overlays, captions, subtitles, UI overlays, watermarks, or added/fabricated logos. Preserve the exact product shape, colour, material, pattern, packaging, and visible labels, branding, logos, and printed details shown in the uploaded image. Do not remove, rewrite, distort, or invent product marks. Do not invent product features or extra accessories. Keep movement natural, hands anatomically correct, and the product clearly in focus. Output exactly 10 seconds in vertical 9:16 format."
+    },
+    {
+      "id": "sports_gear_detail_hero_v1",
+      "category": "sports",
+      "label": "Gear Detail Hero",
+      "duration_seconds": 10,
+      "style": "premium_product",
+      "description": "Rakaman dekat bahan dan ciri peralatan sukan, kemudian kembali kepada paparan penuh.",
+      "prompt": "Use the uploaded sports product image as the sole visual reference. Create a 10-second vertical 9:16 photorealistic product showcase. Place the exact item on a clean surface or relevant neutral setting. The camera slowly pushes in to reveal real texture, grip, seams, adjustment points and visible branding, then pulls back to show the complete product. Keep the item stationary and avoid inventing unseen features. PRODUCT LOCK: exact colour, shape, proportions, materials, labels and all visible components. No added accessories, performance claims, text overlays, watermarks, floating objects, morphing or CGI. Soft natural light, realistic shadows, crisp detail, exactly 10 seconds, vertical 9:16.\n\nSTRICT OUTPUT RULES: No on-screen text overlays, captions, subtitles, UI overlays, watermarks, or added/fabricated logos. Preserve the exact product shape, colour, material, pattern, packaging, and visible labels, branding, logos, and printed details shown in the uploaded image. Do not remove, rewrite, distort, or invent product marks. Do not invent product features or extra accessories. Keep movement natural, hands anatomically correct, and the product clearly in focus. Output exactly 10 seconds in vertical 9:16 format."
+    },
+    {
+      "id": "bags_office_storyboard_v1",
+      "category": "bags",
+      "label": "Office Bag Storyboard",
+      "duration_seconds": 10,
+      "style": "premium_product",
+      "description": "Storyboard 10 saat untuk beg tangan dalam suasana persediaan ke pejabat, dengan product lock yang ketat.",
+      "prompt": "KLIPPO | STORYBOARD | 💎 Luxury Product\n\nOUTPUT: One cohesive vertical 9:16 product advertisement, EXACT DURATION: 10 seconds.\n\nPRODUCT REFERENCE: The uploaded product photograph is the sole visual source of truth.\n\nPRODUCT NAME: Use the product name supplied by the user, if any. If no name was supplied, do not invent one.\n\nREFERENCE LOCK: Preserve the exact handbag from the uploaded image. Maintain its original colour, shape, proportions, material, texture, handles, straps, stitching, hardware, logo and all visible details. Do not redesign, replace or invent product features. Only show handles or straps that are actually present in the reference image.\n\nSCENE 1 (0–3s): Show the handbag in a naturally lit, tidy room near a dressing table. Begin with a clear medium shot and slowly move the camera closer to reveal the overall design. Keep the whole bag visible.\n\nSCENE 2 (3–7s): A woman's hand gently lifts the handbag using an existing handle or strap visible in the reference. Keep the movement simple and physically realistic. Show the front of the bag clearly without covering important details or changing its shape.\n\nSCENE 3 (7–10s): Place the handbag back on the surface and finish with a refined close-up hero shot. Keep the product sharp, stable and clearly visible.\n\nVISUAL STYLE: Ultra-realistic live-action smartphone video, soft natural daylight, realistic contact shadows, smooth camera movement and premium commercial quality.\n\nAUDIO: Soft, elegant background music at low volume. No dialogue or voice-over.\n\nSTRICT RULES: No on-screen text, captions, extra logos, watermarks or additional products. No distorted hands, floating objects, morphing handbag, invented compartments or hardware, or sudden scene changes. Do not fabricate unseen sides. Keep the handbag as the main focus throughout.\n\nFORMAT: Vertical 9:16, exactly 10 seconds.\n\nSTRICT OUTPUT RULES: No on-screen text overlays, captions, subtitles, UI overlays, watermarks, or added/fabricated logos. Preserve the exact product shape, colour, material, pattern, packaging, and visible labels, branding, logos, and printed details shown in the uploaded image. Do not remove, rewrite, distort, or invent product marks. Do not invent product features or extra accessories. Keep movement natural, hands anatomically correct, and the product clearly in focus. Output exactly 10 seconds in vertical 9:16 format."
+    },
+    {
+      "id": "accessories_wrist_lifestyle_v1",
+      "category": "accessories",
+      "label": "Lifestyle Wear Reveal",
+      "duration_seconds": 10,
+      "style": "natural_ugc",
+      "description": "Jam atau aksesori dipakai dalam situasi harian dengan fokus pada produk yang benar-benar kelihatan.",
+      "prompt": "Create an exactly 10-second vertical 9:16 photorealistic lifestyle product video using the uploaded accessory image as the MASTER reference. If the reference shows a wearable item, show it being worn naturally in a simple everyday setting; if it is not wearable, keep it on a clean surface and use a gentle camera move instead. ACTION: 0–3s establish the item clearly in natural daylight; 3–7s make one slow, realistic movement that reveals its visible finish and proportions; 7–10s settle into a sharp hero view. PRODUCT LOCK: preserve the exact shape, colour, materials, markings, links, clasp, stones, dial, strap and visible components shown in the reference. Do not add features or fabricate unseen sides. No text, captions, extra logos, watermarks, impossible reflections, warped fingers or CGI. Exactly 10 seconds, vertical 9:16.\n\nSTRICT OUTPUT RULES: No on-screen text overlays, captions, subtitles, UI overlays, watermarks, or added/fabricated logos. Preserve the exact product shape, colour, material, pattern, packaging, and visible labels, branding, logos, and printed details shown in the uploaded image. Do not remove, rewrite, distort, or invent product marks. Do not invent product features or extra accessories. Keep movement natural, hands anatomically correct, and the product clearly in focus. Output exactly 10 seconds in vertical 9:16 format."
+    },
+    {
+      "id": "accessories_gift_reveal_v1",
+      "category": "accessories",
+      "label": "Gift Box Reveal",
+      "duration_seconds": 10,
+      "style": "premium_product",
+      "description": "Pendedahan aksesori sebagai hadiah dengan pembukaan kotak yang ringkas, hanya jika kotak memang kelihatan dalam rujukan.",
+      "prompt": "Use the uploaded accessory photo as the sole visual source of truth. Create one exactly 10-second vertical 9:16 realistic premium product video. If the reference includes its original box or packaging, begin with the item neatly presented beside it; if packaging is not shown, do not invent a branded box and instead use a simple neutral surface. ACTION: 0–3s slow camera approach; 3–6s a hand gently adjusts or lifts the item only where physically plausible; 6–10s finish on a clean close-up that keeps the complete item recognisable. PRODUCT LOCK: exact colour, size, shape, finish, markings, stones, clasp and visible parts. Never invent packaging, accessories, logos or product specifications. Soft studio daylight and realistic contact shadows. No on-screen text, captions, watermarks, extra products, floating objects, deformed hands or CGI. Exactly 10 seconds, vertical 9:16.\n\nSTRICT OUTPUT RULES: No on-screen text overlays, captions, subtitles, UI overlays, watermarks, or added/fabricated logos. Preserve the exact product shape, colour, material, pattern, packaging, and visible labels, branding, logos, and printed details shown in the uploaded image. Do not remove, rewrite, distort, or invent product marks. Do not invent product features or extra accessories. Keep movement natural, hands anatomically correct, and the product clearly in focus. Output exactly 10 seconds in vertical 9:16 format."
+    },
+    {
+      "id": "food_pour_serve_v1",
+      "category": "food",
+      "label": "Pour & Serve",
+      "duration_seconds": 10,
+      "style": "appetising_realism",
+      "description": "Hidangan atau minuman dituang dan dihidangkan secara realistik jika sesuai dengan produk.",
+      "prompt": "Create an exactly 10-second vertical 9:16 photorealistic food affiliate video using the uploaded food or drink product image as the MASTER reference. Choose only an action suitable for the visible product: pour a drink only if it is a pourable liquid, or gently plate/serve a ready-to-eat food. ACTION: 0–2s show the exact package or product clearly; 2–7s perform one simple, believable serving action; 7–10s hold on an appetising final close-up with the product still recognisable. PRODUCT LOCK: preserve the original packaging, brand, label, colour and visible food appearance. Do not invent ingredients, nutritional claims, serving sizes or packaging details. Natural texture, believable liquid and food physics, warm realistic light. No text overlays, captions, watermarks, fake steam, exaggerated splashes, floating food or CGI. Exactly 10 seconds, vertical 9:16.\n\nSTRICT OUTPUT RULES: No on-screen text overlays, captions, subtitles, UI overlays, watermarks, or added/fabricated logos. Preserve the exact product shape, colour, material, pattern, packaging, and visible labels, branding, logos, and printed details shown in the uploaded image. Do not remove, rewrite, distort, or invent product marks. Do not invent product features or extra accessories. Keep movement natural, hands anatomically correct, and the product clearly in focus. Output exactly 10 seconds in vertical 9:16 format."
+    },
+    {
+      "id": "food_snack_opening_v1",
+      "category": "food",
+      "label": "Open & Taste Appeal",
+      "duration_seconds": 10,
+      "style": "casual_ugc",
+      "description": "Pembukaan bungkusan dan paparan makanan yang menarik tanpa mereka kandungan bungkusan.",
+      "prompt": "Use the uploaded food product image as the MASTER reference and create an exactly 10-second vertical 9:16 realistic casual product video. ACTION: 0–3s show the exact unopened package in a clean everyday setting; 3–6s a hand opens it only if the packaging can plausibly be opened as shown; 6–10s reveal the actual-looking product and hold on a tempting close-up. Keep the packaging and food consistent throughout. PRODUCT LOCK: retain exact package design, printed labels, colours and visible product type. Do not invent extra pieces, fillings, toppings, ingredients or claims. If the reference does not show the food inside, keep the reveal conservative and consistent with what is visible. No text, captions, watermarks, distorted hands, impossible packaging changes or CGI. Exactly 10 seconds, vertical 9:16.\n\nSTRICT OUTPUT RULES: No on-screen text overlays, captions, subtitles, UI overlays, watermarks, or added/fabricated logos. Preserve the exact product shape, colour, material, pattern, packaging, and visible labels, branding, logos, and printed details shown in the uploaded image. Do not remove, rewrite, distort, or invent product marks. Do not invent product features or extra accessories. Keep movement natural, hands anatomically correct, and the product clearly in focus. Output exactly 10 seconds in vertical 9:16 format."
+    },
+    {
+      "id": "stationery_writing_demo_v1",
+      "category": "stationery",
+      "label": "Real Use Writing Demo",
+      "duration_seconds": 10,
+      "style": "natural_ugc",
+      "description": "Alat tulis digunakan dalam aksi ringkas di atas kertas tanpa tulisan tambahan yang direka.",
+      "prompt": "Create an exactly 10-second vertical 9:16 photorealistic stationery product video using the uploaded image as the MASTER reference. Show one simple real-use action appropriate to the item: a pen writing a short neutral line, a highlighter marking a page, or a ruler aligning with paper. If the item is not designed for that action, demonstrate its appropriate use instead. ACTION: 0–3s show the exact item clearly on a tidy study desk; 3–7s demonstrate one controlled use with natural hand movement; 7–10s return to a clean product-focused frame. PRODUCT LOCK: preserve the exact shape, colour, number of items, branding and visible printed details. Do not add extra stationery or fabricate text on the product. Any writing on paper should be minimal, incidental and not presented as an overlay. Soft daylight, realistic shadows. No captions, logos, watermarks, warped fingers, floating items or CGI. Exactly 10 seconds, vertical 9:16.\n\nSTRICT OUTPUT RULES: No on-screen text overlays, captions, subtitles, UI overlays, watermarks, or added/fabricated logos. Preserve the exact product shape, colour, material, pattern, packaging, and visible labels, branding, logos, and printed details shown in the uploaded image. Do not remove, rewrite, distort, or invent product marks. Do not invent product features or extra accessories. Keep movement natural, hands anatomically correct, and the product clearly in focus. Output exactly 10 seconds in vertical 9:16 format."
+    },
+    {
+      "id": "stationery_schoolbag_pack_v1",
+      "category": "stationery",
+      "label": "Pack for Study",
+      "duration_seconds": 10,
+      "style": "student_lifestyle",
+      "description": "Keperluan belajar disusun untuk dibawa, tanpa menambah item yang tidak ditunjukkan sebagai sebahagian produk.",
+      "prompt": "Use the uploaded stationery or study-supply image as the MASTER reference. Create an exactly 10-second vertical 9:16 realistic back-to-school lifestyle product video. ACTION: begin with the exact item neatly arranged on a study desk; a hand picks it up or places it beside a plain school bag or notebook only if this does not imply the extra item is included in the sale; finish with a clear close-up of the featured product. Keep movements slow and practical. PRODUCT LOCK: preserve exact product count, dimensions, colour, packaging, branding and visible details. Never suggest extra objects are included in the product bundle. Avoid readable invented writing, school logos, on-screen text, captions, watermarks, clutter, distorted hands and CGI. Natural Malaysian home or study corner, soft daylight. Exactly 10 seconds, vertical 9:16.\n\nSTRICT OUTPUT RULES: No on-screen text overlays, captions, subtitles, UI overlays, watermarks, or added/fabricated logos. Preserve the exact product shape, colour, material, pattern, packaging, and visible labels, branding, logos, and printed details shown in the uploaded image. Do not remove, rewrite, distort, or invent product marks. Do not invent product features or extra accessories. Keep movement natural, hands anatomically correct, and the product clearly in focus. Output exactly 10 seconds in vertical 9:16 format."
+    },
+    {
+      "id": "sports_gear_pack_ready_v1",
+      "category": "sports",
+      "label": "Pack & Go",
+      "duration_seconds": 10,
+      "style": "active_lifestyle",
+      "description": "Peralatan sukan disediakan sebelum aktiviti dengan gerakan ringkas yang sesuai untuk item tersebut.",
+      "prompt": "Create an exactly 10-second vertical 9:16 photorealistic sports accessory video using the uploaded product image as the MASTER reference. ACTION: 0–3s show the exact gear in a tidy, believable pre-activity setting; 3–7s a person prepares or picks it up using only visible handles, straps or grips; 7–10s finish with the product clearly framed and ready to use. If the item is not portable, demonstrate one suitable setup action instead. PRODUCT LOCK: preserve exact design, colour, materials, stitching, visible logos, straps, parts and proportions. Do not invent safety certifications, performance results or accessories. Keep the activity low-risk and physically realistic. No text overlays, captions, watermarks, stunts, floating objects, warped anatomy or CGI. Exactly 10 seconds, vertical 9:16.\n\nSTRICT OUTPUT RULES: No on-screen text overlays, captions, subtitles, UI overlays, watermarks, or added/fabricated logos. Preserve the exact product shape, colour, material, pattern, packaging, and visible labels, branding, logos, and printed details shown in the uploaded image. Do not remove, rewrite, distort, or invent product marks. Do not invent product features or extra accessories. Keep movement natural, hands anatomically correct, and the product clearly in focus. Output exactly 10 seconds in vertical 9:16 format."
+    },
+    {
+      "id": "sports_outdoor_hero_v1",
+      "category": "sports",
+      "label": "Outdoor Lifestyle Hero",
+      "duration_seconds": 10,
+      "style": "outdoor_realism",
+      "description": "Paparan peralatan sukan dalam suasana luar yang sesuai, kemudian fokus semula pada produk.",
+      "prompt": "Use the uploaded sports gear image as the sole visual reference. Create an exactly 10-second vertical 9:16 realistic outdoor product video. Place the exact item in a safe, relevant outdoor environment with natural daylight; choose a neutral setting that does not imply unverified performance. ACTION: 0–3s show the full product clearly; 3–7s make a slow lateral camera move to reveal its visible form and materials; 7–10s settle on a stable hero composition. Keep the product stationary unless its normal use clearly requires movement. PRODUCT LOCK: preserve original shape, colour, materials, printed marks and visible components; do not fabricate hidden sides, accessories or technical features. No text, captions, watermarks, dramatic stunts, impossible physics, morphing, floating gear or CGI. Exactly 10 seconds, vertical 9:16.\n\nSTRICT OUTPUT RULES: No on-screen text overlays, captions, subtitles, UI overlays, watermarks, or added/fabricated logos. Preserve the exact product shape, colour, material, pattern, packaging, and visible labels, branding, logos, and printed details shown in the uploaded image. Do not remove, rewrite, distort, or invent product marks. Do not invent product features or extra accessories. Keep movement natural, hands anatomically correct, and the product clearly in focus. Output exactly 10 seconds in vertical 9:16 format."
+    }
+  ]
+}
