@@ -35,10 +35,11 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0):
         "Use elegant pacing, physically plausible movement and stable framing."
     )
     negative = (
-        "STRICT EXCLUSIONS: No dramatic spinning, flying product, aggressive morph transitions or scene changes. No invented features, extra accessories, duplicated or morphing products, "
-        "changing logos or typography, people or hands, random props, floating geometry, distorted edges, "
-        "flicker, jitter, abrupt exposure shifts, captions, subtitles, UI or watermarks. "
-        "Do not attempt a full 360-degree rotation from one reference image."
+        "STRICT EXCLUSIONS: Preserve the exact reference identity and proportions. No dramatic spinning, flying product, aggressive morph transitions or scene changes. "
+        "No invented features, extra accessories, duplicated products, changing logos, altered garment patterns, changed clothing, random props, floating geometry, distorted edges, "
+        "flicker, jitter, abrupt exposure shifts, plastic skin or unnatural hands. Do not add subtitles, UI, watermarks or promotional wording not explicitly requested. "
+        "If the reference contains a person, preserve that same person's visible identity, face, hairstyle, skin tone and outfit; do not replace them with another person. "
+        "Never invent unseen product surfaces or attempt a full 360-degree rotation from one reference image."
     )
     if mode == "storyboard":
         style_key, style_name, style_template = resolve(style)
@@ -175,10 +176,28 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0):
                      "matching crop, product position, orientation, setting, lighting and color. "
                      "0-3s resume gentle camera movement; 3-7s highlight another visible detail; "
                      "7-10s full-product hero finish with graceful fade. No new product, scene or angle.")
+    product_words = (product or "").lower()
+    fashion_terms = ("kurung", "baju", "tudung", "hijab", "dress", "clothing", "apparel",
+                     "fashion", "outfit", "blouse", "skirt", "trousers", "pants", "garment",
+                     "woman wearing", "model wearing", "pakaian", "kebaya", "jubah", "abaya")
+    is_fashion = any(term in product_words for term in fashion_terms)
+    if is_fashion and mode != "storyboard" and part == 0 and duration != 20:
+        direction = (
+            "DIRECTOR'S NATURAL FASHION TRY-ON BRIEF: Create one continuous, believable 10-second vertical fashion video, "
+            "like authentic iPhone footage filmed at home before going out. If a person is visible in the reference, keep the same person and natural appearance; "
+            "if no person is visible, do not invent one. If the reference shows a mirror selfie, retain the mirror-selfie viewpoint and phone. "
+            "0–2s | ESTABLISH: Begin with the same outfit, person, pose and room as the reference; use soft natural morning light and realistic skin and fabric texture. "
+            "2–5s | NATURAL ACTION: The person makes one small, relaxed movement appropriate to the reference, such as gently lowering the phone a little to reveal more of the outfit or making a slight body turn. "
+            "Do not force an action that the reference cannot support. 5–8s | OUTFIT DETAIL: Let the camera or person move subtly to show the real visible fabric pattern, sleeve, neckline and cut; never fabricate hidden garment details. "
+            "8–10s | FINISH: Return to a relaxed, natural pose and hold briefly. Keep movement subtle, human and physically plausible; no dancing, exaggerated posing or scene changes. "
+            "FASHION PRODUCT LOCK: The exact garment must remain unchanged frame to frame—same color, print, pattern placement, neckline, sleeves, cut, fit, fabric, accessories and proportions. "
+            "Keep the same hijab style and handbag only if they are visible in the reference. Never redesign, recolor, reshape, add or remove outfit details. "
+            "Use one consistent home setting, authentic phone-camera perspective, soft daylight and crisp fabric detail. No collage, split screen, poster layout, outfit change, plastic skin or CGI."
+        )
     return (
         "KLIPPO | PROFESSIONAL IMAGE-TO-VIDEO PRODUCTION PROMPT" + (" | BAHAGIAN " + str(part) + "/2" if part else "") + "\n"
         "OUTPUT: " + str(duration) + " seconds; portrait 9:16; high-quality realistic product commercial; "
-        "one coherent deliverable; no on-screen text.\n\n"
+        "one coherent deliverable. ON-SCREEN TEXT: Only show a product name or exact wording if it is explicitly supplied in Optional user details; preserve spelling exactly, use a small elegant pop-up around 3–5 seconds, keep it away from the product, then fade it out. If no exact wording is supplied, show no text.\n\n"
         "PRODUCT: " + product + "\n\n" + identity + "\n\n" + art + "\n\n"
         + direction + "\n\n" + negative + "\n\n"
         "FINAL QUALITY CHECK: Consistent identity in every frame, natural physics, clean edges, "
