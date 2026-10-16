@@ -1,4 +1,5 @@
 from prompt_catalog import resolve, product_hook
+from smart_prompt_engine import choose_variation, format_variation
 """Detailed, reference-safe AI video prompt templates for KLIPPO."""
 
 CAMERAS = {
@@ -8,19 +9,29 @@ CAMERAS = {
     "static": "A locked premium studio composition with delicate lighting movement and a subtle focus transition.",
 }
 
-def build_prompt(mode, product, scene, motion, style='auto', duration=10):
+def build_prompt(mode, product, scene, motion, style='auto', duration=10, user_concept=None):
+    # Choose one coherent creative pack per generation. Connected 10s clips share
+    # the same setting, mood, camera and lighting; Part 2 only changes its action beat.
+    variation = choose_variation(product, scene, motion, style, mode, part=1 if duration == 20 else 0,
+                                 user_concept=user_concept)
     if duration == 20:
-        # Resolve Auto/Random once so both clips use exactly the same style.
         chosen_style = resolve(style)[0] if mode == 'storyboard' else style
-        first = _build_single_prompt(mode, product, scene, motion, chosen_style, part=1)
-        second = _build_single_prompt(mode, product, scene, motion, chosen_style, part=2)
+        second_variation = dict(variation)
+        second_variation["action"] = (
+            "resume from the exact final frame of Part 1, then reveal another genuinely visible detail "
+            "before returning to the full-product hero view"
+        )
+        first = _build_single_prompt(mode, product, scene, motion, chosen_style, part=1, variation=variation)
+        second = _build_single_prompt(mode, product, scene, motion, chosen_style, part=2, variation=second_variation)
         return first + "\n\n=== KLIPPO PART 2 ===\n\n" + second
-    return _build_single_prompt(mode, product, scene, motion, style, part=0)
+    return _build_single_prompt(mode, product, scene, motion, style, part=0, variation=variation)
 
 
-def _build_single_prompt(mode, product, scene, motion, style='auto', part=0):
+def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, variation=None):
     duration = 10
     camera = CAMERAS.get(motion, CAMERAS["push"])
+    if variation is None:
+        variation = choose_variation(product, scene, motion, style, mode, part=part)
     identity = (
         "REFERENCE LOCK: Treat the uploaded photograph as the sole visual source of truth. "
         "Preserve the exact product silhouette, proportions, material appearance, visible colors, "
@@ -34,6 +45,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0):
         "surface texture and legibility; avoid excessive bloom or artificial plastic shine. "
         "Use elegant pacing, physically plausible movement and stable framing."
     )
+    art += "\n\n" + format_variation(variation)
     negative = (
         "STRICT EXCLUSIONS: Preserve the exact reference identity and proportions. No dramatic spinning, flying product, aggressive morph transitions or scene changes. "
         "No invented features, extra accessories, duplicated products, changing logos, altered garment patterns, changed clothing, random props, floating geometry, distorted edges, "
@@ -113,6 +125,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0):
             "STYLE FROM KLIPPO CATALOG: " + style_template + "\n\n"
             "SETTING: " + scene + "\n"
             "CAMERA: " + camera + " Stay reference-facing; never invent unseen sides.\n\n"
+            + format_variation(variation) + "\n\n"
             + evidence_rules + "\n\n" + (hook_direction if part != 2 else "NO REPEATED OPENING HOOK in Part 2.") + "\n\n" + rules + "\n\n"
             "CONTINUITY: Preserve exact shape, color, visible logo and count across the entire video. "
             "Use soft physically believable lighting and stable background. "
