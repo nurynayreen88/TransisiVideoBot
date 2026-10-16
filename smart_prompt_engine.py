@@ -127,12 +127,26 @@ def choose_variation(product: str, scene: str, motion: str = "push",
     """Choose one coherent variation pack; pass the same pack to connected clips."""
     rng = random.Random(seed) if seed is not None else random.SystemRandom()
     category = _category(product)
-    bucket = _scene_bucket(scene)
+    style_text = (style or "").lower()
+    is_luxury = "luxury" in style_text or "💎" in style_text
+    bucket = "dark" if is_luxury else _scene_bucket(scene)
     setting = rng.choice(SCENE_VARIANTS[bucket])
-    framing = rng.choice(FRAMING_VARIANTS)
+    # Luxury product mode must not randomly drift into casual UGC, mirror selfies,
+    # bright lifestyle sets, or playful moods.
+    framing_pool = [item for item in FRAMING_VARIANTS if "mirror-selfie" not in item] if is_luxury else FRAMING_VARIANTS
+    framing = rng.choice(framing_pool)
     camera = ""
-    lighting = rng.choice(LIGHTING_VARIANTS)
-    mood = rng.choice(MOOD_VARIANTS)
+    lighting_pool = [
+        "large diffused studio key light with gentle fill and a subtle edge highlight",
+        "subtle premium rim light that reveals texture without plastic shine",
+        "warm late-afternoon light with realistic highlights and no orange colour cast",
+    ] if is_luxury else LIGHTING_VARIANTS
+    mood_pool = [
+        "polished premium commercial, restrained and elegant",
+        "editorial product film with clean composition and tactile detail",
+    ] if is_luxury else MOOD_VARIANTS
+    lighting = rng.choice(lighting_pool)
+    mood = rng.choice(mood_pool)
     if category == "fashion":
         action = rng.choice(FASHION_ACTIONS)
     elif category == "home":
