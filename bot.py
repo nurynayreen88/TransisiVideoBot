@@ -21,6 +21,17 @@ from storyboard_overlay import apply_overlay, make_handwriting_labels
 from gemini_vision import describe_photo
 from prompt_engine import build_prompt
 from prompt_catalog import choices as storyboard_styles
+
+# Curated prompt library; kept separate from the existing video-generation engine.
+PROMPT_LIBRARY_PATH = Path(__file__).resolve().parent / 'prompts' / 'prompt_library.json'
+try:
+    with PROMPT_LIBRARY_PATH.open('r', encoding='utf-8') as handle:
+        PROMPT_LIBRARY = json.load(handle)
+except (OSError, json.JSONDecodeError):
+    logging.exception('Klippo prompt library could not be loaded')
+    PROMPT_LIBRARY = {'categories': [], 'prompts': []}
+PROMPTS_BY_ID = {item['id']: item for item in PROMPT_LIBRARY.get('prompts', []) if isinstance(item, dict) and item.get('id')}
+CATEGORIES_BY_ID = {item['id']: item for item in PROMPT_LIBRARY.get('categories', []) if isinstance(item, dict) and item.get('id')}
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler, ContextTypes, MessageHandler, filters
 
@@ -208,9 +219,42 @@ def doodle_menu():
 def prompt_input_menu():
     return InlineKeyboardMarkup([
         [InlineKeyboardButton('📷 Upload Gambar', callback_data='prompt_input:photo')],
-        [InlineKeyboardButton('🔗 Masukkan Pautan Shopee', callback_data='prompt_input:shopee')],
         [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
     ])
+
+
+def prompt_category_menu():
+    rows = []
+    categories = PROMPT_LIBRARY.get('categories', [])
+    for index in range(0, len(categories), 2):
+        pair = categories[index:index + 2]
+        rows.append([InlineKeyboardButton(f"{item.get('emoji', '🎬')} {item['label']}", callback_data=f"pcat:{item['id']}") for item in pair])
+    rows.append([InlineKeyboardButton('↩️ Menu Utama', callback_data='home')])
+    return InlineKeyboardMarkup(rows)
+
+
+def prompt_options_menu(category_id: str):
+    category = CATEGORIES_BY_ID.get(category_id, {})
+    rows = []
+    for prompt_id in category.get('prompt_ids', []):
+        prompt = PROMPTS_BY_ID.get(prompt_id)
+        if prompt:
+            rows.append([InlineKeyboardButton(f"🎬 {prompt['label']}", callback_data=f"ptpl:{prompt_id}")])
+    rows.append([InlineKeyboardButton('↩️ Tukar Kategori', callback_data='prompt_categories')])
+    rows.append([InlineKeyboardButton('🏠 Menu Utama', callback_data='home')])
+    return InlineKeyboardMarkup(rows)
+
+
+def inject_product_details(prompt_text: str, details: str) -> str:
+    details = ' '.join((details or '').split()).strip()
+    if not details:
+        return prompt_text
+    note = ('PRODUCT NAME / DETAILS FROM USER: ' + details +
+            '. Use these details only as supporting context. The uploaded image remains the sole visual source of truth; never invent or alter product features.\\n\\n')
+    first_sentence_end = prompt_text.find('. ')
+    if first_sentence_end >= 0:
+        return prompt_text[:first_sentence_end + 2] + note + prompt_text[first_sentence_end + 2:]
+    return note + prompt_text
 
 
 def video_input_menu():
@@ -1159,6 +1203,15 @@ async def photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if context.user_data.get('stage') == 'receipt_upload':
         await receive_receipt(update, context)
         return
+    if context.user_data.get('stage') == 'prompt_upload':
+        photo_item = update.message.photo[-1] if update.message.photo else update.message.document
+        if not update.message.photo and not (update.message.document and (update.message.document.mime_type or '').startswith('image/')):
+            await update.message.reply_text('Sila hantar fail imej produk (gambar).')
+            return
+        context.user_data['prompt_reference_photo'] = photo_item.file_id
+        context.user_data['stage'] = 'prompt_library_details'
+        await update.message.reply_text('✅ Gambar diterima sebagai rujukan utama. Sekarang tampal nama produk atau maklumat produk daripada Shopee. Nama sahaja memadai; tidak perlu pautan. Jika tidak mahu tambah maklumat, hantar tanda - .')
+        return
     if context.user_data.get('stage') == 'prompt_photo':
         context.user_data['prompt_photo_id'] = update.message.photo[-1].file_id
         context.user_data['stage'] = 'prompt_details_choice'
@@ -1441,11 +1494,15 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await query.message.reply_text('✍️ HASILKAN PROMPT — Pilih jenis:', reply_markup=InlineKeyboardMarkup([
             [InlineKeyboardButton('✨ Prompt Biasa', callback_data='prompt_type:normal')],
             [InlineKeyboardButton('🎞️ Prompt Storyboard', callback_data='prompt_type:storyboard')],
+            [InlineKeyboardButton('📚 Prompt Pilihan Siap', callback_data='prompt_type:library')],
             [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
         ]))
     elif action.startswith('prompt_type:') and stage == 'prompt_type':
         selected = action.split(':', 1)[1]
-        if selected in ('normal', 'storyboard', 'doodle'):
+        if selected == 'library':
+            context.user_data['stage'] = 'prompt_upload'
+            await query.message.reply_text('📷 Hantar satu gambar produk. Gambar ini menjadi rujukan utama; selepas itu tampal nama produk atau maklumat produk daripada Shopee (nama sahaja pun memadai).')
+        elif selected in ('normal', 'storyboard', 'doodle'):
             context.user_data['prompt_mode'] = 'storyboard' if selected == 'doodle' else selected
             context.user_data['stage'] = 'prompt_duration'
             await query.message.reply_text('⏱️ Pilih durasi prompt video:', reply_markup=InlineKeyboardMarkup([
@@ -1481,6 +1538,33 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif action == 'prompt_input:back' and stage == 'prompt_shopee_link':
         context.user_data['stage'] = 'prompt_input'
         await query.message.reply_text('✍️ Pilih cara masukkan produk untuk prompt:', reply_markup=prompt_input_menu())
+    elif action == 'prompt_categories' and stage in ('prompt_category', 'prompt_template', 'prompt_library_done'):
+        context.user_data['stage'] = 'prompt_category'
+        await query.message.reply_text('📚 Pilih kategori produk:', reply_markup=prompt_category_menu())
+    elif action.startswith('pcat:') and stage in ('prompt_category', 'prompt_template', 'prompt_library_done'):
+        category_id = action.split(':', 1)[1]
+        if category_id not in CATEGORIES_BY_ID:
+            await query.message.reply_text('Kategori tidak ditemui. Sila pilih semula.', reply_markup=prompt_category_menu())
+        else:
+            context.user_data['prompt_category'] = category_id
+            context.user_data['stage'] = 'prompt_template'
+            category_name = CATEGORIES_BY_ID[category_id].get('label', category_id)
+            await query.message.reply_text(f'🎨 Pilih gaya prompt untuk kategori {category_name}:', reply_markup=prompt_options_menu(category_id))
+    elif action.startswith('ptpl:') and stage in ('prompt_category', 'prompt_template', 'prompt_library_done'):
+        prompt_id = action.split(':', 1)[1]
+        prompt_item = PROMPTS_BY_ID.get(prompt_id)
+        if not prompt_item or prompt_item.get('category') != context.user_data.get('prompt_category'):
+            await query.message.reply_text('Prompt tidak sepadan dengan kategori. Sila pilih semula.', reply_markup=prompt_options_menu(context.user_data.get('prompt_category', '')))
+        else:
+            result_prompt = inject_product_details(prompt_item.get('prompt', ''), context.user_data.get('prompt_library_details', ''))
+            context.user_data['stage'] = 'prompt_library_done'
+            await query.message.reply_text('✅ PROMPT SIAP — ' + prompt_item.get('label', 'Prompt Pilihan') + '\\n\\nSalin prompt di bawah dan muat naik gambar produk yang sama ke Gemini.\\n\\n' + result_prompt,
+                reply_markup=InlineKeyboardMarkup([
+                    [InlineKeyboardButton('✨ Buka Gemini', url='https://gemini.google.com/')],
+                    [InlineKeyboardButton('🔁 Pilih Gaya Lain', callback_data=f"pcat:{prompt_item['category']}")],
+                    [InlineKeyboardButton('↩️ Tukar Kategori', callback_data='prompt_categories')],
+                    [InlineKeyboardButton('✍️ Prompt Baharu', callback_data='prompt'), InlineKeyboardButton('🏠 Menu Utama', callback_data='home')]
+                ]))
     elif action.startswith('prompt_details:') and stage == 'prompt_details_choice':
         if action == 'prompt_details:add':
             context.user_data['stage'] = 'prompt_details_text'
@@ -1516,7 +1600,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # callbacks must continue into the second chain.
     if action in ('admin_pending', 'admin', 'storyboard', 'make', 'prompt') or action.startswith(
         ('admin_approve:', 'admin_reject:', 'prompt_type:', 'prompt_duration:',
-         'prompt_style:', 'prompt_details:', 'video_input:', 'prompt_input:')
+         'prompt_style:', 'prompt_details:', 'video_input:', 'prompt_input:', 'pcat:', 'ptpl:') or action == 'prompt_categories'
     ):
         return
     if action.startswith('motion:') and context.user_data.get('stage') == 'prompt_motion':
@@ -1773,6 +1857,12 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
     stage = context.user_data.get('stage')
     value = update.message.text.strip()
+    if stage == 'prompt_library_details':
+        details = '' if value in ('-', '—', 'tiada', 'Tiada') else value
+        context.user_data['prompt_library_details'] = details[:1200]
+        context.user_data['stage'] = 'prompt_category'
+        await update.message.reply_text('📚 Maklumat diterima. Pilih kategori produk untuk melihat prompt siap:', reply_markup=prompt_category_menu())
+        return
     if value in ('🏠 Menu Utama', 'Menu Utama', 'menu', 'MENU', '/menu'):
         await start(update, context)
         return
@@ -1803,6 +1893,7 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await update.message.reply_text('✍️ HASILKAN PROMPT — Pilih jenis:', reply_markup=InlineKeyboardMarkup([
                 [InlineKeyboardButton('✨ Prompt Biasa', callback_data='prompt_type:normal')],
                 [InlineKeyboardButton('🎞️ Prompt Storyboard (6 Babak)', callback_data='prompt_type:storyboard')],
+                [InlineKeyboardButton('📚 Prompt Pilihan Siap', callback_data='prompt_type:library')],
                 [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
             ]))
         elif action == 'subscription':
