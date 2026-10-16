@@ -439,6 +439,14 @@ def prompt_idea_choice_menu():
     ])
 
 
+def prompt_text_mode_menu():
+    return InlineKeyboardMarkup([
+        [InlineKeyboardButton('✍️ Dengan Teks (AI jana teks dalam video)', callback_data='prompt_text_mode:with')],
+        [InlineKeyboardButton('🚫 Tanpa Teks', callback_data='prompt_text_mode:without')],
+        [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
+    ])
+
+
 def prompt_category_menu():
     rows = []
     categories = PROMPT_LIBRARY.get('categories', [])
@@ -1862,6 +1870,24 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data['prompt_concept'] = ''
         context.user_data['stage'] = 'prompt_product_name'
         await query.message.reply_text('🛍️ Masukkan nama produk daripada Shopee. Buka Shopee, copy dan paste nama produk di sini. Nama sahaja — tidak perlu pautan.\n\nContoh: VELLA Beg Tangan Wanita Besar Sling Shoulder Women Luxury Handbags')
+    elif action.startswith('prompt_text_mode:') and stage == 'prompt_text_mode':
+        selected = action.split(':', 1)[1]
+        if selected == 'without':
+            context.user_data['prompt_text_mode'] = 'without'
+            context.user_data['prompt_on_screen_text'] = ''
+            context.user_data['prompt_product'] = ''
+            context.user_data['stage'] = 'prompt_scene'
+            await query.message.reply_text('🚫 Prompt akan melarang semua teks tambahan dalam video. Pilih latar video:', reply_markup=prompt_scene_menu())
+        elif selected == 'with':
+            context.user_data['prompt_text_mode'] = 'with'
+            context.user_data['stage'] = 'prompt_text_content'
+            await query.message.reply_text('✍️ Masukkan perkataan tepat yang mahu dipaparkan dalam video. Klippo akan arahkan AI mengekalkan ejaan dan menggunakan teks ini sahaja.\n\nContoh: Stail elegan, sesuai setiap hari')
+        else:
+            await query.message.reply_text('Pilihan tidak sah. Sila pilih semula:', reply_markup=prompt_text_mode_menu())
+    elif action == 'prompt_text_info:skip' and stage == 'prompt_text_info':
+        context.user_data['prompt_product'] = ''
+        context.user_data['stage'] = 'prompt_scene'
+        await query.message.reply_text('Maklumat tambahan dilangkau. Pilih latar video:', reply_markup=prompt_scene_menu())
     elif action == 'prompt_input:photo' and stage == 'prompt_input':
         context.user_data['stage'] = 'prompt_product_name'
         await query.message.reply_text('🛍️ Mod prompt Klippo tidak menggunakan gambar atau analisis AI. Tampal nama produk sahaja untuk mengesan kategori secara automatik.')
@@ -1900,7 +1926,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # callbacks must continue into the second chain.
     if action in ('admin_pending', 'admin', 'storyboard', 'make', 'prompt', 'prompt_categories') or action.startswith(
         ('admin_approve:', 'admin_reject:', 'prompt_type:', 'prompt_product_type:', 'prompt_duration:',
-         'prompt_style:', 'prompt_idea:', 'prompt_details:', 'video_input:', 'prompt_input:', 'pcat:', 'ptpl:')
+         'prompt_style:', 'prompt_idea:', 'prompt_details:', 'prompt_text_mode:', 'prompt_text_info:', 'video_input:', 'prompt_input:', 'pcat:', 'ptpl:')
     ):
         return
     if action.startswith('motion:') and context.user_data.get('stage') == 'prompt_motion':
@@ -2005,7 +2031,9 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     context.user_data.get('prompt_duration', 10),
                     context.user_data.get('prompt_concept', ''),
                     product_type=context.user_data.get('prompt_product_type', 'other'),
-                    storyboard_override=context.user_data.get('prompt_library_storyboard') or None
+                    storyboard_override=context.user_data.get('prompt_library_storyboard') or None,
+                    text_mode=context.user_data.get('prompt_text_mode', 'without'),
+                    on_screen_text=context.user_data.get('prompt_on_screen_text', '')
                 )
                 await progress_update(waiting, 70, 'Menyediakan PROMPT IMAGE dan PROMPT VIDEO...')
                 context.user_data['stage'] = 'prompt_done'
@@ -2340,8 +2368,22 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['prompt_product_type'] = 'bag'
         if bag_subtype:
             context.user_data['prompt_concept'] = (context.user_data.get('prompt_concept', '') + ' | Product-name category detection: ' + bag_subtype.replace('_', ' ') + '. Use the matching visual style without guessing product features.').strip(' |')
+        context.user_data['stage'] = 'prompt_text_mode'
+        await update.message.reply_text('📝 Mahu teks dipaparkan dalam video oleh AI, atau video tanpa teks?\n\nJika pilih Dengan Teks, masukkan ayat tepat yang mahu muncul. Klippo akan mengarahkan AI memilih kedudukan dan gaya yang sesuai.', reply_markup=prompt_text_mode_menu())
+        return
+    if stage == 'prompt_text_content':
+        if not value.strip():
+            await update.message.reply_text('⚠️ Sila masukkan teks yang mahu dipaparkan, atau pilih Tanpa Teks untuk video tanpa tulisan.')
+            return
+        context.user_data['prompt_on_screen_text'] = value.strip()[:240]
+        context.user_data['stage'] = 'prompt_text_info'
+        await update.message.reply_text('📝 Teks disimpan tepat seperti yang diberikan. Ada maklumat produk tambahan untuk membantu AI memahami konteks? Jika tiada, tekan Langkau.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('➡️ Langkau maklumat tambahan', callback_data='prompt_text_info:skip')], [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
+        return
+    if stage == 'prompt_text_info':
+        context.user_data['prompt_product'] = value.strip()[:600]
         context.user_data['stage'] = 'prompt_scene'
-        await update.message.reply_text('✅ Nama produk disimpan: ' + value[:240] + chr(10) * 2 + '📌 Gambar dan analisis AI tidak diperlukan. Klippo mengesan jenis produk daripada nama dan memilih arahan visual yang sesuai. Pilih latar video:', reply_markup=prompt_scene_menu())
+        await update.message.reply_text('✅ Maklumat tambahan disimpan. Pilih latar video:', reply_markup=prompt_scene_menu())
+        return
         return
     shortcuts = {
         '🎬 Jana Video Affiliate': 'make',
@@ -2662,7 +2704,7 @@ def main():
     app.add_handler(CommandHandler('jana', generate, block=False))
     for style in STYLES:
         app.add_handler(CommandHandler(style, choose_style))
-    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(photos_order|photos_undo|photos_more|photo_up:[0-4]|photo_down:[0-4]|photo_remove:[0-4]|duration:(10|15|20)|admin_pending|admin_approve:[0-9]+|admin_reject:[0-9]+|admin|receipt_upload|subscription_qr|make|video_input:(photos|shopee|back)|prompt_input:(photo|shopee|back)|storyboard|doodle:(auto|white|sparkle|motion|all|none)|convert|merge|merge_next|merge_done|merge_style:(fade|smoothleft|slideleft|zoomin)|prompt|prompt_type:(normal|storyboard|doodle|library)|prompt_categories|pcat:[a-z0-9_]+|ptpl:[a-z0-9_]+|prompt_duration:(10|20)|prompt_product_type:[a-z0-9_]+|prompt_style:[a-z0-9_]+|prompt_idea:(yes|skip)|prompt_details:(add|skip)|prompt_generate:confirm|description:skip|scene:(auto|studio|dark|home|nature|minimal)|motion:(orbit|push|side|static|auto|stop|spin|smooth|hand)|photos_done|background:(original|white|beige|dark|pastel|gradient|pattern|duotone|mist)|confirm|styles|music|music_previews|subscription|account|help|check|reset|home|preview:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|listen:(cinematic|energetic|happy|luxury|nature|beauty)|style:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|music:(auto|cinematic|energetic|happy|luxury|nature|beauty|none|custom))$'))
+    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(photos_order|photos_undo|photos_more|photo_up:[0-4]|photo_down:[0-4]|photo_remove:[0-4]|duration:(10|15|20)|prompt_text_mode:(with|without)|prompt_text_info:skip|admin_pending|admin_approve:[0-9]+|admin_reject:[0-9]+|admin|receipt_upload|subscription_qr|make|video_input:(photos|shopee|back)|prompt_input:(photo|shopee|back)|storyboard|doodle:(auto|white|sparkle|motion|all|none)|convert|merge|merge_next|merge_done|merge_style:(fade|smoothleft|slideleft|zoomin)|prompt|prompt_type:(normal|storyboard|doodle|library)|prompt_categories|pcat:[a-z0-9_]+|ptpl:[a-z0-9_]+|prompt_duration:(10|20)|prompt_product_type:[a-z0-9_]+|prompt_style:[a-z0-9_]+|prompt_idea:(yes|skip)|prompt_details:(add|skip)|prompt_generate:confirm|description:skip|scene:(auto|studio|dark|home|nature|minimal)|motion:(orbit|push|side|static|auto|stop|spin|smooth|hand)|photos_done|background:(original|white|beige|dark|pastel|gradient|pattern|duotone|mist)|confirm|styles|music|music_previews|subscription|account|help|check|reset|home|preview:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|listen:(cinematic|energetic|happy|luxury|nature|beauty)|style:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|music:(auto|cinematic|energetic|happy|luxury|nature|beauty|none|custom))$'))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, menu_text))
     app.add_handler(MessageHandler(filters.PHOTO, photo))
     app.add_handler(MessageHandler(filters.Document.IMAGE | filters.Document.MimeType('application/pdf'), handle_image_or_receipt_document))
