@@ -55,6 +55,14 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
         'gadget': "PRODUCT CATEGORY DIRECTION: Treat this as an electronic gadget. Favor precise edges, ports, buttons and screen details only where visible; keep geometry and screen content unchanged.",
         'home': "PRODUCT CATEGORY DIRECTION: Treat this as a home/kitchen product. Favor believable placement and practical scale; do not add components or imply functions not visible.",
         'accessory': "PRODUCT CATEGORY DIRECTION: Treat this as an accessory or jewellery. Favor delicate close-ups, accurate reflections and realistic scale; do not invent stones, engravings or materials.",
+        'travel': "PRODUCT CATEGORY DIRECTION: Treat this as travel gear or luggage. Favor believable packing, handling and travel-preparation scenes; do not invent capacity, locks, materials, compartments or airline approval.",
+        'pet': "PRODUCT CATEGORY DIRECTION: Treat this as a pet accessory. Use calm, responsible handling and natural animal behavior only when relevant; do not invent safety, health, durability or training claims.",
+        'automotive': "PRODUCT CATEGORY DIRECTION: Treat this as a car accessory. Keep any vehicle stationary unless the scene explicitly requires safe movement; do not show device use while driving or invent compatibility, power or safety claims.",
+        'garden': "PRODUCT CATEGORY DIRECTION: Treat this as gardening or plant-care gear. Use believable garden physics and natural light; do not invent plant growth, material, weatherproofing or performance claims.",
+        'kitchen': "PRODUCT CATEGORY DIRECTION: Treat this as kitchenware or a kitchen appliance. Keep food handling and appliance actions physically plausible; do not invent materials, safety ratings, temperature performance or functions.",
+        'furniture': "PRODUCT CATEGORY DIRECTION: Treat this as furniture or home decor. Preserve exact proportions, joints and visible construction; do not invent materials, assembly parts, storage or load capacity.",
+        'baby': "PRODUCT CATEGORY DIRECTION: Treat this as a baby or child-care product. Keep scenes calm and responsible, do not place a child in a risky situation, and do not invent safety certification, age suitability or health claims.",
+        'crafts': "PRODUCT CATEGORY DIRECTION: Treat this as an art, craft or hobby product. Show only plausible tools and actions, do not invent kit contents, material composition or professional performance claims.",
         'other': "PRODUCT CATEGORY DIRECTION: Follow the product category inferred from the product name and choose a suitable presentation without guessing features.",
     }
     category_direction = product_type_directions.get(product_type, product_type_directions['other'])
@@ -155,7 +163,14 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
                             "orientation and scale. Do not repeat the opening hook or restart the reveal."
                         ),
                     },
-                    curated_shots[1],
+                    {
+                        **curated_shots[1],
+                        "direction": (
+                            "CONTINUATION ACTION — do not repeat the main gesture from Part 1. Continue the same concept with "
+                            "a complementary, physically plausible follow-through while keeping the same product, set, light and scale. "
+                            + str(curated_shots[1].get("direction", ""))
+                        ),
+                    },
                     curated_shots[2],
                     curated_shots[3],
                 ]
@@ -179,10 +194,10 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
             "STYLE FROM KLIPPO CATALOG: " + style_template + "\n\n"
             "SETTING: " + scene + "\n"
             "CAMERA: " + camera + " Keep framing plausible for the named product; avoid unsupported angles or features.\n\n"
-            + evidence_rules + "\\n\\n" + (
+            + evidence_rules + "\n\n" + (
                 curated_direction if curated_direction else
-                (hook_direction if part != 2 else "NO REPEATED OPENING HOOK in Part 2.") + "\\n\\n" + rules
-            ) + "\\n\\n"
+                (hook_direction if part != 2 else "NO REPEATED OPENING HOOK in Part 2.") + "\n\n" + rules
+            ) + "\n\n"
             + (("OPTIONAL CREATIVE CONCEPT: " + concept + ". Use it only to guide a suitable, physically plausible action or story beat; "
                  "do not treat it as proof of product features, benefits, included accessories or unseen details. "
                  "If the idea requires an unprovided feature, ignore that part.\n\n") if concept else "")
