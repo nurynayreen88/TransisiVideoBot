@@ -1,4 +1,4 @@
-"""Regression checks for storyboard prompt quality and mode consistency."""
+"""Regression checks for storyboard prompt quality using the curated library."""
 import unittest
 
 from prompt_engine import build_prompt
@@ -9,20 +9,20 @@ class StoryboardPromptQualityTests(unittest.TestCase):
     def test_luxury_style_does_not_add_white_doodles_when_hook_unknown(self):
         prompt = build_prompt(
             "storyboard",
-            "PRODUCT REFERENCE: the product in the uploaded reference image. Visible observations: unavailable.",
+            "The product shown in the uploaded reference image.\n\nVERIFIED IMAGE OBSERVATIONS:\nKATEGORI: TIDAK PASTI",
             "clean premium studio background, selected to complement the exact product reference",
             "push",
             style="luxury",
             duration=10,
         )
         self.assertIn("NO ON-SCREEN HOOK TEXT", prompt)
-        self.assertIn("do not add headline text or decorative doodles", prompt)
+        self.assertIn("No on-screen text, captions, icons or decorative graphics", prompt)
         self.assertNotIn("decorative white doodle only", prompt)
 
     def test_internal_evidence_placeholders_are_not_emitted(self):
         prompt = build_prompt(
             "storyboard",
-            "PRODUCT REFERENCE: uploaded product image; details not verified.",
+            "The product shown in the uploaded reference image.\n\nVERIFIED IMAGE OBSERVATIONS:\nNAMA_PRODUK: TIDAK PASTI\nKATEGORI: TIDAK PASTI\nCIRI_VISUAL: TIADA",
             "clean premium studio background, selected to complement the exact product reference",
             "push",
             style="luxury",
@@ -32,6 +32,7 @@ class StoryboardPromptQualityTests(unittest.TestCase):
         self.assertNotIn("TEKS_DISAHKAN", prompt)
         self.assertNotIn("CIRI_BERTULIS", prompt)
         self.assertNotIn("CIRI_VISUAL lists", prompt)
+        self.assertNotIn("VERIFIED IMAGE OBSERVATIONS:", prompt)
 
     def test_luxury_variations_stay_premium(self):
         for seed in range(20):
