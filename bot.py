@@ -1545,6 +1545,9 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 [InlineKeyboardButton('🏠 Menu Utama', callback_data='home')],
             ]
             await query.message.reply_text(
+                'Cara guna: buka Gemini, muat naik gambar produk yang sama, kemudian salin prompt di bawah dan tampal di Gemini.'
+            )
+            await query.message.reply_text(
                 prompt_text[:4000],
                 reply_markup=InlineKeyboardMarkup(buttons),
                 disable_web_page_preview=True
