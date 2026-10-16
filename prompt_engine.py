@@ -74,8 +74,6 @@ def build_prompt(mode, product, scene, motion, style='auto', duration=10, concep
 
 
 def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, concept='', product_type='other', storyboard_override=None, text_mode='without', on_screen_text=''):
-
-def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, concept='', product_type='other', storyboard_override=None):
     duration = 10
     camera = CAMERAS.get(motion, CAMERAS["push"])
     product_type_directions = {
