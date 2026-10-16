@@ -2164,7 +2164,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if not image_ids:
             await query.message.reply_text('⚠️ Tiada gambar rujukan ditemui. Sila mulakan prompt baharu dan hantar gambar produk.')
             return
-        waiting = await query.message.reply_text('⏳ GEMINI STORYBOARD — 0%\\nMenghantar gambar rujukan dan menyediakan babak...')
+        waiting = await query.message.reply_text('⏳ GEMINI STORYBOARD — 0%\nMenghantar gambar rujukan dan menyediakan babak...')
         try:
             images = []
             for file_id in image_ids[:4]:
@@ -2193,8 +2193,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 'Kekalkan identiti dan rupa produk tepat seperti gambar. Jangan mereka warna, logo, corak, ciri, bahan, aksesori atau dakwaan yang tidak dapat dilihat. '
                 'Kekalkan model dewasa yang sama pada semua babak jika model dipilih. Jangan tambah teks pada skrin, sari kata, logo tambahan atau watermark. '
                 'Pastikan setiap aksi praktikal, jelas dan tidak bertindih dengan aksi babak lain. Mulakan dengan hook visual yang kuat dan tamat dengan product hero shot. '
-                + voiceover_instruction + '\\n\\nPILIHAN PENGGUNA:\\n' + model_instruction
-                + '\\n\\nFormat output: tajuk ringkas, konsep, kemudian senarai babak bernombor. Jangan hasilkan prompt video penuh dahulu.'
+                + voiceover_instruction + '\n\nPILIHAN PENGGUNA:\n' + model_instruction
+                + '\n\nFormat output: tajuk ringkas, konsep, kemudian senarai babak bernombor. Jangan hasilkan prompt video penuh dahulu.'
             )
             await progress_update(waiting, 35, 'Gemini sedang menganalisis gambar produk...')
             storyboard = await generate_storyboard(images, prompt_instruction)
@@ -2207,7 +2207,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 [InlineKeyboardButton('🏠 Menu Utama', callback_data='home')]
             ])
             await progress_update(waiting, 90, 'Storyboard siap. Menghantar hasil...')
-            await query.message.reply_text('🎬 STORYBOARD GEMINI SIAP\\n\\nSemak setiap babak dahulu. Gambar produk asal digunakan sebagai rujukan analisis; video masih perlu dijana dalam platform video pilihan.', reply_markup=storyboard_actions)
+            await query.message.reply_text('🎬 STORYBOARD GEMINI SIAP\n\nSemak setiap babak dahulu. Gambar produk asal digunakan sebagai rujukan analisis; video masih perlu dijana dalam platform video pilihan.', reply_markup=storyboard_actions)
             if len(storyboard) <= 3900:
                 await query.message.reply_text(storyboard, reply_markup=storyboard_actions)
             else:
@@ -2219,7 +2219,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             logging.exception('Gemini storyboard generation failed')
             message = str(exc)[:220]
             await query.message.reply_text(
-                '❌ Storyboard automatik belum berjaya. Pastikan GEMINI_API_KEY ditetapkan dalam persekitaran bot dan kuota percuma masih tersedia.\\n\\nButiran: ' + message,
+                '❌ Storyboard automatik belum berjaya. Pastikan GEMINI_API_KEY ditetapkan dalam persekitaran bot dan kuota percuma masih tersedia.\n\nButiran: ' + message,
                 reply_markup=InlineKeyboardMarkup([
                     [InlineKeyboardButton('🔁 Cuba Lagi', callback_data='prompt_chatgpt_storyboard')],
                     [InlineKeyboardButton('✍️ Prompt Baharu', callback_data='prompt')],
