@@ -2860,7 +2860,7 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
         '🎬 Jana Video Affiliate': 'make',
         '🎬 Jana Video Transisi': 'make',
         '🎞️ Gerakkan Foto (Transisi)': 'make',
-        '🛍️ Prompt AI Produk (Imej → Video)': 'prompt',
+        '✍️ Jana Prompt': 'prompt',
         '🔄 Tukar Format Video': 'convert',
         '✍️ Sediakan Prompt Video': 'prompt',
         '✍️ Hasilkan Prompt': 'prompt',
@@ -2885,17 +2885,19 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['prompt_style'] = 'auto'
             context.user_data['prompt_concept'] = ''
             context.user_data['prompt_product_type'] = 'other'
-            context.user_data['stage'] = 'prompt_flow_choice'
+            context.user_data['prompt_mode'] = 'normal'
+            context.user_data['prompt_reference_photos'] = []
+            context.user_data['stage'] = 'prompt_images'
             await update.message.reply_text(
-                '✍️ KLIPPO PROMPT AI PRODUK\n\nPilih cara yang sesuai. Prompt Video Terus lebih ringkas; Storyboard Video AI menjana storyboard secara automatik dengan Gemini.',
-                reply_markup=prompt_flow_menu()
+                '✍️ KLIPPO | JANA PROMPT VIDEO\n\nHantar 1 hingga 4 gambar produk yang jelas. Tekan “Selesai Hantar Gambar” selepas selesai. Klippo akan menyediakan satu prompt video lengkap dengan susunan babak, aksi dan pergerakan kamera.',
+                reply_markup=prompt_images_menu()
             )
         elif action == 'subscription':
             await update.message.reply_text('💎 LANGGANAN KLIPPO\n\nPelan Penyokong Awal: RM5 / 30 hari, sehingga 30 video sebulan. Pengaktifan manual selepas resit disemak.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📱 Papar QR DuitNow', callback_data='subscription_qr')]]))
         elif action == 'account':
             await account_info(update, context)
         elif action == 'help':
-            await update.message.reply_text('❓ BANTUAN\n\nJana Video: hantar gambar, pilih gaya dan muzik.\nTukar Format: hantar MP4.\nVideo AI: upload gambar, tambah maklumat jika mahu, kemudian pilih latar dan gerakan kamera. Prompt digunakan bersama gambar di penjana video luar.')
+            await update.message.reply_text('❓ BANTUAN\n\nJana Prompt: hantar gambar produk, pilih kategori, gaya, durasi dan latar, kemudian salin satu prompt video lengkap ke AI pilihan anda.\nGerakkan Foto: jadikan gambar pegun sebagai video dengan transisi.\nGabung Video: cantum beberapa klip.\nTukar Format: sesuaikan video kepada format menegak.')
         else:
             await start(update, context)
         return
