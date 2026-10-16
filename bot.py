@@ -290,6 +290,7 @@ def detect_product_subtype(product_name: str) -> str:
         ('stationery', 'notebook', ('notebook', 'journal', 'buku nota', 'notepad')),
         ('stationery', 'marker', ('marker', 'highlighter', 'pen marker')),
         ('stationery', 'pencil_case', ('pencil case', 'pencil pouch', 'bekas pensel', 'kotak pensel')),
+        ('sports', 'sports_gear', ('sports gear', 'football', 'soccer ball', 'badminton racket', 'racket badminton', 'dumbbell', 'skipping rope', 'jump rope', 'gym equipment', 'gym bag', 'beg sukan')),
         ('sports', 'water_bottle', ('sports bottle', 'water bottle', 'botol air')),
         ('sports', 'yoga_mat', ('yoga mat', 'alas yoga')),
         ('sports', 'resistance_band', ('resistance band', 'exercise band', 'getah senaman')),
@@ -319,7 +320,7 @@ def detect_prompt_library_category(product_name: str) -> str:
         'necklace': 'accessories', 'sunglasses': 'accessories', 'snack': 'food',
         'drink': 'food', 'sauce': 'food', 'biscuits': 'food', 'pen': 'stationery',
         'notebook': 'stationery', 'marker': 'stationery', 'pencil_case': 'stationery',
-        'water_bottle': 'sports', 'yoga_mat': 'sports', 'resistance_band': 'sports',
+        'sports_gear': 'sports', 'water_bottle': 'sports', 'yoga_mat': 'sports', 'resistance_band': 'sports',
         'wallet': 'wallets', 'backpack': 'bags', 'sling_bag': 'bags',
         'handbag': 'bags', 'bag': 'bags',
     }
