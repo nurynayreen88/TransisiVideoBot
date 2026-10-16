@@ -5,9 +5,8 @@
   "default_duration_seconds": 10,
   "default_aspect_ratio": "9:16",
   "usage_notes": [
+    "No product image is required for prompt generation. Infer the likely product subtype from the product name; ask the user to correct the category if ambiguous.",
     "These are reusable, fixed prompt templates; do not randomly rewrite them at runtime.",
-    "Use the user's uploaded product image as the master visual reference.",
-    "Show category-specific prompt options after the user uploads a product image and chooses or confirms the category.",
     "This file only adds a prompt library; it does not change video generation, menus, storage, billing, or deployment.",
     "Prompts are for external image-to-video tools such as Gemini; Klippo's existing FFmpeg slideshow renderer does not animate the product as generative video.",
     "Additional category templates are reusable prompts. Review category fit and product-lock behavior with sample products before production use."
@@ -35,6 +34,18 @@
         "bags_daily_carry_v1",
         "bags_tabletop_pickup_v1",
         "bags_office_storyboard_v1"
+      ]
+    },
+    {
+      "id": "wallets",
+      "label": "Dompet",
+      "emoji": "👛",
+      "prompt_ids": [
+        "wallets_luxury_macro_v1",
+        "wallets_open_close_v1",
+        "wallets_clean_flatlay_v1",
+        "wallets_everyday_carry_v1",
+        "wallets_gift_reveal_v1"
       ]
     },
     {
@@ -504,6 +515,51 @@
       "style": "outdoor_realism",
       "description": "Paparan peralatan sukan dalam suasana luar yang sesuai, kemudian fokus semula pada produk.",
       "prompt": "Use the uploaded sports gear image as the sole visual reference. Create an exactly 10-second vertical 9:16 realistic outdoor product video. Place the exact item in a safe, relevant outdoor environment with natural daylight; choose a neutral setting that does not imply unverified performance. ACTION: 0–3s show the full product clearly; 3–7s make a slow lateral camera move to reveal its visible form and materials; 7–10s settle on a stable hero composition. Keep the product stationary unless its normal use clearly requires movement. PRODUCT LOCK: preserve original shape, colour, materials, printed marks and visible components; do not fabricate hidden sides, accessories or technical features. No text, captions, watermarks, dramatic stunts, impossible physics, morphing, floating gear or CGI. Exactly 10 seconds, vertical 9:16.\n\nSTRICT OUTPUT RULES: No on-screen text overlays, captions, subtitles, UI overlays, watermarks, or added/fabricated logos. Preserve the exact product shape, colour, material, pattern, packaging, and visible labels, branding, logos, and printed details shown in the uploaded image. Do not remove, rewrite, distort, or invent product marks. Do not invent product features or extra accessories. Keep movement natural, hands anatomically correct, and the product clearly in focus. Output exactly 10 seconds in vertical 9:16 format."
+    },
+    {
+      "id": "wallets_luxury_macro_v1",
+      "category": "wallets",
+      "label": "Luxury Wallet Macro",
+      "duration_seconds": 10,
+      "style": "premium_product",
+      "description": "Close-up premium on the wallet silhouette, visible stitching and visible closure; do not infer leather or other materials.",
+      "prompt": "Create a 10-second vertical 9:16 product video for the named wallet. Keep the wallet as the clear hero in a refined, realistic composition. Action concept: Close-up premium on the wallet silhouette, visible stitching and visible closure; do not infer leather or other materials. Use controlled lighting, gentle camera movement and a clean closing frame. The prompt is based on the product name only, without a reference image. Do not invent exact materials, brand marks, interior layout, card slots, coin pockets, capacity, included accessories or product claims. No on-screen text, captions, added logos, watermark, morphing, floating objects or unrealistic transformations. Exactly 10 seconds, vertical 9:16."
+    },
+    {
+      "id": "wallets_open_close_v1",
+      "category": "wallets",
+      "label": "Open & Close Demo",
+      "duration_seconds": 10,
+      "style": "premium_product",
+      "description": "A calm opening and closing demonstration only; do not invent interior slots, pockets or card capacity.",
+      "prompt": "Create a 10-second vertical 9:16 product video for the named wallet. Keep the wallet as the clear hero in a refined, realistic composition. Action concept: A calm opening and closing demonstration only; do not invent interior slots, pockets or card capacity. Use controlled lighting, gentle camera movement and a clean closing frame. The prompt is based on the product name only, without a reference image. Do not invent exact materials, brand marks, interior layout, card slots, coin pockets, capacity, included accessories or product claims. No on-screen text, captions, added logos, watermark, morphing, floating objects or unrealistic transformations. Exactly 10 seconds, vertical 9:16."
+    },
+    {
+      "id": "wallets_clean_flatlay_v1",
+      "category": "wallets",
+      "label": "Clean Wallet Flat Lay",
+      "duration_seconds": 10,
+      "style": "premium_product",
+      "description": "A tasteful overhead flat lay with the wallet as the hero and no props that imply included accessories.",
+      "prompt": "Create a 10-second vertical 9:16 product video for the named wallet. Keep the wallet as the clear hero in a refined, realistic composition. Action concept: A tasteful overhead flat lay with the wallet as the hero and no props that imply included accessories. Use controlled lighting, gentle camera movement and a clean closing frame. The prompt is based on the product name only, without a reference image. Do not invent exact materials, brand marks, interior layout, card slots, coin pockets, capacity, included accessories or product claims. No on-screen text, captions, added logos, watermark, morphing, floating objects or unrealistic transformations. Exactly 10 seconds, vertical 9:16."
+    },
+    {
+      "id": "wallets_everyday_carry_v1",
+      "category": "wallets",
+      "label": "Everyday Wallet",
+      "duration_seconds": 10,
+      "style": "premium_product",
+      "description": "A natural everyday carry scene focused on the wallet itself, with no claims about capacity or durability.",
+      "prompt": "Create a 10-second vertical 9:16 product video for the named wallet. Keep the wallet as the clear hero in a refined, realistic composition. Action concept: A natural everyday carry scene focused on the wallet itself, with no claims about capacity or durability. Use controlled lighting, gentle camera movement and a clean closing frame. The prompt is based on the product name only, without a reference image. Do not invent exact materials, brand marks, interior layout, card slots, coin pockets, capacity, included accessories or product claims. No on-screen text, captions, added logos, watermark, morphing, floating objects or unrealistic transformations. Exactly 10 seconds, vertical 9:16."
+    },
+    {
+      "id": "wallets_gift_reveal_v1",
+      "category": "wallets",
+      "label": "Gift-Style Reveal",
+      "duration_seconds": 10,
+      "style": "premium_product",
+      "description": "A refined gift-inspired reveal using neutral styling; do not imply gift packaging is included.",
+      "prompt": "Create a 10-second vertical 9:16 product video for the named wallet. Keep the wallet as the clear hero in a refined, realistic composition. Action concept: A refined gift-inspired reveal using neutral styling; do not imply gift packaging is included. Use controlled lighting, gentle camera movement and a clean closing frame. The prompt is based on the product name only, without a reference image. Do not invent exact materials, brand marks, interior layout, card slots, coin pockets, capacity, included accessories or product claims. No on-screen text, captions, added logos, watermark, morphing, floating objects or unrealistic transformations. Exactly 10 seconds, vertical 9:16."
     }
   ]
 }
