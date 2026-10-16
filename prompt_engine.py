@@ -93,11 +93,11 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
         doodle = style_key == "white_doodle"
         hook = product_hook(product)
         evidence_rules = (
-            "PRODUCT NAME RULE: Preserve the user-provided product name and spelling. "
-            "The name is the only product evidence available; do not claim to have inspected a photo or packaging. "
-            "Use only features explicitly stated in the name or optional user text. "
-            "Do not invent materials, dimensions, compartments, accessories, product benefits, model numbers or specifications. "
-            "If a detail is unknown, keep it neutral and omit the claim."
+            "REFERENCE IMAGE RULE: The video generator will receive the user's original product photo(s) as visual evidence. "
+            "Inspect only details genuinely visible in those reference photo(s), and preserve the product name and spelling supplied by the user. "
+            "Use the name and optional user text as supporting context, not as permission to invent features. "
+            "Do not invent unseen sides, materials, dimensions, compartments, accessories, product benefits, model numbers or specifications. "
+            "If a detail is not visible or confirmed, keep it neutral and omit the claim."
         )
 
         hook_direction = (
@@ -215,9 +215,9 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
         ]
         direction = ("DIRECTOR'S FIVE-PANEL STORYBOARD: Deliver one cohesive commercial with exactly five panels, each exactly 2 seconds. "
                       "Treat these as connected editing beats, not five different product designs. Keep the same product identity, "
-                      "spatial orientation, visual palette and believable light direction in every panel.\\n\\n"
-                      + "\\n\\n".join(title + "\\nVISUAL AND CAMERA BRIEF: " + detail for title, detail in shots)
-                      + "\\n\\nEDITING AND CONTINUITY: Use clean match cuts or gentle transitions. Every panel must advance the story from curiosity "
+                      "spatial orientation, visual palette and believable light direction in every panel.\n\n"
+                      + "\n\n".join(title + "\nVISUAL AND CAMERA BRIEF: " + detail for title, detail in shots)
+                      + "\n\nEDITING AND CONTINUITY: Use clean match cuts or gentle transitions. Every panel must advance the story from curiosity "
                       "to product recognition, a visible detail and a memorable closing hero frame. Avoid flashy templates, random zooms and inconsistent set geometry.")
     else:
         direction = (
