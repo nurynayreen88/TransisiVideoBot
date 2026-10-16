@@ -250,7 +250,7 @@ def inject_product_details(prompt_text: str, details: str) -> str:
     if not details:
         return prompt_text
     note = ('PRODUCT NAME / DETAILS FROM USER: ' + details +
-            '. Use these details only as supporting context. The uploaded image remains the sole visual source of truth; never invent or alter product features.\\n\\n')
+            '. Use these details only as supporting context. The uploaded image remains the sole visual source of truth; never invent or alter product features.\n\n')
     first_sentence_end = prompt_text.find('. ')
     if first_sentence_end >= 0:
         return prompt_text[:first_sentence_end + 2] + note + prompt_text[first_sentence_end + 2:]
@@ -1094,6 +1094,9 @@ def reset(context):
     context.user_data['shopee_url'] = ''
     context.user_data['prompt_vision'] = ''
     context.user_data['prompt_product'] = ''
+    context.user_data['prompt_reference_photo'] = ''
+    context.user_data['prompt_library_details'] = ''
+    context.user_data['prompt_category'] = ''
     context.user_data['stage'] = 'home'
 
 
@@ -1532,39 +1535,6 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif action == 'prompt_input:photo' and stage == 'prompt_input':
         context.user_data['stage'] = 'prompt_photo'
         await query.message.reply_text('📷 Hantar satu gambar produk. Maklumat tambahan boleh dimasukkan kemudian.')
-    elif action == 'prompt_input:shopee' and stage == 'prompt_input':
-        context.user_data['stage'] = 'prompt_shopee_link'
-        await query.message.reply_text('🔗 MASUKKAN PAUTAN PRODUK SHOPEE\\n\\n1. Buka produk di Shopee.\\n2. Tekan Kongsi → Salin Pautan.\\n3. Tampal pautan produk Shopee Malaysia dalam ruang mesej dan tekan Hantar.\\n\\n👇 Tampal pautan sekarang:', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('↩️ Tukar Cara Input', callback_data='prompt_input:back')], [InlineKeyboardButton('🏠 Menu Utama', callback_data='home')]]))
-    elif action == 'prompt_input:back' and stage == 'prompt_shopee_link':
-        context.user_data['stage'] = 'prompt_input'
-        await query.message.reply_text('✍️ Pilih cara masukkan produk untuk prompt:', reply_markup=prompt_input_menu())
-    elif action == 'prompt_categories' and stage in ('prompt_category', 'prompt_template', 'prompt_library_done'):
-        context.user_data['stage'] = 'prompt_category'
-        await query.message.reply_text('📚 Pilih kategori produk:', reply_markup=prompt_category_menu())
-    elif action.startswith('pcat:') and stage in ('prompt_category', 'prompt_template', 'prompt_library_done'):
-        category_id = action.split(':', 1)[1]
-        if category_id not in CATEGORIES_BY_ID:
-            await query.message.reply_text('Kategori tidak ditemui. Sila pilih semula.', reply_markup=prompt_category_menu())
-        else:
-            context.user_data['prompt_category'] = category_id
-            context.user_data['stage'] = 'prompt_template'
-            category_name = CATEGORIES_BY_ID[category_id].get('label', category_id)
-            await query.message.reply_text(f'🎨 Pilih gaya prompt untuk kategori {category_name}:', reply_markup=prompt_options_menu(category_id))
-    elif action.startswith('ptpl:') and stage in ('prompt_category', 'prompt_template', 'prompt_library_done'):
-        prompt_id = action.split(':', 1)[1]
-        prompt_item = PROMPTS_BY_ID.get(prompt_id)
-        if not prompt_item or prompt_item.get('category') != context.user_data.get('prompt_category'):
-            await query.message.reply_text('Prompt tidak sepadan dengan kategori. Sila pilih semula.', reply_markup=prompt_options_menu(context.user_data.get('prompt_category', '')))
-        else:
-            result_prompt = inject_product_details(prompt_item.get('prompt', ''), context.user_data.get('prompt_library_details', ''))
-            context.user_data['stage'] = 'prompt_library_done'
-            await query.message.reply_text('✅ PROMPT SIAP — ' + prompt_item.get('label', 'Prompt Pilihan') + '\\n\\nSalin prompt di bawah dan muat naik gambar produk yang sama ke Gemini.\\n\\n' + result_prompt,
-                reply_markup=InlineKeyboardMarkup([
-                    [InlineKeyboardButton('✨ Buka Gemini', url='https://gemini.google.com/')],
-                    [InlineKeyboardButton('🔁 Pilih Gaya Lain', callback_data=f"pcat:{prompt_item['category']}")],
-                    [InlineKeyboardButton('↩️ Tukar Kategori', callback_data='prompt_categories')],
-                    [InlineKeyboardButton('✍️ Prompt Baharu', callback_data='prompt'), InlineKeyboardButton('🏠 Menu Utama', callback_data='home')]
-                ]))
     elif action.startswith('prompt_details:') and stage == 'prompt_details_choice':
         if action == 'prompt_details:add':
             context.user_data['stage'] = 'prompt_details_text'
