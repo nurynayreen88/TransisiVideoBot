@@ -18,7 +18,7 @@ def build_prompt(mode, product, scene, motion, style='auto', duration=10, concep
     return _build_single_prompt(mode, product, scene, motion, style, part=0, concept=concept)
 
 
-def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, concept='')
+def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, concept=''):
     duration = 10
     camera = CAMERAS.get(motion, CAMERAS["push"])
     identity = (
