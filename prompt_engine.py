@@ -8,10 +8,32 @@ CAMERAS = {
     "static": "A locked premium studio composition with delicate lighting movement and a subtle focus transition.",
 }
 
+AUTO_STYLE_BY_PRODUCT_TYPE = {
+    'fashion': 'fashion_editorial',
+    'bag': 'luxury',
+    'hijab': 'fashion_editorial',
+    'shoes': 'studio_360_safe',
+    'beauty': 'beauty_macro',
+    'food': 'food_appetite',
+    'gadget': 'tech_demo',
+    'home': 'cozy_home',
+    'accessory': 'luxury',
+    'other': 'cinematic',
+}
+
+
+def _resolve_auto_style(style, product_type):
+    """Choose a stable, category-appropriate catalog style without an AI call."""
+    if style != 'auto':
+        return style
+    return AUTO_STYLE_BY_PRODUCT_TYPE.get(product_type, 'cinematic')
+
+
 def build_prompt(mode, product, scene, motion, style='auto', duration=10, concept='', product_type='other'):
+    style = _resolve_auto_style(style, product_type) if mode == 'storyboard' else style
     if duration == 20:
-        # Resolve Auto/Random once so both clips use exactly the same style.
-        chosen_style = resolve(style)[0] if mode == 'storyboard' else style
+        # Resolve the category-appropriate style once so both clips remain consistent.
+        chosen_style = style
         first = _build_single_prompt(mode, product, scene, motion, chosen_style, part=1, concept=concept, product_type=product_type)
         second = _build_single_prompt(mode, product, scene, motion, chosen_style, part=2, concept=concept, product_type=product_type)
         return first + "\n\n=== KLIPPO PART 2 ===\n\n" + second
