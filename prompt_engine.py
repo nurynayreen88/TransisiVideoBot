@@ -153,7 +153,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0):
             "typography, without enhancing unreadable text into invented words. Keep movement continuous and natural.\n\n"
             "7.5–10.0s | HERO FINISH: Ease the camera into a balanced full-product composition. Let the product "
             "remain clearly legible, with polished edge separation and a stable contact shadow. Finish on a "
-            "brief confident hold with an understated lighting accent. No added caption, CTA or watermark.\n\n"
+            "brief confident hold with an understated lighting accent. No unrequested caption, CTA or watermark; follow the ON-SCREEN TEXT rule exactly.\n\n"
             "CINEMATOGRAPHY: Premium commercial lens language, elegant motion curves, coherent depth of field, "
             "physically plausible parallax and natural material response. Maintain one consistent studio space "
             "and color grade throughout; avoid frantic motion, jump cuts, fake rotations or excessive effects."
