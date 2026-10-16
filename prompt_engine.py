@@ -67,10 +67,11 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
     }
     category_direction = product_type_directions.get(product_type, product_type_directions['other'])
     identity = (
-        "PRODUCT IDENTITY RULE: This prompt is generated from the product name and category without a reference image. "
-        "Keep the named product as the clear hero and use a plausible, generic presentation. Do not invent exact brand marks, "
-        "model numbers, materials, technical specifications, included accessories, product claims, compartments or hidden features. "
-        "Where the name alone does not establish a detail, leave it neutral rather than guessing."
+        "PRODUCT IDENTITY / MASTER REFERENCE RULE: Use the uploaded image as the MASTER visual reference and sole source of truth for visible product identity. "
+        "Preserve exact shape, proportions, color, pattern, packaging, visible labels or branding, and every visible component. "
+        "Treat the product name, category and written details as supplementary context only; they must never override the image. "
+        "Do not invent unseen sides, materials, compartments, accessories, functions, technical specifications or claims. "
+        "If a detail is not visible or supplied, keep it neutral rather than guessing."
     )
     art = (
         f"ART DIRECTION: Premium commercial product cinematography. Environment: {scene}. "
@@ -85,7 +86,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
         "No invented features, extra accessories, duplicated products, fabricated logos or labels, random props that imply included items, "
         "floating geometry, distorted edges, flicker, jitter, abrupt exposure shifts, plastic-looking surfaces or unnatural hands. "
         "Do not add subtitles, UI, watermarks or promotional wording not explicitly requested. "
-        "Do not claim to reproduce unseen or verified details because no reference image is provided."
+        "Do not fabricate unseen sides or details; if a surface is not visible in the reference, keep it hidden or neutral."
     )
     if mode == "storyboard":
         style_key, style_name, style_template = resolve(style)
@@ -93,8 +94,8 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
         hook = product_hook(product)
         evidence_rules = (
             "PRODUCT NAME RULE: Preserve the user-provided product name and spelling. "
-            "The name is the only product evidence available; do not claim to have inspected a photo or packaging. "
-            "Use only features explicitly stated in the name or optional user text. "
+            "The uploaded image is the visual evidence for visible product appearance; do not claim details beyond what is shown or supplied in writing. "
+            "Use visible features from the reference image and treat written details as supplementary context. "
             "Do not invent materials, dimensions, compartments, accessories, product benefits, model numbers or specifications. "
             "If a detail is unknown, keep it neutral and omit the claim."
         )
