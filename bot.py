@@ -845,14 +845,22 @@ def render_creative_motion(layers, output, music, duration, on_progress=None, do
             if on_progress and (n == 0 or n % max(hold,round(FPS*2/hold)*hold) == 0):
                 on_progress(45+round(30*n/total),'Membina video produk dan transisi...')
         joined = tmp / 'creative.mp4'
+        if on_progress:
+            on_progress(76, 'Frame siap. Menyusun video HD...')
         subprocess.run(['ffmpeg','-hide_banner','-loglevel','error','-y','-threads','1','-filter_threads','1',
                         '-framerate',str(FPS),'-i',str(frames_dir/'%05d.png'),'-c:v','libx264','-threads','1',
                         '-preset','veryfast','-crf','20','-pix_fmt','yuv420p','-movflags','+faststart',str(joined)],check=True,timeout=240,capture_output=True,text=True)
+        if on_progress:
+            on_progress(79, 'Video asas siap. Mengemas kini efek...')
         if doodle != 'none':
             decorated = tmp / 'decorated.mp4'
+            if on_progress:
+                on_progress(81, 'Menambah efek visual...')
             apply_overlay(joined,decorated,doodle,WIDTH,HEIGHT,duration,background=layers[0][1],seed=variant_hash.hexdigest())
             joined = decorated
         # Three staggered handwriting reveals after the product settles / hand exits.
+        if on_progress:
+            on_progress(83, 'Menyediakan tulisan promosi...')
         labels = make_handwriting_labels(tmp, WIDTH, HEIGHT, background=layers[0][1],
                                          seed=variant_hash.hexdigest(), product_info=product_info)
         labelled = tmp / 'labelled.mp4'
@@ -874,6 +882,8 @@ def render_creative_motion(layers, output, music, duration, on_progress=None, do
                       '-map','[final]','-an','-t',str(duration),'-c:v','libx264',
                       '-preset','veryfast','-crf','18','-pix_fmt','yuv420p',str(labelled)]
         subprocess.run(label_cmd,check=True,timeout=240,capture_output=True,text=True)
+        if on_progress:
+            on_progress(88, 'Kemasan video selesai. Menyediakan fail akhir...')
         joined = labelled
         cmd=['ffmpeg','-hide_banner','-loglevel','error','-y','-i',str(joined)]
         if music:
