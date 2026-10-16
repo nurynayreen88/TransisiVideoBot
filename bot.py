@@ -2305,7 +2305,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     'Create one ultra-realistic premium commercial product photograph in vertical 9:16. '
                     'The product is: ' + product_name + '. Category: ' + category_label + '.\\n\\n'
                     'VISUAL DIRECTION: Create a believable, elegant lifestyle advertising scene suited to this product. '
-                    'If the product is clothing, show a realistic adult model wearing the exact item naturally in a suitable setting. '
+                    'If a model was selected, include the same adult model naturally in a way suited to this product; for clothing, the model must wear the exact item. If no model was selected, do not add a person. '
                     'If it is a bag, accessory, beauty item, gadget, food or home product, compose a premium scene that showcases the actual item clearly. '
                     'Use soft natural or studio light, realistic shadows, refined composition, authentic textures, and a photographic—not CGI—finish. '
                     'Keep the product prominent and leave enough clear space around it.\\n\\n'
@@ -2317,7 +2317,17 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     'No collage, split screen, poster layout, captions, promotional text, watermark or extra logos. '
                     'Avoid distorted hands, unnatural faces, plastic skin, warped product geometry and artificial CGI appearance.'
                 )
-                image_prompt += '\n\nMODEL DIRECTION: ' + prompt_creative_settings(context.user_data, include_audio=False)
+                if context.user_data.get('prompt_model_presence') == 'yes':
+                    image_prompt += (
+                        '\n\nMODEL DIRECTION: Include ' + str(context.user_data.get('prompt_model_count', 1)) +
+                        ' consistent adult model(s); gender: ' + str(context.user_data.get('prompt_model_gender', 'female')) +
+                        '; head covering: ' + str(context.user_data.get('prompt_model_hijab', 'not specified')) +
+                        '; appearance: ' + str(context.user_data.get('prompt_model_ethnicity', 'any')) +
+                        '; adult age range: ' + str(context.user_data.get('prompt_model_age', '26-40')) +
+                        '. Keep the same face, hair/head covering and outfit consistent throughout.'
+                    )
+                else:
+                    image_prompt += '\n\nMODEL DIRECTION: No human model. Focus entirely on the exact product.'
                 context.user_data['prompt_image_ready'] = image_prompt
                 image_action_rows = [
                     [InlineKeyboardButton('✨ ChatGPT Image', url='https://chatgpt.com/'),
