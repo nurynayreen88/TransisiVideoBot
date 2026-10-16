@@ -245,13 +245,85 @@ def detect_bag_subtype(product_name: str) -> str:
     return ''
 
 
-def detect_prompt_library_category(product_name: str) -> str:
-    subtype = detect_bag_subtype(product_name)
-    if subtype == 'wallet':
-        return 'wallets'
-    if subtype in ('backpack', 'sling_bag', 'handbag', 'bag'):
-        return 'bags'
+def detect_product_subtype(product_name: str) -> str:
+    """Infer a curated prompt subtype from product-name text only; never calls AI or image analysis."""
+    name = (product_name or '').casefold()
+    rules = [
+        ('beauty', 'lip_gloss', ('lip gloss', 'lipgloss')),
+        ('beauty', 'lipstick', ('lipstick', 'lip stick', 'gincu')),
+        ('beauty', 'facial_cleanser', ('facial cleanser', 'face cleanser', 'cleanser', 'pencuci muka', 'sabun muka', 'pencuci wajah', 'face wash')),
+        ('beauty', 'powder', ('face powder', 'loose powder', 'compact powder', 'setting powder', 'bedak', 'cushion powder')),
+        ('beauty', 'serum', ('serum', 'ampoule')),
+        ('beauty', 'sunscreen', ('sunscreen', 'sun screen', 'sunblock', 'spf')),
+        ('beauty', 'mascara', ('mascara', 'maskara')),
+        ('beauty', 'perfume', ('perfume', 'fragrance', 'minyak wangi', 'eau de parfum', 'eau de toilette')),
+        ('beauty', 'moisturizer', ('moisturizer', 'moisturiser', 'moisturizing cream', 'pelembap', 'moisture cream')),
+        ('beauty', 'toner', ('toner', 'facial mist')),
+        ('beauty', 'blush', ('blush', 'blusher', 'rouge', 'pemerah pipi')),
+        ('beauty', 'sheet_mask', ('sheet mask', 'masker muka', 'face mask')),
+        ('clothing', 'hijab', ('hijab', 'tudung', 'shawl', 'bawal')),
+        ('clothing', 'baju_kurung', ('baju kurung', 'kurung moden', 'kurung kedah')),
+        ('clothing', 'dress', ('dress', 'gown', 'maxi dress')),
+        ('clothing', 'shirt', ('shirt', 'blouse', 'kemeja', 'baju lelaki', 't-shirt', 'tshirt')),
+        ('shoes', 'running_shoes', ('running shoes', 'kasut larian', 'jogging shoes')),
+        ('shoes', 'sneakers', ('sneaker', 'trainers', 'kasut sukan')),
+        ('shoes', 'heels', ('high heels', 'heels', 'kasut tumit', 'stiletto')),
+        ('shoes', 'sandals', ('sandals', 'sandal', 'selipar', 'slippers')),
+        ('gadgets', 'earbuds', ('earbuds', 'ear buds', 'wireless earphone', 'bluetooth earphone', 'earphones', 'earphone')),
+        ('gadgets', 'phone_stand', ('phone stand', 'phone holder', 'stand telefon', 'holder telefon')),
+        ('gadgets', 'smartwatch', ('smartwatch', 'smart watch', 'jam pintar')),
+        ('gadgets', 'keyboard', ('keyboard', 'papan kekunci')),
+        ('gadgets', 'powerbank', ('power bank', 'powerbank', 'portable charger')),
+        ('home', 'kitchen_organizer', ('kitchen organizer', 'kitchen rack', 'rak dapur', 'organizer dapur')),
+        ('home', 'cleaning_tool', ('mop', 'brush cleaner', 'cleaning brush', 'alat pembersih', 'penyapu', 'squeegee')),
+        ('home', 'bedding', ('bedsheet', 'bed sheet', 'bedding', 'cadar', 'comforter', 'sarung bantal')),
+        ('home', 'lamp', ('lampu', 'desk lamp', 'table lamp', 'night lamp', 'lamp')),
+        ('accessories', 'watch', ('wristwatch', 'watch women', 'watch men', 'jam tangan')),
+        ('accessories', 'earrings', ('earring', 'earrings', 'anting-anting', 'anting')),
+        ('accessories', 'necklace', ('necklace', 'pendant', 'kalung', 'rantai leher')),
+        ('accessories', 'sunglasses', ('sunglasses', 'sun glasses', 'cermin mata hitam')),
+        ('food', 'snack', ('snack', 'kerepek', 'chips', 'crackers', 'snek')),
+        ('food', 'drink', ('drink', 'beverage', 'juice', 'jus', 'kopi', 'coffee', 'tea', 'teh', 'minuman')),
+        ('food', 'sauce', ('sauce', 'sos', 'sambal', 'condiment')),
+        ('food', 'biscuits', ('biscuit', 'biscuits', 'cookies', 'biskut')),
+        ('stationery', 'pen', ('pen ', 'ballpoint', 'ball pen', 'gel pen', 'fountain pen')),
+        ('stationery', 'notebook', ('notebook', 'journal', 'buku nota', 'notepad')),
+        ('stationery', 'marker', ('marker', 'highlighter', 'pen marker')),
+        ('stationery', 'pencil_case', ('pencil case', 'pencil pouch', 'bekas pensel', 'kotak pensel')),
+        ('sports', 'water_bottle', ('sports bottle', 'water bottle', 'botol air')),
+        ('sports', 'yoga_mat', ('yoga mat', 'alas yoga')),
+        ('sports', 'resistance_band', ('resistance band', 'exercise band', 'getah senaman')),
+    ]
+    for category, subtype, keywords in rules:
+        if any(keyword in name for keyword in keywords):
+            return subtype
+    bag_subtype = detect_bag_subtype(name)
+    if bag_subtype:
+        return bag_subtype
     return ''
+
+
+def detect_prompt_library_category(product_name: str) -> str:
+    """Map common product-name keywords to a curated GitHub prompt-library category."""
+    subtype = detect_product_subtype(product_name)
+    category_by_subtype = {
+        'lip_gloss': 'beauty', 'lipstick': 'beauty', 'facial_cleanser': 'beauty',
+        'powder': 'beauty', 'serum': 'beauty', 'sunscreen': 'beauty', 'mascara': 'beauty',
+        'perfume': 'beauty', 'moisturizer': 'beauty', 'toner': 'beauty', 'blush': 'beauty',
+        'sheet_mask': 'beauty', 'hijab': 'clothing', 'baju_kurung': 'clothing',
+        'dress': 'clothing', 'shirt': 'clothing', 'running_shoes': 'shoes',
+        'sneakers': 'shoes', 'heels': 'shoes', 'sandals': 'shoes', 'earbuds': 'gadgets',
+        'phone_stand': 'gadgets', 'smartwatch': 'gadgets', 'keyboard': 'gadgets',
+        'powerbank': 'gadgets', 'kitchen_organizer': 'home', 'cleaning_tool': 'home',
+        'bedding': 'home', 'lamp': 'home', 'watch': 'accessories', 'earrings': 'accessories',
+        'necklace': 'accessories', 'sunglasses': 'accessories', 'snack': 'food',
+        'drink': 'food', 'sauce': 'food', 'biscuits': 'food', 'pen': 'stationery',
+        'notebook': 'stationery', 'marker': 'stationery', 'pencil_case': 'stationery',
+        'water_bottle': 'sports', 'yoga_mat': 'sports', 'resistance_band': 'sports',
+        'wallet': 'wallets', 'backpack': 'bags', 'sling_bag': 'bags',
+        'handbag': 'bags', 'bag': 'bags',
+    }
+    return category_by_subtype.get(subtype, '')
 
 
 def prompt_product_type_menu():
@@ -2052,7 +2124,7 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data['prompt_library_details'] = details[:1200]
         if details:
             context.user_data['prompt_product_name'] = details[:240]
-            subtype = detect_bag_subtype(details)
+            subtype = detect_product_subtype(details)
             category_id = detect_prompt_library_category(details)
             context.user_data['prompt_bag_subtype'] = subtype
             context.user_data['prompt_detected_category'] = category_id
@@ -2064,7 +2136,7 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 context.user_data['prompt_category'] = category_id
                 context.user_data['stage'] = 'prompt_category_options'
                 await update.message.reply_text(
-                    '🔎 Klippo mengesan jenis produk: ' + subtype.replace('_', ' ') + '. Pilih gaya video dalam koleksi ' + CATEGORIES_BY_ID[category_id].get('label', category_id) + ':',
+                    '🔎 Klippo mengesan jenis produk: ' + subtype.replace('_', ' ') + '. Pilih prompt khusus dalam koleksi ' + CATEGORIES_BY_ID[category_id].get('label', category_id) + ':',
                     reply_markup=prompt_options_menu(category_id)
                 )
                 return
