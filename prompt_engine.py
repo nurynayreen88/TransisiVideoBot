@@ -1,5 +1,6 @@
 from prompt_catalog import resolve, product_hook
 from smart_prompt_engine import choose_variation, format_variation
+from prompt_library import build_curated_storyboard
 import re
 """Detailed, reference-safe AI video prompt templates for KLIPPO."""
 
@@ -26,6 +27,16 @@ def _clean_product_reference(product):
     return value or "the product shown in the uploaded reference image"
 
 def build_prompt(mode, product, scene, motion, style='auto', duration=10, user_concept=None):
+    # Storyboard prompts use saved, curated templates. Do not dynamically rewrite
+    # the creative copy or append the experimental variation engine to these prompts.
+    if mode == "storyboard":
+        return build_curated_storyboard(
+            product=product,
+            motion=motion,
+            style=style,
+            duration=duration,
+            scene=scene,
+        )
     # Resolve storyboard style once, before choosing variations, so the creative
     # direction cannot drift from the catalog style (especially Luxury Product).
     chosen_style = resolve(style)[0] if mode == "storyboard" else style
