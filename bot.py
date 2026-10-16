@@ -493,7 +493,7 @@ def prompt_creative_settings(user_data, include_audio=True):
         lines.append('On-screen text language: ' + ('no on-screen text' if language == 'none' else language) + '. All on-screen text, including any opening hook, must follow this language; preserve brand and product names exactly, keep text short and readable, and do not invent claims, logos or watermarks.')
         voiceover_mode = user_data.get('prompt_voiceover_mode', 'none')
         if voiceover_mode == 'ai':
-            lines.append('Create a concise, natural voiceover in ' + ('Bahasa Melayu' if language == 'Malay' else 'English' if language == 'English' else 'Bahasa Melayu') + ' only if it improves the ad; otherwise use no dialogue. Keep background music below the voice.')
+            lines.append('Create a concise, natural voiceover in ' + ('Bahasa Melayu' if language == 'Malay' else 'English' if language == 'English' else 'Bahasa Melayu') + '. Keep spoken lines short, match them to the product actions, and keep background music below the voice.')
         elif voiceover_mode == 'script':
             script = ' '.join((user_data.get('prompt_voiceover_script') or '').split())
             lines.append('Use this exact user-provided voiceover/dialogue script without rewriting it: ' + script)
