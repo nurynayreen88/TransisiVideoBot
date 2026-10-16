@@ -2445,7 +2445,52 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if len(value) > 3000:
             await update.message.reply_text('⚠️ Maklumat terlalu panjang. Sila salin blok “MAKLUMAT PRODUK UNTUK KLIPPO” sahaja, bukan seluruh jawapan ChatGPT.')
             return
-        name_match = re.search(r'(?im)^\\s*(?:NAMA PRODUK|NAMA|PRODUCT NAME)\\s*:\\s*(.+?)\\s*        details = '' if value in ('-', '—', 'tiada', 'Tiada') else value
+        name_match = re.search(r'(?im)^\s*(?:NAMA PRODUK|NAMA|PRODUCT NAME)\s*:\s*(.+?)\s*$', value)
+        if not name_match:
+            await update.message.reply_text('⚠️ Saya belum jumpa baris NAMA PRODUK. Sila tampal blok “MAKLUMAT PRODUK UNTUK KLIPPO” penuh daripada ChatGPT.')
+            return
+        product_name = name_match.group(1).strip()[:240]
+        if not product_name or product_name.casefold() in ('tidak dapat dipastikan daripada gambar', 'tidak diketahui'):
+            await update.message.reply_text('⚠️ Nama produk belum jelas. Sila tambah nama atau jenis produk pada baris NAMA PRODUK dan hantar semula.')
+            return
+        details = value.strip()[:1800]
+        context.user_data['prompt_product_name'] = product_name
+        context.user_data['prompt_product'] = 'MAKLUMAT PRODUK DARIPADA ANALISIS CHATGPT:\n' + details
+        context.user_data['prompt_library_details'] = details
+        context.user_data['prompt_from_product_sheet'] = True
+        subtype = detect_product_subtype(product_name + '\n' + details)
+        category_id = detect_prompt_library_category(product_name + '\n' + details)
+        context.user_data['prompt_bag_subtype'] = subtype
+        if category_id:
+            context.user_data['prompt_category'] = category_id
+        category_product_type = {
+            'clothing': 'fashion', 'bags': 'bag', 'wallets': 'wallet', 'shoes': 'shoes',
+            'beauty': 'beauty', 'food': 'food', 'gadgets': 'gadget', 'home': 'home',
+            'accessories': 'accessory', 'stationery': 'other', 'sports': 'other',
+            'travel': 'other', 'pets': 'other', 'automotive': 'other', 'garden': 'other',
+            'kitchen': 'other', 'furniture': 'other', 'baby': 'other', 'crafts': 'other',
+        }
+        context.user_data['prompt_product_type'] = category_product_type.get(category_id, 'other')
+        context.user_data['prompt_mode'] = 'storyboard'
+        context.user_data['prompt_style'] = 'white_doodle'
+        context.user_data['prompt_duration'] = 10
+        context.user_data['prompt_concept'] = ''
+        context.user_data['stage'] = 'prompt_product_data_ready'
+        await update.message.reply_text(
+            '✅ Maklumat produk diterima.\n\n'
+            f'🛍️ Nama: {product_name}\n'
+            f'📦 Kategori: {category_id or "belum dikenal pasti — boleh pilih gaya umum"}\n'
+            '🎨 Gaya dicadangkan: Realistik + Doodle\n'
+            '📋 Maklumat ini akan dimasukkan ke dalam prompt video; anda boleh semak pilihan sebelum menjana.',
+            reply_markup=InlineKeyboardMarkup([
+                [InlineKeyboardButton('🎬 Teruskan ke Prompt Video', callback_data='product_sheet_use')],
+                [InlineKeyboardButton('🔄 Hantar Maklumat Semula', callback_data='product_sheet_start')],
+                [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
+            ])
+        )
+        return
+    if stage == 'prompt_library_details':
+        details = '' if value in ('-', '—', 'tiada', 'Tiada') else value
         context.user_data['prompt_library_details'] = details[:1200]
         if details:
             context.user_data['prompt_product_name'] = details[:240]
