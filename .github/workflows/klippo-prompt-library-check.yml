@@ -176,6 +176,7 @@ jobs:
                   product_type="beauty",
                   storyboard_override=curated["storyboard"],
               )
+              assert curated_prompt.startswith("PROMPT VIDEO — 10 SAAT")
               assert "DIRECTOR'S CURATED PREMIUM STORYBOARD" in curated_prompt
               assert "NO ON-SCREEN TEXT" in curated_prompt
               for shot in curated["storyboard"]:
