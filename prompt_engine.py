@@ -138,14 +138,14 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
         return (
             "KLIPPO | UNIVERSAL PRODUCT VIDEO PROMPT | " + style_name + (" | BAHAGIAN " + str(part) + "/2" if part else "") + "\n"
             "OUTPUT: One cohesive vertical 9:16 product advertisement, EXACT DURATION: " + str(duration) + " seconds.\n\n"
-            "PRODUCT REFERENCE: " + product + "\n" + category_direction + "\n\n" + identity + "\n\n"
+            "PRODUCT NAME: " + product + "\n" + category_direction + "\n\n" + identity + "\n\n"
             "STYLE FROM KLIPPO CATALOG: " + style_template + "\n\n"
             "SETTING: " + scene + "\n"
-            "CAMERA: " + camera + " Stay reference-facing; never invent unseen sides.\n\n"
+            "CAMERA: " + camera + " Keep framing plausible for the named product; avoid unsupported angles or features.\n\n"
             + evidence_rules + "\n\n" + (hook_direction if part != 2 else "NO REPEATED OPENING HOOK in Part 2.") + "\n\n" + rules + "\n\n"
             + (("OPTIONAL CREATIVE CONCEPT: " + concept + ". Use it only to guide a suitable, physically plausible action or story beat; "
                  "do not treat it as proof of product features, benefits, included accessories or unseen details. "
-                 "If the idea conflicts with the reference image, ignore the conflicting part.\n\n") if concept else "")
+                 "If the idea requires an unprovided feature, ignore that part.\n\n") if concept else "")
             +  "CONTINUITY: Keep a consistent, plausible presentation of the named product throughout the video. "
             "Use soft physically believable lighting and stable background. "
             "Do not morph the object, invent accessories or cover its visible branding. "
@@ -154,8 +154,8 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
         )
     if mode == "storyboard":
         shots = [
-            ("01 | HOOK | 0.0–1.5s", "Start with a visually arresting close crop of a genuinely visible feature. Establish the product's material and silhouette with a soft directional highlight. Camera: precise micro push-in, no sudden jump. Keep focus locked on the visible feature. End with movement that motivates the reveal."),
-            ("02 | REVEAL | 1.5–3.0s", "Reveal the complete product in a carefully balanced frame. Camera: controlled pull-back within the original reference-facing view, maintaining exact scale and shape. Let the background separate naturally through restrained depth and contact shadow. Transition from the hook with matching movement and consistent lighting."),
+            ("01 | HOOK | 0.0–1.5s", "Start with a visually arresting close crop suited to the named product. Use a soft directional highlight without asserting a specific material. Camera: precise micro push-in, no sudden jump. End with movement that motivates the reveal."),
+            ("02 | REVEAL | 1.5–3.0s", "Reveal the complete named product in a carefully balanced frame. Camera: controlled pull-back with believable scale and shape. Let the background separate naturally through restrained depth and contact shadow. Transition from the hook with matching movement and consistent lighting."),
             ("03 | CONTEXT | 3.0–5.0s", "Keep the unchanged product in the same selected setting without suggesting an unsupported function or inventing props. Show convincing surface contact, natural reflections and realistic perspective. Use a gentle camera drift to create depth while keeping the reference-facing product geometry recognizable. Transition through a subtle dissolve or match cut."),
             ("04 | DETAIL | 5.0–7.0s", "Select one plausible generic detail view suited to the product category, such as silhouette, edge, handle or closure when applicable. Use a measured macro-style push, controlled depth of field and soft grazing light. Do not invent materials, labels or hidden features. Transition by matching the detail's position into the next hero composition."),
             ("05 | HERO | 7.0–8.5s", "Present the product as the unmistakable visual centerpiece. Camera instruction: use a restrained, reference-safe variation of the primary movement: " + camera + " Use restrained premium edge lighting, realistic material response and uncluttered negative space. Keep the product presentation consistent with its name and do not fabricate branding. Build visual emphasis without aggressive spinning or deformation."),
