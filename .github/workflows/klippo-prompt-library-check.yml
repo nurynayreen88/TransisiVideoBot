@@ -254,6 +254,22 @@ jobs:
               assert "SECOND CLIP 10s" in second_part and "full-product frame" in second_part
               assert "Do NOT repeat the opening hook" in second_part
 
+          # Regression checks for the image-first UI and split 20-second instructions.
+          image_prompt_send = bot.find("await query.message.reply_text(image_prompt)")
+          image_step_instructions = bot.find("'🖼️ LANGKAH 1 — PROMPT IMAGE", image_prompt_send)
+          assert image_prompt_send >= 0 and image_step_instructions > image_prompt_send, (
+              "PROMPT IMAGE must be delivered before its action buttons/instructions"
+          )
+          assert "if caption:" in bot and "BAHAGIAN " in bot and "Gunakan bingkai akhir Bahagian 1" in bot, (
+              "20-second prompt parts must be labelled and explain the continuity frame"
+          )
+          assert "'🎬 LANGKAH 2 — PROMPT VIDEO\\\\n\\\\n'" not in bot, (
+              "Video instructions must not contain literal escaped newline sequences"
+          )
+          assert "'❓ FAQ KLIPPO\\\\n\\\\n'" not in bot, (
+              "FAQ heading must use actual line breaks"
+          )
+
           print(
               f"Validated {len(categories)} categories, {len(prompts)} prompt-library entries, "
               f"{generated_cases} generated library cases, flow markers, and White Doodle v4 "
