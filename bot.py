@@ -1536,7 +1536,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await query.message.reply_text('Prompt ini tidak ditemui dalam kategori tersebut. Sila pilih semula.', reply_markup=prompt_options_menu(category_id))
         else:
             prompt_text = inject_product_details(template.get('prompt', ''), context.user_data.get('prompt_library_details', ''))
-            prompt_text = 'PROMPT VIDEO — 10 SAAT\\n\\n' + prompt_text
+            prompt_text = 'PROMPT VIDEO — 10 SAAT\n\n' + prompt_text
             buttons = [
                 [InlineKeyboardButton('✨ Buka Gemini', url='https://gemini.google.com/app')],
                 [InlineKeyboardButton('🎬 Prompt Lain Dalam Kategori', callback_data=f'pcat:{category_id}')],
