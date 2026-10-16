@@ -20,6 +20,7 @@ from storyboard_engine import build_storyboard, format_storyboard, source_sequen
 from storyboard_overlay import apply_overlay, make_handwriting_labels
 from gemini_vision import describe_photo
 from gemini_storyboard import generate_storyboard
+from gemini_storyboard_image import generate_storyboard_sheet, GeminiStoryboardImageError
 from prompt_engine import build_prompt
 from prompt_catalog import choices as storyboard_styles
 
@@ -2215,7 +2216,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             prompt_instruction = (
                 'Anda ialah pengarah kreatif iklan produk. Analisis SEMUA gambar rujukan yang dilampirkan dan hasilkan storyboard video produk yang boleh terus digunakan sebagai arahan penjana video AI. '
                 'Tulis hasil dalam ' + language_label + '. Durasi tepat ' + str(duration) + ' saat, format menegak 9:16. '
-                + ('Bina 5 babak, setiap babak tepat 2 saat.' if duration == 10 else 'Bina 10 babak, setiap babak tepat 2 saat; babak 6–10 mesti bersambung secara visual daripada babak 1–5.')
+                + ('Bina ' + str(4 if duration <= 10 else (6 if duration <= 15 else 8)) + ' babak, setiap babak kira-kira ' + str(round(duration / (4 if duration <= 10 else (6 if duration <= 15 else 8)), 2)) + ' saat. ' + ('Pastikan keempat-empat babak membentuk aliran lengkap.' if duration <= 10 else ('Babak 5–6 mesti menyambung secara visual daripada babak 1–4.' if duration <= 15 else 'Babak 5–8 mesti bersambung secara visual daripada babak 1–4.')))
                 + ' Untuk setiap babak, berikan masa mula–akhir, aksi spesifik, framing dan gerakan kamera, ekspresi/pergerakan model jika ada, serta peralihan/kesinambungan. '
                 'Kekalkan identiti dan rupa produk tepat seperti gambar. Jangan mereka warna, logo, corak, ciri, bahan, aksesori atau dakwaan yang tidak dapat dilihat. '
                 'Kekalkan model dewasa yang sama pada semua babak jika model dipilih. Jangan tambah teks pada skrin, sari kata, logo tambahan atau watermark. '
@@ -2234,15 +2235,49 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 [InlineKeyboardButton('🔁 Jana Storyboard Baharu', callback_data='prompt_chatgpt_storyboard')],
                 [InlineKeyboardButton('🏠 Menu Utama', callback_data='home')]
             ])
-            await progress_update(waiting, 90, 'Storyboard siap. Menghantar hasil...')
-            await query.message.reply_text('🎬 STORYBOARD GEMINI SIAP\n\nSemak setiap babak dahulu. Gambar produk asal digunakan sebagai rujukan analisis; video masih perlu dijana dalam platform video pilihan.', reply_markup=storyboard_actions)
+            scene_count = 4 if duration <= 10 else (6 if duration <= 15 else 8)
+            sheet_count = (scene_count + 3) // 4
+            visual_error = None
+            await progress_update(waiting, 65, 'Teks babak siap. Menjana helaian storyboard bergambar...')
+            for sheet_number in range(1, sheet_count + 1):
+                try:
+                    sheet_bytes = await asyncio.to_thread(
+                        generate_storyboard_sheet, images, storyboard, duration, sheet_number, language_label
+                    )
+                    sheet_file = BytesIO(sheet_bytes)
+                    sheet_file.name = f'KLIPPO_STORYBOARD_HELAIAN_{sheet_number}.png'
+                    await query.message.reply_photo(
+                        photo=sheet_file,
+                        caption=f'🎬 STORYBOARD BERGAMBAR — HELAIAN {sheet_number}/{sheet_count}\n'
+                                f'Video {duration} saat · Babak {min((sheet_number-1)*4+1, scene_count)}–{min(sheet_number*4, scene_count)}',
+                        reply_markup=storyboard_actions if sheet_number == sheet_count else None
+                    )
+                except GeminiStoryboardImageError as exc:
+                    visual_error = str(exc)
+                    logging.warning('Visual storyboard sheet %s failed: %s', sheet_number, type(exc).__name__)
+                    break
+                except Exception as exc:
+                    visual_error = 'Helaian storyboard bergambar tidak dapat dihantar. Cuba lagi sebentar lagi.'
+                    logging.exception('Visual storyboard sheet delivery failed')
+                    break
+            await progress_update(waiting, 90, 'Menghantar penerangan setiap babak...')
+            status_caption = '🎬 STORYBOARD BERGAMBAR SIAP' if not visual_error else '📝 PENERANGAN BABAK SIAP'
+            await query.message.reply_text(
+                status_caption + '\n\nSemak penerangan setiap babak di bawah. Helaian bergambar menunjukkan urutan visual; gunakan gambar rujukan asal apabila meneruskan ke penjana video.',
+                reply_markup=storyboard_actions
+            )
             if len(storyboard) <= 3900:
                 await query.message.reply_text(storyboard, reply_markup=storyboard_actions)
             else:
                 storyboard_file = BytesIO(storyboard.encode('utf-8'))
                 storyboard_file.name = 'KLIPPO_GEMINI_STORYBOARD.txt'
-                await query.message.reply_document(document=storyboard_file, filename=storyboard_file.name, caption='📋 Storyboard Gemini penuh.', reply_markup=storyboard_actions)
-            await progress_update(waiting, 100, 'Storyboard Gemini siap.')
+                await query.message.reply_document(document=storyboard_file, filename=storyboard_file.name, caption='📋 Penerangan penuh setiap babak.', reply_markup=storyboard_actions)
+            if visual_error:
+                await query.message.reply_text(
+                    '⚠️ Teks storyboard berjaya dijana, tetapi helaian bergambar gagal dijana.\n\n'
+                    + visual_error + '\n\nSemak akses model imej Gemini dan kuota penjanaan imej.'
+                )
+            await progress_update(waiting, 100, 'Storyboard Klippo selesai.')
         except Exception as exc:
             logging.exception('Automatic storyboard generation failed')
             message = str(exc)[:260]
