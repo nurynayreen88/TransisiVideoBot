@@ -383,6 +383,125 @@ def detect_prompt_library_category(product_name: str) -> str:
     return category_by_subtype.get(subtype, '')
 
 
+def prompt_flow_menu():
+    return InlineKeyboardMarkup([
+        [InlineKeyboardButton('🎥 Prompt Video Terus', callback_data='prompt_flow:direct')],
+        [InlineKeyboardButton('🎞️ Storyboard Video AI', callback_data='prompt_flow:storyboard')],
+        [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
+    ])
+
+
+def prompt_images_menu():
+    return InlineKeyboardMarkup([
+        [InlineKeyboardButton('✅ Selesai Hantar Gambar', callback_data='prompt_images_done')],
+        [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
+    ])
+
+
+def prompt_model_presence_menu():
+    return InlineKeyboardMarkup([
+        [InlineKeyboardButton('👩 Ada Model AI', callback_data='prompt_model:yes')],
+        [InlineKeyboardButton('📦 Tiada Model — Fokus Produk', callback_data='prompt_model:none')],
+        [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
+    ])
+
+
+def prompt_model_count_menu():
+    return InlineKeyboardMarkup([
+        [InlineKeyboardButton('1 model', callback_data='prompt_model_count:1'),
+         InlineKeyboardButton('2 model', callback_data='prompt_model_count:2')],
+        [InlineKeyboardButton('3 model', callback_data='prompt_model_count:3')],
+        [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
+    ])
+
+
+def prompt_model_gender_menu():
+    return InlineKeyboardMarkup([
+        [InlineKeyboardButton('Wanita', callback_data='prompt_model_gender:female'),
+         InlineKeyboardButton('Lelaki', callback_data='prompt_model_gender:male')],
+        [InlineKeyboardButton('Campuran', callback_data='prompt_model_gender:mixed')],
+        [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
+    ])
+
+
+def prompt_model_hijab_menu():
+    return InlineKeyboardMarkup([
+        [InlineKeyboardButton('Bertudung', callback_data='prompt_model_hijab:hijab')],
+        [InlineKeyboardButton('Tidak bertudung', callback_data='prompt_model_hijab:no_hijab')],
+        [InlineKeyboardButton('Tidak berkenaan', callback_data='prompt_model_hijab:na')],
+    ])
+
+
+def prompt_model_ethnicity_menu():
+    return InlineKeyboardMarkup([
+        [InlineKeyboardButton('Melayu', callback_data='prompt_model_ethnicity:Malay'),
+         InlineKeyboardButton('Asia lain', callback_data='prompt_model_ethnicity:Asian')],
+        [InlineKeyboardButton('Pelbagai rupa', callback_data='prompt_model_ethnicity:diverse')],
+        [InlineKeyboardButton('Tiada pilihan', callback_data='prompt_model_ethnicity:any')],
+    ])
+
+
+def prompt_model_age_menu():
+    return InlineKeyboardMarkup([
+        [InlineKeyboardButton('Dewasa 18–25', callback_data='prompt_model_age:18-25')],
+        [InlineKeyboardButton('Dewasa 26–40', callback_data='prompt_model_age:26-40')],
+        [InlineKeyboardButton('Dewasa 41+', callback_data='prompt_model_age:41+')],
+    ])
+
+
+def prompt_language_menu():
+    return InlineKeyboardMarkup([
+        [InlineKeyboardButton('Bahasa Melayu', callback_data='prompt_language:Malay'),
+         InlineKeyboardButton('English', callback_data='prompt_language:English')],
+        [InlineKeyboardButton('Tiada teks pada skrin', callback_data='prompt_language:none')],
+        [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
+    ])
+
+
+def prompt_voiceover_menu():
+    return InlineKeyboardMarkup([
+        [InlineKeyboardButton('🔇 Tanpa dialog / voiceover', callback_data='prompt_voiceover:none')],
+        [InlineKeyboardButton('🎙️ AI cadangkan voiceover', callback_data='prompt_voiceover:ai')],
+        [InlineKeyboardButton('✍️ Saya masukkan skrip sendiri', callback_data='prompt_voiceover:script')],
+        [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
+    ])
+
+
+def prompt_creative_settings(user_data, include_audio=True):
+    """Translate guided Klippo choices into explicit, reusable prompt instructions."""
+    if user_data.get('prompt_model_presence') == 'yes':
+        model = (
+            f"Include {user_data.get('prompt_model_count', 1)} consistent adult AI model(s); "
+            f"gender: {user_data.get('prompt_model_gender', 'female')}; "
+            f"head covering: {user_data.get('prompt_model_hijab', 'not specified')}; "
+            f"appearance: {user_data.get('prompt_model_ethnicity', 'any')}; "
+            f"adult age range: {user_data.get('prompt_model_age', '26-40')}. "
+            "Keep the same model identity, face, hair/head covering and outfit consistent across every shot."
+        )
+    else:
+        model = "No human model. Focus entirely on the exact product and its real visible details."
+    images_count = len(user_data.get('prompt_reference_photos', []))
+    lines = [
+        'KLIPPO GUIDED CREATIVE SETTINGS:',
+        f'Reference images uploaded in Klippo: {images_count}. The user must upload the same original reference image(s) manually to the chosen external AI platform; Klippo does not transfer files to external websites.',
+        'Model direction: ' + model,
+        'Product fidelity: treat the user-uploaded product photo(s) as the source of truth; preserve visible colour, shape, print, packaging, logo and proportions. Do not invent unseen details or product claims.',
+        'Video format: vertical 9:16. Keep one coherent visual story and continuous product identity across all panels.',
+    ]
+    if include_audio:
+        language = user_data.get('prompt_language', 'Malay')
+        lines.append('On-screen text language: ' + ('no on-screen text' if language == 'none' else language) + '. Keep any text short, correctly spelled and readable; do not add extra logos or watermarks.')
+        voiceover_mode = user_data.get('prompt_voiceover_mode', 'none')
+        if voiceover_mode == 'ai':
+            lines.append('Create a concise, natural voiceover in ' + ('Bahasa Melayu' if language == 'Malay' else 'English' if language == 'English' else 'Bahasa Melayu') + ' only if it improves the ad; otherwise use no dialogue. Keep background music below the voice.')
+        elif voiceover_mode == 'script':
+            script = ' '.join((user_data.get('prompt_voiceover_script') or '').split())
+            lines.append('Use this exact user-provided voiceover/dialogue script without rewriting it: ' + script)
+        else:
+            lines.append('No spoken dialogue or voiceover. Use suitable background music only if the target video platform supports it.')
+    return '\n'.join(lines)
+
+
 def prompt_product_type_menu():
     items = list(PRODUCT_TYPES.items())
     rows = []
@@ -1330,6 +1449,16 @@ def reset(context):
     context.user_data['prompt_concept'] = ''
     context.user_data['prompt_library_id'] = ''
     context.user_data['prompt_library_storyboard'] = []
+    context.user_data['prompt_reference_photos'] = []
+    context.user_data['prompt_model_presence'] = 'none'
+    context.user_data['prompt_model_count'] = 0
+    context.user_data['prompt_model_gender'] = 'none'
+    context.user_data['prompt_model_hijab'] = 'na'
+    context.user_data['prompt_model_ethnicity'] = 'na'
+    context.user_data['prompt_model_age'] = 'na'
+    context.user_data['prompt_language'] = 'Malay'
+    context.user_data['prompt_voiceover_mode'] = 'none'
+    context.user_data['prompt_voiceover_script'] = ''
     context.user_data['stage'] = 'home'
 
 
@@ -1446,6 +1575,17 @@ async def photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
     if context.user_data.get('stage') == 'receipt_upload':
         await receive_receipt(update, context)
+        return
+    if context.user_data.get('stage') == 'prompt_images':
+        if not update.message.photo:
+            await update.message.reply_text('Sila hantar gambar produk sebagai gambar Telegram. Maksimum 4 gambar.', reply_markup=prompt_images_menu())
+            return
+        images = context.user_data.setdefault('prompt_reference_photos', [])
+        if len(images) >= 4:
+            await update.message.reply_text('Maksimum 4 gambar telah diterima. Tekan Selesai Hantar Gambar untuk meneruskan.', reply_markup=prompt_images_menu())
+            return
+        images.append(update.message.photo[-1].file_id)
+        await update.message.reply_text(f'✅ Gambar {len(images)}/4 diterima. Hantar lagi atau tekan Selesai Hantar Gambar.', reply_markup=prompt_images_menu())
         return
     if context.user_data.get('stage') == 'prompt_upload':
         photo_item = update.message.photo[-1] if update.message.photo else update.message.document
@@ -1724,17 +1864,35 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await query.message.reply_text('📷 Hantar 1–5 gambar produk. Tekan Selesai apabila cukup.', reply_markup=photos_menu())
     elif action == 'prompt':
         reset(context)
-        context.user_data['prompt_mode'] = 'storyboard'
         context.user_data['prompt_style'] = 'auto'
         context.user_data['prompt_concept'] = ''
         context.user_data['prompt_library_id'] = ''
         context.user_data['prompt_library_storyboard'] = []
-        context.user_data['stage'] = 'prompt_product_type'
         context.user_data['prompt_product_type'] = 'other'
+        context.user_data['stage'] = 'prompt_flow_choice'
         await query.message.reply_text(
-            '✍️ KLIPPO ONE PROMPT — Pilih jenis produk dahulu supaya gaya iklan dan aksi lebih sesuai:',
-            reply_markup=prompt_product_type_menu()
+            '✍️ KLIPPO PROMPT AI PRODUK\\n\\nPilih cara yang cikgu mahu. Prompt Video Terus lebih ringkas; Storyboard Video AI membantu merancang babak dahulu.',
+            reply_markup=prompt_flow_menu()
         )
+    elif action.startswith('prompt_flow:') and stage == 'prompt_flow_choice':
+        selected = action.split(':', 1)[1]
+        if selected in ('direct', 'storyboard'):
+            context.user_data['prompt_mode'] = 'normal' if selected == 'direct' else 'storyboard'
+            context.user_data['prompt_reference_photos'] = []
+            context.user_data['stage'] = 'prompt_images'
+            await query.message.reply_text(
+                '📷 LANGKAH 1 — GAMBAR PRODUK\\n\\nHantar 1 hingga 4 gambar produk yang jelas. Selepas semua gambar dihantar, tekan “Selesai Hantar Gambar”.\\n\\nNota: Klippo menyimpan pilihan gambar dalam sesi bot tetapi tidak menghantarnya secara automatik ke ChatGPT/Gemini. Anda akan memuat naik gambar yang sama di platform AI pilihan nanti.',
+                reply_markup=prompt_images_menu()
+            )
+    elif action == 'prompt_images_done' and stage == 'prompt_images':
+        if not context.user_data.get('prompt_reference_photos'):
+            await query.message.reply_text('Sila hantar sekurang-kurangnya 1 gambar produk dahulu.', reply_markup=prompt_images_menu())
+        else:
+            context.user_data['stage'] = 'prompt_product_type'
+            await query.message.reply_text(
+                f"✅ {len(context.user_data['prompt_reference_photos'])} gambar diterima.\\n\\n📦 LANGKAH 2 — Pilih kategori produk:",
+                reply_markup=prompt_product_type_menu()
+            )
     elif action.startswith('prompt_type:') and stage == 'prompt_type':
         selected = action.split(':', 1)[1]
         if selected == 'library':
@@ -1817,41 +1975,98 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 context.user_data['stage'] = 'prompt_product_name'
                 await query.message.reply_text('🛍️ Masukkan nama produk daripada Shopee. Nama sahaja — gambar dan pautan tidak diperlukan.')
     elif action.startswith('prompt_product_type:'):
-        # Handle the product callback even if the in-memory stage is stale.
-        # Telegram callbacks can outlive a menu redraw or a session state change.
         selected = action.split(':', 1)[1]
         if selected in PRODUCT_TYPES:
             context.user_data['prompt_product_type'] = selected
-            context.user_data['stage'] = 'prompt_duration'
-            logging.info('KLIPPO product type selected=%s user=%s', selected, update.effective_user.id)
+            context.user_data['stage'] = 'prompt_model_presence'
             await query.message.reply_text(
-                f"🛍️ Jenis produk: {PRODUCT_TYPES[selected]}\n\n⏱️ Pilih tempoh video:",
-                reply_markup=prompt_duration_menu()
+                f"📦 Kategori: {PRODUCT_TYPES[selected]}\\n\\n👤 LANGKAH 3 — Mahu model AI dalam video?",
+                reply_markup=prompt_model_presence_menu()
             )
         else:
-            await query.message.reply_text(
-                'Pilihan produk tidak sah. Sila pilih semula:',
-                reply_markup=prompt_product_type_menu()
-            )
+            await query.message.reply_text('Pilihan produk tidak sah. Sila pilih semula:', reply_markup=prompt_product_type_menu())
+    elif action.startswith('prompt_model:') and stage == 'prompt_model_presence':
+        selected = action.split(':', 1)[1]
+        if selected == 'none':
+            context.user_data.update({
+                'prompt_model_presence': 'none', 'prompt_model_count': 0,
+                'prompt_model_gender': 'none', 'prompt_model_hijab': 'na',
+                'prompt_model_ethnicity': 'na', 'prompt_model_age': 'na'
+            })
+            context.user_data['stage'] = 'prompt_style'
+            await query.message.reply_text('🎨 LANGKAH 4 — Pilih gaya video:', reply_markup=prompt_style_menu(context.user_data.get('prompt_product_type', 'other')))
+        elif selected == 'yes':
+            context.user_data['prompt_model_presence'] = 'yes'
+            context.user_data['stage'] = 'prompt_model_count'
+            await query.message.reply_text('Berapa orang model dewasa yang diperlukan?', reply_markup=prompt_model_count_menu())
+    elif action.startswith('prompt_model_count:') and stage == 'prompt_model_count':
+        selected = action.split(':', 1)[1]
+        if selected in ('1', '2', '3'):
+            context.user_data['prompt_model_count'] = int(selected)
+            context.user_data['stage'] = 'prompt_model_gender'
+            await query.message.reply_text('Pilih jantina model:', reply_markup=prompt_model_gender_menu())
+    elif action.startswith('prompt_model_gender:') and stage == 'prompt_model_gender':
+        selected = action.split(':', 1)[1]
+        if selected in ('female', 'male', 'mixed'):
+            context.user_data['prompt_model_gender'] = selected
+            if selected in ('female', 'mixed'):
+                context.user_data['stage'] = 'prompt_model_hijab'
+                await query.message.reply_text('Pilihan tudung untuk model wanita:', reply_markup=prompt_model_hijab_menu())
+            else:
+                context.user_data['prompt_model_hijab'] = 'na'
+                context.user_data['stage'] = 'prompt_model_ethnicity'
+                await query.message.reply_text('Pilih rupa atau latar etnik model:', reply_markup=prompt_model_ethnicity_menu())
+    elif action.startswith('prompt_model_hijab:') and stage == 'prompt_model_hijab':
+        selected = action.split(':', 1)[1]
+        if selected in ('hijab', 'no_hijab', 'na'):
+            context.user_data['prompt_model_hijab'] = selected
+            context.user_data['stage'] = 'prompt_model_ethnicity'
+            await query.message.reply_text('Pilih rupa atau latar etnik model:', reply_markup=prompt_model_ethnicity_menu())
+    elif action.startswith('prompt_model_ethnicity:') and stage == 'prompt_model_ethnicity':
+        selected = action.split(':', 1)[1]
+        if selected in ('Malay', 'Asian', 'diverse', 'any'):
+            context.user_data['prompt_model_ethnicity'] = selected
+            context.user_data['stage'] = 'prompt_model_age'
+            await query.message.reply_text('Pilih lingkungan umur model (dewasa sahaja):', reply_markup=prompt_model_age_menu())
+    elif action.startswith('prompt_model_age:') and stage == 'prompt_model_age':
+        selected = action.split(':', 1)[1]
+        if selected in ('18-25', '26-40', '41+'):
+            context.user_data['prompt_model_age'] = selected
+            context.user_data['stage'] = 'prompt_style'
+            await query.message.reply_text('🎨 LANGKAH 4 — Pilih gaya video:', reply_markup=prompt_style_menu(context.user_data.get('prompt_product_type', 'other')))
     elif action.startswith('prompt_duration:') and stage == 'prompt_duration':
         selected = action.split(':', 1)[1]
         if selected in ('10', '20'):
             context.user_data['prompt_duration'] = int(selected)
-            context.user_data['stage'] = 'prompt_style'
+            context.user_data['stage'] = 'prompt_language'
+            await query.message.reply_text('🌐 LANGKAH 6 — Pilih bahasa teks pada skrin:', reply_markup=prompt_language_menu())
+    elif action.startswith('prompt_language:') and stage == 'prompt_language':
+        selected = action.split(':', 1)[1]
+        if selected in ('Malay', 'English', 'none'):
+            context.user_data['prompt_language'] = selected
+            context.user_data['stage'] = 'prompt_voiceover'
+            await query.message.reply_text('🎙️ LANGKAH 7 — Skrip atau voiceover adalah pilihan:', reply_markup=prompt_voiceover_menu())
+    elif action.startswith('prompt_voiceover:') and stage == 'prompt_voiceover':
+        selected = action.split(':', 1)[1]
+        if selected == 'script':
+            context.user_data['prompt_voiceover_mode'] = 'script'
+            context.user_data['stage'] = 'prompt_voiceover_text'
+            await query.message.reply_text('✍️ Tampal skrip voiceover/dialogue anda. Tulis - jika mahu batalkan skrip dan teruskan tanpa dialog.')
+        elif selected in ('none', 'ai'):
+            context.user_data['prompt_voiceover_mode'] = selected
+            context.user_data['prompt_voiceover_script'] = ''
+            context.user_data['stage'] = 'prompt_idea_choice'
             await query.message.reply_text(
-                '🎨 Pilih gaya visual untuk prompt yang sama:',
-                reply_markup=prompt_style_menu(context.user_data.get('prompt_product_type', 'other'))
+                '💡 Mahu tambah satu idea aksi daripada koleksi prompt siap? Pilihan ini akan digabungkan ke dalam prompt yang sama.',
+                reply_markup=prompt_idea_choice_menu()
             )
     elif action.startswith('prompt_style:') and stage == 'prompt_style':
         selected = action.split(':', 1)[1]
         valid = {'auto'} | {key for key, _ in storyboard_styles()}
         if selected in valid:
             context.user_data['prompt_style'] = selected
-            context.user_data['stage'] = 'prompt_idea_choice'
-            await query.message.reply_text(
-                '💡 Mahu tambah satu idea aksi daripada koleksi prompt siap? Ia akan digabungkan ke dalam prompt yang sama.',
-                reply_markup=prompt_idea_choice_menu()
-            )
+            context.user_data['stage'] = 'prompt_duration'
+            await query.message.reply_text('⏱️ LANGKAH 5 — Pilih durasi video:', reply_markup=prompt_duration_menu())
     elif action == 'prompt_idea:yes' and stage == 'prompt_idea_choice':
         context.user_data['stage'] = 'prompt_category'
         await query.message.reply_text(
@@ -1898,8 +2113,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 return
     # Return only for actions handled by the first chain. Video workflow
     # callbacks must continue into the second chain.
-    if action in ('admin_pending', 'admin', 'storyboard', 'make', 'prompt', 'prompt_categories') or action.startswith(
-        ('admin_approve:', 'admin_reject:', 'prompt_type:', 'prompt_product_type:', 'prompt_duration:',
+    if action in ('admin_pending', 'admin', 'storyboard', 'make', 'prompt', 'prompt_categories', 'prompt_images_done') or action.startswith(
+        ('admin_approve:', 'admin_reject:', 'prompt_flow:', 'prompt_model:', 'prompt_model_count:', 'prompt_model_gender:', 'prompt_model_hijab:', 'prompt_model_ethnicity:', 'prompt_model_age:', 'prompt_language:', 'prompt_voiceover:', 'prompt_type:', 'prompt_product_type:', 'prompt_duration:',
          'prompt_style:', 'prompt_idea:', 'prompt_details:', 'video_input:', 'prompt_input:', 'pcat:', 'ptpl:')
     ):
         return
@@ -1961,7 +2176,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             'Gunakan hanya ciri produk, warna, corak, logo dan butiran yang benar-benar kelihatan pada gambar. Jangan reka ciri, aksesori, dakwaan atau sudut produk yang tidak kelihatan. '
             'Kekalkan produk yang sama sepanjang video. Jangan tambah teks pada skrin, sari kata, logo tambahan atau watermark kecuali saya minta. '
             'Jadikan aksi spesifik dan mudah difahami oleh penjana video AI, bukan arahan umum. '
-            'Paparkan hasil sebagai storyboard berstruktur mengikut babak. Jangan jana prompt video penuh dahulu; hasilkan storyboard sahaja.'
+            'Paparkan hasil sebagai storyboard berstruktur mengikut babak. Jangan jana prompt video penuh dahulu; hasilkan storyboard sahaja.\\n\\n'
+            + prompt_creative_settings(context.user_data)
         )
         context.user_data['stage'] = 'prompt_storyboard_ready'
         storyboard_actions = InlineKeyboardMarkup([
@@ -2043,6 +2259,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     product_type=context.user_data.get('prompt_product_type', 'other'),
                     storyboard_override=context.user_data.get('prompt_library_storyboard') or None
                 )
+                prompt = prompt.rstrip() + '\\n\\n' + prompt_creative_settings(context.user_data)
                 await progress_update(waiting, 70, 'Menyediakan PROMPT IMAGE dan PROMPT VIDEO...')
                 context.user_data['stage'] = 'prompt_done'
                 mode_name = context.user_data.get('prompt_mode', 'normal')
@@ -2069,16 +2286,21 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     'No collage, split screen, poster layout, captions, promotional text, watermark or extra logos. '
                     'Avoid distorted hands, unnatural faces, plastic skin, warped product geometry and artificial CGI appearance.'
                 )
+                image_prompt += '\\n\\nMODEL DIRECTION: ' + prompt_creative_settings(context.user_data, include_audio=False)
                 context.user_data['prompt_image_ready'] = image_prompt
-                image_actions = InlineKeyboardMarkup([
+                image_action_rows = [
                     [InlineKeyboardButton('✨ ChatGPT Image', url='https://chatgpt.com/'),
                      InlineKeyboardButton('🌟 Google Gemini', url='https://gemini.google.com/')],
                     [InlineKeyboardButton('🎨 Microsoft Designer', url='https://designer.microsoft.com/')],
-                    [InlineKeyboardButton('🎬 Minta ChatGPT Buat Storyboard', callback_data='prompt_chatgpt_storyboard')],
+                ]
+                if context.user_data.get('prompt_mode') == 'storyboard':
+                    image_action_rows.append([InlineKeyboardButton('🎬 Minta ChatGPT Buat Storyboard', callback_data='prompt_chatgpt_storyboard')])
+                image_action_rows.extend([
                     [InlineKeyboardButton('➡️ Jana Prompt Video', callback_data='prompt_continue_video')],
                     [InlineKeyboardButton('✍️ Prompt Baharu', callback_data='prompt'),
                      InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]
                 ])
+                image_actions = InlineKeyboardMarkup(image_action_rows)
                 await query.message.reply_text(
                     '🖼️ LANGKAH 1 — PROMPT IMAGE\\n\\n'
                     '1. Salin prompt di bawah.\\n'
@@ -2342,6 +2564,14 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data['stage'] = 'prompt_category'
         await update.message.reply_text('📚 Nama produk diterima. Pilih koleksi prompt:', reply_markup=prompt_category_menu())
         return
+    if stage == 'prompt_voiceover_text':
+        script = '' if value.strip() in ('-', '—', 'tiada', 'Tiada') else value.strip()
+        context.user_data['prompt_voiceover_script'] = script[:1200]
+        if not script:
+            context.user_data['prompt_voiceover_mode'] = 'none'
+        context.user_data['stage'] = 'prompt_idea_choice'
+        await update.message.reply_text('✅ Skrip disimpan.' if script else '✅ Teruskan tanpa dialog.', reply_markup=prompt_idea_choice_menu())
+        return
     if stage == 'prompt_product_name':
         if len(value) < 2 or value.lower().startswith(('http://', 'https://')):
             await update.message.reply_text('⚠️ Masukkan nama produk sahaja. Buka Shopee, copy nama produk dan paste di sini; pautan tidak diperlukan.')
@@ -2384,14 +2614,13 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await update.message.reply_text('🔄 TUKAR FORMAT VIDEO\n\nTekan 📎 → File / Fail → pilih video MP4 asal. Bot akan memprosesnya secara automatik.', reply_markup=main_menu())
         elif action == 'prompt':
             reset(context)
-            context.user_data['prompt_mode'] = 'storyboard'
             context.user_data['prompt_style'] = 'auto'
             context.user_data['prompt_concept'] = ''
-            context.user_data['stage'] = 'prompt_product_type'
             context.user_data['prompt_product_type'] = 'other'
+            context.user_data['stage'] = 'prompt_flow_choice'
             await update.message.reply_text(
-                '✍️ KLIPPO ONE PROMPT — Pilih jenis produk dahulu supaya gaya iklan dan aksi lebih sesuai:',
-                reply_markup=prompt_product_type_menu()
+                '✍️ KLIPPO PROMPT AI PRODUK\\n\\nPilih cara yang cikgu mahu. Prompt Video Terus lebih ringkas; Storyboard Video AI membantu merancang babak dahulu.',
+                reply_markup=prompt_flow_menu()
             )
         elif action == 'subscription':
             await update.message.reply_text('💎 LANGGANAN KLIPPO\n\nPelan Penyokong Awal: RM5 / 30 hari, sehingga 30 video sebulan. Pengaktifan manual selepas resit disemak.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📱 Papar QR DuitNow', callback_data='subscription_qr')]]))
