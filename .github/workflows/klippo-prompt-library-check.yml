@@ -95,6 +95,8 @@ jobs:
           assert "study-desk" not in by_id_for_quality["shoes_lace_and_step_v1"]["storyboard"][0]["direction"].casefold()
           assert "footwear" not in by_id_for_quality["beauty_vanity_hero_v1"]["storyboard"][0]["direction"].casefold()
           assert "food or drink" not in by_id_for_quality["beauty_texture_demo_v1"]["storyboard"][0]["direction"].casefold()
+          assert "footwear" not in by_id_for_quality["bags_sling_crossbody_v1"]["storyboard"][0]["direction"].casefold()
+          assert "outsole" not in by_id_for_quality["bags_sling_crossbody_v1"]["storyboard"][2]["direction"].casefold()
 
           # Every curated entry must carry its own timed premium storyboard.
           storyboard_signatures = set()
