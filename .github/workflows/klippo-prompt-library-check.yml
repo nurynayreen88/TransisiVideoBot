@@ -142,6 +142,19 @@ jobs:
           missing = [marker for marker in required_flow_markers if marker not in bot]
           assert not missing, f"Prompt-library flow markers missing from bot.py: {missing}"
 
+          # Check the actual PROMPT IMAGE builder, not only the video library.
+          image_start = bot.find("image_prompt = (")
+          image_end = bot.find("context.user_data['prompt_image_ready']", image_start)
+          assert image_start >= 0 and image_end > image_start, "PROMPT IMAGE builder missing"
+          image_source = bot[image_start:image_end]
+          assert r"\\n" not in image_source, "PROMPT IMAGE contains literal escaped newline sequences"
+          for category_id in category_ids:
+              assert f"'{category_id}':" in image_source, (
+                  f"PROMPT IMAGE lacks category-specific visual direction: {category_id}"
+              )
+          assert "sole MASTER product reference" in image_source
+          assert "No collage, split screen, poster layout, captions, promotional text" in image_source
+
           # Exercise prompt generation for every library entry, with and without user details.
           # Keep this in sync with inject_product_details() and Telegram's ordered chunking.
           def inject_details(prompt_text, details):
