@@ -240,7 +240,7 @@ jobs:
                   version = db.execute(
                       "SELECT version FROM storyboard_prompt_styles WHERE style_key='white_doodle'"
                   ).fetchone()[0]
-                  assert version == 4, f"Unexpected White Doodle template version: {version}"
+                  assert version == 5, f"Unexpected White Doodle template version: {version}"
 
               uncertain = (
                   "PRODUCT NAME: unknown. "
