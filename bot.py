@@ -780,7 +780,7 @@ def faq_example(index):
 
 def main_menu(user_id=None):
     rows = [
-        [InlineKeyboardButton('🛍️ Prompt AI Produk (Imej → Video)', callback_data='prompt')],
+        [InlineKeyboardButton('✍️ Jana Prompt', callback_data='prompt')],
         [InlineKeyboardButton('🎞️ Gabung Video', callback_data='merge')],
         [InlineKeyboardButton('🔄 Tukar Format Video', callback_data='convert')],
         [InlineKeyboardButton('🎞️ Gerakkan Foto (Transisi)', callback_data='make')],
@@ -1509,7 +1509,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.effective_message.reply_text(
         '🎬 KLIPPO | Studio Video Affiliate\n\n'
         'Pilih fungsi yang anda perlukan:\n\n'
-        '🛍️ Prompt AI Produk (Imej → Video) — bina PROMPT IMAGE dahulu, kemudian PROMPT VIDEO untuk digunakan bersama imej yang dijana.\n'
+        '✍️ Jana Prompt — hasilkan satu prompt video lengkap berdasarkan gambar produk dan pilihan pengguna.\n'
         '🎞️ Gerakkan Foto (Transisi) — gabungkan gambar pegun menjadi video MP4 menggunakan kesan transisi, zoom/pan 2D dan muzik. Fungsi ini tidak menjana gerakan AI pada objek.\n'
         '🎞️ Gabung Video — cantum beberapa klip menjadi satu video.\n'
         '🔄 Tukar Format Video — sesuaikan video kepada format MP4 menegak untuk affiliate.\n'
