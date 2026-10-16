@@ -85,12 +85,16 @@ def _select_style(style):
     except Exception:
         return "cinematic"
 
-def build_curated_storyboard(product, motion="push", style="luxury", duration=10, user_details=""):
+def build_curated_storyboard(product, motion="push", style="luxury", duration=10, user_details="", scene=""):
     """Build from a saved template. This deliberately does not call the variation engine."""
     key = _select_style(style)
     template = TEMPLATES[key]
     reference = _clean_reference(product)
     camera = CAMERA.get(motion, CAMERA["auto"])
+    selected_scene = (scene or "").strip()
+    if selected_scene and "selected to complement the exact product reference" not in selected_scene.lower():
+        template = dict(template)
+        template["setting"] = selected_scene
     details = (user_details or "").strip()
     if details:
         reference += "\nUSER-PROVIDED DETAILS (use only if consistent with the image): " + details
