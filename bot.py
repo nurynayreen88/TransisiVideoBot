@@ -642,10 +642,10 @@ def faq_example(index):
 
 def main_menu(user_id=None):
     rows = [
-        [InlineKeyboardButton('🎞️ Gerakkan Foto (Transisi)', callback_data='make')],
+        [InlineKeyboardButton('🛍️ Prompt AI Produk (Imej → Video)', callback_data='prompt')],
         [InlineKeyboardButton('🎞️ Gabung Video', callback_data='merge')],
         [InlineKeyboardButton('🔄 Tukar Format Video', callback_data='convert')],
-        [InlineKeyboardButton('🛍️ Prompt AI Produk (Imej → Video)', callback_data='prompt')],
+        [InlineKeyboardButton('🎞️ Gerakkan Foto (Transisi)', callback_data='make')],
         [InlineKeyboardButton('💎 Langganan', callback_data='subscription'), InlineKeyboardButton('👤 Akaun Saya', callback_data='account')],
         [InlineKeyboardButton('❓ FAQ', callback_data='help')],
     ]
