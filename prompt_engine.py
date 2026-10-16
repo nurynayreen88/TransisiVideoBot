@@ -240,6 +240,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
             "Do not morph the object, invent accessories or cover its visible branding. "
             "For white doodle, the graphic overlays are explicitly REQUIRED and are not captions or UI. "
             "If the video generator cannot render precise overlays, generate clean product footage and add doodles in post-production."
+            + "\n\n" + _text_direction(text_mode, on_screen_text, part)
         )
     if mode == "storyboard":
         shots = [
