@@ -1,5 +1,6 @@
 from prompt_catalog import resolve, product_hook
 from smart_prompt_engine import choose_variation, format_variation
+import re
 """Detailed, reference-safe AI video prompt templates for KLIPPO."""
 
 CAMERAS = {
@@ -9,26 +10,44 @@ CAMERAS = {
     "static": "A locked premium studio composition with delicate lighting movement and a subtle focus transition.",
 }
 
+
+def _clean_product_reference(product):
+    """Remove empty analysis labels from the user-facing prompt without inventing details."""
+    value = (product or "").strip()
+    # Empty visual-analysis slots must never leak into the final prompt.
+    value = re.sub(
+        r"\\s*[.;]?\\s*Visible observations(?:\\s*\\([^)]*\\))?\\s*:\\s*(?=[.;]?\\s*(?:Optional user details\\s*:)?\\s*$)",
+        "",
+        value,
+        flags=re.IGNORECASE,
+    )
+    value = re.sub(r"\\s*[.;]?\\s*Optional user details\\s*:\\s*$", "", value, flags=re.IGNORECASE)
+    value = re.sub(r"\\s*[.;]+\\s*$", "", value).strip()
+    return value or "the product shown in the uploaded reference image"
+
 def build_prompt(mode, product, scene, motion, style='auto', duration=10, user_concept=None):
+    # Resolve storyboard style once, before choosing variations, so the creative
+    # direction cannot drift from the catalog style (especially Luxury Product).
+    chosen_style = resolve(style)[0] if mode == "storyboard" else style
+    display_product = _clean_product_reference(product)
     # Choose one coherent creative pack per generation. Connected 10s clips share
     # the same setting, mood, camera and lighting; Part 2 only changes its action beat.
-    variation = choose_variation(product, scene, motion, style, mode, part=1 if duration == 20 else 0,
+    variation = choose_variation(product, scene, motion, chosen_style, mode, part=1 if duration == 20 else 0,
                                  user_concept=user_concept)
     # When the user selects Auto, use the selected variation as the actual scene
     # instead of leaving contradictory "studio" wording in the base prompt.
     if "selected to complement" in (scene or "").lower():
         scene = variation["setting"]
     if duration == 20:
-        chosen_style = resolve(style)[0] if mode == 'storyboard' else style
         second_variation = dict(variation)
         second_variation["action"] = (
             "resume from the exact final frame of Part 1, then reveal another genuinely visible detail "
             "before returning to the full-product hero view"
         )
-        first = _build_single_prompt(mode, product, scene, motion, chosen_style, part=1, variation=variation)
-        second = _build_single_prompt(mode, product, scene, motion, chosen_style, part=2, variation=second_variation)
+        first = _build_single_prompt(mode, display_product, scene, motion, chosen_style, part=1, variation=variation)
+        second = _build_single_prompt(mode, display_product, scene, motion, chosen_style, part=2, variation=second_variation)
         return first + "\n\n=== KLIPPO PART 2 ===\n\n" + second
-    return _build_single_prompt(mode, product, scene, motion, style, part=0, variation=variation)
+    return _build_single_prompt(mode, display_product, scene, motion, chosen_style, part=0, variation=variation)
 
 
 def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, variation=None):
