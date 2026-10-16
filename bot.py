@@ -1827,14 +1827,14 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
     stage = context.user_data.get('stage')
     value = update.message.text.strip()
+    if value in ('🏠 Menu Utama', 'Menu Utama', 'menu', 'MENU', '/menu'):
+        await start(update, context)
+        return
     if stage == 'prompt_library_details':
         details = '' if value in ('-', '—', 'tiada', 'Tiada') else value
         context.user_data['prompt_library_details'] = details[:1200]
         context.user_data['stage'] = 'prompt_category'
         await update.message.reply_text('📚 Maklumat diterima. Pilih kategori produk untuk melihat prompt siap:', reply_markup=prompt_category_menu())
-        return
-    if value in ('🏠 Menu Utama', 'Menu Utama', 'menu', 'MENU', '/menu'):
-        await start(update, context)
         return
     shortcuts = {
         '🎬 Jana Video Affiliate': 'make',
