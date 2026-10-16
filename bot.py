@@ -1314,19 +1314,8 @@ async def photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text('✅ Gambar diterima sebagai rujukan utama. Sekarang tampal nama produk atau maklumat produk daripada Shopee. Nama sahaja memadai; tidak perlu pautan. Jika tidak mahu tambah maklumat, hantar tanda - .')
         return
     if context.user_data.get('stage') == 'prompt_photo':
-        context.user_data['prompt_photo_id'] = update.message.photo[-1].file_id
-        context.user_data['stage'] = 'prompt_details_choice'
-        description = None
-        vision_enabled = os.environ.get('GEMINI_VISION_ENABLED', '').strip().lower() in ('1', 'true', 'yes', 'on')
-        if vision_enabled and os.environ.get('GEMINI_API_KEY'):
-            try:
-                image_file = await context.bot.get_file(context.user_data['prompt_photo_id'])
-                image_bytes = bytes(await image_file.download_as_bytearray())
-                description = await describe_photo(image_bytes)
-            except Exception:
-                logging.exception('Product image analysis unavailable')
-        context.user_data['prompt_vision'] = description or ''
-        await update.message.reply_text(('🔎 AI mengenal pasti: ' + description + '\n\n' if description else '📷 Gambar diterima. Prompt akan menggunakan gambar rujukan tanpa analisis AI tambahan.\n\n') + 'Mahu tambah maklumat produk secara pilihan?', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('✍️ Tambah Maklumat', callback_data='prompt_details:add')], [InlineKeyboardButton('✨ Teruskan Dengan Gambar Sahaja', callback_data='prompt_details:skip')]]))
+        context.user_data['stage'] = 'prompt_product_name'
+        await update.message.reply_text('📌 Klippo kini menggunakan prompt berasaskan nama produk sahaja. Gambar tidak diproses. Tampal nama produk daripada Shopee di sini.')
         return
     if context.user_data.get('stage') != 'photos':
         await update.message.reply_text('Pilih 📷 Upload Gambar dahulu melalui menu Video Transisi.', reply_markup=main_menu())
@@ -1702,8 +1691,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data['stage'] = 'prompt_product_name'
         await query.message.reply_text('🛍️ Masukkan nama produk daripada Shopee. Buka Shopee, copy dan paste nama produk di sini. Nama sahaja — tidak perlu pautan.\n\nContoh: VELLA Beg Tangan Wanita Besar Sling Shoulder Women Luxury Handbags')
     elif action == 'prompt_input:photo' and stage == 'prompt_input':
-        context.user_data['stage'] = 'prompt_photo'
-        await query.message.reply_text('📷 Hantar satu gambar produk. Maklumat tambahan boleh dimasukkan kemudian.')
+        context.user_data['stage'] = 'prompt_product_name'
+        await query.message.reply_text('🛍️ Mod prompt Klippo tidak menggunakan gambar atau analisis AI. Tampal nama produk sahaja untuk mengesan kategori secara automatik.')
     elif action.startswith('prompt_details:') and stage == 'prompt_details_choice':
         if action == 'prompt_details:add':
             context.user_data['stage'] = 'prompt_details_text'
