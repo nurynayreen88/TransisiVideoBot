@@ -25,7 +25,9 @@ jobs:
         with:
           python-version: "3.11"
       - name: Check Python syntax
-        run: python -m py_compile bot.py prompt_catalog.py prompt_engine.py
+        run: python -m py_compile bot.py prompt_catalog.py prompt_engine.py product_reference_sheet.py
+      - name: Test product reference sheet and ChatGPT handoff prompt
+        run: python -m unittest discover -s tests -p 'test_*.py'
       - name: Validate prompt library structure
         run: |
           python - <<'PY'
@@ -151,6 +153,14 @@ jobs:
               "on_screen_text=context.user_data.get('prompt_on_screen_text', '')",
               "Mod teks:",
               "Teks tepat:",
+              "from product_reference_sheet import CHATGPT_ANALYSIS_PROMPT, MAX_REFERENCE_IMAGES, build_reference_sheet",
+              "product_sheet_start",
+              "product_sheet_done",
+              "product_sheet_use",
+              "product_sheet_photos",
+              "CHATGPT_ANALYSIS_PROMPT",
+              "if stage == 'prompt_product_data':",
+              "if context.user_data.get('prompt_from_product_sheet'):",
             "async def handle_image_or_receipt_document(",
             "filters.Document.IMAGE | filters.Document.MimeType('application/pdf'), handle_image_or_receipt_document",
           ]
