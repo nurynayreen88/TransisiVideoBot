@@ -157,9 +157,11 @@ def _scene_background(size, choice):
     return canvas
 
 
-def replace_background(source: Path, destination: Path, choice: str, foreground_destination: Path | None = None) -> Path:
-    if choice not in BACKGROUNDS and choice not in ('gradient', 'pattern', 'duotone', 'mist'):
+def replace_background(source: Path, destination: Path, choice: str, foreground_destination: Path | None = None, custom_background_path: Path | None = None) -> Path:
+    if choice not in BACKGROUNDS and choice not in ('gradient', 'pattern', 'duotone', 'mist', 'custom'):
         raise ValueError('Unknown background')
+    if choice == 'custom' and (custom_background_path is None or not custom_background_path.is_file()):
+        raise ValueError('Custom background image is missing')
     with Image.open(source) as opened:
         image = ImageOps.exif_transpose(opened).convert('RGB')
     foreground = _remove_bg_api(image)
@@ -177,8 +179,14 @@ def replace_background(source: Path, destination: Path, choice: str, foreground_
             alpha = foreground.getchannel('A')
             if not alpha.getbbox():
                 raise ValueError('No product detected')
-    background = (_scene_background(foreground.size, choice) if choice not in BACKGROUNDS
-                  else Image.new('RGBA', foreground.size, BACKGROUNDS[choice] + (255,)))
+    if choice == 'custom':
+        with Image.open(custom_background_path) as opened_background:
+            background_image = ImageOps.exif_transpose(opened_background).convert('RGB')
+        background_image = ImageOps.fit(background_image, foreground.size, method=Image.Resampling.LANCZOS)
+        background = background_image.convert('RGBA')
+    else:
+        background = (_scene_background(foreground.size, choice) if choice not in BACKGROUNDS
+                      else Image.new('RGBA', foreground.size, BACKGROUNDS[choice] + (255,)))
     if foreground_destination is not None:
         foreground.save(foreground_destination, 'PNG')
     background.alpha_composite(foreground)
@@ -219,15 +227,23 @@ def doodle_menu():
 
 PRODUCT_TYPES = {
     'fashion': '👗 Pakaian / Fesyen',
-    'bag': '👜 Beg / Dompet — auto kesan daripada nama',
+    'bag': '👜 Beg / Dompet',
     'hijab': '🧕 Tudung / Hijab',
-    'shoes': '👟 Kasut',
+    'shoes': '👟 Kasut / Sandal',
     'beauty': '💄 Kecantikan / Skincare',
     'food': '🍰 Makanan / Minuman',
     'gadget': '📱 Gajet / Elektronik',
     'home': '🏡 Rumah / Dapur',
     'accessory': '⌚ Aksesori / Barang Kemas',
-    'other': '📦 Produk Lain / Auto',
+    'toy': '🧸 Mainan / Permainan',
+    'book_stationery': '📚 Buku / Alat Tulis',
+    'sports': '⚽ Sukan / Kecergasan',
+    'pet': '🐾 Haiwan Peliharaan',
+    'automotive': '🚗 Aksesori Kereta / Motosikal',
+    'baby': '🍼 Produk Bayi',
+    'travel': '🧳 Kembara / Beg Perjalanan',
+    'office': '🖇️ Pejabat / Organisasi',
+    'other': '📦 Produk Lain',
 }
 
 def detect_bag_subtype(product_name: str) -> str:
@@ -646,6 +662,7 @@ def background_menu():
          InlineKeyboardButton('◯ Corak Halus', callback_data='background:pattern')],
         [InlineKeyboardButton('◐ Dua Tona', callback_data='background:duotone'),
          InlineKeyboardButton('🌫️ Kelabu Lembut', callback_data='background:mist')],
+        [InlineKeyboardButton('🖼️ Guna Gambar Latar Sendiri', callback_data='background:custom')],
         [InlineKeyboardButton('↩️ Semak Gambar', callback_data='photos_order')],
     ])
 
@@ -1564,7 +1581,7 @@ async def receive_receipt(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def handle_image_or_receipt_document(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Route uploaded image documents to the active flow, without breaking receipt PDFs."""
-    if context.user_data.get('stage') == 'prompt_upload':
+    if context.user_data.get('stage') in ('prompt_upload', 'background_custom_upload'):
         await photo(update, context)
         return
     await receive_receipt(update, context)
@@ -1576,6 +1593,16 @@ async def photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
     if context.user_data.get('stage') == 'receipt_upload':
         await receive_receipt(update, context)
+        return
+    if context.user_data.get('stage') == 'background_custom_upload':
+        photo_item = update.message.photo[-1] if update.message.photo else update.message.document
+        if not update.message.photo and not (update.message.document and (update.message.document.mime_type or '').startswith('image/')):
+            await update.message.reply_text('Sila hantar gambar latar sebagai gambar atau fail imej (JPG, PNG atau WEBP).')
+            return
+        context.user_data['custom_background_file_id'] = photo_item.file_id
+        context.user_data['background'] = 'custom'
+        context.user_data['stage'] = 'duration'
+        await update.message.reply_text('✅ Gambar latar sendiri diterima. Pilih durasi video:', reply_markup=duration_menu())
         return
     if context.user_data.get('stage') == 'prompt_images':
         if not update.message.photo:
@@ -2518,8 +2545,12 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await query.message.reply_text('📝 Tajuk produk Shopee wajib diisi. Sila salin dan tampal tajuk penuh produk di ruang mesej.')
     elif action.startswith('background:') and stage == 'background':
         choice = action.split(':', 1)[1]
-        if choice in ('original', 'white', 'beige', 'dark', 'pastel', 'gradient', 'pattern', 'duotone', 'mist'):
+        if choice == 'custom':
+            context.user_data['stage'] = 'background_custom_upload'
+            await query.message.reply_text('🖼️ Hantar gambar yang mahu digunakan sebagai latar video. Boleh hantar sebagai gambar Telegram atau fail imej JPG, PNG atau WEBP. Gambar ini akan dipadankan dengan saiz video.')
+        elif choice in ('original', 'white', 'beige', 'dark', 'pastel', 'gradient', 'pattern', 'duotone', 'mist'):
             context.user_data['background'] = choice
+            context.user_data.pop('custom_background_file_id', None)
             context.user_data['stage'] = 'duration'
             await query.message.reply_text('⏱️ Pilih durasi video:', reply_markup=duration_menu())
     elif action == 'styles' and stage in ('style', 'music', 'confirm', 'motion', 'doodle'):
@@ -2926,13 +2957,21 @@ async def generate(update: Update, context: ContextTypes.DEFAULT_TYPE):
             supplied_info = context.user_data.get('video_product_info', '').strip()
             label_info = ' '.join(part for part in (supplied_info, image_label_info) if part)[:320]
             background = context.user_data.get('background', 'original')
+            custom_background_path = None
+            if background == 'custom':
+                custom_background_file_id = context.user_data.get('custom_background_file_id')
+                if not custom_background_file_id:
+                    raise ValueError('Gambar latar sendiri belum diterima. Sila mula semula pilihan latar.')
+                custom_background_path = folder / 'custom_background_source'
+                custom_background_file = await context.bot.get_file(custom_background_file_id)
+                await custom_background_file.download_to_drive(custom_background_path)
             product_layers = []
             if background != 'original':
                 for i, path in enumerate(paths):
                     prepared = folder / f'product_bg_{i}.png'
                     foreground_path = folder / f'product_cutout_{i}.png'
                     try:
-                        await asyncio.to_thread(replace_background, path, prepared, background, foreground_path)
+                        await asyncio.to_thread(replace_background, path, prepared, background, foreground_path, custom_background_path)
                     except ValueError as exc:
                         logging.warning('Background removal declined: %s', exc)
                         alternative = folder / f'shopee_alternative_{i}.jpg'
@@ -2941,7 +2980,7 @@ async def generate(update: Update, context: ContextTypes.DEFAULT_TYPE):
                         found = bool(link and await asyncio.to_thread(_shopee_public_photo, link, alternative, description))
                         if found:
                             try:
-                                await asyncio.to_thread(replace_background, alternative, prepared, background, foreground_path)
+                                await asyncio.to_thread(replace_background, alternative, prepared, background, foreground_path, custom_background_path)
                                 paths[i] = prepared
                                 product_layers.append((foreground_path, background))
                                 continue
