@@ -2697,7 +2697,7 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['prompt_product_type'] = 'other'
             context.user_data['stage'] = 'prompt_flow_choice'
             await update.message.reply_text(
-                '✍️ KLIPPO PROMPT AI PRODUK\n\nPilih cara yang cikgu mahu. Prompt Video Terus lebih ringkas; Storyboard Video AI membantu merancang babak dahulu.',
+                '✍️ KLIPPO PROMPT AI PRODUK\n\nPilih cara yang sesuai. Prompt Video Terus lebih ringkas; Storyboard Video AI menjana storyboard secara automatik dengan Gemini.',
                 reply_markup=prompt_flow_menu()
             )
         elif action == 'subscription':
