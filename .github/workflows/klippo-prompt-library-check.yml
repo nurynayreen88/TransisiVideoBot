@@ -25,7 +25,11 @@ jobs:
         with:
           python-version: "3.11"
       - name: Check Python syntax
-        run: python -m py_compile bot.py prompt_catalog.py prompt_engine.py
+        run: python -m py_compile bot.py prompt_catalog.py prompt_engine.py product_reference_sheet.py
+      - name: Install image-processing test dependency
+        run: python -m pip install 'Pillow>=10.4,<12'
+      - name: Test product reference sheet and ChatGPT handoff prompt
+        run: python -m unittest discover -s tests -p 'test_*.py'
       - name: Validate prompt library structure
         run: |
           python - <<'PY'
@@ -141,6 +145,24 @@ jobs:
               "context.user_data['prompt_library_storyboard'] = template.get('storyboard', [])",
               "storyboard_override=context.user_data.get('prompt_library_storyboard') or None",
               "prompt_categories|pcat:[a-z0-9_]+|ptpl:[a-z0-9_]+",
+              "def prompt_text_mode_menu():",
+              "prompt_text_mode:(with|without)",
+              "context.user_data['stage'] = 'prompt_text_mode'",
+              "if stage == 'prompt_text_content':",
+              "if len(value.strip()) > 240:",
+              "context.user_data['prompt_on_screen_text'] = value.strip()",
+              "text_mode=context.user_data.get('prompt_text_mode', 'without')",
+              "on_screen_text=context.user_data.get('prompt_on_screen_text', '')",
+              "Mod teks:",
+              "Teks tepat:",
+              "from product_reference_sheet import CHATGPT_ANALYSIS_PROMPT, MAX_REFERENCE_IMAGES, build_reference_sheet",
+              "product_sheet_start",
+              "product_sheet_done",
+              "product_sheet_use",
+              "product_sheet_photos",
+              "CHATGPT_ANALYSIS_PROMPT",
+              "if stage == 'prompt_product_data':",
+              "if context.user_data.get('prompt_from_product_sheet'):",
             "async def handle_image_or_receipt_document(",
             "filters.Document.IMAGE | filters.Document.MimeType('application/pdf'), handle_image_or_receipt_document",
           ]
@@ -322,9 +344,50 @@ jobs:
               assert "SECOND CLIP 10s" in second_part and "full-product frame" in second_part
               assert "Do NOT repeat the opening hook" in second_part
 
+          # Explicit opt-in AI-rendered text mode: exact copy only, with no-text as default.
+          no_text = build_prompt(
+              "storyboard", verified, "clean premium studio background",
+              "push", "cinematic", 10
+          )
+          assert "NO ON-SCREEN TEXT: STRICTLY NONE" in no_text
+          assert "Stail elegan, sesuai setiap hari" not in no_text
+
+          exact_copy = "Stail elegan, sesuai setiap hari"
+          with_text = build_prompt(
+              "storyboard", verified, "clean premium studio background",
+              "push", "cinematic", 10,
+              text_mode="with", on_screen_text=exact_copy
+          )
+          assert "EXACT TEXT TO DISPLAY" in with_text
+          assert json.dumps(exact_copy, ensure_ascii=False) in with_text
+          assert "Render ONLY the exact user-supplied text" in with_text
+          assert "NO ON-SCREEN TEXT: STRICTLY NONE" not in with_text
+
+          # A 20-second request must carry the same exact text and style into both 10-second parts.
+          paired_with_text = build_prompt(
+              "storyboard", verified, "clean premium studio background",
+              "push", "cinematic", 20,
+              text_mode="with", on_screen_text=exact_copy
+          )
+          assert "=== KLIPPO PART 2 ===" in paired_with_text
+          text_part1, text_part2 = paired_with_text.split("=== KLIPPO PART 2 ===", 1)
+          for text_part in (text_part1, text_part2):
+              assert json.dumps(exact_copy, ensure_ascii=False) in text_part
+              assert "same wording, typography, color, position and scale" in text_part
+          assert "do not add new copy in Part 2" in text_part2
+
+          # Text entered by a user must not activate text mode unless explicitly selected.
+          opt_out = build_prompt(
+              "storyboard", verified, "clean premium studio background",
+              "push", "cinematic", 10,
+              text_mode="without", on_screen_text=exact_copy
+          )
+          assert "NO ON-SCREEN TEXT: STRICTLY NONE" in opt_out
+          assert json.dumps(exact_copy, ensure_ascii=False) not in opt_out
+
           print(
               f"Validated {len(categories)} categories, {len(prompts)} prompt-library entries, "
               f"{generated_cases} generated library cases, flow markers, and White Doodle v5 "
-              "evidence/continuity behavior."
+              "evidence/continuity and opt-in text behavior."
           )
           PY
