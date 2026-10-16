@@ -1707,7 +1707,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await query.message.reply_text('🎨 Pilih latar video:', reply_markup=prompt_scene_menu())
     elif action.startswith('scene:') and stage == 'prompt_scene':
         scenes = {
-            'auto': 'clean premium studio background, selected to complement the exact product reference',
+            'auto': 'clean premium studio background, selected to complement the named product',
             'studio': 'premium photography studio, soft neutral backdrop and realistic contact shadows',
             'dark': 'dark luxury studio, controlled rim lighting and understated premium contrast',
             'home': 'tasteful modern home interior, natural ambient lighting and believable product placement',
@@ -1781,7 +1781,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             waiting = await query.message.reply_text('⏳ DALAM PROSES — 0%' + chr(10) + 'Menyusun prompt...')
             try:
                 product_name = context.user_data.get('prompt_product_name', '').strip()
-                product = 'PRODUCT NAME SUPPLIED BY USER: ' + product_name + '. Use the product name as the source of truth; no reference image or AI image analysis is used. Optional user details: ' + context.user_data.get('prompt_product', '')
+                product = 'NAMA_PRODUK: ' + product_name + '. Optional user details: ' + context.user_data.get('prompt_product', '')
                 scene = context.user_data.get('prompt_scene', 'clean studio background')
                 prompt = build_prompt(
                     'storyboard', product, scene, motions[motion],
