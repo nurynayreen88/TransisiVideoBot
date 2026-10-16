@@ -2014,16 +2014,38 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 # has used the image prompt, so the workflow is clearly image -> video.
                 context.user_data['prompt_video_ready'] = prompt
                 product_name = context.user_data.get('prompt_product_name', '').strip() or 'product shown in the uploaded reference photo'
-                category_label = CATEGORIES_BY_ID.get(context.user_data.get('prompt_category', ''), {}).get('label', 'product')
+                category_id = context.user_data.get('prompt_category', '')
+                category_label = CATEGORIES_BY_ID.get(category_id, {}).get('label', 'product')
+                image_scene_by_category = {
+                    'clothing': "Show a realistic adult model wearing the exact garment in a natural pose; preserve its cut, color, print and fit, with no outfit changes.",
+                    'bags': "Show the complete exact bag as the hero, with handles and straps arranged plausibly; do not add compartments, accessories or contents.",
+                    'wallets': "Show the exact wallet on a clean premium surface; do not invent card slots, pockets, interior layouts, cards or cash.",
+                    'shoes': "Show the exact shoe or pair grounded naturally on a clean surface; preserve the visible upper, sole profile, color and orientation.",
+                    'beauty': "Compose the exact cosmetic and existing packaging on a clean vanity or counter; no skin transformation, invented ingredients or beauty claims.",
+                    'gadgets': "Show the exact device on a clean desk or suitable neutral set; keep geometry and visible screen content unchanged, with no fake interface.",
+                    'home': "Place the exact home product in a believable room at realistic scale; do not add parts, functions or accessories that are not shown.",
+                    'accessories': "Show the exact accessory alone or naturally worn when appropriate; preserve the number, size, color and arrangement of all visible components.",
+                    'food': "Show the exact food or package in appetizing natural light; do not add ingredients, toppings, garnish, nutrition claims or unverified label text.",
+                    'stationery': "Arrange the exact stationery item neatly on a study desk; avoid readable generated writing and do not add unlisted kit contents.",
+                    'sports': "Present the exact sports item in a clean, safe, grounded setup appropriate to its use; avoid performance claims or exaggerated action.",
+                    'travel': "Show the exact travel item in a tidy travel-preparation setting; do not invent wheels, locks, compartments, capacity or accessories.",
+                    'pets': "Present the exact pet product in a calm, tidy setting; include an animal only if relevant and do not imply health or safety claims.",
+                    'automotive': "Show the exact car accessory in a stationary, safe setting; never depict device handling while driving or invent compatibility.",
+                    'garden': "Place the exact gardening item in a believable garden or potting setting; do not invent material, weatherproofing or plant-growth results.",
+                    'kitchen': "Show the exact kitchen item on a clean countertop; add food or utensils only when appropriate and never imply unverified safety or performance.",
+                    'furniture': "Show the complete furniture item in a believable room at realistic scale; preserve all proportions and visible construction without adding parts.",
+                    'baby': "Show the exact baby product in a clean, safe product-focused scene; a child is not needed, and no safety certification may be invented.",
+                    'crafts': "Arrange the exact craft item or kit neatly on a work surface; preserve colors and visible components and add no unlisted contents.",
+                }
                 image_prompt = (
                     'PROMPT IMAGE — PREMIUM PRODUCT CAMPAIGN\\n\\n'
                     'Use the uploaded product photograph as the sole MASTER product reference. '
                     'Create one ultra-realistic premium commercial product photograph in vertical 9:16. '
                     'The product is: ' + product_name + '. Category: ' + category_label + '.\\n\\n'
-                    'VISUAL DIRECTION: Create a believable, elegant lifestyle advertising scene suited to this product. '
-                    'If the product is clothing, show a realistic adult model wearing the exact item naturally in a suitable setting. '
-                    'If it is a bag, accessory, beauty item, gadget, food or home product, compose a premium scene that showcases the actual item clearly. '
-                    'Use soft natural or studio light, realistic shadows, refined composition, authentic textures, and a photographic—not CGI—finish. '
+                    'VISUAL DIRECTION: ' + image_scene_by_category.get(
+                        category_id,
+                        'Present the exact product in a believable, category-appropriate premium scene at realistic scale.'
+                    ) + ' Use soft natural or studio light, realistic shadows, refined composition, authentic textures, and a photographic—not CGI—finish. '
                     'Keep the product prominent and leave enough clear space around it.\\n\\n'
                     'PRODUCT LOCK: Preserve the exact product identity from the uploaded photo, including its visible shape, colour, print, pattern, cut, packaging, proportions, hardware and details. '
                     'Do not redesign, recolour, replace, add or remove product features. Do not invent logos, labels, accessories, materials or claims. '
