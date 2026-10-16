@@ -19,6 +19,7 @@ import klippo_db
 from storyboard_engine import build_storyboard, format_storyboard, source_sequence
 from storyboard_overlay import apply_overlay, make_handwriting_labels
 from gemini_vision import describe_photo
+from gemini_storyboard import generate_storyboard
 from prompt_engine import build_prompt
 from prompt_catalog import choices as storyboard_styles
 
@@ -1871,7 +1872,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data['prompt_product_type'] = 'other'
         context.user_data['stage'] = 'prompt_flow_choice'
         await query.message.reply_text(
-            '✍️ KLIPPO PROMPT AI PRODUK\n\nPilih cara yang cikgu mahu. Prompt Video Terus lebih ringkas; Storyboard Video AI membantu merancang babak dahulu.',
+            '✍️ KLIPPO PROMPT AI PRODUK\n\nPilih cara yang sesuai. Prompt Video Terus lebih ringkas; Storyboard Video AI menjana storyboard secara automatik dengan Gemini.',
             reply_markup=prompt_flow_menu()
         )
     elif action.startswith('prompt_flow:') and stage == 'prompt_flow_choice':
@@ -1881,7 +1882,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['prompt_reference_photos'] = []
             context.user_data['stage'] = 'prompt_images'
             await query.message.reply_text(
-                '📷 LANGKAH 1 — GAMBAR PRODUK\n\nHantar 1 hingga 4 gambar produk yang jelas. Selepas semua gambar dihantar, tekan “Selesai Hantar Gambar”.\n\nNota: Klippo menyimpan pilihan gambar dalam sesi bot tetapi tidak menghantarnya secara automatik ke ChatGPT/Gemini. Anda akan memuat naik gambar yang sama di platform AI pilihan nanti.',
+                '📷 LANGKAH 1 — GAMBAR PRODUK\n\nHantar 1 hingga 4 gambar produk yang jelas. Selepas semua gambar dihantar, tekan “Selesai Hantar Gambar”.\n\nUntuk Storyboard Video AI, Klippo akan menggunakan gambar ini untuk menjana storyboard secara automatik. Gambar tidak dihantar ke platform luar selain perkhidmatan Gemini API yang dikonfigurasi.',
                 reply_markup=prompt_images_menu()
             )
     elif action == 'prompt_images_done' and stage == 'prompt_images':
@@ -2159,41 +2160,77 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             ]))
     elif action == 'prompt_chatgpt_storyboard':
         duration = int(context.user_data.get('prompt_duration', 10))
-        if duration == 20:
-            storyboard_timing = (
-                'Buat 10 panel keseluruhan: 5 panel untuk Bahagian 1 (0–10 saat) dan 5 panel untuk Bahagian 2 (10–20 saat). '
-                'Setiap panel tepat 2 saat. Bahagian 2 mesti menyambung aksi, kedudukan kamera dan bingkai akhir Bahagian 1.'
+        image_ids = context.user_data.get('prompt_reference_photos', [])
+        if not image_ids:
+            await query.message.reply_text('⚠️ Tiada gambar rujukan ditemui. Sila mulakan prompt baharu dan hantar gambar produk.')
+            return
+        waiting = await query.message.reply_text('⏳ GEMINI STORYBOARD — 0%\\nMenghantar gambar rujukan dan menyediakan babak...')
+        try:
+            images = []
+            for file_id in image_ids[:4]:
+                telegram_file = await context.bot.get_file(file_id)
+                image_bytes = bytes(await telegram_file.download_as_bytearray())
+                if image_bytes:
+                    images.append(image_bytes)
+            if not images:
+                raise RuntimeError('Gambar rujukan tidak dapat dimuat turun daripada Telegram.')
+            language = context.user_data.get('prompt_language', 'Malay')
+            language_label = {'Malay': 'Bahasa Melayu', 'English': 'English', 'none': 'Bahasa Melayu untuk penerangan; jangan cadangkan teks pada skrin'}.get(language, 'Bahasa Melayu')
+            voiceover_mode = context.user_data.get('prompt_voiceover_mode', 'none')
+            voiceover = context.user_data.get('prompt_voiceover_script', '').strip()
+            if voiceover_mode == 'script' and voiceover:
+                voiceover_instruction = 'Gunakan skrip dialog/voiceover pengguna ini tepat tanpa mengubahnya: ' + voiceover
+            elif voiceover_mode == 'ai':
+                voiceover_instruction = 'Cadangkan dialog/voiceover ringkas dan semula jadi dalam ' + language_label + ' hanya jika sesuai; muzik latar tidak boleh menenggelamkan suara.'
+            else:
+                voiceover_instruction = 'Dialog tidak wajib. Utamakan penceritaan visual; nyatakan “Tanpa dialog” jika dialog tidak diperlukan.'
+            model_instruction = prompt_creative_settings(context.user_data)
+            prompt_instruction = (
+                'Anda ialah pengarah kreatif iklan produk. Analisis SEMUA gambar rujukan yang dilampirkan dan hasilkan storyboard video produk yang boleh terus digunakan sebagai arahan penjana video AI. '
+                'Tulis hasil dalam ' + language_label + '. Durasi tepat ' + str(duration) + ' saat, format menegak 9:16. '
+                + ('Bina 5 babak, setiap babak tepat 2 saat.' if duration == 10 else 'Bina 10 babak, setiap babak tepat 2 saat; babak 6–10 mesti bersambung secara visual daripada babak 1–5.')
+                + ' Untuk setiap babak, berikan masa mula–akhir, aksi spesifik, framing dan gerakan kamera, ekspresi/pergerakan model jika ada, serta peralihan/kesinambungan. '
+                'Kekalkan identiti dan rupa produk tepat seperti gambar. Jangan mereka warna, logo, corak, ciri, bahan, aksesori atau dakwaan yang tidak dapat dilihat. '
+                'Kekalkan model dewasa yang sama pada semua babak jika model dipilih. Jangan tambah teks pada skrin, sari kata, logo tambahan atau watermark. '
+                'Pastikan setiap aksi praktikal, jelas dan tidak bertindih dengan aksi babak lain. Mulakan dengan hook visual yang kuat dan tamat dengan product hero shot. '
+                + voiceover_instruction + '\\n\\nPILIHAN PENGGUNA:\\n' + model_instruction
+                + '\\n\\nFormat output: tajuk ringkas, konsep, kemudian senarai babak bernombor. Jangan hasilkan prompt video penuh dahulu.'
             )
-        else:
-            storyboard_timing = 'Buat 5 panel untuk satu video 10 saat; setiap panel tepat 2 saat.'
-        storyboard_prompt = (
-            'PROMPT CHATGPT — HASILKAN STORYBOARD VIDEO PRODUK\n\n'
-            'Saya akan memuat naik gambar rujukan produk. Analisis gambar yang dimuat naik dan hasilkan storyboard iklan video menegak 9:16. '
-            + storyboard_timing + '\n\n'
-            'Dialog TIDAK mandatori. Utamakan penceritaan visual melalui aksi, ekspresi, komposisi dan pergerakan kamera. '
-            'Masukkan dialog atau suara latar hanya jika benar-benar sesuai; jika tidak perlu, nyatakan “Tanpa dialog”. '
-            'Untuk setiap babak, berikan: masa mula–akhir, aksi yang jelas, framing/pergerakan kamera, peralihan ke babak seterusnya dan kesinambungan. '
-            'Gunakan hanya ciri produk, warna, corak, logo dan butiran yang benar-benar kelihatan pada gambar. Jangan reka ciri, aksesori, dakwaan atau sudut produk yang tidak kelihatan. '
-            'Kekalkan produk yang sama sepanjang video. Jangan tambah teks pada skrin, sari kata, logo tambahan atau watermark kecuali saya minta. '
-            'Jadikan aksi spesifik dan mudah difahami oleh penjana video AI, bukan arahan umum. '
-            'Paparkan hasil sebagai storyboard berstruktur mengikut babak. Jangan jana prompt video penuh dahulu; hasilkan storyboard sahaja.\n\n'
-            + prompt_creative_settings(context.user_data)
-        )
-        context.user_data['stage'] = 'prompt_storyboard_ready'
-        storyboard_actions = InlineKeyboardMarkup([
-            [InlineKeyboardButton('🖼️ Buka ChatGPT', url='https://chatgpt.com/')],
-            [InlineKeyboardButton('➡️ Jana Prompt Video Klippo', callback_data='prompt_continue_video')],
-            [InlineKeyboardButton('🏠 Menu Utama', callback_data='home')]
-        ])
-        await query.message.reply_text(
-            '🎬 STORYBOARD DENGAN CHATGPT\n\n'
-            '1. Buka ChatGPT melalui butang di bawah.\n'
-            '2. Muat naik gambar rujukan produk yang sama.\n'
-            '3. Salin prompt di bawah dan tampal dalam ChatGPT.\n'
-            '4. Semak storyboard dahulu. Dialog tidak wajib. Selepas itu, kembali ke Klippo untuk prompt video jika diperlukan.',
-            reply_markup=storyboard_actions
-        )
-        await query.message.reply_text(storyboard_prompt)
+            await progress_update(waiting, 35, 'Gemini sedang menganalisis gambar produk...')
+            storyboard = await generate_storyboard(images, prompt_instruction)
+            if not storyboard:
+                raise RuntimeError('Gemini tidak memulangkan storyboard.')
+            context.user_data['stage'] = 'prompt_storyboard_ready'
+            storyboard_actions = InlineKeyboardMarkup([
+                [InlineKeyboardButton('➡️ Jana Prompt Video Klippo', callback_data='prompt_continue_video')],
+                [InlineKeyboardButton('🔁 Jana Storyboard Baharu', callback_data='prompt_chatgpt_storyboard')],
+                [InlineKeyboardButton('🏠 Menu Utama', callback_data='home')]
+            ])
+            await progress_update(waiting, 90, 'Storyboard siap. Menghantar hasil...')
+            await query.message.reply_text('🎬 STORYBOARD GEMINI SIAP\\n\\nSemak setiap babak dahulu. Gambar produk asal digunakan sebagai rujukan analisis; video masih perlu dijana dalam platform video pilihan.', reply_markup=storyboard_actions)
+            if len(storyboard) <= 3900:
+                await query.message.reply_text(storyboard, reply_markup=storyboard_actions)
+            else:
+                storyboard_file = BytesIO(storyboard.encode('utf-8'))
+                storyboard_file.name = 'KLIPPO_GEMINI_STORYBOARD.txt'
+                await query.message.reply_document(document=storyboard_file, filename=storyboard_file.name, caption='📋 Storyboard Gemini penuh.', reply_markup=storyboard_actions)
+            await progress_update(waiting, 100, 'Storyboard Gemini siap.')
+        except Exception as exc:
+            logging.exception('Gemini storyboard generation failed')
+            message = str(exc)[:220]
+            await query.message.reply_text(
+                '❌ Storyboard automatik belum berjaya. Pastikan GEMINI_API_KEY ditetapkan dalam persekitaran bot dan kuota percuma masih tersedia.\\n\\nButiran: ' + message,
+                reply_markup=InlineKeyboardMarkup([
+                    [InlineKeyboardButton('🔁 Cuba Lagi', callback_data='prompt_chatgpt_storyboard')],
+                    [InlineKeyboardButton('✍️ Prompt Baharu', callback_data='prompt')],
+                    [InlineKeyboardButton('🏠 Menu Utama', callback_data='home')]
+                ])
+            )
+        finally:
+            try:
+                await waiting.delete()
+            except Exception:
+                pass
     elif action == 'prompt_continue_video':
         prompt = context.user_data.get('prompt_video_ready', '')
         if not prompt:
