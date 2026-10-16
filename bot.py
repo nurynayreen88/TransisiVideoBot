@@ -1271,6 +1271,8 @@ def reset(context):
     context.user_data['prompt_library_details'] = ''
     context.user_data['prompt_category'] = ''
     context.user_data['prompt_concept'] = ''
+    context.user_data['prompt_library_id'] = ''
+    context.user_data['prompt_library_storyboard'] = []
     context.user_data['stage'] = 'home'
 
 
@@ -1668,6 +1670,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data['prompt_mode'] = 'storyboard'
         context.user_data['prompt_style'] = 'auto'
         context.user_data['prompt_concept'] = ''
+        context.user_data['prompt_library_id'] = ''
+        context.user_data['prompt_library_storyboard'] = []
         context.user_data['stage'] = 'prompt_product_type'
         context.user_data['prompt_product_type'] = 'other'
         await query.message.reply_text(
@@ -1716,14 +1720,29 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['prompt_concept'] = (
                 (template.get('label', '') + ': ' + template.get('description', '')).strip(': ')
             )
+            context.user_data['prompt_library_id'] = prompt_id
+            context.user_data['prompt_library_storyboard'] = template.get('storyboard', [])
             if context.user_data.get('prompt_product_name'):
                 product_name = context.user_data['prompt_product_name']
-                subtype = detect_bag_subtype(product_name)
-                context.user_data['prompt_bag_subtype'] = subtype
-                if subtype == 'wallet' or category_id == 'wallets':
-                    context.user_data['prompt_product_type'] = 'wallet'
-                elif category_id == 'bags':
-                    context.user_data['prompt_product_type'] = 'bag'
+                subtype = detect_product_subtype(product_name)
+                context.user_data['prompt_bag_subtype'] = detect_bag_subtype(product_name)
+                category_product_type = {
+                    'clothing': 'fashion',
+                    'bags': 'bag',
+                    'wallets': 'wallet',
+                    'shoes': 'shoes',
+                    'beauty': 'beauty',
+                    'gadgets': 'gadget',
+                    'home': 'home',
+                    'accessories': 'accessory',
+                    'food': 'food',
+                    'stationery': 'other',
+                    'sports': 'other',
+                }
+                if subtype == 'hijab':
+                    context.user_data['prompt_product_type'] = 'hijab'
+                else:
+                    context.user_data['prompt_product_type'] = category_product_type.get(category_id, 'other')
                 context.user_data['stage'] = 'prompt_scene'
                 await query.message.reply_text(
                     '✅ Nama produk: ' + product_name + '\n🔎 Jenis dikesan: ' + (subtype.replace('_', ' ') if subtype else category_id) + '\n\n🎨 Pilih latar video:',
@@ -1882,7 +1901,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     style_choice,
                     context.user_data.get('prompt_duration', 10),
                     context.user_data.get('prompt_concept', ''),
-                    product_type=context.user_data.get('prompt_product_type', 'other')
+                    product_type=context.user_data.get('prompt_product_type', 'other'),
+                    storyboard_override=context.user_data.get('prompt_library_storyboard') or None
                 )
                 await progress_update(waiting, 70, 'Prompt siap disusun. Menghantar hasil...')
                 context.user_data['stage'] = 'prompt_done'
