@@ -74,6 +74,8 @@ jobs:
               "prompt_category_menu()",
               "prompt_options_menu(category_id)",
               "prompt_categories|pcat:[a-z0-9_]+|ptpl:[a-z0-9_]+",
+            "async def handle_image_or_receipt_document(",
+            "filters.Document.IMAGE | filters.Document.MimeType('application/pdf'), handle_image_or_receipt_document",
           ]
           missing = [marker for marker in required_flow_markers if marker not in bot]
           assert not missing, f"Prompt-library flow markers missing from bot.py: {missing}"
