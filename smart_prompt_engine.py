@@ -6,7 +6,6 @@ No external API calls, no database writes, and no changes to rendering workflows
 from __future__ import annotations
 
 import random
-import re
 
 SCENE_VARIANTS = {
     "auto": [
@@ -48,14 +47,15 @@ SCENE_VARIANTS = {
     ],
 }
 
-CAMERA_VARIANTS = [
-    "begin in a balanced medium shot, then make a gentle push-in toward one visible detail before easing back",
-    "use a smooth lateral slide of only a small distance, keeping product proportions and framing stable",
-    "start with a close detail that is genuinely visible, then gently widen to reveal the complete product",
-    "hold a calm reference-facing composition while focus and light subtly shift across the real surface",
-    "use a modest over-the-shoulder or mirror-facing framing only when supported by the reference photograph",
-    "make a slow diagonal camera drift with physically plausible parallax; never orbit into unseen sides",
-    "alternate a steady full-product view with one controlled detail crop, connected by a soft match cut",
+FRAMING_VARIANTS = [
+    "balanced full-product framing with clear negative space around the silhouette",
+    "slightly off-centre editorial framing, keeping the complete product unobstructed",
+    "begin with a safe crop of one visible detail, then return to the complete product",
+    "reference-facing eye-level framing with stable product proportions",
+    "a gentle three-quarter composition only when that view is genuinely visible in the reference",
+    "a wider environmental frame that keeps the product dominant and clearly separated from the background",
+    "a tactile close-up of a real visible texture followed by a clean hero composition",
+    "a calm mirror-selfie composition only when the uploaded reference already shows a mirror selfie",
 ]
 
 LIGHTING_VARIANTS = [
@@ -129,7 +129,8 @@ def choose_variation(product: str, scene: str, motion: str = "push",
     category = _category(product)
     bucket = _scene_bucket(scene)
     setting = rng.choice(SCENE_VARIANTS[bucket])
-    camera = rng.choice(CAMERA_VARIANTS)
+    framing = rng.choice(FRAMING_VARIANTS)
+    camera = ""
     lighting = rng.choice(LIGHTING_VARIANTS)
     mood = rng.choice(MOOD_VARIANTS)
     if category == "fashion":
@@ -158,6 +159,7 @@ def choose_variation(product: str, scene: str, motion: str = "push",
         "category": category,
         "setting": setting,
         "camera": camera,
+        "framing": framing,
         "lighting": lighting,
         "mood": mood,
         "action": action,
@@ -172,6 +174,7 @@ def format_variation(variation: dict[str, str]) -> str:
         f"Environment variation: {variation['setting']}.\n"
         f"Action: {variation['action']}.\n"
         f"Camera direction: {variation['camera']}.\n"
+        f"Framing variation: {variation['framing']}.\n"
         f"Lighting: {variation['lighting']}.\n"
         "Keep one coherent scene within this clip. Variation must never alter the product's real design, "
         "visible colour, pattern, packaging, branding, count or proportions. Do not invent unseen sides, "
