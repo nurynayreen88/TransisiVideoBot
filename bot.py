@@ -2110,7 +2110,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                          InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]
                     ])
                     await query.message.reply_text(
-                        '🎬 PROMPT VIDEO SIAP\\n\\n'
+                        '🎬 PROMPT VIDEO SIAP\n\n'
                         'Gunakan gambar produk yang dijana di ChatGPT sebagai MASTER reference. '
                         'Salin prompt di bawah ke platform video. Untuk 20 saat, jana Bahagian 1 dahulu, '
                         'kemudian gunakan bingkai akhir Bahagian 1 sebagai rujukan Bahagian 2.',
@@ -2479,11 +2479,7 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if len(value) > 3000:
             await update.message.reply_text('⚠️ Maklumat terlalu panjang. Sila salin blok “MAKLUMAT PRODUK UNTUK KLIPPO” sahaja, bukan seluruh jawapan ChatGPT.')
             return
-        name_match = re.search(r'(?im)^\s*(?:NAMA PRODUK|NAMA|PRODUCT NAME)\s*:\s*(.+?)\s*$', value)
-        if not name_match:
-            await update.message.reply_text('⚠️ Saya belum jumpa baris NAMA PRODUK. Sila tampal blok “MAKLUMAT PRODUK UNTUK KLIPPO” penuh daripada ChatGPT.')
-            return
-        product_name = name_match.group(1).strip()[:240]
+        name_match = re.search(r'(?im)^\s*(?:NAMA PRODUK|NAMA|PRODUCT NAME)\s*:\s*(.*?)\s*
         if not product_name or product_name.casefold() in ('tidak dapat dipastikan daripada gambar', 'tidak diketahui'):
             await update.message.reply_text('⚠️ Nama produk belum jelas. Sila tambah nama atau jenis produk pada baris NAMA PRODUK dan hantar semula.')
             return
@@ -2518,7 +2514,911 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
             '📋 Maklumat ini akan dimasukkan ke dalam prompt video; anda boleh semak pilihan sebelum menjana.',
             reply_markup=InlineKeyboardMarkup([
                 [InlineKeyboardButton('🎬 Teruskan ke Prompt Video', callback_data='product_sheet_use')],
-                [InlineKeyboardButton('🔄 Hantar Maklumat Semula', callback_data='product_sheet_start')],
+                [InlineKeyboardButton('🔄 Mula Semula dengan Gambar', callback_data='product_sheet_start')],
+                [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
+            ])
+        )
+        return
+    if stage == 'prompt_library_details':
+        details = '' if value in ('-', '—', 'tiada', 'Tiada') else value
+        context.user_data['prompt_library_details'] = details[:1200]
+        if details:
+            context.user_data['prompt_product_name'] = details[:240]
+            subtype = detect_product_subtype(details)
+            category_id = detect_prompt_library_category(details)
+            context.user_data['prompt_bag_subtype'] = subtype
+            context.user_data['prompt_detected_category'] = category_id
+            if category_id == 'wallets':
+                context.user_data['prompt_product_type'] = 'wallet'
+            elif category_id == 'bags':
+                context.user_data['prompt_product_type'] = 'bag'
+            if category_id:
+                context.user_data['prompt_category'] = category_id
+                context.user_data['stage'] = 'prompt_category_options'
+                await update.message.reply_text(
+                    '🔎 Klippo mengesan jenis produk: ' + subtype.replace('_', ' ') + '. Pilih prompt khusus dalam koleksi ' + CATEGORIES_BY_ID[category_id].get('label', category_id) + ':',
+                    reply_markup=prompt_options_menu(category_id, subtype)
+                )
+                return
+        context.user_data['stage'] = 'prompt_category'
+        await update.message.reply_text('📚 Nama produk diterima. Pilih koleksi prompt:', reply_markup=prompt_category_menu())
+        return
+    if stage == 'prompt_product_name':
+        if len(value) < 2 or value.lower().startswith(('http://', 'https://')):
+            await update.message.reply_text('⚠️ Masukkan nama produk sahaja. Buka Shopee, copy nama produk dan paste di sini; pautan tidak diperlukan.')
+            return
+        context.user_data['prompt_product_name'] = value[:240]
+        bag_subtype = detect_bag_subtype(value)
+        context.user_data['prompt_bag_subtype'] = bag_subtype
+        if bag_subtype == 'wallet':
+            context.user_data['prompt_product_type'] = 'wallet'
+        elif bag_subtype in ('handbag', 'sling_bag', 'backpack', 'bag'):
+            context.user_data['prompt_product_type'] = 'bag'
+        if bag_subtype:
+            context.user_data['prompt_concept'] = (context.user_data.get('prompt_concept', '') + ' | Product-name category detection: ' + bag_subtype.replace('_', ' ') + '. Use the matching visual style without guessing product features.').strip(' |')
+        context.user_data['stage'] = 'prompt_text_mode'
+        await update.message.reply_text('📝 Mahu teks dipaparkan dalam video oleh AI, atau video tanpa teks?\n\nJika pilih Dengan Teks, masukkan ayat tepat yang mahu muncul. Klippo akan mengarahkan AI memilih kedudukan dan gaya yang sesuai.', reply_markup=prompt_text_mode_menu())
+        return
+    if stage == 'prompt_text_content':
+        if not value.strip():
+            await update.message.reply_text('⚠️ Sila masukkan teks yang mahu dipaparkan, atau pilih Tanpa Teks untuk video tanpa tulisan.')
+            return
+        if len(value.strip()) > 240:
+            await update.message.reply_text('⚠️ Teks terlalu panjang. Had maksimum ialah 240 aksara supaya AI lebih mudah memaparkannya dengan jelas. Sila pendekkan teks tanpa mengubah maksudnya.')
+            return
+        context.user_data['prompt_on_screen_text'] = value.strip()
+        if context.user_data.get('prompt_from_product_sheet'):
+            context.user_data['stage'] = 'prompt_scene'
+            await update.message.reply_text('📝 Teks disimpan. Pilih latar video:', reply_markup=prompt_scene_menu())
+        else:
+            context.user_data['stage'] = 'prompt_text_info'
+            await update.message.reply_text('📝 Teks disimpan tepat seperti yang diberikan. Ada maklumat produk tambahan untuk membantu AI memahami konteks? Jika tiada, tekan Langkau.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('➡️ Langkau maklumat tambahan', callback_data='prompt_text_info:skip')], [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
+        return
+    if stage == 'prompt_text_info':
+        context.user_data['prompt_product'] = value.strip()[:600]
+        context.user_data['stage'] = 'prompt_scene'
+        await update.message.reply_text('✅ Maklumat tambahan disimpan. Pilih latar video:', reply_markup=prompt_scene_menu())
+        return
+        return
+    shortcuts = {
+        '🎬 Jana Video Affiliate': 'make',
+        '🎬 Jana Video Transisi': 'make',
+        '🎞️ Gerakkan Foto (Transisi)': 'make',
+        '🛍️ Prompt AI Produk (Imej → Video)': 'prompt',
+        '🧩 Gabung Gambar + Analisis ChatGPT': 'product_sheet_start',
+        '🔄 Tukar Format Video': 'convert',
+        '✍️ Sediakan Prompt Video': 'prompt',
+        '✍️ Hasilkan Prompt': 'prompt',
+        '✍️ Prompt': 'prompt',
+        '💎 Langganan': 'subscription',
+        '👤 Akaun Saya': 'account',
+        '❓ Bantuan': 'help',
+        '🗑 Mula Semula': 'home',
+    }
+    if value in shortcuts:
+        action = shortcuts[value]
+        if action == 'make':
+            reset(context)
+            context.user_data['stage'] = 'video_input'
+            await update.message.reply_text('🎬 Pilih cara masukkan produk:', reply_markup=video_input_menu())
+        elif action == 'convert':
+            reset(context)
+            context.user_data['stage'] = 'convert'
+            await update.message.reply_text('🔄 TUKAR FORMAT VIDEO\n\nTekan 📎 → File / Fail → pilih video MP4 asal. Bot akan memprosesnya secara automatik.', reply_markup=main_menu())
+        elif action == 'prompt':
+            reset(context)
+            context.user_data['prompt_mode'] = 'storyboard'
+            context.user_data['prompt_style'] = 'auto'
+            context.user_data['prompt_concept'] = ''
+            context.user_data['stage'] = 'prompt_product_type'
+            context.user_data['prompt_product_type'] = 'other'
+            await update.message.reply_text(
+                '✍️ KLIPPO ONE PROMPT — Pilih jenis produk dahulu supaya gaya iklan dan aksi lebih sesuai:',
+                reply_markup=prompt_product_type_menu()
+            )
+        elif action == 'subscription':
+            await update.message.reply_text('💎 LANGGANAN KLIPPO\n\nPelan Penyokong Awal: RM5 / 30 hari, sehingga 30 video sebulan. Pengaktifan manual selepas resit disemak.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📱 Papar QR DuitNow', callback_data='subscription_qr')]]))
+        elif action == 'account':
+            await account_info(update, context)
+        elif action == 'help':
+            await update.message.reply_text('❓ BANTUAN\n\nJana Video: hantar gambar, pilih gaya dan muzik.\nTukar Format: hantar MP4.\nVideo AI: upload gambar, tambah maklumat jika mahu, kemudian pilih latar dan gerakan kamera. Prompt digunakan bersama gambar di penjana video luar.')
+        else:
+            await start(update, context)
+        return
+    if stage == 'shopee_link' and _shopee_link(value):
+        context.user_data['shopee_url'] = _shopee_link(value)
+        context.user_data['stage'] = 'background'
+        await update.message.reply_text('🔗 Pautan Shopee diterima. KLIPPO akan cuba mengambil foto awam produk tanpa Gemini. Jika akses disekat, bot akan meminta gambar sendiri. Pilih latar:', reply_markup=background_menu())
+    elif stage == 'shopee_link':
+        await update.message.reply_text('⚠️ Pautan tidak dikenali. Tampal URL halaman produk Shopee Malaysia yang lengkap (https://shopee.com.my/...).')
+    elif stage == 'product_description':
+        if len(value.strip()) < 5 or _shopee_link(value) or value.lower().startswith(('http://', 'https://')):
+            await update.message.reply_text('⚠️ Tampal TAJUK produk Shopee (bukan pautan). Tajuk wajib diisi sebelum meneruskan.')
+            return
+        context.user_data['shopee_url'] = ''
+        context.user_data['product_description'] = value[:1800]
+        context.user_data['video_product_info'] = value[:600]
+        context.user_data['stage'] = 'background'
+        await update.message.reply_text('✅ Tajuk produk diterima. Pilih latar produk:',reply_markup=background_menu())
+    elif stage == 'photos' and value.lower().startswith('produk:'):
+        info = value.split(':', 1)[1].strip()[:100]
+        context.user_data['video_product_info'] = info
+        hook = verified_video_hook(info)
+        await update.message.reply_text(('✅ Cadangan hook: ' + hook if hook else 'Maklumat produk tidak cukup jelas; video akan dijana tanpa hook.'), reply_markup=photos_menu())
+    elif stage == 'prompt_shopee_link':
+        link = _shopee_link(value)
+        if not link:
+            await update.message.reply_text('⚠️ Pautan tidak dikenali. Tampal URL halaman produk Shopee Malaysia yang lengkap.')
+            return
+        context.user_data['shopee_url'] = link
+        context.user_data['prompt_product'] = 'Product reference URL (do not invent unverified specifications): ' + link
+        context.user_data['prompt_vision'] = ''
+        context.user_data['stage'] = 'prompt_details_text'
+        await update.message.reply_text('✅ Pautan diterima. Untuk prompt yang tepat, masukkan nama produk dan ciri utama daripada halaman Shopee (contoh: jenama, model, warna). Pautan sahaja tidak menjamin AI boleh membaca halaman produk.')
+    elif stage == 'prompt_details_text':
+        context.user_data['prompt_product'] = value[:600]
+        context.user_data['stage'] = 'prompt_scene'
+        await update.message.reply_text('🎨 Maklumat disimpan. Pilih latar video:', reply_markup=prompt_scene_menu())
+    elif stage == 'prompt_scene':
+        await update.message.reply_text('🎨 Pilih latar menggunakan butang:', reply_markup=prompt_scene_menu())
+    else:
+        await update.message.reply_text('Gunakan butang menu di bawah.', reply_markup=main_menu())
+
+
+
+
+def _shopee_link(value):
+    """Only accept an explicit Shopee product URL; never fetch arbitrary pasted URLs."""
+    from urllib.parse import urlparse
+    for candidate in re.findall(r'https?://[^\\s<>]+', value):
+        candidate = candidate.rstrip('.,);]')
+        parsed = urlparse(candidate)
+        host = (parsed.hostname or '').lower()
+        if parsed.scheme == 'https' and (host == 'shopee.com.my' or host.endswith('.shopee.com.my')) and (re.search(r'/product/\\d+/\\d+', parsed.path) or re.search(r'-i\\.\\d+\\.\\d+', parsed.path)):
+            return candidate
+    return ''
+
+
+def _shopee_public_photo(url, destination, description):
+    """Best-effort public OG photo only; no login, private API or image AI."""
+    from urllib.request import Request, urlopen
+    from urllib.parse import urlparse
+    from PIL import Image
+    if not _shopee_link(url):
+        return False
+    try:
+        req = Request(url, headers={'User-Agent': 'Mozilla/5.0 KLIPPO/1.0'})
+        with urlopen(req, timeout=7) as response:
+            if not (response.geturl().startswith('https://shopee.com.my/') or response.geturl().startswith('https://www.shopee.com.my/')):
+                return False
+            if 'text/html' not in response.headers.get('Content-Type', '').lower():
+                return False
+            page = response.read(350000).decode('utf-8', 'replace')
+        from html import unescape
+        def meta(name):
+            for tag in re.findall(r'<meta\\b[^>]*>', page, re.I):
+                if re.search(r'(?:property|name)=[\\"\\\']'+re.escape(name)+r'[\\"\\\']', tag, re.I):
+                    match = re.search(r'content=[\\"\\\']([^\\"\\\']+)', tag, re.I)
+                    if match:
+                        return unescape(match.group(1))
+            return ''
+        title, image_url = meta('og:title'), meta('og:image')
+        words = [w.lower() for w in re.findall(r'[A-Za-z0-9]{4,}', description) if not w.isdigit()]
+        if not title or not image_url or (words and not any(w in title.lower() for w in words[:8])):
+            return False
+        parsed = urlparse(image_url)
+        if parsed.scheme != 'https' or not (parsed.hostname or '').lower().endswith(('.shopee.com.my', '.shopee.sg', '.shopeemobile.com', '.shopeeusercontent.com')):
+            return False
+        with urlopen(Request(image_url, headers={'User-Agent': 'Mozilla/5.0'}), timeout=7) as response:
+            if not response.headers.get('Content-Type', '').lower().startswith('image/'):
+                return False
+            data = response.read(6000001)
+        if len(data) > 6000000:
+            return False
+        with Image.open(BytesIO(data)) as opened:
+            opened.verify()
+        with Image.open(BytesIO(data)) as opened:
+            if min(opened.size) < 350:
+                return False
+            ImageOps.exif_transpose(opened).convert('RGB').save(destination, 'JPEG', quality=92)
+        return True
+    except Exception as exc:
+        logging.info('Public Shopee image unavailable: %s', exc)
+        return False
+
+def validate_rendered_video(path, expected_duration):
+    """Reject truncated/invalid MP4 before reporting success to a paying user."""
+    if not path.is_file() or path.stat().st_size < 20_000:
+        raise RuntimeError('Fail video kosong atau terlalu kecil.')
+    probe = subprocess.run(
+        ['ffprobe', '-v', 'error', '-show_entries',
+         'format=duration:stream=codec_type,width,height',
+         '-of', 'json', str(path)],
+        capture_output=True, text=True, timeout=25, check=True)
+    metadata = json.loads(probe.stdout)
+    duration = float(metadata.get('format', {}).get('duration') or 0)
+    video_streams = [stream for stream in metadata.get('streams', [])
+                     if stream.get('codec_type') == 'video']
+    if not video_streams:
+        raise RuntimeError('Fail output tidak mempunyai trek video.')
+    stream = video_streams[0]
+    if int(stream.get('width') or 0) < 480 or int(stream.get('height') or 0) < 720:
+        raise RuntimeError('Resolusi video tidak mencapai tahap minimum.')
+    if abs(duration - expected_duration) > max(.8, expected_duration*.08):
+        raise RuntimeError('Tempoh video tidak lengkap.')
+    return metadata
+
+
+async def generate(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    message = update.effective_message
+    ids = context.user_data.get('photos', [])
+    if ids and not context.user_data.get('video_product_info', '').strip() and not context.user_data.get('storyboard_mode'):
+        await message.reply_text('📝 Tajuk produk Shopee wajib diisi. Sila lengkapkan langkah selepas Selesai Hantar Gambar.')
+        return
+    if not ids and not context.user_data.get('shopee_url'):
+        await message.reply_text('Hantar gambar atau pautan produk Shopee dahulu.', reply_markup=main_menu())
+        return
+    if context.user_data.get('busy'):
+        await message.reply_text('Video sedang diproses.')
+        return
+    lock = context.application.bot_data.setdefault('render_lock', asyncio.Lock())
+    if lock.locked():
+        await message.reply_text('Server sedang menjana video lain. Cuba sebentar lagi.')
+        return
+    await lock.acquire()
+    context.user_data['busy'] = True
+    progress = await message.reply_text('⏳ DALAM PROSES — 0%\nMenyediakan fail...')
+    try:
+        with tempfile.TemporaryDirectory(prefix='telegram_video_') as td:
+            folder = Path(td)
+            paths = []
+            for i, fid in enumerate(list(ids)):
+                p = folder / f'{i}.jpg'
+                await (await context.bot.get_file(fid)).download_to_drive(p)
+                paths.append(p)
+                await progress_update(progress, round(25 * (i + 1) / len(ids)), 'Memuat turun gambar...')
+            if not paths and context.user_data.get('shopee_url'):
+                product_photo = folder / 'shopee_product.jpg'
+                available = await asyncio.to_thread(_shopee_public_photo, context.user_data['shopee_url'], product_photo, context.user_data.get('product_description', ''))
+                if not available:
+                    context.user_data['stage'] = 'photos'
+                    await message.reply_text('⚠️ Shopee tidak menyediakan gambar awam yang dapat diakses atau disahkan untuk pautan ini. Sila hantar 1–5 gambar produk sendiri, kemudian tekan Selesai.', reply_markup=photos_menu())
+                    return
+                paths.append(product_photo)
+                await progress_update(progress, 25, 'Gambar produk Shopee diterima...')
+            # Optional vision reads the actual uploaded product photo before background removal.
+            # Never make the video depend on an external AI service being available.
+            image_label_info = ''
+            if os.environ.get('GEMINI_API_KEY') and paths:
+                verified_parts = []
+                for photo_path in paths[:3]:
+                    try:
+                        vision = await describe_photo(photo_path.read_bytes())
+                        if not vision:
+                            continue
+                        for line in vision.splitlines():
+                            key, separator, value = line.partition(':')
+                            if separator and key.strip() in ('NAMA_PRODUK', 'KATEGORI', 'TEKS_DISAHKAN', 'CIRI_VISUAL'):
+                                value = value.strip()
+                                if value and value.upper() not in ('TIADA', 'TIDAK PASTI', 'NONE'):
+                                    if key.strip() == 'TEKS_DISAHKAN':
+                                        verified_parts.extend(v.strip() for v in value.split(';') if v.strip())
+                                    elif key.strip() == 'CIRI_VISUAL':
+                                        verified_parts.extend(v.strip() for v in value.split(';') if v.strip())
+                                    else:
+                                        verified_parts.append(value)
+                    except Exception:
+                        logging.exception('Optional image label analysis failed')
+                image_label_info = ' '.join(dict.fromkeys(verified_parts))[:240]
+            supplied_info = context.user_data.get('video_product_info', '').strip()
+            label_info = ' '.join(part for part in (supplied_info, image_label_info) if part)[:320]
+            background = context.user_data.get('background', 'original')
+            product_layers = []
+            if background != 'original':
+                for i, path in enumerate(paths):
+                    prepared = folder / f'product_bg_{i}.png'
+                    foreground_path = folder / f'product_cutout_{i}.png'
+                    try:
+                        await asyncio.to_thread(replace_background, path, prepared, background, foreground_path)
+                    except ValueError as exc:
+                        logging.warning('Background removal declined: %s', exc)
+                        alternative = folder / f'shopee_alternative_{i}.jpg'
+                        link = context.user_data.get('shopee_url', '')
+                        description = context.user_data.get('product_description', '')
+                        found = bool(link and await asyncio.to_thread(_shopee_public_photo, link, alternative, description))
+                        if found:
+                            try:
+                                await asyncio.to_thread(replace_background, alternative, prepared, background, foreground_path)
+                                paths[i] = prepared
+                                product_layers.append((foreground_path, background))
+                                continue
+                            except ValueError:
+                                logging.info('Shopee public thumbnail is also unsuitable for segmentation')
+                        await message.reply_text('⚠️ Gambar ini terlalu kompleks untuk pengasingan produk yang selamat. KLIPPO akan menggunakan gambar asal tanpa menggantikannya dengan gambar produk lain yang belum disahkan.')
+                        product_layers = []
+                        paths = [folder / f'{j}.jpg' for j in range(len(ids))] if ids else [folder / 'shopee_product.jpg']
+                        break
+                    paths[i] = prepared
+                    product_layers.append((foreground_path, background))
+                await progress_update(progress, 30, 'Produk diasingkan dan latar baharu disediakan...')
+            music = None
+            if context.user_data.get('music_choice') == 'custom' and context.user_data.get('music'):
+                music = folder / 'music.mp3'
+                await (await context.bot.get_file(context.user_data['music'])).download_to_drive(music)
+            elif context.user_data.get('music_choice') == 'custom':
+                await message.reply_text('Sila hantar MP3 sendiri dahulu, atau pilih muzik lain.', reply_markup=music_menu())
+                return
+            elif context.user_data.get('music_choice', 'auto') != 'none':
+                music = resolve_music(context.user_data.get('music_choice', 'auto'), context.user_data.get('style', 'hybrid'))
+                if music is None:
+                    await message.reply_text('Muzik pilihan belum tersedia pada server. Video akan dijana tanpa muzik.')
+            result = folder / 'video.mp4'
+            if context.user_data.get('storyboard_mode'):
+                plan = build_storyboard(len(paths), context.user_data.get('duration', 10))
+                await message.reply_text(format_storyboard(plan) + '\n\nEfek prompt: ' + DOODLE_OPTIONS[context.user_data.get('doodle_choice', 'none')] + '\nArahan AI: Tambah efek pilihan secara halus di luar label dan logo produk. Jangan ubah identiti produk. (Efek overlay turut dirender pada MP4.)')
+                paths = [paths[i] for i in source_sequence(plan)]
+                selected_style = 'cinematic'
+                doodle = context.user_data.get('doodle_choice', 'none')
+            else:
+                selected_style = context.user_data.get('style', 'hybrid')
+                doodle = context.user_data.get('doodle_choice', 'auto')
+            await progress_update(progress, 40, 'Bahan siap. Sedang render video...')
+            loop = asyncio.get_running_loop()
+            def render_progress(percent, detail):
+                asyncio.run_coroutine_threadsafe(progress_update(progress, percent, detail), loop)
+            await asyncio.to_thread(render_video, paths, result, music, selected_style, context.user_data.get('duration', 10), doodle, None, render_progress, product_layers if not context.user_data.get('storyboard_mode') else None, context.user_data.get('motion_choice','auto'), label_info)
+            await asyncio.to_thread(validate_rendered_video, result, context.user_data.get('duration', 10))
+            await progress_update(progress, 90, 'Video lulus semakan fail. Menghantar ke Telegram...')
+            with result.open('rb') as f:
+                await message.reply_video(video=f, caption='🎬 Video siap! Hantar gambar baharu untuk video seterusnya.', supports_streaming=True,
+                                                 read_timeout=120, write_timeout=120)
+        await progress_update(progress, 100, 'Video berjaya dihantar.')
+        reset(context)
+        await message.reply_text('Mahu buat video lagi? Hantar gambar baharu.', reply_markup=main_menu())
+    except subprocess.CalledProcessError as exc:
+        logging.error('KLIPPO FFmpeg failed: %s', (exc.stderr or str(exc))[-1800:])
+        await message.reply_text('❌ Proses video gagal pada FFmpeg. Semak log KLIPPO FFmpeg failed di Render.')
+    except Exception:
+        logging.exception('Video generation failed')
+        await message.reply_text('❌ Gagal menjana video. Cuba kurangkan gambar atau semak log FFmpeg.')
+    finally:
+        context.user_data['busy'] = False
+        lock.release()
+
+
+def main():
+    if not TOKEN:
+        raise RuntimeError('BOT_TOKEN belum ditetapkan')
+    if not shutil.which('ffmpeg'):
+        raise RuntimeError('FFmpeg belum dipasang')
+    app = Application.builder().token(TOKEN).build()
+    app.add_handler(CommandHandler('start', start))
+    app.add_handler(CommandHandler('menu', start))
+    app.add_handler(CommandHandler('admin', admin))
+    app.add_handler(CommandHandler('reset', start))
+    app.add_handler(CommandHandler('periksa', status))
+    app.add_handler(CommandHandler('jana', generate, block=False))
+    for style in STYLES:
+        app.add_handler(CommandHandler(style, choose_style))
+    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(product_sheet_start|product_sheet_done|product_sheet_cancel|product_sheet_use|photos_order|photos_undo|photos_more|photo_up:[0-4]|photo_down:[0-4]|photo_remove:[0-4]|duration:(10|15|20)|prompt_text_mode:(with|without)|prompt_text_info:skip|admin_pending|admin_approve:[0-9]+|admin_reject:[0-9]+|admin|receipt_upload|subscription_qr|make|video_input:(photos|shopee|back)|prompt_input:(photo|shopee|back)|storyboard|doodle:(auto|white|sparkle|motion|all|none)|convert|merge|merge_next|merge_done|merge_style:(fade|smoothleft|slideleft|zoomin)|prompt|prompt_type:(normal|storyboard|doodle|library)|prompt_categories|pcat:[a-z0-9_]+|ptpl:[a-z0-9_]+|prompt_duration:(10|20)|prompt_product_type:[a-z0-9_]+|prompt_style:[a-z0-9_]+|prompt_idea:(yes|skip)|prompt_details:(add|skip)|prompt_generate:confirm|description:skip|scene:(auto|studio|dark|home|nature|minimal)|motion:(orbit|push|side|static|auto|stop|spin|smooth|hand)|photos_done|background:(original|white|beige|dark|pastel|gradient|pattern|duotone|mist)|confirm|styles|music|music_previews|subscription|account|help|check|reset|home|preview:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|listen:(cinematic|energetic|happy|luxury|nature|beauty)|style:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|music:(auto|cinematic|energetic|happy|luxury|nature|beauty|none|custom))$'))
+    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, menu_text))
+    app.add_handler(MessageHandler(filters.PHOTO, photo))
+    app.add_handler(MessageHandler(filters.Document.IMAGE | filters.Document.MimeType('application/pdf'), handle_image_or_receipt_document))
+    app.add_handler(MessageHandler(filters.VIDEO | filters.Document.MimeType('video/mp4'), convert_upload))
+    app.add_handler(MessageHandler(filters.AUDIO | filters.Document.MimeType('audio/mpeg'), audio))
+    url = os.environ.get('WEBHOOK_URL', '').rstrip('/')
+    secret = os.environ.get('WEBHOOK_SECRET', '')
+    if not url.startswith('https://') or not secret:
+        raise RuntimeError('WEBHOOK_URL (https) dan WEBHOOK_SECRET wajib ditetapkan')
+    app.run_webhook(
+        listen='0.0.0.0',
+        port=int(os.environ.get('PORT', '10000')),
+        url_path='telegram',
+        webhook_url=url + '/telegram',
+        secret_token=secret,
+        drop_pending_updates=True,
+        bootstrap_retries=5,  # Retry transient Telegram getMe / webhook gateway failures at startup.
+    )
+
+if __name__ == '__main__':
+    main()
+, value)
+        product_name = name_match.group(1).strip() if name_match else ''
+        if not product_name and name_match:
+            data_lines = value.splitlines()
+            for line_index, line in enumerate(data_lines):
+                if re.match(r'(?i)^\s*(?:NAMA PRODUK|NAMA|PRODUCT NAME)\s*:\s*
+        if not product_name or product_name.casefold() in ('tidak dapat dipastikan daripada gambar', 'tidak diketahui'):
+            await update.message.reply_text('⚠️ Nama produk belum jelas. Sila tambah nama atau jenis produk pada baris NAMA PRODUK dan hantar semula.')
+            return
+        details = value.strip()[:1800]
+        context.user_data['prompt_product_name'] = product_name
+        context.user_data['prompt_product'] = 'MAKLUMAT PRODUK DARIPADA ANALISIS CHATGPT:\n' + details
+        context.user_data['prompt_library_details'] = details
+        context.user_data['prompt_from_product_sheet'] = True
+        subtype = detect_product_subtype(product_name + '\n' + details)
+        category_id = detect_prompt_library_category(product_name + '\n' + details)
+        context.user_data['prompt_bag_subtype'] = subtype
+        if category_id:
+            context.user_data['prompt_category'] = category_id
+        category_product_type = {
+            'clothing': 'fashion', 'bags': 'bag', 'wallets': 'wallet', 'shoes': 'shoes',
+            'beauty': 'beauty', 'food': 'food', 'gadgets': 'gadget', 'home': 'home',
+            'accessories': 'accessory', 'stationery': 'other', 'sports': 'other',
+            'travel': 'other', 'pets': 'other', 'automotive': 'other', 'garden': 'other',
+            'kitchen': 'other', 'furniture': 'other', 'baby': 'other', 'crafts': 'other',
+        }
+        context.user_data['prompt_product_type'] = category_product_type.get(category_id, 'other')
+        context.user_data['prompt_mode'] = 'storyboard'
+        context.user_data['prompt_style'] = 'white_doodle'
+        context.user_data['prompt_duration'] = 10
+        context.user_data['prompt_concept'] = ''
+        context.user_data['stage'] = 'prompt_product_data_ready'
+        await update.message.reply_text(
+            '✅ Maklumat produk diterima.\n\n'
+            f'🛍️ Nama: {product_name}\n'
+            f'📦 Kategori: {category_id or "belum dikenal pasti — boleh pilih gaya umum"}\n'
+            '🎨 Gaya dicadangkan: Realistik + Doodle\n'
+            '📋 Maklumat ini akan dimasukkan ke dalam prompt video; anda boleh semak pilihan sebelum menjana.',
+            reply_markup=InlineKeyboardMarkup([
+                [InlineKeyboardButton('🎬 Teruskan ke Prompt Video', callback_data='product_sheet_use')],
+                [InlineKeyboardButton('🔄 Mula Semula dengan Gambar', callback_data='product_sheet_start')],
+                [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
+            ])
+        )
+        return
+    if stage == 'prompt_library_details':
+        details = '' if value in ('-', '—', 'tiada', 'Tiada') else value
+        context.user_data['prompt_library_details'] = details[:1200]
+        if details:
+            context.user_data['prompt_product_name'] = details[:240]
+            subtype = detect_product_subtype(details)
+            category_id = detect_prompt_library_category(details)
+            context.user_data['prompt_bag_subtype'] = subtype
+            context.user_data['prompt_detected_category'] = category_id
+            if category_id == 'wallets':
+                context.user_data['prompt_product_type'] = 'wallet'
+            elif category_id == 'bags':
+                context.user_data['prompt_product_type'] = 'bag'
+            if category_id:
+                context.user_data['prompt_category'] = category_id
+                context.user_data['stage'] = 'prompt_category_options'
+                await update.message.reply_text(
+                    '🔎 Klippo mengesan jenis produk: ' + subtype.replace('_', ' ') + '. Pilih prompt khusus dalam koleksi ' + CATEGORIES_BY_ID[category_id].get('label', category_id) + ':',
+                    reply_markup=prompt_options_menu(category_id, subtype)
+                )
+                return
+        context.user_data['stage'] = 'prompt_category'
+        await update.message.reply_text('📚 Nama produk diterima. Pilih koleksi prompt:', reply_markup=prompt_category_menu())
+        return
+    if stage == 'prompt_product_name':
+        if len(value) < 2 or value.lower().startswith(('http://', 'https://')):
+            await update.message.reply_text('⚠️ Masukkan nama produk sahaja. Buka Shopee, copy nama produk dan paste di sini; pautan tidak diperlukan.')
+            return
+        context.user_data['prompt_product_name'] = value[:240]
+        bag_subtype = detect_bag_subtype(value)
+        context.user_data['prompt_bag_subtype'] = bag_subtype
+        if bag_subtype == 'wallet':
+            context.user_data['prompt_product_type'] = 'wallet'
+        elif bag_subtype in ('handbag', 'sling_bag', 'backpack', 'bag'):
+            context.user_data['prompt_product_type'] = 'bag'
+        if bag_subtype:
+            context.user_data['prompt_concept'] = (context.user_data.get('prompt_concept', '') + ' | Product-name category detection: ' + bag_subtype.replace('_', ' ') + '. Use the matching visual style without guessing product features.').strip(' |')
+        context.user_data['stage'] = 'prompt_text_mode'
+        await update.message.reply_text('📝 Mahu teks dipaparkan dalam video oleh AI, atau video tanpa teks?\n\nJika pilih Dengan Teks, masukkan ayat tepat yang mahu muncul. Klippo akan mengarahkan AI memilih kedudukan dan gaya yang sesuai.', reply_markup=prompt_text_mode_menu())
+        return
+    if stage == 'prompt_text_content':
+        if not value.strip():
+            await update.message.reply_text('⚠️ Sila masukkan teks yang mahu dipaparkan, atau pilih Tanpa Teks untuk video tanpa tulisan.')
+            return
+        if len(value.strip()) > 240:
+            await update.message.reply_text('⚠️ Teks terlalu panjang. Had maksimum ialah 240 aksara supaya AI lebih mudah memaparkannya dengan jelas. Sila pendekkan teks tanpa mengubah maksudnya.')
+            return
+        context.user_data['prompt_on_screen_text'] = value.strip()
+        if context.user_data.get('prompt_from_product_sheet'):
+            context.user_data['stage'] = 'prompt_scene'
+            await update.message.reply_text('📝 Teks disimpan. Pilih latar video:', reply_markup=prompt_scene_menu())
+        else:
+            context.user_data['stage'] = 'prompt_text_info'
+            await update.message.reply_text('📝 Teks disimpan tepat seperti yang diberikan. Ada maklumat produk tambahan untuk membantu AI memahami konteks? Jika tiada, tekan Langkau.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('➡️ Langkau maklumat tambahan', callback_data='prompt_text_info:skip')], [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
+        return
+    if stage == 'prompt_text_info':
+        context.user_data['prompt_product'] = value.strip()[:600]
+        context.user_data['stage'] = 'prompt_scene'
+        await update.message.reply_text('✅ Maklumat tambahan disimpan. Pilih latar video:', reply_markup=prompt_scene_menu())
+        return
+        return
+    shortcuts = {
+        '🎬 Jana Video Affiliate': 'make',
+        '🎬 Jana Video Transisi': 'make',
+        '🎞️ Gerakkan Foto (Transisi)': 'make',
+        '🛍️ Prompt AI Produk (Imej → Video)': 'prompt',
+        '🧩 Gabung Gambar + Analisis ChatGPT': 'product_sheet_start',
+        '🔄 Tukar Format Video': 'convert',
+        '✍️ Sediakan Prompt Video': 'prompt',
+        '✍️ Hasilkan Prompt': 'prompt',
+        '✍️ Prompt': 'prompt',
+        '💎 Langganan': 'subscription',
+        '👤 Akaun Saya': 'account',
+        '❓ Bantuan': 'help',
+        '🗑 Mula Semula': 'home',
+    }
+    if value in shortcuts:
+        action = shortcuts[value]
+        if action == 'make':
+            reset(context)
+            context.user_data['stage'] = 'video_input'
+            await update.message.reply_text('🎬 Pilih cara masukkan produk:', reply_markup=video_input_menu())
+        elif action == 'convert':
+            reset(context)
+            context.user_data['stage'] = 'convert'
+            await update.message.reply_text('🔄 TUKAR FORMAT VIDEO\n\nTekan 📎 → File / Fail → pilih video MP4 asal. Bot akan memprosesnya secara automatik.', reply_markup=main_menu())
+        elif action == 'prompt':
+            reset(context)
+            context.user_data['prompt_mode'] = 'storyboard'
+            context.user_data['prompt_style'] = 'auto'
+            context.user_data['prompt_concept'] = ''
+            context.user_data['stage'] = 'prompt_product_type'
+            context.user_data['prompt_product_type'] = 'other'
+            await update.message.reply_text(
+                '✍️ KLIPPO ONE PROMPT — Pilih jenis produk dahulu supaya gaya iklan dan aksi lebih sesuai:',
+                reply_markup=prompt_product_type_menu()
+            )
+        elif action == 'subscription':
+            await update.message.reply_text('💎 LANGGANAN KLIPPO\n\nPelan Penyokong Awal: RM5 / 30 hari, sehingga 30 video sebulan. Pengaktifan manual selepas resit disemak.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📱 Papar QR DuitNow', callback_data='subscription_qr')]]))
+        elif action == 'account':
+            await account_info(update, context)
+        elif action == 'help':
+            await update.message.reply_text('❓ BANTUAN\n\nJana Video: hantar gambar, pilih gaya dan muzik.\nTukar Format: hantar MP4.\nVideo AI: upload gambar, tambah maklumat jika mahu, kemudian pilih latar dan gerakan kamera. Prompt digunakan bersama gambar di penjana video luar.')
+        else:
+            await start(update, context)
+        return
+    if stage == 'shopee_link' and _shopee_link(value):
+        context.user_data['shopee_url'] = _shopee_link(value)
+        context.user_data['stage'] = 'background'
+        await update.message.reply_text('🔗 Pautan Shopee diterima. KLIPPO akan cuba mengambil foto awam produk tanpa Gemini. Jika akses disekat, bot akan meminta gambar sendiri. Pilih latar:', reply_markup=background_menu())
+    elif stage == 'shopee_link':
+        await update.message.reply_text('⚠️ Pautan tidak dikenali. Tampal URL halaman produk Shopee Malaysia yang lengkap (https://shopee.com.my/...).')
+    elif stage == 'product_description':
+        if len(value.strip()) < 5 or _shopee_link(value) or value.lower().startswith(('http://', 'https://')):
+            await update.message.reply_text('⚠️ Tampal TAJUK produk Shopee (bukan pautan). Tajuk wajib diisi sebelum meneruskan.')
+            return
+        context.user_data['shopee_url'] = ''
+        context.user_data['product_description'] = value[:1800]
+        context.user_data['video_product_info'] = value[:600]
+        context.user_data['stage'] = 'background'
+        await update.message.reply_text('✅ Tajuk produk diterima. Pilih latar produk:',reply_markup=background_menu())
+    elif stage == 'photos' and value.lower().startswith('produk:'):
+        info = value.split(':', 1)[1].strip()[:100]
+        context.user_data['video_product_info'] = info
+        hook = verified_video_hook(info)
+        await update.message.reply_text(('✅ Cadangan hook: ' + hook if hook else 'Maklumat produk tidak cukup jelas; video akan dijana tanpa hook.'), reply_markup=photos_menu())
+    elif stage == 'prompt_shopee_link':
+        link = _shopee_link(value)
+        if not link:
+            await update.message.reply_text('⚠️ Pautan tidak dikenali. Tampal URL halaman produk Shopee Malaysia yang lengkap.')
+            return
+        context.user_data['shopee_url'] = link
+        context.user_data['prompt_product'] = 'Product reference URL (do not invent unverified specifications): ' + link
+        context.user_data['prompt_vision'] = ''
+        context.user_data['stage'] = 'prompt_details_text'
+        await update.message.reply_text('✅ Pautan diterima. Untuk prompt yang tepat, masukkan nama produk dan ciri utama daripada halaman Shopee (contoh: jenama, model, warna). Pautan sahaja tidak menjamin AI boleh membaca halaman produk.')
+    elif stage == 'prompt_details_text':
+        context.user_data['prompt_product'] = value[:600]
+        context.user_data['stage'] = 'prompt_scene'
+        await update.message.reply_text('🎨 Maklumat disimpan. Pilih latar video:', reply_markup=prompt_scene_menu())
+    elif stage == 'prompt_scene':
+        await update.message.reply_text('🎨 Pilih latar menggunakan butang:', reply_markup=prompt_scene_menu())
+    else:
+        await update.message.reply_text('Gunakan butang menu di bawah.', reply_markup=main_menu())
+
+
+
+
+def _shopee_link(value):
+    """Only accept an explicit Shopee product URL; never fetch arbitrary pasted URLs."""
+    from urllib.parse import urlparse
+    for candidate in re.findall(r'https?://[^\\s<>]+', value):
+        candidate = candidate.rstrip('.,);]')
+        parsed = urlparse(candidate)
+        host = (parsed.hostname or '').lower()
+        if parsed.scheme == 'https' and (host == 'shopee.com.my' or host.endswith('.shopee.com.my')) and (re.search(r'/product/\\d+/\\d+', parsed.path) or re.search(r'-i\\.\\d+\\.\\d+', parsed.path)):
+            return candidate
+    return ''
+
+
+def _shopee_public_photo(url, destination, description):
+    """Best-effort public OG photo only; no login, private API or image AI."""
+    from urllib.request import Request, urlopen
+    from urllib.parse import urlparse
+    from PIL import Image
+    if not _shopee_link(url):
+        return False
+    try:
+        req = Request(url, headers={'User-Agent': 'Mozilla/5.0 KLIPPO/1.0'})
+        with urlopen(req, timeout=7) as response:
+            if not (response.geturl().startswith('https://shopee.com.my/') or response.geturl().startswith('https://www.shopee.com.my/')):
+                return False
+            if 'text/html' not in response.headers.get('Content-Type', '').lower():
+                return False
+            page = response.read(350000).decode('utf-8', 'replace')
+        from html import unescape
+        def meta(name):
+            for tag in re.findall(r'<meta\\b[^>]*>', page, re.I):
+                if re.search(r'(?:property|name)=[\\"\\\']'+re.escape(name)+r'[\\"\\\']', tag, re.I):
+                    match = re.search(r'content=[\\"\\\']([^\\"\\\']+)', tag, re.I)
+                    if match:
+                        return unescape(match.group(1))
+            return ''
+        title, image_url = meta('og:title'), meta('og:image')
+        words = [w.lower() for w in re.findall(r'[A-Za-z0-9]{4,}', description) if not w.isdigit()]
+        if not title or not image_url or (words and not any(w in title.lower() for w in words[:8])):
+            return False
+        parsed = urlparse(image_url)
+        if parsed.scheme != 'https' or not (parsed.hostname or '').lower().endswith(('.shopee.com.my', '.shopee.sg', '.shopeemobile.com', '.shopeeusercontent.com')):
+            return False
+        with urlopen(Request(image_url, headers={'User-Agent': 'Mozilla/5.0'}), timeout=7) as response:
+            if not response.headers.get('Content-Type', '').lower().startswith('image/'):
+                return False
+            data = response.read(6000001)
+        if len(data) > 6000000:
+            return False
+        with Image.open(BytesIO(data)) as opened:
+            opened.verify()
+        with Image.open(BytesIO(data)) as opened:
+            if min(opened.size) < 350:
+                return False
+            ImageOps.exif_transpose(opened).convert('RGB').save(destination, 'JPEG', quality=92)
+        return True
+    except Exception as exc:
+        logging.info('Public Shopee image unavailable: %s', exc)
+        return False
+
+def validate_rendered_video(path, expected_duration):
+    """Reject truncated/invalid MP4 before reporting success to a paying user."""
+    if not path.is_file() or path.stat().st_size < 20_000:
+        raise RuntimeError('Fail video kosong atau terlalu kecil.')
+    probe = subprocess.run(
+        ['ffprobe', '-v', 'error', '-show_entries',
+         'format=duration:stream=codec_type,width,height',
+         '-of', 'json', str(path)],
+        capture_output=True, text=True, timeout=25, check=True)
+    metadata = json.loads(probe.stdout)
+    duration = float(metadata.get('format', {}).get('duration') or 0)
+    video_streams = [stream for stream in metadata.get('streams', [])
+                     if stream.get('codec_type') == 'video']
+    if not video_streams:
+        raise RuntimeError('Fail output tidak mempunyai trek video.')
+    stream = video_streams[0]
+    if int(stream.get('width') or 0) < 480 or int(stream.get('height') or 0) < 720:
+        raise RuntimeError('Resolusi video tidak mencapai tahap minimum.')
+    if abs(duration - expected_duration) > max(.8, expected_duration*.08):
+        raise RuntimeError('Tempoh video tidak lengkap.')
+    return metadata
+
+
+async def generate(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    message = update.effective_message
+    ids = context.user_data.get('photos', [])
+    if ids and not context.user_data.get('video_product_info', '').strip() and not context.user_data.get('storyboard_mode'):
+        await message.reply_text('📝 Tajuk produk Shopee wajib diisi. Sila lengkapkan langkah selepas Selesai Hantar Gambar.')
+        return
+    if not ids and not context.user_data.get('shopee_url'):
+        await message.reply_text('Hantar gambar atau pautan produk Shopee dahulu.', reply_markup=main_menu())
+        return
+    if context.user_data.get('busy'):
+        await message.reply_text('Video sedang diproses.')
+        return
+    lock = context.application.bot_data.setdefault('render_lock', asyncio.Lock())
+    if lock.locked():
+        await message.reply_text('Server sedang menjana video lain. Cuba sebentar lagi.')
+        return
+    await lock.acquire()
+    context.user_data['busy'] = True
+    progress = await message.reply_text('⏳ DALAM PROSES — 0%\nMenyediakan fail...')
+    try:
+        with tempfile.TemporaryDirectory(prefix='telegram_video_') as td:
+            folder = Path(td)
+            paths = []
+            for i, fid in enumerate(list(ids)):
+                p = folder / f'{i}.jpg'
+                await (await context.bot.get_file(fid)).download_to_drive(p)
+                paths.append(p)
+                await progress_update(progress, round(25 * (i + 1) / len(ids)), 'Memuat turun gambar...')
+            if not paths and context.user_data.get('shopee_url'):
+                product_photo = folder / 'shopee_product.jpg'
+                available = await asyncio.to_thread(_shopee_public_photo, context.user_data['shopee_url'], product_photo, context.user_data.get('product_description', ''))
+                if not available:
+                    context.user_data['stage'] = 'photos'
+                    await message.reply_text('⚠️ Shopee tidak menyediakan gambar awam yang dapat diakses atau disahkan untuk pautan ini. Sila hantar 1–5 gambar produk sendiri, kemudian tekan Selesai.', reply_markup=photos_menu())
+                    return
+                paths.append(product_photo)
+                await progress_update(progress, 25, 'Gambar produk Shopee diterima...')
+            # Optional vision reads the actual uploaded product photo before background removal.
+            # Never make the video depend on an external AI service being available.
+            image_label_info = ''
+            if os.environ.get('GEMINI_API_KEY') and paths:
+                verified_parts = []
+                for photo_path in paths[:3]:
+                    try:
+                        vision = await describe_photo(photo_path.read_bytes())
+                        if not vision:
+                            continue
+                        for line in vision.splitlines():
+                            key, separator, value = line.partition(':')
+                            if separator and key.strip() in ('NAMA_PRODUK', 'KATEGORI', 'TEKS_DISAHKAN', 'CIRI_VISUAL'):
+                                value = value.strip()
+                                if value and value.upper() not in ('TIADA', 'TIDAK PASTI', 'NONE'):
+                                    if key.strip() == 'TEKS_DISAHKAN':
+                                        verified_parts.extend(v.strip() for v in value.split(';') if v.strip())
+                                    elif key.strip() == 'CIRI_VISUAL':
+                                        verified_parts.extend(v.strip() for v in value.split(';') if v.strip())
+                                    else:
+                                        verified_parts.append(value)
+                    except Exception:
+                        logging.exception('Optional image label analysis failed')
+                image_label_info = ' '.join(dict.fromkeys(verified_parts))[:240]
+            supplied_info = context.user_data.get('video_product_info', '').strip()
+            label_info = ' '.join(part for part in (supplied_info, image_label_info) if part)[:320]
+            background = context.user_data.get('background', 'original')
+            product_layers = []
+            if background != 'original':
+                for i, path in enumerate(paths):
+                    prepared = folder / f'product_bg_{i}.png'
+                    foreground_path = folder / f'product_cutout_{i}.png'
+                    try:
+                        await asyncio.to_thread(replace_background, path, prepared, background, foreground_path)
+                    except ValueError as exc:
+                        logging.warning('Background removal declined: %s', exc)
+                        alternative = folder / f'shopee_alternative_{i}.jpg'
+                        link = context.user_data.get('shopee_url', '')
+                        description = context.user_data.get('product_description', '')
+                        found = bool(link and await asyncio.to_thread(_shopee_public_photo, link, alternative, description))
+                        if found:
+                            try:
+                                await asyncio.to_thread(replace_background, alternative, prepared, background, foreground_path)
+                                paths[i] = prepared
+                                product_layers.append((foreground_path, background))
+                                continue
+                            except ValueError:
+                                logging.info('Shopee public thumbnail is also unsuitable for segmentation')
+                        await message.reply_text('⚠️ Gambar ini terlalu kompleks untuk pengasingan produk yang selamat. KLIPPO akan menggunakan gambar asal tanpa menggantikannya dengan gambar produk lain yang belum disahkan.')
+                        product_layers = []
+                        paths = [folder / f'{j}.jpg' for j in range(len(ids))] if ids else [folder / 'shopee_product.jpg']
+                        break
+                    paths[i] = prepared
+                    product_layers.append((foreground_path, background))
+                await progress_update(progress, 30, 'Produk diasingkan dan latar baharu disediakan...')
+            music = None
+            if context.user_data.get('music_choice') == 'custom' and context.user_data.get('music'):
+                music = folder / 'music.mp3'
+                await (await context.bot.get_file(context.user_data['music'])).download_to_drive(music)
+            elif context.user_data.get('music_choice') == 'custom':
+                await message.reply_text('Sila hantar MP3 sendiri dahulu, atau pilih muzik lain.', reply_markup=music_menu())
+                return
+            elif context.user_data.get('music_choice', 'auto') != 'none':
+                music = resolve_music(context.user_data.get('music_choice', 'auto'), context.user_data.get('style', 'hybrid'))
+                if music is None:
+                    await message.reply_text('Muzik pilihan belum tersedia pada server. Video akan dijana tanpa muzik.')
+            result = folder / 'video.mp4'
+            if context.user_data.get('storyboard_mode'):
+                plan = build_storyboard(len(paths), context.user_data.get('duration', 10))
+                await message.reply_text(format_storyboard(plan) + '\n\nEfek prompt: ' + DOODLE_OPTIONS[context.user_data.get('doodle_choice', 'none')] + '\nArahan AI: Tambah efek pilihan secara halus di luar label dan logo produk. Jangan ubah identiti produk. (Efek overlay turut dirender pada MP4.)')
+                paths = [paths[i] for i in source_sequence(plan)]
+                selected_style = 'cinematic'
+                doodle = context.user_data.get('doodle_choice', 'none')
+            else:
+                selected_style = context.user_data.get('style', 'hybrid')
+                doodle = context.user_data.get('doodle_choice', 'auto')
+            await progress_update(progress, 40, 'Bahan siap. Sedang render video...')
+            loop = asyncio.get_running_loop()
+            def render_progress(percent, detail):
+                asyncio.run_coroutine_threadsafe(progress_update(progress, percent, detail), loop)
+            await asyncio.to_thread(render_video, paths, result, music, selected_style, context.user_data.get('duration', 10), doodle, None, render_progress, product_layers if not context.user_data.get('storyboard_mode') else None, context.user_data.get('motion_choice','auto'), label_info)
+            await asyncio.to_thread(validate_rendered_video, result, context.user_data.get('duration', 10))
+            await progress_update(progress, 90, 'Video lulus semakan fail. Menghantar ke Telegram...')
+            with result.open('rb') as f:
+                await message.reply_video(video=f, caption='🎬 Video siap! Hantar gambar baharu untuk video seterusnya.', supports_streaming=True,
+                                                 read_timeout=120, write_timeout=120)
+        await progress_update(progress, 100, 'Video berjaya dihantar.')
+        reset(context)
+        await message.reply_text('Mahu buat video lagi? Hantar gambar baharu.', reply_markup=main_menu())
+    except subprocess.CalledProcessError as exc:
+        logging.error('KLIPPO FFmpeg failed: %s', (exc.stderr or str(exc))[-1800:])
+        await message.reply_text('❌ Proses video gagal pada FFmpeg. Semak log KLIPPO FFmpeg failed di Render.')
+    except Exception:
+        logging.exception('Video generation failed')
+        await message.reply_text('❌ Gagal menjana video. Cuba kurangkan gambar atau semak log FFmpeg.')
+    finally:
+        context.user_data['busy'] = False
+        lock.release()
+
+
+def main():
+    if not TOKEN:
+        raise RuntimeError('BOT_TOKEN belum ditetapkan')
+    if not shutil.which('ffmpeg'):
+        raise RuntimeError('FFmpeg belum dipasang')
+    app = Application.builder().token(TOKEN).build()
+    app.add_handler(CommandHandler('start', start))
+    app.add_handler(CommandHandler('menu', start))
+    app.add_handler(CommandHandler('admin', admin))
+    app.add_handler(CommandHandler('reset', start))
+    app.add_handler(CommandHandler('periksa', status))
+    app.add_handler(CommandHandler('jana', generate, block=False))
+    for style in STYLES:
+        app.add_handler(CommandHandler(style, choose_style))
+    app.add_handler(CallbackQueryHandler(buttons, pattern=r'^(product_sheet_start|product_sheet_done|product_sheet_cancel|product_sheet_use|photos_order|photos_undo|photos_more|photo_up:[0-4]|photo_down:[0-4]|photo_remove:[0-4]|duration:(10|15|20)|prompt_text_mode:(with|without)|prompt_text_info:skip|admin_pending|admin_approve:[0-9]+|admin_reject:[0-9]+|admin|receipt_upload|subscription_qr|make|video_input:(photos|shopee|back)|prompt_input:(photo|shopee|back)|storyboard|doodle:(auto|white|sparkle|motion|all|none)|convert|merge|merge_next|merge_done|merge_style:(fade|smoothleft|slideleft|zoomin)|prompt|prompt_type:(normal|storyboard|doodle|library)|prompt_categories|pcat:[a-z0-9_]+|ptpl:[a-z0-9_]+|prompt_duration:(10|20)|prompt_product_type:[a-z0-9_]+|prompt_style:[a-z0-9_]+|prompt_idea:(yes|skip)|prompt_details:(add|skip)|prompt_generate:confirm|description:skip|scene:(auto|studio|dark|home|nature|minimal)|motion:(orbit|push|side|static|auto|stop|spin|smooth|hand)|photos_done|background:(original|white|beige|dark|pastel|gradient|pattern|duotone|mist)|confirm|styles|music|music_previews|subscription|account|help|check|reset|home|preview:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|listen:(cinematic|energetic|happy|luxury|nature|beauty)|style:(hybrid|cinematic|luxury|dynamic|zoom|smooth|creative|morph)|music:(auto|cinematic|energetic|happy|luxury|nature|beauty|none|custom))$'))
+    app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, menu_text))
+    app.add_handler(MessageHandler(filters.PHOTO, photo))
+    app.add_handler(MessageHandler(filters.Document.IMAGE | filters.Document.MimeType('application/pdf'), handle_image_or_receipt_document))
+    app.add_handler(MessageHandler(filters.VIDEO | filters.Document.MimeType('video/mp4'), convert_upload))
+    app.add_handler(MessageHandler(filters.AUDIO | filters.Document.MimeType('audio/mpeg'), audio))
+    url = os.environ.get('WEBHOOK_URL', '').rstrip('/')
+    secret = os.environ.get('WEBHOOK_SECRET', '')
+    if not url.startswith('https://') or not secret:
+        raise RuntimeError('WEBHOOK_URL (https) dan WEBHOOK_SECRET wajib ditetapkan')
+    app.run_webhook(
+        listen='0.0.0.0',
+        port=int(os.environ.get('PORT', '10000')),
+        url_path='telegram',
+        webhook_url=url + '/telegram',
+        secret_token=secret,
+        drop_pending_updates=True,
+        bootstrap_retries=5,  # Retry transient Telegram getMe / webhook gateway failures at startup.
+    )
+
+if __name__ == '__main__':
+    main()
+, line):
+                    for candidate in data_lines[line_index + 1:]:
+                        candidate = candidate.strip()
+                        if not candidate:
+                            continue
+                        if re.match(r'(?i)^[A-ZÀ-ÖØ-Þ][A-ZÀ-ÖØ-Þ /_-]{1,35}\s*:', candidate):
+                            break
+                        product_name = candidate
+                        break
+                    break
+        if not name_match or not product_name:
+            await update.message.reply_text('⚠️ Saya belum jumpa nama produk. Sila tampal blok “MAKLUMAT PRODUK UNTUK KLIPPO” penuh daripada ChatGPT, termasuk baris NAMA PRODUK.')
+            return
+        product_name = product_name[:240]
+        if not product_name or product_name.casefold() in ('tidak dapat dipastikan daripada gambar', 'tidak diketahui'):
+            await update.message.reply_text('⚠️ Nama produk belum jelas. Sila tambah nama atau jenis produk pada baris NAMA PRODUK dan hantar semula.')
+            return
+        details = value.strip()[:1800]
+        context.user_data['prompt_product_name'] = product_name
+        context.user_data['prompt_product'] = 'MAKLUMAT PRODUK DARIPADA ANALISIS CHATGPT:\n' + details
+        context.user_data['prompt_library_details'] = details
+        context.user_data['prompt_from_product_sheet'] = True
+        subtype = detect_product_subtype(product_name + '\n' + details)
+        category_id = detect_prompt_library_category(product_name + '\n' + details)
+        context.user_data['prompt_bag_subtype'] = subtype
+        if category_id:
+            context.user_data['prompt_category'] = category_id
+        category_product_type = {
+            'clothing': 'fashion', 'bags': 'bag', 'wallets': 'wallet', 'shoes': 'shoes',
+            'beauty': 'beauty', 'food': 'food', 'gadgets': 'gadget', 'home': 'home',
+            'accessories': 'accessory', 'stationery': 'other', 'sports': 'other',
+            'travel': 'other', 'pets': 'other', 'automotive': 'other', 'garden': 'other',
+            'kitchen': 'other', 'furniture': 'other', 'baby': 'other', 'crafts': 'other',
+        }
+        context.user_data['prompt_product_type'] = category_product_type.get(category_id, 'other')
+        context.user_data['prompt_mode'] = 'storyboard'
+        context.user_data['prompt_style'] = 'white_doodle'
+        context.user_data['prompt_duration'] = 10
+        context.user_data['prompt_concept'] = ''
+        context.user_data['stage'] = 'prompt_product_data_ready'
+        await update.message.reply_text(
+            '✅ Maklumat produk diterima.\n\n'
+            f'🛍️ Nama: {product_name}\n'
+            f'📦 Kategori: {category_id or "belum dikenal pasti — boleh pilih gaya umum"}\n'
+            '🎨 Gaya dicadangkan: Realistik + Doodle\n'
+            '📋 Maklumat ini akan dimasukkan ke dalam prompt video; anda boleh semak pilihan sebelum menjana.',
+            reply_markup=InlineKeyboardMarkup([
+                [InlineKeyboardButton('🎬 Teruskan ke Prompt Video', callback_data='product_sheet_use')],
+                [InlineKeyboardButton('🔄 Mula Semula dengan Gambar', callback_data='product_sheet_start')],
                 [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
             ])
         )
