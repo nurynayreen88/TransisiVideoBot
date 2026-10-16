@@ -1605,14 +1605,22 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 '✅ Idea video ditambah. Sekarang hantar satu gambar produk; idea hanya mengarah aksi dan tidak mengubah rupa produk.',
                 reply_markup=prompt_input_menu()
             )
-    elif action.startswith('prompt_product_type:') and stage == 'prompt_product_type':
+    elif action.startswith('prompt_product_type:'):
+        # Handle the product callback even if the in-memory stage is stale.
+        # Telegram callbacks can outlive a menu redraw or a session state change.
         selected = action.split(':', 1)[1]
         if selected in PRODUCT_TYPES:
             context.user_data['prompt_product_type'] = selected
             context.user_data['stage'] = 'prompt_duration'
+            logging.info('KLIPPO product type selected=%s user=%s', selected, update.effective_user.id)
             await query.message.reply_text(
                 f"🛍️ Jenis produk: {PRODUCT_TYPES[selected]}\n\n⏱️ Pilih tempoh video:",
                 reply_markup=prompt_duration_menu()
+            )
+        else:
+            await query.message.reply_text(
+                'Pilihan produk tidak sah. Sila pilih semula:',
+                reply_markup=prompt_product_type_menu()
             )
     elif action.startswith('prompt_duration:') and stage == 'prompt_duration':
         selected = action.split(':', 1)[1]
