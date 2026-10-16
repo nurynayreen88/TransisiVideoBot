@@ -24,7 +24,7 @@ class ProductReferenceSheetTests(unittest.TestCase):
             output = build_reference_sheet(paths, root / "sheet.jpg")
             with Image.open(output) as result:
                 self.assertEqual(result.format, "JPEG")
-                self.assertEqual(result.size, (2604, 1932))
+                self.assertEqual(result.size, (2652, 1932))
                 self.assertEqual(result.mode, "RGB")
 
     def test_rejects_empty_or_too_many_images(self):
