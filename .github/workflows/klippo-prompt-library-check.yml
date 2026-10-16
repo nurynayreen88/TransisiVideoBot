@@ -71,12 +71,31 @@ jobs:
               )
               text = prompt["prompt"].casefold()
               for required in (
-                  "no uploaded image", "text only", "strict output rules:", "no on-screen text",
+                  "reference lock:", "master visual reference", "strict output rules:", "no on-screen text",
                   "logos", "exactly 10 seconds", "vertical 9:16"
               ):
                   assert required in text, (
                       f"Prompt {prompt['id']} is missing required reference/output rule: {required}"
                   )
+          # Reference-lock and category-fit regression checks across the complete library.
+          for prompt in prompts:
+              body = prompt["prompt"].casefold()
+              assert "no uploaded image" not in body and "text only" not in body, (
+                  f"Prompt {prompt['id']} contradicts the image-to-video workflow"
+              )
+              assert "uploaded image" in body and "sole source of truth" in body, (
+                  f"Prompt {prompt['id']} lacks an explicit reference-image lock"
+              )
+              for shot in prompt["storyboard"]:
+                  assert shot["direction"] in prompt["prompt"], (
+                      f"Storyboard/prompt mismatch for {prompt['id']} / {shot['time']}"
+                  )
+          by_id_for_quality = {p["id"]: p for p in prompts}
+          assert "study-desk" not in by_id_for_quality["beauty_cleanser_rich_lather_v1"]["storyboard"][0]["direction"].casefold()
+          assert "study-desk" not in by_id_for_quality["shoes_lace_and_step_v1"]["storyboard"][0]["direction"].casefold()
+          assert "footwear" not in by_id_for_quality["beauty_vanity_hero_v1"]["storyboard"][0]["direction"].casefold()
+          assert "food or drink" not in by_id_for_quality["beauty_texture_demo_v1"]["storyboard"][0]["direction"].casefold()
+
           # Every curated entry must carry its own timed premium storyboard.
           storyboard_signatures = set()
           for prompt in prompts:
@@ -129,7 +148,7 @@ jobs:
                   return prompt_text
               note = (
                   "PRODUCT NAME / DETAILS FROM USER: " + details +
-                  ". The product name is the source of truth; do not invent or alter unprovided product features. "
+                  ". The uploaded image is the master visual reference; these details are supplementary and must not override it. "
                   "\\n\\n"
               )
               first_sentence_end = prompt_text.find(". ")
@@ -144,13 +163,14 @@ jobs:
                   assert generated.startswith("PROMPT VIDEO — 10 SAAT\\n\\n")
                   assert "STRICT OUTPUT RULES:" in generated
                   assert "Keep the product presentation consistent" in generated
-                  assert "no uploaded image" in generated
+                  assert "master visual reference" in generated
+                  assert "no uploaded image" not in generated
                   chunks = [generated[index:index + 3800] for index in range(0, len(generated), 3800)] or [generated]
                   assert "".join(chunks) == generated, f"Prompt was truncated: {prompt['id']}"
                   assert all(len(chunk) <= 3800 for chunk in chunks), f"Unsafe chunk length: {prompt['id']}"
                   if details:
                       assert "PRODUCT NAME / DETAILS FROM USER:" in generated
-                      assert "product name is the source of truth" in generated
+                      assert "details are supplementary and must not override it" in generated
                   generated_cases += 1
 
           # Regression checks for the reusable White Doodle storyboard style.
