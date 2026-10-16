@@ -1898,10 +1898,12 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data['prompt_library_id'] = ''
         context.user_data['prompt_library_storyboard'] = []
         context.user_data['prompt_product_type'] = 'other'
-        context.user_data['stage'] = 'prompt_flow_choice'
+        context.user_data['prompt_mode'] = 'normal'
+        context.user_data['prompt_reference_photos'] = []
+        context.user_data['stage'] = 'prompt_images'
         await query.message.reply_text(
-            '✍️ KLIPPO PROMPT AI PRODUK\n\nPilih cara yang sesuai. Prompt Video Terus lebih ringkas; Storyboard Video AI menjana storyboard secara automatik dengan Gemini.',
-            reply_markup=prompt_flow_menu()
+            '✍️ KLIPPO | JANA PROMPT VIDEO\n\nHantar 1 hingga 4 gambar produk yang jelas. Selepas semua gambar dihantar, tekan “Selesai Hantar Gambar”. Klippo akan menyediakan satu prompt video lengkap dengan susunan babak, aksi dan pergerakan kamera.',
+            reply_markup=prompt_images_menu()
         )
     elif action.startswith('prompt_flow:') and stage == 'prompt_flow_choice':
         selected = action.split(':', 1)[1]
@@ -1910,7 +1912,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['prompt_reference_photos'] = []
             context.user_data['stage'] = 'prompt_images'
             await query.message.reply_text(
-                '📷 LANGKAH 1 — GAMBAR PRODUK\n\nHantar 1 hingga 4 gambar produk yang jelas. Selepas semua gambar dihantar, tekan “Selesai Hantar Gambar”.\n\nUntuk Storyboard Video AI, Klippo akan menggunakan gambar ini untuk menjana storyboard secara automatik. Gambar tidak dihantar ke platform luar selain perkhidmatan Gemini API yang dikonfigurasi.',
+                '📷 LANGKAH 1 — GAMBAR PRODUK\n\nHantar 1 hingga 4 gambar produk yang jelas. Selepas semua gambar dihantar, tekan “Selesai Hantar Gambar”. Gambar digunakan untuk menyediakan prompt video yang sesuai dengan produk.',
                 reply_markup=prompt_images_menu()
             )
     elif action == 'prompt_images_done' and stage == 'prompt_images':
