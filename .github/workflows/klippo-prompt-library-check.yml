@@ -322,6 +322,47 @@ jobs:
               assert "SECOND CLIP 10s" in second_part and "full-product frame" in second_part
               assert "Do NOT repeat the opening hook" in second_part
 
+          # Explicit opt-in AI-rendered text mode: exact copy only, with no-text as default.
+          no_text = build_prompt(
+              "storyboard", verified, "clean premium studio background",
+              "push", "cinematic", 10
+          )
+          assert "NO ON-SCREEN TEXT: STRICTLY NONE" in no_text
+          assert "Stail elegan, sesuai setiap hari" not in no_text
+
+          exact_copy = "Stail elegan, sesuai setiap hari"
+          with_text = build_prompt(
+              "storyboard", verified, "clean premium studio background",
+              "push", "cinematic", 10,
+              text_mode="with", on_screen_text=exact_copy
+          )
+          assert "EXACT TEXT TO DISPLAY" in with_text
+          assert json.dumps(exact_copy, ensure_ascii=False) in with_text
+          assert "Render ONLY the exact user-supplied text" in with_text
+          assert "NO ON-SCREEN TEXT: STRICTLY NONE" not in with_text
+
+          # A 20-second request must carry the same exact text and style into both 10-second parts.
+          paired_with_text = build_prompt(
+              "storyboard", verified, "clean premium studio background",
+              "push", "cinematic", 20,
+              text_mode="with", on_screen_text=exact_copy
+          )
+          assert "=== KLIPPO PART 2 ===" in paired_with_text
+          text_part1, text_part2 = paired_with_text.split("=== KLIPPO PART 2 ===", 1)
+          for text_part in (text_part1, text_part2):
+              assert json.dumps(exact_copy, ensure_ascii=False) in text_part
+              assert "same wording, typography, color, position and scale" in text_part
+          assert "do not add new copy in Part 2" in text_part2
+
+          # Text entered by a user must not activate text mode unless explicitly selected.
+          opt_out = build_prompt(
+              "storyboard", verified, "clean premium studio background",
+              "push", "cinematic", 10,
+              text_mode="without", on_screen_text=exact_copy
+          )
+          assert "NO ON-SCREEN TEXT: STRICTLY NONE" in opt_out
+          assert json.dumps(exact_copy, ensure_ascii=False) not in opt_out
+
           print(
               f"Validated {len(categories)} categories, {len(prompts)} prompt-library entries, "
               f"{generated_cases} generated library cases, flow markers, and White Doodle v5 "
