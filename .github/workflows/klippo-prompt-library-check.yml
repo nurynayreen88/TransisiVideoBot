@@ -3,12 +3,14 @@ name: Klippo prompt library checks
 on:
   push:
     branches:
-      - staging/klippo-library-main-port
+      - "staging/**"
   pull_request:
     branches:
       - main
     paths:
       - "bot.py"
+      - "prompt_catalog.py"
+      - "prompt_engine.py"
       - "prompts/prompt_library.json"
       - ".github/workflows/klippo-prompt-library-check.yml"
 
@@ -23,7 +25,7 @@ jobs:
         with:
           python-version: "3.11"
       - name: Check Python syntax
-        run: python -m py_compile bot.py
+        run: python -m py_compile bot.py prompt_catalog.py prompt_engine.py
       - name: Validate prompt library structure
         run: |
           python - <<'PY'
@@ -112,8 +114,69 @@ jobs:
                       assert "sole visual source of truth" in generated
                   generated_cases += 1
 
+          # Regression checks for the reusable White Doodle storyboard style.
+          import os
+          import sqlite3
+          import tempfile
+
+          with tempfile.TemporaryDirectory() as tmp:
+              os.environ["KLIPPO_PROMPT_DB"] = str(Path(tmp) / "prompt_catalog.sqlite3")
+              from prompt_catalog import choices, resolve, DB_PATH
+              from prompt_engine import build_prompt
+
+              assert ("white_doodle", "✏️ White Doodle") in choices()
+              style_key, style_name, style_template = resolve("white_doodle")
+              assert style_key == "white_doodle"
+              for required in (
+                  "verified", "omit unsupported labels", "HOLD the final frame",
+                  "Do not draw the main surrounding contour in Part 1",
+                  "white dashed contour", "Never invent unseen sides"
+              ):
+                  assert required.casefold() in style_template.casefold(), (
+                      f"White Doodle template missing rule: {required}"
+                  )
+
+              with sqlite3.connect(DB_PATH) as db:
+                  version = db.execute(
+                      "SELECT version FROM storyboard_prompt_styles WHERE style_key='white_doodle'"
+                  ).fetchone()[0]
+                  assert version == 4, f"Unexpected White Doodle template version: {version}"
+
+              uncertain = (
+                  "Visible observations (verify against reference image): . "
+                  "Optional user details: "
+              )
+              first = build_prompt(
+                  "storyboard", uncertain, "clean premium studio background",
+                  "push", "white_doodle", 10
+              )
+              assert "NO ON-SCREEN HOOK TEXT" in first
+              assert "Do not perform the main surrounding contour yet." in first
+              assert "HOLD the final frame" in first
+              assert "Never guess a category, benefit, price, popularity or product name." in first
+
+              verified = "NAMA_PRODUK: Beg VELLA"
+              verified_prompt = build_prompt(
+                  "storyboard", verified, "clean premium studio background",
+                  "push", "white_doodle", 10
+              )
+              assert "KENALI Beg VELLA" in verified_prompt, (
+                  "Verified product name should create the exact conservative hook"
+              )
+
+              paired = build_prompt(
+                  "storyboard", uncertain, "clean premium studio background",
+                  "push", "white_doodle", 20
+              )
+              assert "=== KLIPPO PART 2 ===" in paired
+              first_part, second_part = paired.split("=== KLIPPO PART 2 ===", 1)
+              assert "HOLD the final frame" in first_part
+              assert "SECOND CLIP 10s" in second_part and "full-product frame" in second_part
+              assert "Do NOT repeat the opening hook" in second_part
+
           print(
-              f"Validated {len(categories)} categories, {len(prompts)} prompts, "
-              f"{generated_cases} generated prompt cases, and prompt-library flow markers."
+              f"Validated {len(categories)} categories, {len(prompts)} prompt-library entries, "
+              f"{generated_cases} generated library cases, flow markers, and White Doodle v4 "
+              "evidence/continuity behavior."
           )
           PY
