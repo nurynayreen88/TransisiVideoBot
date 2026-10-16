@@ -392,10 +392,21 @@ def prompt_category_menu():
     return InlineKeyboardMarkup(rows)
 
 
-def prompt_options_menu(category_id: str):
+def prompt_options_menu(category_id: str, subtype: str = ''):
     category = CATEGORIES_BY_ID.get(category_id, {})
     rows = []
-    for prompt_id in category.get('prompt_ids', []):
+    prompt_ids = category.get('prompt_ids', [])
+    if subtype:
+        # Prefer exact subtype prompts plus category-wide concepts. Hide prompts for
+        # unrelated subtypes (e.g. cleanser prompts when the title says lipstick).
+        matching = [
+            prompt_id for prompt_id in prompt_ids
+            if (PROMPTS_BY_ID.get(prompt_id, {}).get('subtype') in ('', subtype)
+                or 'subtype' not in PROMPTS_BY_ID.get(prompt_id, {}))
+        ]
+        if matching:
+            prompt_ids = matching
+    for prompt_id in prompt_ids:
         prompt = PROMPTS_BY_ID.get(prompt_id)
         if prompt:
             rows.append([InlineKeyboardButton(f"🎬 {prompt['label']}", callback_data=f"ptpl:{prompt_id}")])
@@ -2137,7 +2148,7 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 context.user_data['stage'] = 'prompt_category_options'
                 await update.message.reply_text(
                     '🔎 Klippo mengesan jenis produk: ' + subtype.replace('_', ' ') + '. Pilih prompt khusus dalam koleksi ' + CATEGORIES_BY_ID[category_id].get('label', category_id) + ':',
-                    reply_markup=prompt_options_menu(category_id)
+                    reply_markup=prompt_options_menu(category_id, subtype)
                 )
                 return
         context.user_data['stage'] = 'prompt_category'
