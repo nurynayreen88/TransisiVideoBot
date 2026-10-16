@@ -16,13 +16,13 @@ def _clean_product_reference(product):
     value = (product or "").strip()
     # Empty visual-analysis slots must never leak into the final prompt.
     value = re.sub(
-        r"\\s*[.;]?\\s*Visible observations(?:\\s*\\([^)]*\\))?\\s*:\\s*(?=[.;]?\\s*(?:Optional user details\\s*:)?\\s*$)",
+        r"\s*[.;]?\s*Visible observations(?:\s*\\([^)]*\\))?\s*:\s*(?=[.;]?\s*(?:Optional user details\s*:)?\s*$)",
         "",
         value,
         flags=re.IGNORECASE,
     )
-    value = re.sub(r"\\s*[.;]?\\s*Optional user details\\s*:\\s*$", "", value, flags=re.IGNORECASE)
-    value = re.sub(r"\\s*[.;]+\\s*$", "", value).strip()
+    value = re.sub(r"\s*[.;]?\s*Optional user details\s*:\s*$", "", value, flags=re.IGNORECASE)
+    value = re.sub(r"\s*[.;]+\s*$", "", value).strip()
     return value or "the product shown in the uploaded reference image"
 
 def build_prompt(mode, product, scene, motion, style='auto', duration=10, user_concept=None):
