@@ -1,0 +1,24 @@
+name: Smart Prompt Engine tests
+
+on:
+  push:
+    branches:
+      - feature/smart-prompt-engine-v1
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  prompt-engine-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Compile prompt modules
+        run: python -m py_compile prompt_engine.py smart_prompt_engine.py tests/test_smart_prompt_engine.py
+      - name: Run variation regression tests
+        run: python -m unittest discover -s tests -v
