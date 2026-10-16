@@ -67,10 +67,11 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
     }
     category_direction = product_type_directions.get(product_type, product_type_directions['other'])
     identity = (
-        "PRODUCT IDENTITY RULE: This prompt is generated from the product name and category without a reference image. "
-        "Keep the named product as the clear hero and use a plausible, generic presentation. Do not invent exact brand marks, "
+        "PRODUCT IDENTITY RULE: The user will upload the original product photo(s) to the target AI video generator as the MASTER visual reference. "
+        "Treat those photo(s), not assumptions from the product name, as the source of truth for the visible product identity. "
+        "Preserve visible shape, color, print, packaging, proportions and readable branding. Do not invent unseen angles, brand marks, "
         "model numbers, materials, technical specifications, included accessories, product claims, compartments or hidden features. "
-        "Where the name alone does not establish a detail, leave it neutral rather than guessing."
+        "Use the product name and category only as supporting context; if a detail is not visible, keep it neutral rather than guessing."
     )
     art = (
         f"ART DIRECTION: Premium commercial product cinematography. Environment: {scene}. "
@@ -123,10 +124,8 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
                 )
             else:
                 rules = (
-                    "FIRST CLIP 10s: 0-2s close-up with verified product-name/category hook IF AVAILABLE and white sparkles; "
-                    "2-5s full product reveal with up to TWO short factual feature labels only when grounded in visible "
-                    "or legible packaging evidence, with tiny white icons and curved arrows; "
-                    "5-8s detail shot with small dotted flourish; "
+                    "FIRST CLIP 10s, five 2-second panels: 0-2s close-up with a verified product-name/category hook if available; "
+                    "2-4s full product reveal; 4-6s one genuinely visible detail; 6-8s restrained white doodle emphasis; "
                     "8-10s settle into a steady full-product composition and HOLD the final frame for a seamless Part 2 handoff. "
                     "Do not perform the main surrounding contour yet. "
                 )
@@ -138,17 +137,15 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
             )
         elif part == 2:
             rules = (
-                "SECOND CLIP 10s: 0-2s continue the exact full-product frame held at the end of Part 1; "
-                "2-5s emphasize a second genuinely visible detail without inventing an angle; "
-                "5-8s elegant style-specific visual emphasis; 8-10s full-product hero closing and fade. "
-                "Do NOT repeat the opening hook."
+                "SECOND CLIP 10s, five 2-second panels: 0-2s continue the exact full-product frame held at the end of Part 1; "
+                "2-4s emphasize a second genuinely visible detail without inventing an angle; 4-6s continue the same concept; "
+                "6-8s elegant style-specific visual emphasis; 8-10s full-product hero closing and fade. Do NOT repeat the opening hook."
             )
         else:
             rules = (
-                "FIRST CLIP 10s: 0-2s verified product-name/category hook IF AVAILABLE; "
-                "2-5s full-product reveal; 5-8s one genuinely visible detail; "
-                "8-10s settle into a stable full-product frame and HOLD for a seamless Part 2 handoff. "
-                "No closing fade in Part 1."
+                "FIRST CLIP 10s, five 2-second panels: 0-2s verified product-name/category hook if available; "
+                "2-4s full-product reveal; 4-6s one genuinely visible detail; 6-8s continue the product story; "
+                "8-10s settle into a stable full-product frame and HOLD for a seamless Part 2 handoff. No closing fade in Part 1."
             )
         curated_direction = ""
         if storyboard_override and isinstance(storyboard_override, (list, tuple)) and len(storyboard_override) == 4:
@@ -210,20 +207,18 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
         )
     if mode == "storyboard":
         shots = [
-            ("01 | HOOK | 0.0–1.5s", "Start with a visually arresting close crop suited to the named product. Use a soft directional highlight without asserting a specific material. Camera: precise micro push-in, no sudden jump. End with movement that motivates the reveal."),
-            ("02 | REVEAL | 1.5–3.0s", "Reveal the complete named product in a carefully balanced frame. Camera: controlled pull-back with believable scale and shape. Let the background separate naturally through restrained depth and contact shadow. Transition from the hook with matching movement and consistent lighting."),
-            ("03 | CONTEXT | 3.0–5.0s", "Keep the named product in the same selected setting without suggesting an unsupported function or inventing props. Show convincing surface contact, natural reflections and realistic perspective. Use a gentle camera drift to create depth while keeping the product presentation recognizable. Transition through a subtle dissolve or match cut."),
-            ("04 | DETAIL | 5.0–7.0s", "Select one plausible generic detail view suited to the product category, such as silhouette, edge, handle or closure when applicable. Use a measured macro-style push, controlled depth of field and soft grazing light. Do not invent materials, labels or hidden features. Transition by matching the detail's position into the next hero composition."),
-            ("05 | HERO | 7.0–8.5s", "Present the product as the unmistakable visual centerpiece. Camera instruction: use a restrained, reference-safe variation of the primary movement: " + camera + " Use restrained premium edge lighting, realistic material response and uncluttered negative space. Keep the product presentation consistent with its name and do not fabricate branding. Build visual emphasis without aggressive spinning or deformation."),
-            ("06 | CLOSING | 8.5–10.0s", "Return to a clean full-product hero frame with balanced framing. Slow the movement into a confident hold, then apply a subtle graceful fade. Preserve a clear product silhouette and stable highlights. Do not invent a slogan, price, call-to-action text or new logo.")
+            ("01 | HOOK | 0–2s", "Open with a compelling but reference-safe close view. Use a subtle camera move and light reveal; do not invent a product feature."),
+            ("02 | REVEAL | 2–4s", "Reveal the complete product in a balanced frame. Keep scale, proportions and orientation faithful to the reference."),
+            ("03 | CONTEXT | 4–6s", "Place the same product in a believable setting suited to its category. Do not add props that imply included accessories or unsupported functions."),
+            ("04 | DETAIL | 6–8s", "Emphasize one genuinely visible detail using a controlled close-up. Do not reveal unseen sides or fabricate material details."),
+            ("05 | HERO CLOSING | 8–10s", "Return to a clean full-product hero frame. Ease into a stable hold and a subtle fade; no invented slogan, price or claim.")
         ]
-        direction = ("DIRECTOR'S SIX-SHOT STORYBOARD: Deliver one cohesive commercial using a consistent product presentation throughout. Treat the six shots as framing and editing beats, not six newly invented product designs. "
-                     "Keep the same product identity, spatial orientation, visual palette and believable light direction in every shot.\n\n"
-                     + "\n\n".join(title + "\nVISUAL AND CAMERA BRIEF: " + detail for title, detail in shots)
-                     + "\n\nEDITING AND CONTINUITY: Respect the specified timing as closely as the generator permits. "
-                     "Prefer subtle reframing and no more than two soft cuts; use gentle easing. Avoid flashy templates, "
-                     "random zooms and inconsistent set geometry. Every cut should advance the viewer from curiosity "
-                     "to product recognition, detail appreciation and a memorable closing hero image.")
+        direction = ("DIRECTOR'S FIVE-PANEL STORYBOARD: Deliver one cohesive commercial with exactly five panels, each exactly 2 seconds. "
+                      "Treat these as connected editing beats, not five different product designs. Keep the same product identity, "
+                      "spatial orientation, visual palette and believable light direction in every panel.\\n\\n"
+                      + "\\n\\n".join(title + "\\nVISUAL AND CAMERA BRIEF: " + detail for title, detail in shots)
+                      + "\\n\\nEDITING AND CONTINUITY: Use clean match cuts or gentle transitions. Every panel must advance the story from curiosity "
+                      "to product recognition, a visible detail and a memorable closing hero frame. Avoid flashy templates, random zooms and inconsistent set geometry.")
     else:
         direction = (
             "DIRECTOR'S SINGLE-TAKE BRIEF: Create one sophisticated uninterrupted " + str(duration) + "-second commercial, "
@@ -256,14 +251,14 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
             "avoid added text or invented features. This is one coherent commercial, not a slideshow."
         )
     if part == 1:
-        direction = ("FIRST CLIP 10s: 0-2s establish the product; 2-5s gentle product-focused movement; "
-                     "5-8s focus on one genuinely visible detail; 8-10s return to a stable full-product frame, "
-                     "hold the final frame without fade to connect directly into Part 2.")
+        direction = ("FIRST CLIP 10s, five 2-second panels: 0-2s establish the product; 2-4s reveal the complete product; "
+                     "4-6s focus on one genuinely visible detail; 6-8s continue a complementary action; "
+                     "8-10s return to a stable full-product frame and hold without fade to connect directly into Part 2.")
     elif part == 2:
-        direction = ("SECOND CLIP 10s: start with the EXACT held full-product final frame from Part 1, "
+        direction = ("SECOND CLIP 10s, five 2-second panels: start with the EXACT held full-product final frame from Part 1, "
                      "matching crop, product position, orientation, setting, lighting and color. "
-                     "0-3s resume gentle camera movement; 3-7s highlight another visible detail; "
-                     "7-10s full-product hero finish with graceful fade. No new product, scene or angle.")
+                     "0-2s resume the same movement; 2-4s continue the action; 4-6s highlight another visible detail; "
+                     "6-8s maintain coherent context; 8-10s full-product hero finish with graceful fade. No new product, scene or angle.")
     product_words = (product or "").lower()
     fashion_terms = ("kurung", "baju", "tudung", "hijab", "dress", "clothing", "apparel",
                      "fashion", "outfit", "blouse", "skirt", "trousers", "pants", "garment",
