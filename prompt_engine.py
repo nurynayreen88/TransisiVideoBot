@@ -1,4 +1,7 @@
 from prompt_catalog import resolve, product_hook
+from smart_prompt_engine import choose_variation, format_variation
+from prompt_library import build_curated_storyboard
+import re
 """Detailed, reference-safe AI video prompt templates for KLIPPO."""
 
 CAMERAS = {
@@ -8,19 +11,61 @@ CAMERAS = {
     "static": "A locked premium studio composition with delicate lighting movement and a subtle focus transition.",
 }
 
-def build_prompt(mode, product, scene, motion, style='auto', duration=10):
+
+def _clean_product_reference(product):
+    """Remove empty analysis labels from the user-facing prompt without inventing details."""
+    value = (product or "").strip()
+    # Empty visual-analysis slots must never leak into the final prompt.
+    value = re.sub(
+        r"\s*[.;]?\s*Visible observations(?:\s*\([^)]*\))?\s*:\s*(?=\s*[.;]?\s*(?:Optional user details\s*:)?\s*$)",
+        "",
+        value,
+        flags=re.IGNORECASE,
+    )
+    value = re.sub(r"\s*[.;]?\s*Optional user details\s*:\s*$", "", value, flags=re.IGNORECASE)
+    value = re.sub(r"\s*[.;]+\s*$", "", value).strip()
+    return value or "the product shown in the uploaded reference image"
+
+def build_prompt(mode, product, scene, motion, style='auto', duration=10, user_concept=None):
+    # Storyboard prompts use saved, curated templates. Do not dynamically rewrite
+    # the creative copy or append the experimental variation engine to these prompts.
+    if mode == "storyboard":
+        return build_curated_storyboard(
+            product=product,
+            motion=motion,
+            style=style,
+            duration=duration,
+            scene=scene,
+        )
+    # Resolve storyboard style once, before choosing variations, so the creative
+    # direction cannot drift from the catalog style (especially Luxury Product).
+    chosen_style = resolve(style)[0] if mode == "storyboard" else style
+    display_product = _clean_product_reference(product)
+    # Choose one coherent creative pack per generation. Connected 10s clips share
+    # the same setting, mood, camera and lighting; Part 2 only changes its action beat.
+    variation = choose_variation(product, scene, motion, chosen_style, mode, part=1 if duration == 20 else 0,
+                                 user_concept=user_concept)
+    # When the user selects Auto, use the selected variation as the actual scene
+    # instead of leaving contradictory "studio" wording in the base prompt.
+    if "selected to complement" in (scene or "").lower():
+        scene = variation["setting"]
     if duration == 20:
-        # Resolve Auto/Random once so both clips use exactly the same style.
-        chosen_style = resolve(style)[0] if mode == 'storyboard' else style
-        first = _build_single_prompt(mode, product, scene, motion, chosen_style, part=1)
-        second = _build_single_prompt(mode, product, scene, motion, chosen_style, part=2)
+        second_variation = dict(variation)
+        second_variation["action"] = (
+            "resume from the exact final frame of Part 1, then reveal another genuinely visible detail "
+            "before returning to the full-product hero view"
+        )
+        first = _build_single_prompt(mode, display_product, scene, motion, chosen_style, part=1, variation=variation)
+        second = _build_single_prompt(mode, display_product, scene, motion, chosen_style, part=2, variation=second_variation)
         return first + "\n\n=== KLIPPO PART 2 ===\n\n" + second
-    return _build_single_prompt(mode, product, scene, motion, style, part=0)
+    return _build_single_prompt(mode, display_product, scene, motion, chosen_style, part=0, variation=variation)
 
 
-def _build_single_prompt(mode, product, scene, motion, style='auto', part=0):
+def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, variation=None):
     duration = 10
     camera = CAMERAS.get(motion, CAMERAS["push"])
+    if variation is None:
+        variation = choose_variation(product, scene, motion, style, mode, part=part)
     identity = (
         "REFERENCE LOCK: Treat the uploaded photograph as the sole visual source of truth. "
         "Preserve the exact product silhouette, proportions, material appearance, visible colors, "
@@ -34,6 +79,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0):
         "surface texture and legibility; avoid excessive bloom or artificial plastic shine. "
         "Use elegant pacing, physically plausible movement and stable framing."
     )
+    art += "\n\n" + format_variation(variation)
     negative = (
         "STRICT EXCLUSIONS: Preserve the exact reference identity and proportions. No dramatic spinning, flying product, aggressive morph transitions or scene changes. "
         "No invented features, extra accessories, duplicated products, changing logos, altered garment patterns, changed clothing, random props, floating geometry, distorted edges, "
@@ -46,15 +92,12 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0):
         doodle = style_key == "white_doodle"
         hook = product_hook(product)
         evidence_rules = (
-            "PRODUCT EVIDENCE PRIORITY: NAMA_PRODUK is the exact printed product name only if marked legible; "
-            "preserve its spelling, brand and model verbatim. TEKS_DISAHKAN and CIRI_BERTULIS are claims printed "
-            "on packaging, NOT independently proven benefits: attribute them to the label if used. "
-            "CIRI_VISUAL lists only features directly visible in the image. "
-            "Do not replace precise visible product details with generic marketing adjectives. "
-            "Use a feature callout only if it can be traced to a specific CIRI_VISUAL, a legible CIRI_BERTULIS, "
-            "or explicit user-provided information consistent with the photo. "
-            "If evidence is missing or uncertain, omit that callout entirely; never fill a slot with a guessed feature. "
-            "Never reconstruct blurry letters or invent an exact model number. "
+            "PRODUCT EVIDENCE RULE: Use only product details that are clearly visible in the uploaded reference "
+            "or explicitly supplied by the user and consistent with it. Preserve any legible printed name, brand, "
+            "model and label exactly as shown. Treat packaging claims as label text, not independently verified benefits. "
+            "Describe visual features only when directly supported by the image. If the name, category, feature or text "
+            "cannot be verified, omit it rather than guessing. Never invent a model number, reconstruct blurry letters, "
+            "or print internal analysis labels, empty fields, placeholders or variable names in the final prompt. "
         )
 
         hook_direction = (
@@ -64,9 +107,10 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0):
             "Do not generate any additional unverified promotional copy. If text rendering is unreliable, "
             "reserve space for accurate text overlay in editing. "
         ) if hook else (
-            "NO ON-SCREEN HOOK TEXT: The product identity is not sufficiently verified. "
-            "Begin with the product image and decorative white doodle only; leave out all headline text. "
-            "Never guess a category, benefit, price, popularity or product name."
+            "NO ON-SCREEN HOOK TEXT: The product name/category is not sufficiently verified. "
+            + ("Begin with the product image and decorative white doodle only; leave out all headline text. "
+               if doodle else "Begin with the product image only; do not add headline text or decorative doodles. ")
+            + "Never guess a category, benefit, price, popularity or product name."
         )
         if doodle:
             if part == 2:

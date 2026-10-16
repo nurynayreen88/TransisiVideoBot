@@ -1525,7 +1525,14 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if motion in motions:
             waiting = await query.message.reply_text('⏳ DALAM PROSES — 0%\nMenyusun prompt...')
             try:
-                product = ('the product in the uploaded reference image. Visible observations (verify against reference image): ' + context.user_data.get('prompt_vision', '') + '. Optional user details: ' + context.user_data.get('prompt_product', ''))
+                vision_details = (context.user_data.get('prompt_vision', '') or '').strip()
+                user_details = (context.user_data.get('prompt_product', '') or '').strip()
+                product_parts = ['The product shown in the uploaded reference image.']
+                if vision_details:
+                    product_parts.append('VERIFIED IMAGE OBSERVATIONS:\\n' + vision_details)
+                if user_details:
+                    product_parts.append('USER-PROVIDED PRODUCT DETAILS: ' + user_details)
+                product = '\\n\\n'.join(product_parts)
                 scene = context.user_data.get('prompt_scene', 'clean studio background')
                 prompt = build_prompt(context.user_data.get('prompt_mode', 'normal'), product, scene, motion, context.user_data.get('prompt_style', 'auto'), context.user_data.get('prompt_duration', 10))
                 await progress_update(waiting, 70, 'Prompt siap disusun. Menghantar hasil...')
