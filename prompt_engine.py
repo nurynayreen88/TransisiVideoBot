@@ -1,7 +1,8 @@
+"""Detailed, reference-safe AI video prompt templates for KLIPPO."""
+
 import json
 
 from prompt_catalog import resolve, product_hook
-"""Detailed, reference-safe AI video prompt templates for KLIPPO."""
 
 CAMERAS = {
     "orbit": "A restrained camera arc of at most 30 degrees with subtle parallax. Never reveal or fabricate an unseen side.",
@@ -37,7 +38,7 @@ def _text_direction(text_mode='without', on_screen_text='', part=0):
     exact_text = (on_screen_text or '').strip()
     if text_mode != 'with' or not exact_text:
         return (
-            "ON-SCREEN TEXT: STRICTLY NONE. Do not generate words, captions, headlines, "
+            "NO ON-SCREEN TEXT: STRICTLY NONE. Do not generate words, captions, headlines,
             "subtitles, labels, call-to-action text or decorative lettering. Preserve only "
             "branding already visible in the reference image."
         )
