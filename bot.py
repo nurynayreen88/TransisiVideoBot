@@ -1972,6 +1972,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 caption = ('BAHAGIAN ' + str(index) + '/2 — jana klip 10 saat secara berasingan. ' +
                            ('Simpan bingkai akhir untuk sambungan Bahagian 2.' if index == 1 else
                             'Gunakan bingkai akhir Bahagian 1 sebagai rujukan kesinambungan.')) if len(sections) == 2 else ''
+                if caption:
+                    await query.message.reply_text('🎬 ' + caption)
                 if len(section) <= 3900:
                     await query.message.reply_text(section, reply_markup=video_actions)
                 else:
