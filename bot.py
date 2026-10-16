@@ -2452,7 +2452,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                             sheet_file.name = f'KLIPPO_STORYBOARD_HELAIAN_{sheet_number}.png'
                             await query.message.reply_photo(
                                 photo=sheet_file,
-                                caption=f'🎬 STORYBOARD BERGAMBAR — HELAIAN {sheet_number}/{sheet_count}\\n'
+                                caption=f'🎬 STORYBOARD BERGAMBAR — HELAIAN {sheet_number}/{sheet_count}\n'
                                         f'Video {duration} saat · Babak {min((sheet_number-1)*4+1, scene_count)}–{min(sheet_number*4, scene_count)}',
                                 reply_markup=storyboard_actions if sheet_number == sheet_count else None
                             )
@@ -2466,7 +2466,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                             break
                     await query.message.reply_text(
                         ('🎬 STORYBOARD BERGAMBAR SIAP' if not visual_error else '📝 STORYBOARD TEKS SIAP') +
-                        '\\n\\nStoryboard dijana terus berdasarkan gambar produk anda. Prompt video ialah pilihan seterusnya, bukan langkah wajib sebelum storyboard.',
+                        '\n\nStoryboard dijana terus berdasarkan gambar produk anda. Prompt video ialah pilihan seterusnya, bukan langkah wajib sebelum storyboard.',
                         reply_markup=storyboard_actions
                     )
                     if len(storyboard) <= 3900:
