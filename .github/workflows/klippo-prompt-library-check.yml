@@ -228,7 +228,7 @@ jobs:
               style_key, style_name, style_template = resolve("white_doodle")
               assert style_key == "white_doodle"
               for required in (
-                  "verified", "omit unsupported labels", "HOLD the final frame",
+                  "verified", "omit unsupported labels", "never render words", "HOLD the final frame",
                   "Do not draw the main surrounding contour in Part 1",
                   "white dashed contour", "Never invent unseen sides"
               ):
@@ -260,8 +260,9 @@ jobs:
                   "storyboard", verified, "clean premium studio background",
                   "push", "white_doodle", 10
               )
-              assert "KENALI Beg VELLA" in verified_prompt, (
-                  "Verified product name should create the exact conservative hook"
+              assert "NO ON-SCREEN HOOK TEXT" in verified_prompt
+              assert "KENALI Beg VELLA" not in verified_prompt, (
+                  "Product names must not be rendered as on-screen text"
               )
 
               paired = build_prompt(
