@@ -33,7 +33,12 @@
         "bags_luxury_closeup_v1",
         "bags_daily_carry_v1",
         "bags_tabletop_pickup_v1",
-        "bags_office_storyboard_v1"
+        "bags_office_storyboard_v1",
+        "bags_editorial_flatlay_v1",
+        "bags_everyday_carry_v1",
+        "bags_tabletop_hero_v1",
+        "bags_sling_crossbody_v1",
+        "bags_backpack_ready_v1"
       ]
     },
     {
@@ -560,6 +565,51 @@
       "style": "premium_product",
       "description": "A refined gift-inspired reveal using neutral styling; do not imply gift packaging is included.",
       "prompt": "Create a 10-second vertical 9:16 product video for the named wallet. Keep the wallet as the clear hero in a refined, realistic composition. Action concept: A refined gift-inspired reveal using neutral styling; do not imply gift packaging is included. Use controlled lighting, gentle camera movement and a clean closing frame. The prompt is based on the product name only, without a reference image. Do not invent exact materials, brand marks, interior layout, card slots, coin pockets, capacity, included accessories or product claims. No on-screen text, captions, added logos, watermark, morphing, floating objects or unrealistic transformations. Exactly 10 seconds, vertical 9:16."
+    },
+    {
+      "id": "bags_editorial_flatlay_v1",
+      "category": "bags",
+      "label": "Editorial Flat Lay",
+      "duration_seconds": 10,
+      "style": "cinematic",
+      "description": "An elegant overhead or three-quarter composition with the bag as the hero, soft shadows and generous negative space; no props implying included accessories.",
+      "prompt": "Create a 10-second vertical 9:16 product video for the named bag. An elegant overhead or three-quarter composition with the bag as the hero, soft shadows and generous negative space; no props implying included accessories. Keep the named product as the clear hero with a polished commercial look and a clean closing frame. The prompt uses product name only, without a reference image or AI image analysis. Do not invent exact materials, branding, model numbers, compartments, capacity, included accessories or product claims. No on-screen text, captions, added logos, watermark, morphing, floating objects or unrealistic transformations. Exactly 10 seconds, vertical 9:16."
+    },
+    {
+      "id": "bags_everyday_carry_v1",
+      "category": "bags",
+      "label": "Everyday Carry",
+      "duration_seconds": 10,
+      "style": "cinematic",
+      "description": "A believable everyday lifestyle scene suited to the named bag, with natural carrying posture and no unsupported capacity or durability claims.",
+      "prompt": "Create a 10-second vertical 9:16 product video for the named bag. A believable everyday lifestyle scene suited to the named bag, with natural carrying posture and no unsupported capacity or durability claims. Keep the named product as the clear hero with a polished commercial look and a clean closing frame. The prompt uses product name only, without a reference image or AI image analysis. Do not invent exact materials, branding, model numbers, compartments, capacity, included accessories or product claims. No on-screen text, captions, added logos, watermark, morphing, floating objects or unrealistic transformations. Exactly 10 seconds, vertical 9:16."
+    },
+    {
+      "id": "bags_tabletop_hero_v1",
+      "category": "bags",
+      "label": "Tabletop Hero Reveal",
+      "duration_seconds": 10,
+      "style": "cinematic",
+      "description": "A controlled tabletop reveal with gentle camera movement, clean lighting and a stable final hero frame.",
+      "prompt": "Create a 10-second vertical 9:16 product video for the named bag. A controlled tabletop reveal with gentle camera movement, clean lighting and a stable final hero frame. Keep the named product as the clear hero with a polished commercial look and a clean closing frame. The prompt uses product name only, without a reference image or AI image analysis. Do not invent exact materials, branding, model numbers, compartments, capacity, included accessories or product claims. No on-screen text, captions, added logos, watermark, morphing, floating objects or unrealistic transformations. Exactly 10 seconds, vertical 9:16."
+    },
+    {
+      "id": "bags_sling_crossbody_v1",
+      "category": "bags",
+      "label": "Sling / Crossbody Look",
+      "duration_seconds": 10,
+      "style": "cinematic",
+      "description": "A natural crossbody or sling-bag presentation with realistic strap placement; do not invent compartments or features.",
+      "prompt": "Create a 10-second vertical 9:16 product video for the named bag. A natural crossbody or sling-bag presentation with realistic strap placement; do not invent compartments or features. Keep the named product as the clear hero with a polished commercial look and a clean closing frame. The prompt uses product name only, without a reference image or AI image analysis. Do not invent exact materials, branding, model numbers, compartments, capacity, included accessories or product claims. No on-screen text, captions, added logos, watermark, morphing, floating objects or unrealistic transformations. Exactly 10 seconds, vertical 9:16."
+    },
+    {
+      "id": "bags_backpack_ready_v1",
+      "category": "bags",
+      "label": "Backpack Ready-to-Go",
+      "duration_seconds": 10,
+      "style": "cinematic",
+      "description": "An upright backpack hero in a tidy everyday setting; do not invent pockets, laptop sleeves, water resistance or included accessories.",
+      "prompt": "Create a 10-second vertical 9:16 product video for the named bag. An upright backpack hero in a tidy everyday setting; do not invent pockets, laptop sleeves, water resistance or included accessories. Keep the named product as the clear hero with a polished commercial look and a clean closing frame. The prompt uses product name only, without a reference image or AI image analysis. Do not invent exact materials, branding, model numbers, compartments, capacity, included accessories or product claims. No on-screen text, captions, added logos, watermark, morphing, floating objects or unrealistic transformations. Exactly 10 seconds, vertical 9:16."
     }
   ]
 }
