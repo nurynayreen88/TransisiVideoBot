@@ -1728,17 +1728,19 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 'bright minimalist setting with clean neutral surfaces and soft daylight': 'Cerah Minimalis',
             }
             motion_labels = {'orbit': 'Orbit Terkawal', 'push': 'Zoom Masuk', 'side': 'Gerak Sisi', 'static': 'Studio Statik'}
-            summary = (
-                '🧾 SEMAK PILIHAN SEBELUM JANA PROMPT\\n\\n'
-                f'🛍️ Nama produk: {product_name}\\n'
-                f'📦 Jenis produk: {PRODUCT_TYPES.get(context.user_data.get("prompt_product_type", "other"), "Produk lain")}\\n'
-                f'⏱️ Tempoh: {context.user_data.get("prompt_duration", 10)} saat\\n'
-                f'🎨 Gaya visual: {style_name}\\n'
-                f'💡 Idea video: {concept}\\n'
-                f'🖼️ Latar: {scene_labels.get(scene, scene)}\\n'
-                f'🎥 Gerakan kamera: {motion_labels[motion]}\\n\\n'
+            summary = chr(10).join([
+                '🧾 SEMAK PILIHAN SEBELUM JANA PROMPT',
+                '',
+                f'🛍️ Nama produk: {product_name}',
+                f'📦 Jenis produk: {PRODUCT_TYPES.get(context.user_data.get("prompt_product_type", "other"), "Produk lain")}',
+                f'⏱️ Tempoh: {context.user_data.get("prompt_duration", 10)} saat',
+                f'🎨 Gaya visual: {style_name}',
+                f'💡 Idea video: {concept}',
+                f'🖼️ Latar: {scene_labels.get(scene, scene)}',
+                f'🎥 Gerakan kamera: {motion_labels[motion]}',
+                '',
                 'Semak semua pilihan di atas. Tekan Jana Prompt untuk meneruskan.'
-            )
+            ])
             await query.message.reply_text(summary, reply_markup=InlineKeyboardMarkup([
                 [InlineKeyboardButton('✅ Jana Prompt', callback_data='prompt_generate:confirm')],
                 [InlineKeyboardButton('🔁 Mula Semula / Tukar Pilihan', callback_data='prompt')],
@@ -1748,7 +1750,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         motion = context.user_data.get('prompt_motion_choice', 'push')
         motions = {'orbit': 'A controlled 30-degree camera arc around the product, not a full 360-degree rotation; preserve the visible product geometry.', 'push': 'A slow forward dolly-in with gentle parallax; no object deformation.', 'side': 'A smooth left-to-right camera slide with stable product proportions.', 'static': 'A locked camera with subtle studio lighting changes only.'}
         if motion in motions:
-            waiting = await query.message.reply_text('⏳ DALAM PROSES — 0%\\nMenyusun prompt...')
+            waiting = await query.message.reply_text('⏳ DALAM PROSES — 0%' + chr(10) + 'Menyusun prompt...')
             try:
                 product_name = context.user_data.get('prompt_product_name', '').strip()
                 product = ('Product name supplied by user: ' + product_name + '. The uploaded reference image is the sole visual source of truth; preserve the exact product appearance. Visible observations (verify against reference image): ' + context.user_data.get('prompt_vision', '') + '. Optional user details: ' + context.user_data.get('prompt_product', ''))
