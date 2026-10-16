@@ -88,8 +88,8 @@ jobs:
                   f"Prompt {prompt['id']} is missing premium continuity direction"
               )
               storyboard_signatures.add("|".join(shot["direction"] for shot in storyboard))
-          assert len(storyboard_signatures) >= int(len(prompts) * 0.7), (
-              "Storyboard diversity is too low; most prompts appear to reuse the same shot plan"
+          assert len(storyboard_signatures) == len(prompts), (
+              "Every prompt must have a unique product-specific storyboard"
           )
 
           bot = Path("bot.py").read_text(encoding="utf-8")
