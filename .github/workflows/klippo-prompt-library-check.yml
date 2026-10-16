@@ -171,7 +171,7 @@ jobs:
               assert "=== KLIPPO PART 2 ===" in paired
               first_part, second_part = paired.split("=== KLIPPO PART 2 ===", 1)
               assert "HOLD the final frame" in first_part
-              assert "continue from the exact full-product frame" in second_part
+              assert "resume the exact full-product frame held at the end of Part 1" in second_part
               assert "Do NOT repeat the opening hook" in second_part
 
           print(
