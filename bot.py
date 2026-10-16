@@ -1980,7 +1980,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     prompt_file = BytesIO(section.encode('utf-8'))
                     prompt_file.name = f'KLIPPO_PROMPT_VIDEO_PART{index}.txt'
                     await query.message.reply_document(document=prompt_file, filename=prompt_file.name,
-                                                       caption=caption or '📋 PROMPT VIDEO penuh — buka fail dan salin semua teks.',
+                                                       caption='📋 PROMPT VIDEO penuh — buka fail dan salin semua teks.',
                                                        reply_markup=video_actions)
     elif action == 'prompt_generate:confirm' and context.user_data.get('stage') == 'prompt_confirm':
         motion = context.user_data.get('prompt_motion_choice', 'push')
