@@ -642,7 +642,8 @@ def faq_example(index):
 
 def main_menu(user_id=None):
     rows = [
-        [InlineKeyboardButton('🎬 Jana Video Transisi', callback_data='make'), InlineKeyboardButton('✍️ Prompt', callback_data='prompt')],
+        [InlineKeyboardButton('🛍️ Prompt AI Produk (Imej → Video)', callback_data='prompt')],
+        [InlineKeyboardButton('🎞️ Gerakkan Foto (Transisi)', callback_data='make')],
         [InlineKeyboardButton('🎞️ Gabung Video', callback_data='merge')],
         [InlineKeyboardButton('🔄 Tukar Format Video', callback_data='convert')],
         [InlineKeyboardButton('💎 Langganan', callback_data='subscription'), InlineKeyboardButton('👤 Akaun Saya', callback_data='account')],
@@ -1360,8 +1361,8 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.effective_message.reply_text(
         '🎬 KLIPPO | Studio Video Affiliate\n\n'
         'Pilih fungsi yang anda perlukan:\n\n'
-        '🎬 Jana Video Transisi — gabungkan gambar pegun menjadi video MP4 menggunakan kesan transisi, zoom/pan 2D dan muzik. Ini transisi gambar sahaja; bukan video AI yang menghidupkan atau menggerakkan objek.\n'
-        '✍️ Hasilkan Prompt — sediakan Prompt Biasa atau Prompt Storyboard terperinci untuk penjana video AI.\n'
+        '🛍️ Prompt AI Produk (Imej → Video) — bina PROMPT IMAGE dahulu, kemudian PROMPT VIDEO untuk digunakan bersama imej yang dijana.\n'
+        '🎞️ Gerakkan Foto (Transisi) — gabungkan gambar pegun menjadi video MP4 menggunakan kesan transisi, zoom/pan 2D dan muzik. Fungsi ini tidak menjana gerakan AI pada objek.\n'
         '🎞️ Gabung Video — cantum beberapa klip menjadi satu video.\n'
         '🔄 Tukar Format Video — sesuaikan video kepada format MP4 menegak untuk affiliate.\n'
         '💎 Langganan — lihat pelan dan cara pembayaran.\n'
@@ -2323,9 +2324,12 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
     shortcuts = {
         '🎬 Jana Video Affiliate': 'make',
         '🎬 Jana Video Transisi': 'make',
+        '🎞️ Gerakkan Foto (Transisi)': 'make',
+        '🛍️ Prompt AI Produk (Imej → Video)': 'prompt',
         '🔄 Tukar Format Video': 'convert',
         '✍️ Sediakan Prompt Video': 'prompt',
         '✍️ Hasilkan Prompt': 'prompt',
+        '✍️ Prompt': 'prompt',
         '💎 Langganan': 'subscription',
         '👤 Akaun Saya': 'account',
         '❓ Bantuan': 'help',
