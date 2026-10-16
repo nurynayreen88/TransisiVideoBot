@@ -1952,9 +1952,9 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         else:
             storyboard_timing = 'Buat 4 babak untuk satu video 10 saat.'
         storyboard_prompt = (
-            'PROMPT CHATGPT — HASILKAN STORYBOARD VIDEO PRODUK\\n\\n'
+            'PROMPT CHATGPT — HASILKAN STORYBOARD VIDEO PRODUK\n\n'
             'Saya akan memuat naik gambar rujukan produk. Analisis gambar yang dimuat naik dan hasilkan storyboard iklan video menegak 9:16. '
-            + storyboard_timing + '\\n\\n'
+            + storyboard_timing + '\n\n'
             'Dialog TIDAK mandatori. Utamakan penceritaan visual melalui aksi, ekspresi, komposisi dan pergerakan kamera. '
             'Masukkan dialog atau suara latar hanya jika benar-benar sesuai; jika tidak perlu, nyatakan “Tanpa dialog”. '
             'Untuk setiap babak, berikan: masa mula–akhir, aksi yang jelas, framing/pergerakan kamera, peralihan ke babak seterusnya dan kesinambungan. '
@@ -1970,10 +1970,10 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             [InlineKeyboardButton('🏠 Menu Utama', callback_data='home')]
         ])
         await query.message.reply_text(
-            '🎬 STORYBOARD DENGAN CHATGPT\\n\\n'
-            '1. Buka ChatGPT melalui butang di bawah.\\n'
-            '2. Muat naik gambar rujukan produk yang sama.\\n'
-            '3. Salin prompt di bawah dan tampal dalam ChatGPT.\\n'
+            '🎬 STORYBOARD DENGAN CHATGPT\n\n'
+            '1. Buka ChatGPT melalui butang di bawah.\n'
+            '2. Muat naik gambar rujukan produk yang sama.\n'
+            '3. Salin prompt di bawah dan tampal dalam ChatGPT.\n'
             '4. Semak storyboard dahulu. Dialog tidak wajib. Selepas itu, kembali ke Klippo untuk prompt video jika diperlukan.',
             reply_markup=storyboard_actions
         )
