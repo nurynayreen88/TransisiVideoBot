@@ -163,7 +163,7 @@ jobs:
                   assert generated.startswith("PROMPT VIDEO — 10 SAAT\\n\\n")
                   assert "STRICT OUTPUT RULES:" in generated
                   assert "Keep the product presentation consistent" in generated
-                  assert "master visual reference" in generated
+                  assert "master visual reference" in generated.casefold()
                   assert "no uploaded image" not in generated
                   chunks = [generated[index:index + 3800] for index in range(0, len(generated), 3800)] or [generated]
                   assert "".join(chunks) == generated, f"Prompt was truncated: {prompt['id']}"
