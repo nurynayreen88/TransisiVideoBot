@@ -8,17 +8,17 @@ CAMERAS = {
     "static": "A locked premium studio composition with delicate lighting movement and a subtle focus transition.",
 }
 
-def build_prompt(mode, product, scene, motion, style='auto', duration=10):
+def build_prompt(mode, product, scene, motion, style='auto', duration=10, concept=''):
     if duration == 20:
         # Resolve Auto/Random once so both clips use exactly the same style.
         chosen_style = resolve(style)[0] if mode == 'storyboard' else style
-        first = _build_single_prompt(mode, product, scene, motion, chosen_style, part=1)
-        second = _build_single_prompt(mode, product, scene, motion, chosen_style, part=2)
+        first = _build_single_prompt(mode, product, scene, motion, chosen_style, part=1, concept=concept)
+        second = _build_single_prompt(mode, product, scene, motion, chosen_style, part=2, concept=concept)
         return first + "\n\n=== KLIPPO PART 2 ===\n\n" + second
-    return _build_single_prompt(mode, product, scene, motion, style, part=0)
+    return _build_single_prompt(mode, product, scene, motion, style, part=0, concept=concept)
 
 
-def _build_single_prompt(mode, product, scene, motion, style='auto', part=0):
+def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, concept=''):
     duration = 10
     camera = CAMERAS.get(motion, CAMERAS["push"])
     identity = (
@@ -107,14 +107,17 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0):
                 "No closing fade in Part 1."
             )
         return (
-            "KLIPPO | STORYBOARD | " + style_name + (" | BAHAGIAN " + str(part) + "/2" if part else "") + "\n"
+            "KLIPPO | UNIVERSAL PRODUCT VIDEO PROMPT | " + style_name + (" | BAHAGIAN " + str(part) + "/2" if part else "") + "\n"
             "OUTPUT: One cohesive vertical 9:16 product advertisement, EXACT DURATION: " + str(duration) + " seconds.\n\n"
             "PRODUCT REFERENCE: " + product + "\n\n" + identity + "\n\n"
             "STYLE FROM KLIPPO CATALOG: " + style_template + "\n\n"
             "SETTING: " + scene + "\n"
             "CAMERA: " + camera + " Stay reference-facing; never invent unseen sides.\n\n"
             + evidence_rules + "\n\n" + (hook_direction if part != 2 else "NO REPEATED OPENING HOOK in Part 2.") + "\n\n" + rules + "\n\n"
-            "CONTINUITY: Preserve exact shape, color, visible logo and count across the entire video. "
+            + (("OPTIONAL CREATIVE CONCEPT: " + concept + ". Use it only to guide a suitable, physically plausible action or story beat; "
+                 "do not treat it as proof of product features, benefits, included accessories or unseen details. "
+                 "If the idea conflicts with the reference image, ignore the conflicting part.\n\n") if concept else "")
+            + "CONTINUITY: Preserve exact shape, color, visible logo and count across the entire video. "
             "Use soft physically believable lighting and stable background. "
             "Do not morph the object, invent accessories or cover its visible branding. "
             "For white doodle, the graphic overlays are explicitly REQUIRED and are not captions or UI. "
