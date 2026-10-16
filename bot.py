@@ -1982,7 +1982,9 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                                + ('Gunakan bingkai akhir Bahagian 1 sebagai rujukan sambungan.' if index == 2 else
                                   'Simpan bingkai terakhir untuk sambungan Bahagian 2.')) if len(sections) == 2 else ''
                     if len(section) <= 3900:
-                        await query.message.reply_text((caption + chr(10) * 2 if caption else '') + section, reply_markup=actions)
+                        # Keep the prompt message itself clean and copy-ready. The connection
+                        # instructions are already embedded in the two generated 10-second prompts.
+                        await query.message.reply_text(section, reply_markup=actions)
                     else:
                         prompt_file = BytesIO(section.encode('utf-8'))
                         prompt_file.name = f'KLIPPO_prompt_{mode_name}_part{index}.txt'
