@@ -2100,6 +2100,40 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 # Keep the existing premium video prompt and show it only after the user
                 # has used the image prompt, so the workflow is clearly image -> video.
                 context.user_data['prompt_video_ready'] = prompt
+                if context.user_data.get('prompt_from_product_sheet'):
+                    context.user_data['stage'] = 'prompt_done'
+                    video_actions = InlineKeyboardMarkup([
+                        [InlineKeyboardButton('🤖 NexaBot', url='https://t.me/aigeneratornexa_bot?start=ref37141287'),
+                         InlineKeyboardButton('✨ Gemini', url='https://gemini.google.com/')],
+                        [InlineKeyboardButton('🖼️ Buka ChatGPT', url='https://chatgpt.com/')],
+                        [InlineKeyboardButton('✍️ Prompt Baharu', callback_data='prompt'),
+                         InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]
+                    ])
+                    await query.message.reply_text(
+                        '🎬 PROMPT VIDEO SIAP\\n\\n'
+                        'Gunakan gambar produk yang dijana di ChatGPT sebagai MASTER reference. '
+                        'Salin prompt di bawah ke platform video. Untuk 20 saat, jana Bahagian 1 dahulu, '
+                        'kemudian gunakan bingkai akhir Bahagian 1 sebagai rujukan Bahagian 2.',
+                        reply_markup=video_actions
+                    )
+                    sections = prompt.split('=== KLIPPO PART 2 ===') if context.user_data.get('prompt_duration') == 20 else [prompt]
+                    for index, section in enumerate(sections, 1):
+                        section = section.strip()
+                        caption = ('BAHAGIAN ' + str(index) + '/2 — jana klip 10 saat secara berasingan. ' +
+                                   ('Simpan bingkai akhir untuk sambungan Bahagian 2.' if index == 1 else
+                                    'Gunakan bingkai akhir Bahagian 1 sebagai rujukan kesinambungan.')) if len(sections) == 2 else ''
+                        if len(section) <= 3900:
+                            await query.message.reply_text(section, reply_markup=video_actions)
+                        else:
+                            prompt_file = BytesIO(section.encode('utf-8'))
+                            prompt_file.name = f'KLIPPO_PROMPT_VIDEO_PART{index}.txt'
+                            await query.message.reply_document(
+                                document=prompt_file, filename=prompt_file.name,
+                                caption=caption or '📋 PROMPT VIDEO penuh — buka fail dan salin semua teks.',
+                                reply_markup=video_actions
+                            )
+                    await progress_update(waiting, 100, 'PROMPT VIDEO siap. Maklumat produk digunakan tanpa jana prompt imej berulang.')
+                    return
                 product_name = context.user_data.get('prompt_product_name', '').strip() or 'product shown in the uploaded reference photo'
                 category_id = context.user_data.get('prompt_category', '')
                 category_label = CATEGORIES_BY_ID.get(category_id, {}).get('label', 'product')
