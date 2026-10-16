@@ -20,7 +20,9 @@
       "prompt_ids": [
         "fashion_walking_ootd_v1",
         "fashion_mirror_selfie_v1",
-        "fashion_detail_showcase_v1"
+        "fashion_detail_showcase_v1",
+        "fashion_sit_stand_transition_v1",
+        "fashion_walk_past_camera_v1"
       ]
     },
     {
@@ -30,6 +32,8 @@
       "prompt_ids": [
         "bags_handheld_showcase_v1",
         "bags_luxury_closeup_v1",
+        "bags_daily_carry_v1",
+        "bags_tabletop_pickup_v1",
         "bags_office_storyboard_v1"
       ]
     },
@@ -39,7 +43,9 @@
       "emoji": "👟",
       "prompt_ids": [
         "shoes_on_feet_walk_v1",
-        "shoes_clean_product_reveal_v1"
+        "shoes_clean_product_reveal_v1",
+        "shoes_lace_and_step_v1",
+        "shoes_side_profile_reveal_v1"
       ]
     },
     {
@@ -48,7 +54,9 @@
       "emoji": "💄",
       "prompt_ids": [
         "beauty_texture_demo_v1",
-        "beauty_vanity_hero_v1"
+        "beauty_vanity_hero_v1",
+        "beauty_hand_swatches_v1",
+        "beauty_get_ready_counter_v1"
       ]
     },
     {
@@ -57,7 +65,9 @@
       "emoji": "📱",
       "prompt_ids": [
         "gadgets_real_use_demo_v1",
-        "gadgets_detail_reveal_v1"
+        "gadgets_detail_reveal_v1",
+        "gadgets_unbox_on_desk_v1",
+        "gadgets_handheld_scale_v1"
       ]
     },
     {
@@ -66,7 +76,9 @@
       "emoji": "🏠",
       "prompt_ids": [
         "home_before_after_use_v1",
-        "home_lifestyle_hero_v1"
+        "home_lifestyle_hero_v1",
+        "home_problem_solution_demo_v1",
+        "home_space_saver_demo_v1"
       ]
     },
     {
@@ -411,7 +423,7 @@
       "duration_seconds": 10,
       "style": "premium_product",
       "description": "Storyboard 10 saat untuk beg tangan dalam suasana persediaan ke pejabat, dengan product lock yang ketat.",
-      "prompt": "KLIPPO | STORYBOARD | 💎 Luxury Product\n\nOUTPUT: One cohesive vertical 9:16 product advertisement, EXACT DURATION: 10 seconds.\n\nPRODUCT REFERENCE: The uploaded product photograph is the sole visual source of truth.\n\nPRODUCT NAME: VELLA Beg Tangan Wanita Besar.\n\nREFERENCE LOCK: Preserve the exact handbag from the uploaded image. Maintain its original colour, shape, proportions, material, texture, handles, straps, stitching, hardware, logo and all visible details. Do not redesign, replace or invent product features. Only show handles or straps that are actually present in the reference image.\n\nSCENE 1 (0–3s): Show the handbag in a naturally lit, tidy room near a dressing table. Begin with a clear medium shot and slowly move the camera closer to reveal the overall design. Keep the whole bag visible.\n\nSCENE 2 (3–7s): A woman's hand gently lifts the handbag using an existing handle or strap visible in the reference. Keep the movement simple and physically realistic. Show the front of the bag clearly without covering important details or changing its shape.\n\nSCENE 3 (7–10s): Place the handbag back on the surface and finish with a refined close-up hero shot. Keep the product sharp, stable and clearly visible.\n\nVISUAL STYLE: Ultra-realistic live-action smartphone video, soft natural daylight, realistic contact shadows, smooth camera movement and premium commercial quality.\n\nAUDIO: Soft, elegant background music at low volume. No dialogue or voice-over.\n\nSTRICT RULES: No on-screen text, captions, extra logos, watermarks or additional products. No distorted hands, floating objects, morphing handbag, invented compartments or hardware, or sudden scene changes. Do not fabricate unseen sides. Keep the handbag as the main focus throughout.\n\nFORMAT: Vertical 9:16, exactly 10 seconds.\n\nSTRICT OUTPUT RULES: No on-screen text, captions, subtitles, logos, watermarks, UI overlays, or extra written descriptions. Preserve the exact product shape, colour, material, pattern, packaging, and visible labels shown in the uploaded image. Do not invent product features or extra accessories. Keep movement natural, hands anatomically correct, and the product clearly in focus. Output exactly 10 seconds in vertical 9:16 format."
+      "prompt": "KLIPPO | STORYBOARD | 💎 Luxury Product\n\nOUTPUT: One cohesive vertical 9:16 product advertisement, EXACT DURATION: 10 seconds.\n\nPRODUCT REFERENCE: The uploaded product photograph is the sole visual source of truth.\n\nPRODUCT NAME: Use the product name supplied by the user, if any. If no name was supplied, do not invent one.\n\nREFERENCE LOCK: Preserve the exact handbag from the uploaded image. Maintain its original colour, shape, proportions, material, texture, handles, straps, stitching, hardware, logo and all visible details. Do not redesign, replace or invent product features. Only show handles or straps that are actually present in the reference image.\n\nSCENE 1 (0–3s): Show the handbag in a naturally lit, tidy room near a dressing table. Begin with a clear medium shot and slowly move the camera closer to reveal the overall design. Keep the whole bag visible.\n\nSCENE 2 (3–7s): A woman's hand gently lifts the handbag using an existing handle or strap visible in the reference. Keep the movement simple and physically realistic. Show the front of the bag clearly without covering important details or changing its shape.\n\nSCENE 3 (7–10s): Place the handbag back on the surface and finish with a refined close-up hero shot. Keep the product sharp, stable and clearly visible.\n\nVISUAL STYLE: Ultra-realistic live-action smartphone video, soft natural daylight, realistic contact shadows, smooth camera movement and premium commercial quality.\n\nAUDIO: Soft, elegant background music at low volume. No dialogue or voice-over.\n\nSTRICT RULES: No on-screen text, captions, extra logos, watermarks or additional products. No distorted hands, floating objects, morphing handbag, invented compartments or hardware, or sudden scene changes. Do not fabricate unseen sides. Keep the handbag as the main focus throughout.\n\nFORMAT: Vertical 9:16, exactly 10 seconds.\n\nSTRICT OUTPUT RULES: No on-screen text, captions, subtitles, logos, watermarks, UI overlays, or extra written descriptions. Preserve the exact product shape, colour, material, pattern, packaging, and visible labels shown in the uploaded image. Do not invent product features or extra accessories. Keep movement natural, hands anatomically correct, and the product clearly in focus. Output exactly 10 seconds in vertical 9:16 format."
     }
   ]
 }
