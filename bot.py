@@ -1871,7 +1871,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data['prompt_product_type'] = 'other'
         context.user_data['stage'] = 'prompt_flow_choice'
         await query.message.reply_text(
-            '✍️ KLIPPO PROMPT AI PRODUK\\n\\nPilih cara yang cikgu mahu. Prompt Video Terus lebih ringkas; Storyboard Video AI membantu merancang babak dahulu.',
+            '✍️ KLIPPO PROMPT AI PRODUK\n\nPilih cara yang cikgu mahu. Prompt Video Terus lebih ringkas; Storyboard Video AI membantu merancang babak dahulu.',
             reply_markup=prompt_flow_menu()
         )
     elif action.startswith('prompt_flow:') and stage == 'prompt_flow_choice':
@@ -1881,7 +1881,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['prompt_reference_photos'] = []
             context.user_data['stage'] = 'prompt_images'
             await query.message.reply_text(
-                '📷 LANGKAH 1 — GAMBAR PRODUK\\n\\nHantar 1 hingga 4 gambar produk yang jelas. Selepas semua gambar dihantar, tekan “Selesai Hantar Gambar”.\\n\\nNota: Klippo menyimpan pilihan gambar dalam sesi bot tetapi tidak menghantarnya secara automatik ke ChatGPT/Gemini. Anda akan memuat naik gambar yang sama di platform AI pilihan nanti.',
+                '📷 LANGKAH 1 — GAMBAR PRODUK\n\nHantar 1 hingga 4 gambar produk yang jelas. Selepas semua gambar dihantar, tekan “Selesai Hantar Gambar”.\n\nNota: Klippo menyimpan pilihan gambar dalam sesi bot tetapi tidak menghantarnya secara automatik ke ChatGPT/Gemini. Anda akan memuat naik gambar yang sama di platform AI pilihan nanti.',
                 reply_markup=prompt_images_menu()
             )
     elif action == 'prompt_images_done' and stage == 'prompt_images':
@@ -1890,7 +1890,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         else:
             context.user_data['stage'] = 'prompt_product_type'
             await query.message.reply_text(
-                f"✅ {len(context.user_data['prompt_reference_photos'])} gambar diterima.\\n\\n📦 LANGKAH 2 — Pilih kategori produk:",
+                f"✅ {len(context.user_data['prompt_reference_photos'])} gambar diterima.\n\n📦 LANGKAH 2 — Pilih kategori produk:",
                 reply_markup=prompt_product_type_menu()
             )
     elif action.startswith('prompt_type:') and stage == 'prompt_type':
@@ -1980,7 +1980,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['prompt_product_type'] = selected
             context.user_data['stage'] = 'prompt_model_presence'
             await query.message.reply_text(
-                f"📦 Kategori: {PRODUCT_TYPES[selected]}\\n\\n👤 LANGKAH 3 — Mahu model AI dalam video?",
+                f"📦 Kategori: {PRODUCT_TYPES[selected]}\n\n👤 LANGKAH 3 — Mahu model AI dalam video?",
                 reply_markup=prompt_model_presence_menu()
             )
         else:
@@ -2161,11 +2161,11 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         duration = int(context.user_data.get('prompt_duration', 10))
         if duration == 20:
             storyboard_timing = (
-                'Buat 8 babak keseluruhan, 4 babak untuk Bahagian 1 (0–10 saat) dan 4 babak untuk Bahagian 2 (10–20 saat). '
-                'Bahagian 2 mesti menyambung aksi, kedudukan kamera dan bingkai akhir Bahagian 1.'
+                'Buat 10 panel keseluruhan: 5 panel untuk Bahagian 1 (0–10 saat) dan 5 panel untuk Bahagian 2 (10–20 saat). '
+                'Setiap panel tepat 2 saat. Bahagian 2 mesti menyambung aksi, kedudukan kamera dan bingkai akhir Bahagian 1.'
             )
         else:
-            storyboard_timing = 'Buat 4 babak untuk satu video 10 saat.'
+            storyboard_timing = 'Buat 5 panel untuk satu video 10 saat; setiap panel tepat 2 saat.'
         storyboard_prompt = (
             'PROMPT CHATGPT — HASILKAN STORYBOARD VIDEO PRODUK\n\n'
             'Saya akan memuat naik gambar rujukan produk. Analisis gambar yang dimuat naik dan hasilkan storyboard iklan video menegak 9:16. '
@@ -2176,7 +2176,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             'Gunakan hanya ciri produk, warna, corak, logo dan butiran yang benar-benar kelihatan pada gambar. Jangan reka ciri, aksesori, dakwaan atau sudut produk yang tidak kelihatan. '
             'Kekalkan produk yang sama sepanjang video. Jangan tambah teks pada skrin, sari kata, logo tambahan atau watermark kecuali saya minta. '
             'Jadikan aksi spesifik dan mudah difahami oleh penjana video AI, bukan arahan umum. '
-            'Paparkan hasil sebagai storyboard berstruktur mengikut babak. Jangan jana prompt video penuh dahulu; hasilkan storyboard sahaja.\\n\\n'
+            'Paparkan hasil sebagai storyboard berstruktur mengikut babak. Jangan jana prompt video penuh dahulu; hasilkan storyboard sahaja.\n\n'
             + prompt_creative_settings(context.user_data)
         )
         context.user_data['stage'] = 'prompt_storyboard_ready'
@@ -2259,13 +2259,44 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     product_type=context.user_data.get('prompt_product_type', 'other'),
                     storyboard_override=context.user_data.get('prompt_library_storyboard') or None
                 )
-                prompt = prompt.rstrip() + '\\n\\n' + prompt_creative_settings(context.user_data)
+                prompt = prompt.rstrip() + '\n\n' + prompt_creative_settings(context.user_data)
                 await progress_update(waiting, 70, 'Menyediakan PROMPT IMAGE dan PROMPT VIDEO...')
                 context.user_data['stage'] = 'prompt_done'
                 mode_name = context.user_data.get('prompt_mode', 'normal')
                 # Keep the existing premium video prompt and show it only after the user
                 # has used the image prompt, so the workflow is clearly image -> video.
                 context.user_data['prompt_video_ready'] = prompt
+                if mode_name == 'normal':
+                    context.user_data['stage'] = 'prompt_video_ready'
+                    sections = prompt.split('=== KLIPPO PART 2 ===') if context.user_data.get('prompt_duration') == 20 else [prompt]
+                    direct_actions = InlineKeyboardMarkup([
+                        [InlineKeyboardButton('🤖 NexaBot', url='https://t.me/aigeneratornexa_bot?start=ref37141287'),
+                         InlineKeyboardButton('✨ Gemini', url='https://gemini.google.com/')],
+                        [InlineKeyboardButton('🖼️ Buka ChatGPT', url='https://chatgpt.com/')],
+                        [InlineKeyboardButton('✍️ Prompt Baharu', callback_data='prompt'),
+                         InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]
+                    ])
+                    await query.message.reply_text(
+                        '🎥 PROMPT VIDEO TERUS\n\n'
+                        'Muat naik gambar produk asal yang sama ke platform AI pilihan, kemudian salin prompt di bawah. '
+                        'Klippo tidak menghantar gambar ke laman luar secara automatik. Untuk video 20 saat, jana Bahagian 1 dahulu dan gunakan bingkai akhirnya sebagai rujukan Bahagian 2.',
+                        reply_markup=direct_actions
+                    )
+                    for index, section in enumerate(sections, 1):
+                        section = section.strip()
+                        caption = ('BAHAGIAN ' + str(index) + '/2 — jana klip 10 saat secara berasingan. ' +
+                                   ('Simpan bingkai akhir untuk sambungan Bahagian 2.' if index == 1 else
+                                    'Gunakan bingkai akhir Bahagian 1 sebagai rujukan kesinambungan.')) if len(sections) == 2 else ''
+                        if len(section) <= 3900:
+                            await query.message.reply_text(section, reply_markup=direct_actions)
+                        else:
+                            prompt_file = BytesIO(section.encode('utf-8'))
+                            prompt_file.name = f'KLIPPO_PROMPT_VIDEO_PART{index}.txt'
+                            await query.message.reply_document(document=prompt_file, filename=prompt_file.name,
+                                                               caption=caption or '📋 PROMPT VIDEO penuh — buka fail dan salin semua teks.',
+                                                               reply_markup=direct_actions)
+                    await progress_update(waiting, 100, 'Prompt video siap.')
+                    return
                 product_name = context.user_data.get('prompt_product_name', '').strip() or 'product shown in the uploaded reference photo'
                 category_label = CATEGORIES_BY_ID.get(context.user_data.get('prompt_category', ''), {}).get('label', 'product')
                 image_prompt = (
@@ -2286,7 +2317,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     'No collage, split screen, poster layout, captions, promotional text, watermark or extra logos. '
                     'Avoid distorted hands, unnatural faces, plastic skin, warped product geometry and artificial CGI appearance.'
                 )
-                image_prompt += '\\n\\nMODEL DIRECTION: ' + prompt_creative_settings(context.user_data, include_audio=False)
+                image_prompt += '\n\nMODEL DIRECTION: ' + prompt_creative_settings(context.user_data, include_audio=False)
                 context.user_data['prompt_image_ready'] = image_prompt
                 image_action_rows = [
                     [InlineKeyboardButton('✨ ChatGPT Image', url='https://chatgpt.com/'),
@@ -2619,7 +2650,7 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['prompt_product_type'] = 'other'
             context.user_data['stage'] = 'prompt_flow_choice'
             await update.message.reply_text(
-                '✍️ KLIPPO PROMPT AI PRODUK\\n\\nPilih cara yang cikgu mahu. Prompt Video Terus lebih ringkas; Storyboard Video AI membantu merancang babak dahulu.',
+                '✍️ KLIPPO PROMPT AI PRODUK\n\nPilih cara yang cikgu mahu. Prompt Video Terus lebih ringkas; Storyboard Video AI membantu merancang babak dahulu.',
                 reply_markup=prompt_flow_menu()
             )
         elif action == 'subscription':
