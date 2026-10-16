@@ -2196,7 +2196,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 + voiceover_instruction + '\n\nPILIHAN PENGGUNA:\n' + model_instruction
                 + '\n\nFormat output: tajuk ringkas, konsep, kemudian senarai babak bernombor. Jangan hasilkan prompt video penuh dahulu.'
             )
-            await progress_update(waiting, 35, 'Gemini sedang menganalisis gambar produk...')
+            context.user_data['prompt_storyboard_fallback'] = prompt_instruction
+            await progress_update(waiting, 35, 'Klippo sedang menjana storyboard secara automatik...')
             storyboard = await generate_storyboard(images, prompt_instruction)
             if not storyboard:
                 raise RuntimeError('Gemini tidak memulangkan storyboard.')
@@ -2216,16 +2217,44 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 await query.message.reply_document(document=storyboard_file, filename=storyboard_file.name, caption='📋 Storyboard Gemini penuh.', reply_markup=storyboard_actions)
             await progress_update(waiting, 100, 'Storyboard Gemini siap.')
         except Exception as exc:
-            logging.exception('Gemini storyboard generation failed')
-            message = str(exc)[:220]
+            logging.exception('Automatic storyboard generation failed')
+            message = str(exc)[:260]
+            fallback_prompt = context.user_data.get('prompt_storyboard_fallback', '').strip()
+            if not fallback_prompt:
+                fallback_prompt = (
+                    'Bertindak sebagai pengarah kreatif iklan produk. Analisis gambar produk yang saya lampirkan dan hasilkan storyboard video menegak 9:16 selama '
+                    + str(duration) + ' saat. Pecahkan kepada babak 2 saat setiap satu. Untuk setiap babak nyatakan masa, aksi visual khusus, framing/pergerakan kamera, kesinambungan dan peralihan. Kekalkan produk tepat seperti gambar; jangan reka warna, logo, ciri atau dakwaan yang tidak kelihatan. Jangan tambah teks pada skrin, sari kata, logo tambahan atau watermark. Mulakan dengan hook visual kuat dan tamat dengan product hero shot. Hasilkan storyboard sahaja, bukan prompt video penuh.'
+                )
             await query.message.reply_text(
-                '❌ Storyboard automatik belum berjaya. Pastikan GEMINI_API_KEY ditetapkan dalam persekitaran bot dan kuota percuma masih tersedia.\n\nButiran: ' + message,
+                '⚠️ Klippo tidak dapat menjana storyboard secara automatik kali ini. Anda tidak perlu pilih alternatif jika automatik berjaya.\n\n'
+                'Butiran ralat: ' + message + '\n\n'
+                'Pilih servis AI di bawah, kemudian gunakan prompt yang Klippo sediakan dalam mesej seterusnya bersama gambar produk.',
                 reply_markup=InlineKeyboardMarkup([
-                    [InlineKeyboardButton('🔁 Cuba Lagi', callback_data='prompt_chatgpt_storyboard')],
-                    [InlineKeyboardButton('✍️ Prompt Baharu', callback_data='prompt')],
+                    [InlineKeyboardButton('🤖 Buka ChatGPT', url='https://chatgpt.com/'),
+                     InlineKeyboardButton('✨ Buka Gemini', url='https://gemini.google.com/')],
+                    [InlineKeyboardButton('🪄 Buka Microsoft Copilot', url='https://copilot.microsoft.com/')],
+                    [InlineKeyboardButton('🔁 Cuba Jana Automatik Lagi', callback_data='prompt_chatgpt_storyboard')],
                     [InlineKeyboardButton('🏠 Menu Utama', callback_data='home')]
                 ])
             )
+            if len(fallback_prompt) <= 3900:
+                await query.message.reply_text(
+                    '📋 PROMPT ALTERNATIF — JANA STORYBOARD\n\n'
+                    'Salin prompt ini dan tampal di ChatGPT, Gemini atau Copilot. Lampirkan gambar produk yang sama.\n\n'
+                    + fallback_prompt,
+                    reply_markup=InlineKeyboardMarkup([
+                        [InlineKeyboardButton('🤖 ChatGPT', url='https://chatgpt.com/'),
+                         InlineKeyboardButton('✨ Gemini', url='https://gemini.google.com/')]
+                    ])
+                )
+            else:
+                prompt_file = BytesIO(fallback_prompt.encode('utf-8'))
+                prompt_file.name = 'KLIPPO_PROMPT_ALTERNATIF_STORYBOARD.txt'
+                await query.message.reply_document(
+                    document=prompt_file,
+                    filename=prompt_file.name,
+                    caption='📋 Prompt alternatif storyboard. Lampirkan gambar produk apabila menggunakan prompt ini.'
+                )
         finally:
             try:
                 await waiting.delete()
