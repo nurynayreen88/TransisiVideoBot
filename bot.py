@@ -1291,7 +1291,8 @@ async def photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data['prompt_photo_id'] = update.message.photo[-1].file_id
         context.user_data['stage'] = 'prompt_details_choice'
         description = None
-        if os.environ.get('GEMINI_API_KEY'):
+        vision_enabled = os.environ.get('GEMINI_VISION_ENABLED', '').strip().lower() in ('1', 'true', 'yes', 'on')
+        if vision_enabled and os.environ.get('GEMINI_API_KEY'):
             try:
                 image_file = await context.bot.get_file(context.user_data['prompt_photo_id'])
                 image_bytes = bytes(await image_file.download_as_bytearray())
@@ -1299,7 +1300,7 @@ async def photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
             except Exception:
                 logging.exception('Product image analysis unavailable')
         context.user_data['prompt_vision'] = description or ''
-        await update.message.reply_text(('🔎 AI mengenal pasti: ' + description + '\n\n' if description else '📷 Gambar diterima. AI Vision tidak tersedia; prompt masih boleh digunakan bersama gambar rujukan.\n\n') + 'Mahu tambah maklumat produk secara pilihan?', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('✍️ Tambah Maklumat', callback_data='prompt_details:add')], [InlineKeyboardButton('✨ Teruskan Dengan Gambar Sahaja', callback_data='prompt_details:skip')]]))
+        await update.message.reply_text(('🔎 AI mengenal pasti: ' + description + '\n\n' if description else '📷 Gambar diterima. Prompt akan menggunakan gambar rujukan tanpa analisis AI tambahan.\n\n') + 'Mahu tambah maklumat produk secara pilihan?', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('✍️ Tambah Maklumat', callback_data='prompt_details:add')], [InlineKeyboardButton('✨ Teruskan Dengan Gambar Sahaja', callback_data='prompt_details:skip')]]))
         return
     if context.user_data.get('stage') != 'photos':
         await update.message.reply_text('Pilih 📷 Upload Gambar dahulu melalui menu Video Transisi.', reply_markup=main_menu())
