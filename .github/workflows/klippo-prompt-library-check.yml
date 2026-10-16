@@ -78,5 +78,40 @@ jobs:
           missing = [marker for marker in required_flow_markers if marker not in bot]
           assert not missing, f"Prompt-library flow markers missing from bot.py: {missing}"
 
-          print(f"Validated {len(categories)} categories, {len(prompts)} prompts, and prompt-library flow markers.")
+          # Exercise prompt generation for every library entry, with and without user details.
+          # Keep this in sync with inject_product_details() and Telegram's ordered chunking.
+          def inject_details(prompt_text, details):
+              details = " ".join((details or "").split()).strip()
+              if not details:
+                  return prompt_text
+              note = (
+                  "PRODUCT NAME / DETAILS FROM USER: " + details +
+                  ". Use these details only as supporting context. The uploaded image "
+                  "remains the sole visual source of truth; never invent or alter product features.\\n\\n"
+              )
+              first_sentence_end = prompt_text.find(". ")
+              if first_sentence_end >= 0:
+                  return prompt_text[:first_sentence_end + 2] + note + prompt_text[first_sentence_end + 2:]
+              return note + prompt_text
+
+          generated_cases = 0
+          for prompt in prompts:
+              for details in ("", "Example product name; use exact appearance in reference image"):
+                  generated = "PROMPT VIDEO — 10 SAAT\\n\\n" + inject_details(prompt["prompt"], details)
+                  assert generated.startswith("PROMPT VIDEO — 10 SAAT\\n\\n")
+                  assert "STRICT OUTPUT RULES:" in generated
+                  assert "Preserve the exact product shape" in generated
+                  assert "branding, logos, and printed details shown in the uploaded image" in generated
+                  chunks = [generated[index:index + 3800] for index in range(0, len(generated), 3800)] or [generated]
+                  assert "".join(chunks) == generated, f"Prompt was truncated: {prompt['id']}"
+                  assert all(len(chunk) <= 3800 for chunk in chunks), f"Unsafe chunk length: {prompt['id']}"
+                  if details:
+                      assert "PRODUCT NAME / DETAILS FROM USER:" in generated
+                      assert "sole visual source of truth" in generated
+                  generated_cases += 1
+
+          print(
+              f"Validated {len(categories)} categories, {len(prompts)} prompts, "
+              f"{generated_cases} generated prompt cases, and prompt-library flow markers."
+          )
           PY
