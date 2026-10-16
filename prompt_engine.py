@@ -45,7 +45,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
     camera = CAMERAS.get(motion, CAMERAS["push"])
     product_type_directions = {
         'fashion': "PRODUCT CATEGORY DIRECTION: Treat this as clothing/fashion. Favor natural fabric movement and visible garment details; never alter cut, print, color or pattern.",
-        'bag': "PRODUCT CATEGORY DIRECTION: Treat this as a bag or wallet. Favor believable carrying or tabletop presentation, visible handles, seams and hardware; do not change shape or invent accessories.",
+        'bag': "PRODUCT CATEGORY DIRECTION: Treat this as the bag or wallet subtype inferred from the product name. Choose a matching presentation (handbag hero, crossbody lifestyle, backpack upright showcase, or wallet macro/flat lay). Do not assume exact materials, compartments, hardware or accessories unless stated in the name.",
         'hijab': "PRODUCT CATEGORY DIRECTION: Treat this as a hijab/tudung. Emphasize the exact drape, folds, texture and visible styling; do not change the wrap, color or fabric pattern.",
         'shoes': "PRODUCT CATEGORY DIRECTION: Treat this as footwear. Favor grounded placement and visible upper/outsole details; do not invent soles or unseen angles.",
         'beauty': "PRODUCT CATEGORY DIRECTION: Treat this as a beauty, cosmetics or skincare product. Favor clean styling, packaging and texture close-ups; do not imply medical results or unverified benefits.",
@@ -53,14 +53,14 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
         'gadget': "PRODUCT CATEGORY DIRECTION: Treat this as an electronic gadget. Favor precise edges, ports, buttons and screen details only where visible; keep geometry and screen content unchanged.",
         'home': "PRODUCT CATEGORY DIRECTION: Treat this as a home/kitchen product. Favor believable placement and practical scale; do not add components or imply functions not visible.",
         'accessory': "PRODUCT CATEGORY DIRECTION: Treat this as an accessory or jewellery. Favor delicate close-ups, accurate reflections and realistic scale; do not invent stones, engravings or materials.",
-        'other': "PRODUCT CATEGORY DIRECTION: Follow the product category visible in the reference image and choose a suitable presentation without guessing features.",
+        'other': "PRODUCT CATEGORY DIRECTION: Follow the product category inferred from the product name and choose a suitable presentation without guessing features.",
     }
     category_direction = product_type_directions.get(product_type, product_type_directions['other'])
     identity = (
-        "REFERENCE LOCK: Treat the uploaded photograph as the sole visual source of truth. "
-        "Preserve the exact product silhouette, proportions, material appearance, visible colors, "
-        "packaging, labels, branding, count and orientation. Use the user's optional details only "
-        "when consistent with what is visible. Never infer unseen surfaces or specifications."
+        "PRODUCT IDENTITY RULE: This prompt is generated from the product name and category without a reference image. "
+        "Keep the named product as the clear hero and use a plausible, generic presentation. Do not invent exact brand marks, "
+        "model numbers, materials, technical specifications, included accessories, product claims, compartments or hidden features. "
+        "Where the name alone does not establish a detail, leave it neutral rather than guessing."
     )
     art = (
         f"ART DIRECTION: Premium commercial product cinematography. Environment: {scene}. "
