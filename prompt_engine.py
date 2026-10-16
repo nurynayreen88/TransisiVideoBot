@@ -8,19 +8,32 @@ CAMERAS = {
     "static": "A locked premium studio composition with delicate lighting movement and a subtle focus transition.",
 }
 
-def build_prompt(mode, product, scene, motion, style='auto', duration=10, concept=''):
+def build_prompt(mode, product, scene, motion, style='auto', duration=10, concept='', product_type='other'):
     if duration == 20:
         # Resolve Auto/Random once so both clips use exactly the same style.
         chosen_style = resolve(style)[0] if mode == 'storyboard' else style
-        first = _build_single_prompt(mode, product, scene, motion, chosen_style, part=1, concept=concept)
-        second = _build_single_prompt(mode, product, scene, motion, chosen_style, part=2, concept=concept)
+        first = _build_single_prompt(mode, product, scene, motion, chosen_style, part=1, concept=concept, product_type=product_type)
+        second = _build_single_prompt(mode, product, scene, motion, chosen_style, part=2, concept=concept, product_type=product_type)
         return first + "\n\n=== KLIPPO PART 2 ===\n\n" + second
-    return _build_single_prompt(mode, product, scene, motion, style, part=0, concept=concept)
+    return _build_single_prompt(mode, product, scene, motion, style, part=0, concept=concept, product_type=product_type)
 
 
-def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, concept=''):
+def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, concept='', product_type='other'):
     duration = 10
     camera = CAMERAS.get(motion, CAMERAS["push"])
+    product_type_directions = {
+        'fashion': "PRODUCT CATEGORY DIRECTION: Treat this as clothing/fashion. Favor natural fabric movement and visible garment details; never alter cut, print, color or pattern.",
+        'bag': "PRODUCT CATEGORY DIRECTION: Treat this as a bag or wallet. Favor believable carrying or tabletop presentation, visible handles, seams and hardware; do not change shape or invent accessories.",
+        'hijab': "PRODUCT CATEGORY DIRECTION: Treat this as a hijab/tudung. Emphasize the exact drape, folds, texture and visible styling; do not change the wrap, color or fabric pattern.",
+        'shoes': "PRODUCT CATEGORY DIRECTION: Treat this as footwear. Favor grounded placement and visible upper/outsole details; do not invent soles or unseen angles.",
+        'beauty': "PRODUCT CATEGORY DIRECTION: Treat this as a beauty, cosmetics or skincare product. Favor clean styling, packaging and texture close-ups; do not imply medical results or unverified benefits.",
+        'food': "PRODUCT CATEGORY DIRECTION: Treat this as food or drink. Favor appetizing but realistic lighting and visible texture; do not add ingredients, toppings or serving items not shown.",
+        'gadget': "PRODUCT CATEGORY DIRECTION: Treat this as an electronic gadget. Favor precise edges, ports, buttons and screen details only where visible; keep geometry and screen content unchanged.",
+        'home': "PRODUCT CATEGORY DIRECTION: Treat this as a home/kitchen product. Favor believable placement and practical scale; do not add components or imply functions not visible.",
+        'accessory': "PRODUCT CATEGORY DIRECTION: Treat this as an accessory or jewellery. Favor delicate close-ups, accurate reflections and realistic scale; do not invent stones, engravings or materials.",
+        'other': "PRODUCT CATEGORY DIRECTION: Follow the product category visible in the reference image and choose a suitable presentation without guessing features.",
+    }
+    category_direction = product_type_directions.get(product_type, product_type_directions['other'])
     identity = (
         "REFERENCE LOCK: Treat the uploaded photograph as the sole visual source of truth. "
         "Preserve the exact product silhouette, proportions, material appearance, visible colors, "
@@ -109,7 +122,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
         return (
             "KLIPPO | UNIVERSAL PRODUCT VIDEO PROMPT | " + style_name + (" | BAHAGIAN " + str(part) + "/2" if part else "") + "\n"
             "OUTPUT: One cohesive vertical 9:16 product advertisement, EXACT DURATION: " + str(duration) + " seconds.\n\n"
-            "PRODUCT REFERENCE: " + product + "\n\n" + identity + "\n\n"
+            "PRODUCT REFERENCE: " + product + "\n" + category_direction + "\n\n" + identity + "\n\n"
             "STYLE FROM KLIPPO CATALOG: " + style_template + "\n\n"
             "SETTING: " + scene + "\n"
             "CAMERA: " + camera + " Stay reference-facing; never invent unseen sides.\n\n"
@@ -201,7 +214,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
         "KLIPPO | PROFESSIONAL IMAGE-TO-VIDEO PRODUCTION PROMPT" + (" | BAHAGIAN " + str(part) + "/2" if part else "") + "\n"
         "OUTPUT: " + str(duration) + " seconds; portrait 9:16; high-quality realistic product commercial; "
         "one coherent deliverable. ON-SCREEN TEXT: Only show a product name or exact wording if it is explicitly supplied in Optional user details; preserve spelling exactly, use a small elegant pop-up around 3–5 seconds, keep it away from the product, then fade it out. If no exact wording is supplied, show no text.\n\n"
-        "PRODUCT: " + product + "\n\n" + identity + "\n\n" + art + "\n\n"
+        "PRODUCT: " + product + "\n" + category_direction + "\n\n" + identity + "\n\n" + art + "\n\n"
         + direction + "\n\n" + negative + "\n\n"
         "FINAL QUALITY CHECK: Consistent identity in every frame, natural physics, clean edges, "
         "stable illumination, smooth temporal coherence and polished affiliate-ad aesthetics. "

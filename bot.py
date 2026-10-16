@@ -223,6 +223,29 @@ def prompt_input_menu():
     ])
 
 
+PRODUCT_TYPES = {
+    'fashion': '👗 Pakaian / Fesyen',
+    'bag': '👜 Beg & Dompet',
+    'hijab': '🧕 Tudung / Hijab',
+    'shoes': '👟 Kasut',
+    'beauty': '💄 Kecantikan / Skincare',
+    'food': '🍰 Makanan / Minuman',
+    'gadget': '📱 Gajet / Elektronik',
+    'home': '🏡 Rumah / Dapur',
+    'accessory': '⌚ Aksesori / Barang Kemas',
+    'other': '📦 Produk Lain / Auto',
+}
+
+def prompt_product_type_menu():
+    items = list(PRODUCT_TYPES.items())
+    rows = []
+    for index in range(0, len(items), 2):
+        pair = items[index:index + 2]
+        rows.append([InlineKeyboardButton(label, callback_data='prompt_product_type:' + key) for key, label in pair])
+    rows.append([InlineKeyboardButton('↩️ Menu Utama', callback_data='home')])
+    return InlineKeyboardMarkup(rows)
+
+
 def prompt_duration_menu():
     return InlineKeyboardMarkup([
         [InlineKeyboardButton('🎬 10 Saat', callback_data='prompt_duration:10'),
@@ -1529,10 +1552,11 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data['prompt_mode'] = 'storyboard'
         context.user_data['prompt_style'] = 'auto'
         context.user_data['prompt_concept'] = ''
-        context.user_data['stage'] = 'prompt_duration'
+        context.user_data['stage'] = 'prompt_product_type'
+        context.user_data['prompt_product_type'] = 'other'
         await query.message.reply_text(
-            '✍️ KLIPPO ONE PROMPT — Satu aliran untuk semua produk. Pilih tempoh video:',
-            reply_markup=prompt_duration_menu()
+            '✍️ KLIPPO ONE PROMPT — Pilih jenis produk dahulu supaya gaya iklan dan aksi lebih sesuai:',
+            reply_markup=prompt_product_type_menu()
         )
     elif action.startswith('prompt_type:') and stage == 'prompt_type':
         selected = action.split(':', 1)[1]
@@ -1580,6 +1604,15 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await query.message.reply_text(
                 '✅ Idea video ditambah. Sekarang hantar satu gambar produk; idea hanya mengarah aksi dan tidak mengubah rupa produk.',
                 reply_markup=prompt_input_menu()
+            )
+    elif action.startswith('prompt_product_type:') and stage == 'prompt_product_type':
+        selected = action.split(':', 1)[1]
+        if selected in PRODUCT_TYPES:
+            context.user_data['prompt_product_type'] = selected
+            context.user_data['stage'] = 'prompt_duration'
+            await query.message.reply_text(
+                f"🛍️ Jenis produk: {PRODUCT_TYPES[selected]}\n\n⏱️ Pilih tempoh video:",
+                reply_markup=prompt_duration_menu()
             )
     elif action.startswith('prompt_duration:') and stage == 'prompt_duration':
         selected = action.split(':', 1)[1]
@@ -1647,7 +1680,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # Return only for actions handled by the first chain. Video workflow
     # callbacks must continue into the second chain.
     if action in ('admin_pending', 'admin', 'storyboard', 'make', 'prompt', 'prompt_categories') or action.startswith(
-        ('admin_approve:', 'admin_reject:', 'prompt_type:', 'prompt_duration:',
+        ('admin_approve:', 'admin_reject:', 'prompt_type:', 'prompt_product_type:', 'prompt_duration:',
          'prompt_style:', 'prompt_idea:', 'prompt_details:', 'video_input:', 'prompt_input:', 'pcat:', 'ptpl:')
     ):
         return
@@ -1663,7 +1696,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     'storyboard', product, scene, motion,
                     context.user_data.get('prompt_style', 'auto'),
                     context.user_data.get('prompt_duration', 10),
-                    context.user_data.get('prompt_concept', '')
+                    context.user_data.get('prompt_concept', ''),
+                    product_type=context.user_data.get('prompt_product_type', 'other')
                 )
                 await progress_update(waiting, 70, 'Prompt siap disusun. Menghantar hasil...')
                 context.user_data['stage'] = 'prompt_done'
@@ -1945,10 +1979,11 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['prompt_mode'] = 'storyboard'
             context.user_data['prompt_style'] = 'auto'
             context.user_data['prompt_concept'] = ''
-            context.user_data['stage'] = 'prompt_duration'
+            context.user_data['stage'] = 'prompt_product_type'
+            context.user_data['prompt_product_type'] = 'other'
             await update.message.reply_text(
-                '✍️ KLIPPO ONE PROMPT — Satu aliran untuk semua produk. Pilih tempoh video:',
-                reply_markup=prompt_duration_menu()
+                '✍️ KLIPPO ONE PROMPT — Pilih jenis produk dahulu supaya gaya iklan dan aksi lebih sesuai:',
+                reply_markup=prompt_product_type_menu()
             )
         elif action == 'subscription':
             await update.message.reply_text('💎 LANGGANAN KLIPPO\n\nPelan Penyokong Awal: RM5 / 30 hari, sehingga 30 video sebulan. Pengaktifan manual selepas resit disemak.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📱 Papar QR DuitNow', callback_data='subscription_qr')]]))
