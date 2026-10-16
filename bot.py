@@ -218,7 +218,7 @@ def doodle_menu():
 
 PRODUCT_TYPES = {
     'fashion': '👗 Pakaian / Fesyen',
-    'bag': '👜 Beg & Dompet',
+    'bag': '👜 Beg / Dompet — auto kesan daripada nama',
     'hijab': '🧕 Tudung / Hijab',
     'shoes': '👟 Kasut',
     'beauty': '💄 Kecantikan / Skincare',
