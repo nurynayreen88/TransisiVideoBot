@@ -1636,6 +1636,10 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 product_name = context.user_data['prompt_product_name']
                 subtype = detect_bag_subtype(product_name)
                 context.user_data['prompt_bag_subtype'] = subtype
+                if subtype == 'wallet' or category_id == 'wallets':
+                    context.user_data['prompt_product_type'] = 'wallet'
+                elif category_id == 'bags':
+                    context.user_data['prompt_product_type'] = 'bag'
                 context.user_data['stage'] = 'prompt_scene'
                 await query.message.reply_text(
                     '✅ Nama produk: ' + product_name + '\n🔎 Jenis dikesan: ' + (subtype.replace('_', ' ') if subtype else category_id) + '\n\n🎨 Pilih latar video:',
@@ -2042,6 +2046,10 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
             category_id = detect_prompt_library_category(details)
             context.user_data['prompt_bag_subtype'] = subtype
             context.user_data['prompt_detected_category'] = category_id
+            if category_id == 'wallets':
+                context.user_data['prompt_product_type'] = 'wallet'
+            elif category_id == 'bags':
+                context.user_data['prompt_product_type'] = 'bag'
             if category_id:
                 context.user_data['prompt_category'] = category_id
                 context.user_data['stage'] = 'prompt_category_options'
