@@ -1783,9 +1783,19 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 product_name = context.user_data.get('prompt_product_name', '').strip()
                 product = 'NAMA_PRODUK: ' + product_name + chr(10) + 'Optional user details: ' + context.user_data.get('prompt_product', '')
                 scene = context.user_data.get('prompt_scene', 'clean studio background')
+                style_choice = context.user_data.get('prompt_style', 'auto')
+                if style_choice == 'auto':
+                    subtype = context.user_data.get('prompt_bag_subtype', '')
+                    style_choice = {
+                        'wallet': 'wallet_luxury_macro',
+                        'backpack': 'backpack_demo',
+                        'sling_bag': 'sling_bag_lifestyle',
+                        'handbag': 'handbag_showcase',
+                        'bag': 'bag_tabletop_reveal',
+                    }.get(subtype, 'auto')
                 prompt = build_prompt(
                     'storyboard', product, scene, motions[motion],
-                    context.user_data.get('prompt_style', 'auto'),
+                    style_choice,
                     context.user_data.get('prompt_duration', 10),
                     context.user_data.get('prompt_concept', ''),
                     product_type=context.user_data.get('prompt_product_type', 'other')
