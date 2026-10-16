@@ -1,0 +1,60 @@
+name: Klippo prompt library checks
+
+on:
+  push:
+    branches:
+      - staging/klippo-library-main-port
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "bot.py"
+      - "prompts/prompt_library.json"
+      - ".github/workflows/klippo-prompt-library-check.yml"
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Check Python syntax
+        run: python -m py_compile bot.py
+      - name: Validate prompt library structure
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          path = Path("prompts/prompt_library.json")
+          data = json.loads(path.read_text(encoding="utf-8"))
+          categories = data.get("categories", [])
+          prompts = data.get("prompts", [])
+          assert categories, "No categories found"
+          assert prompts, "No prompts found"
+
+          prompt_ids = [item.get("id") for item in prompts]
+          assert all(prompt_ids), "A prompt is missing its id"
+          assert len(prompt_ids) == len(set(prompt_ids)), "Duplicate prompt ids found"
+          by_id = {item["id"]: item for item in prompts}
+
+          category_ids = [item.get("id") for item in categories]
+          assert len(category_ids) == len(set(category_ids)), "Duplicate category ids found"
+          for category in categories:
+              assert category.get("label"), f"Category missing label: {category}"
+              for prompt_id in category.get("prompt_ids", []):
+                  assert prompt_id in by_id, f"Missing prompt referenced by {category['id']}: {prompt_id}"
+                  assert by_id[prompt_id].get("category") == category["id"], (
+                      f"Category mismatch for prompt {prompt_id}"
+                  )
+
+          for prompt in prompts:
+              assert prompt.get("label") and prompt.get("prompt"), (
+                  f"Prompt missing label/text: {prompt.get('id')}"
+              )
+          print(f"Validated {len(categories)} categories and {len(prompts)} prompts.")
+          PY
