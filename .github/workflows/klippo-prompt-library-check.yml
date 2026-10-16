@@ -56,5 +56,19 @@ jobs:
               assert prompt.get("label") and prompt.get("prompt"), (
                   f"Prompt missing label/text: {prompt.get('id')}"
               )
-          print(f"Validated {len(categories)} categories and {len(prompts)} prompts.")
+          bot = Path("bot.py").read_text(encoding="utf-8")
+          required_flow_markers = [
+              "if context.user_data.get('stage') == 'prompt_upload':",
+              "elif action == 'prompt_categories':",
+              "elif action.startswith('pcat:')",
+              "elif action.startswith('ptpl:')",
+              "PROMPT_LIBRARY_PATH",
+              "prompt_category_menu()",
+              "prompt_options_menu(category_id)",
+              "prompt_categories|pcat:[a-z0-9_]+|ptpl:[a-z0-9_]+",
+          ]
+          missing = [marker for marker in required_flow_markers if marker not in bot]
+          assert not missing, f"Prompt-library flow markers missing from bot.py: {missing}"
+
+          print(f"Validated {len(categories)} categories, {len(prompts)} prompts, and prompt-library flow markers.")
           PY
