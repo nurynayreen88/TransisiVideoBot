@@ -1704,7 +1704,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # callbacks must continue into the second chain.
     if action in ('admin_pending', 'admin', 'storyboard', 'make', 'prompt', 'prompt_categories') or action.startswith(
         ('admin_approve:', 'admin_reject:', 'prompt_type:', 'prompt_product_type:', 'prompt_duration:',
-         'prompt_style:', 'prompt_idea:', 'prompt_details:', 'prompt_generate:', 'video_input:', 'prompt_input:', 'pcat:', 'ptpl:')
+         'prompt_style:', 'prompt_idea:', 'prompt_details:', 'video_input:', 'prompt_input:', 'pcat:', 'ptpl:')
     ):
         return
     if action.startswith('motion:') and context.user_data.get('stage') == 'prompt_motion':
@@ -1728,17 +1728,19 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 'bright minimalist setting with clean neutral surfaces and soft daylight': 'Cerah Minimalis',
             }
             motion_labels = {'orbit': 'Orbit Terkawal', 'push': 'Zoom Masuk', 'side': 'Gerak Sisi', 'static': 'Studio Statik'}
-            summary = (
-                '🧾 SEMAK PILIHAN SEBELUM JANA PROMPT\\n\\n'
-                f'🛍️ Nama produk: {product_name}\\n'
-                f'📦 Jenis produk: {PRODUCT_TYPES.get(context.user_data.get("prompt_product_type", "other"), "Produk lain")}\\n'
-                f'⏱️ Tempoh: {context.user_data.get("prompt_duration", 10)} saat\\n'
-                f'🎨 Gaya visual: {style_name}\\n'
-                f'💡 Idea video: {concept}\\n'
-                f'🖼️ Latar: {scene_labels.get(scene, scene)}\\n'
-                f'🎥 Gerakan kamera: {motion_labels[motion]}\\n\\n'
+            summary = chr(10).join([
+                '🧾 SEMAK PILIHAN SEBELUM JANA PROMPT',
+                '',
+                f'🛍️ Nama produk: {product_name}',
+                f'📦 Jenis produk: {PRODUCT_TYPES.get(context.user_data.get("prompt_product_type", "other"), "Produk lain")}',
+                f'⏱️ Tempoh: {context.user_data.get("prompt_duration", 10)} saat',
+                f'🎨 Gaya visual: {style_name}',
+                f'💡 Idea video: {concept}',
+                f'🖼️ Latar: {scene_labels.get(scene, scene)}',
+                f'🎥 Gerakan kamera: {motion_labels[motion]}',
+                '',
                 'Semak semua pilihan di atas. Tekan Jana Prompt untuk meneruskan.'
-            )
+            ])
             await query.message.reply_text(summary, reply_markup=InlineKeyboardMarkup([
                 [InlineKeyboardButton('✅ Jana Prompt', callback_data='prompt_generate:confirm')],
                 [InlineKeyboardButton('🔁 Mula Semula / Tukar Pilihan', callback_data='prompt')],
@@ -1748,7 +1750,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         motion = context.user_data.get('prompt_motion_choice', 'push')
         motions = {'orbit': 'A controlled 30-degree camera arc around the product, not a full 360-degree rotation; preserve the visible product geometry.', 'push': 'A slow forward dolly-in with gentle parallax; no object deformation.', 'side': 'A smooth left-to-right camera slide with stable product proportions.', 'static': 'A locked camera with subtle studio lighting changes only.'}
         if motion in motions:
-            waiting = await query.message.reply_text('⏳ DALAM PROSES — 0%\\nMenyusun prompt...')
+            waiting = await query.message.reply_text('⏳ DALAM PROSES — 0%' + chr(10) + 'Menyusun prompt...')
             try:
                 product_name = context.user_data.get('prompt_product_name', '').strip()
                 product = ('Product name supplied by user: ' + product_name + '. The uploaded reference image is the sole visual source of truth; preserve the exact product appearance. Visible observations (verify against reference image): ' + context.user_data.get('prompt_vision', '') + '. Optional user details: ' + context.user_data.get('prompt_product', ''))
@@ -1774,7 +1776,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                                + ('Gunakan bingkai akhir Bahagian 1 sebagai rujukan sambungan.' if index == 2 else
                                   'Simpan bingkai terakhir untuk sambungan Bahagian 2.')) if len(sections) == 2 else ''
                     if len(section) <= 3900:
-                        await query.message.reply_text((caption + '\\n\\n' if caption else '') + section, reply_markup=actions)
+                        await query.message.reply_text((caption + chr(10) * 2 if caption else '') + section, reply_markup=actions)
                     else:
                         prompt_file = BytesIO(section.encode('utf-8'))
                         prompt_file.name = f'KLIPPO_prompt_{mode_name}_part{index}.txt'
@@ -1785,6 +1787,9 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                             reply_markup=actions
                         )
                 await progress_update(waiting, 100, 'Prompt berjaya dihantar.')
+            except Exception:
+                logging.exception('Klippo prompt generation failed')
+                await query.message.reply_text('❌ Prompt tidak berjaya dijana. Sila tekan Jana Prompt sekali lagi. Jika masalah berulang, maklumkan admin Klippo.')
             finally:
                 try:
                     await waiting.delete()
@@ -2016,7 +2021,7 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
             return
         context.user_data['prompt_product_name'] = value[:240]
         context.user_data['stage'] = 'prompt_photo'
-        await update.message.reply_text('✅ Nama produk disimpan: ' + value[:240] + '\\n\\n📷 Sekarang hantar satu gambar produk. Gambar ini akan menjadi rujukan utama untuk rupa produk.')
+        await update.message.reply_text('✅ Nama produk disimpan: ' + value[:240] + chr(10) * 2 + '📷 Sekarang hantar satu gambar produk. Gambar ini akan menjadi rujukan utama untuk rupa produk.')
         return
     shortcuts = {
         '🎬 Jana Video Affiliate': 'make',
