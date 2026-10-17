@@ -15,7 +15,7 @@ import tempfile
 from pathlib import Path
 
 import fal_client
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageOps
 from telegram import Update
 from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters
 
@@ -165,5 +165,4 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    from PIL import ImageOps
     main()
