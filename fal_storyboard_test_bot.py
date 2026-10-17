@@ -129,7 +129,7 @@ async def choose_mode(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
         )
         context.user_data["video_prompt"] = video_prompt
         await query.edit_message_text(
-            "🎬 KLIPPO DIRECT VIDEO PROMPT\\n\\n"
+            "🎬 KLIPPO DIRECT VIDEO PROMPT\n\n"
             "Prompt ini menggunakan gambar produk yang anda muat naik sebagai rujukan. Salin prompt dan muat naik "
             "gambar yang sama pada platform pilihan anda. Klippo tidak memanggil API penjana video dalam laluan ini."
         )
@@ -154,7 +154,7 @@ async def send_text_chunks(message, text: str, reply_markup=None) -> None:
     chunks = []
     remaining = text.strip()
     while len(remaining) > limit:
-        split_at = remaining.rfind("\\n", 0, limit)
+        split_at = remaining.rfind("\n", 0, limit)
         if split_at < limit // 2:
             split_at = limit
         chunks.append(remaining[:split_at].strip())
@@ -246,16 +246,16 @@ async def choose_environment(update: Update, context: ContextTypes.DEFAULT_TYPE)
             "studio": "Studio Premium", "home": "Suasana Rumah", "cafe": "Kafe Moden"
         }.get(context.user_data["visual_environment"], "Studio Premium")
         malay_script = (
-            "✨ KLIPPO SUPER STORYBOARD — 4 PANEL\\n\\n"
-            f"🎯 Tujuan: {goal_label} | 📍 Latar: {environment_label}\\n\\n"
+            "✨ KLIPPO SUPER STORYBOARD — 4 PANEL\n\n"
+            f"🎯 Tujuan: {goal_label} | 📍 Latar: {environment_label}\n\n"
             "PANEL 1 — HOOK (0–3s): Perkenalkan produk dengan komposisi yang kuat dan jelas. "
-            "Tarik perhatian melalui visual produk, bukan teks tambahan.\\n\\n"
+            "Tarik perhatian melalui visual produk, bukan teks tambahan.\n\n"
             "PANEL 2 — DETAIL (3–6s): Dekatkan kamera untuk menunjukkan bentuk, bahan dan ciri "
-            "yang benar-benar kelihatan pada gambar rujukan.\\n\\n"
+            "yang benar-benar kelihatan pada gambar rujukan.\n\n"
             "PANEL 3 — LIFESTYLE / PENGGUNAAN (6–9s): Tunjukkan konteks penggunaan yang munasabah "
-            "mengikut gaya visual dipilih. Kekalkan produk yang sama dan jangan reka ciri baharu.\\n\\n"
+            "mengikut gaya visual dipilih. Kekalkan produk yang sama dan jangan reka ciri baharu.\n\n"
             "PANEL 4 — HERO / PENUTUP (9–12s): Akhiri dengan paparan produk yang kemas, premium "
-            "dan mudah dikenal pasti. Ini ialah pelan visual; bukan video siap.\\n\\n"
+            "dan mudah dikenal pasti. Ini ialah pelan visual; bukan video siap.\n\n"
             "Nota: Klippo hanya menyediakan teks. Tiada API imej berbayar dipanggil. Untuk hasil visual, "
             "muat naik gambar produk asal bersama prompt di platform pilihan."
         )
@@ -263,7 +263,7 @@ async def choose_environment(update: Update, context: ContextTypes.DEFAULT_TYPE)
         context.user_data["storyboard_prompt"] = prompt
         await send_text_chunks(
             query.message,
-            "🎨 AI IMAGE PROMPT (ENGLISH) — READY TO COPY\\n\\n" + prompt,
+            "🎨 AI IMAGE PROMPT (ENGLISH) — READY TO COPY\n\n" + prompt,
             reply_markup=InlineKeyboardMarkup([
                 [InlineKeyboardButton("🔗 ChatGPT", url="https://chatgpt.com/"),
                  InlineKeyboardButton("🔗 Gemini", url="https://gemini.google.com/")],
@@ -376,7 +376,7 @@ async def show_video_prompt_for_copy(update: Update, context: ContextTypes.DEFAU
     if not prompt:
         await query.message.reply_text("Prompt video tiada. Sila muat naik gambar produk dan pilih Direct Video Prompt.")
         return
-    await send_text_chunks(query.message, "DIRECT VIDEO PROMPT — TEKAN LAMA UNTUK SALIN\\n\\n" + prompt)
+    await send_text_chunks(query.message, "DIRECT VIDEO PROMPT — TEKAN LAMA UNTUK SALIN\n\n" + prompt)
 
 
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
