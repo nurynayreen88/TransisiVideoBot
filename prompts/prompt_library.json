@@ -1474,27 +1474,27 @@
       "duration_seconds": 10,
       "style": "natural_ugc",
       "description": "Kasut dipakai dan diperlihatkan melalui beberapa langkah perlahan.",
-      "prompt": "Premium product ad for the exact user-supplied product name. Category: Kasut. Concept: On-Foot Walk Test. EXACTLY 10 seconds, vertical 9:16.\n\nPRODUCT LOCK: Match any supplied reference image precisely: shape, colour, proportions, visible parts and packaging. Do not invent features, materials, ingredients, functions, claims, accessories or label text. Keep actions physically plausible and the same product consistent throughout.\n\nRULES: No on-screen text, captions, added logos, watermark, morphing, floating/duplicated parts, sudden redesign or impossible movement. Props are not implied to be included. No dialogue/voice-over; if supported, subtle instrumental music below ambience.\n\nSTORYBOARD:\n0–2s | Opening hook: Open with the actual shoe or pair grounded on a clean surface; reveal the side profile, toe shape and sole in one slow slide.\n2–6s | Signature action: Execute this exact concept: Kasut dipakai dan diperlihatkan melalui beberapa langkah perlahan. Complete it naturally within this beat. Slight intentional handheld motion only; no jitter. If unsupported by the visible product, do not fake a mechanism; use a compatible gesture or camera move.\n6–8s | Detail insert: Close in on the real outsole edge or tread only where visible; do not invent grip patterns or performance claims.\n8–10s | Hero finish: Finish with the complete shoe or pair grounded in a clean hero view; keep the sole, upper and fastenings unchanged.\n\nFinish with a stable hero frame showing the unchanged product.",
+      "prompt": "Premium product advertisement for the exact user-supplied footwear. Category: Kasut. Concept: On-Foot Walk Test. EXACTLY 10 seconds, vertical 9:16.\n\nPRODUCT LOCK: Use the supplied reference image as the visual source of truth. Preserve the exact shoe design, colour, pattern, material appearance, toe shape, heel height, sole profile, visible stitching, logo placement and fastening system. Keep the same pair consistent on both feet; do not swap left/right designs or invent laces, buckles, straps, logos, cushioning, waterproofing, grip or comfort claims. If the reference shows only one shoe or does not support an on-foot view, use a stationary product view rather than inventing a wearer or unseen construction.\n\nWEARER AND REALISM LOCK: If a wearer is visible in the reference, preserve their identity, skin tone, leg proportions, socks and styling. Foot movement must be anatomically plausible, with natural balance, contact with the floor and believable weight transfer. No sliding feet, floating shoes, fused toes, extra limbs, shoe morphing, duplicated footwear, sudden redesign, impossible bending, flickering details, text overlays, added logos or watermarks. Do not imply props are included. No dialogue or voice-over; if supported, use subtle instrumental music below natural ambience.\n\nSTORYBOARD — keep the same shoes, wearer, surface and lighting continuous throughout:\n0–2s OPENING HOOK: Open on both shoes clearly visible on the wearer's feet, framed from lower calf to floor. Use a gentle camera push-in that preserves the true shoe shape, colour, sole profile and left-right pairing.\n2–6s SIGNATURE WALK: The wearer takes two short, measured steps on a flat, stable surface, then stops. Show natural foot placement and believable sole contact; keep both shoes identical to the reference and do not invent laces, buckles or fasteners.\n6–8s PROFILE DETAIL: Hold a low, steady side angle to reveal the visible upper, toe shape and sole edge. Show only details present in the reference; do not stretch, reshape or add tread patterns.\n8–10s HERO FINISH: Settle into a clean standing pose with both shoes fully visible. Allow any remaining movement to stop naturally, then hold a stable final frame with realistic shadows and unchanged proportions.\n\nCAMERA AND CONTINUITY: Use smooth, controlled tracking at shoe level, realistic floor contact and consistent shadows. Avoid fast walking, dramatic camera orbit, excessive motion blur or cropping the shoes during the key action. Keep exposure, colour, shoe proportions and background consistent from first frame to last. End with a stable, clear product view.",
       "storyboard": [
         {
           "time": "0–2s",
           "shot": "Opening hook",
-          "direction": "Open with the actual shoe or pair grounded on a clean surface; reveal the side profile, toe shape and sole in one slow slide."
+          "direction": "Open on both shoes clearly visible on the wearer's feet, framed from lower calf to floor. Use a gentle camera push-in that preserves the true shoe shape, colour, sole profile and left-right pairing."
         },
         {
           "time": "2–6s",
-          "shot": "Signature action",
-          "direction": "Execute this exact concept: Kasut dipakai dan diperlihatkan melalui beberapa langkah perlahan. Complete it naturally within this beat. Slight intentional handheld motion only; no jitter. If unsupported by the visible product, do not fake a mechanism; use a compatible gesture or camera move."
+          "shot": "Signature walk",
+          "direction": "The wearer takes two short, measured steps on a flat, stable surface, then stops. Show natural foot placement and believable sole contact; keep both shoes identical to the reference and do not invent laces, buckles or fasteners."
         },
         {
           "time": "6–8s",
-          "shot": "Detail insert",
-          "direction": "Close in on the real outsole edge or tread only where visible; do not invent grip patterns or performance claims."
+          "shot": "Profile detail",
+          "direction": "Hold a low, steady side angle to reveal the visible upper, toe shape and sole edge. Show only details present in the reference; do not stretch, reshape or add tread patterns."
         },
         {
           "time": "8–10s",
           "shot": "Hero finish",
-          "direction": "Finish with the complete shoe or pair grounded in a clean hero view; keep the sole, upper and fastenings unchanged."
+          "direction": "Settle into a clean standing pose with both shoes fully visible. Allow any remaining movement to stop naturally, then hold a stable final frame with realistic shadows and unchanged proportions."
         }
       ]
     },
