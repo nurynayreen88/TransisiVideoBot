@@ -2621,27 +2621,27 @@
       "duration_seconds": 10,
       "style": "premium_product",
       "description": "Close-up premium on the wallet silhouette, visible stitching and visible closure; do not infer leather or other materials.",
-      "prompt": "Premium product ad for the exact user-supplied product name. Category: Dompet. Concept: Luxury Wallet Macro. EXACTLY 10 seconds, vertical 9:16.\n\nPRODUCT LOCK: Match any supplied reference image precisely: shape, colour, proportions, visible parts and packaging. Do not invent features, materials, ingredients, functions, claims, accessories or label text. Keep actions physically plausible and the same product consistent throughout.\n\nRULES: No on-screen text, captions, added logos, watermark, morphing, floating/duplicated parts, sudden redesign or impossible movement. Props are not implied to be included. No dialogue/voice-over; if supported, subtle instrumental music below ambience.\n\nSTORYBOARD:\n0–2s | Opening hook: Open with the complete wallet resting flat and unobstructed; use a gentle three-quarter slide to reveal its true outline and closure.\n2–6s | Signature action: Execute this exact concept: Close-up premium on the wallet silhouette, visible stitching and visible closure; do not infer leather or other materials. Complete it naturally within this beat. Slow dolly/slider move, refined light and precise focus. If unsupported by the visible product, do not fake a mechanism; use a compatible gesture or camera move.\n6–8s | Detail insert: Focus only on visible stitching, edge paint, zipper or clasp; do not invent card slots, pockets or storage capacity.\n8–10s | Hero finish: Finish with the whole wallet visible and closed or open exactly as established; hold its real silhouette steady.\n\nFinish with a stable hero frame showing the unchanged product.",
+      "prompt": "Premium product advertisement for the exact user-supplied wallet. Category: Dompet. Concept: Luxury Wallet Macro. EXACTLY 10 seconds, vertical 9:16.\n\nPRODUCT LOCK: Use the supplied reference image as the sole visual source of truth. Preserve the wallet's exact outline, dimensions, fold, colour, pattern, visible surface appearance, edge finish, stitching, zipper or clasp, logo placement and all visible details. Do not infer leather, suede, metal type, craftsmanship, durability, water resistance, capacity or other material/product claims. Do not invent card slots, pockets, lining, compartments, cards, coins, labels or accessories. If the wallet is shown open, keep its visible interior exactly as supported by the reference; otherwise keep it closed.\n\nSCENE AND REALISM: Keep the wallet resting naturally on a stable surface. Camera movement is the main action; the wallet must not float, slide, rotate by itself, open spontaneously, duplicate, morph or change thickness. No impossible folds, flickering stitching, changing closure, fake reflections, exaggerated shine, sudden redesign, added text, captions, logos or watermarks. Any background prop already visible remains separate and must not imply it is included. No dialogue or voice-over; if audio is supported, use subtle instrumental music below natural ambience.\n\nSTORYBOARD — exact timing and continuous product identity:\n0–2s OPENING HOOK: Show the complete wallet resting flat in a clean three-quarter macro composition. Use a slow, shallow camera slide to reveal its true outline, fold and visible closure while keeping the whole product recognisable.\n2–6s SIGNATURE MACRO REVEAL: Make one measured slider move along the wallet's visible edge toward its closure, drawing attention to the actual silhouette and construction. Keep the wallet stationary; do not open it, add contents or imply an unshown mechanism.\n6–8s VISIBLE DETAIL INSERT: Hold a sharp close-up on one real detail—visible stitching, edge finish, zipper pull or clasp, only if present. Preserve its exact location and shape; do not infer leather, metal grade, handmade quality or other material claims.\n8–10s HERO FINISH: Ease back to a balanced view of the entire wallet in the same resting position. Let the camera stop smoothly and hold the real shape, closure and colour steady against a quiet background.\n\nCAMERA AND LIGHTING: Use controlled macro focus, gentle slider movement, soft directional light and realistic contact shadows. Keep the focus plane natural and avoid over-sharpened texture, dramatic lens distortion, focus pumping or artificial gloss. Maintain consistent exposure, colour and orientation from first frame to last. End on a stable, uncluttered product frame suitable for a short-form ad.",
       "storyboard": [
         {
           "time": "0–2s",
           "shot": "Opening hook",
-          "direction": "Open with the complete wallet resting flat and unobstructed; use a gentle three-quarter slide to reveal its true outline and closure."
+          "direction": "Show the complete wallet resting flat in a clean three-quarter macro composition. Use a slow, shallow camera slide to reveal its true outline, fold and visible closure while keeping the whole product recognisable."
         },
         {
           "time": "2–6s",
-          "shot": "Signature action",
-          "direction": "Execute this exact concept: Close-up premium on the wallet silhouette, visible stitching and visible closure; do not infer leather or other materials. Complete it naturally within this beat. Slow dolly/slider move, refined light and precise focus. If unsupported by the visible product, do not fake a mechanism; use a compatible gesture or camera move."
+          "shot": "Signature macro reveal",
+          "direction": "Make one measured slider move along the wallet's visible edge toward its closure, drawing attention to the actual silhouette and construction. Keep the wallet stationary; do not open it, add contents or imply an unshown mechanism."
         },
         {
           "time": "6–8s",
-          "shot": "Detail insert",
-          "direction": "Focus only on visible stitching, edge paint, zipper or clasp; do not invent card slots, pockets or storage capacity."
+          "shot": "Visible detail insert",
+          "direction": "Hold a sharp close-up on one real detail—visible stitching, edge finish, zipper pull or clasp, only if present. Preserve its exact location and shape; do not infer leather, metal grade, handmade quality or other material claims."
         },
         {
           "time": "8–10s",
           "shot": "Hero finish",
-          "direction": "Finish with the whole wallet visible and closed or open exactly as established; hold its real silhouette steady."
+          "direction": "Ease back to a balanced view of the entire wallet in the same resting position. Let the camera stop smoothly and hold the real shape, closure and colour steady against a quiet background."
         }
       ]
     },
