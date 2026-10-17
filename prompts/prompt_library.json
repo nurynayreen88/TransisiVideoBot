@@ -1412,27 +1412,27 @@
       "duration_seconds": 10,
       "style": "natural_ugc",
       "description": "Model memegang dan menunjukkan beg dari sudut yang munasabah.",
-      "prompt": "Premium product ad for the exact user-supplied product name. Category: Beg. Concept: Handbag Showcase. EXACTLY 10 seconds, vertical 9:16.\n\nPRODUCT LOCK: Match any supplied reference image precisely: shape, colour, proportions, visible parts and packaging. Do not invent features, materials, ingredients, functions, claims, accessories or label text. Keep actions physically plausible and the same product consistent throughout.\n\nRULES: No on-screen text, captions, added logos, watermark, morphing, floating/duplicated parts, sudden redesign or impossible movement. Props are not implied to be included. No dialogue/voice-over; if supported, subtle instrumental music below ambience.\n\nSTORYBOARD:\n0–2s | Opening hook: Open with the complete bag grounded on a clean surface; use a slow three-quarter orbit to reveal its actual silhouette, handles and straps.\n2–6s | Signature action: Execute this exact concept: Model memegang dan menunjukkan beg dari sudut yang munasabah. Complete it naturally within this beat. Slight intentional handheld motion only; no jitter. If unsupported by the visible product, do not fake a mechanism; use a compatible gesture or camera move.\n6–8s | Detail insert: Inspect only visible stitching, handle attachment or strap hardware; do not create extra seams, pockets or reinforced parts.\n8–10s | Hero finish: Finish with the complete bag in a balanced three-quarter hero view; all handles, straps and closures remain consistent.\n\nFinish with a stable hero frame showing the unchanged product.",
+      "prompt": "Premium product ad for the exact user-supplied product name. Category: Beg. Concept: Handbag Showcase. EXACTLY 10 seconds, vertical 9:16.\n\nPRODUCT LOCK: Match the supplied reference image precisely: handbag shape, colour, proportions, handle count and shape, visible straps, hardware, stitching and all other visible details. Do not invent features, materials, functions, claims, accessories, compartments or label text. Keep the same product identity and dimensions throughout.\n\nREALISM RULES: Use only visible product features and physically plausible movement. Handles and straps must remain attached in the correct places and respond naturally to gravity. No morphing, duplicated parts, floating, sudden redesign, impossible hand positions, extra fingers, added logos, watermarks, captions or on-screen text. Props must not imply they are included with the product. No dialogue or voice-over; if supported, use subtle instrumental music kept below the scene ambience.\n\nSTORYBOARD:\n0–2s | Opening hook: Open on the complete handbag in a clean three-quarter view. Make a slow, short camera push-in that reveals the real silhouette, handle shape and visible strap arrangement; keep the entire bag in frame.\n2–6s | Signature action: Present the handbag naturally by holding a visible handle or supporting strap, then make one gentle turn from front to three-quarter view. Keep the grip believable, let loose straps respond to gravity, and do not force any movement the visible design cannot support.\n6–8s | Detail insert: Cut briefly to one real, visible detail—such as the handle attachment, stitching, clasp or zipper only if present. Track steadily across that detail; invent no extra pockets, hardware, seams, lining or material properties.\n8–10s | Hero finish: Return to a full, stable three-quarter hero view with the handbag held securely or resting naturally. Let all movement settle and hold the unchanged product clearly for the final beat.\n\nCAMERA AND CONTINUITY: Smooth, controlled movement; realistic contact shadows; consistent lighting and colour; no abrupt cuts or exaggerated lens distortion. Keep the handbag recognisable in every shot and finish on a clean, stable hero frame.",
       "storyboard": [
         {
           "time": "0–2s",
           "shot": "Opening hook",
-          "direction": "Open with the complete bag grounded on a clean surface; use a slow three-quarter orbit to reveal its actual silhouette, handles and straps."
+          "direction": "Open on the complete handbag in a clean three-quarter view. Make a slow, short camera push-in that reveals the real silhouette, handle shape and visible strap arrangement; keep the entire bag in frame."
         },
         {
           "time": "2–6s",
           "shot": "Signature action",
-          "direction": "Execute this exact concept: Model memegang dan menunjukkan beg dari sudut yang munasabah. Complete it naturally within this beat. Slight intentional handheld motion only; no jitter. If unsupported by the visible product, do not fake a mechanism; use a compatible gesture or camera move."
+          "direction": "Present the handbag naturally by holding a visible handle or supporting strap, then make one gentle turn from front to three-quarter view. Keep the grip believable, let loose straps respond to gravity, and do not force any movement the visible design cannot support."
         },
         {
           "time": "6–8s",
           "shot": "Detail insert",
-          "direction": "Inspect only visible stitching, handle attachment or strap hardware; do not create extra seams, pockets or reinforced parts."
+          "direction": "Cut briefly to one real, visible detail—such as the handle attachment, stitching, clasp or zipper only if present. Track steadily across that detail; invent no extra pockets, hardware, seams, lining or material properties."
         },
         {
           "time": "8–10s",
           "shot": "Hero finish",
-          "direction": "Finish with the complete bag in a balanced three-quarter hero view; all handles, straps and closures remain consistent."
+          "direction": "Return to a full, stable three-quarter hero view with the handbag held securely or resting naturally. Let all movement settle and hold the unchanged product clearly for the final beat."
         }
       ]
     },
