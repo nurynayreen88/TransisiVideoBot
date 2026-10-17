@@ -406,7 +406,15 @@ def prompt_flow_menu():
     return InlineKeyboardMarkup([[InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]])
 
 
+def prompt_images_start_menu():
+    # Before the first image arrives, show only the option to return home.
+    return InlineKeyboardMarkup([
+        [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
+    ])
+
+
 def prompt_images_menu():
+    # Show the completion button only after at least one image has arrived.
     return InlineKeyboardMarkup([
         [InlineKeyboardButton('✅ Selesai Hantar Gambar', callback_data='prompt_images_done')],
         [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
@@ -1900,7 +1908,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data['stage'] = 'prompt_images'
         await query.message.reply_text(
             '✍️ KLIPPO | JANA PROMPT VIDEO\n\nHantar 1 hingga 4 gambar produk yang jelas. Selepas semua gambar dihantar, tekan “Selesai Hantar Gambar”. Klippo akan menyediakan satu prompt video lengkap dengan susunan babak, aksi dan pergerakan kamera.',
-            reply_markup=prompt_images_menu()
+            reply_markup=prompt_images_start_menu()
         )
     elif action.startswith('prompt_flow:'):
         # Compatibility for old Telegram keyboards: both legacy buttons now enter
@@ -1910,7 +1918,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data['stage'] = 'prompt_images'
         await query.message.reply_text(
             '📷 LANGKAH 1 — GAMBAR PRODUK\\n\\nHantar 1 hingga 4 gambar produk yang jelas. Selepas semua gambar dihantar, tekan “Selesai Hantar Gambar”. Klippo akan menyediakan satu prompt video lengkap.',
-            reply_markup=prompt_images_menu()
+            reply_markup=prompt_images_start_menu()
         )
     elif action == 'prompt_images_done' and stage == 'prompt_images':
         if not context.user_data.get('prompt_reference_photos'):
@@ -2919,7 +2927,7 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['stage'] = 'prompt_images'
             await update.message.reply_text(
                 '✍️ KLIPPO | JANA PROMPT VIDEO\n\nHantar 1 hingga 4 gambar produk yang jelas. Tekan “Selesai Hantar Gambar” selepas selesai. Klippo akan menyediakan satu prompt video lengkap dengan susunan babak, aksi dan pergerakan kamera.',
-                reply_markup=prompt_images_menu()
+                reply_markup=prompt_images_start_menu()
             )
         elif action == 'subscription':
             await update.message.reply_text('💎 LANGGANAN KLIPPO\n\nPelan Penyokong Awal: RM5 / 30 hari, sehingga 30 video sebulan. Pengaktifan manual selepas resit disemak.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📱 Papar QR DuitNow', callback_data='subscription_qr')]]))
