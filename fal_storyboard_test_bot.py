@@ -178,6 +178,7 @@ async def choose_environment(update: Update, context: ContextTypes.DEFAULT_TYPE)
         style=context.user_data.get("visual_style", "product_only"),
         environment=context.user_data["visual_environment"],
     )
+    context.user_data["storyboard_prompt"] = prompt
     try:
         await query.edit_message_text("Menyediakan prompt storyboard satu imej…")
         image_sent = False
@@ -202,9 +203,10 @@ async def choose_environment(update: Update, context: ContextTypes.DEFAULT_TYPE)
         await query.message.reply_text(
             "✨ PROMPT STORYBOARD KLIPPO ✨\n\n" + prompt
             + "\n\nSalin prompt ini dan gunakan bersama gambar produk asal dalam Gemini.",
-            reply_markup=InlineKeyboardMarkup([[
-                InlineKeyboardButton("🎬 Teruskan ke fungsi video beta", callback_data="legacy:video")
-            ]]),
+            reply_markup=InlineKeyboardMarkup([
+                [InlineKeyboardButton("📋 Paparkan prompt untuk disalin", callback_data="prompt:show")],
+                [InlineKeyboardButton("🎬 Teruskan ke fungsi video beta", callback_data="legacy:video")],
+            ]),
         )
     except Exception:
         logging.exception("Single-image storyboard flow failed")
@@ -281,6 +283,19 @@ async def run_legacy_video(update: Update, context: ContextTypes.DEFAULT_TYPE) -
         release_user(user_id)
 
 
+async def show_prompt_for_copy(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Re-send the full prompt so Telegram users can long-press and copy it."""
+    query = update.callback_query
+    await query.answer()
+    prompt = context.user_data.get("storyboard_prompt")
+    if not prompt:
+        await query.message.reply_text("Prompt tiada. Sila ulang proses daripada gambar produk.")
+        return
+    await query.message.reply_text(
+        "PROMPT STORYBOARD — TEKAN LAMA UNTUK SALIN\n\n" + prompt
+    )
+
+
 async def legacy_video_button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     query = update.callback_query
     await query.answer()
@@ -303,6 +318,7 @@ def main() -> None:
     app.add_handler(CallbackQueryHandler(choose_visual_style, pattern=r"^visual:"))
     app.add_handler(CallbackQueryHandler(choose_environment, pattern=r"^environment:"))
     app.add_handler(CallbackQueryHandler(legacy_video_button, pattern=r"^legacy:video$"))
+    app.add_handler(CallbackQueryHandler(show_prompt_for_copy, pattern=r"^prompt:show$"))
     app.run_polling(drop_pending_updates=True)
 
 
