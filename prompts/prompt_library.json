@@ -1846,27 +1846,27 @@
       "duration_seconds": 10,
       "style": "footwear_ugc",
       "description": "Kasut dipakai, tali atau pengikat disentuh hanya jika memang ada pada produk.",
-      "prompt": "Premium product ad for the exact user-supplied product name. Category: Kasut. Concept: Lace-Up & First Steps. EXACTLY 10 seconds, vertical 9:16.\n\nPRODUCT LOCK: Match any supplied reference image precisely: shape, colour, proportions, visible parts and packaging. Do not invent features, materials, ingredients, functions, claims, accessories or label text. Keep actions physically plausible and the same product consistent throughout.\n\nRULES: No on-screen text, captions, added logos, watermark, morphing, floating/duplicated parts, sudden redesign or impossible movement. Props are not implied to be included. No dialogue/voice-over; if supported, subtle instrumental music below ambience.\n\nSTORYBOARD:\n0–2s | Opening hook: Show the pair together first if two shoes are supplied; preserve their matching design and natural spacing.\n2–6s | Signature action: Execute this exact concept: Kasut dipakai, tali atau pengikat disentuh hanya jika memang ada pada produk. Complete it naturally within this beat. Use one slow controlled move that supports the action. If unsupported by the visible product, do not fake a mechanism; use a compatible gesture or camera move.\n6–8s | Detail insert: Show how the shoe rests against the floor; avoid impossible bends, floating or rubber-like deformation.\n8–10s | Hero finish: End with the pair aligned naturally, if supplied as a pair; do not duplicate or mirror the design incorrectly.\n\nFinish with a stable hero frame showing the unchanged product.",
+      "prompt": "Premium product advertisement for the exact user-supplied footwear. Category: Kasut. Concept: Lace-Up & First Steps. EXACTLY 10 seconds, vertical 9:16.\n\nPRODUCT LOCK: Treat the supplied reference image as the source of truth. Preserve the exact shoe shape, colour, proportions, toe and heel shape, sole profile, visible material appearance, panel layout, stitching, fastening type, lace count and route, eyelets, buckles, straps, logos and labels. Never add laces to a slip-on, replace a buckle, alter strap count or invent hidden construction. If the reference shows only a product shot with no wearer or hand, do not force an on-foot scene; keep the shoe stationary and use camera movement.\n\nINTERACTION AND REALISM: Only show a hand touching the fastening if the design and framing support it. Hand movement must be slow and anatomically plausible; fingers should contact the actual lace or closure without passing through the shoe. No extra fingers, fused hands, floating shoes, sliding feet, impossible bends, duplicated footwear, left/right mismatch, morphing, flickering details, sudden redesign, text, captions, added logos or watermarks. Do not imply props are included. No dialogue or voice-over; if supported, subtle instrumental music only, below natural ambience.\n\nSTORYBOARD — exact timing; keep the same shoe design, lighting and setting throughout:\n0–2s OPENING HOOK: Show the supplied shoe or matching pair in a clear front three-quarter view. Keep the toe, visible fastening and overall silhouette in frame; do not invent a wearer if the reference only shows the product alone.\n2–6s SIGNATURE FASTENING: If the shoe has visible laces and the reference supports a hand interaction, one hand gently tightens the existing laces once without changing their route, colour or number of eyelets. If it has straps, a buckle, hook-and-loop fastening or no fastening, show that actual design at rest and use a slow camera move instead—never invent laces or a closure.\n6–8s FIT AND CONTACT DETAIL: Show the visible fastening area and toe shape in one steady close-up, then let the camera ease toward the shoe resting naturally on the floor. Keep fingers anatomically correct and avoid stretching or deforming the shoe.\n8–10s HERO FINISH: Finish on the supplied shoe or pair in a balanced three-quarter view. The hand leaves frame naturally if present; hold the product still with unchanged design, realistic floor contact and a clean final composition.\n\nCAMERA AND CONTINUITY: Use restrained camera movement, natural shadows and consistent exposure. Avoid fast cuts, excessive motion blur, unrealistic foot movement or angles that invent unseen details. Maintain the same shoe identity, fastening and left/right orientation from first frame to last. End on a stable, uncluttered product frame suitable for a short-form ad.",
       "storyboard": [
         {
           "time": "0–2s",
           "shot": "Opening hook",
-          "direction": "Show the pair together first if two shoes are supplied; preserve their matching design and natural spacing."
+          "direction": "Show the supplied shoe or matching pair in a clear front three-quarter view. Keep the toe, visible fastening and overall silhouette in frame; do not invent a wearer if the reference only shows the product alone."
         },
         {
           "time": "2–6s",
-          "shot": "Signature action",
-          "direction": "Execute this exact concept: Kasut dipakai, tali atau pengikat disentuh hanya jika memang ada pada produk. Complete it naturally within this beat. Use one slow controlled move that supports the action. If unsupported by the visible product, do not fake a mechanism; use a compatible gesture or camera move."
+          "shot": "Signature fastening",
+          "direction": "If the shoe has visible laces and the reference supports a hand interaction, one hand gently tightens the existing laces once without changing their route, colour or number of eyelets. If it has straps, a buckle, hook-and-loop fastening or no fastening, show that actual design at rest and use a slow camera move instead—never invent laces or a closure."
         },
         {
           "time": "6–8s",
-          "shot": "Detail insert",
-          "direction": "Show how the shoe rests against the floor; avoid impossible bends, floating or rubber-like deformation."
+          "shot": "Fit and contact detail",
+          "direction": "Show the visible fastening area and toe shape in one steady close-up, then let the camera ease toward the shoe resting naturally on the floor. Keep fingers anatomically correct and avoid stretching or deforming the shoe."
         },
         {
           "time": "8–10s",
           "shot": "Hero finish",
-          "direction": "End with the pair aligned naturally, if supplied as a pair; do not duplicate or mirror the design incorrectly."
+          "direction": "Finish on the supplied shoe or pair in a balanced three-quarter view. The hand leaves frame naturally if present; hold the product still with unchanged design, realistic floor contact and a clean final composition."
         }
       ]
     },
