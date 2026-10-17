@@ -4,6 +4,7 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 COPY fal_storyboard_test.py fal_storyboard_test_bot.py bot.py generate_music.py video_merge.py fusion_animation.py klippo_db.py storyboard_engine.py storyboard_overlay.py gemini_vision.py gemini_storyboard.py gemini_storyboard_image.py prompt_engine.py prompt_catalog.py ./
+COPY modules/ ./modules/
 COPY prompts/ ./prompts/
 COPY fusion_assets/ ./fusion_assets/
 COPY klippo_qr.jpg ./klippo_qr.jpg
