@@ -2373,14 +2373,23 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 caption = ('BAHAGIAN ' + str(index) + '/2 — jana klip 10 saat secara berasingan. ' +
                            ('Simpan bingkai akhir untuk sambungan Bahagian 2.' if index == 1 else
                             'Gunakan bingkai akhir Bahagian 1 sebagai rujukan kesinambungan.')) if len(sections) == 2 else ''
-                if len(section) <= 3900:
-                    await query.message.reply_text(section, reply_markup=video_actions)
-                else:
-                    prompt_file = BytesIO(section.encode('utf-8'))
-                    prompt_file.name = f'KLIPPO_PROMPT_VIDEO_PART{index}.txt'
-                    await query.message.reply_document(document=prompt_file, filename=prompt_file.name,
-                                                       caption=caption or '📋 PROMPT VIDEO penuh — buka fail dan salin semua teks.',
-                                                       reply_markup=video_actions)
+                # Always send prompts as Telegram text, never as .txt attachments.
+                remaining = section
+                chunks = []
+                while remaining:
+                    if len(remaining) <= 3900:
+                        chunks.append(remaining)
+                        break
+                    cut = remaining.rfind('\\n', 0, 3900)
+                    if cut < 1800:
+                        cut = 3900
+                    chunks.append(remaining[:cut].rstrip())
+                    remaining = remaining[cut:].lstrip()
+                for chunk_index, chunk in enumerate(chunks):
+                    await query.message.reply_text(
+                        chunk,
+                        reply_markup=video_actions if chunk_index == len(chunks) - 1 else None
+                    )
     elif action == 'prompt_generate:confirm' and context.user_data.get('stage') == 'prompt_confirm':
         motion = context.user_data.get('prompt_motion_choice', 'push')
         motions = {'auto': 'Choose the simplest camera movement best suited to the product and shot; prefer a gentle push-in for detail, a slow side slide for a full product view, or a locked camera when movement risks changing product details. Keep movement subtle and preserve exact product geometry.', 'orbit': 'A controlled 30-degree camera arc around the product, not a full 360-degree rotation; preserve the visible product geometry.', 'push': 'A slow forward camera push-in toward the product to reveal texture and details; avoid digital warping and preserve product geometry.', 'pull': 'A slow camera pull-back away from the product to reveal its full shape and surrounding scene; preserve proportions.', 'side': 'A smooth horizontal left-to-right camera slide with stable product proportions.', 'dolly': 'A slow physical-feeling forward dolly-in with gentle natural parallax; no object deformation.', 'low': 'A restrained low-angle camera view looking slightly upward at the product; preserve the reference design and proportions.', 'static': 'A locked camera with subtle studio lighting changes only; keep the product clear and stable.'}
@@ -2522,14 +2531,23 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                         caption = ('BAHAGIAN ' + str(index) + '/2 — jana klip 10 saat secara berasingan. ' +
                                    ('Simpan bingkai akhir untuk sambungan Bahagian 2.' if index == 1 else
                                     'Gunakan bingkai akhir Bahagian 1 sebagai rujukan kesinambungan.')) if len(sections) == 2 else ''
-                        if len(section) <= 3900:
-                            await query.message.reply_text(section, reply_markup=direct_actions)
-                        else:
-                            prompt_file = BytesIO(section.encode('utf-8'))
-                            prompt_file.name = f'KLIPPO_PROMPT_VIDEO_PART{index}.txt'
-                            await query.message.reply_document(document=prompt_file, filename=prompt_file.name,
-                                                               caption=caption or '📋 PROMPT VIDEO penuh — buka fail dan salin semua teks.',
-                                                               reply_markup=direct_actions)
+                        # Always send prompts as Telegram text, never as .txt attachments.
+                        remaining = section
+                        chunks = []
+                        while remaining:
+                            if len(remaining) <= 3900:
+                                chunks.append(remaining)
+                                break
+                            cut = remaining.rfind('\\n', 0, 3900)
+                            if cut < 1800:
+                                cut = 3900
+                            chunks.append(remaining[:cut].rstrip())
+                            remaining = remaining[cut:].lstrip()
+                        for chunk_index, chunk in enumerate(chunks):
+                            await query.message.reply_text(
+                                chunk,
+                                reply_markup=direct_actions if chunk_index == len(chunks) - 1 else None
+                            )
                     await progress_update(waiting, 100, 'Prompt video siap.')
                     return
                 product_name = context.user_data.get('prompt_product_name', '').strip() or 'product shown in the uploaded reference photo'
