@@ -7,6 +7,7 @@ from PIL import Image
 
 from fal_storyboard_test import detect_image_mime, parse_gemini_json
 from modules.video_engine import calculate_panel_durations, create_video
+from fal_storyboard_test_bot import claim_user, release_user
 
 
 class GeminiHelperTests(unittest.TestCase):
@@ -41,6 +42,16 @@ class GeminiHelperTests(unittest.TestCase):
     def test_invalid_json_raises(self):
         with self.assertRaises(ValueError):
             parse_gemini_json("{not-json}")
+
+
+class TelegramLockTests(unittest.TestCase):
+    def test_same_user_cannot_claim_two_generation_slots(self):
+        user_id = 123456
+        self.assertTrue(claim_user(user_id))
+        self.assertFalse(claim_user(user_id))
+        release_user(user_id)
+        self.assertTrue(claim_user(user_id))
+        release_user(user_id)
 
 
 class VideoHelperTests(unittest.TestCase):
