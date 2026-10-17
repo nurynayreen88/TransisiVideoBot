@@ -2367,7 +2367,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     '3. Untuk 20 saat, jana Bahagian 1 dahulu. Gunakan bingkai akhir Bahagian 1 sebagai rujukan Bahagian 2.\\n\\n'
                     'PENTING: Gunakan imej baharu yang dijana daripada PROMPT IMAGE sebagai MASTER reference.'
                 )
-            await query.message.reply_text(video_intro, reply_markup=video_actions)
+            await query.message.reply_text(video_intro)
             for index, section in enumerate(sections, 1):
                 section = section.strip()
                 caption = ('BAHAGIAN ' + str(index) + '/2 — jana klip 10 saat secara berasingan. ' +
@@ -2523,8 +2523,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     await query.message.reply_text(
                         '🎥 PROMPT VIDEO TERUS\n\n'
                         'Muat naik gambar produk asal yang sama ke platform AI pilihan, kemudian salin prompt di bawah. '
-                        'Klippo tidak menghantar gambar ke laman luar secara automatik. Untuk video 20 saat, jana Bahagian 1 dahulu dan gunakan bingkai akhirnya sebagai rujukan Bahagian 2.',
-                        reply_markup=direct_actions
+                        'Klippo tidak menghantar gambar ke laman luar secara automatik. Untuk video 20 saat, jana Bahagian 1 dahulu dan gunakan bingkai akhirnya sebagai rujukan Bahagian 2.'
                     )
                     for index, section in enumerate(sections, 1):
                         section = section.strip()
