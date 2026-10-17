@@ -1,7 +1,7 @@
 """Standalone Telegram beta bot for Gemini + fal.ai storyboard/video tests.
 
 Run only as a separate Render service with a separate Telegram bot token.
-Required: FAL_TEST_BOT_TOKEN, FAL_KEY. Optional: GEMINI_API_KEY.
+Required: FAL_TEST_BOT_TOKEN, FAL_KEY, GEMINI_API_KEY.
 """
 import asyncio
 import io
