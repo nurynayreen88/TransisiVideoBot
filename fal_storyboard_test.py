@@ -4,6 +4,7 @@ import base64
 import json
 import logging
 import os
+import re
 import time
 import urllib.request
 from pathlib import Path
@@ -11,9 +12,36 @@ from pathlib import Path
 import fal_client
 import requests
 from PIL import Image, ImageDraw
+from modules.video_engine import create_video
 
 MODEL = os.environ.get("FAL_STORYBOARD_MODEL", "fal-ai/flux-kontext/dev").strip()
 GEMINI_MODEL = os.environ.get("GEMINI_VISION_MODEL", "gemini-2.5-flash").strip()
+
+
+def detect_image_mime(image_path: str | Path) -> str:
+    """Detect and validate the actual image format instead of assuming JPEG."""
+    mime_by_format = {"JPEG": "image/jpeg", "PNG": "image/png", "WEBP": "image/webp"}
+    try:
+        with Image.open(image_path) as image:
+            image_format = (image.format or "").upper()
+            image.verify()
+    except Exception as exc:
+        raise ValueError("Reference file is not a valid supported image.") from exc
+    if image_format not in mime_by_format:
+        raise ValueError(f"Unsupported image format: {image_format or 'unknown'}. Use JPEG, PNG, or WEBP.")
+    return mime_by_format[image_format]
+
+
+def parse_gemini_json(text: str) -> dict:
+    """Parse a JSON object, tolerating a surrounding Markdown code fence."""
+    cleaned = text.strip()
+    match = re.fullmatch(r"^\x60{3}(?:json)?\s*(.*?)\s*\x60{3}$", cleaned, flags=re.IGNORECASE | re.DOTALL)
+    if match:
+        cleaned = match.group(1).strip()
+    value = json.loads(cleaned)
+    if not isinstance(value, dict):
+        raise ValueError("Gemini response must be a JSON object.")
+    return value
 
 
 def analyze_product(image_path: Path) -> dict:
@@ -27,6 +55,7 @@ def analyze_product(image_path: Path) -> dict:
     key = os.environ.get("GEMINI_API_KEY", "").strip()
     if not key:
         raise RuntimeError("GEMINI_API_KEY is required: Gemini JSON analysis must run before fal.ai.")
+    mime_type = detect_image_mime(image_path)
     data = image_path.read_bytes()
     if len(data) > 8_000_000:
         raise RuntimeError("Image exceeds Gemini inline limit (8 MB). Resize the reference image and retry.")
@@ -39,7 +68,7 @@ def analyze_product(image_path: Path) -> dict:
     )
     body = {"contents": [{"parts": [
         {"text": prompt},
-        {"inline_data": {"mime_type": "image/jpeg", "data": base64.b64encode(data).decode("ascii")}}
+        {"inline_data": {"mime_type": mime_type, "data": base64.b64encode(data).decode("ascii")}}
     ]}], "generationConfig": {"temperature": 0.1, "maxOutputTokens": 650, "responseMimeType": "application/json"}}
     url = f"https://generativelanguage.googleapis.com/v1beta/models/{GEMINI_MODEL}:generateContent"
     request = urllib.request.Request(url, data=json.dumps(body).encode(),
@@ -51,7 +80,7 @@ def analyze_product(image_path: Path) -> dict:
         logging.info("Gemini analysis latency: %.2fs", time.perf_counter() - started)
         text = "".join(part.get("text", "") for part in
             result.get("candidates", [{}])[0].get("content", {}).get("parts", [])).strip()
-        attributes = json.loads(text)
+        attributes = parse_gemini_json(text)
         for name, default in fallback.items():
             attributes.setdefault(name, default)
         usage = result.get("usageMetadata", {})
@@ -107,6 +136,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Generate exactly two fal.ai storyboard panels and report latency.")
     parser.add_argument("image", help="Path to product reference image")
     parser.add_argument("--out", default="fal_storyboard_test_output", help="Output folder")
+    parser.add_argument("--no-video", action="store_true", help="Generate only panels and contact sheet")
     args = parser.parse_args()
     if not os.environ.get("FAL_KEY", "").strip():
         parser.error("FAL_KEY is missing. Set it as an environment variable; never hardcode it.")
@@ -139,6 +169,12 @@ def main() -> int:
     sheet = output_dir / "contact_sheet_2_panels.jpg"
     make_contact_sheet(generated, sheet)
     print("Contact sheet:", sheet)
+    if not args.no_video:
+        video_path = output_dir / "video_output.mp4"
+        narration = str(attributes.get("voiceover_ms") or "Lihat produk ini dengan reka bentuk dan perincian yang menarik.")
+        print("Creating vertical video with complete Malay voiceover...")
+        create_video(generated, narration, video_path)
+        print("Video:", video_path)
     print(f"Total latency: {time.perf_counter() - started:.2f}s")
     print("Check fal.ai Usage/Billing before and after this run for actual credit/cost; script does not guess pricing.")
     print("Compare original vs panels: silhouette, colours, material appearance, logo/text and accessories.")
