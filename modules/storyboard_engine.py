@@ -1,42 +1,29 @@
-"""Single-image storyboard generation with an explicit Gemini API cost gate.
+"""Free, offline prompt builder for a four-panel product storyboard.
 
-Image generation is disabled by default. To opt in, set
-KLIPPO_ENABLE_GEMINI_IMAGE_API=true and GEMINI_STORYBOARD_IMAGE_MODEL to a
-model enabled for the project's Gemini API key. Google AI Plan app access does
-not itself imply free API access.
+This module makes no network/API calls and does not generate images or video.
+It creates a copy-ready text prompt that users can run in an image/video tool
+they already have access to.
 """
-import base64
-import json
-import os
-import urllib.error
-import urllib.request
-from io import BytesIO
-
-from PIL import Image, ImageOps
-
-
-class StoryboardEngineError(RuntimeError):
-    """Safe, user-facing error from the storyboard engine."""
 
 
 STYLE_LABELS = {
-    "product_only": "A product-only hero shot; no people, hands, or extra products.",
-    "model_holding": "A realistic model naturally holding or wearing the exact product.",
-    "model_lifestyle": "A realistic lifestyle scene featuring a model with the exact product.",
+    "product_only": "Product-only campaign: do not include a model, hands, or unrelated products.",
+    "model_holding": "A suitable adult model naturally holding or wearing the exact product.",
+    "model_lifestyle": "A suitable adult model featuring the exact product in a believable lifestyle scene.",
 }
 ENVIRONMENT_LABELS = {
-    "studio": "A premium minimalist studio with soft, controlled commercial lighting.",
-    "home": "A tasteful, modern, warm home interior with natural daylight.",
-    "cafe": "A stylish modern cafe with warm ambient light and a softly blurred background.",
+    "studio": "premium minimalist studio, soft controlled light, elegant neutral background",
+    "home": "tasteful modern home, warm natural daylight, realistic lived-in details",
+    "cafe": "modern stylish cafe, warm ambient light, softly blurred background",
 }
 GOAL_LABELS = {
-    "shopee": "Shopee Affiliate: clear, trustworthy product presentation that makes product details easy to see.",
-    "tiktok": "TikTok Viral: a visually strong opening frame with lively composition while keeping the product unmistakably clear.",
+    "shopee": "Shopee Affiliate: clear, credible product presentation that helps shoppers inspect the real product.",
+    "tiktok": "TikTok Viral: a strong visual hook and dynamic framing while keeping the product clear and believable.",
 }
 
 
 def build_storyboard_prompt(goal, style, environment, attributes=None):
-    """Build one vertical storyboard/key-visual prompt without making API calls."""
+    """Return a complete, copy-ready four-panel storyboard prompt without API calls."""
     goal_text = GOAL_LABELS.get(goal, GOAL_LABELS["shopee"])
     style_text = STYLE_LABELS.get(style, STYLE_LABELS["product_only"])
     environment_text = ENVIRONMENT_LABELS.get(environment, ENVIRONMENT_LABELS["studio"])
@@ -53,110 +40,44 @@ def build_storyboard_prompt(goal, style, environment, attributes=None):
         if isinstance(value, str) and value.strip():
             observed.append(f"{label}: {value.strip()}.")
     observations = " ".join(observed) or (
-        "Use the uploaded reference photograph as the sole source of truth for product-specific details; "
-        "do not guess unseen specifications."
-    )
-    return (
-        "Create ONE photorealistic vertical 9:16 storyboard key visual for a product advertisement. "
-        "This is one complete image, NOT a multi-panel storyboard, grid, collage, contact sheet, or video. "
-        f"Campaign objective: {goal_text} "
-        f"Visual direction: {style_text} "
-        f"Background: {environment_text} "
-        f"{observations} "
-        "REFERENCE LOCK: Treat the uploaded product photograph as the authoritative visual reference. "
-        "Preserve the exact product identity, silhouette, proportions, colour, material, texture, pattern, "
-        "stitching, hardware, accessories, and any visible original logo. Do not redesign, replace, invent, "
-        "or omit product features. If a detail is unclear, keep it faithful to the reference rather than guessing. "
-        "Use realistic commercial photography, intentional composition, natural perspective, premium lighting, "
-        "sharp product focus, and a clean background. No extra text, captions, subtitles, watermarks, fake logos, "
-        "or decorative typography. Output exactly one image in a vertical 9:16 composition."
+        "Inspect the uploaded product reference directly. Use it as the sole source of truth "
+        "for product-specific appearance; do not invent unseen details or specifications."
     )
 
+    return f"""KLIPPO — FOUR-PANEL PRODUCT STORYBOARD PROMPT
 
-def image_api_enabled():
-    """Require explicit opt-in so an API request cannot unexpectedly incur charges."""
-    return os.environ.get("KLIPPO_ENABLE_GEMINI_IMAGE_API", "").strip().lower() in {
-        "1", "true", "yes", "on"
-    }
+Create ONE cohesive, professional 9:16 vertical storyboard sheet containing EXACTLY FOUR clearly separated panels arranged vertically from top to bottom (Panel 1, Panel 2, Panel 3, Panel 4). This is a storyboard layout, not a finished video. Keep the same product identity, model (if selected), outfit, setting, lighting direction, colour grade, and visual continuity across all four panels. No extra panels.
 
+CAMPAIGN GOAL
+{goal_text}
 
-def _reference_jpeg(image_bytes):
-    try:
-        with Image.open(BytesIO(image_bytes)) as source:
-            image = ImageOps.exif_transpose(source).convert("RGB")
-            image.thumbnail((1600, 1600), Image.Resampling.LANCZOS)
-            output = BytesIO()
-            image.save(output, format="JPEG", quality=88, optimize=True)
-            return output.getvalue()
-    except Exception as exc:
-        raise StoryboardEngineError("Gambar produk tidak dapat dibaca. Sila muat naik gambar lain.") from exc
+SELECTED VISUAL STYLE
+{style_text}
 
+SELECTED SETTING
+{environment_text}
 
-def generate_storyboard_image(image_bytes, prompt, api_key=None, model=None):
-    """Generate one 9:16 image only after explicit API-cost opt-in."""
-    if not image_api_enabled():
-        raise StoryboardEngineError(
-            "Penjanaan imej API belum diaktifkan untuk mengelakkan caj tanpa kebenaran. "
-            "Salin prompt ini ke aplikasi Gemini dan lampirkan gambar produk asal."
-        )
-    api_key = (api_key or os.environ.get("GEMINI_API_KEY", "")).strip()
-    model = (model or os.environ.get("GEMINI_STORYBOARD_IMAGE_MODEL", "")).strip()
-    if not api_key:
-        raise StoryboardEngineError("GEMINI_API_KEY belum ditetapkan pada servis beta.")
-    if not model or not all(char.isalnum() or char in ".-_" for char in model):
-        raise StoryboardEngineError("Tetapkan nama model Gemini Image yang sah selepas mengesahkan akses dan kos API.")
-    reference = _reference_jpeg(image_bytes)
-    payload = {
-        "contents": [{
-            "role": "user",
-            "parts": [
-                {"text": prompt},
-                {"inline_data": {
-                    "mime_type": "image/jpeg",
-                    "data": base64.b64encode(reference).decode("ascii"),
-                }},
-            ],
-        }],
-        "generationConfig": {
-            "responseModalities": ["IMAGE"],
-            "responseFormat": {"image": {"aspectRatio": "9:16", "imageSize": "1K"}},
-        },
-    }
-    request = urllib.request.Request(
-        "https://generativelanguage.googleapis.com/v1beta/models/"
-        + model + ":generateContent",
-        data=json.dumps(payload).encode("utf-8"),
-        headers={"Content-Type": "application/json", "x-goog-api-key": api_key},
-        method="POST",
-    )
-    try:
-        with urllib.request.urlopen(request, timeout=120) as response:
-            result = json.load(response)
-    except urllib.error.HTTPError as exc:
-        if exc.code == 429:
-            raise StoryboardEngineError("Kuota atau had Gemini Image telah dicapai. Semak kuota API projek.") from None
-        if exc.code in (401, 403):
-            raise StoryboardEngineError("Projek atau API key tidak mempunyai akses kepada model imej ini.") from None
-        if exc.code == 404:
-            raise StoryboardEngineError("Model imej tidak ditemui atau tidak tersedia untuk projek ini.") from None
-        raise StoryboardEngineError(f"Gemini Image gagal (HTTP {exc.code}).") from None
-    except Exception:
-        raise StoryboardEngineError("Sambungan ke Gemini Image gagal atau tamat masa.") from None
+PRODUCT REFERENCE AND CONTINUITY
+{observations}
+Use the uploaded original product photograph as the authoritative reference. Preserve the exact product identity, silhouette, proportions, colour, material, texture, pattern, stitching, hardware, accessories, and any original visible logo. Do not redesign, replace, beautify into a different product, invent details, or omit distinctive features. Keep the product recognisably identical in all four panels. If a feature is unclear, do not guess. If a model is selected, use an adult model and keep the same person and styling in every panel.
 
-    candidates = result.get("candidates") or []
-    parts = candidates[0].get("content", {}).get("parts", []) if candidates else []
-    for part in parts:
-        blob = part.get("inlineData") or part.get("inline_data") or {}
-        data = blob.get("data")
-        mime = blob.get("mimeType") or blob.get("mime_type") or ""
-        if data and mime.startswith("image/"):
-            try:
-                raw = base64.b64decode(data)
-                with Image.open(BytesIO(raw)) as image:
-                    image.load()
-                    output = BytesIO()
-                    image.convert("RGB").save(output, format="JPEG", quality=92, optimize=True)
-                    return output.getvalue()
-            except Exception as exc:
-                raise StoryboardEngineError("Gemini memulangkan imej yang tidak sah.") from exc
-    raise StoryboardEngineError("Gemini tidak memulangkan imej. Cuba prompt atau gambar lain.")
+PANEL 1 — HOOK / HERO ESTABLISHING SHOT
+Show the selected product immediately and clearly in the chosen setting. Use a compelling but natural composition, medium or three-quarter framing, clean separation from the background, and premium commercial lighting. The product must be the first thing viewers notice.
+
+PANEL 2 — PRODUCT FORM / MAIN BENEFIT
+Move to a closer medium shot that clearly shows the product's overall form, fit, silhouette, and practical use. If a model is selected, show a natural, believable interaction with the product. Avoid exaggerated poses or changes to the product.
+
+PANEL 3 — DETAIL / TRUST SHOT
+Use a close-up focused on real details visible in the reference, such as material texture, seams, fastening, handle, surface finish, or other distinctive features. Show only details that genuinely exist in the source image. Keep geometry and colours accurate.
+
+PANEL 4 — FINAL HERO / DESIRE SHOT
+Finish with the strongest polished composition of the same product in the same campaign style. Keep the product fully recognisable, well lit, and clearly visible, with balanced negative space and a natural commercial finish. This final panel should feel like a memorable closing frame.
+
+CAMERA, LIGHTING AND ART DIRECTION
+Photorealistic commercial photography, realistic anatomy and hands where applicable, natural perspective, controlled highlights, crisp product focus, tasteful depth of field, coherent colour grading, high visual quality, and deliberate framing. The four panels must feel like shots from one consistent campaign rather than four unrelated images.
+
+STRICT NEGATIVE REQUIREMENTS
+No changes to product design, colour, proportions, materials, logos, or visible details. No invented accessories or extra products. No duplicate limbs, distorted hands, warped product geometry, fake branding, watermarks, captions, subtitles, or decorative text. Panel labels or thin dividers may be used only to clarify the storyboard layout; do not add advertising copy inside the image.
+
+OUTPUT
+Return exactly one cohesive storyboard sheet with four distinct panels in a vertical 9:16 composition. Do not return a single hero image, a two-panel collage, more than four panels, or a video. The storyboard must be usable as a clear visual plan for a later product promotion."""
