@@ -34,7 +34,7 @@ $env:FAL_KEY = Read-Host "Enter fal.ai key locally"
 $env:GEMINI_API_KEY = Read-Host "Enter Gemini key locally"
 python .\fal_storyboard_test.py .\product.jpg --out .\fal_storyboard_test_output
 ```
-By default, the CLI generates `product_attributes.json`, `panel_1.jpg`, `panel_2.jpg`, `contact_sheet_2_panels.jpg`, and `video_output.mp4`. The video step requires FFmpeg/ffprobe and internet access for gTTS. Use `--no-video` to run the image-only stage. It reports Gemini latency, upload latency, per-panel latency, total latency, and Gemini token usage when returned. fal.ai cost is not guessed from latency: record the fal.ai Usage/Billing dashboard before and after the run to determine actual credits/cost.
+By default, the CLI generates `product_attributes.json`, `panel_1.jpg`, `panel_2.jpg`, `contact_sheet_2_panels.jpg`, and `video_output.mp4`. The video step requires FFmpeg and internet access for gTTS. `ffprobe` is preferred for accurate audio timing; Mutagen is the fallback reader, followed by a clearly logged speech-duration estimate if both readers fail. Use `--no-video` to run the image-only stage. It reports Gemini latency, upload latency, per-panel latency, total latency, and Gemini token usage when returned. fal.ai cost is not guessed from latency: record the fal.ai Usage/Billing dashboard before and after the run to determine actual credits/cost.
 
 ## Telegram UX
 1. Send a product photo.
