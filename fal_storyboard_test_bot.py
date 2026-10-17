@@ -21,9 +21,7 @@ from telegram.ext import (
 )
 from fal_storyboard_test import analyze_product, generate_panel
 from modules.video_engine import create_video
-from modules.storyboard_engine import (
-    StoryboardEngineError, build_storyboard_prompt, generate_storyboard_image, image_api_enabled,
-)
+from modules.storyboard_engine import build_storyboard_prompt
 
 logging.basicConfig(level=logging.INFO)
 TOKEN = os.environ.get("FAL_TEST_BOT_TOKEN", "").strip()
@@ -167,29 +165,12 @@ async def choose_environment(update: Update, context: ContextTypes.DEFAULT_TYPE)
     )
     context.user_data["storyboard_prompt"] = prompt
     try:
-        await query.edit_message_text("Menyediakan prompt storyboard satu imej…")
-        image_sent = False
-        if image_api_enabled():
-            try:
-                image_bytes = await asyncio.to_thread(generate_storyboard_image, raw, prompt)
-                image_file = io.BytesIO(image_bytes)
-                image_file.name = "KLIPPO_STORYBOARD_9x16.jpg"
-                await query.message.reply_photo(
-                    photo=image_file,
-                    caption="🖼️ Imej storyboard tunggal 9:16 siap. Semak kesamaan produk dengan gambar asal.",
-                )
-                image_sent = True
-            except StoryboardEngineError as exc:
-                await query.message.reply_text(str(exc))
-        if not image_sent:
-            await query.message.reply_text(
-                "ℹ️ Imej tidak dijana dalam bot kerana penjanaan API dinyahaktifkan atau tidak berjaya. "
-                "Untuk pilihan tanpa caj API bot, buka aplikasi Gemini, lampirkan gambar produk asal "
-                "dan tampal prompt di bawah."
-            )
+        await query.edit_message_text("Menyediakan prompt storyboard 4 panel…")
         await query.message.reply_text(
-            "✨ PROMPT STORYBOARD KLIPPO ✨\n\n" + prompt
-            + "\n\nSalin prompt ini dan gunakan bersama gambar produk asal dalam Gemini.",
+            "✅ PROMPT STORYBOARD 4 PANEL SIAP\\n\\n"
+            "Aliran ini menghasilkan teks sahaja, tidak menjana imej dan tidak memanggil API imej luaran. "
+            "Muat naik gambar produk asal bersama prompt ini dalam alat yang anda pilih.\\n\\n"
+            + prompt,
             reply_markup=InlineKeyboardMarkup([
                 [InlineKeyboardButton("📋 Paparkan prompt untuk disalin", callback_data="prompt:show")],
                 [InlineKeyboardButton("🎬 Teruskan ke fungsi video beta", callback_data="legacy:video")],
