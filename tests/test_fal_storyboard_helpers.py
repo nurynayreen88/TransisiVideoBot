@@ -51,6 +51,7 @@ class TelegramLockTests(unittest.TestCase):
         self.assertTrue(claim_user(user_id))
         self.assertFalse(claim_user(user_id))
         release_user(user_id)
+        release_user(user_id)  # cleanup is idempotent even after an earlier release
         self.assertTrue(claim_user(user_id))
         release_user(user_id)
 
