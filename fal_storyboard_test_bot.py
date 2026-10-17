@@ -26,6 +26,20 @@ TOKEN = os.environ.get("FAL_TEST_BOT_TOKEN", "").strip()
 MODEL = os.environ.get("FAL_STORYBOARD_MODEL", "fal-ai/flux-kontext/dev").strip()
 MAX_UPLOAD_BYTES = 12 * 1024 * 1024
 ACTIVE_USERS: set[int] = set()
+
+
+def claim_user(user_id: int) -> bool:
+    """Atomically claim a user's generation slot within this bot process."""
+    if user_id in ACTIVE_USERS:
+        return False
+    ACTIVE_USERS.add(user_id)
+    return True
+
+
+def release_user(user_id: int) -> None:
+    ACTIVE_USERS.discard(user_id)
+
+
 SCENES = [
     "Opening hero shot: product clearly visible in a tasteful, clean setting, three-quarter view.",
     "Detail shot: closer framing on the same product, showing only real visible details and gentle highlights.",
@@ -113,10 +127,9 @@ async def choose_format(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
         await query.edit_message_text("Sila hantar gambar produk dahulu.")
         return
     user_id = query.from_user.id
-    if user_id in ACTIVE_USERS:
+    if not claim_user(user_id):
         await query.answer("⏳ Proses anda masih berjalan. Tunggu sehingga selesai.", show_alert=True)
         return
-    ACTIVE_USERS.add(user_id)
     output_format = query.data.split(":", 1)[1]
     started = time.perf_counter()
     try:
@@ -179,7 +192,7 @@ async def choose_format(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
             safe = "Ujian gagal. Semak log servis ujian Render. Bot produksi tidak terjejas."
         await query.message.reply_text(safe)
     finally:
-        ACTIVE_USERS.discard(user_id)
+        release_user(user_id)
 
 
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
