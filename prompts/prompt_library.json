@@ -1598,27 +1598,27 @@
       "duration_seconds": 10,
       "style": "tech_ugc",
       "description": "Demonstrasi ringkas fungsi yang jelas dan munasabah untuk gajet.",
-      "prompt": "Premium product ad for the exact user-supplied product name. Category: Gajet & Elektronik. Concept: Everyday Use Demo. EXACTLY 10 seconds, vertical 9:16.\n\nPRODUCT LOCK: Match any supplied reference image precisely: shape, colour, proportions, visible parts and packaging. Do not invent features, materials, ingredients, functions, claims, accessories or label text. Keep actions physically plausible and the same product consistent throughout.\n\nRULES: No on-screen text, captions, added logos, watermark, morphing, floating/duplicated parts, sudden redesign or impossible movement. Props are not implied to be included. No dialogue/voice-over; if supported, subtle instrumental music below ambience.\n\nSTORYBOARD:\n0–2s | Opening hook: Open with the complete device on a stable surface; use a slow three-quarter camera move to show its true shape, buttons and ports.\n2–6s | Signature action: Execute this exact concept: Demonstrasi ringkas fungsi yang jelas dan munasabah untuk gajet. Complete it naturally within this beat. Use one slow controlled move that supports the action. If unsupported by the visible product, do not fake a mechanism; use a compatible gesture or camera move.\n6–8s | Detail insert: Show only real buttons, ports, controls or connectors that are visible; do not imply compatibility or functions not verified.\n8–10s | Hero finish: Finish with the complete device in a stable hero view; preserve the exact casing, ports, controls and screen state.\n\nFinish with a stable hero frame showing the unchanged product.",
+      "prompt": "Premium product advertisement for the exact user-supplied gadget or electronic device. Category: Gajet & Elektronik. Concept: Everyday Use Demo. EXACTLY 10 seconds, vertical 9:16.\n\nDEVICE LOCK: Treat the supplied reference image as authoritative. Preserve the exact model appearance, dimensions, body colour, finish, screen shape, camera layout, buttons, ports, vents, connectors, labels and visible accessories. Do not add or remove components, invent branding, rewrite labels, generate unsupported screen content or claim specifications, compatibility, battery life, speed, water resistance or performance not provided by the reference.\n\nFUNCTION AND CONTINUITY: Show only one simple, plausible action that is clearly supported by the visible product and reference. A button press must use an existing button; a cable may connect only when the correct port and cable are visible or supplied. If the function is uncertain, use careful handling or a slow camera move rather than inventing functionality. Keep the same device and configuration throughout.\n\nREALISM RULES: Hands must be natural, with correct finger placement and believable grip. Device geometry must remain stable; no melting edges, floating controls, duplicated gadgets, impossible cables, changing screen layout, flicker, sudden redesign, sparks, fake interface overlays, added text, captions, logos or watermarks. Do not imply accessories are included unless shown. No dialogue or voice-over; use subtle instrumental music only if supported, below natural ambience.\n\nSTORYBOARD — maintain device identity, scale and lighting:\n0–2s OPENING HOOK: Show the complete gadget and all visible included components exactly as pictured. Use a slow push-in that keeps the device silhouette, buttons, ports and screen layout faithful to the reference.\n2–6s EVERYDAY-USE ACTION: Demonstrate one simple, visible action supported by the reference, such as pressing an existing button, holding the device naturally or placing it on a surface. Do not invent a screen interface, connection, feature or outcome; if the function is unclear, show careful handling instead.\n6–8s PHYSICAL DETAIL: Use a steady close-up of one real visible control, port, edge, display or finish. Do not add ports, alter button placement, generate readable interface text or imply technical specifications not supplied.\n8–10s HERO FINISH: Return to a complete three-quarter product view with the device resting or held naturally. Keep the same configuration and accessories, let movement settle, and hold a stable final frame.\n\nCAMERA AND CONTINUITY: Smooth controlled camera movement, realistic reflections and stable exposure. Avoid extreme lens distortion, rapid cuts and dramatic effects that obscure the device. Preserve exact proportions, colour and component placement from start to finish. End on a clean, steady product frame.",
       "storyboard": [
         {
           "time": "0–2s",
           "shot": "Opening hook",
-          "direction": "Open with the complete device on a stable surface; use a slow three-quarter camera move to show its true shape, buttons and ports."
+          "direction": "Show the complete gadget and all visible included components exactly as pictured. Use a slow push-in that keeps the device silhouette, buttons, ports and screen layout faithful to the reference."
         },
         {
           "time": "2–6s",
-          "shot": "Signature action",
-          "direction": "Execute this exact concept: Demonstrasi ringkas fungsi yang jelas dan munasabah untuk gajet. Complete it naturally within this beat. Use one slow controlled move that supports the action. If unsupported by the visible product, do not fake a mechanism; use a compatible gesture or camera move."
+          "shot": "Everyday-use action",
+          "direction": "Demonstrate one simple, visible action supported by the reference, such as pressing an existing button, holding the device naturally or placing it on a surface. Do not invent a screen interface, connection, feature or outcome; if the function is unclear, show careful handling instead."
         },
         {
           "time": "6–8s",
-          "shot": "Detail insert",
-          "direction": "Show only real buttons, ports, controls or connectors that are visible; do not imply compatibility or functions not verified."
+          "shot": "Physical detail",
+          "direction": "Use a steady close-up of one real visible control, port, edge, display or finish. Do not add ports, alter button placement, generate readable interface text or imply technical specifications not supplied."
         },
         {
           "time": "8–10s",
           "shot": "Hero finish",
-          "direction": "Finish with the complete device in a stable hero view; preserve the exact casing, ports, controls and screen state."
+          "direction": "Return to a complete three-quarter product view with the device resting or held naturally. Keep the same configuration and accessories, let movement settle, and hold a stable final frame."
         }
       ]
     },
