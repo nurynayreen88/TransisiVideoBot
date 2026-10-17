@@ -2133,15 +2133,15 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 action = 'motion:static' if context.user_data.get('prompt_style') == 'white_doodle' else 'motion:push'
             else:
                 await query.message.reply_text(
-                    '🎥 PILIH PERGERAKAN KAMERA\\n\\n'
-                    'Pilih cara kamera bergerak dalam video. Setiap pilihan akan dimasukkan ke dalam prompt. Jika tidak pasti, pilih AI Auto.\\n\\n'
-                    '🤖 AI Auto — AI memilih gerakan paling sesuai dengan produk dan babak. Pilihan disyorkan untuk hasil yang seimbang.\\n\\n'
-                    '🔍 Zoom Masuk — kamera mendekati produk untuk menonjolkan tekstur, jahitan, corak atau butiran kecil. Sesuai untuk beg, kasut, kosmetik dan barang kemas.\\n\\n'
-                    '🔎 Zoom Keluar — kamera menjauhi produk untuk menunjukkan bentuk dan keseluruhan produk.\\n\\n'
-                    '↔️ Gerak Sisi — kamera bergerak mendatar dari kiri ke kanan atau sebaliknya untuk memperlihatkan produk dari sisi.\\n\\n'
-                    '🔄 Orbit Terkawal — kamera bergerak melengkung sedikit di sekeliling produk untuk menunjukkan perspektif berbeza; bukan pusingan 360 darjah.\\n\\n'
-                    '🎬 Dolly In — kamera bergerak ke hadapan dengan perubahan perspektif semula jadi, sesuai untuk iklan premium.\\n\\n'
-                    '📐 Sudut Rendah — kamera melihat produk dari bawah untuk kesan lebih menonjol dan dramatik.\\n\\n'
+                    '🎥 PILIH PERGERAKAN KAMERA\n\n'
+                    'Pilih cara kamera bergerak dalam video. Setiap pilihan akan dimasukkan ke dalam prompt. Jika tidak pasti, pilih AI Auto.\n\n'
+                    '🤖 AI Auto — AI memilih gerakan paling sesuai dengan produk dan babak. Pilihan disyorkan untuk hasil yang seimbang.\n\n'
+                    '🔍 Zoom Masuk — kamera mendekati produk untuk menonjolkan tekstur, jahitan, corak atau butiran kecil. Sesuai untuk beg, kasut, kosmetik dan barang kemas.\n\n'
+                    '🔎 Zoom Keluar — kamera menjauhi produk untuk menunjukkan bentuk dan keseluruhan produk.\n\n'
+                    '↔️ Gerak Sisi — kamera bergerak mendatar dari kiri ke kanan atau sebaliknya untuk memperlihatkan produk dari sisi.\n\n'
+                    '🔄 Orbit Terkawal — kamera bergerak melengkung sedikit di sekeliling produk untuk menunjukkan perspektif berbeza; bukan pusingan 360 darjah.\n\n'
+                    '🎬 Dolly In — kamera bergerak ke hadapan dengan perubahan perspektif semula jadi, sesuai untuk iklan premium.\n\n'
+                    '📐 Sudut Rendah — kamera melihat produk dari bawah untuk kesan lebih menonjol dan dramatik.\n\n'
                     '✨ Studio Statik — kamera kekal di tempatnya supaya produk jelas dan konsisten; sesuai untuk katalog dan demonstrasi.',
                     reply_markup=InlineKeyboardMarkup([
                     [InlineKeyboardButton('🤖 AI Auto (Disyorkan)', callback_data='motion:auto')],
