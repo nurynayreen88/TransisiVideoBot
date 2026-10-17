@@ -2132,12 +2132,27 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             if context.user_data.get('prompt_mode') == 'storyboard':
                 action = 'motion:static' if context.user_data.get('prompt_style') == 'white_doodle' else 'motion:push'
             else:
-                await query.message.reply_text('🎥 Pilih gerakan kamera:', reply_markup=InlineKeyboardMarkup([
-                [InlineKeyboardButton('🔄 Orbit Terkawal', callback_data='motion:orbit')],
-                [InlineKeyboardButton('🔍 Zoom Masuk', callback_data='motion:push')],
-                [InlineKeyboardButton('↔️ Gerak Sisi', callback_data='motion:side')],
-                [InlineKeyboardButton('✨ Studio Statik', callback_data='motion:static')]
-            ]))
+                await query.message.reply_text(
+                    '🎥 PILIH PERGERAKAN KAMERA\\n\\n'
+                    'Pilih cara kamera bergerak dalam video. Setiap pilihan akan dimasukkan ke dalam prompt. Jika tidak pasti, pilih AI Auto.\\n\\n'
+                    '🤖 AI Auto — AI memilih gerakan paling sesuai dengan produk dan babak. Pilihan disyorkan untuk hasil yang seimbang.\\n\\n'
+                    '🔍 Zoom Masuk — kamera mendekati produk untuk menonjolkan tekstur, jahitan, corak atau butiran kecil. Sesuai untuk beg, kasut, kosmetik dan barang kemas.\\n\\n'
+                    '🔎 Zoom Keluar — kamera menjauhi produk untuk menunjukkan bentuk dan keseluruhan produk.\\n\\n'
+                    '↔️ Gerak Sisi — kamera bergerak mendatar dari kiri ke kanan atau sebaliknya untuk memperlihatkan produk dari sisi.\\n\\n'
+                    '🔄 Orbit Terkawal — kamera bergerak melengkung sedikit di sekeliling produk untuk menunjukkan perspektif berbeza; bukan pusingan 360 darjah.\\n\\n'
+                    '🎬 Dolly In — kamera bergerak ke hadapan dengan perubahan perspektif semula jadi, sesuai untuk iklan premium.\\n\\n'
+                    '📐 Sudut Rendah — kamera melihat produk dari bawah untuk kesan lebih menonjol dan dramatik.\\n\\n'
+                    '✨ Studio Statik — kamera kekal di tempatnya supaya produk jelas dan konsisten; sesuai untuk katalog dan demonstrasi.',
+                    reply_markup=InlineKeyboardMarkup([
+                    [InlineKeyboardButton('🤖 AI Auto (Disyorkan)', callback_data='motion:auto')],
+                    [InlineKeyboardButton('🔍 Zoom Masuk', callback_data='motion:push')],
+                    [InlineKeyboardButton('🔎 Zoom Keluar', callback_data='motion:pull')],
+                    [InlineKeyboardButton('↔️ Gerak Sisi', callback_data='motion:side')],
+                    [InlineKeyboardButton('🔄 Orbit Terkawal', callback_data='motion:orbit')],
+                    [InlineKeyboardButton('🎬 Dolly In', callback_data='motion:dolly')],
+                    [InlineKeyboardButton('📐 Sudut Rendah', callback_data='motion:low')],
+                    [InlineKeyboardButton('✨ Studio Statik', callback_data='motion:static')]
+                ]))
                 return
     # Return only for actions handled by the first chain. Video workflow
     # callbacks must continue into the second chain.
@@ -2148,7 +2163,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
     if action.startswith('motion:') and context.user_data.get('stage') == 'prompt_motion':
         motion = action.split(':', 1)[1]
-        motions = {'orbit': 'A controlled 30-degree camera arc around the product, not a full 360-degree rotation; preserve the visible product geometry.', 'push': 'A slow forward dolly-in with gentle parallax; no object deformation.', 'side': 'A smooth left-to-right camera slide with stable product proportions.', 'static': 'A locked camera with subtle studio lighting changes only.'}
+        motions = {'auto': 'Choose the simplest camera movement best suited to the product and shot; prefer a gentle push-in for detail, a slow side slide for a full product view, or a locked camera when movement risks changing product details. Keep movement subtle and preserve exact product geometry.', 'orbit': 'A controlled 30-degree camera arc around the product, not a full 360-degree rotation; preserve the visible product geometry.', 'push': 'A slow forward camera push-in toward the product to reveal texture and details; avoid digital warping and preserve product geometry.', 'pull': 'A slow camera pull-back away from the product to reveal its full shape and surrounding scene; preserve proportions.', 'side': 'A smooth horizontal left-to-right camera slide with stable product proportions.', 'dolly': 'A slow physical-feeling forward dolly-in with gentle natural parallax; no object deformation.', 'low': 'A restrained low-angle camera view looking slightly upward at the product; preserve the reference design and proportions.', 'static': 'A locked camera with subtle studio lighting changes only; keep the product clear and stable.'}
         if motion in motions:
             context.user_data['prompt_motion_choice'] = motion
             context.user_data['stage'] = 'prompt_confirm'
@@ -2166,7 +2181,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 'restrained natural setting with soft daylight, without obscuring the product': 'Alam Semula Jadi',
                 'bright minimalist setting with clean neutral surfaces and soft daylight': 'Cerah Minimalis',
             }
-            motion_labels = {'orbit': 'Orbit Terkawal', 'push': 'Zoom Masuk', 'side': 'Gerak Sisi', 'static': 'Studio Statik'}
+            motion_labels = {'auto': 'AI Auto (Disyorkan)', 'orbit': 'Orbit Terkawal', 'push': 'Zoom Masuk', 'pull': 'Zoom Keluar', 'side': 'Gerak Sisi', 'dolly': 'Dolly In', 'low': 'Sudut Rendah', 'static': 'Studio Statik'}
             summary = chr(10).join([
                 '🧾 SEMAK PILIHAN SEBELUM JANA PROMPT',
                 '',
@@ -2368,7 +2383,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                                                        reply_markup=video_actions)
     elif action == 'prompt_generate:confirm' and context.user_data.get('stage') == 'prompt_confirm':
         motion = context.user_data.get('prompt_motion_choice', 'push')
-        motions = {'orbit': 'A controlled 30-degree camera arc around the product, not a full 360-degree rotation; preserve the visible product geometry.', 'push': 'A slow forward dolly-in with gentle parallax; no object deformation.', 'side': 'A smooth left-to-right camera slide with stable product proportions.', 'static': 'A locked camera with subtle studio lighting changes only.'}
+        motions = {'auto': 'Choose the simplest camera movement best suited to the product and shot; prefer a gentle push-in for detail, a slow side slide for a full product view, or a locked camera when movement risks changing product details. Keep movement subtle and preserve exact product geometry.', 'orbit': 'A controlled 30-degree camera arc around the product, not a full 360-degree rotation; preserve the visible product geometry.', 'push': 'A slow forward camera push-in toward the product to reveal texture and details; avoid digital warping and preserve product geometry.', 'pull': 'A slow camera pull-back away from the product to reveal its full shape and surrounding scene; preserve proportions.', 'side': 'A smooth horizontal left-to-right camera slide with stable product proportions.', 'dolly': 'A slow physical-feeling forward dolly-in with gentle natural parallax; no object deformation.', 'low': 'A restrained low-angle camera view looking slightly upward at the product; preserve the reference design and proportions.', 'static': 'A locked camera with subtle studio lighting changes only; keep the product clear and stable.'}
         if motion in motions:
             waiting = await query.message.reply_text('⏳ DALAM PROSES — 0%' + chr(10) + 'Menyusun prompt...')
             try:
