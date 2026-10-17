@@ -26,12 +26,10 @@ def analyze_product(image_path: Path) -> dict:
     }
     key = os.environ.get("GEMINI_API_KEY", "").strip()
     if not key:
-        logging.warning("GEMINI_API_KEY missing; using conservative fallback.")
-        return fallback
+        raise RuntimeError("GEMINI_API_KEY is required: Gemini JSON analysis must run before fal.ai.")
     data = image_path.read_bytes()
     if len(data) > 8_000_000:
-        logging.warning("Image exceeds Gemini inline limit; using conservative fallback.")
-        return fallback
+        raise RuntimeError("Image exceeds Gemini inline limit (8 MB). Resize the reference image and retry.")
     prompt = (
         "Analyse this product photo. Return ONLY valid JSON with keys: product_type (string), "
         "colors (array), shape (string), materials (array), logo_or_text (string), visible_details (array), "
@@ -63,8 +61,7 @@ def analyze_product(image_path: Path) -> dict:
                 usage.get("totalTokenCount", "n/a"))
         return attributes
     except Exception as exc:
-        logging.warning("Gemini JSON analysis failed (%s); using conservative fallback.", type(exc).__name__)
-        return fallback
+        raise RuntimeError(f"Gemini JSON analysis failed ({type(exc).__name__}); fal.ai generation was not started.") from exc
 
 
 def generate_panel(image_url: str, attributes: dict, scene: str, index: int) -> tuple[bytes, float]:
