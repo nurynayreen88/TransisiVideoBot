@@ -1,28 +1,51 @@
-# Klippo fal.ai Storyboard Beta (isolated)
+# Klippo Storyboard + Video Beta (isolated test branch)
 
-This is an experimental test bot and must run as a **separate Render service** with its own Telegram bot token. Do not change the existing live Klippo service or reuse its Telegram bot token.
+This is experimental. Run as a separate Render service with a separate Telegram bot token. Do not alter the production service, production token, or main branch.
 
-## 1. Create a separate Telegram test bot
-1. Open Telegram and message [@BotFather](https://t.me/BotFather).
-2. Run `/newbot` and follow the steps.
-3. Copy the new test bot token. Do not share it in chat or commit it to GitHub.
+## Required environment variables
+- `FAL_TEST_BOT_TOKEN`: token for the separate Telegram test bot
+- `FAL_KEY`: fal.ai API key
+- `GEMINI_API_KEY`: Gemini key for JSON visual attributes and a short Malay voiceover line
+- Optional `GEMINI_VISION_MODEL` (default `gemini-2.5-flash`)
+- Optional `FAL_STORYBOARD_MODEL` (default `fal-ai/flux-kontext/dev`)
 
-## 2. Create a separate Render service
-1. In Render, choose **New + → Web Service** (or the service type your account uses for a continuously running worker).
-2. Connect `nurynayreen88/TransisiVideoBot`.
-3. Select branch `test/fal-storyboard-beta`.
-4. Use the existing Dockerfile.
-5. Set the Start Command to `python fal_storyboard_test_bot.py`.
-6. Add Environment Variables:
-   - `FAL_TEST_BOT_TOKEN` = token from the separate Telegram test bot
-   - `FAL_KEY` = fal.ai API key
-   - `GEMINI_API_KEY` = optional, only if you want Gemini to analyse the reference image
-7. Keep the existing production Klippo service unchanged. Do not attach the production bot token to this test service.
+Never commit keys or paste them into chat.
 
-## 3. Run a test
-Open the new Telegram test bot, send `/start`, then send one product photo. It attempts to generate two panels using `fal-ai/flux-kontext/dev` and returns a two-panel contact sheet.
+## Isolated Render service
+1. Create a separate Render service using repository `nurynayreen88/TransisiVideoBot`.
+2. Select branch `test/fal-storyboard-beta`.
+3. Use the repository Dockerfile.
+4. Set the start command to `python fal_storyboard_test_bot.py`.
+5. Set the environment variables listed above.
+6. Keep the live Klippo service unchanged. Do not reuse its Telegram bot token.
 
-## Notes
-- API calls may incur charges. Check fal.ai pricing and usage before testing.
-- This is an experiment, not a guarantee that product labels or logos will be reproduced perfectly.
-- The test bot is independent of the live Klippo bot; do not merge this branch into the production branch until the output has been reviewed.
+## Minimum live API test (local)
+Install Python 3.11+, FFmpeg, and requirements:
+```bash
+pip install -r requirements.txt
+```
+Set `FAL_KEY` and `GEMINI_API_KEY` in your local environment without writing them into source files. Then run:
+```bash
+python fal_storyboard_test.py ./product.jpg --out ./fal_storyboard_test_output
+```
+PowerShell environment-variable example (enter keys locally; do not paste them into chat):
+```powershell
+$env:FAL_KEY = Read-Host "Enter fal.ai key locally"
+$env:GEMINI_API_KEY = Read-Host "Enter Gemini key locally"
+python .\fal_storyboard_test.py .\product.jpg --out .\fal_storyboard_test_output
+```
+The script generates exactly two panels and reports Gemini latency, upload latency, per-panel latency, total latency, and Gemini token usage when returned. fal.ai cost is not guessed from latency: record the fal.ai Usage/Billing dashboard before and after the run to determine actual credits/cost.
+
+## Telegram UX
+1. Send a product photo.
+2. Choose `🛍️ Shopee Affiliate` or `🎵 TikTok Viral`.
+3. Choose `🖼️ Storyboard Panel (Gambar)` or `🎬 Video Motion + Voiceover`.
+
+The video path assembles two generated panels locally with FFmpeg, applies a subtle slow zoom, and uses gTTS Malay speech. gTTS needs internet access and is basic text-to-speech, not a custom AI voice. Target output is 1080x1920 MP4, 3.6 seconds total (two panels at 1.8 seconds each). Keep the Gemini narration short because audio longer than the 3.6-second video is cut off.
+
+## Review checklist
+- Compare original and both panels for silhouette, colour, material appearance, label/logo and accessories.
+- Record actual fal.ai usage/cost from the dashboard.
+- Check MP4 dimensions, duration, voice intelligibility and Telegram playback.
+- AI image generation cannot guarantee perfect product/logo preservation.
+- Do not merge to main or deploy production until explicitly approved.
