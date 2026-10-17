@@ -1505,27 +1505,27 @@
       "duration_seconds": 10,
       "style": "studio_product",
       "description": "Produk kasut dipaparkan atas permukaan bersih dengan gerakan kamera perlahan.",
-      "prompt": "Premium product ad for the exact user-supplied product name. Category: Kasut. Concept: Clean Product Reveal. EXACTLY 10 seconds, vertical 9:16.\n\nPRODUCT LOCK: Match any supplied reference image precisely: shape, colour, proportions, visible parts and packaging. Do not invent features, materials, ingredients, functions, claims, accessories or label text. Keep actions physically plausible and the same product consistent throughout.\n\nRULES: No on-screen text, captions, added logos, watermark, morphing, floating/duplicated parts, sudden redesign or impossible movement. Props are not implied to be included. No dialogue/voice-over; if supported, subtle instrumental music below ambience.\n\nSTORYBOARD:\n0–2s | Opening hook: Begin at a low three-quarter angle, keeping the complete shoe in frame and its real proportions undistorted.\n2–6s | Signature action: Execute this exact concept: Produk kasut dipaparkan atas permukaan bersih dengan gerakan kamera perlahan. Complete it naturally within this beat. Use one slow controlled move that supports the action. If unsupported by the visible product, do not fake a mechanism; use a compatible gesture or camera move.\n6–8s | Detail insert: If worn, show one small natural step on a safe flat surface, with realistic foot contact and no exaggerated bounce.\n8–10s | Hero finish: End with a slow camera settle and the full shoe unobstructed; no text or invented logos.\n\nFinish with a stable hero frame showing the unchanged product.",
+      "prompt": "Premium product advertisement for the exact user-supplied footwear. Category: Kasut. Concept: Clean Product Reveal. EXACTLY 10 seconds, vertical 9:16.\n\nPRODUCT LOCK: Use the supplied reference image as the source of truth. Preserve the exact shoe silhouette, toe shape, heel height, sole profile, colour, pattern, visible material appearance, panels, stitching, fastening, logo placement and proportions. Do not add, remove or relocate laces, straps, buckles, logos, labels, tread or decorative elements. Do not invent the unseen side or underside. If the reference shows a pair, preserve both shoes' matching design and correct left/right orientation; if it shows one shoe, do not generate a second.\n\nSCENE AND REALISM: Keep the shoe resting on a believable flat surface with natural contact shadow. The product remains stationary; only the camera moves. No floating, sliding, self-rotating, duplicated parts, shape morphing, melting soles, impossible reflections, flickering details, sudden redesign or warped perspective. Background props, if any are present in the reference, remain separate and must not imply they are included with the product. No on-screen text, captions, added logos or watermark. No dialogue or voice-over; if audio is supported, use subtle instrumental music below natural ambience.\n\nSTORYBOARD — exact timing and continuous product identity:\n0–2s OPENING HOOK: Reveal the complete shoe in a clean low three-quarter tabletop or floor-level composition. Keep the toe, heel and full sole outline inside frame; use a short, smooth camera push-in without moving or reshaping the shoe.\n2–6s SIGNATURE REVEAL: Make one slow, controlled camera slide from the toe toward the heel to reveal the shoe's real side profile. Keep the shoe stationary and grounded; show only visible construction and do not invent a second shoe, hidden side, mechanism or feature.\n6–8s DETAIL INSERT: Hold a steady close-up on one real, visible detail such as the fastening, stitching, panel edge or sole junction. Choose only a detail present in the reference; preserve its exact position, scale and appearance.\n8–10s HERO FINISH: Ease back to a balanced three-quarter view of the complete shoe. Let the camera settle fully and hold a sharp, uncluttered final frame with realistic contact shadow and unchanged proportions.\n\nCAMERA AND CONTINUITY: Smooth, measured camera movement only; no fast orbit, jump cuts, exaggerated depth effects or excessive motion blur. Maintain consistent light direction, exposure, colour and background throughout. Keep the full shoe readable in the opening and closing frames. The final frame should be clean and suitable for a short-form product listing ad.",
       "storyboard": [
         {
           "time": "0–2s",
           "shot": "Opening hook",
-          "direction": "Begin at a low three-quarter angle, keeping the complete shoe in frame and its real proportions undistorted."
+          "direction": "Reveal the complete shoe in a clean low three-quarter tabletop or floor-level composition. Keep the toe, heel and full sole outline inside frame; use a short, smooth camera push-in without moving or reshaping the shoe."
         },
         {
           "time": "2–6s",
-          "shot": "Signature action",
-          "direction": "Execute this exact concept: Produk kasut dipaparkan atas permukaan bersih dengan gerakan kamera perlahan. Complete it naturally within this beat. Use one slow controlled move that supports the action. If unsupported by the visible product, do not fake a mechanism; use a compatible gesture or camera move."
+          "shot": "Signature reveal",
+          "direction": "Make one slow, controlled camera slide from the toe toward the heel to reveal the shoe's real side profile. Keep the shoe stationary and grounded; show only visible construction and do not invent a second shoe, hidden side, mechanism or feature."
         },
         {
           "time": "6–8s",
           "shot": "Detail insert",
-          "direction": "If worn, show one small natural step on a safe flat surface, with realistic foot contact and no exaggerated bounce."
+          "direction": "Hold a steady close-up on one real, visible detail such as the fastening, stitching, panel edge or sole junction. Choose only a detail present in the reference; preserve its exact position, scale and appearance."
         },
         {
           "time": "8–10s",
           "shot": "Hero finish",
-          "direction": "End with a slow camera settle and the full shoe unobstructed; no text or invented logos."
+          "direction": "Ease back to a balanced three-quarter view of the complete shoe. Let the camera settle fully and hold a sharp, uncluttered final frame with realistic contact shadow and unchanged proportions."
         }
       ]
     },
