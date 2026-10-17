@@ -1,7 +1,8 @@
-"""Standalone Telegram beta bot for Gemini + fal.ai storyboard/video tests.
+"""Standalone Telegram beta bot for single-image storyboard and legacy video tests.
 
-Run only as a separate Render service with a separate Telegram bot token.
-Required: FAL_TEST_BOT_TOKEN, FAL_KEY, GEMINI_API_KEY.
+Run only as a separate Render service with its own Telegram bot token.
+Gemini image API generation is disabled unless explicitly opted in.
+The legacy video route separately requires FAL_KEY.
 """
 import asyncio
 import io
@@ -12,7 +13,7 @@ import time
 from pathlib import Path
 
 import fal_client
-from PIL import Image, ImageDraw, ImageOps
+from PIL import Image
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import (
     Application, CallbackQueryHandler, CommandHandler, ContextTypes,
@@ -49,21 +50,6 @@ SCENES = [
 ]
 
 
-def make_sheet(panel_bytes: list[bytes]) -> bytes:
-    cell_w, cell_h, margin, header_h = 540, 720, 12, 42
-    sheet = Image.new("RGB", (cell_w * 2 + margin * 3, cell_h + header_h + margin * 2), "#f4f0e9")
-    draw = ImageDraw.Draw(sheet)
-    for index, data in enumerate(panel_bytes):
-        with Image.open(io.BytesIO(data)) as source:
-            panel = ImageOps.fit(source.convert("RGB"), (cell_w, cell_h), method=Image.Resampling.LANCZOS)
-        x = margin + index * (cell_w + margin)
-        draw.text((x + 8, 12), f"PANEL {index + 1}", fill="#242424")
-        sheet.paste(panel, (x, header_h))
-    output = io.BytesIO()
-    sheet.save(output, format="JPEG", quality=90, optimize=True)
-    return output.getvalue()
-
-
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.effective_message.reply_text(
         "KLIPPO | STORYBOARD IMEJ TUNGGAL (BETA)\n\n"
@@ -94,6 +80,7 @@ async def handle_photo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
         context.user_data.pop("output_format", None)
         context.user_data.pop("visual_style", None)
         context.user_data.pop("visual_environment", None)
+        context.user_data.pop("storyboard_prompt", None)
         await status.edit_text(
             "Untuk tujuan kandungan apa?",
             reply_markup=InlineKeyboardMarkup([[
@@ -116,7 +103,7 @@ async def choose_goal(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
     await query.edit_message_text(
         "Pilih hasil yang mahu dijana:",
         reply_markup=InlineKeyboardMarkup([[
-            InlineKeyboardButton("🖼️ Storyboard Panel (Gambar)", callback_data="format:image"),
+            InlineKeyboardButton("🖼️ Satu Imej Storyboard", callback_data="format:image"),
         ], [
             InlineKeyboardButton("🎬 Video Motion + Voiceover", callback_data="format:video"),
         ]]),
@@ -169,7 +156,7 @@ async def choose_environment(update: Update, context: ContextTypes.DEFAULT_TYPE)
         return
     user_id = query.from_user.id
     if not claim_user(user_id):
-        await query.answer("⏳ Proses anda masih berjalan. Tunggu sehingga selesai.", show_alert=True)
+        await query.message.reply_text("⏳ Proses anda masih berjalan. Tunggu sehingga selesai.")
         return
     context.user_data["visual_environment"] = query.data.split(":", 1)[1]
     goal = context.user_data.get("content_goal", "shopee")
