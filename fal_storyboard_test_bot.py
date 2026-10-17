@@ -20,6 +20,9 @@ from telegram.ext import (
 )
 from fal_storyboard_test import analyze_product, generate_panel
 from modules.video_engine import create_video
+from modules.storyboard_engine import (
+    StoryboardEngineError, build_storyboard_prompt, generate_storyboard_image, image_api_enabled,
+)
 
 logging.basicConfig(level=logging.INFO)
 TOKEN = os.environ.get("FAL_TEST_BOT_TOKEN", "").strip()
@@ -63,11 +66,11 @@ def make_sheet(panel_bytes: list[bytes]) -> bytes:
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.effective_message.reply_text(
-        "KLIPPO | BETA STORYBOARD & VIDEO\n\n"
+        "KLIPPO | STORYBOARD IMEJ TUNGGAL (BETA)\n\n"
         "1. Hantar satu gambar produk.\n"
-        "2. Pilih tujuan kandungan.\n"
-        "3. Pilih hasil gambar storyboard atau video motion + voiceover.\n\n"
-        "Ini bot ujian berasingan; hasil AI mungkin mengubah butiran produk."
+        "2. Pilih tujuan, gaya visual dan latar.\n"
+        "3. Terima prompt storyboard dan, jika API imej diaktifkan secara jelas, satu imej 9:16.\n\n"
+        "Penjanaan API imej dinyahaktifkan secara lalai untuk mengelakkan caj tanpa kebenaran."
     )
 
 
@@ -89,6 +92,8 @@ async def handle_photo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
         context.user_data["product_image"] = raw
         context.user_data.pop("content_goal", None)
         context.user_data.pop("output_format", None)
+        context.user_data.pop("visual_style", None)
+        context.user_data.pop("visual_environment", None)
         await status.edit_text(
             "Untuk tujuan kandungan apa?",
             reply_markup=InlineKeyboardMarkup([[
@@ -119,8 +124,98 @@ async def choose_goal(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
 
 
 async def choose_format(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Route image storyboard to the new flow; preserve the legacy video path."""
     query = update.callback_query
     await query.answer()
+    output_format = query.data.split(":", 1)[1]
+    if not context.user_data.get("product_image"):
+        await query.edit_message_text("Sila hantar gambar produk dahulu.")
+        return
+    if output_format == "image":
+        keyboard = [
+            [InlineKeyboardButton("📦 Produk Sahaja", callback_data="visual:product_only")],
+            [InlineKeyboardButton("🧍 Model Memegang/Memakai", callback_data="visual:model_holding")],
+            [InlineKeyboardButton("📸 Model + Produk (Lifestyle)", callback_data="visual:model_lifestyle")],
+        ]
+        await query.edit_message_text("Pilih gaya visual untuk satu imej storyboard:", reply_markup=InlineKeyboardMarkup(keyboard))
+        return
+    if output_format == "video":
+        await run_legacy_video(update, context)
+        return
+    await query.edit_message_text("Pilihan tidak sah. Sila hantar gambar produk semula.")
+
+
+async def choose_visual_style(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    query = update.callback_query
+    await query.answer()
+    if not context.user_data.get("product_image"):
+        await query.edit_message_text("Sila hantar gambar produk dahulu.")
+        return
+    context.user_data["visual_style"] = query.data.split(":", 1)[1]
+    keyboard = [
+        [InlineKeyboardButton("🏛️ Studio Premium", callback_data="environment:studio")],
+        [InlineKeyboardButton("🏡 Suasana Rumah", callback_data="environment:home")],
+        [InlineKeyboardButton("☕ Kafe Moden", callback_data="environment:cafe")],
+    ]
+    await query.edit_message_text("Pilih latar belakang:", reply_markup=InlineKeyboardMarkup(keyboard))
+
+
+async def choose_environment(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    query = update.callback_query
+    await query.answer()
+    raw = context.user_data.get("product_image")
+    if not raw:
+        await query.edit_message_text("Sila hantar gambar produk dahulu.")
+        return
+    user_id = query.from_user.id
+    if not claim_user(user_id):
+        await query.answer("⏳ Proses anda masih berjalan. Tunggu sehingga selesai.", show_alert=True)
+        return
+    context.user_data["visual_environment"] = query.data.split(":", 1)[1]
+    goal = context.user_data.get("content_goal", "shopee")
+    prompt = build_storyboard_prompt(
+        goal=goal,
+        style=context.user_data.get("visual_style", "product_only"),
+        environment=context.user_data["visual_environment"],
+    )
+    try:
+        await query.edit_message_text("Menyediakan prompt storyboard satu imej…")
+        image_sent = False
+        if image_api_enabled():
+            try:
+                image_bytes = await asyncio.to_thread(generate_storyboard_image, raw, prompt)
+                image_file = io.BytesIO(image_bytes)
+                image_file.name = "KLIPPO_STORYBOARD_9x16.jpg"
+                await query.message.reply_photo(
+                    photo=image_file,
+                    caption="🖼️ Imej storyboard tunggal 9:16 siap. Semak kesamaan produk dengan gambar asal.",
+                )
+                image_sent = True
+            except StoryboardEngineError as exc:
+                await query.message.reply_text(str(exc))
+        if not image_sent:
+            await query.message.reply_text(
+                "ℹ️ Imej tidak dijana dalam bot kerana penjanaan API dinyahaktifkan atau tidak berjaya. "
+                "Untuk pilihan tanpa caj API bot, buka aplikasi Gemini, lampirkan gambar produk asal "
+                "dan tampal prompt di bawah."
+            )
+        await query.message.reply_text(
+            "✨ PROMPT STORYBOARD KLIPPO ✨\n\n" + prompt
+            + "\n\nSalin prompt ini dan gunakan bersama gambar produk asal dalam Gemini.",
+            reply_markup=InlineKeyboardMarkup([[
+                InlineKeyboardButton("🎬 Teruskan ke fungsi video beta", callback_data="legacy:video")
+            ]]),
+        )
+    except Exception:
+        logging.exception("Single-image storyboard flow failed")
+        await query.message.reply_text("Aliran storyboard gagal. Semak log servis beta.")
+    finally:
+        release_user(user_id)
+
+
+async def run_legacy_video(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Keep the existing fal.ai + video-engine path isolated from image generation."""
+    query = update.callback_query
     raw = context.user_data.get("product_image")
     goal = context.user_data.get("content_goal", "shopee")
     if not raw:
@@ -130,10 +225,12 @@ async def choose_format(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
     if not claim_user(user_id):
         await query.answer("⏳ Proses anda masih berjalan. Tunggu sehingga selesai.", show_alert=True)
         return
-    output_format = query.data.split(":", 1)[1]
     started = time.perf_counter()
     try:
-        await query.edit_message_text("Menganalisis produk dengan Gemini dan menyediakan dua panel…")
+        if not os.environ.get("FAL_KEY", "").strip():
+            await query.message.reply_text("Fungsi video lama memerlukan FAL_KEY. Fungsi imej tunggal tidak memerlukannya.")
+            return
+        await query.edit_message_text("Menganalisis produk dan menyediakan video beta…")
         with tempfile.TemporaryDirectory(prefix="klippo-beta-") as temp:
             root = Path(temp)
             image_path = root / "product_reference.jpg"
@@ -142,57 +239,52 @@ async def choose_format(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
             (root / "product_attributes.json").write_text(
                 __import__("json").dumps(attributes, ensure_ascii=False, indent=2), encoding="utf-8")
             image_url = await asyncio.to_thread(fal_client.upload_file, str(image_path))
-            panels = []
-            timings = []
             goal_scene = (
                 "Shopee affiliate product showcase, clear product visibility and trustworthy commercial styling."
                 if goal == "shopee" else
                 "TikTok-style energetic visual hook, dynamic but believable framing; keep the product clearly visible."
             )
+            panels = []
             for index, scene in enumerate(SCENES, start=1):
                 data, latency = await asyncio.to_thread(
                     generate_panel, image_url, attributes, f"{goal_scene} {scene}", index)
                 with Image.open(io.BytesIO(data)) as image:
                     image.verify()
                 panels.append(data)
-                timings.append(latency)
-                logging.info("Panel %s latency %.2fs", index, latency)
-
-            if output_format == "image":
-                await query.message.reply_photo(
-                    photo=io.BytesIO(make_sheet(panels)),
-                    caption=f"Storyboard 2 panel siap untuk semakan. Jumlah masa: {time.perf_counter()-started:.1f}s. "
-                            "Semak kesamaan logo, warna, bentuk dan butiran produk.",
+                logging.info("Legacy video panel %s latency %.2fs", index, latency)
+            panel_paths = []
+            for index, data in enumerate(panels, start=1):
+                path = root / f"panel_{index}.jpg"
+                path.write_bytes(data)
+                panel_paths.append(path)
+            voiceover = str(attributes.get("voiceover_ms") or "Lihat produk ini dengan reka bentuk dan perincian yang menarik.")
+            video_path = root / "klippo_product_video.mp4"
+            await query.message.reply_text("Panel video siap. Sedang menghasilkan video 9:16 dan voiceover Bahasa Melayu…")
+            await asyncio.to_thread(create_video, panel_paths, voiceover, video_path)
+            with video_path.open("rb") as video_file:
+                await query.message.reply_video(
+                    video=video_file,
+                    caption=f"Video beta 9:16 dengan motion + voiceover. Jumlah masa: {time.perf_counter()-started:.1f}s.",
+                    supports_streaming=True,
                 )
-            else:
-                panel_paths = []
-                for index, data in enumerate(panels, start=1):
-                    path = root / f"panel_{index}.jpg"
-                    path.write_bytes(data)
-                    panel_paths.append(path)
-                voiceover = str(attributes.get("voiceover_ms") or
-                    "Lihat produk ini dengan reka bentuk dan perincian yang menarik.")
-                video_path = root / "klippo_product_video.mp4"
-                await query.message.reply_text("Panel siap. Sedang menghasilkan video 9:16 dan voiceover Bahasa Melayu…")
-                await asyncio.to_thread(create_video, panel_paths, voiceover, video_path)
-                with video_path.open("rb") as video_file:
-                    await query.message.reply_video(
-                        video=video_file,
-                        caption=f"Video beta 9:16 dengan motion + voiceover. Jumlah masa: {time.perf_counter()-started:.1f}s.",
-                        supports_streaming=True,
-                    )
     except Exception as exc:
-        logging.exception("Storyboard/video beta failed")
+        logging.exception("Legacy video beta failed")
         message = str(exc)
         if "401" in message or "403" in message or "FAL_KEY" in message:
             safe = "Permintaan fal.ai ditolak. Semak konfigurasi dan akses model pada servis ujian."
         elif "429" in message:
             safe = "Had permintaan/kredit mungkin dicapai. Semak papan pemuka fal.ai."
         else:
-            safe = "Ujian gagal. Semak log servis ujian Render. Bot produksi tidak terjejas."
+            safe = "Ujian video gagal. Semak log servis beta. Enjin video produksi tidak terjejas."
         await query.message.reply_text(safe)
     finally:
         release_user(user_id)
+
+
+async def legacy_video_button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    query = update.callback_query
+    await query.answer()
+    await run_legacy_video(update, context)
 
 
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -202,14 +294,15 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
 def main() -> None:
     if not TOKEN:
         raise RuntimeError("FAL_TEST_BOT_TOKEN belum ditetapkan.")
-    if not os.environ.get("FAL_KEY", "").strip():
-        raise RuntimeError("FAL_KEY belum ditetapkan.")
     app = Application.builder().token(TOKEN).build()
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("help", help_command))
     app.add_handler(MessageHandler(filters.PHOTO, handle_photo))
     app.add_handler(CallbackQueryHandler(choose_goal, pattern=r"^goal:"))
     app.add_handler(CallbackQueryHandler(choose_format, pattern=r"^format:"))
+    app.add_handler(CallbackQueryHandler(choose_visual_style, pattern=r"^visual:"))
+    app.add_handler(CallbackQueryHandler(choose_environment, pattern=r"^environment:"))
+    app.add_handler(CallbackQueryHandler(legacy_video_button, pattern=r"^legacy:video$"))
     app.run_polling(drop_pending_updates=True)
 
 
