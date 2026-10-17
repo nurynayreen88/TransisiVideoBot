@@ -52,11 +52,11 @@ SCENES = [
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.effective_message.reply_text(
-        "KLIPPO | STORYBOARD IMEJ TUNGGAL (BETA)\n\n"
+        "KLIPPO | STORYBOARD 4 PANEL (BETA)\n\n"
         "1. Hantar satu gambar produk.\n"
         "2. Pilih tujuan, gaya visual dan latar.\n"
-        "3. Terima prompt storyboard dan, jika API imej diaktifkan secara jelas, satu imej 9:16.\n\n"
-        "Penjanaan API imej dinyahaktifkan secara lalai untuk mengelakkan caj tanpa kebenaran."
+        "3. Terima prompt storyboard 4 panel lengkap dan butang salin prompt.\n\n"
+        "Aliran ini menghasilkan teks sahaja dan tidak memanggil API imej berbayar."
     )
 
 
@@ -103,7 +103,7 @@ async def choose_goal(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
     await query.edit_message_text(
         "Pilih hasil yang mahu dijana:",
         reply_markup=InlineKeyboardMarkup([[
-            InlineKeyboardButton("🖼️ Satu Imej Storyboard", callback_data="format:image"),
+            InlineKeyboardButton("🖼️ Prompt Storyboard 4 Panel", callback_data="format:image"),
         ], [
             InlineKeyboardButton("🎬 Video Motion + Voiceover", callback_data="format:video"),
         ]]),
@@ -124,7 +124,7 @@ async def choose_format(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
             [InlineKeyboardButton("🧍 Model Memegang/Memakai", callback_data="visual:model_holding")],
             [InlineKeyboardButton("📸 Model + Produk (Lifestyle)", callback_data="visual:model_lifestyle")],
         ]
-        await query.edit_message_text("Pilih gaya visual untuk satu imej storyboard:", reply_markup=InlineKeyboardMarkup(keyboard))
+        await query.edit_message_text("Pilih gaya visual untuk storyboard 4 panel:", reply_markup=InlineKeyboardMarkup(keyboard))
         return
     if output_format == "video":
         await run_legacy_video(update, context)
