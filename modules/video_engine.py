@@ -1,0 +1,70 @@
+"""Low-cost local vertical video assembly using FFmpeg + gTTS."""
+from pathlib import Path
+import shutil
+import subprocess
+import tempfile
+
+from gtts import gTTS
+from PIL import Image, ImageOps
+
+WIDTH, HEIGHT = 1080, 1920
+PANEL_SECONDS = 1.8
+FPS = 30
+
+
+def _run(command: list[str]) -> None:
+    result = subprocess.run(command, capture_output=True, text=True)
+    if result.returncode:
+        raise RuntimeError(f"FFmpeg failed: {result.stderr[-1200:]}")
+
+
+def create_video(panel_paths: list[str | Path], narration_ms: str, output_path: str | Path) -> Path:
+    """Create an MP4 from exactly two panel images and Malaysian Malay narration."""
+    if len(panel_paths) != 2:
+        raise ValueError("Beta video engine expects exactly two storyboard panels.")
+    if not narration_ms.strip():
+        raise ValueError("Voiceover text must not be empty.")
+    ffmpeg = shutil.which("ffmpeg")
+    if not ffmpeg:
+        raise RuntimeError("FFmpeg is not installed.")
+    output = Path(output_path).expanduser().resolve()
+    output.parent.mkdir(parents=True, exist_ok=True)
+
+    with tempfile.TemporaryDirectory(prefix="klippo-video-") as tmp:
+        work = Path(tmp)
+        normalized = []
+        for index, source in enumerate(panel_paths, start=1):
+            source = Path(source)
+            if not source.is_file():
+                raise FileNotFoundError(f"Panel image not found: {source}")
+            with Image.open(source) as image:
+                frame = ImageOps.fit(image.convert("RGB"), (WIDTH, HEIGHT), method=Image.Resampling.LANCZOS)
+                frame_path = work / f"panel_{index}.jpg"
+                frame.save(frame_path, quality=94)
+                normalized.append(frame_path)
+
+        audio_path = work / "voiceover.mp3"
+        gTTS(text=narration_ms[:500], lang="ms", slow=False).save(str(audio_path))
+        clips = []
+        for index, frame_path in enumerate(normalized, start=1):
+            clip_path = work / f"clip_{index}.mp4"
+            vf = (
+                f"zoompan=z='min(zoom+0.00037,1.04)':d={int(PANEL_SECONDS*FPS)}:"
+                f"x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':"
+                f"s={WIDTH}x{HEIGHT}:fps={FPS},format=yuv420p"
+            )
+            _run([ffmpeg, "-y", "-loop", "1", "-i", str(frame_path), "-vf", vf,
+                  "-t", str(PANEL_SECONDS), "-r", str(FPS), "-an",
+                  "-c:v", "libx264", "-preset", "veryfast", "-crf", "23", str(clip_path)])
+            clips.append(clip_path)
+
+        concat_file = work / "concat.txt"
+        concat_file.write_text("".join(f"file '{p.as_posix()}'\n" for p in clips), encoding="utf-8")
+        silent_video = work / "silent.mp4"
+        _run([ffmpeg, "-y", "-f", "concat", "-safe", "0", "-i", str(concat_file),
+              "-c", "copy", str(silent_video)])
+        _run([ffmpeg, "-y", "-i", str(silent_video), "-i", str(audio_path),
+              "-map", "0:v:0", "-map", "1:a:0", "-t", str(PANEL_SECONDS*2),
+              "-c:v", "copy", "-c:a", "aac", "-b:a", "128k", "-movflags", "+faststart",
+              str(output)])
+    return output
