@@ -49,7 +49,7 @@ def create_video(panel_paths: list[str | Path], narration_ms: str, output_path: 
         for index, frame_path in enumerate(normalized, start=1):
             clip_path = work / f"clip_{index}.mp4"
             vf = (
-                f"zoompan=z='min(zoom+0.00037,1.04)':d={int(PANEL_SECONDS*FPS)}:"
+                f"zoompan=z='min(zoom+0.00075,1.04)':d={int(PANEL_SECONDS*FPS)}:"
                 f"x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':"
                 f"s={WIDTH}x{HEIGHT}:fps={FPS},format=yuv420p"
             )
