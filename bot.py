@@ -789,6 +789,7 @@ def main_menu(user_id=None):
         [InlineKeyboardButton('🎞️ Gabung Video', callback_data='merge')],
         [InlineKeyboardButton('🔄 Tukar Format Video', callback_data='convert')],
         [InlineKeyboardButton('🎞️ Gerakkan Foto (Transisi)', callback_data='make')],
+        [InlineKeyboardButton('🎬 Storyboard AI (Beta)', callback_data='falbeta')],
         [InlineKeyboardButton('💎 Langganan', callback_data='subscription'), InlineKeyboardButton('👤 Akaun Saya', callback_data='account')],
         [InlineKeyboardButton('❓ FAQ', callback_data='help')],
     ]
@@ -1593,12 +1594,57 @@ async def handle_image_or_receipt_document(update: Update, context: ContextTypes
     await receive_receipt(update, context)
 
 
+async def falbeta_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Opt-in AI storyboard/video flow; API calls begin only after a result is chosen."""
+    missing = [key for key in ("FAL_KEY", "GEMINI_API_KEY") if not os.environ.get(key, "").strip()]
+    if missing:
+        await update.effective_message.reply_text(
+            "Fungsi Storyboard AI belum dikonfigurasi di Render. Pentadbir perlu menetapkan "
+            "FAL_KEY dan GEMINI_API_KEY dalam Environment Variables. Jangan hantar kunci dalam chat."
+        )
+        return
+    context.user_data["stage"] = "fal_beta_photo"
+    context.user_data.pop("fal_beta_image", None)
+    context.user_data.pop("fal_beta_goal", None)
+    await update.effective_message.reply_text(
+        "🎬 KLIPPO | STORYBOARD AI\n\nHantar satu gambar produk. Selepas itu pilih tujuan dan hasil. "
+        "Penjanaan menggunakan API AI dan mungkin menggunakan kredit berbayar."
+    )
+
+
 async def photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if context.user_data.get('busy'):
         await update.message.reply_text('Video sedang diproses. Sila tunggu.')
         return
     if context.user_data.get('stage') == 'receipt_upload':
         await receive_receipt(update, context)
+        return
+    if context.user_data.get('stage') == 'fal_beta_photo':
+        if not update.message.photo:
+            await update.message.reply_text('Sila hantar gambar produk sebagai gambar Telegram.')
+            return
+        photo_item = update.message.photo[-1]
+        if (photo_item.file_size or 0) > 12 * 1024 * 1024:
+            await update.message.reply_text('Gambar terlalu besar. Cuba hantar gambar yang lebih kecil.')
+            return
+        try:
+            tg_file = await photo_item.get_file()
+            raw = bytes(await tg_file.download_as_bytearray())
+            if not raw or len(raw) > 12 * 1024 * 1024:
+                await update.message.reply_text('Gambar tidak sah atau terlalu besar.')
+                return
+            context.user_data['fal_beta_image'] = raw
+            context.user_data['stage'] = 'fal_beta_goal'
+            await update.message.reply_text(
+                'Pilih tujuan kandungan:',
+                reply_markup=InlineKeyboardMarkup([[
+                    InlineKeyboardButton('🛍️ Shopee Affiliate', callback_data='falbeta:goal:shopee'),
+                    InlineKeyboardButton('🎵 TikTok Viral', callback_data='falbeta:goal:tiktok'),
+                ]])
+            )
+        except Exception:
+            logging.exception('Klippo beta image upload failed')
+            await update.message.reply_text('Tidak berjaya menerima gambar. Cuba hantar semula.')
         return
     if context.user_data.get('stage') == 'background_custom_upload':
         photo_item = update.message.photo[-1] if update.message.photo else update.message.document
@@ -1840,6 +1886,109 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await query.message.reply_text('Video sedang diproses. Sila tunggu.')
         return
     stage = context.user_data.get('stage', 'home')
+
+    if action == 'falbeta':
+        missing = [key for key in ("FAL_KEY", "GEMINI_API_KEY") if not os.environ.get(key, "").strip()]
+        if missing:
+            await query.message.reply_text(
+                "Storyboard AI belum dikonfigurasi. Pentadbir perlu menetapkan FAL_KEY dan GEMINI_API_KEY "
+                "di Render Environment Variables. Jangan hantar kunci dalam chat."
+            )
+            return
+        context.user_data['stage'] = 'fal_beta_photo'
+        context.user_data.pop('fal_beta_image', None)
+        context.user_data.pop('fal_beta_goal', None)
+        await query.message.reply_text(
+            "🎬 KLIPPO | STORYBOARD AI\\n\\nHantar satu gambar produk. Selepas itu pilih tujuan dan hasil. "
+            "Penjanaan menggunakan API AI dan mungkin menggunakan kredit berbayar."
+        )
+        return
+    if action.startswith('falbeta:goal:'):
+        goal = action.rsplit(':', 1)[-1]
+        if not context.user_data.get('fal_beta_image'):
+            await query.message.reply_text('Sila hantar gambar produk dahulu melalui Storyboard AI.')
+            return
+        context.user_data['fal_beta_goal'] = goal
+        await query.edit_message_text(
+            'Pilih hasil. Penjanaan video/gambar menggunakan API AI dan mungkin menggunakan kredit berbayar:',
+            reply_markup=InlineKeyboardMarkup([
+                [InlineKeyboardButton('🖼️ Jana 2 Panel Storyboard', callback_data='falbeta:format:image')],
+                [InlineKeyboardButton('🎬 Jana Video Motion + Voiceover', callback_data='falbeta:format:video')],
+            ])
+        )
+        return
+    if action.startswith('falbeta:format:'):
+        output_format = action.rsplit(':', 1)[-1]
+        raw = context.user_data.get('fal_beta_image')
+        if not raw:
+            await query.edit_message_text('Sesi gambar tamat. Tekan Storyboard AI untuk mula semula.')
+            return
+        if not os.environ.get('FAL_KEY', '').strip() or not os.environ.get('GEMINI_API_KEY', '').strip():
+            await query.edit_message_text('Fungsi belum dikonfigurasi. Pentadbir perlu menetapkan FAL_KEY dan GEMINI_API_KEY dalam Render.')
+            return
+        context.user_data['busy'] = True
+        try:
+            await query.edit_message_text('Menganalisis produk dan menjana dua panel AI. Sila tunggu…')
+            from fal_storyboard_test import analyze_product, generate_panel
+            from modules.video_engine import create_video
+            import fal_client
+            with tempfile.TemporaryDirectory(prefix='klippo-falbeta-') as temp:
+                root = Path(temp)
+                image_path = root / 'product_reference.jpg'
+                image_path.write_bytes(raw)
+                attributes = await asyncio.to_thread(analyze_product, image_path)
+                image_url = await asyncio.to_thread(fal_client.upload_file, str(image_path))
+                goal = context.user_data.get('fal_beta_goal', 'shopee')
+                goal_scene = (
+                    'Shopee affiliate product showcase, clear product visibility and trustworthy commercial styling.'
+                    if goal == 'shopee' else
+                    'TikTok-style energetic visual hook, dynamic but believable framing; keep the product clearly visible.'
+                )
+                scenes = [
+                    'Opening hero shot: product clearly visible in a tasteful clean setting, three-quarter view.',
+                    'Detail shot: closer framing on the same product, showing only real visible details and gentle highlights.',
+                ]
+                panel_paths = []
+                panel_bytes = []
+                from PIL import Image
+                for index, scene in enumerate(scenes, start=1):
+                    data, _latency = await asyncio.to_thread(
+                        generate_panel, image_url, attributes, f'{goal_scene} {scene}', index
+                    )
+                    panel_path = root / f'panel_{index}.jpg'
+                    with Image.open(BytesIO(data)) as generated_image:
+                        generated_image.convert('RGB').save(panel_path, 'JPEG', quality=92, optimize=True)
+                    panel_paths.append(panel_path)
+                    panel_bytes.append(panel_path.read_bytes())
+                if output_format == 'image':
+                    for index, data in enumerate(panel_bytes, start=1):
+                        await query.message.reply_photo(
+                            photo=BytesIO(data),
+                            caption=f'Storyboard AI — Panel {index}/2. Semak kesamaan bentuk, warna, logo dan butiran produk.'
+                        )
+                else:
+                    voiceover = str(attributes.get('voiceover_ms') or
+                        'Lihat produk ini dengan reka bentuk dan perincian yang menarik.')
+                    video_path = root / 'klippo_product_video.mp4'
+                    await query.message.reply_text('Panel siap. Sedang menghasilkan video 9:16 dan voiceover Bahasa Melayu…')
+                    await asyncio.to_thread(create_video, panel_paths, voiceover, video_path)
+                    with video_path.open('rb') as video_file:
+                        await query.message.reply_video(
+                            video=video_file,
+                            caption='Video Storyboard AI beta 9:16 dengan motion + voiceover.',
+                            supports_streaming=True
+                        )
+            context.user_data['stage'] = 'home'
+            context.user_data.pop('fal_beta_image', None)
+            await query.message.reply_text('Selesai. Untuk jana lagi, pilih Storyboard AI daripada menu.')
+        except Exception:
+            logging.exception('Klippo Storyboard AI generation failed')
+            await query.message.reply_text(
+                'Penjanaan gagal. Semak log Render dan penggunaan API. Bot utama masih menggunakan aliran sedia ada.'
+            )
+        finally:
+            context.user_data.pop('busy', None)
+        return
     if action == 'admin_pending':
         if not is_admin(update.effective_user.id):
             await query.message.reply_text('Akses tidak dibenarkan.')
@@ -3219,6 +3368,7 @@ def main():
     app.add_handler(CommandHandler('reset', start))
     app.add_handler(CommandHandler('periksa', status))
     app.add_handler(CommandHandler('jana', generate, block=False))
+    app.add_handler(CommandHandler('falbeta', falbeta_start))
     for style in STYLES:
         app.add_handler(CommandHandler(style, choose_style))
     app.add_handler(CallbackQueryHandler(buttons, pattern=r'.+'))
