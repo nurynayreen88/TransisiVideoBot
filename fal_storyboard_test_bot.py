@@ -136,11 +136,10 @@ async def choose_mode(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
         await send_text_chunks(
             query.message, video_prompt,
             reply_markup=InlineKeyboardMarkup([
-                [InlineKeyboardButton("🔗 ChatGPT", url="https://chatgpt.com/"),
-                 InlineKeyboardButton("🔗 Gemini", url="https://gemini.google.com/")],
-                [InlineKeyboardButton("🔗 Microsoft Copilot", url="https://copilot.microsoft.com/"),
-                 InlineKeyboardButton("🔗 Bing Image Creator", url="https://www.bing.com/create")],
-                [InlineKeyboardButton("🔗 Canva", url="https://www.canva.com/")],
+                [InlineKeyboardButton("🔗 Luma Dream Machine", url="https://lumalabs.ai/dream-machine"),
+                 InlineKeyboardButton("🔗 Runway", url="https://runwayml.com/")],
+                [InlineKeyboardButton("🔗 Kling AI", url="https://klingai.com/"),
+                 InlineKeyboardButton("🔗 Pika", url="https://pika.art/")],
                 [InlineKeyboardButton("📋 Paparkan prompt semula", callback_data="prompt:video")],
             ]),
         )
