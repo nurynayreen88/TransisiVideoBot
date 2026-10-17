@@ -402,11 +402,8 @@ def detect_prompt_library_category(product_name: str) -> str:
 
 
 def prompt_flow_menu():
-    return InlineKeyboardMarkup([
-        [InlineKeyboardButton('🎥 Prompt Video Terus', callback_data='prompt_flow:direct')],
-        [InlineKeyboardButton('🎞️ Storyboard Video AI', callback_data='prompt_flow:storyboard')],
-        [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
-    ])
+    # Legacy helper: never show the old two-choice prompt menu.
+    return InlineKeyboardMarkup([[InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]])
 
 
 def prompt_images_menu():
