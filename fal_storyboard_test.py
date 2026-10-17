@@ -15,7 +15,7 @@ from PIL import Image, ImageDraw
 from modules.video_engine import create_video
 
 MODEL = os.environ.get("FAL_STORYBOARD_MODEL", "fal-ai/flux-kontext/dev").strip()
-GEMINI_MODEL = os.environ.get("GEMINI_VISION_MODEL", "gemini-2.5-flash").strip()
+GEMINI_MODEL = os.environ.get("GEMINI_VISION_MODEL", "gemini-3.5-flash-lite").strip()
 
 
 def detect_image_mime(image_path: str | Path) -> str:
@@ -70,14 +70,32 @@ def analyze_product(image_path: Path) -> dict:
         {"text": prompt},
         {"inline_data": {"mime_type": mime_type, "data": base64.b64encode(data).decode("ascii")}}
     ]}], "generationConfig": {"temperature": 0.1, "maxOutputTokens": 650, "responseMimeType": "application/json"}}
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/{GEMINI_MODEL}:generateContent"
-    request = urllib.request.Request(url, data=json.dumps(body).encode(),
-        headers={"Content-Type": "application/json", "x-goog-api-key": key}, method="POST")
     started = time.perf_counter()
+    # Gemini 2.5 Flash may return 404 for projects without prior access.
+    # Try the configured model first, then one current, cost-efficient multimodal fallback.
+    candidate_models = list(dict.fromkeys([GEMINI_MODEL, "gemini-3.5-flash-lite"]))
     try:
-        with urllib.request.urlopen(request, timeout=30) as response:
-            result = json.load(response)
-        logging.info("Gemini analysis latency: %.2fs", time.perf_counter() - started)
+        result = None
+        selected_model = GEMINI_MODEL
+        for candidate_model in candidate_models:
+            url = f"https://generativelanguage.googleapis.com/v1beta/models/{candidate_model}:generateContent"
+            request = urllib.request.Request(url, data=json.dumps(body).encode(),
+                headers={"Content-Type": "application/json", "x-goog-api-key": key}, method="POST")
+            try:
+                with urllib.request.urlopen(request, timeout=30) as response:
+                    result = json.load(response)
+                selected_model = candidate_model
+                break
+            except urllib.error.HTTPError as exc:
+                if exc.code == 404 and candidate_model != candidate_models[-1]:
+                    logging.warning("Gemini model %s returned HTTP 404; retrying once with %s",
+                                    candidate_model, candidate_models[-1])
+                    continue
+                raise
+        if result is None:
+            raise RuntimeError("Gemini returned no result from configured or fallback model.")
+        logging.info("Gemini model selected: %s; analysis latency: %.2fs",
+                     selected_model, time.perf_counter() - started)
         text = "".join(part.get("text", "") for part in
             result.get("candidates", [{}])[0].get("content", {}).get("parts", [])).strip()
         attributes = parse_gemini_json(text)
@@ -90,7 +108,8 @@ def analyze_product(image_path: Path) -> dict:
                 usage.get("totalTokenCount", "n/a"))
         return attributes
     except Exception as exc:
-        raise RuntimeError(f"Gemini JSON analysis failed ({type(exc).__name__}); fal.ai generation was not started.") from exc
+        detail = f"HTTP {exc.code}" if isinstance(exc, urllib.error.HTTPError) else type(exc).__name__
+        raise RuntimeError(f"Gemini JSON analysis failed ({detail}); fal.ai generation was not started.") from exc
 
 
 def generate_panel(image_url: str, attributes: dict, scene: str, index: int) -> tuple[bytes, float]:
