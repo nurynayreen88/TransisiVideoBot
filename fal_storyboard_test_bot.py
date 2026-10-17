@@ -1,75 +1,34 @@
-"""Standalone Telegram beta bot for testing fal.ai storyboard panels.
+"""Standalone Telegram beta bot for Gemini + fal.ai storyboard/video tests.
 
-Run as a SEPARATE Render service with a SEPARATE Telegram bot token:
-  Start Command: python fal_storyboard_test_bot.py
-Required env vars: FAL_TEST_BOT_TOKEN, FAL_KEY
-Optional: GEMINI_API_KEY, FAL_STORYBOARD_MODEL
-
-This file is intentionally not imported by bot.py and does not change the live Klippo bot.
+Run only as a separate Render service with a separate Telegram bot token.
+Required: FAL_TEST_BOT_TOKEN, FAL_KEY. Optional: GEMINI_API_KEY.
 """
 import asyncio
 import io
 import logging
 import os
 import tempfile
+import time
 from pathlib import Path
 
 import fal_client
 from PIL import Image, ImageDraw, ImageOps
-from telegram import Update
-from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
+from telegram.ext import (
+    Application, CallbackQueryHandler, CommandHandler, ContextTypes,
+    MessageHandler, filters,
+)
+from fal_storyboard_test import analyze_product, generate_panel
+from modules.video_engine import create_video
 
 logging.basicConfig(level=logging.INFO)
 TOKEN = os.environ.get("FAL_TEST_BOT_TOKEN", "").strip()
 MODEL = os.environ.get("FAL_STORYBOARD_MODEL", "fal-ai/flux-kontext/dev").strip()
 MAX_UPLOAD_BYTES = 12 * 1024 * 1024
-
-
-def describe_product(image_path: Path) -> str:
-    if os.environ.get("GEMINI_API_KEY", "").strip():
-        try:
-            from gemini_vision import _describe
-            text = _describe(image_path.read_bytes())
-            if text:
-                return text
-        except Exception as exc:
-            logging.warning("Gemini vision failed (%s); use conservative prompt.", type(exc).__name__)
-    return (
-        "Use the uploaded photograph as the sole reference. Preserve only directly visible product details. "
-        "Do not invent brand names, label text, product specifications, colors, materials, or accessories."
-    )
-
-
-def make_panel(image_url: str, product_details: str, scene: str, panel_number: int) -> bytes:
-    prompt = (
-        "Edit the supplied reference photograph into ONE realistic product-ad storyboard frame. "
-        "The reference image is the source of truth for the product. Preserve its identity, silhouette, "
-        "proportions, colors, materials, printed label, logo, pattern and visible accessories as closely as possible. "
-        "Do not redesign the product or add text, captions, watermarks, or extra logos. "
-        "Create one scene only, no collage, in a vertical 9:16 composition with realistic commercial lighting. "
-        f"Verified visual notes: {product_details[:1500]} "
-        f"Storyboard panel {panel_number}: {scene}"
-    )
-    result = fal_client.subscribe(
-        MODEL,
-        arguments={
-            "prompt": prompt,
-            "image_url": image_url,
-            "num_inference_steps": 28,
-            "num_images": 1,
-            "output_format": "jpeg",
-            "aspect_ratio": "9:16",
-        },
-        with_logs=False,
-        client_timeout=240,
-    )
-    images = result.get("images") or []
-    if not images or not images[0].get("url"):
-        raise RuntimeError("fal.ai tidak memulangkan imej panel.")
-    import requests
-    response = requests.get(images[0]["url"], timeout=60)
-    response.raise_for_status()
-    return response.content
+SCENES = [
+    "Opening hero shot: product clearly visible in a tasteful, clean setting, three-quarter view.",
+    "Detail shot: closer framing on the same product, showing only real visible details and gentle highlights.",
+]
 
 
 def make_sheet(panel_bytes: list[bytes]) -> bytes:
@@ -78,9 +37,7 @@ def make_sheet(panel_bytes: list[bytes]) -> bytes:
     draw = ImageDraw.Draw(sheet)
     for index, data in enumerate(panel_bytes):
         with Image.open(io.BytesIO(data)) as source:
-            panel = source.convert("RGB")
-            panel.thumbnail((cell_w, cell_h), Image.Resampling.LANCZOS)
-            panel = ImageOps.fit(panel, (cell_w, cell_h), method=Image.Resampling.LANCZOS)
+            panel = ImageOps.fit(source.convert("RGB"), (cell_w, cell_h), method=Image.Resampling.LANCZOS)
         x = margin + index * (cell_w + margin)
         draw.text((x + 8, 12), f"PANEL {index + 1}", fill="#242424")
         sheet.paste(panel, (x, header_h))
@@ -91,8 +48,10 @@ def make_sheet(panel_bytes: list[bytes]) -> bytes:
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.effective_message.reply_text(
-        "KLIPPO | UJIAN STORYBOARD FAL.AI\n\n"
-        "Hantar satu gambar produk. Bot ujian akan cuba menjana 2 panel dan menyusunnya menjadi satu helaian.\n"
+        "KLIPPO | BETA STORYBOARD & VIDEO\n\n"
+        "1. Hantar satu gambar produk.\n"
+        "2. Pilih tujuan kandungan.\n"
+        "3. Pilih hasil gambar storyboard atau video motion + voiceover.\n\n"
         "Ini bot ujian berasingan; hasil AI mungkin mengubah butiran produk."
     )
 
@@ -105,51 +64,118 @@ async def handle_photo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
     if photo.file_size and photo.file_size > MAX_UPLOAD_BYTES:
         await message.reply_text("Gambar terlalu besar. Cuba hantar gambar yang lebih kecil.")
         return
-    status = await message.reply_text("Menerima gambar… menyediakan ujian 2 panel.")
+    status = await message.reply_text("Menerima gambar produk…")
     try:
         tg_file = await photo.get_file()
         raw = bytes(await tg_file.download_as_bytearray())
         if not raw or len(raw) > MAX_UPLOAD_BYTES:
             await status.edit_text("Gambar tidak sah atau terlalu besar.")
             return
-        with tempfile.TemporaryDirectory(prefix="klippo-fal-test-") as temp_dir:
-            image_path = Path(temp_dir) / "product_reference.jpg"
+        context.user_data["product_image"] = raw
+        context.user_data.pop("content_goal", None)
+        context.user_data.pop("output_format", None)
+        await status.edit_text(
+            "Untuk tujuan kandungan apa?",
+            reply_markup=InlineKeyboardMarkup([[
+                InlineKeyboardButton("🛍️ Shopee Affiliate", callback_data="goal:shopee"),
+                InlineKeyboardButton("🎵 TikTok Viral", callback_data="goal:tiktok"),
+            ]]),
+        )
+    except Exception:
+        logging.exception("Failed to receive Telegram product photo")
+        await status.edit_text("Tidak berjaya menerima gambar. Cuba hantar semula.")
+
+
+async def choose_goal(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    query = update.callback_query
+    await query.answer()
+    if "product_image" not in context.user_data:
+        await query.edit_message_text("Sila hantar gambar produk dahulu.")
+        return
+    context.user_data["content_goal"] = query.data.split(":", 1)[1]
+    await query.edit_message_text(
+        "Pilih hasil yang mahu dijana:",
+        reply_markup=InlineKeyboardMarkup([[
+            InlineKeyboardButton("🖼️ Storyboard Panel (Gambar)", callback_data="format:image"),
+        ], [
+            InlineKeyboardButton("🎬 Video Motion + Voiceover", callback_data="format:video"),
+        ]]),
+    )
+
+
+async def choose_format(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    query = update.callback_query
+    await query.answer()
+    raw = context.user_data.get("product_image")
+    goal = context.user_data.get("content_goal", "shopee")
+    if not raw:
+        await query.edit_message_text("Sila hantar gambar produk dahulu.")
+        return
+    output_format = query.data.split(":", 1)[1]
+    await query.edit_message_text("Menganalisis produk dengan Gemini dan menyediakan dua panel…")
+    started = time.perf_counter()
+    try:
+        with tempfile.TemporaryDirectory(prefix="klippo-beta-") as temp:
+            root = Path(temp)
+            image_path = root / "product_reference.jpg"
             image_path.write_bytes(raw)
-            await status.edit_text("Langkah 1/3: menganalisis gambar produk…")
-            description = await asyncio.to_thread(describe_product, image_path)
-            await status.edit_text("Langkah 2/3: menjana 2 panel melalui fal.ai…")
+            attributes = await asyncio.to_thread(analyze_product, image_path)
+            (root / "product_attributes.json").write_text(
+                __import__("json").dumps(attributes, ensure_ascii=False, indent=2), encoding="utf-8")
             image_url = await asyncio.to_thread(fal_client.upload_file, str(image_path))
-            scenes = [
-                "Opening hero frame: product clearly visible in a tasteful, clean setting, three-quarter view, product remains the main subject.",
-                "Detail frame: closer view of the same product, showing only real visible details, with gentle realistic highlights and no invented accessories.",
-            ]
             panels = []
-            for index, scene in enumerate(scenes, start=1):
-                panel = await asyncio.to_thread(make_panel, image_url, description, scene, index)
-                with Image.open(io.BytesIO(panel)) as checked:
-                    checked.verify()
-                panels.append(panel)
-            sheet = await asyncio.to_thread(make_sheet, panels)
-        await status.edit_text("Langkah 3/3: menghantar hasil untuk semakan…")
-        await message.reply_photo(photo=io.BytesIO(sheet), caption="Ujian storyboard 2 panel — semak kesamaan produk dengan gambar asal.")
-        await status.delete()
+            timings = []
+            goal_scene = (
+                "Shopee affiliate product showcase, clear product visibility and trustworthy commercial styling."
+                if goal == "shopee" else
+                "TikTok-style energetic visual hook, dynamic but believable framing; keep the product clearly visible."
+            )
+            for index, scene in enumerate(SCENES, start=1):
+                data, latency = await asyncio.to_thread(
+                    generate_panel, image_url, attributes, f"{goal_scene} {scene}", index)
+                with Image.open(io.BytesIO(data)) as image:
+                    image.verify()
+                panels.append(data)
+                timings.append(latency)
+                logging.info("Panel %s latency %.2fs", index, latency)
+
+            if output_format == "image":
+                await query.message.reply_photo(
+                    photo=io.BytesIO(make_sheet(panels)),
+                    caption=f"Storyboard 2 panel siap untuk semakan. Jumlah masa: {time.perf_counter()-started:.1f}s. "
+                            "Semak kesamaan logo, warna, bentuk dan butiran produk.",
+                )
+            else:
+                panel_paths = []
+                for index, data in enumerate(panels, start=1):
+                    path = root / f"panel_{index}.jpg"
+                    path.write_bytes(data)
+                    panel_paths.append(path)
+                voiceover = str(attributes.get("voiceover_ms") or
+                    "Lihat produk ini dengan reka bentuk dan perincian yang menarik.")
+                video_path = root / "klippo_product_video.mp4"
+                await query.message.reply_text("Panel siap. Sedang menghasilkan video 9:16 dan voiceover Bahasa Melayu…")
+                await asyncio.to_thread(create_video, panel_paths, voiceover, video_path)
+                with video_path.open("rb") as video_file:
+                    await query.message.reply_video(
+                        video=video_file,
+                        caption=f"Video beta 9:16 dengan motion + voiceover. Jumlah masa: {time.perf_counter()-started:.1f}s.",
+                        supports_streaming=True,
+                    )
     except Exception as exc:
-        logging.exception("fal storyboard test failed")
-        safe_error = str(exc)
-        if "FAL_KEY" in safe_error or "401" in safe_error or "403" in safe_error:
-            user_message = "fal.ai tidak membenarkan permintaan. Semak FAL_KEY dan akses model dalam Render."
-        elif "429" in safe_error:
-            user_message = "Had permintaan atau kredit fal.ai mungkin telah dicapai. Semak papan pemuka fal.ai."
+        logging.exception("Storyboard/video beta failed")
+        message = str(exc)
+        if "401" in message or "403" in message or "FAL_KEY" in message:
+            safe = "Permintaan fal.ai ditolak. Semak konfigurasi dan akses model pada servis ujian."
+        elif "429" in message:
+            safe = "Had permintaan/kredit mungkin dicapai. Semak papan pemuka fal.ai."
         else:
-            user_message = "Ujian gagal. Semak log servis ujian di Render. Bot utama tidak terjejas."
-        try:
-            await status.edit_text(user_message)
-        except Exception:
-            await message.reply_text(user_message)
+            safe = "Ujian gagal. Semak log servis ujian Render. Bot produksi tidak terjejas."
+        await query.message.reply_text(safe)
 
 
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    await update.effective_message.reply_text("Hantar satu gambar produk untuk menghasilkan helaian ujian 2 panel.")
+    await update.effective_message.reply_text("Hantar gambar produk, kemudian pilih tujuan dan format hasil.")
 
 
 def main() -> None:
@@ -161,6 +187,8 @@ def main() -> None:
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("help", help_command))
     app.add_handler(MessageHandler(filters.PHOTO, handle_photo))
+    app.add_handler(CallbackQueryHandler(choose_goal, pattern=r"^goal:"))
+    app.add_handler(CallbackQueryHandler(choose_format, pattern=r"^format:"))
     app.run_polling(drop_pending_updates=True)
 
 
