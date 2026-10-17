@@ -8,8 +8,37 @@ from gtts import gTTS
 from PIL import Image, ImageOps
 
 WIDTH, HEIGHT = 1080, 1920
-PANEL_SECONDS = 1.8
+MIN_TOTAL_SECONDS = 3.6
 FPS = 30
+
+
+def calculate_panel_durations(audio_duration: float, minimum_total: float = MIN_TOTAL_SECONDS) -> tuple[float, float]:
+    """Return equal panel durations long enough for the full narration plus a small tail."""
+    if audio_duration <= 0:
+        raise ValueError("Audio duration must be positive.")
+    total = max(minimum_total, audio_duration + 0.25)
+    each = total / 2
+    return each, each
+
+
+def _probe_duration(path: Path) -> float:
+    ffprobe = shutil.which("ffprobe")
+    if not ffprobe:
+        raise RuntimeError("ffprobe is not installed (it is normally bundled with FFmpeg).")
+    result = subprocess.run(
+        [ffprobe, "-v", "error", "-show_entries", "format=duration",
+         "-of", "default=noprint_wrappers=1:nokey=1", str(path)],
+        capture_output=True, text=True,
+    )
+    if result.returncode:
+        raise RuntimeError(f"Could not read media duration: {result.stderr[-800:]}")
+    try:
+        duration = float(result.stdout.strip())
+    except ValueError as exc:
+        raise RuntimeError("Could not determine generated voiceover duration.") from exc
+    if duration <= 0:
+        raise RuntimeError("Generated voiceover has an invalid duration.")
+    return duration
 
 
 def _run(command: list[str]) -> None:
@@ -24,6 +53,8 @@ def create_video(panel_paths: list[str | Path], narration_ms: str, output_path: 
         raise ValueError("Beta video engine expects exactly two storyboard panels.")
     if not narration_ms.strip():
         raise ValueError("Voiceover text must not be empty.")
+    if len(narration_ms) > 500:
+        raise ValueError("Voiceover exceeds the 500-character gTTS limit. Shorten the sentence; it will not be silently truncated.")
     ffmpeg = shutil.which("ffmpeg")
     if not ffmpeg:
         raise RuntimeError("FFmpeg is not installed.")
@@ -44,17 +75,19 @@ def create_video(panel_paths: list[str | Path], narration_ms: str, output_path: 
                 normalized.append(frame_path)
 
         audio_path = work / "voiceover.mp3"
-        gTTS(text=narration_ms[:500], lang="ms", slow=False).save(str(audio_path))
+        gTTS(text=narration_ms, lang="ms", slow=False).save(str(audio_path))
+        audio_duration = _probe_duration(audio_path)
+        panel_durations = calculate_panel_durations(audio_duration)
         clips = []
-        for index, frame_path in enumerate(normalized, start=1):
+        for index, (frame_path, panel_seconds) in enumerate(zip(normalized, panel_durations), start=1):
             clip_path = work / f"clip_{index}.mp4"
             vf = (
-                f"zoompan=z='min(zoom+0.00075,1.04)':d={int(PANEL_SECONDS*FPS)}:"
+                f"zoompan=z='min(zoom+0.00075,1.04)':d={max(1, int(round(panel_seconds*FPS)))}:"
                 f"x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':"
                 f"s={WIDTH}x{HEIGHT}:fps={FPS},format=yuv420p"
             )
             _run([ffmpeg, "-y", "-loop", "1", "-i", str(frame_path), "-vf", vf,
-                  "-t", str(PANEL_SECONDS), "-r", str(FPS), "-an",
+                  "-t", f"{panel_seconds:.3f}", "-r", str(FPS), "-an",
                   "-c:v", "libx264", "-preset", "veryfast", "-crf", "23", str(clip_path)])
             clips.append(clip_path)
 
@@ -63,8 +96,9 @@ def create_video(panel_paths: list[str | Path], narration_ms: str, output_path: 
         silent_video = work / "silent.mp4"
         _run([ffmpeg, "-y", "-f", "concat", "-safe", "0", "-i", str(concat_file),
               "-c", "copy", str(silent_video)])
+        total_duration = sum(panel_durations)
         _run([ffmpeg, "-y", "-i", str(silent_video), "-i", str(audio_path),
-              "-map", "0:v:0", "-map", "1:a:0", "-t", str(PANEL_SECONDS*2),
+              "-map", "0:v:0", "-map", "1:a:0", "-t", f"{total_duration:.3f}",
               "-c:v", "copy", "-c:a", "aac", "-b:a", "128k", "-movflags", "+faststart",
               str(output)])
     return output
