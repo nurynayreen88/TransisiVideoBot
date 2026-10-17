@@ -1981,11 +1981,27 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['stage'] = 'home'
             context.user_data.pop('fal_beta_image', None)
             await query.message.reply_text('Selesai. Untuk jana lagi, pilih Storyboard AI daripada menu.')
-        except Exception:
+        except Exception as exc:
             logging.exception('Klippo Storyboard AI generation failed')
-            await query.message.reply_text(
-                'Penjanaan gagal. Semak log Render dan penggunaan API. Bot utama masih menggunakan aliran sedia ada.'
-            )
+            # Give a safe, actionable message for fal.ai storage authentication failures.
+            status_code = getattr(getattr(exc, 'response', None), 'status_code', None)
+            if status_code == 403 and 'fal' in str(getattr(exc, 'request', '')) .lower():
+                user_message = (
+                    '❌ fal.ai menolak pengesahan storan (HTTP 403). Gemini berjaya, tetapi gambar belum '
+                    'dimuat naik dan penjanaan belum bermula. Pentadbir: semak FAL_KEY dalam Render '
+                    'Environment dan gantikannya dengan API key aktif dari https://fal.ai/dashboard/keys, '
+                    'kemudian redeploy. Jangan hantar API key dalam chat.'
+                )
+            elif status_code == 403:
+                user_message = (
+                    '❌ Permintaan AI ditolak (HTTP 403). Semak kunci API/akses penyedia dalam Render. '
+                    'Jangan hantar API key dalam chat.'
+                )
+            else:
+                user_message = (
+                    'Penjanaan gagal. Semak log Render dan penggunaan API. Bot utama masih menggunakan aliran sedia ada.'
+                )
+            await query.message.reply_text(user_message)
         finally:
             context.user_data.pop('busy', None)
         return
