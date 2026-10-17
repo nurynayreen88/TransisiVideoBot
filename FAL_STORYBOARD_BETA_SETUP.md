@@ -34,14 +34,14 @@ $env:FAL_KEY = Read-Host "Enter fal.ai key locally"
 $env:GEMINI_API_KEY = Read-Host "Enter Gemini key locally"
 python .\fal_storyboard_test.py .\product.jpg --out .\fal_storyboard_test_output
 ```
-The script generates exactly two panels and reports Gemini latency, upload latency, per-panel latency, total latency, and Gemini token usage when returned. fal.ai cost is not guessed from latency: record the fal.ai Usage/Billing dashboard before and after the run to determine actual credits/cost.
+By default, the CLI generates `product_attributes.json`, `panel_1.jpg`, `panel_2.jpg`, `contact_sheet_2_panels.jpg`, and `video_output.mp4`. The video step requires FFmpeg/ffprobe and internet access for gTTS. Use `--no-video` to run the image-only stage. It reports Gemini latency, upload latency, per-panel latency, total latency, and Gemini token usage when returned. fal.ai cost is not guessed from latency: record the fal.ai Usage/Billing dashboard before and after the run to determine actual credits/cost.
 
 ## Telegram UX
 1. Send a product photo.
 2. Choose `🛍️ Shopee Affiliate` or `🎵 TikTok Viral`.
 3. Choose `🖼️ Storyboard Panel (Gambar)` or `🎬 Video Motion + Voiceover`.
 
-The video path assembles two generated panels locally with FFmpeg, applies a subtle slow zoom, and uses gTTS Malay speech. gTTS needs internet access and is basic text-to-speech, not a custom AI voice. Target output is 1080x1920 MP4, 3.6 seconds total (two panels at 1.8 seconds each). Keep the Gemini narration short because audio longer than the 3.6-second video is cut off.
+The video path assembles two generated panels locally with FFmpeg, applies a subtle slow zoom, and uses gTTS Malay speech. gTTS needs internet access and is basic text-to-speech, not a custom AI voice. Output is 1080x1920 MP4. The engine measures the generated audio and extends both panels evenly when needed, so narration is not cut off at a fixed 3.6 seconds. Voiceover text over 500 characters is rejected with a clear error rather than silently truncated.
 
 ## Review checklist
 - Compare original and both panels for silhouette, colour, material appearance, label/logo and accessories.
