@@ -80,15 +80,90 @@ async def handle_photo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
         context.user_data.pop("visual_environment", None)
         context.user_data.pop("storyboard_prompt", None)
         await status.edit_text(
-            "Untuk tujuan kandungan apa?",
+            "📦 Gambar produk diterima. Pilih laluan Klippo:",
+            reply_markup=InlineKeyboardMarkup([
+                [InlineKeyboardButton("📝 Pilihan A: Storyboard 4 Panel (Skrip + Prompt)", callback_data="mode:storyboard")],
+                [InlineKeyboardButton("🎬 Pilihan B: Direct Video Prompt", callback_data="mode:video_prompt")],
+            ]),
+        )
+    except Exception:
+        logging.exception("Failed to receive Telegram product photo")
+        await status.edit_text("Tidak berjaya menerima gambar. Cuba hantar semula.")
+
+
+async def choose_mode(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Route uploaded product images to storyboard prompts or direct video prompts."""
+    query = update.callback_query
+    await query.answer()
+    if not context.user_data.get("product_image"):
+        await query.edit_message_text("Sila hantar gambar produk dahulu.")
+        return
+    mode = query.data.split(":", 1)[1]
+    if mode == "storyboard":
+        await query.edit_message_text(
+            "Pilih tujuan storyboard:",
             reply_markup=InlineKeyboardMarkup([[
                 InlineKeyboardButton("🛍️ Shopee Affiliate", callback_data="goal:shopee"),
                 InlineKeyboardButton("🎵 TikTok Viral", callback_data="goal:tiktok"),
             ]]),
         )
-    except Exception:
-        logging.exception("Failed to receive Telegram product photo")
-        await status.edit_text("Tidak berjaya menerima gambar. Cuba hantar semula.")
+        return
+    if mode == "video_prompt":
+        goal = context.user_data.get("content_goal", "shopee")
+        campaign = (
+            "Shopee affiliate: clear, trustworthy product presentation that helps shoppers inspect the item."
+            if goal == "shopee" else
+            "TikTok viral: a strong visual hook, energetic but believable camera movement, and instant product clarity."
+        )
+        video_prompt = (
+            "Use the uploaded product photograph as the MASTER visual reference. Create a vertical 9:16 "
+            "photorealistic product commercial video, exactly 10 seconds long. Preserve the exact product "
+            "identity, silhouette, proportions, colours, materials, patterns, stitching, hardware, accessories, "
+            "and any visible branding. Do not redesign the product or invent unseen features. "
+            + campaign +
+            " Shot sequence: 0–3s, an immediate clean hero reveal; 3–6s, a smooth controlled camera push-in "
+            "showing the real product details; 6–8s, a natural lifestyle/use shot consistent with the reference; "
+            "8–10s, a polished final hero frame. Use realistic motion, stable geometry, soft professional lighting, "
+            "natural shadows, coherent colour grading, and clear product focus. No warped product, extra objects, "
+            "fake logos, watermark, subtitles, or on-screen text. Keep motion elegant and physically plausible."
+        )
+        context.user_data["video_prompt"] = video_prompt
+        await query.edit_message_text(
+            "🎬 KLIPPO DIRECT VIDEO PROMPT\\n\\n"
+            "Prompt ini menggunakan gambar produk yang anda muat naik sebagai rujukan. Salin prompt dan muat naik "
+            "gambar yang sama pada platform pilihan anda. Klippo tidak memanggil API penjana video dalam laluan ini."
+        )
+        await send_text_chunks(
+            query.message, video_prompt,
+            reply_markup=InlineKeyboardMarkup([
+                [InlineKeyboardButton("🔗 ChatGPT", url="https://chatgpt.com/"),
+                 InlineKeyboardButton("🔗 Gemini", url="https://gemini.google.com/")],
+                [InlineKeyboardButton("🔗 Microsoft Copilot", url="https://copilot.microsoft.com/"),
+                 InlineKeyboardButton("🔗 Bing Image Creator", url="https://www.bing.com/create")],
+                [InlineKeyboardButton("🔗 Canva", url="https://www.canva.com/")],
+                [InlineKeyboardButton("📋 Paparkan prompt semula", callback_data="prompt:video")],
+            ]),
+        )
+        return
+    await query.edit_message_text("Pilihan tidak sah. Sila hantar gambar produk semula.")
+
+
+async def send_text_chunks(message, text: str, reply_markup=None) -> None:
+    """Send long prompt text safely under Telegram's message length limit."""
+    limit = 3600
+    chunks = []
+    remaining = text.strip()
+    while len(remaining) > limit:
+        split_at = remaining.rfind("\\n", 0, limit)
+        if split_at < limit // 2:
+            split_at = limit
+        chunks.append(remaining[:split_at].strip())
+        remaining = remaining[split_at:].strip()
+    if remaining:
+        chunks.append(remaining)
+    for index, chunk in enumerate(chunks):
+        markup = reply_markup if index == len(chunks) - 1 else None
+        await message.reply_text(chunk, reply_markup=markup)
 
 
 async def choose_goal(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -99,12 +174,12 @@ async def choose_goal(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
         return
     context.user_data["content_goal"] = query.data.split(":", 1)[1]
     await query.edit_message_text(
-        "Pilih hasil yang mahu dijana:",
-        reply_markup=InlineKeyboardMarkup([[
-            InlineKeyboardButton("🖼️ Prompt Storyboard 4 Panel", callback_data="format:image"),
-        ], [
-            InlineKeyboardButton("🎬 Video Motion + Voiceover", callback_data="format:video"),
-        ]]),
+        "Pilih gaya visual untuk storyboard 4 panel:",
+        reply_markup=InlineKeyboardMarkup([
+            [InlineKeyboardButton("📦 Produk Sahaja", callback_data="visual:product_only")],
+            [InlineKeyboardButton("🧍 Model Memegang/Memakai", callback_data="visual:model_holding")],
+            [InlineKeyboardButton("📸 Model + Produk (Lifestyle)", callback_data="visual:model_lifestyle")],
+        ]),
     )
 
 
@@ -165,15 +240,38 @@ async def choose_environment(update: Update, context: ContextTypes.DEFAULT_TYPE)
     )
     context.user_data["storyboard_prompt"] = prompt
     try:
-        await query.edit_message_text("Menyediakan prompt storyboard 4 panel…")
-        await query.message.reply_text(
-            "✅ PROMPT STORYBOARD 4 PANEL SIAP\\n\\n"
-            "Aliran ini menghasilkan teks sahaja, tidak menjana imej dan tidak memanggil API imej luaran. "
-            "Muat naik gambar produk asal bersama prompt ini dalam alat yang anda pilih.\\n\\n"
-            + prompt,
+        await query.edit_message_text("Menyediakan skrip Bahasa Melayu dan prompt storyboard 4 panel…")
+        goal_label = "Shopee Affiliate" if goal == "shopee" else "TikTok Viral"
+        environment_label = {
+            "studio": "Studio Premium", "home": "Suasana Rumah", "cafe": "Kafe Moden"
+        }.get(context.user_data["visual_environment"], "Studio Premium")
+        malay_script = (
+            "✨ KLIPPO SUPER STORYBOARD — 4 PANEL\\n\\n"
+            f"🎯 Tujuan: {goal_label} | 📍 Latar: {environment_label}\\n\\n"
+            "PANEL 1 — HOOK (0–3s): Perkenalkan produk dengan komposisi yang kuat dan jelas. "
+            "Tarik perhatian melalui visual produk, bukan teks tambahan.\\n\\n"
+            "PANEL 2 — DETAIL (3–6s): Dekatkan kamera untuk menunjukkan bentuk, bahan dan ciri "
+            "yang benar-benar kelihatan pada gambar rujukan.\\n\\n"
+            "PANEL 3 — LIFESTYLE / PENGGUNAAN (6–9s): Tunjukkan konteks penggunaan yang munasabah "
+            "mengikut gaya visual dipilih. Kekalkan produk yang sama dan jangan reka ciri baharu.\\n\\n"
+            "PANEL 4 — HERO / PENUTUP (9–12s): Akhiri dengan paparan produk yang kemas, premium "
+            "dan mudah dikenal pasti. Ini ialah pelan visual; bukan video siap.\\n\\n"
+            "Nota: Klippo hanya menyediakan teks. Tiada API imej berbayar dipanggil. Untuk hasil visual, "
+            "muat naik gambar produk asal bersama prompt di platform pilihan."
+        )
+        await query.message.reply_text(malay_script)
+        context.user_data["storyboard_prompt"] = prompt
+        await send_text_chunks(
+            query.message,
+            "🎨 AI IMAGE PROMPT (ENGLISH) — READY TO COPY\\n\\n" + prompt,
             reply_markup=InlineKeyboardMarkup([
-                [InlineKeyboardButton("📋 Paparkan prompt untuk disalin", callback_data="prompt:show")],
-                [InlineKeyboardButton("🎬 Teruskan ke fungsi video beta", callback_data="legacy:video")],
+                [InlineKeyboardButton("🔗 ChatGPT", url="https://chatgpt.com/"),
+                 InlineKeyboardButton("🔗 Gemini", url="https://gemini.google.com/")],
+                [InlineKeyboardButton("🔗 Microsoft Copilot", url="https://copilot.microsoft.com/"),
+                 InlineKeyboardButton("🔗 Bing Image Creator", url="https://www.bing.com/create")],
+                [InlineKeyboardButton("🔗 Canva", url="https://www.canva.com/")],
+                [InlineKeyboardButton("📋 Paparkan prompt semula", callback_data="prompt:show")],
+                [InlineKeyboardButton("🎬 Uji enjin video beta lama", callback_data="legacy:video")],
             ]),
         )
     except Exception:
@@ -259,7 +357,8 @@ async def show_prompt_for_copy(update: Update, context: ContextTypes.DEFAULT_TYP
     if not prompt:
         await query.message.reply_text("Prompt tiada. Sila ulang proses daripada gambar produk.")
         return
-    await query.message.reply_text(
+    await send_text_chunks(
+        query.message,
         "PROMPT STORYBOARD — TEKAN LAMA UNTUK SALIN\n\n" + prompt
     )
 
@@ -268,6 +367,16 @@ async def legacy_video_button(update: Update, context: ContextTypes.DEFAULT_TYPE
     query = update.callback_query
     await query.answer()
     await run_legacy_video(update, context)
+
+
+async def show_video_prompt_for_copy(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    query = update.callback_query
+    await query.answer()
+    prompt = context.user_data.get("video_prompt")
+    if not prompt:
+        await query.message.reply_text("Prompt video tiada. Sila muat naik gambar produk dan pilih Direct Video Prompt.")
+        return
+    await send_text_chunks(query.message, "DIRECT VIDEO PROMPT — TEKAN LAMA UNTUK SALIN\\n\\n" + prompt)
 
 
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -281,12 +390,14 @@ def main() -> None:
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("help", help_command))
     app.add_handler(MessageHandler(filters.PHOTO, handle_photo))
+    app.add_handler(CallbackQueryHandler(choose_mode, pattern=r"^mode:"))
     app.add_handler(CallbackQueryHandler(choose_goal, pattern=r"^goal:"))
     app.add_handler(CallbackQueryHandler(choose_format, pattern=r"^format:"))
     app.add_handler(CallbackQueryHandler(choose_visual_style, pattern=r"^visual:"))
     app.add_handler(CallbackQueryHandler(choose_environment, pattern=r"^environment:"))
     app.add_handler(CallbackQueryHandler(legacy_video_button, pattern=r"^legacy:video$"))
     app.add_handler(CallbackQueryHandler(show_prompt_for_copy, pattern=r"^prompt:show$"))
+    app.add_handler(CallbackQueryHandler(show_video_prompt_for_copy, pattern=r"^prompt:video$"))
     app.run_polling(drop_pending_updates=True)
 
 
