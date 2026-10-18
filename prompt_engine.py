@@ -96,7 +96,24 @@ def build_prompt(mode, product, scene, motion, style='auto', duration=10, concep
 
 
 def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, duration=10, concept='', product_type='other', storyboard_override=None, universal_custom=False):
-    camera = CAMERAS.get(motion, CAMERAS["push"])
+    scene_text = str(scene or '').lower()
+    if motion in ('auto', '', None):
+        if any(term in scene_text for term in ('mirror', 'vanity', 'dressing table', 'cermin')):
+            camera = "Use a stable medium framing that follows the model's small natural movements, then a gentle side adjustment to include the mirror reflection; never circle around the model or distort the reflection."
+        elif any(term in scene_text for term in ('airport', 'terminal', 'mall', 'shopping mall', 'street', 'beach', 'garden', 'park')):
+            camera = "Use a smooth tracking shot from the front three-quarter or side as the person walks naturally; keep pace and distance steady, with no forced product rotation."
+        elif any(term in scene_text for term in ('cafe', 'restaurant', 'living room', 'bedroom', 'home interior', 'hotel')):
+            camera = "Begin with a calm medium-wide contextual view, then make a gentle push-in only when the person naturally uses or presents the product."
+        elif any(term in scene_text for term in ('kitchen', 'workshop', 'office', 'library')):
+            camera = "Use a steady practical demonstration angle, with a subtle close-in on the actual interaction and no distracting camera orbit."
+        elif product_type in ('beauty', 'wallet', 'accessory', 'gadget'):
+            camera = "Use a restrained close-in to show visible product details, then hold a clear stable view; preserve product shape and markings."
+        elif product_type in ('fashion', 'hijab', 'shoes', 'bag', 'travel'):
+            camera = "Use a smooth medium shot with a short natural walk or body movement, tracking gently only as needed to keep the product visible."
+        else:
+            camera = "Choose one restrained camera movement suited to the product and action; prioritize a clear stable view and believable perspective."
+    else:
+        camera = CAMERAS.get(motion, CAMERAS["push"])
     product_type_directions = {
         'fashion': "PRODUCT CATEGORY DIRECTION: Treat this as clothing/fashion. Favor natural fabric movement and visible garment details; never alter cut, print, color or pattern.",
         'bag': "PRODUCT CATEGORY DIRECTION: Treat this as a bag subtype inferred from the product name. Choose a matching presentation (handbag hero, crossbody lifestyle or backpack upright showcase). Do not assume exact materials, compartments, hardware or accessories unless stated in the name.",
@@ -134,6 +151,26 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
         'other': "If a person is present, give them one simple, purposeful action suited to the product and location. Prefer natural walking or practical interaction over static posing with repetitive product rotation.",
     }
     category_direction += " NATURAL HUMAN MOVEMENT: " + natural_motion_by_type.get(product_type, natural_motion_by_type['other']) + " "
+    scene_action_directions = [
+        (('mirror' in scene_text or 'vanity' in scene_text or 'dressing table' in scene_text or 'cermin' in scene_text),
+         "SCENE ACTION — MIRROR: If a model is present, let them look at their reflection, make one small practical adjustment to the outfit or hijab if relevant, and optionally turn naturally once to check the side view. The reflection and body movement must remain physically consistent; no repeated spinning."),
+        (('airport' in scene_text or 'terminal' in scene_text),
+         "SCENE ACTION — AIRPORT: If suitable for the product, have the model walk naturally toward the terminal or past the check-in area. Use relaxed shoulders, natural arm swing and believable product movement; do not pose rigidly or twirl a bag."),
+        (('boutique' in scene_text or 'shop' in scene_text or 'mall' in scene_text),
+         "SCENE ACTION — SHOPPING: Use a simple purposeful action such as browsing a rack, taking a few steps or pausing to present the product. Keep background shoppers subtle and avoid distracting interactions."),
+        (('cafe' in scene_text or 'restaurant' in scene_text),
+         "SCENE ACTION — CAFE/RESTAURANT: Prefer a relaxed seated or standing interaction that fits the product; use natural hand placement and do not make the model perform unrelated gestures."),
+        (('kitchen' in scene_text or 'bakery' in scene_text),
+         "SCENE ACTION — KITCHEN: Show one plausible preparation, serving or practical-use action only when the product supports it. Keep food, hands and utensils physically consistent."),
+        (('garden' in scene_text or 'beach' in scene_text or 'nature' in scene_text or 'park' in scene_text),
+         "SCENE ACTION — OUTDOORS: Use a gentle walk, a natural pause or a relevant practical interaction. Let clothing and loose items respond subtly to movement and breeze without exaggerated motion."),
+        (('office' in scene_text or 'library' in scene_text or 'workshop' in scene_text),
+         "SCENE ACTION — WORKSPACE: Prefer a focused, practical product interaction at a desk or work surface; maintain believable contact with objects and keep the product clearly visible."),
+    ]
+    for scene_matches, direction in scene_action_directions:
+        if scene_matches:
+            category_direction += " " + direction
+            break
     category_direction += (
         " PRODUCT-SPECIFIC SPOKEN COPY: Only if voice-over or dialogue is explicitly requested, write a short, conversational line about this exact product category and only visible or verified features. "
         "Do not repeat generic phrases such as 'perincian teliti', 'lihat dengan dekat' or 'sangat terperinci'; do not narrate camera directions. "
