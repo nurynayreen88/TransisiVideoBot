@@ -2557,14 +2557,14 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 video_intro = (
                     '🎬 PROMPT VIDEO — LANGKAH PILIHAN\\n\\n'
                     'Storyboard telah dijana dahulu. Muat naik gambar produk asal yang sama sebagai rujukan, kemudian salin prompt video di bawah.\\n'
-                    'Untuk 20 saat, jana Bahagian 1 dahulu dan gunakan bingkai akhir Bahagian 1 sebagai rujukan Bahagian 2.'
+                    'Untuk klip bersambung, jana setiap bahagian mengikut turutan dan gunakan bingkai akhir bahagian sebelumnya sebagai rujukan bahagian seterusnya.'
                 )
             else:
                 video_intro = (
                     '🎬 LANGKAH 2 — PROMPT VIDEO\\n\\n'
                     '1. Muat naik imej yang dijana dalam Langkah 1 ke platform AI pilihan.\\n'
                     '2. Salin prompt video di bawah dan tampal pada platform tersebut.\\n'
-                    '3. Untuk 20 saat, jana Bahagian 1 dahulu. Gunakan bingkai akhir Bahagian 1 sebagai rujukan Bahagian 2.\\n\\n'
+                    '3. Jika prompt dibahagikan kepada beberapa klip, jana mengikut turutan dan gunakan bingkai akhir klip sebelumnya sebagai rujukan klip seterusnya.\\n\\n'
                     'PENTING: Gunakan imej baharu yang dijana daripada PROMPT IMAGE sebagai MASTER reference.'
                 )
             await query.message.reply_text(video_intro)
