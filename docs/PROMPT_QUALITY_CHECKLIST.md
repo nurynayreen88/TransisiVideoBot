@@ -241,3 +241,15 @@ The initial scan found a small number of prompts that did not contain the exact 
 - [ ] Confirm actual generated clips visually after deployment; prompt-level rules cannot guarantee every external video model will obey them.
 
 **Scope note:** This change covers all current quality overrides plus the shared prompt engine. It does not claim that video outputs have been rendered and visually verified.
+
+
+## 2N. Expanded product-background choices
+
+- [x] Expanded the Telegram product-background menu with eight additional solid colour studios: navy, sage, sky blue, lavender, rose, mint, terracotta and charcoal.
+- [x] Added six additional premium gradients: sky, lavender, sage, blush, midnight and sand.
+- [x] Kept the existing original, white, beige, dark, pastel, cream gradient, subtle pattern, duotone, mist and custom-image options.
+- [x] Updated both the bundled bot background engine and the standalone `product_background.py` module, including the premium animated-studio palette and accepted callback values.
+- [ ] Run CI and syntax checks before merging.
+- [ ] Verify menu display and rendered output in the live bot after a separately authorized deployment.
+
+**Design rule:** Backgrounds are simple, text-free and logo-free, selected to support product visibility rather than distract from the product.
