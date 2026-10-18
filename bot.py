@@ -166,6 +166,22 @@ def _scene_background(size, choice):
         'blush_gradient': ((255, 246, 243), (225, 173, 178)),
         'midnight_gradient': ((91, 99, 121), (19, 24, 38)),
         'sand_gradient': ((255, 249, 235), (193, 157, 115)),
+        'ocean_gradient': ((226, 247, 250), (28, 105, 139)),
+        'forest_gradient': ((230, 240, 222), (39, 83, 62)),
+        'sunset_gradient': ((255, 224, 195), (172, 77, 107)),
+        'aurora_gradient': ((215, 247, 237), (95, 90, 165)),
+        'mocha_gradient': ((246, 231, 211), (112, 78, 61)),
+        'peach_gradient': ((255, 235, 220), (232, 151, 126)),
+        'ice_gradient': ((248, 253, 255), (157, 202, 225)),
+        'emerald_gradient': ((220, 245, 231), (22, 112, 86)),
+        'plum_gradient': ((246, 226, 246), (104, 54, 111)),
+        'coral_gradient': ((255, 231, 221), (213, 94, 91)),
+        'graphite_gradient': ((115, 122, 133), (25, 29, 37)),
+        'champagne_gradient': ((255, 250, 226), (192, 157, 91)),
+        'lemon_gradient': ((255, 255, 219), (215, 205, 105)),
+        'teal_gradient': ((218, 246, 242), (28, 112, 117)),
+        'lilac_gradient': ((250, 239, 255), (164, 133, 202)),
+        'cobalt_gradient': ((224, 237, 255), (42, 74, 160)),
     }
     top, bottom = palettes[choice]
     canvas = Image.new('RGBA', size)
@@ -187,7 +203,7 @@ def _scene_background(size, choice):
 
 
 def replace_background(source: Path, destination: Path, choice: str, foreground_destination: Path | None = None, custom_background_path: Path | None = None) -> Path:
-    if choice not in BACKGROUNDS and choice not in ('gradient', 'pattern', 'duotone', 'mist', 'sky_gradient', 'lavender_gradient', 'sage_gradient', 'blush_gradient', 'midnight_gradient', 'sand_gradient', 'custom'):
+    if choice not in BACKGROUNDS and choice not in ('gradient', 'pattern', 'duotone', 'mist', 'sky_gradient', 'lavender_gradient', 'sage_gradient', 'blush_gradient', 'midnight_gradient', 'sand_gradient', 'ocean_gradient', 'forest_gradient', 'sunset_gradient', 'aurora_gradient', 'mocha_gradient', 'peach_gradient', 'ice_gradient', 'emerald_gradient', 'plum_gradient', 'coral_gradient', 'graphite_gradient', 'champagne_gradient', 'lemon_gradient', 'teal_gradient', 'lilac_gradient', 'cobalt_gradient', 'custom'):
         raise ValueError('Unknown background')
     if choice == 'custom' and (custom_background_path is None or not custom_background_path.is_file()):
         raise ValueError('Custom background image is missing')
@@ -782,6 +798,22 @@ def background_menu():
          InlineKeyboardButton('🏖️ Gradient Sand', callback_data='background:sand_gradient')],
         [InlineKeyboardButton('◯ Corak Halus', callback_data='background:pattern'),
          InlineKeyboardButton('◐ Dua Tona', callback_data='background:duotone')],
+        [InlineKeyboardButton('🌊 Ocean Blue', callback_data='background:ocean_gradient'),
+         InlineKeyboardButton('🌲 Forest Green', callback_data='background:forest_gradient')],
+        [InlineKeyboardButton('🌅 Sunset', callback_data='background:sunset_gradient'),
+         InlineKeyboardButton('🌌 Aurora', callback_data='background:aurora_gradient')],
+        [InlineKeyboardButton('☕ Mocha', callback_data='background:mocha_gradient'),
+         InlineKeyboardButton('🍑 Peach', callback_data='background:peach_gradient')],
+        [InlineKeyboardButton('🧊 Ice Blue', callback_data='background:ice_gradient'),
+         InlineKeyboardButton('💚 Emerald', callback_data='background:emerald_gradient')],
+        [InlineKeyboardButton('🍇 Plum', callback_data='background:plum_gradient'),
+         InlineKeyboardButton('🪸 Coral', callback_data='background:coral_gradient')],
+        [InlineKeyboardButton('🪨 Graphite', callback_data='background:graphite_gradient'),
+         InlineKeyboardButton('🥂 Champagne', callback_data='background:champagne_gradient')],
+        [InlineKeyboardButton('🍋 Lemon', callback_data='background:lemon_gradient'),
+         InlineKeyboardButton('🩵 Teal', callback_data='background:teal_gradient')],
+        [InlineKeyboardButton('💜 Lilac', callback_data='background:lilac_gradient'),
+         InlineKeyboardButton('🔵 Cobalt', callback_data='background:cobalt_gradient')],
         [InlineKeyboardButton('🖼️ Guna Gambar Latar Sendiri', callback_data='background:custom')],
         [InlineKeyboardButton('↩️ Semak Gambar', callback_data='photos_order')],
     ])
@@ -801,7 +833,16 @@ def prompt_scene_menu():
         [InlineKeyboardButton('✨ Auto (Disyorkan)', callback_data='scene:auto')],
         [InlineKeyboardButton('📸 Studio Premium', callback_data='scene:studio'), InlineKeyboardButton('🌑 Mewah Gelap', callback_data='scene:dark')],
         [InlineKeyboardButton('🏡 Ruang Rumah', callback_data='scene:home'), InlineKeyboardButton('🌿 Alam Semula Jadi', callback_data='scene:nature')],
-        [InlineKeyboardButton('☀️ Cerah Minimalis', callback_data='scene:minimal')]
+        [InlineKeyboardButton('☀️ Cerah Minimalis', callback_data='scene:minimal')],
+        [InlineKeyboardButton('🍳 Dapur', callback_data='scene:kitchen'), InlineKeyboardButton('🛋️ Ruang Tamu', callback_data='scene:living_room')],
+        [InlineKeyboardButton('💼 Pejabat', callback_data='scene:office'), InlineKeyboardButton('🚗 Dalam Kereta', callback_data='scene:car_interior')],
+        [InlineKeyboardButton('☕ Kafe', callback_data='scene:cafe'), InlineKeyboardButton('🛍️ Butik', callback_data='scene:boutique')],
+        [InlineKeyboardButton('🏬 Pusat Beli-belah', callback_data='scene:mall'), InlineKeyboardButton('💄 Meja Solek', callback_data='scene:vanity')],
+        [InlineKeyboardButton('🛏️ Bilik Tidur', callback_data='scene:bedroom'), InlineKeyboardButton('🌿 Taman', callback_data='scene:garden')],
+        [InlineKeyboardButton('🏖️ Pantai', callback_data='scene:beach'), InlineKeyboardButton('🏋️ Gimnasium', callback_data='scene:gym')],
+        [InlineKeyboardButton('📚 Perpustakaan', callback_data='scene:library'), InlineKeyboardButton('🧰 Bengkel', callback_data='scene:workshop')],
+        [InlineKeyboardButton('🥐 Bakeri', callback_data='scene:bakery'), InlineKeyboardButton('🍽️ Restoran', callback_data='scene:restaurant')],
+        [InlineKeyboardButton('🧳 Lapangan Terbang', callback_data='scene:airport'), InlineKeyboardButton('🏨 Bilik Hotel', callback_data='scene:hotel')]
     ])
 
 
@@ -2511,12 +2552,30 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await query.message.reply_text('🎨 Pilih latar video:', reply_markup=prompt_scene_menu())
     elif action.startswith('scene:') and stage == 'prompt_scene':
         scenes = {
-            'auto': 'clean premium studio background, selected to complement the named product',
-            'studio': 'premium photography studio, soft neutral backdrop and realistic contact shadows',
-            'dark': 'dark luxury studio, controlled rim lighting and understated premium contrast',
-            'home': 'tasteful modern home interior, natural ambient lighting and believable product placement',
-            'nature': 'restrained natural setting with soft daylight, without obscuring the product',
-            'minimal': 'bright minimalist setting with clean neutral surfaces and soft daylight'
+            'auto': 'a realistic premium location chosen to suit the product, with natural lighting and believable physical surroundings',
+            'studio': 'a premium photography studio with soft neutral backdrop and realistic contact shadows',
+            'dark': 'a dark luxury studio with controlled rim lighting and understated premium contrast',
+            'home': 'a tasteful modern home interior with natural ambient lighting and believable product placement',
+            'nature': 'a restrained natural setting with soft daylight, without obscuring the product',
+            'minimal': 'a bright minimalist setting with clean neutral surfaces and soft daylight',
+            'kitchen': 'a realistic modern home kitchen, clean counter and softly blurred cabinets',
+            'living_room': 'a realistic contemporary living room with sofa, side table and natural window light',
+            'office': 'a realistic modern office desk area with neutral workspace and shelves',
+            'car_interior': 'inside a realistic clean modern car interior, daylight through windows, product placed naturally and safely',
+            'cafe': 'a realistic cozy cafe with wooden tables, warm daylight and softly blurred background',
+            'boutique': 'a realistic fashion boutique with clothing racks softly out of focus',
+            'mall': 'a realistic modern shopping mall interior with storefronts blurred in the distance',
+            'vanity': 'a realistic elegant dressing table and vanity area with mirror and soft natural light',
+            'bedroom': 'a realistic neat modern bedroom with bedside table and soft daylight',
+            'garden': 'a realistic lush home garden with green plants and soft natural bokeh',
+            'beach': 'a realistic tropical beach with sand and sea softly blurred in the distance',
+            'gym': 'a realistic modern gym with exercise equipment softly out of focus',
+            'library': 'a realistic library with bookshelves softly blurred in the background',
+            'workshop': 'a realistic tidy workshop with tools and workbench softly out of focus',
+            'bakery': 'a realistic artisan bakery counter with bread displays softly blurred in the background',
+            'restaurant': 'a realistic modern restaurant interior with tables and warm ambient lighting',
+            'airport': 'a realistic airport lounge with large windows and seating softly out of focus',
+            'hotel': 'a realistic premium hotel room with tasteful furniture and natural light'
         }
         selected = action.split(':', 1)[1]
         if selected in scenes:
@@ -2785,6 +2844,43 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                         chunk,
                         reply_markup=video_actions if chunk_index == len(chunks) - 1 else None
                     )
+    elif action == 'prompt_generate_image':
+        image_prompt = context.user_data.get('prompt_image_ready', '').strip()
+        image_ids = context.user_data.get('prompt_reference_photos', [])
+        if not image_prompt or not image_ids:
+            await query.message.reply_text(
+                '⚠️ Prompt imej atau gambar produk asal tiada. Mulakan prompt baharu dan muat naik gambar produk dahulu.'
+            )
+            return
+        waiting = await query.message.reply_text(
+            '⏳ GEMINI IMAGE — 0%\\nMenjana satu imej rujukan berdasarkan foto produk asal. Caj API mungkin dikenakan.'
+        )
+        try:
+            telegram_file = await context.bot.get_file(image_ids[0])
+            source_bytes = bytes(await telegram_file.download_as_bytearray())
+            if not source_bytes:
+                raise GeminiProductImageError('Gambar produk tidak dapat dimuat turun daripada Telegram.')
+            await progress_update(waiting, 35, 'Gemini sedang mengolah latar dan pencahayaan...')
+            generated = await asyncio.to_thread(
+                generate_product_reference_image, source_bytes, image_prompt
+            )
+            image_file = BytesIO(generated)
+            image_file.name = 'KLIPPO_GEMINI_PRODUCT_REFERENCE.png'
+            await query.message.reply_photo(
+                photo=image_file,
+                caption='🖼️ IMEJ RUJUKAN PRODUK SIAP\\nGunakan imej ini bersama prompt video. Semak dahulu bahawa warna, bentuk, corak dan logo produk kekal tepat seperti foto asal.'
+            )
+            await progress_update(waiting, 100, 'Imej rujukan siap.')
+        except GeminiProductImageError as exc:
+            await query.message.reply_text('⚠️ Imej tidak berjaya dijana. ' + str(exc))
+        except Exception:
+            logging.exception('Gemini product image generation failed')
+            await query.message.reply_text('⚠️ Imej tidak berjaya dijana kali ini. Prompt asal masih tersedia; cuba lagi kemudian.')
+        finally:
+            try:
+                await waiting.delete()
+            except Exception:
+                pass
     elif action == 'prompt_generate:confirm' and context.user_data.get('stage') == 'prompt_confirm':
         motion = context.user_data.get('prompt_motion_choice', 'push')
         motions = {'auto': 'Choose the simplest camera movement best suited to the product and shot; prefer a gentle push-in for detail, a slow side slide for a full product view, or a locked camera when movement risks changing product details. Keep movement subtle and preserve exact product geometry.', 'orbit': 'A controlled 30-degree camera arc around the product, not a full 360-degree rotation; preserve the visible product geometry.', 'push': 'A slow forward camera push-in toward the product to reveal texture and details; avoid digital warping and preserve product geometry.', 'pull': 'A slow camera pull-back away from the product to reveal its full shape and surrounding scene; preserve proportions.', 'side': 'A smooth horizontal left-to-right camera slide with stable product proportions.', 'dolly': 'A slow physical-feeling forward dolly-in with gentle natural parallax; no object deformation.', 'low': 'A restrained low-angle camera view looking slightly upward at the product; preserve the reference design and proportions.', 'static': 'A locked camera with subtle studio lighting changes only; keep the product clear and stable.'}
@@ -2953,11 +3049,19 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     return
                 product_name = context.user_data.get('prompt_product_name', '').strip() or 'product shown in the uploaded reference photo'
                 category_label = CATEGORIES_BY_ID.get(context.user_data.get('prompt_category', ''), {}).get('label', 'product')
+                selected_background = context.user_data.get(
+                    'prompt_scene',
+                    'clean premium studio background, selected to complement the exact product reference'
+                )
                 image_prompt = (
                     'PROMPT IMAGE — PREMIUM PRODUCT CAMPAIGN\\n\\n'
                     'Use the uploaded product photograph as the sole MASTER product reference. '
                     'Create one ultra-realistic premium commercial product photograph in vertical 9:16. '
                     'The product is: ' + product_name + '. Category: ' + category_label + '.\\n\\n'
+                    'BACKGROUND REPLACEMENT — MANDATORY: Completely remove/replace the original background in the uploaded photo. '
+                    'Use this exact user-selected scene as the new background: ' + selected_background + '. '
+                    'Do not preserve or recreate the original photo background. Do not place the unchanged source photo on top of a new background. '
+                    'Integrate the product naturally into the selected scene with matching perspective, light direction, colour temperature and contact shadows.\\n\\n'
                     'VISUAL DIRECTION: Create a believable, elegant lifestyle advertising scene suited to this product. '
                     'If a model was selected, include the same adult model naturally in a way suited to this product; for clothing, the model must wear the exact item. If no model was selected, do not add a person. '
                     'If it is a bag, accessory, beauty item, gadget, food or home product, compose a premium scene that showcases the actual item clearly. '
