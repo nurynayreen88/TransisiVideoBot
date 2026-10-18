@@ -552,7 +552,10 @@ def prompt_product_type_menu():
 def prompt_duration_menu():
     return InlineKeyboardMarkup([
         [InlineKeyboardButton('🎬 10 saat · 1 prompt', callback_data='prompt_duration:10_single')],
+        [InlineKeyboardButton('🎞️ 20 saat · 2 prompt bersambung (10+10)', callback_data='prompt_duration:20_split')],
         [InlineKeyboardButton('🎞️ 20 saat · 1 prompt', callback_data='prompt_duration:20_single')],
+        [InlineKeyboardButton('🎬 30 saat · 3 prompt bersambung (10+10+10)', callback_data='prompt_duration:30_split')],
+        [InlineKeyboardButton('🎬 30 saat · 1 prompt', callback_data='prompt_duration:30_single')],
         [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
     ])
 
