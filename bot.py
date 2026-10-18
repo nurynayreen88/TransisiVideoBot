@@ -2639,7 +2639,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['prompt_framing'] = 'auto'
             context.user_data['stage'] = 'prompt_framing'
             await query.message.reply_text(
-                '🎥 LANGKAH 3 — Bagaimana kamera patut merakam produk?\\n\\nPilihan ini berbeza daripada gaya visual. Contohnya, Luxury/Cinematic ialah rupa video; Fokus kaki/Kasut dalam kereta menentukan apa yang kamera tunjuk.',
+                '🎥 LANGKAH 3 — Bagaimana kamera patut merakam produk?\n\nPilihan ini berbeza daripada gaya visual. Contohnya, Luxury/Cinematic ialah rupa video; Fokus kaki/Kasut dalam kereta menentukan apa yang kamera tunjuk.',
                 reply_markup=prompt_framing_menu(context.user_data.get('prompt_product_type', 'other'), context.user_data.get('prompt_model_presence'))
             )
     elif action == 'prompt_framing_back' and stage == 'prompt_framing':
