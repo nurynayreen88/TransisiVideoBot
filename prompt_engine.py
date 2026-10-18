@@ -229,12 +229,23 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
                     + "\\n\\nKeep transitions natural, camera movement restrained, and product geometry stable throughout."
                 )
             else:
+                generic_scenes = [
+                    ("OPENING HOOK", "Open with a truthful, instantly readable product composition and a subtle camera or light move."),
+                    ("FULL PRODUCT REVEAL", "Show the complete product clearly, preserving exact shape, colour, print, proportions, packaging and visible branding."),
+                    ("VISIBLE DETAIL", "Move gently toward one genuinely visible detail supported by the reference; do not invent unseen surfaces or features."),
+                    ("NATURAL PRODUCT ACTION", "Show one simple, believable product-appropriate action or restrained camera move. Keep product identity stable."),
+                    ("FINAL HERO HOLD", "Return to a clean full-product composition and hold briefly. No invented slogan, price, claim or watermark."),
+                ]
+                generic_blocks = []
+                for index, (shot_name, shot_direction) in enumerate(generic_scenes):
+                    start = index * scene_length
+                    end = start + scene_length
+                    generic_blocks.append(f"SCENE {index + 1} — {start:.1f}–{end:.1f}s | {shot_name}: {shot_direction}")
                 rules = (
-                    "ONE CONTINUOUS VIDEO — exactly five equal scenes, each "
-                    + str(scene_length) + " seconds: "
-                    "opening product recognition; full product reveal; visible detail; natural product-appropriate action; "
-                    "stable full-product hero finish. Do not split into separate clips or create a storyboard image. "
-                    "No unrequested text, captions, added logos, claims or watermarks."
+                    "DIRECTOR'S WRITTEN STORYBOARD: ONE continuous video with exactly five equal scenes. "
+                    f"Each scene lasts exactly {scene_length:g} seconds. These are timed scenes inside one video, "
+                    "not separate prompts or a storyboard image. No unrequested text, captions, added logos, claims or watermarks.\\n\\n"
+                    + "\\n\\n".join(generic_blocks)
                 )
         return (
             "PROMPT VIDEO — " + str(duration) + " SAAT\n"
