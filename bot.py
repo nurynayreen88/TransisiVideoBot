@@ -2096,8 +2096,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             '✍️ KLIPPO | JANA PROMPT\n\nPilih jenis prompt yang anda mahu sediakan:',
             reply_markup=InlineKeyboardMarkup([
                 [InlineKeyboardButton('🎥 Jana Prompt Video', callback_data='prompt_mode:video')],
-                [InlineKeyboardButton('🧩 Jana Prompt Storyboard', callback_data='prompt_mode:storyboard')],
-                [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]
+                [InlineKeyboardButton('🧩 Jana Prompt Storyboard', callback_data='prompt_mode:storyboard')]
             ])
         )
     elif action.startswith('prompt_mode:'):
@@ -2107,8 +2106,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 'Pilihan tidak sah. Sila pilih semula.',
                 reply_markup=InlineKeyboardMarkup([
                     [InlineKeyboardButton('🎥 Jana Prompt Video', callback_data='prompt_mode:video')],
-                    [InlineKeyboardButton('🧩 Jana Prompt Storyboard', callback_data='prompt_mode:storyboard')],
-                    [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]
+                    [InlineKeyboardButton('🧩 Jana Prompt Storyboard', callback_data='prompt_mode:storyboard')]
                 ])
             )
         else:
