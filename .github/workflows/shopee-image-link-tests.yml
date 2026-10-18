@@ -30,3 +30,5 @@ jobs:
         run: python -m py_compile bot.py
       - name: Test Shopee URL and image extraction
         run: python -m unittest discover -s tests -p "test_shopee_image_link.py" -v
+      - name: Live test the supplied Shopee links
+        run: python -m unittest discover -s tests -p "test_shopee_live.py" -v
