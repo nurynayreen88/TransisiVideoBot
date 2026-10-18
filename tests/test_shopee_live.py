@@ -50,6 +50,14 @@ class LiveShopeeLinkTests(unittest.TestCase):
                             print(f"DIAGNOSTIC link #{index}: status={response.status}, final_url={response.geturl()}, content_type={response.headers.get('Content-Type')}, page_start={page[:1800]!r}")
                     except Exception as error:
                         print(f"DIAGNOSTIC link #{index}: request_error={type(error).__name__}: {error}")
+                    proxy_url = "https://r.jina.ai/http://shopee.com.my/product/29993877/44905654836"
+                    try:
+                        proxy_req = Request(proxy_url, headers={"Accept": "text/plain", "User-Agent": "Mozilla/5.0"})
+                        with urlopen(proxy_req, timeout=20) as proxy_response:
+                            proxy_body = proxy_response.read(30000).decode("utf-8", "replace")
+                            print(f"DIAGNOSTIC JINA status={proxy_response.status}, body={proxy_body[:6000]!r}")
+                    except Exception as proxy_error:
+                        print(f"DIAGNOSTIC JINA {type(proxy_error).__name__}: {proxy_error}")
                     for api_url in (
                         "https://shopee.com.my/api/v4/pdp/get_pc?shop_id=29993877&item_id=44905654836",
                         "https://shopee.com.my/api/v4/item/get?shopid=29993877&itemid=44905654836",
