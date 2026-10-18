@@ -1726,15 +1726,16 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         reply_markup=home_keyboard()
     )
     await update.effective_message.reply_text(
-        '🎬 KLIPPO | Studio Video Affiliate\n\n'
-        'Pilih fungsi yang anda perlukan:\n\n'
-        '✍️ Jana Prompt — hasilkan prompt video lengkap berdasarkan nama produk dan pilihan pengguna.\n'
-        '🎞️ Gerakkan Foto (Transisi) — gabungkan gambar pegun menjadi video MP4 menggunakan kesan transisi, zoom/pan 2D dan muzik. Fungsi ini tidak menjana gerakan AI pada objek.\n'
-        '🎞️ Gabung Video — cantum beberapa klip menjadi satu video.\n'
-        '🔄 Tukar Format Video — sesuaikan video kepada format MP4 menegak untuk affiliate.\n'
-        '💎 Langganan — lihat pelan dan cara pembayaran.\n'
-        '👤 Akaun Saya — semak maklumat akaun dan status langganan.\n'
-        '👇 Tekan pilihan di bawah untuk bermula:',
+        '🎬 KLIPPO | Video Menarik, Semudah Klik\\n\\n'
+        'Tak perlu mahir AI atau suntingan video. Pilih satu fungsi di bawah:\\n\\n'
+        '⭐ BARU PERTAMA KALI? Mulakan dengan Jana Prompt.\\n'
+        '1️⃣ Jana Prompt — masukkan nama produk; Klippo sediakan arahan video untuk disalin ke penjana video AI. Gambar produk tidak diperlukan dalam bot.\\n'
+        '2️⃣ Gerakkan Foto (Transisi) — jadikan gambar pegun sebagai video MP4 dengan gerakan kamera 2D dan muzik; ini bukan penjanaan gerakan AI pada objek.\\n'
+        '3️⃣ Gabung Video — cantum beberapa klip menjadi satu video.\\n'
+        '4️⃣ Tukar Format Video — tukar video kepada format MP4 menegak untuk affiliate.\\n\\n'
+        '💎 Langganan — lihat pelan dan cara pembayaran.\\n'
+        '👤 Akaun Saya — semak status akaun dan langganan.\\n\\n'
+        '💡 Ikut arahan yang muncul selepas setiap pilihan. Jika tersalah pilih, tekan Menu Utama untuk mula semula:',
         reply_markup=main_menu(update.effective_user.id)
     )
 
@@ -2092,7 +2093,12 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if action == 'home':
         if not context.user_data.get('busy'):
             reset(context)
-        await query.message.reply_text('🏠 KLIPPO | Menu Utama\n\nPilih fungsi di bawah:', reply_markup=main_menu(update.effective_user.id))
+        await query.message.reply_text(
+            '🏠 KLIPPO | Menu Utama\\n\\n'
+            'Pilih fungsi di bawah. Baru pertama kali? Mulakan dengan ✍️ Jana Prompt.\\n'
+            'Ikut arahan satu demi satu; tekan Menu Utama jika mahu mula semula.',
+            reply_markup=main_menu(update.effective_user.id)
+        )
         return
     if context.user_data.get('busy'):
         await query.message.reply_text('Video sedang diproses. Sila tunggu.')
@@ -2287,9 +2293,12 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data['stage'] = 'prompt_product_type'
         await query.message.reply_text(
             '✍️ KLIPPO | JANA PROMPT VIDEO\\n\\n'
-            'Muat naik gambar tidak diperlukan dalam proses jana prompt. Pilih kategori produk untuk bermula; '
-            'kemudian pilih subkategori, nama produk, latar, gaya dan durasi. '
-            'Selepas prompt siap, muat naik gambar produk asal terus ke platform video AI pilihan anda.',
+            'Cara paling mudah:\\n'
+            '1. Pilih kategori dan subkategori produk.\\n'
+            '2. Taip nama produk sahaja — tidak perlu pautan Shopee atau muat naik gambar.\\n'
+            '3. Pilih durasi dan latar; Klippo akan mengurus aksi serta kamera secara automatik.\\n'
+            '4. Semak ringkasan, kemudian tekan Jana Prompt.\\n\\n'
+            'Prompt ialah arahan teks, bukan video siap. Salin prompt yang terhasil ke platform video AI pilihan anda dan lampirkan gambar produk di sana. Jika tidak pasti, gunakan pilihan yang disyorkan.',
             reply_markup=prompt_product_type_menu()
         )
     elif action.startswith('prompt_mode:'):
