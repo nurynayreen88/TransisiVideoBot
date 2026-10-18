@@ -580,6 +580,11 @@ def prompt_style_menu(product_type='other'):
     available = storyboard_styles()
     allowed = PRODUCT_STYLE_KEYS.get(product_type, PRODUCT_STYLE_KEYS['other'])
     matching = [(key, label) for key, label in available if key in allowed]
+    # White Doodle is a universal overlay style, not a product-category action.
+    # Keep it selectable for every category while retaining relevant category-specific styles.
+    doodle_option = next(((key, label) for key, label in available if key == 'white_doodle'), None)
+    if doodle_option and not any(key == 'white_doodle' for key, _ in matching):
+        matching.append(doodle_option)
     # If catalog entries are customized, never leave the user with an empty style menu.
     if not matching:
         matching = available
