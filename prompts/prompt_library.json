@@ -1051,28 +1051,28 @@
       "label": "Everyday Carry",
       "duration_seconds": 10,
       "style": "lifestyle_ugc",
-      "description": "Beg ditunjukkan sebagai sebahagian rutin harian tanpa menambah barang yang tidak disahkan.",
-      "prompt": "Create a 10-second vertical 9:16 product advertisement for the product name supplied by the user, in the Beg category. Creative direction: Beg ditunjukkan sebagai sebahagian rutin harian tanpa menambah barang yang tidak disahkan. Keep the named product as the clear hero. Use plausible generic visuals and natural camera movement. This prompt is generated from text only; no uploaded image or AI image analysis is used. Do not invent exact materials, specifications, features, compartments, included accessories, product benefits, brand marks or labels that are not stated in the product name. STRICT OUTPUT RULES: exactly 10 seconds, vertical 9:16, one cohesive product video, no on-screen text, no captions, no added logos, no watermark, no morphing, no floating objects, no unrealistic transformations. Keep the product presentation consistent and finish with a clean hero frame.\n\nPREMIUM STORYBOARD — EXACTLY 10 SECONDS:\n0–2s | Opening / premium hook: Start with a premium silhouette reveal of the named bag or wallet against a carefully lit neutral set, leaving clear space around its complete shape.\n2–6s | Signature action: Show a single natural lifestyle action in a believable setting, with realistic posture, contact and scale; keep background props secondary and not implied as included. Concept-specific signature for \"Everyday Carry\": Beg ditunjukkan sebagai sebahagian rutin harian tanpa menambah barang yang tidak disahkan. Keep this exact concept as the central action while preserving product identity and making no unsupported claims.\n6–8s | Detail insert: Cut to one purposeful detail shot of visible stitching, closure, strap, edge or silhouette; never expose or invent hidden compartments or unseen surfaces.\n8–10s | Hero close: Return to a composed three-quarter or top-down hero frame suited to the concept; stop motion cleanly and hold the entire product in focus.\n\nCINEMATOGRAPHY & CONTINUITY: premium commercial lighting, deliberate camera movement, realistic depth of field, natural contact shadows, controlled highlights, clean transitions, and consistent product geometry from start to finish. One coherent scene; no jumpy edits, warping, floating objects or sudden background changes. Use a subtle instrumental background score only, mixed below any natural product sounds; no dialogue or voice-over unless explicitly requested. No on-screen text, captions, added logos or watermarks.",
+      "description": "Beg digunakan dalam satu aksi rutin yang mudah difahami—diangkat dari meja atau disandang—dengan saiz, tali dan bentuk beg kekal konsisten.",
+      "prompt": "Create an exactly 10-second vertical 9:16 live-action-style product video for the user-supplied product name in the everyday handbag category. Creative direction: a candid, polished moment from a believable daily routine. Use one adult model in a tidy entryway or beside a simple desk; keep the environment uncluttered and the bag dominant. This prompt is text-only and does not analyse uploaded images.\n\nPRODUCT ACCURACY: Preserve the bag's stated colour, shape, handles, strap, closure and visible pattern. Do not invent material, brand, pockets, compartments, laptop fit, capacity, water resistance or accessories. Any background objects are set dressing only and must not appear to be included with the bag. The bag should retain plausible weight and scale during handling.\n\n10-SECOND SHOT PLAN:\n0–2s | Routine setup: show the full bag resting on a bench or desk, with the complete silhouette visible and natural window light.\n2–5s | Everyday action: an adult model reaches in, grips an existing handle or strap, and lifts the bag in one smooth motion. Keep the grip physically correct; do not swing the bag or let it pass through the body.\n5–7s | Carry moment: the model takes one natural step or places the bag beside their leg, keeping the bag visible and at a believable height. If the product name implies a hand-held clutch, keep it in hand rather than adding a shoulder strap.\n7–10s | Hero finish: return to a clear view of the bag at rest, either held naturally or set down on the same surface. Hold the full product steady for the final frame.\n\nREALISM & CAMERA: authentic handheld-commercial feel with restrained stabilization, believable body movement, correct contact and weight, realistic shadows under the bag, consistent lighting and natural depth of field. Keep the same model, bag, background and wardrobe throughout. Optional soft instrumental music only, below natural ambience; no dialogue unless requested.\n\nAVOID: floating bag, impossible grip, stretched or disappearing straps, sudden size changes, invented contents, props that imply bundle inclusions, warped bag geometry, artificial reflections, extra fingers, body clipping, frantic cuts, flicker, jitter, excessive HDR, text overlays, captions, added logos or watermarks. End with the complete bag clearly visible and unchanged.",
       "storyboard": [
         {
           "time": "0–2s",
-          "shot": "Opening / premium hook",
-          "direction": "Start with a premium silhouette reveal of the named bag or wallet against a carefully lit neutral set, leaving clear space around its complete shape."
+          "shot": "Daily routine setup",
+          "direction": "Show the complete bag resting on a bench or desk in a tidy entryway, with its full silhouette visible."
         },
         {
-          "time": "2–6s",
-          "shot": "Signature action",
-          "direction": "Show a single natural lifestyle action in a believable setting, with realistic posture, contact and scale; keep background props secondary and not implied as included. Concept-specific signature for \"Everyday Carry\": Beg ditunjukkan sebagai sebahagian rutin harian tanpa menambah barang yang tidak disahkan. Keep this exact concept as the central action while preserving product identity and making no unsupported claims."
+          "time": "2–5s",
+          "shot": "Natural pick-up",
+          "direction": "An adult model grips an existing handle or strap and lifts the bag in one smooth, physically plausible motion without swinging it."
         },
         {
-          "time": "6–8s",
-          "shot": "Detail insert",
-          "direction": "Cut to one purposeful detail shot of visible stitching, closure, strap, edge or silhouette; never expose or invent hidden compartments or unseen surfaces."
+          "time": "5–7s",
+          "shot": "Believable carry",
+          "direction": "The model takes one natural step or places the bag beside their leg; preserve scale and use only the carrying method supported by the product name."
         },
         {
-          "time": "8–10s",
-          "shot": "Hero close",
-          "direction": "Return to a composed three-quarter or top-down hero frame suited to the concept; stop motion cleanly and hold the entire product in focus."
+          "time": "7–10s",
+          "shot": "Stable everyday hero",
+          "direction": "Show the complete bag at rest or held naturally in the same setting and hold a steady final frame."
         }
       ]
     },
