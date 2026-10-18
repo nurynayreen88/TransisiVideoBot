@@ -149,3 +149,12 @@ The initial scan found a small number of prompts that did not contain the exact 
 - [x] Four-shot timings and storyboard directions are embedded verbatim; no-on-screen-text rules are explicit.
 - [ ] Run CI against current `main` before merge.
 - [ ] Visually inspect generated clips; structural checks are not a visual-quality pass.
+
+## 2G. Shoe, hijab and wallet storyboard-alignment batch
+
+- [x] `shoes_running_shoe_motion_v1` — running action is conditional on worn/reference context; no unsupported performance claims.
+- [x] `clothing_hijab_drape_v1` — preserve wrap, coverage, folds and colour; avoid unsupported repositioning.
+- [x] `wallets_open_close_v1` — opening is conditional on visible construction; open/closed state remains continuous.
+- [x] Four-shot directions are embedded verbatim with the required 10-second timing and explicit no-on-screen-text rules.
+- [ ] Run CI against current `main` before merge.
+- [ ] Visually inspect generated clips; structural checks do not prove visual quality.
