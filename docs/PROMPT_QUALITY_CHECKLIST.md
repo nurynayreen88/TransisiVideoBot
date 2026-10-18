@@ -215,3 +215,18 @@ The initial scan found a small number of prompts that did not contain the exact 
 - [ ] Generated video/audio still needs visual and listening review; prompt constraints reduce risk but cannot guarantee every model render is defect-free.
 
 **Scope note:** This batch covers six kitchen prompts only. It does not mean the full kitchen category or all 1,171 master prompts have been individually verified.
+
+
+## 2L. Adult model, face, wearable product and background continuity — Batch 4
+
+- [x] Added six ID-preserving quality overrides for garment detail, sit-to-stand outfit reveal, walk-past camera, beauty hand swatches, jewellery on model and sunglasses try-on.
+- [x] Locked adult model identity and anatomy across frames: consistent face/body/hair/skin, plausible hands and joints, grounded foot contact, no duplicated limbs, fused fingers or face morphing.
+- [x] Locked garment/accessory geometry and visible details: no changing cut, print, frame shape, lens tint, stone/link count, invented materials, extra accessories or unsupported product claims.
+- [x] Added scene continuity rules for stable background, light direction, reflections, contact shadows and focus; no flicker, texture crawl, focus pumping or abrupt exposure changes.
+- [x] All six use four timed beats totalling exactly 10 seconds and include 1080x1920 vertical 9:16 guidance for Shopee and TikTok, with the subject inside the central safe area.
+- [x] Audio defaults to no voice-over; if speech is requested, one consistent natural voice, clean levels and accurate lip-sync are required.
+- [x] Master prompt library and existing IDs remain unchanged; the six updates are additive overrides only.
+- [ ] Run repository CI before merging.
+- [ ] Generated videos still require visual review and any requested speech requires listening review; prompt constraints reduce risk but cannot guarantee every model render is defect-free.
+
+**Scope note:** This batch covers six selected fashion/beauty/accessory prompts only, not every prompt in those categories or the full 1,171-prompt library.
