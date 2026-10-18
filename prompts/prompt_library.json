@@ -2806,29 +2806,29 @@
       "label": "Shirt Detail & Fit",
       "duration_seconds": 10,
       "style": "category_specific",
-      "description": "Baju atau kemeja ditunjukkan melalui close-up kolar, lengan dan pemakaian yang kemas.",
-      "prompt": "Create a 10-second vertical 9:16 product advertisement for the product name supplied by the user. Fashion: shirt or blouse. An adult model stands in soft daylight, adjusts one cuff naturally, and turns slightly to show the overall fit. Include a collar or button close-up only if the garment type suggests it. Do not add logos, pockets, buttons, or fabric claims not provided. This prompt is generated from text only; no uploaded image or AI image analysis is used. Treat the product name and written details as the only source of product facts. Do not invent exact materials, specifications, included accessories, product benefits, brand marks, labels, prices or claims. STRICT OUTPUT RULES: exactly 10 seconds, vertical 9:16, one cohesive product video, no on-screen text, no captions, no added logos, no watermark, no morphing, no floating objects or unrealistic transformations. Keep product shape and packaging consistent. Keep the product presentation consistent and finish with a clean hero frame.\n\n\n\nPREMIUM STORYBOARD — EXACTLY 10 SECONDS:\n0–2s | Opening / premium hook: Open on a refined full-length or on-foot composition, with the named garment or footwear clearly readable in silhouette and soft directional key light.\n2–6s | Signature action: An adult model adjusts one cuff naturally and turns slightly to show the fit; do not add buttons or pockets. Concept-specific signature for \"Shirt Detail & Fit\": Baju atau kemeja ditunjukkan melalui close-up kolar, lengan dan pemakaian yang kemas. Keep this exact concept as the central action while preserving product identity and making no unsupported claims.\n6–8s | Detail insert: Close-up on the actual collar, cuff or visible seam, keeping the garment details unchanged.\n8–10s | Hero close: Return to a stable full-product or full-look frame, with natural fabric movement settling and a premium editorial finish.\n\nCINEMATOGRAPHY & CONTINUITY: premium commercial lighting, deliberate camera movement, realistic depth of field, natural contact shadows, controlled highlights, clean transitions, and consistent product geometry from start to finish. One coherent scene; no jumpy edits, warping, floating objects or sudden background changes. Use a subtle instrumental background score only, mixed below any natural product sounds; no dialogue or voice-over unless explicitly requested. No on-screen text, captions, added logos or watermarks.",
+      "description": "Kemeja atau blaus dipersembahkan melalui pelarasan kecil pada manset dan sudut sisi, dengan fokus pada potongan serta butiran yang benar-benar dinyatakan.",
+      "prompt": "Create an exactly 10-second vertical 9:16 live-action-style product video for the user-supplied product name in the shirt/blouse category. Creative direction: a crisp, understated fit-and-detail showcase. Use one adult model in a clean, softly daylit setting with a plain background. This prompt is text-only; do not claim to analyse uploaded images.\n\nGARMENT ACCURACY: Preserve the described shirt or blouse silhouette, colour, print, sleeve length and fit. Show a collar, cuff, button, pocket, seam or placket only when that feature is stated in the product name or written details; never add missing construction details. Do not invent fabric composition, stretch, breathability, wrinkle resistance, logos or accessories. Keep the garment fitted naturally without tightening, reshaping or changing its length.\n\n10-SECOND SHOT PLAN:\n0–2s | Clear fit opening: frame the adult model from shoulders to hips, or wider when needed to show the garment's full silhouette. Hold a natural posture so the front shape is easy to read.\n2–5s | Signature cuff gesture: the model makes one small, believable adjustment to a sleeve cuff or smooths the front once, without pulling or deforming the fabric. If no cuff is specified, use a relaxed half-turn instead.\n5–7s | Construction detail: make a short, steady push-in on an actual visible collar edge, sleeve finish or seam; avoid showing unsupported buttons, pockets or stitching.\n7–10s | Fit hero: ease back to a clear upper-body or three-quarter frame; the model turns slightly and settles, keeping the garment unobstructed.\n\nREALISM & CAMERA: natural hand movement, correct finger anatomy, realistic skin texture, believable cloth tension and folds, grounded posture, soft daylight, subtle contact shadows and restrained depth of field. Keep the same adult model, garment, background and exposure throughout. No fast montage. Optional quiet instrumental music only; no dialogue unless requested.\n\nAVOID: CGI sheen, waxy skin, over-smoothed fabric, extra fingers, hands merging with sleeves, fabric clipping, changing collar or sleeve shape, invented pockets/buttons/logos, shifting print, flicker, jitter, excessive HDR, text overlays, captions and watermarks. End with the garment's actual fit and details clearly visible.",
       "subtype": "shirt",
       "storyboard": [
         {
           "time": "0–2s",
-          "shot": "Opening / premium hook",
-          "direction": "Open on a refined full-length or on-foot composition, with the named garment or footwear clearly readable in silhouette and soft directional key light."
+          "shot": "Fit-first opening",
+          "direction": "Frame the adult model from shoulders to hips, or wider if needed, in a natural posture that clearly shows the shirt or blouse silhouette."
         },
         {
-          "time": "2–6s",
-          "shot": "Signature action",
-          "direction": "An adult model adjusts one cuff naturally and turns slightly to show the fit; do not add buttons or pockets. Concept-specific signature for \"Shirt Detail & Fit\": Baju atau kemeja ditunjukkan melalui close-up kolar, lengan dan pemakaian yang kemas. Keep this exact concept as the central action while preserving product identity and making no unsupported claims."
+          "time": "2–5s",
+          "shot": "Small styling gesture",
+          "direction": "The model adjusts one cuff or smooths the front once without stretching or deforming the garment; if no cuff is specified, use a relaxed half-turn."
         },
         {
-          "time": "6–8s",
-          "shot": "Detail insert",
-          "direction": "Close-up on the actual collar, cuff or visible seam, keeping the garment details unchanged."
+          "time": "5–7s",
+          "shot": "Actual construction detail",
+          "direction": "Push in steadily on a visible collar edge, sleeve finish or seam only; do not add buttons, pockets or stitching not supported by the product details."
         },
         {
-          "time": "8–10s",
-          "shot": "Hero close",
-          "direction": "Return to a stable full-product or full-look frame, with natural fabric movement settling and a premium editorial finish."
+          "time": "7–10s",
+          "shot": "Clean fit hero",
+          "direction": "Ease back to an upper-body or three-quarter view; the model turns slightly and settles with the garment unobstructed."
         }
       ]
     },
