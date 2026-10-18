@@ -145,12 +145,12 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
             )
             concept_rule = ("CREATIVE IDEA: " + concept.strip() + ". " if concept and concept.strip() else "")
             return (
-                "KLIPPO — VIDEO PROMPT | 10 SECONDS" + (" | PART " + str(part) if part else "") + "\\n"
-                "Vertical 9:16, one realistic product ad, exactly 10 seconds.\\n"
-                "PRODUCT: " + product + "\\n"
-                + category_direction + "\\n"
-                + "STYLE: " + style_name + " — " + style_template + "\\n"
-                + "SETTING: " + scene + ". CAMERA: " + camera + "\\n"
+                "KLIPPO — VIDEO PROMPT | 10 SECONDS" + (" | PART " + str(part) if part else "") + "\n"
+                "Vertical 9:16, one realistic product ad, exactly 10 seconds.\n"
+                "PRODUCT: " + product + "\n"
+                + category_direction + "\n"
+                + "STYLE: " + style_name + " — " + style_template + "\n"
+                + "SETTING: " + scene + ". CAMERA: " + camera + "\n"
                 + hook_rule + beat_plan + concept_rule + doodle_rule
                 + "REFERENCE LOCK: Use the uploaded photo as the source of truth. Preserve visible shape, colour, print, packaging, proportions and branding. "
                 "Do not invent features, materials, accessories, unseen angles, claims or text. "
