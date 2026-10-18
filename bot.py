@@ -2996,11 +2996,19 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     return
                 product_name = context.user_data.get('prompt_product_name', '').strip() or 'product shown in the uploaded reference photo'
                 category_label = CATEGORIES_BY_ID.get(context.user_data.get('prompt_category', ''), {}).get('label', 'product')
+                selected_background = context.user_data.get(
+                    'prompt_scene',
+                    'clean premium studio background, selected to complement the exact product reference'
+                )
                 image_prompt = (
                     'PROMPT IMAGE — PREMIUM PRODUCT CAMPAIGN\\n\\n'
                     'Use the uploaded product photograph as the sole MASTER product reference. '
                     'Create one ultra-realistic premium commercial product photograph in vertical 9:16. '
                     'The product is: ' + product_name + '. Category: ' + category_label + '.\\n\\n'
+                    'BACKGROUND REPLACEMENT — MANDATORY: Completely remove/replace the original background in the uploaded photo. '
+                    'Use this exact user-selected scene as the new background: ' + selected_background + '. '
+                    'Do not preserve or recreate the original photo background. Do not place the unchanged source photo on top of a new background. '
+                    'Integrate the product naturally into the selected scene with matching perspective, light direction, colour temperature and contact shadows.\\n\\n'
                     'VISUAL DIRECTION: Create a believable, elegant lifestyle advertising scene suited to this product. '
                     'If a model was selected, include the same adult model naturally in a way suited to this product; for clothing, the model must wear the exact item. If no model was selected, do not add a person. '
                     'If it is a bag, accessory, beauty item, gadget, food or home product, compose a premium scene that showcases the actual item clearly. '
