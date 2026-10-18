@@ -1927,9 +1927,9 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['prompt_reference_photos'] = []
             context.user_data['stage'] = 'prompt_images'
             if selected_mode == 'storyboard':
-                instruction = '🧩 JANA PROMPT STORYBOARD\\n\\nHantar 1 hingga 4 gambar produk. Klippo akan menyediakan prompt untuk meminta ChatGPT menghasilkan storyboard berdasarkan gambar tersebut.'
+                instruction = '🧩 JANA PROMPT STORYBOARD\n\nHantar 1 hingga 4 gambar produk. Klippo akan menyediakan prompt untuk meminta ChatGPT menghasilkan storyboard berdasarkan gambar tersebut.'
             else:
-                instruction = '🎥 JANA PROMPT VIDEO\\n\\nHantar 1 hingga 4 gambar produk yang jelas. Klippo akan menyediakan prompt video lengkap dengan susunan babak, aksi dan pergerakan kamera.'
+                instruction = '🎥 JANA PROMPT VIDEO\n\nHantar 1 hingga 4 gambar produk yang jelas. Klippo akan menyediakan prompt video lengkap dengan susunan babak, aksi dan pergerakan kamera.'
             await query.message.reply_text(instruction, reply_markup=prompt_images_start_menu())
     elif action.startswith('prompt_flow:'):
         # Compatibility for old Telegram keyboards: both legacy buttons now enter
@@ -1947,20 +1947,20 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         elif context.user_data.get('prompt_mode') == 'storyboard':
             context.user_data['stage'] = 'prompt_storyboard_prompt_ready'
             storyboard_prompt = (
-                'STORYBOARD PROMPT — PRODUCT VIDEO\\n\\n'
-                'Act as a professional commercial storyboard director. Use the uploaded product image as the only visual reference and create a polished storyboard for a short vertical 9:16 product advertisement.\\n\\n'
-                'Create 6 clearly numbered, sequential panels. For every panel, specify the approximate duration, the exact visual action, shot size/framing, camera movement, and how it connects to the next panel. Begin with a strong visual hook, progress through distinct product-reveal and detail shots, and finish with a memorable product hero shot. Make every panel visually different while keeping the sequence coherent and practical for an AI video generator.\\n\\n'
-                'PRODUCT CONSISTENCY: Preserve the exact product shown in the reference image, including its visible shape, colour, pattern, material, packaging, proportions, and details. Do not invent or alter product features, labels, logos, or claims. Keep the product consistent in every panel.\\n\\n'
-                'STORYBOARD OUTPUT: Present the storyboard as a clear visual storyboard sheet with six readable panels in order. The panels must show the intended shots and actions, not merely text descriptions. Use realistic commercial photography, consistent lighting and setting, and a vertical-video composition. Do not add subtitles, promotional text, extra logos, or watermarks.\\n\\n'
+                'STORYBOARD PROMPT — PRODUCT VIDEO\n\n'
+                'Act as a professional commercial storyboard director. Use the uploaded product image as the only visual reference and create a polished storyboard for a short vertical 9:16 product advertisement.\n\n'
+                'Create 6 clearly numbered, sequential panels. For every panel, specify the approximate duration, the exact visual action, shot size/framing, camera movement, and how it connects to the next panel. Begin with a strong visual hook, progress through distinct product-reveal and detail shots, and finish with a memorable product hero shot. Make every panel visually different while keeping the sequence coherent and practical for an AI video generator.\n\n'
+                'PRODUCT CONSISTENCY: Preserve the exact product shown in the reference image, including its visible shape, colour, pattern, material, packaging, proportions, and details. Do not invent or alter product features, labels, logos, or claims. Keep the product consistent in every panel.\n\n'
+                'STORYBOARD OUTPUT: Present the storyboard as a clear visual storyboard sheet with six readable panels in order. The panels must show the intended shots and actions, not merely text descriptions. Use realistic commercial photography, consistent lighting and setting, and a vertical-video composition. Do not add subtitles, promotional text, extra logos, or watermarks.\n\n'
                 'Return the storyboard only. Do not generate the finished video and do not return a separate video-generation prompt.'
             )
             context.user_data['prompt_storyboard_prompt_ready'] = storyboard_prompt
             await query.message.reply_text(
-                f"✅ {len(context.user_data['prompt_reference_photos'])} gambar diterima.\\n\\n"
-                '🧩 PROMPT STORYBOARD SIAP\\n\\n'
-                '1. Tekan Buka ChatGPT.\\n'
-                '2. Muat naik gambar produk yang sama ke ChatGPT.\\n'
-                '3. Salin prompt di bawah dan minta ChatGPT hasilkan storyboard.\\n'
+                f"✅ {len(context.user_data['prompt_reference_photos'])} gambar diterima.\n\n"
+                '🧩 PROMPT STORYBOARD SIAP\n\n'
+                '1. Tekan Buka ChatGPT.\n'
+                '2. Muat naik gambar produk yang sama ke ChatGPT.\n'
+                '3. Salin prompt di bawah dan minta ChatGPT hasilkan storyboard.\n'
                 '4. Selepas storyboard siap, tekan “Selesai Jana Prompt Storyboard” untuk mendapatkan pilihan penjana video.',
                 reply_markup=InlineKeyboardMarkup([
                     [InlineKeyboardButton('🖼️ Buka ChatGPT', url='https://chatgpt.com/')],
@@ -1971,7 +1971,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         else:
             context.user_data['stage'] = 'prompt_product_type'
             await query.message.reply_text(
-                f"✅ {len(context.user_data['prompt_reference_photos'])} gambar diterima.\\n\\n📦 LANGKAH 2 — Pilih kategori produk:",
+                f"✅ {len(context.user_data['prompt_reference_photos'])} gambar diterima.\n\n📦 LANGKAH 2 — Pilih kategori produk:",
                 reply_markup=prompt_product_type_menu()
             )
     elif action.startswith('prompt_type:') and stage == 'prompt_type':
@@ -2392,10 +2392,10 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif action == 'prompt_storyboard_done':
         context.user_data['stage'] = 'prompt_storyboard_video_options'
         await query.message.reply_text(
-            '🎬 JANA VIDEO BERDASARKAN STORYBOARD\\n\\n'
-            '1. Buka salah satu platform AI di bawah.\\n'
-            '2. Muat naik storyboard yang telah siap dijana oleh ChatGPT.\\n'
-            '3. Tampal arahan ringkas ini:\\n\\n'
+            '🎬 JANA VIDEO BERDASARKAN STORYBOARD\n\n'
+            '1. Buka salah satu platform AI di bawah.\n'
+            '2. Muat naik storyboard yang telah siap dijana oleh ChatGPT.\n'
+            '3. Tampal arahan ringkas ini:\n\n'
             'Generate a video based on the uploaded storyboard. Follow the panel order, actions, camera movements, timing, and transitions. Keep the product consistent with the storyboard.',
             reply_markup=InlineKeyboardMarkup([
                 [InlineKeyboardButton('🤖 NexaBot', url='https://t.me/aigeneratornexa_bot?start=ref37141287'),
