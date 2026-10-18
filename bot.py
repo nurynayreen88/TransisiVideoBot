@@ -2543,12 +2543,13 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             ]))
         else:
             context.user_data['stage'] = 'prompt_video_ready'
-            sections = prompt.split('=== KLIPPO PART 2 ===') if context.user_data.get('prompt_duration') == 20 else [prompt]
+            sections = re.split(r'\n\n=== KLIPPO PART [2-3] ===\n\n', prompt) if context.user_data.get('prompt_duration_mode', 'split' if context.user_data.get('prompt_duration') == 20 else 'single') == 'split' else [prompt]
             video_actions = InlineKeyboardMarkup([
+                [InlineKeyboardButton('🌐 Google Flow / Veo', url='https://labs.google/fx/tools/flow'),
+                 InlineKeyboardButton('🎬 Kling AI', url='https://kling.ai/')],
                 [InlineKeyboardButton('🤖 NexaBot', url='https://t.me/aigeneratornexa_bot?start=ref37141287'),
                  InlineKeyboardButton('🌐 AxcelStudio', url='https://axcel.cloud/a/3839266034')],
                 [InlineKeyboardButton('✨ Gemini', url='https://gemini.google.com/')],
-                [InlineKeyboardButton('🖼️ Buka ChatGPT', url='https://chatgpt.com/')],
                 [InlineKeyboardButton('✍️ Prompt Baharu', callback_data='prompt'),
                  InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]
             ])
@@ -2569,9 +2570,9 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await query.message.reply_text(video_intro)
             for index, section in enumerate(sections, 1):
                 section = section.strip()
-                caption = ('BAHAGIAN ' + str(index) + '/2 — jana klip 10 saat secara berasingan. ' +
-                           ('Simpan bingkai akhir untuk sambungan Bahagian 2.' if index == 1 else
-                            'Gunakan bingkai akhir Bahagian 1 sebagai rujukan kesinambungan.')) if len(sections) == 2 else ''
+                caption = ('BAHAGIAN ' + str(index) + '/' + str(len(sections)) + ' — jana klip 10 saat secara berasingan. ' +
+                           ('Simpan bingkai akhir untuk sambungan bahagian seterusnya.' if index < len(sections) else
+                            'Gunakan bingkai akhir bahagian sebelumnya sebagai rujukan kesinambungan.')) if len(sections) > 1 else ''
                 # Always send prompts as Telegram text, never as .txt attachments.
                 remaining = section
                 chunks = []
