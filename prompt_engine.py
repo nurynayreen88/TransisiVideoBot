@@ -125,7 +125,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
         if doodle:
             if part > 1:
                 rules = (
-                    "SECOND CLIP 10s, five 2-second panels: 0-2s resume from the exact final full-product framing of Part 1; "
+                    "SECOND CLIP 10s, five 2-second panels: 0-2s resume from the exact final full-product frame held at the end of Part 1; "
                     "2-4s begin drawing a thin white dashed contour just OUTSIDE the actual product silhouette; "
                     "following only visible product edges; 4-6s complete and hold the contour. "
                     "6-8s add one small white dotted arrow or sparkle beside a genuinely visible detail; "
