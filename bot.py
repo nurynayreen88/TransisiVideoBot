@@ -752,13 +752,13 @@ def prompt_wait_animation():
 
 
 FAQ_ITEMS = (
-    ('Cara jana video', 'Upload 1-5 gambar, tekan Selesai, masukkan tajuk penuh produk Shopee, kemudian pilih latar, tempoh, gerakan dan muzik.', ('GAMBAR PRODUK', 'TAJUK PRODUK', 'PILIH GAYA', 'JANA VIDEO')),
-    ('Perlu pautan Shopee?', 'Tidak. Masukkan tajuk penuh produk, bukan URL atau pautan Shopee.', ('GAMBAR PRODUK', 'TAJUK PENUH', 'BUKAN PAUTAN')),
-    ('Tempoh video', 'Pilih 10, 15 atau 20 saat. Masa menunggu bergantung pada gambar dan kesibukan pelayan.', ('10 SAAT', '15 SAAT', '20 SAAT')),
-    ('Latar gambar', 'Anda boleh kekalkan latar asal atau pilih latar lain. Gambar berlatar kompleks mungkin tidak dapat diasingkan dengan sempurna.', ('LATAR ASAL', 'LATAR STUDIO', 'SEMAK HASIL')),
-    ('Fungsi Prompt', 'Prompt menyediakan arahan teks untuk penjana video AI lain. Ia bukan fail video yang telah siap.', ('PILIH PROMPT', 'ISI MAKLUMAT', 'SALIN TEKS')),
-    ('Video gagal dijana', 'Cuba gambar yang lebih jelas, kurangkan bilangan gambar dan jana semula. Simpan mesej ralat jika masalah berulang.', ('SEMAK GAMBAR', 'CUBA SEMULA', 'SIMPAN RALAT')),
-    ('Adakah video generatif?', 'Tidak. KLIPPO menyunting gambar asal dengan animasi 2D, transisi dan muzik; ia tidak mencipta rakaman produk baharu.', ('GAMBAR ASAL', 'EFEK 2D', 'VIDEO MP4')),
+    ('Cara jana video', 'Untuk Jana Prompt Video, hantar 1–4 gambar produk yang jelas, kemudian pilih kategori, gaya dan durasi. Pautan Shopee tidak diperlukan.', ('GAMBAR PRODUK', 'PILIH GAYA', 'JANA PROMPT')),
+    ('Perlu pautan Shopee?', 'Tidak. Hantar gambar produk sahaja. Nama produk atau pautan Shopee boleh diberi sebagai maklumat tambahan, tetapi kedua-duanya bukan syarat untuk menjana prompt.', ('GAMBAR SAHAJA', 'PAUTAN PILIHAN', 'BUKAN WAJIB')),
+    ('Pilihan durasi prompt', 'Pilih 10 saat dengan 1 prompt, 20 saat dengan 2 prompt bersambung atau 1 prompt, atau 30 saat dengan 3 prompt bersambung atau 1 prompt.', ('10 SAAT', '20 SAAT', '30 SAAT')),
+    ('Latar gambar', 'Untuk aliran suntingan video, anda boleh kekalkan latar asal atau pilih latar lain. Hasil pengasingan bergantung pada kerumitan gambar.', ('LATAR ASAL', 'PILIH LATAR', 'SEMAK HASIL')),
+    ('Fungsi Prompt', 'Prompt ialah arahan teks untuk digunakan dalam penjana video AI. Klippo menyediakan prompt; ia bukan fail video yang telah siap.', ('PILIH PROMPT', 'ISI PILIHAN', 'SALIN TEKS')),
+    ('Video gagal dijana', 'Cuba gambar produk yang lebih jelas dan pastikan produk kelihatan penuh. Jika masalah berulang, simpan mesej ralat untuk semakan.', ('SEMAK GAMBAR', 'CUBA SEMULA', 'SIMPAN RALAT')),
+    ('Adakah video generatif?', 'Aliran suntingan video menggerakkan gambar dengan animasi 2D, transisi dan muzik. Jana Prompt Video pula menghasilkan teks arahan untuk penjana video AI.', ('SUNTINGAN 2D', 'PROMPT TEKS', 'PILIH ALIRAN')),
 )
 
 
