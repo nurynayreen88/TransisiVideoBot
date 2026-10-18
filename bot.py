@@ -703,10 +703,8 @@ def prompt_framing_menu(product_type='other', model_presence=None):
     for key in keys:
         label = PRODUCT_FRAMING[key][0]
         if model_presence != 'yes' and key in ('model', 'hijab_detail', 'shoes_feet', 'shoes_walk', 'shoes_car', 'beauty_apply'):
-            # Worn/apply framing needs a person; shoe-focused choices can still be used with legs only,
-            # so retain those footwear options even when no full model was requested.
-            if key not in ('shoes_feet', 'shoes_walk', 'shoes_car'):
-                continue
+            # Do not offer worn-on-body or application shots when the user chose no model.
+            continue
         rows.append([InlineKeyboardButton(label, callback_data='prompt_framing:' + key)])
     rows.append([InlineKeyboardButton('↩️ Tukar Gaya Visual', callback_data='prompt_framing_back')])
     rows.append([InlineKeyboardButton('🏠 Menu Utama', callback_data='home')])
