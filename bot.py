@@ -551,11 +551,8 @@ def prompt_product_type_menu():
 
 def prompt_duration_menu():
     return InlineKeyboardMarkup([
-        [InlineKeyboardButton('🎬 10s · 1 prompt', callback_data='prompt_duration:10_single')],
-        [InlineKeyboardButton('🎞️ 20s · 1 prompt', callback_data='prompt_duration:20_single'),
-         InlineKeyboardButton('🔗 20s · 2 prompt', callback_data='prompt_duration:20_split')],
-        [InlineKeyboardButton('🎬 30s · 1 prompt', callback_data='prompt_duration:30_single'),
-         InlineKeyboardButton('🔗 30s · 3 prompt', callback_data='prompt_duration:30_split')],
+        [InlineKeyboardButton('🎬 10 saat · 1 prompt', callback_data='prompt_duration:10_single')],
+        [InlineKeyboardButton('🎞️ 20 saat · 1 prompt', callback_data='prompt_duration:20_single')],
         [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
     ])
 
@@ -2090,14 +2087,15 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data['prompt_library_storyboard'] = []
         context.user_data['prompt_product_type'] = 'other'
         context.user_data['prompt_mode'] = 'normal'
+        context.user_data['prompt_duration_mode'] = 'single'
         context.user_data['prompt_reference_photos'] = []
-        context.user_data['stage'] = 'prompt_mode_select'
+        context.user_data['stage'] = 'prompt_images'
         await query.message.reply_text(
-            '✍️ KLIPPO | JANA PROMPT\n\nPilih jenis prompt yang anda mahu sediakan:',
-            reply_markup=InlineKeyboardMarkup([
-                [InlineKeyboardButton('🎥 Jana Prompt Video', callback_data='prompt_mode:video')],
-                [InlineKeyboardButton('🧩 Jana Prompt Storyboard', callback_data='prompt_mode:storyboard')]
-            ])
+            '✍️ KLIPPO | JANA PROMPT VIDEO\n\n'
+            'Hantar 1 hingga 4 gambar produk yang jelas. Selepas itu pilih kategori, gaya dan durasi. '
+            'Klippo akan menghasilkan SATU prompt video lengkap dalam bentuk storyboard bertulis mengikut masa, '
+            'aksi dan pergerakan kamera — tanpa menjana storyboard bergambar atau prompt imej berasingan.',
+            reply_markup=prompt_images_start_menu()
         )
     elif action.startswith('prompt_mode:'):
         selected_mode = action.split(':', 1)[1]
@@ -2750,9 +2748,10 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                          InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]
                     ])
                     await query.message.reply_text(
-                        '🎥 PROMPT VIDEO TERUS\n\n'
-                        'Muat naik gambar produk asal yang sama ke platform AI pilihan, kemudian salin prompt di bawah. '
-                        'Klippo tidak menghantar gambar ke laman luar secara automatik. Untuk video 20 saat, jana Bahagian 1 dahulu dan gunakan bingkai akhirnya sebagai rujukan Bahagian 2.'
+                        '🎥 SATU PROMPT VIDEO SIAP\n\n'
+                        'Salin prompt lengkap di bawah dan muat naik gambar produk asal yang sama ke platform AI pilihan. '
+                        'Prompt sudah mengandungi storyboard bertulis mengikut masa, aksi, framing, pergerakan kamera dan kesinambungan babak. '
+                        'Tiada storyboard bergambar, prompt imej berasingan atau pecahan prompt video diperlukan.'
                     )
                     for index, section in enumerate(sections, 1):
                         section = section.strip()
@@ -3147,7 +3146,7 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['prompt_reference_photos'] = []
             context.user_data['stage'] = 'prompt_images'
             await update.message.reply_text(
-                '✍️ KLIPPO | JANA PROMPT VIDEO\n\nHantar 1 hingga 4 gambar produk yang jelas. Tekan “Selesai Hantar Gambar” selepas selesai. Klippo akan menyediakan satu prompt video lengkap dengan susunan babak, aksi dan pergerakan kamera.',
+                '✍️ KLIPPO | JANA PROMPT VIDEO\n\nHantar 1 hingga 4 gambar produk yang jelas. Tekan “Selesai Hantar Gambar” selepas selesai. Klippo akan menyediakan satu prompt video lengkap dalam bentuk storyboard bertulis mengikut masa, aksi dan pergerakan kamera. Tiada storyboard bergambar atau prompt imej berasingan.',
                 reply_markup=prompt_images_start_menu()
             )
         elif action == 'subscription':
