@@ -2240,7 +2240,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['prompt_product_type'] = selected
             context.user_data['stage'] = 'prompt_model_presence'
             await query.message.reply_text(
-                f"📦 LANGKAH 2 — Kategori dipilih: {PRODUCT_TYPES[selected]}\n\n👤 LANGKAH 3 — Mahu model AI dalam video?"
+                f"📦 LANGKAH 2 — Kategori dipilih: {PRODUCT_TYPES[selected]}\n\n👤 LANGKAH 3 — Mahu model AI dalam video?",
                 reply_markup=prompt_model_presence_menu()
             )
         else:
