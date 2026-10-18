@@ -1,0 +1,92 @@
+{
+  "version": 1,
+  "purpose": "Universal prompt frameworks for user-entered custom product categories/subcategories. These are creative directions, not product facts.",
+  "selection": "Match the selected visual style to a framework. Never infer product functions or claims from the framework.",
+  "frameworks": [
+    {
+      "id": "premium_showcase",
+      "name": "Paparan produk premium",
+      "style_keys": [
+        "cinematic",
+        "luxury",
+        "luxury_reveal"
+      ],
+      "direction": "Create a restrained premium hero presentation: begin with a clear view of the exact product, make one gentle camera move, highlight only one visible detail, then hold a clean full-product hero frame. Use soft controlled light and realistic contact shadows; no dramatic spin or fabricated view."
+    },
+    {
+      "id": "clean_catalog",
+      "name": "Paparan katalog minimal",
+      "style_keys": [
+        "minimal",
+        "white_doodle"
+      ],
+      "direction": "Use a clean uncluttered composition with generous negative space and stable framing. Keep the full product readable, use subtle light and a small push-in only if it preserves geometry, then finish on a still hero view. Do not add props, captions or graphic marks unless the chosen style explicitly requests them."
+    },
+    {
+      "id": "real_life",
+      "name": "Gaya kehidupan sebenar",
+      "style_keys": [
+        "lifestyle",
+        "cozy_home",
+        "golden_hour"
+      ],
+      "direction": "Place the exact product in a believable context suited to the user-provided category, without guessing its specific use. Show one simple, natural interaction only when the use is clear; otherwise let the environment provide context. Keep scale, lighting and product identity consistent."
+    },
+    {
+      "id": "organized_layout",
+      "name": "Susunan dan paparan kemas",
+      "style_keys": [
+        "flatlay"
+      ],
+      "direction": "Arrange the product in a tidy, balanced composition using only items already visible or explicitly confirmed as included. Use a gentle overhead or near-overhead camera drift, preserve the original silhouette and packaging, and end with a clear view of the complete product."
+    },
+    {
+      "id": "careful_unboxing",
+      "name": "Unboxing berhati-hati",
+      "style_keys": [
+        "unboxing"
+      ],
+      "direction": "If the reference clearly shows packaging that can be opened, reveal only what is visible or confirmed; otherwise present the packaged product without inventing contents. Use slow, practical hand movement, consistent packaging details and a clean final product view. No surprise accessories or unsupported claims."
+    },
+    {
+      "id": "visual_hook",
+      "name": "Hook visual dan reveal",
+      "style_keys": [
+        "creative_reveal",
+        "playful_viral",
+        "fast_cut"
+      ],
+      "direction": "Open with an interesting but truthful framing or light reveal, not a false result or exaggerated effect. Reveal the complete product early, show one visible detail, then settle into a polished hero shot. Keep transitions restrained and never morph, duplicate or make the product fly."
+    },
+    {
+      "id": "camera_reveal",
+      "name": "Gerakan kamera terkawal",
+      "style_keys": [
+        "studio_360_safe",
+        "tech_demo",
+        "dynamic",
+        "zoom"
+      ],
+      "direction": "Use one controlled camera move—slow push-in, short lateral slide or a limited arc only when the visible reference supports it. Do not perform a full rotation or reveal unseen sides. Keep the product stationary, proportions stable and edges free from warping."
+    },
+    {
+      "id": "detail_focus",
+      "name": "Fokus pada perincian",
+      "style_keys": [
+        "beauty_macro",
+        "bag_detail_macro",
+        "detail_macro",
+        "pov_demo",
+        "ugc_review"
+      ],
+      "direction": "Show the full product first, then move toward one genuinely visible texture, control, seam, finish or other detail without naming an unverified material or feature. Return to a recognizable full-product view. If a close-up risks distortion, use a safe crop instead."
+    }
+  ],
+  "global_rules": [
+    "Use the uploaded product image as the source of truth for visible shape, colour, print, packaging, proportions and branding.",
+    "Use custom category/subcategory text only as context; do not assume a function, specification, included accessory, material, certification, benefit or claim.",
+    "Use realistic lighting, natural movement and coherent setting; avoid CGI/plastic appearance, flicker, warping and abrupt scene changes.",
+    "No unrequested on-screen text, subtitles, logos, watermarks or promotional claims.",
+    "For a 10-second clip: reveal product by 2 seconds, show one visible detail around 4–6 seconds, use one simple appropriate action or camera move, and hold a clear hero frame at 8–10 seconds."
+  ]
+}

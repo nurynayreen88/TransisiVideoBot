@@ -1,5 +1,35 @@
 from prompt_catalog import resolve, product_hook
+import json
+from pathlib import Path
+
 """Detailed, reference-safe AI video prompt templates for KLIPPO."""
+
+UNIVERSAL_PROMPT_PATH = Path(__file__).resolve().parent / "prompts" / "universal_prompt_templates.json"
+try:
+    with UNIVERSAL_PROMPT_PATH.open("r", encoding="utf-8") as _handle:
+        _universal_data = json.load(_handle)
+    UNIVERSAL_PROMPT_FRAMEWORKS = _universal_data.get("frameworks", [])
+    UNIVERSAL_PROMPT_GLOBAL_RULES = _universal_data.get("global_rules", [])
+except (OSError, json.JSONDecodeError):
+    UNIVERSAL_PROMPT_FRAMEWORKS = []
+    UNIVERSAL_PROMPT_GLOBAL_RULES = []
+
+
+def _universal_prompt_direction(style_key):
+    """Return a style-matched universal framework for custom categories, without an AI/API call."""
+    for framework in UNIVERSAL_PROMPT_FRAMEWORKS:
+        if style_key in framework.get("style_keys", []):
+            return str(framework.get("direction", "")).strip()
+    return str(UNIVERSAL_PROMPT_FRAMEWORKS[0].get("direction", "")).strip() if UNIVERSAL_PROMPT_FRAMEWORKS else (
+        "Use a clean product reveal, one subtle camera move, one genuinely visible detail and a stable full-product finish. "
+        "Preserve the reference and never invent product facts."
+    )
+
+
+def _universal_prompt_rules():
+    return " ".join(str(rule).strip() for rule in UNIVERSAL_PROMPT_GLOBAL_RULES if str(rule).strip())
+
+
 
 CAMERAS = {
     "orbit": "A restrained camera arc of at most 30 degrees with subtle parallax. Never reveal or fabricate an unseen side.",
@@ -44,7 +74,7 @@ def _resolve_auto_style(style, product_type):
     return AUTO_STYLE_BY_PRODUCT_TYPE.get(product_type, 'cinematic')
 
 
-def build_prompt(mode, product, scene, motion, style='auto', duration=10, concept='', product_type='other', storyboard_override=None, split=None):
+def build_prompt(mode, product, scene, motion, style='auto', duration=10, concept='', product_type='other', storyboard_override=None, split=None, universal_custom=False):
     # Preserve the historical API behavior: a 20-second call without an explicit
     # split choice still returns two connected 10-second prompts.
     if split is None:
@@ -54,7 +84,7 @@ def build_prompt(mode, product, scene, motion, style='auto', duration=10, concep
         # Generate connected 10-second prompts while retaining the same style and product context.
         parts = [
             _build_single_prompt(mode, product, scene, motion, style, part=index, duration=10,
-                                 concept=concept, product_type=product_type, storyboard_override=storyboard_override)
+                                 concept=concept, product_type=product_type, storyboard_override=storyboard_override, universal_custom=universal_custom)
             for index in range(1, duration // 10 + 1)
         ]
         return "\n\n".join(
@@ -62,10 +92,10 @@ def build_prompt(mode, product, scene, motion, style='auto', duration=10, concep
             for index, part in enumerate(parts)
         )
     return _build_single_prompt(mode, product, scene, motion, style, part=0, duration=duration,
-                                concept=concept, product_type=product_type, storyboard_override=storyboard_override)
+                                concept=concept, product_type=product_type, storyboard_override=storyboard_override, universal_custom=universal_custom)
 
 
-def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, duration=10, concept='', product_type='other', storyboard_override=None):
+def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, duration=10, concept='', product_type='other', storyboard_override=None, universal_custom=False):
     camera = CAMERAS.get(motion, CAMERAS["push"])
     product_type_directions = {
         'fashion': "PRODUCT CATEGORY DIRECTION: Treat this as clothing/fashion. Favor natural fabric movement and visible garment details; never alter cut, print, color or pattern.",
@@ -115,6 +145,13 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
         style_key, style_name, style_template = resolve(style)
         doodle = style_key == "white_doodle"
         hook = product_hook(product)
+        if product_type == "other" or universal_custom:
+            category_direction += (
+                " UNIVERSAL CREATIVE FRAMEWORK: "
+                + _universal_prompt_direction(style_key)
+                + " UNIVERSAL SAFETY RULES: "
+                + _universal_prompt_rules()
+            )
 
         # Keep single 10-second prompts concise enough for one Telegram message.
         # Retain the selected style, reference safety, timed beats and user concept.

@@ -13,6 +13,7 @@ on:
       - "prompt_engine.py"
       - "prompts/prompt_library.json"
       - "prompts/prompt_quality_overrides.json"
+      - "prompts/universal_prompt_templates.json"
       - ".github/workflows/klippo-prompt-library-check.yml"
 
 jobs:
@@ -231,6 +232,47 @@ jobs:
               os.environ["KLIPPO_PROMPT_DB"] = str(Path(tmp) / "prompt_catalog.sqlite3")
               from prompt_catalog import choices, resolve, DB_PATH
               from prompt_engine import build_prompt
+
+              # Universal frameworks for user-entered custom categories/subcategories.
+              universal_path = Path("prompts/universal_prompt_templates.json")
+              universal_data = json.loads(universal_path.read_text(encoding="utf-8"))
+              frameworks = universal_data.get("frameworks", [])
+              assert len(frameworks) == 8, f"Expected 8 universal frameworks, found {len(frameworks)}"
+              framework_ids = [item.get("id") for item in frameworks]
+              assert len(framework_ids) == len(set(framework_ids)), "Duplicate universal framework IDs"
+              assert all(item.get("name") and item.get("direction") and item.get("style_keys") for item in frameworks), (
+                  "Every universal framework needs a name, direction and style mapping"
+              )
+              assert len(universal_data.get("global_rules", [])) >= 5, "Universal safety rules are incomplete"
+
+              custom_category_prompt = build_prompt(
+                  "storyboard",
+                  "NAMA_PRODUK: Baja Organik Premium\\nKATEGORI: Baja tanaman\\nSUBKATEGORI: Baja organik",
+                  "clean premium studio background",
+                  "push",
+                  "auto",
+                  10,
+                  product_type="other",
+                  universal_custom=True,
+              )
+              assert "UNIVERSAL CREATIVE FRAMEWORK:" in custom_category_prompt
+              assert "UNIVERSAL SAFETY RULES:" in custom_category_prompt
+              assert "Paparan produk premium" in custom_category_prompt or "premium hero presentation" in custom_category_prompt
+
+              custom_subcategory_prompt = build_prompt(
+                  "storyboard",
+                  "NAMA_PRODUK: Peralatan memancing\\nKATEGORI: Hobi\\nSUBKATEGORI: Peralatan memancing",
+                  "clean premium studio background",
+                  "push",
+                  "auto",
+                  10,
+                  product_type="sports",
+                  universal_custom=True,
+              )
+              assert "UNIVERSAL CREATIVE FRAMEWORK:" in custom_subcategory_prompt, (
+                  "Custom subcategory did not receive a universal framework"
+              )
+              assert "Preserve" in custom_subcategory_prompt or "preserve" in custom_subcategory_prompt
 
               # Verify the selected GitHub storyboard is used by the actual final prompt.
               curated = next(item for item in prompts if item.get("storyboard"))
