@@ -131,3 +131,12 @@ The initial scan found a small number of prompts that did not contain the exact 
 
 **Quality rule:** Do not infer hidden compartments, material, capacity, durability, brand marks or features from a generic bag name. Keep actions conditional where the product's visible design is not known.
 
+
+## 2E. Handbag storyboard-alignment batch
+
+- [x] `bags_handheld_showcase_v1` — four shot directions embedded verbatim; realistic supported handling and stable hero finish.
+- [x] `bags_luxury_closeup_v1` — macro details limited to visible features; no unsupported material claims.
+- [x] `bags_daily_carry_v1` — natural carry action, consistent scale and conditional handling method.
+- [x] Existing prompt IDs and master library preserved; additions are ID-preserving overrides.
+- [ ] Run CI on this batch before merging.
+- [ ] Inspect generated clips for physical handling, product geometry and final-frame continuity; text checks are not visual validation.
