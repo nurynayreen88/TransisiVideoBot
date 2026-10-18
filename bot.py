@@ -1940,7 +1940,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await query.message.reply_text(
             '🔗 MASUKKAN PAUTAN PRODUK SHOPEE\n\n'
             'Tampal pautan Shopee Malaysia — pautan panjang atau pautan pendek s.shopee.com.my diterima. '
-            'KLIPPO akan cuba menggunakan pautan sebagai rujukan. Jika akses automatik disekat, bot tidak akan mereka-reka butiran produk.',
+            'Pautan akan dimasukkan ke dalam prompt sebagai rujukan. Untuk hasil lebih tepat, tambah nama atau ciri produk jika diketahui; pautan sahaja tidak menjamin AI pilihan anda dapat membuka halaman.',
             reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('↩️ Kembali', callback_data='prompt')], [InlineKeyboardButton('🏠 Menu Utama', callback_data='home')]])
         )
     elif action == 'prompt_link_skip_details' and stage == 'prompt_details_text':
