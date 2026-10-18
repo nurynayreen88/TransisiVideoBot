@@ -2702,10 +2702,11 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     context.user_data['stage'] = 'prompt_video_ready'
                     sections = prompt.split('=== KLIPPO PART 2 ===') if context.user_data.get('prompt_duration') == 20 else [prompt]
                     direct_actions = InlineKeyboardMarkup([
+                        [InlineKeyboardButton('🌐 Google Flow / Veo', url='https://labs.google/fx/tools/flow'),
+                         InlineKeyboardButton('🎬 Kling AI', url='https://kling.ai/')],
                         [InlineKeyboardButton('🤖 NexaBot', url='https://t.me/aigeneratornexa_bot?start=ref37141287'),
                          InlineKeyboardButton('🌐 AxcelStudio', url='https://axcel.cloud/a/3839266034')],
                         [InlineKeyboardButton('✨ Gemini', url='https://gemini.google.com/')],
-                        [InlineKeyboardButton('🖼️ Buka ChatGPT', url='https://chatgpt.com/')],
                         [InlineKeyboardButton('✍️ Prompt Baharu', callback_data='prompt'),
                          InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]
                     ])
