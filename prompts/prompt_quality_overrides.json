@@ -316,53 +316,53 @@
     },
     {
       "id": "beauty_texture_demo_v1",
-      "prompt": "Create an exactly 10-second vertical 9:16 live-action product video for the supplied beauty/cosmetic product. Treat the reference as the source of truth for the container, cap, label, colour and visible contents. Do not invent ingredients, shade names, skin benefits, SPF, coverage, medical results, applicators, seals or product amounts. If opening or applying the product is not supported by the reference, keep it closed and use a gentle camera move. No on-screen text, captions, added logos or watermarks. Preserve natural skin and product texture; avoid exaggerated shine, colour shifts, floating tools, warped packaging or before/after claims. Use soft realistic light, stable camera movement and subtle instrumental music only if supported.\n\nFOUR-SHOT STORYBOARD — EXACTLY 10 SECONDS:\n0–2s | Opening hook: Frame the complete product and its original packaging clearly on a clean, stable surface. Use a gentle push-in while keeping all visible label details faithful and legible only to the extent supported by the reference.\n2–6s | Signature texture demo: If the reference supports an open container and a visible applicator or hand, show one small, controlled pickup or dab of product. Otherwise, keep the packaging closed and demonstrate the finish with a slow camera move. Never invent a seal, applicator, product amount or application method.\n6–8s | Visible finish detail: Show a close-up of the real product texture or a small swatch only if it is visible or can be plausibly shown from the supplied reference. Preserve the actual colour and consistency; do not exaggerate shine, coverage or skin results.\n8–10s | Hero finish: Return to the complete product and packaging in a tidy hero composition. Keep the original cap, container, label and proportions unchanged, then hold a steady final frame.",
+      "prompt": "Create an exactly 10-second vertical 9:16 realistic live-action beauty product video using the supplied product reference as the source of truth. Keep the container, cap, label, colour, proportions and visible contents unchanged. Show only actions supported by the reference: if opening or applying is uncertain, leave it closed and showcase its packaging. Never invent ingredients, benefits, SPF, shade names, applicators, seals or results. Preserve natural skin and true product texture; no exaggerated shine, colour shift, before/after claims, warped packaging or floating objects. No on-screen text, captions, added logos or watermarks. Use soft window-like light, natural contact shadows and gentle camera movement. No voice-over; subtle instrumental music only if supported.\n\nFOUR-SHOT STORYBOARD — EXACTLY 10 SECONDS:\n0–2s | Product reveal: Show the complete product upright on a clean vanity surface. Make one slow push-in; keep the label and silhouette faithful.\n2–6s | Beauty ritual: If the reference clearly supports an applicator or open product, show one careful hand movement using only visible components. Otherwise, rotate the camera slightly around the closed product; do not invent an opening or application.\n6–8s | Texture detail: Hold a close view of a real visible surface, finish or product texture only when supported. Keep colour and consistency natural; do not imply a result.\n8–10s | Final hero: Return to the complete product in the same setting. Settle all movement and hold a crisp, unchanged final frame.\n\nKeep one coherent scene and consistent lighting throughout. Hands must have natural anatomy and believable contact; avoid flicker, sudden cuts, label mutations and impossible reflections.",
       "storyboard": [
         {
           "time": "0–2s",
-          "shot": "Opening hook",
-          "direction": "Frame the complete product and its original packaging clearly on a clean, stable surface. Use a gentle push-in while keeping all visible label details faithful and legible only to the extent supported by the reference."
+          "shot": "Product reveal",
+          "direction": "Show the complete product upright on a clean vanity surface. Make one slow push-in; keep the label and silhouette faithful."
         },
         {
           "time": "2–6s",
-          "shot": "Signature texture demo",
-          "direction": "If the reference supports an open container and a visible applicator or hand, show one small, controlled pickup or dab of product. Otherwise, keep the packaging closed and demonstrate the finish with a slow camera move. Never invent a seal, applicator, product amount or application method."
+          "shot": "Beauty ritual",
+          "direction": "If the reference clearly supports an applicator or open product, show one careful hand movement using only visible components. Otherwise, rotate the camera slightly around the closed product; do not invent an opening or application."
         },
         {
           "time": "6–8s",
-          "shot": "Visible finish detail",
-          "direction": "Show a close-up of the real product texture or a small swatch only if it is visible or can be plausibly shown from the supplied reference. Preserve the actual colour and consistency; do not exaggerate shine, coverage or skin results."
+          "shot": "Texture detail",
+          "direction": "Hold a close view of a real visible surface, finish or product texture only when supported. Keep colour and consistency natural; do not imply a result."
         },
         {
           "time": "8–10s",
-          "shot": "Hero finish",
-          "direction": "Return to the complete product and packaging in a tidy hero composition. Keep the original cap, container, label and proportions unchanged, then hold a steady final frame."
+          "shot": "Final hero",
+          "direction": "Return to the complete product in the same setting. Settle all movement and hold a crisp, unchanged final frame."
         }
       ]
     },
     {
       "id": "gadgets_real_use_demo_v1",
-      "prompt": "Create an exactly 10-second vertical 9:16 live-action product video for the supplied gadget or electronic device. Treat the reference as authoritative for model shape, buttons, ports, display, markings and included components. Demonstrate only one simple action supported by visible evidence; if the function is unclear, show careful handling instead. Do not invent a screen interface, connection, performance, battery life, compatibility, technical specification or result. Keep device geometry, button placement and accessories consistent. No on-screen text, captions, added logos or watermarks. Avoid floating devices, impossible finger contact, extra ports, flickering screens, reflections that create false details or morphing. Use controlled camera motion, realistic contact shadows and subtle instrumental music only if supported.\n\nFOUR-SHOT STORYBOARD — EXACTLY 10 SECONDS:\n0–2s | Opening hook: Show the complete gadget and all visible included components exactly as pictured. Use a slow push-in that keeps the device silhouette, buttons, ports and screen layout faithful to the reference.\n2–6s | Everyday-use action: Demonstrate one simple, visible action supported by the reference, such as pressing an existing button, holding the device naturally or placing it on a surface. Do not invent a screen interface, connection, feature or outcome; if the function is unclear, show careful handling instead.\n6–8s | Physical detail: Use a steady close-up of one real visible control, port, edge, display or finish. Do not add ports, alter button placement, generate readable interface text or imply technical specifications not supplied.\n8–10s | Hero finish: Return to a complete three-quarter product view with the device resting or held naturally. Keep the same configuration and accessories, let movement settle, and hold a stable final frame.",
+      "prompt": "Create an exactly 10-second vertical 9:16 realistic live-action product video for the supplied gadget. The reference controls the device shape, buttons, ports, screen, finish and included accessories. Choose one simple action that is clearly supported; if its function is unknown, show careful handling instead. Never invent interfaces, connections, specifications, compatibility, battery claims or results. Keep every control and accessory in the same position. No on-screen text, captions, added logos or watermarks. Use natural practical lighting, believable reflections, contact shadows and restrained camera motion. Avoid floating parts, extra ports, finger intersections, screen flicker, geometry changes and impossible reflections. No voice-over; subtle instrumental music only if supported.\n\nFOUR-SHOT STORYBOARD — EXACTLY 10 SECONDS:\n0–2s | Clean reveal: Show the complete device and only the components visible in the reference. Start at a three-quarter angle and make a gentle push-in.\n2–6s | Real interaction: Perform one believable action, such as a natural pickup, placement or press on a visible button, only when supported. Keep finger contact accurate and do not fabricate a response on the screen.\n6–8s | Build detail: Show one existing button, port, edge, screen or surface finish in a steady close-up. Do not add labels, ports or technical claims.\n8–10s | Final hero: Return to the full device in the same configuration and location. Let movement settle and hold the unchanged product clearly in frame.\n\nMaintain one continuous-feeling scene, consistent light direction and stable device geometry. Use clean cuts only; no morphing or sudden changes in accessories.",
       "storyboard": [
         {
           "time": "0–2s",
-          "shot": "Opening hook",
-          "direction": "Show the complete gadget and all visible included components exactly as pictured. Use a slow push-in that keeps the device silhouette, buttons, ports and screen layout faithful to the reference."
+          "shot": "Clean reveal",
+          "direction": "Show the complete device and only the components visible in the reference. Start at a three-quarter angle and make a gentle push-in."
         },
         {
           "time": "2–6s",
-          "shot": "Everyday-use action",
-          "direction": "Demonstrate one simple, visible action supported by the reference, such as pressing an existing button, holding the device naturally or placing it on a surface. Do not invent a screen interface, connection, feature or outcome; if the function is unclear, show careful handling instead."
+          "shot": "Real interaction",
+          "direction": "Perform one believable action, such as a natural pickup, placement or press on a visible button, only when supported. Keep finger contact accurate and do not fabricate a response on the screen."
         },
         {
           "time": "6–8s",
-          "shot": "Physical detail",
-          "direction": "Use a steady close-up of one real visible control, port, edge, display or finish. Do not add ports, alter button placement, generate readable interface text or imply technical specifications not supplied."
+          "shot": "Build detail",
+          "direction": "Show one existing button, port, edge, screen or surface finish in a steady close-up. Do not add labels, ports or technical claims."
         },
         {
           "time": "8–10s",
-          "shot": "Hero finish",
-          "direction": "Return to a complete three-quarter product view with the device resting or held naturally. Keep the same configuration and accessories, let movement settle, and hold a stable final frame."
+          "shot": "Final hero",
+          "direction": "Return to the full device in the same configuration and location. Let movement settle and hold the unchanged product clearly in frame."
         }
       ]
     },
