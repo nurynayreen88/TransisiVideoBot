@@ -22,6 +22,6 @@ jobs:
           pip install -r requirements.txt
       - name: Compile beta Python files
         run: |
-          python -m py_compile fal_storyboard_test.py fal_storyboard_test_bot.py modules/video_engine.py tests/test_fal_storyboard_helpers.py
+          python -m py_compile bot.py fal_storyboard_test.py fal_storyboard_test_bot.py modules/video_engine.py tests/test_fal_storyboard_helpers.py
       - name: Run offline unit tests
         run: python -m unittest discover -s tests -v
