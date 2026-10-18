@@ -1943,6 +1943,14 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             'KLIPPO akan cuba menggunakan pautan sebagai rujukan. Jika akses automatik disekat, bot tidak akan mereka-reka butiran produk.',
             reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('↩️ Kembali', callback_data='prompt')], [InlineKeyboardButton('🏠 Menu Utama', callback_data='home')]])
         )
+    elif action == 'prompt_link_skip_details' and stage == 'prompt_details_text':
+        link = context.user_data.get('shopee_url', '')
+        context.user_data['prompt_product'] = (
+            'Shopee product reference URL: ' + link + chr(10) +
+            'Use the URL only as a reference. Do not invent product specifications that cannot be verified.'
+        )
+        context.user_data['stage'] = 'prompt_scene'
+        await query.message.reply_text('➡️ Kita teruskan dengan pautan sebagai rujukan. Pilih latar video:', reply_markup=prompt_scene_menu())
     elif action.startswith('prompt_mode:'):
         selected_mode = action.split(':', 1)[1]
         if selected_mode not in ('video', 'storyboard'):
@@ -2275,7 +2283,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # Return only for actions handled by the first chain. Video workflow
     # callbacks must continue into the second chain.
     if action in ('admin_pending', 'admin', 'storyboard', 'make', 'prompt', 'prompt_categories', 'prompt_images_done') or action.startswith(
-        ('admin_approve:', 'admin_reject:', 'prompt_mode:', 'prompt_flow:', 'prompt_model:', 'prompt_model_count:', 'prompt_model_gender:', 'prompt_model_hijab:', 'prompt_model_ethnicity:', 'prompt_model_age:', 'prompt_language:', 'prompt_voiceover:', 'prompt_type:', 'prompt_product_type:', 'prompt_duration:',
+        ('admin_approve:', 'admin_reject:', 'prompt_link_skip_details', 'prompt_mode:', 'prompt_flow:', 'prompt_model:', 'prompt_model_count:', 'prompt_model_gender:', 'prompt_model_hijab:', 'prompt_model_ethnicity:', 'prompt_model_age:', 'prompt_language:', 'prompt_voiceover:', 'prompt_type:', 'prompt_product_type:', 'prompt_duration:',
          'prompt_style:', 'prompt_idea:', 'prompt_details:', 'video_input:', 'prompt_input:', 'pcat:', 'ptpl:')
     ):
         return
@@ -3117,14 +3125,26 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await update.message.reply_text('⚠️ Pautan tidak dikenali. Tampal URL halaman produk Shopee Malaysia yang lengkap.')
             return
         context.user_data['shopee_url'] = link
-        context.user_data['prompt_product'] = 'Product reference URL (do not invent unverified specifications): ' + link
+        context.user_data['prompt_product'] = 'Shopee product reference URL: ' + link
         context.user_data['prompt_vision'] = ''
         context.user_data['stage'] = 'prompt_details_text'
-        await update.message.reply_text('✅ Pautan Shopee diterima. Masukkan nama produk dan ciri utama jika diketahui. Jika mahu cuba dengan pautan sahaja, taip “tak pasti”; Klippo tidak akan mereka-reka spesifikasi yang tidak disahkan.')
+        await update.message.reply_text(
+            '✅ Pautan Shopee diterima. Jika tahu, masukkan nama produk atau ciri penting. '
+            'Jika mahu teruskan dengan pautan sahaja, taip “tak pasti”.',
+            reply_markup=InlineKeyboardMarkup([
+                [InlineKeyboardButton('➡️ Teruskan dengan pautan sahaja', callback_data='prompt_link_skip_details')],
+                [InlineKeyboardButton('🏠 Menu Utama', callback_data='home')]
+            ])
+        )
     elif stage == 'prompt_details_text':
-        if value.strip().lower() in ('tak pasti', 'tak tahu', 'skip', 'guna pautan sahaja'):
-            value = 'Use the supplied Shopee product URL as a reference only. Do not invent or assert product specifications that cannot be verified.'
-        context.user_data['prompt_product'] = value[:600]
+        details = value.strip()
+        link = context.user_data.get('shopee_url', '')
+        if details.lower() in ('tak pasti', 'tak tahu', 'skip', 'guna pautan sahaja'):
+            details = 'Use the supplied URL only as a reference. Do not invent product specifications that cannot be verified.'
+        context.user_data['prompt_product'] = (
+            'Shopee product reference URL: ' + link + chr(10) + 'User-provided product details: ' + details[:600]
+            if link else details[:600]
+        )
         context.user_data['stage'] = 'prompt_scene'
         await update.message.reply_text('🎨 Maklumat disimpan. Pilih latar video:', reply_markup=prompt_scene_menu())
     elif stage == 'prompt_scene':
