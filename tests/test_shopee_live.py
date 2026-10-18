@@ -50,6 +50,22 @@ class LiveShopeeLinkTests(unittest.TestCase):
                             print(f"DIAGNOSTIC link #{index}: status={response.status}, final_url={response.geturl()}, content_type={response.headers.get('Content-Type')}, page_start={page[:1800]!r}")
                     except Exception as error:
                         print(f"DIAGNOSTIC link #{index}: request_error={type(error).__name__}: {error}")
+                    for api_url in (
+                        "https://shopee.com.my/api/v4/pdp/get_pc?shop_id=29993877&item_id=44905654836",
+                        "https://shopee.com.my/api/v4/item/get?shopid=29993877&itemid=44905654836",
+                    ):
+                        try:
+                            api_req = Request(api_url, headers={
+                                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
+                                "Accept": "application/json",
+                                "Referer": "https://shopee.com.my/product/29993877/44905654836",
+                                "x-api-source": "pc",
+                            })
+                            with urlopen(api_req, timeout=12) as api_response:
+                                body = api_response.read(10000).decode("utf-8", "replace")
+                                print(f"DIAGNOSTIC API {api_url}: status={api_response.status}, type={api_response.headers.get('Content-Type')}, body={body[:2500]!r}")
+                        except Exception as api_error:
+                            print(f"DIAGNOSTIC API {api_url}: {type(api_error).__name__}: {api_error}")
                 self.assertTrue(
                     success and destination.is_file(),
                     f"Could not extract a public product image from link #{index}: {link}",
