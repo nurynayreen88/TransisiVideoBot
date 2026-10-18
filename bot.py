@@ -1686,7 +1686,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.effective_message.reply_text(
         '🎬 KLIPPO | Studio Video Affiliate\n\n'
         'Pilih fungsi yang anda perlukan:\n\n'
-        '✍️ Jana Prompt — hasilkan satu prompt video lengkap berdasarkan gambar produk dan pilihan pengguna.\n'
+        '✍️ Jana Prompt — hasilkan prompt video lengkap berdasarkan nama produk dan pilihan pengguna; gambar tidak perlu dimuat naik ke Klippo.\n'
         '🎞️ Gerakkan Foto (Transisi) — gabungkan gambar pegun menjadi video MP4 menggunakan kesan transisi, zoom/pan 2D dan muzik. Fungsi ini tidak menjana gerakan AI pada objek.\n'
         '🎞️ Gabung Video — cantum beberapa klip menjadi satu video.\n'
         '🔄 Tukar Format Video — sesuaikan video kepada format MP4 menegak untuk affiliate.\n'
@@ -3466,7 +3466,7 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
         elif action == 'account':
             await account_info(update, context)
         elif action == 'help':
-            await update.message.reply_text('❓ BANTUAN\n\nJana Prompt: pilih kategori, masukkan nama produk, gaya, durasi dan latar, kemudian salin prompt video ke AI pilihan anda. Gambar produk dimuat naik terus pada platform video AI, bukan dalam proses jana prompt Klippo.\nGerakkan Foto: jadikan gambar pegun sebagai video dengan transisi.\nGabung Video: cantum beberapa klip.\nTukar Format: sesuaikan video kepada format menegak.')
+            await start(update, context)
         else:
             await start(update, context)
         return
