@@ -15,6 +15,14 @@ BACKGROUNDS = {
     'beige': (225, 209, 187),
     'dark': (33, 34, 41),
     'pastel': (237, 218, 228),
+    'navy': (34, 51, 79),
+    'sage': (184, 199, 177),
+    'sky': (190, 218, 235),
+    'lavender': (209, 198, 231),
+    'rose': (226, 184, 187),
+    'mint': (190, 221, 207),
+    'terracotta': (190, 112, 83),
+    'charcoal': (49, 51, 56),
 }
 
 
@@ -102,6 +110,12 @@ def _scene_background(size, choice):
         'pattern': ((248, 246, 242), (229, 223, 214)),
         'duotone': ((241, 232, 219), (210, 190, 171)),
         'mist': ((246, 247, 248), (210, 216, 221)),
+        'sky_gradient': ((245, 250, 255), (151, 194, 222)),
+        'lavender_gradient': ((250, 246, 255), (190, 174, 222)),
+        'sage_gradient': ((246, 249, 239), (159, 181, 151)),
+        'blush_gradient': ((255, 246, 243), (225, 173, 178)),
+        'midnight_gradient': ((91, 99, 121), (19, 24, 38)),
+        'sand_gradient': ((255, 249, 235), (193, 157, 115)),
     }
     top, bottom = palettes[choice]
     canvas = Image.new('RGBA', size)
@@ -123,7 +137,7 @@ def _scene_background(size, choice):
 
 
 def replace_background(source: Path, destination: Path, choice: str) -> Path:
-    if choice not in BACKGROUNDS and choice not in ('gradient', 'pattern', 'duotone', 'mist'):
+    if choice not in BACKGROUNDS and choice not in ('gradient', 'pattern', 'duotone', 'mist', 'sky_gradient', 'lavender_gradient', 'sage_gradient', 'blush_gradient', 'midnight_gradient', 'sand_gradient'):
         raise ValueError('Unknown background')
     with Image.open(source) as opened:
         image = ImageOps.exif_transpose(opened).convert('RGB')
