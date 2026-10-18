@@ -313,6 +313,84 @@
           "direction": "Show the complete bag at rest or held naturally in the same setting and hold a steady final frame."
         }
       ]
+    },
+    {
+      "id": "beauty_texture_demo_v1",
+      "prompt": "Create an exactly 10-second vertical 9:16 live-action product video for the supplied beauty/cosmetic product. Treat the reference as the source of truth for the container, cap, label, colour and visible contents. Do not invent ingredients, shade names, skin benefits, SPF, coverage, medical results, applicators, seals or product amounts. If opening or applying the product is not supported by the reference, keep it closed and use a gentle camera move. No on-screen text, captions, added logos or watermarks. Preserve natural skin and product texture; avoid exaggerated shine, colour shifts, floating tools, warped packaging or before/after claims. Use soft realistic light, stable camera movement and subtle instrumental music only if supported.\n\nFOUR-SHOT STORYBOARD — EXACTLY 10 SECONDS:\n0–2s | Opening hook: Frame the complete product and its original packaging clearly on a clean, stable surface. Use a gentle push-in while keeping all visible label details faithful and legible only to the extent supported by the reference.\n2–6s | Signature texture demo: If the reference supports an open container and a visible applicator or hand, show one small, controlled pickup or dab of product. Otherwise, keep the packaging closed and demonstrate the finish with a slow camera move. Never invent a seal, applicator, product amount or application method.\n6–8s | Visible finish detail: Show a close-up of the real product texture or a small swatch only if it is visible or can be plausibly shown from the supplied reference. Preserve the actual colour and consistency; do not exaggerate shine, coverage or skin results.\n8–10s | Hero finish: Return to the complete product and packaging in a tidy hero composition. Keep the original cap, container, label and proportions unchanged, then hold a steady final frame.",
+      "storyboard": [
+        {
+          "time": "0–2s",
+          "shot": "Opening hook",
+          "direction": "Frame the complete product and its original packaging clearly on a clean, stable surface. Use a gentle push-in while keeping all visible label details faithful and legible only to the extent supported by the reference."
+        },
+        {
+          "time": "2–6s",
+          "shot": "Signature texture demo",
+          "direction": "If the reference supports an open container and a visible applicator or hand, show one small, controlled pickup or dab of product. Otherwise, keep the packaging closed and demonstrate the finish with a slow camera move. Never invent a seal, applicator, product amount or application method."
+        },
+        {
+          "time": "6–8s",
+          "shot": "Visible finish detail",
+          "direction": "Show a close-up of the real product texture or a small swatch only if it is visible or can be plausibly shown from the supplied reference. Preserve the actual colour and consistency; do not exaggerate shine, coverage or skin results."
+        },
+        {
+          "time": "8–10s",
+          "shot": "Hero finish",
+          "direction": "Return to the complete product and packaging in a tidy hero composition. Keep the original cap, container, label and proportions unchanged, then hold a steady final frame."
+        }
+      ]
+    },
+    {
+      "id": "gadgets_real_use_demo_v1",
+      "prompt": "Create an exactly 10-second vertical 9:16 live-action product video for the supplied gadget or electronic device. Treat the reference as authoritative for model shape, buttons, ports, display, markings and included components. Demonstrate only one simple action supported by visible evidence; if the function is unclear, show careful handling instead. Do not invent a screen interface, connection, performance, battery life, compatibility, technical specification or result. Keep device geometry, button placement and accessories consistent. No on-screen text, captions, added logos or watermarks. Avoid floating devices, impossible finger contact, extra ports, flickering screens, reflections that create false details or morphing. Use controlled camera motion, realistic contact shadows and subtle instrumental music only if supported.\n\nFOUR-SHOT STORYBOARD — EXACTLY 10 SECONDS:\n0–2s | Opening hook: Show the complete gadget and all visible included components exactly as pictured. Use a slow push-in that keeps the device silhouette, buttons, ports and screen layout faithful to the reference.\n2–6s | Everyday-use action: Demonstrate one simple, visible action supported by the reference, such as pressing an existing button, holding the device naturally or placing it on a surface. Do not invent a screen interface, connection, feature or outcome; if the function is unclear, show careful handling instead.\n6–8s | Physical detail: Use a steady close-up of one real visible control, port, edge, display or finish. Do not add ports, alter button placement, generate readable interface text or imply technical specifications not supplied.\n8–10s | Hero finish: Return to a complete three-quarter product view with the device resting or held naturally. Keep the same configuration and accessories, let movement settle, and hold a stable final frame.",
+      "storyboard": [
+        {
+          "time": "0–2s",
+          "shot": "Opening hook",
+          "direction": "Show the complete gadget and all visible included components exactly as pictured. Use a slow push-in that keeps the device silhouette, buttons, ports and screen layout faithful to the reference."
+        },
+        {
+          "time": "2–6s",
+          "shot": "Everyday-use action",
+          "direction": "Demonstrate one simple, visible action supported by the reference, such as pressing an existing button, holding the device naturally or placing it on a surface. Do not invent a screen interface, connection, feature or outcome; if the function is unclear, show careful handling instead."
+        },
+        {
+          "time": "6–8s",
+          "shot": "Physical detail",
+          "direction": "Use a steady close-up of one real visible control, port, edge, display or finish. Do not add ports, alter button placement, generate readable interface text or imply technical specifications not supplied."
+        },
+        {
+          "time": "8–10s",
+          "shot": "Hero finish",
+          "direction": "Return to a complete three-quarter product view with the device resting or held naturally. Keep the same configuration and accessories, let movement settle, and hold a stable final frame."
+        }
+      ]
+    },
+    {
+      "id": "wallets_luxury_macro_v1",
+      "prompt": "Create an exactly 10-second vertical 9:16 live-action product video for the supplied wallet. Use the reference as the only source of truth for silhouette, fold, colour, stitching, edge finish and visible closure. Do not infer leather, metal grade, handmade quality, durability, capacity, internal slots or hidden mechanisms. Keep the wallet stationary; use camera movement rather than unsupported opening or handling. No on-screen text, captions, added logos or watermarks. Avoid fake grain, invented stitching, exaggerated shine, warped edges, floating product or shifting closures. Use restrained macro depth of field, soft realistic light and natural contact shadows.\n\nFOUR-SHOT STORYBOARD — EXACTLY 10 SECONDS:\n0–2s | Opening hook: Show the complete wallet resting flat in a clean three-quarter macro composition. Use a slow, shallow camera slide to reveal its true outline, fold and visible closure while keeping the whole product recognisable.\n2–6s | Signature macro reveal: Make one measured slider move along the wallet's visible edge toward its closure, drawing attention to the actual silhouette and construction. Keep the wallet stationary; do not open it, add contents or imply an unshown mechanism.\n6–8s | Visible detail insert: Hold a sharp close-up on one real detail—visible stitching, edge finish, zipper pull or clasp, only if present. Preserve its exact location and shape; do not infer leather, metal grade, handmade quality or other material claims.\n8–10s | Hero finish: Ease back to a balanced view of the entire wallet in the same resting position. Let the camera stop smoothly and hold the real shape, closure and colour steady against a quiet background.",
+      "storyboard": [
+        {
+          "time": "0–2s",
+          "shot": "Opening hook",
+          "direction": "Show the complete wallet resting flat in a clean three-quarter macro composition. Use a slow, shallow camera slide to reveal its true outline, fold and visible closure while keeping the whole product recognisable."
+        },
+        {
+          "time": "2–6s",
+          "shot": "Signature macro reveal",
+          "direction": "Make one measured slider move along the wallet's visible edge toward its closure, drawing attention to the actual silhouette and construction. Keep the wallet stationary; do not open it, add contents or imply an unshown mechanism."
+        },
+        {
+          "time": "6–8s",
+          "shot": "Visible detail insert",
+          "direction": "Hold a sharp close-up on one real detail—visible stitching, edge finish, zipper pull or clasp, only if present. Preserve its exact location and shape; do not infer leather, metal grade, handmade quality or other material claims."
+        },
+        {
+          "time": "8–10s",
+          "shot": "Hero finish",
+          "direction": "Ease back to a balanced view of the entire wallet in the same resting position. Let the camera stop smoothly and hold the real shape, closure and colour steady against a quiet background."
+        }
+      ]
     }
   ]
 }
