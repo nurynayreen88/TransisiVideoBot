@@ -2774,29 +2774,29 @@
       "label": "Dress Gentle Turn",
       "duration_seconds": 10,
       "style": "category_specific",
-      "description": "Pakaian dress ditunjukkan melalui satu pusingan lembut dan close-up potongan.",
-      "prompt": "Create a 10-second vertical 9:16 product advertisement for the product name supplied by the user. Fashion: dress. Begin with a full-length shot of an adult model wearing the dress. The model makes one gentle turn, then the camera moves to a close-up of the neckline and sleeve only if these are described or visibly implied by the product name. No outfit redesign or added jewelry. This prompt is generated from text only; no uploaded image or AI image analysis is used. Treat the product name and written details as the only source of product facts. Do not invent exact materials, specifications, included accessories, product benefits, brand marks, labels, prices or claims. STRICT OUTPUT RULES: exactly 10 seconds, vertical 9:16, one cohesive product video, no on-screen text, no captions, no added logos, no watermark, no morphing, no floating objects or unrealistic transformations. Keep product shape and packaging consistent. Keep the product presentation consistent and finish with a clean hero frame.\n\n\n\nPREMIUM STORYBOARD — EXACTLY 10 SECONDS:\n0–2s | Opening / premium hook: Open on a refined full-length or on-foot composition, with the named garment or footwear clearly readable in silhouette and soft directional key light.\n2–6s | Signature action: An adult model makes one gentle turn, allowing the dress to move naturally without changing the cut or print. Concept-specific signature for \"Dress Gentle Turn\": Pakaian dress ditunjukkan melalui satu pusingan lembut dan close-up potongan. Keep this exact concept as the central action while preserving product identity and making no unsupported claims.\n6–8s | Detail insert: Close-up on the described neckline or sleeve only when the garment name supports it.\n8–10s | Hero close: Return to a stable full-product or full-look frame, with natural fabric movement settling and a premium editorial finish.\n\nCINEMATOGRAPHY & CONTINUITY: premium commercial lighting, deliberate camera movement, realistic depth of field, natural contact shadows, controlled highlights, clean transitions, and consistent product geometry from start to finish. One coherent scene; no jumpy edits, warping, floating objects or sudden background changes. Use a subtle instrumental background score only, mixed below any natural product sounds; no dialogue or voice-over unless explicitly requested. No on-screen text, captions, added logos or watermarks.",
+      "description": "Model dewasa membuat satu pusingan lembut dan terkawal untuk menunjukkan siluet dress, gerakan labuh dan bentuk potongan tanpa mengubah reka bentuk asal.",
+      "prompt": "Create an exactly 10-second vertical 9:16 live-action-style product video for the user-supplied product name in the dress category. Creative direction: a graceful, understated fashion showcase. Use one adult model in a clean studio or softly lit room with enough space to show the complete dress. This prompt is text-only; do not claim to analyse uploaded images.\n\nDRESS ACCURACY: Preserve the named silhouette, length, colour, print, sleeve and neckline details only where stated. Do not invent fabric composition, lining, pockets, fasteners, embellishments, jewellery, accessories or performance claims. Keep the dress length and cut stable during movement; fabric should follow gravity and the model's motion naturally, with no clipping or sudden shape changes.\n\n10-SECOND SHOT PLAN:\n0–2s | Silhouette reveal: begin with a steady full-length front view so the complete dress shape and hem are easy to read. The model stands naturally, not in an exaggerated pose.\n2–5s | Signature gentle turn: the model makes one slow, small turn of about a quarter rotation, then pauses. The skirt and hem follow with subtle, believable motion; no fast spin or dramatic wind.\n5–7s | Cut detail: make a restrained camera push toward a neckline, sleeve, seam or visible drape only if supported by the product name. Do not fabricate close-up details.\n7–10s | Hero finish: return smoothly to a full-length view as the model settles into a relaxed three-quarter pose. Hold the complete dress in frame for a clean final impression.\n\nREALISM & CAMERA: authentic live-action commercial look, natural skin texture and proportions, believable posture and balance, grounded feet, realistic cloth weight, soft directional light and natural contact shadows. Maintain the same adult model, dress, background and exposure throughout. Smooth camera movement and measured pacing; optional subtle instrumental music only, kept below natural ambience. No dialogue unless requested.\n\nAVOID: CGI or mannequin-like motion, waxy skin, face drift, extra fingers, sliding feet, floating hems, cloth passing through legs, changing length or print, invented garment features, sudden background changes, excessive bokeh/HDR, flicker, jitter, captions, on-screen text, added logos or watermarks. End with the dress fully visible and consistent.",
       "subtype": "dress",
       "storyboard": [
         {
           "time": "0–2s",
-          "shot": "Opening / premium hook",
-          "direction": "Open on a refined full-length or on-foot composition, with the named garment or footwear clearly readable in silhouette and soft directional key light."
+          "shot": "Full silhouette reveal",
+          "direction": "Steady full-length front view; show the dress shape and hem clearly while the adult model stands in a relaxed, natural pose."
         },
         {
-          "time": "2–6s",
-          "shot": "Signature action",
-          "direction": "An adult model makes one gentle turn, allowing the dress to move naturally without changing the cut or print. Concept-specific signature for \"Dress Gentle Turn\": Pakaian dress ditunjukkan melalui satu pusingan lembut dan close-up potongan. Keep this exact concept as the central action while preserving product identity and making no unsupported claims."
+          "time": "2–5s",
+          "shot": "Gentle quarter turn",
+          "direction": "The model makes one slow, small quarter turn and pauses; the hem follows with subtle, gravity-led motion and the dress cut stays unchanged."
         },
         {
-          "time": "6–8s",
-          "shot": "Detail insert",
-          "direction": "Close-up on the described neckline or sleeve only when the garment name supports it."
+          "time": "5–7s",
+          "shot": "Supported detail",
+          "direction": "Use a restrained push-in on a neckline, sleeve, seam or visible drape only when supported by the product name; do not invent construction details."
         },
         {
-          "time": "8–10s",
-          "shot": "Hero close",
-          "direction": "Return to a stable full-product or full-look frame, with natural fabric movement settling and a premium editorial finish."
+          "time": "7–10s",
+          "shot": "Full dress hero",
+          "direction": "Return smoothly to a full-length view as the model settles into a relaxed three-quarter pose and hold the complete dress in frame."
         }
       ]
     },
