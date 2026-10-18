@@ -32,6 +32,20 @@ try:
 except (OSError, json.JSONDecodeError):
     logging.exception('Klippo prompt library could not be loaded')
     PROMPT_LIBRARY = {'categories': [], 'prompts': []}
+# Optional additive quality overrides; never replace or shrink the master library.
+PROMPT_OVERRIDES_PATH = Path(__file__).resolve().parent / 'prompts' / 'prompt_quality_overrides.json'
+try:
+    with PROMPT_OVERRIDES_PATH.open('r', encoding='utf-8') as handle:
+        _prompt_overrides = json.load(handle).get('overrides', [])
+    _base_prompts = {item.get('id'): item for item in PROMPT_LIBRARY.get('prompts', []) if isinstance(item, dict) and item.get('id')}
+    for _override in _prompt_overrides:
+        _target = _base_prompts.get(_override.get('id')) if isinstance(_override, dict) else None
+        if _target is not None:
+            for _field in ('prompt', 'storyboard'):
+                if _field in _override:
+                    _target[_field] = _override[_field]
+except (OSError, json.JSONDecodeError):
+    logging.exception('Klippo prompt-quality overrides could not be loaded; using the master library unchanged')
 PROMPTS_BY_ID = {item['id']: item for item in PROMPT_LIBRARY.get('prompts', []) if isinstance(item, dict) and item.get('id')}
 CATEGORIES_BY_ID = {item['id']: item for item in PROMPT_LIBRARY.get('categories', []) if isinstance(item, dict) and item.get('id')}
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup
