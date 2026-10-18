@@ -811,7 +811,6 @@ def main_menu(user_id=None):
         [InlineKeyboardButton('🎞️ Gabung Video', callback_data='merge')],
         [InlineKeyboardButton('🔄 Tukar Format Video', callback_data='convert')],
         [InlineKeyboardButton('🎞️ Gerakkan Foto (Transisi)', callback_data='make')],
-        [InlineKeyboardButton('🎬 Storyboard AI (Beta)', callback_data='falbeta')],
         [InlineKeyboardButton('💎 Langganan', callback_data='subscription'), InlineKeyboardButton('👤 Akaun Saya', callback_data='account')],
         [InlineKeyboardButton('❓ FAQ', callback_data='help')],
     ]
@@ -2092,11 +2091,33 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data['prompt_product_type'] = 'other'
         context.user_data['prompt_mode'] = 'normal'
         context.user_data['prompt_reference_photos'] = []
-        context.user_data['stage'] = 'prompt_images'
+        context.user_data['stage'] = 'prompt_mode_select'
         await query.message.reply_text(
-            '✍️ KLIPPO | JANA PROMPT VIDEO\n\nHantar 1 hingga 4 gambar produk yang jelas. Selepas semua gambar dihantar, tekan “Selesai Hantar Gambar”. Klippo akan menyediakan satu prompt video lengkap dengan susunan babak, aksi dan pergerakan kamera.',
-            reply_markup=prompt_images_start_menu()
+            '✍️ KLIPPO | JANA PROMPT\n\nPilih jenis prompt yang anda mahu sediakan:',
+            reply_markup=InlineKeyboardMarkup([
+                [InlineKeyboardButton('🎥 Jana Prompt Video', callback_data='prompt_mode:video')],
+                [InlineKeyboardButton('🧩 Jana Prompt Storyboard', callback_data='prompt_mode:storyboard')]
+            ])
         )
+    elif action.startswith('prompt_mode:'):
+        selected_mode = action.split(':', 1)[1]
+        if selected_mode not in ('video', 'storyboard'):
+            await query.message.reply_text(
+                'Pilihan tidak sah. Sila pilih semula.',
+                reply_markup=InlineKeyboardMarkup([
+                    [InlineKeyboardButton('🎥 Jana Prompt Video', callback_data='prompt_mode:video')],
+                    [InlineKeyboardButton('🧩 Jana Prompt Storyboard', callback_data='prompt_mode:storyboard')]
+                ])
+            )
+        else:
+            context.user_data['prompt_mode'] = 'normal' if selected_mode == 'video' else 'storyboard'
+            context.user_data['prompt_reference_photos'] = []
+            context.user_data['stage'] = 'prompt_images'
+            if selected_mode == 'storyboard':
+                instruction = '🧩 JANA PROMPT STORYBOARD\\n\\nHantar 1 hingga 4 gambar produk. Klippo akan menyediakan prompt storyboard berdasarkan gambar produk tersebut.'
+            else:
+                instruction = '🎥 JANA PROMPT VIDEO\\n\\nHantar 1 hingga 4 gambar produk yang jelas. Klippo akan menyediakan prompt video lengkap dengan susunan babak, aksi dan pergerakan kamera.'
+            await query.message.reply_text(instruction, reply_markup=prompt_images_start_menu())
     elif action.startswith('prompt_flow:'):
         # Compatibility for old Telegram keyboards: both legacy buttons now enter
         # the same single prompt flow, never the storyboard branch.
@@ -2360,7 +2381,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # Return only for actions handled by the first chain. Video workflow
     # callbacks must continue into the second chain.
     if action in ('admin_pending', 'admin', 'storyboard', 'make', 'prompt', 'prompt_categories', 'prompt_images_done') or action.startswith(
-        ('admin_approve:', 'admin_reject:', 'prompt_flow:', 'prompt_model:', 'prompt_model_count:', 'prompt_model_gender:', 'prompt_model_hijab:', 'prompt_model_ethnicity:', 'prompt_model_age:', 'prompt_language:', 'prompt_voiceover:', 'prompt_type:', 'prompt_product_type:', 'prompt_duration:',
+        ('admin_approve:', 'admin_reject:', 'prompt_flow:', 'prompt_mode:', 'prompt_model:', 'prompt_model_count:', 'prompt_model_gender:', 'prompt_model_hijab:', 'prompt_model_ethnicity:', 'prompt_model_age:', 'prompt_language:', 'prompt_voiceover:', 'prompt_type:', 'prompt_product_type:', 'prompt_duration:',
          'prompt_style:', 'prompt_idea:', 'prompt_details:', 'video_input:', 'prompt_input:', 'pcat:', 'ptpl:')
     ):
         return
