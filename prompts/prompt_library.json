@@ -2710,29 +2710,29 @@
       "label": "Hijab Drape Showcase",
       "duration_seconds": 10,
       "style": "category_specific",
-      "description": "Tudung diperlihatkan melalui gerakan lilitan dan jatuhan kain yang sederhana tanpa mengubah warna.",
-      "prompt": "Create a 10-second vertical 9:16 product advertisement for the product name supplied by the user. Fashion: hijab or scarf. Show the named hijab neatly draped on a mannequin or adult model. Use a gentle turn and a close-up of the natural drape and edge finish. Keep the color and fabric description limited to details stated in the product name. No added pins or accessories unless specified. This prompt is generated from text only; no uploaded image or AI image analysis is used. Treat the product name and written details as the only source of product facts. Do not invent exact materials, specifications, included accessories, product benefits, brand marks, labels, prices or claims. STRICT OUTPUT RULES: exactly 10 seconds, vertical 9:16, one cohesive product video, no on-screen text, no captions, no added logos, no watermark, no morphing, no floating objects or unrealistic transformations. Keep product shape and packaging consistent. Keep the product presentation consistent and finish with a clean hero frame.\n\n\n\nPREMIUM STORYBOARD — EXACTLY 10 SECONDS:\n0–2s | Opening / premium hook: Open on a refined full-length or on-foot composition, with the named garment or footwear clearly readable in silhouette and soft directional key light.\n2–6s | Signature action: An adult model makes a small turn so the hijab drape falls naturally; preserve the wrap and color throughout. Concept-specific signature for \"Hijab Drape Showcase\": Tudung diperlihatkan melalui gerakan lilitan dan jatuhan kain yang sederhana tanpa mengubah warna. Keep this exact concept as the central action while preserving product identity and making no unsupported claims.\n6–8s | Detail insert: Macro on the visible edge finish and folds, without inventing fabric type or extra pins.\n8–10s | Hero close: Return to a stable full-product or full-look frame, with natural fabric movement settling and a premium editorial finish.\n\nCINEMATOGRAPHY & CONTINUITY: premium commercial lighting, deliberate camera movement, realistic depth of field, natural contact shadows, controlled highlights, clean transitions, and consistent product geometry from start to finish. One coherent scene; no jumpy edits, warping, floating objects or sudden background changes. Use a subtle instrumental background score only, mixed below any natural product sounds; no dialogue or voice-over unless explicitly requested. No on-screen text, captions, added logos or watermarks.",
+      "description": "Tudung dipersembahkan pada model dewasa melalui satu pusingan kecil yang terkawal, menunjukkan bentuk lilitan, bingkai muka dan jatuhan kain secara semula jadi.",
+      "prompt": "Create an exactly 10-second vertical 9:16 product video for the user-supplied product name in the hijab/tudung category. Creative direction: a refined, natural hijab drape showcase. Keep the tudung as the hero and use one adult model in a calm, uncluttered setting. This is a text-only prompt: use plausible generic visuals and do not claim to analyse an uploaded image.\n\nPRODUCT ACCURACY: Preserve only details stated in the product name. Do not invent fabric composition, cooling or comfort claims, print, embellishments, pins, accessories, brand marks or labels. Keep the tudung's stated colour and pattern consistent in every frame; maintain a believable wrap, natural folds and a stable face-framing shape. The fabric must not pass through the model, change length, melt, flutter unnaturally or rearrange itself.\n\n10-SECOND SHOT PLAN:\n0–2s | Clean opening: medium portrait from chest up, with the full face frame and front drape clearly visible. Soft window light reveals natural folds without glossy artificial shine.\n2–5s | Signature action: the adult model slowly turns her shoulders slightly left, then back to camera; the fabric follows with subtle, physically plausible movement. Keep the wrap secure and the face unobstructed.\n5–8s | Detail moment: a gentle camera push-in shows the visible edge finish and layered folds. Show only details that are plausible from the named product; no invented stitching or accessories.\n8–10s | Hero finish: ease back to the opening portrait, let the fabric settle, and hold a clean, composed final frame.\n\nREALISM & CAMERA: live-action commercial footage, realistic skin texture and facial proportions, natural blinking, anatomically correct hands if visible, restrained camera motion, believable lens perspective, soft contact shadows and consistent exposure. Keep the same model, outfit, background and tudung throughout. One coherent scene with smooth timing, not a fast montage. Optional subtle instrumental music only, mixed quietly beneath natural ambience; no dialogue unless requested.\n\nAVOID: CGI or waxy skin, beauty-filter blur, face drift, extra fingers, warped folds, colour shifts, changing patterns, floating fabric, sudden wind, impossible cloth physics, jump cuts, excessive bokeh/HDR, flicker, jitter, text overlays, captions, added logos and watermarks. End with the tudung clearly readable and visually consistent.",
       "subtype": "hijab",
       "storyboard": [
         {
           "time": "0–2s",
-          "shot": "Opening / premium hook",
-          "direction": "Open on a refined full-length or on-foot composition, with the named garment or footwear clearly readable in silhouette and soft directional key light."
+          "shot": "Clear drape reveal",
+          "direction": "Chest-up portrait of an adult model; show the face frame and front drape clearly in soft window light."
         },
         {
-          "time": "2–6s",
-          "shot": "Signature action",
-          "direction": "An adult model makes a small turn so the hijab drape falls naturally; preserve the wrap and color throughout. Concept-specific signature for \"Hijab Drape Showcase\": Tudung diperlihatkan melalui gerakan lilitan dan jatuhan kain yang sederhana tanpa mengubah warna. Keep this exact concept as the central action while preserving product identity and making no unsupported claims."
+          "time": "2–5s",
+          "shot": "Natural signature turn",
+          "direction": "The model slowly turns her shoulders slightly left and returns to camera; the tudung follows with subtle, believable movement while the wrap and colour remain consistent."
         },
         {
-          "time": "6–8s",
-          "shot": "Detail insert",
-          "direction": "Macro on the visible edge finish and folds, without inventing fabric type or extra pins."
+          "time": "5–8s",
+          "shot": "Edge and fold detail",
+          "direction": "Gently push in on the visible edge finish and layered folds; show no invented stitching, pins or embellishments."
         },
         {
           "time": "8–10s",
-          "shot": "Hero close",
-          "direction": "Return to a stable full-product or full-look frame, with natural fabric movement settling and a premium editorial finish."
+          "shot": "Stable hero finish",
+          "direction": "Ease back to the original chest-up portrait, let the fabric settle naturally and hold a clean final frame."
         }
       ]
     },
