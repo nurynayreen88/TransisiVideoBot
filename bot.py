@@ -3695,7 +3695,7 @@ async def generate(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 custom_background_file = await context.bot.get_file(custom_background_file_id)
                 await custom_background_file.download_to_drive(custom_background_path)
             elif background in LOCATION_BACKGROUND_SCENES:
-                status_message = await query.message.reply_text(
+                status_message = await message.reply_text(
                     '🖼️ Menjana latar tempat fotorealistik melalui Gemini Image. '
                     'Permintaan ini mungkin menggunakan kuota API berbayar; imej latar dijana sekali dan dikongsi untuk semua gambar produk dalam video.'
                 )
