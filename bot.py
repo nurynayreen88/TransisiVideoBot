@@ -3128,9 +3128,9 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
         hook = verified_video_hook(info)
         await update.message.reply_text(('✅ Cadangan hook: ' + hook if hook else 'Maklumat produk tidak cukup jelas; video akan dijana tanpa hook.'), reply_markup=photos_menu())
     elif stage == 'prompt_shopee_link':
-        link = _shopee_link(value)
+        link = _shopee_link(value, allow_short=True)
         if not link:
-            await update.message.reply_text('⚠️ Pautan tidak dikenali. Tampal URL halaman produk Shopee Malaysia yang lengkap.')
+            await update.message.reply_text('⚠️ Pautan tidak dikenali. Tampal URL produk Shopee Malaysia atau pautan pendek rasmi s.shopee.com.my.')
             return
         context.user_data['shopee_url'] = link
         context.user_data['prompt_product_name'] = 'product referenced by the Shopee link (details not verified)'
@@ -3166,8 +3166,8 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 
-def _shopee_link(value):
-    """Accept HTTPS Shopee Malaysia product URLs and official short links."""
+def _shopee_link(value, allow_short=False):
+    """Validate Shopee Malaysia product URLs; short links are opt-in."""
     from urllib.parse import urlparse
     for candidate in re.findall(r'https?://[^\s<>]+', value):
         candidate = candidate.rstrip('.,);]\'"')
@@ -3181,7 +3181,7 @@ def _shopee_link(value):
             re.search(r'/product/\d+/\d+', parsed.path) or
             re.search(r'-i\.\d+\.\d+', parsed.path)
         )
-        if is_shopee_domain and (is_product_path or is_short_link):
+        if is_shopee_domain and (is_product_path or (allow_short and is_short_link)):
             return candidate
     return ''
 
