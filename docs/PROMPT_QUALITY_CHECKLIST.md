@@ -140,3 +140,12 @@ The initial scan found a small number of prompts that did not contain the exact 
 - [x] Existing prompt IDs and master library preserved; additions are ID-preserving overrides.
 - [ ] Run CI on this batch before merging.
 - [ ] Inspect generated clips for physical handling, product geometry and final-frame continuity; text checks are not visual validation.
+
+## 2F. Beauty, gadget and wallet prompt-quality batch
+
+- [x] `beauty_texture_demo_v1` — product texture/application remains conditional on visible evidence; no unsupported cosmetic or skin claims.
+- [x] `gadgets_real_use_demo_v1` — one plausible action; no invented interface, ports, specifications or outcomes.
+- [x] `wallets_luxury_macro_v1` — camera-led macro detail; no inferred materials or hidden construction.
+- [x] Four-shot timings and storyboard directions are embedded verbatim; no-on-screen-text rules are explicit.
+- [ ] Run CI against current `main` before merge.
+- [ ] Visually inspect generated clips; structural checks are not a visual-quality pass.
