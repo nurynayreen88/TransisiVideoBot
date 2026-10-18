@@ -2216,23 +2216,20 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 ])
             )
         else:
-            context.user_data['prompt_mode'] = 'normal' if selected_mode == 'video' else 'storyboard'
+            context.user_data['prompt_mode'] = 'normal'
             context.user_data['prompt_reference_photos'] = []
-            context.user_data['stage'] = 'prompt_images'
-            if selected_mode == 'storyboard':
-                instruction = '🧩 JANA PROMPT STORYBOARD\\n\\nHantar 1 hingga 4 gambar produk. Klippo akan menyediakan prompt storyboard berdasarkan gambar produk tersebut.'
-            else:
-                instruction = '🎥 JANA PROMPT VIDEO\\n\\nHantar 1 hingga 4 gambar produk yang jelas. Klippo akan menyediakan prompt video lengkap dengan susunan babak, aksi dan pergerakan kamera.'
-            await query.message.reply_text(instruction, reply_markup=prompt_images_start_menu())
+            context.user_data['stage'] = 'prompt_product_type'
+            instruction = '🎥 JANA PROMPT VIDEO\\n\\nMuat naik gambar tidak diperlukan. Pilih kategori, subkategori dan nama produk; kemudian pilih latar, gaya dan durasi.'
+            await query.message.reply_text(instruction, reply_markup=prompt_product_type_menu())
     elif action.startswith('prompt_flow:'):
         # Compatibility for old Telegram keyboards: both legacy buttons now enter
         # the same single prompt flow, never the storyboard branch.
         context.user_data['prompt_mode'] = 'normal'
         context.user_data['prompt_reference_photos'] = []
-        context.user_data['stage'] = 'prompt_images'
+        context.user_data['stage'] = 'prompt_product_type'
         await query.message.reply_text(
-            '📷 GAMBAR PRODUK\\n\\nHantar 1 hingga 4 gambar produk yang jelas. Selepas semua gambar dihantar, tekan “Selesai Hantar Gambar”. Klippo akan menyediakan satu prompt video lengkap.',
-            reply_markup=prompt_images_start_menu()
+            '✍️ JANA PROMPT VIDEO\\n\\nMuat naik gambar tidak diperlukan. Pilih kategori, subkategori dan nama produk untuk meneruskan.',
+            reply_markup=prompt_product_type_menu()
         )
     elif action == 'prompt_images_done' and stage == 'prompt_images':
         if not context.user_data.get('prompt_reference_photos'):
