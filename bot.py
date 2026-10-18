@@ -2258,20 +2258,16 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 'Pilihan tidak sah. Sila pilih semula.',
                 reply_markup=InlineKeyboardMarkup([
                     [InlineKeyboardButton('🎥 Jana Prompt Video', callback_data='prompt_mode:video')],
-                    [InlineKeyboardButton('🧩 Jana Prompt Storyboard', callback_data='prompt_mode:storyboard')]
+                    [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]
                 ])
             )
         else:
-            context.user_data['prompt_mode'] = 'normal' if selected_mode == 'video' else 'storyboard'
+            # Legacy callbacks always enter the current no-upload prompt flow.
+            context.user_data['prompt_mode'] = 'normal'
             context.user_data['prompt_reference_photos'] = []
-            if selected_mode == 'storyboard':
-                context.user_data['stage'] = 'prompt_images'
-                instruction = '🧩 JANA PROMPT STORYBOARD\\n\\nUntuk storyboard bergambar, hantar 1 hingga 4 gambar produk sebagai rujukan.'
-                await query.message.reply_text(instruction, reply_markup=prompt_images_start_menu())
-            else:
-                context.user_data['stage'] = 'prompt_product_type'
-                instruction = '🎥 JANA PROMPT VIDEO\\n\\nTiada muat naik gambar diperlukan di sini. Pilih kategori, subkategori dan nama produk. Apabila prompt siap, muat naik gambar produk asal terus ke platform video AI pilihan anda.'
-                await query.message.reply_text(instruction, reply_markup=prompt_product_type_menu())
+            context.user_data['stage'] = 'prompt_product_type'
+            instruction = '🎥 JANA PROMPT VIDEO\\n\\nMuat naik gambar tidak diperlukan dalam proses jana prompt. Pilih kategori, subkategori dan nama produk. Selepas prompt siap, muat naik gambar produk asal terus ke platform video AI pilihan anda.'
+            await query.message.reply_text(instruction, reply_markup=prompt_product_type_menu())
     elif action.startswith('prompt_flow:'):
         # Legacy prompt buttons now enter the name-based video prompt flow.
         context.user_data['prompt_mode'] = 'normal'
@@ -2296,9 +2292,9 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['stage'] = 'prompt_library_details'
             await query.message.reply_text('🛍️ Tampal nama produk daripada Shopee. Gambar tidak diperlukan. Klippo akan mengesan jenis produk daripada nama, contohnya beg tangan, sling bag, beg galas atau dompet.')
         elif selected in ('normal', 'storyboard', 'doodle'):
-            context.user_data['prompt_mode'] = 'storyboard' if selected == 'doodle' else selected
+            context.user_data['prompt_mode'] = 'normal'
             context.user_data['stage'] = 'prompt_duration'
-            await query.message.reply_text('⏱️ Pilih tempoh dan cara susunan prompt video:', reply_markup=prompt_duration_menu())
+            await query.message.reply_text('⏱️ Pilih tempoh video:', reply_markup=prompt_duration_menu())
     elif action == 'prompt_categories':
         context.user_data['stage'] = 'prompt_category'
         await query.message.reply_text('📚 Pilih kategori produk:', reply_markup=prompt_category_menu())
@@ -3464,17 +3460,19 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['prompt_product_type'] = 'other'
             context.user_data['prompt_mode'] = 'normal'
             context.user_data['prompt_reference_photos'] = []
-            context.user_data['stage'] = 'prompt_images'
+            context.user_data['stage'] = 'prompt_product_type'
+            context.user_data['prompt_mode'] = 'normal'
+            context.user_data['prompt_reference_photos'] = []
             await update.message.reply_text(
-                '✍️ KLIPPO | JANA PROMPT VIDEO\n\nHantar 1 hingga 4 gambar produk yang jelas. Tekan “Selesai Hantar Gambar” selepas selesai. Klippo akan menyediakan satu prompt video lengkap dengan storyboard bertulis lima babak mengikut masa, aksi dan pergerakan kamera.',
-                reply_markup=prompt_images_start_menu()
+                '✍️ KLIPPO | JANA PROMPT VIDEO\n\nMuat naik gambar tidak diperlukan dalam proses jana prompt. Pilih kategori, subkategori dan nama produk. Selepas prompt siap, muat naik gambar produk asal terus ke platform video AI pilihan anda.',
+                reply_markup=prompt_product_type_menu()
             )
         elif action == 'subscription':
             await update.message.reply_text('💎 LANGGANAN KLIPPO\n\nPelan Penyokong Awal: RM5 / 30 hari, sehingga 30 video sebulan. Pengaktifan manual selepas resit disemak.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📱 Papar QR DuitNow', callback_data='subscription_qr')]]))
         elif action == 'account':
             await account_info(update, context)
         elif action == 'help':
-            await update.message.reply_text('❓ BANTUAN\n\nJana Prompt: hantar gambar produk, pilih kategori, gaya, durasi dan latar, kemudian salin satu prompt video lengkap ke AI pilihan anda.\nGerakkan Foto: jadikan gambar pegun sebagai video dengan transisi.\nGabung Video: cantum beberapa klip.\nTukar Format: sesuaikan video kepada format menegak.')
+            await update.message.reply_text('❓ BANTUAN\n\nJana Prompt: pilih kategori, masukkan nama produk, gaya, durasi dan latar, kemudian salin prompt video ke AI pilihan anda. Gambar produk dimuat naik terus pada platform video AI, bukan dalam proses jana prompt Klippo.\nGerakkan Foto: jadikan gambar pegun sebagai video dengan transisi.\nGabung Video: cantum beberapa klip.\nTukar Format: sesuaikan video kepada format menegak.')
         else:
             await start(update, context)
         return
