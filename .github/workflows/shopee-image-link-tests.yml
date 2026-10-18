@@ -1,0 +1,32 @@
+name: Shopee image-link tests
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "bot.py"
+      - "tests/test_shopee_image_link.py"
+      - ".github/workflows/shopee-image-link-tests.yml"
+  push:
+    branches: ["fix/shopee-image-link-only"]
+    paths:
+      - "bot.py"
+      - "tests/test_shopee_image_link.py"
+      - ".github/workflows/shopee-image-link-tests.yml"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install image dependency
+        run: python -m pip install "Pillow>=10.4,<12"
+      - name: Compile bot
+        run: python -m py_compile bot.py
+      - name: Test Shopee URL and image extraction
+        run: python -m unittest discover -s tests -p "test_shopee_image_link.py" -v
