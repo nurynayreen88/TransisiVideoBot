@@ -3082,13 +3082,20 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
             reset(context)
             context.user_data['prompt_style'] = 'auto'
             context.user_data['prompt_concept'] = ''
+            context.user_data['prompt_library_id'] = ''
+            context.user_data['prompt_library_storyboard'] = []
             context.user_data['prompt_product_type'] = 'other'
             context.user_data['prompt_mode'] = 'normal'
             context.user_data['prompt_reference_photos'] = []
-            context.user_data['stage'] = 'prompt_images'
+            context.user_data['stage'] = 'prompt_mode_select'
             await update.message.reply_text(
-                '✍️ KLIPPO | JANA PROMPT VIDEO\n\nHantar 1 hingga 4 gambar produk yang jelas. Tekan “Selesai Hantar Gambar” selepas selesai. Klippo akan menyediakan satu prompt video lengkap dengan susunan babak, aksi dan pergerakan kamera.',
-                reply_markup=prompt_images_start_menu()
+                '✍️ KLIPPO | JANA PROMPT\n\nPilih cara masukkan rujukan produk:',
+                reply_markup=InlineKeyboardMarkup([
+                    [InlineKeyboardButton('🎥 Jana Prompt Video (guna gambar)', callback_data='prompt_mode:video')],
+                    [InlineKeyboardButton('🧩 Jana Prompt Storyboard (guna gambar)', callback_data='prompt_mode:storyboard')],
+                    [InlineKeyboardButton('🔗 Guna Pautan Produk Shopee', callback_data='prompt_link_input')],
+                    [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]
+                ])
             )
         elif action == 'subscription':
             await update.message.reply_text('💎 LANGGANAN KLIPPO\n\nPelan Penyokong Awal: RM5 / 30 hari, sehingga 30 video sebulan. Pengaktifan manual selepas resit disemak.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📱 Papar QR DuitNow', callback_data='subscription_qr')]]))
