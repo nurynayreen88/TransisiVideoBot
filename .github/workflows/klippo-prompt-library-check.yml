@@ -143,6 +143,8 @@ jobs:
               "prompt_options_menu(category_id)",
               "context.user_data['prompt_library_storyboard'] = template.get('storyboard', [])",
               "storyboard_override=context.user_data.get('prompt_library_storyboard') or None",
+              "White Doodle is a universal overlay style",
+              "doodle_option = next",
             "async def handle_image_or_receipt_document(",
             "filters.Document.IMAGE | filters.Document.MimeType('application/pdf'), handle_image_or_receipt_document",
           ]
@@ -287,7 +289,7 @@ jobs:
                   version = db.execute(
                       "SELECT version FROM storyboard_prompt_styles WHERE style_key='white_doodle'"
                   ).fetchone()[0]
-                  assert version == 4, f"Unexpected White Doodle template version: {version}"
+                  assert version == 5, f"Unexpected White Doodle template version: {version}"
 
               uncertain = (
                   "PRODUCT NAME: unknown. "
