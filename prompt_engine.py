@@ -137,7 +137,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
                              "24–30s stable full-product hero finish. ")
             else:
                 beat_plan = ("TIMING: 0–2s clean reveal; 2–4s show the full product; 4–6s highlight one reference-visible detail; "
-                             "6–8s one subtle product-appropriate action; 8–10s stable full-product hero frame. "
+                             "6–8s one subtle product-appropriate action; 8–10s HOLD the final full-product hero frame. "
                              + ("Do not perform the main surrounding contour yet. " if doodle else ""))
             if storyboard_override and isinstance(storyboard_override, (list, tuple)) and len(storyboard_override) == 4:
                 beat_plan = (
