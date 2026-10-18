@@ -2145,7 +2145,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data['prompt_reference_photos'] = []
         context.user_data['stage'] = 'prompt_images'
         await query.message.reply_text(
-            '📷 LANGKAH 1 — GAMBAR PRODUK\\n\\nHantar 1 hingga 4 gambar produk yang jelas. Selepas semua gambar dihantar, tekan “Selesai Hantar Gambar”. Klippo akan menyediakan satu prompt video lengkap.',
+            '📷 GAMBAR PRODUK\\n\\nHantar 1 hingga 4 gambar produk yang jelas. Selepas semua gambar dihantar, tekan “Selesai Hantar Gambar”. Klippo akan menyediakan satu prompt video lengkap.',
             reply_markup=prompt_images_start_menu()
         )
     elif action == 'prompt_images_done' and stage == 'prompt_images':
@@ -2154,7 +2154,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         else:
             context.user_data['stage'] = 'prompt_product_type'
             await query.message.reply_text(
-                f"✅ {len(context.user_data['prompt_reference_photos'])} gambar diterima.\n\n📦 LANGKAH 2 — Pilih kategori produk:",
+                f"✅ {len(context.user_data['prompt_reference_photos'])} gambar diterima.\n\n📦 Pilih kategori produk:",
                 reply_markup=prompt_product_type_menu()
             )
     elif action.startswith('prompt_type:') and stage == 'prompt_type':
@@ -2240,7 +2240,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['prompt_product_type'] = selected
             context.user_data['stage'] = 'prompt_model_presence'
             await query.message.reply_text(
-                f"📦 LANGKAH 2 — Kategori dipilih: {PRODUCT_TYPES[selected]}\n\n👤 LANGKAH 3 — Mahu model AI dalam video?",
+                f"📦 Kategori dipilih: {PRODUCT_TYPES[selected]}\n\n👤 LANGKAH 1 — Mahu model AI dalam video?",
                 reply_markup=prompt_model_presence_menu()
             )
         else:
@@ -2254,46 +2254,46 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 'prompt_model_ethnicity': 'na', 'prompt_model_age': 'na'
             })
             context.user_data['stage'] = 'prompt_style'
-            await query.message.reply_text('🎨 LANGKAH 4 — Pilih gaya video:', reply_markup=prompt_style_menu(context.user_data.get('prompt_product_type', 'other'), context.user_data.get('prompt_model_presence')))
+            await query.message.reply_text('🎨 LANGKAH 2 — Pilih gaya video:', reply_markup=prompt_style_menu(context.user_data.get('prompt_product_type', 'other'), context.user_data.get('prompt_model_presence')))
         elif selected == 'yes':
             context.user_data['prompt_model_presence'] = 'yes'
             context.user_data['stage'] = 'prompt_model_count'
-            await query.message.reply_text('👤 LANGKAH 3 — BUTIRAN MODEL\n\nBerapa orang model dewasa yang diperlukan?', reply_markup=prompt_model_count_menu())
+            await query.message.reply_text('👤 LANGKAH 1 — BUTIRAN MODEL\n\nBerapa orang model dewasa yang diperlukan?', reply_markup=prompt_model_count_menu())
     elif action.startswith('prompt_model_count:') and stage == 'prompt_model_count':
         selected = action.split(':', 1)[1]
         if selected in ('1', '2', '3'):
             context.user_data['prompt_model_count'] = int(selected)
             context.user_data['stage'] = 'prompt_model_gender'
-            await query.message.reply_text('👤 LANGKAH 3 — BUTIRAN MODEL\n\nPilih jantina model:', reply_markup=prompt_model_gender_menu())
+            await query.message.reply_text('👤 LANGKAH 1 — BUTIRAN MODEL\n\nPilih jantina model:', reply_markup=prompt_model_gender_menu())
     elif action.startswith('prompt_model_gender:') and stage == 'prompt_model_gender':
         selected = action.split(':', 1)[1]
         if selected in ('female', 'male', 'mixed'):
             context.user_data['prompt_model_gender'] = selected
             if selected in ('female', 'mixed'):
                 context.user_data['stage'] = 'prompt_model_hijab'
-                await query.message.reply_text('👤 LANGKAH 3 — BUTIRAN MODEL\n\nPilihan tudung untuk model wanita:', reply_markup=prompt_model_hijab_menu())
+                await query.message.reply_text('👤 LANGKAH 1 — BUTIRAN MODEL\n\nPilihan tudung untuk model wanita:', reply_markup=prompt_model_hijab_menu())
             else:
                 context.user_data['prompt_model_hijab'] = 'na'
                 context.user_data['stage'] = 'prompt_model_ethnicity'
-                await query.message.reply_text('👤 LANGKAH 3 — BUTIRAN MODEL\n\nPilih rupa atau latar etnik model:', reply_markup=prompt_model_ethnicity_menu())
+                await query.message.reply_text('👤 LANGKAH 1 — BUTIRAN MODEL\n\nPilih rupa atau latar etnik model:', reply_markup=prompt_model_ethnicity_menu())
     elif action.startswith('prompt_model_hijab:') and stage == 'prompt_model_hijab':
         selected = action.split(':', 1)[1]
         if selected in ('hijab', 'no_hijab', 'na'):
             context.user_data['prompt_model_hijab'] = selected
             context.user_data['stage'] = 'prompt_model_ethnicity'
-            await query.message.reply_text('👤 LANGKAH 3 — BUTIRAN MODEL\n\nPilih rupa atau latar etnik model:', reply_markup=prompt_model_ethnicity_menu())
+            await query.message.reply_text('👤 LANGKAH 1 — BUTIRAN MODEL\n\nPilih rupa atau latar etnik model:', reply_markup=prompt_model_ethnicity_menu())
     elif action.startswith('prompt_model_ethnicity:') and stage == 'prompt_model_ethnicity':
         selected = action.split(':', 1)[1]
         if selected in ('Malay', 'Asian', 'diverse', 'any'):
             context.user_data['prompt_model_ethnicity'] = selected
             context.user_data['stage'] = 'prompt_model_age'
-            await query.message.reply_text('👤 LANGKAH 3 — BUTIRAN MODEL\n\nPilih lingkungan umur model (dewasa sahaja):', reply_markup=prompt_model_age_menu())
+            await query.message.reply_text('👤 LANGKAH 1 — BUTIRAN MODEL\n\nPilih lingkungan umur model (dewasa sahaja):', reply_markup=prompt_model_age_menu())
     elif action.startswith('prompt_model_age:') and stage == 'prompt_model_age':
         selected = action.split(':', 1)[1]
         if selected in ('18-25', '26-40', '41+'):
             context.user_data['prompt_model_age'] = selected
             context.user_data['stage'] = 'prompt_style'
-            await query.message.reply_text('🎨 LANGKAH 4 — Pilih gaya video:', reply_markup=prompt_style_menu(context.user_data.get('prompt_product_type', 'other'), context.user_data.get('prompt_model_presence')))
+            await query.message.reply_text('🎨 LANGKAH 2 — Pilih gaya video:', reply_markup=prompt_style_menu(context.user_data.get('prompt_product_type', 'other'), context.user_data.get('prompt_model_presence')))
     elif action.startswith('prompt_duration:') and stage == 'prompt_duration':
         selected = action.split(':', 1)[1]
         valid_duration_modes = {
@@ -2311,13 +2311,13 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['prompt_duration'] = duration
             context.user_data['prompt_duration_mode'] = duration_mode
             context.user_data['stage'] = 'prompt_language'
-            await query.message.reply_text('🌐 LANGKAH 6 — Pilih bahasa teks pada skrin:', reply_markup=prompt_language_menu())
+            await query.message.reply_text('🌐 LANGKAH 4 — Pilih bahasa teks pada skrin:', reply_markup=prompt_language_menu())
     elif action.startswith('prompt_language:') and stage == 'prompt_language':
         selected = action.split(':', 1)[1]
         if selected in ('Malay', 'English', 'none'):
             context.user_data['prompt_language'] = selected
             context.user_data['stage'] = 'prompt_voiceover'
-            await query.message.reply_text('🎙️ LANGKAH 7 — Skrip atau voiceover adalah pilihan:', reply_markup=prompt_voiceover_menu())
+            await query.message.reply_text('🎙️ LANGKAH 5 — Skrip atau voiceover adalah pilihan:', reply_markup=prompt_voiceover_menu())
     elif action.startswith('prompt_voiceover:') and stage == 'prompt_voiceover':
         selected = action.split(':', 1)[1]
         if selected == 'script':
@@ -2338,7 +2338,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if selected in valid:
             context.user_data['prompt_style'] = selected
             context.user_data['stage'] = 'prompt_duration'
-            await query.message.reply_text('⏱️ LANGKAH 5 — Pilih durasi video:', reply_markup=prompt_duration_menu())
+            await query.message.reply_text('⏱️ LANGKAH 3 — Pilih durasi video:', reply_markup=prompt_duration_menu())
     elif action == 'prompt_idea:yes' and stage == 'prompt_idea_choice':
         context.user_data['stage'] = 'prompt_category'
         await query.message.reply_text(
