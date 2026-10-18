@@ -9,6 +9,7 @@ on:
       - main
     paths:
       - "bot.py"
+      - "gemini_product_image.py"
       - "prompt_catalog.py"
       - "prompt_engine.py"
       - "prompts/prompt_library.json"
@@ -27,7 +28,7 @@ jobs:
         with:
           python-version: "3.11"
       - name: Check Python syntax
-        run: python -m py_compile bot.py prompt_catalog.py prompt_engine.py
+        run: python -m py_compile bot.py prompt_catalog.py prompt_engine.py gemini_product_image.py
       - name: Validate prompt library structure
         run: |
           python - <<'PY'

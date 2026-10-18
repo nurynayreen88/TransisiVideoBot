@@ -21,6 +21,7 @@ from storyboard_overlay import apply_overlay, make_handwriting_labels
 from gemini_vision import describe_photo
 from gemini_storyboard import generate_storyboard
 from gemini_storyboard_image import generate_storyboard_sheet, GeminiStoryboardImageError
+from gemini_product_image import generate_product_reference_image, GeminiProductImageError
 from prompt_engine import build_prompt
 from prompt_catalog import choices as storyboard_styles
 
@@ -2790,6 +2791,43 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                         chunk,
                         reply_markup=video_actions if chunk_index == len(chunks) - 1 else None
                     )
+    elif action == 'prompt_generate_image':
+        image_prompt = context.user_data.get('prompt_image_ready', '').strip()
+        image_ids = context.user_data.get('prompt_reference_photos', [])
+        if not image_prompt or not image_ids:
+            await query.message.reply_text(
+                '⚠️ Prompt imej atau gambar produk asal tiada. Mulakan prompt baharu dan muat naik gambar produk dahulu.'
+            )
+            return
+        waiting = await query.message.reply_text(
+            '⏳ GEMINI IMAGE — 0%\\nMenjana satu imej rujukan berdasarkan foto produk asal. Caj API mungkin dikenakan.'
+        )
+        try:
+            telegram_file = await context.bot.get_file(image_ids[0])
+            source_bytes = bytes(await telegram_file.download_as_bytearray())
+            if not source_bytes:
+                raise GeminiProductImageError('Gambar produk tidak dapat dimuat turun daripada Telegram.')
+            await progress_update(waiting, 35, 'Gemini sedang mengolah latar dan pencahayaan...')
+            generated = await asyncio.to_thread(
+                generate_product_reference_image, source_bytes, image_prompt
+            )
+            image_file = BytesIO(generated)
+            image_file.name = 'KLIPPO_GEMINI_PRODUCT_REFERENCE.png'
+            await query.message.reply_photo(
+                photo=image_file,
+                caption='🖼️ IMEJ RUJUKAN PRODUK SIAP\\nGunakan imej ini bersama prompt video. Semak dahulu bahawa warna, bentuk, corak dan logo produk kekal tepat seperti foto asal.'
+            )
+            await progress_update(waiting, 100, 'Imej rujukan siap.')
+        except GeminiProductImageError as exc:
+            await query.message.reply_text('⚠️ Imej tidak berjaya dijana. ' + str(exc))
+        except Exception:
+            logging.exception('Gemini product image generation failed')
+            await query.message.reply_text('⚠️ Imej tidak berjaya dijana kali ini. Prompt asal masih tersedia; cuba lagi kemudian.')
+        finally:
+            try:
+                await waiting.delete()
+            except Exception:
+                pass
     elif action == 'prompt_generate:confirm' and context.user_data.get('stage') == 'prompt_confirm':
         motion = context.user_data.get('prompt_motion_choice', 'push')
         motions = {'auto': 'Choose the simplest camera movement best suited to the product and shot; prefer a gentle push-in for detail, a slow side slide for a full product view, or a locked camera when movement risks changing product details. Keep movement subtle and preserve exact product geometry.', 'orbit': 'A controlled 30-degree camera arc around the product, not a full 360-degree rotation; preserve the visible product geometry.', 'push': 'A slow forward camera push-in toward the product to reveal texture and details; avoid digital warping and preserve product geometry.', 'pull': 'A slow camera pull-back away from the product to reveal its full shape and surrounding scene; preserve proportions.', 'side': 'A smooth horizontal left-to-right camera slide with stable product proportions.', 'dolly': 'A slow physical-feeling forward dolly-in with gentle natural parallax; no object deformation.', 'low': 'A restrained low-angle camera view looking slightly upward at the product; preserve the reference design and proportions.', 'static': 'A locked camera with subtle studio lighting changes only; keep the product clear and stable.'}
