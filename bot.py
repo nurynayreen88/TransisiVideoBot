@@ -1938,13 +1938,14 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data['prompt_reference_photos'] = []
         context.user_data['stage'] = 'prompt_shopee_link'
         await query.message.reply_text(
-            '🔗 MASUKKAN PAUTAN PRODUK SHOPEE\\n\\n'
+            '🔗 MASUKKAN PAUTAN PRODUK SHOPEE\n\n'
             'Tampal pautan Shopee Malaysia — pautan panjang atau pautan pendek s.shopee.com.my diterima. '
             'KLIPPO akan cuba menggunakan pautan sebagai rujukan. Jika akses automatik disekat, bot tidak akan mereka-reka butiran produk.',
             reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('↩️ Kembali', callback_data='prompt')], [InlineKeyboardButton('🏠 Menu Utama', callback_data='home')]])
         )
     elif action == 'prompt_link_skip_details' and stage == 'prompt_details_text':
         link = context.user_data.get('shopee_url', '')
+        context.user_data['prompt_product_name'] = 'product referenced by the Shopee link (details not verified)'
         context.user_data['prompt_product'] = (
             'Shopee product reference URL: ' + link + chr(10) +
             'Use the URL only as a reference. Do not invent product specifications that cannot be verified.'
@@ -3132,6 +3133,7 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await update.message.reply_text('⚠️ Pautan tidak dikenali. Tampal URL halaman produk Shopee Malaysia yang lengkap.')
             return
         context.user_data['shopee_url'] = link
+        context.user_data['prompt_product_name'] = 'product referenced by the Shopee link (details not verified)'
         context.user_data['prompt_product'] = 'Shopee product reference URL: ' + link
         context.user_data['prompt_vision'] = ''
         context.user_data['stage'] = 'prompt_details_text'
@@ -3148,6 +3150,8 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
         link = context.user_data.get('shopee_url', '')
         if details.lower() in ('tak pasti', 'tak tahu', 'skip', 'guna pautan sahaja'):
             details = 'Use the supplied URL only as a reference. Do not invent product specifications that cannot be verified.'
+        if link and details and not details.lower().startswith('use the supplied url only'):
+            context.user_data['prompt_product_name'] = details[:240]
         context.user_data['prompt_product'] = (
             'Shopee product reference URL: ' + link + chr(10) + 'User-provided product details: ' + details[:600]
             if link else details[:600]
