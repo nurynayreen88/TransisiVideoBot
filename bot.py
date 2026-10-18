@@ -555,6 +555,9 @@ def prompt_creative_settings(user_data, include_audio=True):
         'Model direction: ' + model,
         'Product fidelity: treat the user-uploaded product photo(s) as the source of truth; preserve visible colour, shape, print, packaging, logo and proportions. Do not invent unseen details or product claims.',
         'Video format: vertical 9:16. Keep one coherent visual story and continuous product identity across all panels.',
+        'Photorealism: the entire scene and background must look like a real location captured by a professional camera, never CGI, 3D render, illustration, game graphics or an obviously AI-generated scene. Use believable real-world materials, natural surface texture, correct scale and perspective, physically plausible architecture and objects, realistic depth of field, natural light falloff, accurate reflections and soft contact shadows.',
+        'Background/location: render the selected setting as a real physical environment within the video itself. Integrate the product naturally into that environment with correct perspective, scale, lighting direction, colour temperature and contact shadows. Do not create, paste in, or show a separate generated background image; do not use a fake green-screen, flat cut-out backdrop or floating product unless explicitly requested.',
+        'Realism safeguards: avoid warped furniture or architecture, duplicated/melting objects, impossible reflections, inconsistent shadows, overly smooth plastic-looking surfaces, excessive bokeh, unnatural saturation and abrupt background changes between shots. Keep the background believable and slightly unobtrusive so the product remains the visual focus.',
     ]
     if include_audio:
         language = user_data.get('prompt_language', 'Malay')
