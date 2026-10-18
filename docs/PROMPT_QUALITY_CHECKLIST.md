@@ -126,7 +126,7 @@ The initial scan found a small number of prompts that did not contain the exact 
 - [x] `bags_editorial_flatlay_v1` — stationary bag with camera movement; close-ups only of details actually visible.
 - [x] Each override defines four timed shots across exactly 10 seconds and aligns the written prompt with the storyboard.
 - [x] Original IDs and the master library are preserved; only the additive override file changes for these prompts.
-- [ ] Run CI against the current `main` base before merging.
+- [x] CI passed against the current `main` baseline before merge.
 - [ ] Visually inspect generated clips for handle/strap physics, hand contact, product geometry, contact shadows and final-frame continuity. Text/CI review is not a visual-generation PASS.
 
 **Quality rule:** Do not infer hidden compartments, material, capacity, durability, brand marks or features from a generic bag name. Keep actions conditional where the product's visible design is not known.
