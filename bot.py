@@ -1929,9 +1929,29 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             reply_markup=InlineKeyboardMarkup([
                 [InlineKeyboardButton('🎥 Jana Prompt Video', callback_data='prompt_mode:video')],
                 [InlineKeyboardButton('🧩 Jana Prompt Storyboard', callback_data='prompt_mode:storyboard')],
+                [InlineKeyboardButton('🔗 Guna Pautan Produk Shopee', callback_data='prompt_link_input')],
                 [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]
             ])
         )
+    elif action == 'prompt_link_input':
+        context.user_data['prompt_mode'] = 'normal'
+        context.user_data['prompt_reference_photos'] = []
+        context.user_data['stage'] = 'prompt_shopee_link'
+        await query.message.reply_text(
+            '🔗 MASUKKAN PAUTAN PRODUK SHOPEE\n\n'
+            'Tampal pautan Shopee Malaysia — pautan panjang atau pautan pendek s.shopee.com.my diterima. '
+            'Pautan akan dimasukkan ke dalam prompt sebagai rujukan. Untuk hasil lebih tepat, tambah nama atau ciri produk jika diketahui; pautan sahaja tidak menjamin AI pilihan anda dapat membuka halaman.',
+            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('↩️ Kembali', callback_data='prompt')], [InlineKeyboardButton('🏠 Menu Utama', callback_data='home')]])
+        )
+    elif action == 'prompt_link_skip_details' and stage == 'prompt_details_text':
+        link = context.user_data.get('shopee_url', '')
+        context.user_data['prompt_product_name'] = 'product referenced by the Shopee link (details not verified)'
+        context.user_data['prompt_product'] = (
+            'Shopee product reference URL: ' + link + chr(10) +
+            'Use the URL only as a reference. Do not invent product specifications that cannot be verified.'
+        )
+        context.user_data['stage'] = 'prompt_scene'
+        await query.message.reply_text('➡️ Kita teruskan dengan pautan sebagai rujukan. Pilih latar video:', reply_markup=prompt_scene_menu())
     elif action.startswith('prompt_mode:'):
         selected_mode = action.split(':', 1)[1]
         if selected_mode not in ('video', 'storyboard'):
@@ -2264,7 +2284,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # Return only for actions handled by the first chain. Video workflow
     # callbacks must continue into the second chain.
     if action in ('admin_pending', 'admin', 'storyboard', 'make', 'prompt', 'prompt_categories', 'prompt_images_done') or action.startswith(
-        ('admin_approve:', 'admin_reject:', 'prompt_mode:', 'prompt_flow:', 'prompt_model:', 'prompt_model_count:', 'prompt_model_gender:', 'prompt_model_hijab:', 'prompt_model_ethnicity:', 'prompt_model_age:', 'prompt_language:', 'prompt_voiceover:', 'prompt_type:', 'prompt_product_type:', 'prompt_duration:',
+        ('admin_approve:', 'admin_reject:', 'prompt_link_skip_details', 'prompt_mode:', 'prompt_flow:', 'prompt_model:', 'prompt_model_count:', 'prompt_model_gender:', 'prompt_model_hijab:', 'prompt_model_ethnicity:', 'prompt_model_age:', 'prompt_language:', 'prompt_voiceover:', 'prompt_type:', 'prompt_product_type:', 'prompt_duration:',
          'prompt_style:', 'prompt_idea:', 'prompt_details:', 'video_input:', 'prompt_input:', 'pcat:', 'ptpl:')
     ):
         return
@@ -3063,13 +3083,20 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
             reset(context)
             context.user_data['prompt_style'] = 'auto'
             context.user_data['prompt_concept'] = ''
+            context.user_data['prompt_library_id'] = ''
+            context.user_data['prompt_library_storyboard'] = []
             context.user_data['prompt_product_type'] = 'other'
             context.user_data['prompt_mode'] = 'normal'
             context.user_data['prompt_reference_photos'] = []
-            context.user_data['stage'] = 'prompt_images'
+            context.user_data['stage'] = 'prompt_mode_select'
             await update.message.reply_text(
-                '✍️ KLIPPO | JANA PROMPT VIDEO\n\nHantar 1 hingga 4 gambar produk yang jelas. Tekan “Selesai Hantar Gambar” selepas selesai. Klippo akan menyediakan satu prompt video lengkap dengan susunan babak, aksi dan pergerakan kamera.',
-                reply_markup=prompt_images_start_menu()
+                '✍️ KLIPPO | JANA PROMPT\n\nPilih cara masukkan rujukan produk:',
+                reply_markup=InlineKeyboardMarkup([
+                    [InlineKeyboardButton('🎥 Jana Prompt Video (guna gambar)', callback_data='prompt_mode:video')],
+                    [InlineKeyboardButton('🧩 Jana Prompt Storyboard (guna gambar)', callback_data='prompt_mode:storyboard')],
+                    [InlineKeyboardButton('🔗 Guna Pautan Produk Shopee', callback_data='prompt_link_input')],
+                    [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]
+                ])
             )
         elif action == 'subscription':
             await update.message.reply_text('💎 LANGGANAN KLIPPO\n\nPelan Penyokong Awal: RM5 / 30 hari, sehingga 30 video sebulan. Pengaktifan manual selepas resit disemak.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📱 Papar QR DuitNow', callback_data='subscription_qr')]]))
@@ -3101,17 +3128,34 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
         hook = verified_video_hook(info)
         await update.message.reply_text(('✅ Cadangan hook: ' + hook if hook else 'Maklumat produk tidak cukup jelas; video akan dijana tanpa hook.'), reply_markup=photos_menu())
     elif stage == 'prompt_shopee_link':
-        link = _shopee_link(value)
+        link = _shopee_link(value, allow_short=True)
         if not link:
-            await update.message.reply_text('⚠️ Pautan tidak dikenali. Tampal URL halaman produk Shopee Malaysia yang lengkap.')
+            await update.message.reply_text('⚠️ Pautan tidak dikenali. Tampal URL produk Shopee Malaysia atau pautan pendek rasmi s.shopee.com.my.')
             return
         context.user_data['shopee_url'] = link
-        context.user_data['prompt_product'] = 'Product reference URL (do not invent unverified specifications): ' + link
+        context.user_data['prompt_product_name'] = 'product referenced by the Shopee link (details not verified)'
+        context.user_data['prompt_product'] = 'Shopee product reference URL: ' + link
         context.user_data['prompt_vision'] = ''
         context.user_data['stage'] = 'prompt_details_text'
-        await update.message.reply_text('✅ Pautan diterima. Untuk prompt yang tepat, masukkan nama produk dan ciri utama daripada halaman Shopee (contoh: jenama, model, warna). Pautan sahaja tidak menjamin AI boleh membaca halaman produk.')
+        await update.message.reply_text(
+            '✅ Pautan Shopee diterima. Jika tahu, masukkan nama produk atau ciri penting. '
+            'Jika mahu teruskan dengan pautan sahaja, taip “tak pasti”.',
+            reply_markup=InlineKeyboardMarkup([
+                [InlineKeyboardButton('➡️ Teruskan dengan pautan sahaja', callback_data='prompt_link_skip_details')],
+                [InlineKeyboardButton('🏠 Menu Utama', callback_data='home')]
+            ])
+        )
     elif stage == 'prompt_details_text':
-        context.user_data['prompt_product'] = value[:600]
+        details = value.strip()
+        link = context.user_data.get('shopee_url', '')
+        if details.lower() in ('tak pasti', 'tak tahu', 'skip', 'guna pautan sahaja'):
+            details = 'Use the supplied URL only as a reference. Do not invent product specifications that cannot be verified.'
+        if link and details and not details.lower().startswith('use the supplied url only'):
+            context.user_data['prompt_product_name'] = details[:240]
+        context.user_data['prompt_product'] = (
+            'Shopee product reference URL: ' + link + chr(10) + 'User-provided product details: ' + details[:600]
+            if link else details[:600]
+        )
         context.user_data['stage'] = 'prompt_scene'
         await update.message.reply_text('🎨 Maklumat disimpan. Pilih latar video:', reply_markup=prompt_scene_menu())
     elif stage == 'prompt_scene':
@@ -3122,60 +3166,100 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 
-def _shopee_link(value):
-    """Only accept an explicit Shopee product URL; never fetch arbitrary pasted URLs."""
+def _shopee_link(value, allow_short=False):
+    """Validate Shopee Malaysia product URLs; short links are opt-in."""
     from urllib.parse import urlparse
-    for candidate in re.findall(r'https?://[^\\s<>]+', value):
-        candidate = candidate.rstrip('.,);]')
+    for candidate in re.findall(r'https?://[^\s<>]+', value):
+        candidate = candidate.rstrip('.,);]\'"')
         parsed = urlparse(candidate)
         host = (parsed.hostname or '').lower()
-        if parsed.scheme == 'https' and (host == 'shopee.com.my' or host.endswith('.shopee.com.my')) and (re.search(r'/product/\\d+/\\d+', parsed.path) or re.search(r'-i\\.\\d+\\.\\d+', parsed.path)):
+        if parsed.scheme != 'https' or parsed.username or parsed.password:
+            continue
+        is_shopee_domain = host in ('shopee.com.my', 'shopee.my') or host.endswith('.shopee.com.my')
+        is_short_link = host == 's.shopee.com.my' and bool(parsed.path.strip('/'))
+        is_product_path = bool(
+            re.search(r'/product/\d+/\d+', parsed.path) or
+            re.search(r'-i\.\d+\.\d+', parsed.path)
+        )
+        if is_shopee_domain and (is_product_path or (allow_short and is_short_link)):
             return candidate
     return ''
 
 
 def _shopee_public_photo(url, destination, description):
-    """Best-effort public OG photo only; no login, private API or image AI."""
+    """Best-effort public product image extraction; never logs in or calls private APIs."""
     from urllib.request import Request, urlopen
     from urllib.parse import urlparse
+    from html import unescape
     from PIL import Image
+
     if not _shopee_link(url):
         return False
+
     try:
-        req = Request(url, headers={'User-Agent': 'Mozilla/5.0 KLIPPO/1.0'})
+        req = Request(url, headers={'User-Agent': 'Mozilla/5.0 (compatible; KLIPPO/1.0)'})
         with urlopen(req, timeout=7) as response:
-            if not (response.geturl().startswith('https://shopee.com.my/') or response.geturl().startswith('https://www.shopee.com.my/')):
+            final_url = response.geturl()
+            final = urlparse(final_url)
+            final_host = (final.hostname or '').lower()
+            if final.scheme != 'https' or not (
+                final_host == 'shopee.com.my' or final_host == 'www.shopee.com.my'
+                or final_host.endswith('.shopee.com.my')
+            ):
                 return False
             if 'text/html' not in response.headers.get('Content-Type', '').lower():
                 return False
             page = response.read(350000).decode('utf-8', 'replace')
-        from html import unescape
+
         def meta(name):
-            for tag in re.findall(r'<meta\\b[^>]*>', page, re.I):
-                if re.search(r'(?:property|name)=[\\"\\\']'+re.escape(name)+r'[\\"\\\']', tag, re.I):
-                    match = re.search(r'content=[\\"\\\']([^\\"\\\']+)', tag, re.I)
-                    if match:
-                        return unescape(match.group(1))
+            # Parse attributes independently so order and quote style do not matter.
+            for tag in re.findall(r'<meta\b[^>]*>', page, re.I):
+                attrs = {}
+                for match in re.finditer(
+                    r"""([a-zA-Z_:][-a-zA-Z0-9_:.]*)\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))""",
+                    tag,
+                    re.I,
+                ):
+                    key = match.group(1).lower()
+                    attr_value = next((v for v in match.groups()[1:] if v is not None), '')
+                    attrs[key] = unescape(attr_value)
+                if attrs.get('property', '').lower() == name.lower() or attrs.get('name', '').lower() == name.lower():
+                    return attrs.get('content', '')
             return ''
-        title, image_url = meta('og:title'), meta('og:image')
-        words = [w.lower() for w in re.findall(r'[A-Za-z0-9]{4,}', description) if not w.isdigit()]
-        if not title or not image_url or (words and not any(w in title.lower() for w in words[:8])):
+
+        title = meta('og:title')
+        image_url = meta('og:image')
+        if not title or not image_url:
             return False
-        parsed = urlparse(image_url)
-        if parsed.scheme != 'https' or not (parsed.hostname or '').lower().endswith(('.shopee.com.my', '.shopee.sg', '.shopeemobile.com', '.shopeeusercontent.com')):
+
+        # If a product name was supplied, reject clearly unrelated page metadata.
+        words = [w.lower() for w in re.findall(r'[A-Za-z0-9]{4,}', description or '') if not w.isdigit()]
+        if words and not any(w in title.lower() for w in words[:8]):
             return False
-        with urlopen(Request(image_url, headers={'User-Agent': 'Mozilla/5.0'}), timeout=7) as response:
+
+        parsed_image = urlparse(image_url)
+        image_host = (parsed_image.hostname or '').lower()
+        allowed_image_host = any(
+            image_host == suffix.lstrip('.') or image_host.endswith(suffix)
+            for suffix in ('.shopee.com.my', '.shopee.sg', '.shopeemobile.com', '.shopeeusercontent.com')
+        )
+        if parsed_image.scheme != 'https' or not allowed_image_host:
+            return False
+
+        with urlopen(Request(image_url, headers={'User-Agent': 'Mozilla/5.0 KLIPPO/1.0'}), timeout=7) as response:
             if not response.headers.get('Content-Type', '').lower().startswith('image/'):
                 return False
             data = response.read(6000001)
         if len(data) > 6000000:
             return False
+
         with Image.open(BytesIO(data)) as opened:
             opened.verify()
         with Image.open(BytesIO(data)) as opened:
             if min(opened.size) < 350:
                 return False
             ImageOps.exif_transpose(opened).convert('RGB').save(destination, 'JPEG', quality=92)
+        logging.info('Public Shopee product image extracted; title=%r', title[:160])
         return True
     except Exception as exc:
         logging.info('Public Shopee image unavailable: %s', exc)
