@@ -563,19 +563,26 @@ def prompt_duration_menu():
 # Keep the style picker relevant to the selected product instead of showing
 # unrelated options (for example, Mirror Selfie for a food product).
 PRODUCT_STYLE_KEYS = {
-    'fashion': {'mirror_selfie', 'fashion_editorial', 'golden_hour', 'lifestyle', 'ugc_review', 'dynamic', 'fast_cut', 'reaction_hook', 'creative_reveal', 'white_doodle', 'cinematic', 'luxury', 'minimal', 'playful_viral', 'studio_360_safe'},
-    'bag': {'handbag_showcase', 'bag_detail_macro', 'bag_flatlay', 'bag_daily_carry', 'bag_tabletop_reveal', 'sling_bag_lifestyle', 'backpack_demo', 'wallet_luxury_macro', 'wallet_open_close', 'wallet_daily_carry', 'wallet_flatlay', 'wallet_gift_reveal', 'luxury', 'flatlay', 'unboxing', 'lifestyle', 'ugc_review', 'studio_360_safe', 'creative_reveal', 'fast_cut', 'white_doodle', 'cinematic', 'minimal', 'dynamic'},
-    'wallet': {'wallet_luxury_macro', 'wallet_open_close', 'wallet_daily_carry', 'wallet_flatlay', 'wallet_gift_reveal', 'luxury', 'flatlay', 'unboxing', 'studio_360_safe', 'minimal', 'cinematic'},
-    'hijab': {'mirror_selfie', 'fashion_editorial', 'golden_hour', 'lifestyle', 'ugc_review', 'dynamic', 'fast_cut', 'reaction_hook', 'creative_reveal', 'white_doodle', 'cinematic', 'luxury', 'minimal'},
-    'shoes': {'dynamic', 'fast_cut', 'pov_demo', 'studio_360_safe', 'lifestyle', 'ugc_review', 'creative_reveal', 'white_doodle', 'cinematic', 'minimal', 'playful_viral'},
-    'beauty': {'beauty_macro', 'ugc_review', 'luxury', 'cinematic', 'white_doodle', 'minimal', 'fast_cut', 'creative_reveal', 'lifestyle', 'flatlay', 'unboxing'},
-    'food': {'food_appetite', 'flatlay', 'lifestyle', 'dynamic', 'fast_cut', 'creative_reveal', 'white_doodle', 'minimal', 'ugc_review', 'nature_fresh', 'playful_viral'},
-    'gadget': {'tech_demo', 'unboxing', 'cinematic', 'minimal', 'fast_cut', 'creative_reveal', 'ugc_review', 'flatlay', 'luxury', 'studio_360_safe', 'dynamic'},
-    'home': {'cozy_home', 'flatlay', 'lifestyle', 'creative_reveal', 'cinematic', 'minimal', 'fast_cut', 'pov_demo', 'unboxing', 'white_doodle', 'ugc_review'},
-    'accessory': {'luxury', 'beauty_macro', 'flatlay', 'cinematic', 'studio_360_safe', 'fashion_editorial', 'golden_hour', 'white_doodle', 'minimal', 'unboxing'},
+    'fashion': {'fashion_editorial', 'golden_hour', 'mirror_selfie', 'lifestyle', 'ugc_review', 'creative_reveal', 'studio_360_safe', 'minimal', 'luxury', 'white_doodle'},
+    'bag': {'handbag_showcase', 'bag_detail_macro', 'bag_flatlay', 'bag_daily_carry', 'bag_tabletop_reveal', 'sling_bag_lifestyle', 'backpack_demo', 'wallet_luxury_macro', 'wallet_open_close', 'wallet_daily_carry', 'wallet_flatlay', 'wallet_gift_reveal', 'white_doodle', 'minimal', 'luxury', 'studio_360_safe'},
+    'wallet': {'wallet_luxury_macro', 'wallet_open_close', 'wallet_daily_carry', 'wallet_flatlay', 'wallet_gift_reveal', 'white_doodle', 'minimal', 'luxury', 'studio_360_safe'},
+    'hijab': {'fashion_editorial', 'golden_hour', 'lifestyle', 'ugc_review', 'creative_reveal', 'white_doodle', 'minimal', 'luxury'},
+    'shoes': {'studio_360_safe', 'pov_demo', 'lifestyle', 'ugc_review', 'creative_reveal', 'fast_cut', 'white_doodle', 'minimal'},
+    'beauty': {'beauty_macro', 'ugc_review', 'luxury', 'minimal', 'creative_reveal', 'flatlay', 'unboxing', 'white_doodle'},
+    'food': {'food_appetite', 'nature_fresh', 'flatlay', 'lifestyle', 'creative_reveal', 'playful_viral', 'white_doodle', 'minimal'},
+    'gadget': {'tech_demo', 'studio_360_safe', 'unboxing', 'minimal', 'creative_reveal', 'flatlay', 'white_doodle'},
+    'home': {'cozy_home', 'pov_demo', 'flatlay', 'lifestyle', 'creative_reveal', 'unboxing', 'minimal', 'white_doodle'},
+    'accessory': {'luxury', 'beauty_macro', 'flatlay', 'studio_360_safe', 'fashion_editorial', 'minimal', 'unboxing', 'white_doodle'},
+    'toy': {'playful_viral', 'funny_ad', 'pov_demo', 'unboxing', 'creative_reveal', 'studio_360_safe', 'minimal', 'white_doodle'},
+    'book_stationery': {'flatlay', 'minimal', 'lifestyle', 'creative_reveal', 'fast_cut', 'unboxing', 'white_doodle'},
+    'sports': {'dynamic', 'pov_demo', 'fast_cut', 'lifestyle', 'studio_360_safe', 'ugc_review', 'minimal', 'white_doodle'},
+    'pet': {'lifestyle', 'pov_demo', 'playful_viral', 'studio_360_safe', 'minimal', 'white_doodle'},
+    'automotive': {'tech_demo', 'studio_360_safe', 'pov_demo', 'minimal', 'creative_reveal', 'white_doodle'},
+    'baby': {'cozy_home', 'lifestyle', 'flatlay', 'minimal', 'unboxing', 'white_doodle'},
+    'travel': {'studio_360_safe', 'lifestyle', 'flatlay', 'unboxing', 'minimal', 'white_doodle'},
+    'office': {'flatlay', 'minimal', 'lifestyle', 'creative_reveal', 'unboxing', 'white_doodle'},
     'other': {'cinematic', 'minimal', 'dynamic', 'luxury', 'lifestyle', 'ugc_review', 'flatlay', 'unboxing', 'creative_reveal', 'studio_360_safe', 'white_doodle', 'fast_cut', 'playful_viral'},
 }
-
 def prompt_style_menu(product_type='other'):
     available = storyboard_styles()
     allowed = PRODUCT_STYLE_KEYS.get(product_type, PRODUCT_STYLE_KEYS['other'])
@@ -585,9 +592,11 @@ def prompt_style_menu(product_type='other'):
     doodle_option = next(((key, label) for key, label in available if key == 'white_doodle'), None)
     if doodle_option and not any(key == 'white_doodle' for key, _ in matching):
         matching.append(doodle_option)
-    # If catalog entries are customized, never leave the user with an empty style menu.
+    # Never leak unrelated styles into a product-specific menu. If catalog entries
+    # are customized and no allowed style remains, use a small safe universal set.
     if not matching:
-        matching = available
+        safe_keys = {'minimal', 'cinematic', 'studio_360_safe', 'white_doodle'}
+        matching = [(key, label) for key, label in available if key in safe_keys]
     rows = [[InlineKeyboardButton('🎲 Auto (Disyorkan)', callback_data='prompt_style:auto')]]
     rows.extend([[InlineKeyboardButton(label, callback_data='prompt_style:' + key)]
                  for key, label in matching])
