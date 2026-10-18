@@ -30,7 +30,7 @@
 | Product category | Prompts | Current status | Next quality check |
 |---|---:|---|---|
 | Pakaian / Clothing | 63 | BASELINE OK — deeper review pending | Check fabric movement, fit, drape, body anatomy, hijab/clothing continuity and avoid changing garment design. |
-| Beg / Bags | 64 | IN PROGRESS — 3 prompts text-audited | Continue with tabletop pickup, office storyboard and editorial flat lay; visual generation test still pending. |
+| Beg / Bags | 64 | IN PROGRESS — 6 prompts text-audited; 3 have quality overrides | Continue with the next three bag prompts; visual generation test still pending. |
 | Dompet / Wallets | 59 | BASELINE OK — deeper review pending | Check opening/closing hinges, card slots only if visible, hand interaction and scale consistency. |
 | Kasut / Shoes | 62 | PASS for 3 named overrides; remaining prompts NOT AUDITED | Review the other 59 prompts for shoe-specific actions, footwear geometry and plausible foot contact. |
 | Kosmetik & Kecantikan / Beauty | 70 | BASELINE OK — deeper review pending | Check applicator/product compatibility, believable liquid/cream behaviour, packaging continuity and avoid unsupported skin/health claims. |
@@ -61,6 +61,21 @@
 - [ ] Generate representative clips and visually inspect handle/strap stability, hands, bag geometry, shadows and final-frame continuity before claiming end-to-end PASS.
 
 **Next small batch:** `bags_tabletop_pickup_v1`, `bags_office_storyboard_v1`, and `bags_editorial_flatlay_v1`. Check for generic template wording, action/storyboard agreement and category-specific realism.
+
+
+## 2B. Bags audit — batch 2 (text review + ID-preserving overrides)
+
+**Scope:** Three existing handbag prompts reviewed against their actual prompt text and structured storyboard. The review found generic or contradictory actions, so additive overrides were written without changing the master library.
+
+- [x] `bags_tabletop_pickup_v1` — **Tabletop Pick-Up**: corrected the opening to show the bag on a table, specified one plausible lift using an existing handle or supported grip, and added a gentle set-down to close the action.
+- [x] `bags_office_storyboard_v1` — **Office Bag Storyboard**: replaced the generic concept-as-action wording with a concrete ready-to-leave sequence: bag at rest, natural lift, short carry and stable final view.
+- [x] `bags_editorial_flatlay_v1` — **Editorial Flat Lay**: made the bag remain stationary while the camera moves, and restricted close-ups to details actually visible.
+- [x] All three overrides contain four timed shots (0–2s, 2–6s, 6–8s, 8–10s); prompt text and storyboard directions were authored to match.
+- [x] Preserved all three original prompt IDs and the master library; changes are additive in `prompts/prompt_quality_overrides.json`.
+- [ ] Run repository validation/CI and inspect its result before merge.
+- [ ] Generate representative clips and inspect hand contact, handle/strap physics, bag geometry, contact shadows and final-frame continuity. Text review is not a visual-generation PASS.
+
+**Findings addressed:** the tabletop prompt previously opened with a carried view despite describing a table pick-up; the office prompt's signature action repeated a description instead of giving the model a clear physical action; the flat-lay prompt mixed a static editorial concept with possible product rotation. Overrides now specify a single physically motivated action and keep the product design locked.
 
 ## 3. Automated structural audit — current snapshot
 
