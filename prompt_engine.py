@@ -48,7 +48,7 @@ def build_prompt(mode, product, scene, motion, style='auto', duration=10, concep
     # Preserve the historical API behavior: a 20-second call without an explicit
     # split choice still returns two connected 10-second prompts.
     if split is None:
-        split = duration == 20
+        split = duration in (20, 30)
     style = _resolve_auto_style(style, product_type) if mode == 'storyboard' else style
     if split and duration > 10:
         # Generate connected 10-second prompts while retaining the same style and product context.
@@ -115,6 +115,67 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
         style_key, style_name, style_template = resolve(style)
         doodle = style_key == "white_doodle"
         hook = product_hook(product)
+
+        # Keep single 10-second prompts concise enough for one Telegram message.
+        # Retain the selected style, reference safety, timed beats and user concept.
+        if duration in (10, 20, 30) and (duration == 10 or part == 0):
+            if duration == 10 and part >= 2:
+                clip_label = "SECOND CLIP 10s" if part == 2 else "CONTINUATION CLIP 10s"
+                beat_plan = (clip_label + ": 0–2s continue from the exact full-product frame held at the end of the previous clip; "
+                             "2–4s resume the same movement; 4–6s show another visible detail; 6–8s continue in the same setting; "
+                             "8–10s stable full-product hero finish. Do NOT repeat the opening hook. ")
+            elif duration == 10 and part == 1:
+                beat_plan = ("FIRST CLIP 10s: 0–2s establish the product; 2–4s reveal it fully; 4–6s highlight one visible detail; "
+                             "6–8s continue one simple action; 8–10s HOLD the final frame for Part 2. No fade. ")
+            elif duration == 20:
+                beat_plan = ("TIMING: 0–4s clear product reveal; 4–8s show the complete product in its setting; "
+                             "8–12s highlight one genuinely visible detail; 12–16s one subtle category-appropriate action; "
+                             "16–20s stable full-product hero finish. ")
+            elif duration == 30:
+                beat_plan = ("TIMING: 0–6s clear product reveal; 6–12s show the complete product in its setting; "
+                             "12–18s highlight one genuinely visible detail; 18–24s one subtle category-appropriate action; "
+                             "24–30s stable full-product hero finish. ")
+            else:
+                beat_plan = ("TIMING: 0–2s clean reveal; 2–4s show the full product; 4–6s highlight one reference-visible detail; "
+                             "6–8s one subtle product-appropriate action; 8–10s HOLD the final frame in a full-product hero composition. "
+                             + ("Do not perform the main surrounding contour yet. " if doodle else ""))
+            if storyboard_override and isinstance(storyboard_override, (list, tuple)) and len(storyboard_override) == 4:
+                beat_plan = (
+                    "DIRECTOR'S CURATED PREMIUM STORYBOARD: NO ON-SCREEN TEXT. "
+                    + (("CONTINUITY BRIDGE: Resume from Part 1's exact final product frame. "
+                        "CONTINUATION ACTION: Continue the same concept. Do not repeat the opening hook. ")
+                       if part == 2 else "")
+                    + "FOLLOW THESE SELECTED STORYBOARD BEATS IN ORDER: "
+                    + " | ".join(
+                        str(item.get("shot", "")) + ": " + str(item.get("direction", ""))
+                        for item in storyboard_override
+                    ) + ". "
+                )
+            hook_rule = (
+                "OPENING TEXT: Show only this neutral product/category hook, exactly: '" + hook + "'. "
+                if hook and not storyboard_override and part < 2 else
+                ("NO ON-SCREEN HOOK TEXT. Never guess a category, benefit, price, popularity or product name. "
+                 if not hook and not storyboard_override else
+                 "ON-SCREEN TEXT: No text, captions, extra logos or watermark unless explicitly requested. ")
+            )
+            doodle_rule = (
+                "GRAPHICS: Thin white hand-drawn marks may emphasize visible product edges only; never cover the product. "
+                if doodle else ""
+            )
+            concept_rule = ("CREATIVE IDEA: " + concept.strip() + ". " if concept and concept.strip() else "")
+            return (
+                "PROMPT VIDEO — " + str(duration) + " SAAT" + (" | BAHAGIAN " + str(part) if part else "") + "\n"
+                "Vertical 9:16, one realistic product ad, exactly " + str(duration) + " seconds.\n"
+                "PRODUCT: " + product + "\n"
+                + category_direction + "\n"
+                + "STYLE: " + style_name + " — " + style_template[:450] + "\n"
+                + "SETTING: " + scene[:300] + ". CAMERA: " + camera + "\n"
+                + hook_rule + beat_plan + concept_rule[:400] + doodle_rule
+                + "REFERENCE LOCK: Use the uploaded photo as the source of truth. Preserve visible shape, colour, print, packaging, proportions and branding. "
+                "Do not invent features, materials, accessories, unseen angles, claims or text. "
+                "Use natural light and shadows, believable physics, stable product geometry and smooth restrained motion; avoid morphing, flicker, CGI/plastic skin and abrupt scene changes."
+            )
+
         evidence_rules = (
             "REFERENCE IMAGE RULE: The video generator will receive the user's original product photo(s) as visual evidence. "
             "Inspect only details genuinely visible in those reference photo(s), and preserve the product name and spelling supplied by the user. "
