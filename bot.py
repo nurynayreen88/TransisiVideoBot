@@ -2008,7 +2008,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 curated_shots = template.get('storyboard', [])
                 shot_text = ''
                 if isinstance(curated_shots, list) and curated_shots:
-                    shot_text = '\\n\\nPRODUCT-SPECIFIC SHOT IDEAS FROM THE KLIPPO LIBRARY:\\n' + '\\n'.join(
+                    shot_text = '\n\nPRODUCT-SPECIFIC SHOT IDEAS FROM THE KLIPPO LIBRARY:\n' + '\n'.join(
                         (
                             f"{index + 1}. {shot.get('time', '')} | {shot.get('shot', '')} — {shot.get('direction', '')}"
                             if isinstance(shot, dict) else f"{index + 1}. {shot}"
