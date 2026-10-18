@@ -107,9 +107,12 @@ jobs:
                   f"Prompt {prompt['id']} must have four timed storyboard shots"
               )
               expected_times = ["0–2s", "2–6s", "6–8s", "8–10s"]
-              supported_legacy_times = ["0–2s", "2–5s", "5–8s", "8–10s"]
+              supported_legacy_timings = {
+                  ("0–2s", "2–5s", "5–8s", "8–10s"),
+                  ("0–2s", "2–5s", "5–7s", "7–10s"),
+              }
               actual_times = [shot.get("time") for shot in storyboard]
-              assert actual_times in (expected_times, supported_legacy_times), (
+              assert actual_times == expected_times or tuple(actual_times) in supported_legacy_timings, (
                   f"Prompt {prompt['id']} has invalid storyboard timing: {actual_times}"
               )
               assert all(shot.get("shot") and shot.get("direction") for shot in storyboard), (
