@@ -710,28 +710,28 @@
       "label": "Luxury Detail Close-Up",
       "duration_seconds": 10,
       "style": "premium_product",
-      "description": "Rakaman dekat pada material, jahitan dan perkakasan yang benar-benar kelihatan.",
-      "prompt": "Create a 10-second vertical 9:16 product advertisement for the product name supplied by the user, in the Beg category. Creative direction: Rakaman dekat pada material, jahitan dan perkakasan yang benar-benar kelihatan. Keep the named product as the clear hero. Use plausible generic visuals and natural camera movement. This prompt is generated from text only; no uploaded image or AI image analysis is used. Do not invent exact materials, specifications, features, compartments, included accessories, product benefits, brand marks or labels that are not stated in the product name. STRICT OUTPUT RULES: exactly 10 seconds, vertical 9:16, one cohesive product video, no on-screen text, no captions, no added logos, no watermark, no morphing, no floating objects, no unrealistic transformations. Keep the product presentation consistent and finish with a clean hero frame.\n\nPREMIUM STORYBOARD — EXACTLY 10 SECONDS:\n0–2s | Opening / premium hook: Start with a premium silhouette reveal of the named bag or wallet against a carefully lit neutral set, leaving clear space around its complete shape.\n2–6s | Signature action: Perform the concept's single signature action—lift, carry, open, arrange or place the item—while preserving strap placement, closure, proportions and visible design. Concept-specific signature for \"Luxury Detail Close-Up\": Rakaman dekat pada material, jahitan dan perkakasan yang benar-benar kelihatan. Keep this exact concept as the central action while preserving product identity and making no unsupported claims.\n6–8s | Detail insert: Make the signature shot a slow, controlled macro pass over the specific visible texture or construction relevant to this concept; never fabricate unseen details.\n8–10s | Hero close: Return to a composed three-quarter or top-down hero frame suited to the concept; stop motion cleanly and hold the entire product in focus.\n\nCINEMATOGRAPHY & CONTINUITY: premium commercial lighting, deliberate camera movement, realistic depth of field, natural contact shadows, controlled highlights, clean transitions, and consistent product geometry from start to finish. One coherent scene; no jumpy edits, warping, floating objects or sudden background changes. Use a subtle instrumental background score only, mixed below any natural product sounds; no dialogue or voice-over unless explicitly requested. No on-screen text, captions, added logos or watermarks.",
+      "description": "Rakaman makro terkawal menonjolkan satu atau dua butiran beg yang kelihatan—seperti kemasan tepi, jahitan atau perkakasan—tanpa membuat dakwaan tentang bahan.",
+      "prompt": "Create an exactly 10-second vertical 9:16 live-action-style product video for the user-supplied product name in the handbag category. Creative direction: a premium macro showcase that feels tactile and photographic, not glossy CGI. Place one bag on a stable, uncluttered surface with soft directional light.\n\nPRODUCT ACCURACY: Keep the complete bag's silhouette, colour, print, visible seams, handle attachments, closure and hardware consistent with the product name. Describe no material or quality as leather, suede, metal or luxury-grade unless explicitly stated. Do not invent logos, stitching patterns, compartments, labels or hidden construction. Only feature details that are actually specified or reasonably visible from the named product; text alone does not confirm details that were not supplied.\n\n10-SECOND SHOT PLAN:\n0–2s | Full-product anchor: begin with the entire bag in a still three-quarter view so viewers understand its shape before the close-up.\n2–5s | Slow macro pass: move the camera slowly along one visible edge or seam. Keep the focal plane steady and the surface texture natural; do not simulate extra grain or stitching.\n5–7s | Hardware/detail glint: shift focus to one existing closure, buckle, handle attachment or other visible feature if present. Keep highlights soft and reflections physically plausible.\n7–10s | Premium hero return: pull back smoothly to the complete bag in the same position. Hold the final composition with the shape, colour and details unchanged.\n\nREALISM & CAMERA: macro photography with believable depth of field, restrained highlights, natural contact shadow, realistic texture, stable camera movement and consistent exposure. The bag remains physically supported by the surface and does not rotate unless the camera itself moves. Optional soft instrumental music only, no voice-over unless requested.\n\nAVOID: exaggerated sparkle, fake metallic shine, invented grain, hyper-sharpening, artificial texture, impossible reflections, warped seams, moving hardware, product morphing, floating bag, sudden focus jumps, flicker, jitter, text overlays, captions, added logos and watermarks. The final frame must show the same complete bag clearly.",
       "storyboard": [
         {
           "time": "0–2s",
-          "shot": "Opening / premium hook",
-          "direction": "Start with a premium silhouette reveal of the named bag or wallet against a carefully lit neutral set, leaving clear space around its complete shape."
+          "shot": "Full bag context",
+          "direction": "Show the entire bag in a still three-quarter view on a stable surface, with its real silhouette and colour easy to read."
         },
         {
-          "time": "2–6s",
-          "shot": "Signature action",
-          "direction": "Perform the concept's single signature action—lift, carry, open, arrange or place the item—while preserving strap placement, closure, proportions and visible design. Concept-specific signature for \"Luxury Detail Close-Up\": Rakaman dekat pada material, jahitan dan perkakasan yang benar-benar kelihatan. Keep this exact concept as the central action while preserving product identity and making no unsupported claims."
+          "time": "2–5s",
+          "shot": "Controlled macro pass",
+          "direction": "Move slowly along one visible edge or seam; keep texture natural and do not invent grain, stitching or material claims."
         },
         {
-          "time": "6–8s",
-          "shot": "Detail insert",
-          "direction": "Make the signature shot a slow, controlled macro pass over the specific visible texture or construction relevant to this concept; never fabricate unseen details."
+          "time": "5–7s",
+          "shot": "Existing hardware detail",
+          "direction": "Shift focus to one visible closure, buckle or handle attachment if present; use soft, plausible reflections without exaggerated sparkle."
         },
         {
-          "time": "8–10s",
-          "shot": "Hero close",
-          "direction": "Return to a composed three-quarter or top-down hero frame suited to the concept; stop motion cleanly and hold the entire product in focus."
+          "time": "7–10s",
+          "shot": "Complete product return",
+          "direction": "Pull back smoothly to the same complete bag in the same position and hold a clean final frame."
         }
       ]
     },
