@@ -30,7 +30,7 @@
 | Product category | Prompts | Current status | Next quality check |
 |---|---:|---|---|
 | Pakaian / Clothing | 63 | BASELINE OK — deeper review pending | Check fabric movement, fit, drape, body anatomy, hijab/clothing continuity and avoid changing garment design. |
-| Beg / Bags | 64 | NOT AUDITED — no category sign-off | Review handle/strap physics, bag opening only when visible, plausible carry, no invented pockets/capacity/material. |
+| Beg / Bags | 64 | IN PROGRESS — 3 prompts text-audited | Continue with tabletop pickup, office storyboard and editorial flat lay; visual generation test still pending. |
 | Dompet / Wallets | 59 | BASELINE OK — deeper review pending | Check opening/closing hinges, card slots only if visible, hand interaction and scale consistency. |
 | Kasut / Shoes | 62 | PASS for 3 named overrides; remaining prompts NOT AUDITED | Review the other 59 prompts for shoe-specific actions, footwear geometry and plausible foot contact. |
 | Kosmetik & Kecantikan / Beauty | 70 | BASELINE OK — deeper review pending | Check applicator/product compatibility, believable liquid/cream behaviour, packaging continuity and avoid unsupported skin/health claims. |
@@ -48,6 +48,19 @@
 | Perabot & Dekorasi / Furniture | 60 | BASELINE OK — deeper review pending | Check weight, contact, doors/drawers, reflections and room geometry remain stable. |
 | Bayi & Keperluan Anak / Baby | 60 | BASELINE OK — deeper review pending | Check safe product handling, age-appropriate use, stable assembly and no unsafe baby interaction. |
 | Seni & Kraf / Crafts | 60 | BASELINE OK — deeper review pending | Check tool/material interactions (threading, painting, crochet, beads) and keep counts/shapes consistent. |
+
+## 2A. Bags audit — batch 1 (text-level review)
+
+**Scope:** First three dedicated handbag prompts in the master library. This is a prompt/storyboard review only; no generated video was available for visual inspection.
+
+- [x] `bags_handheld_showcase_v1` — **Handbag Showcase**: whole-bag reveal, one restrained lift/steadying action, one visible-detail close-up, stable hero finish. Handle/strap physics and product-lock rules are appropriate.
+- [x] `bags_luxury_closeup_v1` — **Luxury Detail Close-Up**: anchored full-bag view, one controlled macro pass, existing hardware only when present, full-product return. Avoids unsupported material claims and artificial texture.
+- [x] `bags_daily_carry_v1` — **Everyday Carry**: grounded bag setup, one plausible pickup, one natural carry/step, steady finish. Correctly avoids assuming a shoulder strap for a hand-held clutch.
+- [x] All three contain four timed storyboard shots matching the prompt's action sequence; product continuity and no-text/logo/watermark constraints are present.
+- [x] **Decision:** No text-level rewrite required for these three entries; their existing instructions are already specific and coherent. No IDs or master-library entries were changed.
+- [ ] Generate representative clips and visually inspect handle/strap stability, hands, bag geometry, shadows and final-frame continuity before claiming end-to-end PASS.
+
+**Next small batch:** `bags_tabletop_pickup_v1`, `bags_office_storyboard_v1`, and `bags_editorial_flatlay_v1`. Check for generic template wording, action/storyboard agreement and category-specific realism.
 
 ## 3. Automated structural audit — current snapshot
 
