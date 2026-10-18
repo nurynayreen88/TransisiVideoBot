@@ -22,7 +22,6 @@ from gemini_vision import describe_photo
 from gemini_storyboard import generate_storyboard
 from gemini_storyboard_image import generate_storyboard_sheet, GeminiStoryboardImageError
 from gemini_product_image import generate_product_reference_image, GeminiProductImageError
-from gemini_location_background import generate_location_background, GeminiLocationBackgroundError
 from prompt_engine import build_prompt
 from prompt_catalog import choices as storyboard_styles
 
@@ -75,28 +74,6 @@ BACKGROUNDS = {
     'mint': (190, 221, 207),
     'terracotta': (190, 112, 83),
     'charcoal': (49, 51, 56),
-}
-
-
-LOCATION_BACKGROUND_SCENES = {
-    'scene_kitchen': 'a realistic modern home kitchen, clean counter and softly blurred cabinets',
-    'scene_living_room': 'a realistic contemporary living room with sofa, side table and natural window light',
-    'scene_office': 'a realistic modern office desk area with monitor-free neutral workspace and shelves',
-    'scene_car_interior': 'a realistic clean modern car interior, viewed from passenger area, daylight through windows',
-    'scene_cafe': 'a realistic cozy cafe with wooden tables, warm daylight and softly blurred background',
-    'scene_boutique': 'a realistic fashion boutique with clothing racks softly out of focus',
-    'scene_mall': 'a realistic modern shopping mall interior with storefronts blurred in the distance',
-    'scene_vanity': 'a realistic elegant dressing table and vanity area with mirror and soft natural light',
-    'scene_bedroom': 'a realistic neat modern bedroom with bedside table and soft daylight',
-    'scene_garden': 'a realistic lush home garden with green plants and soft natural bokeh',
-    'scene_beach': 'a realistic tropical beach with sand and sea softly blurred in the distance',
-    'scene_gym': 'a realistic modern gym with exercise equipment softly out of focus',
-    'scene_library': 'a realistic library with bookshelves softly blurred in the background',
-    'scene_workshop': 'a realistic tidy workshop with tools and workbench softly out of focus',
-    'scene_bakery': 'a realistic artisan bakery counter with bread displays softly blurred in the background',
-    'scene_restaurant': 'a realistic modern restaurant interior with tables and warm ambient lighting',
-    'scene_airport': 'a realistic airport lounge with large windows and seating softly out of focus',
-    'scene_hotel': 'a realistic premium hotel room with tasteful furniture and natural light',
 }
 
 
@@ -227,9 +204,9 @@ def _scene_background(size, choice):
 
 
 def replace_background(source: Path, destination: Path, choice: str, foreground_destination: Path | None = None, custom_background_path: Path | None = None) -> Path:
-    if choice not in BACKGROUNDS and choice not in ('gradient', 'pattern', 'duotone', 'mist', 'sky_gradient', 'lavender_gradient', 'sage_gradient', 'blush_gradient', 'midnight_gradient', 'sand_gradient', 'ocean_gradient', 'forest_gradient', 'sunset_gradient', 'aurora_gradient', 'mocha_gradient', 'peach_gradient', 'ice_gradient', 'emerald_gradient', 'plum_gradient', 'coral_gradient', 'graphite_gradient', 'champagne_gradient', 'lemon_gradient', 'teal_gradient', 'lilac_gradient', 'cobalt_gradient', 'custom') and choice not in LOCATION_BACKGROUND_SCENES:
+    if choice not in BACKGROUNDS and choice not in ('gradient', 'pattern', 'duotone', 'mist', 'sky_gradient', 'lavender_gradient', 'sage_gradient', 'blush_gradient', 'midnight_gradient', 'sand_gradient', 'ocean_gradient', 'forest_gradient', 'sunset_gradient', 'aurora_gradient', 'mocha_gradient', 'peach_gradient', 'ice_gradient', 'emerald_gradient', 'plum_gradient', 'coral_gradient', 'graphite_gradient', 'champagne_gradient', 'lemon_gradient', 'teal_gradient', 'lilac_gradient', 'cobalt_gradient', 'custom'):
         raise ValueError('Unknown background')
-    if (choice == 'custom' or choice in LOCATION_BACKGROUND_SCENES) and (custom_background_path is None or not custom_background_path.is_file()):
+    if choice == 'custom' and (custom_background_path is None or not custom_background_path.is_file()):
         raise ValueError('Custom background image is missing')
     with Image.open(source) as opened:
         image = ImageOps.exif_transpose(opened).convert('RGB')
@@ -248,7 +225,7 @@ def replace_background(source: Path, destination: Path, choice: str, foreground_
             alpha = foreground.getchannel('A')
             if not alpha.getbbox():
                 raise ValueError('No product detected')
-    if choice == 'custom' or choice in LOCATION_BACKGROUND_SCENES:
+    if choice == 'custom':
         with Image.open(custom_background_path) as opened_background:
             background_image = ImageOps.exif_transpose(opened_background).convert('RGB')
         background_image = ImageOps.fit(background_image, foreground.size, method=Image.Resampling.LANCZOS)
@@ -838,24 +815,6 @@ def background_menu():
          InlineKeyboardButton('🩵 Teal', callback_data='background:teal_gradient')],
         [InlineKeyboardButton('💜 Lilac', callback_data='background:lilac_gradient'),
          InlineKeyboardButton('🔵 Cobalt', callback_data='background:cobalt_gradient')],
-        [InlineKeyboardButton('🏠 Dapur / Kitchen', callback_data='background:scene_kitchen'),
-         InlineKeyboardButton('🛋️ Ruang Tamu', callback_data='background:scene_living_room')],
-        [InlineKeyboardButton('💼 Pejabat', callback_data='background:scene_office'),
-         InlineKeyboardButton('🚗 Dalam Kereta', callback_data='background:scene_car_interior')],
-        [InlineKeyboardButton('☕ Kafe', callback_data='background:scene_cafe'),
-         InlineKeyboardButton('🛍️ Butik', callback_data='background:scene_boutique')],
-        [InlineKeyboardButton('🏬 Pusat Beli-belah', callback_data='background:scene_mall'),
-         InlineKeyboardButton('💄 Meja Solek', callback_data='background:scene_vanity')],
-        [InlineKeyboardButton('🛏️ Bilik Tidur', callback_data='background:scene_bedroom'),
-         InlineKeyboardButton('🌿 Taman', callback_data='background:scene_garden')],
-        [InlineKeyboardButton('🏖️ Pantai', callback_data='background:scene_beach'),
-         InlineKeyboardButton('🏋️ Gimnasium', callback_data='background:scene_gym')],
-        [InlineKeyboardButton('📚 Perpustakaan', callback_data='background:scene_library'),
-         InlineKeyboardButton('🧰 Bengkel', callback_data='background:scene_workshop')],
-        [InlineKeyboardButton('🥐 Kedai Bakeri', callback_data='background:scene_bakery'),
-         InlineKeyboardButton('🍽️ Restoran', callback_data='background:scene_restaurant')],
-        [InlineKeyboardButton('🧳 Ruang Lapangan Terbang', callback_data='background:scene_airport'),
-         InlineKeyboardButton('🏨 Bilik Hotel', callback_data='background:scene_hotel')],
         [InlineKeyboardButton('🖼️ Guna Gambar Latar Sendiri', callback_data='background:custom')],
         [InlineKeyboardButton('↩️ Semak Gambar', callback_data='photos_order')],
     ])
@@ -875,7 +834,16 @@ def prompt_scene_menu():
         [InlineKeyboardButton('✨ Auto (Disyorkan)', callback_data='scene:auto')],
         [InlineKeyboardButton('📸 Studio Premium', callback_data='scene:studio'), InlineKeyboardButton('🌑 Mewah Gelap', callback_data='scene:dark')],
         [InlineKeyboardButton('🏡 Ruang Rumah', callback_data='scene:home'), InlineKeyboardButton('🌿 Alam Semula Jadi', callback_data='scene:nature')],
-        [InlineKeyboardButton('☀️ Cerah Minimalis', callback_data='scene:minimal')]
+        [InlineKeyboardButton('☀️ Cerah Minimalis', callback_data='scene:minimal')],
+        [InlineKeyboardButton('🍳 Dapur', callback_data='scene:kitchen'), InlineKeyboardButton('🛋️ Ruang Tamu', callback_data='scene:living_room')],
+        [InlineKeyboardButton('💼 Pejabat', callback_data='scene:office'), InlineKeyboardButton('🚗 Dalam Kereta', callback_data='scene:car_interior')],
+        [InlineKeyboardButton('☕ Kafe', callback_data='scene:cafe'), InlineKeyboardButton('🛍️ Butik', callback_data='scene:boutique')],
+        [InlineKeyboardButton('🏬 Pusat Beli-belah', callback_data='scene:mall'), InlineKeyboardButton('💄 Meja Solek', callback_data='scene:vanity')],
+        [InlineKeyboardButton('🛏️ Bilik Tidur', callback_data='scene:bedroom'), InlineKeyboardButton('🌿 Taman', callback_data='scene:garden')],
+        [InlineKeyboardButton('🏖️ Pantai', callback_data='scene:beach'), InlineKeyboardButton('🏋️ Gimnasium', callback_data='scene:gym')],
+        [InlineKeyboardButton('📚 Perpustakaan', callback_data='scene:library'), InlineKeyboardButton('🧰 Bengkel', callback_data='scene:workshop')],
+        [InlineKeyboardButton('🥐 Bakeri', callback_data='scene:bakery'), InlineKeyboardButton('🍽️ Restoran', callback_data='scene:restaurant')],
+        [InlineKeyboardButton('🧳 Lapangan Terbang', callback_data='scene:airport'), InlineKeyboardButton('🏨 Bilik Hotel', callback_data='scene:hotel')]
     ])
 
 
@@ -2590,12 +2558,30 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await query.message.reply_text('🎨 Pilih latar video:', reply_markup=prompt_scene_menu())
     elif action.startswith('scene:') and stage == 'prompt_scene':
         scenes = {
-            'auto': 'clean premium studio background, selected to complement the named product',
-            'studio': 'premium photography studio, soft neutral backdrop and realistic contact shadows',
-            'dark': 'dark luxury studio, controlled rim lighting and understated premium contrast',
-            'home': 'tasteful modern home interior, natural ambient lighting and believable product placement',
-            'nature': 'restrained natural setting with soft daylight, without obscuring the product',
-            'minimal': 'bright minimalist setting with clean neutral surfaces and soft daylight'
+            'auto': 'a realistic premium location chosen to suit the product, with natural lighting and believable physical surroundings',
+            'studio': 'a premium photography studio with soft neutral backdrop and realistic contact shadows',
+            'dark': 'a dark luxury studio with controlled rim lighting and understated premium contrast',
+            'home': 'a tasteful modern home interior with natural ambient lighting and believable product placement',
+            'nature': 'a restrained natural setting with soft daylight, without obscuring the product',
+            'minimal': 'a bright minimalist setting with clean neutral surfaces and soft daylight',
+            'kitchen': 'a realistic modern home kitchen, clean counter and softly blurred cabinets',
+            'living_room': 'a realistic contemporary living room with sofa, side table and natural window light',
+            'office': 'a realistic modern office desk area with neutral workspace and shelves',
+            'car_interior': 'inside a realistic clean modern car interior, daylight through windows, product placed naturally and safely',
+            'cafe': 'a realistic cozy cafe with wooden tables, warm daylight and softly blurred background',
+            'boutique': 'a realistic fashion boutique with clothing racks softly out of focus',
+            'mall': 'a realistic modern shopping mall interior with storefronts blurred in the distance',
+            'vanity': 'a realistic elegant dressing table and vanity area with mirror and soft natural light',
+            'bedroom': 'a realistic neat modern bedroom with bedside table and soft daylight',
+            'garden': 'a realistic lush home garden with green plants and soft natural bokeh',
+            'beach': 'a realistic tropical beach with sand and sea softly blurred in the distance',
+            'gym': 'a realistic modern gym with exercise equipment softly out of focus',
+            'library': 'a realistic library with bookshelves softly blurred in the background',
+            'workshop': 'a realistic tidy workshop with tools and workbench softly out of focus',
+            'bakery': 'a realistic artisan bakery counter with bread displays softly blurred in the background',
+            'restaurant': 'a realistic modern restaurant interior with tables and warm ambient lighting',
+            'airport': 'a realistic airport lounge with large windows and seating softly out of focus',
+            'hotel': 'a realistic premium hotel room with tasteful furniture and natural light'
         }
         selected = action.split(':', 1)[1]
         if selected in scenes:
@@ -3241,19 +3227,10 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             'ice_gradient', 'emerald_gradient', 'plum_gradient', 'coral_gradient',
             'graphite_gradient', 'champagne_gradient', 'lemon_gradient', 'teal_gradient',
             'lilac_gradient', 'cobalt_gradient'
-        ) or choice in LOCATION_BACKGROUND_SCENES:
+        ):
             context.user_data['background'] = choice
             context.user_data.pop('custom_background_file_id', None)
             context.user_data['stage'] = 'duration'
-            if choice in LOCATION_BACKGROUND_SCENES and not os.environ.get('GEMINI_API_KEY', '').strip():
-                context.user_data['background'] = 'original'
-                context.user_data['stage'] = 'background'
-                await query.message.reply_text(
-                    'Latar tempat memerlukan GEMINI_API_KEY kerana imej latar dijana melalui Gemini Image. '
-                    'Pilih latar warna atau muat naik gambar latar sendiri buat masa ini.',
-                    reply_markup=background_menu()
-                )
-                return
             await query.message.reply_text('⏱️ Pilih durasi video:', reply_markup=duration_menu())
     elif action == 'styles' and stage in ('style', 'music', 'confirm', 'motion', 'doodle'):
         context.user_data['stage'] = 'style'
@@ -3694,23 +3671,6 @@ async def generate(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 custom_background_path = folder / 'custom_background_source'
                 custom_background_file = await context.bot.get_file(custom_background_file_id)
                 await custom_background_file.download_to_drive(custom_background_path)
-            elif background in LOCATION_BACKGROUND_SCENES:
-                status_message = await message.reply_text(
-                    '🖼️ Menjana latar tempat fotorealistik melalui Gemini Image. '
-                    'Permintaan ini mungkin menggunakan kuota API berbayar; imej latar dijana sekali dan dikongsi untuk semua gambar produk dalam video.'
-                )
-                try:
-                    scene_bytes = await asyncio.to_thread(
-                        generate_location_background, LOCATION_BACKGROUND_SCENES[background]
-                    )
-                    custom_background_path = folder / 'generated_location_background.png'
-                    custom_background_path.write_bytes(scene_bytes)
-                    try:
-                        await status_message.delete()
-                    except Exception:
-                        pass
-                except GeminiLocationBackgroundError as exc:
-                    raise ValueError(str(exc)) from exc
             product_layers = []
             if background != 'original':
                 for i, path in enumerate(paths):
