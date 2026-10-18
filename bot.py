@@ -828,6 +828,52 @@ def duration_menu():
     ])
 
 
+def _contextual_motion_instruction(scene_key, product_type='other', model_presence='yes'):
+    """Choose practical model action and camera framing from the selected location and product."""
+    scene_actions = {
+        'vanity': 'At the mirror or vanity, the model naturally checks the reflection, adjusts the item or outfit, and may turn once gently to inspect the side view. Use mirror-aware framing and a small smooth follow; avoid repeated spinning.',
+        'airport': 'At the airport, the model walks naturally toward the terminal or seating area while carrying/wearing the product correctly. Track from the front or side at walking pace; keep arm swing, straps and product sway natural. Never stand rigidly and twirl a bag.',
+        'mall': 'In the shopping mall, let the model walk at an easy pace, briefly pause near a storefront, or interact naturally with the product. Use a stable side-follow or front tracking view.',
+        'boutique': 'In the boutique, the model may browse a rack, touch fabric lightly, or check the fit in a mirror. Frame the product clearly and follow the action smoothly.',
+        'cafe': 'In the cafe, use a relaxed seated or standing interaction appropriate to the product, with a gentle push-in for product detail and a wider view to establish the setting.',
+        'home': 'At home, use a believable everyday interaction that suits the product, with natural weight shifts and practical hand placement. Keep the camera at a comfortable eye-level or product-level angle.',
+        'kitchen': 'In the kitchen, show one safe, practical use of the product on a counter or during food preparation when relevant. Keep hands and object contact believable; use a steady medium shot.',
+        'living_room': 'In the living room, show a natural everyday interaction or a relaxed walk through the space if appropriate. Use a gentle follow or slow push-in.',
+        'office': 'In the office, show the product being used naturally at a desk or while moving through the workspace. Use stable eye-level framing and a small push-in on the product.',
+        'car_interior': 'Inside the car, keep the person seated and the product placed or used safely; do not show distracting movement while driving. Use a steady interior angle.',
+        'bedroom': 'In the bedroom, use a relaxed, practical interaction that suits the product; if a mirror is present, the model may check the reflection and turn once naturally.',
+        'garden': 'In the garden, allow a natural walk or simple product interaction with a gentle side-follow; keep the product readable.',
+        'beach': 'At the beach, use a relaxed walk or practical interaction suited to the product, with a smooth side-follow or wide establishing view.',
+        'gym': 'In the gym, show a safe, correct use of the product or equipment with stable framing; movement should match the activity.',
+        'library': 'In the library, show quiet, believable interaction with the product. Use restrained camera movement and avoid disruptive gestures.',
+        'workshop': 'In the workshop, show a practical, safe interaction with the product on a workbench when appropriate. Keep hand placement and object contact realistic.',
+        'bakery': 'In the bakery, show a natural interaction with the counter or product when relevant, using a gentle detail move and a wider view.',
+        'restaurant': 'In the restaurant, show a natural seated or counter interaction appropriate to the product. Use a calm medium shot and a gentle push-in.',
+        'hotel': 'In the hotel room, use a natural unpacking, getting-ready or everyday interaction when it suits the product. Keep luggage handling practical.',
+        'nature': 'Outdoors, use a relaxed walk or appropriate product interaction with a gentle tracking view.',
+        'studio': 'In the studio, use a controlled product showcase: stable full view, one gentle push-in to a visible detail, then a clean hero hold. Do not rotate the product repeatedly.',
+        'dark': 'In the luxury studio, use restrained movement, a slow push-in or slight lateral slide, and a stable hero finish.',
+        'minimal': 'In the bright minimal setting, use clean stable framing, one gentle reframing toward a visible detail, and a full-product finish.',
+        'auto': 'Choose a believable setting-appropriate action based on product and location. Use natural walking or practical interaction when a model is present; use mirror-aware framing for mirror scenes and stable close framing for product use. Avoid repeated spinning, stiff posing and camera moves that fight the action.'
+    }
+    product_notes = {
+        'bag': 'Keep the bag carried or worn naturally, with plausible strap placement and only subtle sway.',
+        'hijab': 'Show the hijab through natural head turns and gentle fabric adjustment; do not pull or distort the fabric unnaturally.',
+        'fashion': 'Show fit and silhouette through a natural stance, a short walk or one controlled turn only when useful.',
+        'shoes': 'Show footwear through natural steps and a brief grounded detail view; do not twist ankles unnaturally.',
+        'beauty': 'Show realistic application or handling only when suitable; keep hands away from the face unless the action calls for it.',
+        'gadget': 'Use the device in a plausible way with realistic finger placement; keep screens and controls unchanged.',
+        'food': 'Handle or present food naturally and safely; do not invent ingredients or extra servings.',
+        'home': 'Demonstrate a practical household use with believable contact and scale.',
+        'accessory': 'Wear or handle the accessory naturally; avoid repetitive wrist turns or twirling.',
+        'travel': 'Handle luggage with believable weight, grip and strap movement; never swing or spin it.'
+    }
+    location = scene_actions.get(scene_key, scene_actions['auto'])
+    product = product_notes.get(product_type, '')
+    model = 'Keep body mechanics, gaze, hand placement and walking pace natural.' if model_presence != 'no' else 'No model is required; use stable product framing and a clean product hero shot.'
+    return 'ACTION AND CAMERA AUTO-DIRECTION: ' + location + ' ' + product + ' ' + model + ' Choose camera position and movement to support the action, not as a separate effect. Keep motion smooth and purposeful; preserve product identity and spatial continuity.'
+
+
 def prompt_scene_menu():
     return InlineKeyboardMarkup([
         [InlineKeyboardButton('✨ Auto (Disyorkan)', callback_data='scene:auto')],
@@ -2580,8 +2626,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         selected = action.split(':', 1)[1]
         if selected in scenes:
             context.user_data['prompt_scene'] = scenes[selected]
+            context.user_data['prompt_scene_key'] = selected
             context.user_data['stage'] = 'prompt_motion'
-            # No technical camera-choice step: infer model action and framing from the selected location/product.
             action = 'motion:auto'
     # Return only for actions handled by the first chain. Video workflow
     # callbacks must continue into the second chain.
@@ -2592,7 +2638,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
     if action.startswith('motion:') and context.user_data.get('stage') == 'prompt_motion':
         motion = action.split(':', 1)[1]
-        motions = {'auto': 'Automatically choose natural model action and restrained camera framing to fit the selected location and product. Mirror/vanity scenes may include a natural reflection check and one gentle turn; airport or outdoor scenes may use relaxed walking with a suitable tracking shot; indoor practical scenes should favor believable product interaction. Preserve product geometry and continuity; avoid repetitive spinning.', 'orbit': 'A controlled 30-degree camera arc around the product, not a full 360-degree rotation; preserve the visible product geometry.', 'push': 'A slow forward camera push-in toward the product to reveal texture and details; avoid digital warping and preserve product geometry.', 'pull': 'A slow camera pull-back away from the product to reveal its full shape and surrounding scene; preserve proportions.', 'side': 'A smooth horizontal left-to-right camera slide with stable product proportions.', 'dolly': 'A slow physical-feeling forward dolly-in with gentle natural parallax; no object deformation.', 'low': 'A restrained low-angle camera view looking slightly upward at the product; preserve the reference design and proportions.', 'static': 'A locked camera with subtle studio lighting changes only; keep the product clear and stable.'}
+        motions = {'auto': _contextual_motion_instruction(context.user_data.get('prompt_scene_key', 'auto'), context.user_data.get('prompt_product_type', 'other'), context.user_data.get('prompt_model_presence', 'yes')), 'orbit': 'A controlled 30-degree camera arc around the product, not a full 360-degree rotation; preserve the visible product geometry.', 'push': 'A slow forward camera push-in toward the product to reveal texture and details; avoid digital warping and preserve product geometry.', 'pull': 'A slow camera pull-back away from the product to reveal its full shape and surrounding scene; preserve proportions.', 'side': 'A smooth horizontal left-to-right camera slide with stable product proportions.', 'dolly': 'A slow physical-feeling forward dolly-in with gentle natural parallax; no object deformation.', 'low': 'A restrained low-angle camera view looking slightly upward at the product; preserve the reference design and proportions.', 'static': 'A locked camera with subtle studio lighting changes only; keep the product clear and stable.'}
         if motion in motions:
             context.user_data['prompt_motion_choice'] = motion
             context.user_data['stage'] = 'prompt_confirm'
@@ -2859,7 +2905,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 pass
     elif action == 'prompt_generate:confirm' and context.user_data.get('stage') == 'prompt_confirm':
         motion = context.user_data.get('prompt_motion_choice', 'push')
-        motions = {'auto': 'Choose the simplest camera movement best suited to the product and shot; prefer a gentle push-in for detail, a slow side slide for a full product view, or a locked camera when movement risks changing product details. Keep movement subtle and preserve exact product geometry.', 'orbit': 'A controlled 30-degree camera arc around the product, not a full 360-degree rotation; preserve the visible product geometry.', 'push': 'A slow forward camera push-in toward the product to reveal texture and details; avoid digital warping and preserve product geometry.', 'pull': 'A slow camera pull-back away from the product to reveal its full shape and surrounding scene; preserve proportions.', 'side': 'A smooth horizontal left-to-right camera slide with stable product proportions.', 'dolly': 'A slow physical-feeling forward dolly-in with gentle natural parallax; no object deformation.', 'low': 'A restrained low-angle camera view looking slightly upward at the product; preserve the reference design and proportions.', 'static': 'A locked camera with subtle studio lighting changes only; keep the product clear and stable.'}
+        motions = {'auto': _contextual_motion_instruction(context.user_data.get('prompt_scene_key', 'auto'), context.user_data.get('prompt_product_type', 'other'), context.user_data.get('prompt_model_presence', 'yes')), 'orbit': 'A controlled 30-degree camera arc around the product, not a full 360-degree rotation; preserve the visible product geometry.', 'push': 'A slow forward camera push-in toward the product to reveal texture and details; avoid digital warping and preserve product geometry.', 'pull': 'A slow camera pull-back away from the product to reveal its full shape and surrounding scene; preserve proportions.', 'side': 'A smooth horizontal left-to-right camera slide with stable product proportions.', 'dolly': 'A slow physical-feeling forward dolly-in with gentle natural parallax; no object deformation.', 'low': 'A restrained low-angle camera view looking slightly upward at the product; preserve the reference design and proportions.', 'static': 'A locked camera with subtle studio lighting changes only; keep the product clear and stable.'}
         if motion in motions:
             waiting = await query.message.reply_text('⏳ DALAM PROSES — 0%' + chr(10) + 'Menyusun prompt...')
             try:
