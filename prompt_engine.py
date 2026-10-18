@@ -281,6 +281,33 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
             "Keep the chosen hijab style and handbag presentation consistent. Never redesign, recolor, reshape, add or remove stated outfit details. "
             "Use one consistent home setting, authentic phone-camera perspective, soft daylight and crisp fabric detail. Skin must retain pores and natural texture; facial features, fingers, joints, hair and fabric folds must remain anatomically and physically believable. Use relaxed breathing, subtle weight shifts and natural timing rather than a frozen pose or robotic motion. Keep the same real-looking person and garment in every frame; no face drift, beauty-filter skin, uncanny eyes, extra fingers, rubbery limbs, fabric shimmer, pattern drift, over-smoothed skin, CGI sheen or artificial slow motion. No collage, split screen, poster layout, outfit change, plastic skin or CGI."
         )
+    if duration == 10 and part == 0:
+        # Compact 10-second prompt: keep the creative intent in one Telegram message.
+        selected_beats = ""
+        if storyboard_override and isinstance(storyboard_override, (list, tuple)):
+            beat_lines = []
+            for beat in storyboard_override[:4]:
+                if isinstance(beat, dict):
+                    beat_lines.append(str(beat.get("time", "")) + " " + str(beat.get("shot", "")) + ": " + str(beat.get("direction", "")))
+                else:
+                    beat_lines.append(str(beat))
+            if beat_lines:
+                selected_beats = "SELECTED SHOT IDEAS: " + " ".join(beat_lines) + "\n"
+        compact = (
+            "KLIPPO | REALISTIC 10-SECOND PRODUCT VIDEO\n"
+            "FORMAT: vertical 9:16, one coherent live-action-style commercial, 10 seconds.\n"
+            "PRODUCT: " + product + "\n" + category_direction + "\n"
+            "REFERENCE LOCK: Use uploaded photo(s) as truth. Preserve visible shape, colour, print, packaging, logo and proportions. Never invent unseen features, materials, accessories or claims.\n"
+            "SCENE: " + str(scene) + ". " + (("CONCEPT: " + str(concept) + ". ") if concept else "") + "\n"
+            + selected_beats
+            + "SHOT FLOW: 0–2s natural opening/reveal; 2–5s one gentle camera move (" + str(camera) + "); "
+            "5–8s highlight one visible detail; 8–10s settle into a clear full-product hero frame and hold. "
+            "Use one simple, physically possible action; keep the product grounded and stable. No montage, sudden scene change or impossible orbit.\n"
+            "PHOTOREALISM: Must resemble real camera footage, not CGI, 3D render or AI art. Natural material and skin texture; realistic hands/anatomy if a model is included; consistent face, body, clothing and product. Use believable lens perspective, soft real-world light, contact shadows and plausible reflections. Do not add a person if none is needed.\n"
+            "AVOID: waxy skin, uncanny faces, extra/fused fingers, warped product, changing patterns, floating objects, fake reflections, plastic shine, excessive bokeh/HDR, flicker, jitter, identity drift, invented props, captions, added logos or watermarks.\n"
+            "FINAL CHECK: believable physics, consistent product identity, natural motion and understated commercial polish."
+        )
+        return compact
     return (
         "KLIPPO | PROFESSIONAL IMAGE-TO-VIDEO PRODUCTION PROMPT" + (" | BAHAGIAN " + str(part) + "/2" if part else "") + "\n"
         "OUTPUT: " + str(duration) + " seconds; portrait 9:16; high-quality realistic product commercial; "
