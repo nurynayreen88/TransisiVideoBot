@@ -490,6 +490,24 @@ def prompt_voiceover_menu():
     ])
 
 
+def fit_prompt_to_one_telegram_message(prompt, limit=3800):
+    """Keep a video prompt in one Telegram message while preserving its core instructions."""
+    prompt = (prompt or "").strip()
+    if len(prompt) <= limit:
+        return prompt
+    ending = (
+        "\n\nREALISM / FINAL CHECK: Photoreal live-action look, natural texture and anatomy, "
+        "physically plausible movement, grounded shadows, believable reflections and consistent product identity. "
+        "No CGI look, waxy skin, malformed hands, warped product, flicker or invented features."
+    )
+    body = prompt[:limit - len(ending)]
+    # Prefer a clean paragraph/sentence boundary instead of cutting a direction in half.
+    cut = max(body.rfind("\n"), body.rfind(". "))
+    if cut >= int(len(body) * 0.72):
+        body = body[:cut + (1 if body[cut:cut + 1] == "." else 0)]
+    return body.rstrip() + ending
+
+
 def prompt_creative_settings(user_data, include_audio=True):
     """Translate guided Klippo choices into explicit, reusable prompt instructions."""
     if user_data.get('prompt_model_presence') == 'yes':
@@ -2523,6 +2541,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     storyboard_override=context.user_data.get('prompt_library_storyboard') or None
                 )
                 prompt = prompt.rstrip() + '\n\n' + prompt_creative_settings(context.user_data)
+                if int(context.user_data.get('prompt_duration', 10)) == 10:
+                    prompt = fit_prompt_to_one_telegram_message(prompt, limit=3800)
                 await progress_update(waiting, 70, 'Menyediakan PROMPT IMAGE dan PROMPT VIDEO...')
                 context.user_data['stage'] = 'prompt_done'
                 mode_name = context.user_data.get('prompt_mode', 'normal')
