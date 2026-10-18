@@ -152,6 +152,15 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
                 "2-4s full-product reveal; 4-6s one genuinely visible detail; 6-8s continue the product story; "
                 "8-10s settle into a stable full-product frame and HOLD for a seamless Part 2 handoff. No closing fade in Part 1."
             )
+        if part == 0 and duration > 10:
+            rules = (
+                "SINGLE-PROMPT FULL-LENGTH VIDEO: Create one continuous " + str(duration) + "-second product commercial, not separate clips. "
+                "Distribute these five connected beats across the entire duration: opening product recognition; full-product reveal; "
+                "one genuinely visible detail; a restrained style-specific action; and a stable full-product hero finish. "
+                "Keep the same set, lighting, product scale and identity throughout. "
+                + ("Use thin white doodle emphasis only around visible product edges, without obscuring the product. " if doodle else "")
+                + "Do not repeat the opening or introduce unsupported features, props, text or unseen angles."
+            )
         curated_direction = ""
         if storyboard_override and isinstance(storyboard_override, (list, tuple)) and len(storyboard_override) == 4:
             curated_shots = list(storyboard_override)
@@ -178,7 +187,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
                 ]
             curated_direction = (
                 "DIRECTOR'S CURATED PREMIUM STORYBOARD: Use this selected GitHub library storyboard as the primary shot plan. "
-                "Expand the four selected creative beats into exactly five connected panels of 2 seconds each; distribute the selected beats across the panels and add a reference-safe opening or closing panel where needed. Preserve the same product identity, packaging, color, scale and coherent set. "
+                "Expand the four selected creative beats into five connected beats distributed across the full requested duration; add a reference-safe opening or closing beat where needed. Preserve the same product identity, packaging, color, scale and coherent set. "
                 "NO ON-SCREEN TEXT, captions, added logos, watermarks, dialogue or voice-over unless explicitly requested.\n\n"
                 + "\n\n".join(
                     str(item.get("time", "")) + " | " + str(item.get("shot", "")) + "\n"
