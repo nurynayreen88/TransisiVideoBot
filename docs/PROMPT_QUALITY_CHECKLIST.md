@@ -201,3 +201,17 @@ The initial scan found a small number of prompts that did not contain the exact 
 - [ ] Visually inspect generated clips; text and CI validation do not prove external video output is realistic or truly HD.
 
 **Scope note:** This batch covers six named prompts only. It does not mark the clothing, beauty, gadget, wallet or shoe categories fully audited.
+
+
+## 2K. Product, human, environment and audio integrity — batch 3
+
+- [x] Added ID-preserving overrides for `kitchen_lunchbox_v1`, `kitchen_cookware_v1`, `kitchen_spice_rack_v1`, `kitchen_cutting_board_v1`, `kitchen_tumbler_v1`, and `kitchen_appliance_v1`.
+- [x] Added explicit anti-defect constraints for product geometry/parts, hand anatomy, continuity of people and backgrounds, plausible reflections/contact shadows, food/liquid physics, focus and temporal stability.
+- [x] Avoided unsupported product features, labels, compartments, accessories, claims and operating states. Physical actions are conditional on the visible product; use a camera move when unsupported.
+- [x] Audio default is no voice-over; if speech is explicitly requested, require one consistent natural voice, clear pronunciation, stable accent, clean levels and no clipping/echo/repeated words or voice changes.
+- [x] All six use four timed beats totalling exactly 10 seconds and include 1080x1920 vertical 9:16 guidance for Shopee and TikTok.
+- [x] Master prompt library and existing IDs remain unchanged; changes are additive in the quality override file.
+- [ ] Run repository CI before merging.
+- [ ] Generated video/audio still needs visual and listening review; prompt constraints reduce risk but cannot guarantee every model render is defect-free.
+
+**Scope note:** This batch covers six kitchen prompts only. It does not mean the full kitchen category or all 1,171 master prompts have been individually verified.
