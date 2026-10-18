@@ -74,7 +74,7 @@ def _resolve_auto_style(style, product_type):
     return AUTO_STYLE_BY_PRODUCT_TYPE.get(product_type, 'cinematic')
 
 
-def build_prompt(mode, product, scene, motion, style='auto', duration=10, concept='', product_type='other', storyboard_override=None, split=None):
+def build_prompt(mode, product, scene, motion, style='auto', duration=10, concept='', product_type='other', storyboard_override=None, split=None, universal_custom=False):
     # Preserve the historical API behavior: a 20-second call without an explicit
     # split choice still returns two connected 10-second prompts.
     if split is None:
@@ -84,7 +84,7 @@ def build_prompt(mode, product, scene, motion, style='auto', duration=10, concep
         # Generate connected 10-second prompts while retaining the same style and product context.
         parts = [
             _build_single_prompt(mode, product, scene, motion, style, part=index, duration=10,
-                                 concept=concept, product_type=product_type, storyboard_override=storyboard_override)
+                                 concept=concept, product_type=product_type, storyboard_override=storyboard_override, universal_custom=universal_custom)
             for index in range(1, duration // 10 + 1)
         ]
         return "\n\n".join(
@@ -92,10 +92,10 @@ def build_prompt(mode, product, scene, motion, style='auto', duration=10, concep
             for index, part in enumerate(parts)
         )
     return _build_single_prompt(mode, product, scene, motion, style, part=0, duration=duration,
-                                concept=concept, product_type=product_type, storyboard_override=storyboard_override)
+                                concept=concept, product_type=product_type, storyboard_override=storyboard_override, universal_custom=universal_custom)
 
 
-def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, duration=10, concept='', product_type='other', storyboard_override=None):
+def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, duration=10, concept='', product_type='other', storyboard_override=None, universal_custom=False):
     camera = CAMERAS.get(motion, CAMERAS["push"])
     product_type_directions = {
         'fashion': "PRODUCT CATEGORY DIRECTION: Treat this as clothing/fashion. Favor natural fabric movement and visible garment details; never alter cut, print, color or pattern.",
@@ -145,7 +145,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
         style_key, style_name, style_template = resolve(style)
         doodle = style_key == "white_doodle"
         hook = product_hook(product)
-        if product_type == "other":
+        if product_type == "other" or universal_custom:
             category_direction += (
                 " UNIVERSAL CREATIVE FRAMEWORK: "
                 + _universal_prompt_direction(style_key)
