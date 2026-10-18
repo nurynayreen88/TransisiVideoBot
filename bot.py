@@ -2240,7 +2240,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['prompt_product_type'] = selected
             context.user_data['stage'] = 'prompt_model_presence'
             await query.message.reply_text(
-                f"📦 Kategori: {PRODUCT_TYPES[selected]}\n\n👤 LANGKAH 3 — Mahu model AI dalam video?",
+                f"📦 LANGKAH 2 — Kategori dipilih: {PRODUCT_TYPES[selected]}\n\n👤 LANGKAH 3 — Mahu model AI dalam video?",
                 reply_markup=prompt_model_presence_menu()
             )
         else:
@@ -2258,36 +2258,36 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         elif selected == 'yes':
             context.user_data['prompt_model_presence'] = 'yes'
             context.user_data['stage'] = 'prompt_model_count'
-            await query.message.reply_text('Berapa orang model dewasa yang diperlukan?', reply_markup=prompt_model_count_menu())
+            await query.message.reply_text('👤 LANGKAH 3 — BUTIRAN MODEL\n\nBerapa orang model dewasa yang diperlukan?', reply_markup=prompt_model_count_menu())
     elif action.startswith('prompt_model_count:') and stage == 'prompt_model_count':
         selected = action.split(':', 1)[1]
         if selected in ('1', '2', '3'):
             context.user_data['prompt_model_count'] = int(selected)
             context.user_data['stage'] = 'prompt_model_gender'
-            await query.message.reply_text('Pilih jantina model:', reply_markup=prompt_model_gender_menu())
+            await query.message.reply_text('👤 LANGKAH 3 — BUTIRAN MODEL\n\nPilih jantina model:', reply_markup=prompt_model_gender_menu())
     elif action.startswith('prompt_model_gender:') and stage == 'prompt_model_gender':
         selected = action.split(':', 1)[1]
         if selected in ('female', 'male', 'mixed'):
             context.user_data['prompt_model_gender'] = selected
             if selected in ('female', 'mixed'):
                 context.user_data['stage'] = 'prompt_model_hijab'
-                await query.message.reply_text('Pilihan tudung untuk model wanita:', reply_markup=prompt_model_hijab_menu())
+                await query.message.reply_text('👤 LANGKAH 3 — BUTIRAN MODEL\n\nPilihan tudung untuk model wanita:', reply_markup=prompt_model_hijab_menu())
             else:
                 context.user_data['prompt_model_hijab'] = 'na'
                 context.user_data['stage'] = 'prompt_model_ethnicity'
-                await query.message.reply_text('Pilih rupa atau latar etnik model:', reply_markup=prompt_model_ethnicity_menu())
+                await query.message.reply_text('👤 LANGKAH 3 — BUTIRAN MODEL\n\nPilih rupa atau latar etnik model:', reply_markup=prompt_model_ethnicity_menu())
     elif action.startswith('prompt_model_hijab:') and stage == 'prompt_model_hijab':
         selected = action.split(':', 1)[1]
         if selected in ('hijab', 'no_hijab', 'na'):
             context.user_data['prompt_model_hijab'] = selected
             context.user_data['stage'] = 'prompt_model_ethnicity'
-            await query.message.reply_text('Pilih rupa atau latar etnik model:', reply_markup=prompt_model_ethnicity_menu())
+            await query.message.reply_text('👤 LANGKAH 3 — BUTIRAN MODEL\n\nPilih rupa atau latar etnik model:', reply_markup=prompt_model_ethnicity_menu())
     elif action.startswith('prompt_model_ethnicity:') and stage == 'prompt_model_ethnicity':
         selected = action.split(':', 1)[1]
         if selected in ('Malay', 'Asian', 'diverse', 'any'):
             context.user_data['prompt_model_ethnicity'] = selected
             context.user_data['stage'] = 'prompt_model_age'
-            await query.message.reply_text('Pilih lingkungan umur model (dewasa sahaja):', reply_markup=prompt_model_age_menu())
+            await query.message.reply_text('👤 LANGKAH 3 — BUTIRAN MODEL\n\nPilih lingkungan umur model (dewasa sahaja):', reply_markup=prompt_model_age_menu())
     elif action.startswith('prompt_model_age:') and stage == 'prompt_model_age':
         selected = action.split(':', 1)[1]
         if selected in ('18-25', '26-40', '41+'):
