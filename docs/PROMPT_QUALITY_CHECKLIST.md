@@ -185,3 +185,19 @@ The initial scan found a small number of prompts that did not contain the exact 
 - [ ] Continue prompt-by-prompt action/storyboard review of the remaining master-library entries in small batches.
 
 **Scope note:** This batch standardizes the delivery brief; it does not mark all 1,171 master prompts as individually audited or visually verified.
+
+
+## 2J. Category-specific realism and storyboard batch 2
+
+- [x] Added ID-preserving overrides for `fashion_walking_ootd_v1` — natural walking pace, fabric physics, true fit and a readable full-outfit finish.
+- [x] Added ID-preserving overrides for `fashion_mirror_selfie_v1` — mirror, phone and reflection actions are conditional on reference support; avoids invented props and reflection mismatch.
+- [x] Added ID-preserving overrides for `beauty_vanity_hero_v1` — no assumption that every beauty item is liquid, has an applicator, or should be opened/applied.
+- [x] Added ID-preserving overrides for `gadgets_detail_reveal_v1` — visible hardware only; no invented ports, interface, lights or powered-on state.
+- [x] Added ID-preserving overrides for `wallets_clean_flatlay_v1` — preserves construction; does not add cash/cards, open the wallet, or imply hidden capacity.
+- [x] Added ID-preserving overrides for `shoes_side_profile_reveal_v1` — grounded shoe geometry; no forced wearer, unnatural foot twist, or unseen sole detail.
+- [x] All six use four matching timed shots (0–2s, 2–6s, 6–8s, 8–10s), a consistent product-lock section and HD vertical 9:16 delivery guidance for Shopee and TikTok.
+- [x] Existing IDs preserved; changes are additive in `prompt_quality_overrides.json`; master library remains unchanged at 1,171 prompts across 19 categories.
+- [ ] Run repository CI before merging.
+- [ ] Visually inspect generated clips; text and CI validation do not prove external video output is realistic or truly HD.
+
+**Scope note:** This batch covers six named prompts only. It does not mark the clothing, beauty, gadget, wallet or shoe categories fully audited.
