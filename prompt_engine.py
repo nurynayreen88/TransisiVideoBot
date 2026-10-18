@@ -129,6 +129,10 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
         "Treat those photo(s), not assumptions from the product name, as the source of truth for the visible product identity. "
         "Preserve visible shape, color, print, packaging, proportions and readable branding. Do not invent unseen angles, brand marks, "
         "model numbers, materials, technical specifications, included accessories, product claims, compartments or hidden features. "
+        "BACKGROUND REPLACEMENT RULE: The uploaded photo is a product reference, NOT an instruction to keep its original background. "
+        "Replace/remove the original photo background and use the user's selected SETTING as the actual video scene. "
+        "Keep the product itself faithful and naturally integrated into that new setting with matching perspective, lighting and contact shadows. "
+        "Do not retain the original background, paste the whole source photo into the scene, or show a visible cutout edge. "
         "Use the product name and category only as supporting context; if a detail is not visible, keep it neutral rather than guessing."
     )
     art = (
