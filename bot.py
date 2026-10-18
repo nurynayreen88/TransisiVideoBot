@@ -1945,28 +1945,12 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if not context.user_data.get('prompt_reference_photos'):
             await query.message.reply_text('Sila hantar sekurang-kurangnya 1 gambar produk dahulu.', reply_markup=prompt_images_menu())
         elif context.user_data.get('prompt_mode') == 'storyboard':
-            context.user_data['stage'] = 'prompt_storyboard_prompt_ready'
-            storyboard_prompt = (
-                'STORYBOARD PROMPT — PRODUCT VIDEO\n\n'
-                'Act as a professional commercial storyboard director. Use the uploaded product image as the only visual reference and create a polished storyboard for a short vertical 9:16 product advertisement.\n\n'
-                'Create 6 clearly numbered, sequential panels. For every panel, specify the approximate duration, the exact visual action, shot size/framing, camera movement, and how it connects to the next panel. Begin with a strong visual hook, progress through distinct product-reveal and detail shots, and finish with a memorable product hero shot. Make every panel visually different while keeping the sequence coherent and practical for an AI video generator.\n\n'
-                'PRODUCT CONSISTENCY: Preserve the exact product shown in the reference image, including its visible shape, colour, pattern, material, packaging, proportions, and details. Do not invent or alter product features, labels, logos, or claims. Keep the product consistent in every panel.\n\n'
-                'STORYBOARD OUTPUT: Present the storyboard as a clear visual storyboard sheet with six readable panels in order. The panels must show the intended shots and actions, not merely text descriptions. Use realistic commercial photography, consistent lighting and setting, and a vertical-video composition. Do not add subtitles, promotional text, extra logos, or watermarks.\n\n'
-                'Return the storyboard only. Do not generate the finished video and do not return a separate video-generation prompt.'
-            )
-            context.user_data['prompt_storyboard_prompt_ready'] = storyboard_prompt
-            await query.message.reply_text(storyboard_prompt)
+            # Use the same curated prompt library as video mode, then add storyboard-only instructions.
+            context.user_data['stage'] = 'prompt_storyboard_product_name'
             await query.message.reply_text(
-                f"✅ {len(context.user_data['prompt_reference_photos'])} gambar diterima.\n\n"
-                '🧩 PROMPT STORYBOARD SIAP\n\n'
-                '1. Tekan Buka ChatGPT.\n'
-                '2. Muat naik gambar produk yang sama ke ChatGPT.\n'
-                '3. Salin prompt di atas dan tampal ke ChatGPT.\n'
-                '4. Selepas storyboard siap, tekan “Selesai Jana Prompt Storyboard” untuk mendapatkan pilihan penjana video.',
-                reply_markup=InlineKeyboardMarkup([
-                    [InlineKeyboardButton('🖼️ Buka ChatGPT', url='https://chatgpt.com/')],
-                    [InlineKeyboardButton('✅ Selesai Jana Prompt Storyboard', callback_data='prompt_storyboard_done')]
-                ])
+                '🧩 Gambar diterima. Untuk memilih idea aksi yang paling sesuai daripada library Klippo, masukkan nama produk.\\n\\n'
+                'Selepas itu, pilih kategori dan konsep storyboard. Arahan storyboard akan ditambah secara automatik tanpa menggandakan library prompt.',
+                reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]])
             )
         else:
             context.user_data['stage'] = 'prompt_product_type'
@@ -2018,7 +2002,50 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             )
             context.user_data['prompt_library_id'] = prompt_id
             context.user_data['prompt_library_storyboard'] = template.get('storyboard', [])
-            if context.user_data.get('prompt_product_name'):
+            if context.user_data.get('prompt_mode') == 'storyboard':
+                product_name = context.user_data.get('prompt_product_name', '').strip() or 'the product shown in the uploaded reference image'
+                details = context.user_data.get('prompt_library_details', '').strip()
+                curated_shots = template.get('storyboard', [])
+                shot_text = ''
+                if isinstance(curated_shots, list) and curated_shots:
+                    shot_text = '\\n\\nPRODUCT-SPECIFIC SHOT IDEAS FROM THE KLIPPO LIBRARY:\\n' + '\\n'.join(
+                        f'{index + 1}. {shot}' for index, shot in enumerate(curated_shots)
+                    )
+                storyboard_prompt = (
+                    'STORYBOARD PROMPT — PRODUCT VIDEO\\n\\n'
+                    'Act as a professional commercial storyboard director. Use all uploaded product image(s) as the only visual reference. '
+                    'Create a polished, production-ready visual storyboard for a vertical 9:16 product advertisement.\\n\\n'
+                    'PRODUCT: ' + product_name + (('\\nUSER DETAILS: ' + details) if details else '') + '\\n'
+                    'CREATIVE CONCEPT FROM THE KLIPPO PROMPT LIBRARY: ' + template.get('label', 'Product-specific concept') + '. '
+                    + template.get('description', '') + shot_text + '\\n\\n'
+                    'STORYBOARD STRUCTURE: Create six clearly numbered sequential panels. For each panel, specify approximate timing, '
+                    'a distinct and physically plausible product-specific action, shot size/framing, camera movement, lighting or setting changes when useful, '
+                    'and the visual connection to the next panel. Begin with a compelling visual hook, develop the selected concept through varied shots, '
+                    'and finish with a memorable product hero shot. Do not repeat the same action across panels.\\n\\n'
+                    'PRODUCT CONSISTENCY: Preserve the exact product shown in the reference image(s), including visible shape, colour, pattern, material, '
+                    'packaging, proportions and details. Do not invent or alter product features, labels, logos, accessories or claims. Keep the same product '
+                    'identity in every panel. Use the product name and library concept only to guide the creative direction, never to guess unseen details.\\n\\n'
+                    'VISUAL OUTPUT: Show the intended shots and actions as a clear storyboard sheet with six readable panels in order, not merely a page of text. '
+                    'Use realistic commercial photography, coherent lighting and continuity, and a vertical-video composition. Do not add subtitles, promotional text, '
+                    'extra logos or watermarks.\\n\\n'
+                    'Return the storyboard only. Do not generate the finished video and do not return a separate video-generation prompt.'
+                )
+                context.user_data['prompt_storyboard_prompt_ready'] = storyboard_prompt
+                context.user_data['stage'] = 'prompt_storyboard_prompt_ready'
+                await query.message.reply_text(storyboard_prompt)
+                await query.message.reply_text(
+                    '🧩 PROMPT STORYBOARD SIAP\\n\\n'
+                    '1. Tekan Buka ChatGPT.\\n'
+                    '2. Muat naik gambar produk yang sama.\\n'
+                    '3. Salin prompt storyboard di atas dan tampal ke ChatGPT.\\n'
+                    '4. Selepas storyboard siap, tekan “Selesai Jana Prompt Storyboard” untuk mendapatkan pilihan penjana video.',
+                    reply_markup=InlineKeyboardMarkup([
+                        [InlineKeyboardButton('🖼️ Buka ChatGPT', url='https://chatgpt.com/')],
+                        [InlineKeyboardButton('✅ Selesai Jana Prompt Storyboard', callback_data='prompt_storyboard_done')],
+                        [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]
+                    ])
+                )
+            elif context.user_data.get('prompt_product_name'):
                 product_name = context.user_data['prompt_product_name']
                 subtype = detect_product_subtype(product_name)
                 context.user_data['prompt_bag_subtype'] = detect_bag_subtype(product_name)
@@ -2905,6 +2932,31 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
     value = update.message.text.strip()
     if value in ('🏠 Menu Utama', 'Menu Utama', 'menu', 'MENU', '/menu'):
         await start(update, context)
+        return
+    if stage == 'prompt_storyboard_product_name':
+        if len(value.strip()) < 2 or value.lower().startswith(('http://', 'https://')):
+            await update.message.reply_text('⚠️ Masukkan nama produk sahaja supaya Klippo boleh memilih idea aksi yang sesuai.')
+            return
+        product_name = value[:240]
+        context.user_data['prompt_product_name'] = product_name
+        subtype = detect_product_subtype(product_name)
+        category_id = detect_prompt_library_category(product_name)
+        context.user_data['prompt_bag_subtype'] = detect_bag_subtype(product_name)
+        if subtype == 'hijab':
+            context.user_data['prompt_product_type'] = 'hijab'
+        if category_id:
+            context.user_data['prompt_category'] = category_id
+            context.user_data['stage'] = 'prompt_category_options'
+            await update.message.reply_text(
+                '🔎 Jenis produk dikesan: ' + subtype.replace('_', ' ') + '. Pilih konsep untuk storyboard ' + product_name + ':',
+                reply_markup=prompt_options_menu(category_id, subtype)
+            )
+        else:
+            context.user_data['stage'] = 'prompt_category'
+            await update.message.reply_text(
+                '📚 Nama produk disimpan. Pilih kategori yang paling hampir supaya Klippo boleh memilih konsep aksi yang sesuai:',
+                reply_markup=prompt_category_menu()
+            )
         return
     if stage == 'prompt_library_details':
         details = '' if value in ('-', '—', 'tiada', 'Tiada') else value
