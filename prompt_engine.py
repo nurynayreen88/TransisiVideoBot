@@ -202,7 +202,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
             concept_rule = ("CREATIVE IDEA: " + concept.strip() + ". " if concept and concept.strip() else "")
             return (
                 "PROMPT VIDEO — " + str(duration) + " SAAT" + (" | BAHAGIAN " + str(part) if part else "") + "\n"
-                "Vertical 9:16, one realistic product ad, exactly " + str(duration) + " seconds.\n"
+                "Vertical 9:16, one realistic product ad, target 1080x1920, highest available native quality, crisp visible product detail, natural colour and exposure, low noise, stable frame-to-frame geometry, composed for Shopee/TikTok full-screen mobile viewing with the product inside the safe area, exactly " + str(duration) + " seconds.\n"
                 "PRODUCT: " + product + "\n"
                 + category_direction + "\n"
                 + "STYLE: " + style_name + " — " + style_template[:450] + "\n"
@@ -354,7 +354,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
         return (
             "PROMPT VIDEO — " + str(duration) + " SAAT\n"
             "KLIPPO | UNIVERSAL PRODUCT VIDEO PROMPT | " + style_name + (" | BAHAGIAN " + str(part) if part else "") + "\n"
-            "OUTPUT: One cohesive vertical 9:16 product advertisement, target resolution 1080x1920, EXACT DURATION: " + str(duration) + " seconds.\n\n"
+            "OUTPUT: One cohesive vertical 9:16 product advertisement, target resolution 1080x1920, highest available native quality, crisp product detail, natural colour and exposure, low noise, stable frame-to-frame geometry, composed for Shopee/TikTok full-screen mobile viewing with the product inside the safe area, EXACT DURATION: " + str(duration) + " seconds.\n\n"
             "PRODUCT NAME: " + product + "\n" + category_direction + "\n\n" + identity + "\n\n"
             "STYLE FROM KLIPPO CATALOG: " + style_template + "\n\n"
             "SETTING: " + scene + "\n"
