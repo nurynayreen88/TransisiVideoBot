@@ -570,6 +570,7 @@ def prompt_product_type_menu():
     for index in range(0, len(items), 2):
         pair = items[index:index + 2]
         rows.append([InlineKeyboardButton(label, callback_data='prompt_product_type:' + key) for key, label in pair])
+    rows.append([InlineKeyboardButton('✏️ Lain-lain — taip kategori sendiri', callback_data='prompt_product_type:custom')])
     rows.append([InlineKeyboardButton('↩️ Menu Utama', callback_data='home')])
     return InlineKeyboardMarkup(rows)
 
@@ -580,6 +581,7 @@ def prompt_product_subtype_menu(category: str):
     for index in range(0, len(options), 2):
         pair = options[index:index + 2]
         rows.append([InlineKeyboardButton(label, callback_data='prompt_product_subcategory:' + slug) for slug, label in pair])
+    rows.append([InlineKeyboardButton('✏️ Lain-lain — taip sendiri', callback_data='prompt_product_subcategory:custom')])
     rows.append([InlineKeyboardButton('↩️ Tukar Kategori', callback_data='prompt_product_categories')])
     rows.append([InlineKeyboardButton('🏠 Menu Utama', callback_data='home')])
     return InlineKeyboardMarkup(rows)
@@ -2283,9 +2285,15 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await query.message.reply_text('📦 Pilih kategori produk:', reply_markup=prompt_product_type_menu())
     elif action.startswith('prompt_product_type:'):
         selected = action.split(':', 1)[1]
-        if selected in PRODUCT_TYPES:
+        if selected == 'custom':
+            context.user_data['prompt_custom_category_parent'] = 'category'
+            context.user_data['stage'] = 'prompt_custom_category'
+            await query.message.reply_text('✏️ Taip kategori produk anda sendiri. Contoh: Peralatan memancing atau Aksesori akuarium.')
+        elif selected in PRODUCT_TYPES:
             context.user_data['prompt_product_type'] = selected
             context.user_data['prompt_product_subcategory'] = ''
+            context.user_data['prompt_custom_category_name'] = ''
+            context.user_data['prompt_custom_subcategory_name'] = ''
             context.user_data['stage'] = 'prompt_product_subcategory'
             await query.message.reply_text(
                 f"📦 Kategori: {PRODUCT_TYPES[selected]}\n\n🔎 Pilih subkategori produk:",
@@ -2297,8 +2305,14 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         selected = action.split(':', 1)[1]
         category = context.user_data.get('prompt_product_type', 'other')
         valid = {slug for slug, _label in PRODUCT_SUBTYPES.get(category, [])}
-        if selected in valid:
+        if selected == 'custom':
+            context.user_data['prompt_custom_category_parent'] = 'subcategory'
+            context.user_data['stage'] = 'prompt_custom_category'
+            await query.message.reply_text('✏️ Taip subkategori produk anda sendiri. Contoh: Beg kamera kalis air atau serum rambut.')
+        elif selected in valid:
             context.user_data['prompt_product_subcategory'] = selected
+            context.user_data['prompt_custom_category_name'] = ''
+            context.user_data['prompt_custom_subcategory_name'] = ''
             context.user_data['stage'] = 'prompt_product_name'
             await query.message.reply_text(
                 f"✅ Subkategori: {PRODUCT_SUBTYPE_LABELS[selected]}\n\n🛍️ Masukkan nama produk (nama sahaja, bukan pautan):"
@@ -2330,8 +2344,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await query.message.reply_text(
                 '✅ Tetapan Auto siap. Klippo telah memilih gaya, model (jika sesuai), latar dan gerakan kamera berdasarkan produk.\n\n'
                 f"🛍️ Produk: {context.user_data.get('prompt_product_name', 'Produk')}\n"
-                f"📦 Kategori: {PRODUCT_TYPES.get(product_type, 'Produk lain')}\n"
-                f"🔎 Subkategori: {PRODUCT_SUBTYPE_LABELS.get(context.user_data.get('prompt_product_subcategory', ''), 'Tidak dinyatakan')}\n"
+                f"📦 Kategori: {context.user_data.get('prompt_custom_category_name') or PRODUCT_TYPES.get(product_type, 'Produk lain')}\n"
+                f"🔎 Subkategori: {context.user_data.get('prompt_custom_subcategory_name') or PRODUCT_SUBTYPE_LABELS.get(context.user_data.get('prompt_product_subcategory', ''), 'Tidak dinyatakan')}\n"
                 f"⏱️ Durasi: {context.user_data.get('prompt_duration', 10)} saat\n"
                 '⚙️ Mod: Auto\n\nTeruskan untuk menjana prompt?',
                 reply_markup=InlineKeyboardMarkup([
@@ -2741,7 +2755,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             waiting = await query.message.reply_text('⏳ DALAM PROSES — 0%' + chr(10) + 'Menyusun prompt...')
             try:
                 product_name = context.user_data.get('prompt_product_name', '').strip()
-                product = ('NAMA_PRODUK: ' + product_name + chr(10) + 'KATEGORI: ' + PRODUCT_TYPES.get(context.user_data.get('prompt_product_type', 'other'), 'Produk lain') + chr(10) + 'SUBKATEGORI: ' + PRODUCT_SUBTYPE_LABELS.get(context.user_data.get('prompt_product_subcategory', ''), 'Tidak dinyatakan') + chr(10) + 'Optional user details: ' + context.user_data.get('prompt_product', ''))
+                product = ('NAMA_PRODUK: ' + product_name + chr(10) + 'KATEGORI: ' + (context.user_data.get('prompt_custom_category_name') or PRODUCT_TYPES.get(context.user_data.get('prompt_product_type', 'other'), 'Produk lain')) + chr(10) + 'SUBKATEGORI: ' + (context.user_data.get('prompt_custom_subcategory_name') or PRODUCT_SUBTYPE_LABELS.get(context.user_data.get('prompt_product_subcategory', ''), 'Tidak dinyatakan')) + chr(10) + 'Optional user details: ' + context.user_data.get('prompt_product', ''))
                 scene = context.user_data.get('prompt_scene', 'clean studio background')
                 style_choice = context.user_data.get('prompt_style', 'auto')
                 if style_choice == 'auto':
@@ -3215,6 +3229,31 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['prompt_voiceover_mode'] = 'none'
         context.user_data['stage'] = 'prompt_idea_choice'
         await update.message.reply_text('✅ Skrip disimpan.' if script else '✅ Teruskan tanpa dialog.', reply_markup=prompt_idea_choice_menu())
+        return
+    if stage == 'prompt_custom_category':
+        if len(value) < 2 or value.lower().startswith(('http://', 'https://')):
+            parent = context.user_data.get('prompt_custom_category_parent', 'category')
+            label = 'kategori' if parent == 'category' else 'subkategori'
+            await update.message.reply_text(f'⚠️ Taip nama {label} sahaja, bukan pautan. Sekurang-kurangnya 2 aksara.')
+            return
+        custom_value = ' '.join(value.split())[:100]
+        parent = context.user_data.get('prompt_custom_category_parent', 'category')
+        if parent == 'category':
+            context.user_data['prompt_product_type'] = 'other'
+            context.user_data['prompt_custom_category_name'] = custom_value
+            context.user_data['prompt_product_subcategory'] = 'other_other'
+            context.user_data['prompt_custom_subcategory_name'] = ''
+            context.user_data['stage'] = 'prompt_product_name'
+            await update.message.reply_text(
+                f'✅ Kategori sendiri: {custom_value}\n\n🛍️ Masukkan nama produk (nama sahaja, bukan pautan):'
+            )
+        else:
+            context.user_data['prompt_product_subcategory'] = 'other_other'
+            context.user_data['prompt_custom_subcategory_name'] = custom_value
+            context.user_data['stage'] = 'prompt_product_name'
+            await update.message.reply_text(
+                f'✅ Subkategori sendiri: {custom_value}\n\n🛍️ Masukkan nama produk (nama sahaja, bukan pautan):'
+            )
         return
     if stage == 'prompt_product_name':
         if len(value) < 2 or value.lower().startswith(('http://', 'https://')):
