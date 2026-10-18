@@ -30,7 +30,7 @@
 | Product category | Prompts | Current status | Next quality check |
 |---|---:|---|---|
 | Pakaian / Clothing | 63 | BASELINE OK — deeper review pending | Check fabric movement, fit, drape, body anatomy, hijab/clothing continuity and avoid changing garment design. |
-| Beg / Bags | 64 | IN PROGRESS — 9 prompts text-audited | Six additional ID-preserving overrides are merged; continue reviewing the remaining prompts. Visual generation test still pending. |
+| Beg / Bags | 64 | IN PROGRESS — 18 ID-preserving overrides merged across bags, shoes, beauty, gadgets, wallets and hijab | Continue reviewing remaining prompts and category variation. Visual generation tests still pending. |
 | Dompet / Wallets | 59 | BASELINE OK — deeper review pending | Check opening/closing hinges, card slots only if visible, hand interaction and scale consistency. |
 | Kasut / Shoes | 62 | PASS for 3 named overrides; remaining prompts NOT AUDITED | Review the other 59 prompts for shoe-specific actions, footwear geometry and plausible foot contact. |
 | Kosmetik & Kecantikan / Beauty | 70 | BASELINE OK — deeper review pending | Check applicator/product compatibility, believable liquid/cream behaviour, packaging continuity and avoid unsupported skin/health claims. |
