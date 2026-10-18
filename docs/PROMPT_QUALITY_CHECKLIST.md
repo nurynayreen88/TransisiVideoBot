@@ -172,3 +172,16 @@ The initial scan found a small number of prompts that did not contain the exact 
 - [x] `shoes_running_shoe_motion_v1` — shortened the opening rules by 206 characters while retaining the existing ID and all four storyboard directions verbatim.
 - [x] Exact 10-second timing remains `0–2s`, `2–6s`, `6–8s`, `8–10s`; the master library is unchanged.
 - [ ] Generated-video visual inspection is still pending; this text-only change is not a visual quality PASS.
+
+
+## 2I. Premium HD and Shopee/TikTok delivery consistency — batch 1
+
+- [x] Added a shared delivery-quality specification to all 18 existing ID-preserving quality overrides.
+- [x] Added the same baseline to both prompt-engine output paths so ordinary storyboard prompts and library-style prompts request highest native quality, target 1080x1920 vertical 9:16, crisp visible detail, natural colour/exposure, low noise and stable frame-to-frame geometry.
+- [x] Explicitly targets Shopee and TikTok full-screen mobile viewing, with the product kept inside a central safe area.
+- [x] Added safeguards against blur, compression artefacts, oversharpening, flicker, platform UI, unrequested captions, claims, logos and watermarks.
+- [x] Existing prompt IDs, the 1,171-entry master library and video engine/provider are unchanged.
+- [ ] Run repository CI and inspect actual generated clips at native output resolution; prompt wording cannot guarantee the video model's final resolution or fidelity.
+- [ ] Continue prompt-by-prompt action/storyboard review of the remaining master-library entries in small batches.
+
+**Scope note:** This batch standardizes the delivery brief; it does not mark all 1,171 master prompts as individually audited or visually verified.
