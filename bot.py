@@ -834,7 +834,16 @@ def prompt_scene_menu():
         [InlineKeyboardButton('✨ Auto (Disyorkan)', callback_data='scene:auto')],
         [InlineKeyboardButton('📸 Studio Premium', callback_data='scene:studio'), InlineKeyboardButton('🌑 Mewah Gelap', callback_data='scene:dark')],
         [InlineKeyboardButton('🏡 Ruang Rumah', callback_data='scene:home'), InlineKeyboardButton('🌿 Alam Semula Jadi', callback_data='scene:nature')],
-        [InlineKeyboardButton('☀️ Cerah Minimalis', callback_data='scene:minimal')]
+        [InlineKeyboardButton('☀️ Cerah Minimalis', callback_data='scene:minimal')],
+        [InlineKeyboardButton('🍳 Dapur', callback_data='scene:kitchen'), InlineKeyboardButton('🛋️ Ruang Tamu', callback_data='scene:living_room')],
+        [InlineKeyboardButton('💼 Pejabat', callback_data='scene:office'), InlineKeyboardButton('🚗 Dalam Kereta', callback_data='scene:car_interior')],
+        [InlineKeyboardButton('☕ Kafe', callback_data='scene:cafe'), InlineKeyboardButton('🛍️ Butik', callback_data='scene:boutique')],
+        [InlineKeyboardButton('🏬 Pusat Beli-belah', callback_data='scene:mall'), InlineKeyboardButton('💄 Meja Solek', callback_data='scene:vanity')],
+        [InlineKeyboardButton('🛏️ Bilik Tidur', callback_data='scene:bedroom'), InlineKeyboardButton('🌿 Taman', callback_data='scene:garden')],
+        [InlineKeyboardButton('🏖️ Pantai', callback_data='scene:beach'), InlineKeyboardButton('🏋️ Gimnasium', callback_data='scene:gym')],
+        [InlineKeyboardButton('📚 Perpustakaan', callback_data='scene:library'), InlineKeyboardButton('🧰 Bengkel', callback_data='scene:workshop')],
+        [InlineKeyboardButton('🥐 Bakeri', callback_data='scene:bakery'), InlineKeyboardButton('🍽️ Restoran', callback_data='scene:restaurant')],
+        [InlineKeyboardButton('🧳 Lapangan Terbang', callback_data='scene:airport'), InlineKeyboardButton('🏨 Bilik Hotel', callback_data='scene:hotel')]
     ])
 
 
@@ -2549,12 +2558,30 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await query.message.reply_text('🎨 Pilih latar video:', reply_markup=prompt_scene_menu())
     elif action.startswith('scene:') and stage == 'prompt_scene':
         scenes = {
-            'auto': 'clean premium studio background, selected to complement the named product',
-            'studio': 'premium photography studio, soft neutral backdrop and realistic contact shadows',
-            'dark': 'dark luxury studio, controlled rim lighting and understated premium contrast',
-            'home': 'tasteful modern home interior, natural ambient lighting and believable product placement',
-            'nature': 'restrained natural setting with soft daylight, without obscuring the product',
-            'minimal': 'bright minimalist setting with clean neutral surfaces and soft daylight'
+            'auto': 'a realistic premium location chosen to suit the product, with natural lighting and believable physical surroundings',
+            'studio': 'a premium photography studio with soft neutral backdrop and realistic contact shadows',
+            'dark': 'a dark luxury studio with controlled rim lighting and understated premium contrast',
+            'home': 'a tasteful modern home interior with natural ambient lighting and believable product placement',
+            'nature': 'a restrained natural setting with soft daylight, without obscuring the product',
+            'minimal': 'a bright minimalist setting with clean neutral surfaces and soft daylight',
+            'kitchen': 'a realistic modern home kitchen, clean counter and softly blurred cabinets',
+            'living_room': 'a realistic contemporary living room with sofa, side table and natural window light',
+            'office': 'a realistic modern office desk area with neutral workspace and shelves',
+            'car_interior': 'inside a realistic clean modern car interior, daylight through windows, product placed naturally and safely',
+            'cafe': 'a realistic cozy cafe with wooden tables, warm daylight and softly blurred background',
+            'boutique': 'a realistic fashion boutique with clothing racks softly out of focus',
+            'mall': 'a realistic modern shopping mall interior with storefronts blurred in the distance',
+            'vanity': 'a realistic elegant dressing table and vanity area with mirror and soft natural light',
+            'bedroom': 'a realistic neat modern bedroom with bedside table and soft daylight',
+            'garden': 'a realistic lush home garden with green plants and soft natural bokeh',
+            'beach': 'a realistic tropical beach with sand and sea softly blurred in the distance',
+            'gym': 'a realistic modern gym with exercise equipment softly out of focus',
+            'library': 'a realistic library with bookshelves softly blurred in the background',
+            'workshop': 'a realistic tidy workshop with tools and workbench softly out of focus',
+            'bakery': 'a realistic artisan bakery counter with bread displays softly blurred in the background',
+            'restaurant': 'a realistic modern restaurant interior with tables and warm ambient lighting',
+            'airport': 'a realistic airport lounge with large windows and seating softly out of focus',
+            'hotel': 'a realistic premium hotel room with tasteful furniture and natural light'
         }
         selected = action.split(':', 1)[1]
         if selected in scenes:
@@ -3192,7 +3219,15 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if choice == 'custom':
             context.user_data['stage'] = 'background_custom_upload'
             await query.message.reply_text('🖼️ Hantar gambar yang mahu digunakan sebagai latar video. Boleh hantar sebagai gambar Telegram atau fail imej JPG, PNG atau WEBP. Gambar ini akan dipadankan dengan saiz video.')
-        elif choice in ('original', 'white', 'beige', 'dark', 'pastel', 'navy', 'sage', 'sky', 'lavender', 'rose', 'mint', 'terracotta', 'charcoal', 'gradient', 'pattern', 'duotone', 'mist', 'sky_gradient', 'lavender_gradient', 'sage_gradient', 'blush_gradient', 'midnight_gradient', 'sand_gradient'):
+        elif choice in BACKGROUNDS or choice in (
+            'original', 'gradient', 'pattern', 'duotone', 'mist',
+            'sky_gradient', 'lavender_gradient', 'sage_gradient', 'blush_gradient',
+            'midnight_gradient', 'sand_gradient', 'ocean_gradient', 'forest_gradient',
+            'sunset_gradient', 'aurora_gradient', 'mocha_gradient', 'peach_gradient',
+            'ice_gradient', 'emerald_gradient', 'plum_gradient', 'coral_gradient',
+            'graphite_gradient', 'champagne_gradient', 'lemon_gradient', 'teal_gradient',
+            'lilac_gradient', 'cobalt_gradient'
+        ):
             context.user_data['background'] = choice
             context.user_data.pop('custom_background_file_id', None)
             context.user_data['stage'] = 'duration'
