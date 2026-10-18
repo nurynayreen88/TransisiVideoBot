@@ -595,7 +595,7 @@ def prompt_style_menu(product_type='other', model_presence=None):
 
     matching = [(key, label) for key, label in available if key in allowed]
 
-    # White Doodle is a product-tracked 2D overlay and works across categories.
+    # White Doodle is a universal overlay style and works across product categories.
     # It is safe to offer universally because it follows the actual visible product.
     doodle_option = next(((key, label) for key, label in available if key == 'white_doodle'), None)
     if doodle_option and not any(key == 'white_doodle' for key, _ in matching):
