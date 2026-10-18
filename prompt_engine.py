@@ -202,10 +202,47 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
                 "natural contact shadows, clean transitions and restrained highlights. Keep product geometry and visible details "
                 "consistent throughout. Finish on a stable, clean hero frame."
             )
+        # Standardize every Telegram storyboard prompt, including curated library styles,
+        # on five equal timed scenes within one video.
+        if part == 0 and duration in (10, 20):
+            scene_length = duration / 5
+            generic_scenes = [
+                ("OPENING / PRODUCT REVEAL", "Establish the exact product clearly in a coherent setting; no on-screen text."),
+                ("FULL PRODUCT VIEW", "Show the complete product, preserving shape, colour, print, proportions, packaging and visible branding."),
+                ("VISIBLE DETAIL", "Move gently toward a genuinely visible detail; do not invent unseen surfaces, textures or features."),
+                ("NATURAL PRODUCT ACTION", "Show one simple, physically plausible product-appropriate action or restrained camera move."),
+                ("FINAL HERO HOLD", "Return to a clean, stable full-product composition. No invented slogan, price, claim or watermark."),
+            ]
+            if storyboard_override and isinstance(storyboard_override, (list, tuple)) and len(storyboard_override) == 4:
+                curated_items = list(storyboard_override)
+                generic_scenes = [
+                    ("OPENING / PRODUCT REVEAL", "Establish the exact product clearly in a coherent setting; no on-screen text."),
+                    (str(curated_items[0].get("shot", "CREATIVE BEAT 1")), str(curated_items[0].get("direction", ""))),
+                    (str(curated_items[1].get("shot", "CREATIVE BEAT 2")), str(curated_items[1].get("direction", ""))),
+                    (str(curated_items[2].get("shot", "CREATIVE BEAT 3")), str(curated_items[2].get("direction", ""))),
+                    ("CREATIVE FINISH / HERO HOLD", str(curated_items[3].get("direction", "")) + " Finish on a stable, full-product hero frame."),
+                ]
+            blocks = []
+            for index, (shot_name, shot_direction) in enumerate(generic_scenes):
+                start = index * scene_length
+                end = start + scene_length
+                blocks.append(f"SCENE {index + 1} — {start:.1f}–{end:.1f}s | {shot_name}: {shot_direction}")
+            storyboard_text = (
+                "DIRECTOR'S WRITTEN STORYBOARD: Generate ONE continuous vertical product video with exactly five equal scenes. "
+                f"Each scene lasts exactly {scene_length:g} seconds. These are timed scenes inside one video, not separate prompts or a storyboard image. "
+                "No unrequested text, captions, added logos, dialogue, voice-over, claims or watermarks. "
+                "Preserve exact product identity, packaging, colour, scale and coherent lighting.\\n\\n"
+                + "\\n\\n".join(blocks)
+                + "\\n\\nKeep transitions natural, camera movement restrained and product geometry stable throughout."
+            )
+            if storyboard_override and isinstance(storyboard_override, (list, tuple)) and len(storyboard_override) == 4:
+                curated_direction = storyboard_text
+            else:
+                rules = storyboard_text
         return (
             "PROMPT VIDEO — " + str(duration) + " SAAT\n"
             "KLIPPO | UNIVERSAL PRODUCT VIDEO PROMPT | " + style_name + (" | BAHAGIAN " + str(part) if part else "") + "\n"
-            "OUTPUT: One cohesive vertical 9:16 product advertisement, EXACT DURATION: " + str(duration) + " seconds.\n\n"
+            "OUTPUT: One cohesive vertical 9:16 product advertisement, target resolution 1080x1920, EXACT DURATION: " + str(duration) + " seconds.\n\n"
             "PRODUCT NAME: " + product + "\n" + category_direction + "\n\n" + identity + "\n\n"
             "STYLE FROM KLIPPO CATALOG: " + style_template + "\n\n"
             "SETTING: " + scene + "\n"
