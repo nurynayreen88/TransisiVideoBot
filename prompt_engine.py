@@ -143,7 +143,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
                 beat_plan = (
                     "DIRECTOR'S CURATED PREMIUM STORYBOARD: NO ON-SCREEN TEXT. "
                     + (("CONTINUITY BRIDGE: Resume from Part 1's exact final product frame. "
-                        "CONTINUATION ACTION: Continue the same concept without repeating the opening hook. ")
+                        "CONTINUATION ACTION: Continue the same concept. Do not repeat the opening hook. ")
                        if part == 2 else "")
                     + "FOLLOW THESE SELECTED STORYBOARD BEATS IN ORDER: "
                     + " | ".join(
