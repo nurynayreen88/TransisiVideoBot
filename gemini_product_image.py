@@ -60,7 +60,7 @@ def generate_product_reference_image(image_bytes: bytes, image_prompt: str) -> b
         }],
         "generationConfig": {
             "responseModalities": ["IMAGE"],
-            "response_mime_type": "image/png",
+            "responseMimeType": "image/png",
         },
     }
     request = urllib.request.Request(
