@@ -82,7 +82,8 @@ jobs:
               )
               has_text_safety_rule = any(term in text for term in (
                   "no on-screen text", "no text", "no captions", "no readable text",
-                  "no readable generated text", "text overlays", "added text", "on-screen text"
+                  "no readable generated text", "text overlays", "added text", "on-screen text",
+                  "text, captions", "text, caption"
               ))
               assert has_text_safety_rule, (
                   f"Prompt {prompt['id']} is missing a no-text/output safety rule"
