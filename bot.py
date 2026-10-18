@@ -3201,60 +3201,89 @@ def _shopee_link(value):
 
 
 def _shopee_public_photo(url, destination, description=''):
-    """Fetch only a publicly exposed Shopee product image; no product classification."""
+    """Fetch a public product image from Shopee page metadata or embedded image URLs."""
     from urllib.request import Request, urlopen
     from urllib.parse import urlparse
     from html import unescape
     from PIL import Image
+
     if not _shopee_link(url):
         return False
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8',
+        'Accept-Language': 'en-MY,en;q=0.9,ms;q=0.8',
+    }
+
+    def allowed_shopee_host(host):
+        host = (host or '').lower().rstrip('.')
+        return host == 'shopee.com.my' or host.endswith('.shopee.com.my')
+
+    def allowed_image_host(host):
+        host = (host or '').lower().rstrip('.')
+        return any(host == domain or host.endswith('.' + domain) for domain in (
+            'susercontent.com', 'shopeeusercontent.com', 'shopeemobile.com',
+            'shopee.com.my', 'shopee.sg'
+        ))
+
     try:
-        req = Request(url, headers={'User-Agent': 'Mozilla/5.0 (compatible; KLIPPO/1.0)'})
-        with urlopen(req, timeout=10) as response:
+        req = Request(url, headers=headers)
+        with urlopen(req, timeout=15) as response:
             final_url = urlparse(response.geturl())
-            final_host = (final_url.hostname or '').lower()
-            if final_url.scheme != 'https' or not (
-                final_host == 'shopee.com.my' or final_host.endswith('.shopee.com.my')
-            ):
+            if final_url.scheme != 'https' or not allowed_shopee_host(final_url.hostname):
                 return False
             if 'text/html' not in response.headers.get('Content-Type', '').lower():
                 return False
-            page = response.read(500000).decode('utf-8', 'replace')
+            page = response.read(1000000).decode('utf-8', 'replace')
 
         def meta(name):
-            # Attribute order can vary; match either property/name and content.
             for tag in re.findall(r'<meta\b[^>]*>', page, re.I):
                 attr = re.search(r'\b(?:property|name)\s*=\s*["\']([^"\']+)["\']', tag, re.I)
                 content = re.search(r'\bcontent\s*=\s*["\']([^"\']+)["\']', tag, re.I)
                 if attr and content and attr.group(1).lower() == name.lower():
-                    return unescape(content.group(1).replace('&amp;', '&'))
+                    return unescape(content.group(1)).replace('\\/', '/')
             return ''
 
-        image_url = meta('og:image') or meta('twitter:image')
-        if not image_url:
-            return False
-        image_parsed = urlparse(image_url)
-        image_host = (image_parsed.hostname or '').lower()
-        allowed_image_host = (
-            image_host == 'shopee.com.my'
-            or image_host.endswith(('.shopee.com.my', '.shopee.sg', '.shopeemobile.com', '.shopeeusercontent.com'))
-        )
-        if image_parsed.scheme != 'https' or not allowed_image_host:
+        # Shopee's server-rendered page may contain no og:image. Inspect embedded
+        # JSON/JS image URLs too; normalize JSON-escaped slashes before matching.
+        normalized_page = unescape(page).replace('\\/', '/').replace('\\u002F', '/').replace('\\u002f', '/')
+        candidates = [meta('og:image'), meta('twitter:image')]
+        candidates.extend(re.findall(r'''https?://[^"'\s<>\\\\]+''', normalized_page, re.I))
+        seen = set()
+        image_urls = []
+        for candidate in candidates:
+            candidate = unescape(candidate).replace('&amp;', '&').replace('\\/', '/').strip(' \\t\\r\\n,;)]}')
+            parsed = urlparse(candidate)
+            host = (parsed.hostname or '').lower()
+            if (parsed.scheme == 'https' and allowed_image_host(host)
+                    and candidate not in seen):
+                seen.add(candidate)
+                image_urls.append(candidate)
+        if not image_urls:
             return False
 
-        with urlopen(Request(image_url, headers={'User-Agent': 'Mozilla/5.0 (compatible; KLIPPO/1.0)'}), timeout=10) as response:
-            if not response.headers.get('Content-Type', '').lower().startswith('image/'):
-                return False
-            data = response.read(6000001)
-        if not data or len(data) > 6000000:
-            return False
-        with Image.open(BytesIO(data)) as opened:
-            opened.verify()
-        with Image.open(BytesIO(data)) as opened:
-            if min(opened.size) < 250:
-                return False
-            ImageOps.exif_transpose(opened).convert('RGB').save(destination, 'JPEG', quality=92)
-        return True
+        for image_url in image_urls[:30]:
+            try:
+                with urlopen(Request(image_url, headers={
+                    'User-Agent': headers['User-Agent'],
+                    'Accept': 'image/avif,image/webp,image/*,*/*;q=0.8',
+                    'Referer': final_url.geturl(),
+                }), timeout=12) as response:
+                    if not response.headers.get('Content-Type', '').lower().startswith('image/'):
+                        continue
+                    data = response.read(6000001)
+                if not data or len(data) > 6000000:
+                    continue
+                with Image.open(BytesIO(data)) as opened:
+                    opened.verify()
+                with Image.open(BytesIO(data)) as opened:
+                    if min(opened.size) < 250:
+                        continue
+                    ImageOps.exif_transpose(opened).convert('RGB').save(destination, 'JPEG', quality=92)
+                return True
+            except Exception:
+                continue
+        return False
     except Exception as exc:
         logging.info('Public Shopee image unavailable: %s', exc)
         return False
