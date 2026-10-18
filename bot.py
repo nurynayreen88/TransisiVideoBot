@@ -808,11 +808,11 @@ def faq_example(index):
 def main_menu(user_id=None):
     rows = [
         [InlineKeyboardButton('✍️ Jana Prompt', callback_data='prompt')],
+        [InlineKeyboardButton('🎞️ Gerakkan Foto (Transisi)', callback_data='make')],
         [InlineKeyboardButton('🎞️ Gabung Video', callback_data='merge')],
         [InlineKeyboardButton('🔄 Tukar Format Video', callback_data='convert')],
-        [InlineKeyboardButton('🎞️ Gerakkan Foto (Transisi)', callback_data='make')],
         [InlineKeyboardButton('💎 Langganan', callback_data='subscription'), InlineKeyboardButton('👤 Akaun Saya', callback_data='account')],
-        [InlineKeyboardButton('❓ FAQ', callback_data='help')],
+        [InlineKeyboardButton('❓ Bantuan', callback_data='help')],
     ]
     if user_id is not None and is_admin(user_id):
         rows.append([InlineKeyboardButton('🛡️ Panel Admin', callback_data='admin')])
@@ -1542,7 +1542,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         '🔄 Tukar Format Video — sesuaikan video kepada format MP4 menegak untuk affiliate.\n'
         '💎 Langganan — lihat pelan dan cara pembayaran.\n'
         '👤 Akaun Saya — semak maklumat akaun dan status langganan.\n'
-        '❓ Bantuan — panduan menggunakan KLIPPO.\n\n'
+        '❓ Bantuan — panduan penggunaan KLIPPO dan jawapan soalan lazim.\n\n'
         '👇 Tekan pilihan di bawah untuk bermula:',
         reply_markup=main_menu(update.effective_user.id)
     )
