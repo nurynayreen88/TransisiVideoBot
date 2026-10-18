@@ -30,19 +30,28 @@ def _resolve_auto_style(style, product_type):
     return AUTO_STYLE_BY_PRODUCT_TYPE.get(product_type, 'cinematic')
 
 
-def build_prompt(mode, product, scene, motion, style='auto', duration=10, concept='', product_type='other', storyboard_override=None):
+def build_prompt(mode, product, scene, motion, style='auto', duration=10, concept='', product_type='other', storyboard_override=None, split=None):
+    # Preserve the historical API behavior: a 20-second call without an explicit
+    # split choice still returns two connected 10-second prompts.
+    if split is None:
+        split = duration == 20
     style = _resolve_auto_style(style, product_type) if mode == 'storyboard' else style
-    if duration == 20:
-        # Resolve the category-appropriate style once so both clips remain consistent.
-        chosen_style = style
-        first = _build_single_prompt(mode, product, scene, motion, chosen_style, part=1, concept=concept, product_type=product_type, storyboard_override=storyboard_override)
-        second = _build_single_prompt(mode, product, scene, motion, chosen_style, part=2, concept=concept, product_type=product_type, storyboard_override=storyboard_override)
-        return first + "\n\n=== KLIPPO PART 2 ===\n\n" + second
-    return _build_single_prompt(mode, product, scene, motion, style, part=0, concept=concept, product_type=product_type, storyboard_override=storyboard_override)
+    if split and duration > 10:
+        # Generate connected 10-second prompts while retaining the same style and product context.
+        parts = [
+            _build_single_prompt(mode, product, scene, motion, style, part=index, duration=10,
+                                 concept=concept, product_type=product_type, storyboard_override=storyboard_override)
+            for index in range(1, duration // 10 + 1)
+        ]
+        return "\n\n".join(
+            ("=== KLIPPO PART " + str(index + 1) + " ===\n\n" + part) if index else part
+            for index, part in enumerate(parts)
+        )
+    return _build_single_prompt(mode, product, scene, motion, style, part=0, duration=duration,
+                                concept=concept, product_type=product_type, storyboard_override=storyboard_override)
 
 
-def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, concept='', product_type='other', storyboard_override=None):
-    duration = 10
+def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, duration=10, concept='', product_type='other', storyboard_override=None):
     camera = CAMERAS.get(motion, CAMERAS["push"])
     product_type_directions = {
         'fashion': "PRODUCT CATEGORY DIRECTION: Treat this as clothing/fashion. Favor natural fabric movement and visible garment details; never alter cut, print, color or pattern.",
@@ -114,9 +123,9 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
                 "Follow the selected product-specific storyboard."
             )
         if doodle:
-            if part == 2:
+            if part > 1:
                 rules = (
-                    "SECOND CLIP 10s, five 2-second panels: 0-2s resume from the exact final full-product framing of Part 1; "
+                    "SECOND CLIP 10s, five 2-second panels: 0-2s resume from the exact final full-product frame held at the end of Part 1; "
                     "2-4s begin drawing a thin white dashed contour just OUTSIDE the actual product silhouette; "
                     "following only visible product edges; 4-6s complete and hold the contour. "
                     "6-8s add one small white dotted arrow or sparkle beside a genuinely visible detail; "
@@ -135,7 +144,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
                 "short feature labels may appear; reserve space for editing overlays if text rendering is unreliable. "
                 "Prioritize the visible surrounding product contour over camera movement."
             )
-        elif part == 2:
+        elif part > 1:
             rules = (
                 "SECOND CLIP 10s, five 2-second panels: 0-2s continue the exact full-product frame held at the end of Part 1; "
                 "2-4s emphasize a second genuinely visible detail without inventing an angle; 4-6s continue the same concept; "
@@ -146,6 +155,15 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
                 "FIRST CLIP 10s, five 2-second panels: 0-2s verified product-name/category hook if available; "
                 "2-4s full-product reveal; 4-6s one genuinely visible detail; 6-8s continue the product story; "
                 "8-10s settle into a stable full-product frame and HOLD for a seamless Part 2 handoff. No closing fade in Part 1."
+            )
+        if part == 0 and duration > 10:
+            rules = (
+                "SINGLE-PROMPT FULL-LENGTH VIDEO: Create one continuous " + str(duration) + "-second product commercial, not separate clips. "
+                "Distribute these five connected beats across the entire duration: opening product recognition; full-product reveal; "
+                "one genuinely visible detail; a restrained style-specific action; and a stable full-product hero finish. "
+                "Keep the same set, lighting, product scale and identity throughout. "
+                + ("Use thin white doodle emphasis only around visible product edges, without obscuring the product. " if doodle else "")
+                + "Do not repeat the opening or introduce unsupported features, props, text or unseen angles."
             )
         curated_direction = ""
         if storyboard_override and isinstance(storyboard_override, (list, tuple)) and len(storyboard_override) == 4:
@@ -173,7 +191,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
                 ]
             curated_direction = (
                 "DIRECTOR'S CURATED PREMIUM STORYBOARD: Use this selected GitHub library storyboard as the primary shot plan. "
-                "Expand the four selected creative beats into exactly five connected panels of 2 seconds each; distribute the selected beats across the panels and add a reference-safe opening or closing panel where needed. Preserve the same product identity, packaging, color, scale and coherent set. "
+                "Expand the four selected creative beats into five connected beats distributed across the full requested duration; add a reference-safe opening or closing beat where needed. Preserve the same product identity, packaging, color, scale and coherent set. "
                 "NO ON-SCREEN TEXT, captions, added logos, watermarks, dialogue or voice-over unless explicitly requested.\n\n"
                 + "\n\n".join(
                     str(item.get("time", "")) + " | " + str(item.get("shot", "")) + "\n"
@@ -185,8 +203,8 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
                 "consistent throughout. Finish on a stable, clean hero frame."
             )
         return (
-            "PROMPT VIDEO — 10 SAAT\n"
-            "KLIPPO | UNIVERSAL PRODUCT VIDEO PROMPT | " + style_name + (" | BAHAGIAN " + str(part) + "/2" if part else "") + "\n"
+            "PROMPT VIDEO — " + str(duration) + " SAAT\n"
+            "KLIPPO | UNIVERSAL PRODUCT VIDEO PROMPT | " + style_name + (" | BAHAGIAN " + str(part) if part else "") + "\n"
             "OUTPUT: One cohesive vertical 9:16 product advertisement, EXACT DURATION: " + str(duration) + " seconds.\n\n"
             "PRODUCT NAME: " + product + "\n" + category_direction + "\n\n" + identity + "\n\n"
             "STYLE FROM KLIPPO CATALOG: " + style_template + "\n\n"
@@ -278,7 +296,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
             "Use one consistent home setting, authentic phone-camera perspective, soft daylight and crisp fabric detail. No collage, split screen, poster layout, outfit change, plastic skin or CGI."
         )
     return (
-        "KLIPPO | PROFESSIONAL IMAGE-TO-VIDEO PRODUCTION PROMPT" + (" | BAHAGIAN " + str(part) + "/2" if part else "") + "\n"
+        "KLIPPO | PROFESSIONAL IMAGE-TO-VIDEO PRODUCTION PROMPT" + (" | BAHAGIAN " + str(part) if part else "") + "\n"
         "OUTPUT: " + str(duration) + " seconds; portrait 9:16; high-quality realistic product commercial; "
         "one coherent deliverable. ON-SCREEN TEXT: Follow the KLIPPO GUIDED CREATIVE SETTINGS language choice. If the language is none, show no text. Otherwise, use at most the exact product name supplied by the user unless exact wording is provided; do not invent marketing claims or promotional copy. Preserve spelling, keep text brief and legible, and place it away from the product.\n\n"
         "PRODUCT: " + product + "\n" + category_direction + "\n\n" + identity + "\n\n" + art + "\n\n"
