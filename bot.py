@@ -1948,7 +1948,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             # Use the same curated prompt library as video mode, then add storyboard-only instructions.
             context.user_data['stage'] = 'prompt_storyboard_product_name'
             await query.message.reply_text(
-                '🧩 Gambar diterima. Untuk memilih idea aksi yang paling sesuai daripada library Klippo, masukkan nama produk.\\n\\n'
+                '🧩 Gambar diterima. Untuk memilih idea aksi yang paling sesuai daripada library Klippo, masukkan nama produk.\n\n'
                 'Selepas itu, pilih kategori dan konsep storyboard. Arahan storyboard akan ditambah secara automatik tanpa menggandakan library prompt.',
                 reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]])
             )
@@ -2008,36 +2008,36 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 curated_shots = template.get('storyboard', [])
                 shot_text = ''
                 if isinstance(curated_shots, list) and curated_shots:
-                    shot_text = '\\n\\nPRODUCT-SPECIFIC SHOT IDEAS FROM THE KLIPPO LIBRARY:\\n' + '\\n'.join(
+                    shot_text = '\n\nPRODUCT-SPECIFIC SHOT IDEAS FROM THE KLIPPO LIBRARY:\n' + '\n'.join(
                         f'{index + 1}. {shot}' for index, shot in enumerate(curated_shots)
                     )
                 storyboard_prompt = (
-                    'STORYBOARD PROMPT — PRODUCT VIDEO\\n\\n'
+                    'STORYBOARD PROMPT — PRODUCT VIDEO\n\n'
                     'Act as a professional commercial storyboard director. Use all uploaded product image(s) as the only visual reference. '
-                    'Create a polished, production-ready visual storyboard for a vertical 9:16 product advertisement.\\n\\n'
-                    'PRODUCT: ' + product_name + (('\\nUSER DETAILS: ' + details) if details else '') + '\\n'
+                    'Create a polished, production-ready visual storyboard for a vertical 9:16 product advertisement.\n\n'
+                    'PRODUCT: ' + product_name + (('\nUSER DETAILS: ' + details) if details else '') + '\n'
                     'CREATIVE CONCEPT FROM THE KLIPPO PROMPT LIBRARY: ' + template.get('label', 'Product-specific concept') + '. '
-                    + template.get('description', '') + shot_text + '\\n\\n'
+                    + template.get('description', '') + shot_text + '\n\n'
                     'STORYBOARD STRUCTURE: Create six clearly numbered sequential panels. For each panel, specify approximate timing, '
                     'a distinct and physically plausible product-specific action, shot size/framing, camera movement, lighting or setting changes when useful, '
                     'and the visual connection to the next panel. Begin with a compelling visual hook, develop the selected concept through varied shots, '
-                    'and finish with a memorable product hero shot. Do not repeat the same action across panels.\\n\\n'
+                    'and finish with a memorable product hero shot. Do not repeat the same action across panels.\n\n'
                     'PRODUCT CONSISTENCY: Preserve the exact product shown in the reference image(s), including visible shape, colour, pattern, material, '
                     'packaging, proportions and details. Do not invent or alter product features, labels, logos, accessories or claims. Keep the same product '
-                    'identity in every panel. Use the product name and library concept only to guide the creative direction, never to guess unseen details.\\n\\n'
+                    'identity in every panel. Use the product name and library concept only to guide the creative direction, never to guess unseen details.\n\n'
                     'VISUAL OUTPUT: Show the intended shots and actions as a clear storyboard sheet with six readable panels in order, not merely a page of text. '
                     'Use realistic commercial photography, coherent lighting and continuity, and a vertical-video composition. Do not add subtitles, promotional text, '
-                    'extra logos or watermarks.\\n\\n'
+                    'extra logos or watermarks.\n\n'
                     'Return the storyboard only. Do not generate the finished video and do not return a separate video-generation prompt.'
                 )
                 context.user_data['prompt_storyboard_prompt_ready'] = storyboard_prompt
                 context.user_data['stage'] = 'prompt_storyboard_prompt_ready'
                 await query.message.reply_text(storyboard_prompt)
                 await query.message.reply_text(
-                    '🧩 PROMPT STORYBOARD SIAP\\n\\n'
-                    '1. Tekan Buka ChatGPT.\\n'
-                    '2. Muat naik gambar produk yang sama.\\n'
-                    '3. Salin prompt storyboard di atas dan tampal ke ChatGPT.\\n'
+                    '🧩 PROMPT STORYBOARD SIAP\n\n'
+                    '1. Tekan Buka ChatGPT.\n'
+                    '2. Muat naik gambar produk yang sama.\n'
+                    '3. Salin prompt storyboard di atas dan tampal ke ChatGPT.\n'
                     '4. Selepas storyboard siap, tekan “Selesai Jana Prompt Storyboard” untuk mendapatkan pilihan penjana video.',
                     reply_markup=InlineKeyboardMarkup([
                         [InlineKeyboardButton('🖼️ Buka ChatGPT', url='https://chatgpt.com/')],
