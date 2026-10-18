@@ -495,16 +495,16 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
     is_fashion = any(term in product_words for term in fashion_terms)
     if is_fashion and mode != "storyboard" and part == 0 and duration != 20:
         direction = (
-            "DIRECTOR'S NATURAL FASHION TRY-ON BRIEF: Create one continuous, believable 10-second vertical fashion video, "
-            "like authentic iPhone footage filmed at home before going out. If a person is included in the scene, keep their appearance and outfit consistent; "
-            "if no person is needed for the scene, do not add one. For a mirror-selfie style, use a believable mirror and phone composition. "
-            "0–2s | ESTABLISH: Use a simple, consistent outfit and believable room setting; use soft natural morning light and realistic skin and fabric texture. "
-            "2–5s | NATURAL ACTION: The person makes one small, relaxed movement appropriate to the reference, such as gently lowering the phone a little to reveal more of the outfit or making a slight body turn. "
-            "Keep actions simple and plausible. 5–8s | OUTFIT DETAIL: Let the camera or person move subtly to show the stated garment style; never fabricate hidden garment details. "
-            "8–10s | FINISH: Return to a relaxed, natural pose and hold briefly. Keep movement subtle, human and physically plausible; no dancing, exaggerated posing or scene changes. "
+            "DIRECTOR'S NATURAL FASHION TRY-ON BRIEF: Create one continuous, believable 10-second vertical fashion product video with realistic skin and fabric texture. "
+            "Keep the model's appearance and outfit consistent. Unless the user explicitly selected a mirror-selfie concept, the model must NOT hold a phone, film themselves, pose for a mirror selfie or behave as the camera operator. "
+            "Use an external camera operated by an unseen videographer. Follow the exact user-selected location; never replace it with a home, bedroom or dressing room. "
+            "0–2s | ESTABLISH: Show the model and full outfit naturally within the selected location. "
+            "2–5s | NATURAL ACTION: Use one small, relaxed action suited to the location, such as a short walk, a natural pause or a subtle adjustment to a sleeve or garment. Keep both hands naturally placed unless the product action requires otherwise. "
+            "5–8s | OUTFIT DETAIL: Let the external camera move subtly to show visible garment details without cropping away the product or fabric unnaturally. "
+            "8–10s | FINISH: Settle into a relaxed, natural pose and hold briefly. Keep movement human and physically plausible; no dancing, exaggerated posing or scene changes. "
             "FASHION PRODUCT LOCK: The exact garment must remain unchanged frame to frame—same color, print, pattern placement, neckline, sleeves, cut, fit, fabric, accessories and proportions. "
             "Keep the chosen hijab style and handbag presentation consistent. Never redesign, recolor, reshape, add or remove stated outfit details. "
-            "Use one consistent home setting, authentic phone-camera perspective, soft daylight and crisp fabric detail. No collage, split screen, poster layout, outfit change, plastic skin or CGI."
+            "Use the selected location's lighting and surroundings. No collage, split screen, poster layout, outfit change, plastic skin or CGI. " + selected_scene_lock
         )
     return (
         "KLIPPO | PROFESSIONAL IMAGE-TO-VIDEO PRODUCTION PROMPT" + (" | BAHAGIAN " + str(part) if part else "") + "\n"
