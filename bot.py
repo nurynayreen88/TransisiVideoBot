@@ -1829,15 +1829,14 @@ async def photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text('✅ Gambar latar sendiri diterima. Pilih durasi video:', reply_markup=duration_menu())
         return
     if context.user_data.get('stage') == 'prompt_images':
-        if not update.message.photo:
-            await update.message.reply_text('Sila hantar gambar produk sebagai gambar Telegram. Maksimum 4 gambar.', reply_markup=prompt_images_menu())
-            return
-        images = context.user_data.setdefault('prompt_reference_photos', [])
-        if len(images) >= 4:
-            await update.message.reply_text('Maksimum 4 gambar telah diterima. Tekan Selesai Hantar Gambar untuk meneruskan.', reply_markup=prompt_images_menu())
-            return
-        images.append(update.message.photo[-1].file_id)
-        await update.message.reply_text(f'✅ Gambar {len(images)}/4 diterima. Hantar lagi atau tekan Selesai Hantar Gambar.', reply_markup=prompt_images_menu())
+        # Recover users whose session was left in the removed legacy image-upload stage.
+        context.user_data['stage'] = 'prompt_product_type'
+        context.user_data['prompt_mode'] = 'normal'
+        context.user_data['prompt_reference_photos'] = []
+        await update.message.reply_text(
+            '🎥 Aliran muat naik gambar untuk jana prompt telah dibuang. Gambar tidak diperlukan di sini. Pilih kategori produk untuk meneruskan.',
+            reply_markup=prompt_product_type_menu()
+        )
         return
     if context.user_data.get('stage') == 'prompt_upload':
         photo_item = update.message.photo[-1] if update.message.photo else update.message.document
@@ -3461,8 +3460,6 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['prompt_mode'] = 'normal'
             context.user_data['prompt_reference_photos'] = []
             context.user_data['stage'] = 'prompt_product_type'
-            context.user_data['prompt_mode'] = 'normal'
-            context.user_data['prompt_reference_photos'] = []
             await update.message.reply_text(
                 '✍️ KLIPPO | JANA PROMPT VIDEO\n\nMuat naik gambar tidak diperlukan dalam proses jana prompt. Pilih kategori, subkategori dan nama produk. Selepas prompt siap, muat naik gambar produk asal terus ke platform video AI pilihan anda.',
                 reply_markup=prompt_product_type_menu()
