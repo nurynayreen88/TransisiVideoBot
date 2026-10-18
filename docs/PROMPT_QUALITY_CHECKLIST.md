@@ -165,3 +165,10 @@ The initial scan found a small number of prompts that did not contain the exact 
 - [x] Four-shot directions are embedded verbatim with the required 10-second timing and explicit no-on-screen-text rules.
 - [ ] Run CI against current `main` before merge.
 - [ ] Visually inspect generated clips; structural checks do not prove visual quality.
+
+
+## 2H. Running-shoe prompt concision pass
+
+- [x] `shoes_running_shoe_motion_v1` — shortened the opening rules by 206 characters while retaining the existing ID and all four storyboard directions verbatim.
+- [x] Exact 10-second timing remains `0–2s`, `2–6s`, `6–8s`, `8–10s`; the master library is unchanged.
+- [ ] Generated-video visual inspection is still pending; this text-only change is not a visual quality PASS.
