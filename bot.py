@@ -2626,7 +2626,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     if len(remaining) <= 3900:
                         chunks.append(remaining)
                         break
-                    cut = remaining.rfind('\\n', 0, 3900)
+                    cut = remaining.rfind('\n', 0, 3900)
                     if cut < 1800:
                         cut = 3900
                     chunks.append(remaining[:cut].rstrip())
@@ -2786,7 +2786,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                             if len(remaining) <= 3900:
                                 chunks.append(remaining)
                                 break
-                            cut = remaining.rfind('\\n', 0, 3900)
+                            cut = remaining.rfind('\n', 0, 3900)
                             if cut < 1800:
                                 cut = 3900
                             chunks.append(remaining[:cut].rstrip())
