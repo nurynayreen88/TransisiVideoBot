@@ -3181,57 +3181,77 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 def _shopee_link(value):
-    """Only accept an explicit Shopee product URL; never fetch arbitrary pasted URLs."""
+    """Accept Shopee Malaysia product URLs and short share links only."""
     from urllib.parse import urlparse
-    for candidate in re.findall(r'https?://[^\\s<>]+', value):
+    for candidate in re.findall(r'https?://[^\s<>]+', value):
         candidate = candidate.rstrip('.,);]')
         parsed = urlparse(candidate)
         host = (parsed.hostname or '').lower()
-        if parsed.scheme == 'https' and (host == 'shopee.com.my' or host.endswith('.shopee.com.my')) and (re.search(r'/product/\\d+/\\d+', parsed.path) or re.search(r'-i\\.\\d+\\.\\d+', parsed.path)):
+        if parsed.scheme != 'https':
+            continue
+        # Short share links have no product ID in their path; urlopen follows
+        # their redirect later and the final destination is validated separately.
+        if host == 's.shopee.com.my':
+            return candidate
+        valid_host = host == 'shopee.com.my' or host.endswith('.shopee.com.my')
+        valid_path = re.search(r'/product/\d+/\d+', parsed.path) or re.search(r'-i\.\d+\.\d+', parsed.path)
+        if valid_host and valid_path:
             return candidate
     return ''
 
 
-def _shopee_public_photo(url, destination, description):
-    """Best-effort public OG photo only; no login, private API or image AI."""
+def _shopee_public_photo(url, destination, description=''):
+    """Fetch only a publicly exposed Shopee product image; no product classification."""
     from urllib.request import Request, urlopen
     from urllib.parse import urlparse
+    from html import unescape
     from PIL import Image
     if not _shopee_link(url):
         return False
     try:
-        req = Request(url, headers={'User-Agent': 'Mozilla/5.0 KLIPPO/1.0'})
-        with urlopen(req, timeout=7) as response:
-            if not (response.geturl().startswith('https://shopee.com.my/') or response.geturl().startswith('https://www.shopee.com.my/')):
+        req = Request(url, headers={'User-Agent': 'Mozilla/5.0 (compatible; KLIPPO/1.0)'})
+        with urlopen(req, timeout=10) as response:
+            final_url = urlparse(response.geturl())
+            final_host = (final_url.hostname or '').lower()
+            if final_url.scheme != 'https' or not (
+                final_host == 'shopee.com.my' or final_host.endswith('.shopee.com.my')
+            ):
                 return False
             if 'text/html' not in response.headers.get('Content-Type', '').lower():
                 return False
-            page = response.read(350000).decode('utf-8', 'replace')
-        from html import unescape
+            page = response.read(500000).decode('utf-8', 'replace')
+
         def meta(name):
-            for tag in re.findall(r'<meta\\b[^>]*>', page, re.I):
-                if re.search(r'(?:property|name)=[\\"\\\']'+re.escape(name)+r'[\\"\\\']', tag, re.I):
-                    match = re.search(r'content=[\\"\\\']([^\\"\\\']+)', tag, re.I)
-                    if match:
-                        return unescape(match.group(1))
+            # Attribute order can vary; match either property/name and content.
+            for tag in re.findall(r'<meta\b[^>]*>', page, re.I):
+                attr = re.search(r'\b(?:property|name)\s*=\s*["\']([^"\']+)["\']', tag, re.I)
+                content = re.search(r'\bcontent\s*=\s*["\']([^"\']+)["\']', tag, re.I)
+                if attr and content and attr.group(1).lower() == name.lower():
+                    return unescape(content.group(1).replace('&amp;', '&'))
             return ''
-        title, image_url = meta('og:title'), meta('og:image')
-        words = [w.lower() for w in re.findall(r'[A-Za-z0-9]{4,}', description) if not w.isdigit()]
-        if not title or not image_url or (words and not any(w in title.lower() for w in words[:8])):
+
+        image_url = meta('og:image') or meta('twitter:image')
+        if not image_url:
             return False
-        parsed = urlparse(image_url)
-        if parsed.scheme != 'https' or not (parsed.hostname or '').lower().endswith(('.shopee.com.my', '.shopee.sg', '.shopeemobile.com', '.shopeeusercontent.com')):
+        image_parsed = urlparse(image_url)
+        image_host = (image_parsed.hostname or '').lower()
+        allowed_image_host = (
+            image_host == 'shopee.com.my'
+            or image_host.endswith(('.shopee.com.my', '.shopee.sg', '.shopeemobile.com', '.shopeeusercontent.com'))
+        )
+        if image_parsed.scheme != 'https' or not allowed_image_host:
             return False
-        with urlopen(Request(image_url, headers={'User-Agent': 'Mozilla/5.0'}), timeout=7) as response:
+
+        with urlopen(Request(image_url, headers={'User-Agent': 'Mozilla/5.0 (compatible; KLIPPO/1.0)'}), timeout=10) as response:
             if not response.headers.get('Content-Type', '').lower().startswith('image/'):
                 return False
             data = response.read(6000001)
-        if len(data) > 6000000:
+        if not data or len(data) > 6000000:
             return False
         with Image.open(BytesIO(data)) as opened:
             opened.verify()
         with Image.open(BytesIO(data)) as opened:
-            if min(opened.size) < 350:
+            if min(opened.size) < 250:
                 return False
             ImageOps.exif_transpose(opened).convert('RGB').save(destination, 'JPEG', quality=92)
         return True
