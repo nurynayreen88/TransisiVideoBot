@@ -4,7 +4,7 @@
 **Repository:** `nurynayreen88/TransisiVideoBot`  
 **Base commit reviewed:** `d8fc4288bed49b7a9a19cd9d61d43e07e82e33a8`  
 **Master library:** `prompts/prompt_library.json` — 1,171 prompts across 19 categories  
-**Important:** This is a triage checklist, not a claim that all 1,171 prompts have passed a human quality review. Only the three shoe overrides listed below have been specifically rewritten, structurally checked, and merged as quality improvements. The master library remains unchanged.
+**Important:** This is a triage checklist, not a claim that all 1,171 prompts have passed a human quality review. Three shoe overrides and six handbag overrides have been specifically rewritten, structurally checked, and merged as additive quality improvements. Their actual generated video output still needs visual inspection. The master library remains unchanged.
 
 ## Status legend
 
@@ -30,7 +30,7 @@
 | Product category | Prompts | Current status | Next quality check |
 |---|---:|---|---|
 | Pakaian / Clothing | 63 | BASELINE OK — deeper review pending | Check fabric movement, fit, drape, body anatomy, hijab/clothing continuity and avoid changing garment design. |
-| Beg / Bags | 64 | IN PROGRESS — 3 prompts text-audited | Continue with tabletop pickup, office storyboard and editorial flat lay; visual generation test still pending. |
+| Beg / Bags | 64 | IN PROGRESS — 9 prompts text-audited | Six additional ID-preserving overrides are merged; continue reviewing the remaining prompts. Visual generation test still pending. |
 | Dompet / Wallets | 59 | BASELINE OK — deeper review pending | Check opening/closing hinges, card slots only if visible, hand interaction and scale consistency. |
 | Kasut / Shoes | 62 | PASS for 3 named overrides; remaining prompts NOT AUDITED | Review the other 59 prompts for shoe-specific actions, footwear geometry and plausible foot contact. |
 | Kosmetik & Kecantikan / Beauty | 70 | BASELINE OK — deeper review pending | Check applicator/product compatibility, believable liquid/cream behaviour, packaging continuity and avoid unsupported skin/health claims. |
