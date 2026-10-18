@@ -676,24 +676,24 @@ PRODUCT_FRAMING = {
     'beauty_apply': ('💄 Produk & cara aplikasi', 'Frame the product and the relevant hand/application area. Show a gentle, plausible application only when suitable for the product; do not invent effects or claim results.'),
 }
 PRODUCT_FRAMING_KEYS = {
-    'fashion': ('detail','model','lifestyle','product_only'),
-    'hijab': ('hijab_detail','model','lifestyle','product_only'),
-    'shoes': ('shoes_feet','shoes_walk','shoes_car','detail','product_only'),
-    'bag': ('detail','model','demo','lifestyle','product_only'),
-    'wallet': ('detail','demo','pov','lifestyle','product_only'),
-    'beauty': ('beauty_apply','detail','demo','lifestyle','product_only'),
-    'food': ('detail','pov','lifestyle','product_only'),
-    'gadget': ('detail','pov','demo','lifestyle','product_only'),
-    'home': ('detail','pov','demo','lifestyle','product_only'),
-    'accessory': ('detail','model','demo','lifestyle','product_only'),
-    'toy': ('detail','pov','demo','lifestyle','product_only'),
-    'book_stationery': ('detail','pov','demo','lifestyle','product_only'),
-    'sports': ('detail','model','demo','lifestyle','product_only'),
-    'pet': ('detail','pov','lifestyle','product_only'),
-    'automotive': ('detail','pov','demo','lifestyle','product_only'),
-    'baby': ('detail','demo','lifestyle','product_only'),
-    'travel': ('detail','model','demo','lifestyle','product_only'),
-    'office': ('detail','pov','demo','lifestyle','product_only'),
+    'fashion': ('fabric_detail','outfit_walk','seated_style','detail','model','lifestyle','product_only'),
+    'hijab': ('hijab_detail','hijab_walk','hijab_fabric','model','lifestyle','product_only'),
+    'shoes': ('shoes_feet','shoes_walk','shoes_car','shoes_material','shoes_pair','detail','product_only'),
+    'bag': ('bag_wear','bag_open','bag_table','detail','model','demo','lifestyle','product_only'),
+    'wallet': ('wallet_open','wallet_cards','wallet_pocket','detail','demo','pov','lifestyle','product_only'),
+    'beauty': ('beauty_apply','beauty_texture','beauty_unbox','detail','demo','lifestyle','product_only'),
+    'food': ('food_texture','food_serve','food_hand','detail','pov','lifestyle','product_only'),
+    'gadget': ('gadget_hand','gadget_screen','gadget_ports','detail','pov','demo','lifestyle','product_only'),
+    'home': ('home_in_use','home_setup','home_scale','detail','pov','demo','lifestyle','product_only'),
+    'accessory': ('accessory_wear','accessory_close','detail','model','demo','lifestyle','product_only'),
+    'toy': ('toy_play','toy_feature','detail','pov','demo','lifestyle','product_only'),
+    'book_stationery': ('stationery_write','stationery_flatlay','detail','pov','demo','lifestyle','product_only'),
+    'sports': ('sports_action','sports_grip','detail','model','demo','lifestyle','product_only'),
+    'pet': ('pet_interact','detail','pov','lifestyle','product_only'),
+    'automotive': ('auto_install','auto_detail','detail','pov','demo','lifestyle','product_only'),
+    'baby': ('baby_safe_use','detail','demo','lifestyle','product_only'),
+    'travel': ('travel_pack','detail','model','demo','lifestyle','product_only'),
+    'office': ('office_work','detail','pov','demo','lifestyle','product_only'),
     'other': ('detail','model','pov','demo','lifestyle','product_only'),
 }
 
@@ -702,7 +702,7 @@ def prompt_framing_menu(product_type='other', model_presence=None):
     rows = [[InlineKeyboardButton(PRODUCT_FRAMING['auto'][0], callback_data='prompt_framing:auto')]]
     for key in keys:
         label = PRODUCT_FRAMING[key][0]
-        if model_presence != 'yes' and key in ('model', 'hijab_detail', 'shoes_feet', 'shoes_walk', 'shoes_car', 'beauty_apply'):
+        if model_presence != 'yes' and key in ('model', 'hijab_detail', 'hijab_walk', 'hijab_fabric', 'shoes_feet', 'shoes_walk', 'shoes_car', 'beauty_apply', 'outfit_walk', 'seated_style', 'bag_wear', 'accessory_wear', 'pet_interact', 'baby_safe_use'):
             # Do not offer worn-on-body or application shots when the user chose no model.
             continue
         rows.append([InlineKeyboardButton(label, callback_data='prompt_framing:' + key)])
