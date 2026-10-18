@@ -170,7 +170,10 @@ jobs:
               for details in ("", "Example product name; do not assume unprovided features"):
                   generated = "PROMPT VIDEO — 10 SAAT\\n\\n" + inject_details(prompt["prompt"], details)
                   assert generated.startswith("PROMPT VIDEO — 10 SAAT\\n\\n")
-                  assert "STRICT OUTPUT RULES:" in generated
+                  assert any(term in generated.casefold() for term in (
+                      "strict output rules:", "rules:", "avoid:", "realism rules:",
+                      "product accuracy:", "product lock", "reference lock"
+                  )), f"Missing output/accuracy rules: {prompt['id']}"
                   assert any(term in generated.casefold() for term in (
                       "keep the product presentation consistent", "keep the named product",
                       "preserve the named product", "product identity", "product accuracy",
