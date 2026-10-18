@@ -113,3 +113,21 @@ The initial scan found a small number of prompts that did not contain the exact 
 8. [ ] Review the repeated batch prompts across all categories for meaningful variation.
 
 **Rule for marking a category PASS:** Do not mark the whole category as good because its JSON structure passes. Mark it only after its prompts have been reviewed for category-specific action, visual continuity, realistic motion, product fidelity, non-repetitive concepts and consistency between prompt text and storyboard. Record reviewed IDs and test evidence as work progresses.
+
+## 2D. Handbag prompt audit — six additional ID-preserving overrides
+
+**Current-main follow-up:** These six reviewed overrides have been carried forward onto the current `main` baseline so they include the latest White Doodle and duration changes. The master prompt library remains unchanged; the overrides are additive.
+
+- [x] `bags_everyday_carry_v1` — realistic supported pickup, measured carry and controlled finish.
+- [x] `bags_tabletop_hero_v1` — camera-led reveal while the bag remains supported and stationary.
+- [x] `bags_sling_crossbody_v1` — crossbody wearing is conditional on the visible bag design; strap attachment and placement stay consistent.
+- [x] `bags_tabletop_pickup_v1` — tabletop opening, plausible pickup and controlled set-down.
+- [x] `bags_office_storyboard_v1` — clear ready-to-leave sequence with a natural lift and short carry.
+- [x] `bags_editorial_flatlay_v1` — stationary bag with camera movement; close-ups only of details actually visible.
+- [x] Each override defines four timed shots across exactly 10 seconds and aligns the written prompt with the storyboard.
+- [x] Original IDs and the master library are preserved; only the additive override file changes for these prompts.
+- [ ] Run CI against the current `main` base before merging.
+- [ ] Visually inspect generated clips for handle/strap physics, hand contact, product geometry, contact shadows and final-frame continuity. Text/CI review is not a visual-generation PASS.
+
+**Quality rule:** Do not infer hidden compartments, material, capacity, durability, brand marks or features from a generic bag name. Keep actions conditional where the product's visible design is not known.
+
