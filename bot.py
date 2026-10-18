@@ -1955,19 +1955,19 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 'Return the storyboard only. Do not generate the finished video and do not return a separate video-generation prompt.'
             )
             context.user_data['prompt_storyboard_prompt_ready'] = storyboard_prompt
+            await query.message.reply_text(storyboard_prompt)
             await query.message.reply_text(
                 f"✅ {len(context.user_data['prompt_reference_photos'])} gambar diterima.\n\n"
                 '🧩 PROMPT STORYBOARD SIAP\n\n'
                 '1. Tekan Buka ChatGPT.\n'
                 '2. Muat naik gambar produk yang sama ke ChatGPT.\n'
-                '3. Salin prompt di bawah dan minta ChatGPT hasilkan storyboard.\n'
+                '3. Salin prompt di atas dan tampal ke ChatGPT.\n'
                 '4. Selepas storyboard siap, tekan “Selesai Jana Prompt Storyboard” untuk mendapatkan pilihan penjana video.',
                 reply_markup=InlineKeyboardMarkup([
                     [InlineKeyboardButton('🖼️ Buka ChatGPT', url='https://chatgpt.com/')],
                     [InlineKeyboardButton('✅ Selesai Jana Prompt Storyboard', callback_data='prompt_storyboard_done')]
                 ])
             )
-            await query.message.reply_text(storyboard_prompt)
         else:
             context.user_data['stage'] = 'prompt_product_type'
             await query.message.reply_text(
