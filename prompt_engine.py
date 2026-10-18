@@ -9,6 +9,8 @@ CAMERAS = {
 }
 
 AUTO_STYLE_BY_PRODUCT_TYPE = {
+    # Every selectable product type gets a deterministic category-fit style.
+    # Do not fall through to random catalog styles for unlisted categories.
     'fashion': 'fashion_editorial',
     'bag': 'handbag_showcase',
     'wallet': 'wallet_luxury_macro',
@@ -19,6 +21,18 @@ AUTO_STYLE_BY_PRODUCT_TYPE = {
     'gadget': 'tech_demo',
     'home': 'cozy_home',
     'accessory': 'luxury',
+    'toy': 'playful_viral',
+    'book_stationery': 'flatlay',
+    'sports': 'pov_demo',
+    'pet': 'lifestyle',
+    'automotive': 'studio_360_safe',
+    'baby': 'cozy_home',
+    'travel': 'studio_360_safe',
+    'office': 'flatlay',
+    'garden': 'nature_fresh',
+    'kitchen': 'cozy_home',
+    'furniture': 'cozy_home',
+    'crafts': 'flatlay',
     'other': 'cinematic',
 }
 
