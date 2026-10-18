@@ -904,7 +904,6 @@ def main_menu(user_id=None):
         [InlineKeyboardButton('🎞️ Gabung Video', callback_data='merge')],
         [InlineKeyboardButton('🔄 Tukar Format Video', callback_data='convert')],
         [InlineKeyboardButton('💎 Langganan', callback_data='subscription'), InlineKeyboardButton('👤 Akaun Saya', callback_data='account')],
-        [InlineKeyboardButton('❓ Bantuan', callback_data='help')],
     ]
     if user_id is not None and is_admin(user_id):
         rows.append([InlineKeyboardButton('🛡️ Panel Admin', callback_data='admin')])
@@ -1642,13 +1641,12 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.effective_message.reply_text(
         '🎬 KLIPPO | Studio Video Affiliate\n\n'
         'Pilih fungsi yang anda perlukan:\n\n'
-        '✍️ Jana Prompt — hasilkan satu prompt video lengkap berdasarkan gambar produk dan pilihan pengguna.\n'
+        '✍️ Jana Prompt — hasilkan prompt video lengkap berdasarkan nama produk dan pilihan pengguna.\n'
         '🎞️ Gerakkan Foto (Transisi) — gabungkan gambar pegun menjadi video MP4 menggunakan kesan transisi, zoom/pan 2D dan muzik. Fungsi ini tidak menjana gerakan AI pada objek.\n'
         '🎞️ Gabung Video — cantum beberapa klip menjadi satu video.\n'
         '🔄 Tukar Format Video — sesuaikan video kepada format MP4 menegak untuk affiliate.\n'
         '💎 Langganan — lihat pelan dan cara pembayaran.\n'
         '👤 Akaun Saya — semak maklumat akaun dan status langganan.\n'
-        '❓ Bantuan — panduan penggunaan KLIPPO dan jawapan soalan lazim.\n\n'
         '👇 Tekan pilihan di bawah untuk bermula:',
         reply_markup=main_menu(update.effective_user.id)
     )
@@ -2199,13 +2197,13 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data['prompt_reference_photos'] = []
         context.user_data['prompt_duration_mode'] = 'single'
         context.user_data['prompt_reference_photos'] = []
-        context.user_data['stage'] = 'prompt_images'
+        context.user_data['stage'] = 'prompt_product_type'
         await query.message.reply_text(
-            '✍️ KLIPPO | JANA PROMPT VIDEO\n\n'
-            'Hantar 1 hingga 4 gambar produk yang jelas. Selepas itu pilih kategori, gaya dan durasi. '
-            'Klippo akan menghasilkan SATU prompt video lengkap dengan storyboard bertulis lima babak mengikut masa, '
-            'aksi dan pergerakan kamera.',
-            reply_markup=prompt_images_start_menu()
+            '✍️ KLIPPO | JANA PROMPT VIDEO\\n\\n'
+            'Muat naik gambar tidak diperlukan dalam proses jana prompt. Pilih kategori produk untuk bermula; '
+            'kemudian pilih subkategori, nama produk, latar, gaya dan durasi. '
+            'Selepas prompt siap, muat naik gambar produk asal terus ke platform video AI pilihan anda.',
+            reply_markup=prompt_product_type_menu()
         )
     elif action.startswith('prompt_mode:'):
         selected_mode = action.split(':', 1)[1]
@@ -3328,7 +3326,6 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
         '✍️ Prompt': 'prompt',
         '💎 Langganan': 'subscription',
         '👤 Akaun Saya': 'account',
-        '❓ Bantuan': 'help',
         '🗑 Mula Semula': 'home',
     }
     if value in shortcuts:
@@ -3348,17 +3345,15 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['prompt_product_type'] = 'other'
             context.user_data['prompt_mode'] = 'normal'
             context.user_data['prompt_reference_photos'] = []
-            context.user_data['stage'] = 'prompt_images'
+            context.user_data['stage'] = 'prompt_product_type'
             await update.message.reply_text(
-                '✍️ KLIPPO | JANA PROMPT VIDEO\n\nHantar 1 hingga 4 gambar produk yang jelas. Tekan “Selesai Hantar Gambar” selepas selesai. Klippo akan menyediakan satu prompt video lengkap dengan storyboard bertulis lima babak mengikut masa, aksi dan pergerakan kamera.',
-                reply_markup=prompt_images_start_menu()
+                '✍️ KLIPPO | JANA PROMPT VIDEO\\n\\nMuat naik gambar tidak diperlukan dalam proses jana prompt. Pilih kategori, subkategori dan nama produk; kemudian pilih latar, gaya dan durasi. Gambar produk asal boleh dimuat naik terus ke platform video AI pilihan anda selepas prompt siap.',
+                reply_markup=prompt_product_type_menu()
             )
         elif action == 'subscription':
             await update.message.reply_text('💎 LANGGANAN KLIPPO\n\nPelan Penyokong Awal: RM5 / 30 hari, sehingga 30 video sebulan. Pengaktifan manual selepas resit disemak.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📱 Papar QR DuitNow', callback_data='subscription_qr')]]))
         elif action == 'account':
             await account_info(update, context)
-        elif action == 'help':
-            await update.message.reply_text('❓ BANTUAN\n\nJana Prompt: hantar gambar produk, pilih kategori, gaya, durasi dan latar, kemudian salin satu prompt video lengkap ke AI pilihan anda.\nGerakkan Foto: jadikan gambar pegun sebagai video dengan transisi.\nGabung Video: cantum beberapa klip.\nTukar Format: sesuaikan video kepada format menegak.')
         else:
             await start(update, context)
         return
