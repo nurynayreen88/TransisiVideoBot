@@ -221,6 +221,18 @@ jobs:
                   )
                   assert "vertical 9:16" in override_text.casefold()
                   assert "no on-screen text" in override_text.casefold()
+                  assert "quality & platform delivery" in override_text.casefold(), (
+                      f"Override is missing HD/social delivery specification: {override_id}"
+                  )
+                  assert "1080x1920" in override_text.casefold(), (
+                      f"Override is missing 1080x1920 target: {override_id}"
+                  )
+                  assert "shopee and tiktok" in override_text.casefold(), (
+                      f"Override is missing Shopee/TikTok target guidance: {override_id}"
+                  )
+                  assert "central safe area" in override_text.casefold(), (
+                      f"Override is missing mobile safe-area guidance: {override_id}"
+                  )
               assert len(override_ids) == len(override_data.get("overrides", []))
 
           # Regression checks for the reusable White Doodle storyboard style.
@@ -288,6 +300,10 @@ jobs:
                   storyboard_override=curated["storyboard"],
               )
               assert curated_prompt.startswith("PROMPT VIDEO — 10 SAAT")
+              assert "1080x1920" in curated_prompt, "Storyboard prompt missing HD vertical target"
+              assert "Shopee/TikTok full-screen mobile viewing" in curated_prompt, (
+                  "Storyboard prompt missing Shopee/TikTok mobile composition guidance"
+              )
               assert "DIRECTOR'S CURATED PREMIUM STORYBOARD" in curated_prompt
               assert "NO ON-SCREEN TEXT" in curated_prompt
               for shot in curated["storyboard"]:
