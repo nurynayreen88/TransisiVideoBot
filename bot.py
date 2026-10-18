@@ -2243,14 +2243,13 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data['prompt_mode'] = 'normal'
         context.user_data['prompt_reference_photos'] = []
         context.user_data['prompt_duration_mode'] = 'single'
-        context.user_data['prompt_reference_photos'] = []
-        context.user_data['stage'] = 'prompt_images'
+        context.user_data['stage'] = 'prompt_product_type'
         await query.message.reply_text(
             '✍️ KLIPPO | JANA PROMPT VIDEO\n\n'
-            'Hantar 1 hingga 4 gambar produk yang jelas. Selepas itu pilih kategori, gaya dan durasi. '
-            'Klippo akan menghasilkan SATU prompt video lengkap dengan storyboard bertulis lima babak mengikut masa, '
-            'aksi dan pergerakan kamera.',
-            reply_markup=prompt_images_start_menu()
+            'Pilih kategori produk untuk bermula. Anda tidak perlu memuat naik gambar dalam proses jana prompt. '
+            'Selepas itu pilih subkategori, nama produk, latar, gaya dan durasi. '
+            'Apabila prompt siap, muat naik gambar produk asal terus ke platform video AI pilihan anda.',
+            reply_markup=prompt_product_type_menu()
         )
     elif action.startswith('prompt_mode:'):
         selected_mode = action.split(':', 1)[1]
@@ -2265,21 +2264,22 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         else:
             context.user_data['prompt_mode'] = 'normal' if selected_mode == 'video' else 'storyboard'
             context.user_data['prompt_reference_photos'] = []
-            context.user_data['stage'] = 'prompt_images'
             if selected_mode == 'storyboard':
-                instruction = '🧩 JANA PROMPT STORYBOARD\\n\\nHantar 1 hingga 4 gambar produk. Klippo akan menyediakan prompt storyboard berdasarkan gambar produk tersebut.'
+                context.user_data['stage'] = 'prompt_images'
+                instruction = '🧩 JANA PROMPT STORYBOARD\\n\\nUntuk storyboard bergambar, hantar 1 hingga 4 gambar produk sebagai rujukan.'
+                await query.message.reply_text(instruction, reply_markup=prompt_images_start_menu())
             else:
-                instruction = '🎥 JANA PROMPT VIDEO\\n\\nHantar 1 hingga 4 gambar produk yang jelas. Klippo akan menyediakan prompt video lengkap dengan susunan babak, aksi dan pergerakan kamera.'
-            await query.message.reply_text(instruction, reply_markup=prompt_images_start_menu())
+                context.user_data['stage'] = 'prompt_product_type'
+                instruction = '🎥 JANA PROMPT VIDEO\\n\\nTiada muat naik gambar diperlukan di sini. Pilih kategori, subkategori dan nama produk. Apabila prompt siap, muat naik gambar produk asal terus ke platform video AI pilihan anda.'
+                await query.message.reply_text(instruction, reply_markup=prompt_product_type_menu())
     elif action.startswith('prompt_flow:'):
-        # Compatibility for old Telegram keyboards: both legacy buttons now enter
-        # the same single prompt flow, never the storyboard branch.
+        # Legacy prompt buttons now enter the name-based video prompt flow.
         context.user_data['prompt_mode'] = 'normal'
         context.user_data['prompt_reference_photos'] = []
-        context.user_data['stage'] = 'prompt_images'
+        context.user_data['stage'] = 'prompt_product_type'
         await query.message.reply_text(
-            '📷 GAMBAR PRODUK\\n\\nHantar 1 hingga 4 gambar produk yang jelas. Selepas semua gambar dihantar, tekan “Selesai Hantar Gambar”. Klippo akan menyediakan satu prompt video lengkap.',
-            reply_markup=prompt_images_start_menu()
+            '✍️ JANA PROMPT VIDEO\\n\\nMuat naik gambar tidak diperlukan dalam langkah ini. Pilih kategori produk dan masukkan nama produk; gambar produk asal boleh dimuat naik kemudian terus ke platform video AI pilihan anda.',
+            reply_markup=prompt_product_type_menu()
         )
     elif action == 'prompt_images_done' and stage == 'prompt_images':
         if not context.user_data.get('prompt_reference_photos'):
