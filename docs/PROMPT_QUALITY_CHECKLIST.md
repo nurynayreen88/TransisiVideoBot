@@ -4,7 +4,7 @@
 **Repository:** `nurynayreen88/TransisiVideoBot`  
 **Base commit reviewed:** `d8fc4288bed49b7a9a19cd9d61d43e07e82e33a8`  
 **Master library:** `prompts/prompt_library.json` — 1,171 prompts across 19 categories  
-**Important:** This is a triage checklist, not a claim that all 1,171 prompts have passed a human quality review. Three shoe overrides and six handbag overrides have been specifically rewritten, structurally checked, and merged as additive quality improvements. Their actual generated video output still needs visual inspection. The master library remains unchanged.
+**Important:** This is a triage checklist, not a claim that all 1,171 prompts have passed a human quality review. Three shoe overrides, nine handbag overrides, one beauty override and one gadget override have been specifically rewritten or reviewed, structurally checked, and merged as additive quality improvements. Their actual generated video output still needs visual inspection. The master library remains unchanged.
 
 ## Status legend
 
@@ -32,9 +32,9 @@
 | Pakaian / Clothing | 63 | BASELINE OK — deeper review pending | Check fabric movement, fit, drape, body anatomy, hijab/clothing continuity and avoid changing garment design. |
 | Beg / Bags | 64 | IN PROGRESS — 18 ID-preserving overrides merged across bags, shoes, beauty, gadgets, wallets and hijab | Continue reviewing remaining prompts and category variation. Visual generation tests still pending. |
 | Dompet / Wallets | 59 | BASELINE OK — deeper review pending | Check opening/closing hinges, card slots only if visible, hand interaction and scale consistency. |
-| Kasut / Shoes | 62 | PASS for 3 named overrides; remaining prompts NOT AUDITED | Review the other 59 prompts for shoe-specific actions, footwear geometry and plausible foot contact. |
-| Kosmetik & Kecantikan / Beauty | 70 | BASELINE OK — deeper review pending | Check applicator/product compatibility, believable liquid/cream behaviour, packaging continuity and avoid unsupported skin/health claims. |
-| Gajet & Elektronik / Gadgets | 63 | BASELINE OK — deeper review pending | Check ports/buttons/screens match the named device; no invented UI, impossible connections or unsupported technical claims. |
+| Kasut / Shoes | 62 | PASS for 4 named overrides; remaining prompts NOT AUDITED | Review the other 58 prompts for shoe-specific actions, footwear geometry and plausible foot contact. |
+| Kosmetik & Kecantikan / Beauty | 70 | PASS for 1 named override; remaining prompts NOT AUDITED | Check applicator/product compatibility, believable liquid/cream behaviour, packaging continuity and avoid unsupported skin/health claims. |
+| Gajet & Elektronik / Gadgets | 63 | PASS for 1 named override; remaining prompts NOT AUDITED | Check ports/buttons/screens match the named device; no invented UI, impossible connections or unsupported technical claims. |
 | Barangan Rumah / Home | 62 | BASELINE OK — deeper review pending | Check the product is used for its actual purpose, object contact and before/after changes are plausible. |
 | Jam & Aksesori / Accessories | 62 | BASELINE OK — deeper review pending | Check jewellery drape, watch fit, glasses placement, reflections and correct scale. |
 | Makanan & Minuman / Food | 62 | BASELINE OK — deeper review pending | Check believable texture, pouring, serving and packaging; no sudden shape/quantity changes or unsupported claims. |
@@ -61,6 +61,13 @@
 - [ ] Generate representative clips and visually inspect handle/strap stability, hands, bag geometry, shadows and final-frame continuity before claiming end-to-end PASS.
 
 **Next small batch:** `bags_tabletop_pickup_v1`, `bags_office_storyboard_v1`, and `bags_editorial_flatlay_v1`. Check for generic template wording, action/storyboard agreement and category-specific realism.
+
+## 2E. Beauty and gadget prompt audit — two more ID-preserving overrides
+
+- [x] `beauty_texture_demo_v1` — reference-led packaging, conditional application, natural texture, no unsupported beauty/health claims, and a stable final hero frame.
+- [x] `gadgets_real_use_demo_v1` — one evidence-supported interaction, faithful controls/ports/screens, realistic finger contact, and no invented specifications or interface.
+- [x] Both prompts retain the existing IDs and four timed shots; repository validation passed on PR #66 before merge.
+- [ ] Generate representative clips and visually inspect packaging/hand contact, geometry, screen behaviour and final-frame continuity.
 
 ## 3. Automated structural audit — current snapshot
 
