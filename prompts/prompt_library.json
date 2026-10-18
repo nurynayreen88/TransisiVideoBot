@@ -2742,29 +2742,29 @@
       "label": "Baju Kurung Walking OOTD",
       "duration_seconds": 10,
       "style": "category_specific",
-      "description": "Model dewasa berjalan perlahan untuk menunjukkan keseluruhan potongan baju kurung.",
-      "prompt": "Create a 10-second vertical 9:16 product advertisement for the product name supplied by the user. Fashion: baju kurung. Show an adult model wearing the named outfit in a tidy home or corridor. The model takes two natural steps and turns slightly to reveal the overall silhouette and skirt movement. Keep the outfit design consistent and do not invent embroidery, accessories, or fabric claims. This prompt is generated from text only; no uploaded image or AI image analysis is used. Treat the product name and written details as the only source of product facts. Do not invent exact materials, specifications, included accessories, product benefits, brand marks, labels, prices or claims. STRICT OUTPUT RULES: exactly 10 seconds, vertical 9:16, one cohesive product video, no on-screen text, no captions, no added logos, no watermark, no morphing, no floating objects or unrealistic transformations. Keep product shape and packaging consistent. Keep the product presentation consistent and finish with a clean hero frame.\n\n\n\nPREMIUM STORYBOARD — EXACTLY 10 SECONDS:\n0–2s | Opening / premium hook: Open on a refined full-length or on-foot composition, with the named garment or footwear clearly readable in silhouette and soft directional key light.\n2–6s | Signature action: An adult model takes two natural steps and turns slightly to show the overall baju kurung silhouette. Concept-specific signature for \"Baju Kurung Walking OOTD\": Model dewasa berjalan perlahan untuk menunjukkan keseluruhan potongan baju kurung. Keep this exact concept as the central action while preserving product identity and making no unsupported claims.\n6–8s | Detail insert: Detail the visible sleeve, hem or print only if supported by the product name; no outfit redesign.\n8–10s | Hero close: Return to a stable full-product or full-look frame, with natural fabric movement settling and a premium editorial finish.\n\nCINEMATOGRAPHY & CONTINUITY: premium commercial lighting, deliberate camera movement, realistic depth of field, natural contact shadows, controlled highlights, clean transitions, and consistent product geometry from start to finish. One coherent scene; no jumpy edits, warping, floating objects or sudden background changes. Use a subtle instrumental background score only, mixed below any natural product sounds; no dialogue or voice-over unless explicitly requested. No on-screen text, captions, added logos or watermarks.",
+      "description": "Model dewasa melangkah perlahan dan berpusing sedikit untuk memperlihatkan potongan baju kurung, padanan baju dan kain serta gerakan kain yang sopan dan semula jadi.",
+      "prompt": "Create an exactly 10-second vertical 9:16 live-action-style product video for the user-supplied product name in the baju kurung category. Creative direction: an elegant, modern OOTD showcase that feels like a real fashion shoot, not a synthetic catalogue render. Use one adult model in a simple, tidy home corridor or softly lit studio. This prompt is text-only; do not claim to analyse uploaded images.\n\nGARMENT ACCURACY: Keep the baju kurung as the clear hero. Preserve the named design, colour, print, cut, sleeve length, hem, and the relationship between the top and skirt as described. Do not invent embroidery, lace, buttons, jewellery, a shawl, fabric composition or comfort claims. Maintain a modest, natural fit; do not tighten, shorten, lengthen or redesign the outfit. The skirt must move with believable weight and never merge with the legs or floor.\n\n10-SECOND SHOT PLAN:\n0–2s | Full-look opening: frame the adult model from head to below the hem so the top-and-skirt silhouette is immediately clear. Hold briefly in relaxed posture.\n2–5s | Signature walk: the model takes two small, natural steps toward camera, letting the skirt respond gently to each step. Keep shoulders relaxed and the outfit unobstructed.\n5–7s | Cut and drape: make a smooth, short lateral camera move as the model turns slightly to a three-quarter angle, revealing the side silhouette and sleeve shape without a dramatic spin.\n7–10s | Hero finish: the model returns to a comfortable front-facing pose; fabric settles naturally while the camera holds a clean full-look frame.\n\nREALISM & CAMERA: believable human gait, realistic proportions and skin texture, natural fabric weight, consistent face and outfit, grounded feet, soft directional light, subtle contact shadows and restrained depth of field. Keep the same model, hairstyle, accessories (if specified), background and exposure throughout. Smooth pacing, no frantic montage. Optional soft instrumental music only, below natural ambience; no dialogue unless requested.\n\nAVOID: CGI or mannequin-like movement, waxy skin, beauty-filter blur, extra fingers, sliding feet, floating hems, cloth clipping, pattern drift, changing colours, altered garment construction, sudden wind, exaggerated twirls, flicker, jitter, excessive HDR, text overlays, captions, added logos or watermarks. Finish with the complete outfit clearly visible.",
       "subtype": "baju_kurung",
       "storyboard": [
         {
           "time": "0–2s",
-          "shot": "Opening / premium hook",
-          "direction": "Open on a refined full-length or on-foot composition, with the named garment or footwear clearly readable in silhouette and soft directional key light."
+          "shot": "Full-look silhouette",
+          "direction": "Frame the adult model from head to below the hem in a relaxed front-facing pose; make the baju kurung top and skirt immediately readable."
         },
         {
-          "time": "2–6s",
-          "shot": "Signature action",
-          "direction": "An adult model takes two natural steps and turns slightly to show the overall baju kurung silhouette. Concept-specific signature for \"Baju Kurung Walking OOTD\": Model dewasa berjalan perlahan untuk menunjukkan keseluruhan potongan baju kurung. Keep this exact concept as the central action while preserving product identity and making no unsupported claims."
+          "time": "2–5s",
+          "shot": "Two-step OOTD walk",
+          "direction": "The model takes two small, natural steps toward camera; the skirt follows with believable weight and the outfit design stays unchanged."
         },
         {
-          "time": "6–8s",
-          "shot": "Detail insert",
-          "direction": "Detail the visible sleeve, hem or print only if supported by the product name; no outfit redesign."
+          "time": "5–7s",
+          "shot": "Three-quarter cut and drape",
+          "direction": "Use a short, smooth lateral camera move as the model turns slightly to a three-quarter angle, revealing the sleeve and side silhouette without a dramatic spin."
         },
         {
-          "time": "8–10s",
-          "shot": "Hero close",
-          "direction": "Return to a stable full-product or full-look frame, with natural fabric movement settling and a premium editorial finish."
+          "time": "7–10s",
+          "shot": "Complete outfit hero",
+          "direction": "The model returns to a comfortable front-facing pose, lets the fabric settle, and holds a clean full-look frame."
         }
       ]
     },
