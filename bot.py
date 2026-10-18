@@ -752,8 +752,8 @@ def prompt_wait_animation():
 
 
 FAQ_ITEMS = (
-    ('Cara jana video', 'Untuk Jana Prompt Video, hantar 1–4 gambar produk yang jelas, kemudian pilih kategori, gaya dan durasi. Pautan Shopee tidak diperlukan.', ('GAMBAR PRODUK', 'PILIH GAYA', 'JANA PROMPT')),
-    ('Perlu pautan Shopee?', 'Tidak. Hantar gambar produk sahaja. Nama produk atau pautan Shopee boleh diberi sebagai maklumat tambahan, tetapi kedua-duanya bukan syarat untuk menjana prompt.', ('GAMBAR SAHAJA', 'PAUTAN PILIHAN', 'BUKAN WAJIB')),
+    ('Cara jana prompt video', 'Hantar 1–4 gambar produk yang jelas, kemudian pilih kategori, gaya dan durasi.', ('GAMBAR PRODUK', 'PILIH GAYA', 'JANA PROMPT')),
+    ('Apa yang diperlukan?', 'Hanya gambar produk yang jelas. Aliran Jana Prompt Video tidak menggunakan pautan Shopee dan tidak memerlukan maklumat daripada halaman Shopee.', ('GAMBAR SAHAJA', 'PILIH DURASI', 'JANA PROMPT')),
     ('Pilihan durasi prompt', 'Pilih 10 saat dengan 1 prompt, 20 saat dengan 2 prompt bersambung atau 1 prompt, atau 30 saat dengan 3 prompt bersambung atau 1 prompt.', ('10 SAAT', '20 SAAT', '30 SAAT')),
     ('Latar gambar', 'Untuk aliran suntingan video, anda boleh kekalkan latar asal atau pilih latar lain. Hasil pengasingan bergantung pada kerumitan gambar.', ('LATAR ASAL', 'PILIH LATAR', 'SEMAK HASIL')),
     ('Fungsi Prompt', 'Prompt ialah arahan teks untuk digunakan dalam penjana video AI. Klippo menyediakan prompt; ia bukan fail video yang telah siap.', ('PILIH PROMPT', 'ISI PILIHAN', 'SALIN TEKS')),
