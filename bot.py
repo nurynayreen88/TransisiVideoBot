@@ -1905,11 +1905,32 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data['prompt_product_type'] = 'other'
         context.user_data['prompt_mode'] = 'normal'
         context.user_data['prompt_reference_photos'] = []
-        context.user_data['stage'] = 'prompt_images'
+        context.user_data['stage'] = 'prompt_mode_select'
         await query.message.reply_text(
-            '✍️ KLIPPO | JANA PROMPT VIDEO\n\nHantar 1 hingga 4 gambar produk yang jelas. Selepas semua gambar dihantar, tekan “Selesai Hantar Gambar”. Klippo akan menyediakan satu prompt video lengkap dengan susunan babak, aksi dan pergerakan kamera.',
-            reply_markup=prompt_images_start_menu()
+            '✍️ KLIPPO | JANA PROMPT\n\nPilih jenis prompt yang anda mahu sediakan:',
+            reply_markup=InlineKeyboardMarkup([
+                [InlineKeyboardButton('🎥 Jana Prompt Video', callback_data='prompt_mode:video')],
+                [InlineKeyboardButton('🧩 Jana Prompt Storyboard', callback_data='prompt_mode:storyboard')],
+                [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]
+            ])
         )
+    elif action.startswith('prompt_mode:'):
+        selected_mode = action.split(':', 1)[1]
+        if selected_mode not in ('video', 'storyboard'):
+            await query.message.reply_text('Pilihan tidak sah. Sila pilih semula.', reply_markup=InlineKeyboardMarkup([
+                [InlineKeyboardButton('🎥 Jana Prompt Video', callback_data='prompt_mode:video')],
+                [InlineKeyboardButton('🧩 Jana Prompt Storyboard', callback_data='prompt_mode:storyboard')],
+                [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]
+            ]))
+        else:
+            context.user_data['prompt_mode'] = 'normal' if selected_mode == 'video' else 'storyboard'
+            context.user_data['prompt_reference_photos'] = []
+            context.user_data['stage'] = 'prompt_images'
+            if selected_mode == 'storyboard':
+                instruction = '🧩 JANA PROMPT STORYBOARD\\n\\nHantar 1 hingga 4 gambar produk. Klippo akan menyediakan prompt untuk meminta ChatGPT menghasilkan storyboard berdasarkan gambar tersebut.'
+            else:
+                instruction = '🎥 JANA PROMPT VIDEO\\n\\nHantar 1 hingga 4 gambar produk yang jelas. Klippo akan menyediakan prompt video lengkap dengan susunan babak, aksi dan pergerakan kamera.'
+            await query.message.reply_text(instruction, reply_markup=prompt_images_start_menu())
     elif action.startswith('prompt_flow:'):
         # Compatibility for old Telegram keyboards: both legacy buttons now enter
         # the same single prompt flow, never the storyboard branch.
@@ -1923,10 +1944,34 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif action == 'prompt_images_done' and stage == 'prompt_images':
         if not context.user_data.get('prompt_reference_photos'):
             await query.message.reply_text('Sila hantar sekurang-kurangnya 1 gambar produk dahulu.', reply_markup=prompt_images_menu())
+        elif context.user_data.get('prompt_mode') == 'storyboard':
+            context.user_data['stage'] = 'prompt_storyboard_prompt_ready'
+            storyboard_prompt = (
+                'STORYBOARD PROMPT — PRODUCT VIDEO\\n\\n'
+                'Act as a professional commercial storyboard director. Use the uploaded product image as the only visual reference and create a polished storyboard for a short vertical 9:16 product advertisement.\\n\\n'
+                'Create 6 clearly numbered, sequential panels. For every panel, specify the approximate duration, the exact visual action, shot size/framing, camera movement, and how it connects to the next panel. Begin with a strong visual hook, progress through distinct product-reveal and detail shots, and finish with a memorable product hero shot. Make every panel visually different while keeping the sequence coherent and practical for an AI video generator.\\n\\n'
+                'PRODUCT CONSISTENCY: Preserve the exact product shown in the reference image, including its visible shape, colour, pattern, material, packaging, proportions, and details. Do not invent or alter product features, labels, logos, or claims. Keep the product consistent in every panel.\\n\\n'
+                'STORYBOARD OUTPUT: Present the storyboard as a clear visual storyboard sheet with six readable panels in order. The panels must show the intended shots and actions, not merely text descriptions. Use realistic commercial photography, consistent lighting and setting, and a vertical-video composition. Do not add subtitles, promotional text, extra logos, or watermarks.\\n\\n'
+                'Return the storyboard only. Do not generate the finished video and do not return a separate video-generation prompt.'
+            )
+            context.user_data['prompt_storyboard_prompt_ready'] = storyboard_prompt
+            await query.message.reply_text(
+                f"✅ {len(context.user_data['prompt_reference_photos'])} gambar diterima.\\n\\n"
+                '🧩 PROMPT STORYBOARD SIAP\\n\\n'
+                '1. Tekan Buka ChatGPT.\\n'
+                '2. Muat naik gambar produk yang sama ke ChatGPT.\\n'
+                '3. Salin prompt di bawah dan minta ChatGPT hasilkan storyboard.\\n'
+                '4. Selepas storyboard siap, tekan “Selesai Jana Prompt Storyboard” untuk mendapatkan pilihan penjana video.',
+                reply_markup=InlineKeyboardMarkup([
+                    [InlineKeyboardButton('🖼️ Buka ChatGPT', url='https://chatgpt.com/')],
+                    [InlineKeyboardButton('✅ Selesai Jana Prompt Storyboard', callback_data='prompt_storyboard_done')]
+                ])
+            )
+            await query.message.reply_text(storyboard_prompt)
         else:
             context.user_data['stage'] = 'prompt_product_type'
             await query.message.reply_text(
-                f"✅ {len(context.user_data['prompt_reference_photos'])} gambar diterima.\n\n📦 LANGKAH 2 — Pilih kategori produk:",
+                f"✅ {len(context.user_data['prompt_reference_photos'])} gambar diterima.\\n\\n📦 LANGKAH 2 — Pilih kategori produk:",
                 reply_markup=prompt_product_type_menu()
             )
     elif action.startswith('prompt_type:') and stage == 'prompt_type':
@@ -2165,7 +2210,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # Return only for actions handled by the first chain. Video workflow
     # callbacks must continue into the second chain.
     if action in ('admin_pending', 'admin', 'storyboard', 'make', 'prompt', 'prompt_categories', 'prompt_images_done') or action.startswith(
-        ('admin_approve:', 'admin_reject:', 'prompt_flow:', 'prompt_model:', 'prompt_model_count:', 'prompt_model_gender:', 'prompt_model_hijab:', 'prompt_model_ethnicity:', 'prompt_model_age:', 'prompt_language:', 'prompt_voiceover:', 'prompt_type:', 'prompt_product_type:', 'prompt_duration:',
+        ('admin_approve:', 'admin_reject:', 'prompt_mode:', 'prompt_flow:', 'prompt_model:', 'prompt_model_count:', 'prompt_model_gender:', 'prompt_model_hijab:', 'prompt_model_ethnicity:', 'prompt_model_age:', 'prompt_language:', 'prompt_voiceover:', 'prompt_type:', 'prompt_product_type:', 'prompt_duration:',
          'prompt_style:', 'prompt_idea:', 'prompt_details:', 'video_input:', 'prompt_input:', 'pcat:', 'ptpl:')
     ):
         return
@@ -2344,6 +2389,22 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 await waiting.delete()
             except Exception:
                 pass
+    elif action == 'prompt_storyboard_done':
+        context.user_data['stage'] = 'prompt_storyboard_video_options'
+        await query.message.reply_text(
+            '🎬 JANA VIDEO BERDASARKAN STORYBOARD\\n\\n'
+            '1. Buka salah satu platform AI di bawah.\\n'
+            '2. Muat naik storyboard yang telah siap dijana oleh ChatGPT.\\n'
+            '3. Tampal arahan ringkas ini:\\n\\n'
+            'Generate a video based on the uploaded storyboard. Follow the panel order, actions, camera movements, timing, and transitions. Keep the product consistent with the storyboard.',
+            reply_markup=InlineKeyboardMarkup([
+                [InlineKeyboardButton('🤖 NexaBot', url='https://t.me/aigeneratornexa_bot?start=ref37141287'),
+                 InlineKeyboardButton('🌐 AxcelStudio', url='https://axcel.cloud/a/3839266034')],
+                [InlineKeyboardButton('✨ Gemini', url='https://gemini.google.com/')],
+                [InlineKeyboardButton('✍️ Prompt Baharu', callback_data='prompt'),
+                 InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]
+            ])
+        )
     elif action == 'prompt_continue_video':
         prompt = context.user_data.get('prompt_video_ready', '')
         if not prompt:
@@ -2356,8 +2417,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             sections = prompt.split('=== KLIPPO PART 2 ===') if context.user_data.get('prompt_duration') == 20 else [prompt]
             video_actions = InlineKeyboardMarkup([
                 [InlineKeyboardButton('🤖 NexaBot', url='https://t.me/aigeneratornexa_bot?start=ref37141287'),
-                 InlineKeyboardButton('✨ Gemini', url='https://gemini.google.com/')],
-                [InlineKeyboardButton('🖼️ Buka ChatGPT', url='https://chatgpt.com/')],
+                 InlineKeyboardButton('🌐 AxcelStudio', url='https://axcel.cloud/a/3839266034')],
+                [InlineKeyboardButton('✨ Gemini', url='https://gemini.google.com/')],
                 [InlineKeyboardButton('✍️ Prompt Baharu', callback_data='prompt'),
                  InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]
             ])
@@ -2523,8 +2584,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     sections = prompt.split('=== KLIPPO PART 2 ===') if context.user_data.get('prompt_duration') == 20 else [prompt]
                     direct_actions = InlineKeyboardMarkup([
                         [InlineKeyboardButton('🤖 NexaBot', url='https://t.me/aigeneratornexa_bot?start=ref37141287'),
-                         InlineKeyboardButton('✨ Gemini', url='https://gemini.google.com/')],
-                        [InlineKeyboardButton('🖼️ Buka ChatGPT', url='https://chatgpt.com/')],
+                         InlineKeyboardButton('🌐 AxcelStudio', url='https://axcel.cloud/a/3839266034')],
+                        [InlineKeyboardButton('✨ Gemini', url='https://gemini.google.com/')],
                         [InlineKeyboardButton('✍️ Prompt Baharu', callback_data='prompt'),
                          InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]
                     ])
