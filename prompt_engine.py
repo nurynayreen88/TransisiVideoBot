@@ -224,9 +224,9 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
                     "DIRECTOR'S CURATED WRITTEN STORYBOARD: Generate ONE continuous product video with exactly five equal scenes. "
                     f"Each scene lasts exactly {scene_length:g} seconds. The timeline below replaces any older storyboard timings. "
                     "No separate clips, no storyboard image, no on-screen text, captions, added logos, watermarks, dialogue or voice-over unless explicitly requested. "
-                    "Preserve exact product identity, packaging, colour, scale and coherent set.\\n\\n"
-                    + "\\n\\n".join(blocks)
-                    + "\\n\\nKeep transitions natural, camera movement restrained, and product geometry stable throughout."
+                    "Preserve exact product identity, packaging, colour, scale and coherent set.\n\n"
+                    + "\n\n".join(blocks)
+                    + "\n\nKeep transitions natural, camera movement restrained, and product geometry stable throughout."
                 )
             else:
                 generic_scenes = [
@@ -244,8 +244,8 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
                 rules = (
                     "DIRECTOR'S WRITTEN STORYBOARD: ONE continuous video with exactly five equal scenes. "
                     f"Each scene lasts exactly {scene_length:g} seconds. These are timed scenes inside one video, "
-                    "not separate prompts or a storyboard image. No unrequested text, captions, added logos, claims or watermarks.\\n\\n"
-                    + "\\n\\n".join(generic_blocks)
+                    "not separate prompts or a storyboard image. No unrequested text, captions, added logos, claims or watermarks.\n\n"
+                    + "\n\n".join(generic_blocks)
                 )
         return (
             "PROMPT VIDEO — " + str(duration) + " SAAT\n"
