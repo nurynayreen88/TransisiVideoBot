@@ -30,7 +30,11 @@ def _resolve_auto_style(style, product_type):
     return AUTO_STYLE_BY_PRODUCT_TYPE.get(product_type, 'cinematic')
 
 
-def build_prompt(mode, product, scene, motion, style='auto', duration=10, concept='', product_type='other', storyboard_override=None, split=False):
+def build_prompt(mode, product, scene, motion, style='auto', duration=10, concept='', product_type='other', storyboard_override=None, split=None):
+    # Preserve the historical API behavior: a 20-second call without an explicit
+    # split choice still returns two connected 10-second prompts.
+    if split is None:
+        split = duration == 20
     style = _resolve_auto_style(style, product_type) if mode == 'storyboard' else style
     if split and duration > 10:
         # Generate connected 10-second prompts while retaining the same style and product context.
