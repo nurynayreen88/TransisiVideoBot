@@ -2016,25 +2016,25 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                         for index, shot in enumerate(curated_shots)
                     )
                 storyboard_prompt = (
-                    'STORYBOARD PROMPT — PREMIUM PRODUCT COMMERCIAL\\n\\n'
-                    'ROLE AND GOAL\\n'
-                    'Act as a senior commercial director, storyboard artist, product photographer and continuity supervisor. Create a visually polished storyboard that a video-generation model can follow as a practical shot plan. Use the uploaded product reference image(s) as the primary visual truth.\\n\\n'
-                    'PRODUCT AND CREATIVE DIRECTION\\n'
-                    'Product name: ' + product_name + '\\n'
-                    + (('User-provided details: ' + details + '\\n') if details else '')
+                    'STORYBOARD PROMPT — PREMIUM PRODUCT COMMERCIAL\n\n'
+                    'ROLE AND GOAL\n'
+                    'Act as a senior commercial director, storyboard artist, product photographer and continuity supervisor. Create a visually polished storyboard that a video-generation model can follow as a practical shot plan. Use the uploaded product reference image(s) as the primary visual truth.\n\n'
+                    'PRODUCT AND CREATIVE DIRECTION\n'
+                    'Product name: ' + product_name + '\n'
+                    + (('User-provided details: ' + details + '\n') if details else '')
                     + 'Selected Klippo concept: ' + template.get('label', 'Product-specific concept') + '. '
-                    + template.get('description', '') + shot_text + '\\n\\n'
-                    'SHOT PLAN — SIX CONNECTED PANELS FOR A 10-SECOND VERTICAL VIDEO\\n'
-                    'Create exactly six panels, ordered left-to-right and top-to-bottom in a clean 3-column by 2-row storyboard sheet. Use these time ranges: Panel 1, 0.0–1.2s; Panel 2, 1.2–2.8s; Panel 3, 2.8–4.4s; Panel 4, 4.4–6.2s; Panel 5, 6.2–8.0s; Panel 6, 8.0–10.0s. Each panel must depict one clear keyframe and one distinct, physically plausible action or camera beat. For every panel, make the framing, product placement, subject action, camera angle/movement, lighting and transition into the next panel visually understandable.\\n\\n'
-                    'DIRECTING AND VARIATION\\n'
-                    'Panel 1: create an immediate visual hook using framing, composition or a natural reveal—not a fabricated claim. Panels 2–5: develop the chosen Klippo concept with varied but coherent shot sizes, visible product details and purposeful progression. Panel 6: resolve into a clean, memorable product hero frame that can hold at the end. Use the selected library storyboard beats as the creative backbone, adapting them to the actual product shown. Do not repeat the same gesture, camera move or composition just to fill panels. Keep all actions simple enough for a video model to reproduce.\\n\\n'
-                    'PRODUCT FIDELITY — NON-NEGOTIABLE\\n'
-                    'Match the reference product exactly: silhouette, proportions, colour, pattern, texture, packaging, visible hardware, labels and all other visible details. Do not redesign, beautify into a different product, recolour, morph, duplicate or swap it between panels. Never invent unseen sides, materials, components, accessories, packaging contents, functions, specifications, discounts, testimonials or product claims. Props and hands may appear only when they make sense for the selected concept; props must not imply they are included with the product. Preserve realistic scale, contact, grip and hand anatomy. If a detail is not visible or supplied, keep it neutral or out of frame.\\n\\n'
-                    'CAMERA, LIGHT AND CONTINUITY\\n'
-                    'Use a vertical 9:16 composition in every panel, realistic commercial lighting, believable depth of field and clean visual hierarchy. Keep the environment, lighting direction, colour treatment and product identity consistent unless a change is essential to the concept. Camera movement must be physically possible and restrained; avoid impossible 360-degree views of unseen surfaces, teleportation, sudden location changes, random zooms or disconnected scenes. Design each panel so its final composition naturally motivates the next panel.\\n\\n'
-                    'STORYBOARD SHEET DESIGN\\n'
-                    'Render an actual visual storyboard sheet, not a text-only outline: six large, clearly separated image panels in a balanced 3-by-2 grid. Add only small panel numbers and time ranges in the margin of each panel if needed for production clarity. Do not place captions, promotional copy, fake UI, added logos or watermarks over the product. Make the product and action readable at a glance; avoid tiny panels, decorative clutter, overlapping frames and illegible text.\\n\\n'
-                    'OUTPUT RULES\\n'
+                    + template.get('description', '') + shot_text + '\n\n'
+                    'SHOT PLAN — SIX CONNECTED PANELS FOR A 10-SECOND VERTICAL VIDEO\n'
+                    'Create exactly six panels, ordered left-to-right and top-to-bottom in a clean 3-column by 2-row storyboard sheet. Use these time ranges: Panel 1, 0.0–1.2s; Panel 2, 1.2–2.8s; Panel 3, 2.8–4.4s; Panel 4, 4.4–6.2s; Panel 5, 6.2–8.0s; Panel 6, 8.0–10.0s. Each panel must depict one clear keyframe and one distinct, physically plausible action or camera beat. For every panel, make the framing, product placement, subject action, camera angle/movement, lighting and transition into the next panel visually understandable.\n\n'
+                    'DIRECTING AND VARIATION\n'
+                    'Panel 1: create an immediate visual hook using framing, composition or a natural reveal—not a fabricated claim. Panels 2–5: develop the chosen Klippo concept with varied but coherent shot sizes, visible product details and purposeful progression. Panel 6: resolve into a clean, memorable product hero frame that can hold at the end. Use the selected library storyboard beats as the creative backbone, adapting them to the actual product shown. Do not repeat the same gesture, camera move or composition just to fill panels. Keep all actions simple enough for a video model to reproduce.\n\n'
+                    'PRODUCT FIDELITY — NON-NEGOTIABLE\n'
+                    'Match the reference product exactly: silhouette, proportions, colour, pattern, texture, packaging, visible hardware, labels and all other visible details. Do not redesign, beautify into a different product, recolour, morph, duplicate or swap it between panels. Never invent unseen sides, materials, components, accessories, packaging contents, functions, specifications, discounts, testimonials or product claims. Props and hands may appear only when they make sense for the selected concept; props must not imply they are included with the product. Preserve realistic scale, contact, grip and hand anatomy. If a detail is not visible or supplied, keep it neutral or out of frame.\n\n'
+                    'CAMERA, LIGHT AND CONTINUITY\n'
+                    'Use a vertical 9:16 composition in every panel, realistic commercial lighting, believable depth of field and clean visual hierarchy. Keep the environment, lighting direction, colour treatment and product identity consistent unless a change is essential to the concept. Camera movement must be physically possible and restrained; avoid impossible 360-degree views of unseen surfaces, teleportation, sudden location changes, random zooms or disconnected scenes. Design each panel so its final composition naturally motivates the next panel.\n\n'
+                    'STORYBOARD SHEET DESIGN\n'
+                    'Render an actual visual storyboard sheet, not a text-only outline: six large, clearly separated image panels in a balanced 3-by-2 grid. Add only small panel numbers and time ranges in the margin of each panel if needed for production clarity. Do not place captions, promotional copy, fake UI, added logos or watermarks over the product. Make the product and action readable at a glance; avoid tiny panels, decorative clutter, overlapping frames and illegible text.\n\n'
+                    'OUTPUT RULES\n'
                     'Return only the finished storyboard image/sheet. Do not return explanations, a written shot list, a separate video prompt or the finished video. Prioritise fidelity to the uploaded product and clear, connected, product-specific actions over visual effects.'
                 )
                 context.user_data['prompt_storyboard_prompt_ready'] = storyboard_prompt
