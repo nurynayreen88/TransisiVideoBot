@@ -1929,8 +1929,19 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             reply_markup=InlineKeyboardMarkup([
                 [InlineKeyboardButton('🎥 Jana Prompt Video', callback_data='prompt_mode:video')],
                 [InlineKeyboardButton('🧩 Jana Prompt Storyboard', callback_data='prompt_mode:storyboard')],
+                [InlineKeyboardButton('🔗 Guna Pautan Produk Shopee', callback_data='prompt_link_input')],
                 [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]
             ])
+        )
+    elif action == 'prompt_link_input':
+        context.user_data['prompt_mode'] = 'normal'
+        context.user_data['prompt_reference_photos'] = []
+        context.user_data['stage'] = 'prompt_shopee_link'
+        await query.message.reply_text(
+            '🔗 MASUKKAN PAUTAN PRODUK SHOPEE\\n\\n'
+            'Tampal pautan Shopee Malaysia — pautan panjang atau pautan pendek s.shopee.com.my diterima. '
+            'KLIPPO akan cuba menggunakan pautan sebagai rujukan. Jika akses automatik disekat, bot tidak akan mereka-reka butiran produk.',
+            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('↩️ Kembali', callback_data='prompt')], [InlineKeyboardButton('🏠 Menu Utama', callback_data='home')]])
         )
     elif action.startswith('prompt_mode:'):
         selected_mode = action.split(':', 1)[1]
@@ -3109,8 +3120,10 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data['prompt_product'] = 'Product reference URL (do not invent unverified specifications): ' + link
         context.user_data['prompt_vision'] = ''
         context.user_data['stage'] = 'prompt_details_text'
-        await update.message.reply_text('✅ Pautan diterima. Untuk prompt yang tepat, masukkan nama produk dan ciri utama daripada halaman Shopee (contoh: jenama, model, warna). Pautan sahaja tidak menjamin AI boleh membaca halaman produk.')
+        await update.message.reply_text('✅ Pautan Shopee diterima. Masukkan nama produk dan ciri utama jika diketahui. Jika mahu cuba dengan pautan sahaja, taip “tak pasti”; Klippo tidak akan mereka-reka spesifikasi yang tidak disahkan.')
     elif stage == 'prompt_details_text':
+        if value.strip().lower() in ('tak pasti', 'tak tahu', 'skip', 'guna pautan sahaja'):
+            value = 'Use the supplied Shopee product URL as a reference only. Do not invent or assert product specifications that cannot be verified.'
         context.user_data['prompt_product'] = value[:600]
         context.user_data['stage'] = 'prompt_scene'
         await update.message.reply_text('🎨 Maklumat disimpan. Pilih latar video:', reply_markup=prompt_scene_menu())
@@ -3123,18 +3136,21 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 def _shopee_link(value):
-    """Accept only explicit HTTPS Shopee Malaysia product URLs."""
+    """Accept HTTPS Shopee MY product URLs and official short links."""
     from urllib.parse import urlparse
-    for candidate in re.findall(r'https?://[^\s<>]+', value):
-        candidate = candidate.rstrip('.,);]\'"')
+    for candidate in re.findall(r'https?://[^\\s<>]+', value):
+        candidate = candidate.rstrip('.,);]\\'"')
         parsed = urlparse(candidate)
         host = (parsed.hostname or '').lower()
+        if parsed.scheme != 'https' or parsed.username or parsed.password:
+            continue
         is_shopee_my = host == 'shopee.com.my' or host.endswith('.shopee.com.my')
+        is_official_short = host == 's.shopee.com.my' and bool(re.fullmatch(r'/[A-Za-z0-9_-]{5,32}/?', parsed.path))
         is_product_path = bool(
-            re.search(r'/product/\d+/\d+', parsed.path) or
-            re.search(r'-i\.\d+\.\d+', parsed.path)
+            re.search(r'/product/\\d+/\\d+', parsed.path) or
+            re.search(r'-i\\.\\d+\\.\\d+', parsed.path)
         )
-        if parsed.scheme == 'https' and is_shopee_my and is_product_path:
+        if is_shopee_my and (is_product_path or is_official_short):
             return candidate
     return ''
 
