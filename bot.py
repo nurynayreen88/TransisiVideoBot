@@ -790,7 +790,6 @@ def main_menu(user_id=None):
         [InlineKeyboardButton('🔄 Tukar Format Video', callback_data='convert')],
         [InlineKeyboardButton('🎞️ Gerakkan Foto (Transisi)', callback_data='make')],
         [InlineKeyboardButton('🎬 Storyboard AI (Beta)', callback_data='falbeta')],
-        [InlineKeyboardButton('🌐 Hasilkan Video dengan AxcelStudio', url='https://axcel.cloud/a/3839266034')],
         [InlineKeyboardButton('💎 Langganan', callback_data='subscription'), InlineKeyboardButton('👤 Akaun Saya', callback_data='account')],
         [InlineKeyboardButton('❓ FAQ', callback_data='help')],
     ]
@@ -2522,7 +2521,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             sections = prompt.split('=== KLIPPO PART 2 ===') if context.user_data.get('prompt_duration') == 20 else [prompt]
             video_actions = InlineKeyboardMarkup([
                 [InlineKeyboardButton('🤖 NexaBot', url='https://t.me/aigeneratornexa_bot?start=ref37141287'),
-                 InlineKeyboardButton('✨ Gemini', url='https://gemini.google.com/')],
+                 InlineKeyboardButton('🌐 AxcelStudio', url='https://axcel.cloud/a/3839266034')],
+                [InlineKeyboardButton('✨ Gemini', url='https://gemini.google.com/')],
                 [InlineKeyboardButton('🖼️ Buka ChatGPT', url='https://chatgpt.com/')],
                 [InlineKeyboardButton('✍️ Prompt Baharu', callback_data='prompt'),
                  InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]
@@ -2689,7 +2689,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     sections = prompt.split('=== KLIPPO PART 2 ===') if context.user_data.get('prompt_duration') == 20 else [prompt]
                     direct_actions = InlineKeyboardMarkup([
                         [InlineKeyboardButton('🤖 NexaBot', url='https://t.me/aigeneratornexa_bot?start=ref37141287'),
-                         InlineKeyboardButton('✨ Gemini', url='https://gemini.google.com/')],
+                         InlineKeyboardButton('🌐 AxcelStudio', url='https://axcel.cloud/a/3839266034')],
+                        [InlineKeyboardButton('✨ Gemini', url='https://gemini.google.com/')],
                         [InlineKeyboardButton('🖼️ Buka ChatGPT', url='https://chatgpt.com/')],
                         [InlineKeyboardButton('✍️ Prompt Baharu', callback_data='prompt'),
                          InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]
