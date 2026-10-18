@@ -122,7 +122,10 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
     category_direction += (
         " STRICT NO-LOGO RULE: Do not add any logo or watermark anywhere in the video, including TikTok, Shopee, creator, AI-generator or provider branding; "
         "no logo overlays, corner bugs, end cards, branded borders, platform UI or background signage. Never add captions or text unless separately requested. "
-        "If a logo or mark is physically printed on the reference product, preserve it only as part of that exact product and never create a separate or enlarged logo."
+        "If a logo or mark is physically printed on the reference product, preserve it only as part of that exact product and never create a separate or enlarged logo. "
+        "BACKGROUND REPLACEMENT RULE: The uploaded photo is a product reference, NOT an instruction to keep its original background. "
+        "Remove/replace the original photo background and use the user's selected SETTING as the actual video scene. "
+        "Integrate the exact product naturally into the new setting with matching perspective, lighting and contact shadows; do not paste the whole source photo into the scene or retain its original background."
     )
     identity = (
         "PRODUCT IDENTITY RULE: The user will upload the original product photo(s) to the target AI video generator as the MASTER visual reference. "
