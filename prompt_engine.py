@@ -141,13 +141,16 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
                              + ("Do not perform the main surrounding contour yet. " if doodle else ""))
             if storyboard_override and isinstance(storyboard_override, (list, tuple)) and len(storyboard_override) == 4:
                 beat_plan = (
-                    ("CONTINUITY BRIDGE: Resume from Part 1's exact final product frame. "
-                     "CONTINUATION ACTION: Continue the same concept without repeating the opening hook. ")
-                    if part == 2 else ""
-                ) + "FOLLOW THESE SELECTED STORYBOARD BEATS IN ORDER: " + " | ".join(
-                    str(item.get("shot", "")) + ": " + str(item.get("direction", ""))
-                    for item in storyboard_override
-                ) + ". "
+                    "DIRECTOR'S CURATED PREMIUM STORYBOARD: NO ON-SCREEN TEXT. "
+                    + (("CONTINUITY BRIDGE: Resume from Part 1's exact final product frame. "
+                        "CONTINUATION ACTION: Continue the same concept without repeating the opening hook. ")
+                       if part == 2 else "")
+                    + "FOLLOW THESE SELECTED STORYBOARD BEATS IN ORDER: "
+                    + " | ".join(
+                        str(item.get("shot", "")) + ": " + str(item.get("direction", ""))
+                        for item in storyboard_override
+                    ) + ". "
+                )
             hook_rule = (
                 "OPENING TEXT: Show only this neutral product/category hook, exactly: '" + hook + "'. "
                 if hook and not storyboard_override and part < 2 else
@@ -161,7 +164,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
             )
             concept_rule = ("CREATIVE IDEA: " + concept.strip() + ". " if concept and concept.strip() else "")
             return (
-                "KLIPPO — VIDEO PROMPT | " + str(duration) + " SECONDS" + (" | PART " + str(part) if part else "") + "\n"
+                "PROMPT VIDEO — " + str(duration) + " SAAT" + (" | BAHAGIAN " + str(part) if part else "") + "\n"
                 "Vertical 9:16, one realistic product ad, exactly " + str(duration) + " seconds.\n"
                 "PRODUCT: " + product + "\n"
                 + category_direction + "\n"
