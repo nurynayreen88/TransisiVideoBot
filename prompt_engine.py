@@ -160,8 +160,8 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
             )
             concept_rule = ("CREATIVE IDEA: " + concept.strip() + ". " if concept and concept.strip() else "")
             return (
-                "KLIPPO — VIDEO PROMPT | 10 SECONDS" + (" | PART " + str(part) if part else "") + "\n"
-                "Vertical 9:16, one realistic product ad, exactly 10 seconds.\n"
+                "KLIPPO — VIDEO PROMPT | " + str(duration) + " SECONDS" + (" | PART " + str(part) if part else "") + "\n"
+                "Vertical 9:16, one realistic product ad, exactly " + str(duration) + " seconds.\n"
                 "PRODUCT: " + product + "\n"
                 + category_direction + "\n"
                 + "STYLE: " + style_name + " — " + style_template[:450] + "\n"
