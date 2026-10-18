@@ -564,7 +564,7 @@ def prompt_duration_menu():
 # unrelated options (for example, Mirror Selfie for a food product).
 PRODUCT_STYLE_KEYS = {
     'fashion': {'fashion_editorial', 'golden_hour', 'mirror_selfie', 'lifestyle', 'ugc_review', 'creative_reveal', 'studio_360_safe', 'minimal', 'luxury', 'white_doodle'},
-    'bag': {'handbag_showcase', 'bag_detail_macro', 'bag_flatlay', 'bag_daily_carry', 'bag_tabletop_reveal', 'sling_bag_lifestyle', 'backpack_demo', 'wallet_luxury_macro', 'wallet_open_close', 'wallet_daily_carry', 'wallet_flatlay', 'wallet_gift_reveal', 'white_doodle', 'minimal', 'luxury', 'studio_360_safe'},
+    'bag': {'handbag_showcase', 'bag_detail_macro', 'bag_flatlay', 'bag_daily_carry', 'bag_tabletop_reveal', 'sling_bag_lifestyle', 'backpack_demo', 'white_doodle', 'minimal', 'luxury', 'studio_360_safe', 'lifestyle', 'unboxing'},
     'wallet': {'wallet_luxury_macro', 'wallet_open_close', 'wallet_daily_carry', 'wallet_flatlay', 'wallet_gift_reveal', 'white_doodle', 'minimal', 'luxury', 'studio_360_safe'},
     'hijab': {'fashion_editorial', 'golden_hour', 'lifestyle', 'ugc_review', 'creative_reveal', 'white_doodle', 'minimal', 'luxury'},
     'shoes': {'studio_360_safe', 'pov_demo', 'lifestyle', 'ugc_review', 'creative_reveal', 'fast_cut', 'white_doodle', 'minimal'},
@@ -572,7 +572,7 @@ PRODUCT_STYLE_KEYS = {
     'food': {'food_appetite', 'nature_fresh', 'flatlay', 'lifestyle', 'creative_reveal', 'playful_viral', 'white_doodle', 'minimal'},
     'gadget': {'tech_demo', 'studio_360_safe', 'unboxing', 'minimal', 'creative_reveal', 'flatlay', 'white_doodle'},
     'home': {'cozy_home', 'pov_demo', 'flatlay', 'lifestyle', 'creative_reveal', 'unboxing', 'minimal', 'white_doodle'},
-    'accessory': {'luxury', 'beauty_macro', 'flatlay', 'studio_360_safe', 'fashion_editorial', 'minimal', 'unboxing', 'white_doodle'},
+    'accessory': {'luxury', 'flatlay', 'studio_360_safe', 'creative_reveal', 'minimal', 'unboxing', 'white_doodle'},
     'toy': {'playful_viral', 'funny_ad', 'pov_demo', 'unboxing', 'creative_reveal', 'studio_360_safe', 'minimal', 'white_doodle'},
     'book_stationery': {'flatlay', 'minimal', 'lifestyle', 'creative_reveal', 'fast_cut', 'unboxing', 'white_doodle'},
     'sports': {'dynamic', 'pov_demo', 'fast_cut', 'lifestyle', 'studio_360_safe', 'ugc_review', 'minimal', 'white_doodle'},
@@ -581,22 +581,31 @@ PRODUCT_STYLE_KEYS = {
     'baby': {'cozy_home', 'lifestyle', 'flatlay', 'minimal', 'unboxing', 'white_doodle'},
     'travel': {'studio_360_safe', 'lifestyle', 'flatlay', 'unboxing', 'minimal', 'white_doodle'},
     'office': {'flatlay', 'minimal', 'lifestyle', 'creative_reveal', 'unboxing', 'white_doodle'},
-    'other': {'cinematic', 'minimal', 'dynamic', 'luxury', 'lifestyle', 'ugc_review', 'flatlay', 'unboxing', 'creative_reveal', 'studio_360_safe', 'white_doodle', 'fast_cut', 'playful_viral'},
+    'other': {'cinematic', 'minimal', 'lifestyle', 'flatlay', 'unboxing', 'creative_reveal', 'studio_360_safe', 'white_doodle'},
 }
-def prompt_style_menu(product_type='other'):
+def prompt_style_menu(product_type='other', model_presence=None):
+    """Show only styles relevant to the chosen product and model setup."""
     available = storyboard_styles()
     allowed = PRODUCT_STYLE_KEYS.get(product_type, PRODUCT_STYLE_KEYS['other'])
+
+    # Mirror-selfie specifically requires a person/model. Do not offer it for
+    # product-only videos; avoid a misleading style choice before generation.
+    if model_presence != 'yes':
+        allowed = set(allowed) - {'mirror_selfie'}
+
     matching = [(key, label) for key, label in available if key in allowed]
-    # White Doodle is a universal overlay style, not a product-category action.
-    # Keep it selectable for every category while retaining relevant category-specific styles.
+
+    # White Doodle is a product-tracked 2D overlay and works across categories.
+    # It is safe to offer universally because it follows the actual visible product.
     doodle_option = next(((key, label) for key, label in available if key == 'white_doodle'), None)
     if doodle_option and not any(key == 'white_doodle' for key, _ in matching):
         matching.append(doodle_option)
-    # Never leak unrelated styles into a product-specific menu. If catalog entries
-    # are customized and no allowed style remains, use a small safe universal set.
+
+    # Never expose unrelated catalog entries when a category has no matching styles.
     if not matching:
         safe_keys = {'minimal', 'cinematic', 'studio_360_safe', 'white_doodle'}
         matching = [(key, label) for key, label in available if key in safe_keys]
+
     rows = [[InlineKeyboardButton('🎲 Auto (Disyorkan)', callback_data='prompt_style:auto')]]
     rows.extend([[InlineKeyboardButton(label, callback_data='prompt_style:' + key)]
                  for key, label in matching])
@@ -2245,7 +2254,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 'prompt_model_ethnicity': 'na', 'prompt_model_age': 'na'
             })
             context.user_data['stage'] = 'prompt_style'
-            await query.message.reply_text('🎨 LANGKAH 4 — Pilih gaya video:', reply_markup=prompt_style_menu(context.user_data.get('prompt_product_type', 'other')))
+            await query.message.reply_text('🎨 LANGKAH 4 — Pilih gaya video:', reply_markup=prompt_style_menu(context.user_data.get('prompt_product_type', 'other'), context.user_data.get('prompt_model_presence')))
         elif selected == 'yes':
             context.user_data['prompt_model_presence'] = 'yes'
             context.user_data['stage'] = 'prompt_model_count'
@@ -2284,7 +2293,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if selected in ('18-25', '26-40', '41+'):
             context.user_data['prompt_model_age'] = selected
             context.user_data['stage'] = 'prompt_style'
-            await query.message.reply_text('🎨 LANGKAH 4 — Pilih gaya video:', reply_markup=prompt_style_menu(context.user_data.get('prompt_product_type', 'other')))
+            await query.message.reply_text('🎨 LANGKAH 4 — Pilih gaya video:', reply_markup=prompt_style_menu(context.user_data.get('prompt_product_type', 'other'), context.user_data.get('prompt_model_presence')))
     elif action.startswith('prompt_duration:') and stage == 'prompt_duration':
         selected = action.split(':', 1)[1]
         valid_duration_modes = {
