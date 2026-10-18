@@ -30,7 +30,7 @@
 | Product category | Prompts | Current status | Next quality check |
 |---|---:|---|---|
 | Pakaian / Clothing | 63 | BASELINE OK — deeper review pending | Check fabric movement, fit, drape, body anatomy, hijab/clothing continuity and avoid changing garment design. |
-| Beg / Bags | 64 | IN PROGRESS — 6 prompts text-audited; 3 have quality overrides | Continue with the next three bag prompts; visual generation test still pending. |
+| Beg / Bags | 64 | IN PROGRESS — 9 prompts text-audited; 6 have quality overrides in this PR | Continue with backpack and closure/carry actions; visual generation test still pending. |
 | Dompet / Wallets | 59 | BASELINE OK — deeper review pending | Check opening/closing hinges, card slots only if visible, hand interaction and scale consistency. |
 | Kasut / Shoes | 62 | PASS for 3 named overrides; remaining prompts NOT AUDITED | Review the other 59 prompts for shoe-specific actions, footwear geometry and plausible foot contact. |
 | Kosmetik & Kecantikan / Beauty | 70 | BASELINE OK — deeper review pending | Check applicator/product compatibility, believable liquid/cream behaviour, packaging continuity and avoid unsupported skin/health claims. |
@@ -76,6 +76,19 @@
 - [ ] Generate representative clips and inspect hand contact, handle/strap physics, bag geometry, contact shadows and final-frame continuity. Text review is not a visual-generation PASS.
 
 **Findings addressed:** the tabletop prompt previously opened with a carried view despite describing a table pick-up; the office prompt's signature action repeated a description instead of giving the model a clear physical action; the flat-lay prompt mixed a static editorial concept with possible product rotation. Overrides now specify a single physically motivated action and keep the product design locked.
+
+
+## 2C. Bags audit — batch 3 (text review + ID-preserving overrides)
+
+**Scope:** The next three bag prompts were checked against the actual master-library text. Each had a broad concept description in the signature-action beat rather than a concrete, product-specific action. Additive overrides now define a realistic action sequence.
+
+- [x] `bags_everyday_carry_v1` — **Everyday Carry**: specifies a supported handle/strap pickup, one or two measured steps, stable side-profile tracking and a controlled finish; avoids unsupported capacity/durability implications.
+- [x] `bags_tabletop_hero_v1` — **Tabletop Hero Reveal**: uses camera movement for the reveal while the bag remains supported and stationary; close-ups are limited to verified visible details.
+- [x] `bags_sling_crossbody_v1` — **Sling / Crossbody Look**: makes crossbody wearing conditional on the visible design; keeps strap placement and attachment points stable and avoids clipping through clothing.
+- [x] Each override includes four timed shots covering exactly 10 seconds; storyboard directions match the corresponding prompt.
+- [x] Original IDs and master-library entries are preserved. Changes remain additive in `prompts/prompt_quality_overrides.json`.
+- [ ] Full repository validation is currently blocked by an unrelated existing White Doodle storyboard assertion in CI; inspect and resolve that separately rather than weakening prompt-library checks.
+- [ ] Generate representative clips and visually inspect strap physics, hand/body contact, bag geometry, shadows and final-frame continuity.
 
 ## 3. Automated structural audit — current snapshot
 
