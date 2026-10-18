@@ -295,9 +295,49 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
             "Keep the chosen hijab style and handbag presentation consistent. Never redesign, recolor, reshape, add or remove stated outfit details. "
             "Use one consistent home setting, authentic phone-camera perspective, soft daylight and crisp fabric detail. No collage, split screen, poster layout, outfit change, plastic skin or CGI."
         )
+    # Single-prompt mode uses a written storyboard: exactly four 2.5-second scenes
+    # for a 10s video, or eight 2.5-second scenes for a 20s video.
+    if mode != "storyboard" and part == 0 and duration in (10, 20):
+        scene_count = duration // 2.5
+        scene_plan = [
+            ("OPENING HOOK", "A compelling but truthful opening composition that immediately makes the exact product easy to recognize. Use a subtle, physically plausible camera or light movement."),
+            ("FULL PRODUCT REVEAL", "Show the complete product clearly in a balanced composition. Preserve exact shape, color, print, proportions, packaging and visible branding."),
+            ("REALISTIC CONTEXT", "Continue naturally in the same setting, using only plausible context and no props that could imply unconfirmed included accessories or functions."),
+            ("VISIBLE DETAIL", "Move gently toward one genuinely visible detail supported by the reference image. Do not invent unseen surfaces, textures or features."),
+            ("NATURAL PRODUCT ACTION", "Show one simple, believable product-appropriate action or subtle camera move. Keep product geometry and identity stable."),
+            ("SECONDARY VIEW", "Offer a complementary crop or perspective that remains supported by the reference. Keep lighting, background and product scale coherent."),
+            ("RETURN TO HERO", "Ease back toward a clean, recognizable full-product composition. Keep motion controlled and avoid abrupt cuts or morphing."),
+            ("FINAL HERO HOLD", "Finish with a premium, stable full-product hero frame and a brief hold. No invented slogan, price, claim or watermark."),
+        ]
+        scene_blocks = []
+        for index in range(scene_count):
+            start = index * 2.5
+            end = start + 2.5
+            title, detail = scene_plan[index % len(scene_plan)]
+            if duration == 10:
+                title, detail = [
+                    ("HOOK", scene_plan[0][1]),
+                    ("PRODUCT REVEAL", scene_plan[1][1]),
+                    ("DETAIL / ACTION", scene_plan[3][1] + " " + scene_plan[4][1]),
+                    ("HERO FINISH", scene_plan[7][1]),
+                ][index]
+            scene_blocks.append(
+                f"SCENE {index + 1} — {start:.1f}–{end:.1f}s | {title}: {detail}"
+            )
+        direction = (
+            "DIRECTOR'S WRITTEN STORYBOARD: Generate ONE continuous, coherent vertical product video. "
+            f"Use exactly {scene_count} sequential scenes, each exactly 2.5 seconds, with the timestamps below. "
+            "These are four/eight timed beats inside one video, NOT separate video prompts or a storyboard image. "
+            "Use subtle, clean cuts or natural match transitions only where appropriate; maintain the same product identity, "
+            "set, lighting direction and visual style from beginning to end.\n\n"
+            + "\n\n".join(scene_blocks)
+            + "\n\nCONTINUITY AND QUALITY: Keep movement natural and product geometry stable in every scene. "
+            "No sudden scene reset, duplicate product, morphing, invented feature or unsupported angle. "
+            "End on a steady hero shot."
+        )
     return (
         "KLIPPO | PROFESSIONAL IMAGE-TO-VIDEO PRODUCTION PROMPT" + (" | BAHAGIAN " + str(part) if part else "") + "\n"
-        "OUTPUT: " + str(duration) + " seconds; portrait 9:16; high-quality realistic product commercial; "
+        "OUTPUT: " + str(duration) + " seconds; portrait 9:16; target resolution 1080x1920; high-quality realistic product commercial; "
         "one coherent deliverable. ON-SCREEN TEXT: Follow the KLIPPO GUIDED CREATIVE SETTINGS language choice. If the language is none, show no text. Otherwise, use at most the exact product name supplied by the user unless exact wording is provided; do not invent marketing claims or promotional copy. Preserve spelling, keep text brief and legible, and place it away from the product.\n\n"
         "PRODUCT: " + product + "\n" + category_direction + "\n\n" + identity + "\n\n" + art + "\n\n"
         + direction + "\n\n" + negative + "\n\n"
