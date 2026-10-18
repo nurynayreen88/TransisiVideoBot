@@ -202,6 +202,40 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
                 "natural contact shadows, clean transitions and restrained highlights. Keep product geometry and visible details "
                 "consistent throughout. Finish on a stable, clean hero frame."
             )
+        # The Telegram flow uses storyboard mode for every library concept. Normalize
+        # every concept to five equal, timed scenes in one video, never old split-clip timing.
+        if part == 0 and duration in (10, 20):
+            scene_length = duration / 5
+            if storyboard_override and isinstance(storyboard_override, (list, tuple)) and len(storyboard_override) == 4:
+                curated_items = list(storyboard_override)
+                curated_five = [
+                    ("OPENING / PRODUCT REVEAL", "Establish the exact product clearly in the same coherent setting; no on-screen text."),
+                    (str(curated_items[0].get("shot", "CREATIVE BEAT 1")), str(curated_items[0].get("direction", ""))),
+                    (str(curated_items[1].get("shot", "CREATIVE BEAT 2")), str(curated_items[1].get("direction", ""))),
+                    (str(curated_items[2].get("shot", "CREATIVE BEAT 3")), str(curated_items[2].get("direction", ""))),
+                    ("CREATIVE FINISH / HERO HOLD", str(curated_items[3].get("direction", "")) + " Finish on a stable, full-product hero frame."),
+                ]
+                blocks = []
+                for index, (shot_name, shot_direction) in enumerate(curated_five):
+                    start = index * scene_length
+                    end = start + scene_length
+                    blocks.append(f"SCENE {index + 1} — {start:.1f}–{end:.1f}s | {shot_name}: {shot_direction}")
+                curated_direction = (
+                    "DIRECTOR'S CURATED WRITTEN STORYBOARD: Generate ONE continuous product video with exactly five equal scenes. "
+                    f"Each scene lasts exactly {scene_length:g} seconds. The timeline below replaces any older storyboard timings. "
+                    "No separate clips, no storyboard image, no on-screen text, captions, added logos, watermarks, dialogue or voice-over unless explicitly requested. "
+                    "Preserve exact product identity, packaging, colour, scale and coherent set.\\n\\n"
+                    + "\\n\\n".join(blocks)
+                    + "\\n\\nKeep transitions natural, camera movement restrained, and product geometry stable throughout."
+                )
+            else:
+                rules = (
+                    "ONE CONTINUOUS VIDEO — exactly five equal scenes, each "
+                    + str(scene_length) + " seconds: "
+                    "opening product recognition; full product reveal; visible detail; natural product-appropriate action; "
+                    "stable full-product hero finish. Do not split into separate clips or create a storyboard image. "
+                    "No unrequested text, captions, added logos, claims or watermarks."
+                )
         return (
             "PROMPT VIDEO — " + str(duration) + " SAAT\n"
             "KLIPPO | UNIVERSAL PRODUCT VIDEO PROMPT | " + style_name + (" | BAHAGIAN " + str(part) if part else "") + "\n"
@@ -295,10 +329,11 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
             "Keep the chosen hijab style and handbag presentation consistent. Never redesign, recolor, reshape, add or remove stated outfit details. "
             "Use one consistent home setting, authentic phone-camera perspective, soft daylight and crisp fabric detail. No collage, split screen, poster layout, outfit change, plastic skin or CGI."
         )
-    # Single-prompt mode uses a written storyboard: exactly four 2.5-second scenes
-    # for a 10s video, or eight 2.5-second scenes for a 20s video.
+    # Single-prompt mode uses one written storyboard with five equal scenes:
+    # 10s = five 2-second scenes; 20s = five 4-second scenes.
     if mode != "storyboard" and part == 0 and duration in (10, 20):
-        scene_count = duration // 2.5
+        scene_count = 5
+        scene_length = duration / scene_count
         scene_plan = [
             ("OPENING HOOK", "A compelling but truthful opening composition that immediately makes the exact product easy to recognize. Use a subtle, physically plausible camera or light movement."),
             ("FULL PRODUCT REVEAL", "Show the complete product clearly in a balanced composition. Preserve exact shape, color, print, proportions, packaging and visible branding."),
@@ -309,25 +344,24 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
             ("RETURN TO HERO", "Ease back toward a clean, recognizable full-product composition. Keep motion controlled and avoid abrupt cuts or morphing."),
             ("FINAL HERO HOLD", "Finish with a premium, stable full-product hero frame and a brief hold. No invented slogan, price, claim or watermark."),
         ]
+        scene_plan = [
+            ("OPENING HOOK", "Open with a truthful, instantly readable product composition and a subtle camera or light move."),
+            ("FULL PRODUCT REVEAL", "Show the complete product clearly, preserving exact shape, colour, print, proportions, packaging and visible branding."),
+            ("VISIBLE DETAIL", "Move gently toward one genuinely visible detail supported by the reference; do not invent unseen surfaces or features."),
+            ("NATURAL PRODUCT ACTION", "Show one simple, believable product-appropriate action or restrained camera move. Keep product identity stable."),
+            ("FINAL HERO HOLD", "Return to a clean full-product composition and hold briefly. No invented slogan, price, claim or watermark."),
+        ]
         scene_blocks = []
-        for index in range(scene_count):
-            start = index * 2.5
-            end = start + 2.5
-            title, detail = scene_plan[index % len(scene_plan)]
-            if duration == 10:
-                title, detail = [
-                    ("HOOK", scene_plan[0][1]),
-                    ("PRODUCT REVEAL", scene_plan[1][1]),
-                    ("DETAIL / ACTION", scene_plan[3][1] + " " + scene_plan[4][1]),
-                    ("HERO FINISH", scene_plan[7][1]),
-                ][index]
+        for index, (title, detail) in enumerate(scene_plan):
+            start = index * scene_length
+            end = start + scene_length
             scene_blocks.append(
                 f"SCENE {index + 1} — {start:.1f}–{end:.1f}s | {title}: {detail}"
             )
         direction = (
             "DIRECTOR'S WRITTEN STORYBOARD: Generate ONE continuous, coherent vertical product video. "
-            f"Use exactly {scene_count} sequential scenes, each exactly 2.5 seconds, with the timestamps below. "
-            "These are four/eight timed beats inside one video, NOT separate video prompts or a storyboard image. "
+            f"Use exactly five sequential scenes, each exactly {scene_length:g} seconds, with the timestamps below. "
+            "These are five timed beats inside one video, NOT separate video prompts or a storyboard image. "
             "Use subtle, clean cuts or natural match transitions only where appropriate; maintain the same product identity, "
             "set, lighting direction and visual style from beginning to end.\n\n"
             + "\n\n".join(scene_blocks)
