@@ -3136,21 +3136,18 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 def _shopee_link(value):
-    """Accept HTTPS Shopee MY product URLs and official short links."""
+    """Accept HTTPS Shopee Malaysia product URLs and official short links."""
     from urllib.parse import urlparse
     for candidate in re.findall(r'https?://[^\\s<>]+', value):
-        candidate = candidate.rstrip('.,);]\\'"')
+        candidate = candidate.rstrip('.,);]\\'\"')
         parsed = urlparse(candidate)
         host = (parsed.hostname or '').lower()
         if parsed.scheme != 'https' or parsed.username or parsed.password:
             continue
-        is_shopee_my = host == 'shopee.com.my' or host.endswith('.shopee.com.my')
-        is_official_short = host == 's.shopee.com.my' and bool(re.fullmatch(r'/[A-Za-z0-9_-]{5,32}/?', parsed.path))
-        is_product_path = bool(
-            re.search(r'/product/\\d+/\\d+', parsed.path) or
-            re.search(r'-i\\.\\d+\\.\\d+', parsed.path)
-        )
-        if is_shopee_my and (is_product_path or is_official_short):
+        is_shopee_domain = host in ('shopee.com.my', 'shopee.my') or host.endswith('.shopee.com.my')
+        is_short_link = host == 's.shopee.com.my' and bool(parsed.path.strip('/'))
+        is_product_path = bool(re.search(r'/product/\\d+/\\d+', parsed.path) or re.search(r'-i\\.\\d+\\.\\d+', parsed.path))
+        if is_shopee_domain and (is_product_path or is_short_link):
             return candidate
     return ''
 
