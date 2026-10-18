@@ -6,6 +6,7 @@ on:
     paths:
       - "bot.py"
       - "tests/test_shopee_image_link.py"
+      - "tests/test_shopee_live.py"
       - ".github/workflows/shopee-image-link-tests.yml"
   push:
     branches: ["fix/shopee-image-link-only"]
