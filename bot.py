@@ -2774,7 +2774,11 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     context.user_data.get('prompt_concept', ''),
                     product_type=context.user_data.get('prompt_product_type', 'other'),
                     storyboard_override=context.user_data.get('prompt_library_storyboard') or None,
-                    split=context.user_data.get('prompt_duration_mode', 'split' if context.user_data.get('prompt_duration') == 20 else 'single') == 'split'
+                    split=context.user_data.get('prompt_duration_mode', 'split' if context.user_data.get('prompt_duration') == 20 else 'single') == 'split',
+                    universal_custom=bool(
+                        context.user_data.get('prompt_custom_category_name')
+                        or context.user_data.get('prompt_custom_subcategory_name')
+                    )
                 )
                 prompt = prompt.rstrip() + '\n\n' + prompt_creative_settings(context.user_data)
                 await progress_update(waiting, 70, 'Menyediakan PROMPT IMAGE dan PROMPT VIDEO...')
