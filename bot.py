@@ -659,6 +659,60 @@ PRODUCT_STYLE_KEYS = {
     'office': {'flatlay', 'minimal', 'lifestyle', 'creative_reveal', 'unboxing', 'white_doodle'},
     'other': {'cinematic', 'minimal', 'lifestyle', 'flatlay', 'unboxing', 'creative_reveal', 'studio_360_safe', 'white_doodle'},
 }
+# Camera framing is separate from the visual aesthetic (Luxury, Cinematic, White Doodle, etc.).
+# Keep these choices short and filter them to the selected product category.
+PRODUCT_FRAMING = {
+    'auto': ('🎲 Automatik — Klippo pilih', 'Ikut jenis produk; pilih framing dan aksi paling sesuai.'),
+    'detail': ('🔎 Fokus produk sahaja', 'Use close or medium-close framing so the product and its important real details dominate the frame. Keep only the relevant body area in view when worn; do not force a face or full body into the shot.'),
+    'model': ('🧍 Model memperagakan', 'Use a natural external-camera shot of the model demonstrating the product. Keep the product clearly visible and use believable movements; the model must not hold a phone or film themselves.'),
+    'pov': ('👀 POV — sudut pandangan sendiri', 'Use a believable first-person point of view, showing hands and the product as a real viewer would see them. Avoid showing an impossible camera operator or unnecessary face/full body.'),
+    'demo': ('🖐️ Tunjuk cara penggunaan', 'Show a short, clear, physically plausible product-use demonstration with hands and relevant details in frame. Do not invent product features.'),
+    'lifestyle': ('🏡 Gaya kehidupan harian', 'Show the product naturally in a believable everyday situation that suits the selected location; the product must remain easy to see.'),
+    'product_only': ('📦 Produk sahaja — tanpa model', 'Show the product alone with a clean, realistic product-focused composition; no person, hands, face, or body parts.'),
+    'shoes_feet': ('👟 Kasut dipakai — fokus kaki', 'Frame low on the worn shoes and lower legs. Keep shoes as the clear hero; face and full body are unnecessary. Show natural foot placement and realistic contact with the ground.'),
+    'shoes_walk': ('🚶 Kasut ketika berjalan', 'Show a few natural steps with the camera tracking the shoes and lower legs. Preserve realistic foot contact, weight transfer, and the exact shoe design; no exaggerated lifting or robotic marching.'),
+    'shoes_car': ('🚗 Kasut ketika duduk dalam kereta', 'The model is seated in a stationary, parked car. Frame downward on the worn shoes and lower legs only; keep the face and full body out of frame. Show a small natural foot repositioning. The vehicle must remain stationary. No phone, mirror selfie, or filming by the model.'),
+    'hijab_detail': ('🧕 Fokus gaya & lipatan tudung', 'Use a medium-close frame around the head, shoulders, and upper torso to show the actual hijab drape, folds, fabric texture, and styling. Preserve the real colour and design.'),
+    'beauty_apply': ('💄 Produk & cara aplikasi', 'Frame the product and the relevant hand/application area. Show a gentle, plausible application only when suitable for the product; do not invent effects or claim results.'),
+}
+PRODUCT_FRAMING_KEYS = {
+    'fashion': ('detail','model','lifestyle','product_only'),
+    'hijab': ('hijab_detail','model','lifestyle','product_only'),
+    'shoes': ('shoes_feet','shoes_walk','shoes_car','detail','product_only'),
+    'bag': ('detail','model','demo','lifestyle','product_only'),
+    'wallet': ('detail','demo','pov','lifestyle','product_only'),
+    'beauty': ('beauty_apply','detail','demo','lifestyle','product_only'),
+    'food': ('detail','pov','lifestyle','product_only'),
+    'gadget': ('detail','pov','demo','lifestyle','product_only'),
+    'home': ('detail','pov','demo','lifestyle','product_only'),
+    'accessory': ('detail','model','demo','lifestyle','product_only'),
+    'toy': ('detail','pov','demo','lifestyle','product_only'),
+    'book_stationery': ('detail','pov','demo','lifestyle','product_only'),
+    'sports': ('detail','model','demo','lifestyle','product_only'),
+    'pet': ('detail','pov','lifestyle','product_only'),
+    'automotive': ('detail','pov','demo','lifestyle','product_only'),
+    'baby': ('detail','demo','lifestyle','product_only'),
+    'travel': ('detail','model','demo','lifestyle','product_only'),
+    'office': ('detail','pov','demo','lifestyle','product_only'),
+    'other': ('detail','model','pov','demo','lifestyle','product_only'),
+}
+
+def prompt_framing_menu(product_type='other', model_presence=None):
+    keys = PRODUCT_FRAMING_KEYS.get(product_type, PRODUCT_FRAMING_KEYS['other'])
+    rows = [[InlineKeyboardButton(PRODUCT_FRAMING['auto'][0], callback_data='prompt_framing:auto')]]
+    for key in keys:
+        label = PRODUCT_FRAMING[key][0]
+        if model_presence != 'yes' and key in ('model', 'hijab_detail', 'shoes_feet', 'shoes_walk', 'shoes_car', 'beauty_apply'):
+            # Worn/apply framing needs a person; shoe-focused choices can still be used with legs only,
+            # so retain those footwear options even when no full model was requested.
+            if key not in ('shoes_feet', 'shoes_walk', 'shoes_car'):
+                continue
+        rows.append([InlineKeyboardButton(label, callback_data='prompt_framing:' + key)])
+    rows.append([InlineKeyboardButton('↩️ Tukar Gaya Visual', callback_data='prompt_framing_back')])
+    rows.append([InlineKeyboardButton('🏠 Menu Utama', callback_data='home')])
+    return InlineKeyboardMarkup(rows)
+
+
 def prompt_style_menu(product_type='other', model_presence=None):
     """Show only styles relevant to the chosen product and model setup."""
     available = storyboard_styles()
@@ -2582,6 +2636,19 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         valid = {'auto'} | {key for key, _ in storyboard_styles()}
         if selected in valid:
             context.user_data['prompt_style'] = selected
+            context.user_data['prompt_framing'] = 'auto'
+            context.user_data['stage'] = 'prompt_framing'
+            await query.message.reply_text(
+                '🎥 LANGKAH 3 — Bagaimana kamera patut merakam produk?\\n\\nPilihan ini berbeza daripada gaya visual. Contohnya, Luxury/Cinematic ialah rupa video; Fokus kaki/Kasut dalam kereta menentukan apa yang kamera tunjuk.',
+                reply_markup=prompt_framing_menu(context.user_data.get('prompt_product_type', 'other'), context.user_data.get('prompt_model_presence'))
+            )
+    elif action == 'prompt_framing_back' and stage == 'prompt_framing':
+        context.user_data['stage'] = 'prompt_style'
+        await query.message.reply_text('🎨 LANGKAH 2 — Pilih gaya visual:', reply_markup=prompt_style_menu(context.user_data.get('prompt_product_type', 'other'), context.user_data.get('prompt_model_presence')))
+    elif action.startswith('prompt_framing:') and stage == 'prompt_framing':
+        selected = action.split(':', 1)[1]
+        if selected in PRODUCT_FRAMING:
+            context.user_data['prompt_framing'] = selected
             context.user_data['stage'] = 'prompt_language'
             await query.message.reply_text('🌐 LANGKAH 4 — Pilih bahasa teks pada skrin:', reply_markup=prompt_language_menu())
     elif action == 'prompt_idea:yes' and stage == 'prompt_idea_choice':
@@ -2672,6 +2739,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 f'📦 Jenis produk: {PRODUCT_TYPES.get(context.user_data.get("prompt_product_type", "other"), "Produk lain")}',
                 f'⏱️ Tempoh: {context.user_data.get("prompt_duration", 10)} saat — ' + ('satu prompt' if context.user_data.get('prompt_duration_mode', 'split' if context.user_data.get('prompt_duration') == 20 else 'single') == 'single' else str(int(context.user_data.get('prompt_duration', 10)) // 10) + ' prompt bersambung 10 saat'),
                 f'🎨 Gaya visual: {style_name}',
+                '🎥 Cara rakaman: ' + PRODUCT_FRAMING.get(context.user_data.get('prompt_framing', 'auto'), PRODUCT_FRAMING['auto'])[0],
                 f'💡 Idea video: {concept}',
                 f'🖼️ Latar: {scene_labels.get(scene, scene)}',
                 '🎥 Aksi & rakaman: Automatik mengikut produk dan latar',
@@ -2944,6 +3012,11 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                         or context.user_data.get('prompt_custom_subcategory_name')
                     )
                 )
+                framing_key = context.user_data.get('prompt_framing', 'auto')
+                if framing_key != 'auto':
+                    framing = PRODUCT_FRAMING.get(framing_key)
+                    if framing:
+                        prompt = prompt.rstrip() + '\n\nCAMERA FRAMING — FOLLOW THIS CHOICE:\n' + framing[1] + '\nKeep this framing consistent across every segment. Preserve the exact product design, realistic anatomy and physics. Do not add captions, logos, watermarks, or on-screen text unless the user explicitly requested them.'
                 prompt = prompt.rstrip() + '\n\n' + prompt_creative_settings(context.user_data)
                 await progress_update(waiting, 70, 'Menyediakan PROMPT IMAGE dan PROMPT VIDEO...')
                 context.user_data['stage'] = 'prompt_done'
