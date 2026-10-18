@@ -143,7 +143,6 @@ jobs:
               "prompt_options_menu(category_id)",
               "context.user_data['prompt_library_storyboard'] = template.get('storyboard', [])",
               "storyboard_override=context.user_data.get('prompt_library_storyboard') or None",
-              "prompt_categories|pcat:[a-z0-9_]+|ptpl:[a-z0-9_]+",
             "async def handle_image_or_receipt_document(",
             "filters.Document.IMAGE | filters.Document.MimeType('application/pdf'), handle_image_or_receipt_document",
           ]
