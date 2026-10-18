@@ -33,6 +33,20 @@ class LiveShopeeLinkTests(unittest.TestCase):
             with self.subTest(link=link), tempfile.TemporaryDirectory() as folder:
                 destination = Path(folder) / f"product-{index}.jpg"
                 success = public_photo(link, destination, "")
+                if not (success and destination.is_file()):
+                    from urllib.request import Request, urlopen
+                    from urllib.parse import urlparse
+                    try:
+                        request = Request(link, headers={
+                            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
+                            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+                            "Accept-Language": "en-MY,en;q=0.9,ms;q=0.8",
+                        })
+                        with urlopen(request, timeout=15) as response:
+                            page = response.read(12000).decode("utf-8", "replace")
+                            print(f"DIAGNOSTIC link #{index}: status={response.status}, final_url={response.geturl()}, content_type={response.headers.get('Content-Type')}, page_start={page[:1800]!r}")
+                    except Exception as error:
+                        print(f"DIAGNOSTIC link #{index}: request_error={type(error).__name__}: {error}")
                 self.assertTrue(
                     success and destination.is_file(),
                     f"Could not extract a public product image from link #{index}: {link}",
