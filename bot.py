@@ -2252,7 +2252,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             )
         else:
             await query.message.reply_text('Pilihan produk tidak sah. Sila pilih semula:', reply_markup=prompt_product_type_menu())
-    elif action.startswith('prompt_setup:') and stage == 'prompt_setup_mode':
+    elif action.startswith('prompt_setup:') and stage in ('prompt_setup_mode', 'prompt_confirm'): 
         selected = action.split(':', 1)[1]
         if selected == 'auto':
             product_type = context.user_data.get('prompt_product_type', 'other')
@@ -2391,8 +2391,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
     elif action == 'prompt_idea:skip' and stage == 'prompt_idea_choice':
         context.user_data['prompt_concept'] = ''
-        context.user_data['stage'] = 'prompt_product_name'
-        await query.message.reply_text('🛍️ Masukkan nama produk daripada Shopee. Buka Shopee, copy dan paste nama produk di sini. Nama sahaja — tidak perlu pautan.\n\nContoh: VELLA Beg Tangan Wanita Besar Sling Shoulder Women Luxury Handbags')
+        context.user_data['stage'] = 'prompt_scene'
+        await query.message.reply_text('🎨 Pilih latar video:', reply_markup=prompt_scene_menu())
     elif action == 'prompt_input:photo' and stage == 'prompt_input':
         context.user_data['stage'] = 'prompt_product_name'
         await query.message.reply_text('🛍️ Mod prompt Klippo tidak menggunakan gambar atau analisis AI. Tampal nama produk sahaja untuk mengesan kategori secara automatik.')
