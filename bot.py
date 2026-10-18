@@ -65,6 +65,14 @@ BACKGROUNDS = {
     'beige': (225, 209, 187),
     'dark': (33, 34, 41),
     'pastel': (237, 218, 228),
+    'navy': (34, 51, 79),
+    'sage': (184, 199, 177),
+    'sky': (190, 218, 235),
+    'lavender': (209, 198, 231),
+    'rose': (226, 184, 187),
+    'mint': (190, 221, 207),
+    'terracotta': (190, 112, 83),
+    'charcoal': (49, 51, 56),
 }
 
 
@@ -152,6 +160,12 @@ def _scene_background(size, choice):
         'pattern': ((248, 246, 242), (229, 223, 214)),
         'duotone': ((241, 232, 219), (210, 190, 171)),
         'mist': ((246, 247, 248), (210, 216, 221)),
+        'sky_gradient': ((245, 250, 255), (151, 194, 222)),
+        'lavender_gradient': ((250, 246, 255), (190, 174, 222)),
+        'sage_gradient': ((246, 249, 239), (159, 181, 151)),
+        'blush_gradient': ((255, 246, 243), (225, 173, 178)),
+        'midnight_gradient': ((91, 99, 121), (19, 24, 38)),
+        'sand_gradient': ((255, 249, 235), (193, 157, 115)),
     }
     top, bottom = palettes[choice]
     canvas = Image.new('RGBA', size)
@@ -173,7 +187,7 @@ def _scene_background(size, choice):
 
 
 def replace_background(source: Path, destination: Path, choice: str, foreground_destination: Path | None = None, custom_background_path: Path | None = None) -> Path:
-    if choice not in BACKGROUNDS and choice not in ('gradient', 'pattern', 'duotone', 'mist', 'custom'):
+    if choice not in BACKGROUNDS and choice not in ('gradient', 'pattern', 'duotone', 'mist', 'sky_gradient', 'lavender_gradient', 'sage_gradient', 'blush_gradient', 'midnight_gradient', 'sand_gradient', 'custom'):
         raise ValueError('Unknown background')
     if choice == 'custom' and (custom_background_path is None or not custom_background_path.is_file()):
         raise ValueError('Custom background image is missing')
@@ -750,10 +764,24 @@ def background_menu():
          InlineKeyboardButton('🟤 Studio Beige', callback_data='background:beige')],
         [InlineKeyboardButton('⬛ Luxury Gelap', callback_data='background:dark'),
          InlineKeyboardButton('🌸 Pastel', callback_data='background:pastel')],
+        [InlineKeyboardButton('🌊 Navy Premium', callback_data='background:navy'),
+         InlineKeyboardButton('🌿 Sage Natural', callback_data='background:sage')],
+        [InlineKeyboardButton('🩵 Sky Blue', callback_data='background:sky'),
+         InlineKeyboardButton('💜 Lavender', callback_data='background:lavender')],
+        [InlineKeyboardButton('🌷 Rose', callback_data='background:rose'),
+         InlineKeyboardButton('🍃 Mint', callback_data='background:mint')],
+        [InlineKeyboardButton('🧱 Terracotta', callback_data='background:terracotta'),
+         InlineKeyboardButton('🖤 Charcoal', callback_data='background:charcoal')],
         [InlineKeyboardButton('✨ Gradient Krim', callback_data='background:gradient'),
-         InlineKeyboardButton('◯ Corak Halus', callback_data='background:pattern')],
-        [InlineKeyboardButton('◐ Dua Tona', callback_data='background:duotone'),
          InlineKeyboardButton('🌫️ Kelabu Lembut', callback_data='background:mist')],
+        [InlineKeyboardButton('🩵 Gradient Sky', callback_data='background:sky_gradient'),
+         InlineKeyboardButton('💜 Gradient Lavender', callback_data='background:lavender_gradient')],
+        [InlineKeyboardButton('🌿 Gradient Sage', callback_data='background:sage_gradient'),
+         InlineKeyboardButton('🌷 Gradient Blush', callback_data='background:blush_gradient')],
+        [InlineKeyboardButton('🌌 Gradient Midnight', callback_data='background:midnight_gradient'),
+         InlineKeyboardButton('🏖️ Gradient Sand', callback_data='background:sand_gradient')],
+        [InlineKeyboardButton('◯ Corak Halus', callback_data='background:pattern'),
+         InlineKeyboardButton('◐ Dua Tona', callback_data='background:duotone')],
         [InlineKeyboardButton('🖼️ Guna Gambar Latar Sendiri', callback_data='background:custom')],
         [InlineKeyboardButton('↩️ Semak Gambar', callback_data='photos_order')],
     ])
@@ -1173,6 +1201,20 @@ def _premium_studio_background(size, choice):
         'pattern': ((251, 248, 241), (222, 213, 199)),
         'duotone': ((247, 237, 222), (199, 180, 161)),
         'mist': ((249, 250, 250), (203, 212, 219)),
+        'navy': ((73, 92, 124), (25, 37, 59)),
+        'sage': ((232, 239, 224), (165, 185, 157)),
+        'sky': ((241, 249, 255), (167, 204, 228)),
+        'lavender': ((247, 241, 255), (197, 182, 221)),
+        'rose': ((255, 241, 241), (219, 170, 176)),
+        'mint': ((240, 251, 245), (163, 208, 188)),
+        'terracotta': ((246, 222, 208), (163, 91, 67)),
+        'charcoal': ((96, 97, 105), (30, 31, 36)),
+        'sky_gradient': ((245, 250, 255), (151, 194, 222)),
+        'lavender_gradient': ((250, 246, 255), (190, 174, 222)),
+        'sage_gradient': ((246, 249, 239), (159, 181, 151)),
+        'blush_gradient': ((255, 246, 243), (225, 173, 178)),
+        'midnight_gradient': ((91, 99, 121), (19, 24, 38)),
+        'sand_gradient': ((255, 249, 235), (193, 157, 115)),
     }
     top, bottom = palettes.get(choice, palettes['gradient'])
     canvas = Image.new('RGBA', size)
@@ -3072,7 +3114,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if choice == 'custom':
             context.user_data['stage'] = 'background_custom_upload'
             await query.message.reply_text('🖼️ Hantar gambar yang mahu digunakan sebagai latar video. Boleh hantar sebagai gambar Telegram atau fail imej JPG, PNG atau WEBP. Gambar ini akan dipadankan dengan saiz video.')
-        elif choice in ('original', 'white', 'beige', 'dark', 'pastel', 'gradient', 'pattern', 'duotone', 'mist'):
+        elif choice in ('original', 'white', 'beige', 'dark', 'pastel', 'navy', 'sage', 'sky', 'lavender', 'rose', 'mint', 'terracotta', 'charcoal', 'gradient', 'pattern', 'duotone', 'mist', 'sky_gradient', 'lavender_gradient', 'sage_gradient', 'blush_gradient', 'midnight_gradient', 'sand_gradient'):
             context.user_data['background'] = choice
             context.user_data.pop('custom_background_file_id', None)
             context.user_data['stage'] = 'duration'
