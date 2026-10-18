@@ -2092,10 +2092,10 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data['prompt_reference_photos'] = []
         context.user_data['stage'] = 'prompt_images'
         await query.message.reply_text(
-            '✍️ KLIPPO | JANA PROMPT VIDEO\\n\\n'
+            '✍️ KLIPPO | JANA PROMPT VIDEO\n\n'
             'Hantar 1 hingga 4 gambar produk yang jelas. Selepas itu pilih kategori, gaya dan durasi. '
             'Klippo akan menghasilkan SATU prompt video lengkap dengan storyboard bertulis lima babak mengikut masa, '
-            'aksi dan pergerakan kamera — tanpa storyboard bergambar atau prompt imej berasingan.',
+            'aksi dan pergerakan kamera.',
             reply_markup=prompt_images_start_menu()
         )
     elif action.startswith('prompt_mode:'):
@@ -3146,7 +3146,7 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['prompt_reference_photos'] = []
             context.user_data['stage'] = 'prompt_images'
             await update.message.reply_text(
-                '✍️ KLIPPO | JANA PROMPT VIDEO\n\nHantar 1 hingga 4 gambar produk yang jelas. Tekan “Selesai Hantar Gambar” selepas selesai. Klippo akan menyediakan satu prompt video lengkap dengan storyboard bertulis lima babak mengikut masa, aksi dan pergerakan kamera. Tiada storyboard bergambar atau prompt imej berasingan.',
+                '✍️ KLIPPO | JANA PROMPT VIDEO\n\nHantar 1 hingga 4 gambar produk yang jelas. Tekan “Selesai Hantar Gambar” selepas selesai. Klippo akan menyediakan satu prompt video lengkap dengan storyboard bertulis lima babak mengikut masa, aksi dan pergerakan kamera.',
                 reply_markup=prompt_images_start_menu()
             )
         elif action == 'subscription':
