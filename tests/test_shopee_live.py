@@ -46,7 +46,7 @@ class LiveShopeeLinkTests(unittest.TestCase):
                             page = response.read(500000).decode("utf-8", "replace")
                             print("DIAG_COUNTS", len(page), page.count("susercontent"), page.count("44905654836"))
                             print("DIAG_META", [line[:500] for line in page.splitlines() if "<meta" in line.lower() and ("image" in line.lower())][:10])
-                            print("DIAG_IMAGE_URLS", re.findall(r'https?[^"\\']+susercontent[^"\\']+', page)[:8])
+                            print("DIAG_IMAGE_URLS", re.findall(r"""https?[^"']+susercontent[^"']+""", page)[:8])
                             print(f"DIAGNOSTIC link #{index}: status={response.status}, final_url={response.geturl()}, content_type={response.headers.get('Content-Type')}, page_start={page[:1800]!r}")
                     except Exception as error:
                         print(f"DIAGNOSTIC link #{index}: request_error={type(error).__name__}: {error}")
