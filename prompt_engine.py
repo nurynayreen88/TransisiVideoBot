@@ -119,7 +119,25 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
         'other': "PRODUCT CATEGORY DIRECTION: Follow the product category inferred from the product name and choose a suitable presentation without guessing features.",
     }
     category_direction = product_type_directions.get(product_type, product_type_directions['other'])
+    natural_motion_by_type = {
+        'bag': "If a human model is present, have them carry the bag as a real person would and move naturally through the setting: an easy walk for two or three steps, relaxed shoulders, natural arm swing and subtle bag sway caused by walking. In an airport, walk toward the terminal or past the check-in area; do not stand rigidly while rotating or twirling the handbag for the camera.",
+        'fashion': "If a model is present, use a relaxed short walk, natural weight shifts and a small practical gesture such as adjusting a sleeve or letting the fabric settle. Avoid stiff runway posing unless runway style is explicitly requested.",
+        'hijab': "If a model is present, use a relaxed walk or gentle head turn, with natural fabric settling. Do not repeatedly touch, pull or spin the hijab unnaturally.",
+        'shoes': "If a model is present, show a few natural steps with believable foot contact and weight transfer; keep the shoes visible without exaggerated foot lifting or robotic marching.",
+        'wallet': "Prefer a believable hand-held demonstration: pick up, open only if the reference supports it, and return to a relaxed hold. No repeated spinning or impossible finger movement.",
+        'beauty': "Use calm, small hand movements and plausible product handling. Do not repeatedly rotate the container or apply it to skin unless the action is appropriate and supported by the reference.",
+        'food': "Use natural serving or handling motion only when suitable; preserve the actual food and do not make it morph, bounce or multiply.",
+        'gadget': "Use deliberate, minimal hand interaction with controls that are actually visible. Avoid random tapping, turning the device over repeatedly or inventing interface behavior.",
+        'home': "Show the product in a believable everyday context with one practical, physically possible interaction; preserve scale and contact with surrounding surfaces.",
+        'travel': "Use natural walking or packing movement with believable handling and weight. Do not swing, spin or teleport luggage or travel gear.",
+        'accessory': "Use subtle, anatomically plausible handling or wearing motion; no repeated twirling, exaggerated wrist turns or floating product movement.",
+        'other': "If a person is present, give them one simple, purposeful action suited to the product and location. Prefer natural walking or practical interaction over static posing with repetitive product rotation.",
+    }
+    category_direction += " NATURAL HUMAN MOVEMENT: " + natural_motion_by_type.get(product_type, natural_motion_by_type['other']) + " "
     category_direction += (
+        " PRODUCT-SPECIFIC SPOKEN COPY: Only if voice-over or dialogue is explicitly requested, write a short, conversational line about this exact product category and only visible or verified features. "
+        "Do not repeat generic phrases such as 'perincian teliti', 'lihat dengan dekat' or 'sangat terperinci'; do not narrate camera directions. "
+        "Vary the opening naturally, avoid scripted-sounding repetition, and never invent materials, benefits, quality, comfort or specifications. "
         " STRICT NO-LOGO RULE: Do not add any logo or watermark anywhere in the video, including TikTok, Shopee, creator, AI-generator or provider branding; "
         "no logo overlays, corner bugs, end cards, branded borders, platform UI or background signage. Never add captions or text unless separately requested. "
         "If a logo or mark is physically printed on the reference product, preserve it only as part of that exact product and never create a separate or enlarged logo."
@@ -327,7 +345,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
                 ("OPENING / PRODUCT REVEAL", "Establish the exact product clearly in a coherent setting; no on-screen text."),
                 ("FULL PRODUCT VIEW", "Show the complete product, preserving shape, colour, print, proportions, packaging and visible branding."),
                 ("VISIBLE DETAIL", "Move gently toward a genuinely visible detail; do not invent unseen surfaces, textures or features."),
-                ("NATURAL PRODUCT ACTION", "Show one simple, physically plausible product-appropriate action or restrained camera move."),
+                ("NATURAL PRODUCT ACTION", "Show one simple, purposeful action that fits this exact product and location. If a person is present, use relaxed, anatomically plausible movement and natural weight transfer; choose a short walk or practical interaction where appropriate. Never make the model stand rigidly while repeatedly spinning, twirling or rotating the product. Avoid robotic posing, exaggerated gestures and impossible hand movements."),
                 ("FINAL HERO HOLD", "Return to a clean, stable full-product composition. No invented slogan, price, claim or watermark."),
             ]
             if storyboard_override and isinstance(storyboard_override, (list, tuple)) and len(storyboard_override) == 4:
