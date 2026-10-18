@@ -8,7 +8,7 @@ from pathlib import Path
 
 DB_PATH = Path(os.getenv("KLIPPO_PROMPT_DB", str(Path(__file__).with_name("prompt_catalog.sqlite3"))))
 STYLES = {
-    "white_doodle": ("✏️ White Doodle", """Text-only product storyboard based on the user-provided product name and optional written details. Use a verified product-name category hook only when clear; omit unsupported labels. Add at most two short neutral labels only when explicitly supported by the supplied text. Use thin white handwritten 2D doodles, tiny sparkles and simple arrows without obscuring the product. Start with a clean hero reveal, show a plausible generic detail, then settle on a stable full-product frame and HOLD the final frame. Do not draw the main surrounding contour in Part 1. In Part 2, continue from the held framing and progressively trace a thin white dashed contour around the product silhouette, then hold it briefly before a clean hero finish. All doodles are flat 2D overlays, never captions or UI. No uploaded image or AI image analysis is used. Never invent unseen sides, product features, accessories, claims, prices, popularity or unprovided text; Never invent unseen sides."""),
+    "white_doodle": ("✏️ White Doodle", """UNIVERSAL WHITE DOODLE STYLE — suitable for any product category. Treat the user's supplied product image(s) as the visual source of truth whenever provided; use written product details only as supporting context. First reveal the complete, unchanged product. Draw thin white handwritten 2D linework progressively around only the visible silhouette and verified details: adapt the drawing to the object's actual outline and structure, whether it is clothing, a bag, footwear, cosmetics, food, electronics, home goods, accessories, tools or another product. Use one or two small arrows or sparkles only when they point to a genuinely visible detail; never cover the product, readable branding or important features. Keep product geometry, colors, labels, quantities, proportions and visible parts consistent. Part 1: clean reveal, one verified detail, restrained doodle accent, then hold a stable full-product frame for the Part 2 handoff; do not complete the main surrounding contour yet. Part 2: resume from the same framing, progressively trace a thin white dashed contour around the actual visible silhouette, hold briefly, then return to a clean full-product hero finish. Graphics are flat 2D overlays, not physical objects, captions or UI. Do not invent unseen sides, features, materials, accessories, claims, prices, popularity or text. Never guess a category, benefit, price, popularity or product name. Do not force a product-specific action that the reference does not support."""),
     "cinematic": ("🎬 Cinematic Premium", "Premium realistic commercial: soft key light, restrained highlights, natural shadows, slow camera push, consistent product and environment."),
     "minimal": ("✨ Minimal Motion Graphic", "Bright uncluttered product framing, subtle geometric accent lines and smooth minimal graphic reveals, elegant spacing and gentle motion."),
     "dynamic": ("⚡ Dynamic Affiliate", "Engaging but controlled affiliate pacing: striking opening crop, feature emphasis with clean graphic accents, smooth match cuts and clear final hero shot."),
@@ -84,6 +84,17 @@ def connect():
     # Fresh databases seed the current template at the default version; mark that exact seed as v4.
     db.execute(
         "UPDATE storyboard_prompt_styles SET version=4 WHERE style_key='white_doodle' AND version=1 AND template=?",
+        (STYLES["white_doodle"][1],)
+    )
+    # Upgrade only the unchanged v4 bundled seed; leave user-customized rows untouched.
+    previous_v4 = """Text-only product storyboard based on the user-provided product name and optional written details. Use a verified product-name category hook only when clear; omit unsupported labels. Add at most two short neutral labels only when explicitly supported by the supplied text. Use thin white handwritten 2D doodles, tiny sparkles and simple arrows without obscuring the product. Start with a clean hero reveal, show a plausible generic detail, then settle on a stable full-product frame and HOLD the final frame. Do not draw the main surrounding contour in Part 1. In Part 2, continue from the held framing and progressively trace a thin white dashed contour around the product silhouette, then hold it briefly before a clean hero finish. All doodles are flat 2D overlays, never captions or UI. No uploaded image or AI image analysis is used. Never invent unseen sides, product features, accessories, claims, prices, popularity or unprovided text; Never invent unseen sides."""
+    db.execute(
+        "UPDATE storyboard_prompt_styles SET template=?, version=5 WHERE style_key='white_doodle' AND version=4 AND template=?",
+        (STYLES["white_doodle"][1], previous_v4)
+    )
+    # Fresh databases and untouched older bundled seeds now use the current v5 template.
+    db.execute(
+        "UPDATE storyboard_prompt_styles SET version=5 WHERE style_key='white_doodle' AND version=4 AND template=?",
         (STYLES["white_doodle"][1],)
     )
     db.commit()
