@@ -790,6 +790,7 @@ def main_menu(user_id=None):
         [InlineKeyboardButton('🔄 Tukar Format Video', callback_data='convert')],
         [InlineKeyboardButton('🎞️ Gerakkan Foto (Transisi)', callback_data='make')],
         [InlineKeyboardButton('🎬 Storyboard AI (Beta)', callback_data='falbeta')],
+        [InlineKeyboardButton('🌐 Hasilkan Video dengan AxcelStudio', url='https://axcel.cloud/a/3839266034')],
         [InlineKeyboardButton('💎 Langganan', callback_data='subscription'), InlineKeyboardButton('👤 Akaun Saya', callback_data='account')],
         [InlineKeyboardButton('❓ FAQ', callback_data='help')],
     ]
@@ -3356,7 +3357,7 @@ async def generate(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await asyncio.to_thread(validate_rendered_video, result, context.user_data.get('duration', 10))
             await progress_update(progress, 90, 'Video lulus semakan fail. Menghantar ke Telegram...')
             with result.open('rb') as f:
-                await message.reply_video(video=f, caption='🎬 Video siap!\n\n✨ Cuba AxcelStudio untuk hasil video: https://axcel.cloud/a/3839266034\n\nHantar gambar baharu untuk video seterusnya.', supports_streaming=True,
+                await message.reply_video(video=f, caption='🎬 Video siap! Hantar gambar baharu untuk video seterusnya.', supports_streaming=True,
                                                  read_timeout=120, write_timeout=120)
         await progress_update(progress, 100, 'Video berjaya dihantar.')
         reset(context)
