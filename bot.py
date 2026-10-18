@@ -167,6 +167,22 @@ def _scene_background(size, choice):
         'blush_gradient': ((255, 246, 243), (225, 173, 178)),
         'midnight_gradient': ((91, 99, 121), (19, 24, 38)),
         'sand_gradient': ((255, 249, 235), (193, 157, 115)),
+        'ocean_gradient': ((226, 247, 250), (28, 105, 139)),
+        'forest_gradient': ((230, 240, 222), (39, 83, 62)),
+        'sunset_gradient': ((255, 224, 195), (172, 77, 107)),
+        'aurora_gradient': ((215, 247, 237), (95, 90, 165)),
+        'mocha_gradient': ((246, 231, 211), (112, 78, 61)),
+        'peach_gradient': ((255, 235, 220), (232, 151, 126)),
+        'ice_gradient': ((248, 253, 255), (157, 202, 225)),
+        'emerald_gradient': ((220, 245, 231), (22, 112, 86)),
+        'plum_gradient': ((246, 226, 246), (104, 54, 111)),
+        'coral_gradient': ((255, 231, 221), (213, 94, 91)),
+        'graphite_gradient': ((115, 122, 133), (25, 29, 37)),
+        'champagne_gradient': ((255, 250, 226), (192, 157, 91)),
+        'lemon_gradient': ((255, 255, 219), (215, 205, 105)),
+        'teal_gradient': ((218, 246, 242), (28, 112, 117)),
+        'lilac_gradient': ((250, 239, 255), (164, 133, 202)),
+        'cobalt_gradient': ((224, 237, 255), (42, 74, 160)),
     }
     top, bottom = palettes[choice]
     canvas = Image.new('RGBA', size)
@@ -188,7 +204,7 @@ def _scene_background(size, choice):
 
 
 def replace_background(source: Path, destination: Path, choice: str, foreground_destination: Path | None = None, custom_background_path: Path | None = None) -> Path:
-    if choice not in BACKGROUNDS and choice not in ('gradient', 'pattern', 'duotone', 'mist', 'sky_gradient', 'lavender_gradient', 'sage_gradient', 'blush_gradient', 'midnight_gradient', 'sand_gradient', 'custom'):
+    if choice not in BACKGROUNDS and choice not in ('gradient', 'pattern', 'duotone', 'mist', 'sky_gradient', 'lavender_gradient', 'sage_gradient', 'blush_gradient', 'midnight_gradient', 'sand_gradient', 'ocean_gradient', 'forest_gradient', 'sunset_gradient', 'aurora_gradient', 'mocha_gradient', 'peach_gradient', 'ice_gradient', 'emerald_gradient', 'plum_gradient', 'coral_gradient', 'graphite_gradient', 'champagne_gradient', 'lemon_gradient', 'teal_gradient', 'lilac_gradient', 'cobalt_gradient', 'custom'):
         raise ValueError('Unknown background')
     if choice == 'custom' and (custom_background_path is None or not custom_background_path.is_file()):
         raise ValueError('Custom background image is missing')
@@ -783,6 +799,22 @@ def background_menu():
          InlineKeyboardButton('🏖️ Gradient Sand', callback_data='background:sand_gradient')],
         [InlineKeyboardButton('◯ Corak Halus', callback_data='background:pattern'),
          InlineKeyboardButton('◐ Dua Tona', callback_data='background:duotone')],
+        [InlineKeyboardButton('🌊 Ocean Blue', callback_data='background:ocean_gradient'),
+         InlineKeyboardButton('🌲 Forest Green', callback_data='background:forest_gradient')],
+        [InlineKeyboardButton('🌅 Sunset', callback_data='background:sunset_gradient'),
+         InlineKeyboardButton('🌌 Aurora', callback_data='background:aurora_gradient')],
+        [InlineKeyboardButton('☕ Mocha', callback_data='background:mocha_gradient'),
+         InlineKeyboardButton('🍑 Peach', callback_data='background:peach_gradient')],
+        [InlineKeyboardButton('🧊 Ice Blue', callback_data='background:ice_gradient'),
+         InlineKeyboardButton('💚 Emerald', callback_data='background:emerald_gradient')],
+        [InlineKeyboardButton('🍇 Plum', callback_data='background:plum_gradient'),
+         InlineKeyboardButton('🪸 Coral', callback_data='background:coral_gradient')],
+        [InlineKeyboardButton('🪨 Graphite', callback_data='background:graphite_gradient'),
+         InlineKeyboardButton('🥂 Champagne', callback_data='background:champagne_gradient')],
+        [InlineKeyboardButton('🍋 Lemon', callback_data='background:lemon_gradient'),
+         InlineKeyboardButton('🩵 Teal', callback_data='background:teal_gradient')],
+        [InlineKeyboardButton('💜 Lilac', callback_data='background:lilac_gradient'),
+         InlineKeyboardButton('🔵 Cobalt', callback_data='background:cobalt_gradient')],
         [InlineKeyboardButton('🖼️ Guna Gambar Latar Sendiri', callback_data='background:custom')],
         [InlineKeyboardButton('↩️ Semak Gambar', callback_data='photos_order')],
     ])
