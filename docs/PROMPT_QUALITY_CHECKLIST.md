@@ -230,3 +230,14 @@ The initial scan found a small number of prompts that did not contain the exact 
 - [ ] Generated videos still require visual review and any requested speech requires listening review; prompt constraints reduce risk but cannot guarantee every model render is defect-free.
 
 **Scope note:** This batch covers six selected fashion/beauty/accessory prompts only, not every prompt in those categories or the full 1,171-prompt library.
+
+
+## 2M. Strict no-added-logo rule — platform-wide
+
+- [x] Added a shared no-added-logo instruction to the prompt engine so generated prompt modes explicitly prohibit TikTok, Shopee, creator, AI-generator and provider logos/watermarks, corner bugs, end cards, branded borders, platform UI and background signage.
+- [x] Added the same rule to every existing quality override (prompt and individual storyboard shots) without changing prompt IDs or deleting master-library entries.
+- [x] Clarified product fidelity: a mark already physically printed on the supplied product may remain only as part of that product; never duplicate it as a separate overlay or enlarge it.
+- [ ] Run repository CI before merging.
+- [ ] Confirm actual generated clips visually after deployment; prompt-level rules cannot guarantee every external video model will obey them.
+
+**Scope note:** This change covers all current quality overrides plus the shared prompt engine. It does not claim that video outputs have been rendered and visually verified.
