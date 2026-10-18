@@ -119,8 +119,8 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
         # Keep single 10-second prompts concise enough for one Telegram message.
         # Retain the selected style, reference safety, timed beats and user concept.
         if duration in (10, 20, 30) and (duration == 10 or part == 0):
-            if duration == 10 and part == 2:
-                beat_plan = ("SECOND CLIP 10s: 0–2s continue from the exact full-product frame held at the end of Part 1; "
+            if duration == 10 and part >= 2:
+                beat_plan = ("CONTINUATION CLIP 10s: 0–2s continue from the exact final frame of the previous clip; "
                              "2–4s resume the same movement; 4–6s show another visible detail; 6–8s continue in the same setting; "
                              "8–10s stable full-product hero finish. Do NOT repeat the opening hook. ")
             elif duration == 10 and part == 1:
@@ -149,7 +149,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
                 ) + ". "
             hook_rule = (
                 "OPENING TEXT: Show only this neutral product/category hook, exactly: '" + hook + "'. "
-                if hook and not storyboard_override else
+                if hook and not storyboard_override and part < 2 else
                 ("NO ON-SCREEN HOOK TEXT. Never guess a category, benefit, price, popularity or product name. "
                  if not hook and not storyboard_override else
                  "ON-SCREEN TEXT: No text, captions, extra logos or watermark unless explicitly requested. ")
@@ -164,9 +164,9 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
                 "Vertical 9:16, one realistic product ad, exactly 10 seconds.\n"
                 "PRODUCT: " + product + "\n"
                 + category_direction + "\n"
-                + "STYLE: " + style_name + " — " + style_template + "\n"
-                + "SETTING: " + scene + ". CAMERA: " + camera + "\n"
-                + hook_rule + beat_plan + concept_rule + doodle_rule
+                + "STYLE: " + style_name + " — " + style_template[:450] + "\n"
+                + "SETTING: " + scene[:300] + ". CAMERA: " + camera + "\n"
+                + hook_rule + beat_plan + concept_rule[:400] + doodle_rule
                 + "REFERENCE LOCK: Use the uploaded photo as the source of truth. Preserve visible shape, colour, print, packaging, proportions and branding. "
                 "Do not invent features, materials, accessories, unseen angles, claims or text. "
                 "Use natural light and shadows, believable physics, stable product geometry and smooth restrained motion; avoid morphing, flicker, CGI/plastic skin and abrupt scene changes."
