@@ -549,6 +549,14 @@ def prompt_product_type_menu():
     return InlineKeyboardMarkup(rows)
 
 
+def prompt_setup_mode_menu():
+    return InlineKeyboardMarkup([
+        [InlineKeyboardButton('⚡ Auto — Klippo pilih tetapan sesuai', callback_data='prompt_setup:auto')],
+        [InlineKeyboardButton('🎛️ Manual — Saya pilih sendiri', callback_data='prompt_setup:manual')],
+        [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
+    ])
+
+
 def prompt_duration_menu():
     return InlineKeyboardMarkup([
         [InlineKeyboardButton('🎬 10 saat · 1 prompt', callback_data='prompt_duration:10_single')],
@@ -2238,13 +2246,49 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         selected = action.split(':', 1)[1]
         if selected in PRODUCT_TYPES:
             context.user_data['prompt_product_type'] = selected
-            context.user_data['stage'] = 'prompt_model_presence'
+            context.user_data['stage'] = 'prompt_product_name'
             await query.message.reply_text(
-                f"📦 Kategori dipilih: {PRODUCT_TYPES[selected]}\n\n👤 LANGKAH 1 — Mahu model AI dalam video?",
-                reply_markup=prompt_model_presence_menu()
+                f"📦 Kategori dipilih: {PRODUCT_TYPES[selected]}\n\n🛍️ Masukkan nama produk (nama sahaja, bukan pautan):"
             )
         else:
             await query.message.reply_text('Pilihan produk tidak sah. Sila pilih semula:', reply_markup=prompt_product_type_menu())
+    elif action.startswith('prompt_setup:') and stage == 'prompt_setup_mode':
+        selected = action.split(':', 1)[1]
+        if selected == 'auto':
+            product_type = context.user_data.get('prompt_product_type', 'other')
+            # Choose conservative, product-appropriate defaults without asking more questions.
+            use_model = product_type in {'fashion', 'hijab', 'shoes'}
+            context.user_data.update({
+                'prompt_model_presence': 'yes' if use_model else 'none',
+                'prompt_model_count': 1 if use_model else 0,
+                'prompt_model_gender': 'female' if use_model else 'none',
+                'prompt_model_hijab': 'hijab' if product_type == 'hijab' else ('no_hijab' if use_model else 'na'),
+                'prompt_model_ethnicity': 'Malay' if use_model else 'na',
+                'prompt_model_age': '26-40' if use_model else 'na',
+                'prompt_style': 'auto',
+                'prompt_language': 'Malay',
+                'prompt_voiceover_mode': 'none',
+                'prompt_voiceover_script': '',
+                'prompt_concept': '',
+                'prompt_scene': 'clean premium studio background, selected to complement the exact product reference',
+                'prompt_motion_choice': 'auto',
+                'stage': 'prompt_confirm',
+            })
+            await query.message.reply_text(
+                '✅ Tetapan Auto siap. Klippo telah memilih gaya, model (jika sesuai), latar dan gerakan kamera berdasarkan produk.\n\n'
+                f"🛍️ Produk: {context.user_data.get('prompt_product_name', 'Produk')}\n"
+                f"📦 Kategori: {PRODUCT_TYPES.get(product_type, 'Produk lain')}\n"
+                f"⏱️ Durasi: {context.user_data.get('prompt_duration', 10)} saat\n"
+                '⚙️ Mod: Auto\n\nTeruskan untuk menjana prompt?',
+                reply_markup=InlineKeyboardMarkup([
+                    [InlineKeyboardButton('✅ Jana Prompt', callback_data='prompt_generate:confirm')],
+                    [InlineKeyboardButton('🎛️ Tukar kepada Manual', callback_data='prompt_setup:manual')],
+                    [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
+                ])
+            )
+        elif selected == 'manual':
+            context.user_data['stage'] = 'prompt_model_presence'
+            await query.message.reply_text('👤 LANGKAH 1 — Mahu model AI dalam video?', reply_markup=prompt_model_presence_menu())
     elif action.startswith('prompt_model:') and stage == 'prompt_model_presence':
         selected = action.split(':', 1)[1]
         if selected == 'none':
@@ -2310,8 +2354,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             duration, duration_mode = valid_duration_modes[selected]
             context.user_data['prompt_duration'] = duration
             context.user_data['prompt_duration_mode'] = duration_mode
-            context.user_data['stage'] = 'prompt_language'
-            await query.message.reply_text('🌐 LANGKAH 4 — Pilih bahasa teks pada skrin:', reply_markup=prompt_language_menu())
+            context.user_data['stage'] = 'prompt_setup_mode'
+            await query.message.reply_text('⚙️ Pilih cara tetapan prompt:', reply_markup=prompt_setup_mode_menu())
     elif action.startswith('prompt_language:') and stage == 'prompt_language':
         selected = action.split(':', 1)[1]
         if selected in ('Malay', 'English', 'none'):
@@ -2337,8 +2381,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         valid = {'auto'} | {key for key, _ in storyboard_styles()}
         if selected in valid:
             context.user_data['prompt_style'] = selected
-            context.user_data['stage'] = 'prompt_duration'
-            await query.message.reply_text('⏱️ LANGKAH 3 — Pilih durasi video:', reply_markup=prompt_duration_menu())
+            context.user_data['stage'] = 'prompt_language'
+            await query.message.reply_text('🌐 LANGKAH 4 — Pilih bahasa teks pada skrin:', reply_markup=prompt_language_menu())
     elif action == 'prompt_idea:yes' and stage == 'prompt_idea_choice':
         context.user_data['stage'] = 'prompt_category'
         await query.message.reply_text(
@@ -2402,7 +2446,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # callbacks must continue into the second chain.
     if action in ('admin_pending', 'admin', 'storyboard', 'make', 'prompt', 'prompt_categories', 'prompt_images_done') or action.startswith(
         ('admin_approve:', 'admin_reject:', 'prompt_flow:', 'prompt_mode:', 'prompt_model:', 'prompt_model_count:', 'prompt_model_gender:', 'prompt_model_hijab:', 'prompt_model_ethnicity:', 'prompt_model_age:', 'prompt_language:', 'prompt_voiceover:', 'prompt_type:', 'prompt_product_type:', 'prompt_duration:',
-         'prompt_style:', 'prompt_idea:', 'prompt_details:', 'video_input:', 'prompt_input:', 'pcat:', 'ptpl:')
+         'prompt_style:', 'prompt_setup:', 'prompt_idea:', 'prompt_details:', 'video_input:', 'prompt_input:', 'pcat:', 'ptpl:')
     ):
         return
     if action.startswith('motion:') and context.user_data.get('stage') == 'prompt_motion':
@@ -3131,8 +3175,8 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['prompt_product_type'] = 'bag'
         if bag_subtype:
             context.user_data['prompt_concept'] = (context.user_data.get('prompt_concept', '') + ' | Product-name category detection: ' + bag_subtype.replace('_', ' ') + '. Use the matching visual style without guessing product features.').strip(' |')
-        context.user_data['stage'] = 'prompt_scene'
-        await update.message.reply_text('✅ Nama produk disimpan: ' + value[:240] + chr(10) * 2 + '📌 Gambar dan analisis AI tidak diperlukan. Klippo mengesan jenis produk daripada nama dan memilih arahan visual yang sesuai. Pilih latar video:', reply_markup=prompt_scene_menu())
+        context.user_data['stage'] = 'prompt_duration'
+        await update.message.reply_text('✅ Nama produk disimpan: ' + value[:240] + chr(10) * 2 + '⏱️ Pilih durasi video:', reply_markup=prompt_duration_menu())
         return
     shortcuts = {
         '🎬 Jana Video Affiliate': 'make',
