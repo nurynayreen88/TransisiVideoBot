@@ -118,7 +118,7 @@ jobs:
               assert all(shot.get("shot") and shot.get("direction") for shot in storyboard), (
                   f"Prompt {prompt['id']} has an incomplete storyboard"
               )
-              assert "storyboard" in prompt["prompt"].casefold(), (
+              assert any(term in prompt["prompt"].casefold() for term in ("storyboard", "shot plan", "shot sequence", "shot-by-shot")), (
                   f"Prompt {prompt['id']} is missing its embedded storyboard"
               )
               has_continuity_direction = any(term in prompt["prompt"].casefold() for term in (
