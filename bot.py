@@ -889,8 +889,8 @@ def prompt_wait_animation():
 
 
 FAQ_ITEMS = (
-    ('Cara jana prompt video', 'Hantar 1–4 gambar produk yang jelas, kemudian pilih kategori, gaya dan durasi.', ('GAMBAR PRODUK', 'PILIH GAYA', 'JANA PROMPT')),
-    ('Apa yang diperlukan?', 'Hanya gambar produk yang jelas. Aliran Jana Prompt Video tidak menggunakan pautan Shopee dan tidak memerlukan maklumat daripada halaman Shopee.', ('GAMBAR SAHAJA', 'PILIH DURASI', 'JANA PROMPT')),
+    ('Cara jana prompt video', 'Pilih kategori dan subkategori produk, masukkan nama produk, kemudian pilih latar, gaya dan durasi. Gambar tidak diperlukan dalam Klippo.', ('PILIH KATEGORI', 'PILIH GAYA', 'JANA PROMPT')),
+    ('Apa yang diperlukan?', 'Nama produk dan pilihan video sahaja. Selepas prompt siap, muat naik gambar produk asal terus ke platform video AI pilihan anda jika diperlukan.', ('NAMA PRODUK', 'PILIH DURASI', 'JANA PROMPT')),
     ('Pilihan durasi prompt', 'Pilih 10 saat dengan 1 prompt, 20 saat dengan 2 prompt bersambung atau 1 prompt, atau 30 saat dengan 3 prompt bersambung atau 1 prompt.', ('10 SAAT', '20 SAAT', '30 SAAT')),
     ('Latar gambar', 'Untuk aliran suntingan video, anda boleh kekalkan latar asal atau pilih latar lain. Hasil pengasingan bergantung pada kerumitan gambar.', ('LATAR ASAL', 'PILIH LATAR', 'SEMAK HASIL')),
     ('Fungsi Prompt', 'Prompt ialah arahan teks untuk digunakan dalam penjana video AI. Klippo menyediakan prompt; ia bukan fail video yang telah siap.', ('PILIH PROMPT', 'ISI PILIHAN', 'SALIN TEKS')),
@@ -1829,12 +1829,12 @@ async def photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text('✅ Gambar latar sendiri diterima. Pilih durasi video:', reply_markup=duration_menu())
         return
     if context.user_data.get('stage') == 'prompt_images':
-        # Recover users whose session was left in the removed legacy image-upload stage.
+        # Recover legacy sessions; prompt generation is name-based and never requests uploads.
         context.user_data['stage'] = 'prompt_product_type'
         context.user_data['prompt_mode'] = 'normal'
         context.user_data['prompt_reference_photos'] = []
         await update.message.reply_text(
-            '🎥 Aliran muat naik gambar untuk jana prompt telah dibuang. Gambar tidak diperlukan di sini. Pilih kategori produk untuk meneruskan.',
+            '✍️ KLIPPO | JANA PROMPT VIDEO\\n\\nGambar tidak diperlukan untuk menjana prompt. Pilih kategori produk untuk meneruskan; selepas prompt siap, muat naik gambar asal terus ke platform video AI pilihan anda jika perlu.',
             reply_markup=prompt_product_type_menu()
         )
         return
