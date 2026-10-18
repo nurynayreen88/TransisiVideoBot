@@ -115,6 +115,48 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
         style_key, style_name, style_template = resolve(style)
         doodle = style_key == "white_doodle"
         hook = product_hook(product)
+
+        # Keep single 10-second prompts concise enough for one Telegram message.
+        # Retain the selected style, reference safety, timed beats and user concept.
+        if duration == 10:
+            if part == 2:
+                beat_plan = ("TIMING: 0–2s continue from Part 1's exact final frame; 2–4s resume the same movement; "
+                             "4–6s show another visible detail; 6–8s continue in the same setting; "
+                             "8–10s stable full-product hero finish. Do not repeat the opening hook. ")
+            elif part == 1:
+                beat_plan = ("TIMING: 0–2s establish the product; 2–4s reveal it fully; 4–6s highlight one visible detail; "
+                             "6–8s continue one simple action; 8–10s hold a clean full-product frame for Part 2. No fade. ")
+            else:
+                beat_plan = ("TIMING: 0–2s clean reveal; 2–4s show the full product; 4–6s highlight one reference-visible detail; "
+                             "6–8s one subtle product-appropriate action; 8–10s stable full-product hero frame. ")
+            if storyboard_override and isinstance(storyboard_override, (list, tuple)) and len(storyboard_override) == 4:
+                beat_plan = "FOLLOW THESE SELECTED STORYBOARD BEATS IN ORDER: " + " | ".join(
+                    str(item.get("shot", "")) + ": " + str(item.get("direction", ""))
+                    for item in storyboard_override
+                ) + ". "
+            hook_rule = (
+                "OPENING TEXT: Show only this neutral product/category hook, exactly: '" + hook + "'. "
+                if hook and not storyboard_override else
+                "ON-SCREEN TEXT: No text, captions, extra logos or watermark unless explicitly requested. "
+            )
+            doodle_rule = (
+                "GRAPHICS: Thin white hand-drawn marks may emphasize visible product edges only; never cover the product. "
+                if doodle else ""
+            )
+            concept_rule = ("CREATIVE IDEA: " + concept.strip() + ". " if concept and concept.strip() else "")
+            return (
+                "KLIPPO — VIDEO PROMPT | 10 SECONDS" + (" | PART " + str(part) if part else "") + "\\n"
+                "Vertical 9:16, one realistic product ad, exactly 10 seconds.\\n"
+                "PRODUCT: " + product + "\\n"
+                + category_direction + "\\n"
+                + "STYLE: " + style_name + " — " + style_template + "\\n"
+                + "SETTING: " + scene + ". CAMERA: " + camera + "\\n"
+                + hook_rule + beat_plan + concept_rule + doodle_rule
+                + "REFERENCE LOCK: Use the uploaded photo as the source of truth. Preserve visible shape, colour, print, packaging, proportions and branding. "
+                "Do not invent features, materials, accessories, unseen angles, claims or text. "
+                "Use natural light and shadows, believable physics, stable product geometry and smooth restrained motion; avoid morphing, flicker, CGI/plastic skin and abrupt scene changes."
+            )
+
         evidence_rules = (
             "REFERENCE IMAGE RULE: The video generator will receive the user's original product photo(s) as visual evidence. "
             "Inspect only details genuinely visible in those reference photo(s), and preserve the product name and spelling supplied by the user. "
