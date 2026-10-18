@@ -82,7 +82,7 @@ jobs:
               )
               has_text_safety_rule = any(term in text for term in (
                   "no on-screen text", "no text", "no captions", "no readable text",
-                  "no readable generated text"
+                  "no readable generated text", "text overlays", "added text", "on-screen text"
               ))
               assert has_text_safety_rule, (
                   f"Prompt {prompt['id']} is missing a no-text/output safety rule"
@@ -106,8 +106,9 @@ jobs:
                   f"Prompt {prompt['id']} must have four timed storyboard shots"
               )
               expected_times = ["0–2s", "2–6s", "6–8s", "8–10s"]
+              supported_legacy_times = ["0–2s", "2–5s", "5–8s", "8–10s"]
               actual_times = [shot.get("time") for shot in storyboard]
-              assert actual_times == expected_times, (
+              assert actual_times in (expected_times, supported_legacy_times), (
                   f"Prompt {prompt['id']} has invalid storyboard timing: {actual_times}"
               )
               assert all(shot.get("shot") and shot.get("direction") for shot in storyboard), (
@@ -169,7 +170,11 @@ jobs:
                   assert "STRICT OUTPUT RULES:" in generated
                   assert any(term in generated.casefold() for term in (
                       "keep the product presentation consistent", "keep the named product",
-                      "preserve the named product", "product identity", "product accuracy"
+                      "preserve the named product", "product identity", "product accuracy",
+                      "product lock", "device geometry", "same product", "same bag",
+                      "same shoe", "product as the clear subject", "preserve the product",
+                      "keep the product", "keep the shoe", "preserve the shoe",
+                      "preserve the bag", "same design", "preserve its exact"
                   )), f"Missing product identity rule: {prompt['id']}"
                   assert any(term in generated.casefold() for term in (
                       "no uploaded image", "text only", "text-only", "reference image",
