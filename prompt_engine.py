@@ -97,6 +97,7 @@ def build_prompt(mode, product, scene, motion, style='auto', duration=10, concep
 
 def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, duration=10, concept='', product_type='other', storyboard_override=None, universal_custom=False):
     scene_text = str(scene or '').lower()
+    selected_scene_lock = "STRICT LOCATION LOCK: The user-selected location is exactly: " + str(scene or "a realistic setting suited to the product") + ". Keep every scene in this location. Do not change it to an airport, terminal, mall, studio, home or any other place unless that place is explicitly the selected location. Product category must never override the selected location. "
     if motion in ('auto', '', None):
         if any(term in scene_text for term in ('mirror', 'vanity', 'dressing table', 'cermin')):
             camera = "Use a stable medium framing that follows the model's small natural movements, then a gentle side adjustment to include the mirror reflection; never circle around the model or distort the reflection."
@@ -136,8 +137,9 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
         'other': "PRODUCT CATEGORY DIRECTION: Follow the product category inferred from the product name and choose a suitable presentation without guessing features.",
     }
     category_direction = product_type_directions.get(product_type, product_type_directions['other'])
+    category_direction += selected_scene_lock
     natural_motion_by_type = {
-        'bag': "If a human model is present, have them carry the bag as a real person would and move naturally through the setting: an easy walk for two or three steps, relaxed shoulders, natural arm swing and subtle bag sway caused by walking. In an airport, walk toward the terminal or past the check-in area; do not stand rigidly while rotating or twirling the handbag for the camera.",
+        'bag': "If a human model is present, have them carry the bag as a real person would and act naturally in the SELECTED LOCATION: use relaxed shoulders, natural arm swing and subtle bag sway if walking; if seated or stationary, keep the bag held or worn naturally. Only mention an airport, terminal or check-in area when the user explicitly selected an airport setting. Never stand rigidly while rotating or twirling the handbag for the camera.",
         'fashion': "If a model is present, use a relaxed short walk, natural weight shifts and a small practical gesture such as adjusting a sleeve or letting the fabric settle. Avoid stiff runway posing unless runway style is explicitly requested.",
         'hijab': "If a model is present, use a relaxed walk or gentle head turn, with natural fabric settling. Do not repeatedly touch, pull or spin the hijab unnaturally.",
         'shoes': "If a model is present, show a few natural steps with believable foot contact and weight transfer; keep the shoes visible without exaggerated foot lifting or robotic marching.",
