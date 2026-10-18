@@ -97,6 +97,11 @@ def connect():
         "UPDATE storyboard_prompt_styles SET version=5 WHERE style_key='white_doodle' AND version=4 AND template=?",
         (STYLES["white_doodle"][1],)
     )
+    # Fresh databases and untouched v5 bundled seeds now use the current v6 template.
+    db.execute(
+        "UPDATE storyboard_prompt_styles SET version=6 WHERE style_key='white_doodle' AND version=5 AND template=?",
+        (STYLES["white_doodle"][1],)
+    )
     # Upgrade only the unchanged bundled v5 seed to v6; preserve custom templates.
     previous_v5 = """UNIVERSAL WHITE DOODLE STYLE — suitable for any product category. Treat the user's supplied product image(s) as the visual source of truth whenever provided; use written product details only as supporting context. First reveal the complete, unchanged product. Draw thin white handwritten 2D linework progressively around only the visible silhouette and verified details: adapt the drawing to the object's actual outline and structure, whether it is clothing, a bag, footwear, cosmetics, food, electronics, home goods, accessories, tools or another product. Use one or two small arrows or sparkles only when they point to a genuinely visible detail; never cover the product, readable branding or important features. Keep product geometry, colors, labels, quantities, proportions and visible parts consistent. Part 1: clean reveal, one verified detail, restrained doodle accent, then hold a stable full-product frame for the Part 2 handoff; do not complete the main surrounding contour yet. Part 2: resume from the same framing, progressively trace a thin white dashed contour around the actual visible silhouette, hold briefly, then return to a clean full-product hero finish. Graphics are flat 2D overlays, not physical objects, captions or UI. Do not invent unseen sides, features, materials, accessories, claims, prices, popularity or text. Never guess a category, benefit, price, popularity or product name. Do not force a product-specific action that the reference does not support."""
     db.execute(
