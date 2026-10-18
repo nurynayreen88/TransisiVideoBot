@@ -78,7 +78,9 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
         "Clean, intentional negative space; product is the unmistakable hero. Soft large-key illumination, "
         "controlled fill, realistic contact shadow and restrained edge highlights. Use neutral, plausible "
         "surface rendering without claiming unprovided materials. Avoid excessive bloom or artificial plastic shine. "
-        "Use elegant pacing, physically plausible movement and stable framing."
+        "Use elegant pacing, physically plausible movement and stable framing. "
+        "PHOTOREALISM FIRST: Make the result resemble genuine live-action footage from a real camera, not CGI, 3D render, illustration or synthetic AI advertising. Use believable lens perspective, natural texture, imperfect but controlled real-world light, realistic contact shadows and restrained color grading. Avoid waxy surfaces, over-smoothed skin, excessive sharpness, fake bokeh, HDR halos, excessive bloom, impossible reflections, sterile showroom CGI and unnaturally perfect symmetry. "
+        "If a human model is appropriate, preserve a consistent natural face, skin texture, body proportions, hair and clothing; use relaxed posture, subtle expressions, correct anatomy and physically accurate hand-to-product contact. If no model is needed, do not add a person or hands just to decorate the scene. Keep the product physically grounded, correctly scaled and unchanged."
     )
     negative = (
         "STRICT EXCLUSIONS: Keep the product presentation plausible and visually consistent with the supplied product name. "
@@ -86,7 +88,9 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
         "No invented features, extra accessories, duplicated products, fabricated logos or labels, random props that imply included items, "
         "floating geometry, distorted edges, flicker, jitter, abrupt exposure shifts, plastic-looking surfaces or unnatural hands. "
         "Do not add subtitles, UI, watermarks or promotional wording not explicitly requested. "
-        "Do not invent unseen angles or claim features that are not visible in the reference image(s)."
+        "Do not invent unseen angles or claim features that are not visible in the reference image(s). "
+        "Avoid obvious AI artifacts: uncanny or inconsistent faces, waxy/plastic skin, extra or fused fingers, malformed hands, duplicated limbs, changing garment patterns, warped product geometry, floating objects, inconsistent shadows, impossible reflections, texture shimmer, flicker, frame-to-frame identity drift, oversaturated synthetic colors and fake cinematic effects. "
+        "Do not force a human model into a product-only scene; do not force a floating product or impossible camera orbit into a model-led scene. Prefer one simple, physically credible action over multiple complicated actions."
     )
     if mode == "storyboard":
         style_key, style_name, style_template = resolve(style)
@@ -275,7 +279,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
             "8–10s | FINISH: Return to a relaxed, natural pose and hold briefly. Keep movement subtle, human and physically plausible; no dancing, exaggerated posing or scene changes. "
             "FASHION PRODUCT LOCK: The exact garment must remain unchanged frame to frame—same color, print, pattern placement, neckline, sleeves, cut, fit, fabric, accessories and proportions. "
             "Keep the chosen hijab style and handbag presentation consistent. Never redesign, recolor, reshape, add or remove stated outfit details. "
-            "Use one consistent home setting, authentic phone-camera perspective, soft daylight and crisp fabric detail. No collage, split screen, poster layout, outfit change, plastic skin or CGI."
+            "Use one consistent home setting, authentic phone-camera perspective, soft daylight and crisp fabric detail. Skin must retain pores and natural texture; facial features, fingers, joints, hair and fabric folds must remain anatomically and physically believable. Use relaxed breathing, subtle weight shifts and natural timing rather than a frozen pose or robotic motion. Keep the same real-looking person and garment in every frame; no face drift, beauty-filter skin, uncanny eyes, extra fingers, rubbery limbs, fabric shimmer, pattern drift, over-smoothed skin, CGI sheen or artificial slow motion. No collage, split screen, poster layout, outfit change, plastic skin or CGI."
         )
     return (
         "KLIPPO | PROFESSIONAL IMAGE-TO-VIDEO PRODUCTION PROMPT" + (" | BAHAGIAN " + str(part) + "/2" if part else "") + "\n"
@@ -283,6 +287,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
         "one coherent deliverable. ON-SCREEN TEXT: Follow the KLIPPO GUIDED CREATIVE SETTINGS language choice. If the language is none, show no text. Otherwise, use at most the exact product name supplied by the user unless exact wording is provided; do not invent marketing claims or promotional copy. Preserve spelling, keep text brief and legible, and place it away from the product.\n\n"
         "PRODUCT: " + product + "\n" + category_direction + "\n\n" + identity + "\n\n" + art + "\n\n"
         + direction + "\n\n" + negative + "\n\n"
+        "FINAL REALISM CHECK: The result should pass as authentic live-action commercial footage at first glance, not as an AI-generated image or animation. Consistent product identity in every frame, realistic skin and hand anatomy if a person appears, natural fabric or material texture, grounded contact shadows, plausible reflections, stable exposure, real-camera perspective and physically possible movement. Avoid the polished-but-fake CGI look, artificial skin smoothing, impossible object motion, warped geometry, flicker and temporal identity drift. "
         "FINAL QUALITY CHECK: Consistent identity in every frame, natural physics, clean edges, "
         "stable illumination, smooth temporal coherence and polished affiliate-ad aesthetics. "
         "If the product name does not support a requested feature or viewpoint, use a safe crop or modest "
