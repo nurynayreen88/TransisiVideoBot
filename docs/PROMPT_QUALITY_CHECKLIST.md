@@ -30,7 +30,7 @@
 | Product category | Prompts | Current status | Next quality check |
 |---|---:|---|---|
 | Pakaian / Clothing | 63 | BASELINE OK — deeper review pending | Check fabric movement, fit, drape, body anatomy, hijab/clothing continuity and avoid changing garment design. |
-| Beg / Bags | 64 | IN PROGRESS — 9 prompts text-audited | Six additional ID-preserving overrides are merged; continue reviewing the remaining prompts. Visual generation test still pending. |
+| Beg / Bags | 64 | IN PROGRESS — 18 ID-preserving overrides merged across bags, shoes, beauty, gadgets, wallets and hijab | Continue reviewing remaining prompts and category variation. Visual generation tests still pending. |
 | Dompet / Wallets | 59 | BASELINE OK — deeper review pending | Check opening/closing hinges, card slots only if visible, hand interaction and scale consistency. |
 | Kasut / Shoes | 62 | PASS for 3 named overrides; remaining prompts NOT AUDITED | Review the other 59 prompts for shoe-specific actions, footwear geometry and plausible foot contact. |
 | Kosmetik & Kecantikan / Beauty | 70 | BASELINE OK — deeper review pending | Check applicator/product compatibility, believable liquid/cream behaviour, packaging continuity and avoid unsupported skin/health claims. |
@@ -149,3 +149,12 @@ The initial scan found a small number of prompts that did not contain the exact 
 - [x] Four-shot timings and storyboard directions are embedded verbatim; no-on-screen-text rules are explicit.
 - [ ] Run CI against current `main` before merge.
 - [ ] Visually inspect generated clips; structural checks are not a visual-quality pass.
+
+## 2G. Shoe, hijab and wallet storyboard-alignment batch
+
+- [x] `shoes_running_shoe_motion_v1` — running action is conditional on worn/reference context; no unsupported performance claims.
+- [x] `clothing_hijab_drape_v1` — preserve wrap, coverage, folds and colour; avoid unsupported repositioning.
+- [x] `wallets_open_close_v1` — opening is conditional on visible construction; open/closed state remains continuous.
+- [x] Four-shot directions are embedded verbatim with the required 10-second timing and explicit no-on-screen-text rules.
+- [ ] Run CI against current `main` before merge.
+- [ ] Visually inspect generated clips; structural checks do not prove visual quality.
