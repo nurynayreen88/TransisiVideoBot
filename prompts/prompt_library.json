@@ -1411,28 +1411,28 @@
       "label": "Handbag Showcase",
       "duration_seconds": 10,
       "style": "natural_ugc",
-      "description": "Model memegang dan menunjukkan beg dari sudut yang munasabah.",
-      "prompt": "Premium product ad for the exact user-supplied product name. Category: Beg. Concept: Handbag Showcase. EXACTLY 10 seconds, vertical 9:16.\n\nPRODUCT LOCK: Match the supplied reference image precisely: handbag shape, colour, proportions, handle count and shape, visible straps, hardware, stitching and all other visible details. Do not invent features, materials, functions, claims, accessories, compartments or label text. Keep the same product identity and dimensions throughout.\n\nREALISM RULES: Use only visible product features and physically plausible movement. Handles and straps must remain attached in the correct places and respond naturally to gravity. No morphing, duplicated parts, floating, sudden redesign, impossible hand positions, extra fingers, added logos, watermarks, captions or on-screen text. Props must not imply they are included with the product. No dialogue or voice-over; if supported, use subtle instrumental music kept below the scene ambience.\n\nSTORYBOARD:\n0–2s | Opening hook: Open on the complete handbag in a clean three-quarter view. Make a slow, short camera push-in that reveals the real silhouette, handle shape and visible strap arrangement; keep the entire bag in frame.\n2–6s | Signature action: Present the handbag naturally by holding a visible handle or supporting strap, then make one gentle turn from front to three-quarter view. Keep the grip believable, let loose straps respond to gravity, and do not force any movement the visible design cannot support.\n6–8s | Detail insert: Cut briefly to one real, visible detail—such as the handle attachment, stitching, clasp or zipper only if present. Track steadily across that detail; invent no extra pockets, hardware, seams, lining or material properties.\n8–10s | Hero finish: Return to a full, stable three-quarter hero view with the handbag held securely or resting naturally. Let all movement settle and hold the unchanged product clearly for the final beat.\n\nCAMERA AND CONTINUITY: Smooth, controlled movement; realistic contact shadows; consistent lighting and colour; no abrupt cuts or exaggerated lens distortion. Keep the handbag recognisable in every shot and finish on a clean, stable hero frame.",
+      "description": "Beg tangan diperlihatkan melalui pegangan semula jadi, pusingan kecil dan sudut tiga suku yang menunjukkan bentuk keseluruhan tanpa mengubah perkakasan atau tali.",
+      "prompt": "Create an exactly 10-second vertical 9:16 live-action-style product video for the user-supplied product name in the handbag category. Creative direction: a polished but believable everyday handbag showcase. Use one adult model only if carrying the bag helps explain its scale; otherwise keep the bag on a clean console or tabletop. This prompt is text-only and does not analyse uploaded images.\n\nPRODUCT LOCK: Preserve the named bag's silhouette, colour, print, handle and strap arrangement, closure and visible hardware. Do not invent material, brand, compartments, pockets, detachable straps, included accessories or capacity claims. Keep the bag's dimensions and construction consistent; handles must attach naturally and the bag must retain believable weight.\n\n10-SECOND SHOT PLAN:\n0–2s | Shape reveal: start with the whole bag in a clean three-quarter view, softly lit so its actual silhouette and visible finish read clearly.\n2–5s | Signature handling: an adult model gently lifts the bag by its existing handle or strap, or steadies it on the surface if lifting would obscure its shape. One deliberate movement only; no swinging.\n5–7s | Detail glance: make a smooth, short push-in toward one real visible feature—closure, handle attachment, edge, print or stitching. Do not show unseen interiors.\n7–10s | Hero finish: return to a stable three-quarter view with the entire bag visible. The model's hand releases naturally if applicable; hold the final frame.\n\nREALISM & CAMERA: real-camera commercial footage, believable hand grip and finger anatomy, realistic bag weight, natural contact shadows beneath the bag, soft reflections only where physically plausible, controlled highlights and restrained depth of field. Keep the same bag, model, set and lighting throughout. Gentle camera motion, no rapid montage. Optional subtle instrumental music only, kept below natural ambience; no dialogue unless requested.\n\nAVOID: floating or weightless bags, straps changing length, handles detaching, warped seams, shifting patterns, invented logos, impossible reflections, plastic CGI shine, extra fingers, hand-bag intersections, flicker, jitter, excessive HDR, text overlays, captions or watermarks. Finish with the complete, unchanged bag clearly visible.",
       "storyboard": [
         {
           "time": "0–2s",
-          "shot": "Opening hook",
-          "direction": "Open on the complete handbag in a clean three-quarter view. Make a slow, short camera push-in that reveals the real silhouette, handle shape and visible strap arrangement; keep the entire bag in frame."
+          "shot": "Whole-bag shape reveal",
+          "direction": "Show the entire bag in a clean three-quarter view, with soft light revealing only its actual silhouette and visible finish."
         },
         {
-          "time": "2–6s",
-          "shot": "Signature action",
-          "direction": "Present the handbag naturally by holding a visible handle or supporting strap, then make one gentle turn from front to three-quarter view. Keep the grip believable, let loose straps respond to gravity, and do not force any movement the visible design cannot support."
+          "time": "2–5s",
+          "shot": "Controlled handling",
+          "direction": "An adult model gently lifts the bag by an existing handle or strap, or steadies it on the surface if lifting hides the design; no swinging."
         },
         {
-          "time": "6–8s",
-          "shot": "Detail insert",
-          "direction": "Cut briefly to one real, visible detail—such as the handle attachment, stitching, clasp or zipper only if present. Track steadily across that detail; invent no extra pockets, hardware, seams, lining or material properties."
+          "time": "5–7s",
+          "shot": "One real detail",
+          "direction": "Push in smoothly on a visible closure, handle attachment, edge, print or stitch detail; do not reveal or invent unseen interiors."
         },
         {
-          "time": "8–10s",
-          "shot": "Hero finish",
-          "direction": "Return to a full, stable three-quarter hero view with the handbag held securely or resting naturally. Let all movement settle and hold the unchanged product clearly for the final beat."
+          "time": "7–10s",
+          "shot": "Stable bag hero",
+          "direction": "Return to the whole-bag three-quarter view; the hand releases naturally if used, and the complete product holds steady."
         }
       ]
     },
@@ -1442,28 +1442,28 @@
       "label": "Luxury Detail Close-Up",
       "duration_seconds": 10,
       "style": "premium_product",
-      "description": "Rakaman dekat pada material, jahitan dan perkakasan yang benar-benar kelihatan.",
-      "prompt": "Premium product ad for the exact user-supplied product name. Category: Beg. Concept: Luxury Detail Close-Up. EXACTLY 10 seconds, vertical 9:16.\n\nPRODUCT LOCK: Match any supplied reference image precisely: shape, colour, proportions, visible parts and packaging. Do not invent features, materials, ingredients, functions, claims, accessories or label text. Keep actions physically plausible and the same product consistent throughout.\n\nRULES: No on-screen text, captions, added logos, watermark, morphing, floating/duplicated parts, sudden redesign or impossible movement. Props are not implied to be included. No dialogue/voice-over; if supported, subtle instrumental music below ambience.\n\nSTORYBOARD:\n0–2s | Opening hook: Begin with the bag upright and fully visible, then slide the camera from handle height to the base without cropping the product.\n2–6s | Signature action: Execute this exact concept: Rakaman dekat pada material, jahitan dan perkakasan yang benar-benar kelihatan. Complete it naturally within this beat. Slow dolly/slider move, refined light and precise focus. If unsupported by the visible product, do not fake a mechanism; use a compatible gesture or camera move.\n6–8s | Detail insert: Reveal the opening only if it is visibly openable in the source; never fabricate internal compartments or capacity.\n8–10s | Hero finish: End with the closure and full silhouette both legible, with no sudden opening or redesign.\n\nFinish with a stable hero frame showing the unchanged product.",
+      "description": "Rakaman makro terkawal menonjolkan satu atau dua butiran beg yang kelihatan—seperti kemasan tepi, jahitan atau perkakasan—tanpa membuat dakwaan tentang bahan.",
+      "prompt": "Create an exactly 10-second vertical 9:16 live-action-style product video for the user-supplied product name in the handbag category. Creative direction: a premium macro showcase that feels tactile and photographic, not glossy CGI. Place one bag on a stable, uncluttered surface with soft directional light.\n\nPRODUCT ACCURACY: Keep the complete bag's silhouette, colour, print, visible seams, handle attachments, closure and hardware consistent with the product name. Describe no material or quality as leather, suede, metal or luxury-grade unless explicitly stated. Do not invent logos, stitching patterns, compartments, labels or hidden construction. Only feature details that are actually specified or reasonably visible from the named product; text alone does not confirm details that were not supplied.\n\n10-SECOND SHOT PLAN:\n0–2s | Full-product anchor: begin with the entire bag in a still three-quarter view so viewers understand its shape before the close-up.\n2–5s | Slow macro pass: move the camera slowly along one visible edge or seam. Keep the focal plane steady and the surface texture natural; do not simulate extra grain or stitching.\n5–7s | Hardware/detail glint: shift focus to one existing closure, buckle, handle attachment or other visible feature if present. Keep highlights soft and reflections physically plausible.\n7–10s | Premium hero return: pull back smoothly to the complete bag in the same position. Hold the final composition with the shape, colour and details unchanged.\n\nREALISM & CAMERA: macro photography with believable depth of field, restrained highlights, natural contact shadow, realistic texture, stable camera movement and consistent exposure. The bag remains physically supported by the surface and does not rotate unless the camera itself moves. Optional soft instrumental music only, no voice-over unless requested.\n\nAVOID: exaggerated sparkle, fake metallic shine, invented grain, hyper-sharpening, artificial texture, impossible reflections, warped seams, moving hardware, product morphing, floating bag, sudden focus jumps, flicker, jitter, text overlays, captions, added logos and watermarks. The final frame must show the same complete bag clearly.",
       "storyboard": [
         {
           "time": "0–2s",
-          "shot": "Opening hook",
-          "direction": "Begin with the bag upright and fully visible, then slide the camera from handle height to the base without cropping the product."
+          "shot": "Full bag context",
+          "direction": "Show the entire bag in a still three-quarter view on a stable surface, with its real silhouette and colour easy to read."
         },
         {
-          "time": "2–6s",
-          "shot": "Signature action",
-          "direction": "Execute this exact concept: Rakaman dekat pada material, jahitan dan perkakasan yang benar-benar kelihatan. Complete it naturally within this beat. Slow dolly/slider move, refined light and precise focus. If unsupported by the visible product, do not fake a mechanism; use a compatible gesture or camera move."
+          "time": "2–5s",
+          "shot": "Controlled macro pass",
+          "direction": "Move slowly along one visible edge or seam; keep texture natural and do not invent grain, stitching or material claims."
         },
         {
-          "time": "6–8s",
-          "shot": "Detail insert",
-          "direction": "Reveal the opening only if it is visibly openable in the source; never fabricate internal compartments or capacity."
+          "time": "5–7s",
+          "shot": "Existing hardware detail",
+          "direction": "Shift focus to one visible closure, buckle or handle attachment if present; use soft, plausible reflections without exaggerated sparkle."
         },
         {
-          "time": "8–10s",
-          "shot": "Hero finish",
-          "direction": "End with the closure and full silhouette both legible, with no sudden opening or redesign."
+          "time": "7–10s",
+          "shot": "Complete product return",
+          "direction": "Pull back smoothly to the same complete bag in the same position and hold a clean final frame."
         }
       ]
     },
@@ -1783,28 +1783,28 @@
       "label": "Everyday Carry",
       "duration_seconds": 10,
       "style": "lifestyle_ugc",
-      "description": "Beg ditunjukkan sebagai sebahagian rutin harian tanpa menambah barang yang tidak disahkan.",
-      "prompt": "Premium product ad for the exact user-supplied product name. Category: Beg. Concept: Everyday Carry. EXACTLY 10 seconds, vertical 9:16.\n\nPRODUCT LOCK: Match any supplied reference image precisely: shape, colour, proportions, visible parts and packaging. Do not invent features, materials, ingredients, functions, claims, accessories or label text. Keep actions physically plausible and the same product consistent throughout.\n\nRULES: No on-screen text, captions, added logos, watermark, morphing, floating/duplicated parts, sudden redesign or impossible movement. Props are not implied to be included. No dialogue/voice-over; if supported, subtle instrumental music below ambience.\n\nSTORYBOARD:\n0–2s | Opening hook: Show the bag from the front first; gently move to one side to reveal only the depth and structure visible in the reference.\n2–6s | Signature action: Execute this exact concept: Beg ditunjukkan sebagai sebahagian rutin harian tanpa menambah barang yang tidak disahkan. Complete it naturally within this beat. Use one slow controlled move that supports the action. If unsupported by the visible product, do not fake a mechanism; use a compatible gesture or camera move.\n6–8s | Detail insert: Use a three-quarter close-up to connect the handle, body and side panel as one consistent object.\n8–10s | Hero finish: End with the bag resting naturally on its base or held securely; no floating, sliding or extra accessories.\n\nFinish with a stable hero frame showing the unchanged product.",
+      "description": "Beg digunakan dalam satu aksi rutin yang mudah difahami—diangkat dari meja atau disandang—dengan saiz, tali dan bentuk beg kekal konsisten.",
+      "prompt": "Create an exactly 10-second vertical 9:16 live-action-style product video for the user-supplied product name in the everyday handbag category. Creative direction: a candid, polished moment from a believable daily routine. Use one adult model in a tidy entryway or beside a simple desk; keep the environment uncluttered and the bag dominant. This prompt is text-only and does not analyse uploaded images.\n\nPRODUCT ACCURACY: Preserve the bag's stated colour, shape, handles, strap, closure and visible pattern. Do not invent material, brand, pockets, compartments, laptop fit, capacity, water resistance or accessories. Any background objects are set dressing only and must not appear to be included with the bag. The bag should retain plausible weight and scale during handling.\n\n10-SECOND SHOT PLAN:\n0–2s | Routine setup: show the full bag resting on a bench or desk, with the complete silhouette visible and natural window light.\n2–5s | Everyday action: an adult model reaches in, grips an existing handle or strap, and lifts the bag in one smooth motion. Keep the grip physically correct; do not swing the bag or let it pass through the body.\n5–7s | Carry moment: the model takes one natural step or places the bag beside their leg, keeping the bag visible and at a believable height. If the product name implies a hand-held clutch, keep it in hand rather than adding a shoulder strap.\n7–10s | Hero finish: return to a clear view of the bag at rest, either held naturally or set down on the same surface. Hold the full product steady for the final frame.\n\nREALISM & CAMERA: authentic handheld-commercial feel with restrained stabilization, believable body movement, correct contact and weight, realistic shadows under the bag, consistent lighting and natural depth of field. Keep the same model, bag, background and wardrobe throughout. Optional soft instrumental music only, below natural ambience; no dialogue unless requested.\n\nAVOID: floating bag, impossible grip, stretched or disappearing straps, sudden size changes, invented contents, props that imply bundle inclusions, warped bag geometry, artificial reflections, extra fingers, body clipping, frantic cuts, flicker, jitter, excessive HDR, text overlays, captions, added logos or watermarks. End with the complete bag clearly visible and unchanged.",
       "storyboard": [
         {
           "time": "0–2s",
-          "shot": "Opening hook",
-          "direction": "Show the bag from the front first; gently move to one side to reveal only the depth and structure visible in the reference."
+          "shot": "Daily routine setup",
+          "direction": "Show the complete bag resting on a bench or desk in a tidy entryway, with its full silhouette visible."
         },
         {
-          "time": "2–6s",
-          "shot": "Signature action",
-          "direction": "Execute this exact concept: Beg ditunjukkan sebagai sebahagian rutin harian tanpa menambah barang yang tidak disahkan. Complete it naturally within this beat. Use one slow controlled move that supports the action. If unsupported by the visible product, do not fake a mechanism; use a compatible gesture or camera move."
+          "time": "2–5s",
+          "shot": "Natural pick-up",
+          "direction": "An adult model grips an existing handle or strap and lifts the bag in one smooth, physically plausible motion without swinging it."
         },
         {
-          "time": "6–8s",
-          "shot": "Detail insert",
-          "direction": "Use a three-quarter close-up to connect the handle, body and side panel as one consistent object."
+          "time": "5–7s",
+          "shot": "Believable carry",
+          "direction": "The model takes one natural step or places the bag beside their leg; preserve scale and use only the carrying method supported by the product name."
         },
         {
-          "time": "8–10s",
-          "shot": "Hero finish",
-          "direction": "End with the bag resting naturally on its base or held securely; no floating, sliding or extra accessories."
+          "time": "7–10s",
+          "shot": "Stable everyday hero",
+          "direction": "Show the complete bag at rest or held naturally in the same setting and hold a steady final frame."
         }
       ]
     },
