@@ -120,7 +120,8 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
         # Retain the selected style, reference safety, timed beats and user concept.
         if duration in (10, 20, 30) and (duration == 10 or part == 0):
             if duration == 10 and part >= 2:
-                beat_plan = ("CONTINUATION CLIP 10s: 0–2s continue from the exact final frame of the previous clip; "
+                clip_label = "SECOND CLIP 10s" if part == 2 else "CONTINUATION CLIP 10s"
+                beat_plan = (clip_label + ": 0–2s continue from the exact full-product frame held at the end of the previous clip; "
                              "2–4s resume the same movement; 4–6s show another visible detail; 6–8s continue in the same setting; "
                              "8–10s stable full-product hero finish. Do NOT repeat the opening hook. ")
             elif duration == 10 and part == 1:
