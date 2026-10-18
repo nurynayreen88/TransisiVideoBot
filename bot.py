@@ -539,6 +539,31 @@ def prompt_creative_settings(user_data, include_audio=True):
     return '\n'.join(lines)
 
 
+PRODUCT_SUBTYPES = {
+    'fashion': [('fashion_women', '👗 Pakaian wanita'), ('fashion_men', '👔 Pakaian lelaki'), ('fashion_dress', '✨ Dress / Jubah'), ('fashion_sport', '🏃 Pakaian sukan'), ('fashion_outerwear', '🧥 Jaket / Outerwear'), ('fashion_kids', '🧒 Pakaian kanak-kanak'), ('fashion_innerwear', '🩱 Pakaian dalam'), ('fashion_other', '📦 Fesyen lain')],
+    'bag': [('bag_handbag', '👜 Beg tangan'), ('bag_sling', '🎒 Beg silang / Sling'), ('bag_backpack', '🎒 Beg galas / Sekolah'), ('bag_laptop', '💻 Beg laptop'), ('bag_travel', '🧳 Beg perjalanan'), ('bag_wallet', '👛 Dompet / Card holder'), ('bag_tote', '🛍️ Tote bag'), ('bag_other', '📦 Beg lain')],
+    'hijab': [('hijab_bawal', '🧕 Tudung bawal'), ('hijab_shawl', '🧣 Shawl'), ('hijab_instant', '🧕 Tudung sarung / Instant'), ('hijab_sport', '🏃 Tudung sukan'), ('hijab_inner', '🧢 Anak tudung'), ('hijab_accessory', '✨ Aksesori tudung'), ('hijab_other', '📦 Tudung lain')],
+    'shoes': [('shoes_sneakers', '👟 Sneakers / Kasut sukan'), ('shoes_formal', '👞 Kasut formal'), ('shoes_heels', '👠 Kasut tumit'), ('shoes_sandals', '🩴 Sandal / Selipar'), ('shoes_running', '🏃 Kasut larian'), ('shoes_kids', '🧒 Kasut kanak-kanak'), ('shoes_other', '📦 Kasut lain')],
+    'beauty': [('beauty_skincare', '🧴 Skincare'), ('beauty_makeup', '💄 Makeup'), ('beauty_hair', '💇 Penjagaan rambut'), ('beauty_perfume', '🌸 Perfume / Wangian'), ('beauty_body', '🧼 Penjagaan badan'), ('beauty_tools', '🪞 Alat kecantikan'), ('beauty_other', '📦 Kecantikan lain')],
+    'food': [('food_snacks', '🍪 Snek / Kerepek'), ('food_drinks', '🥤 Minuman'), ('food_supplements', '🥣 Makanan tambahan'), ('food_frozen', '🧊 Makanan sejuk beku'), ('food_cooking', '🍳 Bahan masakan / Sos'), ('food_bakery', '🍰 Biskut / Bakeri'), ('food_other', '📦 Makanan lain')],
+    'gadget': [('gadget_phone', '📱 Telefon / Aksesori telefon'), ('gadget_audio', '🎧 Audio / Earbuds'), ('gadget_computer', '💻 Komputer / Aksesori'), ('gadget_smart', '⌚ Jam pintar / Wearable'), ('gadget_camera', '📷 Kamera / Aksesori'), ('gadget_home', '🔌 Elektronik rumah'), ('gadget_other', '📦 Gajet lain')],
+    'home': [('home_kitchen', '🍳 Dapur / Peralatan memasak'), ('home_storage', '🗄️ Penyimpanan / Organizer'), ('home_cleaning', '🧹 Pembersihan'), ('home_decor', '🪴 Dekorasi rumah'), ('home_bedding', '🛏️ Cadar / Peralatan tidur'), ('home_lighting', '💡 Lampu'), ('home_furniture', '🪑 Perabot'), ('home_other', '📦 Rumah lain')],
+    'accessory': [('accessory_watch', '⌚ Jam tangan'), ('accessory_jewelry', '💍 Barang kemas'), ('accessory_eyewear', '🕶️ Cermin mata'), ('accessory_belt', '🪢 Tali pinggang'), ('accessory_hair', '🎀 Aksesori rambut'), ('accessory_scarf', '🧣 Skaf / Aksesori fesyen'), ('accessory_other', '📦 Aksesori lain')],
+    'toy': [('toy_educational', '🧩 Mainan pendidikan'), ('toy_figure', '🧸 Patung / Figure'), ('toy_building', '🧱 Blok binaan'), ('toy_outdoor', '🪁 Mainan luar'), ('toy_baby', '🪇 Mainan bayi'), ('toy_game', '🎲 Permainan / Board game'), ('toy_other', '📦 Mainan lain')],
+    'book_stationery': [('stationery_books', '📚 Buku'), ('stationery_pen', '🖊️ Pen / Pensel'), ('stationery_notebook', '📓 Buku nota / Planner'), ('stationery_art', '🎨 Alat seni'), ('stationery_school', '🎒 Alat tulis sekolah'), ('stationery_office', '📎 Fail / Alat pejabat'), ('stationery_other', '📦 Buku / alat tulis lain')],
+    'sports': [('sports_fitness', '🏋️ Kecergasan / Gym'), ('sports_running', '🏃 Larian'), ('sports_ball', '⚽ Sukan bola'), ('sports_racket', '🏸 Raket / Badminton'), ('sports_cycling', '🚴 Berbasikal'), ('sports_outdoor', '⛺ Aktiviti luar'), ('sports_bottle', '🥤 Botol sukan'), ('sports_other', '📦 Sukan lain')],
+    'pet': [('pet_food', '🦴 Makanan haiwan'), ('pet_grooming', '🧴 Penjagaan / Grooming'), ('pet_toy', '🧸 Mainan haiwan'), ('pet_bed', '🛏️ Katil / Tempat rehat'), ('pet_accessory', '🐕 Tali / Aksesori'), ('pet_cleaning', '🧹 Kebersihan haiwan'), ('pet_other', '📦 Produk haiwan lain')],
+    'automotive': [('auto_car', '🚗 Aksesori kereta'), ('auto_motorcycle', '🏍️ Aksesori motosikal'), ('auto_care', '🧽 Penjagaan / Pembersihan'), ('auto_electronic', '📱 Elektronik kenderaan'), ('auto_interior', '🪑 Aksesori dalaman'), ('auto_exterior', '✨ Aksesori luaran'), ('auto_other', '📦 Automotif lain')],
+    'baby': [('baby_clothing', '👶 Pakaian bayi'), ('baby_feeding', '🍼 Penyusuan / Makan'), ('baby_bath', '🛁 Mandian / Penjagaan'), ('baby_toy', '🧸 Mainan bayi'), ('baby_gear', '🚼 Stroller / Kelengkapan'), ('baby_sleep', '🌙 Tidur / Keselamatan'), ('baby_other', '📦 Produk bayi lain')],
+    'travel': [('travel_luggage', '🧳 Bagasi / Beg travel'), ('travel_organizer', '🧩 Organizer perjalanan'), ('travel_pillow', '💤 Bantal perjalanan'), ('travel_accessory', '🛂 Aksesori perjalanan'), ('travel_toiletry', '🧴 Beg toiletries'), ('travel_outdoor', '🏕️ Kelengkapan kembara'), ('travel_other', '📦 Kembara lain')],
+    'office': [('office_desk', '🖇️ Alat meja pejabat'), ('office_storage', '🗄️ Fail / Penyimpanan'), ('office_electronics', '🖨️ Elektronik pejabat'), ('office_furniture', '🪑 Perabot pejabat'), ('office_stationery', '✏️ Alat tulis pejabat'), ('office_cleaning', '🧹 Kebersihan ruang kerja'), ('office_other', '📦 Pejabat lain')],
+    'other': [('other_health', '🧴 Kesihatan / Penjagaan diri'), ('other_garden', '🌱 Taman / Berkebun'), ('other_hobby', '🎨 Hobi / Kraf'), ('other_car', '🚗 Aksesori kenderaan'), ('other_daily', '🏠 Keperluan harian'), ('other_gift', '🎁 Hadiah'), ('other_other', '📦 Lain-lain')],
+}
+
+PRODUCT_SUBTYPE_LABELS = {
+    slug: label for options in PRODUCT_SUBTYPES.values() for slug, label in options
+}
+
 def prompt_product_type_menu():
     items = list(PRODUCT_TYPES.items())
     rows = []
@@ -546,6 +571,17 @@ def prompt_product_type_menu():
         pair = items[index:index + 2]
         rows.append([InlineKeyboardButton(label, callback_data='prompt_product_type:' + key) for key, label in pair])
     rows.append([InlineKeyboardButton('↩️ Menu Utama', callback_data='home')])
+    return InlineKeyboardMarkup(rows)
+
+
+def prompt_product_subtype_menu(category: str):
+    options = PRODUCT_SUBTYPES.get(category, [('other_other', '📦 Lain-lain')])
+    rows = []
+    for index in range(0, len(options), 2):
+        pair = options[index:index + 2]
+        rows.append([InlineKeyboardButton(label, callback_data='prompt_product_subcategory:' + slug) for slug, label in pair])
+    rows.append([InlineKeyboardButton('↩️ Tukar Kategori', callback_data='prompt_product_categories')])
+    rows.append([InlineKeyboardButton('🏠 Menu Utama', callback_data='home')])
     return InlineKeyboardMarkup(rows)
 
 
@@ -2242,16 +2278,33 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             else:
                 context.user_data['stage'] = 'prompt_product_name'
                 await query.message.reply_text('🛍️ Masukkan nama produk daripada Shopee. Nama sahaja — gambar dan pautan tidak diperlukan.')
+    elif action == 'prompt_product_categories':
+        context.user_data['stage'] = 'prompt_product_type'
+        await query.message.reply_text('📦 Pilih kategori produk:', reply_markup=prompt_product_type_menu())
     elif action.startswith('prompt_product_type:'):
         selected = action.split(':', 1)[1]
         if selected in PRODUCT_TYPES:
             context.user_data['prompt_product_type'] = selected
-            context.user_data['stage'] = 'prompt_product_name'
+            context.user_data['prompt_product_subcategory'] = ''
+            context.user_data['stage'] = 'prompt_product_subcategory'
             await query.message.reply_text(
-                f"📦 Kategori dipilih: {PRODUCT_TYPES[selected]}\n\n🛍️ Masukkan nama produk (nama sahaja, bukan pautan):"
+                f"📦 Kategori: {PRODUCT_TYPES[selected]}\n\n🔎 Pilih subkategori produk:",
+                reply_markup=prompt_product_subtype_menu(selected)
             )
         else:
             await query.message.reply_text('Pilihan produk tidak sah. Sila pilih semula:', reply_markup=prompt_product_type_menu())
+    elif action.startswith('prompt_product_subcategory:') and stage == 'prompt_product_subcategory':
+        selected = action.split(':', 1)[1]
+        category = context.user_data.get('prompt_product_type', 'other')
+        valid = {slug for slug, _label in PRODUCT_SUBTYPES.get(category, [])}
+        if selected in valid:
+            context.user_data['prompt_product_subcategory'] = selected
+            context.user_data['stage'] = 'prompt_product_name'
+            await query.message.reply_text(
+                f"✅ Subkategori: {PRODUCT_SUBTYPE_LABELS[selected]}\n\n🛍️ Masukkan nama produk (nama sahaja, bukan pautan):"
+            )
+        else:
+            await query.message.reply_text('Pilihan subkategori tidak sah. Sila pilih semula:', reply_markup=prompt_product_subtype_menu(category))
     elif action.startswith('prompt_setup:') and stage in ('prompt_setup_mode', 'prompt_confirm'): 
         selected = action.split(':', 1)[1]
         if selected == 'auto':
@@ -2278,6 +2331,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 '✅ Tetapan Auto siap. Klippo telah memilih gaya, model (jika sesuai), latar dan gerakan kamera berdasarkan produk.\n\n'
                 f"🛍️ Produk: {context.user_data.get('prompt_product_name', 'Produk')}\n"
                 f"📦 Kategori: {PRODUCT_TYPES.get(product_type, 'Produk lain')}\n"
+                f"🔎 Subkategori: {PRODUCT_SUBTYPE_LABELS.get(context.user_data.get('prompt_product_subcategory', ''), 'Tidak dinyatakan')}\n"
                 f"⏱️ Durasi: {context.user_data.get('prompt_duration', 10)} saat\n"
                 '⚙️ Mod: Auto\n\nTeruskan untuk menjana prompt?',
                 reply_markup=InlineKeyboardMarkup([
@@ -2445,7 +2499,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # Return only for actions handled by the first chain. Video workflow
     # callbacks must continue into the second chain.
     if action in ('admin_pending', 'admin', 'storyboard', 'make', 'prompt', 'prompt_categories', 'prompt_images_done') or action.startswith(
-        ('admin_approve:', 'admin_reject:', 'prompt_flow:', 'prompt_mode:', 'prompt_model:', 'prompt_model_count:', 'prompt_model_gender:', 'prompt_model_hijab:', 'prompt_model_ethnicity:', 'prompt_model_age:', 'prompt_language:', 'prompt_voiceover:', 'prompt_type:', 'prompt_product_type:', 'prompt_duration:',
+        ('admin_approve:', 'admin_reject:', 'prompt_flow:', 'prompt_mode:', 'prompt_model:', 'prompt_model_count:', 'prompt_model_gender:', 'prompt_model_hijab:', 'prompt_model_ethnicity:', 'prompt_model_age:', 'prompt_language:', 'prompt_voiceover:', 'prompt_type:', 'prompt_product_type:', 'prompt_product_subcategory:', 'prompt_product_categories', 'prompt_duration:',
          'prompt_style:', 'prompt_setup:', 'prompt_idea:', 'prompt_details:', 'video_input:', 'prompt_input:', 'pcat:', 'ptpl:')
     ):
         return
@@ -2687,7 +2741,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             waiting = await query.message.reply_text('⏳ DALAM PROSES — 0%' + chr(10) + 'Menyusun prompt...')
             try:
                 product_name = context.user_data.get('prompt_product_name', '').strip()
-                product = 'NAMA_PRODUK: ' + product_name + chr(10) + 'Optional user details: ' + context.user_data.get('prompt_product', '')
+                product = ('NAMA_PRODUK: ' + product_name + chr(10) + 'KATEGORI: ' + PRODUCT_TYPES.get(context.user_data.get('prompt_product_type', 'other'), 'Produk lain') + chr(10) + 'SUBKATEGORI: ' + PRODUCT_SUBTYPE_LABELS.get(context.user_data.get('prompt_product_subcategory', ''), 'Tidak dinyatakan') + chr(10) + 'Optional user details: ' + context.user_data.get('prompt_product', ''))
                 scene = context.user_data.get('prompt_scene', 'clean studio background')
                 style_choice = context.user_data.get('prompt_style', 'auto')
                 if style_choice == 'auto':
