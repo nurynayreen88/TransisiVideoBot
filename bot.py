@@ -551,8 +551,11 @@ def prompt_product_type_menu():
 
 def prompt_duration_menu():
     return InlineKeyboardMarkup([
-        [InlineKeyboardButton('🎬 10 Saat', callback_data='prompt_duration:10'),
-         InlineKeyboardButton('🎞️ 20 Saat', callback_data='prompt_duration:20')],
+        [InlineKeyboardButton('🎬 10s · 1 prompt', callback_data='prompt_duration:10_single')],
+        [InlineKeyboardButton('🎞️ 20s · 1 prompt', callback_data='prompt_duration:20_single'),
+         InlineKeyboardButton('🔗 20s · 2 prompt', callback_data='prompt_duration:20_split')],
+        [InlineKeyboardButton('🎬 30s · 1 prompt', callback_data='prompt_duration:30_single'),
+         InlineKeyboardButton('🔗 30s · 3 prompt', callback_data='prompt_duration:30_split')],
         [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
     ])
 
@@ -2116,11 +2119,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         elif selected in ('normal', 'storyboard', 'doodle'):
             context.user_data['prompt_mode'] = 'storyboard' if selected == 'doodle' else selected
             context.user_data['stage'] = 'prompt_duration'
-            await query.message.reply_text('⏱️ Pilih durasi prompt video:', reply_markup=InlineKeyboardMarkup([
-                [InlineKeyboardButton('🎬 10 Saat', callback_data='prompt_duration:10'),
-                 InlineKeyboardButton('🎞️ 20 Saat', callback_data='prompt_duration:20')],
-                [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]
-            ]))
+            await query.message.reply_text('⏱️ Pilih tempoh dan cara susunan prompt video:', reply_markup=prompt_duration_menu())
     elif action == 'prompt_categories':
         context.user_data['stage'] = 'prompt_category'
         await query.message.reply_text('📚 Pilih kategori produk:', reply_markup=prompt_category_menu())
@@ -2251,8 +2250,20 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await query.message.reply_text('🎨 LANGKAH 4 — Pilih gaya video:', reply_markup=prompt_style_menu(context.user_data.get('prompt_product_type', 'other')))
     elif action.startswith('prompt_duration:') and stage == 'prompt_duration':
         selected = action.split(':', 1)[1]
-        if selected in ('10', '20'):
-            context.user_data['prompt_duration'] = int(selected)
+        valid_duration_modes = {
+            '10_single': (10, 'single'),
+            '20_single': (20, 'single'),
+            '20_split': (20, 'split'),
+            '30_single': (30, 'single'),
+            '30_split': (30, 'split'),
+            # Keep old Telegram keyboards/callbacks compatible.
+            '10': (10, 'single'),
+            '20': (20, 'split'),
+        }
+        if selected in valid_duration_modes:
+            duration, duration_mode = valid_duration_modes[selected]
+            context.user_data['prompt_duration'] = duration
+            context.user_data['prompt_duration_mode'] = duration_mode
             context.user_data['stage'] = 'prompt_language'
             await query.message.reply_text('🌐 LANGKAH 6 — Pilih bahasa teks pada skrin:', reply_markup=prompt_language_menu())
     elif action.startswith('prompt_language:') and stage == 'prompt_language':
@@ -2374,7 +2385,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 '',
                 f'🛍️ Nama produk: {product_name}',
                 f'📦 Jenis produk: {PRODUCT_TYPES.get(context.user_data.get("prompt_product_type", "other"), "Produk lain")}',
-                f'⏱️ Tempoh: {context.user_data.get("prompt_duration", 10)} saat',
+                f'⏱️ Tempoh: {context.user_data.get("prompt_duration", 10)} saat — ' + ('satu prompt' if context.user_data.get('prompt_duration_mode', 'split' if context.user_data.get('prompt_duration') == 20 else 'single') == 'single' else str(int(context.user_data.get('prompt_duration', 10)) // 10) + ' prompt bersambung 10 saat'),
                 f'🎨 Gaya visual: {style_name}',
                 f'💡 Idea video: {concept}',
                 f'🖼️ Latar: {scene_labels.get(scene, scene)}',
@@ -2603,7 +2614,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     context.user_data.get('prompt_duration', 10),
                     context.user_data.get('prompt_concept', ''),
                     product_type=context.user_data.get('prompt_product_type', 'other'),
-                    storyboard_override=context.user_data.get('prompt_library_storyboard') or None
+                    storyboard_override=context.user_data.get('prompt_library_storyboard') or None,
+                    split=context.user_data.get('prompt_duration_mode', 'split' if context.user_data.get('prompt_duration') == 20 else 'single') == 'split'
                 )
                 prompt = prompt.rstrip() + '\n\n' + prompt_creative_settings(context.user_data)
                 await progress_update(waiting, 70, 'Menyediakan PROMPT IMAGE dan PROMPT VIDEO...')
@@ -2700,7 +2712,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     return
                 if mode_name == 'normal':
                     context.user_data['stage'] = 'prompt_video_ready'
-                    sections = prompt.split('=== KLIPPO PART 2 ===') if context.user_data.get('prompt_duration') == 20 else [prompt]
+                    sections = re.split(r'\n\n=== KLIPPO PART [2-3] ===\n\n', prompt) if context.user_data.get('prompt_duration_mode', 'split' if context.user_data.get('prompt_duration') == 20 else 'single') == 'split' else [prompt]
                     direct_actions = InlineKeyboardMarkup([
                         [InlineKeyboardButton('🌐 Google Flow / Veo', url='https://labs.google/fx/tools/flow'),
                          InlineKeyboardButton('🎬 Kling AI', url='https://kling.ai/')],
@@ -2717,9 +2729,9 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     )
                     for index, section in enumerate(sections, 1):
                         section = section.strip()
-                        caption = ('BAHAGIAN ' + str(index) + '/2 — jana klip 10 saat secara berasingan. ' +
-                                   ('Simpan bingkai akhir untuk sambungan Bahagian 2.' if index == 1 else
-                                    'Gunakan bingkai akhir Bahagian 1 sebagai rujukan kesinambungan.')) if len(sections) == 2 else ''
+                        caption = ('BAHAGIAN ' + str(index) + '/' + str(len(sections)) + ' — jana klip 10 saat secara berasingan. ' +
+                                   ('Simpan bingkai akhir untuk sambungan bahagian seterusnya.' if index < len(sections) else
+                                    'Gunakan bingkai akhir bahagian sebelumnya sebagai rujukan kesinambungan.')) if len(sections) > 1 else ''
                         # Always send prompts as Telegram text, never as .txt attachments.
                         remaining = section
                         chunks = []
