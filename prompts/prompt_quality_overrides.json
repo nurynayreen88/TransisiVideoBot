@@ -788,23 +788,23 @@
       "storyboard": [
         {
           "time": "0–2s",
-          "shot": "Fabric & Cutting Detail — establish",
-          "direction": ""
+          "shot": "Establish the outfit",
+          "direction": "0–2s | Establish the outfit: Show the adult model in a relaxed, stable three-quarter or full-length pose, with the full garment visible and the background already established."
         },
         {
           "time": "2–6s",
-          "shot": "Fabric & Cutting Detail — main action",
-          "direction": "Make a slow camera push toward one genuinely visible seam, print or fabric fold. The model makes only a small natural weight shift; fabric moves with believable gravity and does not change pattern."
+          "shot": "Fabric detail",
+          "direction": "2–6s | Fabric detail: Make a slow camera push toward one genuinely visible seam, print or fabric fold. The model makes only a small natural weight shift; fabric moves with believable gravity and does not change pattern."
         },
         {
           "time": "6–8s",
-          "shot": "Fabric & Cutting Detail — detail",
-          "direction": "Glide gently along the visible silhouette or hem without forcing an unnatural turn or revealing invented garment details. Keep hands anatomically correct and away from obscuring key features."
+          "shot": "Cut and drape",
+          "direction": "6–8s | Cut and drape: Glide gently along the visible silhouette or hem without forcing an unnatural turn or revealing invented garment details. Keep hands anatomically correct and away from obscuring key features."
         },
         {
           "time": "8–10s",
-          "shot": "Fabric & Cutting Detail — final hero",
-          "direction": "Return to a clean three-quarter/full outfit view. The model settles into a comfortable pose and holds still; garment design, colour and fit remain identical."
+          "shot": "Stable finish",
+          "direction": "8–10s | Stable finish: Return to a clean three-quarter/full outfit view. The model settles into a comfortable pose and holds still; garment design, colour and fit remain identical."
         }
       ]
     },
@@ -814,23 +814,23 @@
       "storyboard": [
         {
           "time": "0–2s",
-          "shot": "Sit-to-Stand Outfit Reveal — establish",
-          "direction": ""
+          "shot": "Seated introduction",
+          "direction": "0–2s | Seated introduction: Begin with the adult model comfortably seated on a simple stable chair, framing the visible outfit without clipping important garment details."
         },
         {
           "time": "2–6s",
-          "shot": "Sit-to-Stand Outfit Reveal — main action",
-          "direction": "The model stands up once at an unhurried pace, using believable balance and foot contact. Keep camera movement gentle and continuous; no jump cut or instant pose swap."
+          "shot": "Natural rise",
+          "direction": "2–6s | Natural rise: The model stands up once at an unhurried pace, using believable balance and foot contact. Keep camera movement gentle and continuous; no jump cut or instant pose swap."
         },
         {
           "time": "6–8s",
-          "shot": "Sit-to-Stand Outfit Reveal — detail",
-          "direction": "The model makes one small natural adjustment only if needed, without inventing pockets, fasteners or garment features. Cloth follows gravity and retains the same cut and print."
+          "shot": "Outfit settling",
+          "direction": "6–8s | Outfit settling: The model makes one small natural adjustment only if needed, without inventing pockets, fasteners or garment features. Cloth follows gravity and retains the same cut and print."
         },
         {
           "time": "8–10s",
-          "shot": "Sit-to-Stand Outfit Reveal — final hero",
-          "direction": "Hold a calm three-quarter or full-length pose with the whole outfit visible. Face, clothes, chair and background remain stable."
+          "shot": "Standing hero",
+          "direction": "8–10s | Standing hero: Hold a calm three-quarter or full-length pose with the whole outfit visible. Face, clothes, chair and background remain stable."
         }
       ]
     },
@@ -840,23 +840,23 @@
       "storyboard": [
         {
           "time": "0–2s",
-          "shot": "Walk-Past Camera — establish",
-          "direction": ""
+          "shot": "Establish",
+          "direction": "0–2s | Establish: Start with the model standing in a relaxed full-length view, outfit clearly visible and feet grounded on a level surface."
         },
         {
           "time": "2–6s",
-          "shot": "Walk-Past Camera — main action",
-          "direction": "The model takes two or three natural steps past the camera at a comfortable pace. Track smoothly a short distance; maintain believable weight transfer and avoid excessive fabric flutter."
+          "shot": "Controlled walk",
+          "direction": "2–6s | Controlled walk: The model takes two or three natural steps past the camera at a comfortable pace. Track smoothly a short distance; maintain believable weight transfer and avoid excessive fabric flutter."
         },
         {
           "time": "6–8s",
-          "shot": "Walk-Past Camera — detail",
-          "direction": "Continue the same motion into a brief side or three-quarter view only as naturally reachable. Preserve garment proportions and keep the face and limbs undistorted."
+          "shot": "Side view",
+          "direction": "6–8s | Side view: Continue the same motion into a brief side or three-quarter view only as naturally reachable. Preserve garment proportions and keep the face and limbs undistorted."
         },
         {
           "time": "8–10s",
-          "shot": "Walk-Past Camera — final hero",
-          "direction": "The model stops naturally and turns only slightly if needed, then holds a steady hero pose. End with the outfit readable, not cropped or blurred."
+          "shot": "Settle and hold",
+          "direction": "8–10s | Settle and hold: The model stops naturally and turns only slightly if needed, then holds a steady hero pose. End with the outfit readable, not cropped or blurred."
         }
       ]
     },
@@ -866,23 +866,23 @@
       "storyboard": [
         {
           "time": "0–2s",
-          "shot": "Hand Swatch Close-Up — establish",
-          "direction": ""
+          "shot": "Product and hand establish",
+          "direction": "0–2s | Product and hand establish: Frame the real package beside a clean, neutral surface and one relaxed adult hand. Keep the label and container shape unchanged."
         },
         {
           "time": "2–6s",
-          "shot": "Hand Swatch Close-Up — main action",
-          "direction": "If a suitable applicator and skin area are visible/appropriate, make one slow, short swatch motion with believable contact. Otherwise use a gentle camera move across the closed product; do not force an unsupported action."
+          "shot": "Controlled swatch",
+          "direction": "2–6s | Controlled swatch: If a suitable applicator and skin area are visible/appropriate, make one slow, short swatch motion with believable contact. Otherwise use a gentle camera move across the closed product; do not force an unsupported action."
         },
         {
           "time": "6–8s",
-          "shot": "Hand Swatch Close-Up — detail",
-          "direction": "Hold close on the actual visible swatch or package detail. Preserve true colour and texture; no exaggerated shimmer, particles or invented liquid effects."
+          "shot": "Texture detail",
+          "direction": "6–8s | Texture detail: Hold close on the actual visible swatch or package detail. Preserve true colour and texture; no exaggerated shimmer, particles or invented liquid effects."
         },
         {
           "time": "8–10s",
-          "shot": "Hand Swatch Close-Up — final hero",
-          "direction": "Return to a stable view of the product and swatch/hand. Keep fingers natural and package readable; hold the final frame."
+          "shot": "Clean hero",
+          "direction": "8–10s | Clean hero: Return to a stable view of the product and swatch/hand. Keep fingers natural and package readable; hold the final frame."
         }
       ]
     },
@@ -892,23 +892,23 @@
       "storyboard": [
         {
           "time": "0–2s",
-          "shot": "Jewellery on Model — establish",
-          "direction": ""
+          "shot": "Wearable hero",
+          "direction": "0–2s | Wearable hero: Begin with the item clearly visible on the relevant wrist or neck, with natural posture and a simple background."
         },
         {
           "time": "2–6s",
-          "shot": "Jewellery on Model — main action",
-          "direction": "The model makes one small wrist turn or natural head/shoulder movement. Jewellery responds with believable weight and motion; do not twist it unnaturally or hide its actual design."
+          "shot": "Gentle movement",
+          "direction": "2–6s | Gentle movement: The model makes one small wrist turn or natural head/shoulder movement. Jewellery responds with believable weight and motion; do not twist it unnaturally or hide its actual design."
         },
         {
           "time": "6–8s",
-          "shot": "Jewellery on Model — detail",
-          "direction": "Move closer to one visible feature such as the chain, clasp, face or setting, only if it exists in the reference. Keep reflections physically plausible and detail stable."
+          "shot": "Detail pass",
+          "direction": "6–8s | Detail pass: Move closer to one visible feature such as the chain, clasp, face or setting, only if it exists in the reference. Keep reflections physically plausible and detail stable."
         },
         {
           "time": "8–10s",
-          "shot": "Jewellery on Model — final hero",
-          "direction": "Return to the original wearable framing and hold still, with the same item and model appearance."
+          "shot": "Steady finish",
+          "direction": "8–10s | Steady finish: Return to the original wearable framing and hold still, with the same item and model appearance."
         }
       ]
     },
@@ -918,23 +918,23 @@
       "storyboard": [
         {
           "time": "0–2s",
-          "shot": "Sunglasses Try-On — establish",
-          "direction": ""
+          "shot": "Face and product establish",
+          "direction": "0–2s | Face and product establish: Begin with the adult model holding the sunglasses near the face or wearing them already, choosing only the state that fits the reference and avoids inventing an extra pair."
         },
         {
           "time": "2–6s",
-          "shot": "Sunglasses Try-On — main action",
-          "direction": "If held, the model gently places the same sunglasses on the face with realistic hand movement; if already worn, make a small natural head turn instead. No abrupt appearance/disappearance or extra fingers."
+          "shot": "Natural try-on",
+          "direction": "2–6s | Natural try-on: If held, the model gently places the same sunglasses on the face with realistic hand movement; if already worn, make a small natural head turn instead. No abrupt appearance/disappearance or extra fingers."
         },
         {
           "time": "6–8s",
-          "shot": "Sunglasses Try-On — detail",
-          "direction": "Use a gentle close camera move to show the visible frame edge, bridge or hinge. Do not rotate to reveal unseen parts or create impossible reflections."
+          "shot": "Frame detail",
+          "direction": "6–8s | Frame detail: Use a gentle close camera move to show the visible frame edge, bridge or hinge. Do not rotate to reveal unseen parts or create impossible reflections."
         },
         {
           "time": "8–10s",
-          "shot": "Sunglasses Try-On — final hero",
-          "direction": "Hold a calm three-quarter portrait with the sunglasses sitting consistently. Keep face, frame shape, lens tint and background stable."
+          "shot": "Final fit",
+          "direction": "8–10s | Final fit: Hold a calm three-quarter portrait with the sunglasses sitting consistently. Keep face, frame shape, lens tint and background stable."
         }
       ]
     }
