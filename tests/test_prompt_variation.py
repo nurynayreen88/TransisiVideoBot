@@ -33,7 +33,7 @@ class CreativeVariationTests(unittest.TestCase):
             duration=20, product_type="fashion"
         )
         self.assertIn("=== KLIPPO PART 2 ===", prompt)
-        self.assertEqual(prompt.count("EXACT DURATION: 10 seconds"), 2)
+        self.assertEqual(prompt.count("OUTPUT: 10 seconds"), 2)
         self.assertIn("SECOND CLIP 10s", prompt)
 
     def test_30_seconds_returns_three_connected_10_second_parts(self):
@@ -43,7 +43,7 @@ class CreativeVariationTests(unittest.TestCase):
         )
         self.assertIn("=== KLIPPO PART 2 ===", prompt)
         self.assertIn("=== KLIPPO PART 3 ===", prompt)
-        self.assertEqual(prompt.count("EXACT DURATION: 10 seconds"), 3)
+        self.assertEqual(prompt.count("OUTPUT: 10 seconds"), 3)
         self.assertIn("THIRD CLIP 10s", prompt)
         self.assertIn("final frame from Part 2", prompt)
 
