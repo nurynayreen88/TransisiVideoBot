@@ -369,7 +369,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
             "KLIPPO | STORYBOARD VIDEO PRODUK",
             f"Format menegak 9:16. Durasi tepat 10 saat untuk klip ini" + (f" (Bahagian {part}/{total_parts})." if part else "."),
             f"Produk: {product}.",
-            f"Gaya dipilih: {style_name}. Latar: {scene}.",
+            f"Gaya dipilih: {style_name}. {' '.join(str(style_template).split())[:260].rstrip()}. Latar: {scene}.",
             f"Gerakan kamera dipilih: {motion}.",
             category_direction,
         ]
