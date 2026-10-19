@@ -521,11 +521,34 @@ def prompt_model_age_menu():
     ])
 
 
+def prompt_text_presence_menu():
+    return InlineKeyboardMarkup([
+        [InlineKeyboardButton('📝 Ada teks', callback_data='prompt_text_presence:yes')],
+        [InlineKeyboardButton('🚫 Tiada teks', callback_data='prompt_text_presence:no')],
+        [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
+    ])
+
+
+def prompt_audio_presence_menu():
+    return InlineKeyboardMarkup([
+        [InlineKeyboardButton('🔊 Ada suara', callback_data='prompt_audio_presence:yes')],
+        [InlineKeyboardButton('🔇 Tiada suara', callback_data='prompt_audio_presence:no')],
+        [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
+    ])
+
+
+def prompt_speaker_menu():
+    return InlineKeyboardMarkup([
+        [InlineKeyboardButton('🗣️ Model AI bercakap sendiri', callback_data='prompt_speaker:model')],
+        [InlineKeyboardButton('🎙️ Suara promoter di latar', callback_data='prompt_speaker:voiceover')],
+        [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
+    ])
+
+
 def prompt_language_menu():
     return InlineKeyboardMarkup([
-        [InlineKeyboardButton('Bahasa Melayu', callback_data='prompt_language:Malay'),
-         InlineKeyboardButton('English', callback_data='prompt_language:English')],
-        [InlineKeyboardButton('Tiada teks pada skrin', callback_data='prompt_language:none')],
+        [InlineKeyboardButton('🇲🇾 Bahasa Melayu', callback_data='prompt_language:Malay'),
+         InlineKeyboardButton('🇬🇧 English', callback_data='prompt_language:English')],
         [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
     ])
 
@@ -611,13 +634,18 @@ def prompt_creative_settings(user_data, include_audio=True):
             voice_styles = {'ai': 'santai dan semula jadi', 'cute': 'comel, ceria dan ringan', 'serious': 'tenang, serius dan yakin', 'energetic': 'bertenaga tanpa menjerit', 'friendly': 'mesra dan mudah didekati', 'soft': 'lembut tetapi jelas', 'custom': 'semula jadi'}
             voice_style = voice_styles.get(user_data.get('prompt_voiceover_style', 'ai'), voice_styles['ai'])
             lang = 'Bahasa Melayu Malaysia' if language != 'English' else 'English'
-            lines.append(f'Audio: suara {lang}, gaya {voice_style}; sebutan Malaysia yang jelas (bukan Indonesia). Ayat pendek ikut aksi; muzik latar perlahan di bawah suara.')
+            speaker = user_data.get('prompt_speech_source', 'voiceover')
+            source = 'the on-camera AI model speaks naturally' if speaker == 'model' else 'an off-screen promoter voiceover'
+            lines.append(f'Audio: {source} in {lang}, {voice_style} delivery; clear Malaysian pronunciation, not Indonesian. Short lines matched to the action; background music stays quieter than the voice.')
         elif voiceover_mode == 'script':
             script = ' '.join((user_data.get('prompt_voiceover_script') or '').split())
-            lines.append('Audio: gunakan skrip pengguna tepat seperti diberi: ' + script)
+            lines.append('Audio: use the user script exactly as supplied: ' + script)
         else:
-            lines.append('Audio: tanpa dialog; muzik latar sesuai hanya jika disokong platform.')
-        lines.append('Teks: tiada teks/logo/sari kata/watermark tambahan kecuali pengguna secara jelas memilih teks.')
+            lines.append('Audio: no dialogue; use suitable background music only if supported by the platform.')
+    if user_data.get('prompt_on_screen_text') == 'yes':
+        lines.append('On-screen text: only a few short, legible hook/CTA words; accurate spelling; never cover the product. No subtitles, logos or watermarks.')
+    elif user_data.get('prompt_on_screen_text') == 'no':
+        lines.append('No on-screen text, captions, subtitles, added logos or watermarks.')
     if user_data.get('prompt_custom_background'):
         lines.append('Latar sendiri: muat naik foto produk dan foto latar secara berasingan ke penjana AI; tetapkan foto produk sebagai subjek dan foto kedua sebagai latar. Kekalkan susun atur latar dan padankan perspektif/cahaya. Ulang muat naik kedua-duanya untuk setiap klip sambungan.')
     return '\n'.join(lines)
@@ -2641,15 +2669,21 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 'prompt_model_age': '26-40' if use_model else 'na',
                 'prompt_style': 'auto',
                 'prompt_language': 'Malay',
-                'prompt_voiceover_mode': 'none',
+                'prompt_voiceover_mode': 'none' if context.user_data.get('prompt_audio_enabled') is False else 'ai',
+                'prompt_voiceover_style': 'ai',
+                'prompt_speech_source': 'voiceover',
                 'prompt_voiceover_script': '',
                 'prompt_concept': '',
                 'prompt_scene': 'clean premium studio background, selected to complement the exact product reference',
                 'prompt_motion_choice': 'auto',
                 'stage': 'prompt_confirm',
             })
-            await query.message.reply_text(
-                '✅ Tetapan Auto siap. Klippo telah memilih gaya, model (jika sesuai), latar dan gerakan kamera berdasarkan produk.\n\n'
+            if context.user_data.get('prompt_audio_enabled') is True:
+                context.user_data['stage'] = 'prompt_language'
+                await query.message.reply_text('🌐 LANGKAH 8 — Pilih bahasa suara/dialog:', reply_markup=prompt_language_menu())
+            else:
+                await query.message.reply_text(
+                    '✅ Tetapan Auto siap. Klippo telah memilih gaya, model (jika sesuai), latar dan gerakan kamera berdasarkan produk.\n\n'
                 f"🛍️ Produk: {context.user_data.get('prompt_product_name', 'Produk')}\n"
                 f"📦 Kategori: {context.user_data.get('prompt_custom_category_name') or PRODUCT_TYPES.get(product_type, 'Produk lain')}\n"
                 f"🔎 Subkategori: {context.user_data.get('prompt_custom_subcategory_name') or PRODUCT_SUBTYPE_LABELS.get(context.user_data.get('prompt_product_subcategory', ''), 'Tidak dinyatakan')}\n"
@@ -2736,14 +2770,42 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             duration, duration_mode = valid_duration_modes[selected]
             context.user_data['prompt_duration'] = duration
             context.user_data['prompt_duration_mode'] = duration_mode
+            context.user_data['prompt_speech_source'] = 'voiceover'
+            context.user_data['prompt_voiceover_script'] = ''
+            context.user_data['prompt_on_screen_text'] = 'no'
+            context.user_data['stage'] = 'prompt_text_presence'
+            await query.message.reply_text('📝 LANGKAH 6 — Mahu teks dipaparkan pada skrin video?', reply_markup=prompt_text_presence_menu())
+    elif action.startswith('prompt_text_presence:') and stage == 'prompt_text_presence':
+        selected = action.split(':', 1)[1]
+        if selected in ('yes', 'no'):
+            context.user_data['prompt_on_screen_text'] = selected
+            context.user_data['stage'] = 'prompt_audio_presence'
+            await query.message.reply_text('🔊 LANGKAH 7 — Mahu suara/dialog dalam video?', reply_markup=prompt_audio_presence_menu())
+    elif action.startswith('prompt_audio_presence:') and stage == 'prompt_audio_presence':
+        selected = action.split(':', 1)[1]
+        if selected in ('yes', 'no'):
+            context.user_data['prompt_audio_enabled'] = selected == 'yes'
+            if selected == 'no':
+                context.user_data['prompt_voiceover_mode'] = 'none'
+                context.user_data['prompt_voiceover_style'] = 'none'
+                context.user_data['prompt_voiceover_script'] = ''
             context.user_data['stage'] = 'prompt_setup_mode'
             await query.message.reply_text('⚙️ Pilih cara tetapan prompt:', reply_markup=prompt_setup_mode_menu())
     elif action.startswith('prompt_language:') and stage == 'prompt_language':
         selected = action.split(':', 1)[1]
         if selected in ('Malay', 'English', 'none'):
             context.user_data['prompt_language'] = selected
+            context.user_data['stage'] = 'prompt_speaker' if context.user_data.get('prompt_model_presence') == 'yes' else 'prompt_voiceover'
+            if context.user_data['stage'] == 'prompt_speaker':
+                await query.message.reply_text('🎙️ Pilih sumber suara:', reply_markup=prompt_speaker_menu())
+            else:
+                await query.message.reply_text('🎙️ Pilih gaya suara atau skrip:', reply_markup=prompt_voiceover_menu())
+    elif action.startswith('prompt_speaker:') and stage == 'prompt_speaker':
+        selected = action.split(':', 1)[1]
+        if selected in ('model', 'voiceover'):
+            context.user_data['prompt_speech_source'] = selected
             context.user_data['stage'] = 'prompt_voiceover'
-            await query.message.reply_text('🎙️ LANGKAH 5 — Skrip atau voiceover adalah pilihan:', reply_markup=prompt_voiceover_menu())
+            await query.message.reply_text('🎙️ Pilih gaya suara atau skrip:', reply_markup=prompt_voiceover_menu())
     elif action.startswith('prompt_voiceover:') and stage == 'prompt_voiceover':
         selected = action.split(':', 1)[1]
         valid_voice_styles = {'none', 'ai', 'cute', 'serious', 'energetic', 'friendly', 'soft', 'script'}
@@ -2786,8 +2848,16 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             # Accept a valid framing choice from an older Telegram keyboard if the
             # current prompt session still has its product type and visual style.
             context.user_data['prompt_framing'] = selected
-            context.user_data['stage'] = 'prompt_language'
-            await query.message.reply_text('🌐 LANGKAH 4 — Pilih bahasa teks pada skrin:', reply_markup=prompt_language_menu())
+            if context.user_data.get('prompt_audio_enabled') is False:
+                context.user_data['prompt_voiceover_mode'] = 'none'
+                context.user_data['stage'] = 'prompt_idea_choice'
+                await query.message.reply_text(
+                    '💡 Mahu tambah satu idea aksi daripada koleksi prompt siap? Pilihan ini akan digabungkan ke dalam prompt yang sama.',
+                    reply_markup=prompt_idea_choice_menu()
+                )
+            else:
+                context.user_data['stage'] = 'prompt_language'
+                await query.message.reply_text('🌐 LANGKAH 8 — Pilih bahasa suara/dialog:', reply_markup=prompt_language_menu())
         else:
             logging.warning('Rejected stale prompt framing callback=%r stage=%r', action, stage)
             await query.message.reply_text(
@@ -2859,7 +2929,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # callbacks must continue into the second chain.
     if action in ('admin_pending', 'admin', 'storyboard', 'make', 'prompt', 'prompt_categories', 'prompt_images_done') or action.startswith(
         ('admin_approve:', 'admin_reject:', 'prompt_flow:', 'prompt_mode:', 'prompt_model:', 'prompt_model_count:', 'prompt_model_gender:', 'prompt_model_hijab:', 'prompt_model_ethnicity:', 'prompt_model_age:', 'prompt_language:', 'prompt_voiceover:', 'prompt_type:', 'prompt_product_type:', 'prompt_product_subcategory:', 'prompt_product_categories', 'prompt_duration:',
-         'prompt_style:', 'prompt_setup:', 'prompt_idea:', 'prompt_details:', 'video_input:', 'prompt_input:', 'pcat:', 'ptpl:')
+         'prompt_style:', 'prompt_setup:', 'prompt_idea:', 'prompt_details:', 'prompt_text_presence:', 'prompt_audio_presence:', 'prompt_speaker:', 'video_input:', 'prompt_input:', 'pcat:', 'ptpl:')
     ):
         return
     if action.startswith('motion:') and context.user_data.get('stage') == 'prompt_motion':
