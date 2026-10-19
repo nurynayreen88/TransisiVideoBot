@@ -486,7 +486,6 @@ def prompt_model_gender_menu():
     return InlineKeyboardMarkup([
         [InlineKeyboardButton('Wanita', callback_data='prompt_model_gender:female'),
          InlineKeyboardButton('Lelaki', callback_data='prompt_model_gender:male')],
-        [InlineKeyboardButton('Campuran', callback_data='prompt_model_gender:mixed')],
         [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
     ])
 
@@ -2664,8 +2663,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 'prompt_style':'auto','prompt_language':'Malay','prompt_voiceover_mode':'ai','prompt_voiceover_style':'auto',
                 'prompt_speech_source':'voiceover','prompt_voiceover_script':'','prompt_concept':'',
                 'prompt_scene':'clean premium studio background, selected to complement the exact product reference',
-                'prompt_motion_choice':'auto','prompt_framing':'auto','prompt_on_screen_text':'no','prompt_text_mode':'none',
-                'prompt_text_content':'','prompt_audio_enabled':False,'stage':'prompt_scene'
+                'prompt_motion_choice':'auto','prompt_framing':'auto','prompt_on_screen_text':'yes','prompt_text_mode':'auto',
+                'prompt_text_content':'','prompt_audio_enabled':True,'stage':'prompt_scene'
             })
             await query.message.reply_text('🖼️ Pilih latar video:', reply_markup=prompt_scene_menu())
         elif selected == 'manual':
@@ -2690,7 +2689,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await query.message.reply_text('Pilih jantina model pertama:', reply_markup=prompt_model_gender_menu())
     elif action.startswith('prompt_model_gender:') and stage in ('prompt_model_gender','prompt_model_gender_2'):
         selected = action.split(':', 1)[1]
-        if selected in ('female','male','mixed'):
+        if selected in ('female','male'):
             if stage == 'prompt_model_gender_2':
                 context.user_data['prompt_model_gender_2'] = selected
                 context.user_data['stage'] = 'prompt_model_age_2'
@@ -2743,7 +2742,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     return
             else:
                 context.user_data['prompt_model_hijab'] = selected
-                if int(context.user_data.get('prompt_model_count',1)) == 2 and context.user_data.get('prompt_model_gender_2') == 'female':
+                if int(context.user_data.get('prompt_model_count',1)) == 2 and context.user_data.get('prompt_model_gender_2') == 'female' and context.user_data.get('prompt_model_hijab_2','na') == 'na':
                     context.user_data['prompt_hijab_target'] = 2
                     await query.message.reply_text('Model kedua wanita — pilih bertudung atau tidak:', reply_markup=prompt_model_hijab_menu())
                     return
@@ -3217,22 +3216,22 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     )
                 )
                 if context.user_data.get('prompt_model_presence') == 'yes' and int(context.user_data.get('prompt_model_count',1)) == 2:
-                    prompt += ('\\n\\nTWO-MODEL CAST: Model 1 is ' + str(context.user_data.get('prompt_model_gender','female')) + ', age ' + str(context.user_data.get('prompt_model_age','26-40')) + ', hijab ' + str(context.user_data.get('prompt_model_hijab','na')) + '. Model 2 is ' + str(context.user_data.get('prompt_model_gender_2','male')) + ', age ' + str(context.user_data.get('prompt_model_age_2','26-40')) + ', hijab ' + str(context.user_data.get('prompt_model_hijab_2','na')) + '. Keep identities distinct and consistent.')
+                    prompt += ('\n\nTWO-MODEL CAST: Model 1 is ' + str(context.user_data.get('prompt_model_gender','female')) + ', age ' + str(context.user_data.get('prompt_model_age','26-40')) + ', hijab ' + str(context.user_data.get('prompt_model_hijab','na')) + '. Model 2 is ' + str(context.user_data.get('prompt_model_gender_2','male')) + ', age ' + str(context.user_data.get('prompt_model_age_2','26-40')) + ', hijab ' + str(context.user_data.get('prompt_model_hijab_2','na')) + '. Keep identities distinct and consistent.')
                 elif context.user_data.get('prompt_model_presence') == 'yes':
-                    prompt += ('\\n\\nMODEL CAST: One ' + str(context.user_data.get('prompt_model_gender','female')) + ' model, age ' + str(context.user_data.get('prompt_model_age','26-40')) + ', hijab ' + str(context.user_data.get('prompt_model_hijab','na')) + '.')
+                    prompt += ('\n\nMODEL CAST: One ' + str(context.user_data.get('prompt_model_gender','female')) + ' model, age ' + str(context.user_data.get('prompt_model_age','26-40')) + ', hijab ' + str(context.user_data.get('prompt_model_hijab','na')) + '.')
                 if context.user_data.get('prompt_on_screen_text') == 'yes':
                     if context.user_data.get('prompt_text_mode') == 'manual' and context.user_data.get('prompt_text_content'):
-                        prompt += '\\n\\nON-SCREEN TEXT: Display exactly this text, with correct spelling and no extra words: ' + context.user_data['prompt_text_content']
+                        prompt += '\n\nON-SCREEN TEXT: Display exactly this text, with correct spelling and no extra words: ' + context.user_data['prompt_text_content']
                     else:
-                        prompt += '\\n\\nON-SCREEN TEXT: Add concise Malaysian Malay promotional text with a strong hook and clear CTA. Keep spelling accurate; do not add logos or unrelated text.'
+                        prompt += '\n\nON-SCREEN TEXT: Add concise Malaysian Malay promotional text with a strong hook and clear CTA. Keep spelling accurate; do not add logos or unrelated text.'
                 else:
-                    prompt += '\\n\\nON-SCREEN TEXT: Do not display any text, captions, labels, logos or watermarks.'
+                    prompt += '\n\nON-SCREEN TEXT: Do not display any text, captions, labels, logos or watermarks.'
                 if context.user_data.get('prompt_audio_enabled'):
-                    prompt += '\\n\\nAUDIO: ' + ('The on-camera model speaks naturally' if context.user_data.get('prompt_speech_source') == 'model' else 'Use an off-camera promoter voiceover') + '. Language: ' + str(context.user_data.get('prompt_language','Malay')) + '. Voice style: ' + str(context.user_data.get('prompt_voiceover_style','auto')) + '.'
+                    prompt += '\n\nAUDIO: ' + ('The on-camera model speaks naturally' if context.user_data.get('prompt_speech_source') == 'model' else 'Use an off-camera promoter voiceover') + '. Language: ' + str(context.user_data.get('prompt_language','Malay')) + '. Voice style: ' + str(context.user_data.get('prompt_voiceover_style','auto')) + '.'
                     if context.user_data.get('prompt_voiceover_mode') == 'script' and context.user_data.get('prompt_voiceover_script'):
                         prompt += ' Use this exact spoken script: ' + context.user_data['prompt_voiceover_script']
                 else:
-                    prompt += '\\n\\nAUDIO: No voiceover or spoken dialogue.'
+                    prompt += '\n\nAUDIO: No voiceover or spoken dialogue.'
                 framing_key = context.user_data.get('prompt_framing', 'auto')
                 # Always tailor actions to the actual product and its intended age group.
                 if _prompt_is_child_product(context.user_data):
