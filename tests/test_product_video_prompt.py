@@ -19,8 +19,8 @@ class ProductVideoPromptTests(unittest.TestCase):
         self.assertIn("bahasa melayu malaysia", prompt)
         self.assertIn("indonesian voice", prompt)
         self.assertIn("no on-screen text", prompt)
-        self.assertIn("CATEGORY-SPECIFIC SCENE AND ACTION LOGIC", prompt)
-        self.assertEqual(prompt.count("Open immediately with a product-specific visual hook."), 1)
+        self.assertIn("category-specific scene and action logic", prompt)
+        self.assertEqual(prompt.count("open immediately with a product-specific visual hook."), 1)
 
     def test_longer_durations_have_different_story_progression(self):
         ten = build_video_prompts(10)[0]
