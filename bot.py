@@ -2718,7 +2718,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     'PRODUCT LOCK: Preserve the exact product identity from the uploaded photo, including its visible shape, colour, print, pattern, cut, packaging, proportions, hardware and details. '
                     'Do not redesign, recolour, replace, add or remove product features. Do not invent logos, labels, accessories, materials or claims. '
                     'For clothing, keep the garment print, neckline, sleeves, fit and fabric appearance faithful to the reference. '
-                    'A model or environment may be added only to present the same product; do not let styling obscure it.\n\n'
+                    'Keep styling from obscuring the product.\n\n'
                     'OUTPUT: One cohesive, photorealistic vertical 9:16 image, premium editorial quality. '
                     'No collage, split screen, poster layout, captions, promotional text, watermark or extra logos. '
                     'Avoid distorted hands, unnatural faces, plastic skin, warped product geometry and artificial CGI appearance.'
@@ -2726,13 +2726,12 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 if context.user_data.get('prompt_model_presence') == 'yes':
                     image_prompt += (
                         '\n\nMODEL DIRECTION: Include ' + str(context.user_data.get('prompt_model_count', 1)) +
-                        ' consistent adult model(s); gender: ' + str(context.user_data.get('prompt_model_gender', 'female')) +
+                        ' consistent model(s) appropriate to the product age group; gender: ' + str(context.user_data.get('prompt_model_gender', 'female')) +
                         '; head covering: ' + str(context.user_data.get('prompt_model_hijab', 'not specified')) +
                         '; appearance: ' + str(context.user_data.get('prompt_model_ethnicity', 'any')) +
-                        '; age: appropriate to the product category; ' +
                         '. Keep the same face, hair/head covering and outfit consistent throughout.'
                     )
-                else:
+                elif context.user_data.get('prompt_model_presence') == 'no':
                     image_prompt += '\n\nMODEL DIRECTION: No human model. Focus entirely on the exact product.'
                 context.user_data['prompt_image_ready'] = image_prompt
                 image_action_rows = [
