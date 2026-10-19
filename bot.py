@@ -472,6 +472,14 @@ def prompt_model_age_menu():
     ])
 
 
+def prompt_audio_presence_menu():
+    return InlineKeyboardMarkup([
+        [InlineKeyboardButton('🔊 Ada suara', callback_data='prompt_audio:yes')],
+        [InlineKeyboardButton('🔇 Tiada suara', callback_data='prompt_audio:no')],
+        [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
+    ])
+
+
 def prompt_language_menu():
     # This selection controls dialogue language for both on-camera speech and off-screen voiceover.
     return InlineKeyboardMarkup([
@@ -483,7 +491,6 @@ def prompt_language_menu():
 
 def prompt_voiceover_menu():
     return InlineKeyboardMarkup([
-        [InlineKeyboardButton('🔇 Tanpa dialog / voiceover', callback_data='prompt_voiceover:none')],
         [InlineKeyboardButton('🤖 Auto — jana skrip', callback_data='prompt_voiceover:ai')],
         [InlineKeyboardButton('✍️ Masukkan skrip sendiri', callback_data='prompt_voiceover:script')],
         [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
@@ -2230,14 +2237,30 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         selected = action.split(':', 1)[1]
         if selected in ('10', '20', '30'):
             context.user_data['prompt_duration'] = int(selected)
+            context.user_data['stage'] = 'prompt_audio'
+            await query.message.reply_text('🔊 LANGKAH 6 — Mahu video ini mempunyai suara?', reply_markup=prompt_audio_presence_menu())
+    elif action.startswith('prompt_audio:') and stage == 'prompt_audio':
+        selected = action.split(':', 1)[1]
+        if selected == 'yes':
+            context.user_data['prompt_voiceover_mode'] = 'ai'
+            context.user_data['prompt_voiceover_script'] = ''
             context.user_data['stage'] = 'prompt_language'
-            await query.message.reply_text('🌐 LANGKAH 6 — Pilih bahasa pertuturan. Video kekal tanpa teks pada skrin:', reply_markup=prompt_language_menu())
+            await query.message.reply_text('🌐 LANGKAH 7 — Pilih bahasa pertuturan. Video kekal tanpa teks pada skrin:', reply_markup=prompt_language_menu())
+        elif selected == 'no':
+            context.user_data['prompt_voiceover_mode'] = 'none'
+            context.user_data['prompt_voiceover_script'] = ''
+            context.user_data['prompt_speech_source'] = 'voiceover'
+            context.user_data['stage'] = 'prompt_idea_choice'
+            await query.message.reply_text(
+                '💡 Mahu tambah satu idea aksi daripada koleksi prompt siap? Pilihan ini akan digabungkan ke dalam prompt yang sama.',
+                reply_markup=prompt_idea_choice_menu()
+            )
     elif action.startswith('prompt_language:') and stage == 'prompt_language':
         selected = action.split(':', 1)[1]
-        if selected in ('Malay', 'English', 'none'):
+        if selected in ('Malay', 'English'):
             context.user_data['prompt_language'] = selected
             context.user_data['stage'] = 'prompt_voiceover'
-            await query.message.reply_text('🎙️ LANGKAH 7 — Pilih cara penyampaian dialog atau voiceover:', reply_markup=prompt_voiceover_menu())
+            await query.message.reply_text('🎙️ LANGKAH 8 — Pilih skrip pertuturan:', reply_markup=prompt_voiceover_menu())
     elif action.startswith('prompt_voiceover:') and stage == 'prompt_voiceover':
         selected = action.split(':', 1)[1]
         context.user_data['prompt_voiceover_mode'] = selected
@@ -2341,7 +2364,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # Return only for actions handled by the first chain. Video workflow
     # callbacks must continue into the second chain.
     if action in ('admin_pending', 'admin', 'storyboard', 'make', 'prompt', 'prompt_categories', 'prompt_images_done') or action.startswith(
-        ('admin_approve:', 'admin_reject:', 'prompt_mode:', 'prompt_flow:', 'prompt_model:', 'prompt_model_count:', 'prompt_model_gender:', 'prompt_model_hijab:', 'prompt_model_ethnicity:', 'prompt_model_age:', 'prompt_language:', 'prompt_voiceover:', 'prompt_speaker:', 'prompt_type:', 'prompt_product_type:', 'prompt_duration:',
+        ('admin_approve:', 'admin_reject:', 'prompt_mode:', 'prompt_flow:', 'prompt_model:', 'prompt_model_count:', 'prompt_model_gender:', 'prompt_model_hijab:', 'prompt_model_ethnicity:', 'prompt_model_age:', 'prompt_audio:', 'prompt_language:', 'prompt_voiceover:', 'prompt_speaker:', 'prompt_type:', 'prompt_product_type:', 'prompt_duration:',
          'prompt_style:', 'prompt_idea:', 'prompt_details:', 'video_input:', 'prompt_input:', 'pcat:', 'ptpl:')
     ):
         return
