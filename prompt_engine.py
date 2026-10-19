@@ -37,7 +37,7 @@ def _model_age_direction(product, product_type='other'):
     name = (product or '').casefold()
     if product_type not in ('fashion', 'hijab', 'shoes', 'bag', 'accessory', 'other'):
         return ""
-    baby_terms = ('newborn', 'new born', 'bayi', 'infant', 'baby clothes', 'baju baby',
+    baby_terms = ('babyshop', 'baby ', 'newborn', 'new born', 'bayi', 'infant', 'baby clothes', 'baju baby',
                   'baju bayi', 'romper bayi', 'toddler', '0-3 bulan', '3-6 bulan',
                   '6-12 bulan', '12-18 bulan', '18-24 bulan')
     child_terms = ('kanak-kanak', 'kanak kanak', 'budak', 'kids', 'kid ', 'children',
