@@ -146,6 +146,8 @@ HOOKS = {
     "katil": (("katil", "mattress", "bed"), ("TENGOK PRODUK INI",)),
     "pakaian": (("baju", "shirt", "dress", "clothing", "jacket"), ("TENGOK PAKAIAN INI",)),
     "alat_dapur": (("dapur", "kitchen", "pan", "pot", "blender"), ("TENGOK PRODUK DAPUR INI",)),
+    "cincin": (("cincin", "ring", "engagement ring", "wedding band", "jewellery ring", "jewelry ring"), ("Perhatikan reka bentuk cincin ini.", "Sedang mencari cincin yang sesuai dengan gaya anda?", "Lihat perincian cincin ini dengan lebih dekat.")),
+    "barang_kemas": (("barang kemas", "jewellery", "jewelry", "gelang", "bracelet", "rantai", "necklace", "loket", "pendant", "subang", "earring"), ("Lihat perincian barang kemas ini.", "Sedang mencari aksesori yang melengkapi gaya anda?", "Perhatikan reka bentuknya dengan lebih dekat.")),
 }
 HOOK_SCHEMA = """CREATE TABLE IF NOT EXISTS storyboard_hooks (
     category TEXT PRIMARY KEY, keywords TEXT NOT NULL, hooks TEXT NOT NULL,
