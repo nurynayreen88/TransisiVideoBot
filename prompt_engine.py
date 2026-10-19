@@ -240,6 +240,12 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
     )
     if mode == "storyboard":
         style_key, style_name, style_template = resolve(style)
+        concise_framework = ""
+        if product_type == "other" or universal_custom:
+            concise_framework = (
+                " UNIVERSAL CREATIVE FRAMEWORK: " + _universal_prompt_direction(style_key)[:180]
+                + " UNIVERSAL SAFETY RULES: Preserve visible product details; invent no features or claims."
+            )
         doodle = style_key == "white_doodle"
         hook = product_hook(product)
         if product_type == "other" or universal_custom:
@@ -300,8 +306,8 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
             concept_rule = ("CREATIVE IDEA: " + concept.strip() + ". " if concept and concept.strip() else "")
             return (
                 "VIDEO PROMPT — " + str(duration) + " SECONDS" + (" | PART " + str(part) if part else "") + "\n"
-                "Realistic vertical 9:16 product ad, exactly " + str(duration) + " seconds.\n"
-                "PRODUCT: " + product + "\n" + concise_category_direction + "\n"
+                "Realistic vertical 9:16 (1080x1920) product ad for Shopee/TikTok, exactly " + str(duration) + " seconds.\n"
+                "PRODUCT: " + product + "\n" + concise_category_direction + concise_framework + "\n"
                 + "STYLE: " + style_name + " — " + style_template[:70].strip() + "\n"
                 + "SETTING: " + str(scene)[:100].strip() + "\nCAMERA: " + camera[:70].strip() + "\n"
                 + hook_rule + beat_plan + concept_rule[:100] + doodle_rule
