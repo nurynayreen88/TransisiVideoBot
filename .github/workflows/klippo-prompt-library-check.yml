@@ -31,7 +31,7 @@ jobs:
         run: |
           python - <<'PY'
           import re
-          from prompt_engine import build_prompt
+          from prompt_engine import build_prompt, _category_safe_storyboard
 
           common = dict(
               mode="video",
@@ -44,6 +44,27 @@ jobs:
           single = build_prompt(**common, duration=10)
           double = build_prompt(**common, duration=20)
           triple = build_prompt(**common, duration=30)
+
+          # A selected category must not inherit shot instructions for another product type.
+          shoe_shots = [{
+              "time": "2–6s",
+              "shot": "Lace touch and garment detail",
+              "direction": "Show the shoe lace, then a garment close-up and bag handle."
+          }]
+          shoe_safe = _category_safe_storyboard(shoe_shots, "shoes")
+          assert shoe_safe[0]["shot"] == "PRODUCT DETAIL"
+          assert "footwear detail" in shoe_safe[0]["direction"]
+          assert "garment" not in shoe_safe[0]["direction"].casefold()
+          assert "bag handle" not in shoe_safe[0]["direction"].casefold()
+
+          toy_safe = _category_safe_storyboard([{
+              "time": "6–8s",
+              "shot": "Footwear close-up",
+              "direction": "Show footwear fully grounded on a flat dry surface."
+          }], "toys")
+          assert toy_safe[0]["shot"] == "PRODUCT DETAIL"
+          assert "actual toy" in toy_safe[0]["direction"]
+          assert "footwear" not in toy_safe[0]["direction"].casefold()
 
           assert "10 seconds" in single
           assert "HOOK + DEMONSTRATION + CTA:" in single
