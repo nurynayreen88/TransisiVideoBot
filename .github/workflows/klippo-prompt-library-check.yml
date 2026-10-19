@@ -59,6 +59,14 @@ jobs:
           category_ids = [item.get("id") for item in categories]
           assert len(category_ids) == len(set(category_ids)), "Duplicate category ids found"
           for category in categories:
+              labels = [
+                  str(prompt.get("label", "")).casefold()
+                  for prompt in prompts if prompt.get("category") == category["id"]
+              ]
+              assert len(labels) == len(set(labels)), (
+                  f"Duplicate prompt labels in category {category['id']}"
+              )
+          for category in categories:
               assert category.get("label"), f"Category missing label: {category}"
               for prompt_id in category.get("prompt_ids", []):
                   assert prompt_id in by_id, f"Missing prompt referenced by {category['id']}: {prompt_id}"
