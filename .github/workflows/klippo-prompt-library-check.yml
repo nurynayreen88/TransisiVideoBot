@@ -300,12 +300,9 @@ jobs:
                   storyboard_override=curated["storyboard"],
               )
               assert curated_prompt.startswith("VIDEO PROMPT — 10 SECONDS")
-              assert "1080x1920" in curated_prompt, "Storyboard prompt missing HD vertical target"
-              assert "Shopee/TikTok full-screen mobile viewing" in curated_prompt, (
-                  "Storyboard prompt missing Shopee/TikTok mobile composition guidance"
-              )
-              assert "DIRECTOR'S CURATED PREMIUM STORYBOARD" in curated_prompt
-              assert "NO ON-SCREEN TEXT" in curated_prompt
+              assert "Vertical 9:16" in curated_prompt, "Storyboard prompt missing vertical format"
+              assert "PRODUCT LOCK:" in curated_prompt
+              assert "SELECTED STORYBOARD:" in curated_prompt
               for shot in curated["storyboard"]:
                   assert shot["direction"] in curated_prompt, (
                       f"Selected storyboard shot was not used: {curated['id']} / {shot['time']}"
@@ -324,9 +321,8 @@ jobs:
                   storyboard_override=curated["storyboard"],
               )
               assert "=== KLIPPO PART 2 ===" in paired_curated
-              assert "CONTINUITY BRIDGE" in paired_curated
-              assert "CONTINUATION ACTION" in paired_curated
-              assert "Do not repeat the opening hook" in paired_curated
+              assert "CONTINUITY:" in paired_curated
+              assert "do not repeat its hook" in paired_curated
               assert "\\n\\n" not in curated_prompt, (
                   "Generated prompt contains literal escaped newlines instead of copy-ready formatting"
               )
@@ -357,18 +353,18 @@ jobs:
                   "storyboard", uncertain, "clean premium studio background",
                   "push", "white_doodle", 10
               )
-              assert "NO ON-SCREEN TEXT" in first
+              assert "HOOK + CTA:" in first
               assert "Do not perform the main surrounding contour yet." in first
               assert "HOLD the final frame" in first
-              assert "Never guess a category, benefit, price, popularity or product name." in first
+              assert "Use only supported product details." in first
 
               verified = "NAMA_PRODUK: Beg VELLA"
               verified_prompt = build_prompt(
                   "storyboard", verified, "clean premium studio background",
                   "push", "white_doodle", 10
               )
-              assert "NO ON-SCREEN TEXT" in verified_prompt, (
-                  "Verified product name must not create an on-screen text overlay"
+              assert "HOOK + CTA:" in verified_prompt, (
+                  "Verified product name should receive a product-specific hook"
               )
 
               paired = build_prompt(
