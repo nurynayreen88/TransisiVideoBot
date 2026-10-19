@@ -97,7 +97,7 @@ def build_prompt(mode, product, scene, motion, style='auto', duration=10, concep
 
 def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, duration=10, concept='', product_type='other', storyboard_override=None, universal_custom=False):
     scene_text = str(scene or '').lower()
-    selected_scene_lock = "STRICT LOCATION LOCK: The user-selected location is exactly: " + str(scene or "a realistic setting suited to the product") + ". Keep every scene in this location. Do not change it to an airport, terminal, mall, studio, home or any other place unless that place is explicitly the selected location. Product category must never override the selected location. "
+    selected_scene_lock = "LOCATION: Keep every shot in the selected setting (" + str(scene or "a realistic setting suited to the product") + "); do not substitute another location. "
     if motion in ('auto', '', None):
         if any(term in scene_text for term in ('mirror', 'vanity', 'dressing table', 'cermin')):
             camera = "Use a stable medium framing that follows the model's small natural movements, then a gentle side adjustment to include the mirror reflection; never circle around the model or distort the reflection."
@@ -288,7 +288,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
                 "Vertical 9:16, one realistic product ad, target 1080x1920, highest available native quality, crisp visible product detail, natural colour and exposure, low noise, stable frame-to-frame geometry, composed for Shopee/TikTok full-screen mobile viewing with the product inside the safe area, exactly " + str(duration) + " seconds.\n"
                 "PRODUCT: " + product + "\n"
                 + category_direction + "\n"
-                + "STYLE: " + style_name + " — " + style_template[:450] + "\n"
+                + "STYLE: " + style_name + " — " + style_template[:190].strip() + "\n"
                 + "SETTING: " + scene[:300] + ". CAMERA: " + camera + "\n"
                 + hook_rule + beat_plan + concept_rule[:400] + doodle_rule
                 + "REFERENCE LOCK: Use the uploaded photo as the source of truth. Preserve visible shape, colour, print, packaging, proportions and branding. "
@@ -438,7 +438,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
             "KLIPPO | UNIVERSAL PRODUCT VIDEO PROMPT | " + style_name + (" | BAHAGIAN " + str(part) if part else "") + "\n"
             "OUTPUT: One cohesive vertical 9:16 product advertisement, target resolution 1080x1920, highest available native quality, crisp product detail, natural colour and exposure, low noise, stable frame-to-frame geometry, composed for Shopee/TikTok full-screen mobile viewing with the product inside the safe area, EXACT DURATION: " + str(duration) + " seconds.\n\n"
             "PRODUCT NAME: " + product + "\n" + category_direction + "\n\n" + identity + "\n\n"
-            "STYLE FROM KLIPPO CATALOG: " + style_template + "\n\n"
+            "STYLE: " + style_name + " — " + style_template[:240].strip() + "\n\n"
             "SETTING: " + scene + "\n"
             "CAMERA: " + camera + " Keep framing plausible for the named product; avoid unsupported angles or features.\n\n"
             + evidence_rules + "\n\n" + (
