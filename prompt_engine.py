@@ -437,58 +437,30 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
         )
     if mode == "storyboard":
         shots = [
-            ("01 | HOOK | 0–2s", "Open with a compelling but reference-safe close view. Use a subtle camera move and light reveal; do not invent a product feature."),
-            ("02 | REVEAL | 2–4s", "Reveal the complete product in a balanced frame. Keep scale, proportions and orientation faithful to the reference."),
-            ("03 | CONTEXT | 4–6s", "Place the same product in a believable setting suited to its category. Do not add props that imply included accessories or unsupported functions."),
-            ("04 | DETAIL | 6–8s", "Emphasize one genuinely visible detail using a controlled close-up. Do not reveal unseen sides or fabricate material details."),
-            ("05 | HERO CLOSING | 8–10s", "Return to a clean full-product hero frame. Ease into a stable hold and a subtle fade; no invented slogan, price or claim.")
+            ("HOOK 0–2s", "Quick visual reveal; no text."),
+            ("REVEAL 2–4s", "Show the whole product accurately."),
+            ("CONTEXT 4–6s", "Place it in a believable setting."),
+            ("DETAIL 6–8s", "Highlight one visible detail."),
+            ("CLOSING 8–10s", "Hold a clean full-product shot.")
         ]
-        direction = ("DIRECTOR'S FIVE-PANEL STORYBOARD: Deliver one cohesive commercial with exactly five panels, each exactly 2 seconds. "
-                      "Treat these as connected editing beats, not five different product designs. Keep the same product identity, "
-                      "spatial orientation, visual palette and believable light direction in every panel.\n\n"
-                      + "\n\n".join(title + "\nVISUAL AND CAMERA BRIEF: " + detail for title, detail in shots)
-                      + "\n\nEDITING AND CONTINUITY: Use clean match cuts or gentle transitions. Every panel must advance the story from curiosity "
-                      "to product recognition, a visible detail and a memorable closing hero frame. Avoid flashy templates, random zooms and inconsistent set geometry.")
+        direction = ("Five connected 2-second scenes: "
+                      + " | ".join(title + ": " + detail for title, detail in shots)
+                      + " Keep product identity, colour and lighting consistent. No invented features or text.")
     else:
         direction = (
-            "DIRECTOR'S SINGLE-TAKE BRIEF: Create one sophisticated uninterrupted " + str(duration) + "-second commercial, "
-            "not a slideshow, montage or set of disconnected AI shots. Keep the product almost stationary while the camera or light moves gently; one primary camera move only. The visual story progresses from "
-            "anticipation to discovery and finally a confident product hero moment.\n\n"
-            "0.0–2.0s | OPENING: Begin with a deliberately composed medium-wide shot. Establish the selected "
-            "environment with natural perspective, restrained highlights and believable grounding. Introduce "
-            "the product using a delicate light reveal rather than sudden object appearance. Keep its visible "
-            "branding and outline stable from the first frame.\n\n"
-            "2.0–5.0s | DEVELOPMENT: Start the requested camera move with gradual acceleration: " + camera +
-            " Build depth through the background and lighting rather than bending or reconstructing the object. Do not rotate the product or reveal an unseen side. "
-            "Hold a clean focal plane on the product. Show only surfaces genuinely supported by the reference.\n\n"
-            "5.0–7.5s | VISUAL EMPHASIS: Refine the composition around a visible material, finish or design detail. "
-            "Use subtle controlled light falloff and accurate reflections. Preserve the exact packaging and "
-            "typography, without enhancing unreadable text into invented words. Keep movement continuous and natural.\n\n"
-            "7.5–10.0s | HERO FINISH: Ease the camera into a balanced full-product composition. Let the product "
-            "remain clearly legible, with polished edge separation and a stable contact shadow. Finish on a "
-            "brief confident hold with an understated lighting accent. No unrequested caption, CTA or watermark; follow the ON-SCREEN TEXT rule exactly.\n\n"
-            "CINEMATOGRAPHY: Premium commercial lens language, elegant motion curves, coherent depth of field, "
-            "physically plausible parallax and natural material response. Maintain one consistent studio space "
-            "and color grade throughout; avoid frantic motion, jump cuts, fake rotations or excessive effects."
+            "One continuous " + str(duration) + "-second product ad. Start with a clear reveal, move gently to show one visible detail, "
+            "then return to a stable full-product closing shot. Use one smooth camera move, natural light and a consistent setting. "
+            "Preserve the product exactly; no invented angles, features or text."
         )
     if duration == 20:
         direction = (
-            "DIRECTOR'S SINGLE-TAKE 20-SECOND BRIEF: 0-4s establish the named product in its setting; "
-            "4-8s restrained camera push or lateral movement with realistic parallax; "
-            "8-12s emphasize a genuinely visible detail using subtle focus and light; "
-            "12-16s ease back to a complete recognizable product view with the same identity and background; "
-            "16-20s elegant hero hold and gentle fade. Keep continuity, avoid new unseen angles, "
-            "avoid added text or invented features. This is one coherent commercial, not a slideshow."
+            "20s: 0–4s reveal product; 4–8s gentle camera move; 8–12s show one visible detail; "
+            "12–16s return to full view; 16–20s steady hero finish. One continuous scene, no invented features or text."
         )
     if part == 1:
-        direction = ("FIRST CLIP 10s, five 2-second panels: 0-2s establish the product; 2-4s reveal the complete product; "
-                     "4-6s focus on one genuinely visible detail; 6-8s continue a complementary action; "
-                     "8-10s return to a stable full-product frame and hold without fade to connect directly into Part 2.")
+        direction = "PART 1: reveal product, show one detail, then hold the full-product frame for Part 2."
     elif part == 2:
-        direction = ("SECOND CLIP 10s, five 2-second panels: start with the EXACT held full-product final frame from Part 1, "
-                     "matching crop, product position, orientation, setting, lighting and color. "
-                     "0-2s resume the same movement; 2-4s continue the action; 4-6s highlight another visible detail; "
-                     "6-8s maintain coherent context; 8-10s full-product hero finish with graceful fade. No new product, scene or angle.")
+        direction = "PART 2: match Part 1's final frame exactly, continue the action, show another visible detail and end on a clear hero shot. No repeated hook."
     product_words = (product or "").lower()
     fashion_terms = ("kurung", "baju", "tudung", "hijab", "dress", "clothing", "apparel",
                      "fashion", "outfit", "blouse", "skirt", "trousers", "pants", "garment",
@@ -496,16 +468,10 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
     is_fashion = any(term in product_words for term in fashion_terms)
     if is_fashion and mode != "storyboard" and part == 0 and duration != 20:
         direction = (
-            "DIRECTOR'S NATURAL FASHION TRY-ON BRIEF: Create one continuous, believable 10-second vertical fashion product video with realistic skin and fabric texture. "
-            "Keep the model's appearance and outfit consistent. Unless the user explicitly selected a mirror-selfie concept, the model must NOT hold a phone, film themselves, pose for a mirror selfie or behave as the camera operator. "
-            "Use an external camera operated by an unseen videographer. Follow the exact user-selected location; never replace it with a home, bedroom or dressing room. "
-            "0–2s | ESTABLISH: Show the model and full outfit naturally within the selected location. "
-            "2–5s | NATURAL ACTION: Use one small, relaxed action suited to the location, such as a short walk, a natural pause or a subtle adjustment to a sleeve or garment. Keep both hands naturally placed unless the product action requires otherwise. "
-            "5–8s | OUTFIT DETAIL: Let the external camera move subtly to show visible garment details without cropping away the product or fabric unnaturally. "
-            "8–10s | FINISH: Settle into a relaxed, natural pose and hold briefly. Keep movement human and physically plausible; no dancing, exaggerated posing or scene changes. "
-            "FASHION PRODUCT LOCK: The exact garment must remain unchanged frame to frame—same color, print, pattern placement, neckline, sleeves, cut, fit, fabric, accessories and proportions. "
-            "Keep the chosen hijab style and handbag presentation consistent. Never redesign, recolor, reshape, add or remove stated outfit details. "
-            "Use the selected location's lighting and surroundings. No collage, split screen, poster layout, outfit change, plastic skin or CGI. " + selected_scene_lock
+            "Fashion ad, one continuous shot. Show the full outfit in the selected location; use one relaxed, natural action, "
+            "then a brief close view of visible fabric/design details and a steady finish. External camera, not a selfie. "
+            "Keep model, clothing, colours, fit and accessories unchanged. No dancing, scene changes or invented details. "
+            + selected_scene_lock
         )
     return (
         "PROMPT VIDEO — " + str(duration) + " SAAT" + (" | BAHAGIAN " + str(part) if part else "") + "\n"
