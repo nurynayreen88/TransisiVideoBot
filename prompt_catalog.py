@@ -248,10 +248,11 @@ def product_hook(description):
                 return None
             # Keep the supplied product name factual, but vary the Malaysian-Malay opening.
             openings = (
-                "JOM LIHAT " + name,
-                "INI DIA " + name,
-                "LIHAT LEBIH DEKAT: " + name,
-                name + " DALAM FOKUS",
+                "Kalau tengah cari " + name + ", boleh tengok pilihan ini.",
+                "Sedang bandingkan " + name + "? Ini satu pilihan untuk dipertimbangkan.",
+                "Kalau minat " + name + ", boleh semak yang ini.",
+                "Nak cari " + name + "? Cuba lihat pilihan ini dulu.",
+                "Untuk yang mencari " + name + ", boleh pertimbangkan pilihan ini.",
             )
             return random.choice(openings)
     category_match = re.search(r"(?im)^KATEGORI:\s*(.+)$", description)
@@ -269,16 +270,11 @@ def product_hook(description):
         return None
     if random.random() < 0.20:
         return None
-    base_hook = str(matches[0][0]).strip()
-    # Existing stock category hooks all start with TENGOK. Vary the phrasing
-    # without changing the product category or inventing a benefit.
-    stock_match = re.match(r"(?i)^TENGOK\s+(.+)$", base_hook)
-    if not stock_match:
-        return base_hook
-    subject = stock_match.group(1)
+    # Natural Malaysian Malay wording; caller must treat this as optional speech only.
     return random.choice((
-        base_hook,
-        "JOM LIHAT " + subject,
-        "INI DIA " + subject,
-        "LIHAT LEBIH DEKAT: " + subject,
+        "Kalau tengah cari " + category.lower() + ", boleh tengok pilihan ini.",
+        "Sedang bandingkan " + category.lower() + "? Ini satu pilihan untuk dipertimbangkan.",
+        "Kalau minat " + category.lower() + ", boleh semak yang ini.",
+        "Nak cari " + category.lower() + "? Cuba lihat pilihan ini dulu.",
+        "Untuk yang mencari " + category.lower() + ", boleh pertimbangkan pilihan ini.",
     ))
