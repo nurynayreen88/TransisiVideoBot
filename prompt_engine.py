@@ -173,17 +173,17 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
         if doodle:
             if part > 1:
                 rules = (
-                    "SECOND CLIP 10s, five 2-second panels: 0-2s resume from the exact final full-product framing of Part 1; "
+                    "CONTINUATION CLIP 10s, five 2-second panels: 0-2s resume from the exact final full-product framing of the preceding clip; "
                     "2-4s begin drawing a thin white dashed contour just OUTSIDE the actual product silhouette; "
                     "following only visible product edges; 4-6s complete and hold the contour. "
                     "6-8s add one small white dotted arrow or sparkle beside a genuinely visible detail; "
-                    "8-10s clean full-product hero packshot, gracefully fade the doodle. Do NOT repeat the opening hook. "
+                    "8-10s clean full-product hero packshot; if another clip follows, hold the exact final frame without a fade, otherwise finish with a gentle fade. Do NOT repeat the preceding clip hook. "
                 )
             else:
                 rules = (
                     "FIRST CLIP 10s, five 2-second panels: 0-2s close-up with a verified product-name/category hook if available; "
                     "2-4s full product reveal; 4-6s one genuinely visible detail; 6-8s restrained white doodle emphasis; "
-                    "8-10s settle into a steady full-product composition and HOLD the final frame for a seamless Part 2 handoff. "
+                    "8-10s settle into a steady full-product composition and HOLD the exact final frame for a seamless next-clip handoff. "
                     "Do not perform the main surrounding contour yet. "
                 )
             rules += (
@@ -196,13 +196,13 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
             rules = (
                 "CONTINUATION CLIP 10s, five 2-second panels: 0-2s continue the exact full-product frame held at the end of the preceding clip; "
                 "2-4s emphasize a second genuinely visible detail without inventing an angle; 4-6s continue the same concept; "
-                "6-8s elegant style-specific visual emphasis; 8-10s full-product hero closing and fade. Do NOT repeat the opening hook."
+                "6-8s elegant style-specific visual emphasis; 8-10s full-product hero closing. If another clip follows, hold the exact final frame without a fade; otherwise finish with a gentle fade. Do NOT repeat the preceding clip hook."
             )
         else:
             rules = (
                 "FIRST CLIP 10s, five 2-second panels: 0-2s verified product-name/category hook if available; "
                 "2-4s full-product reveal; 4-6s one genuinely visible detail; 6-8s continue the product story; "
-                "8-10s settle into a stable full-product frame and HOLD for a seamless Part 2 handoff. No closing fade in Part 1."
+                "8-10s settle into a stable full-product frame and HOLD for a seamless next-clip handoff. No closing fade in this segment."
             )
         curated_direction = ""
         if storyboard_override and isinstance(storyboard_override, (list, tuple)) and len(storyboard_override) == 4:
