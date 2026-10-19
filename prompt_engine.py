@@ -190,7 +190,9 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
     category_direction += (
         " PRODUCT-SPECIFIC SPOKEN COPY: Only if voice-over or dialogue is explicitly requested, write a short, conversational line about this exact product category and only visible or verified features. "
         "Do not repeat generic phrases such as 'perincian teliti', 'lihat dengan dekat' or 'sangat terperinci'; do not narrate camera directions. "
-        "Vary the opening naturally, avoid scripted-sounding repetition, and never invent materials, benefits, quality, comfort or specifications. "
+        "Use natural Bahasa Melayu Malaysia (not Bahasa Indonesia) for any Malay spoken copy or on-screen wording. Prefer familiar Malaysian phrasing and spelling; avoid Indonesian wording such as 'kebutuhan', 'temukan', and 'silakan'. "
+        "Vary both the wording and the opening approach across generations: sometimes begin with a relevant visual demonstration, sometimes a short product-specific line, and sometimes a clean reveal with no hook. "
+        "Do not repeatedly start with 'Kenali', 'Jom lihat', or any single stock phrase. Never invent materials, benefits, quality, comfort or specifications. "
         " STRICT NO-LOGO RULE: Do not add any logo or watermark anywhere in the video, including TikTok, Shopee, creator, AI-generator or provider branding; "
         "no logo overlays, corner bugs, end cards, branded borders, platform UI or background signage. Never add captions or text unless separately requested. "
         "If a logo or mark is physically printed on the reference product, preserve it only as part of that exact product and never create a separate or enlarged logo."
