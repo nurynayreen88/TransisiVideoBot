@@ -32,6 +32,39 @@ def _resolve_auto_style(style, product_type):
     return AUTO_STYLE_BY_PRODUCT_TYPE.get(product_type, 'cinematic')
 
 
+def _model_age_direction(product, product_type='other'):
+    """Conservatively match any human fashion model to explicit product age cues."""
+    name = (product or '').casefold()
+    if product_type not in ('fashion', 'hijab', 'shoes', 'bag', 'accessory', 'other'):
+        return ""
+    baby_terms = ('newborn', 'new born', 'bayi', 'infant', 'baby clothes', 'baju baby',
+                  'baju bayi', 'romper bayi', 'toddler', '0-3 bulan', '3-6 bulan',
+                  '6-12 bulan', '12-18 bulan', '18-24 bulan')
+    child_terms = ('kanak-kanak', 'kanak kanak', 'budak', 'kids', 'kid ', 'children',
+                   'child ', 'boy ', 'girl ', 'baju sekolah rendah', 'uniform sekolah rendah',
+                   'toddler', 'saiz kanak', 'size kids', 'kidswear', 'pakaian kanak')
+    adult_terms = ('dewasa', 'adult', 'women', 'woman', 'ladies', 'men ', 'mens',
+                   'lelaki dewasa', 'wanita dewasa', 'plus size', 'saiz dewasa',
+                   'baju kurung', 'kebaya', 'jubah', 'abaya', 'blazer', 'office wear')
+    if any(term in name for term in baby_terms):
+        return ("AGE-APPROPRIATE MODEL LOCK: This product is explicitly for babies/infants. Do not put it on an adult or older child. "
+                "Use a safe, age-appropriate baby product presentation only when appropriate; otherwise show the garment laid flat or on a suitable mannequin. "
+                "Never show unsafe handling, unsupported fit claims or a risky pose.")
+    if any(term in name for term in child_terms):
+        return ("AGE-APPROPRIATE MODEL LOCK: This product is explicitly for children. Use a child model whose apparent age fits the stated size/category; "
+                "never substitute an adult model. Keep posing modest, natural and age-appropriate, with safe supervision implied where relevant.")
+    if any(term in name for term in adult_terms):
+        return ("AGE-APPROPRIATE MODEL LOCK: This product is explicitly adult clothing/fashion. Use an unmistakably adult model; "
+                "do not use a child or teen-looking model. Keep styling and pose appropriate to the garment.")
+    if any(term in name for term in ('baju', 'pakaian', 'dress', 'clothing', 'apparel', 'uniform',
+                                     'blouse', 'skirt', 'seluar', 'pants', 'shirt', 'tudung',
+                                     'hijab', 'kasut', 'shoes', 'sandal', 'sneakers', 'fashion',
+                                     'garment', 'outfit', 'jacket', 'hoodie', 'cardigan')):
+        return ("AGE-APPROPRIATENESS CHECK: The product name does not reliably establish the intended age. "
+                "Do not guess or mix age groups. Prefer a product-only flat lay/mannequin without a human model unless age suitability is clear from the reference, sizing or product details. "
+                "If the available details clearly establish the age group, use only a model from that matching group and keep appearance consistent across all shots.")
+    return ""
+
 def build_prompt(mode, product, scene, motion, style='auto', duration=10, concept='', product_type='other', storyboard_override=None):
     style = _resolve_auto_style(style, product_type) if mode == 'storyboard' else style
     if duration == 20:
@@ -70,6 +103,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
         'other': "PRODUCT CATEGORY DIRECTION: Follow the product category inferred from the product name and choose a suitable presentation without guessing features.",
     }
     category_direction = product_type_directions.get(product_type, product_type_directions['other'])
+    model_age_direction = _model_age_direction(product, product_type)
     identity = (
         "PRODUCT IDENTITY RULE: The user will upload the original product photo(s) to the target AI video generator as the MASTER visual reference. "
         "Treat those photo(s), not assumptions from the product name, as the source of truth for the visible product identity. "
@@ -212,7 +246,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
             "PROMPT VIDEO — 10 SAAT\n"
             "KLIPPO | UNIVERSAL PRODUCT VIDEO PROMPT | " + style_name + (" | BAHAGIAN " + str(part) + "/2" if part else "") + "\n"
             "OUTPUT: One cohesive vertical 9:16 product advertisement, EXACT DURATION: " + str(duration) + " seconds.\n\n"
-            "PRODUCT NAME: " + product + "\n" + category_direction + "\n\n" + identity + "\n\n"
+            "PRODUCT NAME: " + product + "\n" + category_direction + "\n" + model_age_direction + "\n\n" + identity + "\n\n"
             "STYLE FROM KLIPPO CATALOG: " + style_template + "\n\n"
             "SETTING: " + scene + "\n"
             "CAMERA: " + camera + " Keep framing plausible for the named product; avoid unsupported angles or features.\n\n"
@@ -316,7 +350,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
         compact = (
             "KLIPPO | REALISTIC 10-SECOND PRODUCT VIDEO\n"
             "FORMAT: vertical 9:16, one coherent live-action-style commercial, 10 seconds.\n"
-            "PRODUCT: " + product + "\n" + category_direction + "\n"
+            "PRODUCT: " + product + "\n" + category_direction + "\n" + model_age_direction + "\n"
             "REFERENCE LOCK: Use uploaded photo(s) as truth. Preserve visible shape, colour, print, packaging, logo and proportions. Never invent unseen features, materials, accessories or claims. REAL-WORLD SCALE IS MANDATORY: rings remain finger-sized, watches fit wrists, phones fit hands, and furniture/appliances keep believable proportions relative to people and rooms. Use macro framing rather than physically enlarging small objects.\n"
             "SCENE: " + str(scene) + ". " + (("CONCEPT: " + str(concept) + ". ") if concept else "") + "\n"
             + selected_beats
@@ -332,7 +366,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
         "KLIPPO | PROFESSIONAL IMAGE-TO-VIDEO PRODUCTION PROMPT" + (" | BAHAGIAN " + str(part) + "/2" if part else "") + "\n"
         "OUTPUT: " + str(duration) + " seconds; portrait 9:16; high-quality realistic product commercial; "
         "one coherent deliverable. NO ON-SCREEN TEXT: Do not generate captions, headlines, labels, subtitles, UI overlays, added logos or watermarks. Use a visual hook through composition and action only; any selected hook or CTA must be spoken audio, never written on screen. Preserve only branding physically present on the actual reference product.\n\n"
-        "PRODUCT: " + product + "\n" + category_direction + "\n\n" + identity + "\n\n" + art + "\n\n"
+        "PRODUCT: " + product + "\n" + category_direction + "\n" + model_age_direction + "\n\n" + identity + "\n\n" + art + "\n\n"
         + direction + "\n\n" + negative + "\n\n"
         "FINAL REALISM CHECK: The result should pass as authentic live-action commercial footage at first glance, not as an AI-generated image or animation. Consistent product identity in every frame, realistic skin and hand anatomy if a person appears, natural fabric or material texture, grounded contact shadows, plausible reflections, stable exposure, real-camera perspective and physically possible movement. Avoid the polished-but-fake CGI look, artificial skin smoothing, impossible object motion, warped geometry, flicker and temporal identity drift. "
         "FINAL QUALITY CHECK: Consistent identity in every frame, natural physics, clean edges, "
