@@ -205,7 +205,7 @@ def opening_direction(product_type="other"):
         + voice + ". Use natural Bahasa Melayu Malaysia for Malay speech, with clear "
         "Malaysian pronunciation and everyday Malaysian vocabulary; never use Indonesian "
         "slang, vocabulary, accent or intonation. Do not repeatedly begin with “Kenali”, "
-        "“Jom lihat” or another fixed stock phrase. Do not add on-screen text unless requested. "
+        "“Jom lihat” or another fixed stock phrase. Do not invent additional on-screen text; follow the prompt's existing hook/text rule exactly. "
         "This variation applies to the opening only; preserve all later timing, product identity, "
         "selected location, style and no-logo rules."
     )
