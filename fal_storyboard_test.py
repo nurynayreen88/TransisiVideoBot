@@ -44,8 +44,8 @@ def parse_gemini_json(text: str) -> dict:
     return value
 
 
-def normalize_malaysian_voiceover(text: str) -> str:
-    """Replace common Indonesian forms and keep the spoken line concise for Malaysian Malay TTS."""
+def normalize_malaysian_voiceover(text: str, visible_details=None, product_type=None) -> str:
+    """Localize common Indonesian forms and produce a detail-led Malaysian fallback if needed."""
     value = str(text or "").strip()
     replacements = (
         (r"\bbagus banget\b", "sangat bagus"),
@@ -61,12 +61,38 @@ def normalize_malaysian_voiceover(text: str) -> str:
     )
     for pattern, replacement in replacements:
         value = re.sub(pattern, replacement, value, flags=re.IGNORECASE)
+
+    if not value:
+        detail = ""
+        if isinstance(visible_details, (list, tuple)) and visible_details:
+            candidate = str(visible_details[0] or "").strip().strip(". ")
+            if candidate and not re.search(r"\b(?:unknown|uncertain|not sure|tidak pasti)\b", candidate, re.I):
+                detail = candidate
+        type_map = {
+            "ring": "cincin", "jewellery": "aksesori", "jewelry": "aksesori",
+            "bag": "beg", "handbag": "beg tangan", "backpack": "beg galas",
+            "watch": "jam tangan", "phone": "telefon", "smartphone": "telefon pintar",
+            "shoe": "kasut", "shoes": "kasut", "bottle": "botol",
+            "beauty product": "produk kecantikan", "cosmetic": "produk kosmetik",
+            "stationery": "alat tulis", "appliance": "peralatan elektrik",
+        }
+        type_key = str(product_type or "").strip().lower()
+        type_ms = type_map.get(type_key, "")
+        if detail and type_ms:
+            value = f"Tengok {detail} pada {type_ms} ini—jom lihat dengan lebih dekat."
+        elif detail:
+            value = f"Tengok {detail} ini—jom lihat dengan lebih dekat."
+        elif type_ms:
+            value = f"Tengok {type_ms} ini—jom semak butirannya."
+        else:
+            value = "Tengok butiran yang jelas pada produk ini—jom lihat dengan lebih dekat."
+
     value = re.sub(r"\s+", " ", value).strip(" \t\r\n\"'")
     first_sentence = re.split(r"(?<=[.!?])\s+", value, maxsplit=1)[0].strip()
     words = first_sentence.split()
     if len(words) > 18:
         first_sentence = " ".join(words[:18]).rstrip(" ,;:") + "."
-    return first_sentence or "Jom lihat produk ini dengan lebih dekat."
+    return first_sentence or "Tengok butiran produk ini—jom lihat dengan lebih dekat."
 
 def analyze_product(image_path: Path) -> dict:
     """Return Gemini-verified visible attributes as JSON; conservative fallback if unavailable."""
@@ -74,7 +100,7 @@ def analyze_product(image_path: Path) -> dict:
         "product_type": "tidak pasti", "colors": [], "shape": "rujuk bentuk yang kelihatan dalam gambar",
         "materials": [], "logo_or_text": "kekalkan hanya teks/logo yang jelas; jangan reka teks kabur",
         "visible_details": [], "uncertainties": ["analisis Gemini tidak tersedia"],
-        "voiceover_ms": "Lihat produk ini dengan reka bentuk dan perincian yang menarik."
+        "voiceover_ms": ""
     }
     key = os.environ.get("GEMINI_API_KEY", "").strip()
     if not key:
@@ -86,14 +112,15 @@ def analyze_product(image_path: Path) -> dict:
     prompt = (
         "Analyse this product photo. Return ONLY valid JSON with keys: product_type (string), "
         "colors (array), shape (string), materials (array), logo_or_text (string), visible_details (array), "
-        "uncertainties (array), voiceover_ms (one short spoken sentence in natural Bahasa Melayu Malaysia). "
-        "The voiceover MUST sound like a Malaysian product promoter: Malaysian vocabulary, sentence structure, "
-        "and natural local phrasing. DO NOT write Indonesian Malay or use Indonesian expressions such as "
-        "'banget', 'nggak', 'kalian', 'bisa', or 'silakan'. Prefer natural Malaysian wording such as 'sangat', "
-        "'tak', 'anda/korang', 'boleh', and 'jom' where appropriate. Keep the line under 18 words, easy to say, "
-        "conversational, and grounded only in visible facts. Do not use generic filler if a visible product detail "
-        "can be named accurately. Only report directly visible facts. Never guess brand/model, exact material, "
-        "product claims, benefits, or unreadable text. If uncertain, say 'tidak pasti'."
+        "uncertainties (array), voiceover_ms (one short spoken line in natural Bahasa Melayu Malaysia). "
+        "The voiceover MUST sound like a native Malaysian product promoter with Malaysian vocabulary, pronunciation, "
+        "rhythm and intonation. Indonesian accent and Indonesian vocabulary are prohibited; avoid 'banget', 'nggak', "
+        "'kalian', 'bisa' and 'silakan'. Use varied, natural openings instead of repeating 'Kenali produk ini' or "
+        "the same generic phrase. When supported by the visible details, structure the line as a short spoken hook, "
+        "one concrete visible detail, and a soft CTA. Keep it under 18 words, easy to pronounce, and never invent "
+        "price, discounts, stock, guarantees, performance claims, benefits, materials or unreadable text. "
+        "Write visible_details in natural Bahasa Melayu Malaysia so a safe detail-led fallback can use them. "
+        "Only report directly visible facts; if uncertain, say 'tidak pasti'."
     )
     body = {"contents": [{"parts": [
         {"text": prompt},
@@ -112,7 +139,7 @@ def analyze_product(image_path: Path) -> dict:
         attributes = parse_gemini_json(text)
         for name, default in fallback.items():
             attributes.setdefault(name, default)
-        attributes["voiceover_ms"] = normalize_malaysian_voiceover(attributes.get("voiceover_ms", ""))
+        attributes["voiceover_ms"] = normalize_malaysian_voiceover(attributes.get("voiceover_ms", ""), attributes.get("visible_details"), attributes.get("product_type"))
         usage = result.get("usageMetadata", {})
         if usage:
             logging.info("Gemini usage: prompt=%s output=%s total=%s tokens",
@@ -206,7 +233,7 @@ def main() -> int:
     print("Contact sheet:", sheet)
     if not args.no_video:
         video_path = output_dir / "video_output.mp4"
-        narration = str(attributes.get("voiceover_ms") or "Lihat produk ini dengan reka bentuk dan perincian yang menarik.")
+        narration = normalize_malaysian_voiceover(attributes.get("voiceover_ms", ""), attributes.get("visible_details"), attributes.get("product_type"))
         print("Creating vertical video with complete Malay voiceover...")
         create_video(generated, narration, video_path)
         print("Video:", video_path)
