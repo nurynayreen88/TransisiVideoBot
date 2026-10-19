@@ -209,4 +209,16 @@ def product_hook(description):
             matches.append(json.loads(hooks))
     if len(matches) != 1 or not matches[0]:
         return None
-    return matches[0][0]
+    base_hook = str(matches[0][0]).strip()
+    # Existing stock category hooks all start with TENGOK. Vary the phrasing
+    # without changing the product category or inventing a benefit.
+    stock_match = re.match(r"(?i)^TENGOK\\s+(.+)$", base_hook)
+    if not stock_match:
+        return base_hook
+    subject = stock_match.group(1)
+    return random.choice((
+        base_hook,
+        "JOM LIHAT " + subject,
+        "INI DIA " + subject,
+        "LIHAT LEBIH DEKAT: " + subject,
+    ))
