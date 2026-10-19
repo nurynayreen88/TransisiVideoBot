@@ -504,19 +504,28 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
                              "6–8s one subtle product-appropriate action; 8–10s HOLD the final frame in a full-product hero composition. "
                              + ("Do not perform the main surrounding contour yet. " if doodle else ""))
             if storyboard_override and isinstance(storyboard_override, (list, tuple)) and len(storyboard_override) == 4:
+                beat_labels = (
+                    "HOOK",
+                    "FUNCTION + BENEFIT",
+                    "VALUE / VISIBLE DETAIL",
+                    "CTA + HERO SHOT",
+                )
                 beat_plan = (
-                    "SELECTED STORYBOARD: Follow these product-specific beats in order. "
+                    "SELECTED STORYBOARD: FOUR-BEAT STRUCTURE — exactly 0–2s HOOK, 2–6s FUNCTION + BENEFIT, "
+                    "6–8s VALUE / VISIBLE DETAIL, 8–10s CTA + HERO SHOT. "
                     + (("CONTINUITY: Resume from Part 1's final frame; do not repeat its hook. ")
                        if part >= 2 else "")
                     + " | ".join(
-                        str(item.get("shot", "")) + ": " + str(item.get("direction", ""))
-                        for item in storyboard_override
+                        beat_labels[index] + " — " + str(item.get("shot", "")) + ": "
+                        + str(item.get("direction", ""))
+                        for index, item in enumerate(storyboard_override)
                     ) + ". "
                 )
             hook_rule = (
-                "HOOK + CTA: Open with a product-specific visual hook, show one relevant detail or plausible use, "
-                "and finish with a clear product shot. Use only supported product details. "
-                + ("If voice is selected, keep the spoken hook and CTA short and natural. "
+                "HOOK + CTA: Make the opening visually specific to this product. The middle must show a plausible use "
+                "and a benefit supported by the product details; the third beat shows its value or a visible detail; "
+                "the final beat is a clear CTA with a full-product hero shot. Never invent product claims. Use only supported product details. "
+                + ("If voice or on-screen text is selected, use a short, natural, product-specific hook and CTA that match the selected options. "
                    if part < 2 else "Continue naturally without repeating the opening hook. ")
             )
             doodle_rule = (
