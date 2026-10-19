@@ -9,6 +9,7 @@ from PIL import Image
 from fal_storyboard_test import detect_image_mime, normalize_malaysian_voiceover, parse_gemini_json
 from modules.video_engine import _probe_duration, calculate_panel_durations, create_video
 from fal_storyboard_test_bot import claim_user, release_user
+from prompt_engine import _category_safe_storyboard
 
 
 class GeminiHelperTests(unittest.TestCase):
@@ -61,6 +62,45 @@ class GeminiHelperTests(unittest.TestCase):
         self.assertIn("cincin", result)
         self.assertLessEqual(len(result.split()), 18)
 
+
+
+class PromptCategoryIsolationTests(unittest.TestCase):
+    def test_shoe_storyboard_replaces_garment_and_bag_directions(self):
+        shots = [{
+            "time": "2–6s",
+            "shot": "Lace touch and garment detail",
+            "direction": "Show the shoe lace, then a garment close-up and bag handle."
+        }]
+        result = _category_safe_storyboard(shots, "shoes")
+        self.assertEqual(result[0]["shot"], "PRODUCT DETAIL")
+        self.assertIn("footwear detail", result[0]["direction"])
+        self.assertNotIn("garment", result[0]["direction"].casefold())
+        self.assertNotIn("bag handle", result[0]["direction"].casefold())
+
+    def test_toy_storyboard_replaces_unrelated_category_direction(self):
+        shots = [{
+            "time": "6–8s",
+            "shot": "Footwear close-up",
+            "direction": "Show footwear fully grounded on a flat dry surface."
+        }]
+        result = _category_safe_storyboard(shots, "toys")
+        self.assertEqual(result[0]["shot"], "PRODUCT DETAIL")
+        self.assertIn("actual toy", result[0]["direction"])
+        self.assertNotIn("footwear", result[0]["direction"].casefold())
+
+    def test_relevant_category_direction_is_preserved(self):
+        shots = [{
+            "time": "2–6s",
+            "shot": "Visible outsole detail",
+            "direction": "Show a close-up of the visible outsole and return to the complete shoe."
+        }]
+        result = _category_safe_storyboard(shots, "shoes")
+        self.assertEqual(result[0]["direction"], shots[0]["direction"])
+        self.assertEqual(result[0]["shot"], shots[0]["shot"])
+
+    def test_unknown_category_does_not_guess_or_rewrite(self):
+        shots = [{"time": "2–6s", "shot": "Detail", "direction": "Show the actual product."}]
+        self.assertEqual(_category_safe_storyboard(shots, "other"), shots)
 
 class TelegramLockTests(unittest.TestCase):
     def test_same_user_cannot_claim_two_generation_slots(self):
