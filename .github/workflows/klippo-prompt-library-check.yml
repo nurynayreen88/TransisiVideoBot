@@ -232,6 +232,7 @@ jobs:
               assert "Every standalone video must include a CTA" in engine_source
               assert "one fixed script across products" in engine_source
               assert "never mix languages unless the user explicitly requests it" in engine_source
+              assert "Every 10-second segment, including Part 2" in engine_source
 
               for mode in ("storyboard", "standard"):
                   generated = build_prompt(
@@ -348,6 +349,8 @@ jobs:
               )
               assert "=== KLIPPO PART 2 ===" in paired
               first_part, second_part = paired.split("=== KLIPPO PART 2 ===", 1)
+              assert "MANDATORY HOOK, CTA AND LANGUAGE RULES" in first_part
+              assert "MANDATORY HOOK, CTA AND LANGUAGE RULES" in second_part
               assert "HOLD the final frame" in first_part
               assert "SECOND CLIP 10s" in second_part and "full-product frame" in second_part
               assert (
