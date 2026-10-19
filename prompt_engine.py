@@ -207,7 +207,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
         curated_direction = ""
         if storyboard_override and isinstance(storyboard_override, (list, tuple)) and len(storyboard_override) == 4:
             curated_shots = list(storyboard_override)
-            if part == 2:
+            if part > 1:
                 curated_shots = [
                     {
                         "time": "0–2s",
@@ -331,7 +331,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
         direction = ("FIRST CLIP 10s, five 2-second panels: 0-2s establish the product; 2-4s reveal the complete product; "
                      "4-6s focus on one genuinely visible detail; 6-8s continue a complementary action; "
                      "8-10s return to a stable full-product frame and hold without fade to connect directly into Part 2.")
-    elif part == 2:
+    elif part > 1:
         direction = ("CONTINUATION CLIP 10s, five 2-second panels: start with the EXACT held full-product final frame from the preceding clip, "
                      "matching crop, product position, orientation, setting, lighting and color. "
                      "0-2s resume the same movement; 2-4s continue with a distinct action; 4-6s highlight another visible detail; "
@@ -384,7 +384,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
         )
         return compact
     return (
-        "KLIPPO | PROFESSIONAL IMAGE-TO-VIDEO PRODUCTION PROMPT" + (" | BAHAGIAN " + str(part) + "/2" if part else "") + "\n"
+        "KLIPPO | PROFESSIONAL IMAGE-TO-VIDEO PRODUCTION PROMPT" + (" | BAHAGIAN " + str(part) + "/" + str(total_parts) if part else "") + "\n"
         "OUTPUT: " + str(duration) + " seconds; portrait 9:16; high-quality realistic product commercial; "
         + hook_cta_language + "\n\n"
         "one coherent deliverable. NO ON-SCREEN TEXT: Do not generate captions, headlines, labels, subtitles, UI overlays, added logos or watermarks. Use a visual hook through composition and action only; any selected hook or CTA must be spoken audio, never written on screen. Preserve only branding physically present on the actual reference product.\n\n"
