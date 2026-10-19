@@ -8,7 +8,7 @@ from pathlib import Path
 
 DB_PATH = Path(os.getenv("KLIPPO_PROMPT_DB", str(Path(__file__).with_name("prompt_catalog.sqlite3"))))
 STYLES = {
-    "white_doodle": ("✏️ White Doodle", """Text-only product storyboard based on the user-provided product name and optional written details. Use a verified product-name category hook only when clear; omit unsupported labels. Add at most two short neutral labels only when explicitly supported by the supplied text. Use thin white handwritten 2D doodles, tiny sparkles and simple arrows without obscuring the product. Start with a clean hero reveal, show a plausible generic detail, then settle on a stable full-product frame and HOLD the final frame. Do not draw the main surrounding contour in Part 1. In Part 2, continue from the held framing and progressively trace a thin white dashed contour around the product silhouette, then hold it briefly before a clean hero finish. All doodles are flat 2D overlays, never captions or UI. No uploaded image or AI image analysis is used. Never invent unseen sides, product features, accessories, claims, prices, popularity or unprovided text; Never invent unseen sides."""),
+    "white_doodle": ("✏️ White Doodle", """Text-only product storyboard based on the user-provided product name and optional written details. Use a verified product-name/category hook only as a visual reveal, never as written text. Use thin white handwritten 2D contour lines, tiny sparkles and simple arrows without obscuring the product. NO letters, words, labels, captions, subtitles, added logos or watermarks. Start with a clean hero reveal, show one plausible visible detail, then settle on a stable full-product frame and HOLD the final frame. Do not draw the main surrounding contour in Part 1. In Part 2, continue from the held framing and progressively trace a thin white dashed contour around the actual visible product silhouette, then hold it briefly before a clean hero finish. All doodles are flat 2D visual overlays only, never text or UI. No uploaded image or AI image analysis is used. Preserve realistic real-world scale and proportions; macro framing may magnify the view but must never enlarge the physical product. Never invent unseen sides, product features, accessories, claims, prices, popularity or unprovided text."""),
     "cinematic": ("🎬 Cinematic Premium", "Premium realistic commercial: soft key light, restrained highlights, natural shadows, slow camera push, consistent product and environment."),
     "minimal": ("✨ Minimal Motion Graphic", "Bright uncluttered product framing, subtle geometric accent lines and smooth minimal graphic reveals, elegant spacing and gentle motion."),
     "dynamic": ("⚡ Dynamic Affiliate", "Engaging but controlled affiliate pacing: striking opening crop, feature emphasis with clean graphic accents, smooth match cuts and clear final hero shot."),
@@ -84,6 +84,21 @@ def connect():
     # Fresh databases seed the current template at the default version; mark that exact seed as v4.
     db.execute(
         "UPDATE storyboard_prompt_styles SET version=4 WHERE style_key='white_doodle' AND version=1 AND template=?",
+        (STYLES["white_doodle"][1],)
+    )
+    # Upgrade the untouched v4 seed to the no-written-text doodle template; preserve custom edits.
+    previous_v4 = "Text-only product storyboard based on the user-provided product name and optional written details. Use a verified product-name category hook only when clear; omit unsupported labels. Add at most two short neutral labels only when explicitly supported by the supplied text. Use thin white handwritten 2D doodles, tiny sparkles and simple arrows without obscuring the product. Start with a clean hero reveal, show a plausible generic detail, then settle on a stable full-product frame and HOLD the final frame. Do not draw the main surrounding contour in Part 1. In Part 2, continue from the held framing and progressively trace a thin white dashed contour around the product silhouette, then hold it briefly before a clean hero finish. All doodles are flat 2D overlays, never captions or UI. No uploaded image or AI image analysis is used. Never invent unseen sides, product features, accessories, claims, prices, popularity or unprovided text; Never invent unseen sides."
+    db.execute(
+        "UPDATE storyboard_prompt_styles SET template=?, version=5 WHERE style_key='white_doodle' AND version=4 AND template=?",
+        (STYLES["white_doodle"][1], previous_v4)
+    )
+    # Fresh databases and exact earlier migration paths may already contain the new template.
+    db.execute(
+        "UPDATE storyboard_prompt_styles SET version=5 WHERE style_key='white_doodle' AND version=4 AND template=?",
+        (STYLES["white_doodle"][1],)
+    )
+    db.execute(
+        "UPDATE storyboard_prompt_styles SET version=5 WHERE style_key='white_doodle' AND version=1 AND template=?",
         (STYLES["white_doodle"][1],)
     )
     db.commit()
