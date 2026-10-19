@@ -522,7 +522,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
             hook_rule = (
                 "HOOK + CTA: Make the opening visually specific to this product. The middle must show a plausible use "
                 "and a benefit supported by the product details; the third beat shows its value or a visible detail; "
-                "the final beat is a clear CTA with a full-product hero shot. Never invent product claims. "
+                "the final beat is a clear CTA with a full-product hero shot. Never invent product claims; use only supported product details. "
                 + ("If voice or on-screen text is selected, use a short, natural, product-specific hook and CTA that match the selected options. "
                    if part < 2 else "Continue naturally without repeating the opening hook. ")
             )
