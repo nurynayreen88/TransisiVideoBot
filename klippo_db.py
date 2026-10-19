@@ -8,13 +8,13 @@ import urllib.request
 def configured():
     return bool(os.getenv("SUPABASE_URL") and os.getenv("SUPABASE_SERVICE_ROLE_KEY"))
 
-def request(path, method="GET", payload=None):
+def request(path, method="GET", payload=None, prefer="return=representation"):
     base = os.environ["SUPABASE_URL"].rstrip("/")
     key = os.environ["SUPABASE_SERVICE_ROLE_KEY"]
     url = base + "/rest/v1/" + path
     body = json.dumps(payload).encode("utf-8") if payload is not None else None
     headers = {"apikey": key, "Authorization": "Bearer " + key,
-               "Content-Type": "application/json", "Prefer": "return=representation"}
+               "Content-Type": "application/json", "Prefer": prefer}
     req = urllib.request.Request(url, data=body, headers=headers, method=method)
     with urllib.request.urlopen(req, timeout=15) as response:
         return json.loads(response.read().decode("utf-8") or "[]")
@@ -47,6 +47,7 @@ def register_user(user_id, name):
         "klippo_subscriptions?on_conflict=telegram_user_id",
         "POST",
         {"telegram_user_id": int(user_id), "telegram_name": (name or "")[:255]},
+        prefer="resolution=merge-duplicates,return=representation",
     )
     return rows[0] if rows else None
 
