@@ -88,6 +88,50 @@ def users(query="", status="all", offset=0, limit=10):
     return {"total": len(matched), "items": matched[start:start + size], "offset": start, "limit": size}
 
 
+def add_subscription_days(user_id, days):
+    """Extend a user's subscription from the later of now or their current expiry."""
+    from datetime import datetime, timedelta, timezone
+
+    uid = int(user_id)
+    days = int(days)
+    if days < 1 or days > 3650:
+        raise ValueError("days must be between 1 and 3650")
+
+    rows = request(
+        "klippo_subscriptions?telegram_user_id=eq." + str(uid)
+        + "&select=telegram_user_id,telegram_name,status,started_at,expires_at&limit=1"
+    )
+    if not rows:
+        raise ValueError("user subscription record not found")
+
+    user = rows[0]
+    now = datetime.now(timezone.utc)
+    expiry = user.get("expires_at")
+    base = now
+    if expiry:
+        try:
+            parsed = datetime.fromisoformat(expiry.replace("Z", "+00:00"))
+            if parsed.tzinfo is None:
+                parsed = parsed.replace(tzinfo=timezone.utc)
+            if parsed > base:
+                base = parsed
+        except (ValueError, TypeError):
+            pass
+
+    new_expiry = (base + timedelta(days=days)).isoformat(timespec="seconds").replace("+00:00", "Z")
+    payload = {"status": "active", "expires_at": new_expiry}
+    if not user.get("started_at"):
+        payload["started_at"] = now.isoformat(timespec="seconds").replace("+00:00", "Z")
+    updated = request(
+        "klippo_subscriptions?telegram_user_id=eq." + str(uid),
+        "PATCH",
+        payload,
+    )
+    if not updated:
+        raise RuntimeError("subscription update returned no record")
+    return updated[0]
+
+
 def user_details(user_id):
     """Return subscription record and recent payment receipt history for one Telegram user."""
     uid = int(user_id)
