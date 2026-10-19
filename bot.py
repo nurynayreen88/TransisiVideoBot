@@ -599,7 +599,7 @@ def _prompt_is_child_product(user_data):
 
 
 def prompt_creative_settings(user_data, include_audio=True):
-    """Compact, explicit creative settings; avoid repeating rules already stated in the main prompt."""
+    """Return short English instructions based only on the user's selected options."""
     age = str(user_data.get('prompt_model_age', '26-40'))
     child_model = age in {'4-7', '8-12', '13-17'}
     child_product = _prompt_is_child_product(user_data)
@@ -608,53 +608,60 @@ def prompt_creative_settings(user_data, include_audio=True):
         gender = user_data.get('prompt_model_gender', 'female')
         appearance_key = user_data.get('prompt_model_ethnicity', 'random_malaysia')
         appearance = {
-            'Malay': 'Melayu',
-            'Chinese': 'Cina',
-            'Indian': 'India',
-            'random_malaysia': 'pilih satu kaum tempatan secara rawak dengan identiti yang konsisten, bukan rupa asing secara stereotaip',
-            'Asian': 'Asia',
-            'diverse': 'rupa pelbagai',
-            'any': 'mana-mana rupa',
-        }.get(appearance_key, 'kaum rawak yang terdapat di Malaysia')
+            'Malay': 'Malay Malaysian',
+            'Chinese': 'Chinese Malaysian',
+            'Indian': 'Indian Malaysian',
+            'random_malaysia': 'one randomly selected Malaysian ethnicity',
+            'Asian': 'Asian',
+            'diverse': 'diverse appearance',
+            'any': 'any appearance',
+        }.get(appearance_key, 'one randomly selected Malaysian ethnicity')
         if child_model and not child_product:
-            model = 'Model: tiada kanak-kanak/remaja; fokus pada produk, gunakan tangan dewasa sahaja jika perlu.'
+            model = 'Model: no child or teen; focus on the product and use adult hands if needed.'
         elif child_model:
-            model = f'Model: {count} kanak-kanak/remaja, umur {age}, jantina {gender}, rupa {appearance}; kekalkan identiti dan umur, gaya serta aksi sesuai umur, selamat dan tidak diseksualkan.'
+            model = f'Model: {count} child/teen model(s), age {age}, gender {gender}, {appearance}; keep the appearance consistent and actions age-appropriate.'
         elif child_product:
-            model = f'Model: {count} orang dewasa, {gender}, rupa {appearance}, umur {age}; jangan pakai atau cuba item bersaiz kanak-kanak. Paparkan melalui tangan, penyangkut/manekin kanak-kanak atau permukaan bersih; kendalikan produk bayi dengan selamat.'
+            model = f'Model: {count} adult model(s), gender {gender}, {appearance}, age {age}; show child-sized products on a suitable surface, hanger or mannequin.'
         else:
-            model = f'Model: {count} orang dewasa, {gender}, rupa {appearance}, umur {age}; kekalkan wajah, pakaian dan identiti sepanjang klip.'
+            model = f'Model: {count} adult model(s), gender {gender}, {appearance}, age {age}; keep identity and outfit consistent.'
     else:
-        model = 'Model: tiada; fokus pada produk dan butiran yang benar-benar kelihatan.'
+        model = 'Model: none; focus on the product.'
 
     lines = [
-        'PILIHAN UTAMA:',
         model,
-        'Produk: ikut foto rujukan; kekalkan bentuk, warna, corak, logo dan nisbah. Jangan reka ciri, bahan, aksesori atau dakwaan.',
-        'Format: menegak 9:16; gerakan semula jadi dan satu cerita visual yang konsisten.',
+        'Match the reference product exactly. Keep visible shape, colour, pattern and branding; invent no features.',
+        'Vertical 9:16; natural movement and consistent visual continuity.',
     ]
     if include_audio:
         language = user_data.get('prompt_language', 'Malay')
         voiceover_mode = user_data.get('prompt_voiceover_mode', 'none')
         if voiceover_mode == 'ai':
-            voice_styles = {'ai': 'santai dan semula jadi', 'cute': 'comel, ceria dan ringan', 'serious': 'tenang, serius dan yakin', 'energetic': 'bertenaga tanpa menjerit', 'friendly': 'mesra dan mudah didekati', 'soft': 'lembut tetapi jelas', 'custom': 'semula jadi'}
-            voice_style = voice_styles.get(user_data.get('prompt_voiceover_style', 'ai'), voice_styles['ai'])
+            voice_styles = {
+                'ai': 'natural and relaxed', 'cute': 'cute and cheerful',
+                'serious': 'calm and confident', 'energetic': 'energetic, not shouty',
+                'friendly': 'friendly and approachable', 'soft': 'gentle and clear',
+                'custom': 'natural',
+            }
+            voice_style = voice_styles.get(user_data.get('prompt_voiceover_style', 'ai'), 'natural and relaxed')
             lang = 'Bahasa Melayu Malaysia' if language != 'English' else 'English'
             speaker = user_data.get('prompt_speech_source', 'voiceover')
-            source = 'the on-camera AI model speaks naturally' if speaker == 'model' else 'an off-screen promoter voiceover'
-            lines.append(f'Audio: {source} in {lang}, {voice_style} delivery; clear Malaysian pronunciation, not Indonesian. Short lines matched to the action; background music stays quieter than the voice.')
+            source = 'The on-camera model speaks' if speaker == 'model' else 'Use an off-camera promoter voice'
+            lines.append(f'{source} in {lang}, {voice_style} style. Keep dialogue short and background music below the voice.')
         elif voiceover_mode == 'script':
             script = ' '.join((user_data.get('prompt_voiceover_script') or '').split())
-            lines.append('Audio: use the user script exactly as supplied: ' + script)
+            lines.append('Use this exact spoken script: ' + script)
         else:
-            lines.append('Audio: no dialogue; use suitable background music only if supported by the platform.')
+            lines.append('No spoken dialogue.')
     if user_data.get('prompt_on_screen_text') == 'yes':
-        lines.append('On-screen text: only a few short, legible hook/CTA words; accurate spelling; never cover the product. No subtitles, logos or watermarks.')
+        if user_data.get('prompt_text_mode') == 'manual' and user_data.get('prompt_text_content'):
+            lines.append('On-screen text, exactly as supplied: ' + str(user_data['prompt_text_content']))
+        else:
+            lines.append('Add brief promotional on-screen text with a hook and CTA in Bahasa Melayu Malaysia.')
     elif user_data.get('prompt_on_screen_text') == 'no':
-        lines.append('No on-screen text, captions, subtitles, added logos or watermarks.')
+        lines.append('No on-screen text.')
     if user_data.get('prompt_custom_background'):
-        lines.append('Latar sendiri: muat naik foto produk dan foto latar secara berasingan ke penjana AI; tetapkan foto produk sebagai subjek dan foto kedua sebagai latar. Kekalkan susun atur latar dan padankan perspektif/cahaya. Ulang muat naik kedua-duanya untuk setiap klip sambungan.')
-    return '\n'.join(lines)
+        lines.append('Use the separately uploaded background image as the scene and match its perspective and lighting.')
+    return '\\n'.join(lines)
 
 
 PRODUCT_SUBTYPES = {
@@ -3222,7 +3229,14 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             waiting = await query.message.reply_text('⏳ DALAM PROSES — 0%' + chr(10) + 'Menyusun prompt...')
             try:
                 product_name = context.user_data.get('prompt_product_name', '').strip()
-                product = ('NAMA_PRODUK: ' + product_name + chr(10) + 'KATEGORI: ' + (context.user_data.get('prompt_custom_category_name') or PRODUCT_TYPES.get(context.user_data.get('prompt_product_type', 'other'), 'Produk lain')) + chr(10) + 'SUBKATEGORI: ' + (context.user_data.get('prompt_custom_subcategory_name') or PRODUCT_SUBTYPE_LABELS.get(context.user_data.get('prompt_product_subcategory', ''), 'Tidak dinyatakan')) + chr(10) + 'Optional user details: ' + context.user_data.get('prompt_product', ''))
+                product_parts = ['Product name: ' + product_name, 'Category: ' + (context.user_data.get('prompt_custom_category_name') or PRODUCT_TYPES.get(context.user_data.get('prompt_product_type', 'other'), 'Other'))]
+                subtype = context.user_data.get('prompt_custom_subcategory_name') or PRODUCT_SUBTYPE_LABELS.get(context.user_data.get('prompt_product_subcategory', ''), '')
+                if subtype:
+                    product_parts.append('Subcategory: ' + subtype)
+                optional_details = str(context.user_data.get('prompt_product', '') or '').strip()
+                if optional_details:
+                    product_parts.append('Product details: ' + optional_details)
+                product = chr(10).join(product_parts)
                 scene = context.user_data.get('prompt_scene', 'clean studio background')
                 style_choice = context.user_data.get('prompt_style', 'auto')
                 if style_choice == 'auto':
@@ -3259,7 +3273,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 else:
                     prompt += '\n\nON-SCREEN TEXT: Do not display any text, captions, labels, logos or watermarks.'
                 if context.user_data.get('prompt_audio_enabled'):
-                    prompt += '\n\nAUDIO: ' + ('The on-camera model speaks naturally' if context.user_data.get('prompt_speech_source') == 'model' else 'Use an off-camera promoter voiceover') + '. Language: ' + str(context.user_data.get('prompt_language','Malay')) + '. Voice style: ' + str(context.user_data.get('prompt_voiceover_style','auto')) + '.'
+                    language = 'Bahasa Melayu Malaysia' if context.user_data.get('prompt_language', 'Malay') != 'English' else 'English'
+                    prompt += '\n\nAUDIO: ' + ('On-camera model speaks' if context.user_data.get('prompt_speech_source') == 'model' else 'Off-camera promoter voice') + ' in ' + language + '; style: ' + str(context.user_data.get('prompt_voiceover_style','auto')) + '. Keep dialogue short; music below the voice.'
                     if context.user_data.get('prompt_voiceover_mode') == 'script' and context.user_data.get('prompt_voiceover_script'):
                         prompt += ' Use this exact spoken script: ' + context.user_data['prompt_voiceover_script']
                 else:
