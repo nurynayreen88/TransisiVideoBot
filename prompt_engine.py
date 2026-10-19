@@ -132,9 +132,9 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
                 )
             rules += (
                 "Warm authentic UGC product-ad look, thin white handwritten 2D graphics tracked to the product. "
-                "No phone bezel, no invented product claims, no branding obstruction. Only verified hook (if available) and verified "
-                "short feature labels may appear; reserve space for editing overlays if text rendering is unreliable. "
-                "Prioritize the visible surrounding product contour over camera movement."
+                "No phone bezel, no invented product claims, and no branding obstruction. "
+                "Use only flat visual lines, simple arrows and small sparkles; no letters, words, feature labels or captions. "
+                "Keep graphics clear of the product and prioritize tracing its actual visible contour over camera movement."
             )
         elif part == 2:
             rules = (
