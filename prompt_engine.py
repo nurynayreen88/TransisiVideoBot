@@ -161,20 +161,39 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
                         "time": "0–2s",
                         "shot": "CONTINUITY BRIDGE",
                         "direction": (
-                            "Resume from the exact final product framing of Part 1 with the same set, lighting, "
-                            "orientation and scale. Do not repeat the opening hook or restart the reveal."
+                            "Continue from the exact final frame of Part 1. Preserve the same product identity and true scale, "
+                            "hand/model, wardrobe, voice, lighting, setting and camera direction. Make only a small natural "
+                            "continuation movement; do not restart the reveal or repeat the opening hook."
                         ),
                     },
                     {
-                        **curated_shots[1],
+                        "time": "2–6s",
+                        "shot": "SECONDARY DEMONSTRATION",
                         "direction": (
-                            "CONTINUATION ACTION — do not repeat the main gesture from Part 1. Continue the same concept with "
-                            "a complementary, physically plausible follow-through while keeping the same product, set, light and scale. "
-                            + str(curated_shots[1].get("direction", ""))
+                            "Show a distinct second action or product angle that was not used in Part 1. Follow the selected "
+                            "concept and product category, but do not repeat the first clip's main interaction, camera move or "
+                            "dialogue. Use only visible, plausible features and props; if no functional action is suitable, "
+                            "show a different reference-supported view of the actual product."
                         ),
                     },
-                    curated_shots[2],
-                    curated_shots[3],
+                    {
+                        "time": "6–8s",
+                        "shot": "ALTERNATE DETAIL / TRUST SHOT",
+                        "direction": (
+                            "Reveal a different visible detail from Part 1, if one is supported by the reference; otherwise "
+                            "use a new reference-supported angle. Use macro framing rather than changing physical size. "
+                            "Do not invent materials, components, benefits or specifications."
+                        ),
+                    },
+                    {
+                        "time": "8–10s",
+                        "shot": "FINAL HERO / SPOKEN CTA",
+                        "direction": (
+                            "Finish on a clear full-product hero at the same true scale and in the same coherent setting. "
+                            "If voiceover is enabled, deliver a concise spoken CTA only; never show CTA text on screen. "
+                            "Do not repeat Part 1's hook or closing line."
+                        ),
+                    },
                 ]
             curated_direction = (
                 "DIRECTOR'S CURATED PREMIUM STORYBOARD: Use this selected GitHub library storyboard as the primary shot plan. "
