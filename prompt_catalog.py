@@ -177,7 +177,7 @@ def product_hook(description):
         name = name_match.group(1).strip()
         if name and name.upper() not in ("TIDAK PASTI", "TIADA", "TIDAK DAPAT DIPASTIKAN", "UNKNOWN", "NONE"):
             # Exact observed printed name: never generate a speculative product claim.
-            return "KENALI " + name
+            return "Create a varied, natural hook specifically about the product named \"" + name + "\"; do not use a fixed opener or display the name as added on-screen text."
     category_match = re.search(r"(?im)^KATEGORI:\s*(.+)$", description)
     if not category_match:
         return None
