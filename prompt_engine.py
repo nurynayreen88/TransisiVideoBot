@@ -491,7 +491,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
         "OUTPUT: " + str(duration) + " seconds; portrait 9:16; high-quality realistic product commercial; "
         "one coherent deliverable. ON-SCREEN TEXT: Follow the KLIPPO GUIDED CREATIVE SETTINGS language choice. If the language is none, show no text. Otherwise, use at most the exact product name supplied by the user unless exact wording is provided; do not invent marketing claims or promotional copy. Preserve spelling, keep text brief and legible, and place it away from the product.\n\n"
         "PRODUCT: " + product + "\n" + category_direction + "\n\n" + identity + "\n\n" + art + "\n\n"
-        + direction + "\n\n" + negative + "\n\n"
+        + direction + "\n\n" + creative_variation + "\n\n" + negative + "\n\n"
         "FINAL QUALITY CHECK: Consistent identity in every frame, natural physics, clean edges, "
         "stable illumination, smooth temporal coherence and polished affiliate-ad aesthetics. "
         "If the product name does not support a requested feature or viewpoint, use a safe crop or modest "
