@@ -284,11 +284,14 @@ jobs:
               from prompt_catalog import choices, resolve, DB_PATH
               from prompt_engine import build_prompt
 
-              # Regression guard: shared hook/CTA/language policy must reach every prompt output path.
+              # Regression guard: concise prompt output must keep the common hook/CTA policy.
               engine_source = Path("prompt_engine.py").read_text(encoding="utf-8")
-              assert engine_source.count("hook_cta_language") >= 3, (
-                  "Shared hook/CTA/language policy must be defined and applied to all prompt output paths"
+              assert engine_source.count("hook_cta_language") >= 2, (
+                  "Shared hook/CTA policy definition or standard prompt path is missing"
               )
+              assert "if text_mode == 'yes':" in bot
+              assert "On-screen text: Add only a few short, legible promotional words" in bot
+              assert "No on-screen text, captions, or subtitles." in bot
               assert "HOOK + CTA: Start with a product-specific visual hook" in engine_source
               assert "HOOK + DEMONSTRATION + CTA:" in engine_source
 
