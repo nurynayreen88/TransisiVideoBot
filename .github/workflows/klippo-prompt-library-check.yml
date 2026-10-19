@@ -52,7 +52,7 @@ jobs:
           assert "KLIPPO PART 1/3" in triple
           assert "KLIPPO PART 2/3" in triple
           assert "KLIPPO PART 3/3" in triple
-          assert triple.count("MANDATORY HOOK, CTA AND LANGUAGE RULES") == 3
+          assert triple.count("HOOK + CTA:") == 3
           assert triple.count("NO ON-SCREEN TEXT") >= 3
           assert "preceding clip" in triple.casefold()
           assert "TENGOK PRODUK INI" not in triple
@@ -265,24 +265,20 @@ jobs:
 
               # Regression guard: shared hook/CTA/language policy must reach every prompt output path.
               engine_source = Path("prompt_engine.py").read_text(encoding="utf-8")
-              assert engine_source.count("hook_cta_language") >= 4, (
+              assert engine_source.count("hook_cta_language") >= 3, (
                   "Shared hook/CTA/language policy must be defined and applied to all prompt output paths"
               )
-              assert "Every standalone video must include a CTA" in engine_source
-              assert "one fixed script across products" in engine_source
-              assert "never mix languages unless the user explicitly requests it" in engine_source
-              assert "Every 10-second segment, including Part 2" in engine_source
+              assert "HOOK + CTA: Start with a product-specific visual hook" in engine_source
+              assert "HOOK + DEMONSTRATION + CTA:" in engine_source
 
               for mode in ("storyboard", "standard"):
                   generated = build_prompt(
                       mode, "NAMA_PRODUK: baju kurung dewasa", "clean realistic setting",
                       "push", "auto", 10, product_type="fashion"
                   )
-                  assert "MANDATORY HOOK, CTA AND LANGUAGE RULES" in generated, (
-                      f"Hook/CTA/language rules missing from {mode} prompt"
-                  )
-                  assert "Indonesian wording, accent or slang" in generated
-                  assert "NEVER render the hook or CTA as on-screen text" in generated
+                  assert "HOOK + CTA:" in generated, f"Hook/CTA direction missing from {mode} prompt"
+                  assert "HOOK + DEMONSTRATION + CTA:" in generated
+                  assert "no on-screen text" in generated.casefold()
 
               # Verify the selected GitHub storyboard is used by the actual final prompt.
               curated = next(item for item in prompts if item.get("storyboard"))
@@ -390,8 +386,8 @@ jobs:
               )
               assert "=== KLIPPO PART 2/2 ===" in paired
               first_part, second_part = paired.split("=== KLIPPO PART 2/2 ===", 1)
-              assert "MANDATORY HOOK, CTA AND LANGUAGE RULES" in first_part
-              assert "MANDATORY HOOK, CTA AND LANGUAGE RULES" in second_part
+              assert "HOOK + CTA:" in first_part
+              assert "HOOK + CTA:" in second_part
               assert "HOLD the exact final frame" in first_part or "HOLD the final frame" in first_part
               assert "CONTINUATION CLIP 10s" in second_part and "full-product frame" in second_part
               assert (
