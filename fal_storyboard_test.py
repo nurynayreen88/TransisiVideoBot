@@ -48,11 +48,14 @@ def normalize_malaysian_voiceover(text: str) -> str:
     """Replace common Indonesian forms and keep the spoken line concise for Malaysian Malay TTS."""
     value = str(text or "").strip()
     replacements = (
+        (r"\bbagus banget\b", "sangat bagus"),
+        (r"\bbagus sekali\b", "sangat bagus"),
         (r"\bbanget\b", "sangat"),
         (r"\bnggak\b|\benggak\b", "tak"),
         (r"\bkalian\b", "anda"),
         (r"\bbisa\b", "boleh"),
         (r"\bsilakan\b", "sila"),
+        (r"\bcoba\b", "cuba"),
         (r"\bkualitas\b", "kualiti"),
         (r"\bdesain\b", "reka bentuk"),
     )
