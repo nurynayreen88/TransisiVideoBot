@@ -23,6 +23,7 @@ from gemini_storyboard import generate_storyboard
 from gemini_storyboard_image import generate_storyboard_sheet, GeminiStoryboardImageError
 from prompt_engine import build_prompt, creative_angle_instruction
 from prompt_catalog import choices as storyboard_styles
+from caption_hashtags import generate_caption, hashtag_library_size
 
 # Curated prompt library; kept separate from the existing video-generation engine.
 PROMPT_LIBRARY_PATH = Path(__file__).resolve().parent / 'prompts' / 'prompt_library.json'
@@ -3421,6 +3422,32 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 await waiting.delete()
             except Exception:
                 pass
+    elif action in ('prompt_caption_generate', 'prompt_caption_copy'):
+        product_name = str(context.user_data.get('prompt_product_name') or context.user_data.get('prompt_product') or '').strip()
+        if not product_name:
+            await query.message.reply_text('⚠️ Nama produk tidak ditemui. Sila jana prompt video dahulu.')
+            return
+        product_type = str(context.user_data.get('prompt_product_type') or context.user_data.get('prompt_detected_category') or 'other')
+        custom_category = str(context.user_data.get('prompt_custom_category_name') or '').strip()
+        category = custom_category or product_type
+        subcategory = str(context.user_data.get('prompt_custom_subcategory_name') or context.user_data.get('prompt_product_subcategory') or '').strip()
+        caption_text = context.user_data.get('prompt_caption_ready', '')
+        if action == 'prompt_caption_generate' or not caption_text:
+            caption_text = generate_caption(product_name, category, subcategory, 'Shopee')
+            context.user_data['prompt_caption_ready'] = caption_text
+        if action == 'prompt_caption_copy':
+            await query.message.reply_text(caption_text)
+        else:
+            await query.message.reply_text(
+                '✍️ CAPTION PROMOSI + HASHTAG SIAP\n\n'
+                'Dijana berdasarkan produk yang anda pilih. Semak maklumat dan sesuaikan tawaran/harga jika perlu.\n\n'
+                + caption_text,
+                reply_markup=InlineKeyboardMarkup([
+                    [InlineKeyboardButton('📋 Papar untuk Disalin', callback_data='prompt_caption_copy')],
+                    [InlineKeyboardButton('🔁 Jana Caption Baharu', callback_data='prompt_caption_generate')],
+                    [InlineKeyboardButton('↩️ Kembali ke Prompt Video', callback_data='prompt_continue_video')]
+                ])
+            )
     elif action == 'prompt_continue_video':
         prompt = context.user_data.get('prompt_video_ready', '')
         if not prompt:
@@ -3437,6 +3464,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 [InlineKeyboardButton('🤖 NexaBot', url='https://t.me/aigeneratornexa_bot?start=ref37141287'),
                  InlineKeyboardButton('🌐 AxcelStudio', url='https://axcel.cloud/a/3839266034')],
                 [InlineKeyboardButton('✨ Gemini', url='https://gemini.google.com/')],
+                [InlineKeyboardButton('✍️ Jana Caption + Hashtag', callback_data='prompt_caption_generate')],
                 [InlineKeyboardButton('✍️ Prompt Baharu', callback_data='prompt'),
                  InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]
             ])
@@ -3695,6 +3723,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                         [InlineKeyboardButton('🤖 NexaBot', url='https://t.me/aigeneratornexa_bot?start=ref37141287'),
                          InlineKeyboardButton('🌐 AxcelStudio', url='https://axcel.cloud/a/3839266034')],
                         [InlineKeyboardButton('✨ Gemini', url='https://gemini.google.com/')],
+                        [InlineKeyboardButton('✍️ Jana Caption + Hashtag', callback_data='prompt_caption_generate')],
                         [InlineKeyboardButton('✍️ Prompt Baharu', callback_data='prompt'),
                          InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]
                     ])
