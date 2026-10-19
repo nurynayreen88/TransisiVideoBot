@@ -6,7 +6,7 @@ from pathlib import Path
 
 from PIL import Image
 
-from fal_storyboard_test import detect_image_mime, parse_gemini_json
+from fal_storyboard_test import detect_image_mime, normalize_malaysian_voiceover, parse_gemini_json
 from modules.video_engine import _probe_duration, calculate_panel_durations, create_video
 from fal_storyboard_test_bot import claim_user, release_user
 
@@ -43,6 +43,17 @@ class GeminiHelperTests(unittest.TestCase):
     def test_invalid_json_raises(self):
         with self.assertRaises(ValueError):
             parse_gemini_json("{not-json}")
+
+    def test_normalizes_common_indonesian_words_for_malaysian_voiceover(self):
+        result = normalize_malaysian_voiceover("Produk ini bagus banget, kalian bisa coba.")
+        self.assertEqual(result, "Produk ini bagus sangat, anda boleh coba.")
+
+    def test_voiceover_is_limited_to_one_short_sentence(self):
+        result = normalize_malaysian_voiceover(
+            "Ini produk yang sangat menarik untuk anda gunakan setiap hari kerana reka bentuknya kemas dan praktikal. Ayat kedua."
+        )
+        self.assertNotIn("Ayat kedua", result)
+        self.assertLessEqual(len(result.split()), 18)
 
 
 class TelegramLockTests(unittest.TestCase):
