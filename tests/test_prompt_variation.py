@@ -21,6 +21,22 @@ class CreativeVariationTests(unittest.TestCase):
         prompt = prompt_engine._creative_variation("fashion", "children's outfit", 0)
         self.assertIn("fabric swish", prompt)
 
+    def test_20_seconds_single_option_stays_one_full_prompt(self):
+        prompt = prompt_engine.build_prompt(
+            "standard", "Designer Kid Bed", "bright bedroom", "push",
+            duration=20, product_type="home", split=False
+        )
+        self.assertIn("OUTPUT: 20 seconds", prompt)
+        self.assertNotIn("=== KLIPPO PART 2 ===", prompt)
+
+    def test_30_seconds_single_option_stays_one_full_prompt(self):
+        prompt = prompt_engine.build_prompt(
+            "standard", "Designer Kid Bed", "bright bedroom", "push",
+            duration=30, product_type="home", split=False
+        )
+        self.assertIn("OUTPUT: 30 seconds", prompt)
+        self.assertNotIn("=== KLIPPO PART 2 ===", prompt)
+
     def test_20_seconds_produces_two_connected_ten_second_prompts(self):
         prompt = prompt_engine.build_prompt(
             "standard", "Babyshop children's outfit", "bright studio", "push",
