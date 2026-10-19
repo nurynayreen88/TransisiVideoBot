@@ -70,8 +70,8 @@ def _creative_variation(product_type, product, part):
  index=random.SystemRandom().choice(available)
  recent.append(index)
  action=options[index]
- if part==2:
-  action="CONTINUATION ACTION: "+action+" Treat this as a complementary follow-through, not a new opening; preserve Part 1's final-frame identity, setting, lighting and camera direction."
+ if part >= 2:
+  action="CONTINUATION ACTION (PART "+str(part)+"): "+action+" Treat this as a complementary follow-through, not a new opening; preserve the immediately previous part's final-frame identity, setting, lighting and camera direction. Do not repeat the previous part's main gesture."
  return ("CREATIVE VARIATION — Use this distinct action/camera beat: "+action+
   "\\nAUDIO / SFX: "+_SFX_BY_TYPE[group]+
   " Keep effects brief, synchronised, and quieter than selected speech; music remains subtle. If the video model cannot generate audio, do not imply guaranteed sound generation. No sound-effect labels or on-screen text.")
@@ -198,7 +198,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
         # Retain the selected style, reference safety, timed beats and user concept.
         if duration in (10, 20, 30) and (duration == 10 or part == 0):
             if duration == 10 and part >= 2:
-                clip_label = "SECOND CLIP 10s" if part == 2 else "CONTINUATION CLIP 10s"
+                clip_label = "SECOND CLIP 10s" if part == 2 else "THIRD CLIP 10s" if part == 3 else "CONTINUATION CLIP 10s"
                 beat_plan = (clip_label + ": 0–2s continue from the exact full-product frame held at the end of the previous clip; "
                              "2–4s resume the same movement; 4–6s show another visible detail; 6–8s continue in the same setting; "
                              "8–10s stable full-product hero finish. Do NOT repeat the opening hook. ")
@@ -222,7 +222,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
                     "DIRECTOR'S CURATED PREMIUM STORYBOARD: NO ON-SCREEN TEXT. "
                     + (("CONTINUITY BRIDGE: Resume from Part 1's exact final product frame. "
                         "CONTINUATION ACTION: Continue the same concept. Do not repeat the opening hook. ")
-                       if part == 2 else "")
+                       if part >= 2 else "")
                     + "FOLLOW THESE SELECTED STORYBOARD BEATS IN ORDER: "
                     + " | ".join(
                         str(item.get("shot", "")) + ": " + str(item.get("direction", ""))
@@ -463,11 +463,13 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
         direction = ("FIRST CLIP 10s, five 2-second panels: 0-2s establish the product; 2-4s reveal the complete product; "
                      "4-6s focus on one genuinely visible detail; 6-8s continue a complementary action; "
                      "8-10s return to a stable full-product frame and hold without fade to connect directly into Part 2.")
-    elif part == 2:
-        direction = ("SECOND CLIP 10s, five 2-second panels: start with the EXACT held full-product final frame from Part 1, "
+    elif part >= 2:
+        previous_part = part - 1
+        clip_name = "SECOND" if part == 2 else "THIRD" if part == 3 else "CONTINUATION"
+        direction = (clip_name + " CLIP 10s, five 2-second panels: start with the EXACT held full-product final frame from Part " + str(previous_part) + ", "
                      "matching crop, product position, orientation, setting, lighting and color. "
-                     "0-2s resume the same movement; 2-4s continue the action; 4-6s highlight another visible detail; "
-                     "6-8s maintain coherent context; 8-10s full-product hero finish with graceful fade. No new product, scene or angle.")
+                     "0-2s resume the same movement; 2-4s continue with a complementary action; 4-6s highlight another visible detail; "
+                     "6-8s maintain coherent context; 8-10s full-product hero finish with a stable hold. No new product, scene or angle; do not repeat the opening hook.")
     product_words = (product or "").lower()
     fashion_terms = ("kurung", "baju", "tudung", "hijab", "dress", "clothing", "apparel",
                      "fashion", "outfit", "blouse", "skirt", "trousers", "pants", "garment",
