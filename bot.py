@@ -473,10 +473,10 @@ def prompt_model_age_menu():
 
 
 def prompt_language_menu():
-    # This selection controls spoken language only. Klippo videos remain free of generated on-screen text.
+    # This selection controls dialogue language for both on-camera speech and off-screen voiceover.
     return InlineKeyboardMarkup([
-        [InlineKeyboardButton('🇲🇾 Bahasa Melayu Malaysia (voiceover)', callback_data='prompt_language:Malay'),
-         InlineKeyboardButton('🇬🇧 English (voiceover)', callback_data='prompt_language:English')],
+        [InlineKeyboardButton('🇲🇾 Bahasa Melayu Malaysia (pertuturan)', callback_data='prompt_language:Malay'),
+         InlineKeyboardButton('🇬🇧 English (pertuturan)', callback_data='prompt_language:English')],
         [InlineKeyboardButton('Auto — Bahasa Melayu Malaysia', callback_data='prompt_language:none')],
         [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
     ])
@@ -2232,13 +2232,13 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if selected in ('10', '20', '30'):
             context.user_data['prompt_duration'] = int(selected)
             context.user_data['stage'] = 'prompt_language'
-            await query.message.reply_text('🌐 LANGKAH 6 — Pilih bahasa voiceover. Video kekal tanpa teks pada skrin:', reply_markup=prompt_language_menu())
+            await query.message.reply_text('🌐 LANGKAH 6 — Pilih bahasa pertuturan. Video kekal tanpa teks pada skrin:', reply_markup=prompt_language_menu())
     elif action.startswith('prompt_language:') and stage == 'prompt_language':
         selected = action.split(':', 1)[1]
         if selected in ('Malay', 'English', 'none'):
             context.user_data['prompt_language'] = selected
             context.user_data['stage'] = 'prompt_voiceover'
-            await query.message.reply_text('🎙️ LANGKAH 7 — Skrip atau voiceover adalah pilihan:', reply_markup=prompt_voiceover_menu())
+            await query.message.reply_text('🎙️ LANGKAH 7 — Pilih cara penyampaian dialog atau voiceover:', reply_markup=prompt_voiceover_menu())
     elif action.startswith('prompt_voiceover:') and stage == 'prompt_voiceover':
         selected = action.split(':', 1)[1]
         context.user_data['prompt_voiceover_mode'] = selected
