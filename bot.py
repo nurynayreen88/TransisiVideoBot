@@ -728,9 +728,9 @@ PRODUCT_FRAMING_KEYS = {
     'wallet': ('wallet_open','wallet_cards','wallet_pocket','detail','demo','pov','lifestyle','product_only'),
     'beauty': ('beauty_apply','beauty_texture','beauty_unbox','detail','demo','lifestyle','product_only'),
     'food': ('food_texture','food_serve','food_hand','detail','pov','lifestyle','product_only'),
-    'gadget': ('gadget_hand','gadget_screen','gadget_ports','detail','pov','demo','lifestyle','product_only'),
+    'gadget': ('gadget_hand','gadget_screen','gadget_ports','equipment_use','equipment_controls','equipment_working','detail','pov','demo','lifestyle','product_only'),
     'equipment': ('equipment_use','equipment_controls','equipment_setup','equipment_working','home_scale','detail','pov','demo','lifestyle','product_only'),
-    'home': ('home_in_use','home_setup','home_scale','detail','pov','demo','lifestyle','product_only'),
+    'home': ('home_in_use','home_setup','home_scale','equipment_use','equipment_controls','equipment_setup','equipment_working','detail','pov','demo','lifestyle','product_only'),
     'accessory': ('accessory_wear','accessory_close','detail','model','demo','lifestyle','product_only'),
     'toy': ('toy_play','toy_feature','detail','pov','demo','lifestyle','product_only'),
     'book_stationery': ('stationery_write','stationery_flatlay','detail','pov','demo','lifestyle','product_only'),
@@ -739,7 +739,7 @@ PRODUCT_FRAMING_KEYS = {
     'automotive': ('auto_install','auto_detail','detail','pov','demo','lifestyle','product_only'),
     'baby': ('baby_safe_use','detail','demo','lifestyle','product_only'),
     'travel': ('travel_pack','detail','model','demo','lifestyle','product_only'),
-    'office': ('office_work','detail','pov','demo','lifestyle','product_only'),
+    'office': ('office_work','equipment_use','equipment_controls','equipment_working','detail','pov','demo','lifestyle','product_only'),
     'other': ('detail','model','pov','demo','lifestyle','product_only'),
 }
 
