@@ -305,7 +305,13 @@ jobs:
               first_part, second_part = paired.split("=== KLIPPO PART 2 ===", 1)
               assert "HOLD the final frame" in first_part
               assert "SECOND CLIP 10s" in second_part and "full-product frame" in second_part
-              assert "Do NOT repeat the opening hook" in second_part
+              assert (
+              "do not repeat the opening hook" in second_part.casefold()
+              or "no repeated opening hook" in second_part.casefold()
+          )
+          assert "SECONDARY DEMONSTRATION" in second_part
+          assert "ALTERNATE DETAIL / TRUST SHOT" in second_part
+          assert "FINAL HERO / SPOKEN CTA" in second_part
 
           print(
               f"Validated {len(categories)} categories, {len(prompts)} prompt-library entries, "
