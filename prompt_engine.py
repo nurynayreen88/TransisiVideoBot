@@ -328,35 +328,61 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
             "Keep the chosen hijab style and handbag presentation consistent. Never redesign, recolor, reshape, add or remove stated outfit details. "
             "Use one consistent home setting, authentic phone-camera perspective, soft daylight and crisp fabric detail. Skin must retain pores and natural texture; facial features, fingers, joints, hair and fabric folds must remain anatomically and physically believable. Use relaxed breathing, subtle weight shifts and natural timing rather than a frozen pose or robotic motion. Keep the same real-looking person and garment in every frame; no face drift, beauty-filter skin, uncanny eyes, extra fingers, rubbery limbs, fabric shimmer, pattern drift, over-smoothed skin, CGI sheen or artificial slow motion. No collage, split screen, poster layout, outfit change, plastic skin or CGI."
         )
-    if duration == 10 and part == 0:
-        # Compact 10-second prompt: keep the creative intent in one Telegram message.
-        selected_beats = ""
+    if mode == "storyboard":
+        # Compact, copy-ready storyboard: short sentences, selected choices, no generic option branches.
+        style_key, style_name, style_template = resolve(style)
+        selected_beats = []
         if storyboard_override and isinstance(storyboard_override, (list, tuple)):
-            beat_lines = []
             for beat in storyboard_override[:4]:
                 if isinstance(beat, dict):
-                    beat_lines.append(str(beat.get("time", "")) + " " + str(beat.get("shot", "")) + ": " + str(beat.get("direction", "")))
+                    time_label = str(beat.get("time", "")).strip()
+                    shot_label = str(beat.get("shot", "")).strip()
+                    beat_text = " ".join(str(beat.get("direction", "")).split())
+                    if time_label or shot_label or beat_text:
+                        selected_beats.append((time_label + " " + shot_label + ". " + beat_text).strip())
                 else:
-                    beat_lines.append(str(beat))
-            if beat_lines:
-                selected_beats = "SELECTED SHOT IDEAS: " + " ".join(beat_lines) + "\n"
-        compact = (
-            "KLIPPO | REALISTIC 10-SECOND PRODUCT VIDEO\n"
-            "FORMAT: vertical 9:16, one coherent live-action-style commercial, 10 seconds.\n"
-            + hook_cta_language + "\n"
-            "PRODUCT: " + product + "\n" + category_direction + "\n" + model_age_direction + "\n"
-            "REFERENCE LOCK: Use uploaded photo(s) as truth. Preserve visible shape, colour, print, packaging, logo and proportions. Never invent unseen features, materials, accessories or claims. REAL-WORLD SCALE IS MANDATORY: rings remain finger-sized, watches fit wrists, phones fit hands, and furniture/appliances keep believable proportions relative to people and rooms. Use macro framing rather than physically enlarging small objects.\n"
-            "SCENE: " + str(scene) + ". " + (("CONCEPT: " + str(concept) + ". ") if concept else "") + "\n"
-            + selected_beats
-            + "SHOT FLOW: 0–2s natural opening/reveal; 2–5s one gentle camera move (" + str(camera) + "); "
-            "5–8s highlight one visible detail; 8–10s settle into a clear full-product hero frame and hold. "
-            "Use one simple, physically possible action; keep the product grounded and stable. No montage, sudden scene change or impossible orbit.\n"
-            "PHOTOREALISM: Must resemble real camera footage, not CGI, 3D render or AI art. Natural material and skin texture; realistic hands/anatomy if a model is included; consistent face, body, clothing and product. Use believable lens perspective, soft real-world light, contact shadows and plausible reflections. Do not add a person if none is needed.\n"
-            "AVOID: waxy skin, uncanny faces, extra/fused fingers, warped product, changing patterns, floating objects, fake reflections, plastic shine, excessive bokeh/HDR, flicker, jitter, identity drift, invented props, captions, added logos or watermarks.\n"
-            "HOOK + DEMONSTRATION + CTA: Open with a product-specific visual hook, demonstrate one visible detail or plausible use, and finish with a clean hero shot. No on-screen text, added logos or watermarks. " +
-            "FINAL CHECK: believable physics, consistent product identity, natural motion, realistic physical scale, no on-screen text or added branding, and understated commercial polish."
-        )
-        return compact
+                    beat_text = " ".join(str(beat).split())
+                    if beat_text:
+                        selected_beats.append(beat_text)
+        if not selected_beats:
+            selected_beats = [
+                "Buka dengan paparan dekat yang menarik perhatian tanpa mengubah rupa produk.",
+                "Dedahkan keseluruhan produk dalam latar pilihan dengan skala dan warna yang tepat.",
+                "Tunjukkan satu butiran yang benar-benar kelihatan melalui gerakan kamera yang dipilih.",
+                "Akhiri dengan paparan penuh produk yang jelas dan stabil sebagai CTA visual."
+            ]
+        # Keep every segment under Telegram's one-message limit while retaining selected storyboard beats.
+        selected_beats = [" ".join(str(x).split())[:420].rstrip() for x in selected_beats[:4]]
+        if part > 1:
+            selected_beats[0] = "Sambung tepat daripada bingkai akhir klip sebelumnya, dengan produk, latar, cahaya dan kedudukan yang sama. " + selected_beats[0]
+            selected_beats[-1] = selected_beats[-1].rstrip(".") + ". Tamatkan dengan bingkai produk penuh yang stabil untuk sambungan seterusnya."
+        elif part == 1 and total_parts > 1:
+            selected_beats[-1] = selected_beats[-1].rstrip(".") + ". Pegang bingkai akhir tanpa fade supaya klip seterusnya boleh bersambung."
+        elif total_parts == 1:
+            selected_beats[-1] = selected_beats[-1].rstrip(".") + ". Tamatkan dengan paparan produk yang jelas dan stabil."
+        scene_lines = []
+        for i, beat in enumerate(selected_beats, start=1):
+            start_s = (i - 1) * 10 / len(selected_beats)
+            end_s = i * 10 / len(selected_beats)
+            scene_lines.append(f"Babak {i} ({start_s:g}–{end_s:g}s): {beat}")
+        compact_lines = [
+            "KLIPPO | STORYBOARD VIDEO PRODUK",
+            f"Format menegak 9:16. Durasi tepat 10 saat untuk klip ini" + (f" (Bahagian {part}/{total_parts})." if part else "."),
+            f"Produk: {product}.",
+            f"Gaya dipilih: {style_name}. Latar: {scene}.",
+            f"Gerakan kamera dipilih: {motion}.",
+            category_direction,
+        ]
+        if model_age_direction:
+            compact_lines.append(model_age_direction)
+        compact_lines.extend([
+            "Kekalkan bentuk, warna, corak, pembungkusan, logo asal dan skala sebenar produk. Jangan reka ciri, bahan atau aksesori yang tidak kelihatan.",
+            *scene_lines,
+            "Hasilkan rakaman fotorealistik dengan gerakan semula jadi, cahaya dan bayang yang munasabah. Jangan tambah tulisan, sari kata, logo atau watermark."
+        ])
+        if concept:
+            compact_lines.insert(5, "Idea pilihan pengguna: " + " ".join(str(concept).split())[:350].rstrip(".") + ".")
+        return "\n".join(line for line in compact_lines if line and line.strip())
     return (
         "KLIPPO | PROFESSIONAL IMAGE-TO-VIDEO PRODUCTION PROMPT" + (" | BAHAGIAN " + str(part) + "/" + str(total_parts) if part else "") + "\n"
         "OUTPUT: " + str(duration) + " seconds; portrait 9:16; high-quality realistic product commercial; "
