@@ -529,6 +529,14 @@ def prompt_text_presence_menu():
     ])
 
 
+def prompt_text_mode_menu():
+    return InlineKeyboardMarkup([
+        [InlineKeyboardButton('⚡ Auto — Klippo pilih teks sesuai', callback_data='prompt_text_mode:auto')],
+        [InlineKeyboardButton('✍️ Manual — Saya masukkan teks', callback_data='prompt_text_mode:manual')],
+        [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
+    ])
+
+
 def prompt_audio_presence_menu():
     return InlineKeyboardMarkup([
         [InlineKeyboardButton('🔊 Ada suara', callback_data='prompt_audio_presence:yes')],
@@ -555,6 +563,7 @@ def prompt_language_menu():
 
 def prompt_voiceover_menu():
     return InlineKeyboardMarkup([
+        [InlineKeyboardButton('⚡ Auto — Klippo pilih suara sesuai', callback_data='prompt_voiceover:auto')],
         [InlineKeyboardButton('🔇 Tanpa dialog / voiceover', callback_data='prompt_voiceover:none')],
         [InlineKeyboardButton('🎙️ Suara natural / santai', callback_data='prompt_voiceover:ai')],
         [InlineKeyboardButton('🥰 Suara comel / ceria', callback_data='prompt_voiceover:cute')],
@@ -709,11 +718,9 @@ def prompt_setup_mode_menu():
 
 def prompt_duration_menu():
     return InlineKeyboardMarkup([
-        [InlineKeyboardButton('🎬 10 saat · 1 prompt', callback_data='prompt_duration:10_single')],
-        [InlineKeyboardButton('🎞️ 20 saat · 2 prompt bersambung (10+10)', callback_data='prompt_duration:20_split')],
-        [InlineKeyboardButton('🎞️ 20 saat · 1 prompt', callback_data='prompt_duration:20_single')],
-        [InlineKeyboardButton('🎬 30 saat · 3 prompt bersambung (10+10+10)', callback_data='prompt_duration:30_split')],
-        [InlineKeyboardButton('🎬 30 saat · 1 prompt', callback_data='prompt_duration:30_single')],
+        [InlineKeyboardButton('🎬 10 saat', callback_data='prompt_duration:10')],
+        [InlineKeyboardButton('🎞️ 20 saat', callback_data='prompt_duration:20')],
+        [InlineKeyboardButton('🎬 30 saat', callback_data='prompt_duration:30')],
         [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
     ])
 
@@ -876,14 +883,6 @@ def prompt_style_menu(product_type='other', model_presence=None):
                  for key, label in matching])
     rows.append([InlineKeyboardButton('↩️ Menu Utama', callback_data='home')])
     return InlineKeyboardMarkup(rows)
-
-
-def prompt_idea_choice_menu():
-    return InlineKeyboardMarkup([
-        [InlineKeyboardButton('🎬 Tambah idea video siap (pilihan)', callback_data='prompt_idea:yes')],
-        [InlineKeyboardButton('➡️ Teruskan tanpa idea tambahan', callback_data='prompt_idea:skip')],
-        [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
-    ])
 
 
 def prompt_category_menu():
@@ -2498,9 +2497,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data['prompt_reference_photos'] = []
         context.user_data['stage'] = 'prompt_product_type'
         await query.message.reply_text(
-            '✍️ KLIPPO | JANA PROMPT VIDEO\n\n'
-            'Pilih kategori produk dan taip nama produk. Kemudian pilih durasi serta latar, semak ringkasan dan tekan Jana Prompt.\n\n'
-            'Klippo menghasilkan teks prompt sahaja, bukan video siap. Salin prompt ke platform video AI pilihan anda; gambar produk boleh dimuat naik di platform tersebut.',
+            '✍️ KLIPPO | JANA PROMPT VIDEO\n\nPilih kategori, subkategori dan nama produk. Kemudian pilih durasi serta Auto atau Manual.\n\nKlippo menyediakan teks prompt untuk digunakan pada platform video AI pilihan anda. Gambar produk tidak perlu dimuat naik ke bot.',
             reply_markup=prompt_product_type_menu()
         )
     elif action.startswith('prompt_mode:'):
@@ -2654,105 +2651,110 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             )
         else:
             await query.message.reply_text('Pilihan subkategori tidak sah. Sila pilih semula:', reply_markup=prompt_product_subtype_menu(category))
-    elif action.startswith('prompt_setup:') and stage in ('prompt_setup_mode', 'prompt_confirm'): 
+    elif action.startswith('prompt_setup:') and stage in ('prompt_setup_mode', 'prompt_confirm'):
         selected = action.split(':', 1)[1]
         if selected == 'auto':
             product_type = context.user_data.get('prompt_product_type', 'other')
-            # Choose conservative, product-appropriate defaults without asking more questions.
             use_model = product_type in {'fashion', 'hijab', 'shoes'}
             context.user_data.update({
-                'prompt_model_presence': 'yes' if use_model else 'none',
-                'prompt_model_count': 1 if use_model else 0,
-                'prompt_model_gender': 'female' if use_model else 'none',
-                'prompt_model_hijab': 'hijab' if product_type == 'hijab' else ('no_hijab' if use_model else 'na'),
-                'prompt_model_ethnicity': 'Malay' if use_model else 'na',
-                'prompt_model_age': '26-40' if use_model else 'na',
-                'prompt_style': 'auto',
-                'prompt_language': 'Malay',
-                'prompt_voiceover_mode': 'none' if context.user_data.get('prompt_audio_enabled') is False else 'ai',
-                'prompt_voiceover_style': 'ai',
-                'prompt_speech_source': 'voiceover',
-                'prompt_voiceover_script': '',
-                'prompt_concept': '',
-                'prompt_scene': 'clean premium studio background, selected to complement the exact product reference',
-                'prompt_motion_choice': 'auto',
-                'stage': 'prompt_confirm',
+                'prompt_model_presence':'yes' if use_model else 'none','prompt_model_count':1 if use_model else 0,
+                'prompt_model_gender':'female' if use_model else 'none','prompt_model_hijab':'hijab' if product_type == 'hijab' else ('no_hijab' if use_model else 'na'),
+                'prompt_model_ethnicity':'Malay' if use_model else 'na','prompt_model_age':'26-40' if use_model else 'na',
+                'prompt_model_gender_2':'none','prompt_model_hijab_2':'na','prompt_model_age_2':'na',
+                'prompt_style':'auto','prompt_language':'Malay','prompt_voiceover_mode':'ai','prompt_voiceover_style':'auto',
+                'prompt_speech_source':'voiceover','prompt_voiceover_script':'','prompt_concept':'',
+                'prompt_scene':'clean premium studio background, selected to complement the exact product reference',
+                'prompt_motion_choice':'auto','prompt_framing':'auto','prompt_on_screen_text':'no','prompt_text_mode':'none',
+                'prompt_text_content':'','prompt_audio_enabled':False,'stage':'prompt_scene'
             })
-            context.user_data['stage'] = 'prompt_text_presence'
-            await query.message.reply_text(
-                '📝 LANGKAH 7 — Mahu teks dipaparkan pada skrin video?',
-                reply_markup=prompt_text_presence_menu()
-            )
+            await query.message.reply_text('🖼️ Pilih latar video:', reply_markup=prompt_scene_menu())
         elif selected == 'manual':
             context.user_data['stage'] = 'prompt_model_presence'
-            await query.message.reply_text('👤 LANGKAH 1 — Mahu model AI dalam video?', reply_markup=prompt_model_presence_menu())
+            await query.message.reply_text('👤 Mahu model dalam video?', reply_markup=prompt_model_presence_menu())
     elif action.startswith('prompt_model:') and stage == 'prompt_model_presence':
         selected = action.split(':', 1)[1]
         if selected == 'none':
-            context.user_data.update({
-                'prompt_model_presence': 'none', 'prompt_model_count': 0,
-                'prompt_model_gender': 'none', 'prompt_model_hijab': 'na',
-                'prompt_model_ethnicity': 'na', 'prompt_model_age': 'na'
-            })
+            context.user_data.update({'prompt_model_presence':'none','prompt_model_count':0,'prompt_model_gender':'none','prompt_model_hijab':'na','prompt_model_ethnicity':'na','prompt_model_age':'na','prompt_model_gender_2':'none','prompt_model_hijab_2':'na','prompt_model_age_2':'na'})
             context.user_data['stage'] = 'prompt_style'
-            await query.message.reply_text('🎨 LANGKAH 2 — Pilih gaya video:', reply_markup=prompt_style_menu(context.user_data.get('prompt_product_type', 'other'), context.user_data.get('prompt_model_presence')))
+            await query.message.reply_text('🎨 Pilih gaya video:', reply_markup=prompt_style_menu(context.user_data.get('prompt_product_type','other'),'none'))
         elif selected == 'yes':
             context.user_data['prompt_model_presence'] = 'yes'
             context.user_data['stage'] = 'prompt_model_count'
-            await query.message.reply_text('👤 LANGKAH 1 — BUTIRAN MODEL\n\nBerapa orang model AI yang diperlukan? Maksimum 2 model.', reply_markup=prompt_model_count_menu())
+            await query.message.reply_text('👥 Berapa orang model yang diperlukan?', reply_markup=prompt_model_count_menu())
     elif action.startswith('prompt_model_count:') and stage == 'prompt_model_count':
         selected = action.split(':', 1)[1]
-        if selected in ('1', '2'):
+        if selected in ('1','2'):
             context.user_data['prompt_model_count'] = int(selected)
+            context.user_data.update({'prompt_model_gender_2':'none','prompt_model_hijab_2':'na','prompt_model_age_2':'na'})
             context.user_data['stage'] = 'prompt_model_gender'
-            await query.message.reply_text('👤 LANGKAH 1 — BUTIRAN MODEL\n\nPilih jantina model:', reply_markup=prompt_model_gender_menu())
-    elif action.startswith('prompt_model_gender:') and stage == 'prompt_model_gender':
+            await query.message.reply_text('Pilih jantina model pertama:', reply_markup=prompt_model_gender_menu())
+    elif action.startswith('prompt_model_gender:') and stage in ('prompt_model_gender','prompt_model_gender_2'):
         selected = action.split(':', 1)[1]
-        if selected in ('female', 'male', 'mixed'):
-            context.user_data['prompt_model_gender'] = selected
-            if selected in ('female', 'mixed'):
-                context.user_data['stage'] = 'prompt_model_hijab'
-                await query.message.reply_text('👤 LANGKAH 1 — BUTIRAN MODEL\n\nPilihan tudung untuk model wanita:', reply_markup=prompt_model_hijab_menu())
+        if selected in ('female','male','mixed'):
+            if stage == 'prompt_model_gender_2':
+                context.user_data['prompt_model_gender_2'] = selected
+                context.user_data['stage'] = 'prompt_model_age_2'
+                await query.message.reply_text('Pilih umur model kedua:', reply_markup=prompt_model_age_menu())
             else:
-                context.user_data['prompt_model_hijab'] = 'na'
-                context.user_data['stage'] = 'prompt_model_ethnicity'
-                await query.message.reply_text('👤 LANGKAH 1 — BUTIRAN MODEL\n\nPilih rupa atau latar etnik model:', reply_markup=prompt_model_ethnicity_menu())
+                context.user_data['prompt_model_gender'] = selected
+                context.user_data['stage'] = 'prompt_model_age'
+                await query.message.reply_text('Pilih umur model pertama:', reply_markup=prompt_model_age_menu())
+    elif action.startswith('prompt_model_age:') and stage in ('prompt_model_age','prompt_model_age_2'):
+        selected = action.split(':', 1)[1]
+        if selected in ('4-7','8-12','13-17','18-25','26-40','41-60','60+'):
+            if selected in ('4-7','8-12','13-17') and not _prompt_is_child_product(context.user_data):
+                await query.message.reply_text('⚠️ Model bawah 18 tahun hanya sesuai untuk produk kanak-kanak atau remaja. Untuk produk lain, pilih umur dewasa.', reply_markup=prompt_model_age_menu())
+                return
+            if stage == 'prompt_model_age_2':
+                context.user_data['prompt_model_age_2'] = selected
+                if context.user_data.get('prompt_model_gender_2') == 'female':
+                    context.user_data['prompt_hijab_target'] = 2
+                    context.user_data['stage'] = 'prompt_model_hijab'
+                    await query.message.reply_text('Model kedua wanita — pilih bertudung atau tidak:', reply_markup=prompt_model_hijab_menu())
+                elif context.user_data.get('prompt_model_gender') == 'female':
+                    context.user_data['prompt_hijab_target'] = 1
+                    context.user_data['stage'] = 'prompt_model_hijab'
+                    await query.message.reply_text('Model pertama wanita — pilih bertudung atau tidak:', reply_markup=prompt_model_hijab_menu())
+                else:
+                    context.user_data['stage'] = 'prompt_style'
+                    await query.message.reply_text('🎨 Pilih gaya video:', reply_markup=prompt_style_menu(context.user_data.get('prompt_product_type','other'),'yes'))
+            else:
+                context.user_data['prompt_model_age'] = selected
+                if int(context.user_data.get('prompt_model_count',1)) == 2:
+                    context.user_data['stage'] = 'prompt_model_gender_2'
+                    await query.message.reply_text('Pilih jantina model kedua:', reply_markup=prompt_model_gender_menu())
+                elif context.user_data.get('prompt_model_gender') == 'female':
+                    context.user_data['prompt_hijab_target'] = 1
+                    context.user_data['stage'] = 'prompt_model_hijab'
+                    await query.message.reply_text('Model wanita — pilih bertudung atau tidak:', reply_markup=prompt_model_hijab_menu())
+                else:
+                    context.user_data['prompt_model_hijab'] = 'na'
+                    context.user_data['stage'] = 'prompt_style'
+                    await query.message.reply_text('🎨 Pilih gaya video:', reply_markup=prompt_style_menu(context.user_data.get('prompt_product_type','other'),'yes'))
     elif action.startswith('prompt_model_hijab:') and stage == 'prompt_model_hijab':
         selected = action.split(':', 1)[1]
-        if selected in ('hijab', 'no_hijab', 'na'):
-            context.user_data['prompt_model_hijab'] = selected
-            context.user_data['stage'] = 'prompt_model_ethnicity'
-            await query.message.reply_text('👤 LANGKAH 1 — BUTIRAN MODEL\n\nPilih rupa atau latar etnik model:', reply_markup=prompt_model_ethnicity_menu())
-    elif action.startswith('prompt_model_ethnicity:') and stage == 'prompt_model_ethnicity':
-        selected = action.split(':', 1)[1]
-        if selected in ('Malay', 'Chinese', 'Indian', 'random_malaysia', 'Asian', 'diverse', 'any'):
-            context.user_data['prompt_model_ethnicity'] = selected
-            context.user_data['stage'] = 'prompt_model_age'
-            await query.message.reply_text('👤 LANGKAH 1 — BUTIRAN MODEL\n\nPilih lingkungan umur model (dewasa sahaja):', reply_markup=prompt_model_age_menu())
-    elif action.startswith('prompt_model_age:') and stage == 'prompt_model_age':
-        selected = action.split(':', 1)[1]
-        if selected in ('4-7', '8-12', '13-17', '18-25', '26-40', '41-60', '60+'):
-            if selected in ('4-7', '8-12', '13-17') and not _prompt_is_child_product(context.user_data):
-                await query.message.reply_text(
-                    '⚠️ Model bawah 18 tahun hanya boleh dipilih untuk produk yang jelas sesuai untuk kanak-kanak/remaja. '
-                    'Untuk produk dewasa atau kategori yang tidak pasti, pilih model dewasa atau kembali dan pilih tanpa model.',
-                    reply_markup=prompt_model_age_menu()
-                )
-                return
-            context.user_data['prompt_model_age'] = selected
+        if selected in ('hijab','no_hijab','na'):
+            target = int(context.user_data.get('prompt_hijab_target',1))
+            if target == 2:
+                context.user_data['prompt_model_hijab_2'] = selected
+                if context.user_data.get('prompt_model_gender') == 'female' and context.user_data.get('prompt_model_hijab','na') == 'na':
+                    context.user_data['prompt_hijab_target'] = 1
+                    await query.message.reply_text('Model pertama wanita — pilih bertudung atau tidak:', reply_markup=prompt_model_hijab_menu())
+                    return
+            else:
+                context.user_data['prompt_model_hijab'] = selected
+                if int(context.user_data.get('prompt_model_count',1)) == 2 and context.user_data.get('prompt_model_gender_2') == 'female':
+                    context.user_data['prompt_hijab_target'] = 2
+                    await query.message.reply_text('Model kedua wanita — pilih bertudung atau tidak:', reply_markup=prompt_model_hijab_menu())
+                    return
             context.user_data['stage'] = 'prompt_style'
-            await query.message.reply_text('🎨 LANGKAH 2 — Pilih gaya video:', reply_markup=prompt_style_menu(context.user_data.get('prompt_product_type', 'other'), context.user_data.get('prompt_model_presence')))
+            await query.message.reply_text('🎨 Pilih gaya video:', reply_markup=prompt_style_menu(context.user_data.get('prompt_product_type','other'),'yes'))
     elif action.startswith('prompt_duration:') and stage == 'prompt_duration':
         selected = action.split(':', 1)[1]
         valid_duration_modes = {
-            '10_single': (10, 'single'),
-            '20_single': (20, 'single'),
-            '20_split': (20, 'split'),
-            '30_single': (30, 'single'),
-            '30_split': (30, 'split'),
-            # Keep old Telegram keyboards/callbacks compatible.
-            '10': (10, 'single'),
-            '20': (20, 'split'),
+            '10': (10, 'single'), '20': (20, 'split'), '30': (30, 'split'),
+            '10_single': (10, 'single'), '20_single': (20, 'single'), '20_split': (20, 'split'),
+            '30_single': (30, 'single'), '30_split': (30, 'split'),
         }
         if selected in valid_duration_modes:
             duration, duration_mode = valid_duration_modes[selected]
@@ -2766,60 +2768,72 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await query.message.reply_text('⚙️ Pilih cara tetapan prompt:', reply_markup=prompt_setup_mode_menu())
     elif action.startswith('prompt_text_presence:') and stage == 'prompt_text_presence':
         selected = action.split(':', 1)[1]
-        if selected in ('yes', 'no'):
+        if selected in ('yes','no'):
             context.user_data['prompt_on_screen_text'] = selected
+            if selected == 'yes':
+                context.user_data['stage'] = 'prompt_text_mode'
+                await query.message.reply_text('Pilih cara menyediakan teks pada skrin:', reply_markup=prompt_text_mode_menu())
+            else:
+                context.user_data['prompt_text_mode'] = 'none'
+                context.user_data['prompt_text_content'] = ''
+                context.user_data['stage'] = 'prompt_audio_presence'
+                await query.message.reply_text('🔊 Mahu audio atau suara dalam video?', reply_markup=prompt_audio_presence_menu())
+    elif action.startswith('prompt_text_mode:') and stage == 'prompt_text_mode':
+        selected = action.split(':', 1)[1]
+        if selected == 'auto':
+            context.user_data['prompt_text_mode'] = 'auto'
+            context.user_data['prompt_text_content'] = ''
             context.user_data['stage'] = 'prompt_audio_presence'
-            await query.message.reply_text('🔊 LANGKAH 8 — Mahu suara/dialog dalam video?', reply_markup=prompt_audio_presence_menu())
+            await query.message.reply_text('🔊 Mahu audio atau suara dalam video?', reply_markup=prompt_audio_presence_menu())
+        elif selected == 'manual':
+            context.user_data['prompt_text_mode'] = 'manual'
+            context.user_data['stage'] = 'prompt_text_content'
+            await query.message.reply_text('✍️ Taip teks tepat yang mahu dipaparkan pada skrin video.')
     elif action.startswith('prompt_audio_presence:') and stage == 'prompt_audio_presence':
         selected = action.split(':', 1)[1]
-        if selected in ('yes', 'no'):
+        if selected in ('yes','no'):
             context.user_data['prompt_audio_enabled'] = selected == 'yes'
             if selected == 'no':
                 context.user_data['prompt_voiceover_mode'] = 'none'
                 context.user_data['prompt_voiceover_style'] = 'none'
                 context.user_data['prompt_voiceover_script'] = ''
-                context.user_data['stage'] = 'prompt_idea_choice'
-                await query.message.reply_text(
-                    '💡 Mahu tambah satu idea aksi daripada koleksi prompt siap? Pilihan ini akan digabungkan ke dalam prompt yang sama.',
-                    reply_markup=prompt_idea_choice_menu()
-                )
+                context.user_data['stage'] = 'prompt_scene'
+                await query.message.reply_text('🖼️ Pilih latar video:', reply_markup=prompt_scene_menu())
+            elif context.user_data.get('prompt_model_presence') == 'yes':
+                context.user_data['stage'] = 'prompt_speaker'
+                await query.message.reply_text('Pilih sumber suara:', reply_markup=prompt_speaker_menu())
             else:
+                context.user_data['prompt_speech_source'] = 'voiceover'
                 context.user_data['stage'] = 'prompt_language'
-                await query.message.reply_text('🌐 LANGKAH 9 — Pilih bahasa suara/dialog:', reply_markup=prompt_language_menu())
+                await query.message.reply_text('Pilih bahasa suara:', reply_markup=prompt_language_menu())
     elif action.startswith('prompt_language:') and stage == 'prompt_language':
         selected = action.split(':', 1)[1]
-        if selected in ('Malay', 'English', 'none'):
+        if selected in ('Malay','English','none'):
             context.user_data['prompt_language'] = selected
-            context.user_data['stage'] = 'prompt_speaker' if context.user_data.get('prompt_model_presence') == 'yes' else 'prompt_voiceover'
-            if context.user_data['stage'] == 'prompt_speaker':
-                await query.message.reply_text('🎙️ Pilih sumber suara:', reply_markup=prompt_speaker_menu())
-            else:
-                await query.message.reply_text('🎙️ Pilih gaya suara atau skrip:', reply_markup=prompt_voiceover_menu())
+            context.user_data['stage'] = 'prompt_voiceover'
+            await query.message.reply_text('Pilih Auto atau gaya suara:', reply_markup=prompt_voiceover_menu())
     elif action.startswith('prompt_speaker:') and stage == 'prompt_speaker':
         selected = action.split(':', 1)[1]
-        if selected in ('model', 'voiceover'):
+        if selected in ('model','voiceover'):
             context.user_data['prompt_speech_source'] = selected
-            context.user_data['stage'] = 'prompt_voiceover'
-            await query.message.reply_text('🎙️ Pilih gaya suara atau skrip:', reply_markup=prompt_voiceover_menu())
+            context.user_data['stage'] = 'prompt_language'
+            await query.message.reply_text('Pilih bahasa suara:', reply_markup=prompt_language_menu())
     elif action.startswith('prompt_voiceover:') and stage == 'prompt_voiceover':
         selected = action.split(':', 1)[1]
-        valid_voice_styles = {'none', 'ai', 'cute', 'serious', 'energetic', 'friendly', 'soft', 'script'}
+        valid_voice_styles = {'auto','none','ai','cute','serious','energetic','friendly','soft','script'}
         if selected not in valid_voice_styles:
             await query.message.reply_text('Pilihan suara tidak dikenali. Sila pilih semula.', reply_markup=prompt_voiceover_menu())
         elif selected == 'script':
             context.user_data['prompt_voiceover_mode'] = 'script'
             context.user_data['prompt_voiceover_style'] = 'custom'
             context.user_data['stage'] = 'prompt_voiceover_text'
-            await query.message.reply_text('✍️ Tampal skrip voiceover/dialogue anda. Tulis - jika mahu batalkan skrip dan teruskan tanpa dialog.')
+            await query.message.reply_text('✍️ Taip skrip suara/dialog yang mahu digunakan.')
         else:
             context.user_data['prompt_voiceover_mode'] = 'none' if selected == 'none' else 'ai'
             context.user_data['prompt_voiceover_style'] = selected
             context.user_data['prompt_voiceover_script'] = ''
-            context.user_data['stage'] = 'prompt_idea_choice'
-            await query.message.reply_text(
-                '💡 Mahu tambah satu idea aksi daripada koleksi prompt siap? Pilihan ini akan digabungkan ke dalam prompt yang sama.',
-                reply_markup=prompt_idea_choice_menu()
-            )
+            context.user_data['stage'] = 'prompt_scene'
+            await query.message.reply_text('🖼️ Pilih latar video:', reply_markup=prompt_scene_menu())
     elif action.startswith('prompt_style:') and stage == 'prompt_style':
         selected = action.split(':', 1)[1]
         valid = {'auto'} | {key for key, _ in storyboard_styles()}
@@ -2828,12 +2842,12 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['prompt_framing'] = 'auto'
             context.user_data['stage'] = 'prompt_framing'
             await query.message.reply_text(
-                '🎥 LANGKAH 3 — Bagaimana kamera patut merakam produk?\n\nPilihan ini berbeza daripada gaya visual. Contohnya, Luxury/Cinematic ialah rupa video; Fokus kaki/Kasut dalam kereta menentukan apa yang kamera tunjuk.',
+                '🎥 Pilih gaya kamera untuk merakam produk. Gaya kamera menentukan sudut dan cara produk ditunjukkan, berbeza daripada gaya visual.',
                 reply_markup=prompt_framing_menu(context.user_data.get('prompt_product_type', 'other'), context.user_data.get('prompt_model_presence'), context.user_data)
             )
     elif action == 'prompt_framing_back' and stage == 'prompt_framing':
         context.user_data['stage'] = 'prompt_style'
-        await query.message.reply_text('🎨 LANGKAH 2 — Pilih gaya visual:', reply_markup=prompt_style_menu(context.user_data.get('prompt_product_type', 'other'), context.user_data.get('prompt_model_presence')))
+        await query.message.reply_text('🎨 Pilih gaya video:', reply_markup=prompt_style_menu(context.user_data.get('prompt_product_type', 'other'), context.user_data.get('prompt_model_presence')))
     elif action.startswith('prompt_framing:'):
         selected = action.split(':', 1)[1]
         if selected in PRODUCT_FRAMING and (
@@ -2845,7 +2859,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['prompt_framing'] = selected
             context.user_data['stage'] = 'prompt_text_presence'
             await query.message.reply_text(
-                '📝 LANGKAH 7 — Mahu teks dipaparkan pada skrin video?',
+                '📝 Mahu teks dipaparkan pada skrin video?',
                 reply_markup=prompt_text_presence_menu()
             )
         else:
@@ -2855,15 +2869,13 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 reply_markup=main_menu(update.effective_user.id)
             )
     elif action == 'prompt_idea:yes' and stage == 'prompt_idea_choice':
-        context.user_data['stage'] = 'prompt_category'
-        await query.message.reply_text(
-            '📚 Pilih kategori untuk idea video (bukan prompt berasingan):',
-            reply_markup=prompt_category_menu()
-        )
+        context.user_data['prompt_concept'] = ''
+        context.user_data['stage'] = 'prompt_scene'
+        await query.message.reply_text('🖼️ Pilih latar video:', reply_markup=prompt_scene_menu())
     elif action == 'prompt_idea:skip' and stage == 'prompt_idea_choice':
         context.user_data['prompt_concept'] = ''
         context.user_data['stage'] = 'prompt_scene'
-        await query.message.reply_text('🎨 Pilih latar video:', reply_markup=prompt_scene_menu())
+        await query.message.reply_text('🖼️ Pilih latar video:', reply_markup=prompt_scene_menu())
     elif action == 'prompt_input:photo' and stage == 'prompt_input':
         context.user_data['stage'] = 'prompt_product_name'
         await query.message.reply_text('🛍️ Mod prompt Klippo tidak menggunakan gambar atau analisis AI. Tampal nama produk sahaja untuk mengesan kategori secara automatik.')
@@ -2919,7 +2931,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # callbacks must continue into the second chain.
     if action in ('admin_pending', 'admin', 'storyboard', 'make', 'prompt', 'prompt_categories', 'prompt_images_done') or action.startswith(
         ('admin_approve:', 'admin_reject:', 'prompt_flow:', 'prompt_mode:', 'prompt_model:', 'prompt_model_count:', 'prompt_model_gender:', 'prompt_model_hijab:', 'prompt_model_ethnicity:', 'prompt_model_age:', 'prompt_language:', 'prompt_voiceover:', 'prompt_type:', 'prompt_product_type:', 'prompt_product_subcategory:', 'prompt_product_categories', 'prompt_duration:',
-         'prompt_style:', 'prompt_setup:', 'prompt_idea:', 'prompt_details:', 'prompt_text_presence:', 'prompt_audio_presence:', 'prompt_speaker:', 'video_input:', 'prompt_input:', 'pcat:', 'ptpl:')
+         'prompt_style:', 'prompt_setup:', 'prompt_idea:', 'prompt_details:', 'prompt_text_presence:', 'prompt_text_mode:', 'prompt_audio_presence:', 'prompt_speaker:', 'video_input:', 'prompt_input:', 'pcat:', 'ptpl:')
     ):
         return
     if action.startswith('motion:') and context.user_data.get('stage') == 'prompt_motion':
@@ -2931,7 +2943,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             style_key = context.user_data.get('prompt_style', 'auto')
             style_labels = dict(storyboard_styles())
             style_name = 'Auto (Disyorkan)' if style_key == 'auto' else style_labels.get(style_key, style_key)
-            concept = context.user_data.get('prompt_concept', '').strip() or 'Tiada — tanpa idea tambahan'
+            concept = context.user_data.get('prompt_concept', '').strip() or 'Tiada'
             product_name = context.user_data.get('prompt_product_name', '').strip() or 'Tidak diisi'
             scene = context.user_data.get('prompt_scene', 'clean studio background')
             scene_labels = {
@@ -2949,9 +2961,11 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 f'🛍️ Nama produk: {product_name}',
                 f'📦 Jenis produk: {PRODUCT_TYPES.get(context.user_data.get("prompt_product_type", "other"), "Produk lain")}',
                 f'⏱️ Tempoh: {context.user_data.get("prompt_duration", 10)} saat — ' + ('satu prompt' if context.user_data.get('prompt_duration_mode', 'split' if context.user_data.get('prompt_duration') == 20 else 'single') == 'single' else str(int(context.user_data.get('prompt_duration', 10)) // 10) + ' prompt bersambung 10 saat'),
-                f'🎨 Gaya visual: {style_name}',
-                '🎥 Cara rakaman: ' + PRODUCT_FRAMING.get(context.user_data.get('prompt_framing', 'auto'), PRODUCT_FRAMING['auto'])[0],
-                f'💡 Idea video: {concept}',
+                f'👤 Model: ' + ('Tiada — fokus produk' if context.user_data.get('prompt_model_presence') != 'yes' else str(context.user_data.get('prompt_model_count',1)) + ' model; Model 1: ' + str(context.user_data.get('prompt_model_gender','female')) + ', umur ' + str(context.user_data.get('prompt_model_age','26-40')) + ', tudung ' + str(context.user_data.get('prompt_model_hijab','na')) + (('; Model 2: ' + str(context.user_data.get('prompt_model_gender_2')) + ', umur ' + str(context.user_data.get('prompt_model_age_2')) + ', tudung ' + str(context.user_data.get('prompt_model_hijab_2')) if int(context.user_data.get('prompt_model_count',1)) == 2 else '')),
+                f'🎨 Gaya video: {style_name}',
+                '🎥 Gaya kamera: ' + PRODUCT_FRAMING.get(context.user_data.get('prompt_framing','auto'), PRODUCT_FRAMING['auto'])[0],
+                '📝 Teks skrin: ' + ('Tiada' if context.user_data.get('prompt_on_screen_text') != 'yes' else ('Auto' if context.user_data.get('prompt_text_mode') == 'auto' else context.user_data.get('prompt_text_content','Manual'))),
+                '🔊 Suara: ' + ('Tiada' if not context.user_data.get('prompt_audio_enabled') else str(context.user_data.get('prompt_speech_source','voiceover')) + ' / ' + str(context.user_data.get('prompt_voiceover_style','auto'))),
                 f'🖼️ Latar: {scene_labels.get(scene, scene)}',
                 '🎥 Aksi & rakaman: Automatik mengikut produk dan latar',
                 '',
@@ -3098,14 +3112,14 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             ])
             if context.user_data.get('prompt_mode') == 'storyboard':
                 video_intro = (
-                    '🎬 PROMPT VIDEO — LANGKAH PILIHAN\n\n'
+                    '🎬 PROMPT VIDEO —  PILIHAN\n\n'
                     'Storyboard telah dijana dahulu. Muat naik gambar produk asal yang sama sebagai rujukan, kemudian salin prompt video di bawah.\n'
                     'Untuk klip bersambung, jana setiap bahagian mengikut turutan dan gunakan bingkai akhir bahagian sebelumnya sebagai rujukan bahagian seterusnya.'
                 )
             else:
                 video_intro = (
-                    '🎬 LANGKAH 2 — PROMPT VIDEO\n\n'
-                    '1. Muat naik imej yang dijana dalam Langkah 1 ke platform AI pilihan.\n'
+                    '🎬  2 — PROMPT VIDEO\n\n'
+                    '1. Muat naik imej yang dijana dalam  1 ke platform AI pilihan.\n'
                     '2. Salin prompt video di bawah dan tampal pada platform tersebut.\n'
                     '3. Jika prompt dibahagikan kepada beberapa klip, jana mengikut turutan dan gunakan bingkai akhir klip sebelumnya sebagai rujukan klip seterusnya.\n\n'
                     'PENTING: Gunakan imej baharu yang dijana daripada PROMPT IMAGE sebagai MASTER reference.'
@@ -3202,6 +3216,23 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                         or context.user_data.get('prompt_custom_subcategory_name')
                     )
                 )
+                if context.user_data.get('prompt_model_presence') == 'yes' and int(context.user_data.get('prompt_model_count',1)) == 2:
+                    prompt += ('\\n\\nTWO-MODEL CAST: Model 1 is ' + str(context.user_data.get('prompt_model_gender','female')) + ', age ' + str(context.user_data.get('prompt_model_age','26-40')) + ', hijab ' + str(context.user_data.get('prompt_model_hijab','na')) + '. Model 2 is ' + str(context.user_data.get('prompt_model_gender_2','male')) + ', age ' + str(context.user_data.get('prompt_model_age_2','26-40')) + ', hijab ' + str(context.user_data.get('prompt_model_hijab_2','na')) + '. Keep identities distinct and consistent.')
+                elif context.user_data.get('prompt_model_presence') == 'yes':
+                    prompt += ('\\n\\nMODEL CAST: One ' + str(context.user_data.get('prompt_model_gender','female')) + ' model, age ' + str(context.user_data.get('prompt_model_age','26-40')) + ', hijab ' + str(context.user_data.get('prompt_model_hijab','na')) + '.')
+                if context.user_data.get('prompt_on_screen_text') == 'yes':
+                    if context.user_data.get('prompt_text_mode') == 'manual' and context.user_data.get('prompt_text_content'):
+                        prompt += '\\n\\nON-SCREEN TEXT: Display exactly this text, with correct spelling and no extra words: ' + context.user_data['prompt_text_content']
+                    else:
+                        prompt += '\\n\\nON-SCREEN TEXT: Add concise Malaysian Malay promotional text with a strong hook and clear CTA. Keep spelling accurate; do not add logos or unrelated text.'
+                else:
+                    prompt += '\\n\\nON-SCREEN TEXT: Do not display any text, captions, labels, logos or watermarks.'
+                if context.user_data.get('prompt_audio_enabled'):
+                    prompt += '\\n\\nAUDIO: ' + ('The on-camera model speaks naturally' if context.user_data.get('prompt_speech_source') == 'model' else 'Use an off-camera promoter voiceover') + '. Language: ' + str(context.user_data.get('prompt_language','Malay')) + '. Voice style: ' + str(context.user_data.get('prompt_voiceover_style','auto')) + '.'
+                    if context.user_data.get('prompt_voiceover_mode') == 'script' and context.user_data.get('prompt_voiceover_script'):
+                        prompt += ' Use this exact spoken script: ' + context.user_data['prompt_voiceover_script']
+                else:
+                    prompt += '\\n\\nAUDIO: No voiceover or spoken dialogue.'
                 framing_key = context.user_data.get('prompt_framing', 'auto')
                 # Always tailor actions to the actual product and its intended age group.
                 if _prompt_is_child_product(context.user_data):
@@ -3315,7 +3346,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                             break
                     await query.message.reply_text(
                         ('🎬 STORYBOARD BERGAMBAR SIAP' if not visual_error else '📝 STORYBOARD TEKS SIAP') +
-                        '\n\nStoryboard dijana terus berdasarkan gambar produk anda. Prompt video ialah pilihan seterusnya, bukan langkah wajib sebelum storyboard.',
+                        '\n\nStoryboard dijana terus berdasarkan gambar produk anda. Prompt video ialah pilihan seterusnya, bukan  wajib sebelum storyboard.',
                         reply_markup=storyboard_actions
                     )
                     if len(storyboard) <= 3900:
@@ -3425,7 +3456,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 ])
                 image_actions = InlineKeyboardMarkup(image_action_rows)
                 await query.message.reply_text(
-                    '🖼️ LANGKAH 1 — PROMPT IMAGE\n\n'
+                    '🖼️  1 — PROMPT IMAGE\n\n'
                     '1. Salin prompt di bawah.\n'
                     '2. Buka salah satu laman AI melalui butang.\n'
                     '3. Muat naik gambar produk asal dan tampal PROMPT IMAGE.\n'
@@ -3579,7 +3610,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await query.message.reply_text('Pilih efek garisan / doodle untuk prompt storyboard:', reply_markup=doodle_menu())
         else:
             context.user_data['stage'] = 'music'
-            await query.message.reply_text(f"✅ Gaya {context.user_data['style']} dipilih.\nLangkah 3/4 — Pilih muzik:", reply_markup=music_menu())
+            await query.message.reply_text(f"✅ Gaya {context.user_data['style']} dipilih.\n 3/4 — Pilih muzik:", reply_markup=music_menu())
     elif action == 'effects' and stage == 'confirm':
         context.user_data['stage'] = 'doodle'
         await query.message.reply_text('✨ Pilih efek video:', reply_markup=doodle_menu())
@@ -3636,7 +3667,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data['stage'] = 'feedback'
         await query.message.reply_text(
             '💬 KOMEN & CADANGAN KLIPPO\n\n'
-            'Taip komen, cadangan atau masalah yang anda temui. Nyatakan langkah yang dibuat dan hasil yang dijangka jika melaporkan masalah. '
+            'Taip komen, cadangan atau masalah yang anda temui. Nyatakan  yang dibuat dan hasil yang dijangka jika melaporkan masalah. '
             'Mesej akan dihantar kepada pentadbir Klippo untuk semakan.\n\n'
             'Taip /menu untuk batal dan kembali ke menu utama.'
         )
@@ -3728,13 +3759,22 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data['stage'] = 'prompt_category'
         await update.message.reply_text('📚 Nama produk diterima. Pilih koleksi prompt:', reply_markup=prompt_category_menu())
         return
+    if stage == 'prompt_text_content':
+        text_content = value.strip()
+        if not text_content:
+            await update.message.reply_text('Teks tidak boleh kosong. Taip teks yang mahu dipaparkan pada skrin.')
+            return
+        context.user_data['prompt_text_content'] = text_content[:500]
+        context.user_data['stage'] = 'prompt_audio_presence'
+        await update.message.reply_text('✅ Teks disimpan. Mahu audio atau suara dalam video?', reply_markup=prompt_audio_presence_menu())
+        return
     if stage == 'prompt_voiceover_text':
         script = '' if value.strip() in ('-', '—', 'tiada', 'Tiada') else value.strip()
         context.user_data['prompt_voiceover_script'] = script[:1200]
         if not script:
             context.user_data['prompt_voiceover_mode'] = 'none'
-        context.user_data['stage'] = 'prompt_idea_choice'
-        await update.message.reply_text('✅ Skrip disimpan.' if script else '✅ Teruskan tanpa dialog.', reply_markup=prompt_idea_choice_menu())
+        context.user_data['stage'] = 'prompt_scene'
+        await update.message.reply_text('✅ Skrip disimpan.' if script else '✅ Teruskan tanpa dialog.', reply_markup=prompt_scene_menu())
         return
     if stage == 'prompt_custom_category':
         if len(value) < 2 or value.lower().startswith(('http://', 'https://')):
@@ -3947,7 +3987,7 @@ async def generate(update: Update, context: ContextTypes.DEFAULT_TYPE):
     message = update.effective_message
     ids = context.user_data.get('photos', [])
     if ids and not context.user_data.get('video_product_info', '').strip() and not context.user_data.get('storyboard_mode'):
-        await message.reply_text('📝 Tajuk produk Shopee wajib diisi. Sila lengkapkan langkah selepas Selesai Hantar Gambar.')
+        await message.reply_text('📝 Tajuk produk Shopee wajib diisi. Sila lengkapkan  selepas Selesai Hantar Gambar.')
         return
     if not ids and not context.user_data.get('shopee_url'):
         await message.reply_text('Hantar gambar atau pautan produk Shopee dahulu.', reply_markup=main_menu())
