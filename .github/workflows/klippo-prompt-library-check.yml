@@ -286,6 +286,16 @@ jobs:
                   "Verified product name should create a product-specific visual hook without written text"
               )
               assert "NO ON-SCREEN TEXT" in verified_prompt
+              stationery_prompt = build_prompt(
+                  "storyboard", "NAMA_PRODUK: buku nota", "desk", "push", "auto", 10,
+                  product_type="stationery"
+              )
+              sports_prompt = build_prompt(
+                  "storyboard", "NAMA_PRODUK: botol air sukan", "safe sports setting", "push", "auto", 10,
+                  product_type="sports"
+              )
+              assert "stationery or a writing/study item" in stationery_prompt
+              assert "sports or fitness equipment" in sports_prompt
 
               paired = build_prompt(
                   "storyboard", uncertain, "clean premium studio background",
