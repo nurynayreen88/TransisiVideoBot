@@ -55,6 +55,12 @@ class GeminiHelperTests(unittest.TestCase):
         self.assertNotIn("Ayat kedua", result)
         self.assertLessEqual(len(result.split()), 18)
 
+    def test_missing_voiceover_uses_visible_detail_and_malay_product_name(self):
+        result = normalize_malaysian_voiceover("", ["jalur cincin yang kemas"], "ring")
+        self.assertIn("jalur cincin yang kemas", result)
+        self.assertIn("cincin", result)
+        self.assertLessEqual(len(result.split()), 18)
+
 
 class TelegramLockTests(unittest.TestCase):
     def test_same_user_cannot_claim_two_generation_slots(self):
