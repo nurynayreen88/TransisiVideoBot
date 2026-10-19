@@ -3201,7 +3201,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                         '🎥 PROMPT VIDEO TERUS\n\n'
                         + ('🖼️ LATAR SENDIRI DIPILIH\nMuat naik DUA imej ke penjana video: (1) gambar produk asal sebagai rujukan produk, dan (2) gambar latar pilihan anda sebagai rujukan latar. Jika ada tetapan peranan imej, tetapkan imej produk sebagai subjek dan imej latar sebagai latar/scene. Klippo tidak memindahkan fail ke platform luar.\n\n' if context.user_data.get('prompt_custom_background') else '')
                         + 'Muat naik gambar produk asal yang sama ke platform AI pilihan, kemudian salin prompt di bawah. '
-                        + 'Klippo tidak menghantar gambar ke laman luar secara automatik. Untuk video bersambung, muat naik semula kedua-dua imej rujukan yang sama bagi setiap bahagian dan gunakan bingkai akhir klip sebelumnya untuk kesinambungan.'
+                        + ('Klippo tidak menghantar gambar ke laman luar secara automatik. Untuk setiap bahagian video bersambung, muat naik semula gambar produk dan gambar latar yang sama serta gunakan bingkai akhir klip sebelumnya untuk kesinambungan.' if context.user_data.get('prompt_custom_background') else 'Klippo tidak menghantar gambar ke laman luar secara automatik. Untuk video bersambung, muat naik semula gambar produk yang sama dan gunakan bingkai akhir klip sebelumnya untuk kesinambungan.')
                     )
                     for index, section in enumerate(sections, 1):
                         section = section.strip()
