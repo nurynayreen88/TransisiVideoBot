@@ -3311,6 +3311,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await query.message.reply_text('⚠️ Tiada gambar rujukan ditemui. Sila mulakan prompt baharu dan hantar gambar produk.')
             return
         context.user_data["_prompt_trial_count_on_success"] = not access["active"]
+        context.user_data["busy"] = True
         waiting = await query.message.reply_text('⏳ GEMINI STORYBOARD — 0%\nMenghantar gambar rujukan dan menyediakan babak...')
         try:
             images = []
@@ -3418,6 +3419,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     caption='📋 Prompt alternatif storyboard. Lampirkan gambar produk apabila menggunakan prompt ini.'
                 )
         finally:
+            context.user_data["busy"] = False
             try:
                 await waiting.delete()
             except Exception:
@@ -3533,6 +3535,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         motion = context.user_data.get('prompt_motion_choice', 'push')
         motions = {'auto': _contextual_motion_instruction(context.user_data.get('prompt_scene_key', 'auto'), context.user_data.get('prompt_product_type', 'other'), context.user_data.get('prompt_model_presence', 'yes')), 'orbit': 'A controlled 30-degree camera arc around the product, not a full 360-degree rotation; preserve the visible product geometry.', 'push': 'A slow forward camera push-in toward the product to reveal texture and details; avoid digital warping and preserve product geometry.', 'pull': 'A slow camera pull-back away from the product to reveal its full shape and surrounding scene; preserve proportions.', 'side': 'A smooth horizontal left-to-right camera slide with stable product proportions.', 'dolly': 'A slow physical-feeling forward dolly-in with gentle natural parallax; no object deformation.', 'low': 'A restrained low-angle camera view looking slightly upward at the product; preserve the reference design and proportions.', 'static': 'A locked camera with subtle studio lighting changes only; keep the product clear and stable.'}
         if motion in motions:
+            context.user_data["busy"] = True
             waiting = await query.message.reply_text('⏳ DALAM PROSES — 0%' + chr(10) + 'Menyusun prompt...')
             try:
                 product_name = context.user_data.get('prompt_product_name', '').strip()
@@ -3805,6 +3808,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 logging.exception('Klippo prompt generation failed')
                 await query.message.reply_text('❌ Prompt tidak berjaya dijana. Trial tidak ditolak. Sila tekan Jana Prompt sekali lagi. Jika masalah berulang, maklumkan admin Klippo.')
             finally:
+                context.user_data["busy"] = False
                 try:
                     await waiting.delete()
                 except Exception:
