@@ -358,7 +358,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
                 "Sambung tepat daripada bingkai akhir klip sebelumnya. Kekalkan produk, model, pakaian, latar dan cahaya yang sama sambil meneruskan gerakan secara semula jadi.",
                 "Tunjukkan aksi susulan yang berbeza dan sesuai dengan gaya serta idea pilihan pengguna. Jangan ulang pembukaan klip terdahulu.",
                 "Serlahkan butiran lain yang benar-benar kelihatan pada produk, atau gunakan sudut pandangan yang selamat tanpa mereka ciri baharu.",
-                "Akhiri dengan paparan penuh produk dan CTA melalui voiceover terpilih atau aksi visual. Pegang bingkai akhir jika ada klip seterusnya."
+                "Akhiri dengan paparan penuh produk dan CTA melalui voiceover terpilih atau aksi visual."
             ]
         elif part == 1 and total_parts > 1:
             selected_beats[-1] = selected_beats[-1].rstrip(".") + ". Pegang bingkai akhir tanpa fade supaya klip seterusnya boleh bersambung."
