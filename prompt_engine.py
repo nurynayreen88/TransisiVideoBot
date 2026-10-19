@@ -320,27 +320,21 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
                 "natural contact shadows, clean transitions and restrained highlights. Keep product geometry and visible details "
                 "consistent throughout. Finish on a stable, clean hero frame."
             )
+        storyboard_plan = (
+            curated_direction if curated_direction else
+            (hook_direction if part != 2 else "NO REPEATED OPENING HOOK in Part 2.") + "\\n\\n" + rules
+        )
         return (
-            "PROMPT VIDEO — 10 SAAT\n"
-            "KLIPPO | UNIVERSAL PRODUCT VIDEO PROMPT | " + style_name + (" | BAHAGIAN " + str(part) + "/" + str(total_parts) if part else "") + "\n"
-            "OUTPUT: One cohesive vertical 9:16 product advertisement, EXACT DURATION: " + str(duration) + " seconds.\n\n"
-            + hook_cta_language + "\n\n"
-            "PRODUCT NAME: " + product + "\n" + category_direction + "\n" + model_age_direction + "\n\n" + identity + "\n\n"
-            "STYLE FROM KLIPPO CATALOG: " + style_template + "\n\n"
-            "SETTING: " + scene + "\n"
-            "CAMERA: " + camera + " Keep framing plausible for the named product; avoid unsupported angles or features.\n\n"
-            + evidence_rules + "\n\n" + (
-                curated_direction if curated_direction else
-                (hook_direction if part != 2 else "NO REPEATED OPENING HOOK in Part 2.") + "\n\n" + rules
-            ) + "\n\n"
-            + (("OPTIONAL CREATIVE CONCEPT: " + concept + ". Use it only to guide a suitable, physically plausible action or story beat; "
-                 "do not treat it as proof of product features, benefits, included accessories or unseen details. "
-                 "If the idea requires an unprovided feature, ignore that part.\n\n") if concept else "")
-            +  "CONTINUITY: Keep a consistent, plausible presentation of the named product throughout the video. "
-            "Use soft physically believable lighting and stable background. "
-            "Do not morph the object, invent accessories or cover its visible branding. "
-            "For white doodle, the graphic overlays are explicitly REQUIRED and are not captions or UI. "
-            "If the video generator cannot render precise overlays, generate clean product footage and add doodles in post-production."
+            "PROMPT VIDEO — 10 SAAT\\n"
+            + "Vertical 9:16, " + str(duration) + " seconds. " + style_name + ".\\n"
+            + "Product: " + product + ". " + category_direction + (" " + model_age_direction if model_age_direction else "") + "\\n"
+            + "Setting: " + scene + ". Camera: " + camera + "\\n"
+            + "PRODUCT LOCK: Preserve the reference product's visible design, colour, pattern, branding and proportions. Do not invent features or accessories.\\n"
+            + "HOOK + DEMONSTRATION + CTA: Open with a product-specific visual hook, show one relevant detail or plausible use, and finish on a clear product shot.\\n\\n"
+            + "STORYBOARD:\\n" + storyboard_plan + "\\n\\n"
+            + ("CREATIVE IDEA: " + concept.strip() + "\\n\\n" if concept else "")
+            + ("WHITE DOODLE: Keep selected doodles small and outside the product silhouette; use no letters or labels.\\n" if doodle else "")
+            + "Keep actions, lighting and camera movement natural and consistent. Follow the selected storyboard and visual options."
         )
     if mode == "storyboard":
         shots = [
