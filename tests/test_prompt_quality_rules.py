@@ -23,8 +23,8 @@ def load_function_from_source(name):
 class PromptQualityRulesTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.fit_prompt = load_function_from_source("fit_prompt_to_one_telegram_message")
-        cls.creative_settings = load_function_from_source("prompt_creative_settings")
+        cls.fit_prompt = staticmethod(load_function_from_source("fit_prompt_to_one_telegram_message"))
+        cls.creative_settings = staticmethod(load_function_from_source("prompt_creative_settings"))
 
     def test_long_prompt_preserves_voiceover_settings_and_fits_telegram(self):
         long_prompt = (
