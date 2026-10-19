@@ -150,7 +150,7 @@ async def choose_video_duration(update: Update, context: ContextTypes.DEFAULT_TY
     for index, prompt in enumerate(prompts, start=1):
         await send_text_chunks(
             query.message,
-            f"📋 PROMPT {index}/{len(prompts)} — KLIP 10 SAAT\\n\\n{prompt}",
+            f"📋 PROMPT {index}/{len(prompts)} — KLIP 10 SAAT\n\n{prompt}",
             reply_markup=InlineKeyboardMarkup([[
                 InlineKeyboardButton("📋 Paparkan semua prompt semula", callback_data="prompt:video")
             ]]) if index == len(prompts) else None,
@@ -388,7 +388,7 @@ async def show_video_prompt_for_copy(update: Update, context: ContextTypes.DEFAU
     for index, prompt in enumerate(prompts, start=1):
         await send_text_chunks(
             query.message,
-            f"PROMPT {index}/{len(prompts)} — KLIP 10 SAAT\\n\\n" + prompt
+            f"PROMPT {index}/{len(prompts)} — KLIP 10 SAAT\n\n" + prompt
         )
 
 
