@@ -2010,6 +2010,10 @@ async def show_admin_user_details(message, user_id, status='all', offset=0):
                  f"\nDihantar: {receipt.get('submitted_at') or '-'}"
                  f"\nDisemak: {receipt.get('reviewed_at') or '-'}")
     await message.reply_text(text, reply_markup=InlineKeyboardMarkup([
+        [InlineKeyboardButton('➕ Tambah 7 hari', callback_data=f'admin_add_days:{user_id}:7:{status}:{offset}'),
+         InlineKeyboardButton('➕ Tambah 30 hari', callback_data=f'admin_add_days:{user_id}:30:{status}:{offset}')],
+        [InlineKeyboardButton('➕ Tambah 90 hari', callback_data=f'admin_add_days:{user_id}:90:{status}:{offset}'),
+         InlineKeyboardButton('➕ Tambah 365 hari', callback_data=f'admin_add_days:{user_id}:365:{status}:{offset}')],
         [InlineKeyboardButton('⬅️ Kembali ke senarai', callback_data=f'admin_users:{status}:{offset}')],
         [InlineKeyboardButton('↩️ Admin', callback_data='admin')]
     ]))
@@ -2571,6 +2575,35 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         except Exception:
             logging.exception('Admin user detail failed')
             await query.message.reply_text('Gagal mendapatkan butiran pengguna.')
+    elif action.startswith('admin_add_days:'):
+        if not is_admin(update.effective_user.id):
+            await query.message.reply_text('Akses tidak dibenarkan.')
+            return
+        if not klippo_db.configured():
+            await query.message.reply_text('Sambungan Supabase belum tersedia.')
+            return
+        try:
+            _, raw_id, raw_days, user_status, raw_offset = action.split(':', 4)
+            user_id, days, offset = int(raw_id), int(raw_days), int(raw_offset)
+            if days not in (7, 30, 90, 365):
+                raise ValueError('Invalid subscription extension')
+            updated = await asyncio.to_thread(klippo_db.add_subscription_days, user_id, days)
+            expiry = updated.get('expires_at') or '-'
+            await query.message.reply_text(
+                f'✅ Langganan dikemas kini.\nPengguna: {updated.get("telegram_name") or user_id}'
+                f'\nTempoh ditambah: {days} hari\nTarikh tamat baharu: {expiry}'
+            )
+            await show_admin_user_details(query.message, user_id, user_status, offset)
+            try:
+                await context.bot.send_message(
+                    chat_id=user_id,
+                    text=f'🎉 Admin telah menambah {days} hari langganan Klippo anda. Langganan aktif sehingga {expiry}.'
+                )
+            except Exception:
+                logging.info('Could not notify user %s about subscription extension', user_id, exc_info=True)
+        except Exception:
+            logging.exception('Admin subscription extension failed')
+            await query.message.reply_text('❌ Gagal menambah hari langganan. Semak rekod pengguna dan sambungan database.')
     elif action == 'admin_users_help':
         if not is_admin(update.effective_user.id):
             await query.message.reply_text('Akses tidak dibenarkan.')
