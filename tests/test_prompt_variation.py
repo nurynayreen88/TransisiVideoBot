@@ -26,7 +26,7 @@ class CreativeVariationTests(unittest.TestCase):
             "standard", "Designer Kid Bed", "bright bedroom", "push",
             duration=20, product_type="home", split=False
         )
-        self.assertIn("OUTPUT: 20 seconds", prompt)
+        self.assertIn("exactly 20 seconds", prompt)
         self.assertNotIn("=== KLIPPO PART 2 ===", prompt)
 
     def test_30_seconds_single_option_stays_one_full_prompt(self):
@@ -34,7 +34,7 @@ class CreativeVariationTests(unittest.TestCase):
             "standard", "Designer Kid Bed", "bright bedroom", "push",
             duration=30, product_type="home", split=False
         )
-        self.assertIn("OUTPUT: 30 seconds", prompt)
+        self.assertIn("exactly 30 seconds", prompt)
         self.assertNotIn("=== KLIPPO PART 2 ===", prompt)
 
     def test_20_seconds_produces_two_connected_ten_second_prompts(self):
