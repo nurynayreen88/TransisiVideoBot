@@ -492,12 +492,15 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
             "Keep model, clothing, colours, fit and accessories unchanged. No dancing, scene changes or invented details. "
             + selected_scene_lock
         )
+    spoken_language = "Bahasa Melayu Malaysia" if user_data.get("prompt_language", "Malay") != "English" else "English"
     return (
-        "PROMPT VIDEO — " + str(duration) + " SAAT" + (" | BAHAGIAN " + str(part) if part else "") + "\n"
-        "Video produk realistik, 9:16, tepat " + str(duration) + " saat.\n"
-        "PRODUK: " + product + "\n" + category_direction + "\n"
-        + "GAYA: " + art[:100].strip() + "\n"
+        "VIDEO PROMPT — " + str(duration) + " SECONDS" + (" | PART " + str(part) if part else "") + "\n"
+        "Realistic vertical 9:16 product ad, exactly " + str(duration) + " seconds.\n"
+        "PRODUCT: " + product + "\n"
+        "STYLE: " + str(art)[:70].strip() + "\n"
+        "SETTING: " + str(scene)[:100].strip() + "\n"
         + direction + "\n"
-        + "Kekalkan rupa, warna, corak dan pembungkusan asal. Jangan reka ciri atau aksesori. "
-        "Jika suara digunakan, sebut hook dan CTA ringkas dalam Bahasa Melayu Malaysia. Gerakan lancar; tiada teks skrin atau watermark."
+        + "Preserve the product's visible design and packaging; invent no features. "
+        "Natural movement, clean transitions, no added on-screen text or watermark. "
+        "If voice is selected, use a short product-specific hook and CTA in " + spoken_language + "."
     )
