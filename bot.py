@@ -1183,7 +1183,7 @@ def resolve_music(choice: str, style: str) -> Path | None:
 
 
 def verified_video_hook(info: str) -> str | None:
-    """Build a varied, neutral Malaysian-Malay opening without inventing product claims."""
+    """Suggest a natural Malaysian-Malay spoken opening without unsupported claims."""
     import random
 
     info = ' '.join((info or '').split())[:100]
@@ -1191,16 +1191,18 @@ def verified_video_hook(info: str) -> str | None:
         return None
     if len(info) > 42:
         info = info[:42].rsplit(' ', 1)[0]
-    # Some videos work better with a clean visual reveal and no headline at all.
-    if random.SystemRandom().randrange(5) == 0:
+    # A visual-only opening is often more natural than forcing a spoken hook.
+    rng = random.SystemRandom()
+    if rng.randrange(5) == 0:
         return None
     openings = (
-        'JOM LIHAT ' + info.upper(),
-        'INI DIA ' + info.upper(),
-        'LIHAT LEBIH DEKAT: ' + info.upper(),
-        info.upper() + ' DALAM FOKUS',
+        f"Kalau tengah cari {info}, boleh tengok pilihan ini.",
+        f"Sedang bandingkan {info}? Ini satu pilihan untuk dipertimbangkan.",
+        f"Kalau minat {info}, boleh semak yang ini.",
+        f"Nak cari {info}? Cuba lihat pilihan ini dulu.",
+        f"Untuk yang mencari {info}, boleh pertimbangkan pilihan ini.",
     )
-    return random.SystemRandom().choice(openings)
+    return rng.choice(openings)
 
 
 def hook_card(still: Path, hook: str) -> None:
