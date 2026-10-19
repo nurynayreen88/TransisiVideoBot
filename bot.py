@@ -21,7 +21,7 @@ from storyboard_overlay import apply_overlay, make_handwriting_labels
 from gemini_vision import describe_photo
 from gemini_storyboard import generate_storyboard
 from gemini_storyboard_image import generate_storyboard_sheet, GeminiStoryboardImageError
-from prompt_engine import build_prompt
+from prompt_engine import build_prompt, creative_angle_instruction
 from prompt_catalog import choices as storyboard_styles
 
 # Curated prompt library; kept separate from the existing video-generation engine.
@@ -630,6 +630,9 @@ def prompt_creative_settings(user_data, include_audio=True):
     # build_prompt() already supplies format, product lock and continuity.
     # Keep this helper focused on the user's selected model, audio and text options.
     lines = [model]
+    angle_instruction = creative_angle_instruction(user_data.get('prompt_ad_angle', 'auto'))
+    if angle_instruction:
+        lines.append(angle_instruction)
     if include_audio:
         language = user_data.get('prompt_language', 'Malay')
         voiceover_mode = user_data.get('prompt_voiceover_mode', 'none')
@@ -719,10 +722,26 @@ def prompt_setup_mode_menu():
 
 
 def prompt_duration_menu():
+    # Keep all five established duration/segmentation choices distinct.
     return InlineKeyboardMarkup([
         [InlineKeyboardButton('🎬 10 saat', callback_data='prompt_duration:10')],
-        [InlineKeyboardButton('🎞️ 20 saat', callback_data='prompt_duration:20')],
-        [InlineKeyboardButton('🎬 30 saat', callback_data='prompt_duration:30')],
+        [InlineKeyboardButton('🎞️ 20 saat', callback_data='prompt_duration:20_single')],
+        [InlineKeyboardButton('🎞️ 20 saat (10 + 10)', callback_data='prompt_duration:20_split')],
+        [InlineKeyboardButton('🎬 30 saat', callback_data='prompt_duration:30_single')],
+        [InlineKeyboardButton('🎬 30 saat (10 + 10 + 10)', callback_data='prompt_duration:30_split')],
+        [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
+    ])
+
+
+def prompt_ad_angle_menu():
+    return InlineKeyboardMarkup([
+        [InlineKeyboardButton('⚡ Auto — ikut produk', callback_data='prompt_ad_angle:auto')],
+        [InlineKeyboardButton('❓ Hook berbentuk soalan', callback_data='prompt_ad_angle:question')],
+        [InlineKeyboardButton('✨ Reveal produk yang menarik', callback_data='prompt_ad_angle:reveal')],
+        [InlineKeyboardButton('🖐️ Demonstrasi ringkas', callback_data='prompt_ad_angle:demo')],
+        [InlineKeyboardButton('🏡 Situasi harian / relatable', callback_data='prompt_ad_angle:relatable')],
+        [InlineKeyboardButton('💎 Premium / editorial', callback_data='prompt_ad_angle:premium')],
+        [InlineKeyboardButton('🛍️ Promoter affiliate bertenaga', callback_data='prompt_ad_angle:affiliate')],
         [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
     ])
 
@@ -2784,6 +2803,21 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['prompt_audio_enabled'] = None
             context.user_data['stage'] = 'prompt_setup_mode'
             await query.message.reply_text('⚙️ Pilih cara tetapan prompt:', reply_markup=prompt_setup_mode_menu())
+    elif action.startswith('prompt_ad_angle:') and stage == 'prompt_ad_angle':
+        selected = action.split(':', 1)[1]
+        valid_angles = {'auto', 'question', 'reveal', 'demo', 'relatable', 'premium', 'affiliate'}
+        if selected in valid_angles:
+            context.user_data['prompt_ad_angle'] = selected
+            context.user_data['stage'] = 'prompt_text_presence'
+            await query.message.reply_text(
+                '📝 Mahu teks dipaparkan pada skrin video?',
+                reply_markup=prompt_text_presence_menu()
+            )
+        else:
+            await query.message.reply_text(
+                'Pilihan pendekatan iklan tidak sah. Sila pilih semula:',
+                reply_markup=prompt_ad_angle_menu()
+            )
     elif action.startswith('prompt_text_presence:') and stage == 'prompt_text_presence':
         selected = action.split(':', 1)[1]
         if selected in ('yes','no'):
@@ -2875,10 +2909,10 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             # Accept a valid framing choice from an older Telegram keyboard if the
             # current prompt session still has its product type and visual style.
             context.user_data['prompt_framing'] = selected
-            context.user_data['stage'] = 'prompt_text_presence'
+            context.user_data['stage'] = 'prompt_ad_angle'
             await query.message.reply_text(
-                '📝 Mahu teks dipaparkan pada skrin video?',
-                reply_markup=prompt_text_presence_menu()
+                '🎯 Pilih pendekatan iklan. Pilihan ini akan mengubah cara hook, jalan cerita dan CTA dibina:',
+                reply_markup=prompt_ad_angle_menu()
             )
         else:
             logging.warning('Rejected stale prompt framing callback=%r stage=%r', action, stage)
@@ -2949,7 +2983,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # callbacks must continue into the second chain.
     if action in ('admin_pending', 'admin', 'storyboard', 'make', 'prompt', 'prompt_categories', 'prompt_images_done') or action.startswith(
         ('admin_approve:', 'admin_reject:', 'prompt_flow:', 'prompt_mode:', 'prompt_model:', 'prompt_model_count:', 'prompt_model_gender:', 'prompt_model_hijab:', 'prompt_model_ethnicity:', 'prompt_model_age:', 'prompt_language:', 'prompt_voiceover:', 'prompt_type:', 'prompt_product_type:', 'prompt_product_subcategory:', 'prompt_product_categories', 'prompt_duration:',
-         'prompt_style:', 'prompt_setup:', 'prompt_idea:', 'prompt_details:', 'prompt_framing:', 'prompt_text_presence:', 'prompt_text_mode:', 'prompt_audio_presence:', 'prompt_speaker:', 'video_input:', 'prompt_input:', 'pcat:', 'ptpl:')
+         'prompt_style:', 'prompt_setup:', 'prompt_ad_angle:', 'prompt_idea:', 'prompt_details:', 'prompt_framing:', 'prompt_text_presence:', 'prompt_text_mode:', 'prompt_audio_presence:', 'prompt_speaker:', 'video_input:', 'prompt_input:', 'pcat:', 'ptpl:')
     ):
         return
     if action.startswith('motion:') and context.user_data.get('stage') == 'prompt_motion':
@@ -3000,6 +3034,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 f'👤 Model: {model_summary}',
                 f'🎨 Gaya video: {style_name}',
                 '🎥 Gaya kamera: ' + PRODUCT_FRAMING.get(context.user_data.get('prompt_framing','auto'), PRODUCT_FRAMING['auto'])[0],
+                '🎯 Pendekatan iklan: ' + {'auto':'Auto — ikut produk','question':'Hook soalan','reveal':'Reveal produk','demo':'Demonstrasi','relatable':'Situasi harian','premium':'Premium / editorial','affiliate':'Promoter affiliate'}.get(context.user_data.get('prompt_ad_angle','auto'),'Auto — ikut produk'),
                 '📝 Teks skrin: ' + ('Tiada' if context.user_data.get('prompt_on_screen_text') != 'yes' else ('Auto' if context.user_data.get('prompt_text_mode') == 'auto' else context.user_data.get('prompt_text_content','Manual'))),
                 '🔊 Suara: ' + ('Tiada' if not context.user_data.get('prompt_audio_enabled') else str(context.user_data.get('prompt_speech_source','voiceover')) + ' / ' + str(context.user_data.get('prompt_voiceover_style','auto'))),
                 f'🖼️ Latar: {scene_labels.get(scene, scene)}',
