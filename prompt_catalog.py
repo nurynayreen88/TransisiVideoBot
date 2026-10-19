@@ -200,14 +200,11 @@ def opening_direction(product_type="other"):
     camera = random.choice(OPENING_CAMERA_APPROACHES)
     voice = random.choice(OPENING_VOICE_STYLES)
     return (
-        "OPENING VARIATION — choose this opening treatment for this generation only: "
-        + visual + "; use " + camera + "; if voiceover is explicitly requested, use "
-        + voice + ". Use natural Bahasa Melayu Malaysia for Malay speech, with clear "
-        "Malaysian pronunciation and everyday Malaysian vocabulary; never use Indonesian "
-        "slang, vocabulary, accent or intonation. Do not repeatedly begin with “Kenali”, "
-        "“Jom lihat” or another fixed stock phrase. Do not invent additional on-screen text; follow the prompt's existing hook/text rule exactly. "
-        "This variation applies to the opening only; preserve all later timing, product identity, "
-        "selected location, style and no-logo rules."
+        "OPENING VARIATION: " + visual + "; camera: " + camera
+        + "; if voiceover is enabled, use " + voice
+        + ". Speak clear Bahasa Melayu Malaysia; no Indonesian wording or accent. "
+        + "Avoid repeating “Kenali” or any fixed stock phrase. Do not add extra text. "
+        + "This changes the opening only; preserve later beats, product identity, selected location, style and no-logo rules."
     )
 
 def product_hook(description):
