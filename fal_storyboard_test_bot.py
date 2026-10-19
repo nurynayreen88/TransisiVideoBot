@@ -80,6 +80,8 @@ async def handle_photo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
         context.user_data.pop("visual_style", None)
         context.user_data.pop("visual_environment", None)
         context.user_data.pop("storyboard_prompt", None)
+        context.user_data.pop("video_prompts", None)
+        context.user_data.pop("video_duration", None)
         await status.edit_text(
             "📦 Gambar produk diterima. Pilih laluan Klippo:",
             reply_markup=InlineKeyboardMarkup([
