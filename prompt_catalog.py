@@ -152,6 +152,61 @@ HOOK_SCHEMA = """CREATE TABLE IF NOT EXISTS storyboard_hooks (
     version INTEGER NOT NULL DEFAULT 1, active INTEGER NOT NULL DEFAULT 1
 )"""
 
+
+# Opening-only variation engine: 10 visual entries x 10 camera approaches x 10
+# voiceover styles = 1,000 combinations. This changes only the opening direction;
+# it does not rewrite the rest of the prompt or invent product features.
+OPENING_VISUAL_ENTRIES = (
+    "begin with a clean full-product reveal from a slightly off-centre composition",
+    "open on a close crop of a genuinely visible detail, then reveal the full product",
+    "start with the product in its selected setting, then settle on a clear hero frame",
+    "use a gentle light-and-focus reveal while keeping the product geometry unchanged",
+    "begin with a balanced three-quarter view and ease into a stable hero shot",
+    "start from a top-down or front-on view only when it suits the product reference",
+    "open with one purposeful hand interaction only if the product supports it",
+    "begin with clean negative space, then draw attention to the unchanged product",
+    "start at a natural viewing scale, then make one restrained reframing move",
+    "show the whole product clearly from the first moment, with no forced headline",
+)
+OPENING_CAMERA_APPROACHES = (
+    "a slow, short push-in with no digital warping",
+    "a measured side slide that preserves the product's visible shape",
+    "a steady locked shot with a subtle focus transition",
+    "a gentle front three-quarter drift, without revealing unseen sides",
+    "a controlled close-to-medium reframe that keeps the item recognizable",
+    "a restrained tilt toward one visible detail, then a stable full-product view",
+    "a soft focus pull from the setting to the product, with realistic depth",
+    "a small lateral move with natural parallax and stable proportions",
+    "a calm static opening followed by one purposeful camera move",
+    "a natural handheld-style micro-movement only when the selected style calls for it",
+)
+OPENING_VOICE_STYLES = (
+    "a short, casual product-name introduction",
+    "a friendly invitation to look closer, without making a benefit claim",
+    "a simple observation about the product's visible appearance",
+    "a natural question about the item itself, not an unverified result",
+    "a practical-use lead-in only if that use is shown and supported",
+    "a concise conversational introduction in everyday Bahasa Melayu Malaysia",
+    "a demonstration-first opening with no spoken line unless voiceover is enabled",
+    "a neutral opening that names the product without exaggerated hype",
+    "a brief visual-first opening, with speech only if the user requested it",
+    "a clean reveal that avoids a stock phrase and lets the product lead",
+)
+
+def opening_direction(product_type="other"):
+    """Return one of 1,000 compositional opening recipes without changing later beats."""
+    import random
+    visual = random.choice(OPENING_VISUAL_ENTRIES)
+    camera = random.choice(OPENING_CAMERA_APPROACHES)
+    voice = random.choice(OPENING_VOICE_STYLES)
+    return (
+        "OPENING VARIATION: " + visual + "; camera: " + camera
+        + "; if voiceover is enabled, use " + voice
+        + ". Speak clear Bahasa Melayu Malaysia; no Indonesian wording or accent. "
+        + "Avoid repeating “Kenali” or any fixed stock phrase. Do not add extra text. "
+        + "This changes the opening only; preserve later beats, product identity, selected location, style and no-logo rules."
+    )
+
 def product_hook(description):
     """Return a conservative category hook or None if product identity is unclear."""
     import json
