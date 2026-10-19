@@ -190,18 +190,32 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
             category_direction += " " + direction
             break
     category_direction += (
-        " PRODUCT-SPECIFIC SPOKEN COPY: Only if voice-over or dialogue is explicitly requested, write a short, conversational line about this exact product category and only visible or verified features. "
-        "Do not repeat generic phrases such as 'perincian teliti', 'lihat dengan dekat' or 'sangat terperinci'; do not narrate camera directions. "
-        "MALAYSIAN MALAY VOICE AND PRONUNCIATION: When Malay speech is requested, use a native-sounding Bahasa Melayu Malaysia accent and standard Malaysian pronunciation, clearly articulated at a natural, moderate pace. "
-        "Use Malaysian vocabulary, sentence structure and everyday phrasing; do not use Indonesian slang, Indonesian vocabulary, Indonesian accent, Indonesian intonation or Indonesian-style pronunciation. "
-        "Avoid Indonesian wording such as 'kebutuhan', 'temukan', 'silakan', 'banget', 'nggak' and 'aja'; use natural Malaysian equivalents where needed. Do not exaggerate any regional Malaysian dialect unless the user explicitly requests it. "
-        "If the user supplies an exact script, preserve its words and meaning; pronounce it clearly in a Malaysian Malay accent without adding Indonesian expressions. "
-        "Vary both the wording and the opening approach across generations: sometimes begin with a relevant visual demonstration, sometimes a short product-specific line, and sometimes a clean reveal with no hook. "
-        "Avoid classroom-style introductions, repetitive stock phrases and scripted-sounding language. Use a natural, concise Malaysian-Malay advertising tone. Never invent materials, benefits, quality, comfort or specifications. "
-        " STRICT NO-LOGO RULE: Do not add any logo or watermark anywhere in the video, including TikTok, Shopee, creator, AI-generator or provider branding; "
-        "no logo overlays, corner bugs, end cards, branded borders, platform UI or background signage. Never add captions or text unless separately requested. "
-        "If a logo or mark is physically printed on the reference product, preserve it only as part of that exact product and never create a separate or enlarged logo."
+        " PRODUCT-SPECIFIC SPOKEN COPY: If voice is selected, use a short line about this product. "
+        "When Malay speech is selected, use natural Bahasa Melayu Malaysia pronunciation. "
+        "Vary the hook and keep it concise. No added logos or watermarks."
     )
+    concise_category_direction = {
+        'fashion': "Show the selected clothing naturally; preserve its exact cut, colour and pattern.",
+        'bag': "Show the selected bag naturally carried, worn or placed; preserve its visible design.",
+        'wallet': "Focus on the wallet and hands; show only visible features.",
+        'hijab': "Show the selected hijab's actual drape, folds, colour and pattern.",
+        'shoes': "Keep the footwear clearly visible with natural, believable steps.",
+        'beauty': "Focus on the packaging and visible product texture.",
+        'food': "Show the actual food or drink appetizingly and realistically.",
+        'gadget': "Focus on the device and visible controls; preserve its exact shape.",
+        'home': "Show the product in a believable everyday setting.",
+        'accessory': "Use close framing that clearly shows the selected accessory.",
+        'travel': "Show the travel item handled naturally and realistically.",
+        'pet': "Show the pet accessory in a calm, appropriate setting.",
+        'automotive': "Show the car accessory clearly in a safe, stationary setting.",
+        'garden': "Show the garden product in a realistic outdoor setting.",
+        'kitchen': "Show the kitchen product in a practical, believable use.",
+        'furniture': "Preserve the furniture's exact shape, proportions and visible construction.",
+        'baby': "Show the baby product in a calm, age-appropriate setting.",
+        'crafts': "Show the craft product with one plausible, simple action.",
+        'other': "Present the product clearly without assuming unlisted features.",
+    }.get(product_type, "Present the product clearly and realistically.")
+    concise_category_direction += " Setting: " + str(scene or "a suitable realistic setting") + ". Preserve visible product details; invent no features."
     identity = (
         "PRODUCT IDENTITY RULE: The user will upload the original product photo(s) to the target AI video generator as the MASTER visual reference. "
         "Treat those photo(s), not assumptions from the product name, as the source of truth for the visible product identity. "
@@ -284,14 +298,13 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
             )
             concept_rule = ("CREATIVE IDEA: " + concept.strip() + ". " if concept and concept.strip() else "")
             return (
-                "PROMPT VIDEO — " + str(duration) + " SAAT" + (" | BAHAGIAN " + str(part) if part else "") + "\n"
-                "9:16 menegak, iklan produk realistik, tepat " + str(duration) + " saat.\n"
-                "PRODUK: " + product + "\n" + category_direction + "\n"
-                + "GAYA: " + style_name + " — " + style_template[:90].strip() + "\n"
-                + "LATAR: " + scene[:140].strip() + "\nKAMERA: " + camera[:80].strip() + "\n"
-                + hook_rule + beat_plan + concept_rule[:120] + doodle_rule
-                + "Kekalkan rupa, warna, corak, pembungkusan dan logo asal. Jangan reka ciri atau aksesori. "
-                "Gerakan semula jadi. Jika suara digunakan, sebut hook dan CTA ringkas dalam Bahasa Melayu Malaysia. Tiada teks skrin atau watermark."
+                "VIDEO PROMPT — " + str(duration) + " SECONDS" + (" | PART " + str(part) if part else "") + "\n"
+                "Realistic vertical 9:16 product ad, exactly " + str(duration) + " seconds.\n"
+                "PRODUCT: " + product + "\n" + concise_category_direction + "\n"
+                + "STYLE: " + style_name + " — " + style_template[:70].strip() + "\n"
+                + "SETTING: " + str(scene)[:100].strip() + "\nCAMERA: " + camera[:70].strip() + "\n"
+                + hook_rule + beat_plan + concept_rule[:100] + doodle_rule
+                + "Natural movement. If voice is selected, use a short hook and CTA in Bahasa Melayu Malaysia. No added on-screen text or watermark."
             )
 
         evidence_rules = (
@@ -424,16 +437,15 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
             else:
                 rules = storyboard_text
         return (
-            "PROMPT VIDEO — " + str(duration) + " SAAT" + (" | BAHAGIAN " + str(part) if part else "") + "\n"
-            "Iklan produk realistik, menegak 9:16, tepat " + str(duration) + " saat.\n"
-            "PRODUK: " + product + "\n" + category_direction + "\n"
-            + "GAYA: " + style_name + " — " + style_template[:90].strip() + "\n"
-            + "LATAR: " + scene[:140].strip() + "\nKAMERA: " + camera[:80].strip() + "\n"
+            "VIDEO PROMPT — " + str(duration) + " SECONDS" + (" | PART " + str(part) if part else "") + "\n"
+            "Realistic vertical 9:16 product ad, exactly " + str(duration) + " seconds.\n"
+            "PRODUCT: " + product + "\n" + category_direction + "\n"
+            + "STYLE: " + style_name + " — " + style_template[:70].strip() + "\n"
+            + "SETTING: " + str(scene)[:100].strip() + "\nCAMERA: " + camera[:70].strip() + "\n"
             + (curated_direction if curated_direction else
-               ((hook_direction if part != 2 else "Sambung klip pertama; jangan ulang hook.") + "\n" + rules))
-            + (("\nIDEA: " + concept[:100].strip()) if concept else "")
-            + "\nKekalkan rupa, warna, corak, pembungkusan dan logo asal. Jangan reka ciri atau aksesori. "
-            "Jika suara digunakan, sebut hook dan CTA ringkas dalam Bahasa Melayu Malaysia. Tiada teks skrin atau watermark."
+               ((hook_direction if part != 2 else "Continue seamlessly from Part 1; do not repeat the hook.") + "\n" + rules))
+            + (("\nCREATIVE IDEA: " + concept[:100].strip()) if concept else "")
+            + "\nNatural movement. If voice is selected, use a short hook and CTA in Bahasa Melayu Malaysia. No added on-screen text or watermark."
         )
     if mode == "storyboard":
         shots = [
