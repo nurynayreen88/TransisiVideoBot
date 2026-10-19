@@ -3291,6 +3291,20 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
             ]))
     elif action == 'prompt_chatgpt_storyboard':
+        access = await prompt_access_status(update.effective_user.id)
+        if not access["available"]:
+            await query.message.reply_text("⚠️ Sistem trial belum dapat disemak. Sila cuba lagi kemudian.")
+            return
+        if not access["allowed"]:
+            await query.message.reply_text(
+                "🎁 Anda telah menggunakan 3/3 trial Jana Prompt. Langgan Klippo untuk meneruskan.",
+                reply_markup=InlineKeyboardMarkup([
+                    [InlineKeyboardButton("💎 Lihat Langganan", callback_data="subscription")],
+                    [InlineKeyboardButton("🏠 Menu Utama", callback_data="home")],
+                ])
+            )
+            return
+        context.user_data["_prompt_trial_count_on_success"] = not access["active"]
         duration = int(context.user_data.get('prompt_duration', 10))
         image_ids = context.user_data.get('prompt_reference_photos', [])
         if not image_ids:
@@ -3360,8 +3374,10 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     caption='📋 Storyboard teks lengkap mengikut babak.',
                     reply_markup=storyboard_actions
                 )
+            await record_prompt_trial_success(context, update.effective_user.id)
             await progress_update(waiting, 100, 'Storyboard Klippo selesai.')
         except Exception as exc:
+            context.user_data["_prompt_trial_count_on_success"] = False
             logging.exception('Automatic storyboard generation failed')
             message = str(exc)[:260]
             fallback_prompt = context.user_data.get('prompt_storyboard_fallback', '').strip()
