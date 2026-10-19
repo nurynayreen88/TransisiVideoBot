@@ -70,6 +70,10 @@ jobs:
               assert prompt.get("label") and prompt.get("prompt"), (
                   f"Prompt missing label/text: {prompt.get('id')}"
               )
+              description = str(prompt.get("description", "")).casefold()
+              assert "aksi utama yang berbeza" not in description, (
+                  f"Prompt {prompt['id']} still uses generic placeholder description"
+              )
               text = prompt["prompt"].casefold()
               for required in (
                   "no uploaded image", "text only", "strict output rules:", "no on-screen text",
@@ -89,6 +93,11 @@ jobs:
           assert all("VOICEOVER WHEN ENABLED" in item["prompt"] for item in prompts), (
               "Every prompt must define Malaysian Malay voiceover behavior when audio is enabled"
           )
+          signatures = {
+              tuple(shot.get("direction", "") for shot in item.get("storyboard", []))
+              for item in prompts
+          }
+          assert len(signatures) == len(prompts), "Duplicate storyboard sequences detected"
           # Known cross-category boilerplate must never leak into unrelated storyboard categories.
           forbidden_by_category = {
               "beauty": ("footwear fully grounded", "lace touch", "short step on a flat dry surface"),
