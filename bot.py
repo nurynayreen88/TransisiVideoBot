@@ -2683,20 +2683,6 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 '📝 LANGKAH 7 — Mahu teks dipaparkan pada skrin video?',
                 reply_markup=prompt_text_presence_menu()
             )
-            if False:
-                await query.message.reply_text(
-                    '✅ Tetapan Auto siap. Klippo telah memilih gaya, model (jika sesuai), latar dan gerakan kamera berdasarkan produk.\n\n'
-                f"🛍️ Produk: {context.user_data.get('prompt_product_name', 'Produk')}\n"
-                f"📦 Kategori: {context.user_data.get('prompt_custom_category_name') or PRODUCT_TYPES.get(product_type, 'Produk lain')}\n"
-                f"🔎 Subkategori: {context.user_data.get('prompt_custom_subcategory_name') or PRODUCT_SUBTYPE_LABELS.get(context.user_data.get('prompt_product_subcategory', ''), 'Tidak dinyatakan')}\n"
-                f"⏱️ Durasi: {context.user_data.get('prompt_duration', 10)} saat\n"
-                '⚙️ Mod: Auto\n\nTeruskan untuk menjana prompt?',
-                reply_markup=InlineKeyboardMarkup([
-                    [InlineKeyboardButton('✅ Jana Prompt', callback_data='prompt_generate:confirm')],
-                    [InlineKeyboardButton('🎛️ Tukar kepada Manual', callback_data='prompt_setup:manual')],
-                    [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
-                ])
-            )
         elif selected == 'manual':
             context.user_data['stage'] = 'prompt_model_presence'
             await query.message.reply_text('👤 LANGKAH 1 — Mahu model AI dalam video?', reply_markup=prompt_model_presence_menu())
