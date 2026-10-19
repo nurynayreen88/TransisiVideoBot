@@ -3439,8 +3439,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await query.message.reply_text(caption_text)
         else:
             await query.message.reply_text(
-                '✍️ CAPTION PROMOSI + HASHTAG SIAP\\n\\n'
-                'Dijana berdasarkan produk yang anda pilih. Semak maklumat dan sesuaikan tawaran/harga jika perlu.\\n\\n'
+                '✍️ CAPTION PROMOSI + HASHTAG SIAP\n\n'
+                'Dijana berdasarkan produk yang anda pilih. Semak maklumat dan sesuaikan tawaran/harga jika perlu.\n\n'
                 + caption_text,
                 reply_markup=InlineKeyboardMarkup([
                     [InlineKeyboardButton('📋 Papar untuk Disalin', callback_data='prompt_caption_copy')],
