@@ -525,42 +525,50 @@ def fit_prompt_to_one_telegram_message(prompt, limit=3800):
 
 
 def prompt_creative_settings(user_data, include_audio=True):
-    """Translate guided Klippo choices into explicit, reusable prompt instructions."""
-    if user_data.get('prompt_model_presence') == 'yes':
+    """Add only the guided settings selected by the user."""
+    lines = [
+        'PRODUCT LOCK: Preserve the product photo’s visible shape, colour, print, packaging, branding and proportions. Do not invent unseen details or claims.',
+        'NO ADDED TEXT, LOGOS OR WATERMARKS: Keep the video free of captions, subtitles, overlays and added branding.'
+    ]
+
+    model_presence = user_data.get('prompt_model_presence')
+    if model_presence == 'yes':
         model = (
-            f"Include {user_data.get('prompt_model_count', 1)} consistent adult AI model(s); "
+            f"Model: {user_data.get('prompt_model_count', 1)} consistent model(s); "
             f"gender: {user_data.get('prompt_model_gender', 'female')}; "
             f"head covering: {user_data.get('prompt_model_hijab', 'not specified')}; "
-            f"appearance: {user_data.get('prompt_model_ethnicity', 'any')}; "
-            f"adult age range: {user_data.get('prompt_model_age', '26-40')}. "
-            "Keep the same model identity, face, hair/head covering and outfit consistent across every shot."
+            f"appearance: {user_data.get('prompt_model_ethnicity', 'any')}. "
+            "Match the model's apparent age to the product's intended age group and keep identity and outfit consistent."
         )
-    else:
-        model = "No human model. Focus entirely on the exact product and its real visible details."
-    images_count = len(user_data.get('prompt_reference_photos', []))
-    lines = [
-        'KLIPPO GUIDED CREATIVE SETTINGS:',
-        f'Reference images uploaded in Klippo: {images_count}. The user must upload the same original reference image(s) manually to the chosen external AI platform; Klippo does not transfer files to external websites.',
-        'Model direction: ' + model,
-        'Product fidelity: treat the user-uploaded product photo(s) as the source of truth; preserve visible colour, shape, print, packaging, logo and proportions. Do not invent unseen details or product claims.',
-        'Video format: vertical 9:16. Keep one coherent visual story and continuous product identity across all panels.',
-    ]
+        lines.append(model)
+    elif model_presence == 'no':
+        lines.append('No human model. Focus on the product and its visible details.')
+
     if include_audio:
-        language = user_data.get('prompt_language', 'Malay')
-        lines.append('NO GENERATED ON-SCREEN TEXT: no captions, subtitles, headlines, written hooks, CTA text, added logos, watermarks or UI overlays. Preserve only branding physically present on the actual product in the reference image.')
         voiceover_mode = user_data.get('prompt_voiceover_mode', 'none')
+        language = user_data.get('prompt_language', 'Malay')
         if voiceover_mode == 'ai':
-            if language == 'English':
-                spoken_language = 'natural conversational English with clear native-sounding pronunciation'
-            else:
-                spoken_language = ('natural Bahasa Malaysia with clear, local pronunciation.')
-            lines.append('VOICEOVER IS ENABLED: use ' + spoken_language + '. EVERY 10-second segment must contain its own distinct spoken micro-hook in the first 0–2 seconds, one concise demonstration or visible benefit verified by the reference, and a natural spoken CTA before the end. For Part 2, make the opening a fresh continuation hook, not a repeat of Part 1; still include a distinct CTA in Part 2. Never invent specifications, benefits, discounts, scarcity or guarantees. Keep each 10-second segment short enough to speak naturally (normally about 18–22 words maximum, adjusted for the selected language and delivery speed). Vary the actual wording and delivery style to suit the product (cute, cheerful, friendly, humorous, calm, serious, confident or persuasive); do not reuse generic openings or identical CTAs across products. Keep background music clearly below the voice and maintain the same speaker identity and accent across connected clips.')
+            spoken_language = 'English' if language == 'English' else 'Bahasa Malaysia'
+            lines.append(
+                f'VOICEOVER: Use natural {spoken_language}, with clear pronunciation. '
+                'Speak a short product-specific hook, one reference-supported detail or use, and a concise CTA. '
+                'Keep speech natural and brief; background music stays below the voice. No on-screen text.'
+            )
         elif voiceover_mode == 'script':
             script = ' '.join((user_data.get('prompt_voiceover_script') or '').split())
-            lines.append('Use this exact user-provided voiceover/dialogue script without rewriting it: ' + script + ' Keep background music below the voice. Do not add any on-screen text. Create a visual hook in the first 0–2 seconds and a clear visual CTA at the end through product presentation or a natural model gesture, without written text. Do not add spoken words beyond the user script.')
+            if script:
+                lines.append(
+                    'VOICEOVER SCRIPT (use these exact words, without additions): ' + script +
+                    '. Keep background music below the voice. No on-screen text.'
+                )
+            else:
+                lines.append('AUDIO: No dialogue or voiceover; instrumental background music only.')
         else:
-            lines.append('No spoken dialogue or voiceover. Use suitable instrumental background music only if supported by the target video platform. Even without speech, EVERY 10-second segment must have a strong visual hook in the first 0–2 seconds, a clear product demonstration, and a visual CTA in the final seconds (for example, a confident product presentation, a natural inviting gesture, or a decisive hero finish). No written hook or CTA, no captions, no added logos or watermarks.')
-    return '\n'.join(lines)
+            lines.append(
+                'AUDIO: No dialogue or voiceover; instrumental background music only. '
+                'Create the hook and CTA visually through the opening action and final product shot.'
+            )
+    return '\\n'.join(lines)
 
 
 def prompt_product_type_menu():
@@ -2352,9 +2360,9 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             if voiceover_mode == 'script' and voiceover:
                 voiceover_instruction = 'Gunakan skrip dialog/voiceover pengguna ini tepat tanpa mengubahnya: ' + voiceover
             elif voiceover_mode == 'ai':
-                voiceover_instruction = 'Gunakan voiceover yang natural dalam ' + language_label + '. Jika Bahasa Melayu, gunakan Bahasa Malaysia yang semula jadi dan jelas. Bina hook lisan ringkas pada 0–2 saat, satu demonstrasi atau manfaat yang benar-benar disokong gambar, kemudian CTA lisan ringkas. Jangan ulang hook antara klip. Pilih gaya suara yang sesuai (comel, ceria, mesra, kelakar, tenang, serius, yakin atau persuasif), sebutan jelas dan ayat cukup pendek untuk durasi. Muzik latar mesti lebih perlahan daripada suara. Jangan jana sebarang teks pada skrin.'
+                voiceover_instruction = 'Gunakan voiceover ' + ('English' if language == 'English' else 'Bahasa Malaysia') + ' yang semula jadi dan jelas. Sebut hook produk yang ringkas, satu butiran atau kegunaan yang disokong gambar, kemudian CTA ringkas. Muzik latar lebih perlahan daripada suara. Jangan jana teks pada skrin.'
             else:
-                voiceover_instruction = 'Tiada dialog atau voiceover. Gunakan penceritaan visual sahaja; jangan jana teks pada skrin, kapsyen, logo tambahan atau watermark.'
+                voiceover_instruction = 'Tiada dialog atau voiceover; gunakan muzik latar instrumental sahaja. Sampaikan hook dan CTA melalui aksi pembukaan serta paparan akhir produk, tanpa teks.'
             model_instruction = prompt_creative_settings(context.user_data)
             prompt_instruction = (
                 'Anda ialah pengarah kreatif iklan produk. Analisis SEMUA gambar rujukan yang dilampirkan dan hasilkan storyboard video produk yang boleh terus digunakan sebagai arahan penjana video AI. '
@@ -2362,7 +2370,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 + ('Bina ' + str(4 if duration <= 10 else (6 if duration <= 15 else 8)) + ' babak, setiap babak kira-kira ' + str(round(duration / (4 if duration <= 10 else (6 if duration <= 15 else 8)), 2)) + ' saat. ' + ('Pastikan keempat-empat babak membentuk aliran lengkap.' if duration <= 10 else ('Babak 5–6 mesti menyambung secara visual daripada babak 1–4.' if duration <= 15 else 'Babak 5–8 mesti bersambung secara visual daripada babak 1–4.')))
                 + ' Untuk setiap babak, berikan masa mula–akhir, aksi spesifik, framing dan gerakan kamera, ekspresi/pergerakan model jika ada, serta peralihan/kesinambungan. '
                 'Kekalkan identiti dan rupa produk tepat seperti gambar. Jangan mereka warna, logo, corak, ciri, bahan, aksesori atau dakwaan yang tidak dapat dilihat. '
-                'Kekalkan model dewasa yang sama pada semua babak jika model dipilih. Jangan tambah teks pada skrin, sari kata, logo tambahan atau watermark. '
+                'Kekalkan model yang dipilih dan pastikan umurnya sesuai dengan kategori produk. Jangan tambah teks pada skrin, sari kata, logo tambahan atau watermark. '
                 'Pastikan setiap aksi praktikal, jelas dan tidak bertindih dengan aksi babak lain. Mulakan dengan hook visual yang kuat dan tamat dengan product hero shot. '
                 + voiceover_instruction + '\n\nPILIHAN PENGGUNA:\n' + model_instruction
                 + '\n\nFormat output: tajuk ringkas, konsep, kemudian senarai babak bernombor. Jangan hasilkan prompt video penuh dahulu.'
@@ -2593,9 +2601,9 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     if voiceover_mode == 'script' and voiceover:
                         voiceover_instruction = 'Gunakan skrip dialog/voiceover pengguna ini tepat tanpa mengubahnya: ' + voiceover
                     elif voiceover_mode == 'ai':
-                        voiceover_instruction = 'Gunakan voiceover yang natural dalam ' + language_label + '. Jika Bahasa Melayu, gunakan Bahasa Malaysia yang semula jadi dan jelas. Bina hook lisan ringkas pada 0–2 saat, satu demonstrasi atau manfaat yang benar-benar disokong gambar, kemudian CTA lisan ringkas. Jangan ulang hook antara klip. Pilih gaya suara yang sesuai (comel, ceria, mesra, kelakar, tenang, serius, yakin atau persuasif), sebutan jelas dan ayat cukup pendek untuk durasi. Muzik latar mesti lebih perlahan daripada suara. Jangan jana sebarang teks pada skrin.'
+                        voiceover_instruction = 'Gunakan voiceover ' + ('English' if language == 'English' else 'Bahasa Malaysia') + ' yang semula jadi dan jelas. Sebut hook produk yang ringkas, satu butiran atau kegunaan yang disokong gambar, kemudian CTA ringkas. Muzik latar lebih perlahan daripada suara. Jangan jana teks pada skrin.'
                     else:
-                        voiceover_instruction = 'Tiada dialog atau voiceover. Gunakan penceritaan visual sahaja; jangan jana teks pada skrin, kapsyen, logo tambahan atau watermark.'
+                        voiceover_instruction = 'Tiada dialog atau voiceover; gunakan muzik latar instrumental sahaja. Sampaikan hook dan CTA melalui aksi pembukaan serta paparan akhir produk, tanpa teks.'
                     model_instruction = prompt_creative_settings(context.user_data)
                     prompt_instruction = (
                         'Anda ialah pengarah kreatif iklan produk. Analisis gambar rujukan yang dilampirkan dan hasilkan storyboard video produk yang boleh terus digunakan sebagai arahan penjana video AI. '
