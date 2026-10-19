@@ -795,6 +795,8 @@ PRODUCT_FRAMING = {
     'auto_install': ('🔧 Tunjuk pemasangan ringkas', 'Show plausible, safe placement only if the product supports it. Keep the vehicle stationary; do not invent tools or compatibility.'),
     'auto_detail': ('🚘 Butiran aksesori kereta', 'Show the actual automotive product in its real position. Preserve mounting, scale, and connectors; vehicle remains stationary.'),
     'baby_safe_use': ('🍼 Fokus penggunaan selamat', 'Show a calm, supervised, age-appropriate setting. Avoid unsafe handling and do not imply certifications not provided.'),
+    'kids_cute': ('🥰 Aksi comel kanak-kanak', 'Use natural, age-appropriate playful actions: a cheerful small wave, a gentle happy turn, a few light steps or showing the outfit naturally. Choose only one or two actions that fit the product and age; keep the product clearly visible, movement believable, and styling non-sexualised. No risky jumps, exaggerated poses, adult-like posing, or changes to the product.'),
+    'baby_gentle': ('👶 Gaya lembut produk bayi', 'Use a calm, tender baby-product presentation. Prefer a caregiver’s gentle hands, a clean nursery, a child-sized hanger/mannequin, or a stable product display as appropriate to the exact item. If a baby is visible in the reference, keep handling safe and fully supported; never place a baby on an elevated or unstable surface, near small detachable parts, or in an unsafe sleep setup. Do not invent product features or imply safety certification.'),
     'travel_pack': ('🧳 Susun barang perjalanan', 'Show realistic packing with plausible items. Preserve bag dimensions and compartments; do not overstate capacity.'),
     'office_work': ('🖇️ Produk ketika bekerja', 'Show the product naturally used at a desk. Avoid fabricated documents, interface text, or unsupported functions.'),
 }
@@ -821,8 +823,16 @@ PRODUCT_FRAMING_KEYS = {
     'other': ('detail','model','pov','demo','lifestyle','product_only'),
 }
 
-def prompt_framing_menu(product_type='other', model_presence=None):
-    keys = PRODUCT_FRAMING_KEYS.get(product_type, PRODUCT_FRAMING_KEYS['other'])
+def prompt_framing_menu(product_type='other', model_presence=None, user_data=None):
+    user_data = user_data or {}
+    keys = list(PRODUCT_FRAMING_KEYS.get(product_type, PRODUCT_FRAMING_KEYS['other']))
+    # Offer age-specific actions only when the selected product and model fit.
+    if _prompt_is_child_product(user_data):
+        selected_age = str(user_data.get('prompt_model_age', '26-40'))
+        if product_type == 'baby':
+            keys.append('baby_gentle')
+        elif model_presence == 'yes' and selected_age in {'4-7', '8-12', '13-17'}:
+            keys.append('kids_cute')
     rows = [[InlineKeyboardButton(PRODUCT_FRAMING['auto'][0], callback_data='prompt_framing:auto')]]
     for key in keys:
         label = PRODUCT_FRAMING[key][0]
@@ -2787,7 +2797,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['stage'] = 'prompt_framing'
             await query.message.reply_text(
                 '🎥 LANGKAH 3 — Bagaimana kamera patut merakam produk?\n\nPilihan ini berbeza daripada gaya visual. Contohnya, Luxury/Cinematic ialah rupa video; Fokus kaki/Kasut dalam kereta menentukan apa yang kamera tunjuk.',
-                reply_markup=prompt_framing_menu(context.user_data.get('prompt_product_type', 'other'), context.user_data.get('prompt_model_presence'))
+                reply_markup=prompt_framing_menu(context.user_data.get('prompt_product_type', 'other'), context.user_data.get('prompt_model_presence'), context.user_data)
             )
     elif action == 'prompt_framing_back' and stage == 'prompt_framing':
         context.user_data['stage'] = 'prompt_style'
@@ -3147,6 +3157,34 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     )
                 )
                 framing_key = context.user_data.get('prompt_framing', 'auto')
+                # Always tailor actions to the actual product and its intended age group.
+                if _prompt_is_child_product(context.user_data):
+                    selected_category = context.user_data.get('prompt_product_type', 'other')
+                    selected_subcategory = str(context.user_data.get('prompt_product_subcategory', '')).lower()
+                    selected_age = str(context.user_data.get('prompt_model_age', '26-40'))
+                    if selected_category == 'baby' or selected_subcategory.startswith('baby_'):
+                        age_action_rule = (
+                            'AGE-APPROPRIATE BABY PRODUCT ACTIONS: tailor the action to the exact product, not a generic model routine. '
+                            'For clothing, show it on a child-sized hanger/mannequin or carefully held by a caregiver; never make an adult wear baby clothing. '
+                            'For feeding, bath, sleep or baby-gear products, show only a simple supervised demonstration with stable placement and correct, plausible handling. '
+                            'Do not depict unsupported product use, unsafe sleep, unattended elevated surfaces, small loose parts near a baby, or unsafe handling. '
+                            'If a baby is not clearly present in the reference, do not invent a baby; use caregiver hands and product-focused shots.'
+                        )
+                    elif selected_age in {'4-7', '8-12', '13-17'} and context.user_data.get('prompt_model_presence') == 'yes':
+                        age_action_rule = (
+                            'AGE-APPROPRIATE CHILD ACTIONS: use cheerful, natural, non-sexualised movements suited to the selected age and item: '
+                            'a small wave, a gentle turn to reveal clothing, a few natural steps, or a brief playful interaction only when relevant. '
+                            'For shoes, keep the camera on natural steps and the footwear; for clothing, show front/side fit and fabric movement; '
+                            'for toys, show safe age-appropriate play; for school items, show ordinary use. Pick distinct actions that suit this exact product, '
+                            'not the same routine for every product. Avoid risky stunts, adult-like posing, exaggerated expressions, or changing product details.'
+                        )
+                    else:
+                        age_action_rule = (
+                            'CHILD-TARGETED PRODUCT WITH ADULT PRESENTER: the adult is a caregiver/presenter, not the wearer or user of a child-sized item. '
+                            'Use gentle hands, a child-sized hanger/mannequin, product close-ups, or a safe supervised context appropriate to the item. '
+                            'Do not pretend the product fits an adult or invent a child/baby who is not supported by the reference.'
+                        )
+                    prompt = prompt.rstrip() + '\n\nAGE- AND PRODUCT-SUITABLE ACTION RULES:\n' + age_action_rule
                 if framing_key != 'auto':
                     framing = PRODUCT_FRAMING.get(framing_key)
                     if framing:
