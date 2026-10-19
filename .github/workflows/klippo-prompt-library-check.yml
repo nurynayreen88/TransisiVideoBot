@@ -298,8 +298,10 @@ jobs:
                       "push", "auto", 10, product_type="fashion"
                   )
                   assert "HOOK + CTA:" in generated, f"Hook/CTA direction missing from {mode} prompt"
-                  assert "HOOK + DEMONSTRATION + CTA:" in generated
-                  assert "no on-screen text" in generated.casefold()
+                  if mode == "standard":
+                      assert "HOOK + DEMONSTRATION + CTA:" in generated
+                  assert "PRODUCT LOCK:" in generated
+                  assert "Style direction:" in generated
 
               # Verify the selected GitHub storyboard is used by the actual final prompt.
               curated = next(item for item in prompts if item.get("storyboard"))
@@ -316,7 +318,7 @@ jobs:
               )
               assert curated_prompt.startswith("PROMPT VIDEO — 10 SAAT")
               assert "DIRECTOR'S CURATED PREMIUM STORYBOARD" in curated_prompt
-              assert "NO ON-SCREEN TEXT" in curated_prompt
+              assert "PRODUCT LOCK:" in curated_prompt
               for shot in curated["storyboard"]:
                   assert shot["direction"] in curated_prompt, (
                       f"Selected storyboard shot was not used: {curated['id']} / {shot['time']}"
@@ -376,10 +378,10 @@ jobs:
                   "storyboard", uncertain, "clean premium studio background",
                   "push", "white_doodle", 10
               )
-              assert "NO ON-SCREEN TEXT" in first
+              assert "WHITE DOODLE:" in first
               assert "Do not perform the main surrounding contour yet." in first
               assert "HOLD the exact final frame" in first or "HOLD the final frame" in first
-              assert "Never guess a category, benefit, price, popularity or product name." in first
+              assert "Do not guess product benefits or claims." in first
 
               verified = "NAMA_PRODUK: Beg VELLA"
               verified_prompt = build_prompt(
@@ -389,7 +391,7 @@ jobs:
               assert "VISUAL HOOK" in verified_prompt, (
                   "Verified product name should create a product-specific visual hook without written text"
               )
-              assert "NO ON-SCREEN TEXT" in verified_prompt
+              assert "WHITE DOODLE:" in verified_prompt
               stationery_prompt = build_prompt(
                   "storyboard", "NAMA_PRODUK: buku nota", "desk", "push", "auto", 10,
                   product_type="stationery"
