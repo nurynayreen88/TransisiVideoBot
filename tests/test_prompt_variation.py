@@ -57,6 +57,45 @@ class CreativeVariationTests(unittest.TestCase):
         self.assertIn("PART 3:", prompt)
         self.assertIn("Part 2's final frame", prompt)
 
+    def test_bed_storyboard_uses_furniture_specific_beats(self):
+        scenes = prompt_engine._category_specific_scenes("home", "Designer Kid Bed")
+        text = " ".join(shot + " " + direction for shot, direction in scenes)
+        self.assertIn("FULL BED REVEAL", text)
+        self.assertIn("structural details", text)
+        self.assertIn("do not demonstrate unsupported storage", text)
+        self.assertEqual(len(scenes), 5)
+
+    def test_cookware_set_storyboard_shows_set_and_plausible_use(self):
+        scenes = prompt_engine._category_specific_scenes(
+            "kitchen", "Tefal Quickchef 7PCS cookware set"
+        )
+        text = " ".join(shot + " " + direction for shot, direction in scenes)
+        self.assertIn("COMPLETE SET", text)
+        self.assertIn("physically plausible kitchen action", text)
+        self.assertIn("Do not add pieces", text)
+        self.assertIn("invented savings", text)
+
+    def test_category_storyboard_varies_for_fashion_and_gadgets(self):
+        fashion = " ".join(x[0] + " " + x[1] for x in prompt_engine._category_specific_scenes(
+            "fashion", "children's T-shirt and skorts"
+        ))
+        gadget = " ".join(x[0] + " " + x[1] for x in prompt_engine._category_specific_scenes(
+            "gadget", "wireless earbuds"
+        ))
+        self.assertIn("FABRIC / DESIGN DETAIL", fashion)
+        self.assertIn("VISIBLE CONTROL / PORT", gadget)
+        self.assertNotEqual(fashion, gadget)
+
+    def test_30_second_single_prompt_has_five_category_specific_timed_scenes(self):
+        prompt = prompt_engine.build_prompt(
+            "storyboard", "Tefal Quickchef 7PCS cookware set", "bright kitchen", "push",
+            style="auto", duration=30, product_type="kitchen", split=False
+        )
+        self.assertIn("exactly 30 seconds", prompt)
+        self.assertIn("Each scene lasts exactly 6 seconds", prompt)
+        self.assertIn("PRACTICAL DETAIL / VALUE", prompt)
+        self.assertNotIn("=== KLIPPO PART 2 ===", prompt)
+
     def test_all_variations_include_audio_limitation(self):
         prompt = prompt_engine._creative_variation("other", "desk organiser", 0)
         self.assertIn("never stack effects", prompt)
