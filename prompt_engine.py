@@ -89,7 +89,7 @@ def _creative_variation(product_type, product, part):
             + "Do not restart the opening or repeat the previous part's main gesture."
         )
     return (
-        "CREATIVE ACTION / CAMERA VARIATION: " + action + "\\n"
+        "CREATIVE ACTION / CAMERA VARIATION: " + action + "\n"
         + "AUDIO / SFX: " + _SFX_BY_TYPE[group]
         + " Keep effects brief and synchronised, quieter than any selected speech; music remains subtle. "
         + "If the video generator cannot create audio, do not imply sound generation is guaranteed. "
@@ -180,7 +180,7 @@ def build_prompt(mode, product, scene, motion, style='auto', duration=10, concep
         parts = [
             _build_single_prompt(mode, product, scene, motion, style, part=index, duration=10,
                                  concept=concept, product_type=product_type, storyboard_override=storyboard_override, universal_custom=universal_custom)
-            + "\\n\\n" + _creative_variation(product_type, product, index)
+            + "\n\n" + _creative_variation(product_type, product, index)
             for index in range(1, duration // 10 + 1)
         ]
         return "\n\n".join(
@@ -189,7 +189,7 @@ def build_prompt(mode, product, scene, motion, style='auto', duration=10, concep
         )
     return (_build_single_prompt(mode, product, scene, motion, style, part=0, duration=duration,
                                 concept=concept, product_type=product_type, storyboard_override=storyboard_override, universal_custom=universal_custom)
-            + "\\n\\n" + _creative_variation(product_type, product, 0))
+            + "\n\n" + _creative_variation(product_type, product, 0))
 
 
 def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, duration=10, concept='', product_type='other', storyboard_override=None, universal_custom=False):
@@ -529,9 +529,9 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
                 "DIRECTOR'S WRITTEN STORYBOARD: Generate ONE continuous vertical product video with exactly five equal scenes. "
                 f"Each scene lasts exactly {scene_length:g} seconds. These are timed scenes inside one video, not separate prompts or a storyboard image. "
                 "No unrequested text, captions, added logos, dialogue, voice-over, claims or watermarks. "
-                "Preserve exact product identity, packaging, colour, scale and coherent lighting.\\n\\n"
-                + "\\n\\n".join(blocks)
-                + "\\n\\nKeep transitions natural, camera movement restrained and product geometry stable throughout."
+                "Preserve exact product identity, packaging, colour, scale and coherent lighting.\n\n"
+                + "\n\n".join(blocks)
+                + "\n\nKeep transitions natural, camera movement restrained and product geometry stable throughout."
             )
             if storyboard_override and isinstance(storyboard_override, (list, tuple)) and len(storyboard_override) == 4:
                 curated_direction = storyboard_text
