@@ -570,81 +570,47 @@ def _prompt_is_child_product(user_data):
 
 
 def prompt_creative_settings(user_data, include_audio=True):
-    """Translate guided Klippo choices into explicit, age-appropriate prompt instructions."""
+    """Compact, explicit creative settings; avoid repeating rules already stated in the main prompt."""
+    age = str(user_data.get('prompt_model_age', '26-40'))
+    child_model = age in {'4-7', '8-12', '13-17'}
+    child_product = _prompt_is_child_product(user_data)
     if user_data.get('prompt_model_presence') == 'yes':
-        age = str(user_data.get('prompt_model_age', '26-40'))
-        child_model = age in {'4-7', '8-12', '13-17'}
-        child_product = _prompt_is_child_product(user_data)
         count = min(2, max(1, int(user_data.get('prompt_model_count', 1) or 1)))
+        gender = user_data.get('prompt_model_gender', 'female')
+        appearance = user_data.get('prompt_model_ethnicity', 'any')
         if child_model and not child_product:
-            model = (
-                "Do NOT show a child or teen model because the selected product is not clearly child-targeted. "
-                "Use product-only shots and adult hands only where needed; do not depict a minor using, wearing or endorsing this product."
-            )
+            model = 'Model: tiada kanak-kanak/remaja; fokus pada produk, gunakan tangan dewasa sahaja jika perlu.'
         elif child_model:
-            model = (
-                f"Include {count} consistent age-appropriate AI child/teen model(s), exact selected age range {age}; "
-                f"gender: {user_data.get('prompt_model_gender', 'female')}; "
-                f"appearance: {user_data.get('prompt_model_ethnicity', 'any')}. "
-                "Keep the same model identity and age appearance consistent in every shot. "
-                "Only show age-appropriate, non-sexualised styling and activities. For children's clothing or shoes, the model may wear only the child-sized item appropriate to the selected age; never adult-sized or adult-targeted apparel. "
-                "For toys or other child products, show safe age-appropriate interaction, with adult supervision where appropriate. No suggestive posing, makeup styling that implies adulthood, or mature scenarios."
-            )
+            model = f'Model: {count} kanak-kanak/remaja, umur {age}, jantina {gender}, rupa {appearance}; kekalkan identiti dan umur, gaya serta aksi sesuai umur, selamat dan tidak diseksualkan.'
         elif child_product:
-            model = (
-                f"Include {count} consistent adult AI model(s), gender: {user_data.get('prompt_model_gender', 'female')}; "
-                f"head covering: {user_data.get('prompt_model_hijab', 'not specified')}; "
-                f"appearance: {user_data.get('prompt_model_ethnicity', 'any')}; adult age range: {age}. "
-                "The product is child/baby-targeted: the adult model must NOT wear child-sized clothes or shoes and must NOT pretend the item fits them. "
-                "Present it only: hold it carefully, display it on a child-sized hanger/mannequin, point out visible details, or show it on a clean display surface. "
-                "For baby products, demonstrate only safe handling and never place a baby in unsafe situations."
-            )
+            model = f'Model: {count} orang dewasa, {gender}, rupa {appearance}, umur {age}; jangan pakai atau cuba item bersaiz kanak-kanak. Paparkan melalui tangan, penyangkut/manekin kanak-kanak atau permukaan bersih; kendalikan produk bayi dengan selamat.'
         else:
-            model = (
-                f"Include {count} consistent adult AI model(s); gender: {user_data.get('prompt_model_gender', 'female')}; "
-                f"head covering: {user_data.get('prompt_model_hijab', 'not specified')}; "
-                f"appearance: {user_data.get('prompt_model_ethnicity', 'any')}; adult age range: {age}. "
-                "Keep the same model identity, face, hair/head covering and outfit consistent across every shot."
-            )
+            model = f'Model: {count} orang dewasa, {gender}, rupa {appearance}, umur {age}; kekalkan wajah, pakaian dan identiti sepanjang klip.'
     else:
-        model = "No human model. Focus entirely on the exact product and its real visible details."
-    images_count = len(user_data.get('prompt_reference_photos', []))
+        model = 'Model: tiada; fokus pada produk dan butiran yang benar-benar kelihatan.'
+
     lines = [
-        'KLIPPO GUIDED CREATIVE SETTINGS:',
-        f'Reference images uploaded in Klippo: {images_count}. The user must upload the same original reference image(s) manually to the chosen external AI platform; Klippo does not transfer files to external websites.',
-        'Model direction: ' + model,
-        'Product fidelity: treat the user-uploaded product photo(s) as the source of truth; preserve visible colour, shape, print, packaging, logo and proportions. Do not invent unseen details or product claims.',
-        'Video format: vertical 9:16. Keep one coherent visual story and continuous product identity across all panels.',
+        'PILIHAN UTAMA:',
+        model,
+        'Produk: ikut foto rujukan; kekalkan bentuk, warna, corak, logo dan nisbah. Jangan reka ciri, bahan, aksesori atau dakwaan.',
+        'Format: menegak 9:16; gerakan semula jadi dan satu cerita visual yang konsisten.',
     ]
     if include_audio:
         language = user_data.get('prompt_language', 'Malay')
-        lines.append('On-screen text language: ' + ('no on-screen text' if language == 'none' else language) + '. All on-screen text, including any opening hook, must follow this language; preserve brand and product names exactly, keep text short and readable, and do not invent claims, logos or watermarks.')
         voiceover_mode = user_data.get('prompt_voiceover_mode', 'none')
         if voiceover_mode == 'ai':
-            voice_styles = {
-                'ai': 'natural and relaxed conversational delivery',
-                'cute': 'cute, cheerful and light delivery, slightly playful but not childish or exaggerated',
-                'serious': 'calm, serious and confident professional delivery',
-                'energetic': 'upbeat, lively and enthusiastic delivery without shouting',
-                'friendly': 'warm, friendly and approachable delivery, like a helpful Malaysian friend',
-                'soft': 'gentle, soothing and soft-spoken delivery while remaining clear',
-                'custom': 'natural delivery',
-            }
-            style = user_data.get('prompt_voiceover_style', 'ai')
-            lines.append('Create a concise voiceover in ' + ('Bahasa Melayu Malaysia' if language == 'Malay' else 'English' if language == 'English' else 'Bahasa Melayu Malaysia') + '. Voice personality: ' + voice_styles.get(style, voice_styles['ai']) + '. For Malay, require clear Malaysian pronunciation, Malaysian vocabulary and natural Malaysian intonation; never use Indonesian slang, vocabulary or pronunciation. Keep every line short enough for its scene, match delivery to the product action, and keep background music below the voice. Do not imitate a real person or celebrity.')
+            voice_styles = {'ai': 'santai dan semula jadi', 'cute': 'comel, ceria dan ringan', 'serious': 'tenang, serius dan yakin', 'energetic': 'bertenaga tanpa menjerit', 'friendly': 'mesra dan mudah didekati', 'soft': 'lembut tetapi jelas', 'custom': 'semula jadi'}
+            voice_style = voice_styles.get(user_data.get('prompt_voiceover_style', 'ai'), voice_styles['ai'])
+            lang = 'Bahasa Melayu Malaysia' if language != 'English' else 'English'
+            lines.append(f'Audio: suara {lang}, gaya {voice_style}; sebutan Malaysia yang jelas (bukan Indonesia). Ayat pendek ikut aksi; muzik latar perlahan di bawah suara.')
         elif voiceover_mode == 'script':
             script = ' '.join((user_data.get('prompt_voiceover_script') or '').split())
-            lines.append('Use this exact user-provided voiceover/dialogue script without rewriting it: ' + script)
+            lines.append('Audio: gunakan skrip pengguna tepat seperti diberi: ' + script)
         else:
-            lines.append('No spoken dialogue or voiceover. Use suitable background music only if the target video platform supports it.')
+            lines.append('Audio: tanpa dialog; muzik latar sesuai hanya jika disokong platform.')
+        lines.append('Teks: tiada teks/logo/sari kata/watermark tambahan kecuali pengguna secara jelas memilih teks.')
     if user_data.get('prompt_custom_background'):
-        lines.extend([
-            'CUSTOM BACKGROUND IMAGE — IMPORTANT EXTERNAL UPLOAD INSTRUCTIONS:',
-            'The user will manually upload TWO separate reference images to the chosen video generator: (1) the product photo as the product/identity reference, and (2) the user-supplied background photo as the exact scene/background reference. Klippo does not upload or transfer either image to external platforms.',
-            'Use the supplied background image as the actual background plate; do not replace it with an AI-invented room, scenery, colour, pattern or location. Preserve its recognisable layout, objects, colours, perspective and lighting as closely as the generator allows.',
-            'Place the exact product naturally within that background with believable scale, perspective, contact shadows, reflections and matching light direction. Keep the product unobstructed and faithful to the product reference. Do not copy objects from the background into the product or alter the product design.',
-            'For every continuation clip, upload the same product reference and the same background image again. If the platform supports assigning reference roles, set the product image as product/reference subject and the user image as background/scene reference. If it accepts only one image, use its multi-reference/image guidance or combine the two images externally before generation; never assume Klippo has attached the files.',
-        ])
+        lines.append('Latar sendiri: muat naik foto produk dan foto latar secara berasingan ke penjana AI; tetapkan foto produk sebagai subjek dan foto kedua sebagai latar. Kekalkan susun atur latar dan padankan perspektif/cahaya. Ulang muat naik kedua-duanya untuk setiap klip sambungan.')
     return '\n'.join(lines)
 
 
