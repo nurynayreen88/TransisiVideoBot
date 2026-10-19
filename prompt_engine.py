@@ -371,10 +371,10 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
             scene_lines.append(f"Shot {i} ({start_s:g}–{end_s:g}s): {beat}")
         compact_lines = [
             "KLIPPO | PRODUCT VIDEO STORYBOARD",
-            f"Vertical 9:16. Exact duration: 10 seconds for this clip" + (f" (Bahagian {part}/{total_parts})." if part else "."),
+            f"Format: Vertical 9:16. Duration: 10 seconds" + (f". Part {part}/{total_parts}." if part else "."),
             f"Product: {product}.",
-            f"Selected style: {style_name}. {' '.join(str(style_template).split())[:260].rstrip()}. Setting: {scene}.",
-            f"Selected camera movement: {motion}.",
+            f"Visual style: {style_name}. {' '.join(str(style_template).split())[:260].rstrip()}. Background and setting: {scene}.",
+            f"Camera movement: {motion}.",
             category_direction,
         ]
         if model_age_direction:
