@@ -25,7 +25,27 @@ class CreativeVariationTests(unittest.TestCase):
     def test_continuation_keeps_part_two_context(self):
         text = prompt_engine._creative_variation("fashion", "children's outfit", 2)
         self.assertIn("CONTINUATION ACTION", text)
-        self.assertIn("Part 1's final-frame identity", text)
+        self.assertIn("immediately previous part's final-frame identity", text)
+
+    def test_20_seconds_returns_two_connected_10_second_parts(self):
+        prompt = prompt_engine.build_prompt(
+            "standard", "Babyshop children's outfit", "bright studio", "push",
+            duration=20, product_type="fashion"
+        )
+        self.assertIn("=== KLIPPO PART 2 ===", prompt)
+        self.assertEqual(prompt.count("EXACT DURATION: 10 seconds"), 2)
+        self.assertIn("SECOND CLIP 10s", prompt)
+
+    def test_30_seconds_returns_three_connected_10_second_parts(self):
+        prompt = prompt_engine.build_prompt(
+            "standard", "Babyshop children's outfit", "bright studio", "push",
+            duration=30, product_type="fashion"
+        )
+        self.assertIn("=== KLIPPO PART 2 ===", prompt)
+        self.assertIn("=== KLIPPO PART 3 ===", prompt)
+        self.assertEqual(prompt.count("EXACT DURATION: 10 seconds"), 3)
+        self.assertIn("THIRD CLIP 10s", prompt)
+        self.assertIn("final frame from Part 2", prompt)
 
     def test_general_products_get_subtle_sfx(self):
         text = prompt_engine._creative_variation("other", "desk organiser", 0)
