@@ -2406,9 +2406,15 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             voiceover_mode = context.user_data.get('prompt_voiceover_mode', 'none')
             voiceover = context.user_data.get('prompt_voiceover_script', '').strip()
             if voiceover_mode == 'script' and voiceover:
-                voiceover_instruction = 'Use the user-provided voiceover script exactly as written, without changes: ' + voiceover
+                speaker = context.user_data.get('prompt_speech_source', 'voiceover')
+                if speaker == 'model' and context.user_data.get('prompt_model_presence') == 'yes':
+                    voiceover_instruction = 'The on-camera AI model speaks the user-provided script exactly as written, with natural lip-sync and no added words: ' + voiceover
+                else:
+                    voiceover_instruction = 'An off-screen promoter speaks the user-provided script exactly as written, while any visible model remains silent. Do not add words: ' + voiceover
             elif voiceover_mode == 'ai':
-                voiceover_instruction = 'Use a clear, natural ' + ('English' if language == 'English' else 'Malaysian Malay') + ' voiceover. Say a short product-specific hook, one reference-supported detail or use, then a concise CTA. Keep background music quieter than the voice. Add no on-screen text.'
+                speaker = context.user_data.get('prompt_speech_source', 'voiceover')
+                delivery = 'The on-camera AI model speaks with natural lip-sync. ' if speaker == 'model' and context.user_data.get('prompt_model_presence') == 'yes' else 'Use an off-screen promoter voice; any visible model remains silent. '
+                voiceover_instruction = delivery + 'Use a clear, natural ' + ('English' if language == 'English' else 'Malaysian Malay') + ' voice. Say a short product-specific hook, one reference-supported detail or use, then a concise CTA. Keep background music quieter than the voice. Add no on-screen text.'
             else:
                 voiceover_instruction = 'Use instrumental background music only, with no dialogue or voiceover. Convey the hook through the opening action and the CTA through the final product shot, without on-screen text.'
             model_instruction = prompt_creative_settings(context.user_data, include_audio=False)
@@ -2648,9 +2654,15 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     voiceover_mode = context.user_data.get('prompt_voiceover_mode', 'none')
                     voiceover = context.user_data.get('prompt_voiceover_script', '').strip()
                     if voiceover_mode == 'script' and voiceover:
-                        voiceover_instruction = 'Use the user-provided voiceover script exactly as written, without changes: ' + voiceover
+                        speaker = context.user_data.get('prompt_speech_source', 'voiceover')
+                        if speaker == 'model' and context.user_data.get('prompt_model_presence') == 'yes':
+                            voiceover_instruction = 'The on-camera AI model speaks the user-provided script exactly as written, with natural lip-sync and no added words: ' + voiceover
+                        else:
+                            voiceover_instruction = 'An off-screen promoter speaks the user-provided script exactly as written, while any visible model remains silent. Do not add words: ' + voiceover
                     elif voiceover_mode == 'ai':
-                        voiceover_instruction = 'Use a clear, natural ' + ('English' if language == 'English' else 'Malaysian Malay') + ' voiceover. Say a short product-specific hook, one reference-supported detail or use, then a concise CTA. Keep background music quieter than the voice. Add no on-screen text.'
+                        speaker = context.user_data.get('prompt_speech_source', 'voiceover')
+                        delivery = 'The on-camera AI model speaks with natural lip-sync. ' if speaker == 'model' and context.user_data.get('prompt_model_presence') == 'yes' else 'Use an off-screen promoter voice; any visible model remains silent. '
+                        voiceover_instruction = delivery + 'Use a clear, natural ' + ('English' if language == 'English' else 'Malaysian Malay') + ' voice. Say a short product-specific hook, one reference-supported detail or use, then a concise CTA. Keep background music quieter than the voice. Add no on-screen text.'
                     else:
                         voiceover_instruction = 'Use instrumental background music only, with no dialogue or voiceover. Convey the hook through the opening action and the CTA through the final product shot, without on-screen text.'
                     model_instruction = prompt_creative_settings(context.user_data, include_audio=False)
