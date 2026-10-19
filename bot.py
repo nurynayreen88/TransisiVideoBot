@@ -529,7 +529,12 @@ def prompt_language_menu():
 def prompt_voiceover_menu():
     return InlineKeyboardMarkup([
         [InlineKeyboardButton('🔇 Tanpa dialog / voiceover', callback_data='prompt_voiceover:none')],
-        [InlineKeyboardButton('🎙️ AI cadangkan voiceover', callback_data='prompt_voiceover:ai')],
+        [InlineKeyboardButton('🎙️ Suara natural / santai', callback_data='prompt_voiceover:ai')],
+        [InlineKeyboardButton('🥰 Suara comel / ceria', callback_data='prompt_voiceover:cute')],
+        [InlineKeyboardButton('🧑‍💼 Suara serius / profesional', callback_data='prompt_voiceover:serious')],
+        [InlineKeyboardButton('⚡ Suara bertenaga / teruja', callback_data='prompt_voiceover:energetic')],
+        [InlineKeyboardButton('🤝 Suara mesra / bersahaja', callback_data='prompt_voiceover:friendly')],
+        [InlineKeyboardButton('🎧 Suara lembut / tenang', callback_data='prompt_voiceover:soft')],
         [InlineKeyboardButton('✍️ Saya masukkan skrip sendiri', callback_data='prompt_voiceover:script')],
         [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
     ])
@@ -561,7 +566,17 @@ def prompt_creative_settings(user_data, include_audio=True):
         lines.append('On-screen text language: ' + ('no on-screen text' if language == 'none' else language) + '. All on-screen text, including any opening hook, must follow this language; preserve brand and product names exactly, keep text short and readable, and do not invent claims, logos or watermarks.')
         voiceover_mode = user_data.get('prompt_voiceover_mode', 'none')
         if voiceover_mode == 'ai':
-            lines.append('Create a concise, natural voiceover in ' + ('Bahasa Melayu Malaysia' if language == 'Malay' else 'English' if language == 'English' else 'Bahasa Melayu Malaysia') + '. For Malay, require a clear native Malaysian Malay accent, standard Malaysian pronunciation, Malaysian vocabulary and natural Malaysian intonation; speak clearly at a moderate pace. Do not use Indonesian slang, Indonesian vocabulary, Indonesian accent or Indonesian-style pronunciation. Keep spoken lines short, match them to the product actions, and keep background music below the voice.')
+            voice_styles = {
+                'ai': 'natural and relaxed conversational delivery',
+                'cute': 'cute, cheerful and light delivery, slightly playful but not childish or exaggerated',
+                'serious': 'calm, serious and confident professional delivery',
+                'energetic': 'upbeat, lively and enthusiastic delivery without shouting',
+                'friendly': 'warm, friendly and approachable delivery, like a helpful Malaysian friend',
+                'soft': 'gentle, soothing and soft-spoken delivery while remaining clear',
+                'custom': 'natural delivery',
+            }
+            style = user_data.get('prompt_voiceover_style', 'ai')
+            lines.append('Create a concise voiceover in ' + ('Bahasa Melayu Malaysia' if language == 'Malay' else 'English' if language == 'English' else 'Bahasa Melayu Malaysia') + '. Voice personality: ' + voice_styles.get(style, voice_styles['ai']) + '. For Malay, require clear Malaysian pronunciation, Malaysian vocabulary and natural Malaysian intonation; never use Indonesian slang, vocabulary or pronunciation. Keep every line short enough for its scene, match delivery to the product action, and keep background music below the voice. Do not imitate a real person or celebrity.')
         elif voiceover_mode == 'script':
             script = ' '.join((user_data.get('prompt_voiceover_script') or '').split())
             lines.append('Use this exact user-provided voiceover/dialogue script without rewriting it: ' + script)
@@ -1807,6 +1822,7 @@ def reset(context):
     context.user_data['prompt_model_age'] = 'na'
     context.user_data['prompt_language'] = 'Malay'
     context.user_data['prompt_voiceover_mode'] = 'none'
+    context.user_data['prompt_voiceover_style'] = 'ai'
     context.user_data['prompt_voiceover_script'] = ''
     context.user_data['stage'] = 'home'
 
@@ -2676,12 +2692,17 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await query.message.reply_text('🎙️ LANGKAH 5 — Skrip atau voiceover adalah pilihan:', reply_markup=prompt_voiceover_menu())
     elif action.startswith('prompt_voiceover:') and stage == 'prompt_voiceover':
         selected = action.split(':', 1)[1]
-        if selected == 'script':
+        valid_voice_styles = {'none', 'ai', 'cute', 'serious', 'energetic', 'friendly', 'soft', 'script'}
+        if selected not in valid_voice_styles:
+            await query.message.reply_text('Pilihan suara tidak dikenali. Sila pilih semula.', reply_markup=prompt_voiceover_menu())
+        elif selected == 'script':
             context.user_data['prompt_voiceover_mode'] = 'script'
+            context.user_data['prompt_voiceover_style'] = 'custom'
             context.user_data['stage'] = 'prompt_voiceover_text'
             await query.message.reply_text('✍️ Tampal skrip voiceover/dialogue anda. Tulis - jika mahu batalkan skrip dan teruskan tanpa dialog.')
-        elif selected in ('none', 'ai'):
-            context.user_data['prompt_voiceover_mode'] = selected
+        else:
+            context.user_data['prompt_voiceover_mode'] = 'none' if selected == 'none' else 'ai'
+            context.user_data['prompt_voiceover_style'] = selected
             context.user_data['prompt_voiceover_script'] = ''
             context.user_data['stage'] = 'prompt_idea_choice'
             await query.message.reply_text(
