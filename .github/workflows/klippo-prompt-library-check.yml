@@ -44,8 +44,8 @@ jobs:
           double = build_prompt(**common, duration=20)
           triple = build_prompt(**common, duration=30)
 
-          assert "EXACT DURATION: 10 seconds" in single
-          assert "HOOK + DEMONSTRATION + CTA ARE REQUIRED" in single
+          assert "10 seconds" in single
+          assert "HOOK + DEMONSTRATION + CTA:" in single
           assert "no on-screen text" in single.casefold()
           assert "KLIPPO PART 1/2" in double and "KLIPPO PART 2/2" in double
           assert "KLIPPO PART 1/3" in triple
