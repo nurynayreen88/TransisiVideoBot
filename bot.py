@@ -582,6 +582,14 @@ def prompt_creative_settings(user_data, include_audio=True):
             lines.append('Use this exact user-provided voiceover/dialogue script without rewriting it: ' + script)
         else:
             lines.append('No spoken dialogue or voiceover. Use suitable background music only if the target video platform supports it.')
+    if user_data.get('prompt_custom_background'):
+        lines.extend([
+            'CUSTOM BACKGROUND IMAGE — IMPORTANT EXTERNAL UPLOAD INSTRUCTIONS:',
+            'The user will manually upload TWO separate reference images to the chosen video generator: (1) the product photo as the product/identity reference, and (2) the user-supplied background photo as the exact scene/background reference. Klippo does not upload or transfer either image to external platforms.',
+            'Use the supplied background image as the actual background plate; do not replace it with an AI-invented room, scenery, colour, pattern or location. Preserve its recognisable layout, objects, colours, perspective and lighting as closely as the generator allows.',
+            'Place the exact product naturally within that background with believable scale, perspective, contact shadows, reflections and matching light direction. Keep the product unobstructed and faithful to the product reference. Do not copy objects from the background into the product or alter the product design.',
+            'For every continuation clip, upload the same product reference and the same background image again. If the platform supports assigning reference roles, set the product image as product/reference subject and the user image as background/scene reference. If it accepts only one image, use its multi-reference/image guidance or combine the two images externally before generation; never assume Klippo has attached the files.',
+        ])
     return '\n'.join(lines)
 
 
@@ -1001,7 +1009,8 @@ def prompt_scene_menu():
         [InlineKeyboardButton('🏖️ Pantai', callback_data='scene:beach'), InlineKeyboardButton('🏋️ Gimnasium', callback_data='scene:gym')],
         [InlineKeyboardButton('📚 Perpustakaan', callback_data='scene:library'), InlineKeyboardButton('🧰 Bengkel', callback_data='scene:workshop')],
         [InlineKeyboardButton('🥐 Bakeri', callback_data='scene:bakery'), InlineKeyboardButton('🍽️ Restoran', callback_data='scene:restaurant')],
-        [InlineKeyboardButton('🧳 Lapangan Terbang', callback_data='scene:airport'), InlineKeyboardButton('🏨 Bilik Hotel', callback_data='scene:hotel')]
+        [InlineKeyboardButton('🧳 Lapangan Terbang', callback_data='scene:airport'), InlineKeyboardButton('🏨 Bilik Hotel', callback_data='scene:hotel')],
+        [InlineKeyboardButton('🖼️ Guna Latar Sendiri (Upload ke AI)', callback_data='scene:custom')]
     ])
 
 
@@ -2778,7 +2787,14 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             'hotel': 'a realistic premium hotel room with tasteful furniture and natural light'
         }
         selected = action.split(':', 1)[1]
-        if selected in scenes:
+        if selected == 'custom':
+            context.user_data['prompt_scene'] = 'use the exact user-supplied background image as the scene/background plate'
+            context.user_data['prompt_scene_key'] = 'custom'
+            context.user_data['prompt_custom_background'] = True
+            context.user_data['stage'] = 'prompt_motion'
+            action = 'motion:auto'
+        elif selected in scenes:
+            context.user_data['prompt_custom_background'] = False
             context.user_data['prompt_scene'] = scenes[selected]
             context.user_data['prompt_scene_key'] = selected
             context.user_data['stage'] = 'prompt_motion'
@@ -2809,6 +2825,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 'tasteful modern home interior, natural ambient lighting and believable product placement': 'Ruang Rumah',
                 'restrained natural setting with soft daylight, without obscuring the product': 'Alam Semula Jadi',
                 'bright minimalist setting with clean neutral surfaces and soft daylight': 'Cerah Minimalis',
+                'use the exact user-supplied background image as the scene/background plate': 'Latar sendiri (wajib upload imej latar ke AI)',
             }
             summary = chr(10).join([
                 '🧾 SEMAK PILIHAN SEBELUM JANA PROMPT',
@@ -3182,8 +3199,9 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     ])
                     await query.message.reply_text(
                         '🎥 PROMPT VIDEO TERUS\n\n'
-                        'Muat naik gambar produk asal yang sama ke platform AI pilihan, kemudian salin prompt di bawah. '
-                        'Klippo tidak menghantar gambar ke laman luar secara automatik. Untuk video 20 saat, jana Bahagian 1 dahulu dan gunakan bingkai akhirnya sebagai rujukan Bahagian 2.'
+                        + ('🖼️ LATAR SENDIRI DIPILIH\nMuat naik DUA imej ke penjana video: (1) gambar produk asal sebagai rujukan produk, dan (2) gambar latar pilihan anda sebagai rujukan latar. Jika ada tetapan peranan imej, tetapkan imej produk sebagai subjek dan imej latar sebagai latar/scene. Klippo tidak memindahkan fail ke platform luar.\n\n' if context.user_data.get('prompt_custom_background') else '')
+                        + 'Muat naik gambar produk asal yang sama ke platform AI pilihan, kemudian salin prompt di bawah. '
+                        + 'Klippo tidak menghantar gambar ke laman luar secara automatik. Untuk video bersambung, muat naik semula kedua-dua imej rujukan yang sama bagi setiap bahagian dan gunakan bingkai akhir klip sebelumnya untuk kesinambungan.'
                     )
                     for index, section in enumerate(sections, 1):
                         section = section.strip()
