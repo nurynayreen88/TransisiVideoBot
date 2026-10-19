@@ -1935,6 +1935,86 @@ def reset(context):
     context.user_data['stage'] = 'home'
 
 
+
+async def show_admin_users(message, status='all', offset=0, search_query=''):
+    """Render the admin-only user list with status filters and pagination."""
+    status = status if status in ('all', 'active', 'expired', 'inactive') else 'all'
+    result = await asyncio.to_thread(klippo_db.users, search_query, status, offset, 8)
+    items = result['items']
+    heading = '👥 SENARAI PENGGUNA KLIPPO'
+    if search_query:
+        heading += f'\\nCarian: {search_query}'
+    heading += f"\\nPenapis: {status.title()}\\nJumlah padanan: {result['total']}"
+    keyboard = [
+        [InlineKeyboardButton('Semua', callback_data='admin_users:all:0'),
+         InlineKeyboardButton('Aktif', callback_data='admin_users:active:0')],
+        [InlineKeyboardButton('Tamat', callback_data='admin_users:expired:0'),
+         InlineKeyboardButton('Tidak aktif', callback_data='admin_users:inactive:0')],
+    ]
+    for user in items:
+        name = (user.get('telegram_name') or 'Tanpa nama').strip()
+        label = f"{name[:24]} · {user['display_status']}"
+        keyboard.append([InlineKeyboardButton(label, callback_data=f"admin_user:{user['telegram_user_id']}:{status}:{offset}")])
+    nav = []
+    if offset > 0:
+        nav.append(InlineKeyboardButton('⬅️ Sebelum', callback_data=f'admin_users:{status}:{max(0, offset-8)}'))
+    if offset + len(items) < result['total']:
+        nav.append(InlineKeyboardButton('Seterusnya ➡️', callback_data=f'admin_users:{status}:{offset+8}'))
+    if nav:
+        keyboard.append(nav)
+    keyboard.append([InlineKeyboardButton('🔎 Cara cari pengguna', callback_data='admin_users_help')])
+    keyboard.append([InlineKeyboardButton('↩️ Admin', callback_data='admin')])
+    if not items:
+        heading += '\\n\\nTiada pengguna ditemui.'
+    await message.reply_text(heading, reply_markup=InlineKeyboardMarkup(keyboard))
+
+
+async def admin_user_search(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not is_admin(update.effective_user.id):
+        await update.effective_message.reply_text('Akses tidak dibenarkan.')
+        return
+    if not klippo_db.configured():
+        await update.effective_message.reply_text('Sambungan Supabase belum tersedia.')
+        return
+    term = ' '.join(context.args).strip()
+    if not term:
+        await update.effective_message.reply_text('Cara guna: /cariuser nama atau ID_Telegram')
+        return
+    await show_admin_users(update.effective_message, 'all', 0, term)
+
+
+async def show_admin_user_details(message, user_id, status='all', offset=0):
+    details = await asyncio.to_thread(klippo_db.user_details, user_id)
+    user = details.get('user')
+    if not user:
+        await message.reply_text('Pengguna tidak ditemui dalam rekod langganan. Pengguna perlu menekan /start untuk didaftarkan.')
+        return
+    name = user.get('telegram_name') or 'Tanpa nama'
+    current = (user.get('status') or 'inactive').lower()
+    expiry = user.get('expires_at')
+    if current == 'active' and expiry:
+        try:
+            from datetime import datetime, timezone
+            if datetime.fromisoformat(expiry.replace('Z', '+00:00')) <= datetime.now(timezone.utc):
+                current = 'expired'
+        except (ValueError, TypeError):
+            pass
+    text = (f"👤 BUTIRAN PENGGUNA KLIPPO\\n\\nNama: {name}\\nID Telegram: {user_id}"
+            f"\\nStatus: {current}\\nMula langganan: {user.get('started_at') or '-'}"
+            f"\\nTamat langganan: {expiry or '-'}\\n\\n🧾 SEJARAH RESIT (10 terkini)")
+    receipts = details.get('receipts') or []
+    if not receipts:
+        text += '\\nTiada rekod resit.'
+    for receipt in receipts:
+        text += (f"\\n\\n#{receipt['id']} · RM{receipt.get('amount_myr') or '5.00'} · {receipt.get('status')}"
+                 f"\\nDihantar: {receipt.get('submitted_at') or '-'}"
+                 f"\\nDisemak: {receipt.get('reviewed_at') or '-'}")
+    await message.reply_text(text, reply_markup=InlineKeyboardMarkup([
+        [InlineKeyboardButton('⬅️ Kembali ke senarai', callback_data=f'admin_users:{status}:{offset}')],
+        [InlineKeyboardButton('↩️ Admin', callback_data='admin')]
+    ]))
+
+
 async def admin(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not is_admin(update.effective_user.id):
         await update.effective_message.reply_text('Akses tidak dibenarkan.')
@@ -1946,7 +2026,11 @@ async def admin(update: Update, context: ContextTypes.DEFAULT_TYPE):
         pending = await asyncio.to_thread(klippo_db.pending_receipts)
         await update.effective_message.reply_text(
             f'🛡️ KLIPPO ADMIN\n\n🧾 Resit menunggu: {len(pending)} (10 terawal dipaparkan)\n💎 Kelulusan langganan: Manual',
-            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('🧾 Semak Resit', callback_data='admin_pending')], [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
+            reply_markup=InlineKeyboardMarkup([
+                [InlineKeyboardButton('👥 Senarai Pengguna', callback_data='admin_users:all:0')],
+                [InlineKeyboardButton('🧾 Semak Resit', callback_data='admin_pending')],
+                [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]
+            ]))
     except Exception:
         logging.exception('Admin Supabase error')
         await update.effective_message.reply_text('⚠️ Gagal menghubungi database. Semak konfigurasi Supabase di Render.')
@@ -1956,6 +2040,11 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Restore persistent Telegram keyboard and display inline menu."""
     if not context.user_data.get('busy'):
         reset(context)
+    if klippo_db.configured():
+        try:
+            await asyncio.to_thread(klippo_db.register_user, update.effective_user.id, update.effective_user.full_name)
+        except Exception:
+            logging.exception('Could not register Klippo user in Supabase')
     await update.effective_message.reply_text(
         '🏠 Butang Menu Utama tersedia di bawah ruang menaip.',
         reply_markup=home_keyboard()
@@ -2459,7 +2548,35 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         finally:
             context.user_data.pop('busy', None)
         return
-    if action == 'admin_pending':
+    if action.startswith('admin_users:'):
+        if not is_admin(update.effective_user.id):
+            await query.message.reply_text('Akses tidak dibenarkan.')
+            return
+        if not klippo_db.configured():
+            await query.message.reply_text('Sambungan Supabase belum tersedia.')
+            return
+        try:
+            _, user_status, raw_offset = action.split(':', 2)
+            await show_admin_users(query.message, user_status, int(raw_offset))
+        except Exception:
+            logging.exception('Admin user list failed')
+            await query.message.reply_text('Gagal mendapatkan senarai pengguna daripada database.')
+    elif action.startswith('admin_user:'):
+        if not is_admin(update.effective_user.id):
+            await query.message.reply_text('Akses tidak dibenarkan.')
+            return
+        try:
+            _, raw_id, user_status, raw_offset = action.split(':', 3)
+            await show_admin_user_details(query.message, int(raw_id), user_status, int(raw_offset))
+        except Exception:
+            logging.exception('Admin user detail failed')
+            await query.message.reply_text('Gagal mendapatkan butiran pengguna.')
+    elif action == 'admin_users_help':
+        if not is_admin(update.effective_user.id):
+            await query.message.reply_text('Akses tidak dibenarkan.')
+            return
+        await query.message.reply_text('🔎 Untuk mencari nama atau ID Telegram, gunakan arahan admin:\\n/cariuser nama\\n/cariuser 123456789')
+    elif action == 'admin_pending':
         if not is_admin(update.effective_user.id):
             await query.message.reply_text('Akses tidak dibenarkan.')
             return
@@ -2998,8 +3115,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             action = 'motion:auto'
     # Return only for actions handled by the first chain. Video workflow
     # callbacks must continue into the second chain.
-    if action in ('admin_pending', 'admin', 'storyboard', 'make', 'prompt', 'prompt_categories', 'prompt_images_done') or action.startswith(
-        ('admin_approve:', 'admin_reject:', 'prompt_flow:', 'prompt_mode:', 'prompt_model:', 'prompt_model_count:', 'prompt_model_gender:', 'prompt_model_hijab:', 'prompt_model_ethnicity:', 'prompt_model_age:', 'prompt_language:', 'prompt_voiceover:', 'prompt_type:', 'prompt_product_type:', 'prompt_product_subcategory:', 'prompt_product_categories', 'prompt_duration:',
+    if action in ('admin_pending', 'admin', 'admin_users_help', 'storyboard', 'make', 'prompt', 'prompt_categories', 'prompt_images_done') or action.startswith(
+        ('admin_approve:', 'admin_reject:', 'admin_users:', 'admin_user:', 'prompt_flow:', 'prompt_mode:', 'prompt_model:', 'prompt_model_count:', 'prompt_model_gender:', 'prompt_model_hijab:', 'prompt_model_ethnicity:', 'prompt_model_age:', 'prompt_language:', 'prompt_voiceover:', 'prompt_type:', 'prompt_product_type:', 'prompt_product_subcategory:', 'prompt_product_categories', 'prompt_duration:',
          'prompt_style:', 'prompt_setup:', 'prompt_ad_angle:', 'prompt_idea:', 'prompt_details:', 'prompt_framing:', 'prompt_text_presence:', 'prompt_text_mode:', 'prompt_audio_presence:', 'prompt_speaker:', 'video_input:', 'prompt_input:', 'pcat:', 'ptpl:')
     ):
         return
@@ -4205,7 +4322,7 @@ def main():
     app = Application.builder().token(TOKEN).build()
     app.add_handler(CommandHandler('start', start))
     app.add_handler(CommandHandler('menu', start))
-    app.add_handler(CommandHandler('admin', admin))
+    app.add_handler(CommandHandler('admin', admin))\n    app.add_handler(CommandHandler('cariuser', admin_user_search))
     app.add_handler(CommandHandler('reset', start))
     app.add_handler(CommandHandler('periksa', status))
     app.add_handler(CommandHandler('jana', generate, block=False))
