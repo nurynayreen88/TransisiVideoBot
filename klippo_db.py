@@ -42,6 +42,45 @@ def subscription(user_id):
                    "&select=status,expires_at&limit=1")
     return rows[0] if rows else None
 
+def is_active_subscription(user_id):
+    """Return True only for an active subscription whose expiry is still in the future."""
+    from datetime import datetime, timezone
+
+    data = subscription(user_id)
+    if not data or (data.get("status") or "").casefold() != "active":
+        return False
+    expiry = data.get("expires_at")
+    if not expiry:
+        return False
+    try:
+        parsed = datetime.fromisoformat(expiry.replace("Z", "+00:00"))
+        if parsed.tzinfo is None:
+            parsed = parsed.replace(tzinfo=timezone.utc)
+        return parsed > datetime.now(timezone.utc)
+    except (ValueError, TypeError):
+        return False
+
+
+def prompt_trial_status(user_id):
+    """Return successful prompt trials used and any pending count for one Telegram ID."""
+    uid = int(user_id)
+    rows = request(
+        "klippo_prompt_trials?telegram_user_id=eq." + str(uid)
+        + "&select=successful_count&limit=1"
+    )
+    count = int(rows[0].get("successful_count") or 0) if rows else 0
+    return {"successful_count": max(0, min(3, count)), "limit": 3}
+
+
+def record_prompt_trial_success(user_id):
+    """Atomically record one successful prompt trial, capped at three."""
+    rows = request("rpc/klippo_record_prompt_success", "POST", {
+        "p_telegram_user_id": int(user_id)
+    })
+    if isinstance(rows, list):
+        return int(rows[0]) if rows else 0
+    return int(rows or 0)
+
 
 def register_user(user_id, name):
     """Create a minimal user record without overwriting an existing subscription."""
