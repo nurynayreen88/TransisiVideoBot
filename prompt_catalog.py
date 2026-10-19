@@ -188,6 +188,9 @@ def product_hook(description):
     if name_match:
         name = name_match.group(1).strip()
         if name and name.upper() not in ("TIDAK PASTI", "TIADA", "TIDAK DAPAT DIPASTIKAN", "UNKNOWN", "NONE"):
+            # Sometimes a clean visual reveal is stronger than another headline.
+            if random.random() < 0.20:
+                return None
             # Keep the supplied product name factual, but vary the Malaysian-Malay opening.
             openings = (
                 "JOM LIHAT " + name,
@@ -208,6 +211,8 @@ def product_hook(description):
         if words.intersection(json.loads(keywords)):
             matches.append(json.loads(hooks))
     if len(matches) != 1 or not matches[0]:
+        return None
+    if random.random() < 0.20:
         return None
     base_hook = str(matches[0][0]).strip()
     # Existing stock category hooks all start with TENGOK. Vary the phrasing
