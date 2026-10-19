@@ -525,47 +525,57 @@ def fit_prompt_to_one_telegram_message(prompt, limit=3800):
 
 
 def prompt_creative_settings(user_data, include_audio=True):
-    """Add only the guided settings selected by the user."""
+    """Add only selected user options as short, direct prompt sentences."""
     lines = []
-
     model_presence = user_data.get('prompt_model_presence')
+
     if model_presence == 'yes':
-        model = (
-            f"Model: {user_data.get('prompt_model_count', 1)} consistent model(s); "
-            f"gender: {user_data.get('prompt_model_gender', 'female')}; "
-            f"head covering: {user_data.get('prompt_model_hijab', 'not specified')}; "
-            f"appearance: {user_data.get('prompt_model_ethnicity', 'any')}. "
-            "Match the model's apparent age to the product's intended age group and keep identity and outfit consistent."
-        )
-        lines.append(model)
+        parts = []
+        count = user_data.get('prompt_model_count')
+        if count:
+            parts.append(str(count) + (' model' if str(count) == '1' else ' models'))
+        gender = {'female': 'female', 'male': 'male', 'mixed': 'mixed-gender'}.get(
+            user_data.get('prompt_model_gender'))
+        if gender and gender != 'none':
+            parts.append(gender)
+        age = user_data.get('prompt_model_age')
+        if age and age != 'na':
+            parts.append({'18-25': 'age 18–25', '26-40': 'age 26–40', '41+': 'age 41+'}.get(age, 'age ' + str(age)))
+        hijab = user_data.get('prompt_model_hijab')
+        if hijab == 'hijab' and gender != 'male':
+            parts.append('wearing a hijab')
+        elif hijab == 'no_hijab' and gender != 'male':
+            parts.append('without a hijab')
+        appearance = {
+            'Malay': 'Malay appearance', 'Asian': 'Asian appearance',
+            'diverse': 'diverse appearances', 'random_malaysia': 'a locally appropriate appearance'
+        }.get(user_data.get('prompt_model_ethnicity'))
+        if appearance:
+            parts.append(appearance)
+        if parts:
+            lines.append('Model: ' + ', '.join(parts) + '. Keep the same model and outfit throughout, with an age appropriate to the product.')
+        else:
+            lines.append('Use a consistent model appropriate to the product.')
     elif model_presence == 'no':
-        lines.append('No human model. Focus on the product and its visible details.')
+        lines.append('Show the product only; no human model.')
 
     if include_audio:
         voiceover_mode = user_data.get('prompt_voiceover_mode', 'none')
         language = user_data.get('prompt_language', 'Malay')
         if voiceover_mode == 'ai':
-            spoken_language = 'English' if language == 'English' else 'Bahasa Malaysia'
+            spoken_language = 'English' if language == 'English' else 'natural Bahasa Malaysia'
             lines.append(
-                f'VOICEOVER: Use natural {spoken_language}, with clear pronunciation. '
-                'Speak a short product-specific hook, one reference-supported detail or use, and a concise CTA. '
-                'Keep speech natural and brief; background music stays below the voice. No on-screen text.'
+                f'Voiceover: Use clear {spoken_language}. Say a short product-specific hook, one visible detail or supported use, and a concise CTA. Keep background music below the voice. No on-screen text.'
             )
         elif voiceover_mode == 'script':
             script = ' '.join((user_data.get('prompt_voiceover_script') or '').split())
             if script:
-                lines.append(
-                    'VOICEOVER SCRIPT (use these exact words, without additions): ' + script +
-                    '. Keep background music below the voice. No on-screen text.'
-                )
+                lines.append('Voiceover: Speak this exact script without additions: ' + script + ' Keep background music below the voice. No on-screen text.')
             else:
-                lines.append('AUDIO: No dialogue or voiceover; instrumental background music only.')
+                lines.append('Audio: Instrumental background music only; no dialogue or voiceover.')
         else:
-            lines.append(
-                'AUDIO: No dialogue or voiceover; instrumental background music only. '
-                'Create the hook and CTA visually through the opening action and final product shot.'
-            )
-    return '\n'.join(lines)
+            lines.append('Audio: Instrumental background music only; no dialogue or voiceover. Show the hook through the opening and the CTA through the final product shot.')
+    return '\\n'.join(lines)
 
 
 def prompt_product_type_menu():
