@@ -2685,7 +2685,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 'prompt_style':'auto','prompt_language':'Malay','prompt_voiceover_mode':'ai','prompt_voiceover_style':'auto',
                 'prompt_speech_source':'voiceover','prompt_voiceover_script':'','prompt_concept':'',
                 'prompt_scene':'clean premium studio background, selected to complement the exact product reference',
-                'prompt_motion_choice':'auto','prompt_framing':'auto','prompt_on_screen_text':'yes','prompt_text_mode':'auto',
+                'prompt_motion_choice':'auto','prompt_framing':'auto','prompt_ad_angle':'auto','prompt_on_screen_text':'yes','prompt_text_mode':'auto',
                 'prompt_text_content':'','prompt_audio_enabled':True,'stage':'prompt_scene'
             })
             await query.message.reply_text('🖼️ Pilih latar video:', reply_markup=prompt_scene_menu())
@@ -2797,6 +2797,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             duration, duration_mode = valid_duration_modes[selected]
             context.user_data['prompt_duration'] = duration
             context.user_data['prompt_duration_mode'] = duration_mode
+            context.user_data['prompt_ad_angle'] = 'auto'
             context.user_data['prompt_speech_source'] = 'voiceover'
             context.user_data['prompt_voiceover_script'] = ''
             context.user_data['prompt_on_screen_text'] = 'no'
