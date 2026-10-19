@@ -2686,9 +2686,9 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 'prompt_speech_source':'voiceover','prompt_voiceover_script':'','prompt_concept':'',
                 'prompt_scene':'clean premium studio background, selected to complement the exact product reference',
                 'prompt_motion_choice':'auto','prompt_framing':'auto','prompt_ad_angle':'auto','prompt_on_screen_text':'yes','prompt_text_mode':'auto',
-                'prompt_text_content':'','prompt_audio_enabled':True,'stage':'prompt_scene'
+                'prompt_text_content':'','prompt_audio_enabled':True,'stage':'prompt_ad_angle','prompt_ad_angle_flow':'auto_setup'
             })
-            await query.message.reply_text('🖼️ Pilih latar video:', reply_markup=prompt_scene_menu())
+            await query.message.reply_text('🎯 Pilih pendekatan iklan untuk hook, jalan cerita dan CTA:', reply_markup=prompt_ad_angle_menu())
         elif selected == 'manual':
             context.user_data['stage'] = 'prompt_model_presence'
             await query.message.reply_text('👤 Mahu model dalam video?', reply_markup=prompt_model_presence_menu())
@@ -2798,6 +2798,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['prompt_duration'] = duration
             context.user_data['prompt_duration_mode'] = duration_mode
             context.user_data['prompt_ad_angle'] = 'auto'
+            context.user_data.pop('prompt_ad_angle_flow', None)
             context.user_data['prompt_speech_source'] = 'voiceover'
             context.user_data['prompt_voiceover_script'] = ''
             context.user_data['prompt_on_screen_text'] = 'no'
@@ -2809,11 +2810,16 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         valid_angles = {'auto', 'question', 'reveal', 'demo', 'relatable', 'premium', 'affiliate'}
         if selected in valid_angles:
             context.user_data['prompt_ad_angle'] = selected
-            context.user_data['stage'] = 'prompt_text_presence'
-            await query.message.reply_text(
-                '📝 Mahu teks dipaparkan pada skrin video?',
-                reply_markup=prompt_text_presence_menu()
-            )
+            angle_flow = context.user_data.pop('prompt_ad_angle_flow', None)
+            if angle_flow == 'auto_setup':
+                context.user_data['stage'] = 'prompt_scene'
+                await query.message.reply_text('🖼️ Pilih latar video:', reply_markup=prompt_scene_menu())
+            else:
+                context.user_data['stage'] = 'prompt_text_presence'
+                await query.message.reply_text(
+                    '📝 Mahu teks dipaparkan pada skrin video?',
+                    reply_markup=prompt_text_presence_menu()
+                )
         else:
             await query.message.reply_text(
                 'Pilihan pendekatan iklan tidak sah. Sila pilih semula:',
