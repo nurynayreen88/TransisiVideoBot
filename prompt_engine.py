@@ -78,6 +78,17 @@ def build_prompt(mode, product, scene, motion, style='auto', duration=10, concep
 
 def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, concept='', product_type='other', storyboard_override=None):
     duration = 10
+    hook_cta_language = (
+        "MANDATORY HOOK, CTA AND LANGUAGE RULES: Every standalone video must have a product-specific hook in the first 0–2 seconds "
+        "and a clear, natural call to action in the final 2 seconds. If this is Part 1 of a connected multi-part video, open with the hook "
+        "and finish on a clean continuity handoff; place the final CTA in the last part only. Never repeat the same opening hook in Part 2. "
+        "When voiceover is enabled, speak the hook and CTA aloud in the language selected in Klippo. If Bahasa Melayu Malaysia is selected "
+        "or the language is Auto, use natural Malaysian Malay pronunciation, vocabulary and sentence rhythm—not Indonesian wording, accent or slang. "
+        "Avoid repetitive generic openings such as 'Kenali produk ini'. Create varied hooks that fit the exact product, and a concise, believable CTA "
+        "such as inviting viewers to see the product details or check the available options. Do not invent discounts, scarcity, ratings, results or product claims. "
+        "Keep each spoken line short enough to sound natural within its time slot. NEVER render the hook or CTA as on-screen text, subtitles, captions or labels. "
+        "If voiceover is disabled, convey the opening hook and closing invitation through product-focused visuals only, with absolutely no written text."
+    )
     camera = CAMERAS.get(motion, CAMERAS["push"])
     product_type_directions = {
         'fashion': "PRODUCT CATEGORY DIRECTION: Treat this as clothing/fashion. Favor natural fabric movement and visible garment details; never alter cut, print, color or pattern.",
@@ -246,6 +257,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
             "PROMPT VIDEO — 10 SAAT\n"
             "KLIPPO | UNIVERSAL PRODUCT VIDEO PROMPT | " + style_name + (" | BAHAGIAN " + str(part) + "/2" if part else "") + "\n"
             "OUTPUT: One cohesive vertical 9:16 product advertisement, EXACT DURATION: " + str(duration) + " seconds.\n\n"
+            + hook_cta_language + "\n\n"
             "PRODUCT NAME: " + product + "\n" + category_direction + "\n" + model_age_direction + "\n\n" + identity + "\n\n"
             "STYLE FROM KLIPPO CATALOG: " + style_template + "\n\n"
             "SETTING: " + scene + "\n"
@@ -350,6 +362,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
         compact = (
             "KLIPPO | REALISTIC 10-SECOND PRODUCT VIDEO\n"
             "FORMAT: vertical 9:16, one coherent live-action-style commercial, 10 seconds.\n"
+            + hook_cta_language + "\n"
             "PRODUCT: " + product + "\n" + category_direction + "\n" + model_age_direction + "\n"
             "REFERENCE LOCK: Use uploaded photo(s) as truth. Preserve visible shape, colour, print, packaging, logo and proportions. Never invent unseen features, materials, accessories or claims. REAL-WORLD SCALE IS MANDATORY: rings remain finger-sized, watches fit wrists, phones fit hands, and furniture/appliances keep believable proportions relative to people and rooms. Use macro framing rather than physically enlarging small objects.\n"
             "SCENE: " + str(scene) + ". " + (("CONCEPT: " + str(concept) + ". ") if concept else "") + "\n"
@@ -366,6 +379,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
     return (
         "KLIPPO | PROFESSIONAL IMAGE-TO-VIDEO PRODUCTION PROMPT" + (" | BAHAGIAN " + str(part) + "/2" if part else "") + "\n"
         "OUTPUT: " + str(duration) + " seconds; portrait 9:16; high-quality realistic product commercial; "
+        + hook_cta_language + "\n\n"
         "one coherent deliverable. NO ON-SCREEN TEXT: Do not generate captions, headlines, labels, subtitles, UI overlays, added logos or watermarks. Use a visual hook through composition and action only; any selected hook or CTA must be spoken audio, never written on screen. Preserve only branding physically present on the actual reference product.\n\n"
         "PRODUCT: " + product + "\n" + category_direction + "\n" + model_age_direction + "\n\n" + identity + "\n\n" + art + "\n\n"
         + direction + "\n\n" + negative + "\n\n"
