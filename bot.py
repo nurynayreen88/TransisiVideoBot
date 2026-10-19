@@ -475,9 +475,8 @@ def prompt_model_age_menu():
 def prompt_language_menu():
     # This selection controls dialogue language for both on-camera speech and off-screen voiceover.
     return InlineKeyboardMarkup([
-        [InlineKeyboardButton('🇲🇾 Bahasa Melayu Malaysia (pertuturan)', callback_data='prompt_language:Malay'),
-         InlineKeyboardButton('🇬🇧 English (pertuturan)', callback_data='prompt_language:English')],
-        [InlineKeyboardButton('Auto — Bahasa Melayu Malaysia', callback_data='prompt_language:none')],
+        [InlineKeyboardButton('🇲🇾 Bahasa Melayu', callback_data='prompt_language:Malay'),
+         InlineKeyboardButton('🇬🇧 English', callback_data='prompt_language:English')],
         [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
     ])
 
@@ -485,8 +484,8 @@ def prompt_language_menu():
 def prompt_voiceover_menu():
     return InlineKeyboardMarkup([
         [InlineKeyboardButton('🔇 Tanpa dialog / voiceover', callback_data='prompt_voiceover:none')],
-        [InlineKeyboardButton('🎙️ AI cadangkan dialog', callback_data='prompt_voiceover:ai')],
-        [InlineKeyboardButton('✍️ Saya masukkan skrip sendiri', callback_data='prompt_voiceover:script')],
+        [InlineKeyboardButton('🤖 Auto — jana skrip', callback_data='prompt_voiceover:ai')],
+        [InlineKeyboardButton('✍️ Masukkan skrip sendiri', callback_data='prompt_voiceover:script')],
         [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
     ])
 
