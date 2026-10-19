@@ -323,7 +323,8 @@ jobs:
               assert "ALTERNATE DETAIL / TRUST SHOT" in paired_curated
               assert "FINAL HERO / SPOKEN CTA" in paired_curated
               assert (
-                  "do not repeat the preceding clip hook" in paired_curated.casefold()
+                  "do not repeat the preceding clip's hook" in paired_curated.casefold()
+                  or "do not repeat the preceding clip hook" in paired_curated.casefold()
                   or "do not repeat the opening hook" in paired_curated.casefold()
                   or "no repeated opening hook" in paired_curated.casefold()
               )
