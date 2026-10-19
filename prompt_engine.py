@@ -88,10 +88,7 @@ def build_prompt(mode, product, scene, motion, style='auto', duration=10, concep
 
 def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, concept='', product_type='other', storyboard_override=None, total_parts=2):
     duration = 10
-    hook_cta_language = (
-        "HOOK + PRODUCT DEMONSTRATION + CTA: Open with a product-specific visual hook, show one visible detail or plausible use, and finish with a clear product hero shot. Vary the opening; avoid repeated stock phrases. Use only reference-supported details and claims. "
-        "NO ON-SCREEN TEXT, added logos or watermarks."
-    )
+    hook_cta_language = "HOOK + CTA: Start with a product-specific visual hook, show one real detail or plausible use, and end with a clear product shot. No added text, logos or watermarks."
     camera = CAMERAS.get(motion, CAMERAS["push"])
     product_type_directions = {
         'fashion': "PRODUCT CATEGORY DIRECTION: Treat this as clothing/fashion. Favor natural fabric movement and visible garment details; never alter cut, print, color or pattern.",
@@ -119,42 +116,22 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
     category_direction = product_type_directions.get(product_type, product_type_directions['other'])
     model_age_direction = _model_age_direction(product, product_type)
     identity = (
-        "PRODUCT IDENTITY RULE: The user will upload the original product photo(s) to the target AI video generator as the MASTER visual reference. "
-        "Treat those photo(s), not assumptions from the product name, as the source of truth for the visible product identity. "
-        "Preserve visible shape, color, print, packaging, proportions and readable branding. Do not invent unseen angles, brand marks, "
-        "model numbers, materials, technical specifications, included accessories, product claims, compartments or hidden features. "
-        "Use the product name and category only as supporting context; if a detail is not visible, keep it neutral rather than guessing. REAL-WORLD SCALE IS MANDATORY: preserve ordinary physical dimensions relative to fingers, hands, wrists, people, furniture and surroundings. A ring must remain finger-sized and must never become table-sized; achieve macro close-ups with camera framing, never by enlarging the physical object. Watches must fit wrists, phones must fit hands, and scale must stay stable in every shot. If exact dimensions are unknown, use realistic category-appropriate proportions."
+        "PRODUCT LOCK: Use the uploaded product photo as the source of truth. Preserve its visible shape, colour, print, packaging, branding and proportions. "
+        "Do not invent unseen features, accessories, materials or claims. Keep realistic physical scale."
     )
     art = (
-        f"ART DIRECTION: Premium commercial product cinematography. Environment: {scene}. "
-        "Clean, intentional negative space; product is the unmistakable hero. Soft large-key illumination, "
-        "controlled fill, realistic contact shadow and restrained edge highlights. Use neutral, plausible "
-        "surface rendering without claiming unprovided materials. Avoid excessive bloom or artificial plastic shine. "
-        "Use elegant pacing, physically plausible movement and stable framing. "
-        "PHOTOREALISM FIRST: Make the result resemble genuine live-action footage from a real camera, not CGI, 3D render, illustration or synthetic AI advertising. Use believable lens perspective, natural texture, imperfect but controlled real-world light, realistic contact shadows and restrained color grading. Avoid waxy surfaces, over-smoothed skin, excessive sharpness, fake bokeh, HDR halos, excessive bloom, impossible reflections, sterile showroom CGI and unnaturally perfect symmetry. "
-        "If a human model is appropriate, preserve a consistent natural face, skin texture, body proportions, hair and clothing; use relaxed posture, subtle expressions, correct anatomy and physically accurate hand-to-product contact. If no model is needed, do not add a person or hands just to decorate the scene. Keep the product physically grounded, correctly scaled and unchanged at true real-world scale. Macro framing may magnify the view but must never change the object's physical dimensions; keep rings finger-sized, watches wrist-sized and handheld products proportionate to the hand."
+        f"VISUAL STYLE: {scene}. Photorealistic commercial video, natural lighting, realistic texture and shadows, "
+        "stable framing and physically plausible movement. Keep the product clear and unchanged."
     )
     negative = (
-        "STRICT EXCLUSIONS: Keep the product presentation plausible and visually consistent with the supplied product name. "
-        "No dramatic spinning, flying product, aggressive morph transitions or abrupt scene changes. "
-        "No invented features, extra accessories, duplicated products, fabricated logos or labels, random props that imply included items, "
-        "floating geometry, distorted edges, flicker, jitter, abrupt exposure shifts, plastic-looking surfaces or unnatural hands. "
-        "Do not add subtitles, UI, watermarks or promotional wording not explicitly requested. "
-        "Do not invent unseen angles or claim features that are not visible in the reference image(s). "
-        "Avoid obvious AI artifacts: uncanny or inconsistent faces, waxy/plastic skin, extra or fused fingers, malformed hands, duplicated limbs, changing garment patterns, warped product geometry, floating objects, inconsistent shadows, impossible reflections, texture shimmer, flicker, frame-to-frame identity drift, oversaturated synthetic colors and fake cinematic effects. "
-        "Do not force a human model into a product-only scene; do not force a floating product or impossible camera orbit into a model-led scene. Prefer one simple, physically credible action over multiple complicated actions."
+        "AVOID: distorted product geometry, changing patterns, extra accessories, duplicated items, unnatural hands or faces, "
+        "flicker, abrupt transitions, fake reflections, added captions, subtitles, logos or watermarks."
     )
     if mode == "storyboard":
         style_key, style_name, style_template = resolve(style)
         doodle = style_key == "white_doodle"
         hook = product_hook(product)
-        evidence_rules = (
-            "REFERENCE IMAGE RULE: The video generator will receive the user's original product photo(s) as visual evidence. "
-            "Inspect only details genuinely visible in those reference photo(s), and preserve the product name and spelling supplied by the user. "
-            "Use the name and optional user text as supporting context, not as permission to invent features. "
-            "Do not invent unseen sides, materials, dimensions, compartments, accessories, product benefits, model numbers or specifications. "
-            "If a detail is not visible or confirmed, keep it neutral and omit the claim."
-        )
+        evidence_rules = "Use only details visible in or confirmed by the product reference. Do not invent features or claims."
 
         hook_direction = (
             "VISUAL HOOK: Create curiosity with a product-specific reveal or plausible action in the opening 0–2 seconds. Never show hook text or invent product claims. "
