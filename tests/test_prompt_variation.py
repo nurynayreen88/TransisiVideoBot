@@ -72,7 +72,7 @@ class CreativeVariationTests(unittest.TestCase):
         text = " ".join(shot + " " + direction for shot, direction in scenes)
         self.assertIn("COMPLETE SET", text)
         self.assertIn("physically plausible kitchen action", text)
-        self.assertIn("Do not add pieces", text)
+        self.assertIn("do not add pieces", text)
         self.assertIn("invented savings", text)
 
     def test_category_storyboard_varies_for_fashion_and_gadgets(self):
