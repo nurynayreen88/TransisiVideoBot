@@ -1918,10 +1918,10 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         reply_markup=home_keyboard()
     )
     await update.effective_message.reply_text(
-        '🎬 KLIPPO | Video Menarik, Semudah Klik\n\n'
-        'Tak perlu mahir AI atau suntingan video. Pilih satu fungsi di bawah:\n\n'
+        '🎬 KLIPPO | Prompt Video Menarik, Semudah Klik\n\n'
+        'Penting: Klippo tidak menjana video AI. Klippo menyediakan prompt teks untuk digunakan di platform video AI pilihan anda.\n\n'
         '⭐ BARU PERTAMA KALI? Mulakan dengan Jana Prompt.\n'
-        '1️⃣ Jana Prompt — masukkan nama produk; Klippo sediakan arahan video untuk disalin ke penjana video AI. Gambar produk tidak diperlukan dalam bot.\n'
+        '1️⃣ Jana Prompt — pilih kategori produk, masukkan nama produk, pilih gaya dan durasi, kemudian salin prompt yang siap ke platform video AI.\n'
         '2️⃣ Gerakkan Foto (Transisi) — jadikan gambar pegun sebagai video MP4 dengan gerakan kamera 2D dan muzik; ini bukan penjanaan gerakan AI pada objek.\n'
         '3️⃣ Gabung Video — cantum beberapa klip menjadi satu video.\n'
         '4️⃣ Tukar Format Video — tukar video kepada format MP4 menegak untuk affiliate.\n\n'
@@ -2286,7 +2286,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if not context.user_data.get('busy'):
             reset(context)
         await query.message.reply_text(
-            '🏠 KLIPPO | Menu Utama\n\n'
+            '🎬 KLIPPO | Prompt Video Menarik, Semudah Klik\n\n'
+            'Klippo tidak menjana video AI. Fungsi Jana Prompt menyediakan teks arahan untuk digunakan di platform video AI pilihan anda.\n\n'
             'Pilih fungsi di bawah. Baru pertama kali? Mulakan dengan ✍️ Jana Prompt.\n'
             'Ikut arahan satu demi satu; tekan Menu Utama jika mahu mula semula.',
             reply_markup=main_menu(update.effective_user.id)
@@ -2485,12 +2486,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data['stage'] = 'prompt_product_type'
         await query.message.reply_text(
             '✍️ KLIPPO | JANA PROMPT VIDEO\n\n'
-            'Cara paling mudah:\n'
-            '1. Pilih kategori dan subkategori produk.\n'
-            '2. Taip nama produk sahaja — tidak perlu pautan Shopee atau muat naik gambar.\n'
-            '3. Pilih durasi dan latar; Klippo akan mengurus aksi serta kamera secara automatik.\n'
-            '4. Semak ringkasan, kemudian tekan Jana Prompt.\n\n'
-            'Prompt ialah arahan teks, bukan video siap. Salin prompt yang terhasil ke platform video AI pilihan anda dan lampirkan gambar produk di sana. Jika tidak pasti, gunakan pilihan yang disyorkan.',
+            'Pilih kategori produk dan taip nama produk. Kemudian pilih durasi serta latar, semak ringkasan dan tekan Jana Prompt.\n\n'
+            'Klippo menghasilkan teks prompt sahaja, bukan video siap. Salin prompt ke platform video AI pilihan anda; gambar produk boleh dimuat naik di platform tersebut.',
             reply_markup=prompt_product_type_menu()
         )
     elif action.startswith('prompt_mode:'):
