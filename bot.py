@@ -647,7 +647,11 @@ def prompt_creative_settings(user_data, include_audio=True):
             lang = 'Bahasa Melayu Malaysia' if language != 'English' else 'English'
             speaker = user_data.get('prompt_speech_source', 'voiceover')
             source = 'The on-camera model speaks' if speaker == 'model' else 'Use an off-camera promoter voice'
-            lines.append(f'{source} in {lang}, {voice_style} style. Keep dialogue short and background music below the voice.')
+            if language == 'English':
+                copy_direction = 'Write a fresh, product-specific hook, one verified detail or plausible use, and a concise CTA. Avoid generic repeated openings and unsupported claims.'
+            else:
+                copy_direction = 'Gunakan hook yang segar dan khusus untuk produk, satu butiran yang disahkan atau kegunaan yang munasabah, kemudian CTA ringkas. Elakkan pembukaan generik yang berulang dan dakwaan yang tidak disahkan. Sebut dengan jelas dalam Bahasa Melayu Malaysia; jangan gunakan kosa kata atau intonasi Indonesia.'
+            lines.append(f'{source} in {lang}, {voice_style} style. {copy_direction} Keep dialogue short and background music below the voice.')
         elif voiceover_mode == 'script':
             script = ' '.join((user_data.get('prompt_voiceover_script') or '').split())
             lines.append('Use this exact spoken script: ' + script)
@@ -657,7 +661,13 @@ def prompt_creative_settings(user_data, include_audio=True):
         if user_data.get('prompt_text_mode') == 'manual' and user_data.get('prompt_text_content'):
             lines.append('On-screen text, exactly as supplied: ' + str(user_data['prompt_text_content']))
         else:
-            lines.append('Add brief promotional on-screen text with a hook and CTA in Bahasa Melayu Malaysia.')
+            text_language = 'English' if user_data.get('prompt_language') == 'English' else 'Bahasa Melayu Malaysia'
+            lines.append(
+                f'ON-SCREEN COPY ({text_language}): Create at most two short overlays: a distinctive product-specific hook near the opening and a clear, varied CTA at the end. '
+                'Make the wording match the actual product and storyboard; do not repeat generic phrases such as “Kenali produk ini”. '
+                'Use only supplied or verified product details. Never invent prices, discounts, stock urgency, popularity, specifications or results. '
+                'Keep spelling exact, readable and uncluttered; do not duplicate the voice-over word for word.'
+            )
     elif user_data.get('prompt_on_screen_text') == 'no':
         lines.append('No on-screen text.')
     if user_data.get('prompt_custom_background'):
