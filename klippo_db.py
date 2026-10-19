@@ -20,6 +20,8 @@ def request(path, method="GET", payload=None, prefer="return=representation"):
         return json.loads(response.read().decode("utf-8") or "[]")
 
 def submit_receipt(user_id, name, file_id, kind):
+    # Ensure users who were already in an open bot session are also registered.
+    register_user(user_id, name)
     rows = request("klippo_payment_receipts", "POST", {
         "telegram_user_id": user_id, "telegram_name": name,
         "telegram_file_id": file_id, "telegram_file_type": kind
