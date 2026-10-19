@@ -2852,7 +2852,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             if voiceover_mode == 'script' and voiceover:
                 voiceover_instruction = 'Gunakan skrip dialog/voiceover pengguna ini tepat tanpa mengubahnya: ' + voiceover
             elif voiceover_mode == 'ai':
-                voiceover_instruction = 'Cadangkan dialog/voiceover ringkas dan semula jadi dalam ' + language_label + ' hanya jika sesuai. Jika Bahasa Melayu, gunakan sebutan baku Bahasa Melayu Malaysia yang jelas, intonasi Malaysia yang semula jadi dan kosa kata Malaysia; jangan gunakan slang, kosa kata, loghat atau intonasi Indonesia. Sebut pada kelajuan sederhana supaya setiap perkataan jelas. Muzik latar tidak boleh menenggelamkan suara.'
+                voice_style_label = {'cute': 'comel dan ceria tetapi tidak dibuat-buat', 'serious': 'serius, tenang dan profesional', 'energetic': 'bertenaga dan teruja tanpa menjerit', 'friendly': 'mesra dan bersahaja seperti rakan yang membantu', 'soft': 'lembut dan menenangkan tetapi tetap jelas', 'ai': 'natural dan santai'}.get(context.user_data.get('prompt_voiceover_style', 'ai'), 'natural dan santai')
+                voiceover_instruction = 'Cadangkan dialog/voiceover ringkas dalam ' + language_label + '. Gaya suara: ' + voice_style_label + '. Jika Bahasa Melayu, gunakan sebutan Bahasa Melayu Malaysia yang jelas, kosa kata Malaysia dan intonasi semula jadi; jangan gunakan slang, kosa kata, loghat atau intonasi Indonesia. Sesuaikan emosi dan kelajuan suara dengan produk, pastikan setiap ayat muat dalam durasi babak. Muzik latar tidak boleh menenggelamkan suara.'
             else:
                 voiceover_instruction = 'Dialog tidak wajib. Utamakan penceritaan visual; nyatakan “Tanpa dialog” jika dialog tidak diperlukan.'
             model_instruction = prompt_creative_settings(context.user_data)
@@ -3102,7 +3103,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     if voiceover_mode == 'script' and voiceover:
                         voiceover_instruction = 'Gunakan skrip dialog/voiceover pengguna ini tepat tanpa mengubahnya: ' + voiceover
                     elif voiceover_mode == 'ai':
-                        voiceover_instruction = 'Cadangkan dialog/voiceover ringkas dan semula jadi dalam ' + language_label + ' hanya jika sesuai. Jika Bahasa Melayu, gunakan sebutan baku Bahasa Melayu Malaysia yang jelas, intonasi Malaysia yang semula jadi dan kosa kata Malaysia; jangan gunakan slang, kosa kata, loghat atau intonasi Indonesia. Sebut pada kelajuan sederhana supaya setiap perkataan jelas. Muzik latar tidak boleh menenggelamkan suara.'
+                        voice_style_label = {'cute': 'comel dan ceria tetapi tidak dibuat-buat', 'serious': 'serius, tenang dan profesional', 'energetic': 'bertenaga dan teruja tanpa menjerit', 'friendly': 'mesra dan bersahaja seperti rakan yang membantu', 'soft': 'lembut dan menenangkan tetapi tetap jelas', 'ai': 'natural dan santai'}.get(context.user_data.get('prompt_voiceover_style', 'ai'), 'natural dan santai')
+                        voiceover_instruction = 'Cadangkan dialog/voiceover ringkas dalam ' + language_label + '. Gaya suara: ' + voice_style_label + '. Jika Bahasa Melayu, gunakan sebutan Bahasa Melayu Malaysia yang jelas, kosa kata Malaysia dan intonasi semula jadi; jangan gunakan slang, kosa kata, loghat atau intonasi Indonesia. Sesuaikan emosi dan kelajuan suara dengan produk, pastikan setiap ayat muat dalam durasi babak. Muzik latar tidak boleh menenggelamkan suara.'
                     else:
                         voiceover_instruction = 'Dialog tidak wajib. Utamakan penceritaan visual; nyatakan “Tanpa dialog” jika dialog tidak diperlukan.'
                     model_instruction = prompt_creative_settings(context.user_data)
