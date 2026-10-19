@@ -509,7 +509,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
                     "CTA + HERO SHOT",
                 )
                 beat_plan = (
-                    "FOUR-BEAT STORYBOARD — exactly 0–2s HOOK, 2–6s FUNCTION + BENEFIT, "
+                    "SELECTED STORYBOARD: FOUR-BEAT STRUCTURE — exactly 0–2s HOOK, 2–6s FUNCTION + BENEFIT, "
                     "6–8s VALUE / VISIBLE DETAIL, 8–10s CTA + HERO SHOT. "
                     + (("CONTINUITY: Resume from Part 1's final frame; do not repeat its hook. ")
                        if part >= 2 else "")
