@@ -499,7 +499,7 @@ def fit_prompt_to_one_telegram_message(prompt, limit=3800):
 
     marker = 'KLIPPO GUIDED CREATIVE SETTINGS:'
     suffix = (
-        "\\n\\nREALISM / FINAL CHECK: Photoreal live-action look, natural texture and anatomy, "
+        "\n\nREALISM / FINAL CHECK: Photoreal live-action look, natural texture and anatomy, "
         "physically plausible movement, true real-world product scale, grounded shadows, believable reflections, "
         "consistent product identity, and no generated on-screen text or added branding."
     )
@@ -508,17 +508,17 @@ def fit_prompt_to_one_telegram_message(prompt, limit=3800):
         tail = marker + settings
         # The settings block contains voiceover language/accent and must survive compaction.
         if len(tail) > int(limit * 0.42):
-            tail = tail[:int(limit * 0.42) - 80].rstrip() + "\\n[Guided settings shortened; retain selected voiceover language, accent, no-text rule and audio mix.]"
+            tail = tail[:int(limit * 0.42) - 80].rstrip() + "\n[Guided settings shortened; retain selected voiceover language, accent, no-text rule and audio mix.]"
         budget = limit - len(tail) - len(suffix) - 80
         body = head[:max(0, budget)]
-        cut = max(body.rfind("\\n"), body.rfind(". "))
+        cut = max(body.rfind("\n"), body.rfind(". "))
         if cut >= int(len(body) * 0.72):
             body = body[:cut + (1 if body[cut:cut + 1] == "." else 0)]
-        return body.rstrip() + "\\n\\n[Middle of prompt compacted to fit Telegram; retain product identity and selected storyboard.]\\n\\n" + tail + suffix
+        return body.rstrip() + "\n\n[Middle of prompt compacted to fit Telegram; retain product identity and selected storyboard.]\n\n" + tail + suffix
 
     ending = suffix
     body = prompt[:limit - len(ending)]
-    cut = max(body.rfind("\\n"), body.rfind(". "))
+    cut = max(body.rfind("\n"), body.rfind(". "))
     if cut >= int(len(body) * 0.72):
         body = body[:cut + (1 if body[cut:cut + 1] == "." else 0)]
     return body.rstrip() + ending
