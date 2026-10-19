@@ -306,7 +306,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
             curated_direction = (
                 "DIRECTOR'S CURATED PREMIUM STORYBOARD: Use this selected GitHub library storyboard as the primary shot plan. "
                 + (("CONTINUATION SEGMENT " + str(part) + "/" + str(total_parts) + ": Use a fresh, product-specific continuation hook and a distinct action not used in earlier clips; do not repeat earlier CTA wording. Preserve the exact previous final frame at 0–2s. ") if part > 1 else "")
-                + "Use the four selected beats in five connected 2-second panels. Keep product identity, model and setting consistent. "
+                + "Follow the four selected beats in order, fitting them naturally into 10 seconds. Keep product identity, model and setting consistent. "
                 + "\n\n".join(
                     str(item.get("time", "")) + " | " + str(item.get("shot", "")) + "\n"
                     + str(item.get("direction", ""))
