@@ -568,7 +568,7 @@ def prompt_creative_settings(user_data, include_audio=True):
                 'AUDIO: No dialogue or voiceover; instrumental background music only. '
                 'Create the hook and CTA visually through the opening action and final product shot.'
             )
-    return '\\n'.join(lines)
+    return '\n'.join(lines)
 
 
 def prompt_product_type_menu():
@@ -2550,7 +2550,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             waiting = await query.message.reply_text('⏳ DALAM PROSES — 0%' + chr(10) + 'Menyusun prompt...')
             try:
                 product_name = context.user_data.get('prompt_product_name', '').strip()
-                product = 'NAMA_PRODUK: ' + product_name + chr(10) + 'Optional user details: ' + context.user_data.get('prompt_product', '')
+                product_details = (context.user_data.get('prompt_product', '') or '').strip()
+                product = 'NAMA_PRODUK: ' + product_name + (chr(10) + 'BUTIRAN TAMBAHAN: ' + product_details if product_details else '')
                 scene = context.user_data.get('prompt_scene', 'clean studio background')
                 style_choice = context.user_data.get('prompt_style', 'auto')
                 if style_choice == 'auto':
@@ -2711,11 +2712,9 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     'Use the uploaded product photograph as the sole MASTER product reference. '
                     'Create one ultra-realistic premium commercial product photograph in vertical 9:16. '
                     'The product is: ' + product_name + '. Category: ' + category_label + '.\n\n'
-                    'VISUAL DIRECTION: Create a believable, elegant lifestyle advertising scene suited to this product. '
-                    'If a model was selected, include the same adult model naturally in a way suited to this product; for clothing, the model must wear the exact item. If no model was selected, do not add a person. '
-                    'If it is a bag, accessory, beauty item, gadget, food or home product, compose a premium scene that showcases the actual item clearly. '
-                    'Use soft natural or studio light, realistic shadows, refined composition, authentic textures, and a photographic—not CGI—finish. '
-                    'Keep the product prominent and leave enough clear space around it.\n\n'
+                    'VISUAL DIRECTION: Create a believable, elegant advertising scene suited to the selected product category. '
+                    'Use soft natural or studio light, realistic shadows, refined composition, authentic textures and a photographic—not CGI—finish. '
+                    'Keep the product prominent and clearly visible.\n\n'
                     'PRODUCT LOCK: Preserve the exact product identity from the uploaded photo, including its visible shape, colour, print, pattern, cut, packaging, proportions, hardware and details. '
                     'Do not redesign, recolour, replace, add or remove product features. Do not invent logos, labels, accessories, materials or claims. '
                     'For clothing, keep the garment print, neckline, sleeves, fit and fabric appearance faithful to the reference. '
@@ -2730,7 +2729,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                         ' consistent adult model(s); gender: ' + str(context.user_data.get('prompt_model_gender', 'female')) +
                         '; head covering: ' + str(context.user_data.get('prompt_model_hijab', 'not specified')) +
                         '; appearance: ' + str(context.user_data.get('prompt_model_ethnicity', 'any')) +
-                        '; adult age range: ' + str(context.user_data.get('prompt_model_age', '26-40')) +
+                        '; age: appropriate to the product category; ' +
                         '. Keep the same face, hair/head covering and outfit consistent throughout.'
                     )
                 else:
