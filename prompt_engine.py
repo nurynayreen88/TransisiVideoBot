@@ -291,7 +291,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
                 + "LATAR: " + scene[:140].strip() + "\nKAMERA: " + camera[:80].strip() + "\n"
                 + hook_rule + beat_plan + concept_rule[:120] + doodle_rule
                 + "Kekalkan rupa, warna, corak, pembungkusan dan logo asal. Jangan reka ciri atau aksesori. "
-                "Gerakan semula jadi. Tiada teks, sari kata atau watermark."
+                "Gerakan semula jadi. Jika suara digunakan, sebut hook dan CTA ringkas dalam Bahasa Melayu Malaysia. Tiada teks skrin atau watermark."
             )
 
         evidence_rules = (
@@ -433,7 +433,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
                ((hook_direction if part != 2 else "Sambung klip pertama; jangan ulang hook.") + "\n" + rules))
             + (("\nIDEA: " + concept[:100].strip()) if concept else "")
             + "\nKekalkan rupa, warna, corak, pembungkusan dan logo asal. Jangan reka ciri atau aksesori. "
-            "Gerakan semula jadi; tiada teks, sari kata atau watermark."
+            "Jika suara digunakan, sebut hook dan CTA ringkas dalam Bahasa Melayu Malaysia. Tiada teks skrin atau watermark."
         )
     if mode == "storyboard":
         shots = [
@@ -480,5 +480,5 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
         + "GAYA: " + art[:100].strip() + "\n"
         + direction + "\n"
         + "Kekalkan rupa, warna, corak dan pembungkusan asal. Jangan reka ciri atau aksesori. "
-        "Gerakan lancar dan latar konsisten. Tiada teks tambahan atau watermark."
+        "Jika suara digunakan, sebut hook dan CTA ringkas dalam Bahasa Melayu Malaysia. Gerakan lancar; tiada teks skrin atau watermark."
     )
