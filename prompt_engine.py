@@ -93,7 +93,9 @@ def _creative_variation(product_type, product, part):
         + "AUDIO / SFX: " + _SFX_BY_TYPE[group]
         + " Keep effects brief and synchronised, quieter than any selected speech; music remains subtle. "
         + "If the video generator cannot create audio, do not imply sound generation is guaranteed. "
-        + "No sound-effect labels or unrequested on-screen text."
+        + "VISUAL QUALITY LOCK: Use one clear primary action and at most one restrained camera move per beat; keep the product sharply readable, correctly scaled and consistently shaped. "
+        + "Maintain coherent lighting, exposure, focus, reflections, contact shadows and perspective across shots. Use smooth easing and motivated transitions; avoid flicker, jitter, warped edges, extra fingers, duplicated objects, floating items, sudden zooms or morphing. "
+        + "Finish with a clean, steady hero frame. No sound-effect labels or unrequested on-screen text."
     )
 
 
