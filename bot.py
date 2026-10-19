@@ -2361,26 +2361,26 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             if not images:
                 raise RuntimeError('Gambar rujukan tidak dapat dimuat turun daripada Telegram.')
             language = context.user_data.get('prompt_language', 'Malay')
-            language_label = {'Malay': 'Bahasa Melayu Malaysia', 'English': 'English', 'none': 'Bahasa Melayu Malaysia'}.get(language, 'Bahasa Melayu')
+            language_label = 'English'
             voiceover_mode = context.user_data.get('prompt_voiceover_mode', 'none')
             voiceover = context.user_data.get('prompt_voiceover_script', '').strip()
             if voiceover_mode == 'script' and voiceover:
-                voiceover_instruction = 'Gunakan skrip dialog/voiceover pengguna ini tepat tanpa mengubahnya: ' + voiceover
+                voiceover_instruction = 'Use the user-provided voiceover script exactly as written, without changes: ' + voiceover
             elif voiceover_mode == 'ai':
-                voiceover_instruction = 'Gunakan voiceover ' + ('English' if language == 'English' else 'Bahasa Malaysia') + ' yang semula jadi dan jelas. Sebut hook produk yang ringkas, satu butiran atau kegunaan yang disokong gambar, kemudian CTA ringkas. Muzik latar lebih perlahan daripada suara. Jangan jana teks pada skrin.'
+                voiceover_instruction = 'Use a clear, natural ' + ('English' if language == 'English' else 'Malaysian Malay') + ' voiceover. Say a short product-specific hook, one reference-supported detail or use, then a concise CTA. Keep background music quieter than the voice. Add no on-screen text.'
             else:
-                voiceover_instruction = 'Tiada dialog atau voiceover; gunakan muzik latar instrumental sahaja. Sampaikan hook dan CTA melalui aksi pembukaan serta paparan akhir produk, tanpa teks.'
+                voiceover_instruction = 'Use instrumental background music only, with no dialogue or voiceover. Convey the hook through the opening action and the CTA through the final product shot, without on-screen text.'
             model_instruction = prompt_creative_settings(context.user_data, include_audio=False)
             prompt_instruction = (
-                'Anda ialah pengarah kreatif iklan produk. Analisis SEMUA gambar rujukan yang dilampirkan dan hasilkan storyboard video produk yang boleh terus digunakan sebagai arahan penjana video AI. '
-                'Tulis hasil dalam ' + language_label + '. Durasi tepat ' + str(duration) + ' saat, format menegak 9:16. '
-                + ('Bina ' + str(4 if duration <= 10 else (6 if duration <= 15 else 8)) + ' babak, setiap babak kira-kira ' + str(round(duration / (4 if duration <= 10 else (6 if duration <= 15 else 8)), 2)) + ' saat. ' + ('Pastikan keempat-empat babak membentuk aliran lengkap.' if duration <= 10 else ('Babak 5–6 mesti menyambung secara visual daripada babak 1–4.' if duration <= 15 else 'Babak 5–8 mesti bersambung secara visual daripada babak 1–4.')))
-                + ' Untuk setiap babak, berikan masa mula–akhir, aksi spesifik, framing dan gerakan kamera, ekspresi/pergerakan model jika ada, serta peralihan/kesinambungan. '
-                'Kekalkan identiti dan rupa produk tepat seperti gambar. Jangan mereka warna, logo, corak, ciri, bahan, aksesori atau dakwaan yang tidak dapat dilihat. '
-                'Kekalkan model yang dipilih dan pastikan umurnya sesuai dengan kategori produk. Jangan tambah teks pada skrin, sari kata, logo tambahan atau watermark. '
-                'Pastikan setiap aksi praktikal, jelas dan tidak bertindih dengan aksi babak lain. Mulakan dengan hook visual yang kuat dan tamat dengan product hero shot. '
-                + voiceover_instruction + ('\n\nPILIHAN PENGGUNA:\n' + model_instruction if model_instruction else '')
-                + '\n\nFormat output: tajuk ringkas, konsep, kemudian senarai babak bernombor. Jangan hasilkan prompt video penuh dahulu.'
+                'You are a product-ad creative director. Analyze ALL attached reference images and create a storyboard that can be used directly as an AI video-generation prompt. '
+                'Write the entire storyboard in English. Exact duration: ' + str(duration) + ' seconds. Vertical 9:16 format. '
+                + ('Create ' + str(4 if duration <= 10 else (6 if duration <= 15 else 8)) + ' shots, each approximately ' + str(round(duration / (4 if duration <= 10 else (6 if duration <= 15 else 8)), 2)) + ' seconds long. ' + ('Ensure all four shots form a complete visual sequence.' if duration <= 10 else ('Shots 5–6 must continue visually from shots 1–4.' if duration <= 15 else 'Shots 5–8 must continue visually from shots 1–4.')))
+                + ' For each shot, specify the start and end time, specific action, framing, camera movement, model expression or movement if applicable, and transition/continuity. '
+                'Preserve the product identity and appearance exactly as shown. Do not invent colors, logos, patterns, features, materials, accessories, or unsupported claims. '
+                'Keep the selected model consistent and age-appropriate for the product category. Add no on-screen text, subtitles, extra logos, or watermarks. '
+                'Make every action practical, clear, and distinct from the other shots. Start with a strong visual hook and finish with a product hero shot. '
+                + voiceover_instruction + ('\n\nSELECTED MODEL SETTINGS:\n' + model_instruction if model_instruction else '')
+                + '\n\nOutput format: a concise title, concept, then a numbered shot list. Do not generate the full video prompt yet.'
             )
             context.user_data['prompt_storyboard_fallback'] = prompt_instruction
             await progress_update(waiting, 35, 'Klippo sedang menjana storyboard secara automatik...')
@@ -2558,7 +2558,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             try:
                 product_name = context.user_data.get('prompt_product_name', '').strip()
                 product_details = (context.user_data.get('prompt_product', '') or '').strip()
-                product = 'NAMA_PRODUK: ' + product_name + (chr(10) + 'BUTIRAN TAMBAHAN: ' + product_details if product_details else '')
+                product = 'PRODUCT NAME: ' + product_name + (chr(10) + 'ADDITIONAL PRODUCT DETAILS: ' + product_details if product_details else '')
                 scene = context.user_data.get('prompt_scene', 'clean studio background')
                 style_choice = context.user_data.get('prompt_style', 'auto')
                 if style_choice == 'auto':
@@ -2614,13 +2614,13 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                         voiceover_instruction = 'Tiada dialog atau voiceover; gunakan muzik latar instrumental sahaja. Sampaikan hook dan CTA melalui aksi pembukaan serta paparan akhir produk, tanpa teks.'
                     model_instruction = prompt_creative_settings(context.user_data, include_audio=False)
                     prompt_instruction = (
-                        'Anda ialah pengarah kreatif iklan produk. Analisis gambar rujukan yang dilampirkan dan hasilkan storyboard video produk yang boleh terus digunakan sebagai arahan penjana video AI. '
-                        'Tulis hasil dalam ' + language_label + '. Durasi tepat ' + str(duration) + ' saat, format menegak 9:16. '
-                        + ('Bina 4 babak berturutan dalam satu helaian storyboard.' if duration <= 10 else 'Bina 8 babak berturutan dalam dua helaian storyboard; babak 5–8 mesti bersambung daripada babak 1–4.')
-                        + ' Untuk setiap babak, nyatakan masa mula–akhir, aksi spesifik, framing dan gerakan kamera, ekspresi/pergerakan model jika ada, serta peralihan/kesinambungan. '
-                        'Kekalkan identiti produk tepat seperti gambar. Jangan mereka warna, logo, corak, ciri atau bahan yang tidak kelihatan. Jangan tambah teks pada skrin, sari kata, logo tambahan atau watermark. '
-                        + voiceover_instruction + ('\n\nPILIHAN PENGGUNA:\n' + model_instruction if model_instruction else '')
-                        + '\n\nFormat output: tajuk ringkas, konsep, kemudian senarai babak bernombor. Jangan hasilkan prompt video penuh dahulu.'
+                        'You are a product-ad creative director. Analyze the attached reference images and create a storyboard that can be used directly as an AI video-generation prompt. '
+                        'Write the entire storyboard in English. Exact duration: ' + str(duration) + ' seconds. Vertical 9:16 format. '
+                        + ('Create four consecutive shots in one storyboard sheet.' if duration <= 10 else 'Create eight consecutive shots across two storyboard sheets; shots 5–8 must continue seamlessly from shots 1–4.')
+                        + ' For each shot, specify the start and end time, specific action, framing, camera movement, model expression or movement if applicable, and transition/continuity. '
+                        'Preserve the product identity exactly as shown in the images. Do not invent colors, logos, patterns, features, or materials that are not visible. Add no on-screen text, subtitles, extra logos, or watermarks. '
+                        + voiceover_instruction + ('\n\nSELECTED MODEL SETTINGS:\n' + model_instruction if model_instruction else '')
+                        + '\n\nOutput format: a concise title, concept, then a numbered shot list. Do not generate the full video prompt yet.'
                     )
                     await progress_update(waiting, 40, 'Menjana storyboard...')
                     storyboard = await generate_storyboard(images, prompt_instruction)
