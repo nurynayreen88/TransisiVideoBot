@@ -502,9 +502,9 @@ def prompt_model_hijab_menu():
 def prompt_model_ethnicity_menu():
     return InlineKeyboardMarkup([
         [InlineKeyboardButton('Melayu', callback_data='prompt_model_ethnicity:Malay'),
-         InlineKeyboardButton('Cina Malaysia', callback_data='prompt_model_ethnicity:Chinese')],
-        [InlineKeyboardButton('India Malaysia', callback_data='prompt_model_ethnicity:Indian')],
-        [InlineKeyboardButton('Rawak — kaum di Malaysia', callback_data='prompt_model_ethnicity:random_malaysia')],
+         InlineKeyboardButton('Cina', callback_data='prompt_model_ethnicity:Chinese')],
+        [InlineKeyboardButton('India', callback_data='prompt_model_ethnicity:Indian')],
+        [InlineKeyboardButton('Rawak — kaum tempatan', callback_data='prompt_model_ethnicity:random_malaysia')],
     ])
 
 
@@ -579,10 +579,10 @@ def prompt_creative_settings(user_data, include_audio=True):
         gender = user_data.get('prompt_model_gender', 'female')
         appearance_key = user_data.get('prompt_model_ethnicity', 'random_malaysia')
         appearance = {
-            'Malay': 'Melayu Malaysia',
-            'Chinese': 'Cina Malaysia',
-            'Indian': 'India Malaysia',
-            'random_malaysia': 'kaum rawak yang memang terdapat di Malaysia; pilih satu identiti yang konsisten, bukan rupa asing secara stereotaip',
+            'Malay': 'Melayu',
+            'Chinese': 'Cina',
+            'Indian': 'India',
+            'random_malaysia': 'pilih satu kaum tempatan secara rawak dengan identiti yang konsisten, bukan rupa asing secara stereotaip',
             'Asian': 'Asia',
             'diverse': 'rupa pelbagai',
             'any': 'mana-mana rupa',
