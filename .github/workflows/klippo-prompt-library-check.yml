@@ -239,8 +239,13 @@ jobs:
               )
               assert "=== KLIPPO PART 2 ===" in paired_curated
               assert "CONTINUITY BRIDGE" in paired_curated
-              assert "CONTINUATION ACTION" in paired_curated
-              assert "Do not repeat the opening hook" in paired_curated
+              assert "SECONDARY DEMONSTRATION" in paired_curated
+              assert "ALTERNATE DETAIL / TRUST SHOT" in paired_curated
+              assert "FINAL HERO / SPOKEN CTA" in paired_curated
+              assert (
+                  "do not repeat the opening hook" in paired_curated.casefold()
+                  or "no repeated opening hook" in paired_curated.casefold()
+              )
               assert "\\n\\n" not in curated_prompt, (
                   "Generated prompt contains literal escaped newlines instead of copy-ready formatting"
               )
