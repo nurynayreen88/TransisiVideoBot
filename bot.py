@@ -575,7 +575,7 @@ def prompt_creative_settings(user_data, include_audio=True):
                 lines.append('Audio: Instrumental background music only; no dialogue or voiceover.')
         else:
             lines.append('Audio: Instrumental background music only; no dialogue or voiceover. Show the hook through the opening and the CTA through the final product shot.')
-    return '\\n'.join(lines)
+    return '\n'.join(lines)
 
 
 def prompt_product_type_menu():
