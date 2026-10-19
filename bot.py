@@ -2603,15 +2603,15 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     if not images:
                         raise RuntimeError('Gambar rujukan tidak dapat dimuat turun daripada Telegram.')
                     language = context.user_data.get('prompt_language', 'Malay')
-                    language_label = {'Malay': 'Bahasa Melayu Malaysia', 'English': 'English', 'none': 'Bahasa Melayu Malaysia'}.get(language, 'Bahasa Melayu')
+                    language_label = 'English'
                     voiceover_mode = context.user_data.get('prompt_voiceover_mode', 'none')
                     voiceover = context.user_data.get('prompt_voiceover_script', '').strip()
                     if voiceover_mode == 'script' and voiceover:
-                        voiceover_instruction = 'Gunakan skrip dialog/voiceover pengguna ini tepat tanpa mengubahnya: ' + voiceover
+                        voiceover_instruction = 'Use the user-provided voiceover script exactly as written, without changes: ' + voiceover
                     elif voiceover_mode == 'ai':
-                        voiceover_instruction = 'Gunakan voiceover ' + ('English' if language == 'English' else 'Bahasa Malaysia') + ' yang semula jadi dan jelas. Sebut hook produk yang ringkas, satu butiran atau kegunaan yang disokong gambar, kemudian CTA ringkas. Muzik latar lebih perlahan daripada suara. Jangan jana teks pada skrin.'
+                        voiceover_instruction = 'Use a clear, natural ' + ('English' if language == 'English' else 'Malaysian Malay') + ' voiceover. Say a short product-specific hook, one reference-supported detail or use, then a concise CTA. Keep background music quieter than the voice. Add no on-screen text.'
                     else:
-                        voiceover_instruction = 'Tiada dialog atau voiceover; gunakan muzik latar instrumental sahaja. Sampaikan hook dan CTA melalui aksi pembukaan serta paparan akhir produk, tanpa teks.'
+                        voiceover_instruction = 'Use instrumental background music only, with no dialogue or voiceover. Convey the hook through the opening action and the CTA through the final product shot, without on-screen text.'
                     model_instruction = prompt_creative_settings(context.user_data, include_audio=False)
                     prompt_instruction = (
                         'You are a product-ad creative director. Analyze the attached reference images and create a storyboard that can be used directly as an AI video-generation prompt. '
