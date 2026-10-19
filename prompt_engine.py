@@ -518,7 +518,10 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
                    if part < 2 else "Continue naturally without repeating the opening hook. ")
             )
             doodle_rule = (
-                "GRAPHICS: Thin white hand-drawn marks may emphasize visible product edges only; never cover the product. "
+                "DOODLE + MATCHED SFX: Thin hand-drawn lines travel smoothly just outside the visible product outline; "
+                "sync a soft pencil-draw or light whoosh to the line movement, a tiny sparkle/chime when a visible detail is highlighted, "
+                "and a gentle pop only when a circle or doodle accent appears. Keep each effect brief, timed to the visual, and quieter than speech/music; "
+                "do not stack effects or cover the product. If audio generation is unsupported, do not claim the SFX will be rendered. "
                 if doodle else ""
             )
             concept_rule = ("CREATIVE IDEA: " + concept.strip() + ". " if concept and concept.strip() else "")
