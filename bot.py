@@ -562,7 +562,6 @@ def prompt_language_menu():
 def prompt_voiceover_menu():
     return InlineKeyboardMarkup([
         [InlineKeyboardButton('⚡ Auto — Klippo pilih suara sesuai', callback_data='prompt_voiceover:auto')],
-        [InlineKeyboardButton('🔇 Tanpa dialog / voiceover', callback_data='prompt_voiceover:none')],
         [InlineKeyboardButton('🎙️ Suara natural / santai', callback_data='prompt_voiceover:ai')],
         [InlineKeyboardButton('🥰 Suara comel / ceria', callback_data='prompt_voiceover:cute')],
         [InlineKeyboardButton('🧑‍💼 Suara serius / profesional', callback_data='prompt_voiceover:serious')],
@@ -2953,26 +2952,26 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 'bright minimalist setting with clean neutral surfaces and soft daylight': 'Cerah Minimalis',
                 'use the exact user-supplied background image as the scene/background plate': 'Latar sendiri (wajib upload imej latar ke AI)',
             }
+            gender_labels = {'female': 'Wanita', 'male': 'Lelaki'}
+            hijab_labels = {'hijab': 'Bertudung', 'no_hijab': 'Tidak bertudung', 'na': 'Tidak berkenaan'}
+            category_summary = context.user_data.get('prompt_custom_category_name') or PRODUCT_TYPES.get(context.user_data.get('prompt_product_type', 'other'), 'Produk lain')
+            subcategory_summary = context.user_data.get('prompt_custom_subcategory_name') or PRODUCT_SUBTYPE_LABELS.get(context.user_data.get('prompt_product_subcategory', ''), 'Tidak dinyatakan')
             if context.user_data.get('prompt_model_presence') != 'yes':
                 model_summary = 'Tiada — fokus produk'
             else:
-                model_summary = (
-                    str(context.user_data.get('prompt_model_count', 1))
-                    + ' model; Model 1: ' + str(context.user_data.get('prompt_model_gender', 'female'))
-                    + ', umur ' + str(context.user_data.get('prompt_model_age', '26-40'))
-                    + ', tudung ' + str(context.user_data.get('prompt_model_hijab', 'na'))
-                )
+                gender1 = gender_labels.get(context.user_data.get('prompt_model_gender', 'female'), 'Tidak dinyatakan')
+                hijab1 = hijab_labels.get(context.user_data.get('prompt_model_hijab', 'na'), 'Tidak dinyatakan')
+                model_summary = f"{context.user_data.get('prompt_model_count', 1)} model; Model 1: {gender1}, umur {context.user_data.get('prompt_model_age', '26-40')}, {hijab1}"
                 if int(context.user_data.get('prompt_model_count', 1)) == 2:
-                    model_summary += (
-                        '; Model 2: ' + str(context.user_data.get('prompt_model_gender_2', 'male'))
-                        + ', umur ' + str(context.user_data.get('prompt_model_age_2', '26-40'))
-                        + ', tudung ' + str(context.user_data.get('prompt_model_hijab_2', 'na'))
-                    )
+                    gender2 = gender_labels.get(context.user_data.get('prompt_model_gender_2', 'male'), 'Tidak dinyatakan')
+                    hijab2 = hijab_labels.get(context.user_data.get('prompt_model_hijab_2', 'na'), 'Tidak berkenaan')
+                    model_summary += f"; Model 2: {gender2}, umur {context.user_data.get('prompt_model_age_2', '26-40')}, {hijab2}"
             summary = chr(10).join([
                 '🧾 SEMAK PILIHAN SEBELUM JANA PROMPT',
                 '',
                 f'🛍️ Nama produk: {product_name}',
-                f'📦 Jenis produk: {PRODUCT_TYPES.get(context.user_data.get("prompt_product_type", "other"), "Produk lain")}',
+                f'📦 Kategori: {category_summary}',
+                f'🔎 Subkategori: {subcategory_summary}',
                 f'⏱️ Tempoh: {context.user_data.get("prompt_duration", 10)} saat — ' + ('satu prompt' if context.user_data.get('prompt_duration_mode', 'split' if context.user_data.get('prompt_duration') == 20 else 'single') == 'single' else str(int(context.user_data.get('prompt_duration', 10)) // 10) + ' prompt bersambung 10 saat'),
                 f'👤 Model: {model_summary}',
                 f'🎨 Gaya video: {style_name}',
