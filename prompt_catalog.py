@@ -231,6 +231,11 @@ def product_hook(description):
                 "UPDATE storyboard_hooks SET hooks=?, version=3 WHERE category=? AND version=2 AND hooks=?",
                 (json.dumps(list(hooks)), category, json.dumps(previous_defaults[category]))
             )
+            # Mark only rows matching the current bundled seed as v3, including fresh databases.
+            db.execute(
+                "UPDATE storyboard_hooks SET version=3 WHERE category=? AND version IN (1, 2) AND hooks=?",
+                (category, json.dumps(list(hooks)))
+            )
         db.commit()
         rows = db.execute("SELECT keywords, hooks FROM storyboard_hooks WHERE active=1 ORDER BY rowid").fetchall()
     description = description or ""
