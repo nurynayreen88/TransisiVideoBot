@@ -2770,6 +2770,9 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             duration, duration_mode = valid_duration_modes[selected]
             context.user_data['prompt_duration'] = duration
             context.user_data['prompt_duration_mode'] = duration_mode
+            context.user_data['prompt_speech_source'] = 'voiceover'
+            context.user_data['prompt_voiceover_script'] = ''
+            context.user_data['prompt_on_screen_text'] = 'no'
             context.user_data['stage'] = 'prompt_text_presence'
             await query.message.reply_text('📝 LANGKAH 6 — Mahu teks dipaparkan pada skrin video?', reply_markup=prompt_text_presence_menu())
     elif action.startswith('prompt_text_presence:') and stage == 'prompt_text_presence':
