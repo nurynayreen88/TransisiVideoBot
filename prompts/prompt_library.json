@@ -14051,7 +14051,7 @@
     "rule": "Each prompt entry carries its own product-specific storyboard, shot actions, premium cinematography, continuity and strict text-only product identity constraints. Timings and actions must remain specific to the concept.",
     "unique_storyboards": true,
     "unique_shot_plans_required": true,
-    "copy_ready_output": "one complete text block per 10-second clip; 20 seconds is two separate 10-second blocks",
+    "copy_ready_output": "one complete text block per 10-second clip; 20 seconds is two separate connected 10-second blocks; 30 seconds is three separate connected 10-second blocks",
     "continuation_action_required": true
   }
 }
