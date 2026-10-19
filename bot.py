@@ -2678,10 +2678,12 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 'prompt_motion_choice': 'auto',
                 'stage': 'prompt_confirm',
             })
-            if context.user_data.get('prompt_audio_enabled') is True:
-                context.user_data['stage'] = 'prompt_language'
-                await query.message.reply_text('🌐 LANGKAH 8 — Pilih bahasa suara/dialog:', reply_markup=prompt_language_menu())
-            else:
+            context.user_data['stage'] = 'prompt_text_presence'
+            await query.message.reply_text(
+                '📝 LANGKAH 7 — Mahu teks dipaparkan pada skrin video?',
+                reply_markup=prompt_text_presence_menu()
+            )
+            if False:
                 await query.message.reply_text(
                     '✅ Tetapan Auto siap. Klippo telah memilih gaya, model (jika sesuai), latar dan gerakan kamera berdasarkan produk.\n\n'
                 f"🛍️ Produk: {context.user_data.get('prompt_product_name', 'Produk')}\n"
@@ -2773,14 +2775,15 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['prompt_speech_source'] = 'voiceover'
             context.user_data['prompt_voiceover_script'] = ''
             context.user_data['prompt_on_screen_text'] = 'no'
-            context.user_data['stage'] = 'prompt_text_presence'
-            await query.message.reply_text('📝 LANGKAH 6 — Mahu teks dipaparkan pada skrin video?', reply_markup=prompt_text_presence_menu())
+            context.user_data['prompt_audio_enabled'] = None
+            context.user_data['stage'] = 'prompt_setup_mode'
+            await query.message.reply_text('⚙️ Pilih cara tetapan prompt:', reply_markup=prompt_setup_mode_menu())
     elif action.startswith('prompt_text_presence:') and stage == 'prompt_text_presence':
         selected = action.split(':', 1)[1]
         if selected in ('yes', 'no'):
             context.user_data['prompt_on_screen_text'] = selected
             context.user_data['stage'] = 'prompt_audio_presence'
-            await query.message.reply_text('🔊 LANGKAH 7 — Mahu suara/dialog dalam video?', reply_markup=prompt_audio_presence_menu())
+            await query.message.reply_text('🔊 LANGKAH 8 — Mahu suara/dialog dalam video?', reply_markup=prompt_audio_presence_menu())
     elif action.startswith('prompt_audio_presence:') and stage == 'prompt_audio_presence':
         selected = action.split(':', 1)[1]
         if selected in ('yes', 'no'):
@@ -2789,8 +2792,14 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 context.user_data['prompt_voiceover_mode'] = 'none'
                 context.user_data['prompt_voiceover_style'] = 'none'
                 context.user_data['prompt_voiceover_script'] = ''
-            context.user_data['stage'] = 'prompt_setup_mode'
-            await query.message.reply_text('⚙️ Pilih cara tetapan prompt:', reply_markup=prompt_setup_mode_menu())
+                context.user_data['stage'] = 'prompt_idea_choice'
+                await query.message.reply_text(
+                    '💡 Mahu tambah satu idea aksi daripada koleksi prompt siap? Pilihan ini akan digabungkan ke dalam prompt yang sama.',
+                    reply_markup=prompt_idea_choice_menu()
+                )
+            else:
+                context.user_data['stage'] = 'prompt_language'
+                await query.message.reply_text('🌐 LANGKAH 9 — Pilih bahasa suara/dialog:', reply_markup=prompt_language_menu())
     elif action.startswith('prompt_language:') and stage == 'prompt_language':
         selected = action.split(':', 1)[1]
         if selected in ('Malay', 'English', 'none'):
@@ -2848,16 +2857,11 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             # Accept a valid framing choice from an older Telegram keyboard if the
             # current prompt session still has its product type and visual style.
             context.user_data['prompt_framing'] = selected
-            if context.user_data.get('prompt_audio_enabled') is False:
-                context.user_data['prompt_voiceover_mode'] = 'none'
-                context.user_data['stage'] = 'prompt_idea_choice'
-                await query.message.reply_text(
-                    '💡 Mahu tambah satu idea aksi daripada koleksi prompt siap? Pilihan ini akan digabungkan ke dalam prompt yang sama.',
-                    reply_markup=prompt_idea_choice_menu()
-                )
-            else:
-                context.user_data['stage'] = 'prompt_language'
-                await query.message.reply_text('🌐 LANGKAH 8 — Pilih bahasa suara/dialog:', reply_markup=prompt_language_menu())
+            context.user_data['stage'] = 'prompt_text_presence'
+            await query.message.reply_text(
+                '📝 LANGKAH 7 — Mahu teks dipaparkan pada skrin video?',
+                reply_markup=prompt_text_presence_menu()
+            )
         else:
             logging.warning('Rejected stale prompt framing callback=%r stage=%r', action, stage)
             await query.message.reply_text(
