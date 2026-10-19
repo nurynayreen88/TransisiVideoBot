@@ -46,7 +46,7 @@ class GeminiHelperTests(unittest.TestCase):
 
     def test_normalizes_common_indonesian_words_for_malaysian_voiceover(self):
         result = normalize_malaysian_voiceover("Produk ini bagus banget, kalian bisa coba.")
-        self.assertEqual(result, "Produk ini bagus sangat, anda boleh coba.")
+        self.assertEqual(result, "Produk ini sangat bagus, anda boleh cuba.")
 
     def test_voiceover_is_limited_to_one_short_sentence(self):
         result = normalize_malaysian_voiceover(
