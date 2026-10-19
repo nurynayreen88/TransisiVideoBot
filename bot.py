@@ -472,6 +472,14 @@ def prompt_model_age_menu():
     ])
 
 
+def prompt_text_presence_menu():
+    return InlineKeyboardMarkup([
+        [InlineKeyboardButton('📝 Ada teks', callback_data='prompt_text:yes')],
+        [InlineKeyboardButton('🚫 Tiada teks', callback_data='prompt_text:no')],
+        [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
+    ])
+
+
 def prompt_audio_presence_menu():
     return InlineKeyboardMarkup([
         [InlineKeyboardButton('🔊 Ada suara', callback_data='prompt_audio:yes')],
@@ -515,7 +523,7 @@ def fit_prompt_to_one_telegram_message(prompt, limit=3800):
     suffix = (
         "\n\nREALISM / FINAL CHECK: Photoreal live-action look, natural texture and anatomy, "
         "physically plausible movement, true real-world product scale, grounded shadows, believable reflections, "
-        "consistent product identity, and no generated on-screen text or added branding."
+        "consistent product identity, and no added branding."
     )
     if marker in prompt:
         head, settings = prompt.split(marker, 1)
@@ -573,6 +581,12 @@ def prompt_creative_settings(user_data, include_audio=True):
     elif model_presence == 'no':
         lines.append('Show the product only; no human model.')
 
+    text_mode = user_data.get('prompt_on_screen_text', 'no')
+    if text_mode == 'yes':
+        lines.append('On-screen text: Add only a few short, legible promotional words for the hook and CTA. Keep spelling accurate and do not cover the product. No subtitles, logos, or watermarks.')
+    else:
+        lines.append('No on-screen text, captions, or subtitles. No added logos or watermarks.')
+
     if include_audio:
         voiceover_mode = user_data.get('prompt_voiceover_mode', 'none')
         language = user_data.get('prompt_language', 'Malay')
@@ -586,7 +600,7 @@ def prompt_creative_settings(user_data, include_audio=True):
                 'Use an off-screen promoter voice; any visible model remains silent. '
             )
             lines.append(
-                f'Speech: {delivery}Use clear {spoken_language}. Say a short product-specific hook, one visible detail or supported use, and a concise CTA. Keep background music below the speech. No on-screen text.'
+                f'Speech: {delivery}Use clear {spoken_language}. Say a short product-specific hook, one visible detail or supported use, and a concise CTA. Keep background music below the speech.'
             )
         elif voiceover_mode == 'script':
             script = ' '.join((user_data.get('prompt_voiceover_script') or '').split())
@@ -596,7 +610,7 @@ def prompt_creative_settings(user_data, include_audio=True):
                     if on_camera_speech else
                     'An off-screen promoter speaks this exact script while any visible model remains silent: '
                 )
-                lines.append(delivery + script + ' Do not add or change any words. Keep background music below the speech. No on-screen text.')
+                lines.append(delivery + script + ' Do not add or change any words. Keep background music below the speech.')
             else:
                 lines.append('Audio: Instrumental background music only; no dialogue or voiceover.')
         else:
@@ -1564,6 +1578,7 @@ def reset(context):
     context.user_data['prompt_voiceover_mode'] = 'none'
     context.user_data['prompt_voiceover_script'] = ''
     context.user_data['prompt_speech_source'] = 'voiceover'
+    context.user_data['prompt_on_screen_text'] = 'no'
     context.user_data['stage'] = 'home'
 
 
@@ -2237,8 +2252,14 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         selected = action.split(':', 1)[1]
         if selected in ('10', '20', '30'):
             context.user_data['prompt_duration'] = int(selected)
+            context.user_data['stage'] = 'prompt_text'
+            await query.message.reply_text('📝 LANGKAH 6 — Mahu teks dipaparkan pada skrin video?', reply_markup=prompt_text_presence_menu())
+    elif action.startswith('prompt_text:') and stage == 'prompt_text':
+        selected = action.split(':', 1)[1]
+        if selected in ('yes', 'no'):
+            context.user_data['prompt_on_screen_text'] = selected
             context.user_data['stage'] = 'prompt_audio'
-            await query.message.reply_text('🔊 LANGKAH 6 — Mahu video ini mempunyai suara?', reply_markup=prompt_audio_presence_menu())
+            await query.message.reply_text('🔊 LANGKAH 7 — Mahu video ini mempunyai suara?', reply_markup=prompt_audio_presence_menu())
     elif action.startswith('prompt_audio:') and stage == 'prompt_audio':
         selected = action.split(':', 1)[1]
         if selected == 'yes':
@@ -2364,7 +2385,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # Return only for actions handled by the first chain. Video workflow
     # callbacks must continue into the second chain.
     if action in ('admin_pending', 'admin', 'storyboard', 'make', 'prompt', 'prompt_categories', 'prompt_images_done') or action.startswith(
-        ('admin_approve:', 'admin_reject:', 'prompt_mode:', 'prompt_flow:', 'prompt_model:', 'prompt_model_count:', 'prompt_model_gender:', 'prompt_model_hijab:', 'prompt_model_ethnicity:', 'prompt_model_age:', 'prompt_audio:', 'prompt_language:', 'prompt_voiceover:', 'prompt_speaker:', 'prompt_type:', 'prompt_product_type:', 'prompt_duration:',
+        ('admin_approve:', 'admin_reject:', 'prompt_mode:', 'prompt_flow:', 'prompt_model:', 'prompt_model_count:', 'prompt_model_gender:', 'prompt_model_hijab:', 'prompt_model_ethnicity:', 'prompt_model_age:', 'prompt_audio:', 'prompt_text:', 'prompt_language:', 'prompt_voiceover:', 'prompt_speaker:', 'prompt_type:', 'prompt_product_type:', 'prompt_duration:',
          'prompt_style:', 'prompt_idea:', 'prompt_details:', 'video_input:', 'prompt_input:', 'pcat:', 'ptpl:')
     ):
         return
@@ -2436,9 +2457,9 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             elif voiceover_mode == 'ai':
                 speaker = context.user_data.get('prompt_speech_source', 'voiceover')
                 delivery = 'The on-camera AI model speaks with natural lip-sync. ' if speaker == 'model' and context.user_data.get('prompt_model_presence') == 'yes' else 'Use an off-screen promoter voice; any visible model remains silent. '
-                voiceover_instruction = delivery + 'Use a clear, natural ' + ('English' if language == 'English' else 'Malaysian Malay') + ' voice. Say a short product-specific hook, one reference-supported detail or use, then a concise CTA. Keep background music quieter than the voice. Add no on-screen text.'
+                voiceover_instruction = delivery + 'Use a clear, natural ' + ('English' if language == 'English' else 'Malaysian Malay') + ' voice. Say a short product-specific hook, one reference-supported detail or use, then a concise CTA. Keep background music quieter than the voice. .'
             else:
-                voiceover_instruction = 'Use instrumental background music only, with no dialogue or voiceover. Convey the hook through the opening action and the CTA through the final product shot, without on-screen text.'
+                voiceover_instruction = 'Use instrumental background music only, with no dialogue or voiceover. Convey the hook through the opening action and the CTA through the final product shot, .'
             model_instruction = prompt_creative_settings(context.user_data, include_audio=False)
             prompt_instruction = (
                 'You are a product-ad creative director. Analyze ALL attached reference images and create a storyboard that can be used directly as an AI video-generation prompt. '
@@ -2446,7 +2467,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 + ('Create ' + str(4 if duration <= 10 else (6 if duration <= 15 else 8)) + ' shots, each approximately ' + str(round(duration / (4 if duration <= 10 else (6 if duration <= 15 else 8)), 2)) + ' seconds long. ' + ('Ensure all four shots form a complete visual sequence.' if duration <= 10 else ('Shots 5–6 must continue visually from shots 1–4.' if duration <= 15 else 'Shots 5–8 must continue visually from shots 1–4.')))
                 + ' For each shot, specify the start and end time, specific action, framing, camera movement, model expression or movement if applicable, and transition/continuity. '
                 'Preserve the product identity and appearance exactly as shown. Do not invent colors, logos, patterns, features, materials, accessories, or unsupported claims. '
-                'Keep the selected model consistent and age-appropriate for the product category. Add no on-screen text, subtitles, extra logos, or watermarks. '
+                'Keep the selected model consistent and age-appropriate for the product category. '
                 'Make every action practical, clear, and distinct from the other shots. Start with a strong visual hook and finish with a product hero shot. '
                 + voiceover_instruction + ('\n\nSELECTED MODEL SETTINGS:\n' + model_instruction if model_instruction else '')
                 + '\n\nOutput format: a concise title, concept, then a numbered shot list. Do not generate the full video prompt yet.'
@@ -2693,7 +2714,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                         'Write the entire storyboard in English. Exact duration: ' + str(duration) + ' seconds. Vertical 9:16 format. '
                         + ('Create four consecutive shots in one storyboard sheet.' if duration <= 10 else 'Create eight consecutive shots across two storyboard sheets; shots 5–8 must continue seamlessly from shots 1–4.')
                         + ' For each shot, specify the start and end time, specific action, framing, camera movement, model expression or movement if applicable, and transition/continuity. '
-                        'Preserve the product identity exactly as shown in the images. Do not invent colors, logos, patterns, features, or materials that are not visible. Add no on-screen text, subtitles, extra logos, or watermarks. '
+                        'Preserve the product identity exactly as shown in the images. Do not invent colors, logos, patterns, features, or materials that are not visible. '
                         + voiceover_instruction + ('\n\nSELECTED MODEL SETTINGS:\n' + model_instruction if model_instruction else '')
                         + '\n\nOutput format: a concise title, concept, then a numbered shot list. Do not generate the full video prompt yet.'
                     )
