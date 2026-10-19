@@ -1918,15 +1918,15 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         reply_markup=home_keyboard()
     )
     await update.effective_message.reply_text(
-        '🎬 KLIPPO | Video Menarik, Semudah Klik\\n\\n'
-        'Tak perlu mahir AI atau suntingan video. Pilih satu fungsi di bawah:\\n\\n'
-        '⭐ BARU PERTAMA KALI? Mulakan dengan Jana Prompt.\\n'
-        '1️⃣ Jana Prompt — masukkan nama produk; Klippo sediakan arahan video untuk disalin ke penjana video AI. Gambar produk tidak diperlukan dalam bot.\\n'
-        '2️⃣ Gerakkan Foto (Transisi) — jadikan gambar pegun sebagai video MP4 dengan gerakan kamera 2D dan muzik; ini bukan penjanaan gerakan AI pada objek.\\n'
-        '3️⃣ Gabung Video — cantum beberapa klip menjadi satu video.\\n'
-        '4️⃣ Tukar Format Video — tukar video kepada format MP4 menegak untuk affiliate.\\n\\n'
-        '💎 Langganan — lihat pelan dan cara pembayaran.\\n'
-        '👤 Akaun Saya — semak status akaun dan langganan.\\n\\n'
+        '🎬 KLIPPO | Video Menarik, Semudah Klik\n\n'
+        'Tak perlu mahir AI atau suntingan video. Pilih satu fungsi di bawah:\n\n'
+        '⭐ BARU PERTAMA KALI? Mulakan dengan Jana Prompt.\n'
+        '1️⃣ Jana Prompt — masukkan nama produk; Klippo sediakan arahan video untuk disalin ke penjana video AI. Gambar produk tidak diperlukan dalam bot.\n'
+        '2️⃣ Gerakkan Foto (Transisi) — jadikan gambar pegun sebagai video MP4 dengan gerakan kamera 2D dan muzik; ini bukan penjanaan gerakan AI pada objek.\n'
+        '3️⃣ Gabung Video — cantum beberapa klip menjadi satu video.\n'
+        '4️⃣ Tukar Format Video — tukar video kepada format MP4 menegak untuk affiliate.\n\n'
+        '💎 Langganan — lihat pelan dan cara pembayaran.\n'
+        '👤 Akaun Saya — semak status akaun dan langganan.\n\n'
         '💡 Ikut arahan yang muncul selepas setiap pilihan. Jika tersalah pilih, tekan Menu Utama untuk mula semula:',
         reply_markup=main_menu(update.effective_user.id)
     )
@@ -2286,8 +2286,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if not context.user_data.get('busy'):
             reset(context)
         await query.message.reply_text(
-            '🏠 KLIPPO | Menu Utama\\n\\n'
-            'Pilih fungsi di bawah. Baru pertama kali? Mulakan dengan ✍️ Jana Prompt.\\n'
+            '🏠 KLIPPO | Menu Utama\n\n'
+            'Pilih fungsi di bawah. Baru pertama kali? Mulakan dengan ✍️ Jana Prompt.\n'
             'Ikut arahan satu demi satu; tekan Menu Utama jika mahu mula semula.',
             reply_markup=main_menu(update.effective_user.id)
         )
@@ -2309,7 +2309,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data.pop('fal_beta_image', None)
         context.user_data.pop('fal_beta_goal', None)
         await query.message.reply_text(
-            "🎬 KLIPPO | STORYBOARD AI\\n\\nHantar satu gambar produk. Selepas itu pilih tujuan dan hasil. "
+            "🎬 KLIPPO | STORYBOARD AI\n\nHantar satu gambar produk. Selepas itu pilih tujuan dan hasil. "
             "Penjanaan menggunakan API AI dan mungkin menggunakan kredit berbayar."
         )
         return
@@ -2484,12 +2484,12 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data['prompt_reference_photos'] = []
         context.user_data['stage'] = 'prompt_product_type'
         await query.message.reply_text(
-            '✍️ KLIPPO | JANA PROMPT VIDEO\\n\\n'
-            'Cara paling mudah:\\n'
-            '1. Pilih kategori dan subkategori produk.\\n'
-            '2. Taip nama produk sahaja — tidak perlu pautan Shopee atau muat naik gambar.\\n'
-            '3. Pilih durasi dan latar; Klippo akan mengurus aksi serta kamera secara automatik.\\n'
-            '4. Semak ringkasan, kemudian tekan Jana Prompt.\\n\\n'
+            '✍️ KLIPPO | JANA PROMPT VIDEO\n\n'
+            'Cara paling mudah:\n'
+            '1. Pilih kategori dan subkategori produk.\n'
+            '2. Taip nama produk sahaja — tidak perlu pautan Shopee atau muat naik gambar.\n'
+            '3. Pilih durasi dan latar; Klippo akan mengurus aksi serta kamera secara automatik.\n'
+            '4. Semak ringkasan, kemudian tekan Jana Prompt.\n\n'
             'Prompt ialah arahan teks, bukan video siap. Salin prompt yang terhasil ke platform video AI pilihan anda dan lampirkan gambar produk di sana. Jika tidak pasti, gunakan pilihan yang disyorkan.',
             reply_markup=prompt_product_type_menu()
         )
@@ -2507,7 +2507,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['prompt_mode'] = 'normal'
             context.user_data['prompt_reference_photos'] = []
             context.user_data['stage'] = 'prompt_product_type'
-            instruction = '🎥 JANA PROMPT VIDEO\\n\\nMuat naik gambar tidak diperlukan. Pilih kategori, subkategori dan nama produk; kemudian pilih latar, gaya dan durasi.'
+            instruction = '🎥 JANA PROMPT VIDEO\n\nMuat naik gambar tidak diperlukan. Pilih kategori, subkategori dan nama produk; kemudian pilih latar, gaya dan durasi.'
             await query.message.reply_text(instruction, reply_markup=prompt_product_type_menu())
     elif action.startswith('prompt_flow:'):
         # Compatibility for old Telegram keyboards: both legacy buttons now enter
@@ -2516,7 +2516,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data['prompt_reference_photos'] = []
         context.user_data['stage'] = 'prompt_product_type'
         await query.message.reply_text(
-            '✍️ JANA PROMPT VIDEO\\n\\nMuat naik gambar tidak diperlukan. Pilih kategori, subkategori dan nama produk untuk meneruskan.',
+            '✍️ JANA PROMPT VIDEO\n\nMuat naik gambar tidak diperlukan. Pilih kategori, subkategori dan nama produk untuk meneruskan.',
             reply_markup=prompt_product_type_menu()
         )
     elif action == 'prompt_images_done' and stage == 'prompt_images':
@@ -2947,8 +2947,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 'STRUKTUR IKLAN WAJIB: sediakan HOOK pada 0–2 saat yang khusus kepada produk dan menarik perhatian tanpa dakwaan rekaan; bahagian tengah yang menunjukkan produk, butiran yang benar-benar kelihatan dan/atau demonstrasi yang munasabah; serta CTA yang jelas pada babak akhir. CTA boleh mengajak penonton menyemak butiran produk atau melihat pilihan yang tersedia, tetapi jangan mereka harga, diskaun, stok, pautan atau jaminan. Hook dan CTA mesti dinyatakan secara khusus dalam storyboard. '
                 'Jika mod suara AI dipilih, masukkan ayat hook dalam babak pertama dan ayat CTA dalam babak terakhir. Gunakan Bahasa Melayu Malaysia yang semula jadi, jelas dan ringkas, serta pastikan dialog muat dalam tempoh babak. Jika pengguna memilih tanpa dialog, tandakan “Tanpa dialog” dan sampaikan hook/CTA melalui aksi visual, bukan teks pada skrin. Jangan ulang ayat klise yang sama untuk semua produk. '
                 'Rancang jalan cerita khusus mengikut kategori produk: hook visual pada awal, paparan penuh, butiran yang benar-benar kelihatan, konteks penggunaan yang munasabah jika sesuai, dan penutup yang menyokong CTA. Setiap babak mesti mempunyai satu aksi utama yang jelas dan berbeza. Pastikan model, tangan dan interaksi realistik; elakkan perubahan bentuk produk, objek terapung, gerakan mustahil dan potongan mengejut. '
-                + voiceover_instruction + '\\n\\nPILIHAN PENGGUNA:\\n' + model_instruction
-                + '\\n\\nFORMAT OUTPUT WAJIB: 1) Tajuk dan konsep. 2) HOOK: ayat pembukaan dan aksi visual. 3) STORYBOARD: babak bernombor dengan masa tepat, tujuan, visual/aksi, saiz dan sudut shot, gerakan kamera, pencahayaan/latar, suara latar atau “Tanpa dialog”, dan peralihan. 4) CTA: ayat penutup dan aksi visual. 5) SEMAKAN KUALITI: kesinambungan produk, fakta tidak direka, dialog muat dalam durasi, tiada teks/logo tambahan. Hasilkan storyboard teks sahaja; jangan hasilkan imej storyboard atau prompt video penuh dahulu.'
+                + voiceover_instruction + '\n\nPILIHAN PENGGUNA:\n' + model_instruction
+                + '\n\nFORMAT OUTPUT WAJIB: 1) Tajuk dan konsep. 2) HOOK: ayat pembukaan dan aksi visual. 3) STORYBOARD: babak bernombor dengan masa tepat, tujuan, visual/aksi, saiz dan sudut shot, gerakan kamera, pencahayaan/latar, suara latar atau “Tanpa dialog”, dan peralihan. 4) CTA: ayat penutup dan aksi visual. 5) SEMAKAN KUALITI: kesinambungan produk, fakta tidak direka, dialog muat dalam durasi, tiada teks/logo tambahan. Hasilkan storyboard teks sahaja; jangan hasilkan imej storyboard atau prompt video penuh dahulu.'
             )
             context.user_data['prompt_storyboard_fallback'] = prompt_instruction
             await progress_update(waiting, 35, 'Klippo sedang menjana storyboard secara automatik...')
@@ -2963,7 +2963,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             ])
             await progress_update(waiting, 85, 'Mengemas dan menghantar storyboard teks...')
             await query.message.reply_text(
-                '🎬 STORYBOARD TEKS SIAP\\n\\n'
+                '🎬 STORYBOARD TEKS SIAP\n\n'
                 'Storyboard ini mengandungi urutan babak, masa, arahan visual, gerakan kamera, kesinambungan produk dan cadangan suara latar. '
                 'Tiada imej storyboard dijana; gunakan gambar produk asal apabila menghantar prompt ke platform video AI.',
                 reply_markup=storyboard_actions
@@ -3045,16 +3045,16 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             ])
             if context.user_data.get('prompt_mode') == 'storyboard':
                 video_intro = (
-                    '🎬 PROMPT VIDEO — LANGKAH PILIHAN\\n\\n'
-                    'Storyboard telah dijana dahulu. Muat naik gambar produk asal yang sama sebagai rujukan, kemudian salin prompt video di bawah.\\n'
+                    '🎬 PROMPT VIDEO — LANGKAH PILIHAN\n\n'
+                    'Storyboard telah dijana dahulu. Muat naik gambar produk asal yang sama sebagai rujukan, kemudian salin prompt video di bawah.\n'
                     'Untuk klip bersambung, jana setiap bahagian mengikut turutan dan gunakan bingkai akhir bahagian sebelumnya sebagai rujukan bahagian seterusnya.'
                 )
             else:
                 video_intro = (
-                    '🎬 LANGKAH 2 — PROMPT VIDEO\\n\\n'
-                    '1. Muat naik imej yang dijana dalam Langkah 1 ke platform AI pilihan.\\n'
-                    '2. Salin prompt video di bawah dan tampal pada platform tersebut.\\n'
-                    '3. Jika prompt dibahagikan kepada beberapa klip, jana mengikut turutan dan gunakan bingkai akhir klip sebelumnya sebagai rujukan klip seterusnya.\\n\\n'
+                    '🎬 LANGKAH 2 — PROMPT VIDEO\n\n'
+                    '1. Muat naik imej yang dijana dalam Langkah 1 ke platform AI pilihan.\n'
+                    '2. Salin prompt video di bawah dan tampal pada platform tersebut.\n'
+                    '3. Jika prompt dibahagikan kepada beberapa klip, jana mengikut turutan dan gunakan bingkai akhir klip sebelumnya sebagai rujukan klip seterusnya.\n\n'
                     'PENTING: Gunakan imej baharu yang dijana daripada PROMPT IMAGE sebagai MASTER reference.'
                 )
             await query.message.reply_text(video_intro)
@@ -3089,7 +3089,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             )
             return
         waiting = await query.message.reply_text(
-            '⏳ GEMINI IMAGE — 0%\\nMenjana satu imej rujukan berdasarkan foto produk asal. Caj API mungkin dikenakan.'
+            '⏳ GEMINI IMAGE — 0%\nMenjana satu imej rujukan berdasarkan foto produk asal. Caj API mungkin dikenakan.'
         )
         try:
             telegram_file = await context.bot.get_file(image_ids[0])
@@ -3104,7 +3104,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             image_file.name = 'KLIPPO_GEMINI_PRODUCT_REFERENCE.png'
             await query.message.reply_photo(
                 photo=image_file,
-                caption='🖼️ IMEJ RUJUKAN PRODUK SIAP\\nGunakan imej ini bersama prompt video. Semak dahulu bahawa warna, bentuk, corak dan logo produk kekal tepat seperti foto asal.'
+                caption='🖼️ IMEJ RUJUKAN PRODUK SIAP\nGunakan imej ini bersama prompt video. Semak dahulu bahawa warna, bentuk, corak dan logo produk kekal tepat seperti foto asal.'
             )
             await progress_update(waiting, 100, 'Imej rujukan siap.')
         except GeminiProductImageError as exc:
@@ -3297,23 +3297,23 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     'clean premium studio background, selected to complement the exact product reference'
                 )
                 image_prompt = (
-                    'PROMPT IMAGE — PREMIUM PRODUCT CAMPAIGN\\n\\n'
+                    'PROMPT IMAGE — PREMIUM PRODUCT CAMPAIGN\n\n'
                     'Use the uploaded product photograph as the sole MASTER product reference. '
                     'Create one ultra-realistic premium commercial product photograph in vertical 9:16. '
-                    'The product is: ' + product_name + '. Category: ' + category_label + '.\\n\\n'
+                    'The product is: ' + product_name + '. Category: ' + category_label + '.\n\n'
                     'BACKGROUND REPLACEMENT — MANDATORY: Completely remove/replace the original background in the uploaded photo. '
                     'Use this exact user-selected scene as the new background: ' + selected_background + '. '
                     'Do not preserve or recreate the original photo background. Do not place the unchanged source photo on top of a new background. '
-                    'Integrate the product naturally into the selected scene with matching perspective, light direction, colour temperature and contact shadows.\\n\\n'
+                    'Integrate the product naturally into the selected scene with matching perspective, light direction, colour temperature and contact shadows.\n\n'
                     'VISUAL DIRECTION: Create a believable, elegant lifestyle advertising scene suited to this product. '
                     'If a model was selected, include the same adult model naturally in a way suited to this product; for clothing, the model must wear the exact item. If no model was selected, do not add a person. '
                     'If it is a bag, accessory, beauty item, gadget, food or home product, compose a premium scene that showcases the actual item clearly. '
                     'Use soft natural or studio light, realistic shadows, refined composition, authentic textures, and a photographic—not CGI—finish. '
-                    'Keep the product prominent and leave enough clear space around it.\\n\\n'
+                    'Keep the product prominent and leave enough clear space around it.\n\n'
                     'PRODUCT LOCK: Preserve the exact product identity from the uploaded photo, including its visible shape, colour, print, pattern, cut, packaging, proportions, hardware and details. '
                     'Do not redesign, recolour, replace, add or remove product features. Do not invent logos, labels, accessories, materials or claims. '
                     'For clothing, keep the garment print, neckline, sleeves, fit and fabric appearance faithful to the reference. '
-                    'A model or environment may be added only to present the same product; do not let styling obscure it.\\n\\n'
+                    'A model or environment may be added only to present the same product; do not let styling obscure it.\n\n'
                     'OUTPUT: One cohesive, photorealistic vertical 9:16 image, premium editorial quality. '
                     'No collage, split screen, poster layout, captions, promotional text, watermark or extra logos. '
                     'Avoid distorted hands, unnatural faces, plastic skin, warped product geometry and artificial CGI appearance.'
@@ -3344,11 +3344,11 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 ])
                 image_actions = InlineKeyboardMarkup(image_action_rows)
                 await query.message.reply_text(
-                    '🖼️ LANGKAH 1 — PROMPT IMAGE\\n\\n'
-                    '1. Salin prompt di bawah.\\n'
-                    '2. Buka salah satu laman AI melalui butang.\\n'
-                    '3. Muat naik gambar produk asal dan tampal PROMPT IMAGE.\\n'
-                    '4. Jana imej, kemudian simpan imej yang terhasil.\\n\\n'
+                    '🖼️ LANGKAH 1 — PROMPT IMAGE\n\n'
+                    '1. Salin prompt di bawah.\n'
+                    '2. Buka salah satu laman AI melalui butang.\n'
+                    '3. Muat naik gambar produk asal dan tampal PROMPT IMAGE.\n'
+                    '4. Jana imej, kemudian simpan imej yang terhasil.\n\n'
                     'Selepas imej siap, tekan “Jana Prompt Video” untuk mendapatkan prompt video yang menggunakan imej baharu itu sebagai rujukan.',
                     reply_markup=image_actions
                 )
@@ -3560,7 +3560,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             'Taip /menu untuk batal dan kembali ke menu utama.'
         )
     elif action == 'help':
-        await query.message.reply_text('❓ FAQ KLIPPO\\n\\nTekan persoalan untuk melihat jawapan dan gambar contoh:', reply_markup=faq_menu())
+        await query.message.reply_text('❓ FAQ KLIPPO\n\nTekan persoalan untuk melihat jawapan dan gambar contoh:', reply_markup=faq_menu())
     elif action.startswith('faq:'):
         try:
             index = int(action.split(':', 1)[1])
@@ -3574,7 +3574,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         ])
         picture = faq_example(index)
         try:
-            await query.message.reply_photo(photo=picture, caption=f'❓ {title}\\n\\n{answer}', reply_markup=keyboard)
+            await query.message.reply_photo(photo=picture, caption=f'❓ {title}\n\n{answer}', reply_markup=keyboard)
         finally:
             picture.close()
     elif action == 'check':
@@ -3728,7 +3728,7 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['prompt_reference_photos'] = []
             context.user_data['stage'] = 'prompt_product_type'
             await update.message.reply_text(
-                '✍️ KLIPPO | JANA PROMPT VIDEO\\n\\nMuat naik gambar tidak diperlukan dalam proses jana prompt. Pilih kategori, subkategori dan nama produk; kemudian pilih latar, gaya dan durasi. Gambar produk asal boleh dimuat naik terus ke platform video AI pilihan anda selepas prompt siap.',
+                '✍️ KLIPPO | JANA PROMPT VIDEO\n\nMuat naik gambar tidak diperlukan dalam proses jana prompt. Pilih kategori, subkategori dan nama produk; kemudian pilih latar, gaya dan durasi. Gambar produk asal boleh dimuat naik terus ke platform video AI pilihan anda selepas prompt siap.',
                 reply_markup=prompt_product_type_menu()
             )
         elif action == 'subscription':
