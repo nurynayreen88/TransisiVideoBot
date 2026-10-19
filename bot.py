@@ -2490,7 +2490,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             ]))
         else:
             context.user_data['stage'] = 'prompt_video_ready'
-            sections = [part.strip() for part in re.split(r'=== KLIPPO PART \\d+/\\d+ ===', prompt) if part.strip()] if context.user_data.get('prompt_duration') in (20, 30) else [prompt]
+            sections = [part.strip() for part in re.split(r'=== KLIPPO PART \d+/\d+ ===', prompt) if part.strip()] if context.user_data.get('prompt_duration') in (20, 30) else [prompt]
             video_actions = InlineKeyboardMarkup([
                 [InlineKeyboardButton('🤖 NexaBot', url='https://t.me/aigeneratornexa_bot?start=ref37141287'),
                  InlineKeyboardButton('🌐 AxcelStudio', url='https://axcel.cloud/a/3839266034')],
@@ -2509,7 +2509,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     '🎬 LANGKAH 2 — PROMPT VIDEO\n\n'
                     '1. Muat naik imej yang dijana dalam Langkah 1 ke platform AI pilihan.\n'
                     '2. Salin prompt video di bawah dan tampal pada platform tersebut.\n'
-                    '3. Untuk 20 saat, jana Bahagian 1 dahulu. Gunakan bingkai akhir Bahagian 1 sebagai rujukan Bahagian 2.\n\n'
+                    '3. Untuk video berbilang segmen, jana Bahagian 1 dahulu. Gunakan bingkai akhir setiap bahagian sebagai rujukan bagi bahagian seterusnya.\n\n'
                     'PENTING: Gunakan imej baharu yang dijana daripada PROMPT IMAGE sebagai MASTER reference.'
                 )
             await query.message.reply_text(video_intro)
@@ -2659,7 +2659,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     return
                 if mode_name == 'normal':
                     context.user_data['stage'] = 'prompt_video_ready'
-                    sections = [part.strip() for part in re.split(r'=== KLIPPO PART \\d+/\\d+ ===', prompt) if part.strip()] if context.user_data.get('prompt_duration') in (20, 30) else [prompt]
+                    sections = [part.strip() for part in re.split(r'=== KLIPPO PART \d+/\d+ ===', prompt) if part.strip()] if context.user_data.get('prompt_duration') in (20, 30) else [prompt]
                     direct_actions = InlineKeyboardMarkup([
                         [InlineKeyboardButton('🤖 NexaBot', url='https://t.me/aigeneratornexa_bot?start=ref37141287'),
                          InlineKeyboardButton('🌐 AxcelStudio', url='https://axcel.cloud/a/3839266034')],
