@@ -307,8 +307,8 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
                 "DIRECTOR'S CURATED PREMIUM STORYBOARD: Use this selected GitHub library storyboard as the primary shot plan. "
                 + (("CONTINUATION SEGMENT " + str(part) + "/" + str(total_parts) + ": Use a fresh, product-specific continuation hook and a distinct action not used in earlier clips; do not repeat earlier CTA wording. Preserve the exact previous final frame at 0–2s. ") if part > 1 else "")
                 + "Use the four selected beats in five connected 2-second panels. Keep product identity, model and setting consistent. "
-                + "\\n\\n".join(
-                    str(item.get("time", "")) + " | " + str(item.get("shot", "")) + "\\n"
+                + "\n\n".join(
+                    str(item.get("time", "")) + " | " + str(item.get("shot", "")) + "\n"
                     + str(item.get("direction", ""))
                     for item in curated_shots
                 )
@@ -319,7 +319,8 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
         )
         return (
             "PROMPT VIDEO — 10 SAAT\n"
-            + "Vertical 9:16, " + str(duration) + " seconds. " + style_name + ".\n"
+            + "Vertical 9:16, " + str(duration) + " seconds. " + style_name + ".\\n"
+            + "Style direction: " + " ".join(str(style_template).split())[:220].rstrip() + ".\\n"
             + "Product: " + product + ". " + category_direction + (" " + model_age_direction if model_age_direction else "") + "\n"
             + "Setting: " + scene + ". Camera: " + camera + "\n"
             + "PRODUCT LOCK: Preserve the reference product's visible design, colour, pattern, branding and proportions. Do not invent features or accessories.\n"
