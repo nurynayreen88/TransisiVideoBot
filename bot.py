@@ -2344,15 +2344,15 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             if not images:
                 raise RuntimeError('Gambar rujukan tidak dapat dimuat turun daripada Telegram.')
             language = context.user_data.get('prompt_language', 'Malay')
-            language_label = {'Malay': 'Bahasa Melayu', 'English': 'English', 'none': 'Bahasa Melayu untuk penerangan; jangan cadangkan teks pada skrin'}.get(language, 'Bahasa Melayu')
+            language_label = {'Malay': 'Bahasa Melayu Malaysia', 'English': 'English', 'none': 'Bahasa Melayu Malaysia'}.get(language, 'Bahasa Melayu')
             voiceover_mode = context.user_data.get('prompt_voiceover_mode', 'none')
             voiceover = context.user_data.get('prompt_voiceover_script', '').strip()
             if voiceover_mode == 'script' and voiceover:
                 voiceover_instruction = 'Gunakan skrip dialog/voiceover pengguna ini tepat tanpa mengubahnya: ' + voiceover
             elif voiceover_mode == 'ai':
-                voiceover_instruction = 'Cadangkan dialog/voiceover ringkas dan semula jadi dalam ' + language_label + ' hanya jika sesuai; muzik latar tidak boleh menenggelamkan suara.'
+                voiceover_instruction = 'Gunakan voiceover yang natural dalam ' + language_label + '. Jika Bahasa Melayu, wajib sebutan, intonasi dan kosa kata Malaysia; jangan gunakan slang atau sebutan Indonesia. Bina hook lisan ringkas pada 0–2 saat, satu demonstrasi atau manfaat yang benar-benar disokong gambar, kemudian CTA lisan ringkas. Jangan ulang hook antara klip. Pilih gaya suara yang sesuai (comel, ceria, mesra, kelakar, tenang, serius, yakin atau persuasif), sebutan jelas dan ayat cukup pendek untuk durasi. Muzik latar mesti lebih perlahan daripada suara. Jangan jana sebarang teks pada skrin.'
             else:
-                voiceover_instruction = 'Dialog tidak wajib. Utamakan penceritaan visual; nyatakan “Tanpa dialog” jika dialog tidak diperlukan.'
+                voiceover_instruction = 'Tiada dialog atau voiceover. Gunakan penceritaan visual sahaja; jangan jana teks pada skrin, kapsyen, logo tambahan atau watermark.'
             model_instruction = prompt_creative_settings(context.user_data)
             prompt_instruction = (
                 'Anda ialah pengarah kreatif iklan produk. Analisis SEMUA gambar rujukan yang dilampirkan dan hasilkan storyboard video produk yang boleh terus digunakan sebagai arahan penjana video AI. '
@@ -2585,15 +2585,15 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     if not images:
                         raise RuntimeError('Gambar rujukan tidak dapat dimuat turun daripada Telegram.')
                     language = context.user_data.get('prompt_language', 'Malay')
-                    language_label = {'Malay': 'Bahasa Melayu', 'English': 'English', 'none': 'Bahasa Melayu untuk penerangan; jangan cadangkan teks pada skrin'}.get(language, 'Bahasa Melayu')
+                    language_label = {'Malay': 'Bahasa Melayu Malaysia', 'English': 'English', 'none': 'Bahasa Melayu Malaysia'}.get(language, 'Bahasa Melayu')
                     voiceover_mode = context.user_data.get('prompt_voiceover_mode', 'none')
                     voiceover = context.user_data.get('prompt_voiceover_script', '').strip()
                     if voiceover_mode == 'script' and voiceover:
                         voiceover_instruction = 'Gunakan skrip dialog/voiceover pengguna ini tepat tanpa mengubahnya: ' + voiceover
                     elif voiceover_mode == 'ai':
-                        voiceover_instruction = 'Cadangkan dialog/voiceover ringkas dan semula jadi dalam ' + language_label + ' hanya jika sesuai; muzik latar tidak boleh menenggelamkan suara.'
+                        voiceover_instruction = 'Gunakan voiceover yang natural dalam ' + language_label + '. Jika Bahasa Melayu, wajib sebutan, intonasi dan kosa kata Malaysia; jangan gunakan slang atau sebutan Indonesia. Bina hook lisan ringkas pada 0–2 saat, satu demonstrasi atau manfaat yang benar-benar disokong gambar, kemudian CTA lisan ringkas. Jangan ulang hook antara klip. Pilih gaya suara yang sesuai (comel, ceria, mesra, kelakar, tenang, serius, yakin atau persuasif), sebutan jelas dan ayat cukup pendek untuk durasi. Muzik latar mesti lebih perlahan daripada suara. Jangan jana sebarang teks pada skrin.'
                     else:
-                        voiceover_instruction = 'Dialog tidak wajib. Utamakan penceritaan visual; nyatakan “Tanpa dialog” jika dialog tidak diperlukan.'
+                        voiceover_instruction = 'Tiada dialog atau voiceover. Gunakan penceritaan visual sahaja; jangan jana teks pada skrin, kapsyen, logo tambahan atau watermark.'
                     model_instruction = prompt_creative_settings(context.user_data)
                     prompt_instruction = (
                         'Anda ialah pengarah kreatif iklan produk. Analisis gambar rujukan yang dilampirkan dan hasilkan storyboard video produk yang boleh terus digunakan sebagai arahan penjana video AI. '
