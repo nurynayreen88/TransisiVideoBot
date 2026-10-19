@@ -577,6 +577,7 @@ def prompt_duration_menu():
     return InlineKeyboardMarkup([
         [InlineKeyboardButton('🎬 10 Saat', callback_data='prompt_duration:10'),
          InlineKeyboardButton('🎞️ 20 Saat', callback_data='prompt_duration:20')],
+        [InlineKeyboardButton('🎞️ 30 Saat', callback_data='prompt_duration:30')],
         [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
     ])
 
@@ -2007,6 +2008,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await query.message.reply_text('⏱️ Pilih durasi prompt video:', reply_markup=InlineKeyboardMarkup([
                 [InlineKeyboardButton('🎬 10 Saat', callback_data='prompt_duration:10'),
                  InlineKeyboardButton('🎞️ 20 Saat', callback_data='prompt_duration:20')],
+                [InlineKeyboardButton('🎞️ 30 Saat', callback_data='prompt_duration:30')],
                 [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]
             ]))
     elif action == 'prompt_categories':
@@ -2191,7 +2193,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await query.message.reply_text('🎨 LANGKAH 4 — Pilih gaya video:', reply_markup=prompt_style_menu(context.user_data.get('prompt_product_type', 'other')))
     elif action.startswith('prompt_duration:') and stage == 'prompt_duration':
         selected = action.split(':', 1)[1]
-        if selected in ('10', '20'):
+        if selected in ('10', '20', '30'):
             context.user_data['prompt_duration'] = int(selected)
             context.user_data['stage'] = 'prompt_language'
             await query.message.reply_text('🌐 LANGKAH 6 — Pilih bahasa voiceover. Video kekal tanpa teks pada skrin:', reply_markup=prompt_language_menu())
@@ -2488,7 +2490,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             ]))
         else:
             context.user_data['stage'] = 'prompt_video_ready'
-            sections = prompt.split('=== KLIPPO PART 2 ===') if context.user_data.get('prompt_duration') == 20 else [prompt]
+            sections = [part.strip() for part in re.split(r'=== KLIPPO PART \\d+/\\d+ ===', prompt) if part.strip()] if context.user_data.get('prompt_duration') in (20, 30) else [prompt]
             video_actions = InlineKeyboardMarkup([
                 [InlineKeyboardButton('🤖 NexaBot', url='https://t.me/aigeneratornexa_bot?start=ref37141287'),
                  InlineKeyboardButton('🌐 AxcelStudio', url='https://axcel.cloud/a/3839266034')],
@@ -2500,7 +2502,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 video_intro = (
                     '🎬 PROMPT VIDEO — LANGKAH PILIHAN\n\n'
                     'Storyboard telah dijana dahulu. Muat naik gambar produk asal yang sama sebagai rujukan, kemudian salin prompt video di bawah.\n'
-                    'Untuk 20 saat, jana Bahagian 1 dahulu dan gunakan bingkai akhir Bahagian 1 sebagai rujukan Bahagian 2.'
+                    'Untuk video berbilang segmen, jana Bahagian 1 dahulu dan gunakan bingkai akhir setiap bahagian sebagai rujukan bagi bahagian seterusnya.'
                 )
             else:
                 video_intro = (
@@ -2513,9 +2515,9 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await query.message.reply_text(video_intro)
             for index, section in enumerate(sections, 1):
                 section = section.strip()
-                caption = ('BAHAGIAN ' + str(index) + '/2 — jana klip 10 saat secara berasingan. ' +
-                           ('Simpan bingkai akhir untuk sambungan Bahagian 2.' if index == 1 else
-                            'Gunakan bingkai akhir Bahagian 1 sebagai rujukan kesinambungan.')) if len(sections) == 2 else ''
+                caption = ('BAHAGIAN ' + str(index) + '/' + str(len(sections)) + ' — jana klip 10 saat secara berasingan. ' +
+                           ('Simpan bingkai akhir untuk sambungan Bahagian ' + str(index + 1) + '.' if index < len(sections) else
+                            'Gunakan bingkai akhir bahagian sebelumnya untuk mengekalkan kesinambungan.')) if len(sections) > 1 else ''
                 # Always send prompts as Telegram text, never as .txt attachments.
                 remaining = section
                 chunks = []
@@ -2657,7 +2659,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     return
                 if mode_name == 'normal':
                     context.user_data['stage'] = 'prompt_video_ready'
-                    sections = prompt.split('=== KLIPPO PART 2 ===') if context.user_data.get('prompt_duration') == 20 else [prompt]
+                    sections = [part.strip() for part in re.split(r'=== KLIPPO PART \\d+/\\d+ ===', prompt) if part.strip()] if context.user_data.get('prompt_duration') in (20, 30) else [prompt]
                     direct_actions = InlineKeyboardMarkup([
                         [InlineKeyboardButton('🤖 NexaBot', url='https://t.me/aigeneratornexa_bot?start=ref37141287'),
                          InlineKeyboardButton('🌐 AxcelStudio', url='https://axcel.cloud/a/3839266034')],
@@ -2668,13 +2670,13 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     await query.message.reply_text(
                         '🎥 PROMPT VIDEO TERUS\n\n'
                         'Muat naik gambar produk asal yang sama ke platform AI pilihan, kemudian salin prompt di bawah. '
-                        'Klippo tidak menghantar gambar ke laman luar secara automatik. Untuk video 20 saat, jana Bahagian 1 dahulu dan gunakan bingkai akhirnya sebagai rujukan Bahagian 2.'
+                        'Klippo tidak menghantar gambar ke laman luar secara automatik. Untuk video berbilang segmen, jana Bahagian 1 dahulu dan gunakan bingkai akhir setiap bahagian sebagai rujukan bagi bahagian seterusnya.'
                     )
                     for index, section in enumerate(sections, 1):
                         section = section.strip()
-                        caption = ('BAHAGIAN ' + str(index) + '/2 — jana klip 10 saat secara berasingan. ' +
-                                   ('Simpan bingkai akhir untuk sambungan Bahagian 2.' if index == 1 else
-                                    'Gunakan bingkai akhir Bahagian 1 sebagai rujukan kesinambungan.')) if len(sections) == 2 else ''
+                        caption = ('BAHAGIAN ' + str(index) + '/' + str(len(sections)) + ' — jana klip 10 saat secara berasingan. ' +
+                                   ('Simpan bingkai akhir untuk sambungan Bahagian ' + str(index + 1) + '.' if index < len(sections) else
+                                    'Gunakan bingkai akhir bahagian sebelumnya untuk mengekalkan kesinambungan.')) if len(sections) > 1 else ''
                         # Always send prompts as Telegram text, never as .txt attachments.
                         remaining = section
                         chunks = []
