@@ -354,8 +354,12 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
         # Keep every segment under Telegram's one-message limit while retaining selected storyboard beats.
         selected_beats = [" ".join(str(x).split())[:420].rstrip() for x in selected_beats[:4]]
         if part > 1:
-            selected_beats[0] = "Sambung tepat daripada bingkai akhir klip sebelumnya, dengan produk, latar, cahaya dan kedudukan yang sama. " + selected_beats[0]
-            selected_beats[-1] = selected_beats[-1].rstrip(".") + ". Tamatkan dengan bingkai produk penuh yang stabil untuk sambungan seterusnya."
+            selected_beats = [
+                "Sambung tepat daripada bingkai akhir klip sebelumnya. Kekalkan produk, model, pakaian, latar dan cahaya yang sama sambil meneruskan gerakan secara semula jadi.",
+                "Tunjukkan aksi susulan yang berbeza dan sesuai dengan gaya serta idea pilihan pengguna. Jangan ulang pembukaan klip terdahulu.",
+                "Serlahkan butiran lain yang benar-benar kelihatan pada produk, atau gunakan sudut pandangan yang selamat tanpa mereka ciri baharu.",
+                "Akhiri dengan paparan penuh produk dan CTA melalui voiceover terpilih atau aksi visual. Pegang bingkai akhir jika ada klip seterusnya."
+            ]
         elif part == 1 and total_parts > 1:
             selected_beats[-1] = selected_beats[-1].rstrip(".") + ". Pegang bingkai akhir tanpa fade supaya klip seterusnya boleh bersambung."
         elif total_parts == 1:
