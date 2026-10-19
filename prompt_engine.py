@@ -285,23 +285,17 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
             concept_rule = ("CREATIVE IDEA: " + concept.strip() + ". " if concept and concept.strip() else "")
             return (
                 "PROMPT VIDEO — " + str(duration) + " SAAT" + (" | BAHAGIAN " + str(part) if part else "") + "\n"
-                "Vertical 9:16, one realistic product ad, target 1080x1920, highest available native quality, crisp visible product detail, natural colour and exposure, low noise, stable frame-to-frame geometry, composed for Shopee/TikTok full-screen mobile viewing with the product inside the safe area, exactly " + str(duration) + " seconds.\n"
-                "PRODUCT: " + product + "\n"
-                + category_direction + "\n"
-                + "STYLE: " + style_name + " — " + style_template[:190].strip() + "\n"
-                + "SETTING: " + scene[:300] + ". CAMERA: " + camera + "\n"
-                + hook_rule + beat_plan + concept_rule[:400] + doodle_rule
-                + "REFERENCE LOCK: Use the uploaded photo as the source of truth. Preserve visible shape, colour, print, packaging, proportions and branding. "
-                "Do not invent features, materials, accessories, unseen angles, claims or text. "
-                "Use natural light and shadows, believable physics, stable product geometry and smooth restrained motion; avoid morphing, flicker, CGI/plastic skin and abrupt scene changes."
+                "9:16 menegak, iklan produk realistik, tepat " + str(duration) + " saat.\n"
+                "PRODUK: " + product + "\n" + category_direction + "\n"
+                + "GAYA: " + style_name + " — " + style_template[:90].strip() + "\n"
+                + "LATAR: " + scene[:140].strip() + "\nKAMERA: " + camera[:80].strip() + "\n"
+                + hook_rule + beat_plan + concept_rule[:120] + doodle_rule
+                + "Kekalkan rupa, warna, corak, pembungkusan dan logo asal. Jangan reka ciri atau aksesori. "
+                "Gerakan semula jadi. Tiada teks, sari kata atau watermark."
             )
 
         evidence_rules = (
-            "REFERENCE IMAGE RULE: The video generator will receive the user's original product photo(s) as visual evidence. "
-            "Inspect only details genuinely visible in those reference photo(s), and preserve the product name and spelling supplied by the user. "
-            "Use the name and optional user text as supporting context, not as permission to invent features. "
-            "Do not invent unseen sides, materials, dimensions, compartments, accessories, product benefits, model numbers or specifications. "
-            "If a detail is not visible or confirmed, keep it neutral and omit the claim."
+            "Use the supplied product photo as truth. Preserve visible details and spelling; never invent features, materials, accessories or claims."
         )
 
         hook_direction = (
@@ -340,15 +334,11 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
             )
         elif part > 1:
             rules = (
-                "SECOND CLIP 10s, five 2-second panels: 0-2s continue the exact full-product frame held at the end of Part 1; "
-                "2-4s emphasize a second genuinely visible detail without inventing an angle; 4-6s continue the same concept; "
-                "6-8s elegant style-specific visual emphasis; 8-10s full-product hero closing and fade. Do NOT repeat the opening hook."
+                "Part 2: resume from Part 1's exact frame, show another visible detail, continue the same concept and end on a clear hero shot. No repeated hook."
             )
         else:
             rules = (
-                "FIRST CLIP 10s, five 2-second panels: 0-2s clean visual product reveal with no on-screen text; "
-                "2-4s full-product reveal; 4-6s one genuinely visible detail; 6-8s continue the product story; "
-                "8-10s settle into a stable full-product frame and HOLD for a seamless Part 2 handoff. No closing fade in Part 1."
+                "Part 1: reveal the product, highlight one visible detail and hold a clear full-product frame to connect with Part 2."
             )
         if part == 0 and duration > 10:
             rules = (
@@ -401,11 +391,11 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
         if part == 0 and duration in (10, 20):
             scene_length = duration / 5
             generic_scenes = [
-                ("OPENING / PRODUCT REVEAL", "Establish the exact product clearly in a coherent setting; no on-screen text."),
-                ("FULL PRODUCT VIEW", "Show the complete product, preserving shape, colour, print, proportions, packaging and visible branding."),
-                ("VISIBLE DETAIL", "Move gently toward a genuinely visible detail; do not invent unseen surfaces, textures or features."),
-                ("NATURAL PRODUCT ACTION", "Show one simple, purposeful action that fits this exact product and location. If a person is present, use relaxed, anatomically plausible movement and natural weight transfer; choose a short walk or practical interaction where appropriate. Never make the model stand rigidly while repeatedly spinning, twirling or rotating the product. Avoid robotic posing, exaggerated gestures and impossible hand movements."),
-                ("FINAL HERO HOLD", "Return to a clean, stable full-product composition. No invented slogan, price, claim or watermark."),
+                ("REVEAL", "Show the product clearly; no text."),
+                ("FULL VIEW", "Show the whole product; preserve design and colour."),
+                ("DETAIL", "Highlight one visible detail; invent nothing."),
+                ("ACTION", "One natural product-appropriate action; avoid robotic or exaggerated movement."),
+                ("FINISH", "End on a steady full-product shot; no claims or watermark."),
             ]
             if storyboard_override and isinstance(storyboard_override, (list, tuple)) and len(storyboard_override) == 4:
                 curated_items = list(storyboard_override)
@@ -434,25 +424,16 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
             else:
                 rules = storyboard_text
         return (
-            "PROMPT VIDEO — " + str(duration) + " SAAT\n"
-            "KLIPPO | UNIVERSAL PRODUCT VIDEO PROMPT | " + style_name + (" | BAHAGIAN " + str(part) if part else "") + "\n"
-            "OUTPUT: One cohesive vertical 9:16 product advertisement, target resolution 1080x1920, highest available native quality, crisp product detail, natural colour and exposure, low noise, stable frame-to-frame geometry, composed for Shopee/TikTok full-screen mobile viewing with the product inside the safe area, EXACT DURATION: " + str(duration) + " seconds.\n\n"
-            "PRODUCT NAME: " + product + "\n" + category_direction + "\n\n" + identity + "\n\n"
-            "STYLE: " + style_name + " — " + style_template[:240].strip() + "\n\n"
-            "SETTING: " + scene + "\n"
-            "CAMERA: " + camera + " Keep framing plausible for the named product; avoid unsupported angles or features.\n\n"
-            + evidence_rules + "\n\n" + (
-                curated_direction if curated_direction else
-                (hook_direction if part != 2 else "NO REPEATED OPENING HOOK in Part 2.") + "\n\n" + rules
-            ) + "\n\n"
-            + (("OPTIONAL CREATIVE CONCEPT: " + concept + ". Use it only to guide a suitable, physically plausible action or story beat; "
-                 "do not treat it as proof of product features, benefits, included accessories or unseen details. "
-                 "If the idea requires an unprovided feature, ignore that part.\n\n") if concept else "")
-            +  "CONTINUITY: Keep a consistent, plausible presentation of the named product throughout the video. "
-            "Use soft physically believable lighting and stable background. "
-            "Do not morph the object, invent accessories or cover its visible branding. "
-            "For white doodle, the graphic overlays are explicitly REQUIRED and are not captions or UI. "
-            "If the video generator cannot render precise overlays, generate clean product footage and add doodles in post-production."
+            "PROMPT VIDEO — " + str(duration) + " SAAT" + (" | BAHAGIAN " + str(part) if part else "") + "\n"
+            "Iklan produk realistik, menegak 9:16, tepat " + str(duration) + " saat.\n"
+            "PRODUK: " + product + "\n" + category_direction + "\n"
+            + "GAYA: " + style_name + " — " + style_template[:90].strip() + "\n"
+            + "LATAR: " + scene[:140].strip() + "\nKAMERA: " + camera[:80].strip() + "\n"
+            + (curated_direction if curated_direction else
+               ((hook_direction if part != 2 else "Sambung klip pertama; jangan ulang hook.") + "\n" + rules))
+            + (("\nIDEA: " + concept[:100].strip()) if concept else "")
+            + "\nKekalkan rupa, warna, corak, pembungkusan dan logo asal. Jangan reka ciri atau aksesori. "
+            "Gerakan semula jadi; tiada teks, sari kata atau watermark."
         )
     if mode == "storyboard":
         shots = [
@@ -527,13 +508,11 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
             "Use the selected location's lighting and surroundings. No collage, split screen, poster layout, outfit change, plastic skin or CGI. " + selected_scene_lock
         )
     return (
-        "KLIPPO | PROFESSIONAL IMAGE-TO-VIDEO PRODUCTION PROMPT" + (" | BAHAGIAN " + str(part) if part else "") + "\n"
-        "OUTPUT: " + str(duration) + " seconds; portrait 9:16; high-quality realistic product commercial; "
-        "one coherent deliverable. ON-SCREEN TEXT: Follow the KLIPPO GUIDED CREATIVE SETTINGS language choice. If the language is none, show no text. Otherwise, use at most the exact product name supplied by the user unless exact wording is provided; do not invent marketing claims or promotional copy. Preserve spelling, keep text brief and legible, and place it away from the product.\n\n"
-        "PRODUCT: " + product + "\n" + category_direction + "\n\n" + identity + "\n\n" + art + "\n\n"
-        + direction + "\n\n" + negative + "\n\n"
-        "FINAL QUALITY CHECK: Consistent identity in every frame, natural physics, clean edges, "
-        "stable illumination, smooth temporal coherence and polished affiliate-ad aesthetics. "
-        "If the product name does not support a requested feature or viewpoint, use a safe crop or modest "
-        "2D camera movement instead of hallucinating the product."
+        "PROMPT VIDEO — " + str(duration) + " SAAT" + (" | BAHAGIAN " + str(part) if part else "") + "\n"
+        "Video produk realistik, 9:16, tepat " + str(duration) + " saat.\n"
+        "PRODUK: " + product + "\n" + category_direction + "\n"
+        + "GAYA: " + art[:100].strip() + "\n"
+        + direction + "\n"
+        + "Kekalkan rupa, warna, corak dan pembungkusan asal. Jangan reka ciri atau aksesori. "
+        "Gerakan lancar dan latar konsisten. Tiada teks tambahan atau watermark."
     )
