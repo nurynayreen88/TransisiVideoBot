@@ -553,7 +553,7 @@ def prompt_creative_settings(user_data, include_audio=True):
             if language == 'English':
                 spoken_language = 'natural conversational English with clear native-sounding pronunciation'
             else:
-                spoken_language = ('natural Bahasa Melayu Malaysia delivered by a native-sounding Malaysian Malay speaker, with Malaysian vocabulary, pronunciation, rhythm and intonation; Indonesian accent and Indonesian vocabulary are prohibited. Avoid Indonesian expressions such as “banget”, “nggak”, “kalian”, “bisa” and “silakan”.')
+                spoken_language = ('natural Bahasa Malaysia with clear, local pronunciation.')
             lines.append('VOICEOVER IS ENABLED: use ' + spoken_language + '. EVERY 10-second segment must contain its own distinct spoken micro-hook in the first 0–2 seconds, one concise demonstration or visible benefit verified by the reference, and a natural spoken CTA before the end. For Part 2, make the opening a fresh continuation hook, not a repeat of Part 1; still include a distinct CTA in Part 2. Never invent specifications, benefits, discounts, scarcity or guarantees. Keep each 10-second segment short enough to speak naturally (normally about 18–22 words maximum, adjusted for the selected language and delivery speed). Vary the actual wording and delivery style to suit the product (cute, cheerful, friendly, humorous, calm, serious, confident or persuasive); do not reuse generic openings or identical CTAs across products. Keep background music clearly below the voice and maintain the same speaker identity and accent across connected clips.')
         elif voiceover_mode == 'script':
             script = ' '.join((user_data.get('prompt_voiceover_script') or '').split())
@@ -2352,7 +2352,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             if voiceover_mode == 'script' and voiceover:
                 voiceover_instruction = 'Gunakan skrip dialog/voiceover pengguna ini tepat tanpa mengubahnya: ' + voiceover
             elif voiceover_mode == 'ai':
-                voiceover_instruction = 'Gunakan voiceover yang natural dalam ' + language_label + '. Jika Bahasa Melayu, wajib sebutan, intonasi dan kosa kata Malaysia; jangan gunakan slang atau sebutan Indonesia. Bina hook lisan ringkas pada 0–2 saat, satu demonstrasi atau manfaat yang benar-benar disokong gambar, kemudian CTA lisan ringkas. Jangan ulang hook antara klip. Pilih gaya suara yang sesuai (comel, ceria, mesra, kelakar, tenang, serius, yakin atau persuasif), sebutan jelas dan ayat cukup pendek untuk durasi. Muzik latar mesti lebih perlahan daripada suara. Jangan jana sebarang teks pada skrin.'
+                voiceover_instruction = 'Gunakan voiceover yang natural dalam ' + language_label + '. Jika Bahasa Melayu, gunakan Bahasa Malaysia yang semula jadi dan jelas. Bina hook lisan ringkas pada 0–2 saat, satu demonstrasi atau manfaat yang benar-benar disokong gambar, kemudian CTA lisan ringkas. Jangan ulang hook antara klip. Pilih gaya suara yang sesuai (comel, ceria, mesra, kelakar, tenang, serius, yakin atau persuasif), sebutan jelas dan ayat cukup pendek untuk durasi. Muzik latar mesti lebih perlahan daripada suara. Jangan jana sebarang teks pada skrin.'
             else:
                 voiceover_instruction = 'Tiada dialog atau voiceover. Gunakan penceritaan visual sahaja; jangan jana teks pada skrin, kapsyen, logo tambahan atau watermark.'
             model_instruction = prompt_creative_settings(context.user_data)
@@ -2593,7 +2593,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     if voiceover_mode == 'script' and voiceover:
                         voiceover_instruction = 'Gunakan skrip dialog/voiceover pengguna ini tepat tanpa mengubahnya: ' + voiceover
                     elif voiceover_mode == 'ai':
-                        voiceover_instruction = 'Gunakan voiceover yang natural dalam ' + language_label + '. Jika Bahasa Melayu, wajib sebutan, intonasi dan kosa kata Malaysia; jangan gunakan slang atau sebutan Indonesia. Bina hook lisan ringkas pada 0–2 saat, satu demonstrasi atau manfaat yang benar-benar disokong gambar, kemudian CTA lisan ringkas. Jangan ulang hook antara klip. Pilih gaya suara yang sesuai (comel, ceria, mesra, kelakar, tenang, serius, yakin atau persuasif), sebutan jelas dan ayat cukup pendek untuk durasi. Muzik latar mesti lebih perlahan daripada suara. Jangan jana sebarang teks pada skrin.'
+                        voiceover_instruction = 'Gunakan voiceover yang natural dalam ' + language_label + '. Jika Bahasa Melayu, gunakan Bahasa Malaysia yang semula jadi dan jelas. Bina hook lisan ringkas pada 0–2 saat, satu demonstrasi atau manfaat yang benar-benar disokong gambar, kemudian CTA lisan ringkas. Jangan ulang hook antara klip. Pilih gaya suara yang sesuai (comel, ceria, mesra, kelakar, tenang, serius, yakin atau persuasif), sebutan jelas dan ayat cukup pendek untuk durasi. Muzik latar mesti lebih perlahan daripada suara. Jangan jana sebarang teks pada skrin.'
                     else:
                         voiceover_instruction = 'Tiada dialog atau voiceover. Gunakan penceritaan visual sahaja; jangan jana teks pada skrin, kapsyen, logo tambahan atau watermark.'
                     model_instruction = prompt_creative_settings(context.user_data)
