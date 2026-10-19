@@ -145,11 +145,11 @@ jobs:
               for item in prompts
           ), "Every prompt must require a hook, demonstration and CTA in each 10-second segment"
           assert all(
-              "If voiceover is disabled, create the hook and CTA visually" in item["prompt"]
+              "If voiceover is disabled, express the hook and CTA visually" in item["prompt"]
               for item in prompts
           ), "Silent videos must still include a visual hook and CTA"
           assert all(
-              "Indonesian accent and Indonesian vocabulary are prohibited" in item["prompt"]
+              "Indonesian accent, Indonesian phrasing and Indonesian vocabulary are prohibited" in item["prompt"]
               for item in prompts
           ), "Every prompt must guard against Indonesian voiceover when Malay is selected"
           signatures = {
