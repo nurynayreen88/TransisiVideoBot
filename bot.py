@@ -289,7 +289,6 @@ PRODUCT_TYPES = {
     'baby': '🍼 Produk Bayi',
     'travel': '🧳 Kembara / Beg Perjalanan',
     'office': '🖇️ Pejabat / Organisasi',
-    'other': '📦 Produk Lain',
 }
 
 def detect_bag_subtype(product_name: str) -> str:
@@ -706,7 +705,6 @@ def prompt_product_type_menu():
     for index in range(0, len(items), 2):
         pair = items[index:index + 2]
         rows.append([InlineKeyboardButton(label, callback_data='prompt_product_type:' + key) for key, label in pair])
-    rows.append([InlineKeyboardButton('✏️ Lain-lain — taip kategori sendiri', callback_data='prompt_product_type:custom')])
     rows.append([InlineKeyboardButton('↩️ Menu Utama', callback_data='home')])
     return InlineKeyboardMarkup(rows)
 
@@ -717,7 +715,6 @@ def prompt_product_subtype_menu(category: str):
     for index in range(0, len(options), 2):
         pair = options[index:index + 2]
         rows.append([InlineKeyboardButton(label, callback_data='prompt_product_subcategory:' + slug) for slug, label in pair])
-    rows.append([InlineKeyboardButton('✏️ Lain-lain — taip sendiri', callback_data='prompt_product_subcategory:custom')])
     rows.append([InlineKeyboardButton('↩️ Tukar Kategori', callback_data='prompt_product_categories')])
     rows.append([InlineKeyboardButton('🏠 Menu Utama', callback_data='home')])
     return InlineKeyboardMarkup(rows)
