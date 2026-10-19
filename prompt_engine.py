@@ -357,7 +357,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
         # Retain the selected style, reference safety, timed beats and user concept.
         if duration in (10, 20, 30) and (duration == 10 or part == 0):
             if duration == 10 and part >= 2:
-                clip_label = "SECOND CLIP 10s" if part == 2 else "CONTINUATION CLIP 10s"
+                clip_label = "SECOND CLIP 10s" if part == 2 else "THIRD CLIP 10s" if part == 3 else "CONTINUATION CLIP 10s"
                 beat_plan = (clip_label + ": 0–2s continue from the exact full-product frame held at the end of the previous clip; "
                              "2–4s resume the same movement; 4–6s show another visible detail; 6–8s continue in the same setting; "
                              "8–10s stable full-product hero finish. Do NOT repeat the opening hook. ")
@@ -380,7 +380,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
                 beat_plan = (
                     "SELECTED STORYBOARD: Follow these product-specific beats in order. "
                     + (("CONTINUITY: Resume from Part 1's final frame; do not repeat its hook. ")
-                       if part == 2 else "")
+                       if part >= 2 else "")
                     + " | ".join(
                         str(item.get("shot", "")) + ": " + str(item.get("direction", ""))
                         for item in storyboard_override
@@ -466,7 +466,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
         curated_direction = ""
         if storyboard_override and isinstance(storyboard_override, (list, tuple)) and len(storyboard_override) == 4:
             curated_shots = list(storyboard_override)
-            if part == 2:
+            if part >= 2:
                 curated_shots = [
                     {
                         "time": "0–2s",
