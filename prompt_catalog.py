@@ -122,18 +122,66 @@ def resolve(key):
 
 # Conservative category hooks: product identity only, never invented benefits or hype.
 HOOKS = {
-    "lampu": (("lampu", "lantern", "lighting"), ("TENGOK LAMPU INI",)),
-    "beg": (("beg", "bag", "handbag", "backpack", "purse"), ("TENGOK BEG INI",)),
-    "kasut": (("kasut", "shoe", "sneaker", "sandal"), ("TENGOK KASUT INI",)),
-    "botol": (("botol", "bottle", "tumbler", "flask"), ("TENGOK BOTOL INI",)),
-    "jam": (("jam", "watch", "clock"), ("TENGOK JAM INI",)),
-    "kerusi": (("kerusi", "chair", "sofa"), ("TENGOK KERUSI INI",)),
-    "meja": (("meja", "table", "desk"), ("TENGOK MEJA INI",)),
-    "telefon": (("telefon", "phone", "smartphone"), ("TENGOK TELEFON INI",)),
-    "kipas": (("kipas", "fan"), ("TENGOK KIPAS INI",)),
-    "katil": (("katil", "mattress", "bed"), ("TENGOK PRODUK INI",)),
-    "pakaian": (("baju", "shirt", "dress", "clothing", "jacket"), ("TENGOK PAKAIAN INI",)),
-    "alat_dapur": (("dapur", "kitchen", "pan", "pot", "blender"), ("TENGOK PRODUK DAPUR INI",)),
+    "lampu": (("lampu", "lantern", "lighting"), (
+        "Cahaya macam ini sesuai untuk ruang mana?",
+        "Perhatikan bentuk dan kemasan lampu ini.",
+        "Bayangkan pencahayaan ini di sudut rumah anda."
+    )),
+    "beg": (("beg", "bag", "handbag", "backpack", "purse"), (
+        "Gaya beg ini lebih sesuai untuk harian atau keluar santai?",
+        "Perhatikan bentuk dan tali beg ini.",
+        "Beg ini menarik untuk dipadankan dengan gaya apa?"
+    )),
+    "kasut": (("kasut", "shoe", "sneaker", "sandal"), (
+        "Anda lebih suka kasut ringkas atau yang menyerlah begini?",
+        "Lihat bentuk dan kemasan kasut ini dari dekat.",
+        "Gaya kasut begini sesuai dipadankan dengan apa?"
+    )),
+    "botol": (("botol", "bottle", "tumbler", "flask"), (
+        "Botol pilihan anda biasanya dibawa ke mana?",
+        "Perhatikan bentuk dan penutup botol ini.",
+        "Reka bentuk botol begini sesuai dengan rutin apa?"
+    )),
+    "jam": (("jam", "watch", "clock"), (
+        "Anda suka gaya jam minimal atau lebih menonjol?",
+        "Lihat bentuk muka dan tali jam ini.",
+        "Perincian jam ini nampak berbeza apabila dilihat dekat."
+    )),
+    "kerusi": (("kerusi", "chair", "sofa"), (
+        "Sudut rumah mana yang sesuai untuk kerusi begini?",
+        "Perhatikan bentuk dan kemasan kerusi ini.",
+        "Bayangkan kerusi ini dalam susun atur ruang anda."
+    )),
+    "meja": (("meja", "table", "desk"), (
+        "Meja begini sesuai diletakkan di ruang mana?",
+        "Lihat bentuk meja dan kemasan yang kelihatan.",
+        "Sedang mencari idea untuk susun ruang? Perhatikan reka bentuk ini."
+    )),
+    "telefon": (("telefon", "phone", "smartphone"), (
+        "Perhatikan reka bentuk telefon ini dari dekat.",
+        "Anda lebih suka kemasan telefon yang ringkas atau berani?",
+        "Lihat susun atur dan bentuk telefon ini."
+    )),
+    "kipas": (("kipas", "fan"), (
+        "Perhatikan bentuk kipas ini dan cara ia dipaparkan.",
+        "Sedang memilih kipas untuk ruang tertentu?",
+        "Lihat reka bentuk kipas ini dengan lebih dekat."
+    )),
+    "katil": (("katil", "mattress", "bed"), (
+        "Ruang tidur anda berkonsep ringkas atau lebih lembut?",
+        "Perhatikan bentuk dan susunan produk tidur ini.",
+        "Sedang mencari idea untuk ruang tidur? Lihat reka bentuk ini."
+    )),
+    "pakaian": (("baju", "shirt", "dress", "clothing", "jacket"), (
+        "Anda akan gayakan pakaian ini untuk acara apa?",
+        "Lihat potongan, corak dan warna yang benar-benar kelihatan.",
+        "Gaya begini lebih sesuai untuk harian atau majlis?"
+    )),
+    "alat_dapur": (("dapur", "kitchen", "pan", "pot", "blender"), (
+        "Apa yang anda selalu sediakan di dapur?",
+        "Perhatikan bentuk dan bahagian alat dapur ini.",
+        "Sedang melengkapkan ruang dapur? Lihat produk ini dengan dekat."
+    )),
 }
 HOOK_SCHEMA = """CREATE TABLE IF NOT EXISTS storyboard_hooks (
     category TEXT PRIMARY KEY, keywords TEXT NOT NULL, hooks TEXT NOT NULL,
@@ -167,7 +215,21 @@ def product_hook(description):
         for category, (_, hooks) in HOOKS.items():
             db.execute(
                 "UPDATE storyboard_hooks SET hooks=?, version=2 WHERE category=? AND version=1 AND hooks=?",
-                (json.dumps(hooks), category, json.dumps(old[category]))
+                (json.dumps(list(hooks)), category, json.dumps(old[category]))
+            )
+        # Upgrade only untouched v2 seed rows; preserve any user-edited hook lists.
+        previous_defaults = {
+            "lampu": ["TENGOK LAMPU INI"], "beg": ["TENGOK BEG INI"],
+            "kasut": ["TENGOK KASUT INI"], "botol": ["TENGOK BOTOL INI"],
+            "jam": ["TENGOK JAM INI"], "kerusi": ["TENGOK KERUSI INI"],
+            "meja": ["TENGOK MEJA INI"], "telefon": ["TENGOK TELEFON INI"],
+            "kipas": ["TENGOK KIPAS INI"], "katil": ["TENGOK PRODUK INI"],
+            "pakaian": ["TENGOK PAKAIAN INI"], "alat_dapur": ["TENGOK PRODUK DAPUR INI"],
+        }
+        for category, (_, hooks) in HOOKS.items():
+            db.execute(
+                "UPDATE storyboard_hooks SET hooks=?, version=3 WHERE category=? AND version=2 AND hooks=?",
+                (json.dumps(list(hooks)), category, json.dumps(previous_defaults[category]))
             )
         db.commit()
         rows = db.execute("SELECT keywords, hooks FROM storyboard_hooks WHERE active=1 ORDER BY rowid").fetchall()
@@ -191,4 +253,4 @@ def product_hook(description):
             matches.append(json.loads(hooks))
     if len(matches) != 1 or not matches[0]:
         return None
-    return matches[0][0]
+    return random.choice(matches[0])
