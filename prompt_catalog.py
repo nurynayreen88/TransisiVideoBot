@@ -232,6 +232,8 @@ def product_hook(description):
             "katil": ("TENGOK REKAAN INI!", "IDEA UNTUK RUANG ANDA!"),
             "pakaian": ("DETAIL PAKAIAN INI MENARIK!", "JOM TENGOK GAYA INI!"),
             "alat_dapur": ("JOM TENGOK ITEM DAPUR INI!", "DETAIL PRODUK DAPUR INI!"),
+            "cincin": ("TENGOK CINCIN INI!", "REKAAN CINCIN INI MENARIK!"),
+            "barang_kemas": ("TENGOK BARANG KEMAS INI!", "DETAIL AKSESORI INI MENARIK!"),
         }
         for category, (_, hooks) in HOOKS.items():
             db.execute(
