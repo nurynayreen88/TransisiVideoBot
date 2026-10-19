@@ -317,7 +317,7 @@ jobs:
                   product_type="beauty",
                   storyboard_override=curated["storyboard"],
               )
-              assert "=== KLIPPO PART 2 ===" in paired_curated
+              assert "=== KLIPPO PART 2/2 ===" in paired_curated
               assert "CONTINUITY BRIDGE" in paired_curated
               assert "SECONDARY DEMONSTRATION" in paired_curated
               assert "ALTERNATE DETAIL / TRUST SHOT" in paired_curated
@@ -359,7 +359,7 @@ jobs:
               )
               assert "NO ON-SCREEN TEXT" in first
               assert "Do not perform the main surrounding contour yet." in first
-              assert "HOLD the final frame" in first
+              assert "HOLD the exact final frame" in first or "HOLD the final frame" in first
               assert "Never guess a category, benefit, price, popularity or product name." in first
 
               verified = "NAMA_PRODUK: Beg VELLA"
@@ -386,14 +386,15 @@ jobs:
                   "storyboard", uncertain, "clean premium studio background",
                   "push", "white_doodle", 20
               )
-              assert "=== KLIPPO PART 2 ===" in paired
-              first_part, second_part = paired.split("=== KLIPPO PART 2 ===", 1)
+              assert "=== KLIPPO PART 2/2 ===" in paired
+              first_part, second_part = paired.split("=== KLIPPO PART 2/2 ===", 1)
               assert "MANDATORY HOOK, CTA AND LANGUAGE RULES" in first_part
               assert "MANDATORY HOOK, CTA AND LANGUAGE RULES" in second_part
-              assert "HOLD the final frame" in first_part
-              assert "SECOND CLIP 10s" in second_part and "full-product frame" in second_part
+              assert "HOLD the exact final frame" in first_part or "HOLD the final frame" in first_part
+              assert "CONTINUATION CLIP 10s" in second_part and "full-product frame" in second_part
               assert (
-              "do not repeat the opening hook" in second_part.casefold()
+              "do not repeat the preceding clip hook" in second_part.casefold()
+              or "do not repeat the opening hook" in second_part.casefold()
               or "no repeated opening hook" in second_part.casefold()
           )
           assert "SECONDARY DEMONSTRATION" in second_part
