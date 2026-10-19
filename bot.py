@@ -627,11 +627,9 @@ def prompt_creative_settings(user_data, include_audio=True):
     else:
         model = 'Model: none; focus on the product.'
 
-    lines = [
-        model,
-        'Match the reference product exactly. Keep visible shape, colour, pattern and branding; invent no features.',
-        'Vertical 9:16; natural movement and consistent visual continuity.',
-    ]
+    # build_prompt() already supplies format, product lock and continuity.
+    # Keep this helper focused on the user's selected model, audio and text options.
+    lines = [model]
     if include_audio:
         language = user_data.get('prompt_language', 'Malay')
         voiceover_mode = user_data.get('prompt_voiceover_mode', 'none')
@@ -3263,8 +3261,6 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 )
                 if context.user_data.get('prompt_model_presence') == 'yes' and int(context.user_data.get('prompt_model_count',1)) == 2:
                     prompt += ('\n\nTWO-MODEL CAST: Model 1 is ' + str(context.user_data.get('prompt_model_gender','female')) + ', appearance ' + str(context.user_data.get('prompt_model_ethnicity','random_malaysia')) + ', age ' + str(context.user_data.get('prompt_model_age','26-40')) + ', hijab ' + str(context.user_data.get('prompt_model_hijab','na')) + '. Model 2 is ' + str(context.user_data.get('prompt_model_gender_2','male')) + ', appearance ' + str(context.user_data.get('prompt_model_ethnicity_2','random_malaysia')) + ', age ' + str(context.user_data.get('prompt_model_age_2','26-40')) + ', hijab ' + str(context.user_data.get('prompt_model_hijab_2','na')) + '. Keep identities distinct and consistent.')
-                elif context.user_data.get('prompt_model_presence') == 'yes':
-                    prompt += ('\n\nMODEL CAST: One ' + str(context.user_data.get('prompt_model_gender','female')) + ' model, appearance ' + str(context.user_data.get('prompt_model_ethnicity','random_malaysia')) + ', age ' + str(context.user_data.get('prompt_model_age','26-40')) + ', hijab ' + str(context.user_data.get('prompt_model_hijab','na')) + '.')
                 # Text and audio options are added once by prompt_creative_settings below.
                 framing_key = context.user_data.get('prompt_framing', 'auto')
                 # Always tailor actions to the actual product and its intended age group.
@@ -3273,25 +3269,19 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     selected_subcategory = str(context.user_data.get('prompt_product_subcategory', '')).lower()
                     selected_age = str(context.user_data.get('prompt_model_age', '26-40'))
                     if selected_category == 'baby' or selected_subcategory.startswith('baby_'):
-                        age_action_rule = (
-                            'BABY PRODUCT: use a simple, safe, supervised demonstration suited to this item. '
-                            'For clothing, use a child-sized hanger or caregiver-held close-up; do not invent a baby or unsafe use.'
-                        )
+                        age_action_rule = 'BABY PRODUCT: show one safe, supervised, age-appropriate interaction; do not invent features or unsafe use.'
                     elif selected_age in {'4-7', '8-12', '13-17'} and context.user_data.get('prompt_model_presence') == 'yes':
-                        age_action_rule = (
-                            'CHILD MODEL: choose one natural, age-appropriate action that demonstrates this selected product; '
-                            'keep the product visible and unchanged. Avoid risky or exaggerated movement.'
-                        )
+                        age_action_rule = 'CHILD ACTION: one natural, age-appropriate action suited to this product; keep it visible and unchanged.'
                     else:
-                        age_action_rule = (
-                            'CHILD-SIZED PRODUCT: adult is a caregiver/presenter, not the wearer. '
-                            'Use a suitable hanger, surface or close-up; do not invent a child or unsupported use.'
-                        )
-                    prompt = prompt.rstrip() + '\n\nAGE- AND PRODUCT-SUITABLE ACTION RULES:\n' + age_action_rule
+                        age_action_rule = 'CHILD-SIZED PRODUCT: present it on a suitable hanger or surface; do not imply an adult is the wearer.'
+                    prompt = prompt.rstrip() + '\n' + age_action_rule
                 if framing_key != 'auto':
                     framing = PRODUCT_FRAMING.get(framing_key)
                     if framing:
-                        prompt = prompt.rstrip() + '\n\nCAMERA FRAMING — FOLLOW THIS CHOICE:\n' + framing[1] + '\nKeep this framing consistent across every segment. Preserve the exact product design, realistic anatomy and physics. Do not add captions, logos, watermarks, or on-screen text unless the user explicitly requested them.'
+                        # Keep the selected framing's core direction; the generated storyboard
+                        # already supplies timing, camera and product-continuity rules.
+                        framing_direction = framing[1].split('. ', 1)[0].strip()
+                        prompt = prompt.rstrip() + '\nCAMERA FRAMING: ' + framing_direction.rstrip('. ') + '.'
                 prompt = prompt.rstrip() + '\n\n' + prompt_creative_settings(context.user_data)
                 await progress_update(waiting, 70, 'Menyediakan PROMPT IMAGE dan PROMPT VIDEO...')
                 context.user_data['stage'] = 'prompt_done'
