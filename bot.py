@@ -3492,9 +3492,9 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif action == 'feedback':
         context.user_data['stage'] = 'feedback'
         await query.message.reply_text(
-            '💬 KOMEN & CADANGAN KLIPPO\\n\\n'
+            '💬 KOMEN & CADANGAN KLIPPO\n\n'
             'Taip komen, cadangan atau masalah yang anda temui. Nyatakan langkah yang dibuat dan hasil yang dijangka jika melaporkan masalah. '
-            'Mesej akan dihantar kepada pentadbir Klippo untuk semakan.\\n\\n'
+            'Mesej akan dihantar kepada pentadbir Klippo untuk semakan.\n\n'
             'Taip /menu untuk batal dan kembali ke menu utama.'
         )
     elif action == 'help':
@@ -3546,9 +3546,9 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 await context.bot.send_message(
                     chat_id=int(admin_id),
                     text=(
-                        '💬 KOMEN / CADANGAN KLIPPO\\n'
-                        f'Pengguna: {user.full_name} {username}\\n'
-                        f'ID Telegram: {user.id}\\n\\n'
+                        '💬 KOMEN / CADANGAN KLIPPO\n'
+                        f'Pengguna: {user.full_name} {username}\n'
+                        f'ID Telegram: {user.id}\n\n'
                         f'{feedback}'
                     )
                 )
