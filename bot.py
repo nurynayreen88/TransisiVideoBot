@@ -661,7 +661,7 @@ def prompt_creative_settings(user_data, include_audio=True):
         lines.append('No on-screen text.')
     if user_data.get('prompt_custom_background'):
         lines.append('Use the separately uploaded background image as the scene and match its perspective and lighting.')
-    return '\\n'.join(lines)
+    return '\n'.join(lines)
 
 
 PRODUCT_SUBTYPES = {
