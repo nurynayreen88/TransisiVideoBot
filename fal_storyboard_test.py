@@ -48,25 +48,22 @@ def normalize_malaysian_voiceover(text: str) -> str:
     """Replace common Indonesian forms and keep the spoken line concise for Malaysian Malay TTS."""
     value = str(text or "").strip()
     replacements = (
-        (r"\\bbanget\\b", "sangat"),
-        (r"\\bnggak\\b|\\benggak\\b|\\benggak\\b", "tak"),
-        (r"\\bkalian\\b", "anda"),
-        (r"\\bbisa\\b", "boleh"),
-        (r"\\bsilakan\\b", "sila"),
-        (r"\\bkualitas\\b", "kualiti"),
-        (r"\\bdesain\\b", "reka bentuk"),
-        (r"\\bmenampilkan\\b", "menampilkan"),
+        (r"\bbanget\b", "sangat"),
+        (r"\bnggak\b|\benggak\b", "tak"),
+        (r"\bkalian\b", "anda"),
+        (r"\bbisa\b", "boleh"),
+        (r"\bsilakan\b", "sila"),
+        (r"\bkualitas\b", "kualiti"),
+        (r"\bdesain\b", "reka bentuk"),
     )
     for pattern, replacement in replacements:
         value = re.sub(pattern, replacement, value, flags=re.IGNORECASE)
-    value = re.sub(r"\\s+", " ", value).strip(" \\t\\r\\n\\\"'")
-    # Keep one complete sentence and avoid an overlong line that sounds rushed.
-    first_sentence = re.split(r"(?<=[.!?])\\s+", value, maxsplit=1)[0].strip()
+    value = re.sub(r"\s+", " ", value).strip(" \t\r\n\"'")
+    first_sentence = re.split(r"(?<=[.!?])\s+", value, maxsplit=1)[0].strip()
     words = first_sentence.split()
     if len(words) > 18:
         first_sentence = " ".join(words[:18]).rstrip(" ,;:") + "."
     return first_sentence or "Jom lihat produk ini dengan lebih dekat."
-
 
 def analyze_product(image_path: Path) -> dict:
     """Return Gemini-verified visible attributes as JSON; conservative fallback if unavailable."""
