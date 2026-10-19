@@ -86,7 +86,10 @@ jobs:
               for required in (
                   "no uploaded image", "text only", "strict output rules:", "no on-screen text",
                   "logos", "exactly 10 seconds", "vertical 9:16",
-                  "real-world scale is mandatory", "voiceover when enabled",
+                  "real-world scale is mandatory",
+                  "hook + demonstration + cta are required in every 10-second segment",
+                  "bahasa melayu malaysia", "indonesian accent",
+                  "never display hook/cta as text",
                   "keep the product presentation consistent"
               ):
                   assert required in text, (
