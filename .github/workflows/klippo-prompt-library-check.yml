@@ -3,6 +3,7 @@ name: Klippo prompt library checks
 on:
   push:
     branches:
+      - main
       - "staging/**"
   pull_request:
     branches:
