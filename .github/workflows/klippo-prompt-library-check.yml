@@ -299,7 +299,7 @@ jobs:
                   product_type="beauty",
                   storyboard_override=curated["storyboard"],
               )
-              assert curated_prompt.startswith("PROMPT VIDEO — 10 SAAT")
+              assert curated_prompt.startswith("VIDEO PROMPT — 10 SECONDS")
               assert "1080x1920" in curated_prompt, "Storyboard prompt missing HD vertical target"
               assert "Shopee/TikTok full-screen mobile viewing" in curated_prompt, (
                   "Storyboard prompt missing Shopee/TikTok mobile composition guidance"
