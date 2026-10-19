@@ -188,8 +188,14 @@ def product_hook(description):
     if name_match:
         name = name_match.group(1).strip()
         if name and name.upper() not in ("TIDAK PASTI", "TIADA", "TIDAK DAPAT DIPASTIKAN", "UNKNOWN", "NONE"):
-            # Exact observed printed name: never generate a speculative product claim.
-            return "KENALI " + name
+            # Keep the supplied product name factual, but vary the Malaysian-Malay opening.
+            openings = (
+                "JOM LIHAT " + name,
+                "INI DIA " + name,
+                "LIHAT LEBIH DEKAT: " + name,
+                name + " DALAM FOKUS",
+            )
+            return random.choice(openings)
     category_match = re.search(r"(?im)^KATEGORI:\s*(.+)$", description)
     if not category_match:
         return None
