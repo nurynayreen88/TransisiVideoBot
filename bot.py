@@ -478,7 +478,6 @@ def prompt_model_count_menu():
     return InlineKeyboardMarkup([
         [InlineKeyboardButton('1 model', callback_data='prompt_model_count:1'),
          InlineKeyboardButton('2 model', callback_data='prompt_model_count:2')],
-        [InlineKeyboardButton('3 model', callback_data='prompt_model_count:3')],
         [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
     ])
 
@@ -511,9 +510,14 @@ def prompt_model_ethnicity_menu():
 
 def prompt_model_age_menu():
     return InlineKeyboardMarkup([
+        [InlineKeyboardButton('Kanak-kanak 4–7', callback_data='prompt_model_age:4-7')],
+        [InlineKeyboardButton('Kanak-kanak 8–12', callback_data='prompt_model_age:8-12')],
+        [InlineKeyboardButton('Remaja 13–17', callback_data='prompt_model_age:13-17')],
         [InlineKeyboardButton('Dewasa 18–25', callback_data='prompt_model_age:18-25')],
         [InlineKeyboardButton('Dewasa 26–40', callback_data='prompt_model_age:26-40')],
-        [InlineKeyboardButton('Dewasa 41+', callback_data='prompt_model_age:41+')],
+        [InlineKeyboardButton('Dewasa 41–60', callback_data='prompt_model_age:41-60')],
+        [InlineKeyboardButton('Dewasa 60+', callback_data='prompt_model_age:60+')],
+        [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
     ])
 
 
@@ -540,17 +544,68 @@ def prompt_voiceover_menu():
     ])
 
 
+def _prompt_is_child_product(user_data):
+    """Conservative age-fit check based on the selected product category/subcategory."""
+    category = str(user_data.get('prompt_product_type', '')).lower()
+    subcategory = str(user_data.get('prompt_product_subcategory', '')).lower()
+    name = ' '.join(str(user_data.get(key, '') or '') for key in (
+        'prompt_product_name', 'prompt_library_details',
+        'prompt_custom_category_name', 'prompt_custom_subcategory_name'
+    )).lower()
+    child_subcategories = {
+        'fashion_kids', 'shoes_kids', 'baby_clothing', 'baby_feeding',
+        'baby_bath', 'baby_toy', 'baby_gear', 'baby_sleep', 'baby_other',
+        'toy_educational', 'toy_figure', 'toy_building', 'toy_outdoor',
+        'toy_baby', 'toy_game', 'toy_other', 'stationery_school'
+    }
+    child_words = (
+        'kanak-kanak', 'kanak kanak', 'budak', 'bayi', 'kanak', 'kids',
+        'children', 'child', 'toddler', 'baby', 'school uniform', 'baju sekolah'
+    )
+    return (
+        subcategory in child_subcategories
+        or category in {'baby', 'toy'}
+        or any(word in name for word in child_words)
+    )
+
+
 def prompt_creative_settings(user_data, include_audio=True):
-    """Translate guided Klippo choices into explicit, reusable prompt instructions."""
+    """Translate guided Klippo choices into explicit, age-appropriate prompt instructions."""
     if user_data.get('prompt_model_presence') == 'yes':
-        model = (
-            f"Include {user_data.get('prompt_model_count', 1)} consistent adult AI model(s); "
-            f"gender: {user_data.get('prompt_model_gender', 'female')}; "
-            f"head covering: {user_data.get('prompt_model_hijab', 'not specified')}; "
-            f"appearance: {user_data.get('prompt_model_ethnicity', 'any')}; "
-            f"adult age range: {user_data.get('prompt_model_age', '26-40')}. "
-            "Keep the same model identity, face, hair/head covering and outfit consistent across every shot."
-        )
+        age = str(user_data.get('prompt_model_age', '26-40'))
+        child_model = age in {'4-7', '8-12', '13-17'}
+        child_product = _prompt_is_child_product(user_data)
+        count = min(2, max(1, int(user_data.get('prompt_model_count', 1) or 1)))
+        if child_model and not child_product:
+            model = (
+                "Do NOT show a child or teen model because the selected product is not clearly child-targeted. "
+                "Use product-only shots and adult hands only where needed; do not depict a minor using, wearing or endorsing this product."
+            )
+        elif child_model:
+            model = (
+                f"Include {count} consistent age-appropriate AI child/teen model(s), exact selected age range {age}; "
+                f"gender: {user_data.get('prompt_model_gender', 'female')}; "
+                f"appearance: {user_data.get('prompt_model_ethnicity', 'any')}. "
+                "Keep the same model identity and age appearance consistent in every shot. "
+                "Only show age-appropriate, non-sexualised styling and activities. For children's clothing or shoes, the model may wear only the child-sized item appropriate to the selected age; never adult-sized or adult-targeted apparel. "
+                "For toys or other child products, show safe age-appropriate interaction, with adult supervision where appropriate. No suggestive posing, makeup styling that implies adulthood, or mature scenarios."
+            )
+        elif child_product:
+            model = (
+                f"Include {count} consistent adult AI model(s), gender: {user_data.get('prompt_model_gender', 'female')}; "
+                f"head covering: {user_data.get('prompt_model_hijab', 'not specified')}; "
+                f"appearance: {user_data.get('prompt_model_ethnicity', 'any')}; adult age range: {age}. "
+                "The product is child/baby-targeted: the adult model must NOT wear child-sized clothes or shoes and must NOT pretend the item fits them. "
+                "Present it only: hold it carefully, display it on a child-sized hanger/mannequin, point out visible details, or show it on a clean display surface. "
+                "For baby products, demonstrate only safe handling and never place a baby in unsafe situations."
+            )
+        else:
+            model = (
+                f"Include {count} consistent adult AI model(s); gender: {user_data.get('prompt_model_gender', 'female')}; "
+                f"head covering: {user_data.get('prompt_model_hijab', 'not specified')}; "
+                f"appearance: {user_data.get('prompt_model_ethnicity', 'any')}; adult age range: {age}. "
+                "Keep the same model identity, face, hair/head covering and outfit consistent across every shot."
+            )
     else:
         model = "No human model. Focus entirely on the exact product and its real visible details."
     images_count = len(user_data.get('prompt_reference_photos', []))
@@ -2643,7 +2698,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await query.message.reply_text('👤 LANGKAH 1 — BUTIRAN MODEL\n\nBerapa orang model dewasa yang diperlukan?', reply_markup=prompt_model_count_menu())
     elif action.startswith('prompt_model_count:') and stage == 'prompt_model_count':
         selected = action.split(':', 1)[1]
-        if selected in ('1', '2', '3'):
+        if selected in ('1', '2'):
             context.user_data['prompt_model_count'] = int(selected)
             context.user_data['stage'] = 'prompt_model_gender'
             await query.message.reply_text('👤 LANGKAH 1 — BUTIRAN MODEL\n\nPilih jantina model:', reply_markup=prompt_model_gender_menu())
@@ -2672,7 +2727,14 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await query.message.reply_text('👤 LANGKAH 1 — BUTIRAN MODEL\n\nPilih lingkungan umur model (dewasa sahaja):', reply_markup=prompt_model_age_menu())
     elif action.startswith('prompt_model_age:') and stage == 'prompt_model_age':
         selected = action.split(':', 1)[1]
-        if selected in ('18-25', '26-40', '41+'):
+        if selected in ('4-7', '8-12', '13-17', '18-25', '26-40', '41-60', '60+'):
+            if selected in ('4-7', '8-12', '13-17') and not _prompt_is_child_product(context.user_data):
+                await query.message.reply_text(
+                    '⚠️ Model bawah 18 tahun hanya boleh dipilih untuk produk yang jelas sesuai untuk kanak-kanak/remaja. '
+                    'Untuk produk dewasa atau kategori yang tidak pasti, pilih model dewasa atau kembali dan pilih tanpa model.',
+                    reply_markup=prompt_model_age_menu()
+                )
+                return
             context.user_data['prompt_model_age'] = selected
             context.user_data['stage'] = 'prompt_style'
             await query.message.reply_text('🎨 LANGKAH 2 — Pilih gaya video:', reply_markup=prompt_style_menu(context.user_data.get('prompt_product_type', 'other'), context.user_data.get('prompt_model_presence')))
