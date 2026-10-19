@@ -2,6 +2,101 @@ from prompt_catalog import resolve, product_hook, opening_direction
 import json
 from pathlib import Path
 
+import random
+from collections import deque
+
+# Keep recent action choices in memory so consecutive prompts vary naturally.
+_RECENT_CREATIVE_CHOICES = {}
+_CREATIVE_ACTIONS = {
+    "fashion": [
+        "Begin in a three-quarter view; the model glances at the outfit, takes two small natural steps and settles into a relaxed pose.",
+        "Begin with a side profile; the model gently turns to a front-facing full-outfit view, keeping the garment visible.",
+        "Begin with a candid glance away from camera; the model walks diagonally across frame and pauses for a full-outfit reveal.",
+        "Begin on a visible garment detail, then smoothly widen to reveal the model already moving naturally.",
+        "The model makes one small playful half-turn, then returns to a clear front view; no exaggerated posing.",
+        "The model shifts weight naturally and takes one step sideways while the camera tracks gently in the opposite direction."
+    ],
+    "bag": [
+        "Start with the bag resting naturally; a hand lifts it once by an existing visible handle or strap.",
+        "Use a slow side approach as the bag is picked up and held still for a clear silhouette.",
+        "Begin with a three-quarter product view, then gently reposition only to show reference-visible details.",
+        "Show the bag in a plausible everyday carrying position, then settle into a stable product hero view."
+    ],
+    "shoes": [
+        "Begin at a low three-quarter angle; one foot takes a small step forward and pauses.",
+        "Track a short, natural two-step walk, then hold on both shoes without changing their design.",
+        "Start with both shoes grounded; make a gentle lateral camera move to reveal their visible profile."
+    ],
+    "beauty": [
+        "Begin with clean packaging hero framing, then make a slow macro push toward one genuinely visible detail.",
+        "Use a gentle side-light sweep across the package, then settle into a sharp front-facing view.",
+        "Begin slightly off-centre and make a controlled lateral slide into a balanced hero composition."
+    ],
+    "food": [
+        "Begin with the complete serving in view, then make a slow push-in toward a visible texture.",
+        "Use a gentle overhead-to-oblique camera drift without adding ingredients or changing the serving.",
+        "Start on a close texture detail, then ease out to show the full original serving."
+    ],
+    "gadget": [
+        "Begin with a three-quarter front view, then slide laterally to reveal only visible ports and controls.",
+        "Use a locked product shot with a subtle focus shift to one visible detail.",
+        "Begin wider, then perform a restrained push-in while keeping screen content and geometry unchanged."
+    ],
+    "general": [
+        "Start with a clean wide hero composition, then use a gentle lateral slide to reveal a visible detail.",
+        "Begin with a close view of a reference-visible feature, then pull back to show the complete product.",
+        "Use a restrained three-quarter camera approach and settle into a clear, stable hero frame.",
+        "Begin with the product already in the scene; let natural light shift subtly while the camera moves sideways."
+    ]
+}
+_SFX_BY_TYPE = {
+    "fashion": "Add a very soft fabric swish only if fabric movement is visible, with light upbeat music at low volume.",
+    "bag": "Add a subtle handling rustle only if handling is shown; do not imply an unverified material.",
+    "shoes": "Add quiet natural footsteps only when walking is shown, with soft background music.",
+    "beauty": "A tiny pop or delicate chime may accent the reveal once; keep it subtle, not cartoonish.",
+    "food": "Use a gentle natural sound only if the visible action supports it; avoid exaggerated or invented sounds.",
+    "gadget": "Use one restrained digital tick or soft chime at the detail reveal; no fake interface beeps.",
+    "general": "Use one subtle soft chime, tiny pop or gentle whoosh at a matching visual beat; never stack effects."
+}
+
+
+def _creative_variation(product_type, product, part):
+    words = ((product_type or "") + " " + (product or "")).lower()
+    if any(w in words for w in ("dress", "clothing", "fashion", "apparel", "outfit", "garment", "pakaian", "baju", "skirt", "shirt", "t-shirt", "kids", "child", "baby", "hijab", "tudung", "blouse")):
+        group = "fashion"
+    elif any(w in words for w in ("bag", "handbag", "backpack", "purse")):
+        group = "bag"
+    elif any(w in words for w in ("shoe", "sneaker", "sandal", "footwear")):
+        group = "shoes"
+    elif any(w in words for w in ("beauty", "cosmetic", "skincare", "perfume", "lipstick")):
+        group = "beauty"
+    elif any(w in words for w in ("food", "drink", "snack", "cake", "coffee", "tea")):
+        group = "food"
+    elif any(w in words for w in ("gadget", "phone", "camera", "earbud", "keyboard", "electronic")):
+        group = "gadget"
+    else:
+        group = "general"
+    options = _CREATIVE_ACTIONS[group]
+    recent = _RECENT_CREATIVE_CHOICES.setdefault(group, deque(maxlen=3))
+    available = [i for i in range(len(options)) if i not in recent] or list(range(len(options)))
+    index = random.SystemRandom().choice(available)
+    recent.append(index)
+    action = options[index]
+    if part >= 2:
+        action = (
+            "CONTINUATION ACTION (PART " + str(part) + "): " + action
+            + " Continue from the immediately previous part's final-frame identity, setting, lighting and camera direction. "
+            + "Do not restart the opening or repeat the previous part's main gesture."
+        )
+    return (
+        "CREATIVE ACTION / CAMERA VARIATION: " + action + "\\n"
+        + "AUDIO / SFX: " + _SFX_BY_TYPE[group]
+        + " Keep effects brief and synchronised, quieter than any selected speech; music remains subtle. "
+        + "If the video generator cannot create audio, do not imply sound generation is guaranteed. "
+        + "No sound-effect labels or unrequested on-screen text."
+    )
+
+
 """Detailed, reference-safe AI video prompt templates for KLIPPO."""
 
 UNIVERSAL_PROMPT_PATH = Path(__file__).resolve().parent / "prompts" / "universal_prompt_templates.json"
@@ -85,14 +180,16 @@ def build_prompt(mode, product, scene, motion, style='auto', duration=10, concep
         parts = [
             _build_single_prompt(mode, product, scene, motion, style, part=index, duration=10,
                                  concept=concept, product_type=product_type, storyboard_override=storyboard_override, universal_custom=universal_custom)
+            + "\\n\\n" + _creative_variation(product_type, product, index)
             for index in range(1, duration // 10 + 1)
         ]
         return "\n\n".join(
             ("=== KLIPPO PART " + str(index + 1) + " ===\n\n" + part) if index else part
             for index, part in enumerate(parts)
         )
-    return _build_single_prompt(mode, product, scene, motion, style, part=0, duration=duration,
+    return (_build_single_prompt(mode, product, scene, motion, style, part=0, duration=duration,
                                 concept=concept, product_type=product_type, storyboard_override=storyboard_override, universal_custom=universal_custom)
+            + "\\n\\n" + _creative_variation(product_type, product, 0))
 
 
 def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, duration=10, concept='', product_type='other', storyboard_override=None, universal_custom=False):
@@ -475,8 +572,10 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
         )
     if part == 1:
         direction = "PART 1: reveal product, show one detail, then hold the full-product frame for Part 2."
-    elif part == 2:
-        direction = "PART 2: match Part 1's final frame exactly, continue the action, show another visible detail and end on a clear hero shot. No repeated hook."
+    elif part >= 2:
+        previous_part = part - 1
+        direction = ("PART " + str(part) + ": match Part " + str(previous_part) + "'s final frame exactly, continue with a complementary action, "
+                     "show another visible detail and end on a clear hero shot. No repeated hook or restart.")
     product_words = (product or "").lower()
     fashion_terms = ("kurung", "baju", "tudung", "hijab", "dress", "clothing", "apparel",
                      "fashion", "outfit", "blouse", "skirt", "trousers", "pants", "garment",
