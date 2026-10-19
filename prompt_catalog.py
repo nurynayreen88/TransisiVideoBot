@@ -203,7 +203,7 @@ def opening_direction(product_type="other"):
         "OPENING VARIATION: " + visual + "; camera: " + camera
         + "; if voiceover is enabled, use " + voice
         + ". Speak clear Bahasa Melayu Malaysia; no Indonesian wording or accent. "
-        + "Avoid repeating “Kenali” or any fixed stock phrase. Do not add extra text. "
+        + "Avoid classroom-style introductions, repeated stock phrases and scripted-sounding language. Do not add extra text. "
         + "This changes the opening only; preserve later beats, product identity, selected location, style and no-logo rules."
     )
 
