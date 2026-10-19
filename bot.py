@@ -485,8 +485,16 @@ def prompt_language_menu():
 def prompt_voiceover_menu():
     return InlineKeyboardMarkup([
         [InlineKeyboardButton('🔇 Tanpa dialog / voiceover', callback_data='prompt_voiceover:none')],
-        [InlineKeyboardButton('🎙️ AI cadangkan voiceover', callback_data='prompt_voiceover:ai')],
+        [InlineKeyboardButton('🎙️ AI cadangkan dialog', callback_data='prompt_voiceover:ai')],
         [InlineKeyboardButton('✍️ Saya masukkan skrip sendiri', callback_data='prompt_voiceover:script')],
+        [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
+    ])
+
+
+def prompt_speaker_menu():
+    return InlineKeyboardMarkup([
+        [InlineKeyboardButton('🗣️ Model AI bercakap sendiri', callback_data='prompt_speaker:model')],
+        [InlineKeyboardButton('🎙️ Suara promoter di latar', callback_data='prompt_speaker:voiceover')],
         [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
     ])
 
@@ -562,15 +570,27 @@ def prompt_creative_settings(user_data, include_audio=True):
     if include_audio:
         voiceover_mode = user_data.get('prompt_voiceover_mode', 'none')
         language = user_data.get('prompt_language', 'Malay')
+        speaker = user_data.get('prompt_speech_source', 'voiceover')
+        on_camera_speech = speaker == 'model' and model_presence == 'yes'
         if voiceover_mode == 'ai':
             spoken_language = 'English' if language == 'English' else 'natural Bahasa Malaysia'
+            delivery = (
+                'The on-camera model speaks clearly with natural, accurate lip-sync. '
+                if on_camera_speech else
+                'Use an off-screen promoter voice; any visible model remains silent. '
+            )
             lines.append(
-                f'Voiceover: Use clear {spoken_language}. Say a short product-specific hook, one visible detail or supported use, and a concise CTA. Keep background music below the voice. No on-screen text.'
+                f'Speech: {delivery}Use clear {spoken_language}. Say a short product-specific hook, one visible detail or supported use, and a concise CTA. Keep background music below the speech. No on-screen text.'
             )
         elif voiceover_mode == 'script':
             script = ' '.join((user_data.get('prompt_voiceover_script') or '').split())
             if script:
-                lines.append('Voiceover: Speak this exact script without additions: ' + script + ' Keep background music below the voice. No on-screen text.')
+                delivery = (
+                    'The on-camera model speaks this exact script with natural lip-sync: '
+                    if on_camera_speech else
+                    'An off-screen promoter speaks this exact script while any visible model remains silent: '
+                )
+                lines.append(delivery + script + ' Do not add or change any words. Keep background music below the speech. No on-screen text.')
             else:
                 lines.append('Audio: Instrumental background music only; no dialogue or voiceover.')
         else:
@@ -1537,6 +1557,7 @@ def reset(context):
     context.user_data['prompt_language'] = 'Malay'
     context.user_data['prompt_voiceover_mode'] = 'none'
     context.user_data['prompt_voiceover_script'] = ''
+    context.user_data['prompt_speech_source'] = 'voiceover'
     context.user_data['stage'] = 'home'
 
 
@@ -2220,18 +2241,38 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await query.message.reply_text('🎙️ LANGKAH 7 — Skrip atau voiceover adalah pilihan:', reply_markup=prompt_voiceover_menu())
     elif action.startswith('prompt_voiceover:') and stage == 'prompt_voiceover':
         selected = action.split(':', 1)[1]
-        if selected == 'script':
-            context.user_data['prompt_voiceover_mode'] = 'script'
+        context.user_data['prompt_voiceover_mode'] = selected
+        context.user_data['prompt_voiceover_script'] = ''
+        if selected in ('ai', 'script') and context.user_data.get('prompt_model_presence') == 'yes':
+            context.user_data['stage'] = 'prompt_speaker'
+            await query.message.reply_text(
+                '🗣️ Siapa yang menyampaikan dialog? Pilihan ini hanya digunakan apabila model AI dipilih.',
+                reply_markup=prompt_speaker_menu()
+            )
+        elif selected == 'script':
+            context.user_data['prompt_speech_source'] = 'voiceover'
             context.user_data['stage'] = 'prompt_voiceover_text'
-            await query.message.reply_text('✍️ Tampal skrip voiceover/dialogue anda. Tulis - jika mahu batalkan skrip dan teruskan tanpa dialog.')
-        elif selected in ('none', 'ai'):
-            context.user_data['prompt_voiceover_mode'] = selected
-            context.user_data['prompt_voiceover_script'] = ''
+            await query.message.reply_text('✍️ Tampal skrip dalam Bahasa Melayu atau Inggeris mengikut pilihan bahasa. Tulis - untuk teruskan tanpa dialog.')
+        else:
+            context.user_data['prompt_speech_source'] = 'voiceover'
             context.user_data['stage'] = 'prompt_idea_choice'
             await query.message.reply_text(
                 '💡 Mahu tambah satu idea aksi daripada koleksi prompt siap? Pilihan ini akan digabungkan ke dalam prompt yang sama.',
                 reply_markup=prompt_idea_choice_menu()
             )
+    elif action.startswith('prompt_speaker:') and stage == 'prompt_speaker':
+        selected = action.split(':', 1)[1]
+        if selected in ('model', 'voiceover'):
+            context.user_data['prompt_speech_source'] = selected
+            if context.user_data.get('prompt_voiceover_mode') == 'script':
+                context.user_data['stage'] = 'prompt_voiceover_text'
+                await query.message.reply_text('✍️ Tampal skrip dalam Bahasa Melayu atau Inggeris mengikut pilihan bahasa. Tulis - untuk teruskan tanpa dialog.')
+            else:
+                context.user_data['stage'] = 'prompt_idea_choice'
+                await query.message.reply_text(
+                    '💡 Mahu tambah satu idea aksi daripada koleksi prompt siap? Pilihan ini akan digabungkan ke dalam prompt yang sama.',
+                    reply_markup=prompt_idea_choice_menu()
+                )
     elif action.startswith('prompt_style:') and stage == 'prompt_style':
         selected = action.split(':', 1)[1]
         valid = {'auto'} | {key for key, _ in storyboard_styles()}
@@ -2301,7 +2342,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # Return only for actions handled by the first chain. Video workflow
     # callbacks must continue into the second chain.
     if action in ('admin_pending', 'admin', 'storyboard', 'make', 'prompt', 'prompt_categories', 'prompt_images_done') or action.startswith(
-        ('admin_approve:', 'admin_reject:', 'prompt_mode:', 'prompt_flow:', 'prompt_model:', 'prompt_model_count:', 'prompt_model_gender:', 'prompt_model_hijab:', 'prompt_model_ethnicity:', 'prompt_model_age:', 'prompt_language:', 'prompt_voiceover:', 'prompt_type:', 'prompt_product_type:', 'prompt_duration:',
+        ('admin_approve:', 'admin_reject:', 'prompt_mode:', 'prompt_flow:', 'prompt_model:', 'prompt_model_count:', 'prompt_model_gender:', 'prompt_model_hijab:', 'prompt_model_ethnicity:', 'prompt_model_age:', 'prompt_language:', 'prompt_voiceover:', 'prompt_speaker:', 'prompt_type:', 'prompt_product_type:', 'prompt_duration:',
          'prompt_style:', 'prompt_idea:', 'prompt_details:', 'video_input:', 'prompt_input:', 'pcat:', 'ptpl:')
     ):
         return
