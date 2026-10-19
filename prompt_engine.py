@@ -67,16 +67,26 @@ def _model_age_direction(product, product_type='other'):
 
 def build_prompt(mode, product, scene, motion, style='auto', duration=10, concept='', product_type='other', storyboard_override=None):
     style = _resolve_auto_style(style, product_type) if mode == 'storyboard' else style
-    if duration == 20:
-        # Resolve the category-appropriate style once so both clips remain consistent.
-        chosen_style = style
-        first = _build_single_prompt(mode, product, scene, motion, chosen_style, part=1, concept=concept, product_type=product_type, storyboard_override=storyboard_override)
-        second = _build_single_prompt(mode, product, scene, motion, chosen_style, part=2, concept=concept, product_type=product_type, storyboard_override=storyboard_override)
-        return first + "\n\n=== KLIPPO PART 2 ===\n\n" + second
+    if duration in (20, 30):
+        # Multi-clip outputs are independent 10-second prompts with a shared style
+        # and explicit frame continuity. Keep every segment copy-ready on its own.
+        total_parts = duration // 10
+        segments = [
+            _build_single_prompt(
+                mode, product, scene, motion, style, part=part,
+                concept=concept, product_type=product_type,
+                storyboard_override=storyboard_override, total_parts=total_parts,
+            )
+            for part in range(1, total_parts + 1)
+        ]
+        return "\n\n".join(
+            f"=== KLIPPO PART {part}/{total_parts} ===\n\n{segment}"
+            for part, segment in enumerate(segments, start=1)
+        )
     return _build_single_prompt(mode, product, scene, motion, style, part=0, concept=concept, product_type=product_type, storyboard_override=storyboard_override)
 
 
-def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, concept='', product_type='other', storyboard_override=None):
+def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, concept='', product_type='other', storyboard_override=None, total_parts=2):
     duration = 10
     hook_cta_language = (
         "MANDATORY HOOK, CTA AND LANGUAGE RULES: Every generated video must include a product-specific hook in the first 0–2 seconds, one clear product demonstration or reference-supported benefit, and a natural CTA in the final 2 seconds. "
@@ -161,7 +171,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
                 "NO ON-SCREEN TEXT: Do not add a hook headline, captions, written labels, added logos, watermarks or UI. Use the selected product-specific storyboard; if voiceover is enabled, keep the hook in spoken audio only."
             )
         if doodle:
-            if part == 2:
+            if part > 1:
                 rules = (
                     "SECOND CLIP 10s, five 2-second panels: 0-2s resume from the exact final full-product framing of Part 1; "
                     "2-4s begin drawing a thin white dashed contour just OUTSIDE the actual product silhouette; "
@@ -182,9 +192,9 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
                 "Use only flat visual lines, simple arrows and small sparkles; no letters, words, feature labels or captions. "
                 "Keep graphics clear of the product and prioritize tracing its actual visible contour over camera movement."
             )
-        elif part == 2:
+        elif part > 1:
             rules = (
-                "SECOND CLIP 10s, five 2-second panels: 0-2s continue the exact full-product frame held at the end of Part 1; "
+                "CONTINUATION CLIP 10s, five 2-second panels: 0-2s continue the exact full-product frame held at the end of the preceding clip; "
                 "2-4s emphasize a second genuinely visible detail without inventing an angle; 4-6s continue the same concept; "
                 "6-8s elegant style-specific visual emphasis; 8-10s full-product hero closing and fade. Do NOT repeat the opening hook."
             )
@@ -203,7 +213,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
                         "time": "0–2s",
                         "shot": "CONTINUITY BRIDGE",
                         "direction": (
-                            "Continue from the exact final frame of Part 1. Preserve the same product identity and true scale, "
+                            "Continue from the exact final frame of the preceding clip. Preserve the same product identity and true scale, "
                             "hand/model, wardrobe, voice, lighting, setting and camera direction. Make only a small natural "
                             "continuation movement; do not restart the reveal or repeat the opening hook."
                         ),
@@ -212,7 +222,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
                         "time": "2–6s",
                         "shot": "SECONDARY DEMONSTRATION",
                         "direction": (
-                            "Show a distinct second action or product angle that was not used in Part 1. Follow the selected "
+                            "Show a distinct action or product angle not used in the immediately preceding clip. Follow the selected "
                             "concept and product category, but do not repeat the first clip's main interaction, camera move or "
                             "dialogue. Use only visible, plausible features and props; if no functional action is suitable, "
                             "show a different reference-supported view of the actual product."
@@ -222,7 +232,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
                         "time": "6–8s",
                         "shot": "ALTERNATE DETAIL / TRUST SHOT",
                         "direction": (
-                            "Reveal a different visible detail from Part 1, if one is supported by the reference; otherwise "
+                            "Reveal a different visible detail from the preceding clip, if one is supported by the reference; otherwise "
                             "use a new reference-supported angle. Use macro framing rather than changing physical size. "
                             "Do not invent materials, components, benefits or specifications."
                         ),
@@ -233,7 +243,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
                         "direction": (
                             "Finish on a clear full-product hero at the same true scale and in the same coherent setting. "
                             "If voiceover is enabled, deliver a concise spoken CTA only; never show CTA text on screen. "
-                            "Do not repeat Part 1's hook or closing line."
+                            "Do not repeat the previous clip's hook or closing line."
                         ),
                     },
                 ]
@@ -252,7 +262,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
             )
         return (
             "PROMPT VIDEO — 10 SAAT\n"
-            "KLIPPO | UNIVERSAL PRODUCT VIDEO PROMPT | " + style_name + (" | BAHAGIAN " + str(part) + "/2" if part else "") + "\n"
+            "KLIPPO | UNIVERSAL PRODUCT VIDEO PROMPT | " + style_name + (" | BAHAGIAN " + str(part) + "/" + str(total_parts) if part else "") + "\n"
             "OUTPUT: One cohesive vertical 9:16 product advertisement, EXACT DURATION: " + str(duration) + " seconds.\n\n"
             + hook_cta_language + "\n\n"
             "PRODUCT NAME: " + product + "\n" + category_direction + "\n" + model_age_direction + "\n\n" + identity + "\n\n"
@@ -322,9 +332,9 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
                      "4-6s focus on one genuinely visible detail; 6-8s continue a complementary action; "
                      "8-10s return to a stable full-product frame and hold without fade to connect directly into Part 2.")
     elif part == 2:
-        direction = ("SECOND CLIP 10s, five 2-second panels: start with the EXACT held full-product final frame from Part 1, "
+        direction = ("CONTINUATION CLIP 10s, five 2-second panels: start with the EXACT held full-product final frame from the preceding clip, "
                      "matching crop, product position, orientation, setting, lighting and color. "
-                     "0-2s resume the same movement; 2-4s continue the action; 4-6s highlight another visible detail; "
+                     "0-2s resume the same movement; 2-4s continue with a distinct action; 4-6s highlight another visible detail; "
                      "6-8s maintain coherent context; 8-10s full-product hero finish with graceful fade. No new product, scene or angle.")
     product_words = (product or "").lower()
     fashion_terms = ("kurung", "baju", "tudung", "hijab", "dress", "clothing", "apparel",
