@@ -2705,9 +2705,9 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     elif voiceover_mode == 'ai':
                         speaker = context.user_data.get('prompt_speech_source', 'voiceover')
                         delivery = 'The on-camera AI model speaks with natural lip-sync. ' if speaker == 'model' and context.user_data.get('prompt_model_presence') == 'yes' else 'Use an off-screen promoter voice; any visible model remains silent. '
-                        voiceover_instruction = delivery + 'Use a clear, natural ' + ('English' if language == 'English' else 'Malaysian Malay') + ' voice. Say a short product-specific hook, one reference-supported detail or use, then a concise CTA. Keep background music quieter than the voice. Add no on-screen text.'
+                        voiceover_instruction = delivery + 'Use a clear, natural ' + ('English' if language == 'English' else 'Malaysian Malay') + ' voice. Say a short product-specific hook, one reference-supported detail or use, then a concise CTA. Keep background music quieter than the voice.'
                     else:
-                        voiceover_instruction = 'Use instrumental background music only, with no dialogue or voiceover. Convey the hook through the opening action and the CTA through the final product shot, without on-screen text.'
+                        voiceover_instruction = 'Use instrumental background music only, with no dialogue or voiceover. Convey the hook through the opening action and the CTA through the final product shot.'
                     model_instruction = prompt_creative_settings(context.user_data, include_audio=False)
                     prompt_instruction = (
                         'You are a product-ad creative director. Analyze the attached reference images and create a storyboard that can be used directly as an AI video-generation prompt. '
