@@ -62,9 +62,14 @@ def analyze_product(image_path: Path) -> dict:
     prompt = (
         "Analyse this product photo. Return ONLY valid JSON with keys: product_type (string), "
         "colors (array), shape (string), materials (array), logo_or_text (string), visible_details (array), "
-        "uncertainties (array), voiceover_ms (one short natural Malaysian Malay voiceover sentence). "
-        "Only report directly visible facts. Never guess brand/model, exact material, product claims, benefits, "
-        "or unreadable text. If uncertain, say 'tidak pasti'."
+        "uncertainties (array), voiceover_ms (one short spoken sentence in natural Bahasa Melayu Malaysia). "
+        "The voiceover MUST sound like a Malaysian product promoter: Malaysian vocabulary, sentence structure, "
+        "and natural local phrasing. DO NOT write Indonesian Malay or use Indonesian expressions such as "
+        "'banget', 'nggak', 'kalian', 'bisa', or 'silakan'. Prefer natural Malaysian wording such as 'sangat', "
+        "'tak', 'anda/korang', 'boleh', and 'jom' where appropriate. Keep the line under 18 words, easy to say, "
+        "conversational, and grounded only in visible facts. Do not use generic filler if a visible product detail "
+        "can be named accurately. Only report directly visible facts. Never guess brand/model, exact material, "
+        "product claims, benefits, or unreadable text. If uncertain, say 'tidak pasti'."
     )
     body = {"contents": [{"parts": [
         {"text": prompt},
@@ -102,6 +107,11 @@ def generate_panel(image_url: str, attributes: dict, scene: str, index: int) -> 
         "The reference is the sole source of truth. Preserve the exact product identity, silhouette, proportions, "
         "colors, material appearance, printed label, logo, pattern, and visible accessories. Do not redesign or "
         "invent product details. No added text, captions, watermarks, or extra logos. One scene only, no collage. "
+        "REALISTIC PHYSICAL SCALE IS MANDATORY: keep the product's true category-appropriate size relative to hands, "
+        "fingers, people, furniture, and the environment. A ring must fit naturally on a finger and must never be "
+        "as large as a table. Use macro camera framing rather than enlarging a small object. Watches must fit wrists, "
+        "phones must fit hands, and scale must stay consistent in every panel. No giant products, warped geometry, "
+        "floating objects, or impossible interactions. If exact dimensions are unknown, use ordinary realistic proportions. "
         f"Gemini JSON observations; do not guess uncertain details: {verified[:1800]} "
         f"Storyboard panel {index}: {scene}"
     )
