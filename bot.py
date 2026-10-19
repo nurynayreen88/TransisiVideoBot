@@ -2857,47 +2857,23 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 [InlineKeyboardButton('🔁 Jana Storyboard Baharu', callback_data='prompt_chatgpt_storyboard')],
                 [InlineKeyboardButton('🏠 Menu Utama', callback_data='home')]
             ])
-            scene_count = 4 if duration <= 10 else (6 if duration <= 15 else 8)
-            sheet_count = (scene_count + 3) // 4
-            visual_error = None
-            await progress_update(waiting, 65, 'Teks babak siap. Menjana helaian storyboard bergambar...')
-            for sheet_number in range(1, sheet_count + 1):
-                try:
-                    sheet_bytes = await asyncio.to_thread(
-                        generate_storyboard_sheet, images, storyboard, duration, sheet_number, language_label
-                    )
-                    sheet_file = BytesIO(sheet_bytes)
-                    sheet_file.name = f'KLIPPO_STORYBOARD_HELAIAN_{sheet_number}.png'
-                    await query.message.reply_photo(
-                        photo=sheet_file,
-                        caption=f'🎬 STORYBOARD BERGAMBAR — HELAIAN {sheet_number}/{sheet_count}\n'
-                                f'Video {duration} saat · Babak {min((sheet_number-1)*4+1, scene_count)}–{min(sheet_number*4, scene_count)}',
-                        reply_markup=storyboard_actions if sheet_number == sheet_count else None
-                    )
-                except GeminiStoryboardImageError as exc:
-                    visual_error = str(exc)
-                    logging.warning('Visual storyboard sheet %s failed: %s', sheet_number, type(exc).__name__)
-                    break
-                except Exception as exc:
-                    visual_error = 'Helaian storyboard bergambar tidak dapat dihantar. Cuba lagi sebentar lagi.'
-                    logging.exception('Visual storyboard sheet delivery failed')
-                    break
-            await progress_update(waiting, 90, 'Menghantar penerangan setiap babak...')
-            status_caption = '🎬 STORYBOARD BERGAMBAR SIAP' if not visual_error else '📝 PENERANGAN BABAK SIAP'
+            await progress_update(waiting, 85, 'Mengemas dan menghantar storyboard teks...')
             await query.message.reply_text(
-                status_caption + '\n\nSemak penerangan setiap babak di bawah. Helaian bergambar menunjukkan urutan visual; gunakan gambar rujukan asal apabila meneruskan ke penjana video.',
+                '🎬 STORYBOARD TEKS SIAP\\n\\n'
+                'Storyboard ini mengandungi urutan babak, masa, arahan visual, gerakan kamera, kesinambungan produk dan cadangan suara latar. '
+                'Tiada imej storyboard dijana; gunakan gambar produk asal apabila menghantar prompt ke platform video AI.',
                 reply_markup=storyboard_actions
             )
             if len(storyboard) <= 3900:
                 await query.message.reply_text(storyboard, reply_markup=storyboard_actions)
             else:
                 storyboard_file = BytesIO(storyboard.encode('utf-8'))
-                storyboard_file.name = 'KLIPPO_GEMINI_STORYBOARD.txt'
-                await query.message.reply_document(document=storyboard_file, filename=storyboard_file.name, caption='📋 Penerangan penuh setiap babak.', reply_markup=storyboard_actions)
-            if visual_error:
-                await query.message.reply_text(
-                    '⚠️ Teks storyboard berjaya dijana, tetapi helaian bergambar gagal dijana.\n\n'
-                    + visual_error + '\n\nSemak akses model imej Gemini dan kuota penjanaan imej.'
+                storyboard_file.name = 'KLIPPO_STORYBOARD_TEKST.txt'
+                await query.message.reply_document(
+                    document=storyboard_file,
+                    filename=storyboard_file.name,
+                    caption='📋 Storyboard teks lengkap mengikut babak.',
+                    reply_markup=storyboard_actions
                 )
             await progress_update(waiting, 100, 'Storyboard Klippo selesai.')
         except Exception as exc:
