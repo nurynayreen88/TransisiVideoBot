@@ -169,6 +169,49 @@ def _resolve_auto_style(style, product_type):
     return AUTO_STYLE_BY_PRODUCT_TYPE.get(product_type, 'cinematic')
 
 
+# These directions are injected only when the user selects that ad approach.
+# They shape the actual hook/story and CTA; they are not a universal paragraph.
+_CREATIVE_ANGLE_INSTRUCTIONS = {
+    "question": (
+        "AD APPROACH — QUESTION HOOK: Open with one short, natural question tied to "
+        "the product's visible design or a plausible use case. Answer it visually by "
+        "showing the product and only verified details; finish with a clear, low-pressure "
+        "CTA to view the product details or available options. Do not invent a problem or benefit."
+    ),
+    "reveal": (
+        "AD APPROACH — PRODUCT REVEAL: Open on a tight but recognizable view, then reveal "
+        "the complete unchanged product within the opening beat. Build interest through "
+        "camera movement and reference-visible details, then close with a concise CTA to explore it."
+    ),
+    "demo": (
+        "AD APPROACH — QUICK DEMONSTRATION: Open with the product ready for one simple, "
+        "physically plausible action it genuinely supports. Show the action clearly, then "
+        "close with a CTA to check product details. Never invent functions or hidden features."
+    ),
+    "relatable": (
+        "AD APPROACH — RELATABLE MOMENT: Open with a believable everyday situation relevant "
+        "to this product. Show the product naturally in that context without promising an "
+        "unverified result, then finish with a conversational invitation to view the product."
+    ),
+    "premium": (
+        "AD APPROACH — PREMIUM EDITORIAL: Open with a refined hero composition, deliberate "
+        "lighting and a restrained camera move. Use purposeful close-ups of genuine visible "
+        "details, then end with an understated, elegant CTA. Avoid unsupported luxury claims."
+    ),
+    "affiliate": (
+        "AD APPROACH — LIVELY AFFILIATE: Open with an energetic, conversational Malaysian "
+        "promoter hook. Keep the product clearly visible and mention only verified details; "
+        "finish with a direct shopping CTA such as 'Semak produk ini sekarang'. Never invent "
+        "prices, discounts, stock limits, popularity or false urgency."
+    ),
+}
+
+
+def creative_angle_instruction(angle):
+    """Return only the selected ad-angle direction; auto leaves category logic in control."""
+    return _CREATIVE_ANGLE_INSTRUCTIONS.get(str(angle or "auto"), "")
+
+
 def build_prompt(mode, product, scene, motion, style='auto', duration=10, concept='', product_type='other', storyboard_override=None, split=None, universal_custom=False):
     # Preserve the historical API behavior: a 20-second call without an explicit
     # split choice still returns two connected 10-second prompts.
