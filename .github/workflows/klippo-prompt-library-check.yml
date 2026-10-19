@@ -57,9 +57,9 @@ jobs:
           assert "preceding clip" in triple.casefold()
           assert "TENGOK PRODUK INI" not in triple
           synthetic = (
-              "=== KLIPPO PART 1/3 ===\\n\\nfirst clip\\n\\n"
-              "=== KLIPPO PART 2/3 ===\\n\\nsecond clip\\n\\n"
-              "=== KLIPPO PART 3/3 ===\\n\\nthird clip"
+              "=== KLIPPO PART 1/3 ===\n\nfirst clip\n\n"
+              "=== KLIPPO PART 2/3 ===\n\nsecond clip\n\n"
+              "=== KLIPPO PART 3/3 ===\n\nthird clip"
           )
           sections = [part.strip() for part in re.split(r"=== KLIPPO PART \d+/\d+ ===", synthetic) if part.strip()]
           assert sections == ["first clip", "second clip", "third clip"], sections
