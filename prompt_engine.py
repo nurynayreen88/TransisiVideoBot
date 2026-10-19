@@ -288,8 +288,8 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
             hook_rule = (
                 "NO ON-SCREEN TEXT: Do not render product names, headlines, captions, labels, logos or watermarks. "
                 "Never guess a category, benefit, price, popularity or product name. "
-                + ("If voiceover is enabled, an optional natural spoken opening may say: '" + hook + "'. Do not force dialogue. "
-                   if hook and not storyboard_override and part < 2 else
+                + ("If voice is selected, use a short product-specific spoken hook in the selected language. "
+                   if not storyboard_override and part < 2 else
                    "Use a clean visual reveal; dialogue is optional. ")
             )
             doodle_rule = (
@@ -304,7 +304,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
                 + "STYLE: " + style_name + " — " + style_template[:70].strip() + "\n"
                 + "SETTING: " + str(scene)[:100].strip() + "\nCAMERA: " + camera[:70].strip() + "\n"
                 + hook_rule + beat_plan + concept_rule[:100] + doodle_rule
-                + "Natural movement. If voice is selected, use a short hook and CTA in Bahasa Melayu Malaysia. No added on-screen text or watermark."
+                + "Natural movement. If voice is selected, use a short product-specific hook and CTA in the selected language. No added on-screen text or watermark."
             )
 
         evidence_rules = (
