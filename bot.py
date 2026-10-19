@@ -2953,13 +2953,28 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 'bright minimalist setting with clean neutral surfaces and soft daylight': 'Cerah Minimalis',
                 'use the exact user-supplied background image as the scene/background plate': 'Latar sendiri (wajib upload imej latar ke AI)',
             }
+            if context.user_data.get('prompt_model_presence') != 'yes':
+                model_summary = 'Tiada — fokus produk'
+            else:
+                model_summary = (
+                    str(context.user_data.get('prompt_model_count', 1))
+                    + ' model; Model 1: ' + str(context.user_data.get('prompt_model_gender', 'female'))
+                    + ', umur ' + str(context.user_data.get('prompt_model_age', '26-40'))
+                    + ', tudung ' + str(context.user_data.get('prompt_model_hijab', 'na'))
+                )
+                if int(context.user_data.get('prompt_model_count', 1)) == 2:
+                    model_summary += (
+                        '; Model 2: ' + str(context.user_data.get('prompt_model_gender_2', 'male'))
+                        + ', umur ' + str(context.user_data.get('prompt_model_age_2', '26-40'))
+                        + ', tudung ' + str(context.user_data.get('prompt_model_hijab_2', 'na'))
+                    )
             summary = chr(10).join([
                 '🧾 SEMAK PILIHAN SEBELUM JANA PROMPT',
                 '',
                 f'🛍️ Nama produk: {product_name}',
                 f'📦 Jenis produk: {PRODUCT_TYPES.get(context.user_data.get("prompt_product_type", "other"), "Produk lain")}',
                 f'⏱️ Tempoh: {context.user_data.get("prompt_duration", 10)} saat — ' + ('satu prompt' if context.user_data.get('prompt_duration_mode', 'split' if context.user_data.get('prompt_duration') == 20 else 'single') == 'single' else str(int(context.user_data.get('prompt_duration', 10)) // 10) + ' prompt bersambung 10 saat'),
-                f'👤 Model: ' + ('Tiada — fokus produk' if context.user_data.get('prompt_model_presence') != 'yes' else str(context.user_data.get('prompt_model_count',1)) + ' model; Model 1: ' + str(context.user_data.get('prompt_model_gender','female')) + ', umur ' + str(context.user_data.get('prompt_model_age','26-40')) + ', tudung ' + str(context.user_data.get('prompt_model_hijab','na')) + (('; Model 2: ' + str(context.user_data.get('prompt_model_gender_2')) + ', umur ' + str(context.user_data.get('prompt_model_age_2')) + ', tudung ' + str(context.user_data.get('prompt_model_hijab_2')) if int(context.user_data.get('prompt_model_count',1)) == 2 else '')),
+                f'👤 Model: {model_summary}',
                 f'🎨 Gaya video: {style_name}',
                 '🎥 Gaya kamera: ' + PRODUCT_FRAMING.get(context.user_data.get('prompt_framing','auto'), PRODUCT_FRAMING['auto'])[0],
                 '📝 Teks skrin: ' + ('Tiada' if context.user_data.get('prompt_on_screen_text') != 'yes' else ('Auto' if context.user_data.get('prompt_text_mode') == 'auto' else context.user_data.get('prompt_text_content','Manual'))),
