@@ -10,6 +10,7 @@ CAMERAS = {
 
 AUTO_STYLE_BY_PRODUCT_TYPE = {
     'fashion': 'fashion_editorial',
+    'toys': 'playful_viral',
     'bag': 'handbag_showcase',
     'wallet': 'wallet_luxury_macro',
     'hijab': 'fashion_editorial',
@@ -86,6 +87,7 @@ _CATEGORY_MARKERS = {
     "furniture": ("furniture", "sofa", "chair upholstery", "cabinet", "table legs", "shelving unit"),
     "baby": ("baby product", "infant", "diaper", "stroller", "crib", "child-care product"),
     "crafts": ("craft kit", "hobby supplies", "paintbrush", "glue gun", "art supplies"),
+    "toys": ("toy", "toys", "playset", "building blocks", "plush toy", "doll", "action figure", "puzzle", "board game"),
 }
 _PRODUCT_CATEGORY_GROUP = {
     "fashion": "clothing", "hijab": "clothing", "shoes": "footwear",
@@ -94,7 +96,7 @@ _PRODUCT_CATEGORY_GROUP = {
     "accessory": "jewellery", "travel": "travel", "pet": "pet",
     "automotive": "automotive", "garden": "garden", "kitchen": "kitchen",
     "furniture": "furniture", "baby": "baby", "crafts": "crafts",
-    "home": "furniture", "other": "other",
+    "home": "furniture", "toys": "toys", "other": "other",
 }
 _CATEGORY_SAFE_SHOTS = {
     "footwear": ("PRODUCT DETAIL", "Show a close, stable view of a genuinely visible footwear detail, then return to the complete product. Preserve its real shape, sole and proportions."),
@@ -115,6 +117,7 @@ _CATEGORY_SAFE_SHOTS = {
     "furniture": ("PRODUCT DETAIL", "Show the actual furniture or decor at realistic scale, highlighting its visible shape, finish and construction."),
     "baby": ("PRODUCT DETAIL", "Show the actual baby or child-care item in a calm, safe setting; do not stage a child in a risky situation."),
     "crafts": ("PRODUCT DETAIL", "Show the actual art or craft item and a simple plausible use without adding unlisted kit contents."),
+    "toys": ("PRODUCT DETAIL", "Show the actual toy clearly at a realistic size, with a simple age-appropriate play action only when suitable for the product."),
     "other": ("PRODUCT DETAIL", "Show a close, stable view of a genuinely visible product detail, then return to a clear full-product view."),
 }
 
@@ -123,6 +126,9 @@ def _category_safe_storyboard(storyboard, product_type):
     if not isinstance(storyboard, (list, tuple)):
         return storyboard
     target = _PRODUCT_CATEGORY_GROUP.get(product_type, "other")
+    # Unknown category: do not guess which storyboard beats are irrelevant.
+    if target == "other":
+        return list(storyboard)
     safe = []
     for beat in storyboard:
         if not isinstance(beat, dict):
@@ -190,6 +196,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
         'furniture': "PRODUCT CATEGORY DIRECTION: Treat this as furniture or home decor. Preserve exact proportions, joints and visible construction; do not invent materials, assembly parts, storage or load capacity.",
         'baby': "PRODUCT CATEGORY DIRECTION: Treat this as a baby or child-care product. Keep scenes calm and responsible, do not place a child in a risky situation, and do not invent safety certification, age suitability or health claims.",
         'crafts': "PRODUCT CATEGORY DIRECTION: Treat this as an art, craft or hobby product. Show only plausible tools and actions, do not invent kit contents, material composition or professional performance claims.",
+        'toys': "PRODUCT CATEGORY DIRECTION: Treat this as a toy or play item. Keep play actions age-appropriate and physically plausible; show only the toy and accessories confirmed by the product details.",
         'other': "PRODUCT CATEGORY DIRECTION: Follow the product category inferred from the product name and choose a suitable presentation without guessing features.",
     }
     category_direction = product_type_directions.get(product_type, product_type_directions['other'])
