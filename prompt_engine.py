@@ -273,6 +273,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
                 )
             hook_rule = (
                 "NO ON-SCREEN TEXT: Do not render product names, headlines, captions, labels, logos or watermarks. "
+                "Never guess a category, benefit, price, popularity or product name. "
                 + ("If voiceover is enabled, an optional natural spoken opening may say: '" + hook + "'. Do not force dialogue. "
                    if hook and not storyboard_override and part < 2 else
                    "Use a clean visual reveal; dialogue is optional. ")
