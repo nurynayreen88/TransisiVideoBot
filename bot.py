@@ -1113,6 +1113,7 @@ def main_menu(user_id=None):
         [InlineKeyboardButton('🎞️ Gabung Video', callback_data='merge')],
         [InlineKeyboardButton('🔄 Tukar Format Video', callback_data='convert')],
         [InlineKeyboardButton('💎 Langganan', callback_data='subscription'), InlineKeyboardButton('👤 Akaun Saya', callback_data='account')],
+        [InlineKeyboardButton('💬 Komen & Cadangan', callback_data='feedback')],
     ]
     if user_id is not None and is_admin(user_id):
         rows.append([InlineKeyboardButton('🛡️ Panel Admin', callback_data='admin')])
@@ -3488,6 +3489,14 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await query.message.reply_text('📎 Sila hantar gambar atau fail PDF resit pembayaran di sini.')
     elif action == 'account':
         await account_info(update, context)
+    elif action == 'feedback':
+        context.user_data['stage'] = 'feedback'
+        await query.message.reply_text(
+            '💬 KOMEN & CADANGAN KLIPPO\\n\\n'
+            'Taip komen, cadangan atau masalah yang anda temui. Nyatakan langkah yang dibuat dan hasil yang dijangka jika melaporkan masalah. '
+            'Mesej akan dihantar kepada pentadbir Klippo untuk semakan.\\n\\n'
+            'Taip /menu untuk batal dan kembali ke menu utama.'
+        )
     elif action == 'help':
         await query.message.reply_text('❓ FAQ KLIPPO\\n\\nTekan persoalan untuk melihat jawapan dan gambar contoh:', reply_markup=faq_menu())
     elif action.startswith('faq:'):
@@ -3522,6 +3531,35 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
     value = update.message.text.strip()
     if value in ('🏠 Menu Utama', 'Menu Utama', 'menu', 'MENU', '/menu'):
         await start(update, context)
+        return
+    if stage == 'feedback':
+        feedback = value[:1800]
+        if len(feedback.strip()) < 3:
+            await update.message.reply_text('Sila tulis komen atau cadangan yang lebih jelas, atau taip /menu untuk batal.')
+            return
+        user = update.effective_user
+        username = ('@' + user.username) if user.username else '(tiada username)'
+        admins = [x.strip() for x in os.environ.get('ADMIN_USER_IDS', '37141287').split(',') if x.strip().isdigit()]
+        delivered = False
+        for admin_id in admins:
+            try:
+                await context.bot.send_message(
+                    chat_id=int(admin_id),
+                    text=(
+                        '💬 KOMEN / CADANGAN KLIPPO\\n'
+                        f'Pengguna: {user.full_name} {username}\\n'
+                        f'ID Telegram: {user.id}\\n\\n'
+                        f'{feedback}'
+                    )
+                )
+                delivered = True
+            except Exception:
+                logging.exception('Could not deliver Klippo feedback to admin %s', admin_id)
+        context.user_data['stage'] = None
+        if delivered:
+            await update.message.reply_text('✅ Terima kasih! Komen/cadangan anda telah dihantar kepada pasukan Klippo.', reply_markup=main_menu(user.id))
+        else:
+            await update.message.reply_text('⚠️ Komen belum dapat dihantar. Cuba lagi kemudian atau hubungi pentadbir.', reply_markup=main_menu(user.id))
         return
     if stage == 'prompt_library_details':
         details = '' if value in ('-', '—', 'tiada', 'Tiada') else value
