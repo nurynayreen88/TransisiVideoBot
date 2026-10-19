@@ -71,7 +71,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
         "Treat those photo(s), not assumptions from the product name, as the source of truth for the visible product identity. "
         "Preserve visible shape, color, print, packaging, proportions and readable branding. Do not invent unseen angles, brand marks, "
         "model numbers, materials, technical specifications, included accessories, product claims, compartments or hidden features. "
-        "Use the product name and category only as supporting context; if a detail is not visible, keep it neutral rather than guessing."
+        "Use the product name and category only as supporting context; if a detail is not visible, keep it neutral rather than guessing. REAL-WORLD SCALE IS MANDATORY: preserve ordinary physical dimensions relative to fingers, hands, wrists, people, furniture and surroundings. A ring must remain finger-sized and must never become table-sized; achieve macro close-ups with camera framing, never by enlarging the physical object. Watches must fit wrists, phones must fit hands, and scale must stay stable in every shot. If exact dimensions are unknown, use realistic category-appropriate proportions."
     )
     art = (
         f"ART DIRECTION: Premium commercial product cinematography. Environment: {scene}. "
@@ -80,7 +80,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
         "surface rendering without claiming unprovided materials. Avoid excessive bloom or artificial plastic shine. "
         "Use elegant pacing, physically plausible movement and stable framing. "
         "PHOTOREALISM FIRST: Make the result resemble genuine live-action footage from a real camera, not CGI, 3D render, illustration or synthetic AI advertising. Use believable lens perspective, natural texture, imperfect but controlled real-world light, realistic contact shadows and restrained color grading. Avoid waxy surfaces, over-smoothed skin, excessive sharpness, fake bokeh, HDR halos, excessive bloom, impossible reflections, sterile showroom CGI and unnaturally perfect symmetry. "
-        "If a human model is appropriate, preserve a consistent natural face, skin texture, body proportions, hair and clothing; use relaxed posture, subtle expressions, correct anatomy and physically accurate hand-to-product contact. If no model is needed, do not add a person or hands just to decorate the scene. Keep the product physically grounded, correctly scaled and unchanged."
+        "If a human model is appropriate, preserve a consistent natural face, skin texture, body proportions, hair and clothing; use relaxed posture, subtle expressions, correct anatomy and physically accurate hand-to-product contact. If no model is needed, do not add a person or hands just to decorate the scene. Keep the product physically grounded, correctly scaled and unchanged at true real-world scale. Macro framing may magnify the view but must never change the object's physical dimensions; keep rings finger-sized, watches wrist-sized and handheld products proportionate to the hand."
     )
     negative = (
         "STRICT EXCLUSIONS: Keep the product presentation plausible and visually consistent with the supplied product name. "
@@ -105,17 +105,14 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
         )
 
         hook_direction = (
-            "ON-SCREEN HOOK: Display EXACTLY '" + hook + "' at the top safe area in the opening 0-2s. "
-            "This is a neutral category/name hook only, not a product benefit claim. "
-            "Keep the product unobstructed and do not add any other unverified promotional copy. "
+            "VISUAL HOOK: Create immediate curiosity through a product-specific camera reveal or plausible action in the opening 0–2 seconds. Do not display any text. If voiceover is enabled in the guided settings, the hook may be spoken only. Never invent a product benefit claim. "
         ) if hook else (
-            "NO ON-SCREEN HOOK TEXT: Begin with a clean product reveal and no headline. "
+            "NO ON-SCREEN TEXT: Begin with a clean product reveal and use composition or action as the visual hook. "
             "Never guess a category, benefit, price, popularity or product name."
         )
         if storyboard_override:
             hook_direction = (
-                "NO ON-SCREEN TEXT: Do not add a hook, headline, captions, labels, logos or watermark. "
-                "Follow the selected product-specific storyboard."
+                "NO ON-SCREEN TEXT: Do not add a hook headline, captions, written labels, added logos, watermarks or UI. Use the selected product-specific storyboard; if voiceover is enabled, keep the hook in spoken audio only."
             )
         if doodle:
             if part == 2:
@@ -178,7 +175,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
             curated_direction = (
                 "DIRECTOR'S CURATED PREMIUM STORYBOARD: Use this selected GitHub library storyboard as the primary shot plan. "
                 "Expand the four selected creative beats into exactly five connected panels of 2 seconds each; distribute the selected beats across the panels and add a reference-safe opening or closing panel where needed. Preserve the same product identity, packaging, color, scale and coherent set. "
-                "NO ON-SCREEN TEXT, captions, added logos, watermarks, dialogue or voice-over unless explicitly requested.\n\n"
+                "NO ON-SCREEN TEXT, captions, added logos, watermarks or UI. If the guided settings explicitly enable voiceover, follow their language, accent, duration and audio-mix instructions; otherwise use no dialogue.\n\n"
                 + "\n\n".join(
                     str(item.get("time", "")) + " | " + str(item.get("shot", "")) + "\n"
                     + "VISUAL AND CAMERA BRIEF: " + str(item.get("direction", ""))
@@ -297,7 +294,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
             "KLIPPO | REALISTIC 10-SECOND PRODUCT VIDEO\n"
             "FORMAT: vertical 9:16, one coherent live-action-style commercial, 10 seconds.\n"
             "PRODUCT: " + product + "\n" + category_direction + "\n"
-            "REFERENCE LOCK: Use uploaded photo(s) as truth. Preserve visible shape, colour, print, packaging, logo and proportions. Never invent unseen features, materials, accessories or claims.\n"
+            "REFERENCE LOCK: Use uploaded photo(s) as truth. Preserve visible shape, colour, print, packaging, logo and proportions. Never invent unseen features, materials, accessories or claims. REAL-WORLD SCALE IS MANDATORY: rings remain finger-sized, watches fit wrists, phones fit hands, and furniture/appliances keep believable proportions relative to people and rooms. Use macro framing rather than physically enlarging small objects.\n"
             "SCENE: " + str(scene) + ". " + (("CONCEPT: " + str(concept) + ". ") if concept else "") + "\n"
             + selected_beats
             + "SHOT FLOW: 0–2s natural opening/reveal; 2–5s one gentle camera move (" + str(camera) + "); "
@@ -305,13 +302,13 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
             "Use one simple, physically possible action; keep the product grounded and stable. No montage, sudden scene change or impossible orbit.\n"
             "PHOTOREALISM: Must resemble real camera footage, not CGI, 3D render or AI art. Natural material and skin texture; realistic hands/anatomy if a model is included; consistent face, body, clothing and product. Use believable lens perspective, soft real-world light, contact shadows and plausible reflections. Do not add a person if none is needed.\n"
             "AVOID: waxy skin, uncanny faces, extra/fused fingers, warped product, changing patterns, floating objects, fake reflections, plastic shine, excessive bokeh/HDR, flicker, jitter, identity drift, invented props, captions, added logos or watermarks.\n"
-            "FINAL CHECK: believable physics, consistent product identity, natural motion and understated commercial polish."
+            "FINAL CHECK: believable physics, consistent product identity, natural motion, realistic physical scale, no on-screen text or added branding, and understated commercial polish."
         )
         return compact
     return (
         "KLIPPO | PROFESSIONAL IMAGE-TO-VIDEO PRODUCTION PROMPT" + (" | BAHAGIAN " + str(part) + "/2" if part else "") + "\n"
         "OUTPUT: " + str(duration) + " seconds; portrait 9:16; high-quality realistic product commercial; "
-        "one coherent deliverable. ON-SCREEN TEXT: Follow the KLIPPO GUIDED CREATIVE SETTINGS language choice. If the language is none, show no text. Otherwise, use at most the exact product name supplied by the user unless exact wording is provided; do not invent marketing claims or promotional copy. Preserve spelling, keep text brief and legible, and place it away from the product.\n\n"
+        "one coherent deliverable. NO ON-SCREEN TEXT: Do not generate captions, headlines, labels, subtitles, UI overlays, added logos or watermarks. Use a visual hook through composition and action only; any selected hook or CTA must be spoken audio, never written on screen. Preserve only branding physically present on the actual reference product.\n\n"
         "PRODUCT: " + product + "\n" + category_direction + "\n\n" + identity + "\n\n" + art + "\n\n"
         + direction + "\n\n" + negative + "\n\n"
         "FINAL REALISM CHECK: The result should pass as authentic live-action commercial footage at first glance, not as an AI-generated image or animation. Consistent product identity in every frame, realistic skin and hand anatomy if a person appears, natural fabric or material texture, grounded contact shadows, plausible reflections, stable exposure, real-camera perspective and physically possible movement. Avoid the polished-but-fake CGI look, artificial skin smoothing, impossible object motion, warped geometry, flicker and temporal identity drift. "
