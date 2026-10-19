@@ -501,10 +501,10 @@ def prompt_model_hijab_menu():
 
 def prompt_model_ethnicity_menu():
     return InlineKeyboardMarkup([
-        [InlineKeyboardButton('🇲🇾 Melayu', callback_data='prompt_model_ethnicity:Malay'),
-         InlineKeyboardButton('🇨🇳 Cina Malaysia', callback_data='prompt_model_ethnicity:Chinese')],
-        [InlineKeyboardButton('🇮🇳 India Malaysia', callback_data='prompt_model_ethnicity:Indian')],
-        [InlineKeyboardButton('🎲 Rawak — kaum di Malaysia', callback_data='prompt_model_ethnicity:random_malaysia')],
+        [InlineKeyboardButton('Melayu', callback_data='prompt_model_ethnicity:Malay'),
+         InlineKeyboardButton('Cina Malaysia', callback_data='prompt_model_ethnicity:Chinese')],
+        [InlineKeyboardButton('India Malaysia', callback_data='prompt_model_ethnicity:Indian')],
+        [InlineKeyboardButton('Rawak — kaum di Malaysia', callback_data='prompt_model_ethnicity:random_malaysia')],
     ])
 
 
