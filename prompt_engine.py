@@ -220,15 +220,12 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
         evidence_rules = "Use only details visible in or confirmed by the product reference. Do not invent features or claims."
 
         hook_direction = (
-            "VISUAL HOOK: Create curiosity with a product-specific reveal or plausible action in the opening 0–2 seconds. Never show hook text or invent product claims. "
+            "VISUAL HOOK: Open with a product-specific reveal or plausible action in the first 2 seconds; use only supported product details. "
         ) if hook else (
-            "NO ON-SCREEN TEXT: Begin with a clean product reveal and use composition or action as the visual hook. "
-            "Never guess a category, benefit, price, popularity or product name."
+            "Open with a clear product reveal and use composition or action as the hook. Do not guess product benefits or claims."
         )
         if storyboard_override:
-            hook_direction = (
-                "NO ON-SCREEN TEXT, added logos, watermarks or UI. Follow the selected product-specific storyboard."
-            )
+            hook_direction = "Follow the selected product-specific storyboard."
         if doodle:
             if part > 1:
                 rules = (
@@ -309,16 +306,12 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
             curated_direction = (
                 "DIRECTOR'S CURATED PREMIUM STORYBOARD: Use this selected GitHub library storyboard as the primary shot plan. "
                 + (("CONTINUATION SEGMENT " + str(part) + "/" + str(total_parts) + ": Use a fresh, product-specific continuation hook and a distinct action not used in earlier clips; do not repeat earlier CTA wording. Preserve the exact previous final frame at 0–2s. ") if part > 1 else "")
-                + "Expand the four selected creative beats into exactly five connected panels of 2 seconds each; distribute the selected beats across the panels and add a reference-safe opening or closing panel where needed. Preserve the same product identity, packaging, color, scale and coherent set. "
-                "NO ON-SCREEN TEXT, captions, added logos, watermarks or UI.\n\n"
-                + "\n\n".join(
-                    str(item.get("time", "")) + " | " + str(item.get("shot", "")) + "\n"
-                    + "VISUAL AND CAMERA BRIEF: " + str(item.get("direction", ""))
+                + "Use the four selected beats in five connected 2-second panels. Keep product identity, model and setting consistent. "
+                + "\\n\\n".join(
+                    str(item.get("time", "")) + " | " + str(item.get("shot", "")) + "\\n"
+                    + str(item.get("direction", ""))
                     for item in curated_shots
                 )
-                + "\n\nPREMIUM CINEMATOGRAPHY: Controlled key and fill light, elegant camera easing, realistic depth of field, "
-                "natural contact shadows, clean transitions and restrained highlights. Keep product geometry and visible details "
-                "consistent throughout. Finish on a stable, clean hero frame."
             )
         storyboard_plan = (
             curated_direction if curated_direction else
