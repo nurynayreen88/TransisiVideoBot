@@ -98,9 +98,18 @@ jobs:
           assert all("REAL-WORLD SCALE IS MANDATORY" in item["prompt"] for item in prompts), (
               "Every prompt must explicitly guard real-world physical scale"
           )
-          assert all("VOICEOVER WHEN ENABLED" in item["prompt"] for item in prompts), (
-              "Every prompt must define Malaysian Malay voiceover behavior when audio is enabled"
-          )
+          assert all(
+              "HOOK + DEMONSTRATION + CTA ARE REQUIRED IN EVERY 10-SECOND SEGMENT" in item["prompt"]
+              for item in prompts
+          ), "Every prompt must require a hook, demonstration and CTA in each 10-second segment"
+          assert all(
+              "If voiceover is disabled, create the hook and CTA visually" in item["prompt"]
+              for item in prompts
+          ), "Silent videos must still include a visual hook and CTA"
+          assert all(
+              "Indonesian accent and Indonesian vocabulary are prohibited" in item["prompt"]
+              for item in prompts
+          ), "Every prompt must guard against Indonesian voiceover when Malay is selected"
           signatures = {
               tuple(shot.get("direction", "") for shot in item.get("storyboard", []))
               for item in prompts
