@@ -197,7 +197,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
         "Avoid Indonesian wording such as 'kebutuhan', 'temukan', 'silakan', 'banget', 'nggak' and 'aja'; use natural Malaysian equivalents where needed. Do not exaggerate any regional Malaysian dialect unless the user explicitly requests it. "
         "If the user supplies an exact script, preserve its words and meaning; pronounce it clearly in a Malaysian Malay accent without adding Indonesian expressions. "
         "Vary both the wording and the opening approach across generations: sometimes begin with a relevant visual demonstration, sometimes a short product-specific line, and sometimes a clean reveal with no hook. "
-        "Do not repeatedly start with 'Kenali', 'Jom lihat', or any single stock phrase. Never invent materials, benefits, quality, comfort or specifications. "
+        "Avoid classroom-style introductions, repetitive stock phrases and scripted-sounding language. Use a natural, concise Malaysian-Malay advertising tone. Never invent materials, benefits, quality, comfort or specifications. "
         " STRICT NO-LOGO RULE: Do not add any logo or watermark anywhere in the video, including TikTok, Shopee, creator, AI-generator or provider branding; "
         "no logo overlays, corner bugs, end cards, branded borders, platform UI or background signage. Never add captions or text unless separately requested. "
         "If a logo or mark is physically printed on the reference product, preserve it only as part of that exact product and never create a separate or enlarged logo."
