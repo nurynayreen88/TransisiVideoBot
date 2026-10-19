@@ -281,22 +281,19 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
                              + ("Do not perform the main surrounding contour yet. " if doodle else ""))
             if storyboard_override and isinstance(storyboard_override, (list, tuple)) and len(storyboard_override) == 4:
                 beat_plan = (
-                    "DIRECTOR'S CURATED PREMIUM STORYBOARD: NO ON-SCREEN TEXT. "
-                    + (("CONTINUITY BRIDGE: Resume from Part 1's exact final product frame. "
-                        "CONTINUATION ACTION: Continue the same concept. Do not repeat the opening hook. ")
+                    "SELECTED STORYBOARD: Follow these product-specific beats in order. "
+                    + (("CONTINUITY: Resume from Part 1's final frame; do not repeat its hook. ")
                        if part == 2 else "")
-                    + "FOLLOW THESE SELECTED STORYBOARD BEATS IN ORDER: "
                     + " | ".join(
                         str(item.get("shot", "")) + ": " + str(item.get("direction", ""))
                         for item in storyboard_override
                     ) + ". "
                 )
             hook_rule = (
-                "NO ON-SCREEN TEXT: Do not render product names, headlines, captions, labels, logos or watermarks. "
-                "Never guess a category, benefit, price, popularity or product name. "
-                + ("If voice is selected, use a short product-specific spoken hook in the selected language. "
-                   if not storyboard_override and part < 2 else
-                   "Use a clean visual reveal; dialogue is optional. ")
+                "HOOK + CTA: Open with a product-specific visual hook, show one relevant detail or plausible use, "
+                "and finish with a clear product shot. Use only supported product details. "
+                + ("If voice is selected, keep the spoken hook and CTA short and natural. "
+                   if part < 2 else "Continue naturally without repeating the opening hook. ")
             )
             doodle_rule = (
                 "GRAPHICS: Thin white hand-drawn marks may emphasize visible product edges only; never cover the product. "
@@ -305,12 +302,13 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
             concept_rule = ("CREATIVE IDEA: " + concept.strip() + ". " if concept and concept.strip() else "")
             return (
                 "VIDEO PROMPT — " + str(duration) + " SECONDS" + (" | PART " + str(part) if part else "") + "\n"
-                "Realistic vertical 9:16 (1080x1920) product ad for Shopee/TikTok full-screen mobile viewing, exactly " + str(duration) + " seconds.\n"
-                "PRODUCT: " + product + "\n" + concise_category_direction + concise_framework + "\n"
-                + "STYLE: " + style_name + " — " + style_template[:70].strip() + "\n"
-                + "SETTING: " + str(scene)[:100].strip() + "\nCAMERA: " + camera[:70].strip() + "\n"
+                "Vertical 9:16, realistic product video, exactly " + str(duration) + " seconds.\n"
+                + "STYLE: " + style_name + " — " + " ".join(style_template.split())[:180].rstrip() + "\n"
+                + "PRODUCT: " + product + "\n" + concise_category_direction + concise_framework + "\n"
+                + "SETTING: " + str(scene)[:100].strip() + ". CAMERA: " + camera[:70].strip() + "\n"
+                + "PRODUCT LOCK: Preserve the reference product's visible design, colour, pattern, branding and proportions. Do not invent features or accessories.\n"
                 + hook_rule + beat_plan + concept_rule[:100] + doodle_rule
-                + "Natural movement. If voice is selected, use a short product-specific hook and CTA in the selected language. No added on-screen text or watermark."
+                + "Keep actions natural and the product consistent. Follow the selected text, audio and visual options."
             )
 
         evidence_rules = (
