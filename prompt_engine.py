@@ -322,18 +322,18 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
             )
         storyboard_plan = (
             curated_direction if curated_direction else
-            (hook_direction if part != 2 else "NO REPEATED OPENING HOOK in Part 2.") + "\\n\\n" + rules
+            (hook_direction if part != 2 else "NO REPEATED OPENING HOOK in Part 2.") + "\n\n" + rules
         )
         return (
-            "PROMPT VIDEO — 10 SAAT\\n"
-            + "Vertical 9:16, " + str(duration) + " seconds. " + style_name + ".\\n"
-            + "Product: " + product + ". " + category_direction + (" " + model_age_direction if model_age_direction else "") + "\\n"
-            + "Setting: " + scene + ". Camera: " + camera + "\\n"
-            + "PRODUCT LOCK: Preserve the reference product's visible design, colour, pattern, branding and proportions. Do not invent features or accessories.\\n"
-            + "HOOK + DEMONSTRATION + CTA: Open with a product-specific visual hook, show one relevant detail or plausible use, and finish on a clear product shot.\\n\\n"
-            + "STORYBOARD:\\n" + storyboard_plan + "\\n\\n"
-            + ("CREATIVE IDEA: " + concept.strip() + "\\n\\n" if concept else "")
-            + ("WHITE DOODLE: Keep selected doodles small and outside the product silhouette; use no letters or labels.\\n" if doodle else "")
+            "PROMPT VIDEO — 10 SAAT\n"
+            + "Vertical 9:16, " + str(duration) + " seconds. " + style_name + ".\n"
+            + "Product: " + product + ". " + category_direction + (" " + model_age_direction if model_age_direction else "") + "\n"
+            + "Setting: " + scene + ". Camera: " + camera + "\n"
+            + "PRODUCT LOCK: Preserve the reference product's visible design, colour, pattern, branding and proportions. Do not invent features or accessories.\n"
+            + "HOOK + DEMONSTRATION + CTA: Open with a product-specific visual hook, show one relevant detail or plausible use, and finish on a clear product shot.\n\n"
+            + "STORYBOARD:\n" + storyboard_plan + "\n\n"
+            + ("CREATIVE IDEA: " + concept.strip() + "\n\n" if concept else "")
+            + ("WHITE DOODLE: Keep selected doodles small and outside the product silhouette; use no letters or labels.\n" if doodle else "")
             + "Keep actions, lighting and camera movement natural and consistent. Follow the selected storyboard and visual options."
         )
     if mode == "storyboard":
