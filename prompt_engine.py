@@ -215,7 +215,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
         'crafts': "Show the craft product with one plausible, simple action.",
         'other': "Present the product clearly without assuming unlisted features.",
     }.get(product_type, "Present the product clearly and realistically.")
-    concise_category_direction += " Setting: " + str(scene or "a suitable realistic setting") + ". Preserve visible product details; invent no features."
+    concise_category_direction += " Preserve visible product details; invent no features."
     identity = (
         "PRODUCT IDENTITY RULE: The user will upload the original product photo(s) to the target AI video generator as the MASTER visual reference. "
         "Treat those photo(s), not assumptions from the product name, as the source of truth for the visible product identity. "
@@ -303,7 +303,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
             return (
                 "VIDEO PROMPT — " + str(duration) + " SECONDS" + (" | PART " + str(part) if part else "") + "\n"
                 "Vertical 9:16, realistic product video, exactly " + str(duration) + " seconds.\n"
-                + "STYLE: " + style_name + " — " + " ".join(style_template.split())[:180].rstrip() + "\n"
+                + "STYLE: " + style_name + " — " + (" ".join(style_template.split())[:180].rsplit(" ", 1)[0] or " ".join(style_template.split())[:180]).rstrip() + "\n"
                 + "PRODUCT: " + product + "\n" + concise_category_direction + concise_framework + "\n"
                 + "SETTING: " + str(scene)[:100].strip() + ". CAMERA: " + camera[:70].strip() + "\n"
                 + "PRODUCT LOCK: Preserve the reference product's visible design, colour, pattern, branding and proportions. Do not invent features or accessories.\n"
