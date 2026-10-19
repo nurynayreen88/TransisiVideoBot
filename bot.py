@@ -473,10 +473,11 @@ def prompt_model_age_menu():
 
 
 def prompt_language_menu():
+    # This selection controls spoken language only. Klippo videos remain free of generated on-screen text.
     return InlineKeyboardMarkup([
-        [InlineKeyboardButton('Bahasa Melayu', callback_data='prompt_language:Malay'),
-         InlineKeyboardButton('English', callback_data='prompt_language:English')],
-        [InlineKeyboardButton('Tiada teks pada skrin', callback_data='prompt_language:none')],
+        [InlineKeyboardButton('🇲🇾 Bahasa Melayu Malaysia (voiceover)', callback_data='prompt_language:Malay'),
+         InlineKeyboardButton('🇬🇧 English (voiceover)', callback_data='prompt_language:English')],
+        [InlineKeyboardButton('Auto — Bahasa Melayu Malaysia', callback_data='prompt_language:none')],
         [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
     ])
 
@@ -491,18 +492,33 @@ def prompt_voiceover_menu():
 
 
 def fit_prompt_to_one_telegram_message(prompt, limit=3800):
-    """Keep a video prompt in one Telegram message while preserving its core instructions."""
+    """Compact long prompts without dropping the guided audio and final quality settings."""
     prompt = (prompt or "").strip()
     if len(prompt) <= limit:
         return prompt
-    ending = (
-        "\n\nREALISM / FINAL CHECK: Photoreal live-action look, natural texture and anatomy, "
-        "physically plausible movement, grounded shadows, believable reflections and consistent product identity. "
-        "No CGI look, waxy skin, malformed hands, warped product, flicker or invented features."
+
+    marker = 'KLIPPO GUIDED CREATIVE SETTINGS:'
+    suffix = (
+        "\\n\\nREALISM / FINAL CHECK: Photoreal live-action look, natural texture and anatomy, "
+        "physically plausible movement, true real-world product scale, grounded shadows, believable reflections, "
+        "consistent product identity, and no generated on-screen text or added branding."
     )
+    if marker in prompt:
+        head, settings = prompt.split(marker, 1)
+        tail = marker + settings
+        # The settings block contains voiceover language/accent and must survive compaction.
+        if len(tail) > int(limit * 0.42):
+            tail = tail[:int(limit * 0.42) - 80].rstrip() + "\\n[Guided settings shortened; retain selected voiceover language, accent, no-text rule and audio mix.]"
+        budget = limit - len(tail) - len(suffix) - 80
+        body = head[:max(0, budget)]
+        cut = max(body.rfind("\\n"), body.rfind(". "))
+        if cut >= int(len(body) * 0.72):
+            body = body[:cut + (1 if body[cut:cut + 1] == "." else 0)]
+        return body.rstrip() + "\\n\\n[Middle of prompt compacted to fit Telegram; retain product identity and selected storyboard.]\\n\\n" + tail + suffix
+
+    ending = suffix
     body = prompt[:limit - len(ending)]
-    # Prefer a clean paragraph/sentence boundary instead of cutting a direction in half.
-    cut = max(body.rfind("\n"), body.rfind(". "))
+    cut = max(body.rfind("\\n"), body.rfind(". "))
     if cut >= int(len(body) * 0.72):
         body = body[:cut + (1 if body[cut:cut + 1] == "." else 0)]
     return body.rstrip() + ending
@@ -531,15 +547,19 @@ def prompt_creative_settings(user_data, include_audio=True):
     ]
     if include_audio:
         language = user_data.get('prompt_language', 'Malay')
-        lines.append('On-screen text language: ' + ('no on-screen text' if language == 'none' else language) + '. All on-screen text, including any opening hook, must follow this language; preserve brand and product names exactly, keep text short and readable, and do not invent claims, logos or watermarks.')
+        lines.append('NO GENERATED ON-SCREEN TEXT: no captions, subtitles, headlines, written hooks, CTA text, added logos, watermarks or UI overlays. Preserve only branding physically present on the actual product in the reference image.')
         voiceover_mode = user_data.get('prompt_voiceover_mode', 'none')
         if voiceover_mode == 'ai':
-            lines.append('Create a concise, natural voiceover in ' + ('Bahasa Melayu' if language == 'Malay' else 'English' if language == 'English' else 'Bahasa Melayu') + '. Keep spoken lines short, match them to the product actions, and keep background music below the voice.')
+            if language == 'English':
+                spoken_language = 'natural conversational English with clear native-sounding pronunciation'
+            else:
+                spoken_language = ('natural Bahasa Melayu Malaysia delivered by a native-sounding Malaysian Malay speaker, with Malaysian vocabulary, pronunciation, rhythm and intonation; Indonesian accent and Indonesian vocabulary are prohibited. Avoid Indonesian expressions such as “banget”, “nggak”, “kalian”, “bisa” and “silakan”.')
+            lines.append('VOICEOVER IS ENABLED: use ' + spoken_language + ' Keep the opening 0–2 seconds focused on a spoken, product-specific hook; then say one concise demonstration point or visible benefit supported by the reference; finish with a natural spoken CTA. Do not invent specifications, claims, discounts or guarantees. For each 10-second clip, keep dialogue brief (normally no more than 18–22 Malay words), natural and easy to pronounce. For a 20-second video, Part 1 introduces the hook and situation; Part 2 continues with a distinct demonstration and CTA. Never repeat the same hook or line across clips. Choose a suitable delivery style for the product (cute, cheerful, friendly, humorous, calm, serious, confident or persuasive) and vary it rather than reusing a generic opening. Keep background music clearly below the voice and maintain the same speaker identity and accent across connected clips.')
         elif voiceover_mode == 'script':
             script = ' '.join((user_data.get('prompt_voiceover_script') or '').split())
-            lines.append('Use this exact user-provided voiceover/dialogue script without rewriting it: ' + script)
+            lines.append('Use this exact user-provided voiceover/dialogue script without rewriting it: ' + script + ' Keep background music below the voice. Do not add any on-screen text.')
         else:
-            lines.append('No spoken dialogue or voiceover. Use suitable background music only if the target video platform supports it.')
+            lines.append('No spoken dialogue or voiceover. Use suitable instrumental background music only if supported by the target video platform. Keep the video free of generated on-screen text.')
     return '\n'.join(lines)
 
 
@@ -2174,7 +2194,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if selected in ('10', '20'):
             context.user_data['prompt_duration'] = int(selected)
             context.user_data['stage'] = 'prompt_language'
-            await query.message.reply_text('🌐 LANGKAH 6 — Pilih bahasa teks pada skrin:', reply_markup=prompt_language_menu())
+            await query.message.reply_text('🌐 LANGKAH 6 — Pilih bahasa voiceover. Video kekal tanpa teks pada skrin:', reply_markup=prompt_language_menu())
     elif action.startswith('prompt_language:') and stage == 'prompt_language':
         selected = action.split(':', 1)[1]
         if selected in ('Malay', 'English', 'none'):
