@@ -3265,20 +3265,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     prompt += ('\n\nTWO-MODEL CAST: Model 1 is ' + str(context.user_data.get('prompt_model_gender','female')) + ', appearance ' + str(context.user_data.get('prompt_model_ethnicity','random_malaysia')) + ', age ' + str(context.user_data.get('prompt_model_age','26-40')) + ', hijab ' + str(context.user_data.get('prompt_model_hijab','na')) + '. Model 2 is ' + str(context.user_data.get('prompt_model_gender_2','male')) + ', appearance ' + str(context.user_data.get('prompt_model_ethnicity_2','random_malaysia')) + ', age ' + str(context.user_data.get('prompt_model_age_2','26-40')) + ', hijab ' + str(context.user_data.get('prompt_model_hijab_2','na')) + '. Keep identities distinct and consistent.')
                 elif context.user_data.get('prompt_model_presence') == 'yes':
                     prompt += ('\n\nMODEL CAST: One ' + str(context.user_data.get('prompt_model_gender','female')) + ' model, appearance ' + str(context.user_data.get('prompt_model_ethnicity','random_malaysia')) + ', age ' + str(context.user_data.get('prompt_model_age','26-40')) + ', hijab ' + str(context.user_data.get('prompt_model_hijab','na')) + '.')
-                if context.user_data.get('prompt_on_screen_text') == 'yes':
-                    if context.user_data.get('prompt_text_mode') == 'manual' and context.user_data.get('prompt_text_content'):
-                        prompt += '\n\nON-SCREEN TEXT: Display exactly this text, with correct spelling and no extra words: ' + context.user_data['prompt_text_content']
-                    else:
-                        prompt += '\n\nON-SCREEN TEXT: Add concise Malaysian Malay promotional text with a strong hook and clear CTA. Keep spelling accurate; do not add logos or unrelated text.'
-                else:
-                    prompt += '\n\nON-SCREEN TEXT: Do not display any text, captions, labels, logos or watermarks.'
-                if context.user_data.get('prompt_audio_enabled'):
-                    language = 'Bahasa Melayu Malaysia' if context.user_data.get('prompt_language', 'Malay') != 'English' else 'English'
-                    prompt += '\n\nAUDIO: ' + ('On-camera model speaks' if context.user_data.get('prompt_speech_source') == 'model' else 'Off-camera promoter voice') + ' in ' + language + '; style: ' + str(context.user_data.get('prompt_voiceover_style','auto')) + '. Keep dialogue short; music below the voice.'
-                    if context.user_data.get('prompt_voiceover_mode') == 'script' and context.user_data.get('prompt_voiceover_script'):
-                        prompt += ' Use this exact spoken script: ' + context.user_data['prompt_voiceover_script']
-                else:
-                    prompt += '\n\nAUDIO: No voiceover or spoken dialogue.'
+                # Text and audio options are added once by prompt_creative_settings below.
                 framing_key = context.user_data.get('prompt_framing', 'auto')
                 # Always tailor actions to the actual product and its intended age group.
                 if _prompt_is_child_product(context.user_data):
@@ -3287,25 +3274,18 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     selected_age = str(context.user_data.get('prompt_model_age', '26-40'))
                     if selected_category == 'baby' or selected_subcategory.startswith('baby_'):
                         age_action_rule = (
-                            'AGE-APPROPRIATE BABY PRODUCT ACTIONS: tailor the action to the exact product, not a generic model routine. '
-                            'For clothing, show it on a child-sized hanger/mannequin or carefully held by a caregiver; never make an adult wear baby clothing. '
-                            'For feeding, bath, sleep or baby-gear products, show only a simple supervised demonstration with stable placement and correct, plausible handling. '
-                            'Do not depict unsupported product use, unsafe sleep, unattended elevated surfaces, small loose parts near a baby, or unsafe handling. '
-                            'If a baby is not clearly present in the reference, do not invent a baby; use caregiver hands and product-focused shots.'
+                            'BABY PRODUCT: use a simple, safe, supervised demonstration suited to this item. '
+                            'For clothing, use a child-sized hanger or caregiver-held close-up; do not invent a baby or unsafe use.'
                         )
                     elif selected_age in {'4-7', '8-12', '13-17'} and context.user_data.get('prompt_model_presence') == 'yes':
                         age_action_rule = (
-                            'AGE-APPROPRIATE CHILD ACTIONS: use cheerful, natural, non-sexualised movements suited to the selected age and item: '
-                            'a small wave, a gentle turn to reveal clothing, a few natural steps, or a brief playful interaction only when relevant. '
-                            'For shoes, keep the camera on natural steps and the footwear; for clothing, show front/side fit and fabric movement; '
-                            'for toys, show safe age-appropriate play; for school items, show ordinary use. Pick distinct actions that suit this exact product, '
-                            'not the same routine for every product. Avoid risky stunts, adult-like posing, exaggerated expressions, or changing product details.'
+                            'CHILD MODEL: choose one natural, age-appropriate action that demonstrates this selected product; '
+                            'keep the product visible and unchanged. Avoid risky or exaggerated movement.'
                         )
                     else:
                         age_action_rule = (
-                            'CHILD-TARGETED PRODUCT WITH ADULT PRESENTER: the adult is a caregiver/presenter, not the wearer or user of a child-sized item. '
-                            'Use gentle hands, a child-sized hanger/mannequin, product close-ups, or a safe supervised context appropriate to the item. '
-                            'Do not pretend the product fits an adult or invent a child/baby who is not supported by the reference.'
+                            'CHILD-SIZED PRODUCT: adult is a caregiver/presenter, not the wearer. '
+                            'Use a suitable hanger, surface or close-up; do not invent a child or unsupported use.'
                         )
                     prompt = prompt.rstrip() + '\n\nAGE- AND PRODUCT-SUITABLE ACTION RULES:\n' + age_action_rule
                 if framing_key != 'auto':
