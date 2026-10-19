@@ -1183,13 +1183,24 @@ def resolve_music(choice: str, style: str) -> Path | None:
 
 
 def verified_video_hook(info: str) -> str | None:
-    """Conservative, local text-only hook. Never send product photos to a hook AI."""
+    """Build a varied, neutral Malaysian-Malay opening without inventing product claims."""
+    import random
+
     info = ' '.join((info or '').split())[:100]
     if not info or not re.fullmatch(r"[\\w\\s.,&+()/-]+", info, flags=re.UNICODE):
         return None
-    if len(info) > 48:
-        info = info[:48].rsplit(' ', 1)[0]
-    return 'KENALI ' + info.upper() if info else None
+    if len(info) > 42:
+        info = info[:42].rsplit(' ', 1)[0]
+    # Some videos work better with a clean visual reveal and no headline at all.
+    if random.SystemRandom().randrange(5) == 0:
+        return None
+    openings = (
+        'JOM LIHAT ' + info.upper(),
+        'INI DIA ' + info.upper(),
+        'LIHAT LEBIH DEKAT: ' + info.upper(),
+        info.upper() + ' DALAM FOKUS',
+    )
+    return random.SystemRandom().choice(openings)
 
 
 def hook_card(still: Path, hook: str) -> None:
