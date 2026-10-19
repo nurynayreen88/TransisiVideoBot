@@ -105,7 +105,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
         )
 
         hook_direction = (
-            "VISUAL HOOK: Create immediate curiosity through a product-specific camera reveal or plausible action in the opening 0–2 seconds. Do not display any text. If voiceover is enabled in the guided settings, the hook may be spoken only. Never invent a product benefit claim. "
+            "VISUAL HOOK: Create immediate curiosity through a product-specific camera reveal or plausible action in the opening 0–2 seconds. NO ON-SCREEN TEXT: never display the hook as written text. If voiceover is enabled in the guided settings, the hook may be spoken only. Never invent a product benefit claim. "
         ) if hook else (
             "NO ON-SCREEN TEXT: Begin with a clean product reveal and use composition or action as the visual hook. "
             "Never guess a category, benefit, price, popularity or product name."
