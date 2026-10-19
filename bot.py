@@ -494,7 +494,6 @@ def prompt_model_hijab_menu():
     return InlineKeyboardMarkup([
         [InlineKeyboardButton('Bertudung', callback_data='prompt_model_hijab:hijab')],
         [InlineKeyboardButton('Tidak bertudung', callback_data='prompt_model_hijab:no_hijab')],
-        [InlineKeyboardButton('Tidak berkenaan', callback_data='prompt_model_hijab:na')],
     ])
 
 
@@ -3786,11 +3785,12 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if parent == 'category':
             context.user_data['prompt_product_type'] = 'other'
             context.user_data['prompt_custom_category_name'] = custom_value
-            context.user_data['prompt_product_subcategory'] = 'other_other'
+            context.user_data['prompt_product_subcategory'] = ''
             context.user_data['prompt_custom_subcategory_name'] = ''
-            context.user_data['stage'] = 'prompt_product_name'
+            context.user_data['prompt_custom_category_parent'] = 'subcategory'
+            context.user_data['stage'] = 'prompt_custom_category'
             await update.message.reply_text(
-                f'✅ Kategori sendiri: {custom_value}\n\n🛍️ Masukkan nama produk (nama sahaja, bukan pautan):'
+                f'✅ Kategori sendiri: {custom_value}\n\n📦 Taip subkategori produk. Contoh: aksesori telefon, beg kamera atau serum rambut.'
             )
         else:
             context.user_data['prompt_product_subcategory'] = 'other_other'
