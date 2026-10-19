@@ -20,7 +20,7 @@ from telegram.ext import (
     Application, CallbackQueryHandler, CommandHandler, ContextTypes,
     MessageHandler, filters,
 )
-from fal_storyboard_test import analyze_product, generate_panel
+from fal_storyboard_test import analyze_product, generate_panel, normalize_malaysian_voiceover
 from modules.video_engine import create_video
 from modules.storyboard_engine import build_storyboard_prompt
 
@@ -336,7 +336,7 @@ async def run_legacy_video(update: Update, context: ContextTypes.DEFAULT_TYPE) -
                 path = root / f"panel_{index}.jpg"
                 path.write_bytes(data)
                 panel_paths.append(path)
-            voiceover = str(attributes.get("voiceover_ms") or "Lihat produk ini dengan reka bentuk dan perincian yang menarik.")
+            voiceover = normalize_malaysian_voiceover(attributes.get("voiceover_ms", ""), attributes.get("visible_details"), attributes.get("product_type"))
             video_path = root / "klippo_product_video.mp4"
             await query.message.reply_text("Panel video siap. Sedang menghasilkan video 9:16 dan voiceover Bahasa Melayu…")
             await asyncio.to_thread(create_video, panel_paths, voiceover, video_path)
