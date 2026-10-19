@@ -1943,8 +1943,8 @@ async def show_admin_users(message, status='all', offset=0, search_query=''):
     items = result['items']
     heading = '👥 SENARAI PENGGUNA KLIPPO'
     if search_query:
-        heading += f'\\nCarian: {search_query}'
-    heading += f"\\nPenapis: {status.title()}\\nJumlah padanan: {result['total']}"
+        heading += f'\nCarian: {search_query}'
+    heading += f"\nPenapis: {status.title()}\nJumlah padanan: {result['total']}"
     keyboard = [
         [InlineKeyboardButton('Semua', callback_data='admin_users:all:0'),
          InlineKeyboardButton('Aktif', callback_data='admin_users:active:0')],
@@ -1965,7 +1965,7 @@ async def show_admin_users(message, status='all', offset=0, search_query=''):
     keyboard.append([InlineKeyboardButton('🔎 Cara cari pengguna', callback_data='admin_users_help')])
     keyboard.append([InlineKeyboardButton('↩️ Admin', callback_data='admin')])
     if not items:
-        heading += '\\n\\nTiada pengguna ditemui.'
+        heading += '\n\nTiada pengguna ditemui.'
     await message.reply_text(heading, reply_markup=InlineKeyboardMarkup(keyboard))
 
 
@@ -1999,16 +1999,16 @@ async def show_admin_user_details(message, user_id, status='all', offset=0):
                 current = 'expired'
         except (ValueError, TypeError):
             pass
-    text = (f"👤 BUTIRAN PENGGUNA KLIPPO\\n\\nNama: {name}\\nID Telegram: {user_id}"
-            f"\\nStatus: {current}\\nMula langganan: {user.get('started_at') or '-'}"
-            f"\\nTamat langganan: {expiry or '-'}\\n\\n🧾 SEJARAH RESIT (10 terkini)")
+    text = (f"👤 BUTIRAN PENGGUNA KLIPPO\n\nNama: {name}\nID Telegram: {user_id}"
+            f"\nStatus: {current}\nMula langganan: {user.get('started_at') or '-'}"
+            f"\nTamat langganan: {expiry or '-'}\n\n🧾 SEJARAH RESIT (10 terkini)")
     receipts = details.get('receipts') or []
     if not receipts:
-        text += '\\nTiada rekod resit.'
+        text += '\nTiada rekod resit.'
     for receipt in receipts:
-        text += (f"\\n\\n#{receipt['id']} · RM{receipt.get('amount_myr') or '5.00'} · {receipt.get('status')}"
-                 f"\\nDihantar: {receipt.get('submitted_at') or '-'}"
-                 f"\\nDisemak: {receipt.get('reviewed_at') or '-'}")
+        text += (f"\n\n#{receipt['id']} · RM{receipt.get('amount_myr') or '5.00'} · {receipt.get('status')}"
+                 f"\nDihantar: {receipt.get('submitted_at') or '-'}"
+                 f"\nDisemak: {receipt.get('reviewed_at') or '-'}")
     await message.reply_text(text, reply_markup=InlineKeyboardMarkup([
         [InlineKeyboardButton('⬅️ Kembali ke senarai', callback_data=f'admin_users:{status}:{offset}')],
         [InlineKeyboardButton('↩️ Admin', callback_data='admin')]
@@ -2575,7 +2575,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if not is_admin(update.effective_user.id):
             await query.message.reply_text('Akses tidak dibenarkan.')
             return
-        await query.message.reply_text('🔎 Untuk mencari nama atau ID Telegram, gunakan arahan admin:\\n/cariuser nama\\n/cariuser 123456789')
+        await query.message.reply_text('🔎 Untuk mencari nama atau ID Telegram, gunakan arahan admin:\n/cariuser nama\n/cariuser 123456789')
     elif action == 'admin_pending':
         if not is_admin(update.effective_user.id):
             await query.message.reply_text('Akses tidak dibenarkan.')
