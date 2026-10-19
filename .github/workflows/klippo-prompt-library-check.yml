@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - "staging/**"
+      - "test/fal-storyboard-beta"
   pull_request:
     branches:
       - main
@@ -72,11 +73,40 @@ jobs:
               text = prompt["prompt"].casefold()
               for required in (
                   "no uploaded image", "text only", "strict output rules:", "no on-screen text",
-                  "logos", "exactly 10 seconds", "vertical 9:16"
+                  "logos", "exactly 10 seconds", "vertical 9:16",
+                  "real-world scale is mandatory", "voiceover when enabled",
+                  "keep the product presentation consistent"
               ):
                   assert required in text, (
                       f"Prompt {prompt['id']} is missing required reference/output rule: {required}"
                   )
+          assert any(item.get("id") == "accessories_ring_real_scale_v1" for item in prompts), (
+              "Dedicated true-scale ring prompt is missing"
+          )
+          assert all("REAL-WORLD SCALE IS MANDATORY" in item["prompt"] for item in prompts), (
+              "Every prompt must explicitly guard real-world physical scale"
+          )
+          assert all("VOICEOVER WHEN ENABLED" in item["prompt"] for item in prompts), (
+              "Every prompt must define Malaysian Malay voiceover behavior when audio is enabled"
+          )
+          # Known cross-category boilerplate must never leak into unrelated storyboard categories.
+          forbidden_by_category = {
+              "beauty": ("footwear fully grounded", "lace touch", "short step on a flat dry surface"),
+              "bags": ("footwear fully grounded", "lace touch", "short step on a flat dry surface"),
+              "accessories": ("footwear fully grounded", "named garment or footwear", "heel or visible edge most relevant"),
+              "clothing": ("named bag or wallet", "footwear fully grounded"),
+              "food": ("study-desk scene", "footwear fully grounded", "named garment or footwear"),
+              "kitchen": ("study-desk scene", "footwear fully grounded"),
+          }
+          for item in prompts:
+              storyboard_text = " ".join(
+                  str(shot.get("direction", "")) for shot in item.get("storyboard", [])
+              ).casefold()
+              for forbidden in forbidden_by_category.get(item.get("category"), ()):
+                  assert forbidden not in storyboard_text, (
+                      f"Off-category storyboard direction '{forbidden}' in {item['id']}"
+                  )
+
           # Every curated entry must carry its own timed premium storyboard.
           storyboard_signatures = set()
           for prompt in prompts:
@@ -208,7 +238,8 @@ jobs:
               style_key, style_name, style_template = resolve("white_doodle")
               assert style_key == "white_doodle"
               for required in (
-                  "verified", "omit unsupported labels", "HOLD the final frame",
+                  "visual reveal", "NO letters, words, labels, captions",
+                  "HOLD the final frame",
                   "Do not draw the main surrounding contour in Part 1",
                   "white dashed contour", "Never invent unseen sides"
               ):
@@ -220,7 +251,7 @@ jobs:
                   version = db.execute(
                       "SELECT version FROM storyboard_prompt_styles WHERE style_key='white_doodle'"
                   ).fetchone()[0]
-                  assert version == 4, f"Unexpected White Doodle template version: {version}"
+                  assert version == 5, f"Unexpected White Doodle template version: {version}"
 
               uncertain = (
                   "PRODUCT NAME: unknown. "
@@ -230,7 +261,7 @@ jobs:
                   "storyboard", uncertain, "clean premium studio background",
                   "push", "white_doodle", 10
               )
-              assert "NO ON-SCREEN HOOK TEXT" in first
+              assert "NO ON-SCREEN TEXT" in first
               assert "Do not perform the main surrounding contour yet." in first
               assert "HOLD the final frame" in first
               assert "Never guess a category, benefit, price, popularity or product name." in first
@@ -240,9 +271,10 @@ jobs:
                   "storyboard", verified, "clean premium studio background",
                   "push", "white_doodle", 10
               )
-              assert "KENALI Beg VELLA" in verified_prompt, (
-                  "Verified product name should create the exact conservative hook"
+              assert "VISUAL HOOK" in verified_prompt, (
+                  "Verified product name should create a product-specific visual hook without written text"
               )
+              assert "NO ON-SCREEN TEXT" in verified_prompt
 
               paired = build_prompt(
                   "storyboard", uncertain, "clean premium studio background",
