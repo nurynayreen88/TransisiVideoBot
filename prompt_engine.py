@@ -89,12 +89,8 @@ def build_prompt(mode, product, scene, motion, style='auto', duration=10, concep
 def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, concept='', product_type='other', storyboard_override=None, total_parts=2):
     duration = 10
     hook_cta_language = (
-        "MANDATORY HOOK, CTA AND LANGUAGE RULES: Every generated video must include a product-specific hook in the first 0–2 seconds, one clear product demonstration or reference-supported benefit, and a natural CTA in the final 2 seconds. "
-        "For 20-second outputs made of two connected 10-second clips, EACH clip must work on its own and contain its own hook, demonstration and CTA. Part 2 must use a different continuation hook and wording from Part 1; never repeat the same opening line. Part 1 still needs its own brief CTA while ending on a frame that can connect to Part 2. "
-        "When voiceover is enabled, speak the hook and CTA aloud in the language selected in Klippo. Never mix languages unless requested. For English, use natural conversational English. For Bahasa Melayu or Auto, use natural Bahasa Malaysia with clear, easy-to-understand pronunciation. "
-        "Do not reuse one script across products or rely on generic openings such as 'Kenali produk ini'. Vary hook formats naturally: a product-specific question, a visual surprise, a styling/use moment, a close-up reveal or a relatable situation. Match the format to the actual product and vary sentence structure. Mention only details visible in or confirmed by the reference; do not invent discounts, scarcity, popularity, ratings, results or product claims. "
-        "Keep each spoken line concise enough to fit naturally in its allotted seconds; avoid rushed speech. The CTA should be relevant and varied, for example inviting viewers to view product details, explore available colours/sizes, or check the listing—only when that option is actually supported. "
-        "Never render the hook or CTA as on-screen text, subtitles, captions or labels. If voiceover is disabled, express the hook through the opening visual and the CTA through an inviting final product shot only; absolutely no added written text."
+        "HOOK + PRODUCT DEMONSTRATION + CTA: Open with a product-specific visual hook, show one visible detail or plausible use, and finish with a clear product hero shot. Vary the opening; avoid repeated stock phrases. Use only reference-supported details and claims. "
+        "NO ON-SCREEN TEXT, added logos or watermarks."
     )
     camera = CAMERAS.get(motion, CAMERAS["push"])
     product_type_directions = {
@@ -161,14 +157,14 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
         )
 
         hook_direction = (
-            "VISUAL HOOK: Create immediate curiosity through a product-specific camera reveal or plausible action in the opening 0–2 seconds. NO ON-SCREEN TEXT: never display the hook as written text. If voiceover is enabled in the guided settings, the hook may be spoken only. Never invent a product benefit claim. "
+            "VISUAL HOOK: Create curiosity with a product-specific reveal or plausible action in the opening 0–2 seconds. Never show hook text or invent product claims. "
         ) if hook else (
             "NO ON-SCREEN TEXT: Begin with a clean product reveal and use composition or action as the visual hook. "
             "Never guess a category, benefit, price, popularity or product name."
         )
         if storyboard_override:
             hook_direction = (
-                "NO ON-SCREEN TEXT: Do not add a hook headline, captions, written labels, added logos, watermarks or UI. Use the selected product-specific storyboard; if voiceover is enabled, keep the hook in spoken audio only."
+                "NO ON-SCREEN TEXT, added logos, watermarks or UI. Follow the selected product-specific storyboard."
             )
         if doodle:
             if part > 1:
@@ -242,7 +238,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
                         "shot": "FINAL HERO / SPOKEN CTA",
                         "direction": (
                             "Finish on a clear full-product hero at the same true scale and in the same coherent setting. "
-                            "If voiceover is enabled, deliver a concise spoken CTA only; never show CTA text on screen. "
+                            "End with the selected voiceover CTA; never show CTA text on screen. "
                             "Do not repeat the previous clip's hook or closing line."
                         ),
                     },
@@ -251,7 +247,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
                 "DIRECTOR'S CURATED PREMIUM STORYBOARD: Use this selected GitHub library storyboard as the primary shot plan. "
                 + (("CONTINUATION SEGMENT " + str(part) + "/" + str(total_parts) + ": Use a fresh, product-specific continuation hook and a distinct action not used in earlier clips; do not repeat earlier CTA wording. Preserve the exact previous final frame at 0–2s. ") if part > 1 else "")
                 + "Expand the four selected creative beats into exactly five connected panels of 2 seconds each; distribute the selected beats across the panels and add a reference-safe opening or closing panel where needed. Preserve the same product identity, packaging, color, scale and coherent set. "
-                "NO ON-SCREEN TEXT, captions, added logos, watermarks or UI. If the guided settings explicitly enable voiceover, follow their language, accent, duration and audio-mix instructions; otherwise use no dialogue.\n\n"
+                "NO ON-SCREEN TEXT, captions, added logos, watermarks or UI.\n\n"
                 + "\n\n".join(
                     str(item.get("time", "")) + " | " + str(item.get("shot", "")) + "\n"
                     + "VISUAL AND CAMERA BRIEF: " + str(item.get("direction", ""))
@@ -380,7 +376,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
             "Use one simple, physically possible action; keep the product grounded and stable. No montage, sudden scene change or impossible orbit.\n"
             "PHOTOREALISM: Must resemble real camera footage, not CGI, 3D render or AI art. Natural material and skin texture; realistic hands/anatomy if a model is included; consistent face, body, clothing and product. Use believable lens perspective, soft real-world light, contact shadows and plausible reflections. Do not add a person if none is needed.\n"
             "AVOID: waxy skin, uncanny faces, extra/fused fingers, warped product, changing patterns, floating objects, fake reflections, plastic shine, excessive bokeh/HDR, flicker, jitter, identity drift, invented props, captions, added logos or watermarks.\n"
-            "HOOK + DEMONSTRATION + CTA: Open with a distinct, product-specific hook in 0–2s; demonstrate one visible feature or plausible use; finish with a concise CTA in 8–10s. Avoid generic repeated openings such as “Kenali produk ini”. AUDIO AND LANGUAGE: Follow Klippo voiceover settings. If voiceover is enabled, speak the hook and CTA naturally in the selected language; for Bahasa Melayu, use natural Bahasa Malaysia. Keep speech short enough for 10 seconds and mix it above subtle background music. If voiceover is disabled, convey hook and CTA visually without written text. Never add captions, CTA text, logos or watermarks. " +
+            "HOOK + DEMONSTRATION + CTA: Open with a product-specific visual hook, demonstrate one visible detail or plausible use, and finish with a clean hero shot. No on-screen text, added logos or watermarks. " +
             "FINAL CHECK: believable physics, consistent product identity, natural motion, realistic physical scale, no on-screen text or added branding, and understated commercial polish."
         )
         return compact
@@ -391,7 +387,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
         "one coherent deliverable. NO ON-SCREEN TEXT: Do not generate captions, headlines, labels, subtitles, UI overlays, added logos or watermarks. Use a visual hook through composition and action only; any selected hook or CTA must be spoken audio, never written on screen. Preserve only branding physically present on the actual reference product.\n\n"
         "PRODUCT: " + product + "\n" + category_direction + "\n" + model_age_direction + "\n\n" + identity + "\n\n" + art + "\n\n"
         + direction + "\n\n" + negative + "\n\n"
-        "HOOK + DEMONSTRATION + CTA ARE REQUIRED: Open with a distinct, product-specific hook in 0–2s, demonstrate one visible feature or plausible use, and finish with a concise CTA in 8–10s. Avoid generic repeated openings such as “Kenali produk ini”. Follow the user-selected voiceover setting: if enabled, speak hook and CTA in the selected language; for Bahasa Melayu, use natural Bahasa Malaysia. Keep speech short enough for the segment and mix it above subtle background music. If voiceover is disabled, show the hook and CTA visually through the opening reveal, demonstration and inviting final hero frame. Never render hook/CTA as on-screen text. " +
+        "HOOK + DEMONSTRATION + CTA: Open with a product-specific visual hook, show one reference-supported detail or use, and finish with a clear hero shot. Keep all hook/CTA communication in the selected audio direction; never display it as text. " +
         "FINAL REALISM CHECK: The result should pass as authentic live-action commercial footage at first glance, not as an AI-generated image or animation. Consistent product identity in every frame, realistic skin and hand anatomy if a person appears, natural fabric or material texture, grounded contact shadows, plausible reflections, stable exposure, real-camera perspective and physically possible movement. Avoid the polished-but-fake CGI look, artificial skin smoothing, impossible object motion, warped geometry, flicker and temporal identity drift. "
         "FINAL QUALITY CHECK: Consistent identity in every frame, natural physics, clean edges, "
         "stable illumination, smooth temporal coherence and polished affiliate-ad aesthetics. "
