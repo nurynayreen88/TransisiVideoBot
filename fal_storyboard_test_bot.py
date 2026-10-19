@@ -14,6 +14,7 @@ from pathlib import Path
 
 import fal_client
 from PIL import Image
+from modules.product_video_prompt import build_video_prompts
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import (
     Application, CallbackQueryHandler, CommandHandler, ContextTypes,
@@ -109,42 +110,51 @@ async def choose_mode(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
         )
         return
     if mode == "video_prompt":
-        goal = context.user_data.get("content_goal", "shopee")
-        campaign = (
-            "Shopee affiliate: clear, trustworthy product presentation that helps shoppers inspect the item."
-            if goal == "shopee" else
-            "TikTok viral: a strong visual hook, energetic but believable camera movement, and instant product clarity."
-        )
-        video_prompt = (
-            "Use the uploaded product photograph as the MASTER visual reference. Create a vertical 9:16 "
-            "photorealistic product commercial video, exactly 10 seconds long. Preserve the exact product "
-            "identity, silhouette, proportions, colours, materials, patterns, stitching, hardware, accessories, "
-            "and any visible branding. Do not redesign the product or invent unseen features. "
-            + campaign +
-            " Shot sequence: 0–3s, an immediate clean hero reveal; 3–6s, a smooth controlled camera push-in "
-            "showing the real product details; 6–8s, a natural lifestyle/use shot consistent with the reference; "
-            "8–10s, a polished final hero frame. Use realistic motion, stable geometry, soft professional lighting, "
-            "natural shadows, coherent colour grading, and clear product focus. No warped product, extra objects, "
-            "fake logos, watermark, subtitles, or on-screen text. Keep motion elegant and physically plausible."
-        )
-        context.user_data["video_prompt"] = video_prompt
         await query.edit_message_text(
-            "🎬 KLIPPO DIRECT VIDEO PROMPT\n\n"
-            "Prompt ini menggunakan gambar produk yang anda muat naik sebagai rujukan. Salin prompt dan muat naik "
-            "gambar yang sama pada platform pilihan anda. Klippo tidak memanggil API penjana video dalam laluan ini."
-        )
-        await send_text_chunks(
-            query.message, video_prompt,
+            "Pilih tempoh video. Setiap segmen diberikan sebagai prompt berasingan untuk 10 saat:",
             reply_markup=InlineKeyboardMarkup([
-                [InlineKeyboardButton("🔗 Luma Dream Machine", url="https://lumalabs.ai/dream-machine"),
-                 InlineKeyboardButton("🔗 Runway", url="https://runwayml.com/")],
-                [InlineKeyboardButton("🔗 Kling AI", url="https://klingai.com/"),
-                 InlineKeyboardButton("🔗 Pika", url="https://pika.art/")],
-                [InlineKeyboardButton("📋 Paparkan prompt semula", callback_data="prompt:video")],
+                [InlineKeyboardButton("🎬 10 saat — 1 prompt", callback_data="duration:10")],
+                [InlineKeyboardButton("🎬 20 saat — 2 prompt berasingan", callback_data="duration:20")],
+                [InlineKeyboardButton("🎬 30 saat — 3 prompt berasingan", callback_data="duration:30")],
             ]),
         )
         return
     await query.edit_message_text("Pilihan tidak sah. Sila hantar gambar produk semula.")
+
+
+async def choose_video_duration(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Generate the requested number of independent 10-second prompts."""
+    query = update.callback_query
+    await query.answer()
+    if not context.user_data.get("product_image"):
+        await query.edit_message_text("Sila hantar gambar produk dahulu.")
+        return
+    try:
+        duration = int(query.data.split(":", 1)[1])
+        campaign = (
+            "Shopee affiliate: credible, product-focused presentation"
+            if context.user_data.get("content_goal", "shopee") == "shopee"
+            else "TikTok: strong visual hook, energetic but believable product presentation"
+        )
+        prompts = build_video_prompts(duration, campaign=campaign)
+    except (ValueError, KeyError):
+        await query.edit_message_text("Tempoh video tidak sah. Sila pilih 10, 20 atau 30 saat.")
+        return
+
+    context.user_data["video_prompts"] = prompts
+    context.user_data["video_duration"] = duration
+    await query.edit_message_text(
+        f"✅ Video {duration} saat: {len(prompts)} prompt berasingan. "
+        "Setiap prompt ialah satu klip 10 saat. Salin dan gunakan setiap prompt secara berasingan."
+    )
+    for index, prompt in enumerate(prompts, start=1):
+        await send_text_chunks(
+            query.message,
+            f"📋 PROMPT {index}/{len(prompts)} — KLIP 10 SAAT\\n\\n{prompt}",
+            reply_markup=InlineKeyboardMarkup([[
+                InlineKeyboardButton("📋 Paparkan semua prompt semula", callback_data="prompt:video")
+            ]]) if index == len(prompts) else None,
+        )
 
 
 async def send_text_chunks(message, text: str, reply_markup=None) -> None:
@@ -371,11 +381,15 @@ async def legacy_video_button(update: Update, context: ContextTypes.DEFAULT_TYPE
 async def show_video_prompt_for_copy(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     query = update.callback_query
     await query.answer()
-    prompt = context.user_data.get("video_prompt")
-    if not prompt:
+    prompts = context.user_data.get("video_prompts")
+    if not prompts:
         await query.message.reply_text("Prompt video tiada. Sila muat naik gambar produk dan pilih Direct Video Prompt.")
         return
-    await send_text_chunks(query.message, "DIRECT VIDEO PROMPT — TEKAN LAMA UNTUK SALIN\n\n" + prompt)
+    for index, prompt in enumerate(prompts, start=1):
+        await send_text_chunks(
+            query.message,
+            f"PROMPT {index}/{len(prompts)} — KLIP 10 SAAT\\n\\n" + prompt
+        )
 
 
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -390,6 +404,7 @@ def main() -> None:
     app.add_handler(CommandHandler("help", help_command))
     app.add_handler(MessageHandler(filters.PHOTO, handle_photo))
     app.add_handler(CallbackQueryHandler(choose_mode, pattern=r"^mode:"))
+    app.add_handler(CallbackQueryHandler(choose_video_duration, pattern=r"^duration:(10|20|30)$"))
     app.add_handler(CallbackQueryHandler(choose_goal, pattern=r"^goal:"))
     app.add_handler(CallbackQueryHandler(choose_format, pattern=r"^format:"))
     app.add_handler(CallbackQueryHandler(choose_visual_style, pattern=r"^visual:"))
