@@ -2768,12 +2768,23 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif action == 'prompt_framing_back' and stage == 'prompt_framing':
         context.user_data['stage'] = 'prompt_style'
         await query.message.reply_text('🎨 LANGKAH 2 — Pilih gaya visual:', reply_markup=prompt_style_menu(context.user_data.get('prompt_product_type', 'other'), context.user_data.get('prompt_model_presence')))
-    elif action.startswith('prompt_framing:') and stage == 'prompt_framing':
+    elif action.startswith('prompt_framing:'):
         selected = action.split(':', 1)[1]
-        if selected in PRODUCT_FRAMING:
+        if selected in PRODUCT_FRAMING and (
+            stage == 'prompt_framing'
+            or (context.user_data.get('prompt_product_type') and context.user_data.get('prompt_style'))
+        ):
+            # Accept a valid framing choice from an older Telegram keyboard if the
+            # current prompt session still has its product type and visual style.
             context.user_data['prompt_framing'] = selected
             context.user_data['stage'] = 'prompt_language'
             await query.message.reply_text('🌐 LANGKAH 4 — Pilih bahasa teks pada skrin:', reply_markup=prompt_language_menu())
+        else:
+            logging.warning('Rejected stale prompt framing callback=%r stage=%r', action, stage)
+            await query.message.reply_text(
+                'Pilihan kamera ini sudah tamat untuk sesi tersebut. Mulakan semula Jana Prompt jika mahu buat prompt baharu.',
+                reply_markup=main_menu(update.effective_user.id)
+            )
     elif action == 'prompt_idea:yes' and stage == 'prompt_idea_choice':
         context.user_data['stage'] = 'prompt_category'
         await query.message.reply_text(
