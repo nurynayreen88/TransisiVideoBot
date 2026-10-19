@@ -1187,7 +1187,7 @@ def verified_video_hook(info: str) -> str | None:
     import random
 
     info = ' '.join((info or '').split())[:100]
-    if not info or not re.fullmatch(r"[\\w\\s.,&+()/-]+", info, flags=re.UNICODE):
+    if not info or not re.fullmatch(r"[\w\s.,&+()/-]+", info, flags=re.UNICODE):
         return None
     if len(info) > 42:
         info = info[:42].rsplit(' ', 1)[0]
