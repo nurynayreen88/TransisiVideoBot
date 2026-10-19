@@ -65,6 +65,85 @@ def _model_age_direction(product, product_type='other'):
                 "If the available details clearly establish the age group, use only a model from that matching group and keep appearance consistent across all shots.")
     return ""
 
+
+# Product-category markers remove only curated beats that explicitly reference unrelated categories.
+_CATEGORY_MARKERS = {
+    "footwear": ("footwear", "shoes", "shoe", "sneaker", "sandal", "boot", "outsole", "laces", "lace touch", "heel"),
+    "clothing": ("garment", "clothing", "fashion", "outfit", "sleeve", "hemline", "neckline", "blouse", "dress", "trousers", "fabric drape"),
+    "bags": ("handbag", "backpack", "crossbody bag", "shoulder bag", "bag strap", "bag handle"),
+    "wallet": ("wallet", "card slot", "coin pocket", "card holder"),
+    "beauty": ("cosmetic", "skincare", "makeup", "lipstick", "serum", "beauty product", "apply to skin"),
+    "food": ("food", "drink", "ingredient", "topping", "garnish", "edible", "pour into a glass", "appetizing"),
+    "stationery": ("stationery", "notebook", "writing desk", "study desk", "pen tip", "pencil", "paper page"),
+    "sports": ("fitness equipment", "sports equipment", "workout", "exercise gear", "athletic equipment"),
+    "gadget": ("electronic device", "gadget", "screen interface", "charging port", "power button", "device ports"),
+    "jewellery": ("jewellery", "jewelry", "ring", "necklace", "bracelet", "earring", "gemstone", "jewelled"),
+    "travel": ("luggage", "suitcase", "travel gear", "packing cube", "airline cabin"),
+    "pet": ("pet", "dog", "cat", "collar", "leash", "pet accessory"),
+    "automotive": ("car accessory", "vehicle dashboard", "car interior", "windshield", "driving"),
+    "garden": ("gardening", "garden tool", "plant care", "soil", "watering plant", "potted plant"),
+    "kitchen": ("kitchenware", "cookware", "kitchen appliance", "cooking utensil", "food preparation"),
+    "furniture": ("furniture", "sofa", "chair upholstery", "cabinet", "table legs", "shelving unit"),
+    "baby": ("baby product", "infant", "diaper", "stroller", "crib", "child-care product"),
+    "crafts": ("craft kit", "hobby supplies", "paintbrush", "glue gun", "art supplies"),
+}
+_PRODUCT_CATEGORY_GROUP = {
+    "fashion": "clothing", "hijab": "clothing", "shoes": "footwear",
+    "bag": "bags", "wallet": "wallet", "beauty": "beauty", "food": "food",
+    "stationery": "stationery", "sports": "sports", "gadget": "gadget",
+    "accessory": "jewellery", "travel": "travel", "pet": "pet",
+    "automotive": "automotive", "garden": "garden", "kitchen": "kitchen",
+    "furniture": "furniture", "baby": "baby", "crafts": "crafts",
+    "home": "furniture", "other": "other",
+}
+_CATEGORY_SAFE_SHOTS = {
+    "footwear": ("PRODUCT DETAIL", "Show a close, stable view of a genuinely visible footwear detail, then return to the complete product. Preserve its real shape, sole and proportions."),
+    "clothing": ("PRODUCT DETAIL", "Show a close, natural view of the selected garment's visible fabric, cut or pattern, then return to the complete garment without changing its design."),
+    "bags": ("PRODUCT DETAIL", "Show a close, stable view of the actual bag shape, visible handles or straps, and finish; do not add compartments or accessories."),
+    "wallet": ("PRODUCT DETAIL", "Show the actual wallet from a clear angle and reveal only visible edges, closure or interior details; do not invent slots or capacity."),
+    "beauty": ("PRODUCT DETAIL", "Show the actual product packaging and a close-up of its visible texture or applicator, only where supported by the product description."),
+    "food": ("PRODUCT DETAIL", "Show the actual food or drink clearly, with a realistic close-up of its visible texture and a clean final product view."),
+    "stationery": ("PRODUCT DETAIL", "Show the actual stationery item in a plausible close-up and simple use; do not add other supplies or readable generated writing."),
+    "sports": ("PRODUCT DETAIL", "Show the actual sports or fitness item at realistic scale, with a safe, plausible use only when its function is clear."),
+    "gadget": ("PRODUCT DETAIL", "Show the actual device's visible shape and controls in a stable close-up; do not invent ports, interface content or functions."),
+    "jewellery": ("PRODUCT DETAIL", "Show the actual accessory or jewellery with realistic scale and restrained reflections; do not add stones, engravings or materials."),
+    "travel": ("PRODUCT DETAIL", "Show the actual travel item clearly, focusing on visible construction and a plausible handling movement without assuming capacity."),
+    "pet": ("PRODUCT DETAIL", "Show the actual pet item clearly at realistic scale; include an animal only if relevant and keep handling calm and natural."),
+    "automotive": ("PRODUCT DETAIL", "Show the actual car accessory clearly in a stationary, safe setting; do not imply unverified compatibility or functions."),
+    "garden": ("PRODUCT DETAIL", "Show the actual garden item in a believable setting, focusing on visible construction and a plausible use only."),
+    "kitchen": ("PRODUCT DETAIL", "Show the actual kitchen item in a believable, physically plausible setting; demonstrate only functions supported by its visible design."),
+    "furniture": ("PRODUCT DETAIL", "Show the actual furniture or decor at realistic scale, highlighting its visible shape, finish and construction."),
+    "baby": ("PRODUCT DETAIL", "Show the actual baby or child-care item in a calm, safe setting; do not stage a child in a risky situation."),
+    "crafts": ("PRODUCT DETAIL", "Show the actual art or craft item and a simple plausible use without adding unlisted kit contents."),
+    "other": ("PRODUCT DETAIL", "Show a close, stable view of a genuinely visible product detail, then return to a clear full-product view."),
+}
+
+def _category_safe_storyboard(storyboard, product_type):
+    """Replace a curated beat only when it explicitly references unrelated product categories."""
+    if not isinstance(storyboard, (list, tuple)):
+        return storyboard
+    target = _PRODUCT_CATEGORY_GROUP.get(product_type, "other")
+    safe = []
+    for beat in storyboard:
+        if not isinstance(beat, dict):
+            safe.append(beat)
+            continue
+        item = dict(beat)
+        text = " ".join((str(item.get("shot", "")), str(item.get("direction", ""))).split()).casefold()
+        foreign_markers = [
+            marker
+            for group, markers in _CATEGORY_MARKERS.items()
+            if group != target and not (target == "kitchen" and group == "food")
+            for marker in markers
+            if marker in text
+        ]
+        if foreign_markers:
+            safe_label, safe_direction = _CATEGORY_SAFE_SHOTS.get(target, _CATEGORY_SAFE_SHOTS["other"])
+            item["shot"] = safe_label
+            item["direction"] = safe_direction
+        safe.append(item)
+    return safe
+
 def build_prompt(mode, product, scene, motion, style='auto', duration=10, concept='', product_type='other', storyboard_override=None):
     style = _resolve_auto_style(style, product_type) if mode == 'storyboard' else style
     if duration in (20, 30):
@@ -179,7 +258,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
             )
         curated_direction = ""
         if storyboard_override and isinstance(storyboard_override, (list, tuple)) and len(storyboard_override) == 4:
-            curated_shots = list(storyboard_override)
+            curated_shots = _category_safe_storyboard(storyboard_override, product_type)
             if part > 1:
                 curated_shots = [
                     {
@@ -333,7 +412,8 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
         style_key, style_name, style_template = resolve(style)
         selected_beats = []
         if storyboard_override and isinstance(storyboard_override, (list, tuple)):
-            for beat in storyboard_override[:4]:
+            safe_override = _category_safe_storyboard(storyboard_override, product_type)
+            for beat in safe_override[:4]:
                 if isinstance(beat, dict):
                     time_label = str(beat.get("time", "")).strip()
                     shot_label = str(beat.get("shot", "")).strip()
