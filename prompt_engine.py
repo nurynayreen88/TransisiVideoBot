@@ -306,7 +306,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
             concept_rule = ("CREATIVE IDEA: " + concept.strip() + ". " if concept and concept.strip() else "")
             return (
                 "VIDEO PROMPT — " + str(duration) + " SECONDS" + (" | PART " + str(part) if part else "") + "\n"
-                "Realistic vertical 9:16 (1080x1920) product ad for Shopee/TikTok, exactly " + str(duration) + " seconds.\n"
+                "Realistic vertical 9:16 (1080x1920) product ad for Shopee/TikTok full-screen mobile viewing, exactly " + str(duration) + " seconds.\n"
                 "PRODUCT: " + product + "\n" + concise_category_direction + concise_framework + "\n"
                 + "STYLE: " + style_name + " — " + style_template[:70].strip() + "\n"
                 + "SETTING: " + str(scene)[:100].strip() + "\nCAMERA: " + camera[:70].strip() + "\n"
