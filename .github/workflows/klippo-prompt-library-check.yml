@@ -27,6 +27,37 @@ jobs:
           python-version: "3.11"
       - name: Check Python syntax
         run: python -m py_compile bot.py prompt_catalog.py prompt_engine.py
+      - name: Smoke-test 10, 20 and 30-second prompt assembly
+        run: |
+          python - <<'PY'
+          from prompt_engine import build_prompt
+
+          common = dict(
+              mode="video",
+              product="cincin perak",
+              scene="studio neutral",
+              motion="push",
+              style="auto",
+              product_type="accessory",
+          )
+          single = build_prompt(**common, duration=10)
+          double = build_prompt(**common, duration=20)
+          triple = build_prompt(**common, duration=30)
+
+          assert "EXACT DURATION: 10 seconds" in single
+          assert "HOOK + DEMONSTRATION + CTA ARE REQUIRED" in single
+          assert "NO ON-SCREEN TEXT" in single
+          assert "KLIPPO PART 1/2" in double and "KLIPPO PART 2/2" in double
+          assert "KLIPPO PART 1/3" in triple
+          assert "KLIPPO PART 2/3" in triple
+          assert "KLIPPO PART 3/3" in triple
+          assert triple.count("MANDATORY HOOK, CTA AND LANGUAGE RULES") == 3
+          assert triple.count("NO ON-SCREEN TEXT") >= 3
+          assert "preceding clip" in triple.casefold()
+          assert "TENGOK PRODUK INI" not in triple
+          print("Prompt assembly smoke tests passed for 10s, 20s and 30s.")
+          PY
+
       - name: Validate prompt library structure
         run: |
           python - <<'PY'
