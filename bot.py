@@ -3728,7 +3728,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await start(update, context)
     else:
         logging.warning('Unhandled KLIPPO callback action=%r stage=%r', action, stage)
-        await query.message.reply_text('Pilihan ini tidak lagi aktif. Gunakan butang terkini di bawah.', reply_markup=main_menu(update.effective_user.id))
+        # Ignore obsolete or unknown callbacks without sending the stale-menu message.
 
 
 async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
