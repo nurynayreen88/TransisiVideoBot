@@ -1,4 +1,5 @@
 """Telegram slideshow bot: no paid API, FFmpeg required on PATH."""
+# Staging-only syntax validation marker.
 import asyncio
 import html
 import json
