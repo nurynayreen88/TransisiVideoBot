@@ -2704,6 +2704,22 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 return
             if stage == 'prompt_model_age_2':
                 context.user_data['prompt_model_age_2'] = selected
+                context.user_data['prompt_model_ethnicity_2'] = 'random_malaysia'
+                context.user_data['prompt_ethnicity_target'] = 2
+                context.user_data['stage'] = 'prompt_model_ethnicity'
+                await query.message.reply_text('Pilih penampilan kaum untuk model kedua:', reply_markup=prompt_model_ethnicity_menu())
+            else:
+                context.user_data['prompt_model_age'] = selected
+                context.user_data['prompt_model_ethnicity'] = 'random_malaysia'
+                context.user_data['prompt_ethnicity_target'] = 1
+                context.user_data['stage'] = 'prompt_model_ethnicity'
+                await query.message.reply_text('Pilih penampilan kaum untuk model pertama:', reply_markup=prompt_model_ethnicity_menu())
+    elif action.startswith('prompt_model_ethnicity:') and stage == 'prompt_model_ethnicity':
+        selected = action.split(':', 1)[1]
+        if selected in ('Malay', 'Chinese', 'Indian', 'random_malaysia'):
+            target = int(context.user_data.get('prompt_ethnicity_target', 1))
+            if target == 2:
+                context.user_data['prompt_model_ethnicity_2'] = selected
                 if context.user_data.get('prompt_model_gender_2') == 'female':
                     context.user_data['prompt_hijab_target'] = 2
                     context.user_data['stage'] = 'prompt_model_hijab'
@@ -2716,8 +2732,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     context.user_data['stage'] = 'prompt_style'
                     await query.message.reply_text('🎨 Pilih gaya video:', reply_markup=prompt_style_menu(context.user_data.get('prompt_product_type','other'),'yes'))
             else:
-                context.user_data['prompt_model_age'] = selected
-                if int(context.user_data.get('prompt_model_count',1)) == 2:
+                context.user_data['prompt_model_ethnicity'] = selected
+                if int(context.user_data.get('prompt_model_count', 1)) == 2:
                     context.user_data['stage'] = 'prompt_model_gender_2'
                     await query.message.reply_text('Pilih jantina model kedua:', reply_markup=prompt_model_gender_menu())
                 elif context.user_data.get('prompt_model_gender') == 'female':
@@ -2953,6 +2969,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 'use the exact user-supplied background image as the scene/background plate': 'Latar sendiri (wajib upload imej latar ke AI)',
             }
             gender_labels = {'female': 'Wanita', 'male': 'Lelaki'}
+            ethnicity_labels = {'Malay': 'Melayu', 'Chinese': 'Cina', 'Indian': 'India', 'random_malaysia': 'Rawak'}
             hijab_labels = {'hijab': 'Bertudung', 'no_hijab': 'Tidak bertudung', 'na': 'Tidak berkenaan'}
             category_summary = context.user_data.get('prompt_custom_category_name') or PRODUCT_TYPES.get(context.user_data.get('prompt_product_type', 'other'), 'Produk lain')
             subcategory_summary = context.user_data.get('prompt_custom_subcategory_name') or PRODUCT_SUBTYPE_LABELS.get(context.user_data.get('prompt_product_subcategory', ''), 'Tidak dinyatakan')
@@ -2961,11 +2978,13 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             else:
                 gender1 = gender_labels.get(context.user_data.get('prompt_model_gender', 'female'), 'Tidak dinyatakan')
                 hijab1 = hijab_labels.get(context.user_data.get('prompt_model_hijab', 'na'), 'Tidak dinyatakan')
-                model_summary = f"{context.user_data.get('prompt_model_count', 1)} model; Model 1: {gender1}, umur {context.user_data.get('prompt_model_age', '26-40')}, {hijab1}"
+                ethnicity1 = ethnicity_labels.get(context.user_data.get('prompt_model_ethnicity', 'random_malaysia'), 'Rawak')
+                model_summary = f"{context.user_data.get('prompt_model_count', 1)} model; Model 1: {gender1}, {ethnicity1}, umur {context.user_data.get('prompt_model_age', '26-40')}, {hijab1}"
                 if int(context.user_data.get('prompt_model_count', 1)) == 2:
                     gender2 = gender_labels.get(context.user_data.get('prompt_model_gender_2', 'male'), 'Tidak dinyatakan')
                     hijab2 = hijab_labels.get(context.user_data.get('prompt_model_hijab_2', 'na'), 'Tidak berkenaan')
-                    model_summary += f"; Model 2: {gender2}, umur {context.user_data.get('prompt_model_age_2', '26-40')}, {hijab2}"
+                    ethnicity2 = ethnicity_labels.get(context.user_data.get('prompt_model_ethnicity_2', 'random_malaysia'), 'Rawak')
+                    model_summary += f"; Model 2: {gender2}, {ethnicity2}, umur {context.user_data.get('prompt_model_age_2', '26-40')}, {hijab2}"
             summary = chr(10).join([
                 '🧾 SEMAK PILIHAN SEBELUM JANA PROMPT',
                 '',
@@ -3229,9 +3248,9 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     )
                 )
                 if context.user_data.get('prompt_model_presence') == 'yes' and int(context.user_data.get('prompt_model_count',1)) == 2:
-                    prompt += ('\n\nTWO-MODEL CAST: Model 1 is ' + str(context.user_data.get('prompt_model_gender','female')) + ', age ' + str(context.user_data.get('prompt_model_age','26-40')) + ', hijab ' + str(context.user_data.get('prompt_model_hijab','na')) + '. Model 2 is ' + str(context.user_data.get('prompt_model_gender_2','male')) + ', age ' + str(context.user_data.get('prompt_model_age_2','26-40')) + ', hijab ' + str(context.user_data.get('prompt_model_hijab_2','na')) + '. Keep identities distinct and consistent.')
+                    prompt += ('\n\nTWO-MODEL CAST: Model 1 is ' + str(context.user_data.get('prompt_model_gender','female')) + ', appearance ' + str(context.user_data.get('prompt_model_ethnicity','random_malaysia')) + ', age ' + str(context.user_data.get('prompt_model_age','26-40')) + ', hijab ' + str(context.user_data.get('prompt_model_hijab','na')) + '. Model 2 is ' + str(context.user_data.get('prompt_model_gender_2','male')) + ', appearance ' + str(context.user_data.get('prompt_model_ethnicity_2','random_malaysia')) + ', age ' + str(context.user_data.get('prompt_model_age_2','26-40')) + ', hijab ' + str(context.user_data.get('prompt_model_hijab_2','na')) + '. Keep identities distinct and consistent.')
                 elif context.user_data.get('prompt_model_presence') == 'yes':
-                    prompt += ('\n\nMODEL CAST: One ' + str(context.user_data.get('prompt_model_gender','female')) + ' model, age ' + str(context.user_data.get('prompt_model_age','26-40')) + ', hijab ' + str(context.user_data.get('prompt_model_hijab','na')) + '.')
+                    prompt += ('\n\nMODEL CAST: One ' + str(context.user_data.get('prompt_model_gender','female')) + ' model, appearance ' + str(context.user_data.get('prompt_model_ethnicity','random_malaysia')) + ', age ' + str(context.user_data.get('prompt_model_age','26-40')) + ', hijab ' + str(context.user_data.get('prompt_model_hijab','na')) + '.')
                 if context.user_data.get('prompt_on_screen_text') == 'yes':
                     if context.user_data.get('prompt_text_mode') == 'manual' and context.user_data.get('prompt_text_content'):
                         prompt += '\n\nON-SCREEN TEXT: Display exactly this text, with correct spelling and no extra words: ' + context.user_data['prompt_text_content']
