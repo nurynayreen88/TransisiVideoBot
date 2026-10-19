@@ -346,46 +346,46 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
                         selected_beats.append(beat_text)
         if not selected_beats:
             selected_beats = [
-                "Buka dengan paparan dekat yang menarik perhatian tanpa mengubah rupa produk.",
-                "Dedahkan keseluruhan produk dalam latar pilihan dengan skala dan warna yang tepat.",
-                "Tunjukkan satu butiran yang benar-benar kelihatan melalui gerakan kamera yang dipilih.",
-                "Akhiri dengan paparan penuh produk yang jelas dan stabil sebagai CTA visual."
+                "Open with an engaging close-up without changing the product's appearance.",
+                "Reveal the full product in the selected setting, preserving its exact scale and colour.",
+                "Show one genuinely visible detail using the selected camera movement.",
+                "Finish with a clear, steady full-product shot as the visual CTA."
             ]
         # Keep every segment under Telegram's one-message limit while retaining selected storyboard beats.
         selected_beats = [" ".join(str(x).split())[:420].rstrip() for x in selected_beats[:4]]
         if part > 1:
             selected_beats = [
-                "Sambung tepat daripada bingkai akhir klip sebelumnya. Kekalkan produk, model, pakaian, latar dan cahaya yang sama sambil meneruskan gerakan secara semula jadi.",
-                "Tunjukkan aksi susulan yang berbeza dan sesuai dengan gaya serta idea pilihan pengguna. Jangan ulang pembukaan klip terdahulu.",
-                "Serlahkan butiran lain yang benar-benar kelihatan pada produk, atau gunakan sudut pandangan yang selamat tanpa mereka ciri baharu.",
-                "Akhiri dengan paparan penuh produk dan CTA melalui voiceover terpilih atau aksi visual."
+                "Continue from the exact final frame of the previous clip. Keep the same product, model, outfit, setting and lighting while the action moves naturally forward.",
+                "Show a distinct follow-up action that matches the selected style and idea. Do not repeat the previous clip's opening.",
+                "Highlight another visible product detail, or use a safe angle without inventing features.",
+                "Finish with a full-product shot and the selected voiceover CTA or visual action."
             ]
         elif part == 1 and total_parts > 1:
-            selected_beats[-1] = selected_beats[-1].rstrip(".") + ". Pegang bingkai akhir tanpa fade supaya klip seterusnya boleh bersambung."
+            selected_beats[-1] = selected_beats[-1].rstrip(".") + ". Hold the final frame without fading so the next clip connects seamlessly."
         elif total_parts == 1:
-            selected_beats[-1] = selected_beats[-1].rstrip(".") + ". Tamatkan dengan paparan produk yang jelas dan stabil."
+            selected_beats[-1] = selected_beats[-1].rstrip(".") + ". End on a clear, steady product shot."
         scene_lines = []
         for i, beat in enumerate(selected_beats, start=1):
             start_s = (i - 1) * 10 / len(selected_beats)
             end_s = i * 10 / len(selected_beats)
-            scene_lines.append(f"Babak {i} ({start_s:g}–{end_s:g}s): {beat}")
+            scene_lines.append(f"Shot {i} ({start_s:g}–{end_s:g}s): {beat}")
         compact_lines = [
-            "KLIPPO | STORYBOARD VIDEO PRODUK",
-            f"Format menegak 9:16. Durasi tepat 10 saat untuk klip ini" + (f" (Bahagian {part}/{total_parts})." if part else "."),
-            f"Produk: {product}.",
-            f"Gaya dipilih: {style_name}. {' '.join(str(style_template).split())[:260].rstrip()}. Latar: {scene}.",
-            f"Gerakan kamera dipilih: {motion}.",
+            "KLIPPO | PRODUCT VIDEO STORYBOARD",
+            f"Vertical 9:16. Exact duration: 10 seconds for this clip" + (f" (Bahagian {part}/{total_parts})." if part else "."),
+            f"Product: {product}.",
+            f"Selected style: {style_name}. {' '.join(str(style_template).split())[:260].rstrip()}. Setting: {scene}.",
+            f"Selected camera movement: {motion}.",
             category_direction,
         ]
         if model_age_direction:
             compact_lines.append(model_age_direction)
         compact_lines.extend([
-            "Kekalkan bentuk, warna, corak, pembungkusan, logo asal dan skala sebenar produk. Jangan reka ciri, bahan atau aksesori yang tidak kelihatan.",
+            "Preserve the product's exact shape, colour, pattern, packaging, original branding and real-world scale. Do not invent unseen features, materials or accessories.",
             *scene_lines,
-            "Hasilkan rakaman fotorealistik dengan gerakan semula jadi, cahaya dan bayang yang munasabah. Jangan tambah tulisan, sari kata, logo atau watermark."
+            "Create photorealistic footage with natural movement, believable lighting and shadows. Add no text, captions, logos or watermarks."
         ])
         if concept:
-            compact_lines.insert(5, "Idea pilihan pengguna: " + " ".join(str(concept).split())[:350].rstrip(".") + ".")
+            compact_lines.insert(5, "User-selected idea: " + " ".join(str(concept).split())[:350].rstrip(".") + ".")
         return "\n".join(line for line in compact_lines if line and line.strip())
     return (
         "KLIPPO | PROFESSIONAL IMAGE-TO-VIDEO PRODUCTION PROMPT" + (" | BAHAGIAN " + str(part) + "/" + str(total_parts) if part else "") + "\n"
