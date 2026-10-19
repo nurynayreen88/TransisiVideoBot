@@ -1252,6 +1252,7 @@ async def record_prompt_trial_success(context, user_id):
         context.user_data["_prompt_trial_count_on_success"] = False
         logging.info("Klippo prompt trial recorded for user %s; successful_count=%s", user_id, count)
     except Exception:
+        context.user_data["_prompt_trial_count_on_success"] = False
         logging.exception("Could not record successful Klippo prompt trial for user %s", user_id)
 
 
@@ -3304,12 +3305,12 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 ])
             )
             return
-        context.user_data["_prompt_trial_count_on_success"] = not access["active"]
         duration = int(context.user_data.get('prompt_duration', 10))
         image_ids = context.user_data.get('prompt_reference_photos', [])
         if not image_ids:
             await query.message.reply_text('⚠️ Tiada gambar rujukan ditemui. Sila mulakan prompt baharu dan hantar gambar produk.')
             return
+        context.user_data["_prompt_trial_count_on_success"] = not access["active"]
         waiting = await query.message.reply_text('⏳ GEMINI STORYBOARD — 0%\nMenghantar gambar rujukan dan menyediakan babak...')
         try:
             images = []
