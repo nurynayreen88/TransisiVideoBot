@@ -319,12 +319,12 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
         )
         return (
             "PROMPT VIDEO — 10 SAAT\n"
-            + "Vertical 9:16, " + str(duration) + " seconds. " + style_name + ".\\n"
-            + "Style direction: " + " ".join(str(style_template).split())[:220].rstrip() + ".\\n"
+            + "Vertical 9:16, " + str(duration) + " seconds. " + style_name + ".\n"
+            + "Style direction: " + " ".join(str(style_template).split())[:220].rstrip() + ".\n"
             + "Product: " + product + ". " + category_direction + (" " + model_age_direction if model_age_direction else "") + "\n"
             + "Setting: " + scene + ". Camera: " + camera + "\n"
             + "PRODUCT LOCK: Preserve the reference product's visible design, colour, pattern, branding and proportions. Do not invent features or accessories.\n"
-            + "HOOK + DEMONSTRATION + CTA: Open with a product-specific visual hook, show one relevant detail or plausible use, and finish on a clear product shot.\n\n"
+            + "HOOK + CTA: Open with a product-specific hook, show one relevant detail or plausible use, and finish on a clear product shot.\n\n"
             + "STORYBOARD:\n" + storyboard_plan + "\n\n"
             + ("CREATIVE IDEA: " + concept.strip() + "\n\n" if concept else "")
             + ("WHITE DOODLE: Keep selected doodles small and outside the product silhouette; use no letters or labels.\n" if doodle else "")
