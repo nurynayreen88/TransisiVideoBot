@@ -1204,6 +1204,58 @@ def faq_example(index):
     return output
 
 
+async def prompt_access_status(user_id):
+    """Check subscription and persistent prompt-trial usage; fail closed if DB is unavailable."""
+    if not klippo_db.configured():
+        return {"available": False, "active": False, "used": 0, "allowed": False}
+    try:
+        active = await asyncio.to_thread(klippo_db.is_active_subscription, user_id)
+        if active:
+            return {"available": True, "active": True, "used": 0, "allowed": True}
+        trial = await asyncio.to_thread(klippo_db.prompt_trial_status, user_id)
+        used = int(trial.get("successful_count", 0))
+        return {"available": True, "active": False, "used": used, "allowed": used < 3}
+    except Exception:
+        logging.exception("Klippo access/trial lookup failed for user %s", user_id)
+        return {"available": False, "active": False, "used": 0, "allowed": False}
+
+
+async def require_paid_feature(message, user_id):
+    """Block video-processing features unless the user's subscription is active."""
+    access = await prompt_access_status(user_id)
+    if access["available"] and access["active"]:
+        return True
+    if not access["available"]:
+        await message.reply_text(
+            "⚠️ Status langganan belum dapat disahkan. Fungsi ini dikunci buat sementara. "
+            "Sila cuba lagi kemudian atau buka Langganan."
+        )
+    else:
+        await message.reply_text(
+            "🔒 Fungsi ini untuk pelanggan Klippo yang mempunyai langganan aktif.\n\n"
+            "Trial percuma hanya membenarkan 3 kali Jana Prompt yang berjaya. "
+            "Langganan membuka Gerakkan Foto (Transisi), Gabung Video dan Tukar Format Video.",
+            reply_markup=InlineKeyboardMarkup([
+                [InlineKeyboardButton("💎 Lihat Langganan", callback_data="subscription")],
+                [InlineKeyboardButton("🏠 Menu Utama", callback_data="home")],
+            ])
+        )
+    return False
+
+
+async def record_prompt_trial_success(context, user_id):
+    """Record a trial only after a prompt result has been successfully delivered."""
+    if not context.user_data.get("_prompt_trial_count_on_success"):
+        return
+    try:
+        count = await asyncio.to_thread(klippo_db.record_prompt_trial_success, user_id)
+        context.user_data["_prompt_trial_count_on_success"] = False
+        logging.info("Klippo prompt trial recorded for user %s; successful_count=%s", user_id, count)
+    except Exception:
+        context.user_data["_prompt_trial_count_on_success"] = False
+        logging.exception("Could not record successful Klippo prompt trial for user %s", user_id)
+
+
 def main_menu(user_id=None):
     rows = [
         [InlineKeyboardButton('✍️ Jana Prompt', callback_data='prompt')],
@@ -2010,6 +2062,10 @@ async def show_admin_user_details(message, user_id, status='all', offset=0):
                  f"\nDihantar: {receipt.get('submitted_at') or '-'}"
                  f"\nDisemak: {receipt.get('reviewed_at') or '-'}")
     await message.reply_text(text, reply_markup=InlineKeyboardMarkup([
+        [InlineKeyboardButton('➕ Tambah 7 hari', callback_data=f'admin_add_days:{user_id}:7:{status}:{offset}'),
+         InlineKeyboardButton('➕ Tambah 30 hari', callback_data=f'admin_add_days:{user_id}:30:{status}:{offset}')],
+        [InlineKeyboardButton('➕ Tambah 90 hari', callback_data=f'admin_add_days:{user_id}:90:{status}:{offset}'),
+         InlineKeyboardButton('➕ Tambah 365 hari', callback_data=f'admin_add_days:{user_id}:365:{status}:{offset}')],
         [InlineKeyboardButton('⬅️ Kembali ke senarai', callback_data=f'admin_users:{status}:{offset}')],
         [InlineKeyboardButton('↩️ Admin', callback_data='admin')]
     ]))
@@ -2053,6 +2109,8 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         '🎬 KLIPPO | Prompt Video Menarik, Semudah Klik\n\n'
         'Penting: Klippo tidak menjana video AI. Klippo menyediakan prompt teks untuk digunakan di platform video AI pilihan anda.\n\n'
         '⭐ BARU PERTAMA KALI? Mulakan dengan Jana Prompt.\n'
+        '🎁 Trial percuma: 3 kali Jana Prompt yang berjaya bagi setiap pengguna.\n'
+        'Semasa trial, Transisi, Gabung Video dan Tukar Format Video dikunci sehingga langganan aktif.\n'
         '1️⃣ Jana Prompt — pilih kategori produk, masukkan nama produk, pilih gaya dan durasi, kemudian salin prompt yang siap ke platform video AI.\n'
         '2️⃣ Gerakkan Foto (Transisi) — jadikan gambar pegun sebagai video MP4 dengan gerakan kamera 2D dan muzik; ini bukan penjanaan gerakan AI pada objek.\n'
         '3️⃣ Gabung Video — cantum beberapa klip menjadi satu video.\n'
@@ -2071,8 +2129,11 @@ async def account_info(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
     try:
         data = await asyncio.to_thread(klippo_db.subscription, user_id)
-        status = 'Tiada langganan' if not data else f"{data['status']} (tamat: {data.get('expires_at') or '-'})"
-        await update.effective_message.reply_text(f'👤 AKAUN SAYA\n\nID Telegram: {user_id}\nLangganan: {status}')
+        active = await asyncio.to_thread(klippo_db.is_active_subscription, user_id)
+        status = 'Aktif' if active else ('Tiada langganan aktif' if not data else f"{data['status']} (tamat: {data.get('expires_at') or '-'})")
+        trial = await asyncio.to_thread(klippo_db.prompt_trial_status, user_id)
+        trial_line = 'Semua fungsi berbayar dibuka.' if active else f"Trial Jana Prompt: {trial['successful_count']}/3 digunakan · {3 - trial['successful_count']} baki."
+        await update.effective_message.reply_text(f'👤 AKAUN SAYA\n\nID Telegram: {user_id}\nLangganan: {status}\n{trial_line}')
     except Exception:
         logging.exception('Account lookup failed')
         await update.effective_message.reply_text('⚠️ Status langganan tidak dapat disemak sekarang.')
@@ -2429,6 +2490,10 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await query.message.reply_text('Video sedang diproses. Sila tunggu.')
         return
     stage = context.user_data.get('stage', 'home')
+    paid_actions = action in ('make', 'merge', 'convert', 'storyboard', 'falbeta')
+    paid_actions = paid_actions or action.startswith(('merge_', 'video_input:'))
+    if paid_actions and not await require_paid_feature(query.message, update.effective_user.id):
+        return
 
     if action == 'falbeta':
         missing = [key for key in ("FAL_KEY", "GEMINI_API_KEY") if not os.environ.get(key, "").strip()]
@@ -2571,6 +2636,35 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         except Exception:
             logging.exception('Admin user detail failed')
             await query.message.reply_text('Gagal mendapatkan butiran pengguna.')
+    elif action.startswith('admin_add_days:'):
+        if not is_admin(update.effective_user.id):
+            await query.message.reply_text('Akses tidak dibenarkan.')
+            return
+        if not klippo_db.configured():
+            await query.message.reply_text('Sambungan Supabase belum tersedia.')
+            return
+        try:
+            _, raw_id, raw_days, user_status, raw_offset = action.split(':', 4)
+            user_id, days, offset = int(raw_id), int(raw_days), int(raw_offset)
+            if days not in (7, 30, 90, 365):
+                raise ValueError('Invalid subscription extension')
+            updated = await asyncio.to_thread(klippo_db.add_subscription_days, user_id, days)
+            expiry = updated.get('expires_at') or '-'
+            await query.message.reply_text(
+                f'✅ Langganan dikemas kini.\nPengguna: {updated.get("telegram_name") or user_id}'
+                f'\nTempoh ditambah: {days} hari\nTarikh tamat baharu: {expiry}'
+            )
+            await show_admin_user_details(query.message, user_id, user_status, offset)
+            try:
+                await context.bot.send_message(
+                    chat_id=user_id,
+                    text=f'🎉 Admin telah menambah {days} hari langganan Klippo anda. Langganan aktif sehingga {expiry}.'
+                )
+            except Exception:
+                logging.info('Could not notify user %s about subscription extension', user_id, exc_info=True)
+        except Exception:
+            logging.exception('Admin subscription extension failed')
+            await query.message.reply_text('❌ Gagal menambah hari langganan. Semak rekod pengguna dan sambungan database.')
     elif action == 'admin_users_help':
         if not is_admin(update.effective_user.id):
             await query.message.reply_text('Akses tidak dibenarkan.')
@@ -2633,6 +2727,22 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data.pop('shopee_url', None)
         await query.message.reply_text('📷 Hantar 1–5 gambar produk. Tekan Selesai apabila cukup.', reply_markup=photos_menu())
     elif action == 'prompt':
+        access = await prompt_access_status(update.effective_user.id)
+        if not access["available"]:
+            await query.message.reply_text(
+                "⚠️ Sistem trial belum dapat disemak. Sila cuba lagi kemudian."
+            )
+            return
+        if not access["allowed"]:
+            await query.message.reply_text(
+                "🎁 Anda telah menggunakan 3/3 trial Jana Prompt.\n\n"
+                "Untuk terus menjana prompt dan membuka fungsi pemprosesan video, sila langgan Klippo.",
+                reply_markup=InlineKeyboardMarkup([
+                    [InlineKeyboardButton("💎 Lihat Langganan", callback_data="subscription")],
+                    [InlineKeyboardButton("🏠 Menu Utama", callback_data="home")],
+                ])
+            )
+            return
         reset(context)
         context.user_data['prompt_style'] = 'auto'
         context.user_data['prompt_concept'] = ''
@@ -3182,11 +3292,26 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
             ]))
     elif action == 'prompt_chatgpt_storyboard':
+        access = await prompt_access_status(update.effective_user.id)
+        if not access["available"]:
+            await query.message.reply_text("⚠️ Sistem trial belum dapat disemak. Sila cuba lagi kemudian.")
+            return
+        if not access["allowed"]:
+            await query.message.reply_text(
+                "🎁 Anda telah menggunakan 3/3 trial Jana Prompt. Langgan Klippo untuk meneruskan.",
+                reply_markup=InlineKeyboardMarkup([
+                    [InlineKeyboardButton("💎 Lihat Langganan", callback_data="subscription")],
+                    [InlineKeyboardButton("🏠 Menu Utama", callback_data="home")],
+                ])
+            )
+            return
         duration = int(context.user_data.get('prompt_duration', 10))
         image_ids = context.user_data.get('prompt_reference_photos', [])
         if not image_ids:
             await query.message.reply_text('⚠️ Tiada gambar rujukan ditemui. Sila mulakan prompt baharu dan hantar gambar produk.')
             return
+        context.user_data["_prompt_trial_count_on_success"] = not access["active"]
+        context.user_data["busy"] = True
         waiting = await query.message.reply_text('⏳ GEMINI STORYBOARD — 0%\nMenghantar gambar rujukan dan menyediakan babak...')
         try:
             images = []
@@ -3251,8 +3376,10 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     caption='📋 Storyboard teks lengkap mengikut babak.',
                     reply_markup=storyboard_actions
                 )
+            await record_prompt_trial_success(context, update.effective_user.id)
             await progress_update(waiting, 100, 'Storyboard Klippo selesai.')
         except Exception as exc:
+            context.user_data["_prompt_trial_count_on_success"] = False
             logging.exception('Automatic storyboard generation failed')
             message = str(exc)[:260]
             fallback_prompt = context.user_data.get('prompt_storyboard_fallback', '').strip()
@@ -3292,6 +3419,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     caption='📋 Prompt alternatif storyboard. Lampirkan gambar produk apabila menggunakan prompt ini.'
                 )
         finally:
+            context.user_data["busy"] = False
             try:
                 await waiting.delete()
             except Exception:
@@ -3390,9 +3518,24 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             except Exception:
                 pass
     elif action == 'prompt_generate:confirm' and context.user_data.get('stage') == 'prompt_confirm':
+        access = await prompt_access_status(update.effective_user.id)
+        if not access["available"]:
+            await query.message.reply_text("⚠️ Sistem trial belum dapat disemak. Prompt belum dijana; sila cuba lagi.")
+            return
+        if not access["allowed"]:
+            await query.message.reply_text(
+                "🎁 Anda telah menggunakan 3/3 trial Jana Prompt. Langgan Klippo untuk meneruskan.",
+                reply_markup=InlineKeyboardMarkup([
+                    [InlineKeyboardButton("💎 Lihat Langganan", callback_data="subscription")],
+                    [InlineKeyboardButton("🏠 Menu Utama", callback_data="home")],
+                ])
+            )
+            return
+        context.user_data["_prompt_trial_count_on_success"] = not access["active"]
         motion = context.user_data.get('prompt_motion_choice', 'push')
         motions = {'auto': _contextual_motion_instruction(context.user_data.get('prompt_scene_key', 'auto'), context.user_data.get('prompt_product_type', 'other'), context.user_data.get('prompt_model_presence', 'yes')), 'orbit': 'A controlled 30-degree camera arc around the product, not a full 360-degree rotation; preserve the visible product geometry.', 'push': 'A slow forward camera push-in toward the product to reveal texture and details; avoid digital warping and preserve product geometry.', 'pull': 'A slow camera pull-back away from the product to reveal its full shape and surrounding scene; preserve proportions.', 'side': 'A smooth horizontal left-to-right camera slide with stable product proportions.', 'dolly': 'A slow physical-feeling forward dolly-in with gentle natural parallax; no object deformation.', 'low': 'A restrained low-angle camera view looking slightly upward at the product; preserve the reference design and proportions.', 'static': 'A locked camera with subtle studio lighting changes only; keep the product clear and stable.'}
         if motion in motions:
+            context.user_data["busy"] = True
             waiting = await query.message.reply_text('⏳ DALAM PROSES — 0%' + chr(10) + 'Menyusun prompt...')
             try:
                 product_name = context.user_data.get('prompt_product_name', '').strip()
@@ -3543,6 +3686,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                                                            caption='Penerangan penuh babak storyboard.', reply_markup=storyboard_actions)
                     if visual_error:
                         await query.message.reply_text('⚠️ Helaian bergambar belum tersedia: ' + visual_error)
+                    await record_prompt_trial_success(context, update.effective_user.id)
                     await progress_update(waiting, 100, 'Storyboard siap.')
                     return
                 if mode_name == 'normal':
@@ -3585,6 +3729,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                                 chunk,
                                 reply_markup=direct_actions if chunk_index == len(chunks) - 1 else None
                             )
+                    await record_prompt_trial_success(context, update.effective_user.id)
                     await progress_update(waiting, 100, 'Prompt video siap.')
                     return
                 product_name = context.user_data.get('prompt_product_name', '').strip() or 'product shown in the uploaded reference photo'
@@ -3656,11 +3801,14 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     image_file.name = 'KLIPPO_PROMPT_IMAGE.txt'
                     await query.message.reply_document(document=image_file, filename=image_file.name,
                                                        caption='📋 PROMPT IMAGE penuh — buka fail dan salin semua teks.')
+                await record_prompt_trial_success(context, update.effective_user.id)
                 await progress_update(waiting, 100, 'PROMPT IMAGE siap. Seterusnya jana PROMPT VIDEO.')
             except Exception:
+                context.user_data["_prompt_trial_count_on_success"] = False
                 logging.exception('Klippo prompt generation failed')
-                await query.message.reply_text('❌ Prompt tidak berjaya dijana. Sila tekan Jana Prompt sekali lagi. Jika masalah berulang, maklumkan admin Klippo.')
+                await query.message.reply_text('❌ Prompt tidak berjaya dijana. Trial tidak ditolak. Sila tekan Jana Prompt sekali lagi. Jika masalah berulang, maklumkan admin Klippo.')
             finally:
+                context.user_data["busy"] = False
                 try:
                     await waiting.delete()
                 except Exception:
@@ -4019,14 +4167,31 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if value in shortcuts:
         action = shortcuts[value]
         if action == 'make':
+            if not await require_paid_feature(update.message, update.effective_user.id):
+                return
             reset(context)
             context.user_data['stage'] = 'video_input'
             await update.message.reply_text('🎬 Pilih cara masukkan produk:', reply_markup=video_input_menu())
         elif action == 'convert':
+            if not await require_paid_feature(update.message, update.effective_user.id):
+                return
             reset(context)
             context.user_data['stage'] = 'convert'
             await update.message.reply_text('🔄 TUKAR FORMAT VIDEO\n\nTekan 📎 → File / Fail → pilih video MP4 asal. Bot akan memprosesnya secara automatik.', reply_markup=main_menu())
         elif action == 'prompt':
+            access = await prompt_access_status(update.effective_user.id)
+            if not access["available"]:
+                await update.message.reply_text("⚠️ Sistem trial belum dapat disemak. Sila cuba lagi kemudian.")
+                return
+            if not access["allowed"]:
+                await update.message.reply_text(
+                    "🎁 Anda telah menggunakan 3/3 trial Jana Prompt. Langgan Klippo untuk meneruskan.",
+                    reply_markup=InlineKeyboardMarkup([
+                        [InlineKeyboardButton("💎 Lihat Langganan", callback_data="subscription")],
+                        [InlineKeyboardButton("🏠 Menu Utama", callback_data="home")],
+                    ])
+                )
+                return
             reset(context)
             context.user_data['prompt_style'] = 'auto'
             context.user_data['prompt_concept'] = ''
