@@ -215,7 +215,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, con
                         "direction": (
                             "Continue from the exact final frame of the preceding clip. Preserve the same product identity and true scale, "
                             "hand/model, wardrobe, voice, lighting, setting and camera direction. Make only a small natural "
-                            "continuation movement; do not restart the reveal or repeat the opening hook."
+                            "continuation movement; do not restart the reveal or repeat the preceding clip's hook or dialogue."
                         ),
                     },
                     {
