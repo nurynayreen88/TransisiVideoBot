@@ -357,7 +357,7 @@ jobs:
                   "storyboard", uncertain, "clean premium studio background",
                   "push", "white_doodle", 10
               )
-              assert "NO ON-SCREEN HOOK TEXT" in first
+              assert "NO ON-SCREEN TEXT" in first
               assert "Do not perform the main surrounding contour yet." in first
               assert "HOLD the final frame" in first
               assert "Never guess a category, benefit, price, popularity or product name." in first
@@ -367,8 +367,8 @@ jobs:
                   "storyboard", verified, "clean premium studio background",
                   "push", "white_doodle", 10
               )
-              assert "KENALI Beg VELLA" in verified_prompt, (
-                  "Verified product name should create the exact conservative hook"
+              assert "NO ON-SCREEN TEXT" in verified_prompt, (
+                  "Verified product name must not create an on-screen text overlay"
               )
 
               paired = build_prompt(

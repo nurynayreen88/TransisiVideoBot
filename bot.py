@@ -529,7 +529,12 @@ def prompt_language_menu():
 def prompt_voiceover_menu():
     return InlineKeyboardMarkup([
         [InlineKeyboardButton('🔇 Tanpa dialog / voiceover', callback_data='prompt_voiceover:none')],
-        [InlineKeyboardButton('🎙️ AI cadangkan voiceover', callback_data='prompt_voiceover:ai')],
+        [InlineKeyboardButton('🎙️ Suara natural / santai', callback_data='prompt_voiceover:ai')],
+        [InlineKeyboardButton('🥰 Suara comel / ceria', callback_data='prompt_voiceover:cute')],
+        [InlineKeyboardButton('🧑‍💼 Suara serius / profesional', callback_data='prompt_voiceover:serious')],
+        [InlineKeyboardButton('⚡ Suara bertenaga / teruja', callback_data='prompt_voiceover:energetic')],
+        [InlineKeyboardButton('🤝 Suara mesra / bersahaja', callback_data='prompt_voiceover:friendly')],
+        [InlineKeyboardButton('🎧 Suara lembut / tenang', callback_data='prompt_voiceover:soft')],
         [InlineKeyboardButton('✍️ Saya masukkan skrip sendiri', callback_data='prompt_voiceover:script')],
         [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
     ])
@@ -561,7 +566,17 @@ def prompt_creative_settings(user_data, include_audio=True):
         lines.append('On-screen text language: ' + ('no on-screen text' if language == 'none' else language) + '. All on-screen text, including any opening hook, must follow this language; preserve brand and product names exactly, keep text short and readable, and do not invent claims, logos or watermarks.')
         voiceover_mode = user_data.get('prompt_voiceover_mode', 'none')
         if voiceover_mode == 'ai':
-            lines.append('Create a concise, natural voiceover in ' + ('Bahasa Melayu Malaysia' if language == 'Malay' else 'English' if language == 'English' else 'Bahasa Melayu Malaysia') + '. For Malay, require a clear native Malaysian Malay accent, standard Malaysian pronunciation, Malaysian vocabulary and natural Malaysian intonation; speak clearly at a moderate pace. Do not use Indonesian slang, Indonesian vocabulary, Indonesian accent or Indonesian-style pronunciation. Keep spoken lines short, match them to the product actions, and keep background music below the voice.')
+            voice_styles = {
+                'ai': 'natural and relaxed conversational delivery',
+                'cute': 'cute, cheerful and light delivery, slightly playful but not childish or exaggerated',
+                'serious': 'calm, serious and confident professional delivery',
+                'energetic': 'upbeat, lively and enthusiastic delivery without shouting',
+                'friendly': 'warm, friendly and approachable delivery, like a helpful Malaysian friend',
+                'soft': 'gentle, soothing and soft-spoken delivery while remaining clear',
+                'custom': 'natural delivery',
+            }
+            style = user_data.get('prompt_voiceover_style', 'ai')
+            lines.append('Create a concise voiceover in ' + ('Bahasa Melayu Malaysia' if language == 'Malay' else 'English' if language == 'English' else 'Bahasa Melayu Malaysia') + '. Voice personality: ' + voice_styles.get(style, voice_styles['ai']) + '. For Malay, require clear Malaysian pronunciation, Malaysian vocabulary and natural Malaysian intonation; never use Indonesian slang, vocabulary or pronunciation. Keep every line short enough for its scene, match delivery to the product action, and keep background music below the voice. Do not imitate a real person or celebrity.')
         elif voiceover_mode == 'script':
             script = ' '.join((user_data.get('prompt_voiceover_script') or '').split())
             lines.append('Use this exact user-provided voiceover/dialogue script without rewriting it: ' + script)
@@ -1183,7 +1198,7 @@ def resolve_music(choice: str, style: str) -> Path | None:
 
 
 def verified_video_hook(info: str) -> str | None:
-    """Build a varied, neutral Malaysian-Malay opening without inventing product claims."""
+    """Suggest a natural Malaysian-Malay spoken opening without unsupported claims."""
     import random
 
     info = ' '.join((info or '').split())[:100]
@@ -1191,16 +1206,18 @@ def verified_video_hook(info: str) -> str | None:
         return None
     if len(info) > 42:
         info = info[:42].rsplit(' ', 1)[0]
-    # Some videos work better with a clean visual reveal and no headline at all.
-    if random.SystemRandom().randrange(5) == 0:
+    # A visual-only opening is often more natural than forcing a spoken hook.
+    rng = random.SystemRandom()
+    if rng.randrange(5) == 0:
         return None
     openings = (
-        'JOM LIHAT ' + info.upper(),
-        'INI DIA ' + info.upper(),
-        'LIHAT LEBIH DEKAT: ' + info.upper(),
-        info.upper() + ' DALAM FOKUS',
+        f"Kalau tengah cari {info}, boleh tengok pilihan ini.",
+        f"Sedang bandingkan {info}? Ini satu pilihan untuk dipertimbangkan.",
+        f"Kalau minat {info}, boleh semak yang ini.",
+        f"Nak cari {info}? Cuba lihat pilihan ini dulu.",
+        f"Untuk yang mencari {info}, boleh pertimbangkan pilihan ini.",
     )
-    return random.SystemRandom().choice(openings)
+    return rng.choice(openings)
 
 
 def hook_card(still: Path, hook: str) -> None:
@@ -1805,6 +1822,7 @@ def reset(context):
     context.user_data['prompt_model_age'] = 'na'
     context.user_data['prompt_language'] = 'Malay'
     context.user_data['prompt_voiceover_mode'] = 'none'
+    context.user_data['prompt_voiceover_style'] = 'ai'
     context.user_data['prompt_voiceover_script'] = ''
     context.user_data['stage'] = 'home'
 
@@ -2674,12 +2692,17 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await query.message.reply_text('🎙️ LANGKAH 5 — Skrip atau voiceover adalah pilihan:', reply_markup=prompt_voiceover_menu())
     elif action.startswith('prompt_voiceover:') and stage == 'prompt_voiceover':
         selected = action.split(':', 1)[1]
-        if selected == 'script':
+        valid_voice_styles = {'none', 'ai', 'cute', 'serious', 'energetic', 'friendly', 'soft', 'script'}
+        if selected not in valid_voice_styles:
+            await query.message.reply_text('Pilihan suara tidak dikenali. Sila pilih semula.', reply_markup=prompt_voiceover_menu())
+        elif selected == 'script':
             context.user_data['prompt_voiceover_mode'] = 'script'
+            context.user_data['prompt_voiceover_style'] = 'custom'
             context.user_data['stage'] = 'prompt_voiceover_text'
             await query.message.reply_text('✍️ Tampal skrip voiceover/dialogue anda. Tulis - jika mahu batalkan skrip dan teruskan tanpa dialog.')
-        elif selected in ('none', 'ai'):
-            context.user_data['prompt_voiceover_mode'] = selected
+        else:
+            context.user_data['prompt_voiceover_mode'] = 'none' if selected == 'none' else 'ai'
+            context.user_data['prompt_voiceover_style'] = selected
             context.user_data['prompt_voiceover_script'] = ''
             context.user_data['stage'] = 'prompt_idea_choice'
             await query.message.reply_text(
@@ -2829,7 +2852,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             if voiceover_mode == 'script' and voiceover:
                 voiceover_instruction = 'Gunakan skrip dialog/voiceover pengguna ini tepat tanpa mengubahnya: ' + voiceover
             elif voiceover_mode == 'ai':
-                voiceover_instruction = 'Cadangkan dialog/voiceover ringkas dan semula jadi dalam ' + language_label + ' hanya jika sesuai. Jika Bahasa Melayu, gunakan sebutan baku Bahasa Melayu Malaysia yang jelas, intonasi Malaysia yang semula jadi dan kosa kata Malaysia; jangan gunakan slang, kosa kata, loghat atau intonasi Indonesia. Sebut pada kelajuan sederhana supaya setiap perkataan jelas. Muzik latar tidak boleh menenggelamkan suara.'
+                voice_style_label = {'cute': 'comel dan ceria tetapi tidak dibuat-buat', 'serious': 'serius, tenang dan profesional', 'energetic': 'bertenaga dan teruja tanpa menjerit', 'friendly': 'mesra dan bersahaja seperti rakan yang membantu', 'soft': 'lembut dan menenangkan tetapi tetap jelas', 'ai': 'natural dan santai'}.get(context.user_data.get('prompt_voiceover_style', 'ai'), 'natural dan santai')
+                voiceover_instruction = 'Cadangkan dialog/voiceover ringkas dalam ' + language_label + '. Gaya suara: ' + voice_style_label + '. Jika Bahasa Melayu, gunakan sebutan Bahasa Melayu Malaysia yang jelas, kosa kata Malaysia dan intonasi semula jadi; jangan gunakan slang, kosa kata, loghat atau intonasi Indonesia. Sesuaikan emosi dan kelajuan suara dengan produk, pastikan setiap ayat muat dalam durasi babak. Muzik latar tidak boleh menenggelamkan suara.'
             else:
                 voiceover_instruction = 'Dialog tidak wajib. Utamakan penceritaan visual; nyatakan “Tanpa dialog” jika dialog tidak diperlukan.'
             model_instruction = prompt_creative_settings(context.user_data)
@@ -2837,12 +2861,14 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 'Anda ialah pengarah kreatif iklan produk. Analisis SEMUA gambar rujukan yang dilampirkan dan hasilkan storyboard video produk yang boleh terus digunakan sebagai arahan penjana video AI. '
                 'Tulis hasil dalam ' + language_label + '. Durasi tepat ' + str(duration) + ' saat, format menegak 9:16. '
                 + ('Bina ' + str(4 if duration <= 10 else (6 if duration <= 15 else 8)) + ' babak, setiap babak kira-kira ' + str(round(duration / (4 if duration <= 10 else (6 if duration <= 15 else 8)), 2)) + ' saat. ' + ('Pastikan keempat-empat babak membentuk aliran lengkap.' if duration <= 10 else ('Babak 5–6 mesti menyambung secara visual daripada babak 1–4.' if duration <= 15 else 'Babak 5–8 mesti bersambung secara visual daripada babak 1–4.')))
-                + ' Untuk setiap babak, berikan masa mula–akhir, aksi spesifik, framing dan gerakan kamera, ekspresi/pergerakan model jika ada, serta peralihan/kesinambungan. '
-                'Kekalkan identiti dan rupa produk tepat seperti gambar. Jangan mereka warna, logo, corak, ciri, bahan, aksesori atau dakwaan yang tidak dapat dilihat. '
+                + ' Untuk setiap babak, nyatakan masa tepat, tujuan babak, saiz shot, sudut kamera, satu aksi utama, gerakan kamera, komposisi produk, pencahayaan/latar, suara latar atau “Tanpa dialog”, dan peralihan. Arahan mesti khusus dan boleh dilaksanakan, bukan kata umum seperti “cinematic” sahaja. '
+                'Kekalkan identiti produk tepat seperti gambar: bentuk, warna, nisbah, logo asal dan aksesori yang kelihatan. Jangan reka bahagian tersembunyi, bahan, ciri, prestasi, harga, promosi atau dakwaan yang tidak disahkan. Jika butiran tidak kelihatan, jangan mereka-rekanya. '
                 'Kekalkan model dewasa yang sama pada semua babak jika model dipilih. Jangan tambah teks pada skrin, sari kata, logo tambahan atau watermark. '
-                'Pastikan setiap aksi praktikal, jelas dan tidak bertindih dengan aksi babak lain. Mulakan dengan hook visual yang kuat dan tamat dengan product hero shot. '
-                + voiceover_instruction + '\n\nPILIHAN PENGGUNA:\n' + model_instruction
-                + '\n\nFormat output: tajuk ringkas, konsep, kemudian senarai babak bernombor. Jangan hasilkan prompt video penuh dahulu.'
+                'STRUKTUR IKLAN WAJIB: sediakan HOOK pada 0–2 saat yang khusus kepada produk dan menarik perhatian tanpa dakwaan rekaan; bahagian tengah yang menunjukkan produk, butiran yang benar-benar kelihatan dan/atau demonstrasi yang munasabah; serta CTA yang jelas pada babak akhir. CTA boleh mengajak penonton menyemak butiran produk atau melihat pilihan yang tersedia, tetapi jangan mereka harga, diskaun, stok, pautan atau jaminan. Hook dan CTA mesti dinyatakan secara khusus dalam storyboard. '
+                'Jika mod suara AI dipilih, masukkan ayat hook dalam babak pertama dan ayat CTA dalam babak terakhir. Gunakan Bahasa Melayu Malaysia yang semula jadi, jelas dan ringkas, serta pastikan dialog muat dalam tempoh babak. Jika pengguna memilih tanpa dialog, tandakan “Tanpa dialog” dan sampaikan hook/CTA melalui aksi visual, bukan teks pada skrin. Jangan ulang ayat klise yang sama untuk semua produk. '
+                'Rancang jalan cerita khusus mengikut kategori produk: hook visual pada awal, paparan penuh, butiran yang benar-benar kelihatan, konteks penggunaan yang munasabah jika sesuai, dan penutup yang menyokong CTA. Setiap babak mesti mempunyai satu aksi utama yang jelas dan berbeza. Pastikan model, tangan dan interaksi realistik; elakkan perubahan bentuk produk, objek terapung, gerakan mustahil dan potongan mengejut. '
+                + voiceover_instruction + '\\n\\nPILIHAN PENGGUNA:\\n' + model_instruction
+                + '\\n\\nFORMAT OUTPUT WAJIB: 1) Tajuk dan konsep. 2) HOOK: ayat pembukaan dan aksi visual. 3) STORYBOARD: babak bernombor dengan masa tepat, tujuan, visual/aksi, saiz dan sudut shot, gerakan kamera, pencahayaan/latar, suara latar atau “Tanpa dialog”, dan peralihan. 4) CTA: ayat penutup dan aksi visual. 5) SEMAKAN KUALITI: kesinambungan produk, fakta tidak direka, dialog muat dalam durasi, tiada teks/logo tambahan. Hasilkan storyboard teks sahaja; jangan hasilkan imej storyboard atau prompt video penuh dahulu.'
             )
             context.user_data['prompt_storyboard_fallback'] = prompt_instruction
             await progress_update(waiting, 35, 'Klippo sedang menjana storyboard secara automatik...')
@@ -2855,47 +2881,23 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 [InlineKeyboardButton('🔁 Jana Storyboard Baharu', callback_data='prompt_chatgpt_storyboard')],
                 [InlineKeyboardButton('🏠 Menu Utama', callback_data='home')]
             ])
-            scene_count = 4 if duration <= 10 else (6 if duration <= 15 else 8)
-            sheet_count = (scene_count + 3) // 4
-            visual_error = None
-            await progress_update(waiting, 65, 'Teks babak siap. Menjana helaian storyboard bergambar...')
-            for sheet_number in range(1, sheet_count + 1):
-                try:
-                    sheet_bytes = await asyncio.to_thread(
-                        generate_storyboard_sheet, images, storyboard, duration, sheet_number, language_label
-                    )
-                    sheet_file = BytesIO(sheet_bytes)
-                    sheet_file.name = f'KLIPPO_STORYBOARD_HELAIAN_{sheet_number}.png'
-                    await query.message.reply_photo(
-                        photo=sheet_file,
-                        caption=f'🎬 STORYBOARD BERGAMBAR — HELAIAN {sheet_number}/{sheet_count}\n'
-                                f'Video {duration} saat · Babak {min((sheet_number-1)*4+1, scene_count)}–{min(sheet_number*4, scene_count)}',
-                        reply_markup=storyboard_actions if sheet_number == sheet_count else None
-                    )
-                except GeminiStoryboardImageError as exc:
-                    visual_error = str(exc)
-                    logging.warning('Visual storyboard sheet %s failed: %s', sheet_number, type(exc).__name__)
-                    break
-                except Exception as exc:
-                    visual_error = 'Helaian storyboard bergambar tidak dapat dihantar. Cuba lagi sebentar lagi.'
-                    logging.exception('Visual storyboard sheet delivery failed')
-                    break
-            await progress_update(waiting, 90, 'Menghantar penerangan setiap babak...')
-            status_caption = '🎬 STORYBOARD BERGAMBAR SIAP' if not visual_error else '📝 PENERANGAN BABAK SIAP'
+            await progress_update(waiting, 85, 'Mengemas dan menghantar storyboard teks...')
             await query.message.reply_text(
-                status_caption + '\n\nSemak penerangan setiap babak di bawah. Helaian bergambar menunjukkan urutan visual; gunakan gambar rujukan asal apabila meneruskan ke penjana video.',
+                '🎬 STORYBOARD TEKS SIAP\\n\\n'
+                'Storyboard ini mengandungi urutan babak, masa, arahan visual, gerakan kamera, kesinambungan produk dan cadangan suara latar. '
+                'Tiada imej storyboard dijana; gunakan gambar produk asal apabila menghantar prompt ke platform video AI.',
                 reply_markup=storyboard_actions
             )
             if len(storyboard) <= 3900:
                 await query.message.reply_text(storyboard, reply_markup=storyboard_actions)
             else:
                 storyboard_file = BytesIO(storyboard.encode('utf-8'))
-                storyboard_file.name = 'KLIPPO_GEMINI_STORYBOARD.txt'
-                await query.message.reply_document(document=storyboard_file, filename=storyboard_file.name, caption='📋 Penerangan penuh setiap babak.', reply_markup=storyboard_actions)
-            if visual_error:
-                await query.message.reply_text(
-                    '⚠️ Teks storyboard berjaya dijana, tetapi helaian bergambar gagal dijana.\n\n'
-                    + visual_error + '\n\nSemak akses model imej Gemini dan kuota penjanaan imej.'
+                storyboard_file.name = 'KLIPPO_STORYBOARD_TEKST.txt'
+                await query.message.reply_document(
+                    document=storyboard_file,
+                    filename=storyboard_file.name,
+                    caption='📋 Storyboard teks lengkap mengikut babak.',
+                    reply_markup=storyboard_actions
                 )
             await progress_update(waiting, 100, 'Storyboard Klippo selesai.')
         except Exception as exc:
@@ -3101,7 +3103,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     if voiceover_mode == 'script' and voiceover:
                         voiceover_instruction = 'Gunakan skrip dialog/voiceover pengguna ini tepat tanpa mengubahnya: ' + voiceover
                     elif voiceover_mode == 'ai':
-                        voiceover_instruction = 'Cadangkan dialog/voiceover ringkas dan semula jadi dalam ' + language_label + ' hanya jika sesuai. Jika Bahasa Melayu, gunakan sebutan baku Bahasa Melayu Malaysia yang jelas, intonasi Malaysia yang semula jadi dan kosa kata Malaysia; jangan gunakan slang, kosa kata, loghat atau intonasi Indonesia. Sebut pada kelajuan sederhana supaya setiap perkataan jelas. Muzik latar tidak boleh menenggelamkan suara.'
+                        voice_style_label = {'cute': 'comel dan ceria tetapi tidak dibuat-buat', 'serious': 'serius, tenang dan profesional', 'energetic': 'bertenaga dan teruja tanpa menjerit', 'friendly': 'mesra dan bersahaja seperti rakan yang membantu', 'soft': 'lembut dan menenangkan tetapi tetap jelas', 'ai': 'natural dan santai'}.get(context.user_data.get('prompt_voiceover_style', 'ai'), 'natural dan santai')
+                        voiceover_instruction = 'Cadangkan dialog/voiceover ringkas dalam ' + language_label + '. Gaya suara: ' + voice_style_label + '. Jika Bahasa Melayu, gunakan sebutan Bahasa Melayu Malaysia yang jelas, kosa kata Malaysia dan intonasi semula jadi; jangan gunakan slang, kosa kata, loghat atau intonasi Indonesia. Sesuaikan emosi dan kelajuan suara dengan produk, pastikan setiap ayat muat dalam durasi babak. Muzik latar tidak boleh menenggelamkan suara.'
                     else:
                         voiceover_instruction = 'Dialog tidak wajib. Utamakan penceritaan visual; nyatakan “Tanpa dialog” jika dialog tidak diperlukan.'
                     model_instruction = prompt_creative_settings(context.user_data)
@@ -3109,8 +3112,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                         'Anda ialah pengarah kreatif iklan produk. Analisis gambar rujukan yang dilampirkan dan hasilkan storyboard video produk yang boleh terus digunakan sebagai arahan penjana video AI. '
                         'Tulis hasil dalam ' + language_label + '. Durasi tepat ' + str(duration) + ' saat, format menegak 9:16. '
                         + ('Bina 4 babak berturutan dalam satu helaian storyboard.' if duration <= 10 else 'Bina 8 babak berturutan dalam dua helaian storyboard; babak 5–8 mesti bersambung daripada babak 1–4.')
-                        + ' Untuk setiap babak, nyatakan masa mula–akhir, aksi spesifik, framing dan gerakan kamera, ekspresi/pergerakan model jika ada, serta peralihan/kesinambungan. '
-                        'Kekalkan identiti produk tepat seperti gambar. Jangan mereka warna, logo, corak, ciri atau bahan yang tidak kelihatan. Jangan tambah teks pada skrin, sari kata, logo tambahan atau watermark. '
+                        + ' Untuk setiap babak, nyatakan masa tepat, tujuan, saiz dan sudut shot, satu aksi utama, gerakan kamera, komposisi produk, pencahayaan/latar, suara latar pilihan yang muat dalam tempoh, serta peralihan yang menyambungkan babak. Arahan mesti khusus dan boleh dilaksanakan, bukan kata umum sahaja. '
+                        'Kekalkan bentuk, warna, nisbah, logo asal dan aksesori yang kelihatan. Jangan reka bahagian tersembunyi, bahan, ciri, prestasi, harga atau dakwaan. Pastikan tangan, model dan interaksi realistik. Jangan tambah teks pada skrin, sari kata, label, logo tambahan atau watermark. '
                         + voiceover_instruction + '\n\nPILIHAN PENGGUNA:\n' + model_instruction
                         + '\n\nFormat output: tajuk ringkas, konsep, kemudian senarai babak bernombor. Jangan hasilkan prompt video penuh dahulu.'
                     )
@@ -3454,14 +3457,14 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif action == 'confirm' and stage == 'confirm':
         await generate(update, context)
     elif action == 'subscription':
-        await query.message.reply_text('💎 LANGGANAN KLIPPO\n\nRM5 / 30 hari\nSehingga 30 video sebulan.\n\nBayar melalui QR DuitNow. Selepas pembayaran, upload resit untuk semakan admin.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📱 Papar QR DuitNow', callback_data='subscription_qr')], [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
+        await query.message.reply_text('💎 LANGGANAN KLIPPO\n\nPelan Penyokong Awal: RM5 / 30 hari.\n\nKlippo membantu menyediakan prompt untuk digunakan pada platform video AI pilihan anda, menggerakkan foto dengan transisi, menggabungkan klip dan menukar format video. Penjanaan video AI penuh dibuat pada platform luaran.\n\nBayar melalui QR DuitNow. Selepas pembayaran, hantar resit untuk semakan admin.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📱 Papar QR DuitNow', callback_data='subscription_qr')], [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
     elif action == 'subscription_qr':
         qr_path = Path(__file__).resolve().parent / 'klippo_qr.jpg'
         if not qr_path.is_file():
             await query.message.reply_text('QR pembayaran belum tersedia. Sila cuba lagi kemudian.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
         else:
             with qr_path.open('rb') as qr_file:
-                await query.message.reply_photo(photo=qr_file, caption='💎 KLIPPO — DuitNow QR\n\nPelan Penyokong Awal: RM5 / 30 hari (sehingga 30 video sebulan).\n\nTekan 📎 Upload Resit selepas pembayaran. Pengaktifan adalah manual selepas semakan.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📎 Upload Resit', callback_data='receipt_upload')], [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
+                await query.message.reply_photo(photo=qr_file, caption='💎 KLIPPO — DuitNow QR\n\nPelan Penyokong Awal: RM5 / 30 hari. Klippo menyediakan prompt dan alat pemprosesan video; penjanaan video AI penuh dilakukan pada platform luaran.\n\nTekan 📎 Upload Resit selepas pembayaran. Pengaktifan adalah manual selepas semakan.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📎 Upload Resit', callback_data='receipt_upload')], [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
     elif action == 'receipt_upload':
         context.user_data['stage'] = 'receipt_upload'
         await query.message.reply_text('📎 Sila hantar gambar atau fail PDF resit pembayaran di sini.')
@@ -3611,7 +3614,7 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 reply_markup=prompt_product_type_menu()
             )
         elif action == 'subscription':
-            await update.message.reply_text('💎 LANGGANAN KLIPPO\n\nPelan Penyokong Awal: RM5 / 30 hari, sehingga 30 video sebulan. Pengaktifan manual selepas resit disemak.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📱 Papar QR DuitNow', callback_data='subscription_qr')]]))
+            await update.message.reply_text('💎 LANGGANAN KLIPPO\n\nPelan Penyokong Awal: RM5 / 30 hari. Klippo menyediakan prompt dan alat pemprosesan video; penjanaan video AI penuh dilakukan pada platform luaran. Pengaktifan manual selepas resit disemak.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📱 Papar QR DuitNow', callback_data='subscription_qr')]]))
         elif action == 'account':
             await account_info(update, context)
         else:

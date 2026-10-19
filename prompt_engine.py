@@ -272,11 +272,11 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
                     ) + ". "
                 )
             hook_rule = (
-                "OPENING TEXT: Show only this neutral product/category hook, exactly: '" + hook + "'. "
-                if hook and not storyboard_override and part < 2 else
-                ("NO ON-SCREEN HOOK TEXT. Never guess a category, benefit, price, popularity or product name. "
-                 if not hook and not storyboard_override else
-                 "ON-SCREEN TEXT: No text, captions, extra logos or watermark unless explicitly requested. ")
+                "NO ON-SCREEN TEXT: Do not render product names, headlines, captions, labels, logos or watermarks. "
+                "Never guess a category, benefit, price, popularity or product name. "
+                + ("If voiceover is enabled, an optional natural spoken opening may say: '" + hook + "'. Do not force dialogue. "
+                   if hook and not storyboard_override and part < 2 else
+                   "Use a clean visual reveal; dialogue is optional. ")
             )
             doodle_rule = (
                 "GRAPHICS: Thin white hand-drawn marks may emphasize visible product edges only; never cover the product. "
@@ -305,12 +305,11 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
         )
 
         hook_direction = (
-            "ON-SCREEN HOOK: Display EXACTLY '" + hook + "' at the top safe area in the opening 0-2s. "
-            "This is a neutral category/name hook only, not a product benefit claim. "
-            "Keep the product unobstructed and do not add any other unverified promotional copy. "
-        ) if hook else (
-            "NO ON-SCREEN HOOK TEXT: Begin with a clean product reveal and no headline. "
-            "Never guess a category, benefit, price, popularity or product name."
+            "NO ON-SCREEN TEXT: Do not render product names, headlines, captions, labels, logos or watermarks. "
+            + ("If voiceover is enabled, an optional natural spoken opening may say: '" + hook + "'. Do not force dialogue. "
+               if hook else
+               "Begin with a clean visual product reveal; dialogue is optional. ")
+            + "Never invent a category, benefit, price, popularity or product name."
         )
         if storyboard_override:
             hook_direction = (
@@ -328,7 +327,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
                 )
             else:
                 rules = (
-                    "FIRST CLIP 10s, five 2-second panels: 0-2s close-up with a verified product-name/category hook if available; "
+                    "FIRST CLIP 10s, five 2-second panels: 0-2s clean visual close-up with no on-screen text; "
                     "2-4s full product reveal; 4-6s one genuinely visible detail; 6-8s restrained white doodle emphasis; "
                     "8-10s settle into a steady full-product composition and HOLD the final frame for a seamless Part 2 handoff. "
                     "Do not perform the main surrounding contour yet. "
@@ -347,7 +346,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
             )
         else:
             rules = (
-                "FIRST CLIP 10s, five 2-second panels: 0-2s verified product-name/category hook if available; "
+                "FIRST CLIP 10s, five 2-second panels: 0-2s clean visual product reveal with no on-screen text; "
                 "2-4s full-product reveal; 4-6s one genuinely visible detail; 6-8s continue the product story; "
                 "8-10s settle into a stable full-product frame and HOLD for a seamless Part 2 handoff. No closing fade in Part 1."
             )
