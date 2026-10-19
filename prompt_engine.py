@@ -3,6 +3,7 @@ import json
 from pathlib import Path
 
 """Detailed, reference-safe AI video prompt templates for KLIPPO."""
+# Prompt output is kept concise; selected options control the generated instructions.
 
 UNIVERSAL_PROMPT_PATH = Path(__file__).resolve().parent / "prompts" / "universal_prompt_templates.json"
 try:
