@@ -46,6 +46,15 @@ class CreativeVariationTests(unittest.TestCase):
         self.assertIn("never stack effects", prompt)
         self.assertIn("cannot create audio", prompt)
 
+    def test_ad_angle_instructions_are_distinct_and_non_generic(self):
+        keys = ("question", "reveal", "demo", "relatable", "premium", "affiliate")
+        instructions = [prompt_engine.creative_angle_instruction(key) for key in keys]
+        self.assertEqual(len(set(instructions)), len(keys))
+        self.assertTrue(all(instructions))
+        self.assertEqual(prompt_engine.creative_angle_instruction("auto"), "")
+        self.assertIn("verified details", prompt_engine.creative_angle_instruction("affiliate"))
+        self.assertIn("physically plausible", prompt_engine.creative_angle_instruction("demo"))
+
 
 if __name__ == "__main__":
     unittest.main()
