@@ -501,10 +501,10 @@ def prompt_model_hijab_menu():
 
 def prompt_model_ethnicity_menu():
     return InlineKeyboardMarkup([
-        [InlineKeyboardButton('Melayu', callback_data='prompt_model_ethnicity:Malay'),
-         InlineKeyboardButton('Asia lain', callback_data='prompt_model_ethnicity:Asian')],
-        [InlineKeyboardButton('Pelbagai rupa', callback_data='prompt_model_ethnicity:diverse')],
-        [InlineKeyboardButton('Tiada pilihan', callback_data='prompt_model_ethnicity:any')],
+        [InlineKeyboardButton('🇲🇾 Melayu', callback_data='prompt_model_ethnicity:Malay'),
+         InlineKeyboardButton('🇨🇳 Cina Malaysia', callback_data='prompt_model_ethnicity:Chinese')],
+        [InlineKeyboardButton('🇮🇳 India Malaysia', callback_data='prompt_model_ethnicity:Indian')],
+        [InlineKeyboardButton('🎲 Rawak — kaum di Malaysia', callback_data='prompt_model_ethnicity:random_malaysia')],
     ])
 
 
@@ -577,7 +577,16 @@ def prompt_creative_settings(user_data, include_audio=True):
     if user_data.get('prompt_model_presence') == 'yes':
         count = min(2, max(1, int(user_data.get('prompt_model_count', 1) or 1)))
         gender = user_data.get('prompt_model_gender', 'female')
-        appearance = user_data.get('prompt_model_ethnicity', 'any')
+        appearance_key = user_data.get('prompt_model_ethnicity', 'random_malaysia')
+        appearance = {
+            'Malay': 'Melayu Malaysia',
+            'Chinese': 'Cina Malaysia',
+            'Indian': 'India Malaysia',
+            'random_malaysia': 'kaum rawak yang memang terdapat di Malaysia; pilih satu identiti yang konsisten, bukan rupa asing secara stereotaip',
+            'Asian': 'Asia',
+            'diverse': 'rupa pelbagai',
+            'any': 'mana-mana rupa',
+        }.get(appearance_key, 'kaum rawak yang terdapat di Malaysia')
         if child_model and not child_product:
             model = 'Model: tiada kanak-kanak/remaja; fokus pada produk, gunakan tangan dewasa sahaja jika perlu.'
         elif child_model:
@@ -761,7 +770,7 @@ PRODUCT_FRAMING = {
     'auto_install': ('🔧 Tunjuk pemasangan ringkas', 'Show plausible, safe placement only if the product supports it. Keep the vehicle stationary; do not invent tools or compatibility.'),
     'auto_detail': ('🚘 Butiran aksesori kereta', 'Show the actual automotive product in its real position. Preserve mounting, scale, and connectors; vehicle remains stationary.'),
     'baby_safe_use': ('🍼 Fokus penggunaan selamat', 'Show a calm, supervised, age-appropriate setting. Avoid unsafe handling and do not imply certifications not provided.'),
-    'kids_cute': ('🥰 Aksi comel kanak-kanak', 'Use natural, age-appropriate playful actions: a cheerful small wave, a gentle happy turn, a few light steps or showing the outfit naturally. Choose only one or two actions that fit the product and age; keep the product clearly visible, movement believable, and styling non-sexualised. No risky jumps, exaggerated poses, adult-like posing, or changes to the product.'),
+    'kids_cute': ('🥰 Aksi comel & ceria kanak-kanak', 'Create a lively, charming Malaysian kids-ad moment: start with a curious glance at the product, then a genuine delighted smile and one playful, age-appropriate action that suits the item (e.g. a tiny happy bounce in place, a cheerful twirl to show an outfit, proudly presenting the item, or a playful peek-and-reveal). Finish with a warm natural reaction toward the camera. Pick the best action for this exact product; vary it between generations, keep the product clearly visible, movements realistic, and styling modest and age-appropriate. No adult-like posing, risky stunts, exaggerated expressions, or product changes. The child should look Malaysian, not foreign-stereotyped.'),
     'baby_gentle': ('👶 Gaya lembut produk bayi', 'Use a calm, tender baby-product presentation. Prefer a caregiver’s gentle hands, a clean nursery, a child-sized hanger/mannequin, or a stable product display as appropriate to the exact item. If a baby is visible in the reference, keep handling safe and fully supported; never place a baby on an elevated or unstable surface, near small detachable parts, or in an unsafe sleep setup. Do not invent product features or imply safety certification.'),
     'travel_pack': ('🧳 Susun barang perjalanan', 'Show realistic packing with plausible items. Preserve bag dimensions and compartments; do not overstate capacity.'),
     'office_work': ('🖇️ Produk ketika bekerja', 'Show the product naturally used at a desk. Avoid fabricated documents, interface text, or unsupported functions.'),
@@ -2694,7 +2703,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await query.message.reply_text('👤 LANGKAH 1 — BUTIRAN MODEL\n\nPilih rupa atau latar etnik model:', reply_markup=prompt_model_ethnicity_menu())
     elif action.startswith('prompt_model_ethnicity:') and stage == 'prompt_model_ethnicity':
         selected = action.split(':', 1)[1]
-        if selected in ('Malay', 'Asian', 'diverse', 'any'):
+        if selected in ('Malay', 'Chinese', 'Indian', 'random_malaysia', 'Asian', 'diverse', 'any'):
             context.user_data['prompt_model_ethnicity'] = selected
             context.user_data['stage'] = 'prompt_model_age'
             await query.message.reply_text('👤 LANGKAH 1 — BUTIRAN MODEL\n\nPilih lingkungan umur model (dewasa sahaja):', reply_markup=prompt_model_age_menu())
