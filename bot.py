@@ -2839,10 +2839,10 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 'Anda ialah pengarah kreatif iklan produk. Analisis SEMUA gambar rujukan yang dilampirkan dan hasilkan storyboard video produk yang boleh terus digunakan sebagai arahan penjana video AI. '
                 'Tulis hasil dalam ' + language_label + '. Durasi tepat ' + str(duration) + ' saat, format menegak 9:16. '
                 + ('Bina ' + str(4 if duration <= 10 else (6 if duration <= 15 else 8)) + ' babak, setiap babak kira-kira ' + str(round(duration / (4 if duration <= 10 else (6 if duration <= 15 else 8)), 2)) + ' saat. ' + ('Pastikan keempat-empat babak membentuk aliran lengkap.' if duration <= 10 else ('Babak 5–6 mesti menyambung secara visual daripada babak 1–4.' if duration <= 15 else 'Babak 5–8 mesti bersambung secara visual daripada babak 1–4.')))
-                + ' Untuk setiap babak, berikan masa mula–akhir, aksi spesifik, framing dan gerakan kamera, ekspresi/pergerakan model jika ada, serta peralihan/kesinambungan. '
-                'Kekalkan identiti dan rupa produk tepat seperti gambar. Jangan mereka warna, logo, corak, ciri, bahan, aksesori atau dakwaan yang tidak dapat dilihat. '
+                + ' Untuk setiap babak, nyatakan masa tepat, tujuan babak, saiz shot, sudut kamera, satu aksi utama, gerakan kamera, komposisi produk, pencahayaan/latar, suara latar atau “Tanpa dialog”, dan peralihan. Arahan mesti khusus dan boleh dilaksanakan, bukan kata umum seperti “cinematic” sahaja. '
+                'Kekalkan identiti produk tepat seperti gambar: bentuk, warna, nisbah, logo asal dan aksesori yang kelihatan. Jangan reka bahagian tersembunyi, bahan, ciri, prestasi, harga, promosi atau dakwaan yang tidak disahkan. Jika butiran tidak kelihatan, jangan mereka-rekanya. '
                 'Kekalkan model dewasa yang sama pada semua babak jika model dipilih. Jangan tambah teks pada skrin, sari kata, logo tambahan atau watermark. '
-                'Pastikan setiap aksi praktikal, jelas dan tidak bertindih dengan aksi babak lain. Mulakan dengan hook visual yang kuat dan tamat dengan product hero shot. '
+                'Rancang rentak iklan khusus kepada produk: hook visual yang menarik tanpa ayat klise, paparan penuh produk, butiran yang benar-benar kelihatan, konteks penggunaan yang munasabah jika sesuai, kemudian penutup produk yang kemas. Setiap babak mesti mempunyai satu aksi utama yang jelas dan berbeza. Pastikan model, tangan dan interaksi realistik; elakkan perubahan bentuk produk, objek terapung, gerakan mustahil dan potongan mengejut. '
                 + voiceover_instruction + '\n\nPILIHAN PENGGUNA:\n' + model_instruction
                 + '\n\nFormat output: tajuk ringkas, konsep, kemudian senarai babak bernombor. Jangan hasilkan prompt video penuh dahulu.'
             )
@@ -3111,8 +3111,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                         'Anda ialah pengarah kreatif iklan produk. Analisis gambar rujukan yang dilampirkan dan hasilkan storyboard video produk yang boleh terus digunakan sebagai arahan penjana video AI. '
                         'Tulis hasil dalam ' + language_label + '. Durasi tepat ' + str(duration) + ' saat, format menegak 9:16. '
                         + ('Bina 4 babak berturutan dalam satu helaian storyboard.' if duration <= 10 else 'Bina 8 babak berturutan dalam dua helaian storyboard; babak 5–8 mesti bersambung daripada babak 1–4.')
-                        + ' Untuk setiap babak, nyatakan masa mula–akhir, aksi spesifik, framing dan gerakan kamera, ekspresi/pergerakan model jika ada, serta peralihan/kesinambungan. '
-                        'Kekalkan identiti produk tepat seperti gambar. Jangan mereka warna, logo, corak, ciri atau bahan yang tidak kelihatan. Jangan tambah teks pada skrin, sari kata, logo tambahan atau watermark. '
+                        + ' Untuk setiap babak, nyatakan masa tepat, tujuan, saiz dan sudut shot, satu aksi utama, gerakan kamera, komposisi produk, pencahayaan/latar, suara latar pilihan yang muat dalam tempoh, serta peralihan yang menyambungkan babak. Arahan mesti khusus dan boleh dilaksanakan, bukan kata umum sahaja. '
+                        'Kekalkan bentuk, warna, nisbah, logo asal dan aksesori yang kelihatan. Jangan reka bahagian tersembunyi, bahan, ciri, prestasi, harga atau dakwaan. Pastikan tangan, model dan interaksi realistik. Jangan tambah teks pada skrin, sari kata, label, logo tambahan atau watermark. '
                         + voiceover_instruction + '\n\nPILIHAN PENGGUNA:\n' + model_instruction
                         + '\n\nFormat output: tajuk ringkas, konsep, kemudian senarai babak bernombor. Jangan hasilkan prompt video penuh dahulu.'
                     )
