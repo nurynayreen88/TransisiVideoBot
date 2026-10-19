@@ -217,7 +217,7 @@ def product_hook(description):
     base_hook = str(matches[0][0]).strip()
     # Existing stock category hooks all start with TENGOK. Vary the phrasing
     # without changing the product category or inventing a benefit.
-    stock_match = re.match(r"(?i)^TENGOK\\s+(.+)$", base_hook)
+    stock_match = re.match(r"(?i)^TENGOK\s+(.+)$", base_hook)
     if not stock_match:
         return base_hook
     subject = stock_match.group(1)
