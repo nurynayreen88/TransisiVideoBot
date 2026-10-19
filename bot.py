@@ -526,10 +526,7 @@ def fit_prompt_to_one_telegram_message(prompt, limit=3800):
 
 def prompt_creative_settings(user_data, include_audio=True):
     """Add only the guided settings selected by the user."""
-    lines = [
-        'PRODUCT LOCK: Preserve the product photo’s visible shape, colour, print, packaging, branding and proportions. Do not invent unseen details or claims.',
-        'NO ADDED TEXT, LOGOS OR WATERMARKS: Keep the video free of captions, subtitles, overlays and added branding.'
-    ]
+    lines = []
 
     model_presence = user_data.get('prompt_model_presence')
     if model_presence == 'yes':
@@ -2363,7 +2360,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 voiceover_instruction = 'Gunakan voiceover ' + ('English' if language == 'English' else 'Bahasa Malaysia') + ' yang semula jadi dan jelas. Sebut hook produk yang ringkas, satu butiran atau kegunaan yang disokong gambar, kemudian CTA ringkas. Muzik latar lebih perlahan daripada suara. Jangan jana teks pada skrin.'
             else:
                 voiceover_instruction = 'Tiada dialog atau voiceover; gunakan muzik latar instrumental sahaja. Sampaikan hook dan CTA melalui aksi pembukaan serta paparan akhir produk, tanpa teks.'
-            model_instruction = prompt_creative_settings(context.user_data)
+            model_instruction = prompt_creative_settings(context.user_data, include_audio=False)
             prompt_instruction = (
                 'Anda ialah pengarah kreatif iklan produk. Analisis SEMUA gambar rujukan yang dilampirkan dan hasilkan storyboard video produk yang boleh terus digunakan sebagai arahan penjana video AI. '
                 'Tulis hasil dalam ' + language_label + '. Durasi tepat ' + str(duration) + ' saat, format menegak 9:16. '
@@ -2372,7 +2369,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 'Kekalkan identiti dan rupa produk tepat seperti gambar. Jangan mereka warna, logo, corak, ciri, bahan, aksesori atau dakwaan yang tidak dapat dilihat. '
                 'Kekalkan model yang dipilih dan pastikan umurnya sesuai dengan kategori produk. Jangan tambah teks pada skrin, sari kata, logo tambahan atau watermark. '
                 'Pastikan setiap aksi praktikal, jelas dan tidak bertindih dengan aksi babak lain. Mulakan dengan hook visual yang kuat dan tamat dengan product hero shot. '
-                + voiceover_instruction + '\n\nPILIHAN PENGGUNA:\n' + model_instruction
+                + voiceover_instruction + ('\n\nPILIHAN PENGGUNA:\n' + model_instruction if model_instruction else '')
                 + '\n\nFormat output: tajuk ringkas, konsep, kemudian senarai babak bernombor. Jangan hasilkan prompt video penuh dahulu.'
             )
             context.user_data['prompt_storyboard_fallback'] = prompt_instruction
@@ -2605,14 +2602,14 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                         voiceover_instruction = 'Gunakan voiceover ' + ('English' if language == 'English' else 'Bahasa Malaysia') + ' yang semula jadi dan jelas. Sebut hook produk yang ringkas, satu butiran atau kegunaan yang disokong gambar, kemudian CTA ringkas. Muzik latar lebih perlahan daripada suara. Jangan jana teks pada skrin.'
                     else:
                         voiceover_instruction = 'Tiada dialog atau voiceover; gunakan muzik latar instrumental sahaja. Sampaikan hook dan CTA melalui aksi pembukaan serta paparan akhir produk, tanpa teks.'
-                    model_instruction = prompt_creative_settings(context.user_data)
+                    model_instruction = prompt_creative_settings(context.user_data, include_audio=False)
                     prompt_instruction = (
                         'Anda ialah pengarah kreatif iklan produk. Analisis gambar rujukan yang dilampirkan dan hasilkan storyboard video produk yang boleh terus digunakan sebagai arahan penjana video AI. '
                         'Tulis hasil dalam ' + language_label + '. Durasi tepat ' + str(duration) + ' saat, format menegak 9:16. '
                         + ('Bina 4 babak berturutan dalam satu helaian storyboard.' if duration <= 10 else 'Bina 8 babak berturutan dalam dua helaian storyboard; babak 5–8 mesti bersambung daripada babak 1–4.')
                         + ' Untuk setiap babak, nyatakan masa mula–akhir, aksi spesifik, framing dan gerakan kamera, ekspresi/pergerakan model jika ada, serta peralihan/kesinambungan. '
                         'Kekalkan identiti produk tepat seperti gambar. Jangan mereka warna, logo, corak, ciri atau bahan yang tidak kelihatan. Jangan tambah teks pada skrin, sari kata, logo tambahan atau watermark. '
-                        + voiceover_instruction + '\n\nPILIHAN PENGGUNA:\n' + model_instruction
+                        + voiceover_instruction + ('\n\nPILIHAN PENGGUNA:\n' + model_instruction if model_instruction else '')
                         + '\n\nFormat output: tajuk ringkas, konsep, kemudian senarai babak bernombor. Jangan hasilkan prompt video penuh dahulu.'
                     )
                     await progress_update(waiting, 40, 'Menjana storyboard...')
@@ -2717,7 +2714,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     'Keep the product prominent and clearly visible.\n\n'
                     'PRODUCT LOCK: Preserve the exact product identity from the uploaded photo, including its visible shape, colour, print, pattern, cut, packaging, proportions, hardware and details. '
                     'Do not redesign, recolour, replace, add or remove product features. Do not invent logos, labels, accessories, materials or claims. '
-                    'For clothing, keep the garment print, neckline, sleeves, fit and fabric appearance faithful to the reference. '
+
                     'Keep styling from obscuring the product.\n\n'
                     'OUTPUT: One cohesive, photorealistic vertical 9:16 image, premium editorial quality. '
                     'No collage, split screen, poster layout, captions, promotional text, watermark or extra logos. '
