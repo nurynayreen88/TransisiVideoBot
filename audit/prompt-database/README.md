@@ -32,6 +32,8 @@ This is a structured inventory extracted from the current `main` source files, n
 - [Special-case scene beats](special_case_scene_beats.csv): conditional bed and cookware-set storyboards.
 - [Audit findings](audit_findings.csv): preliminary findings and proposed review points.
 
+- [Technical audit review and test plan](audit_review.md): confirmed defects, items requiring end-to-end verification, recommended fix order and regression matrix.
+
 ## How to review
 1. Check whether each product subcategory is assigned the correct product type and style candidates.
 2. Mark which component directions should be shared across categories versus remain category-specific.
