@@ -29,6 +29,8 @@ jobs:
           python-version: "3.11"
       - name: Check Python syntax
         run: python -m py_compile bot.py prompt_catalog.py prompt_engine.py
+      - name: Run prompt regression tests
+        run: python -m unittest discover -s tests -v
       - name: Validate prompt library structure
         run: |
           python - <<'PY'
