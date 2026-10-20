@@ -76,6 +76,25 @@ class PromptQualityTests(unittest.TestCase):
         self.assertTrue(result[0].isupper())
         self.assertNotEqual(result, result.upper())
 
+    def test_explicit_bag_subcategory_overrides_ambiguous_product_name(self):
+        handbag_styles = {
+            "handbag_showcase", "bag_daily_carry", "bag_tabletop_reveal",
+            "sling_bag_lifestyle", "bag_flatlay",
+        }
+        wallet_styles = {
+            "wallet_luxury_macro", "wallet_open_close", "wallet_daily_carry",
+            "wallet_flatlay", "wallet_gift_reveal",
+        }
+        for _ in range(20):
+            self.assertIn(
+                _resolve_auto_style("auto", "bag", "Handbag with wallet accessory", "bag_handbag"),
+                handbag_styles,
+            )
+            self.assertIn(
+                _resolve_auto_style("auto", "bag", "Wallet product", "bag_wallet"),
+                wallet_styles,
+            )
+
     def test_auto_bag_style_does_not_choose_wallet_style_for_handbag(self):
         allowed = {
             "handbag_showcase", "bag_daily_carry", "bag_tabletop_reveal",
