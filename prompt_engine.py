@@ -13,7 +13,7 @@ def _prompt_sentence(value, limit=100, fallback=""):
         return fallback
     if len(text) <= limit:
         return text
-    sentences = [part.strip() for part in re.findall(r".+?(?:[.!?](?=\\s|$)|$)", text) if part.strip()]
+    sentences = [part.strip() for part in re.findall(r".+?(?:[.!?](?=\s|$)|$)", text) if part.strip()]
     if not sentences:
         return fallback
     # Never discard a distinctive first sentence just because it exceeds the target.
