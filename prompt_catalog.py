@@ -186,7 +186,7 @@ OPENING_VOICE_STYLES = (
     "a simple observation about the product's visible appearance",
     "a natural question about the item itself, not an unverified result",
     "a practical-use lead-in only if that use is shown and supported",
-    "a concise conversational introduction in everyday Bahasa Melayu Malaysia",
+    "a concise conversational introduction in the selected speech language",
     "a demonstration-first opening with no spoken line unless voiceover is enabled",
     "a neutral opening that names the product without exaggerated hype",
     "a brief visual-first opening, with speech only if the user requested it",
