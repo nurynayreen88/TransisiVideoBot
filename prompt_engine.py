@@ -288,6 +288,9 @@ def _creative_variation(product_type, product, part, product_subtype=''):
         # Curated variation audio is authoritative; do not append category SFX.
         # Unconditional appending duplicated effects and could contradict a quiet scene.
         audio = str(selected_action.get("audio", "")).strip()
+        # Library entries may already include their field label; the renderer
+        # adds AUDIO: below, so strip it here to avoid duplicated labels.
+        audio = re.sub(r"^AUDIO:\s*", "", audio, flags=re.IGNORECASE)
         if not audio:
             audio = _SFX_BY_TYPE[group]
     else:
