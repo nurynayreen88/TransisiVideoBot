@@ -1121,7 +1121,7 @@ CORE_STYLE_DESCRIPTIONS = {
 
 def prompt_style_guide(product_type='other'):
     available_keys = {key for key, _label in storyboard_styles()}
-    return '\\n'.join(
+    return '\n'.join(
         '• ' + CORE_STYLE_LABELS[key] + ' — ' + CORE_STYLE_DESCRIPTIONS[key]
         for key in CORE_USER_STYLE_KEYS if key in available_keys
     )
@@ -3303,8 +3303,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             })
             style_guide = prompt_style_guide(product_type)
             await query.message.reply_text(
-                '🎨 PILIH GAYA VIDEO SAHAJA\\n\\n' + style_guide
-                + '\\n\\nKamera, aksi, latar, model, pencahayaan, muzik, SFX, hook, CTA dan susunan babak akan dipilih automatik mengikut produk. Variasi akan berubah setiap kali prompt dijana.',
+                '🎨 PILIH GAYA VIDEO SAHAJA\n\n' + style_guide
+                + '\n\nKamera, aksi, latar, model, pencahayaan, muzik, SFX, hook, CTA dan susunan babak akan dipilih automatik mengikut produk. Variasi akan berubah setiap kali prompt dijana.',
                 reply_markup=prompt_style_menu(product_type)
             )
     elif action.startswith('prompt_ad_angle:') and stage == 'prompt_ad_angle':
@@ -3411,10 +3411,10 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             duration_mode = context.user_data.get('prompt_duration_mode', 'single')
             duration_label = str(duration) + ' saat' + (' (prompt bersambung)' if duration_mode == 'split' else '')
             await query.message.reply_text(
-                '🧾 SEMAK RINGKAS\\n\\n'
-                + '🛍️ Produk: ' + product_name + '\\n'
-                + '⏱️ Durasi: ' + duration_label + '\\n'
-                + '🎨 Gaya: ' + style_label + '\\n\\n'
+                '🧾 SEMAK RINGKAS\n\n'
+                + '🛍️ Produk: ' + product_name + '\n'
+                + '⏱️ Durasi: ' + duration_label + '\n'
+                + '🎨 Gaya: ' + style_label + '\n\n'
                 + 'Tetapan kamera, aksi, latar, model, pencahayaan, audio, hook, CTA dan babak dipilih automatik. '
                 + 'Klippo akan mengubah variasi kreatif setiap kali prompt baharu dijana sambil mengekalkan identiti gaya dan ketepatan produk.',
                 reply_markup=InlineKeyboardMarkup([
