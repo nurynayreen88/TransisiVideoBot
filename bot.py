@@ -101,7 +101,7 @@ def _prompt_library_storyboard(template):
     return resolved
 
 
-def _prompt_library_component_rules(template_id, audio_enabled=True, voiceover_mode='none', prompt_language='Malay', on_screen_text='no'):
+def _prompt_library_component_rules(template_id, audio_enabled=True, voiceover_mode='none', prompt_language='Malay', on_screen_text='no', camera_choice='auto'):
     """Assemble concise, choice-aware safety/audio rules from normalized component tables."""
     mapping = _PROMPT_COMPONENT_MAP_BY_ID.get(template_id)
     if not isinstance(mapping, dict):
@@ -117,9 +117,27 @@ def _prompt_library_component_rules(template_id, audio_enabled=True, voiceover_m
                 if item_id in by_id and by_id[item_id].get('direction')]
 
     rules = []
-    camera_rules = directions('camera_profiles', mapping.get('camera_profile_ids', []))
-    if camera_rules:
-        rules.append('CAMERA SAFETY: ' + camera_rules[0])
+    camera_by_id = {
+        item.get('id'): item for item in tables.get('camera_profiles', [])
+        if isinstance(item, dict) and item.get('id')
+    }
+    camera_ids = mapping.get('camera_profile_ids', [])
+    selected_camera_by_choice = {
+        'push': 'camera_slow_push', 'dolly': 'camera_slow_push',
+        'side': 'camera_lateral_slide', 'orbit': 'camera_limited_arc',
+        'static': 'camera_locked',
+    }
+    selected_camera_id = selected_camera_by_choice.get(str(camera_choice or 'auto').casefold())
+    if not selected_camera_id and str(camera_choice or 'auto').casefold() == 'auto':
+        selected_camera_id = next(
+            (item_id for item_id in camera_ids if item_id != 'camera_reference_safe'),
+            'camera_reference_safe',
+        )
+    if selected_camera_id and selected_camera_id in camera_by_id:
+        rules.append('CAMERA PROFILE: ' + str(camera_by_id[selected_camera_id].get('direction', '')).strip())
+    safety_camera = camera_by_id.get('camera_reference_safe', {})
+    if safety_camera and selected_camera_id != 'camera_reference_safe':
+        rules.append('CAMERA SAFETY: ' + str(safety_camera.get('direction', '')).strip())
 
     hook_ids = mapping.get('hook_rule_ids', [])
     hook_rules = directions('hook_rules', hook_ids)
@@ -3804,6 +3822,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     voiceover_mode=context.user_data.get('prompt_voiceover_mode', 'none'),
                     prompt_language=context.user_data.get('prompt_language', 'Malay'),
                     on_screen_text=context.user_data.get('prompt_on_screen_text', 'no'),
+                    camera_choice=context.user_data.get('prompt_motion_choice', 'auto'),
                 )
                 if component_rules:
                     prompt = prompt.rstrip() + '\\n\\nREUSABLE COMPONENT RULES:\\n' + component_rules
