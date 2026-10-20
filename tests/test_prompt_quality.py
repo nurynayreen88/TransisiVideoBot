@@ -4,6 +4,7 @@ import unittest
 from pathlib import Path
 
 import prompt_catalog
+from prompt_model_defaults import auto_prompt_model_defaults
 from prompt_catalog import opening_direction, product_hook
 from prompt_engine import (
     UNIVERSAL_PROMPT_FRAMEWORKS,
@@ -75,6 +76,13 @@ class PromptQualityTests(unittest.TestCase):
         self.assertIn("beg", result.lower())
         self.assertTrue(result[0].isupper())
         self.assertNotEqual(result, result.upper())
+
+    def test_childrens_hijab_auto_model_uses_child_age_and_hijab(self):
+        defaults = auto_prompt_model_defaults("hijab", "hijab_other", child_product=True)
+        self.assertEqual(defaults["prompt_model_presence"], "yes")
+        self.assertEqual(defaults["prompt_model_gender"], "female")
+        self.assertEqual(defaults["prompt_model_hijab"], "hijab")
+        self.assertEqual(defaults["prompt_model_age"], "8-12")
 
     def test_baby_products_prioritize_safe_age_appropriate_model_rules(self):
         source = (Path(__file__).resolve().parents[1] / "bot.py").read_text(encoding="utf-8")
