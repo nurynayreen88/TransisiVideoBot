@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Non-destructive structural and repetition audit for Klippo's variation library."""
+"""Non-destructive structural and semantic review audit for Klippo's variation library."""
 import argparse
 import json
 import re
@@ -9,6 +9,9 @@ from pathlib import Path
 
 FIELDS = ("hook", "action", "detail", "camera", "lighting", "closing", "audio")
 DEFAULT_LIBRARY = Path(__file__).resolve().parents[1] / "prompts/subcategory_variation_library.json"
+# Conservative, category-specific checks: flag for human review rather than auto-rejecting.
+WALLET_BAG_TERMS = re.compile(r"\b(?:bags?|handbags?|backpacks?|tote bags?|bag handles?|bag straps?)\b", re.I)
+TOY_GRAMMAR = re.compile(r"\beducational toy pieces\b", re.I)
 
 
 def audit(data):
@@ -18,7 +21,6 @@ def audit(data):
         return {"errors": ["subcategories must be a non-empty list"], "flags": [], "stats": {}}
     sub_ids, variation_ids = set(), set()
     total = 0
-    repeat_slots = 0
     for sub in subs:
         sid = str(sub.get("subcategory_id", "")).strip()
         if not sid:
@@ -37,12 +39,11 @@ def audit(data):
             errors.append(f"{sid}: only {len(variations)} variations; minimum is {minimum}")
         for field in ("hook", "detail", "audio"):
             values = Counter()
-            for index, v in enumerate(variations, 1):
+            for v in variations:
                 value = v.get(field)
                 if isinstance(value, str) and value.strip():
                     values[re.sub(r"\s+", " ", value.strip().lower())] += 1
             if values:
-                repeat_slots += 1
                 top = values.most_common(1)[0]
                 if top[1] == len(variations) or top[1] >= 8:
                     flags.append(f"{sid}: {field} repeats {top[1]}/{len(variations)} times; review whether boilerplate limits variety")
@@ -65,12 +66,23 @@ def audit(data):
             if isinstance(action, str) and len(action.split()) < 6:
                 flags.append(f"{sid}/{vid}: unusually short action; check whether it is actionable")
             detail = v.get("detail", "")
-            if isinstance(detail, str) and re.search(r"educational toy pieces\b", detail, re.I):
+            if isinstance(detail, str) and TOY_GRAMMAR.search(detail):
                 flags.append(f"{sid}/{vid}: possible toy-detail grammar issue")
+            # Search every prompt component because category mismatch can hide outside detail.
+            if sid == "bag_wallet":
+                for field in FIELDS:
+                    value = v.get(field, "")
+                    if isinstance(value, str) and WALLET_BAG_TERMS.search(value):
+                        flags.append(
+                            f"{sid}/{vid}: possible bag/handle/strap wording in {field}; "
+                            "verify the prompt describes a wallet or cardholder"
+                        )
+                        break
     return {"errors": errors, "flags": flags, "stats": {
         "subcategories": len(subs), "variations": total,
         "unique_variation_ids": len(variation_ids), "field_slots_checked": total * len(FIELDS),
         "repetition_review_flags": sum("repeats " in f for f in flags),
+        "semantic_review_flags": sum("possible bag/handle/strap wording" in f or "toy-detail grammar" in f for f in flags),
         "review_flags": len(flags),
     }}
 
