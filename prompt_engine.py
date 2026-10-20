@@ -179,9 +179,32 @@ def _universal_prompt_rules():
     return " ".join(str(rule).strip() for rule in UNIVERSAL_PROMPT_GLOBAL_RULES if str(rule).strip())
 
 
-def _category_specific_scenes(product_type, product):
+def _category_specific_scenes(product_type, product, product_subtype=""):
     """Build visual beats that suit the product category without assuming unseen features."""
     words = str(product or "").casefold()
+    subtype = str(product_subtype or "").casefold()
+    if product_type == "bag" and (
+        subtype in {"bag_wallet", "wallet", "card_holder"}
+        or any(term in words for term in ("wallet", "dompet", "card holder", "cardholder", "coin purse"))
+    ):
+        return [
+            ("HOOK / WALLET SILHOUETTE", "Open on the wallet or card holder itself, with its complete outline visible; do not frame it as a handbag."),
+            ("FULL WALLET REVEAL", "Show the exact wallet shape and exterior at realistic scale; do not invent slots, pockets, capacity or materials."),
+            ("VISIBLE EDGE / CLOSURE DETAIL", "Highlight only a visible seam, edge, clasp or closure if present."),
+            ("PLAUSIBLE WALLET ACTION", "Open or close the wallet only if its opening is visible and the action is supported; otherwise use a gentle camera move."),
+            ("CTA / WALLET HERO", "Return to a clean full-wallet view and hold steady; no straps, handbag handles or invented accessories.")
+        ]
+    if product_type == "bag" and (
+        subtype in {"bag_backpack", "bag_laptop", "backpack"}
+        or any(term in words for term in ("backpack", "rucksack", "beg galas", "beg sekolah", "beg laptop"))
+    ):
+        return [
+            ("HOOK / BACKPACK SILHOUETTE", "Open on the complete backpack with its visible shoulder straps and body clearly framed."),
+            ("FULL BACKPACK REVEAL", "Show the backpack upright at believable scale; do not invent compartments, laptop sleeves or included accessories."),
+            ("VISIBLE STRAP / ZIP DETAIL", "Highlight only a visible strap, zip, handle or seam if present."),
+            ("PLAUSIBLE BACKPACK HANDLING", "Show one natural lift or carry using existing straps; if the scene does not support it, move the camera only."),
+            ("CTA / BACKPACK HERO", "Finish on the complete unchanged backpack with straps visible and no invented pockets or capacity claims.")
+        ]
     if product_type in {"home", "furniture", "baby"} and any(
         term in words for term in ("bed", "katil", "bedframe", "bed frame", "headboard")
     ):
@@ -491,7 +514,7 @@ def build_prompt(mode, product, scene, motion, style='auto', duration=10, concep
         # Generate connected 10-second prompts while retaining the same style and product context.
         parts = [
             _build_single_prompt(mode, product, scene, motion, style, part=index, duration=10,
-                                 concept=concept, product_type=product_type, storyboard_override=storyboard_override, universal_custom=universal_custom, prompt_language=prompt_language)
+                                 concept=concept, product_type=product_type, storyboard_override=storyboard_override, universal_custom=universal_custom, product_subtype=product_subtype, prompt_language=prompt_language)
             + "\n\n" + _creative_variation(product_type, product, index, product_subtype)
             for index in range(1, duration // 10 + 1)
         ]
@@ -504,7 +527,7 @@ def build_prompt(mode, product, scene, motion, style='auto', duration=10, concep
             + "\n\n" + _creative_variation(product_type, product, 0, product_subtype))
 
 
-def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, duration=10, concept='', product_type='other', storyboard_override=None, universal_custom=False, prompt_language='Malay'):
+def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, duration=10, concept='', product_type='other', storyboard_override=None, universal_custom=False, product_subtype='', prompt_language='Malay'):
     scene_text = str(scene or '').lower()
     selected_scene_lock = "LOCATION: Keep every shot in the selected setting (" + str(scene or "a realistic setting suited to the product") + "); do not substitute another location. "
     if motion in ('auto', '', None):
@@ -669,7 +692,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
         # Retain the selected style, reference safety, timed beats and user concept.
         if duration in (10, 20, 30) and (duration == 10 or part == 0):
             if duration == 10 and part >= 2:
-                scenes = _category_specific_scenes(product_type, product)
+                scenes = _category_specific_scenes(product_type, product, product_subtype)
                 clip_label = "SECOND CLIP 10s" if part == 2 else "THIRD CLIP 10s" if part == 3 else "CONTINUATION CLIP 10s"
                 beat_plan = (
                     clip_label + ": 0–2s CONTINUITY BRIDGE — resume from the exact full-product frame held at the end of the previous clip and do not repeat the hook; "
@@ -680,7 +703,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
                     + "Do NOT repeat the opening hook or restart the reveal. "
                 )
             elif not (storyboard_override and isinstance(storyboard_override, (list, tuple)) and len(storyboard_override) == 4):
-                scenes = _category_specific_scenes(product_type, product)
+                scenes = _category_specific_scenes(product_type, product, product_subtype)
                 scene_length = duration / 5
                 timed_scenes = []
                 for index, (shot_name, shot_direction) in enumerate(scenes):
@@ -847,7 +870,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
         # on five equal timed scenes within one video.
         if part == 0 and duration in (10, 20, 30):
             scene_length = duration / 5
-            generic_scenes = _category_specific_scenes(product_type, product)
+            generic_scenes = _category_specific_scenes(product_type, product, product_subtype)
             if storyboard_override and isinstance(storyboard_override, (list, tuple)) and len(storyboard_override) == 4:
                 curated_items = list(storyboard_override)
                 generic_scenes = [
