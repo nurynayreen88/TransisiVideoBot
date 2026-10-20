@@ -134,7 +134,10 @@ def _prompt_library_component_rules(template_id, audio_enabled=True, voiceover_m
             audio_key = language_key
         audio_by_id = {item.get('id'): item for item in tables.get('audio_profiles', []) if isinstance(item, dict)}
         audio = audio_by_id.get(audio_key, {})
-        audio_parts = [audio.get(key, '') for key in ('voice', 'music', 'sfx') if audio.get(key)]
+        # An exact user script may be in a language different from the UI default;
+        # retain music/SFX guidance but do not impose a conflicting voice language.
+        audio_fields = ('music', 'sfx') if voiceover_mode == 'script' else ('voice', 'music', 'sfx')
+        audio_parts = [audio.get(key, '') for key in audio_fields if audio.get(key)]
         if voiceover_mode == 'script':
             audio_parts.append('Use the supplied script exactly; do not add spoken lines or an extra spoken CTA.')
         elif voiceover_mode == 'none':
