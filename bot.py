@@ -3513,7 +3513,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             action = 'motion:auto'
     # Return only for actions handled by the first chain. Video workflow
     # callbacks must continue into the second chain.
-    if action in ('admin_pending', 'admin', 'admin_users_help', 'storyboard', 'make', 'prompt', 'prompt_categories', 'prompt_images_done') or action.startswith(
+    if action in ('admin_pending', 'admin', 'admin_users_help', 'storyboard', 'make', 'prompt', 'prompt_categories', 'prompt_images_done', 'prompt_style_back') or action.startswith(
         ('admin_approve:', 'admin_reject:', 'admin_users:', 'admin_user:', 'prompt_flow:', 'prompt_mode:', 'prompt_model:', 'prompt_animal_species:', 'prompt_model_count:', 'prompt_model_gender:', 'prompt_model_hijab:', 'prompt_model_ethnicity:', 'prompt_model_age:', 'prompt_language:', 'prompt_voiceover:', 'prompt_type:', 'prompt_product_type:', 'prompt_product_subcategory:', 'prompt_product_categories', 'prompt_duration:',
          'prompt_style:', 'prompt_setup:', 'prompt_ad_angle:', 'prompt_idea:', 'prompt_details:', 'prompt_framing:', 'prompt_text_presence:', 'prompt_text_mode:', 'prompt_audio_presence:', 'prompt_speaker:', 'video_input:', 'prompt_input:', 'pcat:', 'ptpl:')
     ):
