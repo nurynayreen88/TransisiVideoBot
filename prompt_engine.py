@@ -589,7 +589,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
                     timing_summary
                     + "CATEGORY-SPECIFIC STORYBOARD — one continuous video with five connected timed beats: "
                     + " | ".join(timed_scenes)
-                    + (" Do not complete the main surrounding contour in this first white-doodle clip." if doodle and part <= 1 else "")
+                    + (" Do not perform the main surrounding contour yet." if doodle and part <= 1 else "")
                 )
             if storyboard_override and isinstance(storyboard_override, (list, tuple)) and len(storyboard_override) == 4:
                 beat_labels = (
