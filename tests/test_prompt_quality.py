@@ -9,6 +9,7 @@ from prompt_engine import (
     UNIVERSAL_PROMPT_FRAMEWORKS,
     _prompt_sentence,
     _resolve_auto_style,
+    _category_specific_scenes,
     build_prompt,
 )
 
@@ -76,6 +77,18 @@ class PromptQualityTests(unittest.TestCase):
         )
         first_part = prompt.split("=== KLIPPO PART 2 ===", 1)[0]
         self.assertIn("HOLD the final frame", first_part, first_part)
+
+    def test_every_top_level_product_category_has_specific_scene_beats(self):
+        categories = (
+            "fashion", "bag", "hijab", "shoes", "beauty", "food", "gadget",
+            "equipment", "home", "accessory", "toy", "book_stationery",
+            "sports", "pet", "automotive", "baby", "travel", "office",
+        )
+        for category in categories:
+            with self.subTest(category=category):
+                scenes = _category_specific_scenes(category, "generic product")
+                self.assertEqual(len(scenes), 5)
+                self.assertNotEqual(scenes[0][0], "HOOK / PRODUCT RECOGNITION")
 
     def test_universal_framework_keys_resolve_to_canonical_catalog_styles(self):
         canonical = set(prompt_catalog.STYLES)
