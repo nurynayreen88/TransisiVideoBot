@@ -94,7 +94,7 @@ class CreativeVariationTests(unittest.TestCase):
         self.assertIn("exactly 30 seconds", prompt)
         self.assertIn("TIMING: 0–6s", prompt)
         self.assertIn("24–30s stable full-product hero finish", prompt)
-        self.assertIn("PRACTICAL DETAIL / VALUE", prompt)
+        self.assertIn("12–18s highlight one genuinely visible detail", prompt)
         self.assertNotIn("=== KLIPPO PART 2 ===", prompt)
 
     def test_all_variations_include_audio_limitation(self):
