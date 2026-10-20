@@ -140,6 +140,7 @@ class PromptComponentTableTests(unittest.TestCase):
         self.assertIn("on_screen_text=context.user_data.get('prompt_on_screen_text', 'no')", bot_source)
         self.assertIn("if voiceover_mode == 'script':", bot_source)
         self.assertIn("do not add spoken lines or an extra spoken CTA", bot_source)
+        self.assertIn("audio_fields = ('music', 'sfx') if voiceover_mode == 'script' else ('voice', 'music', 'sfx')", bot_source)
         self.assertIn("if on_screen_text == 'yes':", bot_source)
         self.assertIn("REUSABLE COMPONENT RULES:", bot_source)
 
