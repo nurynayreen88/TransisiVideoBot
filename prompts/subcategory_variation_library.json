@@ -8889,7 +8889,7 @@
       "subcategory_id": "accessory_watch",
       "category_id": "accessory",
       "label": "⌚ Jam tangan",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "accessory_watch_v01",
@@ -9010,6 +9010,126 @@
           "lighting": "LIGHTING: Gentle side light reveals shape without changing material or finish.",
           "closing": "CTA / HERO: Keep the original item and supplied parts visible in a calm final composition.",
           "audio": "AUDIO: Keep speech clear if selected, with low background music and no stacked SFX."
+        },
+        {
+          "id": "accessory_watch_v11",
+          "variation_number": 11,
+          "name": "Dial First",
+          "hook": "HOOK: Open close on the visible watch face, keeping all markings exactly as shown. No added text or graphics.",
+          "action": "Ease back to reveal the case and strap without altering their design.",
+          "detail": "DETAIL: Preserve the exact watch identity, visible shape, colors, dial markings, labels and component count. Refer only to details visible in the reference; do not invent materials, functions, water resistance, accuracy or claims.",
+          "camera": "CAMERA: Slow macro-style pullback with a steady focal plane.",
+          "lighting": "LIGHTING: Soft directional light keeps the dial legible without glare.",
+          "closing": "CTA / HERO: Hold the full watch face and body in frame.",
+          "audio": "AUDIO: Quiet refined instrumental; no ticking unless it is genuinely audible in the reference. No unsupported effects or spoken claims."
+        },
+        {
+          "id": "accessory_watch_v12",
+          "variation_number": 12,
+          "name": "Wrist Context",
+          "hook": "HOOK: If a wrist is shown in the reference, begin with the watch worn naturally; otherwise show it resting as pictured. No added text or graphics.",
+          "action": "Make a small, natural movement that reveals the watch's visible proportions without changing its fit or design.",
+          "detail": "DETAIL: Preserve the exact watch identity, visible shape, colors, dial markings, labels and component count. Refer only to details visible in the reference; do not invent materials, functions, water resistance, accuracy or claims.",
+          "camera": "CAMERA: Steady close shot with a gentle side angle.",
+          "lighting": "LIGHTING: Balanced light preserving actual dial and strap colors.",
+          "closing": "CTA / HERO: Finish with the watch clearly visible in its original context.",
+          "audio": "AUDIO: Subtle fabric movement only when visibly supported. No unsupported effects or spoken claims."
+        },
+        {
+          "id": "accessory_watch_v13",
+          "variation_number": 13,
+          "name": "Strap Detail",
+          "hook": "HOOK: Open on the visible strap or bracelet where its design is clearest. No added text or graphics.",
+          "action": "Track along the strap toward the watch case, showing only links or holes that actually exist.",
+          "detail": "DETAIL: Preserve the exact watch identity, visible shape, colors, dial markings, labels and component count. Refer only to details visible in the reference; do not invent materials, functions, water resistance, accuracy or claims.",
+          "camera": "CAMERA: Slow tracking pass, avoiding perspective distortion.",
+          "lighting": "LIGHTING: Soft side light reveals existing edges and texture.",
+          "closing": "CTA / HERO: End with strap and watch case together in frame.",
+          "audio": "AUDIO: Low instrumental bed; no invented clasp sounds. No unsupported effects or spoken claims."
+        },
+        {
+          "id": "accessory_watch_v14",
+          "variation_number": 14,
+          "name": "Case Profile",
+          "hook": "HOOK: Begin at a side angle to show the case's real thickness and outline. No added text or graphics.",
+          "action": "Arc gently toward the face so the profile connects to the complete watch.",
+          "detail": "DETAIL: Preserve the exact watch identity, visible shape, colors, dial markings, labels and component count. Refer only to details visible in the reference; do not invent materials, functions, water resistance, accuracy or claims.",
+          "camera": "CAMERA: Short smooth camera arc; keep the watch stationary.",
+          "lighting": "LIGHTING: Controlled highlights without artificial metallic sparkle.",
+          "closing": "CTA / HERO: Hold a three-quarter hero view.",
+          "audio": "AUDIO: Restrained music only. No unsupported effects or spoken claims."
+        },
+        {
+          "id": "accessory_watch_v15",
+          "variation_number": 15,
+          "name": "Clasp or Buckle Detail",
+          "hook": "HOOK: Show a clasp or buckle only if it is visible in the reference. No added text or graphics.",
+          "action": "Move closer to its actual form, then widen to show how it connects to the strap.",
+          "detail": "DETAIL: Preserve the exact watch identity, visible shape, colors, dial markings, labels and component count. Refer only to details visible in the reference; do not invent materials, functions, water resistance, accuracy or claims.",
+          "camera": "CAMERA: Close tracking shot followed by a short pullback.",
+          "lighting": "LIGHTING: Even soft light preserves the real finish.",
+          "closing": "CTA / HERO: Finish with the complete visible watch.",
+          "audio": "AUDIO: No click sound unless a clasp is visibly operated. No unsupported effects or spoken claims."
+        },
+        {
+          "id": "accessory_watch_v16",
+          "variation_number": 16,
+          "name": "Reflection Control",
+          "hook": "HOOK: Open at an angle that keeps the dial readable and reflections natural. No added text or graphics.",
+          "action": "Shift viewpoint slightly to reveal the visible face and case without obscuring markings.",
+          "detail": "DETAIL: Preserve the exact watch identity, visible shape, colors, dial markings, labels and component count. Refer only to details visible in the reference; do not invent materials, functions, water resistance, accuracy or claims.",
+          "camera": "CAMERA: Small lateral slide with stable framing.",
+          "lighting": "LIGHTING: Diffuse light reduces harsh glare without changing the watch appearance.",
+          "closing": "CTA / HERO: Hold a crisp, recognizable full-watch frame.",
+          "audio": "AUDIO: Quiet instrumental audio; no sparkle effects. No unsupported effects or spoken claims."
+        },
+        {
+          "id": "accessory_watch_v17",
+          "variation_number": 17,
+          "name": "Wrist Turn",
+          "hook": "HOOK: If the reference includes a worn watch, use a gentle wrist turn to show the face at a new angle; otherwise keep the product resting. No added text or graphics.",
+          "action": "Capture only a natural movement supported by the scene, with the watch design unchanged.",
+          "detail": "DETAIL: Preserve the exact watch identity, visible shape, colors, dial markings, labels and component count. Refer only to details visible in the reference; do not invent materials, functions, water resistance, accuracy or claims.",
+          "camera": "CAMERA: Stable close shot following the small movement.",
+          "lighting": "LIGHTING: Consistent lighting across the turn, with no invented glow.",
+          "closing": "CTA / HERO: End with the dial facing the camera clearly.",
+          "audio": "AUDIO: Soft movement foley only if supported by visible action. No unsupported effects or spoken claims."
+        },
+        {
+          "id": "accessory_watch_v18",
+          "variation_number": 18,
+          "name": "Scale on Surface",
+          "hook": "HOOK: Show the watch resting on the same kind of surface as in the reference, with scale kept believable. No added text or graphics.",
+          "action": "Move from the supporting surface toward the full watch.",
+          "detail": "DETAIL: Preserve the exact watch identity, visible shape, colors, dial markings, labels and component count. Refer only to details visible in the reference; do not invent materials, functions, water resistance, accuracy or claims.",
+          "camera": "CAMERA: Low, gentle push-in with a three-quarter view.",
+          "lighting": "LIGHTING: Soft natural light and realistic contact shadow.",
+          "closing": "CTA / HERO: Hold the entire watch unobstructed.",
+          "audio": "AUDIO: Minimal music, no unsupported luxury claims. No unsupported effects or spoken claims."
+        },
+        {
+          "id": "accessory_watch_v19",
+          "variation_number": 19,
+          "name": "Markings Stay True",
+          "hook": "HOOK: Begin on the actual visible dial markings or hands, if present. No added text or graphics.",
+          "action": "Move slowly across the face and widen to show the complete watch without rewriting or inventing markings.",
+          "detail": "DETAIL: Preserve the exact watch identity, visible shape, colors, dial markings, labels and component count. Refer only to details visible in the reference; do not invent materials, functions, water resistance, accuracy or claims.",
+          "camera": "CAMERA: Steady close pass followed by a smooth pullback.",
+          "lighting": "LIGHTING: Even, low-glare lighting preserves legibility.",
+          "closing": "CTA / HERO: Finish on a full view with the face still readable.",
+          "audio": "AUDIO: Quiet instrumental; no added spoken claims. No unsupported effects or spoken claims."
+        },
+        {
+          "id": "accessory_watch_v20",
+          "variation_number": 20,
+          "name": "Complete Watch Reveal",
+          "hook": "HOOK: Open on one genuine identifying detail, then pull back to show the complete watch. No added text or graphics.",
+          "action": "Keep every visible component, color, marking and proportion unchanged throughout.",
+          "detail": "DETAIL: Preserve the exact watch identity, visible shape, colors, dial markings, labels and component count. Refer only to details visible in the reference; do not invent materials, functions, water resistance, accuracy or claims.",
+          "camera": "CAMERA: One continuous pullback, no artificial spin.",
+          "lighting": "LIGHTING: Neutral soft lighting with realistic reflections.",
+          "closing": "CTA / HERO: Hold a clean final product frame with no overlays.",
+          "audio": "AUDIO: A subtle musical resolve; no text or logo audio. No unsupported effects or spoken claims."
         }
       ]
     },
