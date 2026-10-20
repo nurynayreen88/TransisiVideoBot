@@ -532,7 +532,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
         style_key, style_name, style_template = resolve(style)
         # Never apply wallet-specific styling to a bag (or handbag styling to a wallet).
         style_key_text = str(style_key or "").lower()
-        subtype_text = str(product_subtype or "").lower()
+
         wallet_style = "wallet" in style_key_text or "wallet" in str(style_name or "").lower()
         bag_style = any(token in style_key_text for token in ("bag", "handbag", "sling")) or "handbag" in str(style_name or "").lower()
         if product_type == "bag" and wallet_style:
@@ -614,7 +614,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
                 "do not stack effects or cover the product. If audio generation is unsupported, do not claim the SFX will be rendered. "
                 if doodle else ""
             )
-            concept_rule = ("CREATIVE IDEA: " + concept.strip() + ". " if concept and concept.strip() else "")
+            concept_summary = _prompt_sentence(concept, 100, "")
             return (
                 "VIDEO PROMPT — " + str(duration) + " SECONDS" + (" | PART " + str(part) if part else "") + "\n"
                 "Vertical 9:16, realistic product video, exactly " + str(duration) + " seconds.\n"
@@ -624,7 +624,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
                    if product_type == "other" or universal_custom else "") + "\n"
                 + "SETTING: " + _prompt_sentence(scene, 100, "A realistic, uncluttered setting suited to the product.") + " CAMERA: " + _prompt_sentence(camera, 110, "Use one gentle camera move and keep the product stable.") + "\n"
                 + "PRODUCT LOCK: Preserve the reference product's visible design, colour, pattern, branding and proportions. Do not invent features or accessories.\n"
-                + hook_rule + beat_plan + concept_rule[:100] + doodle_rule
+                + hook_rule + beat_plan + (("CREATIVE IDEA: " + concept_summary + " ") if concept_summary else "") + doodle_rule
                 + "Keep actions natural and the product consistent. Follow the selected text, audio and visual options."
             )
 
@@ -751,6 +751,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
                 curated_direction = storyboard_text
             else:
                 rules = storyboard_text
+        concept_summary_long = _prompt_sentence(concept, 100, "")
         return (
             "VIDEO PROMPT — " + str(duration) + " SECONDS" + (" | PART " + str(part) if part else "") + "\n"
             "Realistic vertical 9:16 product ad, exactly " + str(duration) + " seconds.\n"
