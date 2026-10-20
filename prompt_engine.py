@@ -877,11 +877,11 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
             "VIDEO PROMPT — " + str(duration) + " SECONDS" + (" | PART " + str(part) if part else "") + "\n"
             "Realistic vertical 9:16 product ad, exactly " + str(duration) + " seconds.\n"
             "PRODUCT: " + product + "\n" + category_direction + "\n"
-            + "STYLE: " + style_name + " — " + _prompt_sentence(style_template, 180, "Use a realistic product-focused presentation.") + "\n"
+            + "STYLE: " + style_name + " — " + _prompt_text(style_template, "Use a realistic product-focused presentation.") + "\n"
             + "SETTING: " + _prompt_text(scene, "A realistic setting suited to the product.") + "\nCAMERA: " + _prompt_text(camera, "Use one restrained camera move and keep the product stable.") + "\nCAMERA PRIORITY: Follow the selected CAMERA instruction if STYLE suggests a conflicting move; use only one camera movement.\n"
             + (curated_direction if curated_direction else
                ((hook_direction if part != 2 else "Continue seamlessly from Part 1; do not repeat the hook.") + "\n" + rules))
-            + (("\nCREATIVE IDEA: " + _prompt_sentence(concept, 180, "")) if concept else "")
+            + (("\nCREATIVE IDEA: " + _prompt_text(concept, "")) if concept else "")
             + "\nNatural movement. If voice is selected, use a short product-specific hook and CTA in " + ("English" if str(prompt_language or "Malay").casefold() == "english" else "Bahasa Melayu Malaysia") + ". No added on-screen text or watermark."
         )
     if mode == "storyboard":
@@ -930,7 +930,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
         "Realistic vertical 9:16 product ad, exactly " + str(duration) + " seconds.\n"
         "PRODUCT: " + product + "\n"
         "STYLE: " + _prompt_text(art, "Use a realistic product-focused presentation.") + "\n"
-        "SETTING: " + _prompt_sentence(scene, 140, "A realistic setting suited to the product.") + "\n"
+        "SETTING: " + _prompt_text(scene, "A realistic setting suited to the product.") + "\n"
         + direction + "\n"
         + "Preserve the product's visible design and packaging; invent no features. "
         "Natural movement, clean transitions, no added on-screen text or watermark. "
