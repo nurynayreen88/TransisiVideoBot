@@ -75,11 +75,11 @@ def _category_key(value):
         "equipment": "equipment",
     }
     # Resolve child-specific subcategories before broad parent categories.
-    child_terms = ("kanak", "kanakkanak", "budak", "kids", "children", "child", "toddler", "baby")
+    child_terms = ("kanak", "kanakkanak", "budak", "kids", "children", "child", "toddler")
     if any(term in value for term in child_terms):
         if any(term in value for term in ("shoe", "kasut", "footwear")):
             return "kids_shoes"
-        if any(term in value for term in ("cloth", "clothing", "pakaian", "baju", "dress", "apparel")):
+        if "fashion_kids" in value or any(term in value for term in ("cloth", "clothing", "pakaian", "baju", "dress", "apparel", "shirt", "tee", "skort", "shorts", "romper", "kidswear")):
             return "kids_clothing"
     for needle, key in aliases.items():
         if needle in value:
