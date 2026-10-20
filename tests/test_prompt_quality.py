@@ -49,6 +49,14 @@ class PromptQualityTests(unittest.TestCase):
             self.assertTrue(any(word in result.lower() for word in ("looking", "comparing", "interested", "closer look")))
             self.assertNotIn("boleh tengok", result.lower())
 
+    def test_category_hook_uses_curated_database_phrase_without_product_name(self):
+        hooks = [product_hook("KATEGORI: beg", "Malay") for _ in range(30)]
+        result = next((hook for hook in hooks if hook), None)
+        self.assertIsNotNone(result)
+        self.assertIn("beg", result.lower())
+        self.assertTrue(result[0].isupper())
+        self.assertNotEqual(result, result.upper())
+
     def test_auto_bag_style_does_not_choose_wallet_style_for_handbag(self):
         allowed = {
             "handbag_showcase", "bag_daily_carry", "bag_tabletop_reveal",
