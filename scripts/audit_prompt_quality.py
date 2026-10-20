@@ -44,7 +44,7 @@ def audit(data):
             if values:
                 repeat_slots += 1
                 top = values.most_common(1)[0]
-                if top[1] >= 8:
+                if top[1] == len(variations) or top[1] >= 8:
                     flags.append(f"{sid}: {field} repeats {top[1]}/{len(variations)} times; review whether boilerplate limits variety")
         for index, v in enumerate(variations, 1):
             total += 1
