@@ -15,7 +15,7 @@ class CreativeVariationTests(unittest.TestCase):
             for _ in range(3)
         ]
         self.assertEqual(len(set(prompts)), 3)
-        self.assertTrue(all("AUDIO / SFX:" in prompt for prompt in prompts))
+        self.assertTrue(all("AUDIO:" in prompt for prompt in prompts))
 
     def test_category_specific_sfx(self):
         prompt = prompt_engine._creative_variation("fashion", "children's outfit", 0)
@@ -43,7 +43,7 @@ class CreativeVariationTests(unittest.TestCase):
             duration=20, product_type="fashion"
         )
         self.assertIn("=== KLIPPO PART 2 ===", prompt)
-        self.assertEqual(prompt.count("OUTPUT: 10 seconds"), 2)
+        self.assertEqual(prompt.count("VIDEO PROMPT — 10 SECONDS"), 2)
         self.assertIn("PART 2:", prompt)
 
     def test_30_seconds_produces_three_connected_ten_second_prompts(self):
@@ -53,9 +53,9 @@ class CreativeVariationTests(unittest.TestCase):
         )
         self.assertIn("=== KLIPPO PART 2 ===", prompt)
         self.assertIn("=== KLIPPO PART 3 ===", prompt)
-        self.assertEqual(prompt.count("OUTPUT: 10 seconds"), 3)
+        self.assertEqual(prompt.count("VIDEO PROMPT — 10 SECONDS"), 3)
         self.assertIn("PART 3:", prompt)
-        self.assertIn("Part 2's final frame", prompt)
+        self.assertIn("Part 1's final frame", prompt)
 
     def test_bed_storyboard_uses_furniture_specific_beats(self):
         scenes = prompt_engine._category_specific_scenes("home", "Designer Kid Bed")
@@ -109,6 +109,19 @@ class CreativeVariationTests(unittest.TestCase):
         self.assertEqual(prompt_engine.creative_angle_instruction("auto"), "")
         self.assertIn("verified details", prompt_engine.creative_angle_instruction("affiliate"))
         self.assertIn("physically plausible", prompt_engine.creative_angle_instruction("demo"))
+
+    def test_standard_prompt_uses_default_malay_without_undefined_state(self):
+        prompt = prompt_engine.build_prompt(
+            "standard", "Cotton shirt", "studio", "push", duration=10
+        )
+        self.assertIn("in Bahasa Melayu Malaysia", prompt)
+
+    def test_standard_prompt_honours_english_language_choice(self):
+        prompt = prompt_engine.build_prompt(
+            "standard", "Cotton shirt", "studio", "push",
+            duration=10, prompt_language="English"
+        )
+        self.assertIn("in English", prompt)
 
 
 if __name__ == "__main__":

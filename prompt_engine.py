@@ -118,7 +118,7 @@ def _creative_variation(product_type, product, part, product_subtype=''):
     audio = _SFX_BY_TYPE[group]
     return (
         "VISUAL VARIATION: " + action + "\n"
-        + "AUDIO: " + audio + " Keep music soft under speech; use only brief SFX that match visible action.\n"
+        + "AUDIO: " + audio + " Keep music soft under speech; use only brief SFX that match visible action. If the video model cannot create audio, add voice, music and SFX in post-production.\n"
         + "QUALITY: One clear action and at most one controlled camera move per beat. Preserve product shape, colour, markings and scale; keep motion, lighting and contact realistic. Smooth continuity, no morphing, duplication, warping, flicker or unrequested on-screen text."
     )
 
@@ -347,7 +347,7 @@ def creative_angle_instruction(angle):
     return _CREATIVE_ANGLE_INSTRUCTIONS.get(str(angle or "auto"), "")
 
 
-def build_prompt(mode, product, scene, motion, style='auto', duration=10, concept='', product_type='other', storyboard_override=None, split=None, universal_custom=False, product_subtype=''):
+def build_prompt(mode, product, scene, motion, style='auto', duration=10, concept='', product_type='other', storyboard_override=None, split=None, universal_custom=False, product_subtype='', prompt_language='Malay'):
     # Preserve the historical API behavior: a 20-second call without an explicit
     # split choice still returns two connected 10-second prompts.
     if split is None:
@@ -357,7 +357,7 @@ def build_prompt(mode, product, scene, motion, style='auto', duration=10, concep
         # Generate connected 10-second prompts while retaining the same style and product context.
         parts = [
             _build_single_prompt(mode, product, scene, motion, style, part=index, duration=10,
-                                 concept=concept, product_type=product_type, storyboard_override=storyboard_override, universal_custom=universal_custom)
+                                 concept=concept, product_type=product_type, storyboard_override=storyboard_override, universal_custom=universal_custom, prompt_language=prompt_language)
             + "\n\n" + _creative_variation(product_type, product, index, product_subtype)
             for index in range(1, duration // 10 + 1)
         ]
@@ -366,11 +366,11 @@ def build_prompt(mode, product, scene, motion, style='auto', duration=10, concep
             for index, part in enumerate(parts)
         )
     return (_build_single_prompt(mode, product, scene, motion, style, part=0, duration=duration,
-                                concept=concept, product_type=product_type, storyboard_override=storyboard_override, universal_custom=universal_custom)
+                                concept=concept, product_type=product_type, storyboard_override=storyboard_override, universal_custom=universal_custom, prompt_language=prompt_language)
             + "\n\n" + _creative_variation(product_type, product, 0, product_subtype))
 
 
-def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, duration=10, concept='', product_type='other', storyboard_override=None, universal_custom=False):
+def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, duration=10, concept='', product_type='other', storyboard_override=None, universal_custom=False, prompt_language='Malay'):
     scene_text = str(scene or '').lower()
     selected_scene_lock = "LOCATION: Keep every shot in the selected setting (" + str(scene or "a realistic setting suited to the product") + "); do not substitute another location. "
     if motion in ('auto', '', None):
@@ -533,7 +533,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
 
         # Keep single 10-second prompts concise enough for one Telegram message.
         # Retain the selected style, reference safety, timed beats and user concept.
-        if duration in (10, 20, 30) and (duration == 10 or part == 0):
+        if duration == 10:
             if duration == 10 and part >= 2:
                 clip_label = "SECOND CLIP 10s" if part == 2 else "THIRD CLIP 10s" if part == 3 else "CONTINUATION CLIP 10s"
                 beat_plan = (clip_label + ": 0–2s continue from the exact full-product frame held at the end of the previous clip; "
@@ -774,7 +774,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
             "Keep model, clothing, colours, fit and accessories unchanged. No dancing, scene changes or invented details. "
             + selected_scene_lock
         )
-    spoken_language = "Bahasa Melayu Malaysia" if user_data.get("prompt_language", "Malay") != "English" else "English"
+    spoken_language = "English" if str(prompt_language or "Malay").casefold() == "english" else "Bahasa Melayu Malaysia"
     return (
         "VIDEO PROMPT — " + str(duration) + " SECONDS" + (" | PART " + str(part) if part else "") + "\n"
         "Realistic vertical 9:16 product ad, exactly " + str(duration) + " seconds.\n"
