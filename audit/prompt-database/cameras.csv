@@ -1,0 +1,5 @@
+"id","direction","source"
+"orbit","A restrained camera arc of at most 30 degrees with subtle parallax. Never reveal or fabricate an unseen side.","prompt_engine.py → CAMERAS"
+"push","A smooth slow dolly-in from a balanced medium product shot to a crisp detail, with no digital warping.","prompt_engine.py → CAMERAS"
+"side","A measured left-to-right lateral camera slide with gentle depth separation and stable product proportions.","prompt_engine.py → CAMERAS"
+"static","A locked premium studio composition with delicate lighting movement and a subtle focus transition.","prompt_engine.py → CAMERAS"
