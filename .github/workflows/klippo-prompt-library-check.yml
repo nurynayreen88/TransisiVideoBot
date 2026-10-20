@@ -272,7 +272,9 @@ jobs:
               )
               assert "UNIVERSAL CREATIVE FRAMEWORK:" in custom_category_prompt
               assert "UNIVERSAL SAFETY RULES:" in custom_category_prompt
-              assert any(item["direction"] in custom_category_prompt for item in frameworks), (\n                  "Custom category prompt did not embed one complete universal framework direction"\n              )
+              assert any(item["direction"] in custom_category_prompt for item in frameworks), (
+                  "Custom category prompt did not embed one complete universal framework direction"
+              )
 
               custom_subcategory_prompt = build_prompt(
                   "storyboard",
