@@ -138,67 +138,67 @@ def generate_caption(product_name, category="other", subcategory="", platform="S
         "kids_shoes": (
             f"Sedang cari kasut untuk si kecil? 👟\n"
             f"{name} boleh jadi pilihan untuk melengkapkan gaya anak ketika keluar bersama keluarga atau menjalani aktiviti harian. "
-            "Semak pilihan saiz dan butiran produk dahulu supaya sesuai dengan keperluan mereka."
+            ""
         ),
         "kids_clothing": (
             f"Nak gayakan si kecil dengan penampilan yang comel? 🧸\n"
             f"{name} boleh dipertimbangkan untuk melengkapkan koleksi pakaian anak. "
-            "Lihat pilihan saiz, bahan dan kandungan set pada halaman produk sebelum memilih."
+            ""
         ),
         "shoes": (
             f"Sedang mencari kasut untuk melengkapkan gaya harian? 👟\n"
             f"{name} boleh anda pertimbangkan mengikut gaya dan kegunaan yang diperlukan. "
-            "Semak saiz, bahan serta maklumat produk sebelum membuat pilihan."
+            ""
         ),
         "fashion": (
             f"Sedang mencari idea untuk gaya seterusnya? ✨\n"
             f"{name} boleh dijadikan pilihan untuk dipadankan dengan koleksi pakaian anda. "
-            "Lihat variasi, saiz dan butiran produk untuk mencari pilihan yang sesuai."
+            ""
         ),
         "bag": (
             f"Mencari beg untuk melengkapi rutin harian? 👜\n"
             f"{name} boleh anda pertimbangkan mengikut gaya dan barang yang biasa dibawa. "
-            "Semak ukuran, ruang simpanan dan butiran produk sebelum memilih."
+            ""
         ),
         "hijab": (
             f"Jom cari inspirasi gaya tudung yang sesuai dengan anda ✨\n"
             f"{name} boleh dipadankan mengikut pilihan gaya dan warna kegemaran. "
-            "Semak warna, material dan butiran produk pada halaman jualan."
+            ""
         ),
         "beauty": (
             f"Sedang menambah pilihan dalam rutin kecantikan? ✨\n"
             f"Lihat {name} dan teliti maklumat produk sebelum membuat pilihan. "
-            "Semak bahan, cara penggunaan dan kesesuaian yang dinyatakan oleh penjual."
+            ""
         ),
         "food": (
             f"Nampak menarik untuk dicuba? 🍽️\n"
             f"{name} boleh anda semak jika sedang mencari pilihan makanan atau kudapan. "
-            "Lihat ramuan, saiz pek dan maklumat produk sebelum membeli."
+            ""
         ),
         "gadget": (
             f"Sedang mencari gajet atau aksesori teknologi? 📱\n"
             f"{name} boleh anda pertimbangkan berdasarkan kegunaan yang diperlukan. "
-            "Semak spesifikasi, keserasian dan kandungan pakej sebelum membuat pilihan."
+            ""
         ),
         "home": (
             f"Ada idea untuk menceriakan ruang rumah? 🏡\n"
             f"{name} boleh anda lihat sebagai salah satu pilihan untuk kediaman. "
-            "Semak ukuran, bahan dan butiran produk supaya sesuai dengan ruang anda."
+            ""
         ),
         "toy": (
             f"Sedang mencari idea untuk waktu bermain si kecil? 🧸\n"
             f"{name} boleh anda pertimbangkan mengikut minat dan peringkat umur anak. "
-            "Semak cadangan umur serta maklumat keselamatan yang dinyatakan pada produk."
+            ""
         ),
         "baby": (
             f"Sedang menyenaraikan keperluan si kecil? 🍼\n"
             f"{name} boleh anda semak sebagai salah satu pilihan. "
-            "Teliti bahan, saiz dan panduan penggunaan yang dinyatakan oleh penjual."
+            ""
         ),
         "other": (
             f"Jom lihat produk ini dengan lebih dekat ✨\n"
             f"{name} mungkin sesuai untuk dipertimbangkan berdasarkan keperluan anda. "
-            "Semak butiran, variasi dan maklumat terkini pada halaman produk sebelum membeli."
+            ""
         ),
     }
     caption = captions.get(key, captions["other"])
