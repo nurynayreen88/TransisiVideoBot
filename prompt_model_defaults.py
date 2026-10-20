@@ -17,12 +17,13 @@ def auto_prompt_model_defaults(product_type, product_subcategory="", child_produ
             "prompt_animal_species": "auto",
         }
 
-    if child_product and category in {"fashion", "shoes"}:
+    if child_product and category in {"fashion", "shoes", "hijab"}:
+        is_hijab_product = category == "hijab"
         return {
             "prompt_model_presence": "yes",
             "prompt_model_count": 1,
-            "prompt_model_gender": "auto",
-            "prompt_model_hijab": "na",
+            "prompt_model_gender": "female" if is_hijab_product else "auto",
+            "prompt_model_hijab": "hijab" if is_hijab_product else "na",
             "prompt_model_ethnicity": "random_malaysia",
             "prompt_model_age": "8-12",
             "prompt_animal_species": "auto",
