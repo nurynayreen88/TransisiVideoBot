@@ -90,6 +90,16 @@ class PromptQualityTests(unittest.TestCase):
         self.assertEqual(defaults["prompt_model_hijab"], "hijab")
         self.assertEqual(defaults["prompt_model_age"], "8-12")
 
+    def test_product_only_framing_overrides_conflicting_model_actions(self):
+        source = (Path(__file__).resolve().parents[1] / "bot.py").read_text(encoding="utf-8")
+        model_block = source[source.index("def prompt_creative_settings"):source.index("PRODUCT_SUBTYPES =")]
+        self.assertLess(
+            model_block.index("if user_data.get('prompt_framing') == 'product_only':"),
+            model_block.index("elif user_data.get('prompt_model_presence') == 'animal':"),
+        )
+        self.assertIn("PRODUCT-ONLY PRIORITY:", source)
+        self.assertIn("Show no person, hands, face, body parts or animal", source)
+
     def test_baby_products_prioritize_safe_age_appropriate_model_rules(self):
         source = (Path(__file__).resolve().parents[1] / "bot.py").read_text(encoding="utf-8")
         baby_branch = source.index("if baby_product and child_model:")
