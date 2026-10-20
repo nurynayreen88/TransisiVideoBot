@@ -3379,22 +3379,9 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['prompt_scene_key'] = 'auto'
             context.user_data['stage'] = 'prompt_duration'
             style_label = CORE_STYLE_LABELS.get(selected, selected)
-            product_name = context.user_data.get('prompt_product_name', '').strip() or 'Produk'
-            duration = int(context.user_data.get('prompt_duration', 10))
-            duration_mode = context.user_data.get('prompt_duration_mode', 'single')
-            duration_label = str(duration) + ' saat' + (' (prompt bersambung)' if duration_mode == 'split' else '')
             await query.message.reply_text(
-                '🧾 SEMAK RINGKAS\n\n'
-                + '🛍️ Produk: ' + product_name + '\n'
-                + '⏱️ Durasi: ' + duration_label + '\n'
-                + '🎨 Gaya: ' + style_label + '\n\n'
-                + 'Tetapan kamera, aksi, latar, model, pencahayaan, audio, hook, CTA dan babak dipilih automatik. '
-                + 'Klippo akan mengubah variasi kreatif setiap kali prompt baharu dijana sambil mengekalkan identiti gaya dan ketepatan produk.',
-                reply_markup=InlineKeyboardMarkup([
-                    [InlineKeyboardButton('✅ Jana Prompt', callback_data='prompt_generate:confirm')],
-                    [InlineKeyboardButton('🎨 Tukar Gaya', callback_data='prompt_style_back')],
-                    [InlineKeyboardButton('🏠 Menu Utama', callback_data='home')],
-                ])
+                '⏱️ Gaya dipilih: ' + style_label + '\\n\\nPilih tempoh video:',
+                reply_markup=prompt_duration_menu()
             )
     elif action == 'prompt_style_back' and stage == 'prompt_confirm':
         context.user_data['stage'] = 'prompt_style'
