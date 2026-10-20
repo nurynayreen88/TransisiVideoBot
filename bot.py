@@ -174,7 +174,7 @@ def _prompt_library_component_rules(template_id, audio_enabled=True, voiceover_m
     fidelity_rules = directions('product_fidelity_rules', fidelity_ids)
     if fidelity_rules:
         rules.append('PRODUCT FIDELITY: ' + ' '.join(fidelity_rules))
-    return '\\n'.join(rules)
+    return '\n'.join(rules)
 
 
 PROMPTS_BY_ID = {item['id']: item for item in PROMPT_LIBRARY.get('prompts', []) if isinstance(item, dict) and item.get('id')}
@@ -3825,7 +3825,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     camera_choice=context.user_data.get('prompt_motion_choice', 'auto'),
                 )
                 if component_rules:
-                    prompt = prompt.rstrip() + '\\n\\nREUSABLE COMPONENT RULES:\\n' + component_rules
+                    prompt = prompt.rstrip() + '\n\nREUSABLE COMPONENT RULES:\n' + component_rules
                 if context.user_data.get('prompt_model_presence') == 'yes' and int(context.user_data.get('prompt_model_count',1)) == 2:
                     prompt += ('\n\nTWO-MODEL CAST: Model 1 is ' + str(context.user_data.get('prompt_model_gender','female')) + ', appearance ' + str(context.user_data.get('prompt_model_ethnicity','random_malaysia')) + ', age ' + str(context.user_data.get('prompt_model_age','26-40')) + ', hijab ' + str(context.user_data.get('prompt_model_hijab','na')) + '. Model 2 is ' + str(context.user_data.get('prompt_model_gender_2','male')) + ', appearance ' + str(context.user_data.get('prompt_model_ethnicity_2','random_malaysia')) + ', age ' + str(context.user_data.get('prompt_model_age_2','26-40')) + ', hijab ' + str(context.user_data.get('prompt_model_hijab_2','na')) + '. Keep identities distinct and consistent.')
                 # Text and audio options are added once by prompt_creative_settings below.
