@@ -85,6 +85,66 @@ _CREATIVE_ACTIONS = {
         "Begin with a tidy contextual wide shot and slide gently toward one visible design detail.",
         "Keep the product grounded on a suitable surface; use a restrained push-in instead of inventing a function."
     ],
+    "equipment": [
+        "Begin with the complete tool or appliance grounded in frame, then move closer to one visible control or working part.",
+        "Show one safe, simple handling action only when the product supports it; otherwise use a restrained camera slide.",
+        "Keep the equipment stationary while the camera reveals a visible connector, handle or structural detail."
+    ],
+    "accessory": [
+        "Start with the whole accessory visible, then make a gentle close pass over one actual clasp, dial, fastening or edge.",
+        "Show the item at believable scale in a hand or on a wearer only if a model is selected; otherwise use a clean tabletop reveal.",
+        "Return to the full accessory after one detail shot; do not add matching items or invented attachments."
+    ],
+    "toy": [
+        "Show the complete toy or game set first, then one simple safe interaction with an existing piece.",
+        "Keep every visible piece consistent and grounded; do not add characters, accessories or effects that are not shown.",
+        "Use a gentle camera move across the actual set and finish with all supplied pieces visible."
+    ],
+    "stationery": [
+        "Begin with the full book or stationery item visible, then move to one real cover, page or writing detail.",
+        "Show a page turn or pen movement only when it suits the item; do not fabricate readable text.",
+        "Finish with the complete original item neatly arranged, without adding supplies."
+    ],
+    "sports": [
+        "Start with the complete sports item grounded in frame, then show one visible grip, seam or fastening detail.",
+        "Use one controlled, safe demonstration only when the product supports it; no stunts or exaggerated performance.",
+        "Return to a stable full-product view after the action and keep all equipment unchanged."
+    ],
+    "automotive": [
+        "Show the complete automotive accessory by itself first; do not invent a vehicle installation.",
+        "Move close to a visible connector, mount or edge only when present in the reference.",
+        "Use a stationary vehicle context only when appropriate; keep the product grounded and avoid compatibility claims."
+    ],
+    "baby": [
+        "Keep the baby product as the hero, using a clean stable presentation and no infant unless explicitly selected and safe.",
+        "Show one visible closure, support or construction detail without making safety or health claims.",
+        "Use calm adult-caretaker handling only when appropriate; otherwise keep the product alone and stationary."
+    ],
+    "travel": [
+        "Open on the complete luggage or travel item with visible handles, straps and wheels in frame.",
+        "Show one natural lift, roll or carry only when supported by the product and setting.",
+        "Highlight a visible zip, handle or wheel and finish with the whole unchanged item."
+    ],
+    "office": [
+        "Show the complete office product on a tidy desk, then one simple practical interaction if supported.",
+        "Move close to a visible control, edge or compartment without inventing specifications.",
+        "Finish on a clean full-product view and avoid adding stationery or accessories."
+    ],
+    "crafts": [
+        "Show the complete craft item or kit and all visible supplied pieces before any interaction.",
+        "Demonstrate one safe, plausible craft action only when the actual kit supports it.",
+        "Return to the original item or kit; do not invent tools, materials or a finished result."
+    ],
+    "garden": [
+        "Open on the complete garden product at realistic scale, then show one visible construction detail.",
+        "Use one safe outdoor interaction only when the product supports it; do not invent results or accessories.",
+        "Finish with the full item grounded and clearly visible."
+    ],
+    "kitchen": [
+        "Show the complete kitchen product or set before a close-up, with no extra cookware or utensils.",
+        "Use one simple, physically plausible kitchen action only when supported by the product.",
+        "Highlight a visible handle, lid or control and finish on the complete unchanged product."
+    ],
     "general": [
         "Start with a clean wide hero composition, then use a gentle lateral slide to reveal a visible detail.",
         "Begin with a close view of a reference-visible feature, then pull back to show the complete product.",
@@ -102,6 +162,18 @@ _SFX_BY_TYPE = {
     "wallet": "Use a soft handling sound only if a hand moves the wallet; keep music low and polished.",
     "pet": "Use gentle natural paw, collar or movement sounds only if visible and plausible; never force animal sounds.",
     "home": "Use a quiet handling or placement sound only when the action is visible; keep music soft.",
+    "equipment": "Use a restrained mechanical click or soft switch sound only if a visible control is used; no invented machine noise.",
+    "accessory": "Use a tiny, natural fastening or handling sound only if the action is visible; otherwise keep music understated.",
+    "toy": "Use a soft, brief movement sound only when the toy visibly moves; avoid cartoon effects or extra voices.",
+    "stationery": "Use a quiet page turn, paper movement or pen sound only when visible; keep it subtle.",
+    "sports": "Use a natural contact sound only when the visible action supports it; no exaggerated impacts.",
+    "automotive": "Use a restrained fitting or handling sound only if shown; do not add engine sounds to a product-only shot.",
+    "baby": "Use gentle, calm room tone and a soft placement sound only if visible; no crying or invented baby sounds.",
+    "travel": "Use a quiet wheel roll, zip or handle movement only if visible; no airport ambience unless the setting is selected.",
+    "office": "Use a subtle paper, keyboard or placement sound only if the corresponding action is visible.",
+    "crafts": "Use a light tool or material sound only if visible and plausible; no extra tools.",
+    "garden": "Use gentle outdoor ambience only if the setting is outdoors; match handling sounds to visible action.",
+    "kitchen": "Use a light utensil or placement sound only if visible; no exaggerated sizzling or invented cooking sounds.",
     "general": "Use one subtle soft chime, tiny pop or gentle whoosh at a matching visual beat; never stack effects."
 }
 
@@ -115,7 +187,9 @@ def _creative_variation(product_type, product, part, product_subtype=''):
         group = "fashion"
     elif type_key == "bag" and (subtype_key in {"bag_wallet", "wallet", "card_holder"} or any(w in words for w in ("wallet", "dompet", "card holder", "cardholder", "coin purse"))):
         group = "wallet"
-    elif type_key in {"bag", "travel"} or any(w in words for w in ("bag", "handbag", "backpack", "purse", "luggage", "beg galas", "beg tangan")):
+    elif type_key == "travel":
+        group = "travel"
+    elif type_key == "bag" or any(w in words for w in ("bag", "handbag", "backpack", "purse", "beg galas", "beg tangan")):
         group = "bag"
     elif type_key == "shoes" or any(w in words for w in ("shoe", "sneaker", "sandal", "footwear", "kasut", "selipar")):
         group = "shoes"
@@ -125,9 +199,31 @@ def _creative_variation(product_type, product, part, product_subtype=''):
         group = "beauty"
     elif type_key == "food" or any(w in words for w in ("food", "drink", "snack", "cake", "coffee", "tea", "makanan", "minuman")):
         group = "food"
-    elif type_key in {"gadget", "equipment", "automotive", "office"} or any(w in words for w in ("gadget", "phone", "camera", "earbud", "keyboard", "electronic", "telefon", "gajet")):
+    elif type_key == "gadget":
         group = "gadget"
-    elif type_key in {"home", "kitchen", "furniture", "garden"}:
+    elif type_key == "equipment":
+        group = "equipment"
+    elif type_key == "accessory":
+        group = "accessory"
+    elif type_key == "toy":
+        group = "toy"
+    elif type_key == "book_stationery":
+        group = "stationery"
+    elif type_key == "sports":
+        group = "sports"
+    elif type_key == "automotive":
+        group = "automotive"
+    elif type_key == "baby":
+        group = "baby"
+    elif type_key == "office":
+        group = "office"
+    elif type_key == "crafts":
+        group = "crafts"
+    elif type_key == "garden":
+        group = "garden"
+    elif type_key == "kitchen":
+        group = "kitchen"
+    elif type_key in {"home", "furniture"}:
         group = "home"
     else:
         group = "general"
