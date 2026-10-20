@@ -3,7 +3,25 @@ import json
 from pathlib import Path
 
 import random
+import re
 from collections import deque
+
+def _prompt_sentence(value, limit=100, fallback=""):
+    """Keep a meaningful complete sentence; the limit is a target, not a destructive cut."""
+    text = " ".join(str(value or "").split()).strip()
+    if not text:
+        return fallback
+    match = re.search(r"^(.+?[.!?])(?:\\s|$)", text)
+    if match:
+        sentence = match.group(1).strip()
+        # Preserve the complete first sentence even if it exceeds the target length.
+        return sentence
+    if len(text) <= limit:
+        return text
+    # For fragments without sentence punctuation, stop at a word boundary and close it.
+    excerpt = text[:limit].rsplit(" ", 1)[0].strip()
+    return (excerpt.rstrip(" ,;:-") + ".") if excerpt else fallback
+
 
 # Keep recent action choices in memory so consecutive prompts vary naturally.
 _RECENT_CREATIVE_CHOICES = {}
@@ -518,7 +536,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
         concise_framework = ""
         if product_type == "other" or universal_custom:
             concise_framework = (
-                " UNIVERSAL CREATIVE FRAMEWORK: " + _universal_prompt_direction(style_key)[:180]
+                " UNIVERSAL CREATIVE FRAMEWORK: " + _prompt_sentence(_universal_prompt_direction(style_key), 180, "Use a clean product reveal and preserve all visible product details.")
                 + " UNIVERSAL SAFETY RULES: Preserve visible product details; invent no features or claims."
             )
         doodle = style_key == "white_doodle"
@@ -586,17 +604,17 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
                 "do not stack effects or cover the product. If audio generation is unsupported, do not claim the SFX will be rendered. "
                 if doodle else ""
             )
-            concept_rule = ("CREATIVE IDEA: " + concept.strip() + ". " if concept and concept.strip() else "")
+            concept_rule = ("CREATIVE IDEA: " + _prompt_sentence(concept, 180, "") + " " if concept and concept.strip() else "")
             return (
                 "VIDEO PROMPT — " + str(duration) + " SECONDS" + (" | PART " + str(part) if part else "") + "\n"
                 "Vertical 9:16, realistic product video, exactly " + str(duration) + " seconds.\n"
-                + "STYLE: " + style_name + " — " + (" ".join(style_template.split())[:180].rsplit(" ", 1)[0] or " ".join(style_template.split())[:180]).rstrip() + "\n"
+                + "STYLE: " + style_name + " — " + _prompt_sentence(style_template, 180, "Use a realistic product-focused presentation.") + "\n"
                 + "PRODUCT: " + product + "\n" + concise_category_direction + concise_framework
                 + (" UNIVERSAL SAFETY RULES: Preserve visible product details; invent no features or claims."
                    if product_type == "other" or universal_custom else "") + "\n"
-                + "SETTING: " + str(scene)[:100].strip() + ". CAMERA: " + camera[:70].strip() + "\n"
+                + "SETTING: " + _prompt_sentence(scene, 100, "A realistic setting suited to the product.") + " CAMERA: " + _prompt_sentence(camera, 110, "Use one restrained camera move and keep the product stable.") + "\n"
                 + "PRODUCT LOCK: Preserve the reference product's visible design, colour, pattern, branding and proportions. Do not invent features or accessories.\n"
-                + hook_rule + beat_plan + concept_rule[:100] + doodle_rule
+                + hook_rule + beat_plan + concept_rule + doodle_rule
                 + "Keep actions natural and the product consistent. Follow the selected text, audio and visual options."
             )
 
@@ -727,12 +745,12 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
             "VIDEO PROMPT — " + str(duration) + " SECONDS" + (" | PART " + str(part) if part else "") + "\n"
             "Realistic vertical 9:16 product ad, exactly " + str(duration) + " seconds.\n"
             "PRODUCT: " + product + "\n" + category_direction + "\n"
-            + "STYLE: " + style_name + " — " + style_template[:70].strip() + "\n"
-            + "SETTING: " + str(scene)[:100].strip() + "\nCAMERA: " + camera[:70].strip() + "\n"
+            + "STYLE: " + style_name + " — " + _prompt_sentence(style_template, 180, "Use a realistic product-focused presentation.") + "\n"
+            + "SETTING: " + _prompt_sentence(scene, 140, "A realistic setting suited to the product.") + "\nCAMERA: " + _prompt_sentence(camera, 140, "Use one restrained camera move and keep the product stable.") + "\n"
             + (curated_direction if curated_direction else
                ((hook_direction if part != 2 else "Continue seamlessly from Part 1; do not repeat the hook.") + "\n" + rules))
-            + (("\nCREATIVE IDEA: " + concept[:100].strip()) if concept else "")
-            + "\nNatural movement. If voice is selected, use a short hook and CTA in Bahasa Melayu Malaysia. No added on-screen text or watermark."
+            + (("\nCREATIVE IDEA: " + _prompt_sentence(concept, 180, "")) if concept else "")
+            + "\nNatural movement. If voice is selected, use a short product-specific hook and CTA in " + ("English" if str(prompt_language or "Malay").casefold() == "english" else "Bahasa Melayu Malaysia") + ". No added on-screen text or watermark."
         )
     if mode == "storyboard":
         shots = [
