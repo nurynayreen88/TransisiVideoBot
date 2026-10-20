@@ -138,6 +138,8 @@ class PromptComponentTableTests(unittest.TestCase):
         self.assertIn("audio_enabled=context.user_data.get('prompt_audio_enabled', True) is not False", bot_source)
         self.assertIn("voiceover_mode=context.user_data.get('prompt_voiceover_mode', 'none')", bot_source)
         self.assertIn("on_screen_text=context.user_data.get('prompt_on_screen_text', 'no')", bot_source)
+        self.assertIn("camera_choice=context.user_data.get('prompt_motion_choice', 'auto')", bot_source)
+        self.assertIn("selected_camera_by_choice", bot_source)
         self.assertIn("if voiceover_mode == 'script':", bot_source)
         self.assertIn("do not add spoken lines or an extra spoken CTA", bot_source)
         self.assertIn("audio_fields = ('music', 'sfx') if voiceover_mode == 'script' else ('voice', 'music', 'sfx')", bot_source)
