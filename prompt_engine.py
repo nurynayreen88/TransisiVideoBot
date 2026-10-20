@@ -523,7 +523,7 @@ def build_prompt(mode, product, scene, motion, style='auto', duration=10, concep
             for index, part in enumerate(parts)
         )
     return (_build_single_prompt(mode, product, scene, motion, style, part=0, duration=duration,
-                                concept=concept, product_type=product_type, storyboard_override=storyboard_override, universal_custom=universal_custom, prompt_language=prompt_language)
+                                concept=concept, product_type=product_type, storyboard_override=storyboard_override, universal_custom=universal_custom, product_subtype=product_subtype, prompt_language=prompt_language)
             + "\n\n" + _creative_variation(product_type, product, 0, product_subtype))
 
 
