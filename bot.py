@@ -697,6 +697,7 @@ def prompt_creative_settings(user_data, include_audio=True):
     # The single-model video prompt must retain the explicit hijab choice too.
     if (
         user_data.get('prompt_model_presence') == 'yes'
+        and user_data.get('prompt_framing') != 'product_only'
         and int(user_data.get('prompt_model_count', 1) or 1) == 1
         and user_data.get('prompt_model_gender') == 'female'
         and not model.startswith('Model: no child or teen')
