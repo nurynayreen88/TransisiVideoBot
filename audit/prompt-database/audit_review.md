@@ -66,3 +66,9 @@ The most important issue is not simply that some prompt text is long. The genera
 - [Detailed findings table](audit_findings.csv)
 
 No production code was changed and nothing was deployed.
+
+## Implementation progress
+
+PR #131 is open for review and has not been merged or deployed. It addresses sentence truncation, universal framework key mismatches, speech-language selection, category-specific five-beat scene routing, and White Doodle continuity. Latest GitHub Actions checks passed: prompt quality regression tests and Klippo prompt library checks, including Python syntax and library structure.
+
+Still outstanding: compare production SQLite prompt rows read-only; audit model selection end to end; review existing/custom hook rows; and inspect generated outputs across styles for camera/action conflicts. Do not merge or deploy without explicit approval.
