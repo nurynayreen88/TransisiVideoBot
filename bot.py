@@ -692,6 +692,19 @@ def prompt_creative_settings(user_data, include_audio=True):
     else:
         model = 'Model: none; focus on the product.'
 
+    # The single-model video prompt must retain the explicit hijab choice too.
+    if (
+        user_data.get('prompt_model_presence') == 'yes'
+        and int(user_data.get('prompt_model_count', 1) or 1) == 1
+        and user_data.get('prompt_model_gender') == 'female'
+        and not model.startswith('Model: no child or teen')
+    ):
+        hijab_choice = user_data.get('prompt_model_hijab', 'na')
+        if hijab_choice == 'hijab':
+            model += ' Head covering: the female model wears a hijab; keep its style and placement consistent.'
+        elif hijab_choice == 'no_hijab':
+            model += ' Head covering: no hijab; keep the model hair visible and do not add a head covering.'
+
     # build_prompt() already supplies format, product lock and continuity.
     # Keep this helper focused on the user's selected model, audio and text options.
     lines = [model]
