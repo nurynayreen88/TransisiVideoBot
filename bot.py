@@ -3709,6 +3709,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                         framing_direction = ' '.join(str(framing[1]).split()).strip()
                         prompt = prompt.rstrip() + '\nCAMERA FRAMING: ' + framing_direction.rstrip('. ') + '.'
                 prompt = prompt.rstrip() + '\n\n' + prompt_creative_settings(context.user_data)
+                if framing_key == 'product_only':
+                    prompt += '\nPRODUCT-ONLY PRIORITY: This selected framing overrides conflicting style or action suggestions. Show no person, hands, face, body parts or animal; use camera movement only and keep the exact product fully visible.'
                 await progress_update(waiting, 70, 'Menyediakan PROMPT IMAGE dan PROMPT VIDEO...')
                 context.user_data['stage'] = 'prompt_done'
                 mode_name = context.user_data.get('prompt_mode', 'normal')
