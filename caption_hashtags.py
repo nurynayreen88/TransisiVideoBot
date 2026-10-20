@@ -11,7 +11,7 @@ CATEGORY_TERMS = {
     "kids_clothing": ["bajukanakkanak", "pakaianbudak", "gayakanakkanak", "bajukomel", "fesyenkanakkanak"],
     "shoes": ["kasut", "kasutwanita", "kasutlelaki", "kasutselesa", "kasutkerja", "kasutcantik"],
     "beauty": ["kecantikan", "rutinpenjagaan", "beautymalaysia", "skincare", "makeupmalaysia", "selfcare"],
-    "food": ["makanan", "makanansedap", "jommak an".replace(" ", ""), "kudapan", "foodmalaysia", "jommak an".replace(" ", "")],
+    "food": ["makanan", "makanansedap", "makanlokal", "kudapan", "foodmalaysia", "makanankampung"],
     "gadget": ["gadget", "aksesorigajet", "teknologimalaysia", "gadgetmalaysia", "gajetharian"],
     "equipment": ["peralatan", "alatberguna", "peralatanpraktikal", "barangberguna", "alatanrumah"],
     "home": ["dekorasirumah", "rumahkemas", "baranganrumah", "hiasanrumah", "rumahcantik", "homefinds"],
@@ -97,11 +97,13 @@ def hashtag_library_size():
                     tags.add("#" + _slug(root) + _slug(fmt))
     return len(tags)
 
-def _relevant_hashtags(category, product_name, subcategory, limit=12):
+def _relevant_hashtags(category, product_name, subcategory, limit=12, platform="Shopee"):
     key = _category_key(category + " " + subcategory)
     roots = CATEGORY_TERMS.get(key, CATEGORY_TERMS["other"])
     product_slug = _slug(product_name)
     sub_slug = _slug(subcategory)
+    platform_key = str(platform or "Shopee").casefold()
+    platform_tag = "#TikTokMalaysia" if "tik" in platform_key else "#ShopeeMalaysia"
     candidates = []
     for tag in roots:
         candidates.append("#" + _slug(tag))
@@ -126,7 +128,13 @@ def _relevant_hashtags(category, product_name, subcategory, limit=12):
     if general:
         offset = seed % len(general)
         general = general[offset:] + general[:offset]
-    return (specific + general)[:limit]
+    selected = (specific + general)[:limit]
+    if platform_tag.casefold() not in {tag.casefold() for tag in selected}:
+        if selected:
+            selected[-1] = platform_tag
+        else:
+            selected = [platform_tag]
+    return selected[:limit]
 
 def generate_caption(product_name, category="other", subcategory="", platform="Shopee"):
     """Return a useful Malaysian Malay caption and relevant hashtags only."""
@@ -202,8 +210,12 @@ def generate_caption(product_name, category="other", subcategory="", platform="S
         ),
     }
     caption = captions.get(key, captions["other"])
-    hashtags = _relevant_hashtags(key, name, sub)
-    return caption + "\n\n" + " ".join(hashtags)
+    platform_key = str(platform or "Shopee").casefold()
+    cta = ("Tekan pautan TikTok Shop untuk semak butiran dan pilihan produk sebelum membeli."
+           if "tik" in platform_key else
+           "Tekan pautan produk Shopee untuk semak butiran, variasi dan harga terkini sebelum membeli.")
+    hashtags = _relevant_hashtags(key, name, sub, platform=platform)
+    return caption.rstrip() + "\n\n" + cta + "\n\n" + " ".join(hashtags)
 
 def get_caption(product_name, category="other", subcategory="", platform="Shopee"):
     return generate_caption(product_name, category, subcategory, platform)
