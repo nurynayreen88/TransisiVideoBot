@@ -1127,6 +1127,8 @@ def prompt_style_guide(product_type='other'):
     )
 
 
+# White Doodle is a universal overlay style and works across product categories.
+# The legacy doodle_option = next category-filtering path is intentionally replaced by the compact universal style catalogue.
 def prompt_style_menu(product_type='other', model_presence=None):
     """Show a compact, stable set of user-facing styles; vary execution automatically."""
     available = dict(storyboard_styles())
