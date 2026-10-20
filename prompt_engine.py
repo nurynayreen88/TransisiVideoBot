@@ -27,6 +27,12 @@ def _prompt_sentence(value, limit=100, fallback=""):
     return " ".join(kept)
 
 
+def _prompt_text(value, fallback=""):
+    """Normalize whitespace without discarding user or style constraints."""
+    text = " ".join(str(value or "").split()).strip()
+    return text or fallback
+
+
 # Keep recent action choices in memory so consecutive prompts vary naturally.
 _RECENT_CREATIVE_CHOICES = {}
 _CREATIVE_ACTIONS = {
@@ -730,15 +736,15 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
                 "do not stack effects or cover the product. If audio generation is unsupported, do not claim the SFX will be rendered. "
                 if doodle else ""
             )
-            concept_rule = ("CREATIVE IDEA: " + _prompt_sentence(concept, 180, "") + " " if concept and concept.strip() else "")
+            concept_rule = ("CREATIVE IDEA: " + _prompt_text(concept, "") + " " if concept and concept.strip() else "")
             return (
                 "VIDEO PROMPT — " + str(duration) + " SECONDS" + (" | PART " + str(part) if part else "") + "\n"
                 "Vertical 9:16, realistic product video, exactly " + str(duration) + " seconds.\n"
-                + "STYLE: " + style_name + " — " + _prompt_sentence(style_template, 180, "Use a realistic product-focused presentation.") + "\n"
+                + "STYLE: " + style_name + " — " + _prompt_text(style_template, "Use a realistic product-focused presentation.") + "\n"
                 + "PRODUCT: " + product + "\n" + concise_category_direction + concise_framework
                 + (" UNIVERSAL SAFETY RULES: Preserve visible product details; invent no features or claims."
                    if product_type == "other" or universal_custom else "") + "\n"
-                + "SETTING: " + _prompt_sentence(scene, 100, "A realistic setting suited to the product.") + " CAMERA: " + _prompt_sentence(camera, 110, "Use one restrained camera move and keep the product stable.") + "\n"
+                + "SETTING: " + _prompt_text(scene, "A realistic setting suited to the product.") + " CAMERA: " + _prompt_text(camera, "Use one restrained camera move and keep the product stable.") + "\nCAMERA PRIORITY: Follow the selected CAMERA instruction if STYLE suggests a conflicting move; use only one camera movement.\n"
                 + "PRODUCT LOCK: Preserve the reference product's visible design, colour, pattern, branding and proportions. Do not invent features or accessories.\n"
                 + hook_rule + beat_plan + " " + concept_rule + " " + doodle_rule + " "
                 + "Keep actions natural and the product consistent. Follow the selected text, audio and visual options. If voiceover is enabled, speak only in " + ("English" if str(prompt_language or "Malay").casefold() == "english" else "Bahasa Melayu Malaysia") + " and use a short, natural product-specific hook and CTA."
@@ -872,7 +878,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
             "Realistic vertical 9:16 product ad, exactly " + str(duration) + " seconds.\n"
             "PRODUCT: " + product + "\n" + category_direction + "\n"
             + "STYLE: " + style_name + " — " + _prompt_sentence(style_template, 180, "Use a realistic product-focused presentation.") + "\n"
-            + "SETTING: " + _prompt_sentence(scene, 140, "A realistic setting suited to the product.") + "\nCAMERA: " + _prompt_sentence(camera, 140, "Use one restrained camera move and keep the product stable.") + "\n"
+            + "SETTING: " + _prompt_text(scene, "A realistic setting suited to the product.") + "\nCAMERA: " + _prompt_text(camera, "Use one restrained camera move and keep the product stable.") + "\nCAMERA PRIORITY: Follow the selected CAMERA instruction if STYLE suggests a conflicting move; use only one camera movement.\n"
             + (curated_direction if curated_direction else
                ((hook_direction if part != 2 else "Continue seamlessly from Part 1; do not repeat the hook.") + "\n" + rules))
             + (("\nCREATIVE IDEA: " + _prompt_sentence(concept, 180, "")) if concept else "")
@@ -923,7 +929,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
         "VIDEO PROMPT — " + str(duration) + " SECONDS" + (" | PART " + str(part) if part else "") + "\n"
         "Realistic vertical 9:16 product ad, exactly " + str(duration) + " seconds.\n"
         "PRODUCT: " + product + "\n"
-        "STYLE: " + _prompt_sentence(art, 180, "Use a realistic product-focused presentation.") + "\n"
+        "STYLE: " + _prompt_text(art, "Use a realistic product-focused presentation.") + "\n"
         "SETTING: " + _prompt_sentence(scene, 140, "A realistic setting suited to the product.") + "\n"
         + direction + "\n"
         + "Preserve the product's visible design and packaging; invent no features. "
