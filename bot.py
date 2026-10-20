@@ -647,6 +647,9 @@ def prompt_creative_settings(user_data, include_audio=True):
     age = str(user_data.get('prompt_model_age', '26-40'))
     child_model = age in {'4-7', '8-12', '13-17'}
     child_product = _prompt_is_child_product(user_data)
+    category = str(user_data.get('prompt_product_type', '')).casefold()
+    subcategory = str(user_data.get('prompt_product_subcategory', '')).casefold()
+    baby_product = category == 'baby' or subcategory.startswith('baby_')
     if user_data.get('prompt_model_presence') == 'animal':
         species = str(user_data.get('prompt_animal_species', 'auto'))
         species_labels = {
@@ -674,7 +677,11 @@ def prompt_creative_settings(user_data, include_audio=True):
             'diverse': 'diverse appearance',
             'any': 'any appearance',
         }.get(appearance_key, 'one randomly selected Malaysian ethnicity')
-        if child_model and not child_product:
+        if baby_product and child_model:
+            model = 'Model: no child or teen; use adult caregiver hands if needed or show the baby product alone. Keep all handling supervised and age-appropriate.'
+        elif baby_product:
+            model = f'Model: {count} adult caregiver model(s), gender presentation {gender_label}, {appearance}, age {age}; demonstrate only safe, supervised use and keep the baby product clearly visible.'
+        elif child_model and not child_product:
             model = 'Model: no child or teen; focus on the product and use adult hands if needed.'
         elif child_model:
             model = f'Model: {count} child/teen model(s), age {age}, gender presentation {gender_label}, {appearance}; match the product/reference, keep identity consistent and actions age-appropriate.'
