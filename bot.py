@@ -778,8 +778,8 @@ def prompt_product_subtype_menu(category: str):
 
 def prompt_setup_mode_menu():
     return InlineKeyboardMarkup([
-        [InlineKeyboardButton('⚡ Auto — Klippo pilih tetapan sesuai', callback_data='prompt_setup:auto')],
-        [InlineKeyboardButton('🎛️ Manual — Saya pilih sendiri', callback_data='prompt_setup:manual')],
+        [InlineKeyboardButton('⚡ Auto — Klippo urus semua (disyorkan)', callback_data='prompt_setup:auto')],
+        [InlineKeyboardButton('🎛️ Manual — Saya pilih sendiri (lanjutan)', callback_data='prompt_setup:manual')],
         [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
     ])
 
@@ -798,13 +798,13 @@ def prompt_duration_menu():
 
 def prompt_ad_angle_menu():
     return InlineKeyboardMarkup([
-        [InlineKeyboardButton('⚡ Auto — ikut produk', callback_data='prompt_ad_angle:auto')],
-        [InlineKeyboardButton('❓ Hook berbentuk soalan', callback_data='prompt_ad_angle:question')],
-        [InlineKeyboardButton('✨ Reveal produk yang menarik', callback_data='prompt_ad_angle:reveal')],
-        [InlineKeyboardButton('🖐️ Demonstrasi ringkas', callback_data='prompt_ad_angle:demo')],
-        [InlineKeyboardButton('🏡 Situasi harian / relatable', callback_data='prompt_ad_angle:relatable')],
-        [InlineKeyboardButton('💎 Premium / editorial', callback_data='prompt_ad_angle:premium')],
-        [InlineKeyboardButton('🛍️ Promoter affiliate bertenaga', callback_data='prompt_ad_angle:affiliate')],
+        [InlineKeyboardButton('⚡ Pilih untuk saya', callback_data='prompt_ad_angle:auto')],
+        [InlineKeyboardButton('❓ Mulakan dengan soalan', callback_data='prompt_ad_angle:question')],
+        [InlineKeyboardButton('✨ Dedahkan produk secara menarik', callback_data='prompt_ad_angle:reveal')],
+        [InlineKeyboardButton('🖐️ Tunjuk cara penggunaan', callback_data='prompt_ad_angle:demo')],
+        [InlineKeyboardButton('🏡 Situasi harian yang dekat dengan pengguna', callback_data='prompt_ad_angle:relatable')],
+        [InlineKeyboardButton('💎 Nampak mewah dan eksklusif', callback_data='prompt_ad_angle:premium')],
+        [InlineKeyboardButton('🛍️ Promoter ceria dan bertenaga', callback_data='prompt_ad_angle:affiliate')],
         [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
     ])
 
@@ -836,7 +836,7 @@ PRODUCT_STYLE_KEYS = {
 # Camera framing is separate from the visual aesthetic (Luxury, Cinematic, White Doodle, etc.).
 # Keep these choices short and filter them to the selected product category.
 PRODUCT_FRAMING = {
-    'auto': ('🎲 Automatik — Klippo pilih', 'Ikut jenis produk; pilih framing dan aksi paling sesuai.'),
+    'auto': ('⚡ Auto — Klippo pilih cara paparan', 'Ikut jenis produk; pilih framing dan aksi paling sesuai.'),
     'detail': ('🔎 Fokus produk sahaja', 'Use close or medium-close framing so the product and its important real details dominate the frame. Keep only the relevant body area in view when worn; do not force a face or full body into the shot.'),
     'model': ('🧍 Model memperagakan', 'Use a natural external-camera shot of the model demonstrating the product. Keep the product clearly visible and use believable movements; the model must not hold a phone or film themselves.'),
     'pov': ('👀 POV — sudut pandangan sendiri', 'Use a believable first-person point of view, showing hands and the product as a real viewer would see them. Avoid showing an impossible camera operator or unnecessary face/full body.'),
@@ -962,8 +962,29 @@ def prompt_style_menu(product_type='other', model_presence=None):
         safe_keys = {'minimal', 'cinematic', 'studio_360_safe', 'white_doodle'}
         matching = [(key, label) for key, label in available if key in safe_keys]
 
-    rows = [[InlineKeyboardButton('🎲 Auto (Disyorkan)', callback_data='prompt_style:auto')]]
-    rows.extend([[InlineKeyboardButton(label, callback_data='prompt_style:' + key)]
+    style_labels = {
+        'white_doodle': '✏️ Doodle putih bergerak',
+        'cinematic': '🎬 Profesional & sinematik', 'minimal': '✨ Ringkas, kemas & moden',
+        'dynamic': '⚡ Bertenaga & menarik perhatian', 'luxury': '💎 Mewah & eksklusif',
+        'mirror_selfie': '📱 Gaya swafoto di cermin', 'lifestyle': '🌿 Situasi harian yang natural',
+        'ugc_review': '🗣️ Gaya ulasan promoter', 'fashion_editorial': '👗 Model memperagakan pakaian',
+        'beauty_macro': '✨ Fokus dekat pada butiran produk', 'food_appetite': '🍓 Paparan makanan menyelerakan',
+        'tech_demo': '⚙️ Tunjuk ciri produk', 'cozy_home': '🏡 Suasana rumah yang selesa',
+        'flatlay': '🧺 Produk disusun dari atas', 'unboxing': '🎁 Buka dan perkenalkan produk',
+        'playful_viral': '🎨 Ceria & mencuri perhatian', 'nature_fresh': '🌱 Segar dengan cahaya semula jadi',
+        'studio_360_safe': '🔍 Fokus pada butiran produk', 'fast_cut': '⚡ Babak pantas & bertenaga',
+        'pov_demo': '👁️ Seolah-olah anda sedang guna', 'funny_ad': '🎭 Iklan lucu bersahaja',
+        'reaction_hook': '😍 Reaksi teruja yang natural', 'golden_hour': '🌇 Cahaya petang yang hangat',
+        'creative_reveal': '✨ Produk muncul secara menarik', 'handbag_showcase': '👜 Paparan beg yang kemas',
+        'bag_detail_macro': '🔎 Fokus pada butiran beg', 'bag_flatlay': '🧺 Beg disusun dari atas',
+        'bag_daily_carry': '🌿 Beg dalam situasi harian', 'bag_tabletop_reveal': '✨ Beg dipaparkan di atas meja',
+        'sling_bag_lifestyle': '🎒 Cara memakai beg silang', 'backpack_demo': '🎒 Paparan beg galas',
+        'wallet_luxury_macro': '👛 Fokus dekat pada dompet', 'wallet_open_close': '👛 Tunjuk dompet dibuka dan ditutup',
+        'wallet_daily_carry': '🧥 Dompet untuk kegunaan harian', 'wallet_flatlay': '🧾 Dompet disusun dari atas',
+        'wallet_gift_reveal': '🎁 Paparan dompet sebagai hadiah',
+    }
+    rows = [[InlineKeyboardButton('⚡ Pilih untuk saya (disyorkan)', callback_data='prompt_style:auto')]]
+    rows.extend([[InlineKeyboardButton(style_labels.get(key, label), callback_data='prompt_style:' + key)]
                  for key, label in matching])
     rows.append([InlineKeyboardButton('↩️ Menu Utama', callback_data='home')])
     return InlineKeyboardMarkup(rows)
@@ -2979,9 +3000,12 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 'prompt_speech_source':'voiceover','prompt_voiceover_script':'','prompt_concept':'',
                 'prompt_scene':'clean premium studio background, selected to complement the exact product reference',
                 'prompt_motion_choice':'auto','prompt_framing':'auto','prompt_ad_angle':'auto','prompt_on_screen_text':'no','prompt_text_mode':'auto',
-                'prompt_text_content':'','prompt_audio_enabled':True,'stage':'prompt_ad_angle','prompt_ad_angle_flow':'auto_setup'
+                'prompt_text_content':'','prompt_audio_enabled':True,'stage':'prompt_motion'
             })
-            await query.message.reply_text('🎯 Pilih pendekatan iklan untuk hook, jalan cerita dan CTA:', reply_markup=prompt_ad_angle_menu())
+            # One-tap beginner mode: choose the scene, framing, voice and ad approach automatically.
+            context.user_data['prompt_scene_key'] = 'auto'
+            context.user_data['prompt_custom_background'] = False
+            action = 'motion:auto'
         elif selected == 'manual':
             context.user_data['stage'] = 'prompt_model_presence'
             await query.message.reply_text('👤 Pilih model untuk video:', reply_markup=prompt_model_presence_menu(context.user_data))
@@ -2990,7 +3014,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if selected == 'none':
             context.user_data.update({'prompt_model_presence':'none','prompt_model_count':0,'prompt_model_gender':'none','prompt_model_hijab':'na','prompt_model_ethnicity':'na','prompt_model_age':'na','prompt_model_gender_2':'none','prompt_model_hijab_2':'na','prompt_model_age_2':'na'})
             context.user_data['stage'] = 'prompt_style'
-            await query.message.reply_text('🎨 Pilih gaya video:', reply_markup=prompt_style_menu(context.user_data.get('prompt_product_type','other'),'none'))
+            await query.message.reply_text('🎨 Pilih rupa keseluruhan video (contohnya profesional, natural atau doodle). Ini bukan pilihan kamera. Tak pasti? Pilih Auto:', reply_markup=prompt_style_menu(context.user_data.get('prompt_product_type','other'),'none'))
         elif selected == 'yes':
             context.user_data['prompt_model_presence'] = 'yes'
             context.user_data['stage'] = 'prompt_model_count'
@@ -3010,7 +3034,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if selected in {'auto', 'cat', 'dog', 'rabbit', 'bird', 'hamster', 'fish', 'horse'}:
             context.user_data['prompt_animal_species'] = selected
             context.user_data['stage'] = 'prompt_style'
-            await query.message.reply_text('🎨 Pilih gaya video:', reply_markup=prompt_style_menu(context.user_data.get('prompt_product_type', 'other'), 'animal'))
+            await query.message.reply_text('🎨 Pilih rupa keseluruhan video (contohnya profesional, natural atau doodle). Ini bukan pilihan kamera. Tak pasti? Pilih Auto:', reply_markup=prompt_style_menu(context.user_data.get('prompt_product_type', 'other'), 'animal'))
     elif action.startswith('prompt_model_count:') and stage == 'prompt_model_count':
         selected = action.split(':', 1)[1]
         if selected in ('1','2'):
@@ -3063,7 +3087,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     await query.message.reply_text('Model pertama wanita — pilih bertudung atau tidak:', reply_markup=prompt_model_hijab_menu())
                 else:
                     context.user_data['stage'] = 'prompt_style'
-                    await query.message.reply_text('🎨 Pilih gaya video:', reply_markup=prompt_style_menu(context.user_data.get('prompt_product_type','other'),'yes'))
+                    await query.message.reply_text('🎨 Pilih rupa keseluruhan video (contohnya profesional, natural atau doodle). Ini bukan pilihan kamera. Tak pasti? Pilih Auto:', reply_markup=prompt_style_menu(context.user_data.get('prompt_product_type','other'),'yes'))
             else:
                 context.user_data['prompt_model_ethnicity'] = selected
                 if int(context.user_data.get('prompt_model_count', 1)) == 2:
@@ -3076,7 +3100,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 else:
                     context.user_data['prompt_model_hijab'] = 'na'
                     context.user_data['stage'] = 'prompt_style'
-                    await query.message.reply_text('🎨 Pilih gaya video:', reply_markup=prompt_style_menu(context.user_data.get('prompt_product_type','other'),'yes'))
+                    await query.message.reply_text('🎨 Pilih rupa keseluruhan video (contohnya profesional, natural atau doodle). Ini bukan pilihan kamera. Tak pasti? Pilih Auto:', reply_markup=prompt_style_menu(context.user_data.get('prompt_product_type','other'),'yes'))
     elif action.startswith('prompt_model_hijab:') and stage == 'prompt_model_hijab':
         selected = action.split(':', 1)[1]
         if selected in ('hijab','no_hijab','na'):
@@ -3094,7 +3118,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     await query.message.reply_text('Model kedua wanita — pilih bertudung atau tidak:', reply_markup=prompt_model_hijab_menu())
                     return
             context.user_data['stage'] = 'prompt_style'
-            await query.message.reply_text('🎨 Pilih gaya video:', reply_markup=prompt_style_menu(context.user_data.get('prompt_product_type','other'),'yes'))
+            await query.message.reply_text('🎨 Pilih rupa keseluruhan video (contohnya profesional, natural atau doodle). Ini bukan pilihan kamera. Tak pasti? Pilih Auto:', reply_markup=prompt_style_menu(context.user_data.get('prompt_product_type','other'),'yes'))
     elif action.startswith('prompt_duration:') and stage == 'prompt_duration':
         selected = action.split(':', 1)[1]
         valid_duration_modes = {
@@ -3113,7 +3137,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['prompt_on_screen_text'] = 'no'
             context.user_data['prompt_audio_enabled'] = None
             context.user_data['stage'] = 'prompt_setup_mode'
-            await query.message.reply_text('⚙️ Pilih cara tetapan prompt:', reply_markup=prompt_setup_mode_menu())
+            await query.message.reply_text('⚙️ Pilih cara tetapan. Auto untuk pengguna baharu — Klippo uruskan gaya, kamera, latar, suara dan pendekatan iklan. Manual jika anda mahu kawal setiap pilihan.', reply_markup=prompt_setup_mode_menu())
     elif action.startswith('prompt_ad_angle:') and stage == 'prompt_ad_angle':
         selected = action.split(':', 1)[1]
         valid_angles = {'auto', 'question', 'reveal', 'demo', 'relatable', 'premium', 'affiliate'}
@@ -3122,7 +3146,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             angle_flow = context.user_data.pop('prompt_ad_angle_flow', None)
             if angle_flow == 'auto_setup':
                 context.user_data['stage'] = 'prompt_scene'
-                await query.message.reply_text('🖼️ Pilih latar video:', reply_markup=prompt_scene_menu())
+                await query.message.reply_text('🖼️ Pilih latar video. Latar ialah tempat di belakang produk; pilih Auto jika tidak pasti:', reply_markup=prompt_scene_menu())
             else:
                 context.user_data['stage'] = 'prompt_text_presence'
                 await query.message.reply_text(
@@ -3166,7 +3190,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 context.user_data['prompt_voiceover_style'] = 'none'
                 context.user_data['prompt_voiceover_script'] = ''
                 context.user_data['stage'] = 'prompt_scene'
-                await query.message.reply_text('🖼️ Pilih latar video:', reply_markup=prompt_scene_menu())
+                await query.message.reply_text('🖼️ Pilih latar video. Latar ialah tempat di belakang produk; pilih Auto jika tidak pasti:', reply_markup=prompt_scene_menu())
             elif context.user_data.get('prompt_model_presence') == 'yes':
                 context.user_data['stage'] = 'prompt_speaker'
                 await query.message.reply_text('Pilih sumber suara:', reply_markup=prompt_speaker_menu())
@@ -3201,7 +3225,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['prompt_voiceover_style'] = selected
             context.user_data['prompt_voiceover_script'] = ''
             context.user_data['stage'] = 'prompt_scene'
-            await query.message.reply_text('🖼️ Pilih latar video:', reply_markup=prompt_scene_menu())
+            await query.message.reply_text('🖼️ Pilih latar video. Latar ialah tempat di belakang produk; pilih Auto jika tidak pasti:', reply_markup=prompt_scene_menu())
     elif action.startswith('prompt_style:') and stage == 'prompt_style':
         selected = action.split(':', 1)[1]
         valid = {'auto'} | {key for key, _ in storyboard_styles()}
@@ -3210,12 +3234,12 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['prompt_framing'] = 'auto'
             context.user_data['stage'] = 'prompt_framing'
             await query.message.reply_text(
-                '🎥 Pilih gaya kamera untuk merakam produk. Gaya kamera menentukan sudut dan cara produk ditunjukkan, berbeza daripada gaya visual.',
+                '🎥 Cara produk ditunjukkan dalam video. Contohnya fokus dekat, model memperagakan atau tunjuk cara guna. Tak perlu faham istilah kamera — pilih Auto jika tidak pasti.',
                 reply_markup=prompt_framing_menu(context.user_data.get('prompt_product_type', 'other'), context.user_data.get('prompt_model_presence'), context.user_data)
             )
     elif action == 'prompt_framing_back' and stage == 'prompt_framing':
         context.user_data['stage'] = 'prompt_style'
-        await query.message.reply_text('🎨 Pilih gaya video:', reply_markup=prompt_style_menu(context.user_data.get('prompt_product_type', 'other'), context.user_data.get('prompt_model_presence')))
+        await query.message.reply_text('🎨 Pilih rupa keseluruhan video (contohnya profesional, natural atau doodle). Ini bukan pilihan kamera. Tak pasti? Pilih Auto:', reply_markup=prompt_style_menu(context.user_data.get('prompt_product_type', 'other'), context.user_data.get('prompt_model_presence')))
     elif action.startswith('prompt_framing:'):
         selected = action.split(':', 1)[1]
         if selected in PRODUCT_FRAMING and (
@@ -3227,7 +3251,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['prompt_framing'] = selected
             context.user_data['stage'] = 'prompt_ad_angle'
             await query.message.reply_text(
-                '🎯 Pilih pendekatan iklan. Pilihan ini akan mengubah cara hook, jalan cerita dan CTA dibina:',
+                '🎯 Pilih cara video menarik perhatian. Contohnya mulakan dengan soalan, tunjuk cara guna atau gaya promoter. Tak pasti? Pilih Auto:',
                 reply_markup=prompt_ad_angle_menu()
             )
         else:
@@ -3239,11 +3263,11 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif action == 'prompt_idea:yes' and stage == 'prompt_idea_choice':
         context.user_data['prompt_concept'] = ''
         context.user_data['stage'] = 'prompt_scene'
-        await query.message.reply_text('🖼️ Pilih latar video:', reply_markup=prompt_scene_menu())
+        await query.message.reply_text('🖼️ Pilih latar video. Latar ialah tempat di belakang produk; pilih Auto jika tidak pasti:', reply_markup=prompt_scene_menu())
     elif action == 'prompt_idea:skip' and stage == 'prompt_idea_choice':
         context.user_data['prompt_concept'] = ''
         context.user_data['stage'] = 'prompt_scene'
-        await query.message.reply_text('🖼️ Pilih latar video:', reply_markup=prompt_scene_menu())
+        await query.message.reply_text('🖼️ Pilih latar video. Latar ialah tempat di belakang produk; pilih Auto jika tidak pasti:', reply_markup=prompt_scene_menu())
     elif action == 'prompt_input:photo' and stage == 'prompt_input':
         context.user_data['stage'] = 'prompt_product_name'
         await query.message.reply_text('🛍️ Mod prompt Klippo tidak menggunakan gambar atau analisis AI. Tampal nama produk sahaja untuk mengesan kategori secara automatik.')
