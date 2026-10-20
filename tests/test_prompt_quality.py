@@ -13,6 +13,7 @@ from prompt_engine import (
     _resolve_auto_style,
     _category_specific_scenes,
     _creative_variation,
+    _presentation_variation,
     build_prompt,
 )
 
@@ -26,6 +27,27 @@ class PromptQualityTests(unittest.TestCase):
     def tearDown(self):
         prompt_catalog.DB_PATH = self.original_db_path
         self.temp_dir.cleanup()
+
+    def test_presentation_profile_avoids_repeating_recent_three(self):
+        profiles = [
+            _presentation_variation("cinematic", "variation-test-category", "variation-test-subtype")
+            for _ in range(4)
+        ]
+        self.assertEqual(len(set(profiles[-3:])), 3)
+        self.assertTrue(all("PRESENTATION VARIATION:" in profile for profile in profiles))
+
+    def test_generated_prompt_contains_style_preserving_variation_profile(self):
+        prompt = build_prompt(
+            mode="storyboard",
+            product="Desk lamp",
+            scene="a realistic premium location chosen to suit the product",
+            motion="auto",
+            style="cinematic",
+            duration=10,
+            product_type="home",
+        )
+        self.assertIn("PRESENTATION VARIATION:", prompt)
+        self.assertIn("Keep the selected visual style recognizably consistent", prompt)
 
     def test_audio_variation_does_not_force_unselected_voiceover(self):
         direction = _creative_variation("equipment", "desk lamp", 0)
