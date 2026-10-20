@@ -513,7 +513,7 @@
       "subcategory_id": "fashion_dress",
       "category_id": "fashion",
       "label": "✨ Dress / Jubah",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "fashion_dress_v01",
@@ -634,6 +634,126 @@
           "lighting": "Use natural-looking consistent light and gentle contrast; no colour shift or artificial glow.",
           "closing": "End with the wearer centred and relaxed, the garment clearly recognizable for the final beat.",
           "audio": "Use soft modern instrumental music under selected narration; no on-screen words, added logo or exaggerated effects."
+        },
+        {
+          "id": "fashion_dress_v11",
+          "variation_number": 11,
+          "name": "Full-Length Vertical Reveal",
+          "hook": "Begin with a close view of the dress or robe's actual neckline, then travel down its real length to establish the full silhouette. Preserve the supplied colour, print and cut.",
+          "action": "Keep the garment on a steady wearer or display form; if worn, the model makes one small step back to reveal the hem without lifting it.",
+          "detail": "Show only visible neckline, sleeves, seams and hem. Do not invent lining, pockets, closures or fabric properties.",
+          "camera": "Use a slow vertical tilt from neckline to hem, then settle into a full-length frame without wide-angle distortion.",
+          "lighting": "Use broad diffused light from the front with gentle side fill so the entire length is evenly exposed.",
+          "closing": "Hold the complete garment from top to hem, with no edge cropped.",
+          "audio": "Soft flowing instrumental music; no wind sound or dramatic whoosh."
+        },
+        {
+          "id": "fashion_dress_v12",
+          "variation_number": 12,
+          "name": "Sleeve-to-Skirt Diagonal",
+          "hook": "Open on one genuine dress detail, such as the sleeve edge or waist seam if present, and compose a diagonal path toward the skirt or lower panel.",
+          "action": "The wearer turns slightly so the garment's natural lines become visible, then returns to stillness.",
+          "detail": "Follow only visible seams, folds and print placement. Do not add a belt, pleat or waist detail absent from the reference.",
+          "camera": "Make a smooth diagonal camera move from the selected detail to a medium-full view, keeping the garment geometry natural.",
+          "lighting": "Use a soft key light and controlled fill to retain detail in the skirt without flattening folds.",
+          "closing": "End on a balanced three-quarter view that shows the chosen detail in context.",
+          "audio": "Light elegant instrumental bed; no ballroom ambience or invented fabric sounds."
+        },
+        {
+          "id": "fashion_dress_v13",
+          "variation_number": 13,
+          "name": "Turn Without a Spin",
+          "hook": "Present the complete dress front-on before any movement, allowing its actual length and proportions to register.",
+          "action": "The wearer rotates only to a three-quarter angle, pauses, then returns to front; no full spin or skirt-flaring action.",
+          "detail": "Keep the hem and sleeves at their real lengths and preserve the print continuously. Do not imply how the back looks unless the turn genuinely reveals it.",
+          "camera": "Use a locked full-length camera with a level horizon; let the small body turn provide the visual change.",
+          "lighting": "Maintain even diffused lighting throughout the movement, with stable white balance.",
+          "closing": "Return to the opening front view and hold it still.",
+          "audio": "Gentle modern instrumental music without runway claps or swooshes."
+        },
+        {
+          "id": "fashion_dress_v14",
+          "variation_number": 14,
+          "name": "Print Scale at Two Distances",
+          "hook": "If the garment has a visible print, start close enough to read its actual motif scale; if it is plain, use a real seam, panel or neckline edge instead.",
+          "action": "The camera pulls back smoothly from the detail to the full dress while the garment remains still.",
+          "detail": "Preserve motif spacing, orientation and colour. Never create additional motifs, embroidery or decorative trim.",
+          "camera": "Use a straight pullback with no rotation or perspective warp; maintain focus as the framing widens.",
+          "lighting": "Use neutral, soft lighting to avoid colour shifts across the print or plain fabric.",
+          "closing": "Finish on a full-length frame where the detail remains recognisable in context.",
+          "audio": "Low-volume instrumental music; no sound effect for the camera move."
+        },
+        {
+          "id": "fashion_dress_v15",
+          "variation_number": 15,
+          "name": "Hem in Natural Motion",
+          "hook": "Begin on the actual lower hem and enough surrounding garment to identify its shape; do not crop off a defining edge.",
+          "action": "If worn, the model takes one short step and stops so the hem moves naturally; if displayed on a hanger or form, keep it still and use a camera-only move.",
+          "detail": "Show only the existing hem finish, folds and any visible border. Do not add slits, lace or extra layers.",
+          "camera": "Use a low, steady lateral slider move, then a gentle tilt up to a medium-lower view.",
+          "lighting": "Use soft side light with mild fill so the hem remains legible without creating a false sheen.",
+          "closing": "Hold the hem and lower silhouette in a stable final composition.",
+          "audio": "A faint fabric rustle only if the visible movement supports it; music remains quiet."
+        },
+        {
+          "id": "fashion_dress_v16",
+          "variation_number": 16,
+          "name": "Neckline Framed by Negative Space",
+          "hook": "Open with the real neckline clearly visible against a plain background and generous empty space; do not place writing or graphics in the space.",
+          "action": "The wearer gently straightens their posture without touching or pulling the neckline, then remains still.",
+          "detail": "Preserve the neckline shape, collar, fastening and shoulder line exactly as visible. Do not add jewellery or embellishment.",
+          "camera": "Use a steady medium close-up, then pull back enough to include the upper half of the dress.",
+          "lighting": "Use broad frontal diffusion and soft side fill to define edges without harsh shadows.",
+          "closing": "End on a clean upper-body view with the neckline unobstructed.",
+          "audio": "Minimal elegant instrumental music; no voice-over or added effects."
+        },
+        {
+          "id": "fashion_dress_v17",
+          "variation_number": 17,
+          "name": "Layered Panel Light Pass",
+          "hook": "If the dress visibly has overlapping panels or layers, show their actual edge; otherwise focus on the real boundary between the bodice and skirt or another visible design line.",
+          "action": "The camera glides slightly across the garment while the wearer holds a relaxed pose; no pulling layers apart.",
+          "detail": "Do not invent lining, detachable pieces, pleats or hidden structure. Describe only the visible edge and its placement.",
+          "camera": "Use a shallow lateral move at medium distance, keeping the garment's outline undistorted.",
+          "lighting": "Use a soft side source to create gentle separation between visible folds while retaining true colour.",
+          "closing": "Finish with the panel or boundary in context within a medium-full frame.",
+          "audio": "A restrained cinematic music bed; no magical shimmer sounds."
+        },
+        {
+          "id": "fashion_dress_v18",
+          "variation_number": 18,
+          "name": "Seated-to-Standing Drape",
+          "hook": "If the reference and garment support a seated pose, begin seated with the dress arranged naturally; otherwise use a relaxed standing start and skip the rise.",
+          "action": "When seated, the wearer rises slowly in one continuous movement and allows the dress to settle; in a standing-only setup, they simply shift weight once.",
+          "detail": "Do not pull the dress into place or imply guaranteed comfort or fit. Preserve its real length and visible details.",
+          "camera": "Use a fixed wide enough frame to keep the complete movement and hem visible; no cut during the rise.",
+          "lighting": "Use consistent soft lighting throughout the action so the dress does not change shade.",
+          "closing": "Hold the final upright pose with the whole garment visible.",
+          "audio": "Soft instrumental music; no chair scrape unless the visible setup and movement produce it."
+        },
+        {
+          "id": "fashion_dress_v19",
+          "variation_number": 19,
+          "name": "Waistline Context Shot",
+          "hook": "If a waist seam, belt or gathered section is actually visible, begin there; otherwise focus on the real transition between upper and lower garment sections.",
+          "action": "The wearer makes a subtle quarter-turn and returns, keeping hands away from the waist area.",
+          "detail": "Do not add a belt, shaping, elastic or hidden fastening. Show only the actual construction visible in the reference.",
+          "camera": "Use a stable medium shot followed by a slow pullback to reveal the waist detail in the complete silhouette.",
+          "lighting": "Use gentle side fill to define folds without exaggerating body shape or garment contour.",
+          "closing": "End with a medium-full front three-quarter view and the selected area unobstructed.",
+          "audio": "Low-key instrumental audio; no click or tightening sound."
+        },
+        {
+          "id": "fashion_dress_v20",
+          "variation_number": 20,
+          "name": "Still Editorial Portrait",
+          "hook": "Open with the dress fully visible in a composed, editorial-style frame, using a quiet background and no added props that could distract from the product.",
+          "action": "The wearer makes one small natural head or shoulder adjustment, then holds a relaxed pose; the garment remains the focus.",
+          "detail": "Keep the same person, styling and garment details. Do not add accessories, alter the neckline or create a new train or hem.",
+          "camera": "Use a slow, almost imperceptible push-in from full length to medium-full, maintaining a level horizon.",
+          "lighting": "Use soft directional key light with a gentle background gradient; retain natural skin tones and product colour.",
+          "closing": "Finish with a still, clearly readable view of the dress's overall silhouette.",
+          "audio": "Refined, quiet instrumental music; no voice-over, applause or transition effect."
         }
       ]
     },
