@@ -560,7 +560,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
                 scenes = _category_specific_scenes(product_type, product)
                 clip_label = "SECOND CLIP 10s" if part == 2 else "THIRD CLIP 10s" if part == 3 else "CONTINUATION CLIP 10s"
                 beat_plan = (
-                    clip_label + ": 0–2s CONTINUITY BRIDGE — resume the exact previous final frame and do not repeat the hook; "
+                    clip_label + ": 0–2s CONTINUITY BRIDGE — resume from the exact full-product frame held at the end of the previous clip and do not repeat the hook; "
                     + "2–4s CATEGORY ACTION — " + scenes[3][1] + " "
                     + "4–6s VISIBLE DETAIL — " + scenes[2][1] + " "
                     + "6–8s NATURAL FOLLOW-THROUGH — continue the same setting and product orientation; "
