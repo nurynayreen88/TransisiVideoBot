@@ -1,0 +1,6 @@
+"id","rule","source"
+"GLOBAL-01","Use the uploaded product image as the source of truth for visible shape, colour, print, packaging, proportions and branding.","prompts/universal_prompt_templates.json"
+"GLOBAL-02","Use custom category/subcategory text only as context; do not assume a function, specification, included accessory, material, certification, benefit or claim.","prompts/universal_prompt_templates.json"
+"GLOBAL-03","Use realistic lighting, natural movement and coherent setting; avoid CGI/plastic appearance, flicker, warping and abrupt scene changes.","prompts/universal_prompt_templates.json"
+"GLOBAL-04","No unrequested on-screen text, subtitles, logos, watermarks or promotional claims.","prompts/universal_prompt_templates.json"
+"GLOBAL-05","For a 10-second clip: reveal product by 2 seconds, show one visible detail around 4–6 seconds, use one simple appropriate action or camera move, and hold a clear hero frame at 8–10 seconds.","prompts/universal_prompt_templates.json"
