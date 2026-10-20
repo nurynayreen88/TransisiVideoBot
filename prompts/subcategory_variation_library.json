@@ -1053,7 +1053,7 @@
           "camera": "CAMERA: Use a broad side source to define the outline while keeping the bag's actual colour faithful.",
           "lighting": "LIGHTING: End on the entire handbag with its handles and visible fittings unobstructed.",
           "closing": "CTA / HERO: Use restrained instrumental music; no invented clasp or handling sounds.",
-          "audio": "AUDIO: undefined"
+          "audio": "AUDIO: Use restrained instrumental music; add no clasp or handling sounds unless the matching action is visible."
         },
         {
           "id": "bag_handbag_v02",
