@@ -1,0 +1,7 @@
+"category","direction","source"
+"shoes","FRAMING PRIORITY — FOOTWEAR: Keep the frame low and focused on the worn shoes and lower legs; the model's face and full body are not needed. Use a close or medium-close view that clearly shows the shoes while preserving believable foot placement and proportions.","prompt_engine.py → framing_by_type"
+"accessory","FRAMING PRIORITY — ACCESSORIES: Use close or medium-close framing around the body area where the accessory is worn; do not force a full-body shot.","prompt_engine.py → framing_by_type"
+"beauty","FRAMING PRIORITY — BEAUTY: Prioritize the product and the relevant hand or application area; show the face only when useful for the actual product action.","prompt_engine.py → framing_by_type"
+"wallet","FRAMING PRIORITY — WALLET: Prioritize the wallet and hands; the model's face and full body are unnecessary.","prompt_engine.py → framing_by_type"
+"bag","FRAMING PRIORITY — BAG: Keep the bag clearly visible in a natural hand-held, worn or placed composition; choose a medium or close framing that suits the selected action.","prompt_engine.py → framing_by_type"
+"gadget","FRAMING PRIORITY — GADGET: Prioritize the device and the hands interacting with it; do not require a full-body or face shot.","prompt_engine.py → framing_by_type"
