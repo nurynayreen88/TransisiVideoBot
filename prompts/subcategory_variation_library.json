@@ -265,7 +265,7 @@
       "subcategory_id": "fashion_men",
       "category_id": "fashion",
       "label": "👔 Pakaian lelaki",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "fashion_men_v01",
@@ -386,6 +386,126 @@
           "lighting": "Use soft frontal fill and gentle side definition, preserving realistic texture and accurate colour without adding sparkle or shine.",
           "closing": "Stop before any part of the garment is cropped and hold a sharp, calm final frame.",
           "audio": "Keep a minimal instrumental bed below any selected voice; avoid synthetic whooshes and unsupported spoken claims."
+        },
+        {
+          "id": "fashion_men_v11",
+          "variation_number": 11,
+          "name": "Collar-to-Shoulder Sweep",
+          "hook": "Begin on the actual collar, neckline or upper edge visible on the men's garment, then reveal how it sits across the shoulders. Preserve the reference cut, colour and all visible details.",
+          "action": "The wearer turns their shoulders slightly toward the light and returns to a relaxed front stance; no tugging at the collar or adjusting buttons.",
+          "detail": "Feature only the real collar shape, neckline, shoulder seam or placket where present. Do not add buttons, pockets or tailoring details not shown.",
+          "camera": "Make a slow horizontal pan from the genuine neckline detail to a medium-full view, keeping the horizon level and proportions natural.",
+          "lighting": "Use soft side-front light that defines the shoulder line without making the garment appear shinier or a different colour.",
+          "closing": "Hold a composed front three-quarter view with the upper garment unobstructed.",
+          "audio": "A restrained modern instrumental bed; no snap, button or fabric sounds without matching visible action."
+        },
+        {
+          "id": "fashion_men_v12",
+          "variation_number": 12,
+          "name": "Pocket Reality Check",
+          "hook": "If the reference clearly shows a pocket, open on that visible pocket and its placement; if not, frame a genuine seam, panel or plain front area instead. Do not create a pocket.",
+          "action": "The wearer keeps their hands clear of the garment while the camera reveals the detail, avoiding any gesture that implies hidden storage.",
+          "detail": "Only show pockets and closures actually present in the reference. Never imply capacity or function that cannot be verified visually.",
+          "camera": "Use a close steady shot, then slide diagonally back to show the detail in relation to the torso.",
+          "lighting": "Use even diffused light so stitching and edges remain visible without over-sharpened texture.",
+          "closing": "Finish on a medium torso view with the selected detail still in frame.",
+          "audio": "Soft, low-volume music; no zipper or pocket rummaging sound unless that exact action is visible."
+        },
+        {
+          "id": "fashion_men_v13",
+          "variation_number": 13,
+          "name": "Sleeve Length Comparison",
+          "hook": "Start with both sleeves visible in a balanced front view, keeping the real sleeve length and cuff shape consistent with the supplied product.",
+          "action": "The wearer raises each forearm slightly in sequence and returns both arms to a neutral position, only if this does not stretch or obscure the garment.",
+          "detail": "Show the actual sleeve ends and visible seams only. Do not add cuff buttons, thumb holes or performance claims.",
+          "camera": "Use a symmetrical medium frame, then a small tilt down and back up to include sleeve ends and shoulder line.",
+          "lighting": "Use broad, neutral lighting to keep both sleeves equally exposed and preserve the garment's true tone.",
+          "closing": "End with both sleeves hanging naturally in a still front view.",
+          "audio": "A light rhythmic instrumental; no handclaps or artificial movement effects."
+        },
+        {
+          "id": "fashion_men_v14",
+          "variation_number": 14,
+          "name": "Side-Seam Walk Past",
+          "hook": "Present the garment front-on, then let the wearer take one measured step past the camera's axis to reveal a natural side angle.",
+          "action": "The wearer moves slowly from front to three-quarter profile and stops; no fast turn, exaggerated stride or fabric pull.",
+          "detail": "Reveal only visible side seams, hem and silhouette. Do not invent back panels or claim a particular fit type unless the reference supports it.",
+          "camera": "Track a short distance laterally while maintaining a consistent medium-full framing and level camera.",
+          "lighting": "Use soft, even daylight so the side view does not become darker or shift colour.",
+          "closing": "Hold the side angle briefly, then settle on a clear three-quarter view.",
+          "audio": "Quiet contemporary beat; footsteps only if they match the visible floor and movement."
+        },
+        {
+          "id": "fashion_men_v15",
+          "variation_number": 15,
+          "name": "Layer Edge Separation",
+          "hook": "If the product is visibly layered, open where the layers naturally overlap; if it is a single garment, use its real edge, collar or hem as the visual boundary instead.",
+          "action": "The wearer makes a small shoulder turn that separates visible layers naturally, without pulling one layer away or adding a new item.",
+          "detail": "Show only layers present in the reference. Do not invent an undershirt, lining, detachable hood or hidden fastening.",
+          "camera": "Use a slow push-in followed by a short lateral move to clarify the edge between visible pieces.",
+          "lighting": "Use gentle rim separation from the background while retaining natural colour and realistic shadows.",
+          "closing": "End on a medium view where the actual garment outline is easy to read.",
+          "audio": "Low-key instrumental music; no dramatic reveal or whoosh effect."
+        },
+        {
+          "id": "fashion_men_v16",
+          "variation_number": 16,
+          "name": "Fabric Motion Freeze",
+          "hook": "Open on a stable medium-full view of the garment at rest, then capture a brief natural movement without implying any material property.",
+          "action": "The wearer takes one small step and stops, allowing the garment to settle under gravity; no fan, shaking or forceful flapping.",
+          "detail": "Show the real folds created by that movement only. Do not claim stretch, cooling, wrinkle resistance or weight.",
+          "camera": "Use a fixed camera and let the movement occur inside the frame; hold focus rather than chasing the body.",
+          "lighting": "Use soft overhead fill and a gentle side source to preserve fold detail without artificial sheen.",
+          "closing": "Freeze the composition after the garment settles, with the full defining outline visible.",
+          "audio": "Subtle music; fabric rustle only if the movement plausibly produces it."
+        },
+        {
+          "id": "fashion_men_v17",
+          "variation_number": 17,
+          "name": "Button Line or Clean Front",
+          "hook": "If buttons or a front placket are visible, begin with their true alignment; otherwise begin with the actual clean front panel or neckline. Keep the design unchanged.",
+          "action": "The wearer remains still as the camera traces the front line from top to bottom; do not open, fasten or manipulate the garment.",
+          "detail": "Include only real buttons, placket edges, zips or seams. Do not add closures or imply ease of fastening.",
+          "camera": "Use a controlled vertical tilt with close focus, then pull back enough to show the front line's place on the garment.",
+          "lighting": "Use a soft frontal key with slight side fill to avoid glare and retain visible detail.",
+          "closing": "Finish with the front of the garment centred in a medium shot.",
+          "audio": "Minimal instrumental audio; no button clicks or zipper sounds unless an action is actually shown."
+        },
+        {
+          "id": "fashion_men_v18",
+          "variation_number": 18,
+          "name": "Shoulder Fit in Profile",
+          "hook": "Open with the wearer facing slightly sideways so the actual shoulder line and upper-body outline are visible, then turn gently toward front.",
+          "action": "The wearer makes one slow quarter-turn and settles with arms relaxed, keeping the garment unobstructed.",
+          "detail": "Show only the silhouette and visible seams; do not promise fit, comfort or suitability for different body types.",
+          "camera": "Use a level medium-full frame and a small camera push-in; avoid wide-angle distortion at the shoulders.",
+          "lighting": "Keep a soft key light and restrained fill, with stable white balance throughout the turn.",
+          "closing": "End in a relaxed three-quarter stance with the shoulder line clearly visible.",
+          "audio": "Calm, understated instrumental music; no runway ambience."
+        },
+        {
+          "id": "fashion_men_v19",
+          "variation_number": 19,
+          "name": "Hem and Trouser Break",
+          "hook": "If the product is trousers, show the actual lower hem and how it rests above or on the footwear; for tops, use the real lower hem and its relation to the waistband. Do not change the outfit.",
+          "action": "The wearer shifts weight once, giving the hem a natural change in angle, then stands still.",
+          "detail": "Keep the visible length and folds faithful. Do not shorten, lengthen or smooth the garment, and do not imply tailoring alterations.",
+          "camera": "Start with a stable lower-body detail and tilt slowly to a wider composition appropriate to the product.",
+          "lighting": "Use even lower fill so the hem edge is visible without crushing dark tones.",
+          "closing": "Hold a clean lower-half or full outfit frame with the hem unobstructed.",
+          "audio": "Soft music with no artificial footstep accents unless steps are visible."
+        },
+        {
+          "id": "fashion_men_v20",
+          "variation_number": 20,
+          "name": "Return-to-Opening Composition",
+          "hook": "Begin with a clear full or medium-full view of the exact men's garment, establishing its real silhouette, colour and visible styling.",
+          "action": "The wearer makes one small natural movement—such as relaxing the shoulders or a slight quarter-turn—then returns to the original pose.",
+          "detail": "Keep all product details unchanged and visible; do not introduce accessories, props, extra layers or unsupported claims.",
+          "camera": "Use a gentle camera arc of only a few degrees, then return to the opening angle to create a visual loop without morphing.",
+          "lighting": "Maintain consistent soft light and exposure so the garment does not change appearance between angles.",
+          "closing": "Match the opening composition and hold it still for a seamless loop-friendly ending.",
+          "audio": "A restrained instrumental phrase that resolves softly; no applause or exaggerated transition sound."
         }
       ]
     },
