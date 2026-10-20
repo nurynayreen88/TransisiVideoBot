@@ -747,7 +747,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
                 + "SETTING: " + _prompt_text(scene, "A realistic setting suited to the product.") + " CAMERA: " + _prompt_text(camera, "Use one restrained camera move and keep the product stable.") + "\nCAMERA PRIORITY: Follow the selected CAMERA instruction if STYLE suggests a conflicting move; use only one camera movement.\n"
                 + "PRODUCT LOCK: Preserve the reference product's visible design, colour, pattern, branding and proportions. Do not invent features or accessories.\n"
                 + hook_rule + beat_plan + " " + concept_rule + " " + doodle_rule + " "
-                + "Keep actions natural and the product consistent. Follow the selected text, audio and visual options. If voiceover is enabled, speak only in " + ("English" if str(prompt_language or "Malay").casefold() == "english" else "Bahasa Melayu Malaysia") + " and use a short, natural product-specific hook and CTA."
+                + "Keep actions natural and the product consistent. Follow the selected text, audio and visual options. For AI-generated voice, use " + ("English" if str(prompt_language or "Malay").casefold() == "english" else "Bahasa Melayu Malaysia") + "; if a user-supplied script is selected, use it exactly and add no dialogue."
             )
 
         evidence_rules = (
@@ -882,7 +882,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
             + (curated_direction if curated_direction else
                ((hook_direction if part != 2 else "Continue seamlessly from Part 1; do not repeat the hook.") + "\n" + rules))
             + (("\nCREATIVE IDEA: " + _prompt_text(concept, "")) if concept else "")
-            + "\nNatural movement. If voice is selected, use a short product-specific hook and CTA in " + ("English" if str(prompt_language or "Malay").casefold() == "english" else "Bahasa Melayu Malaysia") + ". No added on-screen text or watermark."
+            + "\nNatural movement. For AI-generated voice, use a short product-specific hook and CTA in " + ("English" if str(prompt_language or "Malay").casefold() == "english" else "Bahasa Melayu Malaysia") + "; preserve any user-supplied script exactly and add no dialogue. No added on-screen text or watermark."
         )
     if mode == "storyboard":
         shots = [
@@ -934,5 +934,5 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
         + direction + "\n"
         + "Preserve the product's visible design and packaging; invent no features. "
         "Natural movement, clean transitions, no added on-screen text or watermark. "
-        "If voice is selected, use a short product-specific hook and CTA in " + spoken_language + "."
+        "For AI-generated voice, use a short product-specific hook and CTA in " + spoken_language + "; preserve any user-supplied script exactly and add no dialogue."
     )
