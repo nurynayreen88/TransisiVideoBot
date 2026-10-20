@@ -3822,7 +3822,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     voiceover_mode=context.user_data.get('prompt_voiceover_mode', 'none'),
                     prompt_language=context.user_data.get('prompt_language', 'Malay'),
                     on_screen_text=context.user_data.get('prompt_on_screen_text', 'no'),
-                    camera_choice=context.user_data.get('prompt_motion_choice', 'auto'),
+                    camera_choice=motion,
                 )
                 if component_rules:
                     prompt = prompt.rstrip() + '\n\nREUSABLE COMPONENT RULES:\n' + component_rules
