@@ -76,6 +76,14 @@ class PromptQualityTests(unittest.TestCase):
         self.assertTrue(result[0].isupper())
         self.assertNotEqual(result, result.upper())
 
+    def test_baby_products_prioritize_safe_age_appropriate_model_rules(self):
+        source = (Path(__file__).resolve().parents[1] / "bot.py").read_text(encoding="utf-8")
+        baby_branch = source.index("if baby_product and child_model:")
+        generic_child_branch = source.index("elif child_model and not child_product:", baby_branch)
+        self.assertLess(baby_branch, generic_child_branch)
+        self.assertIn("adult caregiver hands if needed or show the baby product alone", source[baby_branch:generic_child_branch])
+        self.assertIn("adult caregiver model(s)", source[baby_branch:])
+
     def test_explicit_bag_subcategory_overrides_ambiguous_product_name(self):
         handbag_styles = {
             "handbag_showcase", "bag_daily_carry", "bag_tabletop_reveal",
