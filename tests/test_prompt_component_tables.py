@@ -6,6 +6,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 LIBRARY_PATH = ROOT / "prompts" / "prompt_library.json"
 TABLES_PATH = ROOT / "prompts" / "prompt_component_tables.json"
+OVERRIDES_PATH = ROOT / "prompts" / "prompt_quality_overrides.json"
 
 
 class PromptComponentTableTests(unittest.TestCase):
@@ -13,10 +14,20 @@ class PromptComponentTableTests(unittest.TestCase):
     def setUpClass(cls):
         cls.library = json.loads(LIBRARY_PATH.read_text(encoding="utf-8"))
         cls.database = json.loads(TABLES_PATH.read_text(encoding="utf-8"))
+        cls.overrides = json.loads(OVERRIDES_PATH.read_text(encoding="utf-8")).get("overrides", [])
+        cls.effective_prompts = {
+            item["id"]: dict(item) for item in cls.library["prompts"]
+        }
+        for override in cls.overrides:
+            target = cls.effective_prompts.get(override.get("id"))
+            if target is not None:
+                for field in ("prompt", "storyboard"):
+                    if field in override:
+                        target[field] = override[field]
         cls.tables = cls.database["tables"]
 
     def test_component_database_is_versioned_and_additive(self):
-        self.assertEqual(self.database["schema_version"], "1.0.0")
+        self.assertEqual(self.database["schema_version"], "1.0.1")
         self.assertEqual(
             self.database["source"]["master_prompt_count"],
             len(self.library["prompts"]),
@@ -81,7 +92,7 @@ class PromptComponentTableTests(unittest.TestCase):
         mapping_by_id = {
             item["id"]: item for item in self.tables["prompt_component_map"]
         }
-        for prompt in self.library["prompts"]:
+        for prompt in self.effective_prompts.values():
             self.assertEqual(len(prompt["storyboard"]), 4, prompt["id"])
             mapping = mapping_by_id[prompt["id"]]
             for field, source_index in (
@@ -98,7 +109,7 @@ class PromptComponentTableTests(unittest.TestCase):
 
     def test_component_table_reuses_shared_storyboard_directions(self):
         source_shot_count = sum(
-            len(prompt.get("storyboard", [])) for prompt in self.library["prompts"]
+            len(prompt.get("storyboard", [])) for prompt in self.effective_prompts.values()
         )
         component_count = len(self.tables["storyboard_components"])
         self.assertLess(component_count, source_shot_count)
