@@ -515,10 +515,23 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
     )
     if mode == "storyboard":
         style_key, style_name, style_template = resolve(style)
+        # Never apply wallet-specific styling to a bag (or handbag styling to a wallet).
+        style_key_text = str(style_key or "").lower()
+        subtype_text = str(product_subtype or "").lower()
+        wallet_style = "wallet" in style_key_text or "wallet" in str(style_name or "").lower()
+        bag_style = any(token in style_key_text for token in ("bag", "handbag", "sling")) or "handbag" in str(style_name or "").lower()
+        if product_type == "bag" and wallet_style:
+            style_key = "handbag_showcase"
+            style_name = "👜 Handbag Showcase"
+            style_template = "Show the complete handbag naturally carried, worn or placed, then highlight one visible design detail."
+        elif product_type == "wallet" and bag_style:
+            style_key = "wallet_daily_carry"
+            style_name = "👛 Everyday Wallet"
+            style_template = "Show the complete wallet in a clean tabletop or hand-held presentation, highlighting only visible details."
         concise_framework = ""
         if product_type == "other" or universal_custom:
             concise_framework = (
-                " UNIVERSAL CREATIVE FRAMEWORK: " + _universal_prompt_direction(style_key)[:180]
+                " UNIVERSAL CREATIVE FRAMEWORK: " + _prompt_sentence(_universal_prompt_direction(style_key), 180, "Use one restrained visual idea suited to the selected style.")
                 + " UNIVERSAL SAFETY RULES: Preserve visible product details; invent no features or claims."
             )
         doodle = style_key == "white_doodle"
