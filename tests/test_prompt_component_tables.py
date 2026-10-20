@@ -116,6 +116,16 @@ class PromptComponentTableTests(unittest.TestCase):
         self.assertEqual(len(self.tables["camera_profiles"]), 10)
         self.assertGreaterEqual(len(self.tables["subcategories"]), 100)
 
+    def test_runtime_resolves_storyboards_from_normalized_tables_with_fallback(self):
+        bot_source = (ROOT / "bot.py").read_text(encoding="utf-8")
+        self.assertIn("PROMPT_COMPONENT_TABLES_PATH", bot_source)
+        self.assertIn("def _prompt_library_storyboard(template):", bot_source)
+        self.assertIn("return original", bot_source)
+        self.assertIn(
+            "context.user_data['prompt_library_storyboard'] = _prompt_library_storyboard(template)",
+            bot_source,
+        )
+
     def test_optional_audio_and_cta_rules_respect_user_choices(self):
         audio = {item["id"]: item for item in self.tables["audio_profiles"]}
         cta = {item["id"]: item for item in self.tables["cta_rules"]}
