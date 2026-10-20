@@ -709,8 +709,34 @@ def prompt_text_mode_menu():
 
 def prompt_audio_presence_menu():
     return InlineKeyboardMarkup([
-        [InlineKeyboardButton('🔊 Ada suara', callback_data='prompt_audio_presence:yes')],
-        [InlineKeyboardButton('🔇 Tiada suara', callback_data='prompt_audio_presence:no')],
+        [InlineKeyboardButton('🔊 Ada suara latar / dialog', callback_data='prompt_audio_presence:yes')],
+        [InlineKeyboardButton('🔇 Tanpa suara latar / dialog', callback_data='prompt_audio_presence:no')],
+        [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
+    ])
+
+
+def prompt_music_menu():
+    """Independent music choice for Manual mode; Auto is resolved by prompt rules."""
+    return InlineKeyboardMarkup([
+        [InlineKeyboardButton('⚡ Auto — ikut produk dan mood', callback_data='prompt_music:auto')],
+        [InlineKeyboardButton('🎵 Ceria / bertenaga', callback_data='prompt_music:upbeat')],
+        [InlineKeyboardButton('✨ Elegan / premium', callback_data='prompt_music:elegant')],
+        [InlineKeyboardButton('🌿 Tenang / minimal', callback_data='prompt_music:calm')],
+        [InlineKeyboardButton('🎈 Playful / comel', callback_data='prompt_music:playful')],
+        [InlineKeyboardButton('🎬 Sinematik', callback_data='prompt_music:cinematic')],
+        [InlineKeyboardButton('🔇 Tanpa muzik', callback_data='prompt_music:none')],
+        [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
+    ])
+
+
+def prompt_sfx_menu():
+    """Independent SFX choice; effects must match visible actions."""
+    return InlineKeyboardMarkup([
+        [InlineKeyboardButton('⚡ Auto — ikut aksi dan produk', callback_data='prompt_sfx:auto')],
+        [InlineKeyboardButton('📦 Bunyi sentuhan / pergerakan produk', callback_data='prompt_sfx:product')],
+        [InlineKeyboardButton('✏️ SFX White Doodle', callback_data='prompt_sfx:doodle')],
+        [InlineKeyboardButton('🌿 Bunyi persekitaran lembut', callback_data='prompt_sfx:ambient')],
+        [InlineKeyboardButton('🔇 Tanpa SFX', callback_data='prompt_sfx:none')],
         [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
     ])
 
@@ -879,6 +905,26 @@ def prompt_creative_settings(user_data, include_audio=True):
             )
     elif user_data.get('prompt_on_screen_text') == 'no':
         lines.append('No on-screen text.')
+    music_choice = str(user_data.get('prompt_music_choice', 'auto')).casefold()
+    music_directions = {
+        'auto': 'BACKGROUND MUSIC: Choose a suitable genre, mood and tempo for this exact product and selected visual style. Keep it subtle and below any voice.',
+        'upbeat': 'BACKGROUND MUSIC: Use upbeat, positive instrumental music with a suitable tempo; keep it below any voice.',
+        'elegant': 'BACKGROUND MUSIC: Use refined, premium instrumental music with restrained dynamics; keep it below any voice.',
+        'calm': 'BACKGROUND MUSIC: Use calm, minimal instrumental music with gentle dynamics; keep it below any voice.',
+        'playful': 'BACKGROUND MUSIC: Use light, playful instrumental music appropriate to the product; avoid childish music unless the product suits it.',
+        'cinematic': 'BACKGROUND MUSIC: Use a polished cinematic instrumental bed with controlled build and no overpowering hits.',
+        'none': 'BACKGROUND MUSIC: No music; use no musical bed.',
+    }
+    lines.append(music_directions.get(music_choice, music_directions['auto']))
+    sfx_choice = str(user_data.get('prompt_sfx_choice', 'auto')).casefold()
+    sfx_directions = {
+        'auto': 'SFX: Add only subtle, well-timed effects that match visible actions and the product category. Never invent product sounds or imply unsupported functions.',
+        'product': 'SFX: Add subtle, realistic handling or movement sounds only when the corresponding product action is visibly shown; no invented mechanism sounds.',
+        'doodle': 'SFX: For visible White Doodle animation only, sync a soft drawing/whoosh to moving lines, a light chime to highlights and a gentle pop to circles. Keep effects sparse and below any voice.',
+        'ambient': 'SFX: Use only quiet, plausible environmental ambience suited to the scene; do not add unrelated sound effects.',
+        'none': 'SFX: No sound effects; do not add whooshes, impacts, chimes or artificial product sounds.',
+    }
+    lines.append(sfx_directions.get(sfx_choice, sfx_directions['auto']))
     if user_data.get('prompt_custom_background'):
         lines.append('Use the separately uploaded background image as the scene and match its perspective and lighting.')
     return '\n'.join(lines)
@@ -3326,13 +3372,13 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif action.startswith('prompt_audio_presence:') and stage == 'prompt_audio_presence':
         selected = action.split(':', 1)[1]
         if selected in ('yes','no'):
-            context.user_data['prompt_audio_enabled'] = selected == 'yes'
+            context.user_data['prompt_audio_enabled'] = True  # Music and SFX remain independently selectable.
             if selected == 'no':
                 context.user_data['prompt_voiceover_mode'] = 'none'
                 context.user_data['prompt_voiceover_style'] = 'none'
                 context.user_data['prompt_voiceover_script'] = ''
-                context.user_data['stage'] = 'prompt_scene'
-                await query.message.reply_text('🖼️ Pilih latar video:', reply_markup=prompt_scene_menu())
+                context.user_data['stage'] = 'prompt_music'
+                await query.message.reply_text('🎵 Pilih muzik latar:', reply_markup=prompt_music_menu())
             elif context.user_data.get('prompt_model_presence') == 'yes':
                 context.user_data['stage'] = 'prompt_speaker'
                 await query.message.reply_text('Pilih sumber suara:', reply_markup=prompt_speaker_menu())
@@ -3340,6 +3386,22 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 context.user_data['prompt_speech_source'] = 'voiceover'
                 context.user_data['stage'] = 'prompt_language'
                 await query.message.reply_text('Pilih bahasa suara:', reply_markup=prompt_language_menu())
+    elif action.startswith('prompt_music:') and stage == 'prompt_music':
+        selected = action.split(':', 1)[1]
+        if selected in {'auto', 'upbeat', 'elegant', 'calm', 'playful', 'cinematic', 'none'}:
+            context.user_data['prompt_music_choice'] = selected
+            context.user_data['stage'] = 'prompt_sfx'
+            await query.message.reply_text('🔊 Pilih kesan bunyi (SFX):', reply_markup=prompt_sfx_menu())
+        else:
+            await query.message.reply_text('Pilihan muzik tidak sah. Sila pilih semula:', reply_markup=prompt_music_menu())
+    elif action.startswith('prompt_sfx:') and stage == 'prompt_sfx':
+        selected = action.split(':', 1)[1]
+        if selected in {'auto', 'product', 'doodle', 'ambient', 'none'}:
+            context.user_data['prompt_sfx_choice'] = selected
+            context.user_data['stage'] = 'prompt_scene'
+            await query.message.reply_text('🖼️ Pilih latar video:', reply_markup=prompt_scene_menu())
+        else:
+            await query.message.reply_text('Pilihan SFX tidak sah. Sila pilih semula:', reply_markup=prompt_sfx_menu())
     elif action.startswith('prompt_language:') and stage == 'prompt_language':
         selected = action.split(':', 1)[1]
         if selected in ('Malay','English','none'):
@@ -3366,8 +3428,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['prompt_voiceover_mode'] = 'none' if selected == 'none' else 'ai'
             context.user_data['prompt_voiceover_style'] = selected
             context.user_data['prompt_voiceover_script'] = ''
-            context.user_data['stage'] = 'prompt_scene'
-            await query.message.reply_text('🖼️ Pilih latar video:', reply_markup=prompt_scene_menu())
+            context.user_data['stage'] = 'prompt_music'
+            await query.message.reply_text('🎵 Pilih muzik latar:', reply_markup=prompt_music_menu())
     elif action.startswith('prompt_style:') and stage == 'prompt_style':
         selected = action.split(':', 1)[1]
         valid = set(CORE_USER_STYLE_KEYS)
@@ -3475,7 +3537,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # callbacks must continue into the second chain.
     if action in ('admin_pending', 'admin', 'admin_users_help', 'storyboard', 'make', 'prompt', 'prompt_categories', 'prompt_images_done', 'prompt_style_back') or action.startswith(
         ('admin_approve:', 'admin_reject:', 'admin_users:', 'admin_user:', 'prompt_flow:', 'prompt_mode:', 'prompt_model:', 'prompt_animal_species:', 'prompt_model_count:', 'prompt_model_gender:', 'prompt_model_hijab:', 'prompt_model_ethnicity:', 'prompt_model_age:', 'prompt_language:', 'prompt_voiceover:', 'prompt_type:', 'prompt_product_type:', 'prompt_product_subcategory:', 'prompt_product_categories', 'prompt_duration:',
-         'prompt_style:', 'prompt_setup:', 'prompt_ad_angle:', 'prompt_idea:', 'prompt_details:', 'prompt_framing:', 'prompt_text_presence:', 'prompt_text_mode:', 'prompt_audio_presence:', 'prompt_speaker:', 'video_input:', 'prompt_input:', 'pcat:', 'ptpl:')
+         'prompt_style:', 'prompt_setup:', 'prompt_ad_angle:', 'prompt_idea:', 'prompt_details:', 'prompt_framing:', 'prompt_text_presence:', 'prompt_text_mode:', 'prompt_audio_presence:', 'prompt_music:', 'prompt_sfx:', 'prompt_speaker:', 'video_input:', 'prompt_input:', 'pcat:', 'ptpl:')
     ):
         return
     if action.startswith('motion:') and context.user_data.get('stage') == 'prompt_motion':
@@ -3528,7 +3590,9 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 '🎥 Gaya kamera: ' + PRODUCT_FRAMING.get(context.user_data.get('prompt_framing','auto'), PRODUCT_FRAMING['auto'])[0],
                 '🎯 Pendekatan iklan: ' + {'auto':'Auto — ikut produk','question':'Hook soalan','reveal':'Reveal produk','demo':'Demonstrasi','relatable':'Situasi harian','premium':'Premium / editorial','affiliate':'Promoter affiliate'}.get(context.user_data.get('prompt_ad_angle','auto'),'Auto — ikut produk'),
                 '📝 Teks skrin: ' + ('Tiada' if context.user_data.get('prompt_on_screen_text') != 'yes' else ('Auto' if context.user_data.get('prompt_text_mode') == 'auto' else context.user_data.get('prompt_text_content','Manual'))),
-                '🔊 Suara: ' + ('Tiada' if not context.user_data.get('prompt_audio_enabled') else str(context.user_data.get('prompt_speech_source','voiceover')) + ' / ' + str(context.user_data.get('prompt_voiceover_style','auto'))),
+                '🔊 Suara/dialog: ' + ('Tiada' if context.user_data.get('prompt_voiceover_mode') == 'none' else str(context.user_data.get('prompt_speech_source','voiceover')) + ' / ' + str(context.user_data.get('prompt_voiceover_style','auto'))),
+                '🎵 Muzik latar: ' + {'auto':'Auto ikut produk','upbeat':'Ceria / bertenaga','elegant':'Elegan / premium','calm':'Tenang / minimal','playful':'Playful / comel','cinematic':'Sinematik','none':'Tiada muzik'}.get(context.user_data.get('prompt_music_choice','auto'),'Auto ikut produk'),
+                '🔉 SFX: ' + {'auto':'Auto ikut aksi','product':'Sentuhan / pergerakan produk','doodle':'White Doodle','ambient':'Bunyi persekitaran','none':'Tiada SFX'}.get(context.user_data.get('prompt_sfx_choice','auto'),'Auto ikut aksi'),
                 f'🖼️ Latar: {scene_labels.get(scene, scene)}',
                 '🎥 Aksi & rakaman: Automatik mengikut produk dan latar',
                 '',
@@ -4388,8 +4452,9 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data['prompt_voiceover_script'] = script[:1200]
         if not script:
             context.user_data['prompt_voiceover_mode'] = 'none'
-        context.user_data['stage'] = 'prompt_scene'
-        await update.message.reply_text('✅ Skrip disimpan.' if script else '✅ Teruskan tanpa dialog.', reply_markup=prompt_scene_menu())
+        context.user_data['stage'] = 'prompt_music'
+        status_message = '✅ Skrip disimpan.' if script else '✅ Teruskan tanpa dialog.'
+        await update.message.reply_text(status_message + '\n\n🎵 Pilih muzik latar:', reply_markup=prompt_music_menu())
         return
     if stage == 'prompt_custom_category':
         if len(value) < 2 or value.lower().startswith(('http://', 'https://')):
