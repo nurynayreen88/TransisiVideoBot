@@ -6905,7 +6905,7 @@
       "subcategory_id": "home_kitchen",
       "category_id": "home",
       "label": "🍳 Dapur / Peralatan memasak",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "home_kitchen_v01",
@@ -7026,6 +7026,126 @@
           "lighting": "LIGHTING: Warm neutral light, consistent across every beat.",
           "closing": "CTA / HERO: Return to the same product orientation and lighting for a clean close.",
           "audio": "AUDIO: Use one soft handling sound only if the handling is visible; no invented effects."
+        },
+        {
+          "id": "home_kitchen_v11",
+          "variation_number": 11,
+          "name": "Handle-to-body sweep",
+          "hook": "Open on the actual handle or grip if present, with enough of the kitchen item visible to identify it.",
+          "action": "Track from the handle to the main body without lifting or operating the item unless the reference shows it.",
+          "detail": "Preserve the real handle count, attachment, seams and visible finish; do not infer heat resistance or material.",
+          "camera": "Level lateral slide; ease back to a stable three-quarter view.",
+          "lighting": "Soft directional light that preserves the reference colour.",
+          "closing": "Hold on the unchanged product in a clear final frame.",
+          "audio": "Low-volume instrumental; no unsupported sound effects."
+        },
+        {
+          "id": "home_kitchen_v12",
+          "variation_number": 12,
+          "name": "Rim and opening detail",
+          "hook": "If the item has a visible rim, opening or bowl, begin with that real edge; otherwise use its clearest outer contour.",
+          "action": "Tilt gently from the opening to the complete item without filling it or adding ingredients.",
+          "detail": "Do not invent a lid, inner coating, capacity marks or unseen interior features.",
+          "camera": "Controlled close-up followed by a short pullback; keep geometry natural.",
+          "lighting": "Diffused light with realistic contact shadows and no artificial glow.",
+          "closing": "Finish on the authentic full-product view.",
+          "audio": "Quiet instrumental; action sounds only if visibly supported."
+        },
+        {
+          "id": "home_kitchen_v13",
+          "variation_number": 13,
+          "name": "Base and support study",
+          "hook": "Open on the genuine base, feet or support if visible; otherwise begin at the lower outer edge.",
+          "action": "Move along the bottom contour and rise to the whole product while it stays stationary.",
+          "detail": "Do not invent non-slip feet, heating elements, connectors or base markings.",
+          "camera": "Level lateral slide; ease back to a stable three-quarter view.",
+          "lighting": "Soft directional light that preserves the reference colour.",
+          "closing": "Hold on the unchanged product in a clear final frame.",
+          "audio": "Low-volume instrumental; no unsupported sound effects."
+        },
+        {
+          "id": "home_kitchen_v14",
+          "variation_number": 14,
+          "name": "Lid alignment if supplied",
+          "hook": "If a lid is shown with the product, begin with the actual lid and its matching rim; otherwise feature the item alone.",
+          "action": "Show the lid resting in its supplied position or make one simple placement only if the reference supports it.",
+          "detail": "Do not invent seals, locks, vents or a perfect fit claim; keep lid and body shape unchanged.",
+          "camera": "Controlled close-up followed by a short pullback; keep geometry natural.",
+          "lighting": "Diffused light with realistic contact shadows and no artificial glow.",
+          "closing": "Finish on the authentic full-product view.",
+          "audio": "Quiet instrumental; action sounds only if visibly supported."
+        },
+        {
+          "id": "home_kitchen_v15",
+          "variation_number": 15,
+          "name": "Surface texture in daylight",
+          "hook": "Start close on the genuine surface finish or visible pattern, then reveal the item’s overall silhouette.",
+          "action": "Make a slow pass across the surface without rubbing, polishing or changing the finish.",
+          "detail": "Do not infer metal, ceramic, non-stick coating or scratch resistance unless established by the reference.",
+          "camera": "Level lateral slide; ease back to a stable three-quarter view.",
+          "lighting": "Soft directional light that preserves the reference colour.",
+          "closing": "Hold on the unchanged product in a clear final frame.",
+          "audio": "Low-volume instrumental; no unsupported sound effects."
+        },
+        {
+          "id": "home_kitchen_v16",
+          "variation_number": 16,
+          "name": "One safe practical interaction",
+          "hook": "If the reference depicts use, repeat only that same simple interaction; otherwise keep the item still and use camera movement.",
+          "action": "Show one plausible movement supported by the item and reference, without heat, flame, food or liquid added by assumption.",
+          "detail": "Do not simulate cooking results, temperature, speed or capacity; keep hands and contact physically plausible.",
+          "camera": "Controlled close-up followed by a short pullback; keep geometry natural.",
+          "lighting": "Diffused light with realistic contact shadows and no artificial glow.",
+          "closing": "Finish on the authentic full-product view.",
+          "audio": "Quiet instrumental; action sounds only if visibly supported."
+        },
+        {
+          "id": "home_kitchen_v17",
+          "variation_number": 17,
+          "name": "Stack or nest only if shown",
+          "hook": "If multiple matching pieces are visible, open on their existing arrangement; if there is one item, feature that item alone.",
+          "action": "Use a small overhead arc to show the actual arrangement without stacking or separating pieces unexpectedly.",
+          "detail": "Preserve the exact piece count, sizes and order; do not generate matching accessories.",
+          "camera": "Level lateral slide; ease back to a stable three-quarter view.",
+          "lighting": "Soft directional light that preserves the reference colour.",
+          "closing": "Hold on the unchanged product in a clear final frame.",
+          "audio": "Low-volume instrumental; no unsupported sound effects."
+        },
+        {
+          "id": "home_kitchen_v18",
+          "variation_number": 18,
+          "name": "Side profile and depth",
+          "hook": "Begin with the real side profile to show the item's actual depth and silhouette.",
+          "action": "Move from one visible side edge toward the front, staying within views supported by the reference.",
+          "detail": "Do not create an unseen rear handle, spout, hinge or other feature.",
+          "camera": "Controlled close-up followed by a short pullback; keep geometry natural.",
+          "lighting": "Diffused light with realistic contact shadows and no artificial glow.",
+          "closing": "Finish on the authentic full-product view.",
+          "audio": "Quiet instrumental; action sounds only if visibly supported."
+        },
+        {
+          "id": "home_kitchen_v19",
+          "variation_number": 19,
+          "name": "Countertop scale context",
+          "hook": "Show the product in the reference's existing kitchen context; if no context exists, use a simple neutral surface.",
+          "action": "Pull back slightly to establish its realistic size against only objects already visible or naturally included in the reference.",
+          "detail": "Do not invent dimensions, compatibility, storage capacity or suitability claims.",
+          "camera": "Level lateral slide; ease back to a stable three-quarter view.",
+          "lighting": "Soft directional light that preserves the reference colour.",
+          "closing": "Hold on the unchanged product in a clear final frame.",
+          "audio": "Low-volume instrumental; no unsupported sound effects."
+        },
+        {
+          "id": "home_kitchen_v20",
+          "variation_number": 20,
+          "name": "Complete-item reveal",
+          "hook": "Open on a genuine identifying detail such as a handle, rim, control or visible seam, selected only if present.",
+          "action": "Pull back continuously to show the complete kitchen item and its supplied parts.",
+          "detail": "Keep exact shape, part count, colour and visible markings; no added text or accessories.",
+          "camera": "Controlled close-up followed by a short pullback; keep geometry natural.",
+          "lighting": "Diffused light with realistic contact shadows and no artificial glow.",
+          "closing": "Finish on the authentic full-product view.",
+          "audio": "Quiet instrumental; action sounds only if visibly supported."
         }
       ]
     },
@@ -7033,7 +7153,7 @@
       "subcategory_id": "home_storage",
       "category_id": "home",
       "label": "🗄️ Penyimpanan / Organizer",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "home_storage_v01",
@@ -7154,6 +7274,126 @@
           "lighting": "LIGHTING: Soft top light with realistic contact shadows.",
           "closing": "CTA / HERO: Hold a stable hero shot; do not add props, labels or accessories.",
           "audio": "AUDIO: Use a brief natural contact sound only when physically supported by the scene."
+        },
+        {
+          "id": "home_storage_v11",
+          "variation_number": 11,
+          "name": "Compartment-by-compartment reveal",
+          "hook": "Open on the actual compartments or shelves visible in the organizer, then widen to show the full unit.",
+          "action": "Pan slowly across the existing sections without adding stored items or changing their arrangement.",
+          "detail": "Preserve the real compartment count, dividers, openings and proportions; do not imply capacity beyond what is shown.",
+          "camera": "Level lateral slide; ease back to a stable three-quarter view.",
+          "lighting": "Soft directional light that preserves the reference colour.",
+          "closing": "Hold on the unchanged product in a clear final frame.",
+          "audio": "Low-volume instrumental; no unsupported sound effects."
+        },
+        {
+          "id": "home_storage_v12",
+          "variation_number": 12,
+          "name": "Drawer or lid action if supported",
+          "hook": "If a drawer, lid or door is visibly designed to move and the reference supports it, begin closed; otherwise show the stationary product.",
+          "action": "Show one smooth open-and-close action only when the mechanism is clear in the reference; otherwise use a camera-only reveal.",
+          "detail": "Do not invent rails, hinges, locks or extra internal sections; keep the product geometry consistent.",
+          "camera": "Controlled close-up followed by a short pullback; keep geometry natural.",
+          "lighting": "Diffused light with realistic contact shadows and no artificial glow.",
+          "closing": "Finish on the authentic full-product view.",
+          "audio": "Quiet instrumental; action sounds only if visibly supported."
+        },
+        {
+          "id": "home_storage_v13",
+          "variation_number": 13,
+          "name": "Stacking arrangement",
+          "hook": "If the reference shows stackable units already arranged, begin with that exact stack; otherwise present one unit alone.",
+          "action": "Use a gentle vertical camera move to show the existing tiers without adding, removing or balancing units.",
+          "detail": "Do not claim stackability or weight capacity unless the reference explicitly supports it.",
+          "camera": "Level lateral slide; ease back to a stable three-quarter view.",
+          "lighting": "Soft directional light that preserves the reference colour.",
+          "closing": "Hold on the unchanged product in a clear final frame.",
+          "audio": "Low-volume instrumental; no unsupported sound effects."
+        },
+        {
+          "id": "home_storage_v14",
+          "variation_number": 14,
+          "name": "Handle and access points",
+          "hook": "Start on the real handle, pull, opening or access notch if present; otherwise focus on the front edge.",
+          "action": "Slide from the access point across the front panel, keeping doors and drawers in their supplied state.",
+          "detail": "Do not add handles, labels, locks or hidden compartments.",
+          "camera": "Controlled close-up followed by a short pullback; keep geometry natural.",
+          "lighting": "Diffused light with realistic contact shadows and no artificial glow.",
+          "closing": "Finish on the authentic full-product view.",
+          "audio": "Quiet instrumental; action sounds only if visibly supported."
+        },
+        {
+          "id": "home_storage_v15",
+          "variation_number": 15,
+          "name": "Transparent wall clarity",
+          "hook": "If transparent or open sides reveal contents in the reference, begin with that genuine view; otherwise use the visible outer panel.",
+          "action": "Move slowly along the visible wall or opening without inventing objects inside.",
+          "detail": "Do not infer material type, scratch resistance or extra storage space; keep visible contents unchanged.",
+          "camera": "Level lateral slide; ease back to a stable three-quarter view.",
+          "lighting": "Soft directional light that preserves the reference colour.",
+          "closing": "Hold on the unchanged product in a clear final frame.",
+          "audio": "Low-volume instrumental; no unsupported sound effects."
+        },
+        {
+          "id": "home_storage_v16",
+          "variation_number": 16,
+          "name": "Under-shelf or base detail",
+          "hook": "Open on the visible base, feet or underside edge if supplied in the reference; otherwise use the lower front corner.",
+          "action": "Track along the base and rise to the full organizer without lifting it or revealing unsupported hidden parts.",
+          "detail": "Do not invent wheels, feet, mounting hardware or load-bearing features.",
+          "camera": "Controlled close-up followed by a short pullback; keep geometry natural.",
+          "lighting": "Diffused light with realistic contact shadows and no artificial glow.",
+          "closing": "Finish on the authentic full-product view.",
+          "audio": "Quiet instrumental; action sounds only if visibly supported."
+        },
+        {
+          "id": "home_storage_v17",
+          "variation_number": 17,
+          "name": "Everyday placement only if shown",
+          "hook": "If the reference shows items being stored, continue with one of those same visible items; otherwise leave the organizer empty or as supplied.",
+          "action": "Show one simple placement into a clearly visible compartment only when the action is supported; do not add extra contents.",
+          "detail": "Do not imply a particular capacity, organization result or compatibility; keep item sizes plausible.",
+          "camera": "Level lateral slide; ease back to a stable three-quarter view.",
+          "lighting": "Soft directional light that preserves the reference colour.",
+          "closing": "Hold on the unchanged product in a clear final frame.",
+          "audio": "Low-volume instrumental; no unsupported sound effects."
+        },
+        {
+          "id": "home_storage_v18",
+          "variation_number": 18,
+          "name": "Corner-to-full silhouette",
+          "hook": "Begin at a genuine corner, edge or joint to show the construction visible in the reference.",
+          "action": "Move around a small corner arc and pull back to the full shape; do not rotate the product independently.",
+          "detail": "Preserve all panel edges, joints, colour blocks and dimensions.",
+          "camera": "Controlled close-up followed by a short pullback; keep geometry natural.",
+          "lighting": "Diffused light with realistic contact shadows and no artificial glow.",
+          "closing": "Finish on the authentic full-product view.",
+          "audio": "Quiet instrumental; action sounds only if visibly supported."
+        },
+        {
+          "id": "home_storage_v19",
+          "variation_number": 19,
+          "name": "Closet or shelf context",
+          "hook": "Use a closet, shelf or room context only if it already appears in the reference; otherwise keep the organizer on a neutral surface.",
+          "action": "Pull back to show its relationship to the visible surroundings without changing the unit's scale.",
+          "detail": "Do not invent built-in installation, exact dimensions or room-fit claims.",
+          "camera": "Level lateral slide; ease back to a stable three-quarter view.",
+          "lighting": "Soft directional light that preserves the reference colour.",
+          "closing": "Hold on the unchanged product in a clear final frame.",
+          "audio": "Low-volume instrumental; no unsupported sound effects."
+        },
+        {
+          "id": "home_storage_v20",
+          "variation_number": 20,
+          "name": "Clean hero arrangement",
+          "hook": "Open on a real visible feature such as a divider, handle, lid edge or panel corner, chosen only if present.",
+          "action": "Pull back smoothly to reveal the entire organizer and the exact supplied pieces.",
+          "detail": "Maintain compartment count, part count and original finish; no labels, added contents or text.",
+          "camera": "Controlled close-up followed by a short pullback; keep geometry natural.",
+          "lighting": "Diffused light with realistic contact shadows and no artificial glow.",
+          "closing": "Finish on the authentic full-product view.",
+          "audio": "Quiet instrumental; action sounds only if visibly supported."
         }
       ]
     },
@@ -7161,7 +7401,7 @@
       "subcategory_id": "home_cleaning",
       "category_id": "home",
       "label": "🧹 Pembersihan",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "home_cleaning_v01",
@@ -7282,6 +7522,126 @@
           "lighting": "LIGHTING: Subtle rim light only if it does not alter the visible product colour.",
           "closing": "CTA / HERO: End with the complete product in realistic scale and no visual transformation.",
           "audio": "AUDIO: Use a quiet transition accent only if it matches a visible camera or graphic movement."
+        },
+        {
+          "id": "home_cleaning_v11",
+          "variation_number": 11,
+          "name": "Head-to-handle tracking",
+          "hook": "Open on the real cleaning head, brush, pad or nozzle if present, with part of the handle or body visible.",
+          "action": "Track from the working end along the handle to the main body; do not make the tool operate by itself.",
+          "detail": "Preserve the actual head shape, bristle count where visible, attachments and handle geometry.",
+          "camera": "Level lateral slide; ease back to a stable three-quarter view.",
+          "lighting": "Soft directional light that preserves the reference colour.",
+          "closing": "Hold on the unchanged product in a clear final frame.",
+          "audio": "Low-volume instrumental; no unsupported sound effects."
+        },
+        {
+          "id": "home_cleaning_v12",
+          "variation_number": 12,
+          "name": "Nozzle opening detail",
+          "hook": "If a nozzle or outlet is visible, begin on its real opening; otherwise focus on the clearest front detail.",
+          "action": "Make a short macro pass around the opening and pull back to the full product without spraying or emitting anything.",
+          "detail": "Do not add mist, suction lines, steam, liquid, airflow or extra openings unless shown.",
+          "camera": "Controlled close-up followed by a short pullback; keep geometry natural.",
+          "lighting": "Diffused light with realistic contact shadows and no artificial glow.",
+          "closing": "Finish on the authentic full-product view.",
+          "audio": "Quiet instrumental; action sounds only if visibly supported."
+        },
+        {
+          "id": "home_cleaning_v13",
+          "variation_number": 13,
+          "name": "Handle grip and trigger",
+          "hook": "If a trigger or grip is present, start on that exact control; otherwise show the real hand-contact area.",
+          "action": "Move across the grip without pressing a trigger or activating the device unless the reference shows it.",
+          "detail": "Do not add buttons, ergonomic claims or controls not visible in the product.",
+          "camera": "Level lateral slide; ease back to a stable three-quarter view.",
+          "lighting": "Soft directional light that preserves the reference colour.",
+          "closing": "Hold on the unchanged product in a clear final frame.",
+          "audio": "Low-volume instrumental; no unsupported sound effects."
+        },
+        {
+          "id": "home_cleaning_v14",
+          "variation_number": 14,
+          "name": "Supplied cleaning attachments",
+          "hook": "If multiple heads, pads or accessories are supplied in the reference, show those exact pieces; otherwise show the main product alone.",
+          "action": "Use a slow overhead sweep across the actual set without attaching or swapping parts unless shown.",
+          "detail": "Preserve the exact attachment count and shape; do not invent replacement pads, bottles or adapters.",
+          "camera": "Controlled close-up followed by a short pullback; keep geometry natural.",
+          "lighting": "Diffused light with realistic contact shadows and no artificial glow.",
+          "closing": "Finish on the authentic full-product view.",
+          "audio": "Quiet instrumental; action sounds only if visibly supported."
+        },
+        {
+          "id": "home_cleaning_v15",
+          "variation_number": 15,
+          "name": "One visible cleaning pass",
+          "hook": "Only if the reference clearly shows the product being used, begin on the same surface and tool arrangement; otherwise keep it stationary.",
+          "action": "Show one short, plausible pass on the visible surface without creating exaggerated before-and-after results.",
+          "detail": "Do not invent dirt disappearing, germ removal, polishing, sanitising or performance outcomes.",
+          "camera": "Level lateral slide; ease back to a stable three-quarter view.",
+          "lighting": "Soft directional light that preserves the reference colour.",
+          "closing": "Hold on the unchanged product in a clear final frame.",
+          "audio": "Low-volume instrumental; no unsupported sound effects."
+        },
+        {
+          "id": "home_cleaning_v16",
+          "variation_number": 16,
+          "name": "Cord or battery area if visible",
+          "hook": "If a cord, plug or battery compartment is visible, begin with that exact feature; otherwise focus on the housing edge.",
+          "action": "Track along the supplied cord or around the visible compartment without plugging in or opening it unless shown.",
+          "detail": "Do not add batteries, connectors, charge indicators or runtime claims.",
+          "camera": "Controlled close-up followed by a short pullback; keep geometry natural.",
+          "lighting": "Diffused light with realistic contact shadows and no artificial glow.",
+          "closing": "Finish on the authentic full-product view.",
+          "audio": "Quiet instrumental; action sounds only if visibly supported."
+        },
+        {
+          "id": "home_cleaning_v17",
+          "variation_number": 17,
+          "name": "Brush or pad texture",
+          "hook": "Open on the real bristles, pad or cleaning surface if present; otherwise choose a visible working-end detail.",
+          "action": "Move laterally across the actual texture without bending, multiplying or changing the fibers.",
+          "detail": "Do not infer material, replacement life or cleaning effectiveness from appearance alone.",
+          "camera": "Level lateral slide; ease back to a stable three-quarter view.",
+          "lighting": "Soft directional light that preserves the reference colour.",
+          "closing": "Hold on the unchanged product in a clear final frame.",
+          "audio": "Low-volume instrumental; no unsupported sound effects."
+        },
+        {
+          "id": "home_cleaning_v18",
+          "variation_number": 18,
+          "name": "Storage position",
+          "hook": "If the reference shows the product stored or upright, begin in that exact position; otherwise use its supplied resting position.",
+          "action": "Make a slow camera arc that shows how the item rests without adding a wall mount, stand or storage hook.",
+          "detail": "Do not imply compact storage, self-standing ability or compatibility unless visibly supported.",
+          "camera": "Controlled close-up followed by a short pullback; keep geometry natural.",
+          "lighting": "Diffused light with realistic contact shadows and no artificial glow.",
+          "closing": "Finish on the authentic full-product view.",
+          "audio": "Quiet instrumental; action sounds only if visibly supported."
+        },
+        {
+          "id": "home_cleaning_v19",
+          "variation_number": 19,
+          "name": "Body seams and finish",
+          "hook": "Start on a real seam, join or finish detail visible on the product housing.",
+          "action": "Slide along the actual body edge and pull back to show the whole product without opening it.",
+          "detail": "Do not reveal internal parts, invent material types or claim durability and water resistance.",
+          "camera": "Level lateral slide; ease back to a stable three-quarter view.",
+          "lighting": "Soft directional light that preserves the reference colour.",
+          "closing": "Hold on the unchanged product in a clear final frame.",
+          "audio": "Low-volume instrumental; no unsupported sound effects."
+        },
+        {
+          "id": "home_cleaning_v20",
+          "variation_number": 20,
+          "name": "Full cleaning-tool reveal",
+          "hook": "Begin on one genuine identifying feature—head, handle, trigger or visible nozzle—selected only if present.",
+          "action": "Pull back continuously to reveal the entire cleaning product and all supplied parts, without activating it.",
+          "detail": "Preserve exact proportions, openings, attachment count and visible branding; add no text or unsupported result claims.",
+          "camera": "Controlled close-up followed by a short pullback; keep geometry natural.",
+          "lighting": "Diffused light with realistic contact shadows and no artificial glow.",
+          "closing": "Finish on the authentic full-product view.",
+          "audio": "Quiet instrumental; action sounds only if visibly supported."
         }
       ]
     },
