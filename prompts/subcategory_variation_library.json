@@ -8145,7 +8145,7 @@
       "subcategory_id": "home_lighting",
       "category_id": "home",
       "label": "💡 Lampu",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "home_lighting_v01",
@@ -8266,6 +8266,126 @@
           "lighting": "LIGHTING: Balanced light with no artificial glow or invented sparkle.",
           "closing": "CTA / HERO: Finish with the product centred and fully recognizable; no added text.",
           "audio": "AUDIO: Use one soft handling sound only if the handling is visible; no invented effects."
+        },
+        {
+          "id": "home_lighting_v11",
+          "variation_number": 11,
+          "name": "Lamp Shape Reveal",
+          "hook": "HOOK: Open with the lamp's silhouette clearly separated from the background. No added text or graphics.",
+          "action": "Move from outline to full view, showing only the visible lamp design.",
+          "detail": "DETAIL: Preserve the exact product identity, visible shape, colors, labels and component count. Refer only to visible details; do not invent materials, functions or claims.",
+          "camera": "CAMERA: Slow lateral slide ending at a three-quarter angle.",
+          "lighting": "LIGHTING: Balanced ambient light; do not add a glow if the lamp is off.",
+          "closing": "CTA / HERO: Hold the complete lamp and its visible details.",
+          "audio": "AUDIO: Quiet instrumental bed; no invented switch sound. No spoken claims or unsupported effects."
+        },
+        {
+          "id": "home_lighting_v12",
+          "variation_number": 12,
+          "name": "Light Source Detail",
+          "hook": "HOOK: Begin close to the lamp's visible light source or shade opening. No added text or graphics.",
+          "action": "Pull back to connect that detail with the complete fixture.",
+          "detail": "DETAIL: Preserve the exact product identity, visible shape, colors, labels and component count. Refer only to visible details; do not invent materials, functions or claims.",
+          "camera": "CAMERA: Controlled close-up and gradual widening.",
+          "lighting": "LIGHTING: Keep exposure realistic so the source does not bloom unnaturally.",
+          "closing": "CTA / HERO: End on a full fixture view.",
+          "audio": "AUDIO: Soft music; avoid an electrical hum unless clearly part of the reference. No spoken claims or unsupported effects."
+        },
+        {
+          "id": "home_lighting_v13",
+          "variation_number": 13,
+          "name": "Switch Demonstration",
+          "hook": "HOOK: Only if the reference shows a working switch and powered lamp, show the actual switch action; otherwise keep the fixture stationary. No added text or graphics.",
+          "action": "If an on/off change is visible, capture only the real response without inventing extra modes.",
+          "detail": "DETAIL: Preserve the exact product identity, visible shape, colors, labels and component count. Refer only to visible details; do not invent materials, functions or claims.",
+          "camera": "CAMERA: Lock the camera during any visible switch action, then widen slightly.",
+          "lighting": "LIGHTING: Maintain realistic exposure and show only actual light output.",
+          "closing": "CTA / HERO: Hold the final observed state without implying extra functions.",
+          "audio": "AUDIO: Switch click only if the action is visibly performed; keep music low. No spoken claims or unsupported effects."
+        },
+        {
+          "id": "home_lighting_v14",
+          "variation_number": 14,
+          "name": "Room Context to Fixture",
+          "hook": "HOOK: Open on the corner or surface where the lamp is placed. No added text or graphics.",
+          "action": "Move closer while retaining enough context to show how the fixture sits in the room.",
+          "detail": "DETAIL: Preserve the exact product identity, visible shape, colors, labels and component count. Refer only to visible details; do not invent materials, functions or claims.",
+          "camera": "CAMERA: Begin wide and use a gentle dolly-in.",
+          "lighting": "LIGHTING: Natural room lighting with no fabricated rays or halos.",
+          "closing": "CTA / HERO: Finish with the lamp fully visible in context.",
+          "audio": "AUDIO: Low room ambience and understated music. No spoken claims or unsupported effects."
+        },
+        {
+          "id": "home_lighting_v15",
+          "variation_number": 15,
+          "name": "Shade and Base Tour",
+          "hook": "HOOK: Begin on the upper visible section, then travel toward the base if present. No added text or graphics.",
+          "action": "Reveal the fixture's visible components in order without adding unshown parts.",
+          "detail": "DETAIL: Preserve the exact product identity, visible shape, colors, labels and component count. Refer only to visible details; do not invent materials, functions or claims.",
+          "camera": "CAMERA: Slow vertical tilt with a slight pullback.",
+          "lighting": "LIGHTING: Soft side light keeps edges and finish legible.",
+          "closing": "CTA / HERO: End with the whole fixture centred.",
+          "audio": "AUDIO: Subtle instrumental audio; no unsupported material claims. No spoken claims or unsupported effects."
+        },
+        {
+          "id": "home_lighting_v16",
+          "variation_number": 16,
+          "name": "Reflections Under Control",
+          "hook": "HOOK: Open at an angle that shows the lamp finish without distracting glare. No added text or graphics.",
+          "action": "Shift viewpoint slightly to reveal the real surface and shape.",
+          "detail": "DETAIL: Preserve the exact product identity, visible shape, colors, labels and component count. Refer only to visible details; do not invent materials, functions or claims.",
+          "camera": "CAMERA: Small smooth arc; keep the fixture stationary.",
+          "lighting": "LIGHTING: Diffused light controls highlights without changing the finish.",
+          "closing": "CTA / HERO: Hold a clear three-quarter hero frame.",
+          "audio": "AUDIO: Quiet music only; no sparkle effects. No spoken claims or unsupported effects."
+        },
+        {
+          "id": "home_lighting_v17",
+          "variation_number": 17,
+          "name": "Tabletop Scale",
+          "hook": "HOOK: Show the lamp on its actual supporting surface with surrounding context. No added text or graphics.",
+          "action": "Move from the surface relationship up to the complete fixture.",
+          "detail": "DETAIL: Preserve the exact product identity, visible shape, colors, labels and component count. Refer only to visible details; do not invent materials, functions or claims.",
+          "camera": "CAMERA: Low, steady push-in while keeping scale believable.",
+          "lighting": "LIGHTING: Soft ambient lighting consistent with the scene.",
+          "closing": "CTA / HERO: Finish with the base and upper structure visible together.",
+          "audio": "AUDIO: Natural room tone and light instrumental. No spoken claims or unsupported effects."
+        },
+        {
+          "id": "home_lighting_v18",
+          "variation_number": 18,
+          "name": "Profile and Proportions",
+          "hook": "HOOK: Open with a side profile to make the lamp's proportions readable. No added text or graphics.",
+          "action": "Arc slightly toward the front to reveal its overall form.",
+          "detail": "DETAIL: Preserve the exact product identity, visible shape, colors, labels and component count. Refer only to visible details; do not invent materials, functions or claims.",
+          "camera": "CAMERA: Short, smooth camera arc with no object rotation.",
+          "lighting": "LIGHTING: Even light with restrained shadows.",
+          "closing": "CTA / HERO: End at a full view that preserves real proportions.",
+          "audio": "AUDIO: Minimal music, no mechanical sound effects. No spoken claims or unsupported effects."
+        },
+        {
+          "id": "home_lighting_v19",
+          "variation_number": 19,
+          "name": "Practical Light Pool",
+          "hook": "HOOK: If the reference visibly shows the lamp illuminated, begin with its actual pool of light; otherwise start with the fixture unlit. No added text or graphics.",
+          "action": "Widen to show the lamp and only illumination actually visible in the scene.",
+          "detail": "DETAIL: Preserve the exact product identity, visible shape, colors, labels and component count. Refer only to visible details; do not invent materials, functions or claims.",
+          "camera": "CAMERA: Steady pullback that preserves surrounding exposure.",
+          "lighting": "LIGHTING: Keep brightness physically plausible; do not fabricate illumination.",
+          "closing": "CTA / HERO: Hold on the fixture and its genuine visible effect, if any.",
+          "audio": "AUDIO: Soft ambient music; no exaggerated power-up sound. No spoken claims or unsupported effects."
+        },
+        {
+          "id": "home_lighting_v20",
+          "variation_number": 20,
+          "name": "Fixture Hero Hold",
+          "hook": "HOOK: Open on a recognizable visible detail, such as the shade, stem, or base if present. No added text or graphics.",
+          "action": "Pull back continuously until the entire lamp is visible.",
+          "detail": "DETAIL: Preserve the exact product identity, visible shape, colors, labels and component count. Refer only to visible details; do not invent materials, functions or claims.",
+          "camera": "CAMERA: Clean pullback and level horizon.",
+          "lighting": "LIGHTING: Neutral soft lighting preserves color and surface detail.",
+          "closing": "CTA / HERO: Hold a final full-product frame without overlays.",
+          "audio": "AUDIO: A restrained musical resolve, no text or logo audio. No spoken claims or unsupported effects."
         }
       ]
     },
