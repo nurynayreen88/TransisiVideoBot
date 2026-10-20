@@ -142,8 +142,9 @@ class PromptQualityTests(unittest.TestCase):
         self.assertIn("Premium handbag commercial with a clean hero reveal", prompt)
         self.assertIn("HOOK / BAG SHAPE", prompt)
         self.assertIn("HARDWARE / SEAM DETAIL", prompt)
-        self.assertIn("speak only in English", prompt)
-        self.assertNotIn("speak only in Bahasa Melayu Malaysia", prompt)
+        self.assertIn("For AI-generated voice, use English", prompt)
+        self.assertIn("use it exactly and add no dialogue", prompt)
+        self.assertNotIn("Bahasa Melayu Malaysia", prompt)
 
 
 if __name__ == "__main__":
