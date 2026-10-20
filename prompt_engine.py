@@ -7,20 +7,24 @@ import re
 from collections import deque
 
 def _prompt_sentence(value, limit=100, fallback=""):
-    """Keep a meaningful complete sentence; the limit is a target, not a destructive cut."""
+    """Keep complete, meaningful sentences; the limit is a target, not a destructive cut."""
     text = " ".join(str(value or "").split()).strip()
     if not text:
         return fallback
-    match = re.search(r"^(.+?[.!?])(?:\s|$)", text)
-    if match:
-        sentence = match.group(1).strip()
-        # Preserve the complete first sentence even if it exceeds the target length.
-        return sentence
     if len(text) <= limit:
         return text
-    # For fragments without sentence punctuation, stop at a word boundary and close it.
-    excerpt = text[:limit].rsplit(" ", 1)[0].strip()
-    return (excerpt.rstrip(" ,;:-") + ".") if excerpt else fallback
+    sentences = [part.strip() for part in re.findall(r".+?(?:[.!?](?=\\s|$)|$)", text) if part.strip()]
+    if not sentences:
+        return fallback
+    # Never discard a distinctive first sentence just because it exceeds the target.
+    kept = [sentences[0]]
+    if len(kept[0]) < limit:
+        for sentence in sentences[1:]:
+            candidate = " ".join(kept + [sentence])
+            if len(candidate) > limit:
+                break
+            kept.append(sentence)
+    return " ".join(kept)
 
 
 # Keep recent action choices in memory so consecutive prompts vary naturally.
