@@ -16,16 +16,16 @@ TOY_GRAMMAR = re.compile(r"\beducational toy pieces\b", re.I)
 # Obvious cross-field cues only. These create review flags, never automatic failures.
 FIELD_ROLE_CUES = {
     "detail": re.compile(
-        r"\b(?:push[- ]?in|push[- ]?out|camera[- ]only|camera movement|camera slide|three[- ]quarter angle|pan left|pan right)\b", re.I
+        r"\b(?:start low at a three[- ]quarter angle|make a slow push[- ]in|camera[- ]only slide|camera movement)\b", re.I
     ),
     "camera": re.compile(
-        r"\b(?:light source|soft light|even light|rim highlight|lighting|illumination|light the product)\b", re.I
+        r"\b(?:broad side light source|soft,? even light|gentle rim highlight|lighting instruction)\b", re.I
     ),
     "lighting": re.compile(
-        r"\b(?:end on|final frame|closing frame|hero shot|finish on|hold on the entire)\b", re.I
+        r"\b(?:end on the entire|show the entire .{0,50} unobstructed|cta / hero)\b", re.I
     ),
     "closing": re.compile(
-        r"\b(?:background music|instrumental music|sound effects?|audio|voice[- ]?over|room tone|music only)\b", re.I
+        r"\b(?:use restrained instrumental music|background music only|voice[- ]?over instruction|sound effects? only)\b", re.I
     ),
 }
 
