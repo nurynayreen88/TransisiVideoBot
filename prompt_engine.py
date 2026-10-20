@@ -60,22 +60,32 @@ _SFX_BY_TYPE = {
 }
 
 
-def _creative_variation(product_type, product, part):
-    words = ((product_type or "") + " " + (product or "")).lower()
-    if any(w in words for w in ("dress", "clothing", "fashion", "apparel", "outfit", "garment", "pakaian", "baju", "skirt", "shirt", "t-shirt", "kids", "child", "baby", "hijab", "tudung", "blouse")):
+def _creative_variation(product_type, product, part, product_subtype=''):
+    """Add one short, category-aware variation and matching audio direction."""
+    words = " ".join(str(value or "") for value in (product_type, product_subtype, product)).casefold()
+    type_key = str(product_type or "").casefold()
+    subtype_key = str(product_subtype or "").casefold()
+    if type_key in {"fashion", "hijab"} or any(w in words for w in ("dress", "clothing", "fashion", "apparel", "outfit", "garment", "pakaian", "baju", "skirt", "shirt", "t-shirt", "hijab", "tudung", "blouse")):
         group = "fashion"
-    elif any(w in words for w in ("bag", "handbag", "backpack", "purse")):
+    elif type_key == "bag" and (subtype_key in {"bag_wallet", "wallet", "card_holder"} or any(w in words for w in ("wallet", "dompet", "card holder", "cardholder", "coin purse"))):
+        group = "wallet"
+    elif type_key in {"bag", "travel"} or any(w in words for w in ("bag", "handbag", "backpack", "purse", "luggage", "beg galas", "beg tangan")):
         group = "bag"
-    elif any(w in words for w in ("shoe", "sneaker", "sandal", "footwear")):
+    elif type_key == "shoes" or any(w in words for w in ("shoe", "sneaker", "sandal", "footwear", "kasut", "selipar")):
         group = "shoes"
-    elif any(w in words for w in ("beauty", "cosmetic", "skincare", "perfume", "lipstick")):
+    elif type_key == "pet" or any(w in words for w in ("pet", "kucing", "anjing", "arnab", "rabbit", "hamster", "bird cage", "fish tank", "haiwan")):
+        group = "pet"
+    elif type_key == "beauty" or any(w in words for w in ("beauty", "cosmetic", "skincare", "perfume", "lipstick", "makeup", "serum")):
         group = "beauty"
-    elif any(w in words for w in ("food", "drink", "snack", "cake", "coffee", "tea")):
+    elif type_key == "food" or any(w in words for w in ("food", "drink", "snack", "cake", "coffee", "tea", "makanan", "minuman")):
         group = "food"
-    elif any(w in words for w in ("gadget", "phone", "camera", "earbud", "keyboard", "electronic")):
+    elif type_key in {"gadget", "equipment", "automotive", "office"} or any(w in words for w in ("gadget", "phone", "camera", "earbud", "keyboard", "electronic", "telefon", "gajet")):
         group = "gadget"
+    elif type_key in {"home", "kitchen", "furniture", "garden"}:
+        group = "home"
     else:
         group = "general"
+
     options = _CREATIVE_ACTIONS[group]
     recent = _RECENT_CREATIVE_CHOICES.setdefault(group, deque(maxlen=3))
     available = [i for i in range(len(options)) if i not in recent] or list(range(len(options)))
@@ -84,18 +94,14 @@ def _creative_variation(product_type, product, part):
     action = options[index]
     if part >= 2:
         action = (
-            "CONTINUATION ACTION (PART " + str(part) + "): " + action
-            + " Continue from the immediately previous part's final-frame identity, setting, lighting and camera direction. "
-            + "Do not restart the opening or repeat the previous part's main gesture."
+            "CONTINUATION: " + action
+            + " Match the previous clip's final frame, setting, lighting and product orientation; continue the action without repeating its hook or main gesture."
         )
+    audio = _SFX_BY_TYPE[group]
     return (
-        "CREATIVE ACTION / CAMERA VARIATION: " + action + "\n"
-        + "AUDIO / SFX: " + _SFX_BY_TYPE[group]
-        + " Keep effects brief and synchronised, quieter than any selected speech; music remains subtle. "
-        + "If the video generator cannot create audio, do not imply sound generation is guaranteed. "
-        + "VISUAL QUALITY LOCK: Use one clear primary action and at most one restrained camera move per beat; keep the product sharply readable, correctly scaled and consistently shaped. "
-        + "Maintain coherent lighting, exposure, focus, reflections, contact shadows and perspective across shots. Use smooth easing and motivated transitions; avoid flicker, jitter, warped edges, extra fingers, duplicated objects, floating items, sudden zooms or morphing. "
-        + "Finish with a clean, steady hero frame. No sound-effect labels or unrequested on-screen text."
+        "VISUAL VARIATION: " + action + "\n"
+        + "AUDIO: " + audio + " Keep music soft under speech; use only brief SFX that match visible action.\n"
+        + "QUALITY: One clear action and at most one controlled camera move per beat. Preserve product shape, colour, markings and scale; keep motion, lighting and contact realistic. Smooth continuity, no morphing, duplication, warping, flicker or unrequested on-screen text."
     )
 
 
@@ -217,40 +223,67 @@ CAMERAS = {
     "static": "A locked premium studio composition with delicate lighting movement and a subtle focus transition.",
 }
 
-AUTO_STYLE_BY_PRODUCT_TYPE = {
-    # Every selectable product type gets a deterministic category-fit style.
-    # Do not fall through to random catalog styles for unlisted categories.
-    'fashion': 'fashion_editorial',
-    'bag': 'handbag_showcase',
-    'wallet': 'wallet_luxury_macro',
-    'hijab': 'fashion_editorial',
-    'shoes': 'studio_360_safe',
-    'beauty': 'beauty_macro',
-    'food': 'food_appetite',
-    'gadget': 'tech_demo',
-    'home': 'cozy_home',
-    'accessory': 'luxury',
-    'toy': 'playful_viral',
-    'book_stationery': 'flatlay',
-    'sports': 'pov_demo',
-    'pet': 'lifestyle',
-    'automotive': 'studio_360_safe',
-    'baby': 'cozy_home',
-    'travel': 'studio_360_safe',
-    'office': 'flatlay',
-    'garden': 'nature_fresh',
-    'kitchen': 'cozy_home',
-    'furniture': 'cozy_home',
-    'crafts': 'flatlay',
-    'other': 'cinematic',
+_AUTO_STYLE_CANDIDATES = {
+    # Auto selects a category-fit style and avoids repeating the last three choices.
+    "fashion": ["fashion_editorial", "lifestyle", "golden_hour", "creative_reveal", "fast_cut"],
+    "bag": ["handbag_showcase", "bag_daily_carry", "bag_tabletop_reveal", "sling_bag_lifestyle", "bag_detail_macro", "bag_flatlay"],
+    "wallet": ["wallet_luxury_macro", "wallet_open_close", "wallet_daily_carry", "wallet_flatlay", "wallet_gift_reveal"],
+    "hijab": ["fashion_editorial", "lifestyle", "golden_hour", "minimal", "creative_reveal"],
+    "shoes": ["studio_360_safe", "pov_demo", "fast_cut", "lifestyle", "cinematic"],
+    "beauty": ["beauty_macro", "lifestyle", "luxury", "flatlay", "creative_reveal"],
+    "food": ["food_appetite", "lifestyle", "fast_cut", "cozy_home", "nature_fresh"],
+    "gadget": ["tech_demo", "pov_demo", "studio_360_safe", "fast_cut", "cinematic"],
+    "equipment": ["tech_demo", "studio_360_safe", "minimal", "cinematic"],
+    "home": ["cozy_home", "minimal", "lifestyle", "flatlay", "cinematic"],
+    "accessory": ["luxury", "creative_reveal", "studio_360_safe", "fashion_editorial", "flatlay"],
+    "toy": ["playful_viral", "dynamic", "creative_reveal", "lifestyle"],
+    "book_stationery": ["flatlay", "minimal", "creative_reveal", "lifestyle"],
+    "sports": ["pov_demo", "dynamic", "fast_cut", "studio_360_safe"],
+    "pet": ["lifestyle", "nature_fresh", "cozy_home", "cinematic", "playful_viral"],
+    "automotive": ["studio_360_safe", "tech_demo", "cinematic", "luxury"],
+    "baby": ["cozy_home", "lifestyle", "minimal", "flatlay"],
+    "travel": ["studio_360_safe", "lifestyle", "pov_demo", "cinematic"],
+    "office": ["flatlay", "tech_demo", "minimal", "cinematic"],
+    "garden": ["nature_fresh", "lifestyle", "cozy_home", "cinematic"],
+    "kitchen": ["cozy_home", "food_appetite", "minimal", "lifestyle"],
+    "furniture": ["cozy_home", "cinematic", "minimal", "lifestyle"],
+    "crafts": ["flatlay", "creative_reveal", "minimal", "lifestyle"],
+    "other": ["cinematic", "minimal", "lifestyle", "creative_reveal", "flatlay", "studio_360_safe"],
 }
+_RECENT_AUTO_STYLES = {}
 
 
-def _resolve_auto_style(style, product_type):
-    """Choose a stable, category-appropriate catalog style without an AI call."""
-    if style != 'auto':
+def _resolve_auto_style(style, product_type, product="", product_subtype=""):
+    """Choose a varied style that fits both the category and recognizable subtype."""
+    if style != "auto":
         return style
-    return AUTO_STYLE_BY_PRODUCT_TYPE.get(product_type, 'cinematic')
+    category = str(product_type or "other").casefold()
+    subtype = str(product_subtype or "").casefold()
+    product_words = str(product or "").casefold()
+    candidates = None
+    if category == "bag":
+        if subtype in {"bag_wallet", "wallet", "card_holder"} or any(
+            term in product_words for term in ("wallet", "dompet", "card holder", "cardholder", "coin purse")
+        ):
+            category = "wallet"
+        elif subtype in {"bag_backpack", "backpack", "bag_laptop"} or any(
+            term in product_words for term in ("backpack", "rucksack", "beg galas", "beg sekolah", "beg laptop")
+        ):
+            candidates = ["backpack_demo", "bag_daily_carry", "bag_tabletop_reveal", "lifestyle", "cinematic"]
+        elif subtype in {"bag_sling", "sling_bag", "bag_handbag", "handbag", "bag_tote"} or any(
+            term in product_words for term in ("sling", "crossbody", "beg silang", "tote bag", "handbag", "beg tangan")
+        ):
+            candidates = ["sling_bag_lifestyle", "handbag_showcase", "bag_daily_carry", "bag_tabletop_reveal", "bag_flatlay"]
+        else:
+            candidates = _AUTO_STYLE_CANDIDATES["bag"]
+    if candidates is None:
+        candidates = _AUTO_STYLE_CANDIDATES.get(category, _AUTO_STYLE_CANDIDATES["other"])
+    group = category + ":" + subtype if subtype else category
+    recent = _RECENT_AUTO_STYLES.setdefault(group, deque(maxlen=min(3, max(1, len(candidates) - 1))))
+    available = [key for key in candidates if key not in recent] or list(candidates)
+    selected = random.SystemRandom().choice(available)
+    recent.append(selected)
+    return selected
 
 
 # These directions are injected only when the user selects that ad approach.
@@ -296,18 +329,18 @@ def creative_angle_instruction(angle):
     return _CREATIVE_ANGLE_INSTRUCTIONS.get(str(angle or "auto"), "")
 
 
-def build_prompt(mode, product, scene, motion, style='auto', duration=10, concept='', product_type='other', storyboard_override=None, split=None, universal_custom=False):
+def build_prompt(mode, product, scene, motion, style='auto', duration=10, concept='', product_type='other', storyboard_override=None, split=None, universal_custom=False, product_subtype=''):
     # Preserve the historical API behavior: a 20-second call without an explicit
     # split choice still returns two connected 10-second prompts.
     if split is None:
         split = duration in (20, 30)
-    style = _resolve_auto_style(style, product_type) if mode == 'storyboard' else style
+    style = _resolve_auto_style(style, product_type, product, product_subtype) if mode == 'storyboard' else style
     if split and duration > 10:
         # Generate connected 10-second prompts while retaining the same style and product context.
         parts = [
             _build_single_prompt(mode, product, scene, motion, style, part=index, duration=10,
                                  concept=concept, product_type=product_type, storyboard_override=storyboard_override, universal_custom=universal_custom)
-            + "\n\n" + _creative_variation(product_type, product, index)
+            + "\n\n" + _creative_variation(product_type, product, index, product_subtype)
             for index in range(1, duration // 10 + 1)
         ]
         return "\n\n".join(
@@ -316,7 +349,7 @@ def build_prompt(mode, product, scene, motion, style='auto', duration=10, concep
         )
     return (_build_single_prompt(mode, product, scene, motion, style, part=0, duration=duration,
                                 concept=concept, product_type=product_type, storyboard_override=storyboard_override, universal_custom=universal_custom)
-            + "\n\n" + _creative_variation(product_type, product, 0))
+            + "\n\n" + _creative_variation(product_type, product, 0, product_subtype))
 
 
 def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, duration=10, concept='', product_type='other', storyboard_override=None, universal_custom=False):
