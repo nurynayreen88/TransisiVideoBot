@@ -633,7 +633,10 @@ def _prompt_is_child_product(user_data):
     }
     child_words = (
         'kanak-kanak', 'kanak kanak', 'budak', 'bayi', 'kanak', 'kids',
-        'children', 'child', 'toddler', 'baby', 'school uniform', 'baju sekolah'
+        'children', 'child', 'toddler', 'baby', 'newborn', 'infant',
+        'kidswear', 'junior', 'school uniform', 'baju sekolah',
+        'school bag', 'schoolbag', 'school shoes', 'kasut sekolah',
+        'children wear', 'children’s wear', 'childrens wear',
     )
     return (
         subcategory in child_subcategories
