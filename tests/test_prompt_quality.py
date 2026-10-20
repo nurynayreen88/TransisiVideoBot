@@ -4,6 +4,7 @@ import unittest
 from pathlib import Path
 
 import prompt_catalog
+from prompt_catalog import opening_direction, product_hook
 from prompt_engine import (
     UNIVERSAL_PROMPT_FRAMEWORKS,
     _prompt_sentence,
@@ -34,6 +35,19 @@ class PromptQualityTests(unittest.TestCase):
         self.assertTrue(result.endswith("."))
         self.assertIn("preserves the exact visible product.", result)
         self.assertNotIn("Do not invent materials.", result)  # exceeds target after the complete first sentence
+
+    def test_english_opening_direction_does_not_force_malay_speech(self):
+        direction = opening_direction("bag", "English")
+        self.assertIn("Speak clear English.", direction)
+        self.assertNotIn("Bahasa Melayu Malaysia", direction)
+
+    def test_english_product_hook_uses_english_not_malay(self):
+        for description in ("NAMA_PRODUK: Bonia handbag", "KATEGORI: handbag"):
+            hooks = [product_hook(description, "English") for _ in range(30)]
+            result = next((hook for hook in hooks if hook), None)
+            self.assertIsNotNone(result)
+            self.assertTrue(any(word in result.lower() for word in ("looking", "comparing", "interested", "closer look")))
+            self.assertNotIn("boleh tengok", result.lower())
 
     def test_auto_bag_style_does_not_choose_wallet_style_for_handbag(self):
         allowed = {
