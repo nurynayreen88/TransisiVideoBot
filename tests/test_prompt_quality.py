@@ -75,6 +75,19 @@ class PromptQualityTests(unittest.TestCase):
             self.assertTrue(any(word in result.lower() for word in ("looking", "comparing", "interested", "closer look", "shopping", "curious", "before choosing", "here", "take a closer")))
             self.assertNotIn("boleh tengok", result.lower())
 
+    def test_product_name_hooks_have_multiple_natural_malay_openings(self):
+        hooks = {product_hook("NAMA_PRODUK: Beg tangan Bonia", "Malay") for _ in range(50)}
+        hooks.discard(None)
+        self.assertGreaterEqual(len(hooks), 3)
+        self.assertTrue(all("kenali produk ini" not in hook.lower() for hook in hooks))
+
+    def test_child_product_detection_covers_school_items_and_infant_products(self):
+        source = (Path(__file__).resolve().parents[1] / "bot.py").read_text(encoding="utf-8")
+        child_block = source[source.index("def _prompt_is_child_product"):source.index("def prompt_creative_settings")]
+        for term in ("school bag", "school shoes", "newborn", "infant", "kidswear"):
+            with self.subTest(term=term):
+                self.assertIn(term, child_block)
+
     def test_category_hook_uses_curated_database_phrase_without_product_name(self):
         hooks = [product_hook("KATEGORI: beg", "Malay") for _ in range(30)]
         result = next((hook for hook in hooks if hook), None)
