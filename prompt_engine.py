@@ -4,6 +4,21 @@ from pathlib import Path
 
 import random
 from collections import deque
+import re
+
+
+def _prompt_sentence(value, limit, fallback):
+    """Return a complete, readable sentence; never cut a prompt mid-word or mid-sentence."""
+    text = " ".join(str(value or "").split()).strip()
+    if not text:
+        return fallback
+    match = re.search(r"^(.+?[.!?])(?:\\s|$)", text)
+    if match and len(match.group(1)) <= limit:
+        return match.group(1)
+    if len(text) <= limit and text.endswith((".", "!", "?")):
+        return text
+    return fallback
+
 
 # Keep recent action choices in memory so consecutive prompts vary naturally.
 _RECENT_CREATIVE_CHOICES = {}
