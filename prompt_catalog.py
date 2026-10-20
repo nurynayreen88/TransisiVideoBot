@@ -248,19 +248,25 @@ def product_hook(description, language="Malay"):
                 return None
             if str(language or "Malay").casefold() == "english":
                 return random.choice((
-                    "If you're looking for " + name + ", take a closer look at this option.",
-                    "Comparing " + name + "? Here's one option to explore.",
-                    "Interested in " + name + "? Have a closer look.",
-                    "Looking for " + name + "? You can check out this option.",
-                    "Here's a closer look at " + name + ".",
+                    "Take a closer look at " + name + ".",
+                    "Shopping for " + name + "? Here's an option to explore.",
+                    "Curious about " + name + "? Let's look at the details.",
+                    "Comparing options? Have a closer look at " + name + ".",
+                    "Here's " + name + ", shown up close.",
+                    "Before choosing " + name + ", take a look at the details.",
+                    "Looking into " + name + "? Let's see it more clearly.",
+                    "Let's take a closer look at " + name + ".",
                 ))
             # Keep the supplied product name factual, but vary the Malaysian-Malay opening.
             openings = (
-                "Kalau tengah cari " + name + ", boleh tengok pilihan ini.",
-                "Sedang bandingkan " + name + "? Ini satu pilihan untuk dipertimbangkan.",
-                "Kalau minat " + name + ", boleh semak yang ini.",
-                "Nak cari " + name + "? Cuba lihat pilihan ini dulu.",
-                "Untuk yang mencari " + name + ", boleh pertimbangkan pilihan ini.",
+                "Jom lihat dengan lebih dekat " + name + ".",
+                "Sedang mencari " + name + "? Ini satu pilihan untuk anda lihat.",
+                "Kalau " + name + " ada dalam senarai carian anda, lihat yang ini.",
+                "Apa yang menarik pada " + name + "? Mari lihat perinciannya.",
+                "Nak bandingkan pilihan? Lihat " + name + " ini dengan lebih dekat.",
+                "Ini " + name + " yang boleh anda pertimbangkan.",
+                "Sebelum memilih " + name + ", mari lihat rupanya dengan jelas.",
+                "Sedang meninjau " + name + "? Jom lihat dari dekat.",
             )
             return random.choice(openings)
     category_match = re.search(r"(?im)^KATEGORI:\s*(.+)$", description)
