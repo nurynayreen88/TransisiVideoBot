@@ -4,6 +4,21 @@ from pathlib import Path
 
 import random
 from collections import deque
+import re
+
+
+def _prompt_sentence(value, limit, fallback):
+    """Return a complete, readable sentence; never cut a prompt mid-word or mid-sentence."""
+    text = " ".join(str(value or "").split()).strip()
+    if not text:
+        return fallback
+    match = re.search(r"^(.+?[.!?])(?:\s|$)", text)
+    if match and len(match.group(1)) <= limit:
+        return match.group(1)
+    if len(text) <= limit and text.endswith((".", "!", "?")):
+        return text
+    return fallback
+
 
 # Keep recent action choices in memory so consecutive prompts vary naturally.
 _RECENT_CREATIVE_CHOICES = {}
@@ -515,10 +530,23 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
     )
     if mode == "storyboard":
         style_key, style_name, style_template = resolve(style)
+        # Never apply wallet-specific styling to a bag (or handbag styling to a wallet).
+        style_key_text = str(style_key or "").lower()
+
+        wallet_style = "wallet" in style_key_text or "wallet" in str(style_name or "").lower()
+        bag_style = any(token in style_key_text for token in ("bag", "handbag", "sling")) or "handbag" in str(style_name or "").lower()
+        if product_type == "bag" and wallet_style:
+            style_key = "handbag_showcase"
+            style_name = "👜 Handbag Showcase"
+            style_template = "Show the complete handbag naturally carried, worn or placed, then highlight one visible design detail."
+        elif product_type == "wallet" and bag_style:
+            style_key = "wallet_daily_carry"
+            style_name = "👛 Everyday Wallet"
+            style_template = "Show the complete wallet in a clean tabletop or hand-held presentation, highlighting only visible details."
         concise_framework = ""
         if product_type == "other" or universal_custom:
             concise_framework = (
-                " UNIVERSAL CREATIVE FRAMEWORK: " + _universal_prompt_direction(style_key)[:180]
+                " UNIVERSAL CREATIVE FRAMEWORK: " + _prompt_sentence(_universal_prompt_direction(style_key), 180, "Use one restrained visual idea suited to the selected style.")
                 + " UNIVERSAL SAFETY RULES: Preserve visible product details; invent no features or claims."
             )
         doodle = style_key == "white_doodle"
@@ -586,17 +614,17 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
                 "do not stack effects or cover the product. If audio generation is unsupported, do not claim the SFX will be rendered. "
                 if doodle else ""
             )
-            concept_rule = ("CREATIVE IDEA: " + concept.strip() + ". " if concept and concept.strip() else "")
+            concept_summary = _prompt_sentence(concept, 100, "")
             return (
                 "VIDEO PROMPT — " + str(duration) + " SECONDS" + (" | PART " + str(part) if part else "") + "\n"
                 "Vertical 9:16, realistic product video, exactly " + str(duration) + " seconds.\n"
-                + "STYLE: " + style_name + " — " + (" ".join(style_template.split())[:180].rsplit(" ", 1)[0] or " ".join(style_template.split())[:180]).rstrip() + "\n"
+                + "STYLE: " + style_name + " — " + _prompt_sentence(style_template, 180, "A realistic product-focused presentation suited to this style.") + "\n"
                 + "PRODUCT: " + product + "\n" + concise_category_direction + concise_framework
                 + (" UNIVERSAL SAFETY RULES: Preserve visible product details; invent no features or claims."
                    if product_type == "other" or universal_custom else "") + "\n"
-                + "SETTING: " + str(scene)[:100].strip() + ". CAMERA: " + camera[:70].strip() + "\n"
+                + "SETTING: " + _prompt_sentence(scene, 100, "A realistic, uncluttered setting suited to the product.") + " CAMERA: " + _prompt_sentence(camera, 110, "Use one gentle camera move and keep the product stable.") + "\n"
                 + "PRODUCT LOCK: Preserve the reference product's visible design, colour, pattern, branding and proportions. Do not invent features or accessories.\n"
-                + hook_rule + beat_plan + concept_rule[:100] + doodle_rule
+                + hook_rule + beat_plan + (("CREATIVE IDEA: " + concept_summary + " ") if concept_summary else "") + doodle_rule
                 + "Keep actions natural and the product consistent. Follow the selected text, audio and visual options."
             )
 
@@ -723,15 +751,16 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
                 curated_direction = storyboard_text
             else:
                 rules = storyboard_text
+        concept_summary_long = _prompt_sentence(concept, 100, "")
         return (
             "VIDEO PROMPT — " + str(duration) + " SECONDS" + (" | PART " + str(part) if part else "") + "\n"
             "Realistic vertical 9:16 product ad, exactly " + str(duration) + " seconds.\n"
             "PRODUCT: " + product + "\n" + category_direction + "\n"
-            + "STYLE: " + style_name + " — " + style_template[:70].strip() + "\n"
-            + "SETTING: " + str(scene)[:100].strip() + "\nCAMERA: " + camera[:70].strip() + "\n"
+            + "STYLE: " + style_name + " — " + _prompt_sentence(style_template, 70, "A realistic product-focused presentation.") + "\n"
+            + "SETTING: " + _prompt_sentence(scene, 100, "A realistic setting suited to the product.") + "\nCAMERA: " + _prompt_sentence(camera, 110, "Use one gentle camera move and keep the product stable.") + "\n"
             + (curated_direction if curated_direction else
                ((hook_direction if part != 2 else "Continue seamlessly from Part 1; do not repeat the hook.") + "\n" + rules))
-            + (("\nCREATIVE IDEA: " + concept[:100].strip()) if concept else "")
+            + (("\nCREATIVE IDEA: " + concept_summary_long) if concept_summary_long else "")
             + "\nNatural movement. If voice is selected, use a short hook and CTA in Bahasa Melayu Malaysia. No added on-screen text or watermark."
         )
     if mode == "storyboard":
@@ -779,8 +808,8 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
         "VIDEO PROMPT — " + str(duration) + " SECONDS" + (" | PART " + str(part) if part else "") + "\n"
         "Realistic vertical 9:16 product ad, exactly " + str(duration) + " seconds.\n"
         "PRODUCT: " + product + "\n"
-        "STYLE: " + str(art)[:70].strip() + "\n"
-        "SETTING: " + str(scene)[:100].strip() + "\n"
+        "STYLE: " + _prompt_sentence(art, 70, "Premium realistic product cinematography.") + "\n"
+        "SETTING: " + _prompt_sentence(scene, 100, "A realistic setting suited to the product.") + "\n"
         + direction + "\n"
         + "Preserve the product's visible design and packaging; invent no features. "
         "Natural movement, clean transitions, no added on-screen text or watermark. "
