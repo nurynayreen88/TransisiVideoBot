@@ -6,7 +6,6 @@ from io import BytesIO
 import logging
 import os
 import re
-import re
 import shutil
 import subprocess
 import tempfile
@@ -100,6 +99,61 @@ def _prompt_library_storyboard(template):
         shot['direction'] = direction
         resolved.append(shot)
     return resolved
+
+
+def _prompt_library_component_rules(template_id, audio_enabled=True, voiceover_mode='none', prompt_language='Malay', on_screen_text='no'):
+    """Assemble concise, choice-aware safety/audio rules from normalized component tables."""
+    mapping = _PROMPT_COMPONENT_MAP_BY_ID.get(template_id)
+    if not isinstance(mapping, dict):
+        return ''
+    tables = PROMPT_COMPONENT_TABLES.get('tables', {})
+
+    def directions(table_name, ids):
+        by_id = {
+            item.get('id'): item for item in tables.get(table_name, [])
+            if isinstance(item, dict) and item.get('id')
+        }
+        return [str(by_id[item_id].get('direction', '')).strip() for item_id in ids
+                if item_id in by_id and by_id[item_id].get('direction')]
+
+    rules = []
+    camera_rules = directions('camera_profiles', mapping.get('camera_profile_ids', []))
+    if camera_rules:
+        rules.append('CAMERA SAFETY: ' + camera_rules[0])
+
+    hook_ids = mapping.get('hook_rule_ids', [])
+    hook_rules = directions('hook_rules', hook_ids)
+    if hook_rules:
+        rules.append('HOOK: ' + hook_rules[0])
+
+    if audio_enabled:
+        language_key = 'audio_voice_english' if str(prompt_language or 'Malay').casefold() == 'english' else 'audio_voice_malay'
+        if voiceover_mode == 'none':
+            audio_key = 'audio_music_sfx_only'
+        else:
+            audio_key = language_key
+        audio_by_id = {item.get('id'): item for item in tables.get('audio_profiles', []) if isinstance(item, dict)}
+        audio = audio_by_id.get(audio_key, {})
+        audio_parts = [audio.get(key, '') for key in ('voice', 'music', 'sfx') if audio.get(key)]
+        if voiceover_mode == 'script':
+            audio_parts.append('Use the supplied script exactly; do not add spoken lines or an extra spoken CTA.')
+        elif voiceover_mode == 'none':
+            audio_parts.append('Do not add voiceover or dialogue.')
+        if audio_parts:
+            rules.append('AUDIO: ' + ' '.join(audio_parts))
+
+    cta_key = 'cta_soft_invitation' if audio_enabled and voiceover_mode == 'ai' else 'cta_no_added_dialogue'
+    cta_rules = directions('cta_rules', [cta_key])
+    if cta_rules:
+        rules.append('CTA: ' + cta_rules[0])
+
+    fidelity_ids = list(mapping.get('product_fidelity_rule_ids', []))
+    if on_screen_text == 'yes':
+        fidelity_ids = [item_id for item_id in fidelity_ids if item_id != 'no_text_watermark']
+    fidelity_rules = directions('product_fidelity_rules', fidelity_ids)
+    if fidelity_rules:
+        rules.append('PRODUCT FIDELITY: ' + ' '.join(fidelity_rules))
+    return '\\n'.join(rules)
 
 
 PROMPTS_BY_ID = {item['id']: item for item in PROMPT_LIBRARY.get('prompts', []) if isinstance(item, dict) and item.get('id')}
@@ -3741,6 +3795,15 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     product_subtype=context.user_data.get('prompt_product_subcategory', ''),
                     prompt_language=context.user_data.get('prompt_language', 'Malay')
                 )
+                component_rules = _prompt_library_component_rules(
+                    context.user_data.get('prompt_library_id'),
+                    audio_enabled=context.user_data.get('prompt_audio_enabled', True) is not False,
+                    voiceover_mode=context.user_data.get('prompt_voiceover_mode', 'none'),
+                    prompt_language=context.user_data.get('prompt_language', 'Malay'),
+                    on_screen_text=context.user_data.get('prompt_on_screen_text', 'no'),
+                )
+                if component_rules:
+                    prompt = prompt.rstrip() + '\\n\\nREUSABLE COMPONENT RULES:\\n' + component_rules
                 if context.user_data.get('prompt_model_presence') == 'yes' and int(context.user_data.get('prompt_model_count',1)) == 2:
                     prompt += ('\n\nTWO-MODEL CAST: Model 1 is ' + str(context.user_data.get('prompt_model_gender','female')) + ', appearance ' + str(context.user_data.get('prompt_model_ethnicity','random_malaysia')) + ', age ' + str(context.user_data.get('prompt_model_age','26-40')) + ', hijab ' + str(context.user_data.get('prompt_model_hijab','na')) + '. Model 2 is ' + str(context.user_data.get('prompt_model_gender_2','male')) + ', appearance ' + str(context.user_data.get('prompt_model_ethnicity_2','random_malaysia')) + ', age ' + str(context.user_data.get('prompt_model_age_2','26-40')) + ', hijab ' + str(context.user_data.get('prompt_model_hijab_2','na')) + '. Keep identities distinct and consistent.')
                 # Text and audio options are added once by prompt_creative_settings below.
