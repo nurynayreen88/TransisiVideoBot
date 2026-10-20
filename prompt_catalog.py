@@ -193,7 +193,7 @@ OPENING_VOICE_STYLES = (
     "a clean reveal that avoids a stock phrase and lets the product lead",
 )
 
-def opening_direction(product_type="other"):
+def opening_direction(product_type="other", language="Malay"):
     """Return one of 1,000 compositional opening recipes without changing later beats."""
     import random
     visual = random.choice(OPENING_VISUAL_ENTRIES)
@@ -202,12 +202,12 @@ def opening_direction(product_type="other"):
     return (
         "OPENING VARIATION: " + visual + "; camera: " + camera
         + "; if voiceover is enabled, use " + voice
-        + ". Speak clear Bahasa Melayu Malaysia; no Indonesian wording or accent. "
+        + (". Speak clear English." if str(language or "Malay").casefold() == "english" else ". Speak clear Bahasa Melayu Malaysia; no Indonesian wording or accent.") + " "
         + "Avoid classroom-style introductions, repeated stock phrases and scripted-sounding language. Do not add extra text. "
         + "This changes the opening only; preserve later beats, product identity, selected location, style and no-logo rules."
     )
 
-def product_hook(description):
+def product_hook(description, language="Malay"):
     """Return a conservative category hook or None if product identity is unclear."""
     import json
     with connect() as db:
@@ -246,6 +246,14 @@ def product_hook(description):
             # Sometimes a clean visual reveal is stronger than another headline.
             if random.random() < 0.20:
                 return None
+            if str(language or "Malay").casefold() == "english":
+                return random.choice((
+                    "If you're looking for " + name + ", take a closer look at this option.",
+                    "Comparing " + name + "? Here's one option to explore.",
+                    "Interested in " + name + "? Have a closer look.",
+                    "Looking for " + name + "? You can check out this option.",
+                    "Here's a closer look at " + name + ".",
+                ))
             # Keep the supplied product name factual, but vary the Malaysian-Malay opening.
             openings = (
                 "Kalau tengah cari " + name + ", boleh tengok pilihan ini.",
@@ -261,6 +269,15 @@ def product_hook(description):
     category = category_match.group(1).strip()
     if not category or category.upper() in ("TIDAK PASTI", "TIADA", "UNKNOWN", "NONE"):
         return None
+    if str(language or "Malay").casefold() == "english":
+        if random.random() < 0.20:
+            return None
+        return random.choice((
+            "If you're looking for " + category.lower() + ", take a closer look at this option.",
+            "Comparing " + category.lower() + "? Here's one option to explore.",
+            "Interested in " + category.lower() + "? Have a closer look.",
+            "Here's a closer look at this " + category.lower() + ".",
+        ))
     words = set(re.findall(r"[a-zA-ZÀ-ÿ]+", category.lower()))
     matches = []
     for keywords, hooks in rows:
