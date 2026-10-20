@@ -46,5 +46,25 @@ class PromptLibraryAuditTests(unittest.TestCase):
         self.assertEqual(result["errors"], [])
 
 
+    def test_camera_field_with_lighting_instruction_is_flagged(self):
+        data = sample()
+        data["subcategories"][0]["variations"][0]["camera"] = "Use a broad side light source."
+        result = audit(data)
+        self.assertTrue(any("field-role mismatch in camera" in f for f in result["flags"]))
+        self.assertEqual(result["errors"], [])
+
+    def test_detail_field_with_camera_move_is_flagged(self):
+        data = sample()
+        data["subcategories"][0]["variations"][0]["detail"] = "Make a slow push-in."
+        result = audit(data)
+        self.assertTrue(any("field-role mismatch in detail" in f for f in result["flags"]))
+
+    def test_closing_field_with_audio_instruction_is_flagged(self):
+        data = sample()
+        data["subcategories"][0]["variations"][0]["closing"] = "Use restrained instrumental music."
+        result = audit(data)
+        self.assertTrue(any("field-role mismatch in closing" in f for f in result["flags"]))
+
+
 if __name__ == "__main__":
     unittest.main()
