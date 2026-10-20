@@ -622,7 +622,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
                 + "PRODUCT: " + product + "\n" + concise_category_direction + concise_framework
                 + (" UNIVERSAL SAFETY RULES: Preserve visible product details; invent no features or claims."
                    if product_type == "other" or universal_custom else "") + "\n"
-                + "SETTING: " + _prompt_sentence(scene, 100, "A realistic, uncluttered setting suited to the product.") + " CAMERA: " + _prompt_sentence(camera, 110, "Use one gentle camera move and keep the product stable.") + "\\n"
+                + "SETTING: " + _prompt_sentence(scene, 100, "A realistic, uncluttered setting suited to the product.") + " CAMERA: " + _prompt_sentence(camera, 110, "Use one gentle camera move and keep the product stable.") + "\n"
                 + "PRODUCT LOCK: Preserve the reference product's visible design, colour, pattern, branding and proportions. Do not invent features or accessories.\n"
                 + hook_rule + beat_plan + concept_rule[:100] + doodle_rule
                 + "Keep actions natural and the product consistent. Follow the selected text, audio and visual options."
@@ -755,7 +755,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
             "VIDEO PROMPT — " + str(duration) + " SECONDS" + (" | PART " + str(part) if part else "") + "\n"
             "Realistic vertical 9:16 product ad, exactly " + str(duration) + " seconds.\n"
             "PRODUCT: " + product + "\n" + category_direction + "\n"
-            + "STYLE: " + style_name + " — " + _prompt_sentence(style_template, 70, "A realistic product-focused presentation.") + "\\n"
+            + "STYLE: " + style_name + " — " + _prompt_sentence(style_template, 70, "A realistic product-focused presentation.") + "\n"
             + "SETTING: " + str(scene)[:100].strip() + "\nCAMERA: " + camera[:70].strip() + "\n"
             + (curated_direction if curated_direction else
                ((hook_direction if part != 2 else "Continue seamlessly from Part 1; do not repeat the hook.") + "\n" + rules))
@@ -807,7 +807,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
         "VIDEO PROMPT — " + str(duration) + " SECONDS" + (" | PART " + str(part) if part else "") + "\n"
         "Realistic vertical 9:16 product ad, exactly " + str(duration) + " seconds.\n"
         "PRODUCT: " + product + "\n"
-        "STYLE: " + _prompt_sentence(art, 70, "Premium realistic product cinematography.") + "\\n"
+        "STYLE: " + _prompt_sentence(art, 70, "Premium realistic product cinematography.") + "\n"
         "SETTING: " + _prompt_sentence(scene, 100, "A realistic setting suited to the product.") + "\n"
         + direction + "\n"
         + "Preserve the product's visible design and packaging; invent no features. "
