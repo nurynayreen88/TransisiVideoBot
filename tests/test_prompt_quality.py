@@ -7,6 +7,7 @@ import prompt_catalog
 from prompt_catalog import opening_direction, product_hook
 from prompt_engine import (
     UNIVERSAL_PROMPT_FRAMEWORKS,
+    _AUTO_STYLE_CANDIDATES,
     _prompt_sentence,
     _resolve_auto_style,
     _category_specific_scenes,
@@ -89,6 +90,16 @@ class PromptQualityTests(unittest.TestCase):
                 scenes = _category_specific_scenes(category, "generic product")
                 self.assertEqual(len(scenes), 5)
                 self.assertNotEqual(scenes[0][0], "HOOK / PRODUCT RECOGNITION")
+
+    def test_all_auto_style_candidates_exist_in_the_canonical_catalog(self):
+        canonical = set(prompt_catalog.STYLES)
+        missing = {
+            f"{category}:{style}"
+            for category, styles in _AUTO_STYLE_CANDIDATES.items()
+            for style in styles
+            if style not in canonical
+        }
+        self.assertEqual(missing, set())
 
     def test_universal_framework_keys_resolve_to_canonical_catalog_styles(self):
         canonical = set(prompt_catalog.STYLES)
