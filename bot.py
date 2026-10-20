@@ -49,6 +49,54 @@ try:
                     _target[_field] = _override[_field]
 except (OSError, json.JSONDecodeError):
     logging.exception('Klippo prompt-quality overrides could not be loaded; using the master library unchanged')
+# Normalized, reusable prompt components. The legacy library remains the fallback/source text.
+PROMPT_COMPONENT_TABLES_PATH = Path(__file__).resolve().parent / 'prompts' / 'prompt_component_tables.json'
+try:
+    with PROMPT_COMPONENT_TABLES_PATH.open('r', encoding='utf-8') as handle:
+        PROMPT_COMPONENT_TABLES = json.load(handle)
+    _component_tables = PROMPT_COMPONENT_TABLES.get('tables', {})
+    _PROMPT_COMPONENTS_BY_ID = {
+        item.get('id'): item
+        for item in _component_tables.get('storyboard_components', [])
+        if isinstance(item, dict) and item.get('id')
+    }
+    _PROMPT_COMPONENT_MAP_BY_ID = {
+        item.get('id'): item
+        for item in _component_tables.get('prompt_component_map', [])
+        if isinstance(item, dict) and item.get('id')
+    }
+except (OSError, json.JSONDecodeError):
+    logging.exception('Klippo prompt component tables could not be loaded; using legacy storyboards')
+    PROMPT_COMPONENT_TABLES = {'tables': {}}
+    _PROMPT_COMPONENTS_BY_ID = {}
+    _PROMPT_COMPONENT_MAP_BY_ID = {}
+
+
+def _prompt_library_storyboard(template):
+    """Resolve storyboard directions from normalized tables, with a safe legacy fallback."""
+    if not isinstance(template, dict):
+        return []
+    mapping = _PROMPT_COMPONENT_MAP_BY_ID.get(template.get('id'))
+    original = template.get('storyboard', [])
+    if not isinstance(mapping, dict) or not isinstance(original, list) or len(original) != 4:
+        return original
+    fields = (
+        ('hook_component_id', 0),
+        ('action_component_id', 1),
+        ('detail_component_id', 2),
+        ('closing_component_id', 3),
+    )
+    resolved = []
+    for field, index in fields:
+        component = _PROMPT_COMPONENTS_BY_ID.get(mapping.get(field))
+        if not isinstance(component, dict) or not component.get('direction'):
+            return original
+        shot = dict(original[index])
+        shot['direction'] = component['direction']
+        resolved.append(shot)
+    return resolved
+
+
 PROMPTS_BY_ID = {item['id']: item for item in PROMPT_LIBRARY.get('prompts', []) if isinstance(item, dict) and item.get('id')}
 CATEGORIES_BY_ID = {item['id']: item for item in PROMPT_LIBRARY.get('categories', []) if isinstance(item, dict) and item.get('id')}
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup
@@ -2911,7 +2959,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 (template.get('label', '') + ': ' + template.get('description', '')).strip(': ')
             )
             context.user_data['prompt_library_id'] = prompt_id
-            context.user_data['prompt_library_storyboard'] = template.get('storyboard', [])
+            context.user_data['prompt_library_storyboard'] = _prompt_library_storyboard(template)
             if context.user_data.get('prompt_product_name'):
                 product_name = context.user_data['prompt_product_name']
                 subtype = detect_product_subtype(product_name)
