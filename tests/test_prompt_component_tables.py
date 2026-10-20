@@ -126,6 +126,12 @@ class PromptComponentTableTests(unittest.TestCase):
             bot_source,
         )
 
+    def test_runtime_strips_duplicate_timing_labels_from_shot_directions(self):
+        bot_source = (ROOT / "bot.py").read_text(encoding="utf-8")
+        # The prompt engine already writes timed beats; avoid repeating labels
+        # embedded in a small number of legacy storyboard directions.
+        self.assertIn("direction = re.sub(r'^\\s*\\d+(?:[–-]\\d+)?s\\s*\\|\\s*[^:]{1,80}:\\s*', '', direction)", bot_source)
+
     def test_optional_audio_and_cta_rules_respect_user_choices(self):
         audio = {item["id"]: item for item in self.tables["audio_profiles"]}
         cta = {item["id"]: item for item in self.tables["cta_rules"]}
