@@ -3683,7 +3683,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     if framing:
                         # Keep the selected framing's core direction; the generated storyboard
                         # already supplies timing, camera and product-continuity rules.
-                        framing_direction = framing[1].split('. ', 1)[0].strip()
+                        framing_direction = ' '.join(str(framing[1]).split()).strip()
                         prompt = prompt.rstrip() + '\nCAMERA FRAMING: ' + framing_direction.rstrip('. ') + '.'
                 prompt = prompt.rstrip() + '\n\n' + prompt_creative_settings(context.user_data)
                 await progress_update(waiting, 70, 'Menyediakan PROMPT IMAGE dan PROMPT VIDEO...')
