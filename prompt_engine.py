@@ -152,6 +152,21 @@ _CREATIVE_ACTIONS = {
         "Begin with the product already in the scene; let natural light shift subtly while the camera moves sideways."
     ]
 }
+# Ten safe presentation treatments are available to every product subcategory.
+# These change framing, camera language and lighting, never product facts or features.
+_CREATIVE_PRESENTATION_VARIATIONS = [
+    "PRESENTATION: Start in a wide three-quarter composition, then use a slow, stable push-in under soft side lighting.",
+    "PRESENTATION: Use an eye-level lateral camera slide with balanced negative space and natural, consistent shadows.",
+    "PRESENTATION: Begin with a close crop of a genuinely visible detail, then pull back to reveal the complete unchanged product.",
+    "PRESENTATION: Keep the product grounded and use a restrained focus pull from the background to the product; do not alter any labels.",
+    "PRESENTATION: Use a low three-quarter framing where suitable, then settle into a level full-product hero view without revealing unseen surfaces.",
+    "PRESENTATION: Use a locked camera and a subtle, physically plausible light shift; keep colour, texture and reflections true to the reference.",
+    "PRESENTATION: Start slightly off-centre and make one smooth reframing move into a balanced composition; preserve the product's orientation.",
+    "PRESENTATION: Use a gentle overhead or high-angle view only when the product can be shown clearly from that angle; do not expose unseen details.",
+    "PRESENTATION: Use two clean match-cut framings at most, keeping product scale, position, lighting and geometry consistent across the cuts.",
+    "PRESENTATION: Begin with a contextual medium-wide shot, then make one controlled camera move toward the hero product while keeping it fully recognizable."
+]
+
 _SFX_BY_TYPE = {
     "fashion": "Add a very soft fabric swish only if fabric movement is visible, with light upbeat music at low volume.",
     "bag": "Add a subtle handling rustle only if handling is shown; do not imply an unverified material.",
@@ -234,6 +249,11 @@ def _creative_variation(product_type, product, part, product_subtype=''):
     index = random.SystemRandom().choice(available)
     recent.append(index)
     action = options[index]
+    # Each product group combines its category-safe action pool with at least
+    # ten distinct presentation treatments, so every subtype has >=10 usable
+    # prompt variations even when its action pool is intentionally conservative.
+    presentation = random.SystemRandom().choice(_CREATIVE_PRESENTATION_VARIATIONS)
+    action = action + "\\n" + presentation
     if part >= 2:
         action = (
             "CONTINUATION: " + action
@@ -277,8 +297,7 @@ def _universal_prompt_rules():
 
 def _category_specific_scenes(product_type, product, product_subtype=""):
     """Build visual beats that suit the product category without assuming unseen features."""
-    words = str(product or "").casefold()
-    subtype = str(product_subtype or "").casefold()
+    words = str(product or "").casefold()    subtype = str(product_subtype or "").casefold()
     if product_type == "bag" and (
         subtype in {"bag_wallet", "wallet", "card_holder"}
         or any(term in words for term in ("wallet", "dompet", "card holder", "cardholder", "coin purse"))
@@ -617,8 +636,7 @@ _PRESENTATION_PROFILES = (
 )
 
 
-def _presentation_variation(style_key, product_type, product_subtype=""):
-    """Choose a fresh composition/light/edit profile while preserving the selected style."""
+def _presentation_variation(style_key, product_type, product_subtype=""):    """Choose a fresh composition/light/edit profile while preserving the selected style."""
     key = (str(style_key or "auto"), str(product_type or "other"), str(product_subtype or ""))
     recent = _RECENT_PRESENTATION_CHOICES.setdefault(key, deque(maxlen=3))
     available = [index for index in range(len(_PRESENTATION_PROFILES)) if index not in recent]
@@ -957,8 +975,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
             rules = (
                 "SINGLE-PROMPT FULL-LENGTH VIDEO: Create one continuous " + str(duration) + "-second product commercial, not separate clips. "
                 "Distribute these five connected beats across the entire duration: opening product recognition; full-product reveal; "
-                "one genuinely visible detail; a restrained style-specific action; and a stable full-product hero finish. "
-                "Keep the same set, lighting, product scale and identity throughout. "
+                "one genuinely visible detail; a restrained style-specific action; and a stable full-product hero finish. "                "Keep the same set, lighting, product scale and identity throughout. "
                 + ("Use thin white doodle emphasis only around visible product edges, without obscuring the product. " if doodle else "")
                 + "Do not repeat the opening or introduce unsupported features, props, text or unseen angles."
             )
