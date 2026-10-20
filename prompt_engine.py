@@ -756,7 +756,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
             "Realistic vertical 9:16 product ad, exactly " + str(duration) + " seconds.\n"
             "PRODUCT: " + product + "\n" + category_direction + "\n"
             + "STYLE: " + style_name + " — " + _prompt_sentence(style_template, 70, "A realistic product-focused presentation.") + "\n"
-            + "SETTING: " + str(scene)[:100].strip() + "\nCAMERA: " + camera[:70].strip() + "\n"
+            + "SETTING: " + _prompt_sentence(scene, 100, "A realistic setting suited to the product.") + "\nCAMERA: " + _prompt_sentence(camera, 110, "Use one gentle camera move and keep the product stable.") + "\n"
             + (curated_direction if curated_direction else
                ((hook_direction if part != 2 else "Continue seamlessly from Part 1; do not repeat the hook.") + "\n" + rules))
             + (("\nCREATIVE IDEA: " + concept[:100].strip()) if concept else "")
