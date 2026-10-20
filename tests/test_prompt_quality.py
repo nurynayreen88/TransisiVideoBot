@@ -38,7 +38,7 @@ class PromptQualityTests(unittest.TestCase):
 
     def test_english_opening_direction_does_not_force_malay_speech(self):
         direction = opening_direction("bag", "English")
-        self.assertIn("Speak clear English.", direction)
+        self.assertIn("If voiceover is used, speak clear English.", direction)
         self.assertNotIn("Bahasa Melayu Malaysia", direction)
 
     def test_english_product_hook_uses_english_not_malay(self):
