@@ -557,25 +557,33 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
         # Retain the selected style, reference safety, timed beats and user concept.
         if duration in (10, 20, 30) and (duration == 10 or part == 0):
             if duration == 10 and part >= 2:
+                scenes = _category_specific_scenes(product_type, product)
                 clip_label = "SECOND CLIP 10s" if part == 2 else "THIRD CLIP 10s" if part == 3 else "CONTINUATION CLIP 10s"
-                beat_plan = (clip_label + ": 0–2s continue from the exact full-product frame held at the end of the previous clip; "
-                             "2–4s resume the same movement; 4–6s show another visible detail; 6–8s continue in the same setting; "
-                             "8–10s stable full-product hero finish. Do NOT repeat the opening hook. ")
-            elif duration == 10 and part == 1:
-                beat_plan = ("FIRST CLIP 10s: 0–2s establish the product; 2–4s reveal it fully; 4–6s highlight one visible detail; "
-                             "6–8s continue one simple action; 8–10s HOLD the final frame for Part 2. No fade. ")
-            elif duration == 20:
-                beat_plan = ("TIMING: 0–4s clear product reveal; 4–8s show the complete product in its setting; "
-                             "8–12s highlight one genuinely visible detail; 12–16s one subtle category-appropriate action; "
-                             "16–20s stable full-product hero finish. ")
-            elif duration == 30:
-                beat_plan = ("TIMING: 0–6s clear product reveal; 6–12s show the complete product in its setting; "
-                             "12–18s highlight one genuinely visible detail; 18–24s one subtle category-appropriate action; "
-                             "24–30s stable full-product hero finish. ")
-            else:
-                beat_plan = ("TIMING: 0–2s clean reveal; 2–4s show the full product; 4–6s highlight one reference-visible detail; "
-                             "6–8s one subtle product-appropriate action; 8–10s HOLD the final frame in a full-product hero composition. "
-                             + ("Do not perform the main surrounding contour yet. " if doodle else ""))
+                beat_plan = (
+                    clip_label + ": 0–2s CONTINUITY BRIDGE — resume the exact previous final frame and do not repeat the hook; "
+                    + "2–4s CATEGORY ACTION — " + scenes[3][1] + " "
+                    + "4–6s VISIBLE DETAIL — " + scenes[2][1] + " "
+                    + "6–8s NATURAL FOLLOW-THROUGH — continue the same setting and product orientation; "
+                    + "8–10s HERO HOLD — finish with the complete unchanged product clearly visible. "
+                    + "Do NOT repeat the opening hook or restart the reveal. "
+                )
+            elif not (storyboard_override and isinstance(storyboard_override, (list, tuple)) and len(storyboard_override) == 4):
+                scenes = _category_specific_scenes(product_type, product)
+                scene_length = duration / 5
+                timed_scenes = []
+                for index, (shot_name, shot_direction) in enumerate(scenes):
+                    start_time = index * scene_length
+                    end_time = start_time + scene_length
+                    if index == 4 and duration == 10 and part == 1:
+                        shot_direction += " Hold the exact final full-product frame steadily for a seamless Part 2 handoff; no fade."
+                    timed_scenes.append(
+                        f"{start_time:g}–{end_time:g}s {shot_name}: {shot_direction}"
+                    )
+                beat_plan = (
+                    "CATEGORY-SPECIFIC STORYBOARD — one continuous video with five connected timed beats: "
+                    + " | ".join(timed_scenes)
+                    + (" Do not complete the main surrounding contour in this first white-doodle clip." if doodle and part <= 1 else "")
+                )
             if storyboard_override and isinstance(storyboard_override, (list, tuple)) and len(storyboard_override) == 4:
                 beat_labels = (
                     "HOOK",
