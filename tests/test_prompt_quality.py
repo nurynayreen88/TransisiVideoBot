@@ -43,6 +43,18 @@ class PromptQualityTests(unittest.TestCase):
         for _ in range(20):
             self.assertIn(_resolve_auto_style("auto", "bag", "Bonia handbag"), allowed)
 
+    def test_white_doodle_first_clip_holds_final_frame_for_continuity(self):
+        prompt = build_prompt(
+            mode="storyboard",
+            product="PRODUCT NAME: unknown. Optional user details:",
+            scene="clean premium studio background",
+            motion="push",
+            style="white_doodle",
+            duration=20,
+        )
+        first_part = prompt.split("=== KLIPPO PART 2 ===", 1)[0]
+        self.assertIn("HOLD the final frame", first_part, first_part)
+
     def test_universal_framework_keys_resolve_to_canonical_catalog_styles(self):
         canonical = set(prompt_catalog.STYLES)
         referenced = {
