@@ -134,7 +134,7 @@ class PromptComponentTableTests(unittest.TestCase):
         self.assertIn("direction = re.sub(r'^\\s*\\d+(?:[–-]\\d+)?s\\s*\\|\\s*[^:]{1,80}:\\s*', '', direction)", bot_source)
 
     def test_legacy_timing_prefixes_are_removed_from_component_directions(self):
-        pattern = re.compile(r'^\\s*\\d+(?:[–-]\\d+)?s\\s*\\|\\s*[^:]{1,80}:\\s*')
+        pattern = re.compile(r'^\s*\d+(?:[–-]\d+)?s\s*\|\s*[^:]{1,80}:\s*')
         directions = [item.get("direction", "") for item in self.tables["storyboard_components"]]
         affected = [value for value in directions if pattern.match(value)]
         self.assertTrue(affected, "Audit fixture should include legacy repeated timing labels")
