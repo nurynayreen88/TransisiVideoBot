@@ -436,7 +436,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
     category_direction = product_type_directions.get(product_type, product_type_directions['other'])
     category_direction += selected_scene_lock
     if part in (0, 1):
-        category_direction += " " + opening_direction(product_type)
+        category_direction += " " + opening_direction(product_type, prompt_language)
     natural_motion_by_type = {
         'bag': "If a human model is present, have them carry the bag as a real person would and act naturally in the SELECTED LOCATION: use relaxed shoulders, natural arm swing and subtle bag sway if walking; if seated or stationary, keep the bag held or worn naturally. Only mention an airport, terminal or check-in area when the user explicitly selected an airport setting. Never stand rigidly while rotating or twirling the handbag for the camera.",
         'fashion': "If a model is present, use a relaxed short walk, natural weight shifts and a small practical gesture such as adjusting a sleeve or letting the fabric settle. Avoid stiff runway posing unless runway style is explicitly requested.",
@@ -544,7 +544,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
                 + " UNIVERSAL SAFETY RULES: Preserve visible product details; invent no features or claims."
             )
         doodle = style_key == "white_doodle"
-        hook = product_hook(product)
+        hook = product_hook(product, prompt_language)
         if product_type == "other" or universal_custom:
             category_direction += (
                 " UNIVERSAL CREATIVE FRAMEWORK: "
