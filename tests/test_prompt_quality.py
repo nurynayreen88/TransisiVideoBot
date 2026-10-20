@@ -131,6 +131,27 @@ class PromptQualityTests(unittest.TestCase):
         first_part = prompt.split("=== KLIPPO PART 2 ===", 1)[0]
         self.assertIn("HOLD the final frame", first_part, first_part)
 
+    def test_wallet_subcategory_uses_wallet_scenes_not_handbag_scenes(self):
+        prompt = build_prompt(
+            mode="storyboard",
+            product="Generic product name",
+            scene="clean studio background",
+            motion="static",
+            style="auto",
+            duration=10,
+            product_type="bag",
+            product_subtype="bag_wallet",
+        )
+        self.assertIn("HOOK / WALLET SILHOUETTE", prompt)
+        self.assertIn("CTA / WALLET HERO", prompt)
+        self.assertNotIn("HOOK / BAG SHAPE", prompt)
+        self.assertNotIn("visible straps and handles in frame", prompt)
+
+    def test_backpack_subcategory_uses_backpack_scenes(self):
+        scenes = _category_specific_scenes("bag", "generic product", "bag_backpack")
+        self.assertEqual(scenes[0][0], "HOOK / BACKPACK SILHOUETTE")
+        self.assertIn("visible shoulder straps", scenes[0][1])
+
     def test_every_top_level_product_category_has_specific_scene_beats(self):
         categories = (
             "fashion", "bag", "hijab", "shoes", "beauty", "food", "gadget",
