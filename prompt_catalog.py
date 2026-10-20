@@ -202,7 +202,7 @@ def opening_direction(product_type="other", language="Malay"):
     return (
         "OPENING VARIATION: " + visual + "; camera: " + camera
         + "; if voiceover is enabled, use " + voice
-        + (". Speak clear English." if str(language or "Malay").casefold() == "english" else ". Speak clear Bahasa Melayu Malaysia; no Indonesian wording or accent.") + " "
+        + (". If voiceover is used, speak clear English." if str(language or "Malay").casefold() == "english" else ". If voiceover is used, speak clear Bahasa Melayu Malaysia; no Indonesian wording or accent.") + " "
         + "Avoid classroom-style introductions, repeated stock phrases and scripted-sounding language. Do not add extra text. "
         + "This changes the opening only; preserve later beats, product identity, selected location, style and no-logo rules."
     )
