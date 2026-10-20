@@ -132,6 +132,17 @@ class PromptComponentTableTests(unittest.TestCase):
         # embedded in a small number of legacy storyboard directions.
         self.assertIn("direction = re.sub(r'^\\s*\\d+(?:[–-]\\d+)?s\\s*\\|\\s*[^:]{1,80}:\\s*', '', direction)", bot_source)
 
+    def test_runtime_assembles_choice_aware_component_rules(self):
+        bot_source = (ROOT / "bot.py").read_text(encoding="utf-8")
+        self.assertIn("def _prompt_library_component_rules(", bot_source)
+        self.assertIn("audio_enabled=context.user_data.get('prompt_audio_enabled', True) is not False", bot_source)
+        self.assertIn("voiceover_mode=context.user_data.get('prompt_voiceover_mode', 'none')", bot_source)
+        self.assertIn("on_screen_text=context.user_data.get('prompt_on_screen_text', 'no')", bot_source)
+        self.assertIn("if voiceover_mode == 'script':", bot_source)
+        self.assertIn("do not add spoken lines or an extra spoken CTA", bot_source)
+        self.assertIn("if on_screen_text == 'yes':", bot_source)
+        self.assertIn("REUSABLE COMPONENT RULES:", bot_source)
+
     def test_optional_audio_and_cta_rules_respect_user_choices(self):
         audio = {item["id"]: item for item in self.tables["audio_profiles"]}
         cta = {item["id"]: item for item in self.tables["cta_rules"]}
