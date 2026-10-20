@@ -1257,7 +1257,7 @@
       "subcategory_id": "fashion_kids",
       "category_id": "fashion",
       "label": "🧒 Pakaian kanak-kanak",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "fashion_kids_v01",
@@ -1378,6 +1378,126 @@
           "lighting": "Use neutral soft light and consistent exposure, retaining true colours and natural skin tone.",
           "closing": "Hold a clean full-body hero frame with the child relaxed and the garment unobstructed.",
           "audio": "Use soft upbeat instrumental music beneath any selected narration; no exaggerated effects or unsupported claims."
+        },
+        {
+          "id": "fashion_kids_v11",
+          "variation_number": 11,
+          "name": "Playground Pause to Outfit Reveal",
+          "hook": "Open with the child standing safely in a clear, uncluttered play area, showing the exact outfit from the reference. Keep all colours, prints, fastenings and proportions unchanged; add no text or props.",
+          "action": "The child takes two small, natural steps on the spot and pauses with arms relaxed, avoiding running, jumping or any movement that hides the garment.",
+          "detail": "Show only the visible neckline, sleeves, waist and hem that the actual outfit has. Do not invent pockets, badges, fabric properties or safety claims.",
+          "camera": "Begin in a steady full-body vertical frame, track gently for the two steps, then stop with the whole outfit still inside the frame.",
+          "lighting": "Use soft open-shade daylight with stable white balance so the garment colour remains faithful to the reference.",
+          "closing": "Hold a relaxed full-body view after the child stops, with the clothing unobstructed and no cropped edges.",
+          "audio": "Use light playful instrumental music at low volume; add footsteps only if the visible surface and movement support them."
+        },
+        {
+          "id": "fashion_kids_v12",
+          "variation_number": 12,
+          "name": "Sleeve-and-Hem Movement Pair",
+          "hook": "Frame the real sleeve edge and lower hem in one composition where possible, then establish the full children's outfit. Preserve the exact sleeve length, hem shape and print placement.",
+          "action": "The child gently raises both arms only to a comfortable, small height, lowers them, and stands still; do not stretch or reshape the clothing.",
+          "detail": "Observe the actual sleeve opening and hem as they move. If either detail is not visible in the reference, use another visible edge instead of inventing it.",
+          "camera": "Use a stable medium-full frame with a subtle tilt from sleeves to hem, then return to a balanced full-body view.",
+          "lighting": "Use broad diffused light and a soft floor shadow; avoid harsh highlights or colour grading.",
+          "closing": "Finish with arms relaxed and the garment's full silhouette clearly visible.",
+          "audio": "Choose a gentle, bouncy instrumental bed; a fabric rustle is optional only if it plausibly matches the movement."
+        },
+        {
+          "id": "fashion_kids_v13",
+          "variation_number": 13,
+          "name": "Print Discovery Without Spin",
+          "hook": "Start close enough to see the real print, motif or colour blocking on the children's garment, if present; otherwise feature its genuine plain panel or edge. Do not create extra motifs or branding.",
+          "action": "The child slowly turns a quarter-turn, pauses briefly, and returns to face front without spinning or performing a dance.",
+          "detail": "Keep the pattern scale, spacing and colours consistent throughout. Describe visually only what is present; do not make claims about print durability or material.",
+          "camera": "Make a controlled lateral slide during the turn, maintaining a safe, comfortable full-body distance and natural proportions.",
+          "lighting": "Use even daylight with consistent exposure so the pattern does not flicker or change hue between angles.",
+          "closing": "Return to the clear front view and hold still with the print or panel unobstructed.",
+          "audio": "Use a light contemporary instrumental at low volume; no crowd, applause or exaggerated transition effects."
+        },
+        {
+          "id": "fashion_kids_v14",
+          "variation_number": 14,
+          "name": "Little-Step Side Silhouette",
+          "hook": "Open with a clean front view of the exact outfit, then compose enough space to show its side outline without cropping the child's head or feet.",
+          "action": "The child takes one small sideways step and settles into a comfortable three-quarter stance; no runway walk, forced pose or garment tugging.",
+          "detail": "Use the angle to show only the visible side shape, seams and hem. Do not imply hidden construction or guaranteed fit for other children.",
+          "camera": "Keep the horizon level and track sideways just a short distance, then hold a medium-wide full-body frame.",
+          "lighting": "Use soft frontal fill with gentle side definition, keeping skin tones natural and garment colours accurate.",
+          "closing": "End with the child standing comfortably at a three-quarter angle, all defining garment edges visible.",
+          "audio": "Use calm, cheerful music; footsteps only when they naturally correspond to the visible step."
+        },
+        {
+          "id": "fashion_kids_v15",
+          "variation_number": 15,
+          "name": "Seated-to-Standing Everyday View",
+          "hook": "If the supplied outfit can be shown naturally while seated, begin with the child sitting upright on a plain seat; otherwise use a standing opening and skip the seated action. Keep the scene simple and safe.",
+          "action": "For a seated opening, the child rises slowly with a stable movement and stands still; for a standing-only reference, the child makes one small posture adjustment instead.",
+          "detail": "Show how the real garment settles after movement without pulling at it or making claims about comfort, stretch or suitability.",
+          "camera": "Use a fixed, level medium-wide frame with enough room for the whole movement; avoid cuts during the rise and keep the outfit in view.",
+          "lighting": "Maintain soft, even light throughout so exposure and clothing colour do not change between poses.",
+          "closing": "Hold a natural full-body standing view once the child is still, with no extra objects or overlays.",
+          "audio": "Use gentle family-friendly instrumental music and quiet room tone; no dramatic rise sound or unsupported narration."
+        },
+        {
+          "id": "fashion_kids_v16",
+          "variation_number": 16,
+          "name": "Colour-True Window Turn",
+          "hook": "Place the child near soft window light with the complete outfit visible from the start. Preserve the reference colour, print, layering and existing accessories exactly.",
+          "action": "The child makes a small turn toward the window and back to front, then rests in a relaxed pose; do not add wind or make the garment flutter artificially.",
+          "detail": "Let the actual silhouette and visible folds carry the shot. Do not infer fabric composition, softness, breathability or wrinkle resistance.",
+          "camera": "Start with a static full-body shot, then make a restrained push-in during the turn and stop before the outfit is cropped.",
+          "lighting": "Use diffused window light with gentle fill from the opposite side; lock white balance to prevent colour shifts.",
+          "closing": "Finish in the same front-facing position with the whole outfit clear and colour-consistent.",
+          "audio": "Choose a soft, warm instrumental melody at low volume; omit artificial wind and fabric effects."
+        },
+        {
+          "id": "fashion_kids_v17",
+          "variation_number": 17,
+          "name": "Detail Focus Handoff for Small Features",
+          "hook": "Show the whole outfit softly in the background, then select one genuine visible feature—such as a collar, cuff, fastening or print edge. If none stands out, focus on the actual outline instead.",
+          "action": "Keep the child comfortably still while focus shifts to the selected feature and returns to the full outfit; do not ask the child to touch or manipulate it.",
+          "detail": "Only show features confirmed by the reference. Never add buttons, bows, pockets, labels or decorative stitching that are not present.",
+          "camera": "Use a tripod-stable composition and a controlled rack focus, keeping enough of the garment visible to preserve context and avoid extreme close-up distortion.",
+          "lighting": "Use broad soft light so the focus shift reveals existing detail without artificial shine or texture changes.",
+          "closing": "Return focus to the complete outfit and hold a calm, clear frame.",
+          "audio": "Use minimal upbeat instrumental music; no click or sparkle sound for a focus change."
+        },
+        {
+          "id": "fashion_kids_v18",
+          "variation_number": 18,
+          "name": "Playful Peek From Frame Edge",
+          "hook": "Compose the child partly behind a plain doorway or wall edge only if the location naturally supports it; otherwise begin with the child at the edge of a simple open frame. Do not add decorative props or text.",
+          "action": "The child takes one small step into the open area and pauses, keeping hands away from key clothing details and maintaining a natural expression.",
+          "detail": "Reveal the real garment shape and visible details only. Do not change styling, add accessories or suggest an unverified feature.",
+          "camera": "Begin with a locked vertical frame, then pan smoothly just enough to keep the child centred as they step into view.",
+          "lighting": "Use soft, even natural light across both the starting and ending positions, with no sudden exposure shift.",
+          "closing": "Hold a full-body view with the child fully in the open area and the outfit unobstructed.",
+          "audio": "Use playful but restrained instrumental music; avoid whooshes unless a visible transition truly supports one."
+        },
+        {
+          "id": "fashion_kids_v19",
+          "variation_number": 19,
+          "name": "Front View to Natural Detail",
+          "hook": "Open with the complete children's outfit clearly visible, then plan a single visual path toward the most distinctive real detail in the reference without adding graphics or text.",
+          "action": "The child remains still while the camera moves closer; if the outfit's details are not safely readable at closer range, keep the camera at medium distance and emphasize the overall shape.",
+          "detail": "Select only a visible feature such as a real neckline, seam, print or hem. Do not create labels or infer hidden construction.",
+          "camera": "Make one smooth, straight push from full-body to medium framing, keeping the child's face and garment proportions natural and avoiding abrupt zooms.",
+          "lighting": "Use balanced soft light with stable colour and gentle contrast; do not oversharpen fabric texture.",
+          "closing": "Stop at a medium-full composition where both the chosen detail and overall outfit remain identifiable.",
+          "audio": "Use a quiet, cheerful instrumental bed; no artificial camera-move sound effects."
+        },
+        {
+          "id": "fashion_kids_v20",
+          "variation_number": 20,
+          "name": "Opening-Pose Visual Loop",
+          "hook": "Begin with a clean full-body front view of the exact children's outfit, using a plain setting and natural space around the child. Add no text, logos, stickers or extra accessories.",
+          "action": "The child makes one small natural movement, such as a gentle quarter-turn or relaxed shoulder shift, then returns to the same front-facing pose without spinning.",
+          "detail": "Keep the garment, visible pattern, proportions and styling consistent from start to finish. Do not retouch body proportions or claim guaranteed fit, comfort or quality.",
+          "camera": "Use a slow, minimal camera arc and return to the original angle; keep framing and horizon stable so the ending can visually match the opening.",
+          "lighting": "Maintain soft, consistent light and fixed white balance throughout the movement to avoid flicker or colour changes.",
+          "closing": "Match the opening composition as closely as possible and hold still for a clean loop-friendly final beat.",
+          "audio": "Use a short, gentle instrumental phrase that resolves naturally; no applause, whooshes or unsupported spoken claims."
         }
       ]
     },
