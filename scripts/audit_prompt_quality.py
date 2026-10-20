@@ -13,6 +13,35 @@ DEFAULT_LIBRARY = Path(__file__).resolve().parents[1] / "prompts/subcategory_var
 WALLET_BAG_TERMS = re.compile(r"\b(?:bags?|handbags?|backpacks?|tote bags?|bag handles?|bag straps?)\b", re.I)
 TOY_GRAMMAR = re.compile(r"\beducational toy pieces\b", re.I)
 
+# Obvious cross-field cues only. These create review flags, never automatic failures.
+FIELD_ROLE_CUES = {
+    "detail": re.compile(
+        r"\b(?:push[- ]?in|push[- ]?out|camera[- ]only|camera movement|camera slide|three[- ]quarter angle|pan left|pan right)\b", re.I
+    ),
+    "camera": re.compile(
+        r"\b(?:light source|soft light|even light|rim highlight|lighting|illumination|light the product)\b", re.I
+    ),
+    "lighting": re.compile(
+        r"\b(?:end on|final frame|closing frame|hero shot|finish on|hold on the entire)\b", re.I
+    ),
+    "closing": re.compile(
+        r"\b(?:background music|instrumental music|sound effects?|audio|voice[- ]?over|room tone|music only)\b", re.I
+    ),
+}
+
+
+def field_role_flags(sid, vid, variation):
+    """Flag unmistakable cross-field instructions for human review."""
+    flags = []
+    for field, pattern in FIELD_ROLE_CUES.items():
+        value = variation.get(field, "")
+        if isinstance(value, str) and pattern.search(value):
+            flags.append(
+                f"{sid}/{vid}: possible field-role mismatch in {field}; "
+                "review whether the instruction belongs in another field"
+            )
+    return flags
+
 
 def audit(data):
     errors, flags = [], []
@@ -59,6 +88,7 @@ def audit(data):
                 value = v.get(field)
                 if not isinstance(value, str) or not value.strip():
                     errors.append(f"{sid}/{vid or index}: missing or empty {field}")
+            flags.extend(field_role_flags(sid, vid, v))
             audio = v.get("audio", "")
             if isinstance(audio, str) and re.match(r"^AUDIO:\s*AUDIO:", audio, re.I):
                 errors.append(f"{sid}/{vid}: duplicated AUDIO prefix in audio field")
