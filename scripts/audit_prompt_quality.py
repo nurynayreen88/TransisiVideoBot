@@ -40,7 +40,7 @@ def audit(data):
             for index, v in enumerate(variations, 1):
                 value = v.get(field)
                 if isinstance(value, str) and value.strip():
-                    values[re.sub(r"\\s+", " ", value.strip().lower())] += 1
+                    values[re.sub(r"\s+", " ", value.strip().lower())] += 1
             if values:
                 repeat_slots += 1
                 top = values.most_common(1)[0]
@@ -59,13 +59,13 @@ def audit(data):
                 if not isinstance(value, str) or not value.strip():
                     errors.append(f"{sid}/{vid or index}: missing or empty {field}")
             audio = v.get("audio", "")
-            if isinstance(audio, str) and re.match(r"^AUDIO:\\s*AUDIO:", audio, re.I):
+            if isinstance(audio, str) and re.match(r"^AUDIO:\s*AUDIO:", audio, re.I):
                 errors.append(f"{sid}/{vid}: duplicated AUDIO prefix in audio field")
             action = v.get("action", "")
             if isinstance(action, str) and len(action.split()) < 6:
                 flags.append(f"{sid}/{vid}: unusually short action; check whether it is actionable")
             detail = v.get("detail", "")
-            if isinstance(detail, str) and re.search(r"educational toy pieces\\b", detail, re.I):
+            if isinstance(detail, str) and re.search(r"educational toy pieces\b", detail, re.I):
                 flags.append(f"{sid}/{vid}: possible toy-detail grammar issue")
     return {"errors": errors, "flags": flags, "stats": {
         "subcategories": len(subs), "variations": total,
