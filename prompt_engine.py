@@ -253,7 +253,7 @@ def _creative_variation(product_type, product, part, product_subtype=''):
     # ten distinct presentation treatments, so every subtype has >=10 usable
     # prompt variations even when its action pool is intentionally conservative.
     presentation = random.SystemRandom().choice(_CREATIVE_PRESENTATION_VARIATIONS)
-    action = action + "\\n" + presentation
+    action = action + "\n" + presentation
     if part >= 2:
         action = (
             "CONTINUATION: " + action
@@ -278,7 +278,6 @@ try:
 except (OSError, json.JSONDecodeError):
     UNIVERSAL_PROMPT_FRAMEWORKS = []
     UNIVERSAL_PROMPT_GLOBAL_RULES = []
-
 
 def _universal_prompt_direction(style_key):
     """Return a style-matched universal framework for custom categories, without an AI/API call."""
@@ -618,7 +617,6 @@ def creative_angle_instruction(angle):
     """Return only the selected ad-angle direction; auto leaves category logic in control."""
     return _CREATIVE_ANGLE_INSTRUCTIONS.get(str(angle or "auto"), "")
 
-
 _RECENT_PRESENTATION_CHOICES = {}
 _PRESENTATION_PROFILES = (
     "centered hero composition, soft side lighting, detail-first reveal followed by a full-product hero, and a calm gradual pace",
@@ -957,8 +955,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
                     "8-10s settle into a steady full-product composition and HOLD the final frame for a seamless Part 2 handoff. "
                     "Do not perform the main surrounding contour yet. "
                 )
-            rules += (
-                "Warm authentic UGC product-ad look, thin white handwritten 2D graphics tracked to the product. "
+            rules += (                "Warm authentic UGC product-ad look, thin white handwritten 2D graphics tracked to the product. "
                 "No phone bezel, no invented product claims, no branding obstruction. Only verified hook (if available) and verified "
                 "short feature labels may appear; reserve space for editing overlays if text rendering is unreliable. "
                 "Prioritize the visible surrounding product contour over camera movement."
