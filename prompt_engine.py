@@ -600,6 +600,39 @@ def creative_angle_instruction(angle):
     return _CREATIVE_ANGLE_INSTRUCTIONS.get(str(angle or "auto"), "")
 
 
+_RECENT_PRESENTATION_CHOICES = {}
+_PRESENTATION_PROFILES = (
+    "centered hero composition, soft side lighting, detail-first reveal followed by a full-product hero, and a calm gradual pace",
+    "off-centre composition with clean negative space, diffused high-key lighting, full-product view before one detail close-up, and two clean match cuts",
+    "three-quarter product composition, restrained rim lighting where compatible with the style, visible-edge detail followed by a stable hero, and measured cinematic pacing",
+    "contextual wide view followed by a product-focused close-up, natural-looking light, one clean reframe, and relaxed lifestyle pacing",
+    "macro or close detail first only when useful for the product, controlled highlights, then ease back to the complete product with a deliberate pace",
+    "overhead or slightly angled composition only when suitable, even soft lighting, detail-to-hero sequence, and a clean editorial rhythm",
+    "lower three-quarter framing only when it suits the product, broad diffused lighting, silhouette before detail, and confident but controlled pacing",
+    "front-facing hero with soft backlight, one visible-detail reveal, then a stable closing hero with gentle pacing",
+    "asymmetrical composition, neutral balanced lighting, side-detail view followed by the complete product, and a minimal edit rhythm",
+    "close-to-medium shot sequence, warm light only when it suits the selected style and product, one motivated match cut, and brisk but clean pacing",
+    "clear full-product view first, subtle reflected highlights, one detail shot, then a steady final hold",
+    "contextual composition with a softly separated background, natural-looking light, wide-to-close progression, and restrained pacing",
+)
+
+
+def _presentation_variation(style_key, product_type, product_subtype=""):
+    """Choose a fresh composition/light/edit profile while preserving the selected style."""
+    key = (str(style_key or "auto"), str(product_type or "other"), str(product_subtype or ""))
+    recent = _RECENT_PRESENTATION_CHOICES.setdefault(key, deque(maxlen=3))
+    available = [index for index in range(len(_PRESENTATION_PROFILES)) if index not in recent]
+    index = random.SystemRandom().choice(available or list(range(len(_PRESENTATION_PROFILES))))
+    recent.append(index)
+    return (
+        "PRESENTATION VARIATION: Keep the selected visual style recognizably consistent, but for this generation use "
+        + _PRESENTATION_PROFILES[index] + ". This profile varies composition, lighting, shot order and pacing; "
+        "do not change product identity, invent features or accessories, replace a user-selected location, "
+        "or contradict category-specific safety and realism rules. For connected clips, preserve the same setting, "
+        "lighting direction, product orientation and final-frame handoff."
+    )
+
+
 def build_prompt(mode, product, scene, motion, style='auto', duration=10, concept='', product_type='other', storyboard_override=None, split=None, universal_custom=False, product_subtype='', prompt_language='Malay'):
     # Preserve the historical API behavior: a 20-second call without an explicit
     # split choice still returns two connected 10-second prompts.
@@ -608,9 +641,11 @@ def build_prompt(mode, product, scene, motion, style='auto', duration=10, concep
     style = _resolve_auto_style(style, product_type, product, product_subtype) if mode == 'storyboard' else style
     if split and duration > 10:
         # Generate connected 10-second prompts while retaining the same style and product context.
+        presentation_variation = _presentation_variation(style, product_type, product_subtype)
         parts = [
             _build_single_prompt(mode, product, scene, motion, style, part=index, duration=10,
                                  concept=concept, product_type=product_type, storyboard_override=storyboard_override, universal_custom=universal_custom, product_subtype=product_subtype, prompt_language=prompt_language)
+            + "\n\n" + presentation_variation
             + "\n\n" + _creative_variation(product_type, product, index, product_subtype)
             for index in range(1, duration // 10 + 1)
         ]
@@ -618,8 +653,10 @@ def build_prompt(mode, product, scene, motion, style='auto', duration=10, concep
             ("=== KLIPPO PART " + str(index + 1) + " ===\n\n" + part) if index else part
             for index, part in enumerate(parts)
         )
+    presentation_variation = _presentation_variation(style, product_type, product_subtype)
     return (_build_single_prompt(mode, product, scene, motion, style, part=0, duration=duration,
                                 concept=concept, product_type=product_type, storyboard_override=storyboard_override, universal_custom=universal_custom, product_subtype=product_subtype, prompt_language=prompt_language)
+            + "\n\n" + presentation_variation
             + "\n\n" + _creative_variation(product_type, product, 0, product_subtype))
 
 
