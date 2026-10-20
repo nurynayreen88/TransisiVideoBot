@@ -65,6 +65,8 @@ class PromptQualityTests(unittest.TestCase):
         )
         self.assertIn("Handbag Hero Reveal", prompt)
         self.assertIn("Premium handbag commercial with a clean hero reveal", prompt)
+        self.assertIn("HOOK / BAG SHAPE", prompt)
+        self.assertIn("HARDWARE / SEAM DETAIL", prompt)
         self.assertIn("speak only in English", prompt)
         self.assertNotIn("speak only in Bahasa Melayu Malaysia", prompt)
 
