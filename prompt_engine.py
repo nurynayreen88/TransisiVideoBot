@@ -11,7 +11,7 @@ def _prompt_sentence(value, limit=100, fallback=""):
     text = " ".join(str(value or "").split()).strip()
     if not text:
         return fallback
-    match = re.search(r"^(.+?[.!?])(?:\\s|$)", text)
+    match = re.search(r"^(.+?[.!?])(?:\s|$)", text)
     if match:
         sentence = match.group(1).strip()
         # Preserve the complete first sentence even if it exceeds the target length.
@@ -609,13 +609,13 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
                 "VIDEO PROMPT — " + str(duration) + " SECONDS" + (" | PART " + str(part) if part else "") + "\n"
                 "Vertical 9:16, realistic product video, exactly " + str(duration) + " seconds.\n"
                 + "STYLE: " + style_name + " — " + _prompt_sentence(style_template, 180, "Use a realistic product-focused presentation.") + "\n"
-                + "PRODUCT: " + product + "\n" + concise_category_direction + concise_framework
+                + "PRODUCT: " + product + "\n" + concise_category_direction
                 + (" UNIVERSAL SAFETY RULES: Preserve visible product details; invent no features or claims."
                    if product_type == "other" or universal_custom else "") + "\n"
                 + "SETTING: " + _prompt_sentence(scene, 100, "A realistic setting suited to the product.") + " CAMERA: " + _prompt_sentence(camera, 110, "Use one restrained camera move and keep the product stable.") + "\n"
                 + "PRODUCT LOCK: Preserve the reference product's visible design, colour, pattern, branding and proportions. Do not invent features or accessories.\n"
                 + hook_rule + beat_plan + concept_rule + doodle_rule
-                + "Keep actions natural and the product consistent. Follow the selected text, audio and visual options."
+                + "Keep actions natural and the product consistent. Follow the selected text, audio and visual options. If voiceover is enabled, speak only in " + ("English" if str(prompt_language or "Malay").casefold() == "english" else "Bahasa Melayu Malaysia") + " and use a short, natural product-specific hook and CTA."
             )
 
         evidence_rules = (
