@@ -12,6 +12,7 @@ from prompt_engine import (
     _prompt_sentence,
     _resolve_auto_style,
     _category_specific_scenes,
+    _creative_variation,
     build_prompt,
 )
 
@@ -25,6 +26,11 @@ class PromptQualityTests(unittest.TestCase):
     def tearDown(self):
         prompt_catalog.DB_PATH = self.original_db_path
         self.temp_dir.cleanup()
+
+    def test_audio_variation_does_not_force_unselected_voiceover(self):
+        direction = _creative_variation("equipment", "desk lamp", 0)
+        self.assertIn("only the audio elements selected by the user", direction)
+        self.assertNotIn("add voice, music and SFX in post-production", direction)
 
     def test_sentence_summary_preserves_short_multi_sentence_constraints(self):
         source = "Natural everyday-carry scene focused on the wallet itself. No capacity, durability or security claims."
