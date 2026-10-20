@@ -338,5 +338,39 @@ class PromptQualityTests(unittest.TestCase):
         self.assertNotIn("Bahasa Melayu Malaysia", prompt)
 
 
+    def test_model_details_are_completed_before_style_picker(self):
+        source = (Path(__file__).resolve().parents[1] / "bot.py").read_text(encoding="utf-8")
+
+        count_start = source.index("    elif action.startswith('prompt_model_count:') and stage == 'prompt_model_count':")
+        gender_start = source.index("    elif action.startswith('prompt_model_gender:')", count_start)
+        count_flow = source[count_start:gender_start]
+        self.assertIn("context.user_data['stage'] = 'prompt_model_gender'", count_flow)
+
+        age_start = source.index("    elif action.startswith('prompt_model_age:')", gender_start)
+        gender_flow = source[gender_start:age_start]
+        self.assertIn("context.user_data['stage'] = 'prompt_model_age'", gender_flow)
+
+        ethnicity_start = source.index("    elif action.startswith('prompt_model_ethnicity:')", age_start)
+        age_flow = source[age_start:ethnicity_start]
+        self.assertIn("context.user_data['stage'] = 'prompt_model_ethnicity'", age_flow)
+        self.assertIn("not _prompt_is_child_product(context.user_data)", age_flow)
+
+        hijab_start = source.index("    elif action.startswith('prompt_model_hijab:')", ethnicity_start)
+        ethnicity_flow = source[ethnicity_start:hijab_start]
+        self.assertIn("context.user_data['stage'] = 'prompt_model_hijab'", ethnicity_flow)
+        self.assertIn("context.user_data['stage'] = 'prompt_style'", ethnicity_flow)
+
+        duration_start = source.index("    elif action.startswith('prompt_duration:') and stage == 'prompt_duration':", hijab_start)
+        hijab_flow = source[hijab_start:duration_start]
+        self.assertIn("context.user_data['stage'] = 'prompt_style'", hijab_flow)
+
+        animal_start = source.index("    elif action.startswith('prompt_animal_species:') and stage == 'prompt_animal_species':")
+        model_count_start = source.index("    elif action.startswith('prompt_model_count:') and stage == 'prompt_model_count':", animal_start)
+        animal_flow = source[animal_start:model_count_start]
+        self.assertIn("context.user_data['stage'] = 'prompt_style'", animal_flow)
+        self.assertIn("prompt_style_menu(context.user_data.get('prompt_product_type', 'other'), 'animal')", animal_flow)
+
+
+
 if __name__ == "__main__":
     unittest.main()
