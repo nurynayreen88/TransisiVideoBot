@@ -285,8 +285,11 @@ def _creative_variation(product_type, product, part, product_subtype=''):
         )
         if part >= 2:
             action += " CONTINUITY: Match the previous clip's final frame, setting, lighting and product orientation; continue naturally without repeating its main gesture."
-        audio = str(selected_action.get("audio", "")).strip() or _SFX_BY_TYPE[group]
-        audio += " " + _SFX_BY_TYPE[group]
+        # Curated variation audio is authoritative; do not append category SFX.
+        # Unconditional appending duplicated effects and could contradict a quiet scene.
+        audio = str(selected_action.get("audio", "")).strip()
+        if not audio:
+            audio = _SFX_BY_TYPE[group]
     else:
         options = _CREATIVE_ACTIONS[group]
         recent = _RECENT_CREATIVE_CHOICES.setdefault(group, deque(maxlen=3))

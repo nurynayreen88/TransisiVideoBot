@@ -21,6 +21,28 @@ class CreativeVariationTests(unittest.TestCase):
         prompt = prompt_engine._creative_variation("fashion", "children's outfit", 0)
         self.assertIn("fabric swish", prompt)
 
+    def test_curated_audio_replaces_category_fallback_instead_of_duplicating_it(self):
+        subtype = "test_audio_authority_subcategory"
+        previous = prompt_engine._SUBCATEGORY_VARIATIONS_BY_ID.get(subtype)
+        prompt_engine._SUBCATEGORY_VARIATIONS_BY_ID[subtype] = [{
+            "name": "Quiet product reveal",
+            "hook": "Open on the product already in frame.",
+            "action": "Keep the product still and let the camera move gently.",
+            "detail": "Show one visible detail only.",
+            "camera": "Use one slow lateral slide.",
+            "lighting": "Keep soft, steady light.",
+            "closing": "End on a stable full-product view.",
+            "audio": "A single soft chime, then silence; never stack effects.",
+        }]
+        try:
+            prompt = prompt_engine._creative_variation("bag", "plain bag", 0, subtype)
+            self.assertEqual(prompt.count("A single soft chime"), 1)
+            self.assertNotIn(prompt_engine._SFX_BY_TYPE["bag"], prompt)
+        finally:
+            if previous is None:
+                prompt_engine._SUBCATEGORY_VARIATIONS_BY_ID.pop(subtype, None)
+            else:
+                prompt_engine._SUBCATEGORY_VARIATIONS_BY_ID[subtype] = previous
     def test_20_seconds_single_option_stays_one_full_prompt(self):
         prompt = prompt_engine.build_prompt(
             "standard", "Designer Kid Bed", "bright bedroom", "push",
