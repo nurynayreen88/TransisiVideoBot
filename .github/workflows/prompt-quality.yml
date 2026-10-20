@@ -1,0 +1,32 @@
+name: Prompt quality regression tests
+
+on:
+  pull_request:
+    paths:
+      - "prompt_engine.py"
+      - "prompt_catalog.py"
+      - "prompts/universal_prompt_templates.json"
+      - "tests/test_prompt_quality.py"
+      - ".github/workflows/prompt-quality.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "prompt_engine.py"
+      - "prompt_catalog.py"
+      - "prompts/universal_prompt_templates.json"
+      - "tests/test_prompt_quality.py"
+      - ".github/workflows/prompt-quality.yml"
+
+jobs:
+  prompt-quality:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Run prompt quality regression tests
+        run: python -m unittest discover -s tests -p "test_*.py" -v
