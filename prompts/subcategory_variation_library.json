@@ -1009,7 +1009,7 @@
       "subcategory_id": "fashion_outerwear",
       "category_id": "fashion",
       "label": "🧥 Jaket / Outerwear",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "fashion_outerwear_v01",
@@ -1130,6 +1130,126 @@
           "lighting": "Use neutral soft light with controlled contrast and no artificial glow or sparkle.",
           "closing": "Hold a clean final frame with the whole outerwear item centred and unobstructed.",
           "audio": "Use understated instrumental music beneath any selected speech; no transition effects or unverified claims."
+        },
+        {
+          "id": "fashion_outerwear_v11",
+          "variation_number": 11,
+          "name": "Collar Shape Under Soft Light",
+          "hook": "Open close on the actual collar, lapel or neckline edge of the outerwear; if none exists, use the real hood opening or upper seam visible in the reference.",
+          "action": "The wearer turns slightly toward the camera and settles, keeping the collar or opening untouched.",
+          "detail": "Show only the real collar construction, lapel, hood edge or seam. Do not add buttons, drawstrings or lining not visible.",
+          "camera": "Use a steady close-up followed by a slow pullback to a chest-up view; avoid distorting the shoulders.",
+          "lighting": "Use soft side light with gentle fill to define the edge without changing the garment's colour or making it look glossy.",
+          "closing": "Hold on a clean upper-body view with the collar or opening unobstructed.",
+          "audio": "Restrained cinematic instrumental music; no zipper or snap sounds without visible action."
+        },
+        {
+          "id": "fashion_outerwear_v12",
+          "variation_number": 12,
+          "name": "Outer Layer Over Existing Outfit",
+          "hook": "If the reference already shows the outerwear worn over another visible layer, frame both exactly as supplied; otherwise show the outerwear alone without adding clothing.",
+          "action": "The wearer takes one calm step forward and stops, allowing the outer layer to settle naturally over the existing outfit.",
+          "detail": "Keep all visible layers, colours and proportions consistent. Do not invent pockets, lining, water resistance or warmth claims.",
+          "camera": "Use a medium-full tracking shot for one step, then lock the camera as the wearer settles.",
+          "lighting": "Use balanced daylight with enough fill to preserve detail in both the outer layer and the visible underlying clothing.",
+          "closing": "Finish with a stable front three-quarter view of the complete outerwear silhouette.",
+          "audio": "Low-volume modern instrumental music; footsteps only when plausible for the visible surface."
+        },
+        {
+          "id": "fashion_outerwear_v13",
+          "variation_number": 13,
+          "name": "Zip or Fastening Detail, Conditional",
+          "hook": "If a zipper, button or other fastening is clearly present, begin with that exact feature; otherwise feature a genuine seam or panel edge instead.",
+          "action": "Keep the garment still while the camera reveals the selected feature; do not operate a fastening unless the reference clearly supports it.",
+          "detail": "Never add or imply a hidden fastening. Show only the visible slider, button, seam or edge and make no durability claims.",
+          "camera": "Use a close locked shot with a short lateral slide, then widen enough to establish where the detail sits.",
+          "lighting": "Use diffused light to control reflections on any visible hardware and preserve true colours.",
+          "closing": "End on a medium detail shot with the feature centred and unobstructed.",
+          "audio": "Soft minimal music; omit mechanical sound effects if no fastening is operated."
+        },
+        {
+          "id": "fashion_outerwear_v14",
+          "variation_number": 14,
+          "name": "Hood Outline in Profile",
+          "hook": "If the outerwear has a visible hood, begin with its actual outline from a three-quarter angle; if not, use the real collar or upper edge as the subject.",
+          "action": "The wearer turns their head and shoulders slightly, allowing the visible outline to separate naturally from the background without pulling the hood.",
+          "detail": "Do not add toggles, cords, lining or detachable parts. Do not claim weather protection from appearance alone.",
+          "camera": "Use a short, smooth camera arc across the front quarter, maintaining a natural head-and-shoulder scale.",
+          "lighting": "Use a soft rim of light from behind and broad frontal fill so the outline remains visible without a halo effect.",
+          "closing": "Hold the profile angle with the real upper outline clearly readable.",
+          "audio": "Quiet atmospheric instrumental music; no wind or rain effects unless those conditions are actually visible."
+        },
+        {
+          "id": "fashion_outerwear_v15",
+          "variation_number": 15,
+          "name": "Sleeve Panel Tracking",
+          "hook": "Begin on an actual sleeve seam, cuff or colour panel; if the sleeve is plain, use its genuine edge and shape instead.",
+          "action": "The wearer bends one elbow gently and relaxes it, keeping the arm movement small enough to preserve the garment's shape.",
+          "detail": "Show only visible seams, cuffs and panels. Do not invent adjustable cuffs, padding or technical performance features.",
+          "camera": "Track from the shoulder toward the cuff in one smooth diagonal move, then widen to a medium frame.",
+          "lighting": "Use even soft light to reveal seams and edges without oversharpening texture.",
+          "closing": "Finish with the sleeve detail in context and the full sleeve visible.",
+          "audio": "Low-key instrumental beat; no fabric snap or velcro sound unless supported by visible action."
+        },
+        {
+          "id": "fashion_outerwear_v16",
+          "variation_number": 16,
+          "name": "Front-to-Side Volume Check",
+          "hook": "Show the outerwear front-on first, with its actual length and volume clearly visible.",
+          "action": "The wearer slowly turns to a side angle and returns halfway toward front, without flaring the garment or placing hands in pockets.",
+          "detail": "Only reveal the silhouette that the movement genuinely shows. Do not create exaggerated volume or infer insulation, weight or fit guarantees.",
+          "camera": "Use a fixed medium-full camera position and let the wearer provide the change in angle.",
+          "lighting": "Keep broad soft lighting consistent so shadows do not falsely change the apparent shape.",
+          "closing": "End in a three-quarter stance with the garment's outline clear from shoulder to hem.",
+          "audio": "Steady understated music; no runway ambience or exaggerated swooshes."
+        },
+        {
+          "id": "fashion_outerwear_v17",
+          "variation_number": 17,
+          "name": "Hemline Against a Plain Background",
+          "hook": "Open on the real lower hem and adjacent panel, keeping the edge fully inside the frame.",
+          "action": "The wearer shifts weight once or takes a small step in place, then pauses while the hem settles naturally.",
+          "detail": "Preserve the exact length, hem finish and visible side opening if present. Do not add vents, drawcords or decorative trim.",
+          "camera": "Use a low, controlled lateral slider move followed by a gentle pullback to show the hem in context.",
+          "lighting": "Use soft lower fill to preserve detail in dark fabric and avoid a colour cast.",
+          "closing": "Hold a lower-body or full-length composition with the hem unobstructed.",
+          "audio": "Quiet instrumental audio; no footsteps unless an actual step is visible."
+        },
+        {
+          "id": "fashion_outerwear_v18",
+          "variation_number": 18,
+          "name": "Pocket Placement Without Use",
+          "hook": "If a pocket is visible, begin with its actual placement and opening; if no pocket is visible, frame a genuine seam or front panel instead.",
+          "action": "The wearer keeps both hands outside the garment while the camera reveals the selected area without interaction.",
+          "detail": "Do not create pockets, imply storage capacity or add flaps, zips or buttons that are absent from the reference.",
+          "camera": "Use a steady close-up and a measured pullback to show the detail relative to the garment front.",
+          "lighting": "Use broad diffusion and slight side fill so pocket edges or seams remain readable.",
+          "closing": "Finish with the detail visible within a balanced torso composition.",
+          "audio": "Minimal instrumental music; no rummaging or zipper sound."
+        },
+        {
+          "id": "fashion_outerwear_v19",
+          "variation_number": 19,
+          "name": "Natural Shoulder Drape",
+          "hook": "Start with the outerwear hanging naturally on the wearer, with the shoulder line and sleeve attachment clearly visible.",
+          "action": "The wearer relaxes their shoulders and turns a few degrees, allowing the existing garment to settle under gravity.",
+          "detail": "Show only visible folds and construction. Do not claim softness, stretch, waterproofing or thermal performance.",
+          "camera": "Use a slow push-in from medium-full to medium framing, keeping the shoulder line undistorted.",
+          "lighting": "Use soft directional light to reveal folds while retaining natural colour and skin tone.",
+          "closing": "Hold the final relaxed pose with the shoulder and upper sleeve clearly visible.",
+          "audio": "Calm instrumental music; no wind machine or exaggerated fabric sounds."
+        },
+        {
+          "id": "fashion_outerwear_v20",
+          "variation_number": 20,
+          "name": "Opening Frame Return Loop",
+          "hook": "Open with a clear full view of the exact outerwear and its existing styling against a quiet background.",
+          "action": "The wearer makes one small quarter-turn, pauses, then returns to the opening pose without removing or changing the garment.",
+          "detail": "Keep visible zips, pockets, panels, colour and proportions unchanged; do not add props, accessories or claims.",
+          "camera": "Use a subtle camera drift that returns to its original position; avoid morph transitions or fast orbiting.",
+          "lighting": "Maintain fixed white balance and soft consistent exposure throughout for a seamless visual match.",
+          "closing": "Match the opening full-body or product composition and hold it still for the final beat.",
+          "audio": "A restrained instrumental phrase that resolves gently; no applause or dramatic transition sound."
         }
       ]
     },
