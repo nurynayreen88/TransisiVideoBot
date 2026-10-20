@@ -466,10 +466,47 @@ def prompt_images_menu():
     ])
 
 
-def prompt_model_presence_menu():
-    return InlineKeyboardMarkup([
-        [InlineKeyboardButton('👩 Ada Model AI', callback_data='prompt_model:yes')],
+def _prompt_is_animal_related(user_data):
+    """Show animal-model controls for pet products without changing unrelated flows."""
+    category = str(user_data.get('prompt_product_type', '')).casefold()
+    subtype = str(user_data.get('prompt_product_subcategory', '')).casefold()
+    name = ' '.join(str(user_data.get(key, '') or '') for key in (
+        'prompt_product_name', 'prompt_library_details',
+        'prompt_custom_category_name', 'prompt_custom_subcategory_name'
+    )).casefold()
+    animal_terms = (
+        'pet', 'pets', 'kucing', 'cat food', 'cat toy', 'cat bed', 'cat litter',
+        'anjing', 'dog food', 'dog toy', 'dog bed', 'puppy', 'kitten',
+        'hamster', 'rabbit', 'arnab', 'burung', 'bird cage', 'fish tank',
+        'aquarium', 'makanan haiwan', 'haiwan peliharaan', 'tali anjing',
+        'tali kucing', 'pasir kucing', 'pet carrier', 'pet feeder', 'pet leash'
+    )
+    return category in {'pet', 'pets'} or subtype.startswith(('pet_', 'pets_')) or any(term in name for term in animal_terms)
+
+
+def prompt_model_presence_menu(user_data=None):
+    buttons = [
+        [InlineKeyboardButton('👩 Ada Model Manusia', callback_data='prompt_model:yes')],
+    ]
+    if user_data and _prompt_is_animal_related(user_data):
+        buttons.append([InlineKeyboardButton('🐾 Haiwan sebagai model', callback_data='prompt_model:animal')])
+    buttons.extend([
         [InlineKeyboardButton('📦 Tiada Model — Fokus Produk', callback_data='prompt_model:none')],
+        [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
+    ])
+    return InlineKeyboardMarkup(buttons)
+
+
+def prompt_animal_species_menu():
+    return InlineKeyboardMarkup([
+        [InlineKeyboardButton('⚡ Auto — ikut produk', callback_data='prompt_animal_species:auto')],
+        [InlineKeyboardButton('🐱 Kucing', callback_data='prompt_animal_species:cat'),
+         InlineKeyboardButton('🐶 Anjing', callback_data='prompt_animal_species:dog')],
+        [InlineKeyboardButton('🐰 Arnab', callback_data='prompt_animal_species:rabbit'),
+         InlineKeyboardButton('🐦 Burung', callback_data='prompt_animal_species:bird')],
+        [InlineKeyboardButton('🐹 Hamster', callback_data='prompt_animal_species:hamster'),
+         InlineKeyboardButton('🐠 Ikan', callback_data='prompt_animal_species:fish')],
+        [InlineKeyboardButton('🐴 Kuda', callback_data='prompt_animal_species:horse')],
         [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
     ])
 
@@ -603,7 +640,20 @@ def prompt_creative_settings(user_data, include_audio=True):
     age = str(user_data.get('prompt_model_age', '26-40'))
     child_model = age in {'4-7', '8-12', '13-17'}
     child_product = _prompt_is_child_product(user_data)
-    if user_data.get('prompt_model_presence') == 'yes':
+    if user_data.get('prompt_model_presence') == 'animal':
+        species = str(user_data.get('prompt_animal_species', 'auto'))
+        species_labels = {
+            'auto': 'an animal species that clearly matches the named product; infer conservatively, otherwise use a cat or dog only when context supports it',
+            'cat': 'one cat',
+            'dog': 'one dog',
+            'rabbit': 'one rabbit',
+            'bird': 'one bird',
+            'hamster': 'one hamster',
+            'fish': 'one fish',
+            'horse': 'one horse',
+        }
+        model = 'Model: ' + species_labels.get(species, species_labels['auto']) + '; natural, calm, species-appropriate behaviour; show the animal interacting with or naturally using the product only when safe and plausible. Never force tricks, unsafe handling, distress, or unsupported product claims.'
+    elif user_data.get('prompt_model_presence') == 'yes':
         count = min(2, max(1, int(user_data.get('prompt_model_count', 1) or 1)))
         gender = user_data.get('prompt_model_gender', 'female')
         appearance_key = user_data.get('prompt_model_ethnicity', 'random_malaysia')
@@ -2926,7 +2976,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await query.message.reply_text('🎯 Pilih pendekatan iklan untuk hook, jalan cerita dan CTA:', reply_markup=prompt_ad_angle_menu())
         elif selected == 'manual':
             context.user_data['stage'] = 'prompt_model_presence'
-            await query.message.reply_text('👤 Mahu model dalam video?', reply_markup=prompt_model_presence_menu())
+            await query.message.reply_text('👤 Pilih model untuk video:', reply_markup=prompt_model_presence_menu(context.user_data))
     elif action.startswith('prompt_model:') and stage == 'prompt_model_presence':
         selected = action.split(':', 1)[1]
         if selected == 'none':
@@ -2937,6 +2987,22 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['prompt_model_presence'] = 'yes'
             context.user_data['stage'] = 'prompt_model_count'
             await query.message.reply_text('👥 Berapa orang model yang diperlukan?', reply_markup=prompt_model_count_menu())
+        elif selected == 'animal' and _prompt_is_animal_related(context.user_data):
+            context.user_data.update({
+                'prompt_model_presence': 'animal',
+                'prompt_model_count': 1,
+                'prompt_model_gender': 'none',
+                'prompt_model_age': 'na',
+                'prompt_model_ethnicity': 'na',
+            })
+            context.user_data['stage'] = 'prompt_animal_species'
+            await query.message.reply_text('🐾 Pilih haiwan yang menjadi model:', reply_markup=prompt_animal_species_menu())
+    elif action.startswith('prompt_animal_species:') and stage == 'prompt_animal_species':
+        selected = action.split(':', 1)[1]
+        if selected in {'auto', 'cat', 'dog', 'rabbit', 'bird', 'hamster', 'fish', 'horse'}:
+            context.user_data['prompt_animal_species'] = selected
+            context.user_data['stage'] = 'prompt_style'
+            await query.message.reply_text('🎨 Pilih gaya video:', reply_markup=prompt_style_menu(context.user_data.get('prompt_product_type', 'other'), 'animal'))
     elif action.startswith('prompt_model_count:') and stage == 'prompt_model_count':
         selected = action.split(':', 1)[1]
         if selected in ('1','2'):
@@ -3224,7 +3290,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # Return only for actions handled by the first chain. Video workflow
     # callbacks must continue into the second chain.
     if action in ('admin_pending', 'admin', 'admin_users_help', 'storyboard', 'make', 'prompt', 'prompt_categories', 'prompt_images_done') or action.startswith(
-        ('admin_approve:', 'admin_reject:', 'admin_users:', 'admin_user:', 'prompt_flow:', 'prompt_mode:', 'prompt_model:', 'prompt_model_count:', 'prompt_model_gender:', 'prompt_model_hijab:', 'prompt_model_ethnicity:', 'prompt_model_age:', 'prompt_language:', 'prompt_voiceover:', 'prompt_type:', 'prompt_product_type:', 'prompt_product_subcategory:', 'prompt_product_categories', 'prompt_duration:',
+        ('admin_approve:', 'admin_reject:', 'admin_users:', 'admin_user:', 'prompt_flow:', 'prompt_mode:', 'prompt_model:', 'prompt_animal_species:', 'prompt_model_count:', 'prompt_model_gender:', 'prompt_model_hijab:', 'prompt_model_ethnicity:', 'prompt_model_age:', 'prompt_language:', 'prompt_voiceover:', 'prompt_type:', 'prompt_product_type:', 'prompt_product_subcategory:', 'prompt_product_categories', 'prompt_duration:',
          'prompt_style:', 'prompt_setup:', 'prompt_ad_angle:', 'prompt_idea:', 'prompt_details:', 'prompt_framing:', 'prompt_text_presence:', 'prompt_text_mode:', 'prompt_audio_presence:', 'prompt_speaker:', 'video_input:', 'prompt_input:', 'pcat:', 'ptpl:')
     ):
         return
