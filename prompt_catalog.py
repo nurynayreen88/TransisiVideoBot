@@ -287,11 +287,9 @@ def product_hook(description, language="Malay"):
         return None
     if random.random() < 0.20:
         return None
-    # Natural Malaysian Malay wording; caller must treat this as optional speech only.
-    return random.choice((
-        "Kalau tengah cari " + category.lower() + ", boleh tengok pilihan ini.",
-        "Sedang bandingkan " + category.lower() + "? Ini satu pilihan untuk dipertimbangkan.",
-        "Kalau minat " + category.lower() + ", boleh semak yang ini.",
-        "Nak cari " + category.lower() + "? Cuba lihat pilihan ini dulu.",
-        "Untuk yang mencari " + category.lower() + ", boleh pertimbangkan pilihan ini.",
-    ))
+    # Use the selected category's curated hook when the product name is unavailable.
+    # Normalize shouting-style stock data to a natural spoken sentence.
+    selected_hook = random.choice(matches[0]).strip()
+    if not selected_hook:
+        return None
+    return selected_hook[0].upper() + selected_hook[1:].lower()
