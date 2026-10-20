@@ -760,7 +760,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
             + "SETTING: " + _prompt_sentence(scene, 100, "A realistic setting suited to the product.") + "\nCAMERA: " + _prompt_sentence(camera, 110, "Use one gentle camera move and keep the product stable.") + "\n"
             + (curated_direction if curated_direction else
                ((hook_direction if part != 2 else "Continue seamlessly from Part 1; do not repeat the hook.") + "\n" + rules))
-            + (("\nCREATIVE IDEA: " + concept[:100].strip()) if concept else "")
+            + (("\\nCREATIVE IDEA: " + concept_summary_long) if concept_summary_long else "")
             + "\nNatural movement. If voice is selected, use a short hook and CTA in Bahasa Melayu Malaysia. No added on-screen text or watermark."
         )
     if mode == "storyboard":
