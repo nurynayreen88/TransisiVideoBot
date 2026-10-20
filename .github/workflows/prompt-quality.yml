@@ -14,6 +14,8 @@ on:
       - "tests/test_prompt_variation.py"
       - "tests/test_prompt_quality.py"
       - "tests/test_prompt_component_tables.py"
+      - "tests/test_prompt_library_audit.py"
+      - "scripts/audit_prompt_quality.py"
       - ".github/workflows/prompt-quality.yml"
   push:
     branches:
@@ -30,6 +32,8 @@ on:
       - "tests/test_prompt_variation.py"
       - "tests/test_prompt_quality.py"
       - "tests/test_prompt_component_tables.py"
+      - "tests/test_prompt_library_audit.py"
+      - "scripts/audit_prompt_quality.py"
       - ".github/workflows/prompt-quality.yml"
 
 jobs:
@@ -44,3 +48,5 @@ jobs:
           python-version: "3.11"
       - name: Run prompt quality regression tests
         run: python -m unittest discover -s tests -p "test_*.py" -v
+      - name: Audit complete subcategory variation library
+        run: python scripts/audit_prompt_quality.py
