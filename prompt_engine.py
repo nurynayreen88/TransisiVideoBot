@@ -296,7 +296,8 @@ def _universal_prompt_rules():
 
 def _category_specific_scenes(product_type, product, product_subtype=""):
     """Build visual beats that suit the product category without assuming unseen features."""
-    words = str(product or "").casefold()    subtype = str(product_subtype or "").casefold()
+    words = str(product or "").casefold()
+    subtype = str(product_subtype or "").casefold()
     if product_type == "bag" and (
         subtype in {"bag_wallet", "wallet", "card_holder"}
         or any(term in words for term in ("wallet", "dompet", "card holder", "cardholder", "coin purse"))
