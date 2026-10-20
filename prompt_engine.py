@@ -533,7 +533,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
 
         # Keep single 10-second prompts concise enough for one Telegram message.
         # Retain the selected style, reference safety, timed beats and user concept.
-        if duration == 10:
+        if duration in (10, 20, 30) and (duration == 10 or part == 0):
             if duration == 10 and part >= 2:
                 clip_label = "SECOND CLIP 10s" if part == 2 else "THIRD CLIP 10s" if part == 3 else "CONTINUATION CLIP 10s"
                 beat_plan = (clip_label + ": 0–2s continue from the exact full-product frame held at the end of the previous clip; "
