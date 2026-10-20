@@ -7897,7 +7897,7 @@
       "subcategory_id": "home_bedding",
       "category_id": "home",
       "label": "🛏️ Cadar / Peralatan tidur",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "home_bedding_v01",
@@ -8018,6 +8018,126 @@
           "lighting": "LIGHTING: Low-contrast premium light; keep labels and details readable.",
           "closing": "CTA / HERO: Return to the complete unchanged product and hold a clean final frame.",
           "audio": "AUDIO: Respect audio settings; if the generator cannot render audio, do not claim it will."
+        },
+        {
+          "id": "home_bedding_v11",
+          "variation_number": 11,
+          "name": "Fold-to-Full Reveal",
+          "hook": "HOOK: Open close on the bedding's visible folds, then reveal the arranged bed. No added text or graphics.",
+          "action": "Pull back to show the actual pattern and arrangement without changing fabric details.",
+          "detail": "DETAIL: Preserve the exact product identity, visible shape, colors, pattern, labels and component count. Refer only to visible details; do not invent materials, functions or claims.",
+          "camera": "CAMERA: Slow pullback from fabric-level detail to a wide bed view.",
+          "lighting": "LIGHTING: Soft daylight shows folds naturally.",
+          "closing": "CTA / HERO: Hold the full bed arrangement in frame.",
+          "audio": "AUDIO: Quiet bedroom ambience and light instrumental. No spoken claims or unsupported effects."
+        },
+        {
+          "id": "home_bedding_v12",
+          "variation_number": 12,
+          "name": "Pattern Across the Bed",
+          "hook": "HOOK: Begin where the bedding pattern is most clearly visible. No added text or graphics.",
+          "action": "Track across the bed surface, then widen to establish the full arrangement.",
+          "detail": "DETAIL: Preserve the exact product identity, visible shape, colors, pattern, labels and component count. Refer only to visible details; do not invent materials, functions or claims.",
+          "camera": "CAMERA: Smooth horizontal track parallel to the bed.",
+          "lighting": "LIGHTING: Even diffuse light preserves the pattern's real colors.",
+          "closing": "CTA / HERO: End with pattern and overall arrangement readable.",
+          "audio": "AUDIO: Restrained music; no claims about comfort or fabric. No spoken claims or unsupported effects."
+        },
+        {
+          "id": "home_bedding_v13",
+          "variation_number": 13,
+          "name": "Pillow Arrangement",
+          "hook": "HOOK: Open on the visible pillow arrangement as part of the bedding display. No added text or graphics.",
+          "action": "Move from pillows toward the main bedding surface without adding or removing items.",
+          "detail": "DETAIL: Preserve the exact product identity, visible shape, colors, pattern, labels and component count. Refer only to visible details; do not invent materials, functions or claims.",
+          "camera": "CAMERA: Slow diagonal glide at bed height.",
+          "lighting": "LIGHTING: Natural soft light with gentle shadows between folds.",
+          "closing": "CTA / HERO: Finish on the complete visible arrangement.",
+          "audio": "AUDIO: Soft fabric movement only if fabric visibly moves. No spoken claims or unsupported effects."
+        },
+        {
+          "id": "home_bedding_v14",
+          "variation_number": 14,
+          "name": "Bedside Context",
+          "hook": "HOOK: Show the bedding in a believable bedroom context before moving closer. No added text or graphics.",
+          "action": "Approach the bed while keeping the visible design consistent.",
+          "detail": "DETAIL: Preserve the exact product identity, visible shape, colors, pattern, labels and component count. Refer only to visible details; do not invent materials, functions or claims.",
+          "camera": "CAMERA: Wide establishing shot followed by a measured dolly-in.",
+          "lighting": "LIGHTING: Balanced ambient light, no artificial glow.",
+          "closing": "CTA / HERO: Hold a tidy full-bed composition.",
+          "audio": "AUDIO: Low room tone and subdued music. No spoken claims or unsupported effects."
+        },
+        {
+          "id": "home_bedding_v15",
+          "variation_number": 15,
+          "name": "Edge Detail",
+          "hook": "HOOK: Open on a visible edge, seam, or hem if present in the reference. No added text or graphics.",
+          "action": "Follow that edge briefly and pull back to show where it sits on the bedding.",
+          "detail": "DETAIL: Preserve the exact product identity, visible shape, colors, pattern, labels and component count. Refer only to visible details; do not invent materials, functions or claims.",
+          "camera": "CAMERA: Steady close tracking move; do not invent stitching details.",
+          "lighting": "LIGHTING: Soft side light reveals existing contours only.",
+          "closing": "CTA / HERO: End on a full view with the edge detail contextualized.",
+          "audio": "AUDIO: Minimal music; no exaggerated fabric sound. No spoken claims or unsupported effects."
+        },
+        {
+          "id": "home_bedding_v16",
+          "variation_number": 16,
+          "name": "Texture in Daylight",
+          "hook": "HOOK: Begin close to a visible bedding surface texture. No added text or graphics.",
+          "action": "Shift the viewing angle so existing texture catches light, then show the whole surface.",
+          "detail": "DETAIL: Preserve the exact product identity, visible shape, colors, pattern, labels and component count. Refer only to visible details; do not invent materials, functions or claims.",
+          "camera": "CAMERA: Gentle side-to-side slider move.",
+          "lighting": "LIGHTING: Diffused daylight; do not imply special material properties.",
+          "closing": "CTA / HERO: Finish with a calm, recognizable bed view.",
+          "audio": "AUDIO: Subtle ambient music only. No spoken claims or unsupported effects."
+        },
+        {
+          "id": "home_bedding_v17",
+          "variation_number": 17,
+          "name": "Top-Down Layout",
+          "hook": "HOOK: Open from above to show the bedding's visible layout and pattern. No added text or graphics.",
+          "action": "Make a slow overhead drift across the arrangement, then settle centrally.",
+          "detail": "DETAIL: Preserve the exact product identity, visible shape, colors, pattern, labels and component count. Refer only to visible details; do not invent materials, functions or claims.",
+          "camera": "CAMERA: Stable overhead angle; avoid warping perspective.",
+          "lighting": "LIGHTING: Even illumination with realistic shadows.",
+          "closing": "CTA / HERO: Hold a complete overhead composition.",
+          "audio": "AUDIO: Quiet instrumental music. No spoken claims or unsupported effects."
+        },
+        {
+          "id": "home_bedding_v18",
+          "variation_number": 18,
+          "name": "Corner Draping",
+          "hook": "HOOK: Begin at a visible bedding corner where the drape is clear. No added text or graphics.",
+          "action": "Follow the natural drape down and widen to show the overall arrangement.",
+          "detail": "DETAIL: Preserve the exact product identity, visible shape, colors, pattern, labels and component count. Refer only to visible details; do not invent materials, functions or claims.",
+          "camera": "CAMERA: Gentle tilt down followed by a short pullback.",
+          "lighting": "LIGHTING: Soft directional daylight shows folds faithfully.",
+          "closing": "CTA / HERO: End on the corner and complete bedding in context.",
+          "audio": "AUDIO: Fabric foley only if movement is visible. No spoken claims or unsupported effects."
+        },
+        {
+          "id": "home_bedding_v19",
+          "variation_number": 19,
+          "name": "Balanced Bedroom Frame",
+          "hook": "HOOK: Open with the bed centred in a simple, uncluttered room. No added text or graphics.",
+          "action": "Move forward slightly, keeping bedding details and room lines natural.",
+          "detail": "DETAIL: Preserve the exact product identity, visible shape, colors, pattern, labels and component count. Refer only to visible details; do not invent materials, functions or claims.",
+          "camera": "CAMERA: Stable symmetrical composition with a slow push-in.",
+          "lighting": "LIGHTING: Neutral light; do not color-grade the bedding shade.",
+          "closing": "CTA / HERO: Hold the centred full-bed view.",
+          "audio": "AUDIO: Light background music and natural room tone. No spoken claims or unsupported effects."
+        },
+        {
+          "id": "home_bedding_v20",
+          "variation_number": 20,
+          "name": "Complete Set Finish",
+          "hook": "HOOK: Start on one clearly visible bedding detail and slowly reveal the displayed set. No added text or graphics.",
+          "action": "Use one continuous move so the viewer can connect the detail to the overall arrangement.",
+          "detail": "DETAIL: Preserve the exact product identity, visible shape, colors, pattern, labels and component count. Refer only to visible details; do not invent materials, functions or claims.",
+          "camera": "CAMERA: Pull back smoothly while keeping shown pieces within frame.",
+          "lighting": "LIGHTING: Soft, even light across pillows, folds and main surface.",
+          "closing": "CTA / HERO: Finish on a steady wide view of the actual arrangement.",
+          "audio": "AUDIO: Gentle musical finish; no unsupported comfort claims. No spoken claims or unsupported effects."
         }
       ]
     },
