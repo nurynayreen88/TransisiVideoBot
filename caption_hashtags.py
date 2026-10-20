@@ -7,6 +7,8 @@ CATEGORY_TERMS = {
     "fashion": ["fesyen", "bajufesyen", "ootd", "gayaharini", "gayawanita", "gayapria", "outfitmalaysia", "fashionmalaysia"],
     "bag": ["beg", "begwanita", "begtangan", "begseharian", "begtravel", "begkerja", "begcantik"],
     "hijab": ["tudung", "hijab", "tudungcantik", "gayatudung", "tudungmalaysia", "hijabstyle"],
+    "kids_shoes": ["kasutkanakkanak", "kasutbudak", "kasutcomel", "gayakanakkanak", "baranganak"],
+    "kids_clothing": ["bajukanakkanak", "pakaianbudak", "gayakanakkanak", "bajukomel", "fesyenkanakkanak"],
     "shoes": ["kasut", "kasutwanita", "kasutlelaki", "kasutselesa", "kasutkerja", "kasutcantik"],
     "beauty": ["kecantikan", "rutinpenjagaan", "beautymalaysia", "skincare", "makeupmalaysia", "selfcare"],
     "food": ["makanan", "makanansedap", "jommak an".replace(" ", ""), "kudapan", "foodmalaysia", "jommak an".replace(" ", "")],
@@ -72,6 +74,13 @@ def _category_key(value):
         "automotive": "automotive", "baby": "baby", "travel": "travel", "office": "office",
         "equipment": "equipment",
     }
+    # Resolve child-specific subcategories before broad parent categories.
+    child_terms = ("kanak", "kanakkanak", "budak", "kids", "children", "child", "toddler", "baby")
+    if any(term in value for term in child_terms):
+        if any(term in value for term in ("shoe", "kasut", "footwear")):
+            return "kids_shoes"
+        if any(term in value for term in ("cloth", "clothing", "pakaian", "baju", "dress", "apparel")):
+            return "kids_clothing"
     for needle, key in aliases.items():
         if needle in value:
             return key
@@ -120,23 +129,31 @@ def _relevant_hashtags(category, product_name, subcategory, limit=12):
     return (specific + general)[:limit]
 
 def generate_caption(product_name, category="other", subcategory="", platform="Shopee"):
-    """Build a cautious Malay caption based only on selected product details."""
+    """Return only a short product caption and relevant hashtags, without UI instructions."""
     name = str(product_name or "").strip()[:180]
     sub = str(subcategory or "").strip()[:80]
     if not name:
         name = "produk pilihan"
-    key = _category_key(str(category) + " " + sub)
-    seed = sum(ord(ch) for ch in (name + sub + key + str(platform)))
-    hook = HOOKS[seed % len(HOOKS)]
-    cta = CTAS[(seed // 3) % len(CTAS)]
-    product_line = "✨ " + name
-    if sub and _slug(sub).lower() not in _slug(name).lower():
-        product_line += " | " + sub
+    key = _category_key(str(category) + " " + sub + " " + name)
+    # Short, category-aware Malaysian Malay copy; avoid unsupported product claims.
+    captions = {
+        "kids_shoes": f"Lengkapkan gaya si kecil dengan {name} 👟",
+        "kids_clothing": f"Pilihan comel untuk gaya si kecil: {name} 🧸",
+        "shoes": f"Sedang mencari kasut? Jom lihat {name} 👟",
+        "fashion": f"Serlahkan gaya anda dengan {name} ✨",
+        "bag": f"Lengkapkan gaya harian anda dengan {name} 👜",
+        "hijab": f"Idea gaya tudung untuk dipadankan dengan {name} ✨",
+        "beauty": f"Tambahkan {name} dalam senarai pilihan kecantikan anda ✨",
+        "food": f"Teringin mencuba sesuatu? Lihat {name} 🍽️",
+        "gadget": f"Sedang mencari gajet? Kenali {name} 📱",
+        "home": f"Ilham untuk ruang kediaman anda: {name} 🏡",
+        "toy": f"Idea untuk waktu bermain si kecil: {name} 🧸",
+        "baby": f"Pilihan untuk melengkapi keperluan si kecil: {name} 🍼",
+        "other": f"Jom lihat {name} dan semak sama ada sesuai dengan keperluan anda ✨",
+    }
+    caption = captions.get(key, f"Jom lihat {name} dan semak sama ada sesuai dengan keperluan anda ✨")
     hashtags = _relevant_hashtags(key, name, sub)
-    return (
-        hook + "\n\n" + product_line + "\n\n" + cta +
-        "\n\n" + " ".join(hashtags)
-    )
+    return caption + "\n\n" + " ".join(hashtags)
 
 def get_caption(product_name, category="other", subcategory="", platform="Shopee"):
     return generate_caption(product_name, category, subcategory, platform)
