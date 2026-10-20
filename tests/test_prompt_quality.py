@@ -49,6 +49,11 @@ class PromptQualityTests(unittest.TestCase):
         self.assertIn("PRESENTATION VARIATION:", prompt)
         self.assertIn("Keep the selected visual style recognizably consistent", prompt)
 
+    def test_wallet_category_uses_wallet_specific_creative_variation(self):
+        direction = _creative_variation("wallet", "wallet", 0)
+        self.assertIn("wallet", direction.casefold())
+        self.assertIn("AUDIO:", direction)
+
     def test_audio_variation_does_not_force_unselected_voiceover(self):
         direction = _creative_variation("equipment", "desk lamp", 0)
         self.assertIn("only the audio elements selected by the user", direction)
