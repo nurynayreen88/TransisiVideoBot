@@ -9,6 +9,8 @@ from prompt_catalog import opening_direction, product_hook
 from prompt_engine import (
     UNIVERSAL_PROMPT_FRAMEWORKS,
     _AUTO_STYLE_CANDIDATES,
+    _CREATIVE_ACTIONS,
+    _CREATIVE_PRESENTATION_VARIATIONS,
     _prompt_sentence,
     _resolve_auto_style,
     _category_specific_scenes,
@@ -27,6 +29,20 @@ class PromptQualityTests(unittest.TestCase):
     def tearDown(self):
         prompt_catalog.DB_PATH = self.original_db_path
         self.temp_dir.cleanup()
+
+    def test_every_product_group_has_at_least_ten_creative_variations(self):
+        self.assertGreaterEqual(len(_CREATIVE_PRESENTATION_VARIATIONS), 10)
+        self.assertEqual(len(set(_CREATIVE_PRESENTATION_VARIATIONS)), len(_CREATIVE_PRESENTATION_VARIATIONS))
+        for group, actions in _CREATIVE_ACTIONS.items():
+            with self.subTest(group=group):
+                # Every category-safe action can combine with the shared
+                # presentation matrix; each group therefore offers >=10
+                # distinct prompt combinations without inventing product facts.
+                combinations = {f"{action} | {presentation}" for action in actions for presentation in _CREATIVE_PRESENTATION_VARIATIONS}
+                self.assertGreaterEqual(len(combinations), 10)
+                direction = _creative_variation(group, f"generic {group} product", 0)
+                self.assertIn("PRESENTATION:", direction)
+                self.assertIn("VISUAL VARIATION:", direction)
 
     def test_presentation_profile_avoids_repeating_recent_three(self):
         profiles = [
