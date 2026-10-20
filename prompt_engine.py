@@ -575,7 +575,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
                     start_time = index * scene_length
                     end_time = start_time + scene_length
                     if index == 4 and duration == 10 and part == 1:
-                        shot_direction += " Hold the exact final full-product frame steadily for a seamless Part 2 handoff; no fade."
+                        shot_direction += " HOLD the final frame in a stable full-product composition for a seamless Part 2 handoff; no fade."
                     timed_scenes.append(
                         f"{start_time:g}–{end_time:g}s {shot_name}: {shot_direction}"
                     )
