@@ -916,15 +916,19 @@ def prompt_creative_settings(user_data, include_audio=True):
         'none': 'BACKGROUND MUSIC: No music; use no musical bed.',
     }
     lines.append(music_directions.get(music_choice, music_directions['auto']))
-    sfx_choice = str(user_data.get('prompt_sfx_choice', 'auto')).casefold()
-    sfx_directions = {
-        'auto': 'SFX: Add only subtle, well-timed effects that match visible actions and the product category. Never invent product sounds or imply unsupported functions.',
-        'product': 'SFX: Add subtle, realistic handling or movement sounds only when the corresponding product action is visibly shown; no invented mechanism sounds.',
-        'doodle': 'SFX: For visible White Doodle animation only, sync a soft drawing/whoosh to moving lines, a light chime to highlights and a gentle pop to circles. Keep effects sparse and below any voice.',
-        'ambient': 'SFX: Use only quiet, plausible environmental ambience suited to the scene; do not add unrelated sound effects.',
-        'none': 'SFX: No sound effects; do not add whooshes, impacts, chimes or artificial product sounds.',
-    }
-    lines.append(sfx_directions.get(sfx_choice, sfx_directions['auto']))
+    style_key = str(user_data.get('prompt_style', '')).casefold()
+    if style_key == 'white_doodle':
+        lines.append(
+            'SFX: Only for visible White Doodle animation, sync a soft drawing/scribble or whoosh to moving lines, '
+            'a light chime to a visible highlight and a gentle pop to a visible circle. Keep effects sparse, brief, '
+            'timed to the animation and below any voice/music. Do not add doodle SFX to any other style.'
+        )
+    else:
+        lines.append(
+            'SFX: Add subtle, natural handling, movement or environmental sounds only when the matching action is visibly shown. '
+            'These may coexist with background music, but must stay clear, restrained and below speech. Do not add doodle-specific '
+            'scribble, whoosh, chime or pop effects unless White Doodle is selected; never invent product sounds.'
+        )
     if user_data.get('prompt_custom_background'):
         lines.append('Use the separately uploaded background image as the scene and match its perspective and lighting.')
     return '\n'.join(lines)
@@ -1184,6 +1188,25 @@ def prompt_style_menu(product_type='other', model_presence=None):
     ]
     rows.append([InlineKeyboardButton('↩️ Menu Utama', callback_data='home')])
     return InlineKeyboardMarkup(rows)
+
+
+def prompt_preset_menu(product_type='other', model_presence=None):
+    """Eight ready-to-use creative presets plus Manual."""
+    available = {key for key, _label in storyboard_styles()}
+    rows = [
+        [InlineKeyboardButton(CORE_STYLE_LABELS[key], callback_data='prompt_preset:' + key)]
+        for key in CORE_USER_STYLE_KEYS if key in available
+    ]
+    rows.append([InlineKeyboardButton('🛠️ Manual — pilih komponen sendiri', callback_data='prompt_preset:manual')])
+    rows.append([InlineKeyboardButton('↩️ Menu Utama', callback_data='home')])
+    return InlineKeyboardMarkup(rows)
+
+
+def prompt_preset_guide():
+    return '🎨 PILIH PRESET KREATIF KLIPPO\\n\\n' + '\\n'.join(
+        '• ' + CORE_STYLE_LABELS[key] + ' — ' + CORE_STYLE_DESCRIPTIONS[key]
+        for key in CORE_USER_STYLE_KEYS
+    ) + '\\n\\nPilih satu preset untuk gabungan kreatif automatik, atau Manual untuk mengawal komponen satu demi satu.'
 
 
 def prompt_category_menu():
@@ -3188,8 +3211,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         selected = action.split(':', 1)[1]
         if selected == 'none':
             context.user_data.update({'prompt_model_presence':'none','prompt_model_count':0,'prompt_model_gender':'none','prompt_model_hijab':'na','prompt_model_ethnicity':'na','prompt_model_age':'na','prompt_model_gender_2':'none','prompt_model_hijab_2':'na','prompt_model_age_2':'na'})
-            context.user_data['stage'] = 'prompt_style'
-            await query.message.reply_text('🎨 Pilih gaya video:', reply_markup=prompt_style_menu(context.user_data.get('prompt_product_type','other'),'none'))
+            context.user_data['stage'] = 'prompt_preset'
+            await query.message.reply_text(prompt_preset_guide(), reply_markup=prompt_preset_menu(context.user_data.get('prompt_product_type','other'),'none'))
         elif selected == 'yes':
             context.user_data['prompt_model_presence'] = 'yes'
             context.user_data['stage'] = 'prompt_model_count'
@@ -3208,8 +3231,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         selected = action.split(':', 1)[1]
         if selected in {'auto', 'cat', 'dog', 'rabbit', 'bird', 'hamster', 'fish', 'horse'}:
             context.user_data['prompt_animal_species'] = selected
-            context.user_data['stage'] = 'prompt_style'
-            await query.message.reply_text('🎨 Pilih gaya video:', reply_markup=prompt_style_menu(context.user_data.get('prompt_product_type', 'other'), 'animal'))
+            context.user_data['stage'] = 'prompt_preset'
+            await query.message.reply_text(prompt_preset_guide(), reply_markup=prompt_preset_menu(context.user_data.get('prompt_product_type', 'other'), 'animal'))
     elif action.startswith('prompt_model_count:') and stage == 'prompt_model_count':
         selected = action.split(':', 1)[1]
         if selected in ('1','2'):
@@ -3261,8 +3284,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     context.user_data['stage'] = 'prompt_model_hijab'
                     await query.message.reply_text('Model pertama wanita — pilih bertudung atau tidak:', reply_markup=prompt_model_hijab_menu())
                 else:
-                    context.user_data['stage'] = 'prompt_style'
-                    await query.message.reply_text('🎨 Pilih gaya video:', reply_markup=prompt_style_menu(context.user_data.get('prompt_product_type','other'),'yes'))
+                    context.user_data['stage'] = 'prompt_preset'
+                    await query.message.reply_text(prompt_preset_guide(), reply_markup=prompt_preset_menu(context.user_data.get('prompt_product_type','other'),'yes'))
             else:
                 context.user_data['prompt_model_ethnicity'] = selected
                 if int(context.user_data.get('prompt_model_count', 1)) == 2:
@@ -3274,8 +3297,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     await query.message.reply_text('Model wanita — pilih bertudung atau tidak:', reply_markup=prompt_model_hijab_menu())
                 else:
                     context.user_data['prompt_model_hijab'] = 'na'
-                    context.user_data['stage'] = 'prompt_style'
-                    await query.message.reply_text('🎨 Pilih gaya video:', reply_markup=prompt_style_menu(context.user_data.get('prompt_product_type','other'),'yes'))
+                    context.user_data['stage'] = 'prompt_preset'
+                    await query.message.reply_text(prompt_preset_guide(), reply_markup=prompt_preset_menu(context.user_data.get('prompt_product_type','other'),'yes'))
     elif action.startswith('prompt_model_hijab:') and stage == 'prompt_model_hijab':
         selected = action.split(':', 1)[1]
         if selected in ('hijab','no_hijab','na'):
@@ -3292,8 +3315,33 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     context.user_data['prompt_hijab_target'] = 2
                     await query.message.reply_text('Model kedua wanita — pilih bertudung atau tidak:', reply_markup=prompt_model_hijab_menu())
                     return
+            context.user_data['stage'] = 'prompt_preset'
+            await query.message.reply_text(prompt_preset_guide(), reply_markup=prompt_preset_menu(context.user_data.get('prompt_product_type','other'),'yes'))
+    elif action.startswith('prompt_preset:') and stage == 'prompt_preset':
+        selected = action.split(':', 1)[1]
+        if selected == 'manual':
+            context.user_data['prompt_generation_mode'] = 'manual'
+            context.user_data.pop('prompt_preset', None)
             context.user_data['stage'] = 'prompt_style'
-            await query.message.reply_text('🎨 Pilih gaya video:', reply_markup=prompt_style_menu(context.user_data.get('prompt_product_type','other'),'yes'))
+            await query.message.reply_text(
+                '🛠️ MOD MANUAL\\nPilih gaya dahulu; selepas itu anda boleh menetapkan komponen prompt satu demi satu.',
+                reply_markup=prompt_style_menu(context.user_data.get('prompt_product_type', 'other'), context.user_data.get('prompt_model_presence'))
+            )
+        elif selected in CORE_USER_STYLE_KEYS and selected in {key for key, _ in storyboard_styles()}:
+            context.user_data['prompt_generation_mode'] = 'preset'
+            context.user_data['prompt_preset'] = selected
+            context.user_data['prompt_style'] = selected
+            context.user_data['prompt_motion_choice'] = 'auto'
+            context.user_data['prompt_framing'] = 'auto'
+            context.user_data['prompt_ad_angle'] = 'auto'
+            context.user_data['prompt_scene_key'] = 'auto'
+            context.user_data['stage'] = 'prompt_duration'
+            await query.message.reply_text(
+                '✨ Preset dipilih: ' + CORE_STYLE_LABELS[selected] + '\\n' + CORE_STYLE_DESCRIPTIONS[selected] + '\\n\\nPilih tempoh video:',
+                reply_markup=prompt_duration_menu()
+            )
+        else:
+            await query.message.reply_text(prompt_preset_guide(), reply_markup=prompt_preset_menu(context.user_data.get('prompt_product_type', 'other'), context.user_data.get('prompt_model_presence')))
     elif action.startswith('prompt_duration:') and stage == 'prompt_duration':
         selected = action.split(':', 1)[1]
         valid_duration_modes = {
@@ -3321,11 +3369,46 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['prompt_custom_background'] = False
             context.user_data['prompt_motion_choice'] = 'auto'
             context.user_data['prompt_framing'] = 'auto'
-            context.user_data['stage'] = 'prompt_ad_angle'
-            await query.message.reply_text(
-                '🎯 Pilih pendekatan iklan untuk hook, jalan cerita dan CTA:',
-                reply_markup=prompt_ad_angle_menu()
-            )
+            if context.user_data.get('prompt_generation_mode') == 'preset':
+                preset = context.user_data.get('prompt_preset', context.user_data.get('prompt_style', 'cinematic'))
+                preset_scenes = {
+                    'cinematic': ('studio', 'a premium cinematic studio with controlled directional light and realistic shadows'),
+                    'minimal': ('minimal', 'a bright minimalist setting with clean neutral surfaces and soft daylight'),
+                    'lifestyle': ('home', 'a tasteful everyday setting chosen to suit the product, with natural ambient light'),
+                    'dynamic': ('studio', 'a clean studio or practical setting suited to energetic but believable product action'),
+                    'luxury': ('dark', 'a premium dark studio with restrained rim lighting and elegant contrast'),
+                    'flatlay': ('studio', 'a clean tabletop flatlay setting viewed from above, with a tidy complementary surface'),
+                    'creative_reveal': ('studio', 'a creative product-reveal setting with controlled light and uncluttered surroundings'),
+                    'white_doodle': ('minimal', 'a bright clean background that keeps thin white doodle accents visible around the product'),
+                }
+                scene_key, scene_description = preset_scenes.get(preset, preset_scenes['cinematic'])
+                context.user_data.update({
+                    'prompt_ad_angle': {'luxury': 'premium', 'dynamic': 'demo', 'creative_reveal': 'reveal'}.get(preset, 'auto'),
+                    'prompt_on_screen_text': 'no',
+                    'prompt_text_mode': 'none',
+                    'prompt_text_content': '',
+                    'prompt_audio_enabled': True,
+                    'prompt_voiceover_mode': 'ai',
+                    'prompt_voiceover_style': 'auto',
+                    'prompt_speech_source': 'voiceover',
+                    'prompt_language': 'Malay',
+                    'prompt_voiceover_script': '',
+                    'prompt_music_choice': 'auto',
+                    'prompt_sfx_choice': 'auto',
+                    'prompt_scene': scene_description,
+                    'prompt_scene_key': scene_key,
+                    'prompt_custom_background': False,
+                    'prompt_motion_choice': 'auto',
+                    'prompt_framing': 'auto',
+                    'stage': 'prompt_motion',
+                })
+                action = 'motion:auto'
+            else:
+                context.user_data['stage'] = 'prompt_ad_angle'
+                await query.message.reply_text(
+                    '🎯 Pilih pendekatan iklan untuk hook, jalan cerita dan CTA:',
+                    reply_markup=prompt_ad_angle_menu()
+                )
     elif action.startswith('prompt_ad_angle:') and stage == 'prompt_ad_angle':
         selected = action.split(':', 1)[1]
         valid_angles = {'auto', 'question', 'reveal', 'demo', 'relatable', 'premium', 'affiliate'}
@@ -3390,8 +3473,9 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         selected = action.split(':', 1)[1]
         if selected in {'auto', 'upbeat', 'elegant', 'calm', 'playful', 'cinematic', 'none'}:
             context.user_data['prompt_music_choice'] = selected
-            context.user_data['stage'] = 'prompt_sfx'
-            await query.message.reply_text('🔊 Pilih kesan bunyi (SFX):', reply_markup=prompt_sfx_menu())
+            context.user_data['prompt_sfx_choice'] = 'auto'
+            context.user_data['stage'] = 'prompt_scene'
+            await query.message.reply_text('🖼️ Pilih latar video:', reply_markup=prompt_scene_menu())
         else:
             await query.message.reply_text('Pilihan muzik tidak sah. Sila pilih semula:', reply_markup=prompt_music_menu())
     elif action.startswith('prompt_sfx:') and stage == 'prompt_sfx':
@@ -3448,8 +3532,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif action == 'prompt_style_back' and stage == 'prompt_confirm':
         context.user_data['stage'] = 'prompt_style'
         await query.message.reply_text(
-            '🎨 Pilih gaya video sahaja. Semua tetapan lain dipilih automatik.',
-            reply_markup=prompt_style_menu(context.user_data.get('prompt_product_type', 'other'))
+            prompt_preset_guide(),
+            reply_markup=prompt_preset_menu(context.user_data.get('prompt_product_type', 'other'), context.user_data.get('prompt_model_presence'))
         )
     elif action == 'prompt_framing_back' and stage == 'prompt_framing':
         context.user_data['stage'] = 'prompt_style'
@@ -3536,8 +3620,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     # Return only for actions handled by the first chain. Video workflow
     # callbacks must continue into the second chain.
     if action in ('admin_pending', 'admin', 'admin_users_help', 'storyboard', 'make', 'prompt', 'prompt_categories', 'prompt_images_done', 'prompt_style_back') or action.startswith(
-        ('admin_approve:', 'admin_reject:', 'admin_users:', 'admin_user:', 'prompt_flow:', 'prompt_mode:', 'prompt_model:', 'prompt_animal_species:', 'prompt_model_count:', 'prompt_model_gender:', 'prompt_model_hijab:', 'prompt_model_ethnicity:', 'prompt_model_age:', 'prompt_language:', 'prompt_voiceover:', 'prompt_type:', 'prompt_product_type:', 'prompt_product_subcategory:', 'prompt_product_categories', 'prompt_duration:',
-         'prompt_style:', 'prompt_setup:', 'prompt_ad_angle:', 'prompt_idea:', 'prompt_details:', 'prompt_framing:', 'prompt_text_presence:', 'prompt_text_mode:', 'prompt_audio_presence:', 'prompt_music:', 'prompt_sfx:', 'prompt_speaker:', 'video_input:', 'prompt_input:', 'pcat:', 'ptpl:')
+        ('admin_approve:', 'admin_reject:', 'admin_users:', 'admin_user:', 'prompt_flow:', 'prompt_mode:', 'prompt_model:', 'prompt_preset:', 'prompt_animal_species:', 'prompt_model_count:', 'prompt_model_gender:', 'prompt_model_hijab:', 'prompt_model_ethnicity:', 'prompt_model_age:', 'prompt_language:', 'prompt_voiceover:', 'prompt_type:', 'prompt_product_type:', 'prompt_product_subcategory:', 'prompt_product_categories', 'prompt_duration:',
+         'prompt_style:', 'prompt_setup:', 'prompt_ad_angle:', 'prompt_idea:', 'prompt_details:', 'prompt_framing:', 'prompt_text_presence:', 'prompt_text_mode:', 'prompt_audio_presence:', 'prompt_music:', 'prompt_speaker:', 'video_input:', 'prompt_input:', 'pcat:', 'ptpl:')
     ):
         return
     if action.startswith('motion:') and context.user_data.get('stage') == 'prompt_motion':
