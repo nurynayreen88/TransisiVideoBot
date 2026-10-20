@@ -38,6 +38,23 @@ class PromptQualityTests(unittest.TestCase):
         self.assertIn("preserves the exact visible product.", result)
         self.assertNotIn("Do not invent materials.", result)  # exceeds target after the complete first sentence
 
+    def test_prompt_preserves_complete_style_scene_camera_and_concept(self):
+        prompt = build_prompt(
+            mode="storyboard",
+            product="Desk lamp",
+            scene="Clean studio background. Keep a warm side light and neutral tabletop.",
+            motion="orbit",
+            style="studio_360_safe",
+            duration=10,
+            concept="Show a careful hero reveal. Keep the final frame suitable for a seamless edit.",
+            product_type="equipment",
+        )
+        self.assertIn("not a fabricated 360-degree rotation or unseen product surfaces.", prompt)
+        self.assertIn("Keep a warm side light and neutral tabletop.", prompt)
+        self.assertIn("Never reveal or fabricate an unseen side.", prompt)
+        self.assertIn("Keep the final frame suitable for a seamless edit.", prompt)
+        self.assertIn("CAMERA PRIORITY:", prompt)
+
     def test_english_opening_direction_does_not_force_malay_speech(self):
         direction = opening_direction("bag", "English")
         self.assertIn("If voiceover is used, speak clear English.", direction)
