@@ -22,6 +22,7 @@ from gemini_vision import describe_photo
 from gemini_storyboard import generate_storyboard
 from gemini_storyboard_image import generate_storyboard_sheet, GeminiStoryboardImageError
 from prompt_engine import build_prompt, creative_angle_instruction
+from prompt_model_defaults import auto_prompt_model_defaults
 from prompt_catalog import choices as storyboard_styles
 from caption_hashtags import generate_caption, hashtag_library_size
 
@@ -525,6 +526,7 @@ def prompt_model_count_menu():
 
 def prompt_model_gender_menu():
     return InlineKeyboardMarkup([
+        [InlineKeyboardButton('⚡ Auto — ikut produk', callback_data='prompt_model_gender:auto')],
         [InlineKeyboardButton('Wanita', callback_data='prompt_model_gender:female'),
          InlineKeyboardButton('Lelaki', callback_data='prompt_model_gender:male')],
         [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
@@ -660,6 +662,7 @@ def prompt_creative_settings(user_data, include_audio=True):
     elif user_data.get('prompt_model_presence') == 'yes':
         count = min(2, max(1, int(user_data.get('prompt_model_count', 1) or 1)))
         gender = user_data.get('prompt_model_gender', 'female')
+        gender_label = {'female': 'female', 'male': 'male', 'auto': 'matching the product/reference; if unclear, use neutral natural styling'}.get(gender, 'matching the product/reference')
         appearance_key = user_data.get('prompt_model_ethnicity', 'random_malaysia')
         appearance = {
             'Malay': 'Malay Malaysian',
@@ -673,11 +676,11 @@ def prompt_creative_settings(user_data, include_audio=True):
         if child_model and not child_product:
             model = 'Model: no child or teen; focus on the product and use adult hands if needed.'
         elif child_model:
-            model = f'Model: {count} child/teen model(s), age {age}, gender {gender}, {appearance}; keep the appearance consistent and actions age-appropriate.'
+            model = f'Model: {count} child/teen model(s), age {age}, gender presentation {gender_label}, {appearance}; match the product/reference, keep identity consistent and actions age-appropriate.'
         elif child_product:
-            model = f'Model: {count} adult model(s), gender {gender}, {appearance}, age {age}; show child-sized products on a suitable surface, hanger or mannequin.'
+            model = f'Model: {count} adult model(s), gender presentation {gender_label}, {appearance}, age {age}; show child-sized products on a suitable surface, hanger or mannequin.'
         else:
-            model = f'Model: {count} adult model(s), gender {gender}, {appearance}, age {age}; keep identity and outfit consistent.'
+            model = f'Model: {count} adult model(s), gender presentation {gender_label}, {appearance}, age {age}; keep identity and outfit consistent.'
     else:
         model = 'Model: none; focus on the product.'
 
@@ -2965,16 +2968,19 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         selected = action.split(':', 1)[1]
         if selected == 'auto':
             product_type = context.user_data.get('prompt_product_type', 'other')
-            use_model = product_type in {'fashion', 'hijab', 'shoes'}
+            auto_model_defaults = auto_prompt_model_defaults(
+                product_type=product_type,
+                product_subcategory=context.user_data.get('prompt_product_subcategory', ''),
+                child_product=_prompt_is_child_product(context.user_data),
+                animal_related=_prompt_is_animal_related(context.user_data),
+            )
             context.user_data.update({
-                'prompt_model_presence':'yes' if use_model else 'none','prompt_model_count':1 if use_model else 0,
-                'prompt_model_gender':'female' if use_model else 'none','prompt_model_hijab':'hijab' if product_type == 'hijab' else ('no_hijab' if use_model else 'na'),
-                'prompt_model_ethnicity':'Malay' if use_model else 'na','prompt_model_age':'26-40' if use_model else 'na',
+                **auto_model_defaults,
                 'prompt_model_gender_2':'none','prompt_model_hijab_2':'na','prompt_model_age_2':'na',
                 'prompt_style':'auto','prompt_language':'Malay','prompt_voiceover_mode':'ai','prompt_voiceover_style':'auto',
                 'prompt_speech_source':'voiceover','prompt_voiceover_script':'','prompt_concept':'',
                 'prompt_scene':'clean premium studio background, selected to complement the exact product reference',
-                'prompt_motion_choice':'auto','prompt_framing':'auto','prompt_ad_angle':'auto','prompt_on_screen_text':'yes','prompt_text_mode':'auto',
+                'prompt_motion_choice':'auto','prompt_framing':'auto','prompt_ad_angle':'auto','prompt_on_screen_text':'no','prompt_text_mode':'auto',
                 'prompt_text_content':'','prompt_audio_enabled':True,'stage':'prompt_ad_angle','prompt_ad_angle_flow':'auto_setup'
             })
             await query.message.reply_text('🎯 Pilih pendekatan iklan untuk hook, jalan cerita dan CTA:', reply_markup=prompt_ad_angle_menu())
@@ -3016,7 +3022,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await query.message.reply_text('Pilih jantina model pertama:', reply_markup=prompt_model_gender_menu())
     elif action.startswith('prompt_model_gender:') and stage in ('prompt_model_gender','prompt_model_gender_2'):
         selected = action.split(':', 1)[1]
-        if selected in ('female','male'):
+        if selected in ('auto','female','male'):
             if stage == 'prompt_model_gender_2':
                 context.user_data['prompt_model_gender_2'] = selected
                 context.user_data['stage'] = 'prompt_model_age_2'
