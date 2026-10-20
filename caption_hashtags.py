@@ -7,6 +7,8 @@ CATEGORY_TERMS = {
     "fashion": ["fesyen", "bajufesyen", "ootd", "gayaharini", "gayawanita", "gayapria", "outfitmalaysia", "fashionmalaysia"],
     "bag": ["beg", "begwanita", "begtangan", "begseharian", "begtravel", "begkerja", "begcantik"],
     "hijab": ["tudung", "hijab", "tudungcantik", "gayatudung", "tudungmalaysia", "hijabstyle"],
+    "kids_shoes": ["kasutkanakkanak", "kasutbudak", "kasutcomel", "gayakanakkanak", "baranganak"],
+    "kids_clothing": ["bajukanakkanak", "pakaianbudak", "gayakanakkanak", "bajukomel", "fesyenkanakkanak"],
     "shoes": ["kasut", "kasutwanita", "kasutlelaki", "kasutselesa", "kasutkerja", "kasutcantik"],
     "beauty": ["kecantikan", "rutinpenjagaan", "beautymalaysia", "skincare", "makeupmalaysia", "selfcare"],
     "food": ["makanan", "makanansedap", "jommak an".replace(" ", ""), "kudapan", "foodmalaysia", "jommak an".replace(" ", "")],
@@ -72,6 +74,13 @@ def _category_key(value):
         "automotive": "automotive", "baby": "baby", "travel": "travel", "office": "office",
         "equipment": "equipment",
     }
+    # Resolve child-specific subcategories before broad parent categories.
+    child_terms = ("kanak", "kanakkanak", "budak", "kids", "children", "child", "toddler")
+    if any(term in value for term in child_terms):
+        if any(term in value for term in ("shoe", "kasut", "footwear")):
+            return "kids_shoes"
+        if "fashion_kids" in value or any(term in value for term in ("cloth", "clothing", "pakaian", "baju", "dress", "apparel", "shirt", "tee", "skort", "shorts", "romper", "kidswear")):
+            return "kids_clothing"
     for needle, key in aliases.items():
         if needle in value:
             return key
@@ -120,23 +129,81 @@ def _relevant_hashtags(category, product_name, subcategory, limit=12):
     return (specific + general)[:limit]
 
 def generate_caption(product_name, category="other", subcategory="", platform="Shopee"):
-    """Build a cautious Malay caption based only on selected product details."""
-    name = str(product_name or "").strip()[:180]
+    """Return a useful Malaysian Malay caption and relevant hashtags only."""
+    name = str(product_name or "").strip()[:180] or "produk pilihan"
     sub = str(subcategory or "").strip()[:80]
-    if not name:
-        name = "produk pilihan"
-    key = _category_key(str(category) + " " + sub)
-    seed = sum(ord(ch) for ch in (name + sub + key + str(platform)))
-    hook = HOOKS[seed % len(HOOKS)]
-    cta = CTAS[(seed // 3) % len(CTAS)]
-    product_line = "✨ " + name
-    if sub and _slug(sub).lower() not in _slug(name).lower():
-        product_line += " | " + sub
+    key = _category_key(str(category) + " " + sub + " " + name)
+
+    captions = {
+        "kids_shoes": (
+            f"Sedang cari kasut untuk si kecil? 👟\n"
+            f"{name} boleh jadi pilihan untuk melengkapkan gaya anak ketika keluar bersama keluarga atau menjalani aktiviti harian. "
+            ""
+        ),
+        "kids_clothing": (
+            f"Nak gayakan si kecil dengan penampilan yang comel? 🧸\n"
+            f"{name} boleh dipertimbangkan untuk melengkapkan koleksi pakaian anak. "
+            ""
+        ),
+        "shoes": (
+            f"Sedang mencari kasut untuk melengkapkan gaya harian? 👟\n"
+            f"{name} boleh anda pertimbangkan mengikut gaya dan kegunaan yang diperlukan. "
+            ""
+        ),
+        "fashion": (
+            f"Sedang mencari idea untuk gaya seterusnya? ✨\n"
+            f"{name} boleh dijadikan pilihan untuk dipadankan dengan koleksi pakaian anda. "
+            ""
+        ),
+        "bag": (
+            f"Mencari beg untuk melengkapi rutin harian? 👜\n"
+            f"{name} boleh anda pertimbangkan mengikut gaya dan barang yang biasa dibawa. "
+            ""
+        ),
+        "hijab": (
+            f"Jom cari inspirasi gaya tudung yang sesuai dengan anda ✨\n"
+            f"{name} boleh dipadankan mengikut pilihan gaya dan warna kegemaran. "
+            ""
+        ),
+        "beauty": (
+            f"Sedang menambah pilihan dalam rutin kecantikan? ✨\n"
+            f"Lihat {name} dan teliti maklumat produk sebelum membuat pilihan. "
+            ""
+        ),
+        "food": (
+            f"Nampak menarik untuk dicuba? 🍽️\n"
+            f"{name} boleh anda semak jika sedang mencari pilihan makanan atau kudapan. "
+            ""
+        ),
+        "gadget": (
+            f"Sedang mencari gajet atau aksesori teknologi? 📱\n"
+            f"{name} boleh anda pertimbangkan berdasarkan kegunaan yang diperlukan. "
+            ""
+        ),
+        "home": (
+            f"Ada idea untuk menceriakan ruang rumah? 🏡\n"
+            f"{name} boleh anda lihat sebagai salah satu pilihan untuk kediaman. "
+            ""
+        ),
+        "toy": (
+            f"Sedang mencari idea untuk waktu bermain si kecil? 🧸\n"
+            f"{name} boleh anda pertimbangkan mengikut minat dan peringkat umur anak. "
+            ""
+        ),
+        "baby": (
+            f"Sedang menyenaraikan keperluan si kecil? 🍼\n"
+            f"{name} boleh anda semak sebagai salah satu pilihan. "
+            ""
+        ),
+        "other": (
+            f"Jom lihat produk ini dengan lebih dekat ✨\n"
+            f"{name} mungkin sesuai untuk dipertimbangkan berdasarkan keperluan anda. "
+            ""
+        ),
+    }
+    caption = captions.get(key, captions["other"])
     hashtags = _relevant_hashtags(key, name, sub)
-    return (
-        hook + "\n\n" + product_line + "\n\n" + cta +
-        "\n\n" + " ".join(hashtags)
-    )
+    return caption + "\n\n" + " ".join(hashtags)
 
 def get_caption(product_name, category="other", subcategory="", platform="Shopee"):
     return generate_caption(product_name, category, subcategory, platform)
