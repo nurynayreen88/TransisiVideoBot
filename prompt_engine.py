@@ -540,7 +540,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
         concise_framework = ""
         if product_type == "other" or universal_custom:
             concise_framework = (
-                " UNIVERSAL CREATIVE FRAMEWORK: " + _prompt_sentence(_universal_prompt_direction(style_key), 180, "Use a clean product reveal and preserve all visible product details.")
+                " UNIVERSAL CREATIVE FRAMEWORK: " + _universal_prompt_direction(style_key)
                 + " UNIVERSAL SAFETY RULES: Preserve visible product details; invent no features or claims."
             )
         doodle = style_key == "white_doodle"
