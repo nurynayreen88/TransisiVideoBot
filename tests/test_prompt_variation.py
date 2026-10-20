@@ -15,7 +15,7 @@ class CreativeVariationTests(unittest.TestCase):
             for _ in range(3)
         ]
         self.assertEqual(len(set(prompts)), 3)
-        self.assertTrue(all("AUDIO / SFX:" in prompt for prompt in prompts))
+        self.assertTrue(all("AUDIO:" in prompt for prompt in prompts))
 
     def test_category_specific_sfx(self):
         prompt = prompt_engine._creative_variation("fashion", "children's outfit", 0)
