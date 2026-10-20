@@ -650,7 +650,9 @@ def prompt_creative_settings(user_data, include_audio=True):
     category = str(user_data.get('prompt_product_type', '')).casefold()
     subcategory = str(user_data.get('prompt_product_subcategory', '')).casefold()
     baby_product = category == 'baby' or subcategory.startswith('baby_')
-    if user_data.get('prompt_model_presence') == 'animal':
+    if user_data.get('prompt_framing') == 'product_only':
+        model = 'Model: none; no human or animal, hands, face or body parts; focus entirely on the exact product.'
+    elif user_data.get('prompt_model_presence') == 'animal':
         species = str(user_data.get('prompt_animal_species', 'auto'))
         species_labels = {
             'auto': 'an animal species that clearly matches the named product; infer conservatively, otherwise use a cat or dog only when context supports it',
