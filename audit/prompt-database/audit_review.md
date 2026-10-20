@@ -69,6 +69,6 @@ This inventory branch contains audit/report files only. Prompt fixes are kept in
 
 ## Implementation progress
 
-PR #131 is open for review and has not been merged or deployed. It addresses sentence truncation, universal framework key mismatches, English/Malay opening and hook consistency, use of curated category hook rows, category-specific five-beat scene routing, and White Doodle continuity. Latest GitHub Actions checks passed on head `8285ff67df14dfc008c7fa718fa83159af51b574`: prompt quality regression tests (run #21) and Klippo prompt library checks (run #493), including Python syntax, prompt regression tests and library structure.
+PR #131 is open for review and has not been merged or deployed. It addresses sentence truncation, universal framework key mismatches and duplicate styles, English/Malay opening and hook consistency, use of curated category hook rows, five-beat scene coverage for all top-level product categories, and White Doodle continuity. Latest GitHub Actions checks passed on head `64490f3a3008f0550f6c2c54c59931ea10d885cb`: prompt quality regression tests (run #23) and Klippo prompt library checks (run #495), including Python syntax, prompt regression tests, category coverage and library structure.
 
 Still outstanding: compare production SQLite prompt rows read-only; audit model selection end to end; review existing/custom hook rows; and inspect generated outputs across styles for camera/action conflicts. Do not merge or deploy without explicit approval.
