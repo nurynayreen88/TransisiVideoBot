@@ -17,6 +17,10 @@ class CreativeVariationTests(unittest.TestCase):
         self.assertEqual(len(set(prompts)), 3)
         self.assertTrue(all("AUDIO:" in prompt for prompt in prompts))
 
+    def test_curated_audio_label_is_not_duplicated(self):
+        prompt = prompt_engine._creative_variation("bag", "plain bag", 0, "bag_wallet")
+        self.assertEqual(prompt.count("AUDIO:"), 1)
+        self.assertNotIn("AUDIO: AUDIO:", prompt)
     def test_category_specific_sfx(self):
         prompt = prompt_engine._creative_variation("fashion", "children's outfit", 0)
         self.assertIn("fabric swish", prompt)
