@@ -110,6 +110,19 @@ class CreativeVariationTests(unittest.TestCase):
         self.assertIn("verified details", prompt_engine.creative_angle_instruction("affiliate"))
         self.assertIn("physically plausible", prompt_engine.creative_angle_instruction("demo"))
 
+    def test_standard_prompt_uses_default_malay_without_undefined_state(self):
+        prompt = prompt_engine.build_prompt(
+            "standard", "Cotton shirt", "studio", "push", duration=10
+        )
+        self.assertIn("in Bahasa Melayu Malaysia", prompt)
+
+    def test_standard_prompt_honours_english_language_choice(self):
+        prompt = prompt_engine.build_prompt(
+            "standard", "Cotton shirt", "studio", "push",
+            duration=10, prompt_language="English"
+        )
+        self.assertIn("in English", prompt)
+
 
 if __name__ == "__main__":
     unittest.main()
