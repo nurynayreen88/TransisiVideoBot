@@ -729,18 +729,6 @@ def prompt_music_menu():
     ])
 
 
-def prompt_sfx_menu():
-    """Independent SFX choice; effects must match visible actions."""
-    return InlineKeyboardMarkup([
-        [InlineKeyboardButton('⚡ Auto — ikut aksi dan produk', callback_data='prompt_sfx:auto')],
-        [InlineKeyboardButton('📦 Bunyi sentuhan / pergerakan produk', callback_data='prompt_sfx:product')],
-        [InlineKeyboardButton('✏️ SFX White Doodle', callback_data='prompt_sfx:doodle')],
-        [InlineKeyboardButton('🌿 Bunyi persekitaran lembut', callback_data='prompt_sfx:ambient')],
-        [InlineKeyboardButton('🔇 Tanpa SFX', callback_data='prompt_sfx:none')],
-        [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
-    ])
-
-
 def prompt_speaker_menu():
     return InlineKeyboardMarkup([
         [InlineKeyboardButton('🗣️ Model AI bercakap sendiri', callback_data='prompt_speaker:model')],
@@ -3478,14 +3466,6 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await query.message.reply_text('🖼️ Pilih latar video:', reply_markup=prompt_scene_menu())
         else:
             await query.message.reply_text('Pilihan muzik tidak sah. Sila pilih semula:', reply_markup=prompt_music_menu())
-    elif action.startswith('prompt_sfx:') and stage == 'prompt_sfx':
-        selected = action.split(':', 1)[1]
-        if selected in {'auto', 'product', 'doodle', 'ambient', 'none'}:
-            context.user_data['prompt_sfx_choice'] = selected
-            context.user_data['stage'] = 'prompt_scene'
-            await query.message.reply_text('🖼️ Pilih latar video:', reply_markup=prompt_scene_menu())
-        else:
-            await query.message.reply_text('Pilihan SFX tidak sah. Sila pilih semula:', reply_markup=prompt_sfx_menu())
     elif action.startswith('prompt_language:') and stage == 'prompt_language':
         selected = action.split(':', 1)[1]
         if selected in ('Malay','English','none'):
