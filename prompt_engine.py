@@ -844,7 +844,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
                 "HOOK + CTA: Make the opening visually specific to this product. The middle must show a plausible use "
                 "and a benefit supported by the product details; the third beat shows its value or a visible detail; "
                 "the final beat is a clear CTA with a full-product hero shot. Never invent product claims. Use only supported product details. "
-                + ("If voice or on-screen text is selected, use a short, natural, product-specific hook and CTA that match the selected options. "
+                + ("If voice or on-screen text is selected, use varied, natural product-specific wording and one concise CTA that match the selected options; avoid stock openings such as “Kenali produk ini” and never invent claims, discounts, prices, urgency or availability. "
                    if part < 2 else "Continue naturally without repeating the opening hook. ")
             )
             if doodle and duration == 10 and part == 1 and "HOLD the final frame" not in beat_plan:
@@ -1054,5 +1054,5 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
         + direction + "\n"
         + "Preserve the product's visible design and packaging; invent no features. "
         "Natural movement, clean transitions, no added on-screen text or watermark. "
-        "For AI-generated voice, use a short product-specific hook and CTA in " + spoken_language + "; preserve any user-supplied script exactly and add no dialogue."
+        "For AI-generated voice, use varied, natural product-specific wording and one concise CTA in " + spoken_language + "; avoid stock openings such as “Kenali produk ini” and never invent claims, discounts, prices, urgency or availability. Preserve any user-supplied script exactly and add no dialogue."
     )
