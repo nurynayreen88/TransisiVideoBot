@@ -3352,7 +3352,11 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             hijab_labels = {'hijab': 'Bertudung', 'no_hijab': 'Tidak bertudung', 'na': 'Tidak berkenaan'}
             category_summary = context.user_data.get('prompt_custom_category_name') or PRODUCT_TYPES.get(context.user_data.get('prompt_product_type', 'other'), 'Produk lain')
             subcategory_summary = context.user_data.get('prompt_custom_subcategory_name') or PRODUCT_SUBTYPE_LABELS.get(context.user_data.get('prompt_product_subcategory', ''), 'Tidak dinyatakan')
-            if context.user_data.get('prompt_model_presence') != 'yes':
+            if context.user_data.get('prompt_model_presence') == 'animal':
+                species = str(context.user_data.get('prompt_animal_species', 'auto')).casefold()
+                species_labels = {'auto': 'ikut produk', 'cat': 'kucing', 'dog': 'anjing', 'rabbit': 'arnab', 'bird': 'burung', 'hamster': 'hamster', 'fish': 'ikan', 'horse': 'kuda'}
+                model_summary = 'Haiwan — ' + species_labels.get(species, 'ikut produk')
+            elif context.user_data.get('prompt_model_presence') != 'yes':
                 model_summary = 'Tiada — fokus produk'
             else:
                 gender1 = gender_labels.get(context.user_data.get('prompt_model_gender', 'female'), 'Tidak dinyatakan')
