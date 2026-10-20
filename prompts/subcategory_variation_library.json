@@ -5521,7 +5521,7 @@
       "subcategory_id": "food_other",
       "category_id": "food",
       "label": "📦 Makanan lain",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "food_other_v01",
@@ -5642,6 +5642,126 @@
           "lighting": "LIGHTING: Subtle rim light only if it does not alter the visible product colour.",
           "closing": "CTA / HERO: End with the complete product in realistic scale and no visual transformation.",
           "audio": "AUDIO: Use a quiet transition accent only if it matches a visible camera or graphic movement."
+        },
+        {
+          "id": "food_other_v11",
+          "variation_number": 11,
+          "name": "Package-to-serving reveal",
+          "hook": "Open with the exact package beside the visible serving, if a serving is supplied; otherwise feature the package alone.",
+          "action": "Move from the package front to the real contents in one continuous, measured move; do not open sealed packaging unless the reference shows it.",
+          "detail": "Keep package artwork, portion size, ingredient appearance and serving count exactly as supplied; make no nutrition or quality claims.",
+          "camera": "Slow diagonal slide from package label to the actual food, ending in a balanced two-part composition.",
+          "lighting": "Soft side daylight reveals the real surface without adding shine, steam or condensation.",
+          "closing": "Hold on the package and the same visible serving, both fully recognizable.",
+          "audio": "Quiet upbeat instrumental; no opening or pouring sound unless shown."
+        },
+        {
+          "id": "food_other_v12",
+          "variation_number": 12,
+          "name": "Texture in natural light",
+          "hook": "Begin on the most distinctive texture genuinely visible in the food, then reveal enough context to identify the product.",
+          "action": "Use a gentle lateral pass across the existing surface; do not cut, crush, stir or reshape the food.",
+          "detail": "Show only real crumbs, grains, layers, liquid or surface detail visible in the reference; never invent ingredients.",
+          "camera": "Close macro slider move followed by a small pullback; keep texture in focus without extreme magnification.",
+          "lighting": "Broad diffused light with accurate food colour and no artificial gloss.",
+          "closing": "Finish on a medium close-up that includes the texture and product context.",
+          "audio": "Soft instrumental bed; no exaggerated crunch or sizzle."
+        },
+        {
+          "id": "food_other_v13",
+          "variation_number": 13,
+          "name": "Serving-scale composition",
+          "hook": "Open with the product at realistic scale beside only the serving dish or utensil already shown or clearly needed by the reference.",
+          "action": "Make a slow overhead drift that clarifies the actual portion and its relation to the package.",
+          "detail": "Do not multiply pieces, enlarge portions or add garnishes, side dishes or ingredients.",
+          "camera": "Near-overhead glide with a short settle; keep package proportions undistorted.",
+          "lighting": "Even natural light with gentle shadows to make the true quantity easy to read.",
+          "closing": "Hold the unchanged portion and package in a clean, stable frame.",
+          "audio": "Low-volume instrumental music; no unsupported kitchen ambience."
+        },
+        {
+          "id": "food_other_v14",
+          "variation_number": 14,
+          "name": "Label-to-product focus",
+          "hook": "Start with the genuine front label or identifying package area readable, then shift attention to the visible food.",
+          "action": "Perform one smooth focus transition from the package surface to the product itself, without changing either.",
+          "detail": "Do not rewrite, sharpen into new text, translate or fabricate label details; preserve the real food appearance.",
+          "camera": "Locked camera with a controlled rack focus; no digital zoom that distorts the package.",
+          "lighting": "Soft frontal fill keeps real packaging details legible and colour faithful.",
+          "closing": "End with both the original package and visible contents in focus where possible.",
+          "audio": "Minimal music only; no voiceover claims."
+        },
+        {
+          "id": "food_other_v15",
+          "variation_number": 15,
+          "name": "Natural tabletop orbit",
+          "hook": "Show the complete product in its existing tabletop arrangement before beginning a restrained camera move.",
+          "action": "Travel through a small quarter-arc around the stationary item; do not rotate the package independently or reveal unsupported sides.",
+          "detail": "Preserve package seams, closures, printed graphics and all visible contents; do not add props.",
+          "camera": "Small tabletop arc with constant distance and natural perspective.",
+          "lighting": "Soft side key and mild fill; avoid glare over actual printed information.",
+          "closing": "Return to a clear three-quarter view of the original arrangement.",
+          "audio": "Gentle instrumental pulse; no transition effects."
+        },
+        {
+          "id": "food_other_v16",
+          "variation_number": 16,
+          "name": "One real handling moment",
+          "hook": "If a hand is already present or handling is clearly supported, begin with the product resting securely; otherwise use a camera-only reveal.",
+          "action": "Show one simple, plausible pick-up or placement only when the reference supports it; keep the package closed unless opening is shown.",
+          "detail": "Keep fingers, grip, package shape and food quantity realistic; do not imply freshness, taste or results.",
+          "camera": "Stable medium close shot with a short follow movement; avoid cuts during the handling action.",
+          "lighting": "Neutral soft light with realistic contact shadows and true colour.",
+          "closing": "Settle on the product in its original state and realistic scale.",
+          "audio": "A soft contact sound only if handling is visible; music stays quiet."
+        },
+        {
+          "id": "food_other_v17",
+          "variation_number": 17,
+          "name": "Ingredient-visible close-up",
+          "hook": "If the contents are visible, open on their actual colour and form; if sealed, begin on the transparent window or visible package front instead.",
+          "action": "Slide along only the contents or viewing area that the reference reveals, then widen to establish the product.",
+          "detail": "Do not infer ingredients from colour or shape; do not reveal contents through opaque packaging.",
+          "camera": "Slow macro pass into a steady medium close-up; no see-through effects.",
+          "lighting": "Diffused side light preserves real detail without adding glow or fake moisture.",
+          "closing": "Hold on the clearest authentic view of the visible contents or package.",
+          "audio": "Soft instrumental music; no cooking sounds unless cooking is shown."
+        },
+        {
+          "id": "food_other_v18",
+          "variation_number": 18,
+          "name": "Clean counter reset",
+          "hook": "Open with the product and its current arrangement on a clean, neutral surface, retaining all supplied parts.",
+          "action": "Use a gentle backward dolly to create breathing room around the item; do not remove or add anything during the shot.",
+          "detail": "Keep crumbs, droplets, package folds and serving details as shown; no magical cleaning or product transformation.",
+          "camera": "Slow straight pullback with a level horizon and stable framing.",
+          "lighting": "Bright but soft daylight, avoiding clipped highlights on glossy wrappers.",
+          "closing": "Finish with the full product arrangement centred and unobstructed.",
+          "audio": "Light contemporary instrumental, no added sound effects."
+        },
+        {
+          "id": "food_other_v19",
+          "variation_number": 19,
+          "name": "Two-view continuity",
+          "hook": "When the supplied reference genuinely includes two views, cut between those views; otherwise remain with the available view and use a restrained camera move.",
+          "action": "Make one clean cut from the package view to the authentic contents view only if both are supplied; never morph between them.",
+          "detail": "Keep the exact same package, food form, colour, portion and component count in both views.",
+          "camera": "Two steady matched framings with consistent scale; use a small slide if only one view exists.",
+          "lighting": "Match white balance and shadow direction across views.",
+          "closing": "End on the clearest supplied view without adding text or graphics.",
+          "audio": "A quiet musical beat may support the cut; no magical transition sound."
+        },
+        {
+          "id": "food_other_v20",
+          "variation_number": 20,
+          "name": "Final hero with serving context",
+          "hook": "Begin with a close detail that is genuinely visible, such as a package edge, seal, or food surface, then reveal the complete product.",
+          "action": "Make one continuous pullback and let the arrangement settle naturally; no extra props or dramatic reveal effects.",
+          "detail": "Keep the original quantity, packaging, serving and visible details unchanged; avoid health, taste or performance claims.",
+          "camera": "Continuous detail-to-medium pullback with natural focus and realistic scale.",
+          "lighting": "Balanced soft studio light, preserving the product's real colours.",
+          "closing": "Hold a clean hero frame of the original product and its supplied serving, if present.",
+          "audio": "Quiet polished instrumental close; no forced narration."
         }
       ]
     },
@@ -6161,7 +6281,7 @@
       "subcategory_id": "gadget_camera",
       "category_id": "gadget",
       "label": "📷 Kamera / Aksesori",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "gadget_camera_v01",
@@ -6282,6 +6402,126 @@
           "lighting": "LIGHTING: Soft window light with natural shadows; preserve the reference colour.",
           "closing": "CTA / HERO: End on a clear three-quarter product view without revealing unseen surfaces.",
           "audio": "AUDIO: Use a quiet transition accent only if it matches a visible camera or graphic movement."
+        },
+        {
+          "id": "gadget_camera_v11",
+          "variation_number": 11,
+          "name": "Lens-ring precision pass",
+          "hook": "Open on the actual lens front and visible ring markings, keeping the camera body recognisable in the composition.",
+          "action": "Track slowly around the lens rim without rotating the lens or activating controls unless the reference shows it.",
+          "detail": "Preserve the real lens count, glass reflections, ring texture and printed markings; do not invent focal lengths or specifications.",
+          "camera": "Macro lateral pass around the front element, then a small pullback to the full camera.",
+          "lighting": "Controlled softbox reflections that do not obscure genuine markings or alter body colour.",
+          "closing": "Hold on the real lens and front body in a sharp three-quarter view.",
+          "audio": "Subtle modern instrumental; no shutter sound unless a shutter action is shown."
+        },
+        {
+          "id": "gadget_camera_v12",
+          "variation_number": 12,
+          "name": "Grip and body ergonomics",
+          "hook": "Begin on the genuine grip and body contour visible in the reference, then widen to the complete camera.",
+          "action": "Move along the grip to the shutter area without pressing buttons or changing any dial setting.",
+          "detail": "Show only existing grips, seams, buttons and textures; do not claim weather sealing or improved handling.",
+          "camera": "Level side slide with a steady close-to-medium transition and natural perspective.",
+          "lighting": "Soft raking light defines the real contours without excessive shine.",
+          "closing": "Finish with the grip and full body unobstructed.",
+          "audio": "Low-volume instrumental; no fake clicks."
+        },
+        {
+          "id": "gadget_camera_v13",
+          "variation_number": 13,
+          "name": "Dial and button map",
+          "hook": "Start with the actual top plate or control cluster if it is visible; otherwise use the clearest visible control area.",
+          "action": "Make a slow pass across the existing dials and buttons, leaving their positions and labels unchanged.",
+          "detail": "Do not add buttons, change dial icons or invent settings and menu functions.",
+          "camera": "Stable macro slider move, followed by a slight tilt to show the control layout.",
+          "lighting": "Diffused overhead light reduces glare on labels and keeps printed details intact.",
+          "closing": "End on the original control arrangement, fully legible where the reference allows.",
+          "audio": "Quiet electronic music; no beeps or menu sounds."
+        },
+        {
+          "id": "gadget_camera_v14",
+          "variation_number": 14,
+          "name": "Rear screen integrity",
+          "hook": "If the rear screen is visible, open on its exact current content; otherwise focus on the authentic rear body surface.",
+          "action": "Glide past the screen and surrounding buttons without changing the interface, adding graphics or turning the screen on.",
+          "detail": "Never invent menus, focus boxes, photos, numbers or display information; preserve the screen state.",
+          "camera": "Slow straight slide with a short pullback; keep screen edges square and undistorted.",
+          "lighting": "Soft frontal fill controls reflections while retaining real screen content.",
+          "closing": "Hold on the unchanged screen or genuine rear surface.",
+          "audio": "Minimal instrumental; no camera menu beeps."
+        },
+        {
+          "id": "gadget_camera_v15",
+          "variation_number": 15,
+          "name": "Supplied accessory layout",
+          "hook": "When accessories appear in the reference, show that exact set beside the camera; otherwise present the camera alone.",
+          "action": "Use a measured overhead sweep across the supplied items, then settle on the camera body.",
+          "detail": "Do not add lenses, batteries, straps, cards, cables or bags that are not shown; preserve component count.",
+          "camera": "Overhead lateral move with a controlled final tilt only if needed to reveal the actual layout.",
+          "lighting": "Even tabletop lighting with soft contact shadows under each supplied item.",
+          "closing": "Finish with the same authentic set and all visible pieces in frame.",
+          "audio": "Soft instrumental music; no packing or handling sounds unless shown."
+        },
+        {
+          "id": "gadget_camera_v16",
+          "variation_number": 16,
+          "name": "Tripod mount detail",
+          "hook": "If the mount or base is visible, begin with that real area; otherwise feature the lower body edge shown in the reference.",
+          "action": "Move under or around only the visible lower contour; do not attach a tripod or accessory unless it is supplied.",
+          "detail": "Do not invent mount types, thread details or compatibility claims.",
+          "camera": "Low three-quarter close-up with a small arc, avoiding impossible views through the camera body.",
+          "lighting": "Gentle side light reveals existing edges and recesses without false highlights.",
+          "closing": "Return to a stable three-quarter view of the complete camera.",
+          "audio": "Understated music; no mechanical clicks."
+        },
+        {
+          "id": "gadget_camera_v17",
+          "variation_number": 17,
+          "name": "Strap connection check",
+          "hook": "If a strap or strap lug is present in the reference, open on that exact connection; otherwise focus on a visible body corner.",
+          "action": "Track from the existing strap connection toward the body and stop before any unseen side is revealed.",
+          "detail": "Do not add straps, clips or attachment points; preserve the original connection and hardware.",
+          "camera": "Slow close lateral move into a medium shot; keep the camera body geometry stable.",
+          "lighting": "Soft edge light separates real hardware from the body without changing finish.",
+          "closing": "Hold with the authentic connection point and camera clearly visible.",
+          "audio": "Quiet instrumental; no buckle sounds unless visibly handled."
+        },
+        {
+          "id": "gadget_camera_v18",
+          "variation_number": 18,
+          "name": "Viewfinder and eyecup",
+          "hook": "Begin on the actual viewfinder and eyecup if visible, then show how they sit within the camera body.",
+          "action": "Use a gentle tilt from the viewfinder to the top plate or rear body, without simulating a view through the lens.",
+          "detail": "Do not invent optical displays, indicators or viewfinder specifications.",
+          "camera": "Short controlled tilt and slight pullback, keeping edges straight.",
+          "lighting": "Soft directional light with glare controlled on glass and rubber surfaces.",
+          "closing": "Finish on the real viewfinder area within the recognisable body.",
+          "audio": "Low-key instrumental; no focus confirmation beep."
+        },
+        {
+          "id": "gadget_camera_v19",
+          "variation_number": 19,
+          "name": "Stable product turntable",
+          "hook": "Place the camera in its original supported position and show the full silhouette before movement.",
+          "action": "Move the camera viewpoint in a small arc around the stationary body; do not make the camera float or rotate by itself.",
+          "detail": "Do not expose unseen controls or change lens, body, logo, finish or component count.",
+          "camera": "Slow quarter-orbit at product height, maintaining realistic scale and perspective.",
+          "lighting": "Balanced studio light with restrained highlights on lens glass and body finish.",
+          "closing": "Settle on a clean three-quarter hero view of the same camera.",
+          "audio": "Polished instrumental bed; no sci-fi transition sounds."
+        },
+        {
+          "id": "gadget_camera_v20",
+          "variation_number": 20,
+          "name": "Macro-to-complete reveal",
+          "hook": "Open on one authentic detail—lens edge, grip texture, control dial or visible port—chosen only if present.",
+          "action": "Pull back continuously until the full camera and its actual lens are visible; do not detach or swap parts.",
+          "detail": "Preserve lens-to-body proportions, real markings and all supplied accessories; make no performance claims.",
+          "camera": "Continuous macro-to-medium pullback with a stable horizon and realistic focus.",
+          "lighting": "Soft studio key and fill maintain colour accuracy and readable surface details.",
+          "closing": "Hold on the complete camera with no added text or graphics.",
+          "audio": "Quiet premium instrumental close; no forced shutter effects."
         }
       ]
     },
@@ -6289,7 +6529,7 @@
       "subcategory_id": "gadget_home",
       "category_id": "gadget",
       "label": "🔌 Elektronik rumah",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "gadget_home_v01",
@@ -6410,6 +6650,126 @@
           "lighting": "LIGHTING: Gentle side light reveals shape without changing material or finish.",
           "closing": "CTA / HERO: Keep the original item and supplied parts visible in a calm final composition.",
           "audio": "AUDIO: Keep speech clear if selected, with low background music and no stacked SFX."
+        },
+        {
+          "id": "gadget_home_v11",
+          "variation_number": 11,
+          "name": "Control-panel approach",
+          "hook": "Open on the exact visible controls or display, then include enough of the device to establish its full shape.",
+          "action": "Slide slowly across the existing panel without pressing buttons, changing settings or animating a blank display.",
+          "detail": "Keep labels, icons, screen state and control layout unchanged; do not invent modes or smart functions.",
+          "camera": "Level macro slider move with a short pullback to the full device.",
+          "lighting": "Soft frontal light reduces reflections while preserving the real panel appearance.",
+          "closing": "End on the unchanged controls and recognisable device body.",
+          "audio": "Quiet modern instrumental; no beeps or voice prompts."
+        },
+        {
+          "id": "gadget_home_v12",
+          "variation_number": 12,
+          "name": "Vent or outlet detail",
+          "hook": "If the device has a visible vent, grille, outlet or opening, begin there; otherwise use its clearest surface feature.",
+          "action": "Track along the genuine opening or grille, then reveal the surrounding housing without airflow effects.",
+          "detail": "Do not add vents, emit visible air, mist, heat waves or performance claims not supported by the reference.",
+          "camera": "Close lateral pass followed by a restrained three-quarter pullback.",
+          "lighting": "Diffused side light reveals real grille depth without making openings glow.",
+          "closing": "Hold on the authentic feature and surrounding body.",
+          "audio": "Low-volume instrumental; no fan or motor sound unless operation is shown."
+        },
+        {
+          "id": "gadget_home_v13",
+          "variation_number": 13,
+          "name": "Cable and connector view",
+          "hook": "If a cable or connector is included and visible, open with its actual connection point; otherwise stay on the device body.",
+          "action": "Follow the visible cable a short distance and return to the unit without plugging it in unless shown.",
+          "detail": "Do not add ports, adapters, cable ends or compatibility claims; preserve the actual supplied parts.",
+          "camera": "Slow close tracking move with a short, stable pullback.",
+          "lighting": "Even neutral light to keep connector shape and housing colour accurate.",
+          "closing": "Finish with the original device and any supplied cable in view.",
+          "audio": "Minimal music; no electrical buzz or connection chime."
+        },
+        {
+          "id": "gadget_home_v14",
+          "variation_number": 14,
+          "name": "Housing contour study",
+          "hook": "Start on the device's genuine outer contour, corner or seam, then gradually reveal its overall silhouette.",
+          "action": "Move along one edge in a measured arc without opening panels or revealing hidden internals.",
+          "detail": "Do not invent internal components, materials, seams or build-quality claims.",
+          "camera": "Low three-quarter slider move with natural perspective and no wide-angle distortion.",
+          "lighting": "Soft raking light defines the actual housing shape and surface finish.",
+          "closing": "End on a full three-quarter view with the contour clearly readable.",
+          "audio": "Understated instrumental; no mechanical effects."
+        },
+        {
+          "id": "gadget_home_v15",
+          "variation_number": 15,
+          "name": "Display remains authentic",
+          "hook": "If a screen or indicator is present, begin with its exact supplied state; otherwise focus on the visible control area.",
+          "action": "Use a small camera drift past the display or indicator, keeping all displayed content unchanged.",
+          "detail": "Do not generate digits, notifications, status lights or interfaces absent from the reference.",
+          "camera": "Stable close shot with a gentle side drift and square screen geometry.",
+          "lighting": "Controlled soft fill limits glare without inventing illuminated elements.",
+          "closing": "Hold on the unchanged display or authentic control area.",
+          "audio": "Soft electronic instrumental; no alerts or notification tones."
+        },
+        {
+          "id": "gadget_home_v16",
+          "variation_number": 16,
+          "name": "Supplied parts arrangement",
+          "hook": "When the reference includes a remote, cable, filter or other accessory, show only those supplied items; otherwise show the main unit alone.",
+          "action": "Use a slow overhead sweep from the accessory to the main unit, keeping the arrangement physically plausible.",
+          "detail": "Do not add batteries, remotes, attachments or packaging that are not visible.",
+          "camera": "Overhead glide ending in a balanced wide product composition.",
+          "lighting": "Even tabletop lighting and soft natural shadows.",
+          "closing": "Finish with the same item count and original arrangement.",
+          "audio": "Quiet instrumental; no remote clicks unless a button is visibly pressed."
+        },
+        {
+          "id": "gadget_home_v17",
+          "variation_number": 17,
+          "name": "Scale in a real room",
+          "hook": "Place the device in the same kind of setting already supported by the reference; if no context exists, use a plain surface.",
+          "action": "Pull back slightly to establish realistic size relative to only visible furniture or objects; do not invent a room function.",
+          "detail": "Preserve dimensions and proportions; do not imply room coverage, power, capacity or efficiency.",
+          "camera": "Slow dolly-out at a natural eye-level or tabletop height, whichever fits the item.",
+          "lighting": "Soft ambient light consistent with the visible environment.",
+          "closing": "Hold a wider composition that still clearly identifies the device.",
+          "audio": "Gentle room-tone texture only if the scene supports it, under low music."
+        },
+        {
+          "id": "gadget_home_v18",
+          "variation_number": 18,
+          "name": "Surface finish and edge",
+          "hook": "Open close on the genuine finish, edge or texture visible on the product housing.",
+          "action": "Move a short distance across the surface and ease back to reveal the full item; no simulated polish or colour shift.",
+          "detail": "Do not infer metal, plastic, waterproofing or special coating unless clearly established by the reference.",
+          "camera": "Macro lateral pass with a controlled pullback and natural depth of field.",
+          "lighting": "Soft side light shows the actual finish without artificial sparkle.",
+          "closing": "End with the product fully recognisable and its real colour intact.",
+          "audio": "Clean instrumental bed; no polishing or rubbing sounds."
+        },
+        {
+          "id": "gadget_home_v19",
+          "variation_number": 19,
+          "name": "Practical use only if shown",
+          "hook": "If the reference depicts the device in use, continue that same simple action; otherwise present a stationary product with a camera move.",
+          "action": "Show only the operation explicitly supported by the reference, with no new lights, smoke, liquid flow or moving parts.",
+          "detail": "Do not simulate results, performance metrics or functions not visible; keep hands and interactions physically plausible.",
+          "camera": "Steady medium shot that follows the visible action briefly, then settles.",
+          "lighting": "Consistent ambient light without dramatic effects that suggest a result.",
+          "closing": "Finish with the device in its original state and all visible controls unchanged.",
+          "audio": "Use only action-matched sound if the operation is visibly shown; otherwise music only."
+        },
+        {
+          "id": "gadget_home_v20",
+          "variation_number": 20,
+          "name": "Full-unit final reveal",
+          "hook": "Begin on a real identifying feature such as a handle, control, grille or corner, selected only when present.",
+          "action": "Make one continuous pullback to reveal the whole appliance or device without rotating it beyond the visible reference.",
+          "detail": "Maintain exact housing shape, openings, controls, cable and supplied-part count; no extra text or logos.",
+          "camera": "Continuous detail-to-full-product pullback with a level horizon.",
+          "lighting": "Balanced soft studio light with true colour and realistic contact shadows.",
+          "closing": "Hold a clean, centred view of the complete device.",
+          "audio": "Quiet contemporary instrumental close; no forced voiceover."
         }
       ]
     },
