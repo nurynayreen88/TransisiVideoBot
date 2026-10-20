@@ -3655,7 +3655,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                         context.user_data.get('prompt_custom_category_name')
                         or context.user_data.get('prompt_custom_subcategory_name')
                     ),
-                    product_subtype=context.user_data.get('prompt_product_subcategory', '')
+                    product_subtype=context.user_data.get('prompt_product_subcategory', ''),
+                    prompt_language=context.user_data.get('prompt_language', 'Malay')
                 )
                 if context.user_data.get('prompt_model_presence') == 'yes' and int(context.user_data.get('prompt_model_count',1)) == 2:
                     prompt += ('\n\nTWO-MODEL CAST: Model 1 is ' + str(context.user_data.get('prompt_model_gender','female')) + ', appearance ' + str(context.user_data.get('prompt_model_ethnicity','random_malaysia')) + ', age ' + str(context.user_data.get('prompt_model_age','26-40')) + ', hijab ' + str(context.user_data.get('prompt_model_hijab','na')) + '. Model 2 is ' + str(context.user_data.get('prompt_model_gender_2','male')) + ', appearance ' + str(context.user_data.get('prompt_model_ethnicity_2','random_malaysia')) + ', age ' + str(context.user_data.get('prompt_model_age_2','26-40')) + ', hijab ' + str(context.user_data.get('prompt_model_hijab_2','na')) + '. Keep identities distinct and consistent.')
