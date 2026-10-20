@@ -613,7 +613,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
                 "VIDEO PROMPT — " + str(duration) + " SECONDS" + (" | PART " + str(part) if part else "") + "\n"
                 "Vertical 9:16, realistic product video, exactly " + str(duration) + " seconds.\n"
                 + "STYLE: " + style_name + " — " + _prompt_sentence(style_template, 180, "Use a realistic product-focused presentation.") + "\n"
-                + "PRODUCT: " + product + "\n" + concise_category_direction
+                + "PRODUCT: " + product + "\n" + concise_category_direction + concise_framework
                 + (" UNIVERSAL SAFETY RULES: Preserve visible product details; invent no features or claims."
                    if product_type == "other" or universal_custom else "") + "\n"
                 + "SETTING: " + _prompt_sentence(scene, 100, "A realistic setting suited to the product.") + " CAMERA: " + _prompt_sentence(camera, 110, "Use one restrained camera move and keep the product stable.") + "\n"
