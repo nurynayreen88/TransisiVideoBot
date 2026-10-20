@@ -616,6 +616,8 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
                 + ("If voice or on-screen text is selected, use a short, natural, product-specific hook and CTA that match the selected options. "
                    if part < 2 else "Continue naturally without repeating the opening hook. ")
             )
+            if doodle and duration == 10 and part == 1 and "HOLD the final frame" not in beat_plan:
+                beat_plan += " HOLD the final frame in a stable full-product composition for a seamless Part 2 handoff; no fade. "
             doodle_rule = (
                 "DOODLE + MATCHED SFX: Thin hand-drawn lines travel smoothly just outside the visible product outline; "
                 "sync a soft pencil-draw or light whoosh to the line movement, a tiny sparkle/chime when a visible detail is highlighted, "
