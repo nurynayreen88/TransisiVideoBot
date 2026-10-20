@@ -186,14 +186,14 @@ OPENING_VOICE_STYLES = (
     "a simple observation about the product's visible appearance",
     "a natural question about the item itself, not an unverified result",
     "a practical-use lead-in only if that use is shown and supported",
-    "a concise conversational introduction in everyday Bahasa Melayu Malaysia",
+    "a concise conversational introduction in the selected speech language",
     "a demonstration-first opening with no spoken line unless voiceover is enabled",
     "a neutral opening that names the product without exaggerated hype",
     "a brief visual-first opening, with speech only if the user requested it",
     "a clean reveal that avoids a stock phrase and lets the product lead",
 )
 
-def opening_direction(product_type="other"):
+def opening_direction(product_type="other", language="Malay"):
     """Return one of 1,000 compositional opening recipes without changing later beats."""
     import random
     visual = random.choice(OPENING_VISUAL_ENTRIES)
@@ -202,12 +202,12 @@ def opening_direction(product_type="other"):
     return (
         "OPENING VARIATION: " + visual + "; camera: " + camera
         + "; if voiceover is enabled, use " + voice
-        + ". Speak clear Bahasa Melayu Malaysia; no Indonesian wording or accent. "
+        + (". If voiceover is used, speak clear English." if str(language or "Malay").casefold() == "english" else ". If voiceover is used, speak clear Bahasa Melayu Malaysia; no Indonesian wording or accent.") + " "
         + "Avoid classroom-style introductions, repeated stock phrases and scripted-sounding language. Do not add extra text. "
         + "This changes the opening only; preserve later beats, product identity, selected location, style and no-logo rules."
     )
 
-def product_hook(description):
+def product_hook(description, language="Malay"):
     """Return a conservative category hook or None if product identity is unclear."""
     import json
     with connect() as db:
@@ -246,13 +246,27 @@ def product_hook(description):
             # Sometimes a clean visual reveal is stronger than another headline.
             if random.random() < 0.20:
                 return None
+            if str(language or "Malay").casefold() == "english":
+                return random.choice((
+                    "Take a closer look at " + name + ".",
+                    "Shopping for " + name + "? Here's an option to explore.",
+                    "Curious about " + name + "? Let's look at the details.",
+                    "Comparing options? Have a closer look at " + name + ".",
+                    "Here's " + name + ", shown up close.",
+                    "Before choosing " + name + ", take a look at the details.",
+                    "Looking into " + name + "? Let's see it more clearly.",
+                    "Let's take a closer look at " + name + ".",
+                ))
             # Keep the supplied product name factual, but vary the Malaysian-Malay opening.
             openings = (
-                "Kalau tengah cari " + name + ", boleh tengok pilihan ini.",
-                "Sedang bandingkan " + name + "? Ini satu pilihan untuk dipertimbangkan.",
-                "Kalau minat " + name + ", boleh semak yang ini.",
-                "Nak cari " + name + "? Cuba lihat pilihan ini dulu.",
-                "Untuk yang mencari " + name + ", boleh pertimbangkan pilihan ini.",
+                "Jom lihat dengan lebih dekat " + name + ".",
+                "Sedang mencari " + name + "? Ini satu pilihan untuk anda lihat.",
+                "Kalau " + name + " ada dalam senarai carian anda, lihat yang ini.",
+                "Apa yang menarik pada " + name + "? Mari lihat perinciannya.",
+                "Nak bandingkan pilihan? Lihat " + name + " ini dengan lebih dekat.",
+                "Ini " + name + " yang boleh anda pertimbangkan.",
+                "Sebelum memilih " + name + ", mari lihat rupanya dengan jelas.",
+                "Sedang meninjau " + name + "? Jom lihat dari dekat.",
             )
             return random.choice(openings)
     category_match = re.search(r"(?im)^KATEGORI:\s*(.+)$", description)
@@ -261,6 +275,15 @@ def product_hook(description):
     category = category_match.group(1).strip()
     if not category or category.upper() in ("TIDAK PASTI", "TIADA", "UNKNOWN", "NONE"):
         return None
+    if str(language or "Malay").casefold() == "english":
+        if random.random() < 0.20:
+            return None
+        return random.choice((
+            "If you're looking for " + category.lower() + ", take a closer look at this option.",
+            "Comparing " + category.lower() + "? Here's one option to explore.",
+            "Interested in " + category.lower() + "? Have a closer look.",
+            "Here's a closer look at this " + category.lower() + ".",
+        ))
     words = set(re.findall(r"[a-zA-ZÀ-ÿ]+", category.lower()))
     matches = []
     for keywords, hooks in rows:
@@ -270,11 +293,9 @@ def product_hook(description):
         return None
     if random.random() < 0.20:
         return None
-    # Natural Malaysian Malay wording; caller must treat this as optional speech only.
-    return random.choice((
-        "Kalau tengah cari " + category.lower() + ", boleh tengok pilihan ini.",
-        "Sedang bandingkan " + category.lower() + "? Ini satu pilihan untuk dipertimbangkan.",
-        "Kalau minat " + category.lower() + ", boleh semak yang ini.",
-        "Nak cari " + category.lower() + "? Cuba lihat pilihan ini dulu.",
-        "Untuk yang mencari " + category.lower() + ", boleh pertimbangkan pilihan ini.",
-    ))
+    # Use the selected category's curated hook when the product name is unavailable.
+    # Normalize shouting-style stock data to a natural spoken sentence.
+    selected_hook = random.choice(matches[0]).strip()
+    if not selected_hook:
+        return None
+    return selected_hook[0].upper() + selected_hook[1:].lower()

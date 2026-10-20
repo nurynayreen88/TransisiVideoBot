@@ -633,7 +633,10 @@ def _prompt_is_child_product(user_data):
     }
     child_words = (
         'kanak-kanak', 'kanak kanak', 'budak', 'bayi', 'kanak', 'kids',
-        'children', 'child', 'toddler', 'baby', 'school uniform', 'baju sekolah'
+        'children', 'child', 'toddler', 'baby', 'newborn', 'infant',
+        'kidswear', 'junior', 'school uniform', 'baju sekolah',
+        'school bag', 'schoolbag', 'school shoes', 'kasut sekolah',
+        'children wear', 'children’s wear', 'childrens wear',
     )
     return (
         subcategory in child_subcategories
@@ -647,7 +650,12 @@ def prompt_creative_settings(user_data, include_audio=True):
     age = str(user_data.get('prompt_model_age', '26-40'))
     child_model = age in {'4-7', '8-12', '13-17'}
     child_product = _prompt_is_child_product(user_data)
-    if user_data.get('prompt_model_presence') == 'animal':
+    category = str(user_data.get('prompt_product_type', '')).casefold()
+    subcategory = str(user_data.get('prompt_product_subcategory', '')).casefold()
+    baby_product = category == 'baby' or subcategory.startswith('baby_')
+    if user_data.get('prompt_framing') == 'product_only':
+        model = 'Model: none; no human or animal, hands, face or body parts; focus entirely on the exact product.'
+    elif user_data.get('prompt_model_presence') == 'animal':
         species = str(user_data.get('prompt_animal_species', 'auto'))
         species_labels = {
             'auto': 'an animal species that clearly matches the named product; infer conservatively, otherwise use a cat or dog only when context supports it',
@@ -674,7 +682,11 @@ def prompt_creative_settings(user_data, include_audio=True):
             'diverse': 'diverse appearance',
             'any': 'any appearance',
         }.get(appearance_key, 'one randomly selected Malaysian ethnicity')
-        if child_model and not child_product:
+        if baby_product and child_model:
+            model = 'Model: no child or teen; use adult caregiver hands if needed or show the baby product alone. Keep all handling supervised and age-appropriate.'
+        elif baby_product:
+            model = f'Model: {count} adult caregiver model(s), gender presentation {gender_label}, {appearance}, age {age}; demonstrate only safe, supervised use and keep the baby product clearly visible.'
+        elif child_model and not child_product:
             model = 'Model: no child or teen; focus on the product and use adult hands if needed.'
         elif child_model:
             model = f'Model: {count} child/teen model(s), age {age}, gender presentation {gender_label}, {appearance}; match the product/reference, keep identity consistent and actions age-appropriate.'
@@ -684,6 +696,20 @@ def prompt_creative_settings(user_data, include_audio=True):
             model = f'Model: {count} adult model(s), gender presentation {gender_label}, {appearance}, age {age}; keep identity and outfit consistent.'
     else:
         model = 'Model: none; focus on the product.'
+
+    # The single-model video prompt must retain the explicit hijab choice too.
+    if (
+        user_data.get('prompt_model_presence') == 'yes'
+        and user_data.get('prompt_framing') != 'product_only'
+        and int(user_data.get('prompt_model_count', 1) or 1) == 1
+        and user_data.get('prompt_model_gender') == 'female'
+        and not model.startswith('Model: no child or teen')
+    ):
+        hijab_choice = user_data.get('prompt_model_hijab', 'na')
+        if hijab_choice == 'hijab':
+            model += ' Head covering: the female model wears a hijab; keep its style and placement consistent.'
+        elif hijab_choice == 'no_hijab':
+            model += ' Head covering: no hijab; keep the model hair visible and do not add a head covering.'
 
     # build_prompt() already supplies format, product lock and continuity.
     # Keep this helper focused on the user's selected model, audio and text options.
@@ -3683,9 +3709,11 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     if framing:
                         # Keep the selected framing's core direction; the generated storyboard
                         # already supplies timing, camera and product-continuity rules.
-                        framing_direction = framing[1].split('. ', 1)[0].strip()
+                        framing_direction = ' '.join(str(framing[1]).split()).strip()
                         prompt = prompt.rstrip() + '\nCAMERA FRAMING: ' + framing_direction.rstrip('. ') + '.'
                 prompt = prompt.rstrip() + '\n\n' + prompt_creative_settings(context.user_data)
+                if framing_key == 'product_only':
+                    prompt += '\nPRODUCT-ONLY PRIORITY: This selected framing overrides conflicting style or action suggestions. Show no person, hands, face, body parts or animal; use camera movement only and keep the exact product fully visible.'
                 await progress_update(waiting, 70, 'Menyediakan PROMPT IMAGE dan PROMPT VIDEO...')
                 context.user_data['stage'] = 'prompt_done'
                 mode_name = context.user_data.get('prompt_mode', 'normal')

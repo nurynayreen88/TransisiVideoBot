@@ -3,7 +3,35 @@ import json
 from pathlib import Path
 
 import random
+import re
 from collections import deque
+
+def _prompt_sentence(value, limit=100, fallback=""):
+    """Keep complete, meaningful sentences; the limit is a target, not a destructive cut."""
+    text = " ".join(str(value or "").split()).strip()
+    if not text:
+        return fallback
+    if len(text) <= limit:
+        return text
+    sentences = [part.strip() for part in re.findall(r".+?(?:[.!?](?=\s|$)|$)", text) if part.strip()]
+    if not sentences:
+        return fallback
+    # Never discard a distinctive first sentence just because it exceeds the target.
+    kept = [sentences[0]]
+    if len(kept[0]) < limit:
+        for sentence in sentences[1:]:
+            candidate = " ".join(kept + [sentence])
+            if len(candidate) > limit:
+                break
+            kept.append(sentence)
+    return " ".join(kept)
+
+
+def _prompt_text(value, fallback=""):
+    """Normalize whitespace without discarding user or style constraints."""
+    text = " ".join(str(value or "").split()).strip()
+    return text or fallback
+
 
 # Keep recent action choices in memory so consecutive prompts vary naturally.
 _RECENT_CREATIVE_CHOICES = {}
@@ -57,6 +85,66 @@ _CREATIVE_ACTIONS = {
         "Begin with a tidy contextual wide shot and slide gently toward one visible design detail.",
         "Keep the product grounded on a suitable surface; use a restrained push-in instead of inventing a function."
     ],
+    "equipment": [
+        "Begin with the complete tool or appliance grounded in frame, then move closer to one visible control or working part.",
+        "Show one safe, simple handling action only when the product supports it; otherwise use a restrained camera slide.",
+        "Keep the equipment stationary while the camera reveals a visible connector, handle or structural detail."
+    ],
+    "accessory": [
+        "Start with the whole accessory visible, then make a gentle close pass over one actual clasp, dial, fastening or edge.",
+        "Show the item at believable scale in a hand or on a wearer only if a model is selected; otherwise use a clean tabletop reveal.",
+        "Return to the full accessory after one detail shot; do not add matching items or invented attachments."
+    ],
+    "toy": [
+        "Show the complete toy or game set first, then one simple safe interaction with an existing piece.",
+        "Keep every visible piece consistent and grounded; do not add characters, accessories or effects that are not shown.",
+        "Use a gentle camera move across the actual set and finish with all supplied pieces visible."
+    ],
+    "stationery": [
+        "Begin with the full book or stationery item visible, then move to one real cover, page or writing detail.",
+        "Show a page turn or pen movement only when it suits the item; do not fabricate readable text.",
+        "Finish with the complete original item neatly arranged, without adding supplies."
+    ],
+    "sports": [
+        "Start with the complete sports item grounded in frame, then show one visible grip, seam or fastening detail.",
+        "Use one controlled, safe demonstration only when the product supports it; no stunts or exaggerated performance.",
+        "Return to a stable full-product view after the action and keep all equipment unchanged."
+    ],
+    "automotive": [
+        "Show the complete automotive accessory by itself first; do not invent a vehicle installation.",
+        "Move close to a visible connector, mount or edge only when present in the reference.",
+        "Use a stationary vehicle context only when appropriate; keep the product grounded and avoid compatibility claims."
+    ],
+    "baby": [
+        "Keep the baby product as the hero, using a clean stable presentation and no infant unless explicitly selected and safe.",
+        "Show one visible closure, support or construction detail without making safety or health claims.",
+        "Use calm adult-caretaker handling only when appropriate; otherwise keep the product alone and stationary."
+    ],
+    "travel": [
+        "Open on the complete luggage or travel item with visible handles, straps and wheels in frame.",
+        "Show one natural lift, roll or carry only when supported by the product and setting.",
+        "Highlight a visible zip, handle or wheel and finish with the whole unchanged item."
+    ],
+    "office": [
+        "Show the complete office product on a tidy desk, then one simple practical interaction if supported.",
+        "Move close to a visible control, edge or compartment without inventing specifications.",
+        "Finish on a clean full-product view and avoid adding stationery or accessories."
+    ],
+    "crafts": [
+        "Show the complete craft item or kit and all visible supplied pieces before any interaction.",
+        "Demonstrate one safe, plausible craft action only when the actual kit supports it.",
+        "Return to the original item or kit; do not invent tools, materials or a finished result."
+    ],
+    "garden": [
+        "Open on the complete garden product at realistic scale, then show one visible construction detail.",
+        "Use one safe outdoor interaction only when the product supports it; do not invent results or accessories.",
+        "Finish with the full item grounded and clearly visible."
+    ],
+    "kitchen": [
+        "Show the complete kitchen product or set before a close-up, with no extra cookware or utensils.",
+        "Use one simple, physically plausible kitchen action only when supported by the product.",
+        "Highlight a visible handle, lid or control and finish on the complete unchanged product."
+    ],
     "general": [
         "Start with a clean wide hero composition, then use a gentle lateral slide to reveal a visible detail.",
         "Begin with a close view of a reference-visible feature, then pull back to show the complete product.",
@@ -74,6 +162,18 @@ _SFX_BY_TYPE = {
     "wallet": "Use a soft handling sound only if a hand moves the wallet; keep music low and polished.",
     "pet": "Use gentle natural paw, collar or movement sounds only if visible and plausible; never force animal sounds.",
     "home": "Use a quiet handling or placement sound only when the action is visible; keep music soft.",
+    "equipment": "Use a restrained mechanical click or soft switch sound only if a visible control is used; no invented machine noise.",
+    "accessory": "Use a tiny, natural fastening or handling sound only if the action is visible; otherwise keep music understated.",
+    "toy": "Use a soft, brief movement sound only when the toy visibly moves; avoid cartoon effects or extra voices.",
+    "stationery": "Use a quiet page turn, paper movement or pen sound only when visible; keep it subtle.",
+    "sports": "Use a natural contact sound only when the visible action supports it; no exaggerated impacts.",
+    "automotive": "Use a restrained fitting or handling sound only if shown; do not add engine sounds to a product-only shot.",
+    "baby": "Use gentle, calm room tone and a soft placement sound only if visible; no crying or invented baby sounds.",
+    "travel": "Use a quiet wheel roll, zip or handle movement only if visible; no airport ambience unless the setting is selected.",
+    "office": "Use a subtle paper, keyboard or placement sound only if the corresponding action is visible.",
+    "crafts": "Use a light tool or material sound only if visible and plausible; no extra tools.",
+    "garden": "Use gentle outdoor ambience only if the setting is outdoors; match handling sounds to visible action.",
+    "kitchen": "Use a light utensil or placement sound only if visible; no exaggerated sizzling or invented cooking sounds.",
     "general": "Use one subtle soft chime, tiny pop or gentle whoosh at a matching visual beat; never stack effects."
 }
 
@@ -87,7 +187,9 @@ def _creative_variation(product_type, product, part, product_subtype=''):
         group = "fashion"
     elif type_key == "bag" and (subtype_key in {"bag_wallet", "wallet", "card_holder"} or any(w in words for w in ("wallet", "dompet", "card holder", "cardholder", "coin purse"))):
         group = "wallet"
-    elif type_key in {"bag", "travel"} or any(w in words for w in ("bag", "handbag", "backpack", "purse", "luggage", "beg galas", "beg tangan")):
+    elif type_key == "travel":
+        group = "travel"
+    elif type_key == "bag" or any(w in words for w in ("bag", "handbag", "backpack", "purse", "beg galas", "beg tangan")):
         group = "bag"
     elif type_key == "shoes" or any(w in words for w in ("shoe", "sneaker", "sandal", "footwear", "kasut", "selipar")):
         group = "shoes"
@@ -97,9 +199,31 @@ def _creative_variation(product_type, product, part, product_subtype=''):
         group = "beauty"
     elif type_key == "food" or any(w in words for w in ("food", "drink", "snack", "cake", "coffee", "tea", "makanan", "minuman")):
         group = "food"
-    elif type_key in {"gadget", "equipment", "automotive", "office"} or any(w in words for w in ("gadget", "phone", "camera", "earbud", "keyboard", "electronic", "telefon", "gajet")):
+    elif type_key == "gadget":
         group = "gadget"
-    elif type_key in {"home", "kitchen", "furniture", "garden"}:
+    elif type_key == "equipment":
+        group = "equipment"
+    elif type_key == "accessory":
+        group = "accessory"
+    elif type_key == "toy":
+        group = "toy"
+    elif type_key == "book_stationery":
+        group = "stationery"
+    elif type_key == "sports":
+        group = "sports"
+    elif type_key == "automotive":
+        group = "automotive"
+    elif type_key == "baby":
+        group = "baby"
+    elif type_key == "office":
+        group = "office"
+    elif type_key == "crafts":
+        group = "crafts"
+    elif type_key == "garden":
+        group = "garden"
+    elif type_key == "kitchen":
+        group = "kitchen"
+    elif type_key in {"home", "furniture"}:
         group = "home"
     else:
         group = "general"
@@ -118,7 +242,7 @@ def _creative_variation(product_type, product, part, product_subtype=''):
     audio = _SFX_BY_TYPE[group]
     return (
         "VISUAL VARIATION: " + action + "\n"
-        + "AUDIO: " + audio + " Keep music soft under speech; use only brief SFX that match visible action. If the video model cannot create audio, add voice, music and SFX in post-production.\n"
+        + "AUDIO: " + audio + " Keep background music below any selected speech; use only brief SFX that match visible action. If the video model cannot create audio, add only the audio elements selected by the user in post-production.\n"
         + "QUALITY: One clear action and at most one controlled camera move per beat. Preserve product shape, colour, markings and scale; keep motion, lighting and contact realistic. Smooth continuity, no morphing, duplication, warping, flicker or unrequested on-screen text."
     )
 
@@ -151,9 +275,32 @@ def _universal_prompt_rules():
     return " ".join(str(rule).strip() for rule in UNIVERSAL_PROMPT_GLOBAL_RULES if str(rule).strip())
 
 
-def _category_specific_scenes(product_type, product):
+def _category_specific_scenes(product_type, product, product_subtype=""):
     """Build visual beats that suit the product category without assuming unseen features."""
     words = str(product or "").casefold()
+    subtype = str(product_subtype or "").casefold()
+    if product_type == "bag" and (
+        subtype in {"bag_wallet", "wallet", "card_holder"}
+        or any(term in words for term in ("wallet", "dompet", "card holder", "cardholder", "coin purse"))
+    ):
+        return [
+            ("HOOK / WALLET SILHOUETTE", "Open on the wallet or card holder itself, with its complete outline visible; do not frame it as a handbag."),
+            ("FULL WALLET REVEAL", "Show the exact wallet shape and exterior at realistic scale; do not invent slots, pockets, capacity or materials."),
+            ("VISIBLE EDGE / CLOSURE DETAIL", "Highlight only a visible seam, edge, clasp or closure if present."),
+            ("PLAUSIBLE WALLET ACTION", "Open or close the wallet only if its opening is visible and the action is supported; otherwise use a gentle camera move."),
+            ("CTA / WALLET HERO", "Return to a clean full-wallet view and hold steady; no straps, handbag handles or invented accessories.")
+        ]
+    if product_type == "bag" and (
+        subtype in {"bag_backpack", "bag_laptop", "backpack"}
+        or any(term in words for term in ("backpack", "rucksack", "beg galas", "beg sekolah", "beg laptop"))
+    ):
+        return [
+            ("HOOK / BACKPACK SILHOUETTE", "Open on the complete backpack with its visible shoulder straps and body clearly framed."),
+            ("FULL BACKPACK REVEAL", "Show the backpack upright at believable scale; do not invent compartments, laptop sleeves or included accessories."),
+            ("VISIBLE STRAP / ZIP DETAIL", "Highlight only a visible strap, zip, handle or seam if present."),
+            ("PLAUSIBLE BACKPACK HANDLING", "Show one natural lift or carry using existing straps; if the scene does not support it, move the camera only."),
+            ("CTA / BACKPACK HERO", "Finish on the complete unchanged backpack with straps visible and no invented pockets or capacity claims.")
+        ]
     if product_type in {"home", "furniture", "baby"} and any(
         term in words for term in ("bed", "katil", "bedframe", "bed frame", "headboard")
     ):
@@ -162,7 +309,7 @@ def _category_specific_scenes(product_type, product):
             ("FULL BED REVEAL", "Show the complete bed in a believable bedroom scale. Preserve the headboard, frame, rails, footboard, colour and proportions exactly as shown."),
             ("CONSTRUCTION DETAIL", "Make a gentle close pass across one or two genuinely visible structural details. Show a mattress, stool or other piece only if it appears in the reference or supplied product details."),
             ("ROOM CONTEXT", "Use one restrained camera move to show how the unchanged bed sits in the room; keep all parts grounded and do not demonstrate unsupported storage or functions."),
-            ("CTA / HERO HOLD", "Return to a clear full-bed composition and hold it steadily, leaving uncluttered space for optional selected hook/CTA text.")
+            ("CTA / HERO HOLD", "Return to a clear full-bed composition and hold it steadily, leaving uncluttered negative space; no on-screen text unless explicitly selected.")
         ]
     if product_type in {"home", "kitchen", "equipment", "gadget"} and any(
         term in words for term in ("cookware", "quickchef", "pan set", "pot set", "kitchen set", "7pcs", "7 pcs", "cookware set", "saucepan", "frying pan")
@@ -172,7 +319,7 @@ def _category_specific_scenes(product_type, product):
             ("SET OVERVIEW", "Make a smooth, short camera move across the actual items and return to a composition that shows the set together."),
             ("REALISTIC USE", "Show one simple, physically plausible kitchen action with an item and utensil that are actually included or explicitly described. Do not invent a feature, coating, capacity or performance claim."),
             ("PRACTICAL DETAIL / VALUE", "Highlight a visible handle, shape, stack or included component only where supported by the product name or reference; communicate value through the actual set contents, not invented savings."),
-            ("CTA / HERO HOLD", "Finish with the complete unchanged set neatly arranged and clearly visible; leave room for optional selected hook/CTA text.")
+            ("CTA / HERO HOLD", "Finish with the complete unchanged set neatly arranged and clearly visible; leave uncluttered negative space; no on-screen text unless explicitly selected.")
         ]
     scenes_by_type = {
         "fashion": [
@@ -180,49 +327,154 @@ def _category_specific_scenes(product_type, product):
             ("FULL LOOK", "Use one relaxed, realistic model movement to show the garment's actual cut, fit and overall silhouette."),
             ("FABRIC / DESIGN DETAIL", "Move closer to a genuinely visible print, seam, sleeve, hem or fabric detail; do not invent texture or alter the pattern."),
             ("NATURAL MOVEMENT", "Show one category-appropriate step, gentle turn or natural fabric movement without exaggerated posing or wind."),
-            ("CTA / OUTFIT HERO", "Settle on a clean full-outfit view with the garment unchanged and room for optional selected hook/CTA text.")
+            ("CTA / OUTFIT HERO", "Settle on a clean full-outfit view with the garment unchanged and uncluttered negative space; no on-screen text unless explicitly selected.")
         ],
         "hijab": [
             ("HOOK / DRAPE REVEAL", "Open on the actual drape and overall styling, then show the full visible arrangement."),
             ("FULL STYLING", "Use a small natural head or shoulder movement while keeping the wrap and folds consistent."),
             ("FABRIC DETAIL", "Show only visible folds, edging, print or texture; do not change the wrap, colour or fabric."),
             ("NATURAL PROFILE", "Make a gentle three-quarter camera adjustment to show the existing drape from a plausible angle."),
-            ("CTA / STYLING HERO", "Return to a clear, steady view of the same styling with room for optional selected hook/CTA text.")
+            ("CTA / STYLING HERO", "Return to a clear, steady view of the same styling with uncluttered negative space; no on-screen text unless explicitly selected.")
         ],
         "shoes": [
             ("HOOK / SHOE SILHOUETTE", "Open at a low three-quarter angle with the complete shoe or pair clearly visible."),
             ("ON-FOOT OR PRODUCT VIEW", "If a wearer is selected, show a short natural step on a flat surface; otherwise keep the shoes grounded and stationary."),
             ("VISIBLE DETAIL", "Highlight only the visible upper, fastening, sidewall or sole edge; never force an unseen angle."),
             ("NATURAL MOVEMENT", "Show a small, believable shift or two-step walk only if appropriate, preserving shoe shape and foot contact."),
-            ("CTA / SHOE HERO", "Hold a clean view of the unchanged pair or product arrangement with room for optional selected hook/CTA text.")
+            ("CTA / SHOE HERO", "Hold a clean view of the unchanged pair or product arrangement with uncluttered negative space; no on-screen text unless explicitly selected.")
         ],
         "bag": [
             ("HOOK / BAG SHAPE", "Open on the bag's clearest recognizable silhouette, with all visible straps and handles in frame."),
             ("FULL PRODUCT REVEAL", "Show the complete bag at a believable scale in the selected setting; do not add contents or accessories."),
             ("HARDWARE / SEAM DETAIL", "Move close to one visible seam, handle, clasp or hardware detail only if present."),
             ("PLAUSIBLE HANDLING", "If the scene calls for it, show one natural lift or carry using an existing handle or strap; otherwise move the camera only."),
-            ("CTA / BAG HERO", "Return to the same complete bag and hold a stable frame with room for optional selected hook/CTA text.")
+            ("CTA / BAG HERO", "Return to the same complete bag and hold a stable frame with uncluttered negative space; no on-screen text unless explicitly selected.")
         ],
         "beauty": [
             ("HOOK / PACKAGING REVEAL", "Open with a clean, recognizable view of the actual package and keep its label and shape consistent."),
             ("PRODUCT PRESENTATION", "Show the whole product in a tidy, relevant setting; do not add extra containers or applicators."),
             ("VISIBLE DETAIL / TEXTURE", "Highlight a genuinely visible package or product texture detail without inventing ingredients, shade or efficacy."),
             ("REALISTIC USE CONTEXT", "Show only a small, plausible use action if the selected product supports it; otherwise use a restrained close-up."),
-            ("CTA / PRODUCT HERO", "Finish with the original product clearly framed and room for optional selected hook/CTA text.")
+            ("CTA / PRODUCT HERO", "Finish with the original product clearly framed and uncluttered negative space; no on-screen text unless explicitly selected.")
         ],
         "food": [
             ("HOOK / APPETIZING VIEW", "Open on the actual food or drink with natural, appetizing light; do not add toppings or ingredients."),
             ("FULL SERVING", "Show the complete original serving and packaging, where present."),
             ("TEXTURE DETAIL", "Make a gentle close-up of visible texture, crumb, surface or liquid; preserve the actual appearance."),
             ("SERVING MOMENT", "Use one plausible serving or pouring action only if supported by the product and scene; avoid exaggerated effects."),
-            ("CTA / PRODUCT HERO", "Return to the real serving or package and hold a clean final composition with room for optional selected hook/CTA text.")
+            ("CTA / PRODUCT HERO", "Return to the real serving or package and hold a clean final composition with uncluttered negative space; no on-screen text unless explicitly selected.")
         ],
         "gadget": [
             ("HOOK / DEVICE REVEAL", "Open on a recognizable three-quarter view of the unchanged device."),
             ("FULL DEVICE VIEW", "Show the complete device and any supplied components without adding cables or accessories."),
             ("VISIBLE CONTROL / PORT", "Move close only to a control, port, screen or button that is actually visible; keep screen content unchanged."),
             ("PLAUSIBLE DEMONSTRATION", "Show one simple action the named product genuinely supports; do not invent compatibility, specifications or functions."),
-            ("CTA / DEVICE HERO", "Finish with a stable, complete device view and room for optional selected hook/CTA text.")
+            ("CTA / DEVICE HERO", "Finish with a stable, complete device view and uncluttered negative space; no on-screen text unless explicitly selected.")
+        ],
+        "equipment": [
+            ("HOOK / EQUIPMENT REVEAL", "Open with the complete appliance, tool or equipment clearly visible and grounded."),
+            ("FULL EQUIPMENT VIEW", "Show the whole product and only the components visible in the reference."),
+            ("CONTROL / BUILD DETAIL", "Highlight a visible switch, connector, handle or construction detail; do not invent specifications."),
+            ("PLAUSIBLE OPERATION", "Show one safe, simple action only when the named product clearly supports it; never imply a performance result."),
+            ("CTA / EQUIPMENT HERO", "Return to a stable full-product view with all parts visible; no on-screen text unless explicitly selected.")
+        ],
+        "home": [
+            ("HOOK / HOME PRODUCT REVEAL", "Open with the complete product in a believable home setting at realistic scale."),
+            ("FULL PRODUCT VIEW", "Show the item's overall shape and placement without adding unconfirmed decor or included accessories."),
+            ("VISIBLE DESIGN DETAIL", "Highlight one visible finish, edge, texture or functional part without naming unsupported materials."),
+            ("NATURAL HOME CONTEXT", "Use a subtle camera move or one plausible interaction; do not demonstrate an unverified function."),
+            ("CTA / HOME HERO", "Finish with the complete unchanged product clearly framed and uncluttered; no on-screen text unless explicitly selected.")
+        ],
+        "accessory": [
+            ("HOOK / ACCESSORY REVEAL", "Open on the accessory's most recognizable visible shape, with the full item in frame."),
+            ("FULL ACCESSORY VIEW", "Keep the complete item and any visible fastening or strap clear; do not add matching accessories."),
+            ("VISIBLE FINISH DETAIL", "Move close to one visible clasp, dial, setting, edge or surface detail only if present."),
+            ("NATURAL SCALE / HANDLING", "Show the item at believable scale, using a hand or wearer only if selected and appropriate."),
+            ("CTA / ACCESSORY HERO", "Return to a clear full-item view and hold steady; no on-screen text unless explicitly selected.")
+        ],
+        "toy": [
+            ("HOOK / TOY REVEAL", "Open with the complete toy or game set arranged so its actual contents are immediately clear."),
+            ("FULL SET VIEW", "Show only pieces visible in the reference; do not duplicate, add or remove components."),
+            ("DETAIL / MECHANISM", "Highlight a visible piece, texture or mechanism without inventing lights, sounds or functions."),
+            ("PLAUSIBLE PLAY ACTION", "Show one simple, safe interaction consistent with the toy; use a child only when a child model is explicitly selected."),
+            ("CTA / TOY HERO", "Finish with the complete unchanged toy or set neatly visible; no on-screen text unless explicitly selected.")
+        ],
+        "book_stationery": [
+            ("HOOK / STATIONERY REVEAL", "Open on the full book, notebook or stationery item with its cover and shape readable."),
+            ("FULL ITEM VIEW", "Keep the complete item and any supplied pieces visible without adding stationery."),
+            ("PRINT / PAPER DETAIL", "Show only readable text and printed details actually present in the reference; do not fabricate page content."),
+            ("NATURAL DESK ACTION", "Use a gentle page turn or writing gesture only if it suits the product and does not alter visible text."),
+            ("CTA / STATIONERY HERO", "Finish with a clear view of the original item and uncluttered negative space; no on-screen text unless explicitly selected.")
+        ],
+        "sports": [
+            ("HOOK / SPORTS GEAR REVEAL", "Open on the complete sports item or equipment in a stable, recognizable composition."),
+            ("FULL GEAR VIEW", "Show the whole item at realistic scale with no extra accessories or invented parts."),
+            ("VISIBLE MATERIAL / GRIP DETAIL", "Highlight a visible seam, grip, fastener or surface detail without claiming performance."),
+            ("SAFE PRACTICAL ACTION", "Show one simple, controlled use only when appropriate for the item; no risky stunts or exaggerated results."),
+            ("CTA / SPORTS HERO", "Return to a stable full-product view with the item unchanged; no on-screen text unless explicitly selected.")
+        ],
+        "pet": [
+            ("HOOK / PET PRODUCT REVEAL", "Open on the complete pet product, clearly showing its actual shape and supplied parts."),
+            ("FULL PRODUCT VIEW", "Keep the product grounded and at realistic scale; do not add food, toys or accessories."),
+            ("VISIBLE DETAIL", "Highlight one genuinely visible fastening, bowl, texture or structural detail."),
+            ("CALM PET CONTEXT", "If an animal model is selected, show calm, species-appropriate interaction only when safe; otherwise use a product-only camera move."),
+            ("CTA / PET PRODUCT HERO", "Finish with the complete unchanged product clearly visible; no on-screen text unless explicitly selected.")
+        ],
+        "automotive": [
+            ("HOOK / AUTOMOTIVE ITEM REVEAL", "Open on the exact automotive product or accessory, not an invented vehicle or installation."),
+            ("FULL ITEM VIEW", "Show the whole supplied item and its visible connectors or mounting parts."),
+            ("FIT / CONNECTOR DETAIL", "Highlight a visible connector, edge, fastening or control without claiming compatibility."),
+            ("PLAUSIBLE CONTEXT", "Use a simple, stationary vehicle context only when relevant and supported; do not fabricate fitment or operation."),
+            ("CTA / AUTOMOTIVE HERO", "Return to a clean full-item view with all parts unchanged; no on-screen text unless explicitly selected.")
+        ],
+        "baby": [
+            ("HOOK / BABY PRODUCT REVEAL", "Open on the complete baby product in a clean, calm setting; do not add a baby or caregiver unless selected."),
+            ("FULL PRODUCT VIEW", "Show the item's true size, shape and included components without adding accessories."),
+            ("VISIBLE SAFETY / DESIGN DETAIL", "Highlight only visible construction, closure or support details; do not make safety or health claims."),
+            ("GENTLE CONTEXT", "Use calm, safe handling only when the product and selected model support it; never show unsafe infant positioning."),
+            ("CTA / BABY PRODUCT HERO", "Finish with the complete unchanged item clearly visible; no on-screen text unless explicitly selected.")
+        ],
+        "travel": [
+            ("HOOK / TRAVEL ITEM REVEAL", "Open with the complete travel item, including all visible handles, straps and wheels."),
+            ("FULL ITEM VIEW", "Show the item at realistic scale and preserve its exact shape and included parts."),
+            ("VISIBLE TRAVEL DETAIL", "Highlight a visible zip, handle, wheel or fastening without inventing capacity or security features."),
+            ("NATURAL HANDLING", "Show one simple lift, roll or carry only when the item supports it and the selected setting makes sense."),
+            ("CTA / TRAVEL HERO", "Return to a clear full-item view and hold steady; no on-screen text unless explicitly selected.")
+        ],
+        "office": [
+            ("HOOK / OFFICE PRODUCT REVEAL", "Open on the complete office item in a tidy, believable workspace."),
+            ("FULL ITEM VIEW", "Show the whole product and only the components supplied or visible."),
+            ("VISIBLE FUNCTIONAL DETAIL", "Highlight a real button, edge, compartment or surface detail without inventing specifications."),
+            ("PRACTICAL DESK ACTION", "Show one simple, plausible desk-use action only when supported by the product."),
+            ("CTA / OFFICE HERO", "Finish with a stable full-product composition and uncluttered negative space; no on-screen text unless explicitly selected.")
+        ],
+        "kitchen": [
+            ("HOOK / KITCHEN PRODUCT REVEAL", "Open on the complete kitchen item or set, showing all supplied pieces."),
+            ("FULL PRODUCT VIEW", "Keep the product grounded and show only confirmed components."),
+            ("VISIBLE COOKING DETAIL", "Highlight a visible handle, lid, control or included utensil without inventing coating or capacity."),
+            ("PLAUSIBLE KITCHEN ACTION", "Show one simple, physically plausible action only if supported by the product; do not imply a result."),
+            ("CTA / KITCHEN HERO", "Finish with the complete unchanged product clearly visible; no on-screen text unless explicitly selected.")
+        ],
+        "furniture": [
+            ("HOOK / FURNITURE SILHOUETTE", "Open with the full furniture piece at believable room scale."),
+            ("FULL FURNITURE VIEW", "Show the complete item and preserve its visible structure, colour and proportions."),
+            ("VISIBLE CONSTRUCTION DETAIL", "Highlight only a visible joint, edge, handle or surface feature."),
+            ("ROOM CONTEXT", "Use one gentle camera move to show placement; do not demonstrate storage, folding or other functions unless visible and supported."),
+            ("CTA / FURNITURE HERO", "Return to the full item in a stable, uncluttered composition; no on-screen text unless explicitly selected.")
+        ],
+        "garden": [
+            ("HOOK / GARDEN PRODUCT REVEAL", "Open on the complete garden item with its visible shape and parts clear."),
+            ("FULL ITEM VIEW", "Show the product at realistic scale without adding plants, tools or accessories not supplied."),
+            ("VISIBLE BUILD DETAIL", "Highlight one visible connector, edge, nozzle or surface feature."),
+            ("PLAUSIBLE OUTDOOR USE", "Show one simple, safe use only when the product clearly supports it; do not invent results."),
+            ("CTA / GARDEN HERO", "Finish on the unchanged full product in a clean outdoor or neutral setting; no on-screen text unless explicitly selected.")
+        ],
+        "crafts": [
+            ("HOOK / CRAFT ITEM REVEAL", "Open on the complete craft product or kit so the actual included contents are clear."),
+            ("FULL KIT VIEW", "Show only the pieces visible or explicitly confirmed as included."),
+            ("TEXTURE / TOOL DETAIL", "Highlight a visible texture, edge or tool part without inventing material properties."),
+            ("SIMPLE MAKING ACTION", "Show one safe, plausible craft action only if supported by the kit; do not add extra tools or finished results."),
+            ("CTA / CRAFT HERO", "Finish with the original product or kit neatly visible; no on-screen text unless explicitly selected.")
         ],
     }
     return scenes_by_type.get(product_type, [
@@ -230,7 +482,7 @@ def _category_specific_scenes(product_type, product):
         ("FULL PRODUCT REVEAL", "Show the complete product in a believable setting and at realistic scale."),
         ("VISIBLE DETAIL", "Highlight one genuinely visible detail; do not invent materials, functions or accessories."),
         ("PLAUSIBLE USE OR PRESENTATION", "Show one natural action suited to the named product; if no action is supported, use a restrained camera move."),
-        ("CTA / HERO HOLD", "Finish on a clear, stable view of the unchanged product with room for optional selected hook/CTA text.")
+        ("CTA / HERO HOLD", "Finish on a clear, stable view of the unchanged product with uncluttered negative space; no on-screen text unless explicitly selected.")
     ])
 
 
@@ -280,17 +532,18 @@ def _resolve_auto_style(style, product_type, product="", product_subtype=""):
     product_words = str(product or "").casefold()
     candidates = None
     if category == "bag":
-        if subtype in {"bag_wallet", "wallet", "card_holder"} or any(
-            term in product_words for term in ("wallet", "dompet", "card holder", "cardholder", "coin purse")
-        ):
+        # A user's explicit subcategory outranks ambiguous words in a product name.
+        if subtype in {"bag_wallet", "wallet", "card_holder"}:
             category = "wallet"
-        elif subtype in {"bag_backpack", "backpack", "bag_laptop"} or any(
-            term in product_words for term in ("backpack", "rucksack", "beg galas", "beg sekolah", "beg laptop")
-        ):
+        elif subtype in {"bag_backpack", "backpack", "bag_laptop"}:
             candidates = ["backpack_demo", "bag_daily_carry", "bag_tabletop_reveal", "lifestyle", "cinematic"]
-        elif subtype in {"bag_sling", "sling_bag", "bag_handbag", "handbag", "bag_tote"} or any(
-            term in product_words for term in ("sling", "crossbody", "beg silang", "tote bag", "handbag", "beg tangan")
-        ):
+        elif subtype in {"bag_sling", "sling_bag", "bag_handbag", "handbag", "bag_tote"}:
+            candidates = ["sling_bag_lifestyle", "handbag_showcase", "bag_daily_carry", "bag_tabletop_reveal", "bag_flatlay"]
+        elif any(term in product_words for term in ("wallet", "dompet", "card holder", "cardholder", "coin purse")):
+            category = "wallet"
+        elif any(term in product_words for term in ("backpack", "rucksack", "beg galas", "beg sekolah", "beg laptop")):
+            candidates = ["backpack_demo", "bag_daily_carry", "bag_tabletop_reveal", "lifestyle", "cinematic"]
+        elif any(term in product_words for term in ("sling", "crossbody", "beg silang", "tote bag", "handbag", "beg tangan")):
             candidates = ["sling_bag_lifestyle", "handbag_showcase", "bag_daily_carry", "bag_tabletop_reveal", "bag_flatlay"]
         else:
             candidates = _AUTO_STYLE_CANDIDATES["bag"]
@@ -357,7 +610,7 @@ def build_prompt(mode, product, scene, motion, style='auto', duration=10, concep
         # Generate connected 10-second prompts while retaining the same style and product context.
         parts = [
             _build_single_prompt(mode, product, scene, motion, style, part=index, duration=10,
-                                 concept=concept, product_type=product_type, storyboard_override=storyboard_override, universal_custom=universal_custom, prompt_language=prompt_language)
+                                 concept=concept, product_type=product_type, storyboard_override=storyboard_override, universal_custom=universal_custom, product_subtype=product_subtype, prompt_language=prompt_language)
             + "\n\n" + _creative_variation(product_type, product, index, product_subtype)
             for index in range(1, duration // 10 + 1)
         ]
@@ -366,11 +619,11 @@ def build_prompt(mode, product, scene, motion, style='auto', duration=10, concep
             for index, part in enumerate(parts)
         )
     return (_build_single_prompt(mode, product, scene, motion, style, part=0, duration=duration,
-                                concept=concept, product_type=product_type, storyboard_override=storyboard_override, universal_custom=universal_custom, prompt_language=prompt_language)
+                                concept=concept, product_type=product_type, storyboard_override=storyboard_override, universal_custom=universal_custom, product_subtype=product_subtype, prompt_language=prompt_language)
             + "\n\n" + _creative_variation(product_type, product, 0, product_subtype))
 
 
-def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, duration=10, concept='', product_type='other', storyboard_override=None, universal_custom=False, prompt_language='Malay'):
+def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, duration=10, concept='', product_type='other', storyboard_override=None, universal_custom=False, product_subtype='', prompt_language='Malay'):
     scene_text = str(scene or '').lower()
     selected_scene_lock = "LOCATION: Keep every shot in the selected setting (" + str(scene or "a realistic setting suited to the product") + "); do not substitute another location. "
     if motion in ('auto', '', None):
@@ -414,7 +667,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
     category_direction = product_type_directions.get(product_type, product_type_directions['other'])
     category_direction += selected_scene_lock
     if part in (0, 1):
-        category_direction += " " + opening_direction(product_type)
+        category_direction += " " + opening_direction(product_type, prompt_language)
     natural_motion_by_type = {
         'bag': "If a human model is present, have them carry the bag as a real person would and act naturally in the SELECTED LOCATION: use relaxed shoulders, natural arm swing and subtle bag sway if walking; if seated or stationary, keep the bag held or worn naturally. Only mention an airport, terminal or check-in area when the user explicitly selected an airport setting. Never stand rigidly while rotating or twirling the handbag for the camera.",
         'fashion': "If a model is present, use a relaxed short walk, natural weight shifts and a small practical gesture such as adjusting a sleeve or letting the fabric settle. Avoid stiff runway posing unless runway style is explicitly requested.",
@@ -518,11 +771,11 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
         concise_framework = ""
         if product_type == "other" or universal_custom:
             concise_framework = (
-                " UNIVERSAL CREATIVE FRAMEWORK: " + _universal_prompt_direction(style_key)[:180]
+                " UNIVERSAL CREATIVE FRAMEWORK: " + _universal_prompt_direction(style_key)
                 + " UNIVERSAL SAFETY RULES: Preserve visible product details; invent no features or claims."
             )
         doodle = style_key == "white_doodle"
-        hook = product_hook(product)
+        hook = product_hook(product, prompt_language)
         if product_type == "other" or universal_custom:
             category_direction += (
                 " UNIVERSAL CREATIVE FRAMEWORK: "
@@ -535,25 +788,40 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
         # Retain the selected style, reference safety, timed beats and user concept.
         if duration in (10, 20, 30) and (duration == 10 or part == 0):
             if duration == 10 and part >= 2:
+                scenes = _category_specific_scenes(product_type, product, product_subtype)
                 clip_label = "SECOND CLIP 10s" if part == 2 else "THIRD CLIP 10s" if part == 3 else "CONTINUATION CLIP 10s"
-                beat_plan = (clip_label + ": 0–2s continue from the exact full-product frame held at the end of the previous clip; "
-                             "2–4s resume the same movement; 4–6s show another visible detail; 6–8s continue in the same setting; "
-                             "8–10s stable full-product hero finish. Do NOT repeat the opening hook. ")
-            elif duration == 10 and part == 1:
-                beat_plan = ("FIRST CLIP 10s: 0–2s establish the product; 2–4s reveal it fully; 4–6s highlight one visible detail; "
-                             "6–8s continue one simple action; 8–10s HOLD the final frame for Part 2. No fade. ")
-            elif duration == 20:
-                beat_plan = ("TIMING: 0–4s clear product reveal; 4–8s show the complete product in its setting; "
-                             "8–12s highlight one genuinely visible detail; 12–16s one subtle category-appropriate action; "
-                             "16–20s stable full-product hero finish. ")
-            elif duration == 30:
-                beat_plan = ("TIMING: 0–6s clear product reveal; 6–12s show the complete product in its setting; "
-                             "12–18s highlight one genuinely visible detail; 18–24s one subtle category-appropriate action; "
-                             "24–30s stable full-product hero finish. ")
-            else:
-                beat_plan = ("TIMING: 0–2s clean reveal; 2–4s show the full product; 4–6s highlight one reference-visible detail; "
-                             "6–8s one subtle product-appropriate action; 8–10s HOLD the final frame in a full-product hero composition. "
-                             + ("Do not perform the main surrounding contour yet. " if doodle else ""))
+                beat_plan = (
+                    clip_label + ": 0–2s CONTINUITY BRIDGE — resume from the exact full-product frame held at the end of the previous clip and do not repeat the hook; "
+                    + "2–4s CATEGORY ACTION — " + scenes[3][1] + " "
+                    + "4–6s VISIBLE DETAIL — " + scenes[2][1] + " "
+                    + "6–8s NATURAL FOLLOW-THROUGH — continue the same setting and product orientation; "
+                    + "8–10s HERO HOLD — finish with the complete unchanged product clearly visible. "
+                    + "Do NOT repeat the opening hook or restart the reveal. "
+                )
+            elif not (storyboard_override and isinstance(storyboard_override, (list, tuple)) and len(storyboard_override) == 4):
+                scenes = _category_specific_scenes(product_type, product, product_subtype)
+                scene_length = duration / 5
+                timed_scenes = []
+                for index, (shot_name, shot_direction) in enumerate(scenes):
+                    start_time = index * scene_length
+                    end_time = start_time + scene_length
+                    if index == 4 and duration == 10 and (part == 1 or doodle):
+                        shot_direction += " HOLD the final frame in a stable full-product composition for a seamless Part 2 handoff; no fade."
+                    timed_scenes.append(
+                        f"{start_time:g}–{end_time:g}s {shot_name}: {shot_direction}"
+                    )
+                timing_summary = (
+                    "TIMING: 0–6s clear product reveal; 6–12s show the complete product in its setting; "
+                    "12–18s highlight one genuinely visible detail; 18–24s one subtle category-appropriate action; "
+                    "24–30s stable full-product hero finish. "
+                    if duration == 30 else ""
+                )
+                beat_plan = (
+                    timing_summary
+                    + "CATEGORY-SPECIFIC STORYBOARD — one continuous video with five connected timed beats: "
+                    + " | ".join(timed_scenes)
+                    + (" Do not perform the main surrounding contour yet." if doodle and part <= 1 else "")
+                )
             if storyboard_override and isinstance(storyboard_override, (list, tuple)) and len(storyboard_override) == 4:
                 beat_labels = (
                     "HOOK",
@@ -576,9 +844,11 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
                 "HOOK + CTA: Make the opening visually specific to this product. The middle must show a plausible use "
                 "and a benefit supported by the product details; the third beat shows its value or a visible detail; "
                 "the final beat is a clear CTA with a full-product hero shot. Never invent product claims. Use only supported product details. "
-                + ("If voice or on-screen text is selected, use a short, natural, product-specific hook and CTA that match the selected options. "
+                + ("If voice or on-screen text is selected, use varied, natural product-specific wording and one concise CTA that match the selected options; avoid stock openings such as “Kenali produk ini” and never invent claims, discounts, prices, urgency or availability. "
                    if part < 2 else "Continue naturally without repeating the opening hook. ")
             )
+            if doodle and duration == 10 and part == 1 and "HOLD the final frame" not in beat_plan:
+                beat_plan += " HOLD the final frame in a stable full-product composition for a seamless Part 2 handoff; no fade. "
             doodle_rule = (
                 "DOODLE + MATCHED SFX: Thin hand-drawn lines travel smoothly just outside the visible product outline; "
                 "sync a soft pencil-draw or light whoosh to the line movement, a tiny sparkle/chime when a visible detail is highlighted, "
@@ -586,18 +856,18 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
                 "do not stack effects or cover the product. If audio generation is unsupported, do not claim the SFX will be rendered. "
                 if doodle else ""
             )
-            concept_rule = ("CREATIVE IDEA: " + concept.strip() + ". " if concept and concept.strip() else "")
+            concept_rule = ("CREATIVE IDEA: " + _prompt_text(concept, "") + " " if concept and concept.strip() else "")
             return (
                 "VIDEO PROMPT — " + str(duration) + " SECONDS" + (" | PART " + str(part) if part else "") + "\n"
                 "Vertical 9:16, realistic product video, exactly " + str(duration) + " seconds.\n"
-                + "STYLE: " + style_name + " — " + (" ".join(style_template.split())[:180].rsplit(" ", 1)[0] or " ".join(style_template.split())[:180]).rstrip() + "\n"
+                + "STYLE: " + style_name + " — " + _prompt_text(style_template, "Use a realistic product-focused presentation.") + "\n"
                 + "PRODUCT: " + product + "\n" + concise_category_direction + concise_framework
                 + (" UNIVERSAL SAFETY RULES: Preserve visible product details; invent no features or claims."
                    if product_type == "other" or universal_custom else "") + "\n"
-                + "SETTING: " + str(scene)[:100].strip() + ". CAMERA: " + camera[:70].strip() + "\n"
+                + "SETTING: " + _prompt_text(scene, "A realistic setting suited to the product.") + " CAMERA: " + _prompt_text(camera, "Use one restrained camera move and keep the product stable.") + "\nCAMERA PRIORITY: Follow the selected CAMERA instruction if STYLE suggests a conflicting move; use only one camera movement.\n"
                 + "PRODUCT LOCK: Preserve the reference product's visible design, colour, pattern, branding and proportions. Do not invent features or accessories.\n"
-                + hook_rule + beat_plan + concept_rule[:100] + doodle_rule
-                + "Keep actions natural and the product consistent. Follow the selected text, audio and visual options."
+                + hook_rule + beat_plan + " " + concept_rule + " " + doodle_rule + " "
+                + "Keep actions natural and the product consistent. Follow the selected text, audio and visual options. For AI-generated voice, use varied, natural product-specific wording and one concise CTA in " + ("English" if str(prompt_language or "Malay").casefold() == "english" else "Bahasa Melayu Malaysia") + "; avoid stock openings such as “Kenali produk ini” and never invent claims, discounts, prices, urgency or availability. If a user-supplied script is selected, use it exactly and add no dialogue."
             )
 
         evidence_rules = (
@@ -696,7 +966,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
         # on five equal timed scenes within one video.
         if part == 0 and duration in (10, 20, 30):
             scene_length = duration / 5
-            generic_scenes = _category_specific_scenes(product_type, product)
+            generic_scenes = _category_specific_scenes(product_type, product, product_subtype)
             if storyboard_override and isinstance(storyboard_override, (list, tuple)) and len(storyboard_override) == 4:
                 curated_items = list(storyboard_override)
                 generic_scenes = [
@@ -727,12 +997,12 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
             "VIDEO PROMPT — " + str(duration) + " SECONDS" + (" | PART " + str(part) if part else "") + "\n"
             "Realistic vertical 9:16 product ad, exactly " + str(duration) + " seconds.\n"
             "PRODUCT: " + product + "\n" + category_direction + "\n"
-            + "STYLE: " + style_name + " — " + style_template[:70].strip() + "\n"
-            + "SETTING: " + str(scene)[:100].strip() + "\nCAMERA: " + camera[:70].strip() + "\n"
+            + "STYLE: " + style_name + " — " + _prompt_text(style_template, "Use a realistic product-focused presentation.") + "\n"
+            + "SETTING: " + _prompt_text(scene, "A realistic setting suited to the product.") + "\nCAMERA: " + _prompt_text(camera, "Use one restrained camera move and keep the product stable.") + "\nCAMERA PRIORITY: Follow the selected CAMERA instruction if STYLE suggests a conflicting move; use only one camera movement.\n"
             + (curated_direction if curated_direction else
                ((hook_direction if part != 2 else "Continue seamlessly from Part 1; do not repeat the hook.") + "\n" + rules))
-            + (("\nCREATIVE IDEA: " + concept[:100].strip()) if concept else "")
-            + "\nNatural movement. If voice is selected, use a short hook and CTA in Bahasa Melayu Malaysia. No added on-screen text or watermark."
+            + (("\nCREATIVE IDEA: " + _prompt_text(concept, "")) if concept else "")
+            + "\nNatural movement. For AI-generated voice, use varied, natural product-specific wording and one concise CTA in " + ("English" if str(prompt_language or "Malay").casefold() == "english" else "Bahasa Melayu Malaysia") + "; avoid stock openings such as “Kenali produk ini” and never invent claims, discounts, prices, urgency or availability. Preserve any user-supplied script exactly and add no dialogue. No added on-screen text or watermark."
         )
     if mode == "storyboard":
         shots = [
@@ -779,10 +1049,10 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
         "VIDEO PROMPT — " + str(duration) + " SECONDS" + (" | PART " + str(part) if part else "") + "\n"
         "Realistic vertical 9:16 product ad, exactly " + str(duration) + " seconds.\n"
         "PRODUCT: " + product + "\n"
-        "STYLE: " + str(art)[:70].strip() + "\n"
-        "SETTING: " + str(scene)[:100].strip() + "\n"
+        "STYLE: " + _prompt_text(art, "Use a realistic product-focused presentation.") + "\n"
+        "SETTING: " + _prompt_text(scene, "A realistic setting suited to the product.") + "\n"
         + direction + "\n"
         + "Preserve the product's visible design and packaging; invent no features. "
         "Natural movement, clean transitions, no added on-screen text or watermark. "
-        "If voice is selected, use a short product-specific hook and CTA in " + spoken_language + "."
+        "For AI-generated voice, use varied, natural product-specific wording and one concise CTA in " + spoken_language + "; avoid stock openings such as “Kenali produk ini” and never invent claims, discounts, prices, urgency or availability. Preserve any user-supplied script exactly and add no dialogue."
     )

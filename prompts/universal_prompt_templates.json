@@ -8,8 +8,7 @@
       "name": "Paparan produk premium",
       "style_keys": [
         "cinematic",
-        "luxury",
-        "luxury_reveal"
+        "luxury"
       ],
       "direction": "Create a restrained premium hero presentation: begin with a clear view of the exact product, make one gentle camera move, highlight only one visible detail, then hold a clean full-product hero frame. Use soft controlled light and realistic contact shadows; no dramatic spin or fabricated view."
     },
@@ -64,8 +63,7 @@
       "style_keys": [
         "studio_360_safe",
         "tech_demo",
-        "dynamic",
-        "zoom"
+        "dynamic"
       ],
       "direction": "Use one controlled camera move—slow push-in, short lateral slide or a limited arc only when the visible reference supports it. Do not perform a full rotation or reveal unseen sides. Keep the product stationary, proportions stable and edges free from warping."
     },
@@ -75,7 +73,6 @@
       "style_keys": [
         "beauty_macro",
         "bag_detail_macro",
-        "detail_macro",
         "pov_demo",
         "ugc_review"
       ],
