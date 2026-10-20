@@ -8393,7 +8393,7 @@
       "subcategory_id": "home_furniture",
       "category_id": "home",
       "label": "🪑 Perabot",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "home_furniture_v01",
@@ -8514,6 +8514,126 @@
           "lighting": "LIGHTING: Natural-looking light that remains consistent through the final frame.",
           "closing": "CTA / HERO: Let movement settle, then hold a steady full-product view.",
           "audio": "AUDIO: Use a brief natural contact sound only when physically supported by the scene."
+        },
+        {
+          "id": "home_furniture_v11",
+          "variation_number": 11,
+          "name": "Room Layout Reveal",
+          "hook": "HOOK: Open on a wide, believable room view, then draw attention to the furniture piece. No added text or graphics.",
+          "action": "Move closer while keeping the item's real size and relationship to nearby objects clear.",
+          "detail": "DETAIL: Preserve the exact product identity, visible shape, colors, labels and component count. Refer only to details visible in the reference; do not invent materials, functions or claims.",
+          "camera": "CAMERA: Slow dolly-in from wide to medium view.",
+          "lighting": "LIGHTING: Soft natural room light with realistic contact shadows.",
+          "closing": "CTA / HERO: Hold the complete furniture piece in context.",
+          "audio": "AUDIO: Quiet room ambience and restrained music. No spoken claims or unsupported effects."
+        },
+        {
+          "id": "home_furniture_v12",
+          "variation_number": 12,
+          "name": "Joinery and Edge Detail",
+          "hook": "HOOK: Begin on a visible edge, joint, or connection only if it appears in the reference. No added text or graphics.",
+          "action": "Track along the real contour, then widen to show the detail's place on the whole item.",
+          "detail": "DETAIL: Preserve the exact product identity, visible shape, colors, labels and component count. Refer only to details visible in the reference; do not invent materials, functions or claims.",
+          "camera": "CAMERA: Controlled close tracking followed by a short pullback.",
+          "lighting": "LIGHTING: Soft side lighting defines actual edges without inventing finish.",
+          "closing": "CTA / HERO: End on a recognizable full-product angle.",
+          "audio": "AUDIO: Subtle sound only if visible handling occurs. No spoken claims or unsupported effects."
+        },
+        {
+          "id": "home_furniture_v13",
+          "variation_number": 13,
+          "name": "Upholstery or Surface Sweep",
+          "hook": "HOOK: Start with the most visually distinctive visible surface area. No added text or graphics.",
+          "action": "Glide across the actual surface and reveal the complete furniture form.",
+          "detail": "DETAIL: Preserve the exact product identity, visible shape, colors, labels and component count. Refer only to details visible in the reference; do not invent materials, functions or claims.",
+          "camera": "CAMERA: Slow lateral slider move; avoid exaggerated perspective.",
+          "lighting": "LIGHTING: Even diffuse light preserves the true color and texture.",
+          "closing": "CTA / HERO: Finish with surface and overall silhouette both clear.",
+          "audio": "AUDIO: Low instrumental music; no material-performance claims. No spoken claims or unsupported effects."
+        },
+        {
+          "id": "home_furniture_v14",
+          "variation_number": 14,
+          "name": "Functional Space View",
+          "hook": "HOOK: Show the furniture in a setting that reflects its visible intended use without adding props that alter it. No added text or graphics.",
+          "action": "Reframe from the surrounding space to the complete item.",
+          "detail": "DETAIL: Preserve the exact product identity, visible shape, colors, labels and component count. Refer only to details visible in the reference; do not invent materials, functions or claims.",
+          "camera": "CAMERA: Stable eye-level move with natural pacing.",
+          "lighting": "LIGHTING: Balanced interior light; keep shadows believable.",
+          "closing": "CTA / HERO: Hold a clean contextual hero frame.",
+          "audio": "AUDIO: Natural room tone with quiet music. No spoken claims or unsupported effects."
+        },
+        {
+          "id": "home_furniture_v15",
+          "variation_number": 15,
+          "name": "Profile to Front",
+          "hook": "HOOK: Open with a side profile that shows the furniture's proportions. No added text or graphics.",
+          "action": "Arc the camera toward a front three-quarter view while the product stays stationary.",
+          "detail": "DETAIL: Preserve the exact product identity, visible shape, colors, labels and component count. Refer only to details visible in the reference; do not invent materials, functions or claims.",
+          "camera": "CAMERA: Short smooth arc with level horizon.",
+          "lighting": "LIGHTING: Soft directional light separates the form without artificial shine.",
+          "closing": "CTA / HERO: End with the full outline unobstructed.",
+          "audio": "AUDIO: Restrained music; no rotation sound. No spoken claims or unsupported effects."
+        },
+        {
+          "id": "home_furniture_v16",
+          "variation_number": 16,
+          "name": "Top Surface Perspective",
+          "hook": "HOOK: Begin at a high angle to show the visible top surface and its outline. No added text or graphics.",
+          "action": "Tilt down slightly and pull back to reveal the full piece.",
+          "detail": "DETAIL: Preserve the exact product identity, visible shape, colors, labels and component count. Refer only to details visible in the reference; do not invent materials, functions or claims.",
+          "camera": "CAMERA: Gentle tilt and pullback; keep lines straight.",
+          "lighting": "LIGHTING: Even lighting that preserves the surface's actual appearance.",
+          "closing": "CTA / HERO: Hold a clear full-product composition.",
+          "audio": "AUDIO: Quiet instrumental bed. No spoken claims or unsupported effects."
+        },
+        {
+          "id": "home_furniture_v17",
+          "variation_number": 17,
+          "name": "Legs and Base Reveal",
+          "hook": "HOOK: Open on the lower structure if legs or a base are visible. No added text or graphics.",
+          "action": "Tilt upward to connect the base to the whole furniture item.",
+          "detail": "DETAIL: Preserve the exact product identity, visible shape, colors, labels and component count. Refer only to details visible in the reference; do not invent materials, functions or claims.",
+          "camera": "CAMERA: Slow vertical tilt followed by a small pullback.",
+          "lighting": "LIGHTING: Soft side light shows the actual structure without inventing components.",
+          "closing": "CTA / HERO: Finish with the full piece visible.",
+          "audio": "AUDIO: No fabricated creaks or handling sounds. No spoken claims or unsupported effects."
+        },
+        {
+          "id": "home_furniture_v18",
+          "variation_number": 18,
+          "name": "Furniture in Daily Context",
+          "hook": "HOOK: Show the furniture in a tidy, realistic room with no extra product claims. No added text or graphics.",
+          "action": "Use a gentle camera move to make the piece the focal point while preserving the setting.",
+          "detail": "DETAIL: Preserve the exact product identity, visible shape, colors, labels and component count. Refer only to details visible in the reference; do not invent materials, functions or claims.",
+          "camera": "CAMERA: Wide establishing view followed by a steady push-in.",
+          "lighting": "LIGHTING: Natural-looking light with consistent exposure.",
+          "closing": "CTA / HERO: End on a stable contextual shot.",
+          "audio": "AUDIO: Light room ambience and unobtrusive music. No spoken claims or unsupported effects."
+        },
+        {
+          "id": "home_furniture_v19",
+          "variation_number": 19,
+          "name": "Contour and Negative Space",
+          "hook": "HOOK: Open with the furniture framed against uncluttered space. No added text or graphics.",
+          "action": "Slide sideways to reveal its silhouette and relationship to the room.",
+          "detail": "DETAIL: Preserve the exact product identity, visible shape, colors, labels and component count. Refer only to details visible in the reference; do not invent materials, functions or claims.",
+          "camera": "CAMERA: Measured lateral slide; keep verticals true.",
+          "lighting": "LIGHTING: Soft ambient light and realistic shadows.",
+          "closing": "CTA / HERO: Hold a balanced frame with the entire item visible.",
+          "audio": "AUDIO: Minimal instrumental music. No spoken claims or unsupported effects."
+        },
+        {
+          "id": "home_furniture_v20",
+          "variation_number": 20,
+          "name": "Complete Form Hold",
+          "hook": "HOOK: Start on one identifying feature that is genuinely visible. No added text or graphics.",
+          "action": "Pull back in one continuous shot to reveal the full furniture piece.",
+          "detail": "DETAIL: Preserve the exact product identity, visible shape, colors, labels and component count. Refer only to details visible in the reference; do not invent materials, functions or claims.",
+          "camera": "CAMERA: Smooth pullback with no artificial spin or jump cuts.",
+          "lighting": "LIGHTING: Neutral soft light keeps color and finish faithful.",
+          "closing": "CTA / HERO: Hold the unchanged furniture in a clear final frame.",
+          "audio": "AUDIO: Gentle musical resolve; no text or unsupported effects. No spoken claims or unsupported effects."
         }
       ]
     },
