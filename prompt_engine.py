@@ -591,7 +591,9 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
                 "VIDEO PROMPT — " + str(duration) + " SECONDS" + (" | PART " + str(part) if part else "") + "\n"
                 "Vertical 9:16, realistic product video, exactly " + str(duration) + " seconds.\n"
                 + "STYLE: " + style_name + " — " + (" ".join(style_template.split())[:180].rsplit(" ", 1)[0] or " ".join(style_template.split())[:180]).rstrip() + "\n"
-                + "PRODUCT: " + product + "\n" + concise_category_direction + concise_framework + "\n"
+                + "PRODUCT: " + product + "\n" + concise_category_direction + concise_framework
+                + (" UNIVERSAL SAFETY RULES: Preserve visible product details; invent no features or claims."
+                   if product_type == "other" or universal_custom else "") + "\n"
                 + "SETTING: " + str(scene)[:100].strip() + ". CAMERA: " + camera[:70].strip() + "\n"
                 + "PRODUCT LOCK: Preserve the reference product's visible design, colour, pattern, branding and proportions. Do not invent features or accessories.\n"
                 + hook_rule + beat_plan + concept_rule[:100] + doodle_rule
