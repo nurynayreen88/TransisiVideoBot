@@ -1505,7 +1505,7 @@
       "subcategory_id": "fashion_innerwear",
       "category_id": "fashion",
       "label": "🩱 Pakaian dalam",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "fashion_innerwear_v01",
@@ -1626,6 +1626,126 @@
           "lighting": "Keep soft, consistent illumination and realistic shadows from beginning to end.",
           "closing": "Return to the opening composition for a seamless, steady final hold.",
           "audio": "Keep any selected background music subtle and professional; do not add voiceover or effects unless requested and supported."
+        },
+        {
+          "id": "fashion_innerwear_v11",
+          "variation_number": 11,
+          "name": "Flat-Lay Shape and Edge Study",
+          "hook": "Begin with the exact innerwear item laid flat on a plain, clean surface, showing its full outline and real colour. Preserve every visible seam, strap, band and closure; add no props, text or branding.",
+          "action": "Keep the item still while the camera travels slowly from one end to the other, revealing the existing shape without stretching, folding or rearranging it.",
+          "detail": "Show only edges and construction visible in the reference. Do not invent padding, support levels, fabric composition, sizing or performance claims.",
+          "camera": "Use a controlled overhead glide that finishes on a full-item view; avoid extreme macro and keep all edges inside frame.",
+          "lighting": "Use broad, diffused neutral light with soft contact shadows and fixed white balance.",
+          "closing": "Hold a centred overhead view of the complete item, with the actual silhouette unobstructed.",
+          "audio": "Use quiet minimal instrumental music; no handling sounds while the product remains untouched."
+        },
+        {
+          "id": "fashion_innerwear_v12",
+          "variation_number": 12,
+          "name": "Strap Path to Full Form",
+          "hook": "If straps are present, start on their actual attachment points and path; if not, open on a genuine edge or seam. Keep the item identical to the reference.",
+          "action": "The camera follows the visible line across the product while the item remains stationary; do not pull or stretch any part.",
+          "detail": "Show only real strap joins, seams, elastic edges or closures that are visible. Do not imply adjustability or support unless clearly evidenced.",
+          "camera": "Use a precise close-to-medium lateral move, then widen to include the whole item in one calm composition.",
+          "lighting": "Use soft angled light to define the real edges without adding artificial shine or changing colour.",
+          "closing": "Finish on a balanced full-item view with the selected detail still easy to identify.",
+          "audio": "Choose a restrained, clean instrumental bed; no clicks or fastening sounds without visible action."
+        },
+        {
+          "id": "fashion_innerwear_v13",
+          "variation_number": 13,
+          "name": "Folded View to Open Outline",
+          "hook": "If the supplied reference shows the item folded, begin with that exact folded presentation and cut to a compatible view of the same item opened out; otherwise use two views of its existing outline without a transformation.",
+          "action": "Use one clean cut between the compatible views; never animate the product unfolding by itself or invent a new shape.",
+          "detail": "Maintain the same colour, edge shape, seams and visible components across both shots. Do not add labels or accessories.",
+          "camera": "Lock the camera for both compositions and match the product position as closely as possible; no morphing or liquid transitions.",
+          "lighting": "Match light direction and white balance between shots so the product remains visually consistent.",
+          "closing": "Hold the opened or clearest full-item view for a steady final beat.",
+          "audio": "A subtle musical accent may mark the cut; avoid magical transformation effects."
+        },
+        {
+          "id": "fashion_innerwear_v14",
+          "variation_number": 14,
+          "name": "Seam Junction Close Read",
+          "hook": "Open on a real seam junction, stitched edge or panel boundary if visible; otherwise choose a genuine edge detail rather than inventing construction.",
+          "action": "Move the camera slowly past the selected point while the innerwear stays still and retains its natural shape.",
+          "detail": "Show only visible stitching and panel relationships. Do not claim reinforced construction, durability, comfort or material properties without verification.",
+          "camera": "Use a stable close shot with a short diagonal slide, then pull back to explain the detail's position on the complete item.",
+          "lighting": "Use gentle raking light to make existing edges readable without exaggerated texture or shadow.",
+          "closing": "End on a medium overhead view connecting the close detail to the full silhouette.",
+          "audio": "Use quiet, unobtrusive instrumental music; no sewing-machine or stitching effects."
+        },
+        {
+          "id": "fashion_innerwear_v15",
+          "variation_number": 15,
+          "name": "Colour-Accurate Rotation by Camera",
+          "hook": "Present the item in a clean, full view against a neutral background, making its real colour and outline clear before any movement.",
+          "action": "Keep the item stationary and rotate the camera only a few degrees around it, avoiding any change to its arrangement.",
+          "detail": "Reveal only visible side edges and details as the angle changes. Do not imply hidden layers, lining, padding or unseen closures.",
+          "camera": "Use a slow, low-amplitude camera arc with stable distance and no wide-angle distortion; keep the whole item visible.",
+          "lighting": "Maintain a broad, soft key and fixed white balance so the shade remains consistent across the arc.",
+          "closing": "Stop at a clear three-quarter overhead angle and hold the full product still.",
+          "audio": "Choose a soft modern instrumental phrase; no whooshes for the small camera move."
+        },
+        {
+          "id": "fashion_innerwear_v16",
+          "variation_number": 16,
+          "name": "Closure Detail, Conditional",
+          "hook": "If a fastening is clearly visible, begin with that exact closure; if there is none or it cannot be confirmed, focus on the real waistband, edge or seam instead. Add nothing.",
+          "action": "Keep the product still while the camera gently approaches and withdraws from the selected detail; do not open, close or manipulate the item.",
+          "detail": "Show only a visible clasp, hook, button, seam or elastic edge where present. Do not claim ease of use, adjustability or fit benefits.",
+          "camera": "Use a locked close-up followed by a measured pullback to a full-item view, preserving natural proportions.",
+          "lighting": "Use diffuse front-side light to prevent glare and retain fine visible detail.",
+          "closing": "Hold a complete view with the selected real feature still visible in context.",
+          "audio": "Keep music low and clean; no fastening clicks unless a matching action is visibly shown."
+        },
+        {
+          "id": "fashion_innerwear_v17",
+          "variation_number": 17,
+          "name": "Waistband or Upper Edge Line",
+          "hook": "If the item has a waistband or distinct upper edge, frame that real line first; otherwise select its actual top edge or neckline. Preserve the original shape.",
+          "action": "Use camera movement only to trace the edge while the item remains laid out naturally, with no stretching or artificial reshaping.",
+          "detail": "Highlight only the visible edge finish, seam or pattern. Do not infer compression, shaping, support or stretch performance.",
+          "camera": "Make a slow vertical pan along the genuine edge, then tilt or pull back to show the full item.",
+          "lighting": "Use even neutral lighting and soft shadows so the edge remains readable without changing the product's shade.",
+          "closing": "Finish with the whole item centred and the upper edge unobstructed.",
+          "audio": "Use minimal instrumental audio; no synthetic swishes or spoken product claims."
+        },
+        {
+          "id": "fashion_innerwear_v18",
+          "variation_number": 18,
+          "name": "Symmetry and Pairing Check",
+          "hook": "If the reference contains a pair or matching pieces, arrange the exact supplied pieces as shown; if it is a single item, frame its natural left-right shape without duplicating it.",
+          "action": "Keep all pieces stationary while the camera shifts from a balanced overhead composition to a slight diagonal view.",
+          "detail": "Preserve the exact number of pieces, colours and visible details. Never generate a second item or imply a set is included unless the reference shows it.",
+          "camera": "Start overhead and make a slow diagonal slider move, ending with every included piece fully inside the frame.",
+          "lighting": "Use broad, even light with consistent exposure across all pieces; avoid colour casts and harsh shadows.",
+          "closing": "Hold a clean composition that clearly shows the actual number of items supplied.",
+          "audio": "Use a gentle, neutral instrumental bed; no handling sounds or extra effects."
+        },
+        {
+          "id": "fashion_innerwear_v19",
+          "variation_number": 19,
+          "name": "Soft Shadow Outline Reveal",
+          "hook": "Open with the product's actual outline visible against a plain surface, using its natural edges rather than adding decorative objects or graphics.",
+          "action": "Move a soft light source slightly across the scene only if practical, letting the real shadow shift subtly while the product remains still; otherwise keep the light fixed and move the camera instead.",
+          "detail": "Show the actual outline, seams and edges only. Do not use shadows to suggest thickness, padding or structure that cannot be verified.",
+          "camera": "Use a steady overhead frame with a slow, short push-in; maintain enough distance to preserve the full outline.",
+          "lighting": "Keep the lighting soft and controlled, with modest shadow contrast and no dramatic colour effects.",
+          "closing": "Settle on a neutral, full-item composition with edges clearly separated from the background.",
+          "audio": "Use low-volume ambient instrumental music; no artificial wind, heartbeat or other suggestive sound design."
+        },
+        {
+          "id": "fashion_innerwear_v20",
+          "variation_number": 20,
+          "name": "Matched Opening and Closing Product Frame",
+          "hook": "Begin with a crisp full-item view of the exact innerwear product on a plain background. Keep the original colour, proportions, seams and all visible components unchanged.",
+          "action": "Make one subtle camera move toward a real visible detail, then return to the original framing; the product itself stays still and is never reshaped.",
+          "detail": "Feature only details confirmed by the reference. Do not add body-worn demonstrations, accessories, text, logos or unsupported claims.",
+          "camera": "Use a slow push-in and reverse to the starting composition with stable focus, no jump cuts and no distorted edges.",
+          "lighting": "Maintain constant soft light and white balance throughout so the item does not flicker or shift shade.",
+          "closing": "Match the opening full-item frame and hold it still for a clean, loop-friendly ending.",
+          "audio": "Use a short restrained instrumental phrase that resolves smoothly; no exaggerated transition sound or spoken claims."
         }
       ]
     },
