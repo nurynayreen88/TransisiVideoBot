@@ -3,6 +3,7 @@ name: Prompt quality regression tests
 on:
   pull_request:
     paths:
+      - "bot.py"
       - "prompt_engine.py"
       - "prompt_catalog.py"
       - "prompts/prompt_library.json"
