@@ -92,7 +92,12 @@ def _prompt_library_storyboard(template):
         if not isinstance(component, dict) or not component.get('direction'):
             return original
         shot = dict(original[index])
-        shot['direction'] = component['direction']
+        direction = str(component['direction'])
+        # Some legacy entries repeat their own time/shot label inside the direction.
+        # The prompt engine adds the canonical timing separately, so remove only
+        # this redundant prefix while preserving the actual shot instruction.
+        direction = re.sub(r'^\s*\d+(?:[–-]\d+)?s\s*\|\s*[^:]{1,80}:\s*', '', direction)
+        shot['direction'] = direction
         resolved.append(shot)
     return resolved
 
