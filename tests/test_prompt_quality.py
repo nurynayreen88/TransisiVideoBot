@@ -67,7 +67,7 @@ class PromptQualityTests(unittest.TestCase):
         self.assertIn("wallet", direction.casefold())
         self.assertIn("VISUAL VARIATION:", direction)
 
-    def test_main_prompt_flow_selects_model_before_style_and_duration_after_style(self):
+    def test_main_prompt_flow_selects_model_before_preset_and_duration_after_preset(self):
         source = (Path(__file__).resolve().parents[1] / "bot.py").read_text(encoding="utf-8")
         entry_start = source.index("    elif action == 'prompt':")
         entry_end = source.index("    elif action.startswith('prompt_mode:'):", entry_start)
@@ -93,18 +93,20 @@ class PromptQualityTests(unittest.TestCase):
         duration_end = source.index("    elif action.startswith('prompt_ad_angle:') and stage == 'prompt_ad_angle':", duration_start)
         duration_handler = source[duration_start:duration_end]
         self.assertIn("context.user_data['stage'] = 'prompt_ad_angle'", duration_handler)
+        self.assertIn("context.user_data.get('prompt_generation_mode') == 'preset'", duration_handler)
+        self.assertIn("action = 'motion:auto'", duration_handler)
         self.assertNotIn("auto_prompt_model_defaults(", duration_handler)
         self.assertNotIn("'prompt_style': 'cinematic'", duration_handler)
 
-    def test_model_none_and_animal_paths_continue_to_style_picker(self):
+    def test_model_none_and_animal_paths_continue_to_preset_picker(self):
         source = (Path(__file__).resolve().parents[1] / "bot.py").read_text(encoding="utf-8")
         model_start = source.index("    elif action.startswith('prompt_model:') and stage == 'prompt_model_presence':")
         model_end = source.index("    elif action.startswith('prompt_duration:') and stage == 'prompt_duration':", model_start)
         model_flow = source[model_start:model_end]
-        self.assertIn("context.user_data['stage'] = 'prompt_style'", model_flow)
-        self.assertIn("prompt_style_menu(context.user_data.get('prompt_product_type','other'),'none')", model_flow)
-        self.assertIn("prompt_style_menu(context.user_data.get('prompt_product_type', 'other'), 'animal')", model_flow)
-        self.assertIn("prompt_style_menu(context.user_data.get('prompt_product_type','other'),'yes')", model_flow)
+        self.assertIn("context.user_data['stage'] = 'prompt_preset'", model_flow)
+        self.assertIn("prompt_preset_menu(context.user_data.get('prompt_product_type','other'),'none')", model_flow)
+        self.assertIn("prompt_preset_menu(context.user_data.get('prompt_product_type', 'other'), 'animal')", model_flow)
+        self.assertIn("prompt_preset_menu(context.user_data.get('prompt_product_type','other'),'yes')", model_flow)
 
     def test_presentation_profile_avoids_repeating_recent_three(self):
         profiles = [
@@ -358,17 +360,34 @@ class PromptQualityTests(unittest.TestCase):
         hijab_start = source.index("    elif action.startswith('prompt_model_hijab:')", ethnicity_start)
         ethnicity_flow = source[ethnicity_start:hijab_start]
         self.assertIn("context.user_data['stage'] = 'prompt_model_hijab'", ethnicity_flow)
-        self.assertIn("context.user_data['stage'] = 'prompt_style'", ethnicity_flow)
+        self.assertIn("context.user_data['stage'] = 'prompt_preset'", ethnicity_flow)
 
         duration_start = source.index("    elif action.startswith('prompt_duration:') and stage == 'prompt_duration':", hijab_start)
         hijab_flow = source[hijab_start:duration_start]
-        self.assertIn("context.user_data['stage'] = 'prompt_style'", hijab_flow)
+        self.assertIn("context.user_data['stage'] = 'prompt_preset'", hijab_flow)
 
         animal_start = source.index("    elif action.startswith('prompt_animal_species:') and stage == 'prompt_animal_species':")
         model_count_start = source.index("    elif action.startswith('prompt_model_count:') and stage == 'prompt_model_count':", animal_start)
         animal_flow = source[animal_start:model_count_start]
-        self.assertIn("context.user_data['stage'] = 'prompt_style'", animal_flow)
-        self.assertIn("prompt_style_menu(context.user_data.get('prompt_product_type', 'other'), 'animal')", animal_flow)
+        self.assertIn("context.user_data['stage'] = 'prompt_preset'", animal_flow)
+        self.assertIn("prompt_preset_menu(context.user_data.get('prompt_product_type', 'other'), 'animal')", animal_flow)
+
+
+    def test_eight_descriptive_presets_plus_manual_and_automatic_sfx_rules(self):
+        source = (Path(__file__).resolve().parents[1] / "bot.py").read_text(encoding="utf-8")
+        preset_start = source.index("def prompt_preset_menu(")
+        preset_end = source.index("def prompt_category_menu(", preset_start)
+        preset_code = source[preset_start:preset_end]
+        self.assertIn("prompt_preset:manual", preset_code)
+        for style in ("cinematic", "minimal", "lifestyle", "dynamic", "luxury", "flatlay", "creative_reveal", "white_doodle"):
+            self.assertIn("prompt_preset:' + key", preset_code)
+        self.assertIn("CORE_STYLE_DESCRIPTIONS", source)
+        self.assertNotIn("reply_markup=prompt_sfx_menu()", source)
+        audio_start = source.index("    style_key = str(user_data.get('prompt_style', '')).casefold()")
+        audio_end = source.index("    if user_data.get('prompt_custom_background'):", audio_start)
+        sfx_rules = source[audio_start:audio_end]
+        self.assertIn("if style_key == 'white_doodle':", sfx_rules)
+        self.assertIn("Do not add doodle-specific", sfx_rules)
 
 
 
