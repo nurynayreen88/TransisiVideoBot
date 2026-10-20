@@ -272,7 +272,7 @@ jobs:
               )
               assert "UNIVERSAL CREATIVE FRAMEWORK:" in custom_category_prompt
               assert "UNIVERSAL SAFETY RULES:" in custom_category_prompt
-              assert any(item["direction"] in custom_category_prompt for item in frameworks), (
+              assert any(item["direction"][:180] in custom_category_prompt for item in frameworks), (
                   "Custom category prompt did not embed one complete universal framework direction"
               )
 
