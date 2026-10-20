@@ -5,8 +5,12 @@ on:
     paths:
       - "prompt_engine.py"
       - "prompt_catalog.py"
+      - "prompts/prompt_library.json"
+      - "prompts/prompt_quality_overrides.json"
+      - "prompts/prompt_component_tables.json"
       - "prompts/universal_prompt_templates.json"
       - "tests/test_prompt_quality.py"
+      - "tests/test_prompt_component_tables.py"
       - ".github/workflows/prompt-quality.yml"
   push:
     branches:
@@ -14,8 +18,12 @@ on:
     paths:
       - "prompt_engine.py"
       - "prompt_catalog.py"
+      - "prompts/prompt_library.json"
+      - "prompts/prompt_quality_overrides.json"
+      - "prompts/prompt_component_tables.json"
       - "prompts/universal_prompt_templates.json"
       - "tests/test_prompt_quality.py"
+      - "tests/test_prompt_component_tables.py"
       - ".github/workflows/prompt-quality.yml"
 
 jobs:
