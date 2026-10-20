@@ -3638,15 +3638,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 product = chr(10).join(product_parts)
                 scene = context.user_data.get('prompt_scene', 'clean studio background')
                 style_choice = context.user_data.get('prompt_style', 'auto')
-                if style_choice == 'auto':
-                    subtype = context.user_data.get('prompt_bag_subtype', '')
-                    style_choice = {
-                        'wallet': 'wallet_luxury_macro',
-                        'backpack': 'backpack_demo',
-                        'sling_bag': 'sling_bag_lifestyle',
-                        'handbag': 'handbag_showcase',
-                        'bag': 'bag_tabletop_reveal',
-                    }.get(subtype, 'auto')
+                # Keep Auto genuinely varied; prompt_engine selects a category/subtype-fit style without immediate repeats.
                 prompt = build_prompt(
                     'storyboard', product, scene, motions[motion],
                     style_choice,
@@ -3658,7 +3650,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     universal_custom=bool(
                         context.user_data.get('prompt_custom_category_name')
                         or context.user_data.get('prompt_custom_subcategory_name')
-                    )
+                    ),
+                    product_subtype=context.user_data.get('prompt_product_subcategory', '')
                 )
                 if context.user_data.get('prompt_model_presence') == 'yes' and int(context.user_data.get('prompt_model_count',1)) == 2:
                     prompt += ('\n\nTWO-MODEL CAST: Model 1 is ' + str(context.user_data.get('prompt_model_gender','female')) + ', appearance ' + str(context.user_data.get('prompt_model_ethnicity','random_malaysia')) + ', age ' + str(context.user_data.get('prompt_model_age','26-40')) + ', hijab ' + str(context.user_data.get('prompt_model_hijab','na')) + '. Model 2 is ' + str(context.user_data.get('prompt_model_gender_2','male')) + ', appearance ' + str(context.user_data.get('prompt_model_ethnicity_2','random_malaysia')) + ', age ' + str(context.user_data.get('prompt_model_age_2','26-40')) + ', hijab ' + str(context.user_data.get('prompt_model_hijab_2','na')) + '. Keep identities distinct and consistent.')
