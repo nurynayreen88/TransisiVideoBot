@@ -42,6 +42,21 @@ _CREATIVE_ACTIONS = {
         "Use a locked product shot with a subtle focus shift to one visible detail.",
         "Begin wider, then perform a restrained push-in while keeping screen content and geometry unchanged."
     ],
+    "wallet": [
+        "Begin with the wallet closed and fully visible, then let a hand pick it up once for a steady close view.",
+        "Use a clean flat-lay and a slow camera slide across only visible stitching, edges or closure details.",
+        "Open the wallet only if the reference supports it, show the actual visible interior briefly, then close it naturally."
+    ],
+    "pet": [
+        "Keep the pet calm and natural; show one brief, safe interaction with the product only when suitable for the species.",
+        "Begin with the product clearly visible beside the animal, then use a gentle side-follow of natural movement.",
+        "Use a quiet close view of the animal naturally approaching or resting near the product; do not force a trick."
+    ],
+    "home": [
+        "Show one practical, physically plausible interaction with the product, then hold a clean full-product view.",
+        "Begin with a tidy contextual wide shot and slide gently toward one visible design detail.",
+        "Keep the product grounded on a suitable surface; use a restrained push-in instead of inventing a function."
+    ],
     "general": [
         "Start with a clean wide hero composition, then use a gentle lateral slide to reveal a visible detail.",
         "Begin with a close view of a reference-visible feature, then pull back to show the complete product.",
@@ -56,6 +71,9 @@ _SFX_BY_TYPE = {
     "beauty": "A tiny pop or delicate chime may accent the reveal once; keep it subtle, not cartoonish.",
     "food": "Use a gentle natural sound only if the visible action supports it; avoid exaggerated or invented sounds.",
     "gadget": "Use one restrained digital tick or soft chime at the detail reveal; no fake interface beeps.",
+    "wallet": "Use a soft handling sound only if a hand moves the wallet; keep music low and polished.",
+    "pet": "Use gentle natural paw, collar or movement sounds only if visible and plausible; never force animal sounds.",
+    "home": "Use a quiet handling or placement sound only when the action is visible; keep music soft.",
     "general": "Use one subtle soft chime, tiny pop or gentle whoosh at a matching visual beat; never stack effects."
 }
 
