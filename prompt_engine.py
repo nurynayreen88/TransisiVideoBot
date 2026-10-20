@@ -1002,7 +1002,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
             + (curated_direction if curated_direction else
                ((hook_direction if part != 2 else "Continue seamlessly from Part 1; do not repeat the hook.") + "\n" + rules))
             + (("\nCREATIVE IDEA: " + _prompt_text(concept, "")) if concept else "")
-            + "\nNatural movement. For AI-generated voice, use a short product-specific hook and CTA in " + ("English" if str(prompt_language or "Malay").casefold() == "english" else "Bahasa Melayu Malaysia") + "; preserve any user-supplied script exactly and add no dialogue. No added on-screen text or watermark."
+            + "\nNatural movement. For AI-generated voice, use varied, natural product-specific wording and one concise CTA in " + ("English" if str(prompt_language or "Malay").casefold() == "english" else "Bahasa Melayu Malaysia") + "; avoid stock openings such as “Kenali produk ini” and never invent claims, discounts, prices, urgency or availability. Preserve any user-supplied script exactly and add no dialogue. No added on-screen text or watermark."
         )
     if mode == "storyboard":
         shots = [
