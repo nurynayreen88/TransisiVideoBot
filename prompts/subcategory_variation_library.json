@@ -1753,7 +1753,7 @@
       "subcategory_id": "fashion_other",
       "category_id": "fashion",
       "label": "📦 Fesyen lain",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "fashion_other_v01",
@@ -1874,6 +1874,126 @@
           "lighting": "Keep exposure and white balance constant through the entire move.",
           "closing": "Pause on a complete product view for a clear final hold.",
           "audio": "Use a restrained music bed if selected; no whoosh is needed unless explicitly chosen in the user's audio settings."
+        },
+        {
+          "id": "fashion_other_v11",
+          "variation_number": 11,
+          "name": "Unclassified Garment Shape Reveal",
+          "hook": "Begin with the complete garment as shown in the reference, using a plain background that makes its actual outline easy to read. Do not guess the garment type or add styling elements.",
+          "action": "Keep the product still while the camera slowly moves from a wider view to a slightly closer view, preserving its natural arrangement.",
+          "detail": "Show only visible edges, seams, colour blocks and closures that genuinely appear. Do not invent material, function, pockets or hidden construction.",
+          "camera": "Use a level, steady medium-wide composition and one slow straight push-in without cropping defining edges.",
+          "lighting": "Use neutral diffused light with soft contact shadows and stable white balance.",
+          "closing": "Hold the complete garment in a clear, centred frame.",
+          "audio": "Use quiet contemporary instrumental music; no handling sounds while the product remains still."
+        },
+        {
+          "id": "fashion_other_v12",
+          "variation_number": 12,
+          "name": "Edge-to-Edge Overhead Survey",
+          "hook": "Show the garment laid out in its existing form, with all visible edges inside the frame. Preserve exact colour, pattern and proportions.",
+          "action": "Move the camera steadily from one edge toward the opposite edge without moving or reshaping the item.",
+          "detail": "Reveal only real hems, seams, panels or fastenings visible in the reference. Avoid claims about fabric performance or quality.",
+          "camera": "Use a controlled overhead slider movement, then settle into a full-item overhead composition.",
+          "lighting": "Choose broad soft light with even exposure across the whole garment and no colour cast.",
+          "closing": "Finish with the full item aligned neatly in frame, all defining edges visible.",
+          "audio": "Use minimal instrumental music; do not add fabric sounds when there is no visible handling."
+        },
+        {
+          "id": "fashion_other_v13",
+          "variation_number": 13,
+          "name": "Natural Fold and Drape Observation",
+          "hook": "Open on the garment at rest, showing its actual folds and silhouette without forced shaping or added props.",
+          "action": "If the reference supports a worn view, the wearer makes one small natural posture shift; otherwise keep the garment stationary and let the camera move.",
+          "detail": "Describe only folds and drape that can be seen. Do not claim softness, stretch, breathability, wrinkle resistance or a particular material.",
+          "camera": "Use a nearly locked medium or medium-wide frame with a subtle push-in; keep the full defining outline visible.",
+          "lighting": "Use soft side fill to reveal existing folds while maintaining true product colour.",
+          "closing": "Hold a still, clear view after all movement has stopped.",
+          "audio": "Use a calm low-volume instrumental bed; no artificial wind or exaggerated fabric effects."
+        },
+        {
+          "id": "fashion_other_v14",
+          "variation_number": 14,
+          "name": "Print Boundary Tracking Shot",
+          "hook": "If a visible print or colour-block boundary exists, open on that genuine feature; otherwise select a real seam or edge. Never create a pattern.",
+          "action": "The camera follows the selected line at a measured pace while the garment remains still or the wearer stays in a comfortable neutral pose.",
+          "detail": "Keep motif size, spacing, alignment and colours faithful to the reference; do not add symbols, labels or graphics.",
+          "camera": "Use a smooth lateral pan from the detail to a wider view that shows its location on the complete garment.",
+          "lighting": "Use even, colour-neutral light to preserve pattern contrast and prevent flicker.",
+          "closing": "Finish with the feature unobstructed and enough context to identify the full garment.",
+          "audio": "Choose a light rhythmic instrumental; no whoosh effects for the camera pan."
+        },
+        {
+          "id": "fashion_other_v15",
+          "variation_number": 15,
+          "name": "Side Angle Without Hidden Claims",
+          "hook": "Start with a front or top view of the exact garment, then set up a small angle change to reveal only what is actually visible.",
+          "action": "If worn, the person turns gently a few degrees and returns; if laid flat, the item remains still and the camera makes the angle change instead.",
+          "detail": "Do not imply unseen rear features, pockets, lining or closures. Preserve all visible design elements exactly.",
+          "camera": "Use a small, controlled arc or diagonal slider move, maintaining stable scale and avoiding wide-angle distortion.",
+          "lighting": "Maintain consistent soft lighting through the movement so shadows and colour remain believable.",
+          "closing": "Hold a clear three-quarter or top view that keeps the entire product identifiable.",
+          "audio": "Use understated instrumental music; avoid footsteps or handling sounds unless those actions are visibly present."
+        },
+        {
+          "id": "fashion_other_v16",
+          "variation_number": 16,
+          "name": "Closure or Seam Conditional Close-Up",
+          "hook": "If the reference clearly shows a closure, begin there; otherwise choose a genuine seam, edge or plain panel. Do not add a closure that is not present.",
+          "action": "Keep the garment still as the camera approaches the selected feature, then gently pulls back to show the surrounding design.",
+          "detail": "Show only visible buttons, zips, ties, seams or panel edges. Do not imply ease of use, durability or functionality beyond what is visible.",
+          "camera": "Use a stable close-to-medium move with a controlled focus transition and no extreme magnification.",
+          "lighting": "Use soft directional light to define the real feature without glare or artificial texture.",
+          "closing": "End on a medium view with the selected detail in context and the garment's shape readable.",
+          "audio": "Use clean, quiet instrumental audio; no clicks or zipper sounds unless a matching action is visible."
+        },
+        {
+          "id": "fashion_other_v17",
+          "variation_number": 17,
+          "name": "Balanced Negative-Space Composition",
+          "hook": "Place the full garment to one side of a plain frame with natural empty space opposite it. Keep that space empty—no captions, logos, props or graphic overlays.",
+          "action": "If worn, the wearer makes one small step into a balanced position; if the product is flat-lay, let the camera reframe slowly without moving the item.",
+          "detail": "Keep attention on the real silhouette and visible design. Do not imply a use case or feature not supported by the reference.",
+          "camera": "Use a wide, stable composition and a gentle pan that balances the garment against the empty background.",
+          "lighting": "Use soft even light with a natural shadow and no stylized colour cast.",
+          "closing": "Hold a balanced frame with the whole garment unobstructed and empty space free of additions.",
+          "audio": "Use sparse, low-volume instrumental music; no unnecessary sound effects."
+        },
+        {
+          "id": "fashion_other_v18",
+          "variation_number": 18,
+          "name": "Texture-Limit Detail Pass",
+          "hook": "Begin with a close view of the garment's visible surface only if the reference provides enough detail; otherwise open on a seam, edge or pattern boundary that can be confirmed.",
+          "action": "Move the camera slowly across the surface while the product remains still, then widen to show the full garment.",
+          "detail": "Do not fabricate weave, texture, gloss or material characteristics. If surface detail is unclear, remain at a distance that preserves a faithful appearance.",
+          "camera": "Use a measured macro-to-medium pullback, avoiding oversharpening, artificial blur and distortion.",
+          "lighting": "Use broad diffused light to keep highlights restrained and colours consistent.",
+          "closing": "Finish with the full garment visible after the detail pass.",
+          "audio": "Use a subtle ambient instrumental bed; no scratch, rustle or other surface sounds without matching visible action."
+        },
+        {
+          "id": "fashion_other_v19",
+          "variation_number": 19,
+          "name": "One-Action Wearer Reveal",
+          "hook": "If the reference shows the garment worn, begin with a clear front view; if it is only shown as a product image, keep the original presentation and use a camera reveal instead.",
+          "action": "For a worn view, the person takes one measured step and settles into a neutral stance; for a product-only reference, the camera performs one slow reveal without inventing a wearer or scene.",
+          "detail": "Keep all visible garment features, styling and proportions unchanged. Do not claim fit, comfort, quality or occasion suitability.",
+          "camera": "Track smoothly for the single step or make a slow lateral slide for the product-only view, keeping defining edges in frame.",
+          "lighting": "Use soft natural-looking light with stable exposure and accurate colour throughout.",
+          "closing": "Hold a simple, unobstructed view that matches the supplied reference type.",
+          "audio": "Use restrained instrumental music; footsteps only if they match a visible step and surface."
+        },
+        {
+          "id": "fashion_other_v20",
+          "variation_number": 20,
+          "name": "Clean Return-to-Start Product Loop",
+          "hook": "Open on a simple, complete view of the exact garment with its original colour, shape, print and visible components unchanged.",
+          "action": "Make one restrained camera move toward a genuine visible feature and return to the opening angle; the garment itself does not morph or change.",
+          "detail": "Show only features confirmed by the reference. Do not add accessories, graphics, text or unsupported product claims.",
+          "camera": "Use a slow short push-in followed by a smooth return to the starting composition, with stable focus and no jump cuts.",
+          "lighting": "Keep soft illumination and white balance constant from start to finish to prevent flicker or colour drift.",
+          "closing": "Match the opening frame as closely as possible and hold still for a loop-friendly finish.",
+          "audio": "Use a short, subtle instrumental phrase that resolves naturally; no exaggerated transition effects or spoken claims."
         }
       ]
     },
