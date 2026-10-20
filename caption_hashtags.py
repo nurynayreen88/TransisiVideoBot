@@ -129,31 +129,81 @@ def _relevant_hashtags(category, product_name, subcategory, limit=12):
     return (specific + general)[:limit]
 
 def generate_caption(product_name, category="other", subcategory="", platform="Shopee"):
-    """Return only a short product caption and relevant hashtags, without UI instructions."""
-    name = str(product_name or "").strip()[:180]
+    """Return a useful Malaysian Malay caption and relevant hashtags only."""
+    name = str(product_name or "").strip()[:180] or "produk pilihan"
     sub = str(subcategory or "").strip()[:80]
-    if not name:
-        name = "produk pilihan"
     key = _category_key(str(category) + " " + sub + " " + name)
-    # Short, category-aware Malaysian Malay copy; avoid unsupported product claims.
+
     captions = {
-        "kids_shoes": f"Lengkapkan gaya si kecil dengan {name} 👟",
-        "kids_clothing": f"Pilihan comel untuk gaya si kecil: {name} 🧸",
-        "shoes": f"Sedang mencari kasut? Jom lihat {name} 👟",
-        "fashion": f"Serlahkan gaya anda dengan {name} ✨",
-        "bag": f"Lengkapkan gaya harian anda dengan {name} 👜",
-        "hijab": f"Idea gaya tudung untuk dipadankan dengan {name} ✨",
-        "beauty": f"Tambahkan {name} dalam senarai pilihan kecantikan anda ✨",
-        "food": f"Teringin mencuba sesuatu? Lihat {name} 🍽️",
-        "gadget": f"Sedang mencari gajet? Kenali {name} 📱",
-        "home": f"Ilham untuk ruang kediaman anda: {name} 🏡",
-        "toy": f"Idea untuk waktu bermain si kecil: {name} 🧸",
-        "baby": f"Pilihan untuk melengkapi keperluan si kecil: {name} 🍼",
-        "other": f"Jom lihat {name} dan semak sama ada sesuai dengan keperluan anda ✨",
+        "kids_shoes": (
+            f"Sedang cari kasut untuk si kecil? 👟\\n"
+            f"{name} boleh jadi pilihan untuk melengkapkan gaya anak ketika keluar bersama keluarga atau menjalani aktiviti harian. "
+            "Semak pilihan saiz dan butiran produk dahulu supaya sesuai dengan keperluan mereka."
+        ),
+        "kids_clothing": (
+            f"Nak gayakan si kecil dengan penampilan yang comel? 🧸\\n"
+            f"{name} boleh dipertimbangkan untuk melengkapkan koleksi pakaian anak. "
+            "Lihat pilihan saiz, bahan dan kandungan set pada halaman produk sebelum memilih."
+        ),
+        "shoes": (
+            f"Sedang mencari kasut untuk melengkapkan gaya harian? 👟\\n"
+            f"{name} boleh anda pertimbangkan mengikut gaya dan kegunaan yang diperlukan. "
+            "Semak saiz, bahan serta maklumat produk sebelum membuat pilihan."
+        ),
+        "fashion": (
+            f"Sedang mencari idea untuk gaya seterusnya? ✨\\n"
+            f"{name} boleh dijadikan pilihan untuk dipadankan dengan koleksi pakaian anda. "
+            "Lihat variasi, saiz dan butiran produk untuk mencari pilihan yang sesuai."
+        ),
+        "bag": (
+            f"Mencari beg untuk melengkapi rutin harian? 👜\\n"
+            f"{name} boleh anda pertimbangkan mengikut gaya dan barang yang biasa dibawa. "
+            "Semak ukuran, ruang simpanan dan butiran produk sebelum memilih."
+        ),
+        "hijab": (
+            f"Jom cari inspirasi gaya tudung yang sesuai dengan anda ✨\\n"
+            f"{name} boleh dipadankan mengikut pilihan gaya dan warna kegemaran. "
+            "Semak warna, material dan butiran produk pada halaman jualan."
+        ),
+        "beauty": (
+            f"Sedang menambah pilihan dalam rutin kecantikan? ✨\\n"
+            f"Lihat {name} dan teliti maklumat produk sebelum membuat pilihan. "
+            "Semak bahan, cara penggunaan dan kesesuaian yang dinyatakan oleh penjual."
+        ),
+        "food": (
+            f"Nampak menarik untuk dicuba? 🍽️\\n"
+            f"{name} boleh anda semak jika sedang mencari pilihan makanan atau kudapan. "
+            "Lihat ramuan, saiz pek dan maklumat produk sebelum membeli."
+        ),
+        "gadget": (
+            f"Sedang mencari gajet atau aksesori teknologi? 📱\\n"
+            f"{name} boleh anda pertimbangkan berdasarkan kegunaan yang diperlukan. "
+            "Semak spesifikasi, keserasian dan kandungan pakej sebelum membuat pilihan."
+        ),
+        "home": (
+            f"Ada idea untuk menceriakan ruang rumah? 🏡\\n"
+            f"{name} boleh anda lihat sebagai salah satu pilihan untuk kediaman. "
+            "Semak ukuran, bahan dan butiran produk supaya sesuai dengan ruang anda."
+        ),
+        "toy": (
+            f"Sedang mencari idea untuk waktu bermain si kecil? 🧸\\n"
+            f"{name} boleh anda pertimbangkan mengikut minat dan peringkat umur anak. "
+            "Semak cadangan umur serta maklumat keselamatan yang dinyatakan pada produk."
+        ),
+        "baby": (
+            f"Sedang menyenaraikan keperluan si kecil? 🍼\\n"
+            f"{name} boleh anda semak sebagai salah satu pilihan. "
+            "Teliti bahan, saiz dan panduan penggunaan yang dinyatakan oleh penjual."
+        ),
+        "other": (
+            f"Jom lihat produk ini dengan lebih dekat ✨\\n"
+            f"{name} mungkin sesuai untuk dipertimbangkan berdasarkan keperluan anda. "
+            "Semak butiran, variasi dan maklumat terkini pada halaman produk sebelum membeli."
+        ),
     }
-    caption = captions.get(key, f"Jom lihat {name} dan semak sama ada sesuai dengan keperluan anda ✨")
+    caption = captions.get(key, captions["other"])
     hashtags = _relevant_hashtags(key, name, sub)
-    return caption + "\n\n" + " ".join(hashtags)
+    return caption + "\\n\\n" + " ".join(hashtags)
 
 def get_caption(product_name, category="other", subcategory="", platform="Shopee"):
     return generate_caption(product_name, category, subcategory, platform)
