@@ -4484,6 +4484,8 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['prompt_product_type'] = category_to_product_type.get(detected_category, 'other')
         elif context.user_data.get('prompt_product_type') in (None, '', 'other'):
             context.user_data['prompt_product_type'] = 'other'
+        if detected_subtype == 'hijab':
+            context.user_data['prompt_product_type'] = 'hijab'
         context.user_data['prompt_product_subcategory'] = ''
         context.user_data['prompt_custom_category_name'] = ''
         context.user_data['prompt_custom_subcategory_name'] = ''
