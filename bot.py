@@ -23,6 +23,7 @@ from gemini_storyboard import generate_storyboard
 from gemini_storyboard_image import generate_storyboard_sheet, GeminiStoryboardImageError
 from prompt_engine import build_prompt, creative_angle_instruction
 from prompt_model_defaults import auto_prompt_model_defaults, image_model_direction
+from prompt_copy import spoken_copy_direction
 from prompt_catalog import choices as storyboard_styles
 from caption_hashtags import generate_caption, hashtag_library_size
 
@@ -704,10 +705,7 @@ def prompt_creative_settings(user_data, include_audio=True):
             lang = 'Bahasa Melayu Malaysia' if language != 'English' else 'English'
             speaker = user_data.get('prompt_speech_source', 'voiceover')
             source = 'The on-camera model speaks' if speaker == 'model' else 'Use an off-camera promoter voice'
-            if language == 'English':
-                copy_direction = 'Write a fresh, product-specific hook, one verified detail or plausible use, and a concise CTA. Avoid generic repeated openings and unsupported claims.'
-            else:
-                copy_direction = 'Gunakan hook yang segar dan khusus untuk produk, satu butiran yang disahkan atau kegunaan yang munasabah, kemudian CTA ringkas. Elakkan pembukaan generik yang berulang dan dakwaan yang tidak disahkan. Sebut dengan jelas dalam Bahasa Melayu Malaysia; jangan gunakan kosa kata atau intonasi Indonesia.'
+            copy_direction = spoken_copy_direction(language)
             lines.append(f'{source} in {lang}, {voice_style} style. {copy_direction} Keep dialogue short and background music below the voice.')
         elif voiceover_mode == 'script':
             script = ' '.join((user_data.get('prompt_voiceover_script') or '').split())
