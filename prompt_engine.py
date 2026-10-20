@@ -246,6 +246,111 @@ def _category_specific_scenes(product_type, product):
             ("PLAUSIBLE DEMONSTRATION", "Show one simple action the named product genuinely supports; do not invent compatibility, specifications or functions."),
             ("CTA / DEVICE HERO", "Finish with a stable, complete device view and uncluttered negative space; no on-screen text unless explicitly selected.")
         ],
+        "equipment": [
+            ("HOOK / EQUIPMENT REVEAL", "Open with the complete appliance, tool or equipment clearly visible and grounded."),
+            ("FULL EQUIPMENT VIEW", "Show the whole product and only the components visible in the reference."),
+            ("CONTROL / BUILD DETAIL", "Highlight a visible switch, connector, handle or construction detail; do not invent specifications."),
+            ("PLAUSIBLE OPERATION", "Show one safe, simple action only when the named product clearly supports it; never imply a performance result."),
+            ("CTA / EQUIPMENT HERO", "Return to a stable full-product view with all parts visible; no on-screen text unless explicitly selected.")
+        ],
+        "home": [
+            ("HOOK / HOME PRODUCT REVEAL", "Open with the complete product in a believable home setting at realistic scale."),
+            ("FULL PRODUCT VIEW", "Show the item's overall shape and placement without adding unconfirmed decor or included accessories."),
+            ("VISIBLE DESIGN DETAIL", "Highlight one visible finish, edge, texture or functional part without naming unsupported materials."),
+            ("NATURAL HOME CONTEXT", "Use a subtle camera move or one plausible interaction; do not demonstrate an unverified function."),
+            ("CTA / HOME HERO", "Finish with the complete unchanged product clearly framed and uncluttered; no on-screen text unless explicitly selected.")
+        ],
+        "accessory": [
+            ("HOOK / ACCESSORY REVEAL", "Open on the accessory's most recognizable visible shape, with the full item in frame."),
+            ("FULL ACCESSORY VIEW", "Keep the complete item and any visible fastening or strap clear; do not add matching accessories."),
+            ("VISIBLE FINISH DETAIL", "Move close to one visible clasp, dial, setting, edge or surface detail only if present."),
+            ("NATURAL SCALE / HANDLING", "Show the item at believable scale, using a hand or wearer only if selected and appropriate."),
+            ("CTA / ACCESSORY HERO", "Return to a clear full-item view and hold steady; no on-screen text unless explicitly selected.")
+        ],
+        "toy": [
+            ("HOOK / TOY REVEAL", "Open with the complete toy or game set arranged so its actual contents are immediately clear."),
+            ("FULL SET VIEW", "Show only pieces visible in the reference; do not duplicate, add or remove components."),
+            ("DETAIL / MECHANISM", "Highlight a visible piece, texture or mechanism without inventing lights, sounds or functions."),
+            ("PLAUSIBLE PLAY ACTION", "Show one simple, safe interaction consistent with the toy; use a child only when a child model is explicitly selected."),
+            ("CTA / TOY HERO", "Finish with the complete unchanged toy or set neatly visible; no on-screen text unless explicitly selected.")
+        ],
+        "book_stationery": [
+            ("HOOK / STATIONERY REVEAL", "Open on the full book, notebook or stationery item with its cover and shape readable."),
+            ("FULL ITEM VIEW", "Keep the complete item and any supplied pieces visible without adding stationery."),
+            ("PRINT / PAPER DETAIL", "Show only readable text and printed details actually present in the reference; do not fabricate page content."),
+            ("NATURAL DESK ACTION", "Use a gentle page turn or writing gesture only if it suits the product and does not alter visible text."),
+            ("CTA / STATIONERY HERO", "Finish with a clear view of the original item and uncluttered negative space; no on-screen text unless explicitly selected.")
+        ],
+        "sports": [
+            ("HOOK / SPORTS GEAR REVEAL", "Open on the complete sports item or equipment in a stable, recognizable composition."),
+            ("FULL GEAR VIEW", "Show the whole item at realistic scale with no extra accessories or invented parts."),
+            ("VISIBLE MATERIAL / GRIP DETAIL", "Highlight a visible seam, grip, fastener or surface detail without claiming performance."),
+            ("SAFE PRACTICAL ACTION", "Show one simple, controlled use only when appropriate for the item; no risky stunts or exaggerated results."),
+            ("CTA / SPORTS HERO", "Return to a stable full-product view with the item unchanged; no on-screen text unless explicitly selected.")
+        ],
+        "pet": [
+            ("HOOK / PET PRODUCT REVEAL", "Open on the complete pet product, clearly showing its actual shape and supplied parts."),
+            ("FULL PRODUCT VIEW", "Keep the product grounded and at realistic scale; do not add food, toys or accessories."),
+            ("VISIBLE DETAIL", "Highlight one genuinely visible fastening, bowl, texture or structural detail."),
+            ("CALM PET CONTEXT", "If an animal model is selected, show calm, species-appropriate interaction only when safe; otherwise use a product-only camera move."),
+            ("CTA / PET PRODUCT HERO", "Finish with the complete unchanged product clearly visible; no on-screen text unless explicitly selected.")
+        ],
+        "automotive": [
+            ("HOOK / AUTOMOTIVE ITEM REVEAL", "Open on the exact automotive product or accessory, not an invented vehicle or installation."),
+            ("FULL ITEM VIEW", "Show the whole supplied item and its visible connectors or mounting parts."),
+            ("FIT / CONNECTOR DETAIL", "Highlight a visible connector, edge, fastening or control without claiming compatibility."),
+            ("PLAUSIBLE CONTEXT", "Use a simple, stationary vehicle context only when relevant and supported; do not fabricate fitment or operation."),
+            ("CTA / AUTOMOTIVE HERO", "Return to a clean full-item view with all parts unchanged; no on-screen text unless explicitly selected.")
+        ],
+        "baby": [
+            ("HOOK / BABY PRODUCT REVEAL", "Open on the complete baby product in a clean, calm setting; do not add a baby or caregiver unless selected."),
+            ("FULL PRODUCT VIEW", "Show the item's true size, shape and included components without adding accessories."),
+            ("VISIBLE SAFETY / DESIGN DETAIL", "Highlight only visible construction, closure or support details; do not make safety or health claims."),
+            ("GENTLE CONTEXT", "Use calm, safe handling only when the product and selected model support it; never show unsafe infant positioning."),
+            ("CTA / BABY PRODUCT HERO", "Finish with the complete unchanged item clearly visible; no on-screen text unless explicitly selected.")
+        ],
+        "travel": [
+            ("HOOK / TRAVEL ITEM REVEAL", "Open with the complete travel item, including all visible handles, straps and wheels."),
+            ("FULL ITEM VIEW", "Show the item at realistic scale and preserve its exact shape and included parts."),
+            ("VISIBLE TRAVEL DETAIL", "Highlight a visible zip, handle, wheel or fastening without inventing capacity or security features."),
+            ("NATURAL HANDLING", "Show one simple lift, roll or carry only when the item supports it and the selected setting makes sense."),
+            ("CTA / TRAVEL HERO", "Return to a clear full-item view and hold steady; no on-screen text unless explicitly selected.")
+        ],
+        "office": [
+            ("HOOK / OFFICE PRODUCT REVEAL", "Open on the complete office item in a tidy, believable workspace."),
+            ("FULL ITEM VIEW", "Show the whole product and only the components supplied or visible."),
+            ("VISIBLE FUNCTIONAL DETAIL", "Highlight a real button, edge, compartment or surface detail without inventing specifications."),
+            ("PRACTICAL DESK ACTION", "Show one simple, plausible desk-use action only when supported by the product."),
+            ("CTA / OFFICE HERO", "Finish with a stable full-product composition and uncluttered negative space; no on-screen text unless explicitly selected.")
+        ],
+        "kitchen": [
+            ("HOOK / KITCHEN PRODUCT REVEAL", "Open on the complete kitchen item or set, showing all supplied pieces."),
+            ("FULL PRODUCT VIEW", "Keep the product grounded and show only confirmed components."),
+            ("VISIBLE COOKING DETAIL", "Highlight a visible handle, lid, control or included utensil without inventing coating or capacity."),
+            ("PLAUSIBLE KITCHEN ACTION", "Show one simple, physically plausible action only if supported by the product; do not imply a result."),
+            ("CTA / KITCHEN HERO", "Finish with the complete unchanged product clearly visible; no on-screen text unless explicitly selected.")
+        ],
+        "furniture": [
+            ("HOOK / FURNITURE SILHOUETTE", "Open with the full furniture piece at believable room scale."),
+            ("FULL FURNITURE VIEW", "Show the complete item and preserve its visible structure, colour and proportions."),
+            ("VISIBLE CONSTRUCTION DETAIL", "Highlight only a visible joint, edge, handle or surface feature."),
+            ("ROOM CONTEXT", "Use one gentle camera move to show placement; do not demonstrate storage, folding or other functions unless visible and supported."),
+            ("CTA / FURNITURE HERO", "Return to the full item in a stable, uncluttered composition; no on-screen text unless explicitly selected.")
+        ],
+        "garden": [
+            ("HOOK / GARDEN PRODUCT REVEAL", "Open on the complete garden item with its visible shape and parts clear."),
+            ("FULL ITEM VIEW", "Show the product at realistic scale without adding plants, tools or accessories not supplied."),
+            ("VISIBLE BUILD DETAIL", "Highlight one visible connector, edge, nozzle or surface feature."),
+            ("PLAUSIBLE OUTDOOR USE", "Show one simple, safe use only when the product clearly supports it; do not invent results."),
+            ("CTA / GARDEN HERO", "Finish on the unchanged full product in a clean outdoor or neutral setting; no on-screen text unless explicitly selected.")
+        ],
+        "crafts": [
+            ("HOOK / CRAFT ITEM REVEAL", "Open on the complete craft product or kit so the actual included contents are clear."),
+            ("FULL KIT VIEW", "Show only the pieces visible or explicitly confirmed as included."),
+            ("TEXTURE / TOOL DETAIL", "Highlight a visible texture, edge or tool part without inventing material properties."),
+            ("SIMPLE MAKING ACTION", "Show one safe, plausible craft action only if supported by the kit; do not add extra tools or finished results."),
+            ("CTA / CRAFT HERO", "Finish with the original product or kit neatly visible; no on-screen text unless explicitly selected.")
+        ],
     }
     return scenes_by_type.get(product_type, [
         ("HOOK / PRODUCT RECOGNITION", "Open with a distinctive, reference-safe view that identifies the product quickly."),
