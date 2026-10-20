@@ -579,8 +579,15 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
                     timed_scenes.append(
                         f"{start_time:g}–{end_time:g}s {shot_name}: {shot_direction}"
                     )
+                timing_summary = (
+                    "TIMING: 0–6s clear product reveal; 6–12s show the complete product in its setting; "
+                    "12–18s highlight one genuinely visible detail; 18–24s one subtle category-appropriate action; "
+                    "24–30s stable full-product hero finish. "
+                    if duration == 30 else ""
+                )
                 beat_plan = (
-                    "CATEGORY-SPECIFIC STORYBOARD — one continuous video with five connected timed beats: "
+                    timing_summary
+                    + "CATEGORY-SPECIFIC STORYBOARD — one continuous video with five connected timed beats: "
                     + " | ".join(timed_scenes)
                     + (" Do not complete the main surrounding contour in this first white-doodle clip." if doodle and part <= 1 else "")
                 )
@@ -626,7 +633,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
                    if product_type == "other" or universal_custom else "") + "\n"
                 + "SETTING: " + _prompt_sentence(scene, 100, "A realistic setting suited to the product.") + " CAMERA: " + _prompt_sentence(camera, 110, "Use one restrained camera move and keep the product stable.") + "\n"
                 + "PRODUCT LOCK: Preserve the reference product's visible design, colour, pattern, branding and proportions. Do not invent features or accessories.\n"
-                + hook_rule + beat_plan + concept_rule + doodle_rule
+                + hook_rule + beat_plan + " " + concept_rule + " " + doodle_rule + " "
                 + "Keep actions natural and the product consistent. Follow the selected text, audio and visual options. If voiceover is enabled, speak only in " + ("English" if str(prompt_language or "Malay").casefold() == "english" else "Bahasa Melayu Malaysia") + " and use a short, natural product-specific hook and CTA."
             )
 
