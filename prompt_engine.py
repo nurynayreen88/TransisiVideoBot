@@ -184,7 +184,7 @@ def _category_specific_scenes(product_type, product):
             ("FULL BED REVEAL", "Show the complete bed in a believable bedroom scale. Preserve the headboard, frame, rails, footboard, colour and proportions exactly as shown."),
             ("CONSTRUCTION DETAIL", "Make a gentle close pass across one or two genuinely visible structural details. Show a mattress, stool or other piece only if it appears in the reference or supplied product details."),
             ("ROOM CONTEXT", "Use one restrained camera move to show how the unchanged bed sits in the room; keep all parts grounded and do not demonstrate unsupported storage or functions."),
-            ("CTA / HERO HOLD", "Return to a clear full-bed composition and hold it steadily, leaving uncluttered space for optional selected hook/CTA text.")
+            ("CTA / HERO HOLD", "Return to a clear full-bed composition and hold it steadily, leaving uncluttered negative space; no on-screen text unless explicitly selected.")
         ]
     if product_type in {"home", "kitchen", "equipment", "gadget"} and any(
         term in words for term in ("cookware", "quickchef", "pan set", "pot set", "kitchen set", "7pcs", "7 pcs", "cookware set", "saucepan", "frying pan")
@@ -194,7 +194,7 @@ def _category_specific_scenes(product_type, product):
             ("SET OVERVIEW", "Make a smooth, short camera move across the actual items and return to a composition that shows the set together."),
             ("REALISTIC USE", "Show one simple, physically plausible kitchen action with an item and utensil that are actually included or explicitly described. Do not invent a feature, coating, capacity or performance claim."),
             ("PRACTICAL DETAIL / VALUE", "Highlight a visible handle, shape, stack or included component only where supported by the product name or reference; communicate value through the actual set contents, not invented savings."),
-            ("CTA / HERO HOLD", "Finish with the complete unchanged set neatly arranged and clearly visible; leave room for optional selected hook/CTA text.")
+            ("CTA / HERO HOLD", "Finish with the complete unchanged set neatly arranged and clearly visible; leave uncluttered negative space; no on-screen text unless explicitly selected.")
         ]
     scenes_by_type = {
         "fashion": [
@@ -202,49 +202,49 @@ def _category_specific_scenes(product_type, product):
             ("FULL LOOK", "Use one relaxed, realistic model movement to show the garment's actual cut, fit and overall silhouette."),
             ("FABRIC / DESIGN DETAIL", "Move closer to a genuinely visible print, seam, sleeve, hem or fabric detail; do not invent texture or alter the pattern."),
             ("NATURAL MOVEMENT", "Show one category-appropriate step, gentle turn or natural fabric movement without exaggerated posing or wind."),
-            ("CTA / OUTFIT HERO", "Settle on a clean full-outfit view with the garment unchanged and room for optional selected hook/CTA text.")
+            ("CTA / OUTFIT HERO", "Settle on a clean full-outfit view with the garment unchanged and uncluttered negative space; no on-screen text unless explicitly selected.")
         ],
         "hijab": [
             ("HOOK / DRAPE REVEAL", "Open on the actual drape and overall styling, then show the full visible arrangement."),
             ("FULL STYLING", "Use a small natural head or shoulder movement while keeping the wrap and folds consistent."),
             ("FABRIC DETAIL", "Show only visible folds, edging, print or texture; do not change the wrap, colour or fabric."),
             ("NATURAL PROFILE", "Make a gentle three-quarter camera adjustment to show the existing drape from a plausible angle."),
-            ("CTA / STYLING HERO", "Return to a clear, steady view of the same styling with room for optional selected hook/CTA text.")
+            ("CTA / STYLING HERO", "Return to a clear, steady view of the same styling with uncluttered negative space; no on-screen text unless explicitly selected.")
         ],
         "shoes": [
             ("HOOK / SHOE SILHOUETTE", "Open at a low three-quarter angle with the complete shoe or pair clearly visible."),
             ("ON-FOOT OR PRODUCT VIEW", "If a wearer is selected, show a short natural step on a flat surface; otherwise keep the shoes grounded and stationary."),
             ("VISIBLE DETAIL", "Highlight only the visible upper, fastening, sidewall or sole edge; never force an unseen angle."),
             ("NATURAL MOVEMENT", "Show a small, believable shift or two-step walk only if appropriate, preserving shoe shape and foot contact."),
-            ("CTA / SHOE HERO", "Hold a clean view of the unchanged pair or product arrangement with room for optional selected hook/CTA text.")
+            ("CTA / SHOE HERO", "Hold a clean view of the unchanged pair or product arrangement with uncluttered negative space; no on-screen text unless explicitly selected.")
         ],
         "bag": [
             ("HOOK / BAG SHAPE", "Open on the bag's clearest recognizable silhouette, with all visible straps and handles in frame."),
             ("FULL PRODUCT REVEAL", "Show the complete bag at a believable scale in the selected setting; do not add contents or accessories."),
             ("HARDWARE / SEAM DETAIL", "Move close to one visible seam, handle, clasp or hardware detail only if present."),
             ("PLAUSIBLE HANDLING", "If the scene calls for it, show one natural lift or carry using an existing handle or strap; otherwise move the camera only."),
-            ("CTA / BAG HERO", "Return to the same complete bag and hold a stable frame with room for optional selected hook/CTA text.")
+            ("CTA / BAG HERO", "Return to the same complete bag and hold a stable frame with uncluttered negative space; no on-screen text unless explicitly selected.")
         ],
         "beauty": [
             ("HOOK / PACKAGING REVEAL", "Open with a clean, recognizable view of the actual package and keep its label and shape consistent."),
             ("PRODUCT PRESENTATION", "Show the whole product in a tidy, relevant setting; do not add extra containers or applicators."),
             ("VISIBLE DETAIL / TEXTURE", "Highlight a genuinely visible package or product texture detail without inventing ingredients, shade or efficacy."),
             ("REALISTIC USE CONTEXT", "Show only a small, plausible use action if the selected product supports it; otherwise use a restrained close-up."),
-            ("CTA / PRODUCT HERO", "Finish with the original product clearly framed and room for optional selected hook/CTA text.")
+            ("CTA / PRODUCT HERO", "Finish with the original product clearly framed and uncluttered negative space; no on-screen text unless explicitly selected.")
         ],
         "food": [
             ("HOOK / APPETIZING VIEW", "Open on the actual food or drink with natural, appetizing light; do not add toppings or ingredients."),
             ("FULL SERVING", "Show the complete original serving and packaging, where present."),
             ("TEXTURE DETAIL", "Make a gentle close-up of visible texture, crumb, surface or liquid; preserve the actual appearance."),
             ("SERVING MOMENT", "Use one plausible serving or pouring action only if supported by the product and scene; avoid exaggerated effects."),
-            ("CTA / PRODUCT HERO", "Return to the real serving or package and hold a clean final composition with room for optional selected hook/CTA text.")
+            ("CTA / PRODUCT HERO", "Return to the real serving or package and hold a clean final composition with uncluttered negative space; no on-screen text unless explicitly selected.")
         ],
         "gadget": [
             ("HOOK / DEVICE REVEAL", "Open on a recognizable three-quarter view of the unchanged device."),
             ("FULL DEVICE VIEW", "Show the complete device and any supplied components without adding cables or accessories."),
             ("VISIBLE CONTROL / PORT", "Move close only to a control, port, screen or button that is actually visible; keep screen content unchanged."),
             ("PLAUSIBLE DEMONSTRATION", "Show one simple action the named product genuinely supports; do not invent compatibility, specifications or functions."),
-            ("CTA / DEVICE HERO", "Finish with a stable, complete device view and room for optional selected hook/CTA text.")
+            ("CTA / DEVICE HERO", "Finish with a stable, complete device view and uncluttered negative space; no on-screen text unless explicitly selected.")
         ],
     }
     return scenes_by_type.get(product_type, [
@@ -252,7 +252,7 @@ def _category_specific_scenes(product_type, product):
         ("FULL PRODUCT REVEAL", "Show the complete product in a believable setting and at realistic scale."),
         ("VISIBLE DETAIL", "Highlight one genuinely visible detail; do not invent materials, functions or accessories."),
         ("PLAUSIBLE USE OR PRESENTATION", "Show one natural action suited to the named product; if no action is supported, use a restrained camera move."),
-        ("CTA / HERO HOLD", "Finish on a clear, stable view of the unchanged product with room for optional selected hook/CTA text.")
+        ("CTA / HERO HOLD", "Finish on a clear, stable view of the unchanged product with uncluttered negative space; no on-screen text unless explicitly selected.")
     ])
 
 
