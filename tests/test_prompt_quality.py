@@ -67,6 +67,45 @@ class PromptQualityTests(unittest.TestCase):
         self.assertIn("wallet", direction.casefold())
         self.assertIn("VISUAL VARIATION:", direction)
 
+    def test_main_prompt_flow_selects_model_before_style_and_duration_after_style(self):
+        source = (Path(__file__).resolve().parents[1] / "bot.py").read_text(encoding="utf-8")
+        entry_start = source.index("    elif action == 'prompt':")
+        entry_end = source.index("    elif action.startswith('prompt_mode:'):", entry_start)
+        entry = source[entry_start:entry_end]
+        self.assertIn("context.user_data['stage'] = 'prompt_product_type'", entry)
+        self.assertIn("reply_markup=prompt_product_type_menu()", entry)
+
+        product_start = source.index("    if stage == 'prompt_product_name':")
+        product_end = source.index("    shortcuts = {", product_start)
+        product_handler = source[product_start:product_end]
+        self.assertIn("explicit_subcategory = selected_subcategory in PRODUCT_SUBTYPE_LABELS", product_handler)
+        self.assertIn("context.user_data['stage'] = 'prompt_model_presence'", product_handler)
+        self.assertIn("reply_markup=prompt_model_presence_menu(context.user_data)", product_handler)
+
+        style_start = source.index("    elif action.startswith('prompt_style:') and stage == 'prompt_style':")
+        style_end = source.index("    elif action == 'prompt_style_back'", style_start)
+        style_handler = source[style_start:style_end]
+        self.assertIn("context.user_data['stage'] = 'prompt_duration'", style_handler)
+        self.assertIn("reply_markup=prompt_duration_menu()", style_handler)
+        self.assertNotIn("prompt_generate:confirm", style_handler)
+
+        duration_start = source.index("    elif action.startswith('prompt_duration:') and stage == 'prompt_duration':")
+        duration_end = source.index("    elif action.startswith('prompt_ad_angle:') and stage == 'prompt_ad_angle':", duration_start)
+        duration_handler = source[duration_start:duration_end]
+        self.assertIn("context.user_data['stage'] = 'prompt_ad_angle'", duration_handler)
+        self.assertNotIn("auto_prompt_model_defaults(", duration_handler)
+        self.assertNotIn("'prompt_style': 'cinematic'", duration_handler)
+
+    def test_model_none_and_animal_paths_continue_to_style_picker(self):
+        source = (Path(__file__).resolve().parents[1] / "bot.py").read_text(encoding="utf-8")
+        model_start = source.index("    elif action.startswith('prompt_model:') and stage == 'prompt_model_presence':")
+        model_end = source.index("    elif action.startswith('prompt_duration:') and stage == 'prompt_duration':", model_start)
+        model_flow = source[model_start:model_end]
+        self.assertIn("context.user_data['stage'] = 'prompt_style'", model_flow)
+        self.assertIn("prompt_style_menu(context.user_data.get('prompt_product_type','other'),'none')", model_flow)
+        self.assertIn("prompt_style_menu(context.user_data.get('prompt_product_type', 'other'), 'animal')", model_flow)
+        self.assertIn("prompt_style_menu(context.user_data.get('prompt_product_type','other'),'yes')", model_flow)
+
     def test_presentation_profile_avoids_repeating_recent_three(self):
         profiles = [
             _presentation_variation("cinematic", "variation-test-category", "variation-test-subtype")
