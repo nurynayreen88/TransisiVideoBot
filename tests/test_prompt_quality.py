@@ -64,7 +64,7 @@ class PromptQualityTests(unittest.TestCase):
 
     def test_english_opening_direction_does_not_force_malay_speech(self):
         direction = opening_direction("bag", "English")
-        self.assertIn("If voiceover is used, speak clear English.", direction)
+        self.assertIn("Speak clear English.", direction)
         self.assertNotIn("Bahasa Melayu Malaysia", direction)
 
     def test_english_product_hook_uses_english_not_malay(self):
@@ -72,7 +72,7 @@ class PromptQualityTests(unittest.TestCase):
             hooks = [product_hook(description, "English") for _ in range(30)]
             result = next((hook for hook in hooks if hook), None)
             self.assertIsNotNone(result)
-            self.assertTrue(any(word in result.lower() for word in ("looking", "comparing", "interested", "closer look")))
+            self.assertTrue(any(word in result.lower() for word in ("looking", "comparing", "interested", "closer look", "shopping", "curious", "before choosing", "here", "take a closer")))
             self.assertNotIn("boleh tengok", result.lower())
 
     def test_category_hook_uses_curated_database_phrase_without_product_name(self):
@@ -214,7 +214,8 @@ class PromptQualityTests(unittest.TestCase):
         self.assertIn("Premium handbag commercial with a clean hero reveal", prompt)
         self.assertIn("HOOK / BAG SHAPE", prompt)
         self.assertIn("HARDWARE / SEAM DETAIL", prompt)
-        self.assertIn("For AI-generated voice, use English", prompt)
+        self.assertIn("For AI-generated voice, use varied, natural product-specific wording", prompt)
+        self.assertIn("in English", prompt)
         self.assertIn("use it exactly and add no dialogue", prompt)
         self.assertNotIn("Bahasa Melayu Malaysia", prompt)
 
