@@ -92,7 +92,8 @@ class CreativeVariationTests(unittest.TestCase):
             style="auto", duration=30, product_type="kitchen", split=False
         )
         self.assertIn("exactly 30 seconds", prompt)
-        self.assertIn("Each scene lasts exactly 6 seconds", prompt)
+        self.assertIn("TIMING: 0–6s", prompt)
+        self.assertIn("24–30s stable full-product hero finish", prompt)
         self.assertIn("PRACTICAL DETAIL / VALUE", prompt)
         self.assertNotIn("=== KLIPPO PART 2 ===", prompt)
 
