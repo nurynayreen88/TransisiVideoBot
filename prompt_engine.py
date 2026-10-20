@@ -153,7 +153,7 @@ _CREATIVE_ACTIONS = {
     ]
 }
 # Ten safe presentation treatments are available to every product subcategory.
-# These change framing, camera language and lighting, never product facts or features.
+# These vary framing, camera language and lighting without inventing product facts.
 _CREATIVE_PRESENTATION_VARIATIONS = [
     "PRESENTATION: Start in a wide three-quarter composition, then use a slow, stable push-in under soft side lighting.",
     "PRESENTATION: Use an eye-level lateral camera slide with balanced negative space and natural, consistent shadows.",
@@ -249,9 +249,7 @@ def _creative_variation(product_type, product, part, product_subtype=''):
     index = random.SystemRandom().choice(available)
     recent.append(index)
     action = options[index]
-    # Each product group combines its category-safe action pool with at least
-    # ten distinct presentation treatments, so every subtype has >=10 usable
-    # prompt variations even when its action pool is intentionally conservative.
+    # Combine every category-safe action pool with ten distinct presentation treatments.
     presentation = random.SystemRandom().choice(_CREATIVE_PRESENTATION_VARIATIONS)
     action = action + "\n" + presentation
     if part >= 2:
@@ -278,6 +276,7 @@ try:
 except (OSError, json.JSONDecodeError):
     UNIVERSAL_PROMPT_FRAMEWORKS = []
     UNIVERSAL_PROMPT_GLOBAL_RULES = []
+
 
 def _universal_prompt_direction(style_key):
     """Return a style-matched universal framework for custom categories, without an AI/API call."""
@@ -618,6 +617,7 @@ def creative_angle_instruction(angle):
     """Return only the selected ad-angle direction; auto leaves category logic in control."""
     return _CREATIVE_ANGLE_INSTRUCTIONS.get(str(angle or "auto"), "")
 
+
 _RECENT_PRESENTATION_CHOICES = {}
 _PRESENTATION_PROFILES = (
     "centered hero composition, soft side lighting, detail-first reveal followed by a full-product hero, and a calm gradual pace",
@@ -635,7 +635,8 @@ _PRESENTATION_PROFILES = (
 )
 
 
-def _presentation_variation(style_key, product_type, product_subtype=""):    """Choose a fresh composition/light/edit profile while preserving the selected style."""
+def _presentation_variation(style_key, product_type, product_subtype=""):
+    """Choose a fresh composition/light/edit profile while preserving the selected style."""
     key = (str(style_key or "auto"), str(product_type or "other"), str(product_subtype or ""))
     recent = _RECENT_PRESENTATION_CHOICES.setdefault(key, deque(maxlen=3))
     available = [index for index in range(len(_PRESENTATION_PROFILES)) if index not in recent]
@@ -956,7 +957,8 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
                     "8-10s settle into a steady full-product composition and HOLD the final frame for a seamless Part 2 handoff. "
                     "Do not perform the main surrounding contour yet. "
                 )
-            rules += (                "Warm authentic UGC product-ad look, thin white handwritten 2D graphics tracked to the product. "
+            rules += (
+                "Warm authentic UGC product-ad look, thin white handwritten 2D graphics tracked to the product. "
                 "No phone bezel, no invented product claims, no branding obstruction. Only verified hook (if available) and verified "
                 "short feature labels may appear; reserve space for editing overlays if text rendering is unreliable. "
                 "Prioritize the visible surrounding product contour over camera movement."
@@ -973,7 +975,8 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
             rules = (
                 "SINGLE-PROMPT FULL-LENGTH VIDEO: Create one continuous " + str(duration) + "-second product commercial, not separate clips. "
                 "Distribute these five connected beats across the entire duration: opening product recognition; full-product reveal; "
-                "one genuinely visible detail; a restrained style-specific action; and a stable full-product hero finish. "                "Keep the same set, lighting, product scale and identity throughout. "
+                "one genuinely visible detail; a restrained style-specific action; and a stable full-product hero finish. "
+                "Keep the same set, lighting, product scale and identity throughout. "
                 + ("Use thin white doodle emphasis only around visible product edges, without obscuring the product. " if doodle else "")
                 + "Do not repeat the opening or introduce unsupported features, props, text or unseen angles."
             )
