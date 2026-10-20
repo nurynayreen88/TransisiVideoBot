@@ -2961,7 +2961,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data['prompt_custom_subcategory_name'] = ''
         context.user_data['stage'] = 'prompt_product_type'
         await query.message.reply_text(
-            '✍️ KLIPPO | JANA PROMPT VIDEO\\n\\nPilih kategori dan subkategori produk dahulu. Selepas nama produk, anda boleh pilih model manusia, haiwan (jika sesuai) atau fokus produk sahaja sebelum memilih gaya video.\n\nGambar produk tidak perlu dimuat naik ke bot.',
+            '✍️ KLIPPO | JANA PROMPT VIDEO\n\nPilih kategori dan subkategori produk dahulu. Selepas nama produk, anda boleh pilih model manusia, haiwan (jika sesuai) atau fokus produk sahaja sebelum memilih gaya video.\n\nGambar produk tidak perlu dimuat naik ke bot.',
             reply_markup=prompt_product_type_menu()
         )
     elif action.startswith('prompt_mode:'):
