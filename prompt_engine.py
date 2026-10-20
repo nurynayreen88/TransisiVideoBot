@@ -193,8 +193,24 @@ _SFX_BY_TYPE = {
 }
 
 
+# Load the additive per-subcategory variation library. The master prompt library stays untouched.
+_SUBCATEGORY_VARIATION_PATH = Path(__file__).resolve().parent / "prompts" / "subcategory_variation_library.json"
+try:
+    with _SUBCATEGORY_VARIATION_PATH.open("r", encoding="utf-8") as _variation_handle:
+        _subcategory_variation_data = json.load(_variation_handle)
+    _SUBCATEGORY_VARIATIONS_BY_ID = {
+        str(item.get("subcategory_id")): item.get("variations", [])
+        for item in _subcategory_variation_data.get("subcategories", [])
+        if isinstance(item, dict) and item.get("subcategory_id")
+    }
+except (OSError, json.JSONDecodeError):
+    _SUBCATEGORY_VARIATIONS_BY_ID = {}
+
+_RECENT_SUBCATEGORY_VARIATIONS = {}
+
+
 def _creative_variation(product_type, product, part, product_subtype=''):
-    """Add one short, category-aware variation and matching audio direction."""
+    """Select a safe, varied creative direction, preferring the exact selected subcategory."""
     words = " ".join(str(value or "") for value in (product_type, product_subtype, product)).casefold()
     type_key = str(product_type or "").casefold()
     subtype_key = str(product_subtype or "").casefold()
@@ -243,26 +259,56 @@ def _creative_variation(product_type, product, part, product_subtype=''):
     else:
         group = "general"
 
-    options = _CREATIVE_ACTIONS[group]
-    recent = _RECENT_CREATIVE_CHOICES.setdefault(group, deque(maxlen=3))
-    available = [i for i in range(len(options)) if i not in recent] or list(range(len(options)))
-    index = random.SystemRandom().choice(available)
-    recent.append(index)
-    action = options[index]
-    # Combine every category-safe action pool with ten distinct presentation treatments.
-    presentation = random.SystemRandom().choice(_CREATIVE_PRESENTATION_VARIATIONS)
-    action = action + "\n" + presentation
-    if part >= 2:
-        action = (
-            "CONTINUATION: " + action
-            + " Match the previous clip's final frame, setting, lighting and product orientation; continue the action without repeating its hook or main gesture."
+    selected_action = None
+    subtype_variations = _SUBCATEGORY_VARIATIONS_BY_ID.get(subtype_key, [])
+    if subtype_variations:
+        recent = _RECENT_SUBCATEGORY_VARIATIONS.setdefault(subtype_key, deque(maxlen=3))
+        available = [i for i in range(len(subtype_variations)) if i not in recent]
+        if not available:
+            available = list(range(len(subtype_variations)))
+        index = random.SystemRandom().choice(available)
+        recent.append(index)
+        selected_action = subtype_variations[index]
+        if part >= 2:
+            hook = "HOOK: Resume from the previous clip's exact final frame; do not repeat its opening hook."
+        else:
+            hook = str(selected_action.get("hook", "")).strip()
+        action = "\\n".join(
+            line for line in (
+                "SUBCATEGORY VARIATION: " + str(selected_action.get("name", "Product showcase")),
+                hook,
+                str(selected_action.get("action", "")).strip(),
+                str(selected_action.get("detail", "")).strip(),
+                "PRESENTATION: " + str(selected_action.get("camera", "")).strip() + " " + str(selected_action.get("lighting", "")).strip(),
+                str(selected_action.get("closing", "")).strip(),
+            ) if line and not line.endswith(":")
         )
-    audio = _SFX_BY_TYPE[group]
+        if part >= 2:
+            action += " CONTINUITY: Match the previous clip's final frame, setting, lighting and product orientation; continue naturally without repeating its main gesture."
+        audio = str(selected_action.get("audio", "")).strip() or _SFX_BY_TYPE[group]
+        audio += " " + _SFX_BY_TYPE[group]
+    else:
+        options = _CREATIVE_ACTIONS[group]
+        recent = _RECENT_CREATIVE_CHOICES.setdefault(group, deque(maxlen=3))
+        available = [i for i in range(len(options)) if i not in recent] or list(range(len(options)))
+        index = random.SystemRandom().choice(available)
+        recent.append(index)
+        action = options[index]
+        presentation = random.SystemRandom().choice(_CREATIVE_PRESENTATION_VARIATIONS)
+        action = action + "\\n" + presentation
+        if part >= 2:
+            action = (
+                "CONTINUATION: " + action
+                + " Match the previous clip's final frame, setting, lighting and product orientation; continue the action without repeating its hook or main gesture."
+            )
+        audio = _SFX_BY_TYPE[group]
+
     return (
-        "VISUAL VARIATION: " + action + "\n"
-        + "AUDIO: " + audio + " Keep background music below any selected speech; use only brief SFX that match visible action. If the video model cannot create audio, add only the audio elements selected by the user in post-production.\n"
+        "VISUAL VARIATION: " + action + "\\n"
+        + "AUDIO: " + audio + " Keep background music below any selected speech; use only brief SFX that match visible action. If the video model cannot create audio, add only the audio elements selected by the user in post-production.\\n"
         + "QUALITY: One clear action and at most one controlled camera move per beat. Preserve product shape, colour, markings and scale; keep motion, lighting and contact realistic. Smooth continuity, no morphing, duplication, warping, flicker or unrequested on-screen text."
     )
+
 
 
 """Detailed, reference-safe AI video prompt templates for KLIPPO."""
