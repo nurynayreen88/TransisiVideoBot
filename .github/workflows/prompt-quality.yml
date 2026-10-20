@@ -10,6 +10,8 @@ on:
       - "prompts/prompt_quality_overrides.json"
       - "prompts/prompt_component_tables.json"
       - "prompts/universal_prompt_templates.json"
+      - "prompts/subcategory_variation_library.json"
+      - "tests/test_prompt_variation.py"
       - "tests/test_prompt_quality.py"
       - "tests/test_prompt_component_tables.py"
       - ".github/workflows/prompt-quality.yml"
