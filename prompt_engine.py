@@ -413,17 +413,18 @@ def _resolve_auto_style(style, product_type, product="", product_subtype=""):
     product_words = str(product or "").casefold()
     candidates = None
     if category == "bag":
-        if subtype in {"bag_wallet", "wallet", "card_holder"} or any(
-            term in product_words for term in ("wallet", "dompet", "card holder", "cardholder", "coin purse")
-        ):
+        # A user's explicit subcategory outranks ambiguous words in a product name.
+        if subtype in {"bag_wallet", "wallet", "card_holder"}:
             category = "wallet"
-        elif subtype in {"bag_backpack", "backpack", "bag_laptop"} or any(
-            term in product_words for term in ("backpack", "rucksack", "beg galas", "beg sekolah", "beg laptop")
-        ):
+        elif subtype in {"bag_backpack", "backpack", "bag_laptop"}:
             candidates = ["backpack_demo", "bag_daily_carry", "bag_tabletop_reveal", "lifestyle", "cinematic"]
-        elif subtype in {"bag_sling", "sling_bag", "bag_handbag", "handbag", "bag_tote"} or any(
-            term in product_words for term in ("sling", "crossbody", "beg silang", "tote bag", "handbag", "beg tangan")
-        ):
+        elif subtype in {"bag_sling", "sling_bag", "bag_handbag", "handbag", "bag_tote"}:
+            candidates = ["sling_bag_lifestyle", "handbag_showcase", "bag_daily_carry", "bag_tabletop_reveal", "bag_flatlay"]
+        elif any(term in product_words for term in ("wallet", "dompet", "card holder", "cardholder", "coin purse")):
+            category = "wallet"
+        elif any(term in product_words for term in ("backpack", "rucksack", "beg galas", "beg sekolah", "beg laptop")):
+            candidates = ["backpack_demo", "bag_daily_carry", "bag_tabletop_reveal", "lifestyle", "cinematic"]
+        elif any(term in product_words for term in ("sling", "crossbody", "beg silang", "tote bag", "handbag", "beg tangan")):
             candidates = ["sling_bag_lifestyle", "handbag_showcase", "bag_daily_carry", "bag_tabletop_reveal", "bag_flatlay"]
         else:
             candidates = _AUTO_STYLE_CANDIDATES["bag"]
