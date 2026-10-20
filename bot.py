@@ -53,6 +53,10 @@ from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ReplyKe
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler, ContextTypes, MessageHandler, filters
 
 logging.basicConfig(level=logging.INFO)
+# HTTP client INFO logs include Telegram API URLs containing the bot token.
+# Keep request URLs out of persistent hosting logs; retain application warnings/errors.
+logging.getLogger("httpx").setLevel(logging.WARNING)
+logging.getLogger("httpcore").setLevel(logging.WARNING)
 # Background engine is bundled here so single-file Render deployments work.
 from collections import deque
 from io import BytesIO
