@@ -2951,35 +2951,18 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data.pop('shopee_url', None)
         await query.message.reply_text('📷 Hantar 1–5 gambar produk. Tekan Selesai apabila cukup.', reply_markup=photos_menu())
     elif action == 'prompt':
-        access = await prompt_access_status(update.effective_user.id)
-        if not access["available"]:
-            await query.message.reply_text(
-                "⚠️ Sistem trial belum dapat disemak. Sila cuba lagi kemudian."
-            )
-            return
-        if not access["allowed"]:
-            await query.message.reply_text(
-                "🎁 Anda telah menggunakan 3/3 trial Jana Prompt.\n\n"
-                "Untuk terus menjana prompt dan membuka fungsi pemprosesan video, sila langgan Klippo.",
-                reply_markup=InlineKeyboardMarkup([
-                    [InlineKeyboardButton("💎 Lihat Langganan", callback_data="subscription")],
-                    [InlineKeyboardButton("🏠 Menu Utama", callback_data="home")],
-                ])
-            )
-            return
-        reset(context)
-        context.user_data['prompt_style'] = 'auto'
-        context.user_data['prompt_concept'] = ''
-        context.user_data['prompt_library_id'] = ''
-        context.user_data['prompt_library_storyboard'] = []
-        context.user_data['prompt_product_type'] = 'other'
         context.user_data['prompt_mode'] = 'normal'
         context.user_data['prompt_reference_photos'] = []
         context.user_data['prompt_duration_mode'] = 'single'
-        context.user_data['prompt_reference_photos'] = []
-        context.user_data['stage'] = 'prompt_product_name'
+        context.user_data['prompt_product_type'] = ''
+        context.user_data['prompt_product_subcategory'] = ''
+        context.user_data['prompt_product_name'] = ''
+        context.user_data['prompt_custom_category_name'] = ''
+        context.user_data['prompt_custom_subcategory_name'] = ''
+        context.user_data['stage'] = 'prompt_product_type'
         await query.message.reply_text(
-            '✍️ KLIPPO | JANA PROMPT VIDEO\n\nMasukkan nama produk sahaja. Klippo akan mengesan kategori secara automatik. Selepas itu, pilih durasi dan satu gaya video; kamera, aksi, latar, model, audio, hook dan CTA akan ditetapkan secara automatik.\n\nGambar produk tidak perlu dimuat naik ke bot.',
+            '✍️ KLIPPO | JANA PROMPT VIDEO\\n\\nPilih kategori dan subkategori produk dahulu. Selepas nama produk, anda boleh pilih model manusia, haiwan (jika sesuai) atau fokus produk sahaja sebelum memilih gaya video.\\n\\nGambar produk tidak perlu dimuat naik ke bot.',
+            reply_markup=prompt_product_type_menu()
         )
     elif action.startswith('prompt_mode:'):
         selected_mode = action.split(':', 1)[1]
@@ -3278,36 +3261,24 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['prompt_duration_mode'] = duration_mode
             context.user_data['prompt_ad_angle'] = 'auto'
             context.user_data.pop('prompt_ad_angle_flow', None)
+            context.user_data.setdefault('prompt_language', 'Malay')
+            context.user_data.setdefault('prompt_voiceover_mode', 'ai')
+            context.user_data.setdefault('prompt_voiceover_style', 'auto')
             context.user_data['prompt_speech_source'] = 'voiceover'
             context.user_data['prompt_voiceover_script'] = ''
             context.user_data['prompt_on_screen_text'] = 'no'
+            context.user_data['prompt_text_mode'] = 'none'
+            context.user_data['prompt_text_content'] = ''
             context.user_data['prompt_audio_enabled'] = None
-            product_type = context.user_data.get('prompt_product_type', 'other')
-            auto_model_defaults = auto_prompt_model_defaults(
-                product_type=product_type,
-                product_subcategory=context.user_data.get('prompt_product_subcategory', ''),
-                child_product=_prompt_is_child_product(context.user_data),
-                animal_related=_prompt_is_animal_related(context.user_data),
-            )
-            context.user_data.update({
-                **auto_model_defaults,
-                'prompt_model_gender_2': 'none', 'prompt_model_hijab_2': 'na', 'prompt_model_age_2': 'na',
-                'prompt_style': 'cinematic', 'prompt_language': 'Malay',
-                'prompt_voiceover_mode': 'ai', 'prompt_voiceover_style': 'auto',
-                'prompt_speech_source': 'voiceover', 'prompt_voiceover_script': '',
-                'prompt_concept': '',
-                'prompt_scene': 'a realistic premium location chosen to suit the product, with natural lighting and believable physical surroundings',
-                'prompt_scene_key': 'auto', 'prompt_custom_background': False,
-                'prompt_motion_choice': 'auto', 'prompt_framing': 'auto', 'prompt_ad_angle': 'auto',
-                'prompt_on_screen_text': 'no', 'prompt_text_mode': 'none', 'prompt_text_content': '',
-                'prompt_audio_enabled': True, 'prompt_style_flow': 'quick',
-                'stage': 'prompt_style',
-            })
-            style_guide = prompt_style_guide(product_type)
+            context.user_data['prompt_scene'] = 'a realistic premium location chosen to suit the product, with natural lighting and believable physical surroundings'
+            context.user_data['prompt_scene_key'] = 'auto'
+            context.user_data['prompt_custom_background'] = False
+            context.user_data['prompt_motion_choice'] = 'auto'
+            context.user_data['prompt_framing'] = 'auto'
+            context.user_data['stage'] = 'prompt_ad_angle'
             await query.message.reply_text(
-                '🎨 PILIH GAYA VIDEO SAHAJA\n\n' + style_guide
-                + '\n\nKamera, aksi, latar, model, pencahayaan, muzik, SFX, hook, CTA dan susunan babak akan dipilih automatik mengikut produk. Variasi akan berubah setiap kali prompt dijana.',
-                reply_markup=prompt_style_menu(product_type)
+                '🎯 Pilih pendekatan iklan untuk hook, jalan cerita dan CTA:',
+                reply_markup=prompt_ad_angle_menu()
             )
     elif action.startswith('prompt_ad_angle:') and stage == 'prompt_ad_angle':
         selected = action.split(':', 1)[1]
@@ -3406,7 +3377,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['prompt_framing'] = 'auto'
             context.user_data['prompt_ad_angle'] = 'auto'
             context.user_data['prompt_scene_key'] = 'auto'
-            context.user_data['stage'] = 'prompt_confirm'
+            context.user_data['stage'] = 'prompt_duration'
             style_label = CORE_STYLE_LABELS.get(selected, selected)
             product_name = context.user_data.get('prompt_product_name', '').strip() or 'Produk'
             duration = int(context.user_data.get('prompt_duration', 10))
@@ -4467,6 +4438,8 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
         detected_category = detect_prompt_library_category(value)
         detected_subtype = detect_product_subtype(value)
         bag_subtype = detect_bag_subtype(value)
+        selected_subcategory = str(context.user_data.get('prompt_product_subcategory', '') or '')
+        explicit_subcategory = selected_subcategory in PRODUCT_SUBTYPE_LABELS
         category_to_product_type = {
             'clothing': 'fashion', 'bags': 'bag', 'wallets': 'wallet',
             'shoes': 'shoes', 'beauty': 'beauty', 'gadgets': 'gadget',
@@ -4476,30 +4449,45 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
             'kitchen': 'kitchen', 'furniture': 'furniture', 'baby': 'baby',
             'crafts': 'crafts',
         }
-        if bag_subtype == 'wallet':
-            detected_category = 'wallets'
-        elif bag_subtype:
-            detected_category = 'bags'
-        if detected_category:
-            context.user_data['prompt_product_type'] = category_to_product_type.get(detected_category, 'other')
-        elif context.user_data.get('prompt_product_type') in (None, '', 'other'):
-            context.user_data['prompt_product_type'] = 'other'
-        if detected_subtype == 'hijab':
-            context.user_data['prompt_product_type'] = 'hijab'
-        context.user_data['prompt_product_subcategory'] = ''
+        if explicit_subcategory:
+            selected_category = next(
+                (category for category, options in PRODUCT_SUBTYPES.items()
+                 if any(slug == selected_subcategory for slug, _label in options)),
+                context.user_data.get('prompt_product_type', 'other')
+            )
+            context.user_data['prompt_product_type'] = selected_category
+        else:
+            if bag_subtype == 'wallet':
+                detected_category = 'wallets'
+            elif bag_subtype:
+                detected_category = 'bags'
+            if detected_category:
+                context.user_data['prompt_product_type'] = category_to_product_type.get(detected_category, 'other')
+            elif context.user_data.get('prompt_product_type') in (None, '', 'other'):
+                context.user_data['prompt_product_type'] = 'other'
+            if detected_subtype == 'hijab':
+                context.user_data['prompt_product_type'] = 'hijab'
+            # Legacy direct-name entry: retain a subtype only if it exactly matches
+            # one of the current menu IDs; never pass a guessed alias to the library.
+            context.user_data['prompt_product_subcategory'] = (
+                detected_subtype if detected_subtype in PRODUCT_SUBTYPE_LABELS else ''
+            )
         context.user_data['prompt_custom_category_name'] = ''
         context.user_data['prompt_custom_subcategory_name'] = ''
         context.user_data['prompt_bag_subtype'] = bag_subtype
         context.user_data['prompt_concept'] = ''
         category_label = PRODUCT_TYPES.get(context.user_data.get('prompt_product_type', 'other'), 'Produk umum')
-        if detected_subtype:
+        active_subcategory = context.user_data.get('prompt_product_subcategory', '')
+        if active_subcategory in PRODUCT_SUBTYPE_LABELS:
+            category_label += ' · ' + PRODUCT_SUBTYPE_LABELS[active_subcategory]
+        elif detected_subtype:
             category_label += ' · ' + detected_subtype.replace('_', ' ')
-        context.user_data['stage'] = 'prompt_duration'
+        context.user_data['stage'] = 'prompt_model_presence'
         await update.message.reply_text(
             '✅ Nama produk disimpan: ' + value[:240] + chr(10)
-            + '🔎 Kategori dikesan automatik: ' + category_label
-            + chr(10) * 2 + '⏱️ Pilih durasi video:',
-            reply_markup=prompt_duration_menu()
+            + '🔎 Kategori: ' + category_label
+            + chr(10) * 2 + '👤 Pilih model AI sebelum gaya video:',
+            reply_markup=prompt_model_presence_menu(context.user_data)
         )
         return
     shortcuts = {
