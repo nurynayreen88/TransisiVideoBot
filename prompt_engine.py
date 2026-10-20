@@ -146,7 +146,7 @@ def _creative_variation(product_type, product, part, product_subtype=''):
     audio = _SFX_BY_TYPE[group]
     return (
         "VISUAL VARIATION: " + action + "\n"
-        + "AUDIO: " + audio + " Keep music soft under speech; use only brief SFX that match visible action. If the video model cannot create audio, add voice, music and SFX in post-production.\n"
+        + "AUDIO: " + audio + " Keep background music below any selected speech; use only brief SFX that match visible action. If the video model cannot create audio, add only the audio elements selected by the user in post-production.\n"
         + "QUALITY: One clear action and at most one controlled camera move per beat. Preserve product shape, colour, markings and scale; keep motion, lighting and contact realistic. Smooth continuity, no morphing, duplication, warping, flicker or unrequested on-screen text."
     )
 
