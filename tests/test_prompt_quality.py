@@ -11,6 +11,7 @@ from prompt_engine import (
     _AUTO_STYLE_CANDIDATES,
     _CREATIVE_ACTIONS,
     _CREATIVE_PRESENTATION_VARIATIONS,
+    _SUBCATEGORY_VARIATIONS_BY_ID,
     _prompt_sentence,
     _resolve_auto_style,
     _category_specific_scenes,
@@ -43,6 +44,28 @@ class PromptQualityTests(unittest.TestCase):
                 direction = _creative_variation(group, f"generic {group} product", 0)
                 self.assertIn("PRESENTATION:", direction)
                 self.assertIn("VISUAL VARIATION:", direction)
+
+    def test_every_catalogued_subcategory_has_ten_distinct_library_variations(self):
+        library_path = Path(__file__).resolve().parents[1] / "prompts" / "subcategory_variation_library.json"
+        with library_path.open("r", encoding="utf-8") as handle:
+            library = json.load(handle)
+        subcategories = library.get("subcategories", [])
+        self.assertEqual(len(subcategories), 130)
+        self.assertEqual(set(_SUBCATEGORY_VARIATIONS_BY_ID), {item["subcategory_id"] for item in subcategories})
+        for subcategory in subcategories:
+            with self.subTest(subcategory=subcategory["subcategory_id"]):
+                variations = subcategory.get("variations", [])
+                self.assertEqual(len(variations), 10)
+                self.assertEqual(len({item["id"] for item in variations}), 10)
+                self.assertEqual(len({item["action"] for item in variations}), 10)
+                self.assertTrue(all(item.get("hook") and item.get("detail") and item.get("camera") and item.get("lighting") and item.get("closing") and item.get("audio") for item in variations))
+
+    def test_exact_subcategory_library_is_used_by_prompt_variation(self):
+        direction = _creative_variation("bag", "generic bag product", 0, "bag_wallet")
+        self.assertIn("SUBCATEGORY VARIATION:", direction)
+        self.assertIn("PRESENTATION:", direction)
+        self.assertIn("wallet", direction.casefold())
+        self.assertIn("VISUAL VARIATION:", direction)
 
     def test_presentation_profile_avoids_repeating_recent_three(self):
         profiles = [
