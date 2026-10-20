@@ -12,6 +12,7 @@ This is a structured inventory extracted from the current `main` source files, n
 - Branch audited: `main`
 
 ## Files
+- [Full combined inventory](full_inventory.csv): all main components in one Excel-compatible table (filter by section).
 - [Styles](styles.csv): full style names and prompt directions.
 - [Category/subcategory map](category_subcategory_map.csv): Auto style categories and explicit bag/wallet/backpack subtype conditions.
 - [Cameras](cameras.csv): camera movement directions.
@@ -27,6 +28,8 @@ This is a structured inventory extracted from the current `main` source files, n
 - [Opening variations](opening_variations.csv): visual, camera and voice opening variation libraries.
 - [Universal frameworks](universal_frameworks.csv): style-to-framework mapping and directions.
 - [Universal rules](universal_rules.csv): global product and prompt constraints.
+- [Framework style-key check](framework_style_key_check.csv): checks whether each framework style key exists in the source style catalog.
+- [Special-case scene beats](special_case_scene_beats.csv): conditional bed and cookware-set storyboards.
 - [Audit findings](audit_findings.csv): preliminary findings and proposed review points.
 
 ## How to review
