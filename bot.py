@@ -22,7 +22,7 @@ from gemini_vision import describe_photo
 from gemini_storyboard import generate_storyboard
 from gemini_storyboard_image import generate_storyboard_sheet, GeminiStoryboardImageError
 from prompt_engine import build_prompt, creative_angle_instruction
-from prompt_model_defaults import auto_prompt_model_defaults
+from prompt_model_defaults import auto_prompt_model_defaults, image_model_direction
 from prompt_catalog import choices as storyboard_styles
 from caption_hashtags import generate_caption, hashtag_library_size
 
@@ -3842,7 +3842,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     'Do not preserve or recreate the original photo background. Do not place the unchanged source photo on top of a new background. '
                     'Integrate the product naturally into the selected scene with matching perspective, light direction, colour temperature and contact shadows.\n\n'
                     'VISUAL DIRECTION: Create a believable, elegant lifestyle advertising scene suited to this product. '
-                    'If a model was selected, include the same adult model naturally in a way suited to this product; for clothing, the model must wear the exact item. If no model was selected, do not add a person. '
+                    'If a human or animal model was selected, include only that selected model as specified in MODEL DIRECTION below. For clothing, a model may wear the garment only when its age and size are appropriate; otherwise present it on a suitable hanger or surface. If no model was selected, do not add a person or animal. '
                     'If it is a bag, accessory, beauty item, gadget, food or home product, compose a premium scene that showcases the actual item clearly. '
                     'Use soft natural or studio light, realistic shadows, refined composition, authentic textures, and a photographic—not CGI—finish. '
                     'Keep the product prominent and leave enough clear space around it.\n\n'
@@ -3854,17 +3854,19 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     'No collage, split screen, poster layout, captions, promotional text, watermark or extra logos. '
                     'Avoid distorted hands, unnatural faces, plastic skin, warped product geometry and artificial CGI appearance.'
                 )
+                image_prompt += (
+                    '\n\nMODEL DIRECTION: ' +
+                    image_model_direction(
+                        context.user_data,
+                        child_product=_prompt_is_child_product(context.user_data),
+                    )
+                )
                 if context.user_data.get('prompt_model_presence') == 'yes':
                     image_prompt += (
-                        '\n\nMODEL DIRECTION: Include ' + str(context.user_data.get('prompt_model_count', 1)) +
-                        ' consistent adult model(s); gender: ' + str(context.user_data.get('prompt_model_gender', 'female')) +
-                        '; head covering: ' + str(context.user_data.get('prompt_model_hijab', 'not specified')) +
+                        ' Head covering: ' + str(context.user_data.get('prompt_model_hijab', 'not specified')) +
                         '; appearance: ' + str(context.user_data.get('prompt_model_ethnicity', 'any')) +
-                        '; adult age range: ' + str(context.user_data.get('prompt_model_age', '26-40')) +
                         '. Keep the same face, hair/head covering and outfit consistent throughout.'
                     )
-                else:
-                    image_prompt += '\n\nMODEL DIRECTION: No human model. Focus entirely on the exact product.'
                 context.user_data['prompt_image_ready'] = image_prompt
                 image_action_rows = [
                     [InlineKeyboardButton('✨ ChatGPT Image', url='https://chatgpt.com/'),
