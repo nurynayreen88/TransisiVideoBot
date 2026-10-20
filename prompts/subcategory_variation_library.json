@@ -7649,7 +7649,7 @@
       "subcategory_id": "home_decor",
       "category_id": "home",
       "label": "🪴 Dekorasi rumah",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "home_decor_v01",
@@ -7770,6 +7770,126 @@
           "lighting": "LIGHTING: Diffused daylight with a clean, uncluttered background.",
           "closing": "CTA / HERO: Finish with a clean, steady view of the unchanged product.",
           "audio": "AUDIO: Keep speech clear if selected, with low background music and no stacked SFX."
+        },
+        {
+          "id": "home_decor_v11",
+          "variation_number": 11,
+          "name": "Room-Corner Reveal",
+          "hook": "HOOK: Open on a quiet room corner, then reveal the decor item as the visual anchor. No added text or graphics.",
+          "action": "Move from surrounding space to the complete item without changing its appearance.",
+          "detail": "DETAIL: Preserve the exact product identity, visible shape, colors, labels and component count. Refer only to visible details; do not invent materials, functions or claims.",
+          "camera": "CAMERA: Slow lateral slide ending in a three-quarter view.",
+          "lighting": "LIGHTING: Soft window light and natural shadows; preserve the actual finish.",
+          "closing": "CTA / HERO: Hold the full item in context, unobstructed.",
+          "audio": "AUDIO: Gentle room tone and restrained instrumental. No spoken claims or unsupported effects."
+        },
+        {
+          "id": "home_decor_v12",
+          "variation_number": 12,
+          "name": "Silhouette First",
+          "hook": "HOOK: Begin with the item's outline against a simple background. No added text or graphics.",
+          "action": "Reveal its visible shape and finish with a gradual pullback.",
+          "detail": "DETAIL: Preserve the exact product identity, visible shape, colors, labels and component count. Refer only to visible details; do not invent materials, functions or claims.",
+          "camera": "CAMERA: Start tight on the outline, then widen to show the whole object.",
+          "lighting": "LIGHTING: Directional soft light separates the outline without artificial glow.",
+          "closing": "CTA / HERO: End on a clean, full-product composition.",
+          "audio": "AUDIO: A quiet musical swell only. No spoken claims or unsupported effects."
+        },
+        {
+          "id": "home_decor_v13",
+          "variation_number": 13,
+          "name": "Surface Detail Tour",
+          "hook": "HOOK: Open on the most distinctive visible surface detail. No added text or graphics.",
+          "action": "Travel across visible texture or pattern, then reconnect the detail to the full item.",
+          "detail": "DETAIL: Preserve the exact product identity, visible shape, colors, labels and component count. Refer only to visible details; do not invent materials, functions or claims.",
+          "camera": "CAMERA: Controlled close pass followed by a short pullback; avoid distortion.",
+          "lighting": "LIGHTING: Broad diffused light keeps surface detail true to the reference.",
+          "closing": "CTA / HERO: Finish with detail and overall shape both recognizable.",
+          "audio": "AUDIO: Soft contact foley only if the visible action makes contact. No spoken claims or unsupported effects."
+        },
+        {
+          "id": "home_decor_v14",
+          "variation_number": 14,
+          "name": "Shelf Styling Moment",
+          "hook": "HOOK: Show the decor item already placed on a suitable shelf or surface. No added text or graphics.",
+          "action": "Make a small natural framing adjustment while keeping the product unchanged.",
+          "detail": "DETAIL: Preserve the exact product identity, visible shape, colors, labels and component count. Refer only to visible details; do not invent materials, functions or claims.",
+          "camera": "CAMERA: Stable eye-level view with a gentle push-in.",
+          "lighting": "LIGHTING: Balanced interior light, no exaggerated reflections.",
+          "closing": "CTA / HERO: Hold the item in its real setting with clear negative space.",
+          "audio": "AUDIO: Subtle ambient music. No spoken claims or unsupported effects."
+        },
+        {
+          "id": "home_decor_v15",
+          "variation_number": 15,
+          "name": "Scale in Context",
+          "hook": "HOOK: Start with surrounding furniture or room context to establish realistic scale. No added text or graphics.",
+          "action": "Move closer while retaining recognizable surroundings and the complete item.",
+          "detail": "DETAIL: Preserve the exact product identity, visible shape, colors, labels and component count. Refer only to visible details; do not invent materials, functions or claims.",
+          "camera": "CAMERA: Slow dolly-in from wide to medium hero view.",
+          "lighting": "LIGHTING: Natural, even illumination across item and room.",
+          "closing": "CTA / HERO: End at a scale-accurate three-quarter angle.",
+          "audio": "AUDIO: Low-key music and room ambience. No spoken claims or unsupported effects."
+        },
+        {
+          "id": "home_decor_v16",
+          "variation_number": 16,
+          "name": "Camera Arc Profile",
+          "hook": "HOOK: Open on a side angle that makes the object's profile visible. No added text or graphics.",
+          "action": "Arc the camera around the stationary item to reveal its form.",
+          "detail": "DETAIL: Preserve the exact product identity, visible shape, colors, labels and component count. Refer only to visible details; do not invent materials, functions or claims.",
+          "camera": "CAMERA: Small smooth camera arc with a stable horizon.",
+          "lighting": "LIGHTING: Soft side light defines contours without inventing shine.",
+          "closing": "CTA / HERO: Settle on the most informative full view.",
+          "audio": "AUDIO: Quiet instrumental audio; no mechanical spin sound. No spoken claims or unsupported effects."
+        },
+        {
+          "id": "home_decor_v17",
+          "variation_number": 17,
+          "name": "Pattern Framing",
+          "hook": "HOOK: Begin where the visible pattern is most legible. No added text or graphics.",
+          "action": "Track across the pattern and widen to show it on the complete item.",
+          "detail": "DETAIL: Preserve the exact product identity, visible shape, colors, labels and component count. Refer only to visible details; do not invent materials, functions or claims.",
+          "camera": "CAMERA: Slow straight tracking move without stretching perspective.",
+          "lighting": "LIGHTING: Even light keeps pattern and color faithful.",
+          "closing": "CTA / HERO: Finish with the whole item in frame.",
+          "audio": "AUDIO: Gentle music only. No spoken claims or unsupported effects."
+        },
+        {
+          "id": "home_decor_v18",
+          "variation_number": 18,
+          "name": "Negative-Space Composition",
+          "hook": "HOOK: Open with the decor piece framed by uncluttered space. No added text or graphics.",
+          "action": "Recompose gradually so the product becomes the focal point while remaining fully visible.",
+          "detail": "DETAIL: Preserve the exact product identity, visible shape, colors, labels and component count. Refer only to visible details; do not invent materials, functions or claims.",
+          "camera": "CAMERA: Measured push-in; keep verticals straight.",
+          "lighting": "LIGHTING: Soft ambient light and believable shadow falloff.",
+          "closing": "CTA / HERO: Hold a balanced frame with the product unchanged.",
+          "audio": "AUDIO: Minimal instrumental bed. No spoken claims or unsupported effects."
+        },
+        {
+          "id": "home_decor_v19",
+          "variation_number": 19,
+          "name": "Daylight Context",
+          "hook": "HOOK: Start in natural light with the item fully visible. No added text or graphics.",
+          "action": "Shift the camera slightly as daylight reveals the visible finish without changing its color.",
+          "detail": "DETAIL: Preserve the exact product identity, visible shape, colors, labels and component count. Refer only to visible details; do not invent materials, functions or claims.",
+          "camera": "CAMERA: Locked-off shot followed by a subtle side slide.",
+          "lighting": "LIGHTING: Keep exposure steady; do not simulate glow or color-changing properties.",
+          "closing": "CTA / HERO: End on a clear daylight hero view.",
+          "audio": "AUDIO: Quiet environmental ambience and restrained music. No spoken claims or unsupported effects."
+        },
+        {
+          "id": "home_decor_v20",
+          "variation_number": 20,
+          "name": "Final Form Hold",
+          "hook": "HOOK: Open with a close view of one real identifying feature. No added text or graphics.",
+          "action": "Pull back in one continuous move to reveal the complete decor piece and its setting.",
+          "detail": "DETAIL: Preserve the exact product identity, visible shape, colors, labels and component count. Refer only to visible details; do not invent materials, functions or claims.",
+          "camera": "CAMERA: Smooth pullback with no jump cuts or artificial spin.",
+          "lighting": "LIGHTING: Soft neutral lighting preserves true appearance.",
+          "closing": "CTA / HERO: Hold the complete unchanged item for the final beat.",
+          "audio": "AUDIO: A soft musical resolve. No spoken claims or unsupported effects."
         }
       ]
     },
