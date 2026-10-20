@@ -49,7 +49,7 @@ The most important issue is not simply that some prompt text is long. The genera
 | Laptop backpack | Upright backpack framing; no assumed laptop sleeve or compartments |
 | Child's clothing / shoes | Age-appropriate model choice verified through the upstream model selector |
 | Adult men's clothing | Adult male model choice verified through the upstream model selector |
-| English spoken voice | English spoken-copy instruction; no conflicting Malay speech instruction |
+| English spoken voice | Original source had conflicting Malay-only opening/hook text; patched separately in PR #131; regression tests pass |
 | Malay spoken voice | Natural Bahasa Melayu Malaysia; no Indonesian phrasing or unintended language mixing |
 | White Doodle, text disabled | Animated graphic lines only; no random labels/captions/logos |
 | White Doodle, text explicitly enabled | Only verified user-provided/approved text; graphics do not obscure product |
@@ -65,10 +65,10 @@ The most important issue is not simply that some prompt text is long. The genera
 - [Framework key check](framework_style_key_check.csv)
 - [Detailed findings table](audit_findings.csv)
 
-No production code was changed and nothing was deployed.
+This inventory branch contains audit/report files only. Prompt fixes are kept in separate PR #131, which remains open and has not been merged or deployed.
 
 ## Implementation progress
 
-PR #131 is open for review and has not been merged or deployed. It addresses sentence truncation, universal framework key mismatches, speech-language selection, category-specific five-beat scene routing, and White Doodle continuity. Latest GitHub Actions checks passed: prompt quality regression tests and Klippo prompt library checks, including Python syntax and library structure.
+PR #131 is open for review and has not been merged or deployed. It addresses sentence truncation, universal framework key mismatches, English/Malay opening and hook consistency, use of curated category hook rows, category-specific five-beat scene routing, and White Doodle continuity. Latest GitHub Actions checks passed on head `0e1f9af238cf1b2e20ad236f9da98f56d19c7b54`: prompt quality regression tests (run #20) and Klippo prompt library checks (run #492), including Python syntax and library structure.
 
 Still outstanding: compare production SQLite prompt rows read-only; audit model selection end to end; review existing/custom hook rows; and inspect generated outputs across styles for camera/action conflicts. Do not merge or deploy without explicit approval.
