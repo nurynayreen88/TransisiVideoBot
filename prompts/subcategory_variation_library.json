@@ -8641,7 +8641,7 @@
       "subcategory_id": "home_other",
       "category_id": "home",
       "label": "📦 Rumah lain",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "home_other_v01",
@@ -8762,6 +8762,126 @@
           "lighting": "LIGHTING: Soft window light with natural shadows; preserve the reference colour.",
           "closing": "CTA / HERO: End on a clear three-quarter product view without revealing unseen surfaces.",
           "audio": "AUDIO: Use a quiet transition accent only if it matches a visible camera or graphic movement."
+        },
+        {
+          "id": "home_other_v11",
+          "variation_number": 11,
+          "name": "Purposeful First Look",
+          "hook": "HOOK: Open with the complete household item in a clean, realistic setting. No added text or graphics.",
+          "action": "Move from the overall shape to its most identifiable visible feature.",
+          "detail": "DETAIL: Preserve the exact product identity, visible shape, colors, labels and component count. Refer only to details visible in the reference; do not invent materials, functions or claims.",
+          "camera": "CAMERA: Gentle push-in from a three-quarter angle.",
+          "lighting": "LIGHTING: Neutral soft light with faithful color.",
+          "closing": "CTA / HERO: Hold a full-product view without obstruction.",
+          "audio": "AUDIO: Quiet instrumental music. No spoken claims or unsupported effects."
+        },
+        {
+          "id": "home_other_v12",
+          "variation_number": 12,
+          "name": "Everyday Setting",
+          "hook": "HOOK: Show the item where it could realistically be used, based only on its visible form. No added text or graphics.",
+          "action": "Shift focus from the setting to the item without changing or adding components.",
+          "detail": "DETAIL: Preserve the exact product identity, visible shape, colors, labels and component count. Refer only to details visible in the reference; do not invent materials, functions or claims.",
+          "camera": "CAMERA: Wide context shot followed by a slow reframe.",
+          "lighting": "LIGHTING: Natural ambient light and believable shadows.",
+          "closing": "CTA / HERO: Finish with the item fully visible in context.",
+          "audio": "AUDIO: Soft room ambience; no invented action sounds. No spoken claims or unsupported effects."
+        },
+        {
+          "id": "home_other_v13",
+          "variation_number": 13,
+          "name": "Detail Then Context",
+          "hook": "HOOK: Start on a real visible detail that distinguishes the item. No added text or graphics.",
+          "action": "Move across that detail and pull back to show its complete shape.",
+          "detail": "DETAIL: Preserve the exact product identity, visible shape, colors, labels and component count. Refer only to details visible in the reference; do not invent materials, functions or claims.",
+          "camera": "CAMERA: Close tracking move followed by a steady pullback.",
+          "lighting": "LIGHTING: Diffused lighting reveals only existing detail.",
+          "closing": "CTA / HERO: End on a clear full-product frame.",
+          "audio": "AUDIO: Light music, no unsupported claims. No spoken claims or unsupported effects."
+        },
+        {
+          "id": "home_other_v14",
+          "variation_number": 14,
+          "name": "Side Profile",
+          "hook": "HOOK: Open with the item's side profile against an uncluttered background. No added text or graphics.",
+          "action": "Move smoothly toward a three-quarter view to reveal its proportions.",
+          "detail": "DETAIL: Preserve the exact product identity, visible shape, colors, labels and component count. Refer only to details visible in the reference; do not invent materials, functions or claims.",
+          "camera": "CAMERA: Short lateral arc; keep the object stationary.",
+          "lighting": "LIGHTING: Soft directional light outlines the actual form.",
+          "closing": "CTA / HERO: Hold the complete item at a natural scale.",
+          "audio": "AUDIO: Minimal instrumental bed. No spoken claims or unsupported effects."
+        },
+        {
+          "id": "home_other_v15",
+          "variation_number": 15,
+          "name": "Top and Overall Shape",
+          "hook": "HOOK: Begin from a slightly elevated angle that shows the item's visible upper area. No added text or graphics.",
+          "action": "Tilt down gently and widen to include the complete object.",
+          "detail": "DETAIL: Preserve the exact product identity, visible shape, colors, labels and component count. Refer only to details visible in the reference; do not invent materials, functions or claims.",
+          "camera": "CAMERA: Controlled tilt and pullback with straight perspective.",
+          "lighting": "LIGHTING: Even light without artificial highlights.",
+          "closing": "CTA / HERO: Finish with the whole item in frame.",
+          "audio": "AUDIO: Quiet background music. No spoken claims or unsupported effects."
+        },
+        {
+          "id": "home_other_v16",
+          "variation_number": 16,
+          "name": "Scale and Surroundings",
+          "hook": "HOOK: Show enough real surroundings to establish the item's approximate scale. No added text or graphics.",
+          "action": "Move closer while keeping nearby objects and proportions believable.",
+          "detail": "DETAIL: Preserve the exact product identity, visible shape, colors, labels and component count. Refer only to details visible in the reference; do not invent materials, functions or claims.",
+          "camera": "CAMERA: Slow dolly-in from a wide shot.",
+          "lighting": "LIGHTING: Balanced ambient light across item and surroundings.",
+          "closing": "CTA / HERO: End with the item centred and unobstructed.",
+          "audio": "AUDIO: Natural room tone and subdued music. No spoken claims or unsupported effects."
+        },
+        {
+          "id": "home_other_v17",
+          "variation_number": 17,
+          "name": "Surface Light Pass",
+          "hook": "HOOK: Open on the item's visible surface or finish. No added text or graphics.",
+          "action": "Slide the camera so natural light reveals its actual appearance.",
+          "detail": "DETAIL: Preserve the exact product identity, visible shape, colors, labels and component count. Refer only to details visible in the reference; do not invent materials, functions or claims.",
+          "camera": "CAMERA: Slow slider movement; avoid distortion.",
+          "lighting": "LIGHTING: Broad soft light preserves true color and finish.",
+          "closing": "CTA / HERO: Hold on a balanced hero view.",
+          "audio": "AUDIO: Subtle music only. No spoken claims or unsupported effects."
+        },
+        {
+          "id": "home_other_v18",
+          "variation_number": 18,
+          "name": "Contour Reveal",
+          "hook": "HOOK: Frame the item against negative space so its outline is easy to read. No added text or graphics.",
+          "action": "Move laterally to show its form from another useful angle.",
+          "detail": "DETAIL: Preserve the exact product identity, visible shape, colors, labels and component count. Refer only to details visible in the reference; do not invent materials, functions or claims.",
+          "camera": "CAMERA: Measured lateral slide with stable horizon.",
+          "lighting": "LIGHTING: Gentle side light; no fake glow.",
+          "closing": "CTA / HERO: End with the full silhouette visible.",
+          "audio": "AUDIO: No artificial effect sounds. No spoken claims or unsupported effects."
+        },
+        {
+          "id": "home_other_v19",
+          "variation_number": 19,
+          "name": "Realistic Placement",
+          "hook": "HOOK: Show the item resting or standing as it does in the reference, without unsupported handling. No added text or graphics.",
+          "action": "Make a small camera move to reveal its relationship to the supporting surface.",
+          "detail": "DETAIL: Preserve the exact product identity, visible shape, colors, labels and component count. Refer only to details visible in the reference; do not invent materials, functions or claims.",
+          "camera": "CAMERA: Low, steady push-in with realistic perspective.",
+          "lighting": "LIGHTING: Soft natural light and contact shadows.",
+          "closing": "CTA / HERO: Hold the unchanged item in place.",
+          "audio": "AUDIO: Ambient audio only if appropriate to the scene. No spoken claims or unsupported effects."
+        },
+        {
+          "id": "home_other_v20",
+          "variation_number": 20,
+          "name": "Complete Product Finish",
+          "hook": "HOOK: Open on one clear identifying feature, then reveal the whole item. No added text or graphics.",
+          "action": "Use a continuous pullback and leave all visible components unchanged.",
+          "detail": "DETAIL: Preserve the exact product identity, visible shape, colors, labels and component count. Refer only to details visible in the reference; do not invent materials, functions or claims.",
+          "camera": "CAMERA: Smooth pullback with no jump cuts.",
+          "lighting": "LIGHTING: Neutral light keeps details readable.",
+          "closing": "CTA / HERO: Finish on a stable full-product shot.",
+          "audio": "AUDIO: A restrained musical finish; no added text or claims. No spoken claims or unsupported effects."
         }
       ]
     },
