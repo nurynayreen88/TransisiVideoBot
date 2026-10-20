@@ -54,3 +54,58 @@ def auto_prompt_model_defaults(product_type, product_subcategory="", child_produ
         "prompt_model_age": "na",
         "prompt_animal_species": "auto",
     }
+
+def image_model_direction(user_data, child_product=False):
+    """Describe the selected human/animal model consistently for an image prompt."""
+    presence = str(user_data.get("prompt_model_presence", "none")).casefold()
+    if presence == "animal":
+        species = str(user_data.get("prompt_animal_species", "auto")).casefold()
+        labels = {
+            "auto": "only an animal species clearly supported by the product name/reference; if unclear, do not invent a species",
+            "cat": "one cat",
+            "dog": "one dog",
+            "rabbit": "one rabbit",
+            "bird": "one bird",
+            "hamster": "one hamster",
+            "fish": "one fish",
+            "horse": "one horse",
+        }
+        return (
+            "Include " + labels.get(species, labels["auto"]) +
+            " only when it suits the product. Keep the animal calm and anatomically natural; "
+            "show no forced tricks, distress, unsafe handling or unsupported product claims."
+        )
+
+    if presence != "yes":
+        return "No human or animal model. Focus entirely on the exact product."
+
+    age = str(user_data.get("prompt_model_age", "26-40"))
+    gender = str(user_data.get("prompt_model_gender", "auto")).casefold()
+    gender_text = {
+        "female": "female",
+        "male": "male",
+        "auto": "matching the product/reference; if unclear, use neutral natural styling",
+    }.get(gender, "matching the product/reference")
+    count = min(2, max(1, int(user_data.get("prompt_model_count", 1) or 1)))
+
+    if age in {"4-7", "8-12", "13-17"}:
+        if not child_product:
+            return "Do not show a child or teen model; focus on the product and use adult hands only if needed."
+        return (
+            f"Include {count} child/teen model(s), age {age}, gender presentation {gender_text}. "
+            "Keep the model's appearance consistent, use age-appropriate styling and natural safe actions, "
+            "and preserve the product's exact visible design."
+        )
+
+    if child_product:
+        return (
+            f"Include {count} adult model(s), gender presentation {gender_text}, age {age}, only as a presenter. "
+            "Do not dress the adult in child-sized clothing or footwear; show the item on a suitable hanger, "
+            "mannequin or surface, with the adult presenting it naturally."
+        )
+
+    return (
+        f"Include {count} adult model(s), gender presentation {gender_text}, age {age}. "
+        "Keep face, styling and outfit consistent; for clothing, wear the exact reference garment without redesign."
+    )
+
