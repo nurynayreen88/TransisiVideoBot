@@ -761,7 +761,7 @@
       "subcategory_id": "fashion_sport",
       "category_id": "fashion",
       "label": "🏃 Pakaian sukan",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "fashion_sport_v01",
@@ -882,6 +882,126 @@
           "lighting": "Use balanced soft light with enough contrast to distinguish seams and panels without dramatic shadows or colour shifts.",
           "closing": "Hold a crisp, still final frame with the complete outfit recognisable and the background uncluttered.",
           "audio": "Use a restrained instrumental finish under any selected voice; no applause, whistle or artificial impact effects."
+        },
+        {
+          "id": "fashion_sport_v11",
+          "variation_number": 11,
+          "name": "Warm-Up Range, No Performance Claims",
+          "hook": "Show the actual sportswear in a clear front view before movement. Preserve its exact colour, panels, logos already on the product and visible seams; add no graphics.",
+          "action": "The wearer performs one gentle shoulder roll or small arm raise, then returns to neutral; choose only a movement that does not stretch or distort the garment.",
+          "detail": "Show the real cut and visible paneling only. Do not claim sweat-wicking, compression, breathability or athletic performance unless verified.",
+          "camera": "Use a steady medium-full frame, with a small push-in during the movement and a stable return.",
+          "lighting": "Use bright, soft daylight with balanced fill so dark fabric and seams remain visible without a glossy effect.",
+          "closing": "Finish on the same neutral stance with the garment unobstructed.",
+          "audio": "Light energetic instrumental music at low volume; no gym grunts or exaggerated impact sounds."
+        },
+        {
+          "id": "fashion_sport_v12",
+          "variation_number": 12,
+          "name": "Panel Lines in Motion",
+          "hook": "Open on a real contrast panel, seam or colour block on the sports garment; if none is visible, use its actual silhouette edge.",
+          "action": "The wearer takes two controlled side steps and stops, letting the camera reveal how the visible panels sit during ordinary movement.",
+          "detail": "Keep every panel and colour boundary fixed to the reference. Do not invent mesh, vents, padding or reflective strips.",
+          "camera": "Track laterally at a consistent distance, then settle into a three-quarter medium-full view.",
+          "lighting": "Use even, neutral lighting to prevent panel colours from shifting between frames.",
+          "closing": "Hold the garment in a clear three-quarter view after movement stops.",
+          "audio": "A restrained rhythmic beat; footsteps only if the surface and action support them."
+        },
+        {
+          "id": "fashion_sport_v13",
+          "variation_number": 13,
+          "name": "Cuff and Wrist Clearance",
+          "hook": "Begin with the actual sleeve cuff or arm opening, if present; for sleeveless clothing, focus on the real armhole edge instead.",
+          "action": "The wearer bends and relaxes one elbow once, keeping the hand away from the garment edge.",
+          "detail": "Show only the visible opening, seam and fit in that pose. Do not add thumb holes, elastic or fastening features.",
+          "camera": "Start with a close detail, tilt slightly to include the arm, then pull back to a medium view.",
+          "lighting": "Use soft side lighting with neutral fill so the opening is clear without artificial contrast.",
+          "closing": "End with the sleeve or armhole fully visible in context.",
+          "audio": "Quiet athletic instrumental music; no velcro or zipper sound unless visibly used."
+        },
+        {
+          "id": "fashion_sport_v14",
+          "variation_number": 14,
+          "name": "Movement Arc Around the Torso",
+          "hook": "Present the sports top or outfit in a clean front-facing frame, emphasizing the actual shape and visible construction.",
+          "action": "The wearer rotates their torso a few degrees each way while feet remain planted; avoid strenuous exercise or dramatic posing.",
+          "detail": "Do not imply flexibility, support or performance from the movement. Show only real seams and silhouette changes.",
+          "camera": "Use a short, smooth camera arc around the front quarter, never passing behind the wearer or changing garment details.",
+          "lighting": "Use consistent broad lighting from the front and side to retain true colour during the arc.",
+          "closing": "Return to a stable front three-quarter view with the whole relevant garment in frame.",
+          "audio": "Low-volume modern sports music; no crowd or competition ambience."
+        },
+        {
+          "id": "fashion_sport_v15",
+          "variation_number": 15,
+          "name": "Fabric Fold Recovery, Naturally",
+          "hook": "Start with the garment at rest and its actual folds visible, without close-up exaggeration or material claims.",
+          "action": "The wearer lifts an arm slightly and lowers it, then pauses while the fabric settles naturally under gravity.",
+          "detail": "Record only the visible folds before and after movement; do not claim quick-dry, wrinkle recovery, stretch or compression.",
+          "camera": "Keep the camera locked at medium distance so the motion itself carries the scene.",
+          "lighting": "Use soft overhead fill and gentle side light to preserve folds without specular highlights.",
+          "closing": "Hold the garment after it settles, with the outline unchanged.",
+          "audio": "Subtle music only; avoid artificial whoosh or fabric-snap effects."
+        },
+        {
+          "id": "fashion_sport_v16",
+          "variation_number": 16,
+          "name": "Waistband or Hemline Tracking",
+          "hook": "If the sportswear has a visible waistband, start there; otherwise begin at its actual lower hem or leg opening.",
+          "action": "The wearer shifts weight once from one foot to the other, allowing the selected edge to move naturally without pulling it.",
+          "detail": "Show only the visible waistband, drawcord or hem if present. Do not invent pockets, elastic, drawstrings or adjustability.",
+          "camera": "Use a controlled horizontal track along the edge, then widen to show its position on the garment.",
+          "lighting": "Use neutral fill to keep the lower edge readable, especially on dark colours.",
+          "closing": "Finish on a lower-body or medium-full view that keeps the edge in frame.",
+          "audio": "A steady light beat; no tightening sound unless a visible drawcord action occurs."
+        },
+        {
+          "id": "fashion_sport_v17",
+          "variation_number": 17,
+          "name": "Front and Side Silhouette Check",
+          "hook": "Open with a clear front view of the exact sports garment and keep its styling consistent.",
+          "action": "The wearer turns slowly to a side angle and returns to front, arms relaxed and hands clear of the garment.",
+          "detail": "Show the actual side silhouette only; do not infer support level, body shaping or suitability for a particular sport.",
+          "camera": "Use a level full or medium-full shot with a fixed camera, letting the turn reveal the side profile.",
+          "lighting": "Maintain even soft light from both sides so the garment's colour and outline stay stable.",
+          "closing": "Return to the opening front pose and hold for a clean comparison.",
+          "audio": "Understated energetic instrumental music; no whistle or referee sounds."
+        },
+        {
+          "id": "fashion_sport_v18",
+          "variation_number": 18,
+          "name": "Equipment-Free Studio Sprint Cue",
+          "hook": "Show the sportswear against a plain background, with no added gym equipment or performance graphics.",
+          "action": "The wearer makes a small ready stance and one controlled forward step, then stops; do not stage a sprint or jump unless clearly supported by the reference and safe setting.",
+          "detail": "Keep the garment's actual fit and construction unchanged; make no speed, endurance or performance claims.",
+          "camera": "Use a brief forward camera push timed to the step, then lock off as the wearer settles.",
+          "lighting": "Use bright, diffuse light and a natural floor shadow; avoid dramatic stadium lighting.",
+          "closing": "Hold a confident but relaxed stance with the garment clearly visible.",
+          "audio": "A short, soft musical accent may align with the step; no synthetic speed effects."
+        },
+        {
+          "id": "fashion_sport_v19",
+          "variation_number": 19,
+          "name": "Detail-to-Whole Without a Cut",
+          "hook": "Begin on one genuine visible detail—such as a seam, print or collar—then reveal the entire sportswear item in one continuous move.",
+          "action": "The wearer stays still while the camera moves away from the detail; no wardrobe change or transformation.",
+          "detail": "If no distinctive detail exists, focus on the actual neckline or silhouette edge. Never add mesh, badges or reflective features.",
+          "camera": "Use a smooth dolly-back from close detail to medium-full framing, maintaining focus and realistic proportions.",
+          "lighting": "Use neutral softbox-style light with even exposure across the full garment.",
+          "closing": "Finish on a full view with the selected detail still identifiable.",
+          "audio": "Minimal upbeat instrumental music; no magical transition effect."
+        },
+        {
+          "id": "fashion_sport_v20",
+          "variation_number": 20,
+          "name": "Loopable Training-Ready Still",
+          "hook": "Open with the sportswear fully visible in a natural ready stance, without props, text or staged competition scenery.",
+          "action": "The wearer makes one small movement, such as settling the shoulders or stepping lightly in place, then returns to the exact opening stance.",
+          "detail": "Preserve the product's visible details and do not imply athletic results or verified technical features.",
+          "camera": "Use a very gentle camera drift that returns to its starting position; no fast orbit or motion blur.",
+          "lighting": "Keep the light and white balance constant so the closing frame matches the opening frame.",
+          "closing": "Match the opening composition for a loop-friendly final hold.",
+          "audio": "A restrained rhythmic music phrase that resolves smoothly; no crowd noise or dramatic impact."
         }
       ]
     },
