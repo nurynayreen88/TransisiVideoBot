@@ -1191,10 +1191,10 @@ def prompt_preset_menu(product_type='other', model_presence=None):
 
 
 def prompt_preset_guide():
-    return '🎨 PILIH PRESET KREATIF KLIPPO\\n\\n' + '\\n'.join(
+    return '🎨 PILIH PRESET KREATIF KLIPPO\n\n' + '\n'.join(
         '• ' + CORE_STYLE_LABELS[key] + ' — ' + CORE_STYLE_DESCRIPTIONS[key]
         for key in CORE_USER_STYLE_KEYS
-    ) + '\\n\\nPilih satu preset untuk gabungan kreatif automatik, atau Manual untuk mengawal komponen satu demi satu.'
+    ) + '\n\nPilih satu preset untuk gabungan kreatif automatik, atau Manual untuk mengawal komponen satu demi satu.'
 
 
 def prompt_category_menu():
@@ -3312,7 +3312,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data.pop('prompt_preset', None)
             context.user_data['stage'] = 'prompt_style'
             await query.message.reply_text(
-                '🛠️ MOD MANUAL\\nPilih gaya dahulu; selepas itu anda boleh menetapkan komponen prompt satu demi satu.',
+                '🛠️ MOD MANUAL\nPilih gaya dahulu; selepas itu anda boleh menetapkan komponen prompt satu demi satu.',
                 reply_markup=prompt_style_menu(context.user_data.get('prompt_product_type', 'other'), context.user_data.get('prompt_model_presence'))
             )
         elif selected in CORE_USER_STYLE_KEYS and selected in {key for key, _ in storyboard_styles()}:
@@ -3325,7 +3325,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             context.user_data['prompt_scene_key'] = 'auto'
             context.user_data['stage'] = 'prompt_duration'
             await query.message.reply_text(
-                '✨ Preset dipilih: ' + CORE_STYLE_LABELS[selected] + '\\n' + CORE_STYLE_DESCRIPTIONS[selected] + '\\n\\nPilih tempoh video:',
+                '✨ Preset dipilih: ' + CORE_STYLE_LABELS[selected] + '\n' + CORE_STYLE_DESCRIPTIONS[selected] + '\n\nPilih tempoh video:',
                 reply_markup=prompt_duration_menu()
             )
         else:
