@@ -1,4 +1,5 @@
 import json
+import re
 import unittest
 from pathlib import Path
 
@@ -131,6 +132,13 @@ class PromptComponentTableTests(unittest.TestCase):
         # The prompt engine already writes timed beats; avoid repeating labels
         # embedded in a small number of legacy storyboard directions.
         self.assertIn("direction = re.sub(r'^\\s*\\d+(?:[–-]\\d+)?s\\s*\\|\\s*[^:]{1,80}:\\s*', '', direction)", bot_source)
+
+    def test_legacy_timing_prefixes_are_removed_from_component_directions(self):
+        pattern = re.compile(r'^\\s*\\d+(?:[–-]\\d+)?s\\s*\\|\\s*[^:]{1,80}:\\s*')
+        directions = [item.get("direction", "") for item in self.tables["storyboard_components"]]
+        affected = [value for value in directions if pattern.match(value)]
+        self.assertTrue(affected, "Audit fixture should include legacy repeated timing labels")
+        self.assertTrue(all(not pattern.match(pattern.sub("", value)) for value in affected))
 
     def test_runtime_assembles_choice_aware_component_rules(self):
         bot_source = (ROOT / "bot.py").read_text(encoding="utf-8")
