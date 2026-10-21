@@ -977,9 +977,11 @@ def prompt_setup_mode_menu():
 
 
 def prompt_duration_menu():
-    """Klippo uses one consistent storyboard duration: exactly 10 seconds."""
+    """Offer the three supported prompt duration/structure choices."""
     return InlineKeyboardMarkup([
         [InlineKeyboardButton('🎬 Video 10 saat', callback_data='prompt_duration:10')],
+        [InlineKeyboardButton('🎞️ Video 20 saat', callback_data='prompt_duration:20')],
+        [InlineKeyboardButton('🔗 Video 20 saat (10 + 10)', callback_data='prompt_duration:20_split')],
         [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
     ])
 
@@ -3329,6 +3331,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         selected = action.split(':', 1)[1]
         valid_duration_modes = {
             '10': (10, 'single'),
+            '20': (20, 'single'),
+            '20_split': (20, 'split'),
         }
         if selected in valid_duration_modes:
             duration, duration_mode = valid_duration_modes[selected]
@@ -3360,7 +3364,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     'luxury': ('dark', 'a premium dark studio with restrained rim lighting and elegant contrast'),
                     'flatlay': ('studio', 'a clean tabletop flatlay setting viewed from above, with a tidy complementary surface'),
                     'creative_reveal': ('studio', 'a creative product-reveal setting with controlled light and uncluttered surroundings'),
-                    'white_doodle': ('minimal', 'a bright clean background that keeps thin white doodle accents visible around the product'),
+                    'white_doodle': ('minimal', 'a clean background and tasteful 2D doodle accents in colors chosen to remain visible against the actual product and scene; never require a white background or white linework'),
                 }
                 scene_key, scene_description = preset_scenes.get(preset, preset_scenes['cinematic'])
                 context.user_data.update({
@@ -3641,7 +3645,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 f'🛍️ Nama produk: {product_name}',
                 f'📦 Kategori: {category_summary}',
                 f'🔎 Subkategori: {subcategory_summary}',
-                f'⏱️ Tempoh: {context.user_data.get("prompt_duration", 10)} saat — ' + ('satu prompt' if context.user_data.get('prompt_duration_mode', 'split' if context.user_data.get('prompt_duration') == 20 else 'single') == 'single' else str(int(context.user_data.get('prompt_duration', 10)) // 10) + ' prompt bersambung 10 saat'),
+                f'⏱️ Tempoh: {context.user_data.get("prompt_duration", 10)} saat — ' + ('satu storyboard dipanjangkan' if int(context.user_data.get('prompt_duration', 10)) == 20 and context.user_data.get('prompt_duration_mode') == 'single' else ('2 prompt bersambung (10 + 10)' if context.user_data.get('prompt_duration_mode') == 'split' else 'satu prompt lengkap')),
                 f'👤 Model: {model_summary}',
                 f'🎨 Gaya video: {style_name}',
                 '🎥 Gaya kamera: ' + PRODUCT_FRAMING.get(context.user_data.get('prompt_framing','auto'), PRODUCT_FRAMING['auto'])[0],
@@ -3706,7 +3710,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             prompt_instruction = (
                 'Anda ialah pengarah kreatif iklan produk. Analisis SEMUA gambar rujukan yang dilampirkan dan hasilkan storyboard video produk yang boleh terus digunakan sebagai arahan penjana video AI. '
                 'Tulis hasil dalam ' + language_label + '. Durasi tepat ' + str(duration) + ' saat, format menegak 9:16. '
-                + ('Bina ' + str(4 if duration <= 10 else (6 if duration <= 15 else 8)) + ' babak, setiap babak kira-kira ' + str(round(duration / (4 if duration <= 10 else (6 if duration <= 15 else 8)), 2)) + ' saat. ' + ('Pastikan keempat-empat babak membentuk aliran lengkap.' if duration <= 10 else ('Babak 5–6 mesti menyambung secara visual daripada babak 1–4.' if duration <= 15 else 'Babak 5–8 mesti bersambung secara visual daripada babak 1–4.')))
+                + (('Bina 4 babak sepanjang 10 saat, setiap babak kira-kira 2.5 saat. Pastikan keempat-empat babak membentuk aliran lengkap.') if duration <= 10 else ('Bina 8 babak dalam SATU storyboard berterusan sepanjang 20 saat, setiap babak kira-kira 2.5 saat. Ini satu prompt 20 saat yang memanjangkan idea 10 saat dengan pacing lebih luas dan aksi tambahan yang munasabah; jangan pecahkan kepada dua prompt.' if context.user_data.get('prompt_duration_mode') == 'single' else 'Hasilkan DUA PROMPT STORYBOARD BERASINGAN tetapi bersambung: PROMPT 1 berdurasi tepat 10 saat dengan 4 babak (0–10s), PROMPT 2 berdurasi tepat 10 saat dengan 4 babak (0–10s). Prompt 2 menyambung aksi/komposisi daripada penamat Prompt 1; kekalkan produk, model, latar dan pencahayaan. Reset masa kepada 0–10s untuk Prompt 2 dan jangan gabungkan kedua-duanya menjadi satu prompt 20 saat.'))
                 + ' Untuk setiap babak, nyatakan masa tepat, tujuan babak, saiz shot, sudut kamera, satu aksi utama, gerakan kamera, komposisi produk, pencahayaan/latar, suara latar atau “Tanpa dialog”, dan peralihan. Arahan mesti khusus dan boleh dilaksanakan, bukan kata umum seperti “cinematic” sahaja. '
                 'Kekalkan identiti produk tepat seperti gambar: bentuk, warna, nisbah, logo asal dan aksesori yang kelihatan. Jangan reka bahagian tersembunyi, bahan, ciri, prestasi, harga, promosi atau dakwaan yang tidak disahkan. Jika butiran tidak kelihatan, jangan mereka-rekanya. '
                 'Kekalkan identiti dan lingkungan umur model yang dipilih pada semua babak. Jangan ubah umur, identiti atau rupa model antara babak. Jangan tambah teks pada skrin, sari kata, logo tambahan atau watermark. '
@@ -3714,7 +3718,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 'Jika mod suara AI dipilih, masukkan ayat hook dalam babak pertama dan ayat CTA dalam babak terakhir. Gunakan Bahasa Melayu Malaysia yang semula jadi, jelas dan ringkas, serta pastikan dialog muat dalam tempoh babak. Jika pengguna memilih tanpa dialog, tandakan “Tanpa dialog” dan sampaikan hook/CTA melalui aksi visual, bukan teks pada skrin. Jangan ulang ayat klise yang sama untuk semua produk. '
                 'Rancang jalan cerita khusus mengikut kategori produk: hook visual pada awal, paparan penuh, butiran yang benar-benar kelihatan, konteks penggunaan yang munasabah jika sesuai, dan penutup yang menyokong CTA. Setiap babak mesti mempunyai satu aksi utama yang jelas dan berbeza serta paling banyak satu gerakan kamera yang terkawal. Pastikan model, tangan, sentuhan objek, perspektif, pantulan, bayang sentuhan, pencahayaan dan fokus realistik serta konsisten; elakkan perubahan bentuk produk, objek terapung, anggota tambahan, objek berganda, kelipan, jitter, pendedahan cahaya melompat, gerakan mustahil dan potongan mengejut. Gunakan peralihan yang bermotivasi dan lancar, komposisi kemas, produk sentiasa jelas, serta bingkai akhir hero yang stabil. Jika gaya doodle dipilih, selaraskan bunyi lukisan/whoosh lembut dengan garisan bergerak, chime halus pada sorotan dan pop lembut apabila bulatan muncul; bunyi mesti ringkas, tepat pada masa, tidak bertindih dan lebih perlahan daripada suara. Untuk aksi lain, gunakan SFX semula jadi hanya apabila aksi itu benar-benar kelihatan; jangan mereka bunyi fungsi produk. Muzik latar menyokong video dan tidak menenggelamkan suara. Jika penjana tidak menyokong audio, jangan dakwa SFX pasti terhasil. '
                 + voiceover_instruction + '\n\nPILIHAN PENGGUNA:\n' + model_instruction
-                + '\n\nFORMAT OUTPUT WAJIB: 1) Tajuk dan konsep. 2) HOOK: ayat pembukaan dan aksi visual. 3) STORYBOARD: babak bernombor dengan masa tepat, tujuan, visual/aksi, saiz dan sudut shot, gerakan kamera, pencahayaan/latar, suara latar atau “Tanpa dialog”, dan peralihan. 4) CTA: ayat penutup dan aksi visual. 5) SEMAKAN KUALITI: kesinambungan produk, fakta tidak direka, dialog muat dalam durasi, tiada teks/logo tambahan. Hasilkan storyboard teks sahaja; jangan hasilkan imej storyboard atau prompt video penuh dahulu.'
+                + '\n\nFORMAT OUTPUT WAJIB: ' + (context.user_data.get('prompt_duration_mode') == 'split' ? 'hasilkan PROMPT 1 dan PROMPT 2 sebagai dua blok yang berasingan. Setiap blok mesti mempunyai tajuk/konsep, HOOK, STORYBOARD dengan 4 babak bermasa 0–10 saat, CTA dan SEMAKAN KUALITI. Prompt 2 mesti menyambung penamat Prompt 1 secara visual tanpa mengulang hook yang sama. ' : 'hasilkan satu storyboard sahaja dengan tajuk/konsep, HOOK, STORYBOARD bermasa tepat, CTA dan SEMAKAN KUALITI. ') + 'Setiap babak mesti menyatakan tujuan, visual/aksi, saiz dan sudut shot, gerakan kamera, pencahayaan/latar, suara latar atau “Tanpa dialog”, dan peralihan. Pastikan kesinambungan produk, fakta tidak direka, dialog muat dalam durasi, tiada teks/logo tambahan. Hasilkan storyboard teks sahaja; jangan hasilkan imej storyboard atau prompt video penuh dahulu.'
             )
             context.user_data['prompt_storyboard_fallback'] = prompt_instruction
             await progress_update(waiting, 35, 'Klippo sedang menjana storyboard secara automatik...')
