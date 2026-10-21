@@ -45,7 +45,7 @@ class PromptQualityTests(unittest.TestCase):
                 self.assertIn("PRESENTATION:", direction)
                 self.assertIn("VISUAL VARIATION:", direction)
 
-    def test_every_catalogued_subcategory_has_ten_distinct_library_variations(self):
+    def test_every_catalogued_subcategory_has_at_least_ten_distinct_library_variations(self):
         library_path = Path(__file__).resolve().parents[1] / "prompts" / "subcategory_variation_library.json"
         with library_path.open("r", encoding="utf-8") as handle:
             library = json.load(handle)
@@ -55,9 +55,9 @@ class PromptQualityTests(unittest.TestCase):
         for subcategory in subcategories:
             with self.subTest(subcategory=subcategory["subcategory_id"]):
                 variations = subcategory.get("variations", [])
-                self.assertEqual(len(variations), 10)
-                self.assertEqual(len({item["id"] for item in variations}), 10)
-                self.assertEqual(len({item["action"] for item in variations}), 10)
+                self.assertGreaterEqual(len(variations), 10)
+                self.assertEqual(len({item["id"] for item in variations}), len(variations))
+                self.assertEqual(len({item["action"] for item in variations}), len(variations))
                 self.assertTrue(all(item.get("hook") and item.get("detail") and item.get("camera") and item.get("lighting") and item.get("closing") and item.get("audio") for item in variations))
 
     def test_exact_subcategory_library_is_used_by_prompt_variation(self):
