@@ -2136,8 +2136,8 @@
           "audio": "AUDIO: Quiet polished instrumental music; no artificial sparkle or impact effects."
         },
         {
-          "id": "bag_handbag_v13",
-          "variation_number": 13,
+          "id": "bag_handbag_v12",
+          "variation_number": 12,
           "name": "Unboxing Without Claims",
           "hook": "HOOK: Show the handbag resting in its actual packaging only if packaging is present in the reference; otherwise open directly on the bag against a simple surface. No added text or logos.",
           "action": "ACTION: If packaging is shown and can be moved naturally, slide it aside once to reveal the unchanged handbag; otherwise use a camera reveal only.",
@@ -2148,8 +2148,8 @@
           "audio": "AUDIO: Subtle instrumental bed; add paper or packaging sounds only when that movement is visible."
         },
         {
-          "id": "bag_handbag_v15",
-          "variation_number": 15,
+          "id": "bag_handbag_v13",
+          "variation_number": 13,
           "name": "Handle Shadow Geometry",
           "hook": "HOOK: Open on the real shadow cast by the handbag's handles, with part of the bag already visible so the product is identifiable. No added text, captions or logos.",
           "action": "ACTION: Move a soft light source slightly to shift the shadow while the handbag remains still and unchanged.",
@@ -2160,8 +2160,8 @@
           "audio": "AUDIO: Minimal instrumental music at low volume; no sound effects needed."
         },
         {
-          "id": "bag_handbag_v17",
-          "variation_number": 17,
+          "id": "bag_handbag_v14",
+          "variation_number": 14,
           "name": "Seam-Line Tracking Shot",
           "hook": "HOOK: Start at one visible seam or edge that naturally leads the eye across the handbag. No added text, captions or logos.",
           "action": "ACTION: Track the camera along the existing seam and gradually widen to reveal the whole bag; the product does not move.",
@@ -2172,8 +2172,8 @@
           "audio": "AUDIO: Gentle modern instrumental music; avoid whooshes that compete with optional voice-over."
         },
         {
-          "id": "bag_handbag_v19",
-          "variation_number": 19,
+          "id": "bag_handbag_v15",
+          "variation_number": 15,
           "name": "Colour-True Neutral Sweep",
           "hook": "HOOK: Present the handbag against a neutral background that contrasts naturally with its actual colour. No added text, captions or logos.",
           "action": "ACTION: Sweep the camera slowly from one side of the front panel to the other, then pause on the full product.",
@@ -2184,8 +2184,8 @@
           "audio": "AUDIO: Clean low-volume instrumental bed; spoken content, if enabled, remains clear."
         },
         {
-          "id": "bag_handbag_v21",
-          "variation_number": 21,
+          "id": "bag_handbag_v16",
+          "variation_number": 16,
           "name": "Seat-Height Lifestyle Placement",
           "hook": "HOOK: In model mode, show the handbag beside a seated adult on a bench; in product-only mode, place it on a simple bench or plinth. No added text or logos.",
           "action": "ACTION: If a model is selected, the adult gently places the bag beside them once, only using a visible handle and a physically plausible grip; otherwise keep the bag still and let the camera approach.",
@@ -2196,8 +2196,8 @@
           "audio": "AUDIO: Soft lifestyle instrumental music; include movement sounds only if they match visible actions."
         },
         {
-          "id": "bag_handbag_v23",
-          "variation_number": 23,
+          "id": "bag_handbag_v17",
+          "variation_number": 17,
           "name": "Organised Negative Space",
           "hook": "HOOK: Place the handbag off-centre with generous empty space around it, while keeping the full silhouette visible from the first moment. No added text or graphics.",
           "action": "ACTION: Keep the bag stationary as the camera slowly reframes from the negative space toward the product.",
@@ -2208,8 +2208,8 @@
           "audio": "AUDIO: Refined minimal music at low volume; no exaggerated transitions."
         },
         {
-          "id": "bag_handbag_v25",
-          "variation_number": 25,
+          "id": "bag_handbag_v18",
+          "variation_number": 18,
           "name": "Base and Structure Study",
           "hook": "HOOK: Begin at a low angle that shows the handbag's visible base and lower outline without tipping or deforming it. No added text, captions or logos.",
           "action": "ACTION: Move the camera from the lower edge upward to the front panel; do not turn the bag over or reveal unseen underside details.",
@@ -2220,8 +2220,8 @@
           "audio": "AUDIO: Quiet instrumental music; no fabricated handling sounds."
         },
         {
-          "id": "bag_handbag_v27",
-          "variation_number": 27,
+          "id": "bag_handbag_v19",
+          "variation_number": 19,
           "name": "Window-Sill Morning Scene",
           "hook": "HOOK: Reveal the handbag in a calm morning window-light setting, with the complete product visible immediately and no added text or logos.",
           "action": "ACTION: Let natural-looking light shift subtly across the bag while the product remains in place; no wind or object movement is required.",
@@ -2232,8 +2232,8 @@
           "audio": "AUDIO: Light warm instrumental music at low volume; voice-over, if enabled, stays prominent."
         },
         {
-          "id": "bag_handbag_v29",
-          "variation_number": 29,
+          "id": "bag_handbag_v20",
+          "variation_number": 20,
           "name": "One-Hand Lift and Settle",
           "hook": "HOOK: Open on the handbag resting upright, with its complete shape and visible handle clearly shown. No added text, captions or logos.",
           "action": "ACTION: If a model is selected and the handle design supports it, an adult hand lifts the bag a few centimetres once and sets it back down gently; if the grip or handle is unclear, use a camera-only reveal.",
