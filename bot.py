@@ -905,7 +905,7 @@ def prompt_creative_settings(user_data, include_audio=True):
     }
     lines.append(music_directions.get(music_choice, music_directions['auto']))
     style_key = str(user_data.get('prompt_style', '')).casefold()
-    if style_key == 'white_doodle':
+    if style_key in ('white_doodle', 'doodle_style'):
         lines.append(
             'SFX: Only for visible White Doodle animation, sync a soft drawing/scribble or whoosh to moving lines, '
             'a light chime to a visible highlight and a gentle pop to a visible circle. Keep effects sparse, brief, '
@@ -977,13 +977,9 @@ def prompt_setup_mode_menu():
 
 
 def prompt_duration_menu():
-    # Keep all five established duration/segmentation choices distinct.
+    """Klippo uses one consistent storyboard duration: exactly 10 seconds."""
     return InlineKeyboardMarkup([
-        [InlineKeyboardButton('🎬 10 saat', callback_data='prompt_duration:10')],
-        [InlineKeyboardButton('🎞️ 20 saat', callback_data='prompt_duration:20_single')],
-        [InlineKeyboardButton('🎞️ 20 saat (10 + 10)', callback_data='prompt_duration:20_split')],
-        [InlineKeyboardButton('🎬 30 saat', callback_data='prompt_duration:30_single')],
-        [InlineKeyboardButton('🎬 30 saat (10 + 10 + 10)', callback_data='prompt_duration:30_split')],
+        [InlineKeyboardButton('🎬 Video 10 saat', callback_data='prompt_duration:10')],
         [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')],
     ])
 
@@ -1133,7 +1129,7 @@ def prompt_framing_menu(product_type='other', model_presence=None, user_data=Non
 
 CORE_USER_STYLE_KEYS = (
     'cinematic', 'minimal', 'lifestyle', 'dynamic',
-    'luxury', 'flatlay', 'creative_reveal', 'white_doodle',
+    'luxury', 'flatlay', 'creative_reveal', 'doodle_style',
 )
 CORE_STYLE_LABELS = {
     'cinematic': '🎬 Realistic / Cinematic',
@@ -1143,7 +1139,7 @@ CORE_STYLE_LABELS = {
     'luxury': '💎 Luxury Commercial',
     'flatlay': '🧺 Clean Flat Lay',
     'creative_reveal': '✨ Creative Reveal',
-    'white_doodle': '✏️ White Doodle',
+    'doodle_style': '✏️ Doodle Style',
 }
 CORE_STYLE_DESCRIPTIONS = {
     'cinematic': 'Visual realistik, pencahayaan sinematik dan gerakan kamera licin.',
@@ -1153,7 +1149,7 @@ CORE_STYLE_DESCRIPTIONS = {
     'luxury': 'Pencahayaan premium, tekstur jelas dan suasana elegan.',
     'flatlay': 'Paparan dari atas atau sudut tinggi dengan susunan kemas.',
     'creative_reveal': 'Pendedahan produk kreatif melalui cahaya, fokus dan pergerakan kamera.',
-    'white_doodle': 'Garisan doodle putih animasi mengikut bentuk produk tanpa menutupinya.',
+    'doodle_style': 'Doodle 2D animasi dengan warna yang sesuai, mengikut bentuk produk tanpa menutupinya.',
 }
 
 
@@ -1320,10 +1316,9 @@ def background_menu():
 
 
 def duration_menu():
+    """Offer the single supported video duration."""
     return InlineKeyboardMarkup([
-        [InlineKeyboardButton('⏱️ 10 saat', callback_data='duration:10'),
-         InlineKeyboardButton('⏱️ 15 saat', callback_data='duration:15')],
-        [InlineKeyboardButton('⏱️ 20 saat', callback_data='duration:20')],
+        [InlineKeyboardButton('⏱️ 10 saat', callback_data='duration:10')],
         [InlineKeyboardButton('↩️ Semak Gambar', callback_data='photos_order')],
     ])
 
@@ -3333,9 +3328,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif action.startswith('prompt_duration:') and stage == 'prompt_duration':
         selected = action.split(':', 1)[1]
         valid_duration_modes = {
-            '10': (10, 'single'), '20': (20, 'split'), '30': (30, 'split'),
-            '10_single': (10, 'single'), '20_single': (20, 'single'), '20_split': (20, 'split'),
-            '30_single': (30, 'single'), '30_split': (30, 'split'),
+            '10': (10, 'single'),
         }
         if selected in valid_duration_modes:
             duration, duration_mode = valid_duration_modes[selected]
