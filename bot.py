@@ -907,7 +907,7 @@ def prompt_creative_settings(user_data, include_audio=True):
     style_key = str(user_data.get('prompt_style', '')).casefold()
     if style_key in ('white_doodle', 'doodle_style'):
         lines.append(
-            'SFX: Only for visible White Doodle animation, sync a soft drawing/scribble or whoosh to moving lines, '
+            'SFX: Only for visible Doodle Style animation, sync a soft drawing/scribble or whoosh to moving lines, '
             'a light chime to a visible highlight and a gentle pop to a visible circle. Keep effects sparse, brief, '
             'timed to the animation and below any voice/music. Do not add doodle SFX to any other style.'
         )
@@ -915,7 +915,7 @@ def prompt_creative_settings(user_data, include_audio=True):
         lines.append(
             'SFX: Add subtle, natural handling, movement or environmental sounds only when the matching action is visibly shown. '
             'These may coexist with background music, but must stay clear, restrained and below speech. Do not add doodle-specific '
-            'scribble, whoosh, chime or pop effects unless White Doodle is selected; never invent product sounds.'
+            'scribble, whoosh, chime or pop effects unless Doodle Style is selected; never invent product sounds.'
         )
     if user_data.get('prompt_custom_background'):
         lines.append('Use the separately uploaded background image as the scene and match its perspective and lighting.')
@@ -1021,7 +1021,7 @@ PRODUCT_STYLE_KEYS = {
     'office': {'flatlay', 'minimal', 'lifestyle', 'creative_reveal', 'unboxing', 'white_doodle'},
     'other': {'cinematic', 'minimal', 'lifestyle', 'flatlay', 'unboxing', 'creative_reveal', 'studio_360_safe', 'white_doodle'},
 }
-# Camera framing is separate from the visual aesthetic (Luxury, Cinematic, White Doodle, etc.).
+# Camera framing is separate from the visual aesthetic (Luxury, Cinematic, Doodle Style, etc.).
 # Keep these choices short and filter them to the selected product category.
 PRODUCT_FRAMING = {
     'auto': ('🎲 Automatik — Klippo pilih', 'Ikut jenis produk; pilih framing dan aksi paling sesuai.'),
@@ -1132,12 +1132,12 @@ CORE_USER_STYLE_KEYS = (
     'luxury', 'flatlay', 'creative_reveal', 'doodle_style',
 )
 CORE_STYLE_LABELS = {
-    'cinematic': '🎬 Realistic / Cinematic',
-    'minimal': '✨ Minimalist Studio',
-    'lifestyle': '🌿 Lifestyle Story',
-    'dynamic': '⚡ Dynamic Action',
-    'luxury': '💎 Luxury Commercial',
-    'flatlay': '🧺 Clean Flat Lay',
+    'cinematic': '🎬 Cinematic',
+    'minimal': '✨ Minimal',
+    'lifestyle': '🌿 Lifestyle',
+    'dynamic': '⚡ Dynamic',
+    'luxury': '💎 Luxury',
+    'flatlay': '🧺 Flatlay',
     'creative_reveal': '✨ Creative Reveal',
     'doodle_style': '✏️ Doodle Style',
 }
@@ -1161,7 +1161,7 @@ def prompt_style_guide(product_type='other'):
     )
 
 
-# White Doodle is a universal overlay style and works across product categories.
+# Doodle Style is a universal adaptive overlay style and works across product categories.
 # The legacy doodle_option = next category-filtering path is intentionally replaced by the compact universal style catalogue.
 def prompt_style_menu(product_type='other', model_presence=None):
     """Show a compact, stable set of user-facing styles; vary execution automatically."""
@@ -3649,7 +3649,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 '📝 Teks skrin: ' + ('Tiada' if context.user_data.get('prompt_on_screen_text') != 'yes' else ('Auto' if context.user_data.get('prompt_text_mode') == 'auto' else context.user_data.get('prompt_text_content','Manual'))),
                 '🔊 Suara/dialog: ' + ('Tiada' if context.user_data.get('prompt_voiceover_mode') == 'none' else str(context.user_data.get('prompt_speech_source','voiceover')) + ' / ' + str(context.user_data.get('prompt_voiceover_style','auto'))),
                 '🎵 Muzik latar: ' + {'auto':'Auto ikut produk','upbeat':'Ceria / bertenaga','elegant':'Elegan / premium','calm':'Tenang / minimal','playful':'Playful / comel','cinematic':'Sinematik','none':'Tiada muzik'}.get(context.user_data.get('prompt_music_choice','auto'),'Auto ikut produk'),
-                '🔉 SFX: ' + {'auto':'Auto ikut aksi','product':'Sentuhan / pergerakan produk','doodle':'White Doodle','ambient':'Bunyi persekitaran','none':'Tiada SFX'}.get(context.user_data.get('prompt_sfx_choice','auto'),'Auto ikut aksi'),
+                '🔉 SFX: ' + {'auto':'Auto ikut aksi','product':'Sentuhan / pergerakan produk','doodle':'Doodle Style','ambient':'Bunyi persekitaran','none':'Tiada SFX'}.get(context.user_data.get('prompt_sfx_choice','auto'),'Auto ikut aksi'),
                 f'🖼️ Latar: {scene_labels.get(scene, scene)}',
                 '🎥 Aksi & rakaman: Automatik mengikut produk dan latar',
                 '',
