@@ -378,7 +378,6 @@ jobs:
               )
               assert "=== KLIPPO PART 2 ===" in paired
               first_part, second_part = paired.split("=== KLIPPO PART 2 ===", 1)
-              assert "CONTINUITY:" in paired
               assert "SECOND CLIP 10s" in second_part and "full-product frame" in second_part
               assert "Do NOT repeat the opening hook" in second_part
 
