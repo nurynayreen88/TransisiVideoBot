@@ -137,7 +137,7 @@
           "camera": "Begin slightly wider to establish the setting, then make one slow straight push-in that ends with the complete outfit still inside frame.",
           "lighting": "Use soft neutral light with gentle contrast; no artificial glow, dramatic colour grade or shifting highlights.",
           "closing": "Finish on a steady, full-length hero frame with the wearer centred and the garment unobstructed.",
-          "audio": "Use polished but unobtrusive instrumental music beneath any selected narration; no added words or exaggerated effects."
+          "audio": "Use polished but unobtrusive instrumental music beneath any selected narration; do not add unrequested spoken words or exaggerated effects."
         },
         {
           "id": "fashion_women_v11",
@@ -221,7 +221,7 @@
           "camera": "Use a wide, stable composition and a slow reframing move that balances the garment against the empty background.",
           "lighting": "Use soft, even studio-style light with a natural floor shadow and no colour cast.",
           "closing": "End with a balanced full-length composition and no cropping of the outfit.",
-          "audio": "A sparse, calm music bed; no voice-over or added sound effects."
+          "audio": "Use a sparse, calm music bed; follow the selected voice setting exactly, with no added sound effects unless selected."
         },
         {
           "id": "fashion_women_v18",
@@ -2829,7 +2829,7 @@
           "camera": "Use a slow controlled tilt and return to level framing.",
           "lighting": "Use soft top-side light that keeps handle edges readable.",
           "closing": "Hold a balanced full-product composition.",
-          "audio": "Soft instrumental bed; no added dialogue."
+          "audio": "Use a soft instrumental bed; follow the selected voice setting exactly and do not add dialogue beyond the selected script."
         },
         {
           "id": "bag_handbag_v40",
