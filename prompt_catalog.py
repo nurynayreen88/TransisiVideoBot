@@ -8,7 +8,7 @@ from pathlib import Path
 
 DB_PATH = Path(os.getenv("KLIPPO_PROMPT_DB", str(Path(__file__).with_name("prompt_catalog.sqlite3"))))
 STYLES = {
-    "white_doodle": ("✏️ White Doodle", """UNIVERSAL WHITE DOODLE STYLE — suitable for any product category. Treat the user's supplied product image(s) as the visual source of truth whenever provided; use written product details only as supporting context; omit unsupported labels. First reveal the complete, unchanged product. Draw thin white handwritten 2D linework progressively around only the visible silhouette and verified details: adapt the drawing to the object's actual outline and structure, whether it is clothing, a bag, footwear, cosmetics, food, electronics, home goods, accessories, tools or another product. Use one or two small arrows or sparkles only when they point to a genuinely visible detail; never cover the product, readable branding or important features. Keep product geometry, colors, labels, quantities, proportions and visible parts consistent. Part 1: clean reveal, one verified detail, restrained doodle accent, then HOLD the final frame in a stable full-product composition for the Part 2 handoff; Do not draw the main surrounding contour in Part 1; do not complete it yet. Part 2: resume from the same framing, progressively trace a thin white dashed contour around the actual visible silhouette, hold briefly, then return to a clean full-product hero finish. Graphics are flat 2D overlays, not physical objects, captions or UI. Never invent unseen sides. Do not invent unseen features, materials, accessories, claims, prices, popularity or text. Never guess a category, benefit, price, popularity or product name. Do not force a product-specific action that the reference does not support."""),
+    "white_doodle": ("✏️ Doodle Style", """UNIVERSAL DOODLE STYLE — suitable for any product category and not restricted to a white background or white linework. Treat the user's supplied product image(s) as the visual source of truth; keep product shape, colors, proportions, packaging and readable branding unchanged. First reveal the complete product clearly. Animate tasteful hand-drawn 2D doodle lines, outlines, arrows, tiny sparkles or simple illustrative accents in colors chosen to contrast gently with the actual background and product; use white, dark, pastel or bright colors only when legible and suitable. Doodles may overlay realistic footage or sit around the product, but must never obscure the product, labels or important details. Adapt the drawings to the visible silhouette and verified details; do not add unsupported feature callouts or invented text. Use a clear three-beat storyboard across exactly 10 seconds: 0–2s clean product hook; 2–7s one plausible product-specific action or close detail with restrained animated doodles; 7–10s stable full-product hero finish with a brief tasteful doodle accent. Graphics remain flat 2D overlays, not physical objects or UI. Never invent unseen sides, materials, accessories, benefits, prices, popularity or product claims."""),
     "cinematic": ("🎬 Cinematic Premium", "Premium realistic commercial: soft key light, restrained highlights, natural shadows, slow camera push, consistent product and environment."),
     "minimal": ("✨ Minimal Motion Graphic", "Bright uncluttered product framing, subtle geometric accent lines and smooth minimal graphic reveals, elegant spacing and gentle motion."),
     "dynamic": ("⚡ Dynamic Affiliate", "Engaging but controlled affiliate pacing: striking opening crop, feature emphasis with clean graphic accents, smooth match cuts and clear final hero shot."),
@@ -116,20 +116,52 @@ def connect():
     db.commit()
     return db
 
+CORE_STYLE_KEYS = (
+    ("cinematic", "🎬 Cinematic"),
+    ("minimal", "✨ Minimal"),
+    ("lifestyle", "🌿 Lifestyle"),
+    ("dynamic", "⚡ Dynamic"),
+    ("luxury", "💎 Luxury"),
+    ("flatlay", "🧺 Flatlay"),
+    ("creative_reveal", "✨ Creative Reveal"),
+    ("doodle_style", "✏️ Doodle Style"),
+)
+
 def choices():
+    """Expose only the eight agreed user-facing styles; retain legacy DB rows."""
     with connect() as db:
-        return db.execute("SELECT style_key, display_name FROM storyboard_prompt_styles WHERE active=1 ORDER BY rowid").fetchall()
+        active = {row[0] for row in db.execute(
+            "SELECT style_key FROM storyboard_prompt_styles WHERE active=1"
+        ).fetchall()}
+    return [
+        (key, label)
+        for key, label in CORE_STYLE_KEYS
+        if (key in active or key == "doodle_style" and "white_doodle" in active)
+    ]
 
 def resolve(key):
+    """Resolve compact style keys while keeping legacy catalog rows intact."""
+    db_key = "white_doodle" if key == "doodle_style" else key
     with connect() as db:
         if key == "auto":
-            rows = db.execute("SELECT style_key, display_name, template FROM storyboard_prompt_styles WHERE active=1 ORDER BY style_key").fetchall()
+            db_keys = [k if k != "doodle_style" else "white_doodle" for k, _label in CORE_STYLE_KEYS]
+            rows = db.execute(
+                "SELECT style_key, display_name, template FROM storyboard_prompt_styles "
+                "WHERE active=1 AND style_key IN (" + ",".join("?" for _ in db_keys) + ") ORDER BY style_key",
+                db_keys,
+            ).fetchall()
             if not rows:
                 raise ValueError("No active storyboard styles")
-            return random.choice(rows)
-        row = db.execute("SELECT style_key, display_name, template FROM storyboard_prompt_styles WHERE style_key=? AND active=1", (key,)).fetchone()
-        if row is None:
-            raise ValueError("Unknown storyboard style")
+            row = random.choice(rows)
+        else:
+            row = db.execute(
+                "SELECT style_key, display_name, template FROM storyboard_prompt_styles WHERE style_key=? AND active=1",
+                (db_key,),
+            ).fetchone()
+            if row is None:
+                raise ValueError("Unknown storyboard style")
+        if key == "doodle_style":
+            return ("doodle_style", "✏️ Doodle Style", STYLES["white_doodle"][1])
         return row
 
 # Conservative category hooks: product identity only, never invented benefits or hype.
