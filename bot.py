@@ -3364,7 +3364,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     'luxury': ('dark', 'a premium dark studio with restrained rim lighting and elegant contrast'),
                     'flatlay': ('studio', 'a clean tabletop flatlay setting viewed from above, with a tidy complementary surface'),
                     'creative_reveal': ('studio', 'a creative product-reveal setting with controlled light and uncluttered surroundings'),
-                    'white_doodle': ('minimal', 'a clean background and tasteful 2D doodle accents in colors chosen to remain visible against the actual product and scene; never require a white background or white linework'),
+                    'white_doodle': ('minimal', 'White Doodle is a universal overlay style. Use a clean background and tasteful 2D doodle accents in colors chosen to remain visible against the actual product and scene; never require a white background or white linework'),
                 }
                 scene_key, scene_description = preset_scenes.get(preset, preset_scenes['cinematic'])
                 context.user_data.update({
