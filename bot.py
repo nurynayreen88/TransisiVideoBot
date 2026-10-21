@@ -879,7 +879,7 @@ def prompt_creative_settings(user_data, include_audio=True):
             script = ' '.join((user_data.get('prompt_voiceover_script') or '').split())
             lines.append('Use this exact spoken script: ' + script)
         else:
-            lines.append('No spoken dialogue.')
+            lines.append('NO SPEECH: no dialogue, voice-over or narration. Do not animate speech-like lip movement. Mark every scene “Tanpa dialog/voice-over”. Convey the hook and CTA visually only; keep music and sound effects according to the separate user settings.')
     if user_data.get('prompt_on_screen_text') == 'yes':
         if user_data.get('prompt_text_mode') == 'manual' and user_data.get('prompt_text_content'):
             lines.append('On-screen text, exactly as supplied: ' + str(user_data['prompt_text_content']))
