@@ -333,7 +333,7 @@ jobs:
                   "Generated prompt contains literal escaped newlines instead of copy-ready formatting"
               )
 
-              assert ("white_doodle", "✏️ Doodle Style") in choices()
+              assert ("doodle_style", "✏️ Doodle Style") in choices()
               style_key, style_name, style_template = resolve("white_doodle")
               assert style_key == "white_doodle"
               for required in (
