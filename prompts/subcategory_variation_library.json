@@ -2001,7 +2001,7 @@
       "subcategory_id": "bag_handbag",
       "category_id": "bag",
       "label": "👜 Beg tangan",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "bag_handbag_v01",
@@ -2122,6 +2122,126 @@
           "lighting": "LIGHTING: Use balanced softbox-style light with realistic reflections.",
           "closing": "CTA / HERO: Leave the complete bag centred in a clean final frame.",
           "audio": "AUDIO: No extra sound effects; follow the selected speech and music settings."
+        },
+        {
+          "id": "bag_handbag_v11",
+          "variation_number": 11,
+          "name": "Tabletop Reflection Reveal",
+          "hook": "HOOK: Begin with a soft reflection of the handbag on a clean reflective tabletop, then gently tilt the camera until the actual bag is fully visible. No added text, captions or logos.",
+          "action": "ACTION: Keep the handbag completely still while the camera changes angle to reveal its real front and handle silhouette.",
+          "detail": "DETAIL: Use the reflection only as a visual composition; preserve the exact colour, proportions, visible pattern and fittings from the reference.",
+          "camera": "CAMERA: Start low at tabletop height and perform one slow upward tilt into a three-quarter product view.",
+          "lighting": "LIGHTING: Use controlled soft studio light with a believable reflection and no blown highlights.",
+          "closing": "CTA / HERO: Hold a clean, complete three-quarter view with the reflection subtle and the bag unobstructed.",
+          "audio": "AUDIO: Quiet polished instrumental music; no artificial sparkle or impact effects."
+        },
+        {
+          "id": "bag_handbag_v13",
+          "variation_number": 13,
+          "name": "Unboxing Without Claims",
+          "hook": "HOOK: Show the handbag resting in its actual packaging only if packaging is present in the reference; otherwise open directly on the bag against a simple surface. No added text or logos.",
+          "action": "ACTION: If packaging is shown and can be moved naturally, slide it aside once to reveal the unchanged handbag; otherwise use a camera reveal only.",
+          "detail": "DETAIL: Do not invent gift boxes, dust bags, tags or included accessories; show only items actually supplied in the reference.",
+          "camera": "CAMERA: Use a top-down start and a gentle diagonal move into a front three-quarter angle.",
+          "lighting": "LIGHTING: Soft even lighting keeps the true product colour and packaging details readable.",
+          "closing": "CTA / HERO: Finish with the handbag alone and fully visible, unless the original reference clearly includes its packaging as part of the product.",
+          "audio": "AUDIO: Subtle instrumental bed; add paper or packaging sounds only when that movement is visible."
+        },
+        {
+          "id": "bag_handbag_v15",
+          "variation_number": 15,
+          "name": "Handle Shadow Geometry",
+          "hook": "HOOK: Open on the real shadow cast by the handbag's handles, with part of the bag already visible so the product is identifiable. No added text, captions or logos.",
+          "action": "ACTION: Move a soft light source slightly to shift the shadow while the handbag remains still and unchanged.",
+          "detail": "DETAIL: Keep the handle count, curve, attachment points and silhouette faithful to the reference; do not create extra handles in the shadow.",
+          "camera": "CAMERA: Use a locked side-three-quarter composition with a very slow push toward the handle and upper edge.",
+          "lighting": "LIGHTING: Shape a gentle directional shadow without changing the perceived product colour.",
+          "closing": "CTA / HERO: Ease back to a full product frame with the real handles clearly outlined.",
+          "audio": "AUDIO: Minimal instrumental music at low volume; no sound effects needed."
+        },
+        {
+          "id": "bag_handbag_v17",
+          "variation_number": 17,
+          "name": "Seam-Line Tracking Shot",
+          "hook": "HOOK: Start at one visible seam or edge that naturally leads the eye across the handbag. No added text, captions or logos.",
+          "action": "ACTION: Track the camera along the existing seam and gradually widen to reveal the whole bag; the product does not move.",
+          "detail": "DETAIL: Show only visible stitching, piping or panel joins, without claiming handmade construction or special durability.",
+          "camera": "CAMERA: Use a smooth macro-to-medium tracking move with stable focus and no abrupt zoom.",
+          "lighting": "LIGHTING: Broad grazing light reveals real edges without exaggerating texture.",
+          "closing": "CTA / HERO: Settle into a balanced front three-quarter hero shot of the complete handbag.",
+          "audio": "AUDIO: Gentle modern instrumental music; avoid whooshes that compete with optional voice-over."
+        },
+        {
+          "id": "bag_handbag_v19",
+          "variation_number": 19,
+          "name": "Colour-True Neutral Sweep",
+          "hook": "HOOK: Present the handbag against a neutral background that contrasts naturally with its actual colour. No added text, captions or logos.",
+          "action": "ACTION: Sweep the camera slowly from one side of the front panel to the other, then pause on the full product.",
+          "detail": "DETAIL: Preserve the reference colour and pattern exactly; do not recolour the bag or add decorative elements.",
+          "camera": "CAMERA: Use a straight, short slider move at product height, keeping perspective natural.",
+          "lighting": "LIGHTING: Use neutral white balance and soft diffused light to avoid colour shifts.",
+          "closing": "CTA / HERO: End on a centred, colour-accurate full view with all visible edges in frame.",
+          "audio": "AUDIO: Clean low-volume instrumental bed; spoken content, if enabled, remains clear."
+        },
+        {
+          "id": "bag_handbag_v21",
+          "variation_number": 21,
+          "name": "Seat-Height Lifestyle Placement",
+          "hook": "HOOK: In model mode, show the handbag beside a seated adult on a bench; in product-only mode, place it on a simple bench or plinth. No added text or logos.",
+          "action": "ACTION: If a model is selected, the adult gently places the bag beside them once, only using a visible handle and a physically plausible grip; otherwise keep the bag still and let the camera approach.",
+          "detail": "DETAIL: Keep the bag's scale realistic and do not let hands, clothing or the bench hide its defining features.",
+          "camera": "CAMERA: Start in a medium lifestyle frame and make a slow push-in to a full-bag composition.",
+          "lighting": "LIGHTING: Use natural soft daylight and retain the handbag's true colour.",
+          "closing": "CTA / HERO: Hold a relaxed lifestyle hero frame with the whole handbag clearly visible.",
+          "audio": "AUDIO: Soft lifestyle instrumental music; include movement sounds only if they match visible actions."
+        },
+        {
+          "id": "bag_handbag_v23",
+          "variation_number": 23,
+          "name": "Organised Negative Space",
+          "hook": "HOOK: Place the handbag off-centre with generous empty space around it, while keeping the full silhouette visible from the first moment. No added text or graphics.",
+          "action": "ACTION: Keep the bag stationary as the camera slowly reframes from the negative space toward the product.",
+          "detail": "DETAIL: Do not fill the empty space with invented props, labels or promotional claims; preserve the real bag details.",
+          "camera": "CAMERA: Use a restrained lateral pan ending in a balanced composition without cropping handles or base.",
+          "lighting": "LIGHTING: Soft directional studio light with a natural contact shadow beneath the bag.",
+          "closing": "CTA / HERO: Finish with the handbag as the clear focal point, fully in frame against the uncluttered background.",
+          "audio": "AUDIO: Refined minimal music at low volume; no exaggerated transitions."
+        },
+        {
+          "id": "bag_handbag_v25",
+          "variation_number": 25,
+          "name": "Base and Structure Study",
+          "hook": "HOOK: Begin at a low angle that shows the handbag's visible base and lower outline without tipping or deforming it. No added text, captions or logos.",
+          "action": "ACTION: Move the camera from the lower edge upward to the front panel; do not turn the bag over or reveal unseen underside details.",
+          "detail": "DETAIL: Show only the visible base shape, seams and contact points. Do not claim it is reinforced or waterproof unless verified.",
+          "camera": "CAMERA: Make a slow vertical tilt from low product height to a medium three-quarter view.",
+          "lighting": "LIGHTING: Use soft side fill to define the outline while keeping shadows natural.",
+          "closing": "CTA / HERO: Return to a full upright view with the base and handles visible together.",
+          "audio": "AUDIO: Quiet instrumental music; no fabricated handling sounds."
+        },
+        {
+          "id": "bag_handbag_v27",
+          "variation_number": 27,
+          "name": "Window-Sill Morning Scene",
+          "hook": "HOOK: Reveal the handbag in a calm morning window-light setting, with the complete product visible immediately and no added text or logos.",
+          "action": "ACTION: Let natural-looking light shift subtly across the bag while the product remains in place; no wind or object movement is required.",
+          "detail": "DETAIL: Keep all visible colour, pattern, seams and hardware consistent; avoid adding flowers, scarves or other accessories unless present in the reference.",
+          "camera": "CAMERA: Begin at a medium-wide angle and make a slow diagonal push to a three-quarter hero view.",
+          "lighting": "LIGHTING: Use soft daylight and gentle fill; avoid overexposure or warm tint that alters the product colour.",
+          "closing": "CTA / HERO: Hold the full handbag against the quiet window-lit background for a clean final beat.",
+          "audio": "AUDIO: Light warm instrumental music at low volume; voice-over, if enabled, stays prominent."
+        },
+        {
+          "id": "bag_handbag_v29",
+          "variation_number": 29,
+          "name": "One-Hand Lift and Settle",
+          "hook": "HOOK: Open on the handbag resting upright, with its complete shape and visible handle clearly shown. No added text, captions or logos.",
+          "action": "ACTION: If a model is selected and the handle design supports it, an adult hand lifts the bag a few centimetres once and sets it back down gently; if the grip or handle is unclear, use a camera-only reveal.",
+          "detail": "DETAIL: Preserve realistic weight and shape; no swinging, stretching, collapsing or sudden changes to the handles.",
+          "camera": "CAMERA: Use a stable medium close-up during the lift, then pull back slightly to show the full bag after it settles.",
+          "lighting": "LIGHTING: Keep lighting even so the product colour and visible details remain unchanged.",
+          "closing": "CTA / HERO: Let the bag settle naturally and hold a steady full-product shot.",
+          "audio": "AUDIO: A soft contact sound only if the set-down is visible; background music stays understated."
         }
       ]
     },
