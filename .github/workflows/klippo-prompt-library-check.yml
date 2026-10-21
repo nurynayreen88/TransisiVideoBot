@@ -327,7 +327,7 @@ jobs:
                   storyboard_override=curated["storyboard"],
               )
               assert "=== KLIPPO PART 2 ===" in paired_curated
-              assert "CONTINUITY:" in paired_curated
+              assert "resume from the exact final full-product frame" in paired_curated
               assert "do not repeat its hook" in paired_curated
               assert "\\n\\n" not in curated_prompt, (
                   "Generated prompt contains literal escaped newlines instead of copy-ready formatting"
