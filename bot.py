@@ -4034,12 +4034,12 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     model_instruction = prompt_creative_settings(context.user_data)
                     prompt_instruction = (
                         'Anda ialah pengarah kreatif iklan produk. Analisis gambar rujukan yang dilampirkan dan hasilkan storyboard video produk yang boleh terus digunakan sebagai arahan penjana video AI. '
-                        'Tulis hasil dalam ' + language_label + '. Durasi tepat ' + str(duration) + ' saat, format menegak 9:16. '
-                        + ('Bina 4 babak berturutan dalam satu helaian storyboard.' if duration <= 10 else 'Bina 8 babak berturutan dalam dua helaian storyboard; babak 5–8 mesti bersambung daripada babak 1–4.')
+                        'Tulis hasil dalam ' + language_label + '. Format menegak 9:16. '
+                        + ('Durasi tepat 10 saat. Bina 4 babak berturutan dalam satu storyboard.' if duration <= 10 else ('Durasi tepat 20 saat dalam SATU storyboard berterusan dengan 8 babak. Panjangkan idea video 10 saat dengan pacing lebih luas dan aksi tambahan yang munasabah; jangan pecahkan kepada dua prompt.' if context.user_data.get('prompt_duration_mode') != 'split' else 'Hasilkan DUA PROMPT STORYBOARD BERASINGAN tetapi bersambung. PROMPT 1: tepat 10 saat, 4 babak bermasa 0–10s. PROMPT 2: tepat 10 saat, 4 babak bermasa 0–10s dengan masa direset; sambung daripada aksi dan komposisi akhir Prompt 1. Kekalkan produk, model, latar dan pencahayaan yang sama; jangan gabungkan sebagai satu prompt 20 saat.'))
                         + ' Untuk setiap babak, nyatakan masa tepat, tujuan, saiz dan sudut shot, satu aksi utama, gerakan kamera, komposisi produk, pencahayaan/latar, suara latar pilihan yang muat dalam tempoh, serta peralihan yang menyambungkan babak. Arahan mesti khusus dan boleh dilaksanakan, bukan kata umum sahaja. '
                         'Kekalkan bentuk, warna, nisbah, logo asal dan aksesori yang kelihatan. Jangan reka bahagian tersembunyi, bahan, ciri, prestasi, harga atau dakwaan. Pastikan tangan, model dan interaksi realistik. Jangan tambah teks pada skrin, sari kata, label, logo tambahan atau watermark. '
                         + voiceover_instruction + '\n\nPILIHAN PENGGUNA:\n' + model_instruction
-                        + '\n\nFormat output: tajuk ringkas, konsep, kemudian senarai babak bernombor. Jangan hasilkan prompt video penuh dahulu.'
+                        + '\n\nFormat output: ' + ('hasilkan PROMPT 1 dan PROMPT 2 sebagai dua blok berasingan; setiap satu ada tajuk, hook, 4 babak bermasa 0–10 saat dan penamat/CTA. Prompt 2 menyambung Prompt 1 tanpa mengulang hook.' if context.user_data.get('prompt_duration_mode') == 'split' else 'hasilkan satu storyboard sahaja dengan tajuk, hook, babak bernombor bermasa tepat dan penamat/CTA.') + ' Jangan hasilkan prompt video penuh dahulu.'
                     )
                     await progress_update(waiting, 40, 'Menjana storyboard...')
                     storyboard = await generate_storyboard(images, prompt_instruction)
