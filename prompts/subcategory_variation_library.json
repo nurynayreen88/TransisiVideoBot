@@ -17113,7 +17113,7 @@
       "subcategory_id": "accessory_belt",
       "category_id": "accessory",
       "label": "🪢 Tali pinggang",
-      "variation_count": 40,
+      "variation_count": 50,
       "variations": [
         {
           "id": "accessory_belt_v01",
@@ -17594,6 +17594,126 @@
           "lighting": "Match white balance, brightness and shadow character across the cuts.",
           "closing": "Hold the original full-belt frame as the final shot.",
           "audio": "Minimal background music with calm pacing; no added fastening sounds."
+        },
+        {
+          "id": "accessory_belt_v41",
+          "variation_number": 41,
+          "name": "Belt Detail Under Soft Side Light",
+          "hook": "Choose a real buckle or strap detail that remains clear under gentle side lighting.",
+          "action": "Let the camera make a short, slow slide across the detail and then settle into a wider view.",
+          "detail": "Keep the original surface finish and geometry; do not invent embossing, texture or wear.",
+          "camera": "Short lateral slide with restrained depth of field, then a clean wider cut.",
+          "lighting": "Soft side light that preserves the product's actual colour and natural shadows.",
+          "closing": "Hold the complete belt in a simple, reference-matched frame.",
+          "audio": "Quiet instrumental or silence; no sparkle or impact effects."
+        },
+        {
+          "id": "accessory_belt_v42",
+          "variation_number": 42,
+          "name": "Belt Outline and Negative Space",
+          "hook": "Frame the entire visible belt with enough space to distinguish its outline from the background.",
+          "action": "Make a gentle camera reframe to balance the composition without changing the belt's shape or position.",
+          "detail": "Do not crop out ends or create a different strap curve to fit the frame.",
+          "camera": "Slow, subtle reframing with a fixed focal perspective.",
+          "lighting": "Even neutral light and natural contact shadow.",
+          "closing": "Hold the whole belt clearly separated from its background.",
+          "audio": "Soft low-volume music; no animated swoosh."
+        },
+        {
+          "id": "accessory_belt_v43",
+          "variation_number": 43,
+          "name": "Buckle Detail Then Strap Texture",
+          "hook": "Open with a full view, then select one visible buckle detail and one visible strap surface area.",
+          "action": "Use two brief, steady close shots, followed by a return to the complete belt.",
+          "detail": "Both close shots must be present in the reference; avoid material or durability claims from appearance alone.",
+          "camera": "Three stable framings with matching colour and product orientation.",
+          "lighting": "Consistent exposure and white balance across all shots.",
+          "closing": "End on the same complete product view as the opening.",
+          "audio": "Minimal instrumental or silence; no fabricated hardware sounds."
+        },
+        {
+          "id": "accessory_belt_v44",
+          "variation_number": 44,
+          "name": "Natural Product Shadow",
+          "hook": "Show the belt and its existing contact shadow on the surface.",
+          "action": "Use a small straight push-in while keeping the shadow direction and softness consistent, then stop before any part is cropped.",
+          "detail": "Do not float the belt, animate the shadow separately or add a dramatic spotlight effect.",
+          "camera": "Gentle linear push-in with stable horizon and realistic perspective.",
+          "lighting": "Preserve the source's shadow direction and natural softness.",
+          "closing": "Hold a complete product view with the shadow still believable.",
+          "audio": "Quiet background music; no cinematic impact."
+        },
+        {
+          "id": "accessory_belt_v45",
+          "variation_number": 45,
+          "name": "Buckle Centreline Composition",
+          "hook": "Place the visible buckle near the centre of the frame while retaining enough strap to identify the product.",
+          "action": "Make a subtle lateral camera adjustment, then hold the buckle and adjoining strap steady for inspection.",
+          "detail": "Do not change buckle orientation or centre it by distorting the strap geometry.",
+          "camera": "Small horizontal reframe with the product stationary.",
+          "lighting": "Neutral light with controlled highlights and accurate colour.",
+          "closing": "Finish on a balanced buckle-and-strap composition.",
+          "audio": "Silence or restrained instrumental; no metallic chime."
+        },
+        {
+          "id": "accessory_belt_v46",
+          "variation_number": 46,
+          "name": "Visible Strap Layering",
+          "hook": "If the belt overlaps or loops in the supplied image, start with the existing overlap clearly visible.",
+          "action": "Track slowly across the overlapping section and widen to show the full arrangement without moving any part.",
+          "detail": "Do not change which strap section lies above another or invent extra layers.",
+          "camera": "Slow close tracking shot followed by a static wider framing.",
+          "lighting": "Soft, even light that keeps overlapping edges distinguishable.",
+          "closing": "Hold the original arrangement with the visible layers intact.",
+          "audio": "Quiet music or silence; no handling effects."
+        },
+        {
+          "id": "accessory_belt_v47",
+          "variation_number": 47,
+          "name": "Realistic Buckle Scale",
+          "hook": "Show the buckle in relation to the adjacent strap so its real proportions are easy to judge.",
+          "action": "Begin with both elements together, then make a small push-in without switching to a distorted wide-angle view.",
+          "detail": "Do not enlarge the buckle, shrink the strap or add a hand/object solely as an unverified scale reference.",
+          "camera": "Moderate close-up with natural perspective and steady focus.",
+          "lighting": "Balanced lighting without exaggerated reflections.",
+          "closing": "Return to a medium view that preserves buckle-to-strap proportions.",
+          "audio": "Low-key instrumental or silence."
+        },
+        {
+          "id": "accessory_belt_v48",
+          "variation_number": 48,
+          "name": "Belt Product Rotation Avoidance",
+          "hook": "Start with a clear reference-supported view of the belt and buckle.",
+          "action": "Use two static angles only if both are supported by the supplied reference; otherwise create interest with a gentle camera push rather than rotating the product.",
+          "detail": "Never reveal a fabricated back, hidden surface, extra hole or unseen buckle mechanism.",
+          "camera": "Matched static cuts or a restrained push-in; no 360-degree spin.",
+          "lighting": "Keep colour and exposure consistent between any supported angles.",
+          "closing": "End on the most complete and truthful view available.",
+          "audio": "Subtle music only; no spinning or transformation effects."
+        },
+        {
+          "id": "accessory_belt_v49",
+          "variation_number": 49,
+          "name": "Belt Ready-to-Inspect Final Frame",
+          "hook": "Open with the complete belt, neatly framed and unobstructed.",
+          "action": "Move from a full view to one real visible feature, pause, then return to the full belt for a final inspection hold.",
+          "detail": "Do not add claims, discount graphics, labels or accessories; preserve all reference-visible details.",
+          "camera": "Slow push-in, steady detail hold, then a clean cut back to the opening composition.",
+          "lighting": "Neutral and consistent throughout; no colour shifts or artificial gloss.",
+          "closing": "Hold the complete product long enough to recognise its actual design.",
+          "audio": "Soft instrumental or silence; no loud CTA sting."
+        },
+        {
+          "id": "accessory_belt_v50",
+          "variation_number": 50,
+          "name": "Complete Belt Reference Match",
+          "hook": "Begin with a composition that closely matches the supplied belt reference, including its visible arrangement and proportions.",
+          "action": "Show one slow, restrained camera move across the real product, then return to the original framing without moving or transforming the belt.",
+          "detail": "Preserve buckle shape, strap length, holes, colour and visible finish; add no unsupported features or claims.",
+          "camera": "One gentle linear move followed by a matched static final frame; no orbit or morph.",
+          "lighting": "Match the reference white balance, shadow direction and surface appearance.",
+          "closing": "Finish with the entire belt in a clean, unchanged hero view.",
+          "audio": "Understated music or silence; avoid invented buckle sounds and dramatic effects."
         }
       ]
     },
