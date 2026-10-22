@@ -21729,7 +21729,7 @@
       "subcategory_id": "gadget_phone",
       "category_id": "gadget",
       "label": "📱 Telefon / Aksesori telefon",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "gadget_phone_v01",
@@ -21850,6 +21850,126 @@
           "lighting": "Balanced soft studio light with subtle edge highlights and accurate colour.",
           "closing": "Finish with the complete phone centred and unobstructed.",
           "audio": "Soft low-volume electronic instrumental close; no speech or interface sounds."
+        },
+        {
+          "id": "gadget_phone_v11",
+          "variation_number": 11,
+          "name": "Grip and side silhouette",
+          "hook": "Open on the phone standing or resting exactly as shown, with its real side contour visible.",
+          "action": "Make a slow lateral move along the visible silhouette, then settle on the complete device without changing its orientation artificially.",
+          "detail": "Use only the actual frame thickness, buttons and edges visible in the reference; invent no specifications or unseen hardware.",
+          "camera": "Low, level slider move with a restrained parallax shift; preserve straight geometry.",
+          "lighting": "Soft grazing light traces the existing edge while keeping the device colour accurate.",
+          "closing": "End on a crisp three-quarter silhouette with the full phone in frame.",
+          "audio": "Quiet contemporary instrumental; no artificial clicks."
+        },
+        {
+          "id": "gadget_phone_v12",
+          "variation_number": 12,
+          "name": "Natural tabletop reflection",
+          "hook": "Place the visual emphasis on the phone's genuine contact with the supplied surface, keeping the original arrangement intact.",
+          "action": "Glide low across the surface toward the phone, revealing its real outline and natural contact shadow.",
+          "detail": "Do not add a reflective floor, floating effect, extra props or a surface not supported by the reference.",
+          "camera": "Low-angle dolly-in followed by a short rise to a medium product view.",
+          "lighting": "Broad diffused light with realistic contact shadows; reflections only where physically plausible.",
+          "closing": "Hold on the phone resting naturally in its original setup.",
+          "audio": "Subtle ambient electronic music; no whooshes."
+        },
+        {
+          "id": "gadget_phone_v13",
+          "variation_number": 13,
+          "name": "Volume and power-button detail",
+          "hook": "Begin with a real side control only if it is clearly visible; otherwise frame the cleanest visible side edge.",
+          "action": "Perform a slow macro pass over the existing controls without pressing them or changing the screen state.",
+          "detail": "Preserve actual button count, placement and shape; do not imply functions beyond visible controls.",
+          "camera": "Precise macro tracking with shallow but readable focus, then a short pullback.",
+          "lighting": "Soft side light reveals button relief without exaggerated metallic shine.",
+          "closing": "Finish with the authentic side controls sharply focused.",
+          "audio": "Low-volume instrumental bed; no button sound."
+        },
+        {
+          "id": "gadget_phone_v14",
+          "variation_number": 14,
+          "name": "Camera glass light sweep",
+          "hook": "Start close to the actual rear camera glass or lens area if visible, keeping the original module unchanged.",
+          "action": "Shift the light reflection through a gentle camera move, then widen to show how the module sits on the rear panel.",
+          "detail": "Never add lenses, rings, flash units or claims about zoom, night mode or image quality.",
+          "camera": "Slow macro arc with careful focus transition and no fisheye distortion.",
+          "lighting": "Controlled softbox reflection; avoid glowing lenses or fake laser highlights.",
+          "closing": "End on a readable view of the genuine camera module and rear design.",
+          "audio": "Minimal clean electronic music; no shutter effect."
+        },
+        {
+          "id": "gadget_phone_v15",
+          "variation_number": 15,
+          "name": "Screen-to-frame material contrast",
+          "hook": "Open on the boundary between the real display and frame, using only the supplied phone view.",
+          "action": "Track along the existing boundary and ease outward to show the complete front face.",
+          "detail": "Do not change the screen image, add UI, or claim glass or frame materials unless stated in the source.",
+          "camera": "Short diagonal macro track followed by a straight-on pullback.",
+          "lighting": "Balanced fill light with restrained reflections and true edge colours.",
+          "closing": "Hold on the unaltered front face with its actual screen state.",
+          "audio": "Soft modern instrumental; no notification tones."
+        },
+        {
+          "id": "gadget_phone_v16",
+          "variation_number": 16,
+          "name": "Fold or hinge detail when visible",
+          "hook": "If the reference clearly shows a foldable phone, begin at its actual hinge; otherwise use a visible seam or side detail without implying a foldable design.",
+          "action": "Move across the real seam or hinge without opening, folding or flexing the device unless that exact action is supported by the reference.",
+          "detail": "Do not turn a standard phone into a foldable model or invent hinge mechanics.",
+          "camera": "Careful lateral macro pass with stable focus and no exaggerated depth.",
+          "lighting": "Diffused side lighting shows genuine contours without dramatic mechanical highlights.",
+          "closing": "Finish on the real device profile and visible seam, if present.",
+          "audio": "Understated instrumental music; no mechanical sound effects."
+        },
+        {
+          "id": "gadget_phone_v17",
+          "variation_number": 17,
+          "name": "Supplied packaging composition",
+          "hook": "Use the phone and packaging only if both are present in the reference; otherwise compose the shot around the phone alone.",
+          "action": "Travel from the actual package printing or visible edge toward the phone, preserving the exact arrangement.",
+          "detail": "Do not add seals, included accessories, warranty claims, model names or packaging text not visible in the source.",
+          "camera": "Slow diagonal slider move with a gentle pullback to reveal the existing composition.",
+          "lighting": "Neutral soft light with legible real printing and no invented glossy effects.",
+          "closing": "End on the complete original phone-and-packaging arrangement, or phone alone.",
+          "audio": "Quiet premium-style instrumental; no unboxing sounds unless an unboxing action is shown."
+        },
+        {
+          "id": "gadget_phone_v18",
+          "variation_number": 18,
+          "name": "Hand-held scale reference",
+          "hook": "If a hand already holds the phone in the reference, keep that same natural grip; otherwise show the phone resting as supplied.",
+          "action": "Use a subtle camera drift to communicate the phone's real scale without changing hand position or adding a person.",
+          "detail": "Do not introduce hands or models absent from the reference; preserve realistic hand anatomy and device proportions.",
+          "camera": "Steady medium close-up with minimal parallax and no wide-angle stretching.",
+          "lighting": "Soft natural-looking light with believable skin tones only if a hand is visible.",
+          "closing": "Finish on a stable view that keeps the phone's actual size and shape credible.",
+          "audio": "Gentle neutral instrumental; no exaggerated handling foley."
+        },
+        {
+          "id": "gadget_phone_v19",
+          "variation_number": 19,
+          "name": "Charging connection only if shown",
+          "hook": "If a cable is visibly connected in the reference, open on the actual connection; otherwise focus on the phone's real charging-port edge without inserting anything.",
+          "action": "Track from the visible connector or port area back to the full phone; do not connect or disconnect a cable that is not shown.",
+          "detail": "Do not add cables, charging indicators, battery percentages, speed claims or unsupported port types.",
+          "camera": "Short controlled macro slide followed by a pullback, keeping the connector and port physically aligned if present.",
+          "lighting": "Soft directional light reveals the actual opening without creating extra ports.",
+          "closing": "Hold on the genuine connection detail or the unmodified side edge.",
+          "audio": "Low-volume instrumental; no charging chime."
+        },
+        {
+          "id": "gadget_phone_v20",
+          "variation_number": 20,
+          "name": "Balanced front-and-back product pair",
+          "hook": "Use front and rear views only when both authentic views are available in the supplied reference; otherwise create a single-view composition.",
+          "action": "Present the supported views as a clean matched cut or existing side-by-side arrangement; never morph or invent the unseen side.",
+          "detail": "Keep colour, camera layout, screen state and proportions consistent between views; no unsupported specs or badges.",
+          "camera": "Locked-off matched framing with a clean cut only when both views are supplied.",
+          "lighting": "Consistent soft studio lighting and white balance across the supported views.",
+          "closing": "End on the clearest authentic view or the original paired layout.",
+          "audio": "Simple modern instrumental, restrained and without transition effects."
         }
       ]
     },
