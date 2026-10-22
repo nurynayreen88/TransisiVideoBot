@@ -19745,7 +19745,7 @@
       "subcategory_id": "beauty_other",
       "category_id": "beauty",
       "label": "📦 Kecantikan lain",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "beauty_other_v01",
@@ -19866,6 +19866,126 @@
           "lighting": "Broad diffused key light, gentle fill and accurate colour reproduction.",
           "closing": "Finish centred on the full item with no obstruction and hold for the final beat.",
           "audio": "Soft low-volume instrumental music; no speech or unsupported sound effects."
+        },
+        {
+          "id": "beauty_other_v11",
+          "variation_number": 11,
+          "name": "Cap Rim and Container Neck",
+          "hook": "Open on the real junction between the cap, rim or upper edge and the main body, choosing only a feature actually present on this beauty item.",
+          "action": "Keep the item closed and stationary while the camera moves around the upper contour; do not unscrew, unseal or open it unless the reference clearly shows that action.",
+          "detail": "Preserve the actual lid shape, seam and printed placement. Do not imply tamper protection, leak resistance or a particular closure mechanism.",
+          "camera": "Use a short, level arc around the upper third, then ease back to include the complete item.",
+          "lighting": "Soft side fill defines the rim without creating a false gloss or hiding label details.",
+          "closing": "Hold a clear upper-detail-to-full-product composition with the item in its original state.",
+          "audio": "Low instrumental music only; no cap clicks or opening sounds."
+        },
+        {
+          "id": "beauty_other_v12",
+          "variation_number": 12,
+          "name": "Printed Panel Alignment",
+          "hook": "If the product has a printed panel, label or decorated area, begin with its real alignment on the item; if not, use the most distinctive visible edge or moulded contour.",
+          "action": "Track vertically along the visible panel or contour while the item stays still, ending with enough context to show where the feature sits.",
+          "detail": "Keep all visible lettering, icons, colours and spacing unchanged. Never invent text or improve unclear print by replacing it.",
+          "camera": "Use a measured vertical slider move with stable focus and natural perspective, then settle on a medium view.",
+          "lighting": "Use broad frontal diffusion and a small side fill to reduce glare while preserving true colour.",
+          "closing": "Finish with the actual panel or contour readable on the complete product.",
+          "audio": "Subtle instrumental bed; no voiceover or electronic beeps."
+        },
+        {
+          "id": "beauty_other_v13",
+          "variation_number": 13,
+          "name": "Base and Contact Shadow",
+          "hook": "Start at a low angle on the real base or bottom edge of the item, only showing surfaces supported by the supplied reference.",
+          "action": "Keep the product planted in place as the camera rises gradually from base level to a three-quarter view; do not make it float or tilt unnaturally.",
+          "detail": "Show the actual base shape and contact point without claiming stability, grip or a special construction feature.",
+          "camera": "Make a smooth vertical rise from low angle to medium height, keeping the product's proportions natural.",
+          "lighting": "Use soft side lighting and a believable contact shadow; avoid a halo beneath the item.",
+          "closing": "Hold on the full product resting naturally on the surface.",
+          "audio": "Quiet music; no impact sound because the product does not move."
+        },
+        {
+          "id": "beauty_other_v14",
+          "variation_number": 14,
+          "name": "Sidewall Contour Trace",
+          "hook": "Reveal the true sidewall or outer contour of the item, including any visible taper, curve or edge, without assuming its function.",
+          "action": "Move the camera parallel to the product's side and let the existing outline become clear; leave the item untouched.",
+          "detail": "Maintain its exact silhouette and thickness. Do not expose an unseen rear panel or add a seam that is not visible.",
+          "camera": "Use a slow parallel tracking move at mid-height, with a mild focus pull from near edge to far edge.",
+          "lighting": "A soft raking source reveals the contour while a gentle fill keeps the shadow side legible.",
+          "closing": "End in a three-quarter view that connects the side profile to the whole item.",
+          "audio": "Minimal music only; no artificial swishes."
+        },
+        {
+          "id": "beauty_other_v15",
+          "variation_number": 15,
+          "name": "Transparent Window or Visible Contents",
+          "hook": "If the supplied item has a genuinely transparent window or visible contents, frame that area first; otherwise focus on the real outer surface and do not create a window.",
+          "action": "Keep the container closed and still while the camera shifts a few degrees to reduce reflections; do not shake, pour or apply anything.",
+          "detail": "Show only contents that are truly visible in the reference. Do not invent formula colour, texture, quantity, ingredients or effects.",
+          "camera": "Use a short controlled angle adjustment followed by a pullback to a full-product view.",
+          "lighting": "Use a large diffused source placed to minimise glare while preserving the real transparency and colour.",
+          "closing": "Hold the visible window or surface in context with the complete unchanged item.",
+          "audio": "Soft neutral instrumental music; no liquid or pouring sounds."
+        },
+        {
+          "id": "beauty_other_v16",
+          "variation_number": 16,
+          "name": "Package Edge and Fold Detail",
+          "hook": "When packaging is part of the reference, begin with an actual folded edge, corner or seam; if no package is present, apply the same close inspection to a visible edge of the product itself.",
+          "action": "Slide the camera along the edge without crumpling, opening or reshaping the packaging or item.",
+          "detail": "Preserve real folds, seams and printed areas; do not add seals, inserts, boxes or claims absent from the source.",
+          "camera": "Use a close lateral track that transitions into a wider view showing the item's overall form.",
+          "lighting": "Soft grazing light defines the edge, balanced by fill to retain print and colour detail.",
+          "closing": "Finish with the genuine edge visible and the full product recognisable.",
+          "audio": "Low instrumental music; no paper rustle unless the material visibly moves."
+        },
+        {
+          "id": "beauty_other_v17",
+          "variation_number": 17,
+          "name": "Negative-Space Product Portrait",
+          "hook": "Place the exact beauty item in a clean composition with generous empty space, using only the setting and objects already supported by the reference.",
+          "action": "Keep the item still and make a slow diagonal camera drift that balances the negative space without introducing graphics or props.",
+          "detail": "Let the actual silhouette, colour and visible marks speak for themselves. Do not imply a beauty result, routine or intended user that the reference does not establish.",
+          "camera": "Start with an off-centre medium-wide frame and drift into a balanced three-quarter composition.",
+          "lighting": "Use soft, even illumination and realistic shadows; preserve the original colour and surface finish.",
+          "closing": "Hold a composed hero image with the entire item unobstructed and no rendered text.",
+          "audio": "Understated instrumental music, no voiceover or decorative sound effects."
+        },
+        {
+          "id": "beauty_other_v18",
+          "variation_number": 18,
+          "name": "Focus Through Existing Layers",
+          "hook": "If the reference naturally contains a foreground edge or a second supplied component, begin with it softly out of focus and the actual item visible behind; otherwise use a clean single-plane composition.",
+          "action": "Rack focus from the real foreground edge to the product without moving or adding objects.",
+          "detail": "Use only components and depth relationships present in the source. Do not create duplicate products, floating layers or false packaging depth.",
+          "camera": "Lock the camera and make one deliberate focus transition, followed by a small pullback if needed for context.",
+          "lighting": "Keep foreground and product lighting consistent, with no artificial glow or colour shift.",
+          "closing": "End with the main item sharply focused and fully identifiable.",
+          "audio": "Quiet instrumental bed; no focus-pull sound effect."
+        },
+        {
+          "id": "beauty_other_v19",
+          "variation_number": 19,
+          "name": "Colour Fidelity Under Neutral Light",
+          "hook": "Show the complete item under neutral light so its actual colour and any visible colour blocks can be assessed without stylised grading.",
+          "action": "Make a gentle camera move from front to a slight three-quarter angle while maintaining the same white balance and exposure.",
+          "detail": "Keep the visible colours and print consistent. Do not recolour the package, deepen pigments or imply a shade name not shown in the source.",
+          "camera": "Use a short smooth arc with fixed exposure and a constant lens perspective; finish in a steady medium shot.",
+          "lighting": "Use neutral diffused light with balanced highlights and no coloured gels or dramatic warm-cool shifts.",
+          "closing": "Return to a clean view that faithfully represents the item's visible colour.",
+          "audio": "Soft contemporary instrumental music; no spoken shade or quality claims."
+        },
+        {
+          "id": "beauty_other_v20",
+          "variation_number": 20,
+          "name": "Three-Beat Visual Inspection",
+          "hook": "Establish the full item first, then select two genuine visible details—such as a closure, printed area or contour—only if those details exist in the reference.",
+          "action": "Create three calm visual beats using clean cuts between the overall item and the two actual details; the product remains unchanged in every shot.",
+          "detail": "Keep every cut faithful to the same product and supplied components. Do not invent a use demonstration, hidden side or extra feature.",
+          "camera": "Use a stable full view, a close detail view, and a final three-quarter view with matched colour and scale.",
+          "lighting": "Match exposure, white balance and light direction across all three shots.",
+          "closing": "End on the complete item, centred and unobstructed, after the detail beats.",
+          "audio": "A gentle musical pulse may mark the cuts; no additional SFX or narration unless selected."
         }
       ]
     },
