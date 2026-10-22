@@ -14649,7 +14649,7 @@
       "subcategory_id": "shoes_formal",
       "category_id": "shoes",
       "label": "👞 Kasut formal",
-      "variation_count": 20,
+      "variation_count": 30,
       "variations": [
         {
           "id": "shoes_formal_v01",
@@ -14890,6 +14890,126 @@
           "lighting": "Use soft, neutral studio lighting and realistic contact shadows to preserve the formal finish and accurate colour.",
           "closing": "Hold the full unchanged shoe or pair with no added text, logos or accessories.",
           "audio": "Follow selected audio and narration choices; no forced voice-over, captions or fabricated sound effects."
+        },
+        {
+          "id": "shoes_formal_v21",
+          "variation_number": 21,
+          "name": "Brogue Perforation Map",
+          "hook": "Open with the complete formal shoe, then highlight genuine decorative perforations only if they appear in the reference.",
+          "action": "Move slowly across the visible perforation arrangement without adding holes or changing their spacing; if the shoe is plain, feature its actual vamp contour instead.",
+          "detail": "Preserve the real perforation pattern, seam layout and scale. Do not invent brogue detailing on a plain shoe.",
+          "camera": "Use a steady close pass across the visible detail, then widen to a full three-quarter view.",
+          "lighting": "Soft angled light makes existing perforations legible without exaggerated contrast.",
+          "closing": "Hold the unchanged shoe with the detail in context.",
+          "audio": "Follow selected audio settings; no simulated drilling, polishing or unrequested narration."
+        },
+        {
+          "id": "shoes_formal_v22",
+          "variation_number": 22,
+          "name": "Cap-Toe Seam Arc",
+          "hook": "Establish the formal shoe's full silhouette before moving toward a visible cap-toe seam, if present.",
+          "action": "Follow the real seam in a short curved camera move; when no cap-toe seam exists, trace the actual front panel boundary or plain toe contour.",
+          "detail": "Do not add stitching or create a cap-toe design absent from the source. Keep the toe shape and seam placement accurate.",
+          "camera": "Use a slow front-quarter arc and a measured pull-back to the complete shoe.",
+          "lighting": "Neutral soft lighting defines the existing seam without creating artificial gloss.",
+          "closing": "Finish on a stable front-three-quarter view.",
+          "audio": "Use selected audio settings only; no invented shoe-handling sounds."
+        },
+        {
+          "id": "shoes_formal_v23",
+          "variation_number": 23,
+          "name": "Monk Strap Buckle Focus",
+          "hook": "Show the complete formal shoe first, then focus on a monk strap and buckle only if that fastening is visible.",
+          "action": "Keep the shoe stationary while the camera approaches the strap and hardware; for lace-up, loafer or plain designs, focus on their actual fastening or vamp instead.",
+          "detail": "Preserve buckle shape, strap count and placement; never add metal hardware to another shoe style.",
+          "camera": "Make a slow push-in toward the real fastening, pause briefly, then return to the full product.",
+          "lighting": "Controlled soft highlights make visible hardware readable without glare or artificial sparkle.",
+          "closing": "Hold the unchanged shoe with its genuine fastening detail visible.",
+          "audio": "Respect selected audio settings; no invented buckle clicks or voice-over."
+        },
+        {
+          "id": "shoes_formal_v24",
+          "variation_number": 24,
+          "name": "Loafer Vamp and Apron Line",
+          "hook": "If the reference shows a loafer, begin with its complete silhouette and visible vamp; otherwise adapt to the actual front panel detail.",
+          "action": "Track along the visible apron seam, vamp edge or plain front surface without touching or reshaping the shoe.",
+          "detail": "Show only genuine stitching, seams or ornamentation. Do not add a saddle, tassel, bit or apron seam that is absent.",
+          "camera": "Use a slow diagonal move across the vamp, then widen to the full shoe.",
+          "lighting": "Soft side light reveals the true panel contour and finish without exaggerated shine.",
+          "closing": "Return to the original three-quarter hero view.",
+          "audio": "Follow selected audio settings; no fabricated leather or handling sounds."
+        },
+        {
+          "id": "shoes_formal_v25",
+          "variation_number": 25,
+          "name": "Sole Thickness Profile",
+          "hook": "Open on a side profile that shows the formal shoe's real sole thickness and heel-to-toe line.",
+          "action": "Move at a low angle along the visible sole edge without lifting, bending or rotating the shoe to expose hidden parts.",
+          "detail": "Represent thickness and contour as they appear; do not infer comfort, cushioning, height specifications or sole construction.",
+          "camera": "Use a level heel-to-toe slider move and then rise to a full side-three-quarter view.",
+          "lighting": "Gentle side lighting defines the profile while preserving the true colour of the sole and upper.",
+          "closing": "Hold a clean side view of the unchanged shoe.",
+          "audio": "No simulated footsteps or impact effects; use selected audio only."
+        },
+        {
+          "id": "shoes_formal_v26",
+          "variation_number": 26,
+          "name": "Dark Finish Detail Recovery",
+          "hook": "Present the full dark-coloured formal shoe with enough light to read its outline and visible details.",
+          "action": "Make a slow move across the toe, vamp and side panel, keeping exposure balanced so dark areas remain detailed rather than becoming featureless.",
+          "detail": "Preserve the actual black, brown or other reference colour; do not add gloss, recolour the shoe or invent seams to make details more dramatic.",
+          "camera": "Use a controlled close tracking move followed by a wider view of the entire shoe.",
+          "lighting": "Use broad soft fill and restrained highlights to retain detail on dark surfaces without clipping reflections.",
+          "closing": "End on a clear, colour-faithful hero frame.",
+          "audio": "Follow selected audio settings; no simulated polishing or unsupported material claims."
+        },
+        {
+          "id": "shoes_formal_v27",
+          "variation_number": 27,
+          "name": "Pair Toe Alignment",
+          "hook": "If a pair is shown, open with both toes and their original alignment visible; if one shoe is shown, keep the focus on its real toe contour.",
+          "action": "Pan slowly across the visible toe shapes without moving either shoe or creating a second product.",
+          "detail": "Compare only visible toe shape, seam or finish. Do not imply exact sizing or manufacturing consistency.",
+          "camera": "Use a low front-quarter pan across the pair or a short arc around the single shoe, then widen.",
+          "lighting": "Even frontal fill keeps both toe areas readable and preserves the source colours.",
+          "closing": "Hold the original arrangement with the toe design clear.",
+          "audio": "Use selected audio settings only; no footsteps or forced narration."
+        },
+        {
+          "id": "shoes_formal_v28",
+          "variation_number": 28,
+          "name": "Decorative Hardware Restraint",
+          "hook": "Begin with the complete shoe and identify an actual ornament, bit, tassel or metal accent only if present in the reference.",
+          "action": "Move in for a single close view of that real accent; if the shoe has no ornament, highlight a genuine seam or clean surface instead.",
+          "detail": "Do not add decorative hardware, logos or embellishments. Keep the ornament's shape and position unchanged.",
+          "camera": "Use a measured push-in, short hold and smooth return to a complete three-quarter view.",
+          "lighting": "Soft controlled highlights show real metal or trim without artificial sparkle or glare.",
+          "closing": "Finish on the unchanged shoe and its authentic design details.",
+          "audio": "Respect selected audio settings; no fabricated metallic clicks or claims."
+        },
+        {
+          "id": "shoes_formal_v29",
+          "variation_number": 29,
+          "name": "Side Profile and Topline Continuity",
+          "hook": "Establish the formal shoe's full side profile and the real line from toe through vamp to heel.",
+          "action": "Follow that contour with a slow camera move, maintaining the shoe's natural proportions and avoiding wide-angle distortion.",
+          "detail": "Feature actual silhouette, visible seams and finish only; do not imply fit, arch support or comfort benefits.",
+          "camera": "Track from toe to heel at shoe height, then settle into the original three-quarter view.",
+          "lighting": "Consistent soft side light preserves contour definition and natural colour across the shoe.",
+          "closing": "Hold the complete product in a balanced, unchanged frame.",
+          "audio": "Follow selected audio settings; no invented footsteps or forced voice-over."
+        },
+        {
+          "id": "shoes_formal_v30",
+          "variation_number": 30,
+          "name": "Three-Feature Formal Shoe Story",
+          "hook": "Open on the complete formal shoe or pair, allowing the viewer to recognise its actual style before detail shots.",
+          "action": "Show three source-supported features in sequence—such as toe shape, fastening or vamp detail, and heel or sole profile—substituting visible alternatives where needed.",
+          "detail": "Do not invent style features, materials, labels or performance claims. Maintain the same product identity and visible configuration throughout.",
+          "camera": "Use three slow close framings with smooth transitions, then return to the original full-product view; avoid rapid montage.",
+          "lighting": "Keep white balance and exposure consistent across all views so finish and colour remain faithful.",
+          "closing": "Hold the unchanged formal shoe or pair in a clean hero composition.",
+          "audio": "Respect selected audio and narration choices; no forced voice-over, captions or fabricated sound effects."
         }
       ]
     },
