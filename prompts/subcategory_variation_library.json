@@ -9177,7 +9177,7 @@
       "subcategory_id": "bag_other",
       "category_id": "bag",
       "label": "📦 Beg lain",
-      "variation_count": 20,
+      "variation_count": 30,
       "variations": [
         {
           "id": "bag_other_v01",
@@ -9418,6 +9418,126 @@
           "lighting": "Keep light quality, exposure and white balance matched across all framings.",
           "closing": "Hold the final complete-bag view long enough for the outline and visible components to read clearly.",
           "audio": "A soft instrumental pulse is optional; avoid a separate sound effect on each cut."
+        },
+        {
+          "id": "bag_other_v21",
+          "variation_number": 21,
+          "name": "Visible Closure Path",
+          "hook": "Show the complete bag in its supplied closed state, then frame a closure only if its mechanism is clearly visible.",
+          "action": "Track alongside the visible zipper, snap line, drawcord or other actual closure without operating it; if no closure is visible, track a confirmed edge instead.",
+          "detail": "Do not imply the bag opens, locks or seals in a particular way unless the mechanism is unambiguous in the reference.",
+          "camera": "One controlled close tracking move followed by a short pullback to the complete bag.",
+          "lighting": "Soft neutral light with stable exposure and no artificial shine on hardware.",
+          "closing": "Hold the full bag closed exactly as supplied.",
+          "audio": "No zipper, snap or drawcord sound because the closure is not operated; music optional."
+        },
+        {
+          "id": "bag_other_v22",
+          "variation_number": 22,
+          "name": "Handle Lift Only When Supported",
+          "hook": "Begin with the complete bag and its existing handle arrangement clearly visible.",
+          "action": "If the reference or user-supplied direction supports handling, lift the bag once by its existing handle just enough to show its natural hang, then set it down gently; otherwise keep it still and let the camera tilt from handle to base.",
+          "detail": "Preserve handle count, attachment points and natural proportions; do not stretch or add handles.",
+          "camera": "A steady medium shot with a small follow movement, avoiding fast swings.",
+          "lighting": "Consistent soft light and a natural contact shadow when the bag rests.",
+          "closing": "End with the complete bag settled and all visible parts in their original form.",
+          "audio": "Use a faint natural placement sound only if the lift-and-set-down action is actually shown."
+        },
+        {
+          "id": "bag_other_v23",
+          "variation_number": 23,
+          "name": "Strap Route Without Adjustment Claims",
+          "hook": "Start on the whole bag with any visible strap laid or attached exactly as in the reference.",
+          "action": "Follow the visible strap from one end toward its attachment point, then widen to show its route across the bag; do not lengthen or adjust it.",
+          "detail": "Do not claim adjustability or detachable construction unless the hardware visibly supports that conclusion.",
+          "camera": "A smooth short tracking move with a steady focus pull to the attachment point.",
+          "lighting": "Broad soft light to keep overlapping strap edges distinct without changing their colour.",
+          "closing": "Show the complete bag and visible strap in one stable frame.",
+          "audio": "No buckle clicks or fabric sounds unless the strap is physically handled."
+        },
+        {
+          "id": "bag_other_v24",
+          "variation_number": 24,
+          "name": "Natural Fold and Drape Observation",
+          "hook": "Present the bag as supplied, preserving any visible soft folds, creases or structured edges.",
+          "action": "Keep the bag still while the camera moves from a three-quarter view to a front view, allowing existing folds and drape to remain unchanged.",
+          "detail": "Do not smooth, inflate, reshape or animate the bag to imply flexibility or structure not shown by the reference.",
+          "camera": "One small, level arc with realistic perspective and no wide-angle distortion.",
+          "lighting": "Soft directional light that reveals the existing contour without exaggerating texture.",
+          "closing": "Hold the original silhouette and visible folds in a full-item composition.",
+          "audio": "Subtle music only if selected; no synthetic fabric rustle."
+        },
+        {
+          "id": "bag_other_v25",
+          "variation_number": 25,
+          "name": "Edge-to-Edge Colour Accuracy",
+          "hook": "Open on the complete bag so its overall colour is immediately recognisable.",
+          "action": "Make a slow horizontal pass across the visible front surface from one edge to the other, then return to the full bag without altering exposure.",
+          "detail": "Keep colour, pattern and printed marks consistent across the frame; do not recolour or enhance the finish.",
+          "camera": "A straight, measured slider move with locked white balance and no dramatic focus blur.",
+          "lighting": "Even diffused lighting with no colour cast or specular boost.",
+          "closing": "Finish on the complete bag with faithful colour and clean margins.",
+          "audio": "Neutral instrumental or silence; no reveal effects."
+        },
+        {
+          "id": "bag_other_v26",
+          "variation_number": 26,
+          "name": "Included-Piece Count Hold",
+          "hook": "Frame the bag together with only the pieces visibly included in the supplied reference.",
+          "action": "Hold the arrangement still while the camera gently pushes in to show the visible set, then pulls back to the same full arrangement.",
+          "detail": "Do not add pouches, detachable straps, charms, inserts or accessories; preserve the exact number of visible pieces.",
+          "camera": "One continuous push-and-pull move with no duplication or object appearance effects.",
+          "lighting": "Balanced soft light with consistent shadows under every visible piece.",
+          "closing": "Hold the complete supplied arrangement without cropping any included part.",
+          "audio": "No added object-placement sounds; music optional."
+        },
+        {
+          "id": "bag_other_v27",
+          "variation_number": 27,
+          "name": "Low-Angle Proportion Check",
+          "hook": "Start at a normal eye-level view with the full bag visible and its actual proportions easy to read.",
+          "action": "Lower the camera slightly to clarify the visible lower outline, then return to eye level; keep the bag and its base stationary.",
+          "detail": "Avoid an extreme low angle that enlarges the base or makes the bag appear taller or deeper than it is.",
+          "camera": "A small controlled vertical camera move with constant lens distance and no tilt distortion.",
+          "lighting": "Neutral, even illumination and realistic contact shadow.",
+          "closing": "Return to the original eye-level full-bag composition and hold.",
+          "audio": "Use no dramatic bass hit; restrained music is optional."
+        },
+        {
+          "id": "bag_other_v28",
+          "variation_number": 28,
+          "name": "One-Side Detail and Return",
+          "hook": "Show the complete bag, then select one side edge or side feature that is actually visible in the reference.",
+          "action": "Reframe toward that confirmed side detail and return to the original full view without rotating the product into an unseen angle.",
+          "detail": "Do not fabricate side pockets, gussets, lining or depth; if no side feature is visible, use a confirmed front edge instead.",
+          "camera": "Two stable matched framings connected by a clean cut, with consistent orientation.",
+          "lighting": "Match colour temperature and exposure between both views.",
+          "closing": "End on the complete bag with its true outline intact.",
+          "audio": "A soft instrumental bed may continue across the cut; no transition sound required."
+        },
+        {
+          "id": "bag_other_v29",
+          "variation_number": 29,
+          "name": "Surface Reflection Restraint",
+          "hook": "Present the bag in its existing setting and identify the real surface response visible in the reference.",
+          "action": "Keep the item fixed while the camera makes a short oblique slide to show the surface under the same light, then settles front-on.",
+          "detail": "Do not create glossy reflections, water droplets, metallic sheen or texture that the supplied image does not support.",
+          "camera": "A short oblique slide with restrained highlights and realistic perspective.",
+          "lighting": "Preserve the reference light direction and surface appearance; avoid artificial gloss effects.",
+          "closing": "Hold the full bag in a neutral, truthful product view.",
+          "audio": "Silence or subtle music; no sparkle or shimmer effects."
+        },
+        {
+          "id": "bag_other_v30",
+          "variation_number": 30,
+          "name": "Opening-to-Detail-to-Opening Match",
+          "hook": "Establish the full bag in a stable composition with all visible parts inside the frame.",
+          "action": "Cut to one confirmed design detail for a brief hold, then return to the exact opening composition; do not move or transform the product.",
+          "detail": "The detail must be present in the reference and must not imply unverified capacity, material, waterproofing or durability.",
+          "camera": "Use two locked framings with matched orientation and exposure; no morphing or simulated rotation.",
+          "lighting": "Keep white balance, shadows and brightness consistent across the cut.",
+          "closing": "Hold the complete bag in the original frame for a calm, clear finish.",
+          "audio": "One subtle musical accent is optional; avoid stacked sound effects."
         }
       ]
     },
