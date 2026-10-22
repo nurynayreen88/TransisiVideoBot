@@ -9177,7 +9177,7 @@
       "subcategory_id": "bag_other",
       "category_id": "bag",
       "label": "📦 Beg lain",
-      "variation_count": 40,
+      "variation_count": 50,
       "variations": [
         {
           "id": "bag_other_v01",
@@ -9658,6 +9658,126 @@
           "lighting": "Match the reference appearance and keep exposure steady from start to finish.",
           "closing": "End on a composed hero frame with the full bag still visible.",
           "audio": "Gentle, understated instrumental or silence; no loud reveal sting."
+        },
+        {
+          "id": "bag_other_v41",
+          "variation_number": 41,
+          "name": "Side Gusset Detail Hold",
+          "hook": "Start on the visible side profile or gusset only when that area is shown in the reference.",
+          "action": "Hold on the existing side contour, then make a short pullback to reconnect the contour to the full bag.",
+          "detail": "Do not deepen the gusset, expand the bag or imply extra capacity through perspective tricks.",
+          "camera": "Stable side-detail framing followed by a slow pullback; no simulated expansion.",
+          "lighting": "Soft, even light that preserves the original side-panel tone and contour.",
+          "closing": "Finish with the visible side profile clearly connected to the whole product.",
+          "audio": "Quiet instrumental or silence; no swelling or expansion effects."
+        },
+        {
+          "id": "bag_other_v42",
+          "variation_number": 42,
+          "name": "Label Placement Without Added Claims",
+          "hook": "Frame a label, tag or printed mark only if it is legible and present in the supplied reference.",
+          "action": "Make a brief, steady close-up of the existing mark, then return to a wider view showing its real placement on the bag.",
+          "detail": "Do not invent brand names, certification symbols, text or product claims; preserve only readable reference details.",
+          "camera": "Locked close-up and matched wider cut with natural perspective.",
+          "lighting": "Neutral light with no glare that changes or obscures the printed details.",
+          "closing": "Hold a wider composition where the mark sits naturally in context.",
+          "audio": "Minimal background music; no digital typing or notification sounds."
+        },
+        {
+          "id": "bag_other_v43",
+          "variation_number": 43,
+          "name": "Base Edge in a Static View",
+          "hook": "Begin with the lower edge or base visible in the product reference.",
+          "action": "Tilt down gently to inspect the visible base boundary, pause briefly, then tilt back to a full product view.",
+          "detail": "Do not invent feet, reinforcement, a flat base or standing ability that the reference does not show.",
+          "camera": "Slow controlled tilt with the bag stationary and undistorted.",
+          "lighting": "Keep the ground shadow natural and the lower edge clearly visible.",
+          "closing": "Return to a stable full view without cropping the base.",
+          "audio": "Soft neutral music or silence; no impact sound."
+        },
+        {
+          "id": "bag_other_v44",
+          "variation_number": 44,
+          "name": "Pattern Continuity Across Visible Panels",
+          "hook": "Show a visible pattern or print area exactly as it appears on the bag.",
+          "action": "Move slowly across the existing print and pause where two visible panels meet, then widen to show the overall pattern placement.",
+          "detail": "Do not complete missing pattern areas, mirror the print or claim precise alignment unless clearly visible.",
+          "camera": "Slow short pan across real visible surfaces, followed by a steady wider frame.",
+          "lighting": "Consistent neutral illumination that keeps the original print colours intact.",
+          "closing": "Hold on a view that shows the pattern in relation to the bag's shape.",
+          "audio": "Understated instrumental; avoid animated sparkle or pattern effects."
+        },
+        {
+          "id": "bag_other_v45",
+          "variation_number": 45,
+          "name": "Zipper or Closure at Rest",
+          "hook": "If a zipper or closure is visible, begin with it in its exact resting position.",
+          "action": "Use a close stationary view for a brief inspection, then pull back to show the closure's location without operating it.",
+          "detail": "Do not open, close or add zipper teeth, pulls, buttons or fasteners absent from the reference.",
+          "camera": "Locked close framing and gentle pullback; no moving hardware animation.",
+          "lighting": "Soft directional light without exaggerated metallic shine.",
+          "closing": "Finish with the closure visible as part of the complete design.",
+          "audio": "No invented zipper or click sounds; use quiet music or silence."
+        },
+        {
+          "id": "bag_other_v46",
+          "variation_number": 46,
+          "name": "Bag Orientation Match Cut",
+          "hook": "Establish the bag in one clear orientation that matches the reference image.",
+          "action": "Cut to another reference-supported angle if available, then cut back to the original framing; never rotate or morph the item between views.",
+          "detail": "Each angle must remain consistent with the actual product. Do not fabricate hidden sides or accessories.",
+          "camera": "Two or three clean static shots with matched scale and no spin transition.",
+          "lighting": "Match exposure and white balance across the cuts.",
+          "closing": "Return to the opening composition for an easy visual comparison.",
+          "audio": "A very subtle cut accent is optional; avoid whooshes and impact sounds."
+        },
+        {
+          "id": "bag_other_v47",
+          "variation_number": 47,
+          "name": "Handle-to-Body Connection Context",
+          "hook": "Focus on a visible handle attachment point or connection area shown in the reference.",
+          "action": "Hold on the connection detail, then slowly widen until both the detail and surrounding bag panel are visible.",
+          "detail": "Do not suggest load strength, stitching quality or durability based only on the image.",
+          "camera": "Close-to-medium pullback with steady focus and realistic proportions.",
+          "lighting": "Even light that reveals the actual visible boundary without artificial sharpening.",
+          "closing": "Keep the attachment area readable while showing enough of the bag for context.",
+          "audio": "Clean, low-key audio; no tugging or strain effects."
+        },
+        {
+          "id": "bag_other_v48",
+          "variation_number": 48,
+          "name": "Clean Negative Space Composition",
+          "hook": "Present the bag in a simple composition with uncluttered space around its outline.",
+          "action": "Use a slow, small reframing move to balance the empty space around the product while the bag remains motionless.",
+          "detail": "Do not add decorative props, floating graphics or a new environment that changes the reference product presentation.",
+          "camera": "Gentle horizontal reframing with fixed product scale and no wide-angle distortion.",
+          "lighting": "Soft neutral light and a believable shadow; avoid halos or artificial rim glow.",
+          "closing": "Hold a balanced frame with the whole bag visible and clear separation from the background.",
+          "audio": "Subtle ambient instrumental or silence."
+        },
+        {
+          "id": "bag_other_v49",
+          "variation_number": 49,
+          "name": "Texture Detail With No Enhancement",
+          "hook": "Choose one surface area whose texture is genuinely visible in the reference.",
+          "action": "Move into a restrained close-up, hold for inspection, then return to the wider view without changing the surface appearance.",
+          "detail": "Do not add grain, embossing, leather pores, fabric weave or gloss that cannot be seen in the source.",
+          "camera": "Slow optical-style push-in and pullback, avoiding digital oversharpening.",
+          "lighting": "Soft raking light only to the extent supported by the original appearance; keep texture natural.",
+          "closing": "End on a clean medium shot that preserves the original finish.",
+          "audio": "Quiet instrumental or silence; no scratch or rubbing sound effects."
+        },
+        {
+          "id": "bag_other_v50",
+          "variation_number": 50,
+          "name": "Three-Beat Product Overview",
+          "hook": "Open with the complete bag, clear and stationary, in a reference-matched composition.",
+          "action": "Show three calm beats: full product, one clearly visible design detail, then full product again; use cuts rather than fabricated movement.",
+          "detail": "Every detail must be confirmed by the reference. Do not add features, contents, dimensions or performance claims.",
+          "camera": "Three stable framings with consistent colour, perspective and product scale.",
+          "lighting": "Keep the same neutral lighting character across all three beats.",
+          "closing": "Return to the opening view and hold long enough to register the complete product.",
+          "audio": "Simple understated music with restrained pacing; no loud reveal or transformation effects."
         }
       ]
     },
