@@ -19993,7 +19993,7 @@
       "subcategory_id": "food_snacks",
       "category_id": "food",
       "label": "🍪 Snek / Kerepek",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "food_snacks_v01",
@@ -20114,6 +20114,126 @@
           "lighting": "Soft key light and gentle fill preserve accurate colour and detail through the move.",
           "closing": "Finish on the full original arrangement, steady and unobstructed.",
           "audio": "Clean instrumental close; no voiceover claims or exaggerated crunch."
+        },
+        {
+          "id": "food_snacks_v11",
+          "variation_number": 11,
+          "name": "Ridgeline and Shadow Detail",
+          "hook": "Open on the real ridges, waves or raised surface of a snack only if those features are visible; otherwise focus on its natural outer edge.",
+          "action": "Slide the camera along the existing contours without touching, breaking or rearranging the snack.",
+          "detail": "Preserve the exact contour and colour. Do not claim crunchiness, freshness or ingredients from texture alone.",
+          "camera": "Use a low macro tracking move parallel to the ridges, then ease back to show the complete piece.",
+          "lighting": "A broad grazing light creates gentle contour shadows without over-sharpening the surface.",
+          "closing": "Hold a close three-quarter view that still makes the snack's full shape clear.",
+          "audio": "Quiet upbeat instrumental music; no artificial crunch or sizzling."
+        },
+        {
+          "id": "food_snacks_v12",
+          "variation_number": 12,
+          "name": "Shape Repetition Without Duplication",
+          "hook": "Show the actual group of snack pieces in the reference, using their existing repeated shapes as the visual pattern.",
+          "action": "Move the camera slowly across the group without adding, cloning or shifting pieces.",
+          "detail": "Keep piece count, scale, spacing and irregularities faithful to the source; do not make handmade pieces look identical.",
+          "camera": "Use a low diagonal slide across the group, ending with several pieces in focus and the rest naturally receding.",
+          "lighting": "Soft side lighting defines each piece with realistic contact shadows and natural colour.",
+          "closing": "Finish on the original full group so the real quantity remains visible.",
+          "audio": "Light instrumental music only; no invented handling sounds."
+        },
+        {
+          "id": "food_snacks_v13",
+          "variation_number": 13,
+          "name": "Broken Edge Natural Inspection",
+          "hook": "If a broken edge already exists, begin close enough to see its real interior; otherwise use a naturally uneven outer edge without breaking the snack.",
+          "action": "Make a short focus pull across the existing edge and then move back to the intact overall form.",
+          "detail": "Do not invent a filling, hollow centre, layered structure or ingredient. Keep the visible fracture exactly as shown.",
+          "camera": "Use a shallow macro angle with a slow focus shift from the edge to the outer surface.",
+          "lighting": "Diffuse side light reveals existing detail without making the interior look wetter or more saturated.",
+          "closing": "End with the edge visible in context, not as an exaggerated texture effect.",
+          "audio": "Soft instrumental bed; no snapping or crunch unless a break is visibly shown."
+        },
+        {
+          "id": "food_snacks_v14",
+          "variation_number": 14,
+          "name": "Package Seal and Product Context",
+          "hook": "When a sealed packet is visible, begin with its genuine top seam or closure; if the snack is unpackaged, begin with its natural outline instead.",
+          "action": "Track along the actual seam without tearing or opening it, then widen to include the package front and any snack already shown.",
+          "detail": "Preserve the package's printed artwork, seal and proportions. Do not imply freshness locks, resealing or protective performance.",
+          "camera": "Use a slow close lateral pass along the top edge followed by a controlled pullback.",
+          "lighting": "Broad diffused light keeps printed information legible and manages reflections on the wrapper.",
+          "closing": "Hold a balanced frame of the real packet or unpackaged snack as supplied.",
+          "audio": "Quiet music; no wrapper crinkle without visible movement."
+        },
+        {
+          "id": "food_snacks_v15",
+          "variation_number": 15,
+          "name": "Crumb and Surface Scale",
+          "hook": "Begin with naturally visible crumbs or small surface particles only if they are present in the reference; otherwise select a genuine surface mark or ridge.",
+          "action": "Move the camera a short distance at macro scale without sprinkling crumbs or changing the snack's arrangement.",
+          "detail": "Do not create crumbs, powder, seasoning or particles that are absent from the image; do not use them to imply a flavour or texture claim.",
+          "camera": "Use a controlled macro push with a gentle focus transition, then widen to identify the whole snack.",
+          "lighting": "Soft directional light reveals existing tiny details while avoiding harsh contrast or artificial crispness.",
+          "closing": "Finish with a close view that remains faithful to the actual surface.",
+          "audio": "Low-volume instrumental music; no crunch, sprinkle or pouring effects."
+        },
+        {
+          "id": "food_snacks_v16",
+          "variation_number": 16,
+          "name": "Stack Profile and Contact Points",
+          "hook": "If the reference shows snacks stacked or overlapping, frame the actual stack profile and contact points; if not, showcase the single item without constructing a stack.",
+          "action": "Keep all pieces stationary while the camera rises slightly to reveal their real overlap and depth.",
+          "detail": "Do not add pieces, straighten irregular shapes or imply stack stability beyond what is visible.",
+          "camera": "Begin at table height and tilt up into a shallow three-quarter view, maintaining natural perspective.",
+          "lighting": "Use soft side fill to separate overlapping pieces and retain the actual surface colour.",
+          "closing": "Hold the full existing stack or single snack clearly in frame.",
+          "audio": "Gentle instrumental bed; no clatter or movement sounds."
+        },
+        {
+          "id": "food_snacks_v17",
+          "variation_number": 17,
+          "name": "Matte Versus Gloss Surface Read",
+          "hook": "Show the snack under neutral light and focus on whether its visible surface appears matte, coated or reflective, without assuming ingredients.",
+          "action": "Shift the camera angle slightly so genuine highlights change naturally while the food remains still.",
+          "detail": "Do not add oil droplets, sugar crystals, glaze or seasoning unless clearly present in the reference; avoid taste and freshness claims.",
+          "camera": "Use a small controlled arc and finish on a stable medium close-up.",
+          "lighting": "Large diffused light with a restrained side highlight preserves the true surface appearance without fake shine.",
+          "closing": "Return to a balanced view of the whole piece or group.",
+          "audio": "Subtle instrumental music only; no sizzling or exaggerated food sounds."
+        },
+        {
+          "id": "food_snacks_v18",
+          "variation_number": 18,
+          "name": "Wrapper Window Reveal",
+          "hook": "If the actual package has a transparent window, start with the snack visible through that window; if it does not, frame the clearest real printed or sealed area.",
+          "action": "Slide from the genuine window or panel toward the visible product, keeping the package closed and unchanged.",
+          "detail": "Do not make contents more numerous, brighter or more uniform than shown. Never invent a window, inner tray or package insert.",
+          "camera": "Use a slow side-to-front move with stable focus, ending on a complete package view.",
+          "lighting": "Control reflections on clear film with broad soft sources while retaining realistic transparency and colour.",
+          "closing": "Hold the original package with its actual contents and artwork accurately represented.",
+          "audio": "Soft instrumental music; no unboxing sounds."
+        },
+        {
+          "id": "food_snacks_v19",
+          "variation_number": 19,
+          "name": "Low-Angle Snack Silhouette",
+          "hook": "Start at surface level so the snack's actual thickness and outline stand against the background, without using an artificial scale comparison.",
+          "action": "Track a short distance along the front edge while keeping the snack fixed in place.",
+          "detail": "Preserve real thickness, bends and uneven edges. Do not inflate the snack or imply serving size or weight.",
+          "camera": "Use a low macro slider move, then lift gently to a natural three-quarter view.",
+          "lighting": "A soft back-side fill separates the silhouette while the main diffused light preserves surface detail.",
+          "closing": "End with the complete snack visible at a realistic scale.",
+          "audio": "Relaxed instrumental music; no invented crunch or handling effects."
+        },
+        {
+          "id": "food_snacks_v20",
+          "variation_number": 20,
+          "name": "Three-View Snack Showcase",
+          "hook": "Establish the actual snack or package in a full view, then select two visible details that genuinely distinguish this item, such as its shape, surface or real package artwork.",
+          "action": "Cut between the full view and two close details while the snack, piece count and packaging remain unchanged.",
+          "detail": "Use only visible characteristics; do not invent flavours, ingredients, filling, steam, melting or a tasting reaction.",
+          "camera": "Use three stable framings—full product, close surface detail, and package or silhouette detail—with consistent scale and colour.",
+          "lighting": "Match white balance and exposure across every shot; preserve natural food colour and package print.",
+          "closing": "Return to the original full-product frame and hold it cleanly.",
+          "audio": "A light musical beat may mark each cut; no voiceover claims or exaggerated food effects."
         }
       ]
     },
