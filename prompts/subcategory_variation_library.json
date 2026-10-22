@@ -6225,12 +6225,11 @@
           "name": "Entryway ready check",
           "hook": "HOOK: Open on the backpack in a clean entryway bench, grounded and fully readable. Use the supplied reference image as the sole authority for product identity. No text, captions, extra logos or watermark unless explicitly selected.",
           "action": "ACTION: push in slowly, then ease back to the full product. Keep the product's shape, colour, pattern, proportions and supplied parts unchanged; avoid unsupported physical actions.",
-          "detail": "DETAIL: Emphasise front silhouette and visible seams. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims.",
+          "detail": "DETAIL: Emphasise front silhouette and visible seams. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims. Style note retained: Cinematic",
           "camera": "CAMERA: Use a controlled smooth move with stable focus and natural perspective. Keep the whole product in frame during the reveal; avoid distortion, whip-pans and unnecessary cuts.",
           "lighting": "LIGHTING: Use soft, plausible Cinematic lighting. Preserve reference colour, readable shadows and real surface detail; do not recolour or add artificial shine.",
           "closing": "CTA / HERO: End on a clean, stable view with the whole backpack visible and unobstructed. Preserve every reference-visible detail and make no unsupported claims.",
-          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action.",
-          "style": "Cinematic"
+          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action."
         },
         {
           "id": "bag_backpack_v12",
@@ -6238,12 +6237,11 @@
           "name": "Trailhead pause",
           "hook": "HOOK: Open on the backpack in a plain sheltered outdoor bench, grounded and fully readable. Use the supplied reference image as the sole authority for product identity. No text, captions, extra logos or watermark unless explicitly selected.",
           "action": "ACTION: slide gently from side profile toward the front. Keep the product's shape, colour, pattern, proportions and supplied parts unchanged; avoid unsupported physical actions.",
-          "detail": "DETAIL: Emphasise visible straps and outer panels. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims.",
+          "detail": "DETAIL: Emphasise visible straps and outer panels. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims. Style note retained: Minimal",
           "camera": "CAMERA: Use a controlled smooth move with stable focus and natural perspective. Keep the whole product in frame during the reveal; avoid distortion, whip-pans and unnecessary cuts.",
           "lighting": "LIGHTING: Use soft, plausible Minimal lighting. Preserve reference colour, readable shadows and real surface detail; do not recolour or add artificial shine.",
           "closing": "CTA / HERO: End on a clean, stable view with the whole backpack visible and unobstructed. Preserve every reference-visible detail and make no unsupported claims.",
-          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action.",
-          "style": "Minimal"
+          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action."
         },
         {
           "id": "bag_backpack_v13",
@@ -6251,12 +6249,11 @@
           "name": "Front-pocket framing",
           "hook": "HOOK: Open on the backpack in a neutral studio background, grounded and fully readable. Use the supplied reference image as the sole authority for product identity. No text, captions, extra logos or watermark unless explicitly selected.",
           "action": "ACTION: track across the front without opening any compartment. Keep the product's shape, colour, pattern, proportions and supplied parts unchanged; avoid unsupported physical actions.",
-          "detail": "DETAIL: Emphasise visible pocket edges and closures. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims.",
+          "detail": "DETAIL: Emphasise visible pocket edges and closures. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims. Style note retained: Lifestyle",
           "camera": "CAMERA: Use a controlled smooth move with stable focus and natural perspective. Keep the whole product in frame during the reveal; avoid distortion, whip-pans and unnecessary cuts.",
           "lighting": "LIGHTING: Use soft, plausible Lifestyle lighting. Preserve reference colour, readable shadows and real surface detail; do not recolour or add artificial shine.",
           "closing": "CTA / HERO: End on a clean, stable view with the whole backpack visible and unobstructed. Preserve every reference-visible detail and make no unsupported claims.",
-          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action.",
-          "style": "Lifestyle"
+          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action."
         },
         {
           "id": "bag_backpack_v14",
@@ -6264,12 +6261,11 @@
           "name": "Desk-to-daypack",
           "hook": "HOOK: Open on the backpack in a tidy desk without extra props, grounded and fully readable. Use the supplied reference image as the sole authority for product identity. No text, captions, extra logos or watermark unless explicitly selected.",
           "action": "ACTION: glide from the setting toward the stationary backpack. Keep the product's shape, colour, pattern, proportions and supplied parts unchanged; avoid unsupported physical actions.",
-          "detail": "DETAIL: Emphasise complete shape in a simple setting. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims.",
+          "detail": "DETAIL: Emphasise complete shape in a simple setting. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims. Style note retained: Dynamic",
           "camera": "CAMERA: Use a controlled smooth move with stable focus and natural perspective. Keep the whole product in frame during the reveal; avoid distortion, whip-pans and unnecessary cuts.",
           "lighting": "LIGHTING: Use soft, plausible Dynamic lighting. Preserve reference colour, readable shadows and real surface detail; do not recolour or add artificial shine.",
           "closing": "CTA / HERO: End on a clean, stable view with the whole backpack visible and unobstructed. Preserve every reference-visible detail and make no unsupported claims.",
-          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action.",
-          "style": "Dynamic"
+          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action."
         },
         {
           "id": "bag_backpack_v15",
@@ -6277,12 +6273,11 @@
           "name": "Strap detail ladder",
           "hook": "HOOK: Open on the backpack in a plain studio floor, grounded and fully readable. Use the supplied reference image as the sole authority for product identity. No text, captions, extra logos or watermark unless explicitly selected.",
           "action": "ACTION: pan along a visible shoulder strap and widen. Keep the product's shape, colour, pattern, proportions and supplied parts unchanged; avoid unsupported physical actions.",
-          "detail": "DETAIL: Emphasise real strap padding, adjusters and stitching. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims.",
+          "detail": "DETAIL: Emphasise real strap padding, adjusters and stitching. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims. Style note retained: Luxury",
           "camera": "CAMERA: Use a controlled smooth move with stable focus and natural perspective. Keep the whole product in frame during the reveal; avoid distortion, whip-pans and unnecessary cuts.",
           "lighting": "LIGHTING: Use soft, plausible Luxury lighting. Preserve reference colour, readable shadows and real surface detail; do not recolour or add artificial shine.",
           "closing": "CTA / HERO: End on a clean, stable view with the whole backpack visible and unobstructed. Preserve every reference-visible detail and make no unsupported claims.",
-          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action.",
-          "style": "Luxury"
+          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action."
         },
         {
           "id": "bag_backpack_v16",
@@ -6290,12 +6285,11 @@
           "name": "Packing-table composition",
           "hook": "HOOK: Open on the backpack in a matte tabletop, grounded and fully readable. Use the supplied reference image as the sole authority for product identity. No text, captions, extra logos or watermark unless explicitly selected.",
           "action": "ACTION: make an overhead pass from top edge to base. Keep the product's shape, colour, pattern, proportions and supplied parts unchanged; avoid unsupported physical actions.",
-          "detail": "DETAIL: Emphasise visible panels and closures. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims.",
+          "detail": "DETAIL: Emphasise visible panels and closures. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims. Style note retained: Flatlay",
           "camera": "CAMERA: Use a controlled smooth move with stable focus and natural perspective. Keep the whole product in frame during the reveal; avoid distortion, whip-pans and unnecessary cuts.",
           "lighting": "LIGHTING: Use soft, plausible Flatlay lighting. Preserve reference colour, readable shadows and real surface detail; do not recolour or add artificial shine.",
           "closing": "CTA / HERO: End on a clean, stable view with the whole backpack visible and unobstructed. Preserve every reference-visible detail and make no unsupported claims.",
-          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action.",
-          "style": "Flatlay"
+          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action."
         },
         {
           "id": "bag_backpack_v17",
@@ -6303,12 +6297,11 @@
           "name": "Zipper glint",
           "hook": "HOOK: Open on the backpack in a dark neutral studio plinth, grounded and fully readable. Use the supplied reference image as the sole authority for product identity. No text, captions, extra logos or watermark unless explicitly selected.",
           "action": "ACTION: make a precise macro slide past a visible zipper. Keep the product's shape, colour, pattern, proportions and supplied parts unchanged; avoid unsupported physical actions.",
-          "detail": "DETAIL: Emphasise actual zipper hardware if present. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims.",
+          "detail": "DETAIL: Emphasise actual zipper hardware if present. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims. Style note retained: Creative Reveal",
           "camera": "CAMERA: Use a controlled smooth move with stable focus and natural perspective. Keep the whole product in frame during the reveal; avoid distortion, whip-pans and unnecessary cuts.",
           "lighting": "LIGHTING: Use soft, plausible Creative Reveal lighting. Preserve reference colour, readable shadows and real surface detail; do not recolour or add artificial shine.",
           "closing": "CTA / HERO: End on a clean, stable view with the whole backpack visible and unobstructed. Preserve every reference-visible detail and make no unsupported claims.",
-          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action.",
-          "style": "Creative Reveal"
+          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action."
         },
         {
           "id": "bag_backpack_v18",
@@ -6316,12 +6309,11 @@
           "name": "Silhouette cut-out",
           "hook": "HOOK: Open on the backpack in a plain studio with negative space, grounded and fully readable. Use the supplied reference image as the sole authority for product identity. No text, captions, extra logos or watermark unless explicitly selected.",
           "action": "ACTION: gradually reveal the stationary pack with controlled light. Keep the product's shape, colour, pattern, proportions and supplied parts unchanged; avoid unsupported physical actions.",
-          "detail": "DETAIL: Emphasise outer contour and real strap shape. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims.",
+          "detail": "DETAIL: Emphasise outer contour and real strap shape. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims. Style note retained: Doodle Style",
           "camera": "CAMERA: Use a controlled smooth move with stable focus and natural perspective. Keep the whole product in frame during the reveal; avoid distortion, whip-pans and unnecessary cuts.",
           "lighting": "LIGHTING: Use soft, plausible Doodle Style lighting. Preserve reference colour, readable shadows and real surface detail; do not recolour or add artificial shine.",
           "closing": "CTA / HERO: End on a clean, stable view with the whole backpack visible and unobstructed. Preserve every reference-visible detail and make no unsupported claims.",
-          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action.",
-          "style": "Doodle Style"
+          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action."
         },
         {
           "id": "bag_backpack_v19",
@@ -6329,12 +6321,11 @@
           "name": "Sketch-to-real outline",
           "hook": "HOOK: Open on the backpack in a bright seamless background, grounded and fully readable. Use the supplied reference image as the sole authority for product identity. No text, captions, extra logos or watermark unless explicitly selected.",
           "action": "ACTION: trace the actual outer contour with a thin doodle, then fade it. Keep the product's shape, colour, pattern, proportions and supplied parts unchanged; avoid unsupported physical actions.",
-          "detail": "DETAIL: Emphasise unaltered silhouette and visible details. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims.",
+          "detail": "DETAIL: Emphasise unaltered silhouette and visible details. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims. Style note retained: Cinematic",
           "camera": "CAMERA: Use a controlled smooth move with stable focus and natural perspective. Keep the whole product in frame during the reveal; avoid distortion, whip-pans and unnecessary cuts.",
           "lighting": "LIGHTING: Use soft, plausible Cinematic lighting. Preserve reference colour, readable shadows and real surface detail; do not recolour or add artificial shine.",
           "closing": "CTA / HERO: End on a clean, stable view with the whole backpack visible and unobstructed. Preserve every reference-visible detail and make no unsupported claims.",
-          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action.",
-          "style": "Cinematic"
+          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action."
         },
         {
           "id": "bag_backpack_v20",
@@ -6342,12 +6333,11 @@
           "name": "Bench-side profile",
           "hook": "HOOK: Open on the backpack in a simple bench, grounded and fully readable. Use the supplied reference image as the sole authority for product identity. No text, captions, extra logos or watermark unless explicitly selected.",
           "action": "ACTION: slide from side profile toward a three-quarter front view. Keep the product's shape, colour, pattern, proportions and supplied parts unchanged; avoid unsupported physical actions.",
-          "detail": "DETAIL: Emphasise real side depth and grounded base. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims.",
+          "detail": "DETAIL: Emphasise real side depth and grounded base. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims. Style note retained: Minimal",
           "camera": "CAMERA: Use a controlled smooth move with stable focus and natural perspective. Keep the whole product in frame during the reveal; avoid distortion, whip-pans and unnecessary cuts.",
           "lighting": "LIGHTING: Use soft, plausible Minimal lighting. Preserve reference colour, readable shadows and real surface detail; do not recolour or add artificial shine.",
           "closing": "CTA / HERO: End on a clean, stable view with the whole backpack visible and unobstructed. Preserve every reference-visible detail and make no unsupported claims.",
-          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action.",
-          "style": "Minimal"
+          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action."
         },
         {
           "id": "bag_backpack_v21",
@@ -6355,12 +6345,11 @@
           "name": "Top-down hardware map",
           "hook": "HOOK: Open on the backpack in a plain tabletop, grounded and fully readable. Use the supplied reference image as the sole authority for product identity. No text, captions, extra logos or watermark unless explicitly selected.",
           "action": "ACTION: drift overhead above the stationary backpack. Keep the product's shape, colour, pattern, proportions and supplied parts unchanged; avoid unsupported physical actions.",
-          "detail": "DETAIL: Emphasise top handle and visible hardware. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims.",
+          "detail": "DETAIL: Emphasise top handle and visible hardware. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims. Style note retained: Lifestyle",
           "camera": "CAMERA: Use a controlled smooth move with stable focus and natural perspective. Keep the whole product in frame during the reveal; avoid distortion, whip-pans and unnecessary cuts.",
           "lighting": "LIGHTING: Use soft, plausible Lifestyle lighting. Preserve reference colour, readable shadows and real surface detail; do not recolour or add artificial shine.",
           "closing": "CTA / HERO: End on a clean, stable view with the whole backpack visible and unobstructed. Preserve every reference-visible detail and make no unsupported claims.",
-          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action.",
-          "style": "Lifestyle"
+          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action."
         },
         {
           "id": "bag_backpack_v22",
@@ -6368,12 +6357,11 @@
           "name": "One-step carry",
           "hook": "HOOK: Open on the backpack in a simple indoor hallway, grounded and fully readable. Use the supplied reference image as the sole authority for product identity. No text, captions, extra logos or watermark unless explicitly selected.",
           "action": "ACTION: if a model is selected, lift once by a visible carry point and pause; otherwise keep it still. Keep the product's shape, colour, pattern, proportions and supplied parts unchanged; avoid unsupported physical actions.",
-          "detail": "DETAIL: Emphasise real carrying point and unchanged shape. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims.",
+          "detail": "DETAIL: Emphasise real carrying point and unchanged shape. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims. Style note retained: Dynamic",
           "camera": "CAMERA: Use a controlled smooth move with stable focus and natural perspective. Keep the whole product in frame during the reveal; avoid distortion, whip-pans and unnecessary cuts.",
           "lighting": "LIGHTING: Use soft, plausible Dynamic lighting. Preserve reference colour, readable shadows and real surface detail; do not recolour or add artificial shine.",
           "closing": "CTA / HERO: End on a clean, stable view with the whole backpack visible and unobstructed. Preserve every reference-visible detail and make no unsupported claims.",
-          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action.",
-          "style": "Dynamic"
+          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action."
         },
         {
           "id": "bag_backpack_v23",
@@ -6381,12 +6369,11 @@
           "name": "Stitching in focus",
           "hook": "HOOK: Open on the backpack in a neutral close-up setting, grounded and fully readable. Use the supplied reference image as the sole authority for product identity. No text, captions, extra logos or watermark unless explicitly selected.",
           "action": "ACTION: follow a visible seam and pull back. Keep the product's shape, colour, pattern, proportions and supplied parts unchanged; avoid unsupported physical actions.",
-          "detail": "DETAIL: Emphasise genuine stitch line and panel boundary. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims.",
+          "detail": "DETAIL: Emphasise genuine stitch line and panel boundary. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims. Style note retained: Luxury",
           "camera": "CAMERA: Use a controlled smooth move with stable focus and natural perspective. Keep the whole product in frame during the reveal; avoid distortion, whip-pans and unnecessary cuts.",
           "lighting": "LIGHTING: Use soft, plausible Luxury lighting. Preserve reference colour, readable shadows and real surface detail; do not recolour or add artificial shine.",
           "closing": "CTA / HERO: End on a clean, stable view with the whole backpack visible and unobstructed. Preserve every reference-visible detail and make no unsupported claims.",
-          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action.",
-          "style": "Luxury"
+          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action."
         },
         {
           "id": "bag_backpack_v24",
@@ -6394,12 +6381,11 @@
           "name": "Hallway departure",
           "hook": "HOOK: Open on the backpack in a plain hallway beside doorway, grounded and fully readable. Use the supplied reference image as the sole authority for product identity. No text, captions, extra logos or watermark unless explicitly selected.",
           "action": "ACTION: follow a short camera move while keeping the product in frame. Keep the product's shape, colour, pattern, proportions and supplied parts unchanged; avoid unsupported physical actions.",
-          "detail": "DETAIL: Emphasise full backpack with straps visible. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims.",
+          "detail": "DETAIL: Emphasise full backpack with straps visible. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims. Style note retained: Flatlay",
           "camera": "CAMERA: Use a controlled smooth move with stable focus and natural perspective. Keep the whole product in frame during the reveal; avoid distortion, whip-pans and unnecessary cuts.",
           "lighting": "LIGHTING: Use soft, plausible Flatlay lighting. Preserve reference colour, readable shadows and real surface detail; do not recolour or add artificial shine.",
           "closing": "CTA / HERO: End on a clean, stable view with the whole backpack visible and unobstructed. Preserve every reference-visible detail and make no unsupported claims.",
-          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action.",
-          "style": "Flatlay"
+          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action."
         },
         {
           "id": "bag_backpack_v25",
@@ -6407,12 +6393,11 @@
           "name": "Dry weather study",
           "hook": "HOOK: Open on the backpack in a dry sheltered outdoor bench, grounded and fully readable. Use the supplied reference image as the sole authority for product identity. No text, captions, extra logos or watermark unless explicitly selected.",
           "action": "ACTION: move the background subtly while the backpack remains dry and still. Keep the product's shape, colour, pattern, proportions and supplied parts unchanged; avoid unsupported physical actions.",
-          "detail": "DETAIL: Emphasise surface texture without weather claims. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims.",
+          "detail": "DETAIL: Emphasise surface texture without weather claims. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims. Style note retained: Creative Reveal",
           "camera": "CAMERA: Use a controlled smooth move with stable focus and natural perspective. Keep the whole product in frame during the reveal; avoid distortion, whip-pans and unnecessary cuts.",
           "lighting": "LIGHTING: Use soft, plausible Creative Reveal lighting. Preserve reference colour, readable shadows and real surface detail; do not recolour or add artificial shine.",
           "closing": "CTA / HERO: End on a clean, stable view with the whole backpack visible and unobstructed. Preserve every reference-visible detail and make no unsupported claims.",
-          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action.",
-          "style": "Creative Reveal"
+          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action."
         },
         {
           "id": "bag_backpack_v26",
@@ -6420,12 +6405,11 @@
           "name": "Base and balance",
           "hook": "HOOK: Open on the backpack in a clean studio floor, grounded and fully readable. Use the supplied reference image as the sole authority for product identity. No text, captions, extra logos or watermark unless explicitly selected.",
           "action": "ACTION: tilt from the actual base toward the top. Keep the product's shape, colour, pattern, proportions and supplied parts unchanged; avoid unsupported physical actions.",
-          "detail": "DETAIL: Emphasise real base edge and complete outline. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims.",
+          "detail": "DETAIL: Emphasise real base edge and complete outline. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims. Style note retained: Doodle Style",
           "camera": "CAMERA: Use a controlled smooth move with stable focus and natural perspective. Keep the whole product in frame during the reveal; avoid distortion, whip-pans and unnecessary cuts.",
           "lighting": "LIGHTING: Use soft, plausible Doodle Style lighting. Preserve reference colour, readable shadows and real surface detail; do not recolour or add artificial shine.",
           "closing": "CTA / HERO: End on a clean, stable view with the whole backpack visible and unobstructed. Preserve every reference-visible detail and make no unsupported claims.",
-          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action.",
-          "style": "Doodle Style"
+          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action."
         },
         {
           "id": "bag_backpack_v27",
@@ -6433,12 +6417,11 @@
           "name": "Pocket-to-pocket tour",
           "hook": "HOOK: Open on the backpack in a plain studio, grounded and fully readable. Use the supplied reference image as the sole authority for product identity. No text, captions, extra logos or watermark unless explicitly selected.",
           "action": "ACTION: trace visible front compartments without opening them. Keep the product's shape, colour, pattern, proportions and supplied parts unchanged; avoid unsupported physical actions.",
-          "detail": "DETAIL: Emphasise actual pocket outlines only. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims.",
+          "detail": "DETAIL: Emphasise actual pocket outlines only. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims. Style note retained: Cinematic",
           "camera": "CAMERA: Use a controlled smooth move with stable focus and natural perspective. Keep the whole product in frame during the reveal; avoid distortion, whip-pans and unnecessary cuts.",
           "lighting": "LIGHTING: Use soft, plausible Cinematic lighting. Preserve reference colour, readable shadows and real surface detail; do not recolour or add artificial shine.",
           "closing": "CTA / HERO: End on a clean, stable view with the whole backpack visible and unobstructed. Preserve every reference-visible detail and make no unsupported claims.",
-          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action.",
-          "style": "Cinematic"
+          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action."
         },
         {
           "id": "bag_backpack_v28",
@@ -6446,12 +6429,11 @@
           "name": "Window colour fidelity",
           "hook": "HOOK: Open on the backpack in a window-lit neutral room, grounded and fully readable. Use the supplied reference image as the sole authority for product identity. No text, captions, extra logos or watermark unless explicitly selected.",
           "action": "ACTION: shift from frontal to a three-quarter view. Keep the product's shape, colour, pattern, proportions and supplied parts unchanged; avoid unsupported physical actions.",
-          "detail": "DETAIL: Emphasise accurate reference colour and print placement. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims.",
+          "detail": "DETAIL: Emphasise accurate reference colour and print placement. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims. Style note retained: Minimal",
           "camera": "CAMERA: Use a controlled smooth move with stable focus and natural perspective. Keep the whole product in frame during the reveal; avoid distortion, whip-pans and unnecessary cuts.",
           "lighting": "LIGHTING: Use soft, plausible Minimal lighting. Preserve reference colour, readable shadows and real surface detail; do not recolour or add artificial shine.",
           "closing": "CTA / HERO: End on a clean, stable view with the whole backpack visible and unobstructed. Preserve every reference-visible detail and make no unsupported claims.",
-          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action.",
-          "style": "Minimal"
+          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action."
         },
         {
           "id": "bag_backpack_v29",
@@ -6459,12 +6441,11 @@
           "name": "Premium pedestal arc",
           "hook": "HOOK: Open on the backpack in a matte pedestal, grounded and fully readable. Use the supplied reference image as the sole authority for product identity. No text, captions, extra logos or watermark unless explicitly selected.",
           "action": "ACTION: make a shallow camera arc without rotating the product. Keep the product's shape, colour, pattern, proportions and supplied parts unchanged; avoid unsupported physical actions.",
-          "detail": "DETAIL: Emphasise visible silhouette and real hardware. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims.",
+          "detail": "DETAIL: Emphasise visible silhouette and real hardware. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims. Style note retained: Lifestyle",
           "camera": "CAMERA: Use a controlled smooth move with stable focus and natural perspective. Keep the whole product in frame during the reveal; avoid distortion, whip-pans and unnecessary cuts.",
           "lighting": "LIGHTING: Use soft, plausible Lifestyle lighting. Preserve reference colour, readable shadows and real surface detail; do not recolour or add artificial shine.",
           "closing": "CTA / HERO: End on a clean, stable view with the whole backpack visible and unobstructed. Preserve every reference-visible detail and make no unsupported claims.",
-          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action.",
-          "style": "Lifestyle"
+          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action."
         },
         {
           "id": "bag_backpack_v30",
@@ -6472,12 +6453,11 @@
           "name": "Shelf-height reveal",
           "hook": "HOOK: Open on the backpack in a plain shelf with empty background, grounded and fully readable. Use the supplied reference image as the sole authority for product identity. No text, captions, extra logos or watermark unless explicitly selected.",
           "action": "ACTION: raise the camera until the whole backpack is revealed. Keep the product's shape, colour, pattern, proportions and supplied parts unchanged; avoid unsupported physical actions.",
-          "detail": "DETAIL: Emphasise true outline without added props. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims.",
+          "detail": "DETAIL: Emphasise true outline without added props. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims. Style note retained: Dynamic",
           "camera": "CAMERA: Use a controlled smooth move with stable focus and natural perspective. Keep the whole product in frame during the reveal; avoid distortion, whip-pans and unnecessary cuts.",
           "lighting": "LIGHTING: Use soft, plausible Dynamic lighting. Preserve reference colour, readable shadows and real surface detail; do not recolour or add artificial shine.",
           "closing": "CTA / HERO: End on a clean, stable view with the whole backpack visible and unobstructed. Preserve every reference-visible detail and make no unsupported claims.",
-          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action.",
-          "style": "Dynamic"
+          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action."
         },
         {
           "id": "bag_backpack_v31",
@@ -6485,12 +6465,11 @@
           "name": "Doodle detail pointers",
           "hook": "HOOK: Open on the backpack in a simple front-facing studio, grounded and fully readable. Use the supplied reference image as the sole authority for product identity. No text, captions, extra logos or watermark unless explicitly selected.",
           "action": "ACTION: briefly point doodle arrows at real visible details, then remove them. Keep the product's shape, colour, pattern, proportions and supplied parts unchanged; avoid unsupported physical actions.",
-          "detail": "DETAIL: Emphasise existing straps and pockets only. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims.",
+          "detail": "DETAIL: Emphasise existing straps and pockets only. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims. Style note retained: Luxury",
           "camera": "CAMERA: Use a controlled smooth move with stable focus and natural perspective. Keep the whole product in frame during the reveal; avoid distortion, whip-pans and unnecessary cuts.",
           "lighting": "LIGHTING: Use soft, plausible Luxury lighting. Preserve reference colour, readable shadows and real surface detail; do not recolour or add artificial shine.",
           "closing": "CTA / HERO: End on a clean, stable view with the whole backpack visible and unobstructed. Preserve every reference-visible detail and make no unsupported claims.",
-          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action.",
-          "style": "Luxury"
+          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action."
         },
         {
           "id": "bag_backpack_v32",
@@ -6498,12 +6477,11 @@
           "name": "Side seam macro",
           "hook": "HOOK: Open on the backpack in a plain neutral background, grounded and fully readable. Use the supplied reference image as the sole authority for product identity. No text, captions, extra logos or watermark unless explicitly selected.",
           "action": "ACTION: slide parallel to a visible side seam. Keep the product's shape, colour, pattern, proportions and supplied parts unchanged; avoid unsupported physical actions.",
-          "detail": "DETAIL: Emphasise actual panel edge and stitching. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims.",
+          "detail": "DETAIL: Emphasise actual panel edge and stitching. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims. Style note retained: Flatlay",
           "camera": "CAMERA: Use a controlled smooth move with stable focus and natural perspective. Keep the whole product in frame during the reveal; avoid distortion, whip-pans and unnecessary cuts.",
           "lighting": "LIGHTING: Use soft, plausible Flatlay lighting. Preserve reference colour, readable shadows and real surface detail; do not recolour or add artificial shine.",
           "closing": "CTA / HERO: End on a clean, stable view with the whole backpack visible and unobstructed. Preserve every reference-visible detail and make no unsupported claims.",
-          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action.",
-          "style": "Flatlay"
+          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action."
         },
         {
           "id": "bag_backpack_v33",
@@ -6511,12 +6489,11 @@
           "name": "Gym locker context",
           "hook": "HOOK: Open on the backpack in a plain unbranded locker, grounded and fully readable. Use the supplied reference image as the sole authority for product identity. No text, captions, extra logos or watermark unless explicitly selected.",
           "action": "ACTION: push in slowly while the backpack stays still. Keep the product's shape, colour, pattern, proportions and supplied parts unchanged; avoid unsupported physical actions.",
-          "detail": "DETAIL: Emphasise unobstructed full product. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims.",
+          "detail": "DETAIL: Emphasise unobstructed full product. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims. Style note retained: Creative Reveal",
           "camera": "CAMERA: Use a controlled smooth move with stable focus and natural perspective. Keep the whole product in frame during the reveal; avoid distortion, whip-pans and unnecessary cuts.",
           "lighting": "LIGHTING: Use soft, plausible Creative Reveal lighting. Preserve reference colour, readable shadows and real surface detail; do not recolour or add artificial shine.",
           "closing": "CTA / HERO: End on a clean, stable view with the whole backpack visible and unobstructed. Preserve every reference-visible detail and make no unsupported claims.",
-          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action.",
-          "style": "Creative Reveal"
+          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action."
         },
         {
           "id": "bag_backpack_v34",
@@ -6524,12 +6501,11 @@
           "name": "Colour-block precision",
           "hook": "HOOK: Open on the backpack in a neutral studio, grounded and fully readable. Use the supplied reference image as the sole authority for product identity. No text, captions, extra logos or watermark unless explicitly selected.",
           "action": "ACTION: move laterally across the front panel. Keep the product's shape, colour, pattern, proportions and supplied parts unchanged; avoid unsupported physical actions.",
-          "detail": "DETAIL: Emphasise real colour blocks and print boundaries. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims.",
+          "detail": "DETAIL: Emphasise real colour blocks and print boundaries. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims. Style note retained: Doodle Style",
           "camera": "CAMERA: Use a controlled smooth move with stable focus and natural perspective. Keep the whole product in frame during the reveal; avoid distortion, whip-pans and unnecessary cuts.",
           "lighting": "LIGHTING: Use soft, plausible Doodle Style lighting. Preserve reference colour, readable shadows and real surface detail; do not recolour or add artificial shine.",
           "closing": "CTA / HERO: End on a clean, stable view with the whole backpack visible and unobstructed. Preserve every reference-visible detail and make no unsupported claims.",
-          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action.",
-          "style": "Doodle Style"
+          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action."
         },
         {
           "id": "bag_backpack_v35",
@@ -6537,12 +6513,11 @@
           "name": "Handle connection",
           "hook": "HOOK: Open on the backpack in a plain studio floor, grounded and fully readable. Use the supplied reference image as the sole authority for product identity. No text, captions, extra logos or watermark unless explicitly selected.",
           "action": "ACTION: tilt from a visible handle attachment toward the body. Keep the product's shape, colour, pattern, proportions and supplied parts unchanged; avoid unsupported physical actions.",
-          "detail": "DETAIL: Emphasise actual handle and attachment point. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims.",
+          "detail": "DETAIL: Emphasise actual handle and attachment point. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims. Style note retained: Cinematic",
           "camera": "CAMERA: Use a controlled smooth move with stable focus and natural perspective. Keep the whole product in frame during the reveal; avoid distortion, whip-pans and unnecessary cuts.",
           "lighting": "LIGHTING: Use soft, plausible Cinematic lighting. Preserve reference colour, readable shadows and real surface detail; do not recolour or add artificial shine.",
           "closing": "CTA / HERO: End on a clean, stable view with the whole backpack visible and unobstructed. Preserve every reference-visible detail and make no unsupported claims.",
-          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action.",
-          "style": "Cinematic"
+          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action."
         },
         {
           "id": "bag_backpack_v36",
@@ -6550,12 +6525,11 @@
           "name": "Angle-match reveal",
           "hook": "HOOK: Open on the backpack in a seamless studio background, grounded and fully readable. Use the supplied reference image as the sole authority for product identity. No text, captions, extra logos or watermark unless explicitly selected.",
           "action": "ACTION: match-cut between reference-supported angles at the same scale. Keep the product's shape, colour, pattern, proportions and supplied parts unchanged; avoid unsupported physical actions.",
-          "detail": "DETAIL: Emphasise reference-visible surfaces only. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims.",
+          "detail": "DETAIL: Emphasise reference-visible surfaces only. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims. Style note retained: Minimal",
           "camera": "CAMERA: Use a controlled smooth move with stable focus and natural perspective. Keep the whole product in frame during the reveal; avoid distortion, whip-pans and unnecessary cuts.",
           "lighting": "LIGHTING: Use soft, plausible Minimal lighting. Preserve reference colour, readable shadows and real surface detail; do not recolour or add artificial shine.",
           "closing": "CTA / HERO: End on a clean, stable view with the whole backpack visible and unobstructed. Preserve every reference-visible detail and make no unsupported claims.",
-          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action.",
-          "style": "Minimal"
+          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action."
         },
         {
           "id": "bag_backpack_v37",
@@ -6563,12 +6537,11 @@
           "name": "Strap length detail",
           "hook": "HOOK: Open on the backpack in a plain studio background, grounded and fully readable. Use the supplied reference image as the sole authority for product identity. No text, captions, extra logos or watermark unless explicitly selected.",
           "action": "ACTION: follow a visible strap toward any real adjuster, then return wide. Keep the product's shape, colour, pattern, proportions and supplied parts unchanged; avoid unsupported physical actions.",
-          "detail": "DETAIL: Emphasise real strap length and hardware. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims.",
+          "detail": "DETAIL: Emphasise real strap length and hardware. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims. Style note retained: Lifestyle",
           "camera": "CAMERA: Use a controlled smooth move with stable focus and natural perspective. Keep the whole product in frame during the reveal; avoid distortion, whip-pans and unnecessary cuts.",
           "lighting": "LIGHTING: Use soft, plausible Lifestyle lighting. Preserve reference colour, readable shadows and real surface detail; do not recolour or add artificial shine.",
           "closing": "CTA / HERO: End on a clean, stable view with the whole backpack visible and unobstructed. Preserve every reference-visible detail and make no unsupported claims.",
-          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action.",
-          "style": "Lifestyle"
+          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action."
         },
         {
           "id": "bag_backpack_v38",
@@ -6576,12 +6549,11 @@
           "name": "Quiet campus walkway",
           "hook": "HOOK: Open on the backpack in a clean bench beside an unbranded walkway, grounded and fully readable. Use the supplied reference image as the sole authority for product identity. No text, captions, extra logos or watermark unless explicitly selected.",
           "action": "ACTION: approach slowly; a selected model may pause beside the pack. Keep the product's shape, colour, pattern, proportions and supplied parts unchanged; avoid unsupported physical actions.",
-          "detail": "DETAIL: Emphasise full pack without added school items. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims.",
+          "detail": "DETAIL: Emphasise full pack without added school items. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims. Style note retained: Dynamic",
           "camera": "CAMERA: Use a controlled smooth move with stable focus and natural perspective. Keep the whole product in frame during the reveal; avoid distortion, whip-pans and unnecessary cuts.",
           "lighting": "LIGHTING: Use soft, plausible Dynamic lighting. Preserve reference colour, readable shadows and real surface detail; do not recolour or add artificial shine.",
           "closing": "CTA / HERO: End on a clean, stable view with the whole backpack visible and unobstructed. Preserve every reference-visible detail and make no unsupported claims.",
-          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action.",
-          "style": "Dynamic"
+          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action."
         },
         {
           "id": "bag_backpack_v39",
@@ -6589,12 +6561,11 @@
           "name": "Top panel symmetry",
           "hook": "HOOK: Open on the backpack in a matte tabletop, grounded and fully readable. Use the supplied reference image as the sole authority for product identity. No text, captions, extra logos or watermark unless explicitly selected.",
           "action": "ACTION: shift from overhead to a modest oblique angle. Keep the product's shape, colour, pattern, proportions and supplied parts unchanged; avoid unsupported physical actions.",
-          "detail": "DETAIL: Emphasise visible top panel and handle. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims.",
+          "detail": "DETAIL: Emphasise visible top panel and handle. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims. Style note retained: Luxury",
           "camera": "CAMERA: Use a controlled smooth move with stable focus and natural perspective. Keep the whole product in frame during the reveal; avoid distortion, whip-pans and unnecessary cuts.",
           "lighting": "LIGHTING: Use soft, plausible Luxury lighting. Preserve reference colour, readable shadows and real surface detail; do not recolour or add artificial shine.",
           "closing": "CTA / HERO: End on a clean, stable view with the whole backpack visible and unobstructed. Preserve every reference-visible detail and make no unsupported claims.",
-          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action.",
-          "style": "Luxury"
+          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action."
         },
         {
           "id": "bag_backpack_v40",
@@ -6602,12 +6573,11 @@
           "name": "Texture without claims",
           "hook": "HOOK: Open on the backpack in a plain studio pedestal, grounded and fully readable. Use the supplied reference image as the sole authority for product identity. No text, captions, extra logos or watermark unless explicitly selected.",
           "action": "ACTION: pass soft light across the real surface, then pull back. Keep the product's shape, colour, pattern, proportions and supplied parts unchanged; avoid unsupported physical actions.",
-          "detail": "DETAIL: Emphasise actual texture without material claims. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims.",
+          "detail": "DETAIL: Emphasise actual texture without material claims. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims. Style note retained: Flatlay",
           "camera": "CAMERA: Use a controlled smooth move with stable focus and natural perspective. Keep the whole product in frame during the reveal; avoid distortion, whip-pans and unnecessary cuts.",
           "lighting": "LIGHTING: Use soft, plausible Flatlay lighting. Preserve reference colour, readable shadows and real surface detail; do not recolour or add artificial shine.",
           "closing": "CTA / HERO: End on a clean, stable view with the whole backpack visible and unobstructed. Preserve every reference-visible detail and make no unsupported claims.",
-          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action.",
-          "style": "Flatlay"
+          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action."
         },
         {
           "id": "bag_backpack_v41",
@@ -6615,12 +6585,11 @@
           "name": "Grounded shadow study",
           "hook": "HOOK: Open on the backpack in a neutral studio floor, grounded and fully readable. Use the supplied reference image as the sole authority for product identity. No text, captions, extra logos or watermark unless explicitly selected.",
           "action": "ACTION: lower the camera and slide around the contact shadow. Keep the product's shape, colour, pattern, proportions and supplied parts unchanged; avoid unsupported physical actions.",
-          "detail": "DETAIL: Emphasise real base and plausible contact shadow. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims.",
+          "detail": "DETAIL: Emphasise real base and plausible contact shadow. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims. Style note retained: Creative Reveal",
           "camera": "CAMERA: Use a controlled smooth move with stable focus and natural perspective. Keep the whole product in frame during the reveal; avoid distortion, whip-pans and unnecessary cuts.",
           "lighting": "LIGHTING: Use soft, plausible Creative Reveal lighting. Preserve reference colour, readable shadows and real surface detail; do not recolour or add artificial shine.",
           "closing": "CTA / HERO: End on a clean, stable view with the whole backpack visible and unobstructed. Preserve every reference-visible detail and make no unsupported claims.",
-          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action.",
-          "style": "Creative Reveal"
+          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action."
         },
         {
           "id": "bag_backpack_v42",
@@ -6628,12 +6597,11 @@
           "name": "Travel bench pause",
           "hook": "HOOK: Open on the backpack in a simple bench with no signage, grounded and fully readable. Use the supplied reference image as the sole authority for product identity. No text, captions, extra logos or watermark unless explicitly selected.",
           "action": "ACTION: pan slowly and stop with the product centred. Keep the product's shape, colour, pattern, proportions and supplied parts unchanged; avoid unsupported physical actions.",
-          "detail": "DETAIL: Emphasise visible straps and outer shape. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims.",
+          "detail": "DETAIL: Emphasise visible straps and outer shape. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims. Style note retained: Doodle Style",
           "camera": "CAMERA: Use a controlled smooth move with stable focus and natural perspective. Keep the whole product in frame during the reveal; avoid distortion, whip-pans and unnecessary cuts.",
           "lighting": "LIGHTING: Use soft, plausible Doodle Style lighting. Preserve reference colour, readable shadows and real surface detail; do not recolour or add artificial shine.",
           "closing": "CTA / HERO: End on a clean, stable view with the whole backpack visible and unobstructed. Preserve every reference-visible detail and make no unsupported claims.",
-          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action.",
-          "style": "Doodle Style"
+          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action."
         },
         {
           "id": "bag_backpack_v43",
@@ -6641,12 +6609,11 @@
           "name": "Front angle safety",
           "hook": "HOOK: Open on the backpack in a plain studio background, grounded and fully readable. Use the supplied reference image as the sole authority for product identity. No text, captions, extra logos or watermark unless explicitly selected.",
           "action": "ACTION: move only between front and reference-supported three-quarter view. Keep the product's shape, colour, pattern, proportions and supplied parts unchanged; avoid unsupported physical actions.",
-          "detail": "DETAIL: Emphasise front panel without invented unseen details. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims.",
+          "detail": "DETAIL: Emphasise front panel without invented unseen details. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims. Style note retained: Cinematic",
           "camera": "CAMERA: Use a controlled smooth move with stable focus and natural perspective. Keep the whole product in frame during the reveal; avoid distortion, whip-pans and unnecessary cuts.",
           "lighting": "LIGHTING: Use soft, plausible Cinematic lighting. Preserve reference colour, readable shadows and real surface detail; do not recolour or add artificial shine.",
           "closing": "CTA / HERO: End on a clean, stable view with the whole backpack visible and unobstructed. Preserve every reference-visible detail and make no unsupported claims.",
-          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action.",
-          "style": "Cinematic"
+          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action."
         },
         {
           "id": "bag_backpack_v44",
@@ -6654,12 +6621,11 @@
           "name": "Matte tabletop shadow",
           "hook": "HOOK: Open on the backpack in a matte tabletop, grounded and fully readable. Use the supplied reference image as the sole authority for product identity. No text, captions, extra logos or watermark unless explicitly selected.",
           "action": "ACTION: make a diagonal overhead pass from handle to base. Keep the product's shape, colour, pattern, proportions and supplied parts unchanged; avoid unsupported physical actions.",
-          "detail": "DETAIL: Emphasise whole outline and natural shadow. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims.",
+          "detail": "DETAIL: Emphasise whole outline and natural shadow. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims. Style note retained: Minimal",
           "camera": "CAMERA: Use a controlled smooth move with stable focus and natural perspective. Keep the whole product in frame during the reveal; avoid distortion, whip-pans and unnecessary cuts.",
           "lighting": "LIGHTING: Use soft, plausible Minimal lighting. Preserve reference colour, readable shadows and real surface detail; do not recolour or add artificial shine.",
           "closing": "CTA / HERO: End on a clean, stable view with the whole backpack visible and unobstructed. Preserve every reference-visible detail and make no unsupported claims.",
-          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action.",
-          "style": "Minimal"
+          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action."
         },
         {
           "id": "bag_backpack_v45",
@@ -6667,12 +6633,11 @@
           "name": "Dynamic push and settle",
           "hook": "HOOK: Open on the backpack in a neutral studio, grounded and fully readable. Use the supplied reference image as the sole authority for product identity. No text, captions, extra logos or watermark unless explicitly selected.",
           "action": "ACTION: make a controlled push and decelerate to a steady medium view. Keep the product's shape, colour, pattern, proportions and supplied parts unchanged; avoid unsupported physical actions.",
-          "detail": "DETAIL: Emphasise front silhouette and visible details. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims.",
+          "detail": "DETAIL: Emphasise front silhouette and visible details. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims. Style note retained: Lifestyle",
           "camera": "CAMERA: Use a controlled smooth move with stable focus and natural perspective. Keep the whole product in frame during the reveal; avoid distortion, whip-pans and unnecessary cuts.",
           "lighting": "LIGHTING: Use soft, plausible Lifestyle lighting. Preserve reference colour, readable shadows and real surface detail; do not recolour or add artificial shine.",
           "closing": "CTA / HERO: End on a clean, stable view with the whole backpack visible and unobstructed. Preserve every reference-visible detail and make no unsupported claims.",
-          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action.",
-          "style": "Lifestyle"
+          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action."
         },
         {
           "id": "bag_backpack_v46",
@@ -6680,12 +6645,11 @@
           "name": "Strap shadow graphic",
           "hook": "HOOK: Open on the backpack in a plain background with side light, grounded and fully readable. Use the supplied reference image as the sole authority for product identity. No text, captions, extra logos or watermark unless explicitly selected.",
           "action": "ACTION: pull back to reveal the real strap shadow. Keep the product's shape, colour, pattern, proportions and supplied parts unchanged; avoid unsupported physical actions.",
-          "detail": "DETAIL: Emphasise existing strap geometry only. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims.",
+          "detail": "DETAIL: Emphasise existing strap geometry only. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims. Style note retained: Dynamic",
           "camera": "CAMERA: Use a controlled smooth move with stable focus and natural perspective. Keep the whole product in frame during the reveal; avoid distortion, whip-pans and unnecessary cuts.",
           "lighting": "LIGHTING: Use soft, plausible Dynamic lighting. Preserve reference colour, readable shadows and real surface detail; do not recolour or add artificial shine.",
           "closing": "CTA / HERO: End on a clean, stable view with the whole backpack visible and unobstructed. Preserve every reference-visible detail and make no unsupported claims.",
-          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action.",
-          "style": "Dynamic"
+          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action."
         },
         {
           "id": "bag_backpack_v47",
@@ -6693,12 +6657,11 @@
           "name": "Unboxing-free reveal",
           "hook": "HOOK: Open on the backpack in a clean studio with negative space, grounded and fully readable. Use the supplied reference image as the sole authority for product identity. No text, captions, extra logos or watermark unless explicitly selected.",
           "action": "ACTION: slide sideways until the whole product is revealed. Keep the product's shape, colour, pattern, proportions and supplied parts unchanged; avoid unsupported physical actions.",
-          "detail": "DETAIL: Emphasise actual pack without packaging. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims.",
+          "detail": "DETAIL: Emphasise actual pack without packaging. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims. Style note retained: Luxury",
           "camera": "CAMERA: Use a controlled smooth move with stable focus and natural perspective. Keep the whole product in frame during the reveal; avoid distortion, whip-pans and unnecessary cuts.",
           "lighting": "LIGHTING: Use soft, plausible Luxury lighting. Preserve reference colour, readable shadows and real surface detail; do not recolour or add artificial shine.",
           "closing": "CTA / HERO: End on a clean, stable view with the whole backpack visible and unobstructed. Preserve every reference-visible detail and make no unsupported claims.",
-          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action.",
-          "style": "Luxury"
+          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action."
         },
         {
           "id": "bag_backpack_v48",
@@ -6706,12 +6669,11 @@
           "name": "Close then context",
           "hook": "HOOK: Open on the backpack in a neutral studio, grounded and fully readable. Use the supplied reference image as the sole authority for product identity. No text, captions, extra logos or watermark unless explicitly selected.",
           "action": "ACTION: pull smoothly from one real detail to the full product. Keep the product's shape, colour, pattern, proportions and supplied parts unchanged; avoid unsupported physical actions.",
-          "detail": "DETAIL: Emphasise real detail and complete proportions. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims.",
+          "detail": "DETAIL: Emphasise real detail and complete proportions. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims. Style note retained: Flatlay",
           "camera": "CAMERA: Use a controlled smooth move with stable focus and natural perspective. Keep the whole product in frame during the reveal; avoid distortion, whip-pans and unnecessary cuts.",
           "lighting": "LIGHTING: Use soft, plausible Flatlay lighting. Preserve reference colour, readable shadows and real surface detail; do not recolour or add artificial shine.",
           "closing": "CTA / HERO: End on a clean, stable view with the whole backpack visible and unobstructed. Preserve every reference-visible detail and make no unsupported claims.",
-          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action.",
-          "style": "Flatlay"
+          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action."
         },
         {
           "id": "bag_backpack_v49",
@@ -6719,12 +6681,11 @@
           "name": "Calm final turn",
           "hook": "HOOK: Open on the backpack in a neutral room with window light, grounded and fully readable. Use the supplied reference image as the sole authority for product identity. No text, captions, extra logos or watermark unless explicitly selected.",
           "action": "ACTION: if a model is selected, turn slightly beside the pack; otherwise shift the camera a few degrees. Keep the product's shape, colour, pattern, proportions and supplied parts unchanged; avoid unsupported physical actions.",
-          "detail": "DETAIL: Emphasise stationary backpack with unchanged straps. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims.",
+          "detail": "DETAIL: Emphasise stationary backpack with unchanged straps. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims. Style note retained: Creative Reveal",
           "camera": "CAMERA: Use a controlled smooth move with stable focus and natural perspective. Keep the whole product in frame during the reveal; avoid distortion, whip-pans and unnecessary cuts.",
           "lighting": "LIGHTING: Use soft, plausible Creative Reveal lighting. Preserve reference colour, readable shadows and real surface detail; do not recolour or add artificial shine.",
           "closing": "CTA / HERO: End on a clean, stable view with the whole backpack visible and unobstructed. Preserve every reference-visible detail and make no unsupported claims.",
-          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action.",
-          "style": "Creative Reveal"
+          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action."
         },
         {
           "id": "bag_backpack_v50",
@@ -6732,12 +6693,11 @@
           "name": "Outline-to-detail finale",
           "hook": "HOOK: Open on the backpack in a clean studio, grounded and fully readable. Use the supplied reference image as the sole authority for product identity. No text, captions, extra logos or watermark unless explicitly selected.",
           "action": "ACTION: trace the contour with a doodle, fade it, then push toward a real detail. Keep the product's shape, colour, pattern, proportions and supplied parts unchanged; avoid unsupported physical actions.",
-          "detail": "DETAIL: Emphasise unaltered product and one visible detail. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims.",
+          "detail": "DETAIL: Emphasise unaltered product and one visible detail. Show only details actually visible in the reference; do not invent pockets, accessories, materials, functions, capacity or performance claims. Style note retained: Doodle Style",
           "camera": "CAMERA: Use a controlled smooth move with stable focus and natural perspective. Keep the whole product in frame during the reveal; avoid distortion, whip-pans and unnecessary cuts.",
           "lighting": "LIGHTING: Use soft, plausible Doodle Style lighting. Preserve reference colour, readable shadows and real surface detail; do not recolour or add artificial shine.",
           "closing": "CTA / HERO: End on a clean, stable view with the whole backpack visible and unobstructed. Preserve every reference-visible detail and make no unsupported claims.",
-          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action.",
-          "style": "Doodle Style"
+          "audio": "AUDIO: Respect the user's voice setting. If voice is off, use suitable low-volume instrumental music only. If voice is on, use the selected voice and language, keep speech clear above music, and avoid unsupported claims. Add sound effects only when justified by visible action."
         }
       ]
     },
@@ -15257,7 +15217,7 @@
       "subcategory_id": "shoes_heels",
       "category_id": "shoes",
       "label": "👠 Kasut tumit",
-      "variation_count": 40,
+      "variation_count": 50,
       "variations": [
         {
           "id": "shoes_heels_v01",
@@ -15738,6 +15698,126 @@
           "lighting": "Use soft, neutral light with accurate colours and natural contact shadows.",
           "closing": "End on a clear, steady view of the reference-matched shoe or pair.",
           "audio": "Follow selected music, speech and sound-effect settings only."
+        },
+        {
+          "id": "shoes_heels_v41",
+          "variation_number": 41,
+          "name": "Heel Profile Reveal",
+          "hook": "Heel Profile Reveal: show a distinct, reference-faithful view of the supplied kasut tumit.",
+          "action": "Open on the side silhouette, then make a slow horizontal pass from toe to heel.",
+          "detail": "Keep the visible heel shape and proportions faithful; do not infer height or construction.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_heels_v42",
+          "variation_number": 42,
+          "name": "Strap and Fastening Detail",
+          "hook": "Strap and Fastening Detail: show a distinct, reference-faithful view of the supplied kasut tumit.",
+          "action": "If present, follow the visible strap or fastening with a short rack focus; otherwise feature a visible upper edge.",
+          "detail": "Never add straps, buckles, or closures absent from the reference.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_heels_v43",
+          "variation_number": 43,
+          "name": "Toe-to-Heel Focus Pull",
+          "hook": "Toe-to-Heel Focus Pull: show a distinct, reference-faithful view of the supplied kasut tumit.",
+          "action": "Begin with the visible toe area in focus, then gradually shift focus to the heel profile.",
+          "detail": "Preserve the exact toe outline, heel shape, colour, and finish.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_heels_v44",
+          "variation_number": 44,
+          "name": "Pair Spacing Composition",
+          "hook": "Pair Spacing Composition: show a distinct, reference-faithful view of the supplied kasut tumit.",
+          "action": "Frame the supplied shoe or pair from a slightly elevated three-quarter angle and settle into a balanced composition.",
+          "detail": "Keep the number and placement of shoes consistent with the reference.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_heels_v45",
+          "variation_number": 45,
+          "name": "Heel Contact Shadow",
+          "hook": "Heel Contact Shadow: show a distinct, reference-faithful view of the supplied kasut tumit.",
+          "action": "Move the camera slightly lower to reveal the visible heel silhouette against its natural shadow.",
+          "detail": "Do not imply grip, stability, comfort, or materials not evidenced by the image.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_heels_v46",
+          "variation_number": 46,
+          "name": "Upper Edge Tracking",
+          "hook": "Upper Edge Tracking: show a distinct, reference-faithful view of the supplied kasut tumit.",
+          "action": "Track along a visible seam, edge, or opening before widening to the whole shoe.",
+          "detail": "Use only details that can actually be seen; invent no stitching or labels.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_heels_v47",
+          "variation_number": 47,
+          "name": "Finish Under Neutral Light",
+          "hook": "Finish Under Neutral Light: show a distinct, reference-faithful view of the supplied kasut tumit.",
+          "action": "Use a gentle angle change so the existing surface finish reads clearly.",
+          "detail": "Do not add gloss, glitter, metallic effects, or texture that is not visible.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_heels_v48",
+          "variation_number": 48,
+          "name": "Three-Quarter Slow Arc",
+          "hook": "Three-Quarter Slow Arc: show a distinct, reference-faithful view of the supplied kasut tumit.",
+          "action": "Make a very small arc around the stationary shoe to reveal its visible front and side planes.",
+          "detail": "Avoid showing unseen surfaces or changing the product design.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_heels_v49",
+          "variation_number": 49,
+          "name": "Sole Junction Close View",
+          "hook": "Sole Junction Close View: show a distinct, reference-faithful view of the supplied kasut tumit.",
+          "action": "Show the visible meeting point of heel and sole, then pull back to a full product view.",
+          "detail": "Do not fabricate tread, underside details, or internal construction.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_heels_v50",
+          "variation_number": 50,
+          "name": "Clean Hero Hold",
+          "hook": "Clean Hero Hold: show a distinct, reference-faithful view of the supplied kasut tumit.",
+          "action": "Ease from a close visible detail into a stable full-shoe hero frame.",
+          "detail": "Finish with the reference-matched shoe unchanged and fully in frame.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
         }
       ]
     },
@@ -15745,7 +15825,7 @@
       "subcategory_id": "shoes_sandals",
       "category_id": "shoes",
       "label": "🩴 Sandal / Selipar",
-      "variation_count": 30,
+      "variation_count": 50,
       "variations": [
         {
           "id": "shoes_sandals_v01",
@@ -16106,6 +16186,246 @@
           "lighting": "Neutral diffuse lighting with accurate colour and natural contact shadows.",
           "closing": "End on a still, complete-pair frame suitable for a product showcase.",
           "audio": "Use the selected audio configuration only; do not add unrequested sound effects."
+        },
+        {
+          "id": "shoes_sandals_v31",
+          "variation_number": 31,
+          "name": "Sole Outline Sweep",
+          "hook": "Sole Outline Sweep: show a distinct, reference-faithful view of the supplied sandal / selipar.",
+          "action": "Start at the visible toe end and follow the sandal outline toward the heel end.",
+          "detail": "Keep the original sole shape and thickness; do not reveal a hidden underside.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_sandals_v32",
+          "variation_number": 32,
+          "name": "Strap Layout Overview",
+          "hook": "Strap Layout Overview: show a distinct, reference-faithful view of the supplied sandal / selipar.",
+          "action": "Use a top-down drift to show the actual arrangement of visible straps.",
+          "detail": "Do not add, remove, cross, or reposition straps.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_sandals_v33",
+          "variation_number": 33,
+          "name": "Footbed Surface Detail",
+          "hook": "Footbed Surface Detail: show a distinct, reference-faithful view of the supplied sandal / selipar.",
+          "action": "Move slowly across the visible footbed surface, then widen to show the whole sandal.",
+          "detail": "Only show visible surface texture; make no comfort or material claims.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_sandals_v34",
+          "variation_number": 34,
+          "name": "Pair from Above",
+          "hook": "Pair from Above: show a distinct, reference-faithful view of the supplied sandal / selipar.",
+          "action": "Frame the supplied sandal or pair from directly above and make a gentle pullback.",
+          "detail": "Preserve the exact number and arrangement of sandals.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_sandals_v35",
+          "variation_number": 35,
+          "name": "Buckle or Closure Focus",
+          "hook": "Buckle or Closure Focus: show a distinct, reference-faithful view of the supplied sandal / selipar.",
+          "action": "If a closure is visible, briefly focus on it before returning to the full product.",
+          "detail": "Do not invent buckles, hooks, or adjustable features.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_sandals_v36",
+          "variation_number": 36,
+          "name": "Side Thickness Profile",
+          "hook": "Side Thickness Profile: show a distinct, reference-faithful view of the supplied sandal / selipar.",
+          "action": "Lower the camera to show the visible side profile and sole edge.",
+          "detail": "Keep proportions realistic and do not exaggerate thickness.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_sandals_v37",
+          "variation_number": 37,
+          "name": "Open-Toe Composition",
+          "hook": "Open-Toe Composition: show a distinct, reference-faithful view of the supplied sandal / selipar.",
+          "action": "Use a slow push toward the open toe area, if visible, then pause.",
+          "detail": "Do not change toe openings or add feet unless explicitly selected elsewhere.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_sandals_v38",
+          "variation_number": 38,
+          "name": "Strap Shadow Play",
+          "hook": "Strap Shadow Play: show a distinct, reference-faithful view of the supplied sandal / selipar.",
+          "action": "Shift the camera slightly while soft light defines the existing strap shapes.",
+          "detail": "Keep shadows natural and do not alter strap colour or geometry.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_sandals_v39",
+          "variation_number": 39,
+          "name": "Minimal Studio Turn",
+          "hook": "Minimal Studio Turn: show a distinct, reference-faithful view of the supplied sandal / selipar.",
+          "action": "Keep the sandal stationary while the camera makes a restrained quarter-arc.",
+          "detail": "Do not generate unseen details on the reverse side.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_sandals_v40",
+          "variation_number": 40,
+          "name": "Texture-to-Whole Reveal",
+          "hook": "Texture-to-Whole Reveal: show a distinct, reference-faithful view of the supplied sandal / selipar.",
+          "action": "Begin close on a real visible surface detail and pull back to the complete sandal.",
+          "detail": "No invented grain, stitching, logos, or embellishments.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_sandals_v41",
+          "variation_number": 41,
+          "name": "Sole Edge Tracking",
+          "hook": "Sole Edge Tracking: show a distinct, reference-faithful view of the supplied sandal / selipar.",
+          "action": "Track along the visible outer edge from one end to the other.",
+          "detail": "Do not claim anti-slip performance or show unverified tread.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_sandals_v42",
+          "variation_number": 42,
+          "name": "Strap Junction Detail",
+          "hook": "Strap Junction Detail: show a distinct, reference-faithful view of the supplied sandal / selipar.",
+          "action": "Focus on a visible strap junction or attachment point, then widen gently.",
+          "detail": "Only include junctions present in the reference.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_sandals_v43",
+          "variation_number": 43,
+          "name": "Balanced Flat Lay",
+          "hook": "Balanced Flat Lay: show a distinct, reference-faithful view of the supplied sandal / selipar.",
+          "action": "Create a clean overhead flat-lay framing with a slow, subtle camera drift.",
+          "detail": "Retain the original orientation and spacing of each item.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_sandals_v44",
+          "variation_number": 44,
+          "name": "Colour Accurate Reframe",
+          "hook": "Colour Accurate Reframe: show a distinct, reference-faithful view of the supplied sandal / selipar.",
+          "action": "Move from a close view to a wider view under neutral, even lighting.",
+          "detail": "Keep the exact reference colours; no colour grading that changes them.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_sandals_v45",
+          "variation_number": 45,
+          "name": "Single Sandal Hero",
+          "hook": "Single Sandal Hero: show a distinct, reference-faithful view of the supplied sandal / selipar.",
+          "action": "If only one sandal is supplied, centre it and make a slow controlled push-in.",
+          "detail": "Never duplicate a single item to create a pair.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_sandals_v46",
+          "variation_number": 46,
+          "name": "Pair-to-Detail Pullback",
+          "hook": "Pair-to-Detail Pullback: show a distinct, reference-faithful view of the supplied sandal / selipar.",
+          "action": "Start with the supplied pair, briefly feature one visible detail, then return to both.",
+          "detail": "Do not alter pair orientation or add extra products.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_sandals_v47",
+          "variation_number": 47,
+          "name": "Strap Curve Silhouette",
+          "hook": "Strap Curve Silhouette: show a distinct, reference-faithful view of the supplied sandal / selipar.",
+          "action": "Use a low three-quarter angle to outline the visible curve of the straps.",
+          "detail": "Do not change strap width or shape.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_sandals_v48",
+          "variation_number": 48,
+          "name": "Quiet End Frame",
+          "hook": "Quiet End Frame: show a distinct, reference-faithful view of the supplied sandal / selipar.",
+          "action": "Ease into a steady overhead or three-quarter composition matching the reference view.",
+          "detail": "End without extra props, text, or unsupported claims.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_sandals_v49",
+          "variation_number": 49,
+          "name": "Surface Reflection Check",
+          "hook": "Surface Reflection Check: show a distinct, reference-faithful view of the supplied sandal / selipar.",
+          "action": "Make a tiny angle adjustment to show the actual finish without dramatic reflections.",
+          "detail": "Do not invent shine or premium material properties.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_sandals_v50",
+          "variation_number": 50,
+          "name": "Product Edge Separation",
+          "hook": "Product Edge Separation: show a distinct, reference-faithful view of the supplied sandal / selipar.",
+          "action": "Use a gentle lateral slide to separate the sandal silhouette from its background.",
+          "detail": "Keep the product itself unchanged and avoid artificial outlines.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
         }
       ]
     },
@@ -16113,7 +16433,7 @@
       "subcategory_id": "shoes_running",
       "category_id": "shoes",
       "label": "🏃 Kasut larian",
-      "variation_count": 30,
+      "variation_count": 50,
       "variations": [
         {
           "id": "shoes_running_v01",
@@ -16474,6 +16794,246 @@
           "lighting": "Use soft, colour-accurate light and natural contact shadows.",
           "closing": "Finish on a clear, steady view of the reference-matched shoe.",
           "audio": "Follow the selected music, speech and sound-effect settings only."
+        },
+        {
+          "id": "shoes_running_v31",
+          "variation_number": 31,
+          "name": "Outsole Edge Profile",
+          "hook": "Outsole Edge Profile: show a distinct, reference-faithful view of the supplied kasut larian.",
+          "action": "Track along the visible outsole edge from toe toward heel.",
+          "detail": "Do not invent tread pattern or performance features hidden from view.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_running_v32",
+          "variation_number": 32,
+          "name": "Midsole Side Sweep",
+          "hook": "Midsole Side Sweep: show a distinct, reference-faithful view of the supplied kasut larian.",
+          "action": "Use a low side-level glide across the visible midsole and upper boundary.",
+          "detail": "Preserve exact thickness, colour blocks, and visible construction.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_running_v33",
+          "variation_number": 33,
+          "name": "Lace Path Close-up",
+          "hook": "Lace Path Close-up: show a distinct, reference-faithful view of the supplied kasut larian.",
+          "action": "If laces are visible, follow their existing path across the upper; otherwise focus on a visible detail.",
+          "detail": "Do not add eyelets, laces, or fastening parts.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_running_v34",
+          "variation_number": 34,
+          "name": "Heel Counter View",
+          "hook": "Heel Counter View: show a distinct, reference-faithful view of the supplied kasut larian.",
+          "action": "Move toward the visible rear profile, then settle on the shoe's overall shape.",
+          "detail": "Do not claim support technology or reveal hidden internal structure.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_running_v35",
+          "variation_number": 35,
+          "name": "Toe Box Perspective",
+          "hook": "Toe Box Perspective: show a distinct, reference-faithful view of the supplied kasut larian.",
+          "action": "Make a slow push toward the visible toe box from a three-quarter angle.",
+          "detail": "Keep the toe shape and mesh or surface appearance as shown.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_running_v36",
+          "variation_number": 36,
+          "name": "Pair Running Layout",
+          "hook": "Pair Running Layout: show a distinct, reference-faithful view of the supplied kasut larian.",
+          "action": "Frame the supplied shoe or pair in a dynamic-looking but stationary diagonal composition.",
+          "detail": "Do not animate the shoes as if running or duplicate products.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_running_v37",
+          "variation_number": 37,
+          "name": "Upper Panel Transition",
+          "hook": "Upper Panel Transition: show a distinct, reference-faithful view of the supplied kasut larian.",
+          "action": "Rack focus across visible upper panels and seams, if present.",
+          "detail": "Do not create new overlays, stitching, or branding.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_running_v38",
+          "variation_number": 38,
+          "name": "Sole-to-Upper Reveal",
+          "hook": "Sole-to-Upper Reveal: show a distinct, reference-faithful view of the supplied kasut larian.",
+          "action": "Start on the visible sole boundary and pull back to the complete shoe.",
+          "detail": "No unsupported cushioning, grip, or lightweight claims.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_running_v39",
+          "variation_number": 39,
+          "name": "Rear-to-Side Reframe",
+          "hook": "Rear-to-Side Reframe: show a distinct, reference-faithful view of the supplied kasut larian.",
+          "action": "Move from a rear three-quarter view toward the visible side profile.",
+          "detail": "Do not reveal unseen heel details or change proportions.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_running_v40",
+          "variation_number": 40,
+          "name": "Lace-free Design Focus",
+          "hook": "Lace-free Design Focus: show a distinct, reference-faithful view of the supplied kasut larian.",
+          "action": "If no laces are visible, feature the actual closure or upper contour with a slow push-in.",
+          "detail": "Never add laces or closures absent from the reference.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_running_v41",
+          "variation_number": 41,
+          "name": "Surface Texture Pass",
+          "hook": "Surface Texture Pass: show a distinct, reference-faithful view of the supplied kasut larian.",
+          "action": "Use a close controlled slide over a visibly textured section, if present.",
+          "detail": "Do not invent mesh, knit, leather, or other material types.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_running_v42",
+          "variation_number": 42,
+          "name": "Logo-safe Detail",
+          "hook": "Logo-safe Detail: show a distinct, reference-faithful view of the supplied kasut larian.",
+          "action": "Show only branding that is clearly visible in the supplied reference, then widen.",
+          "detail": "Do not add, redraw, or fabricate logos or text.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_running_v43",
+          "variation_number": 43,
+          "name": "Toe-to-Rear Tracking",
+          "hook": "Toe-to-Rear Tracking: show a distinct, reference-faithful view of the supplied kasut larian.",
+          "action": "Glide along the visible side from the toe region toward the rear.",
+          "detail": "Keep the product stationary and perspective realistic.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_running_v44",
+          "variation_number": 44,
+          "name": "Sole Line Silhouette",
+          "hook": "Sole Line Silhouette: show a distinct, reference-faithful view of the supplied kasut larian.",
+          "action": "Use side lighting to define the existing outline of the sole.",
+          "detail": "Do not dramatize tread or suggest technical performance.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_running_v45",
+          "variation_number": 45,
+          "name": "Top View Lacing Layout",
+          "hook": "Top View Lacing Layout: show a distinct, reference-faithful view of the supplied kasut larian.",
+          "action": "If laces are visible, use an elevated view to show their actual layout.",
+          "detail": "Preserve lace count, colour, and routing.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_running_v46",
+          "variation_number": 46,
+          "name": "Natural Shadow Hero",
+          "hook": "Natural Shadow Hero: show a distinct, reference-faithful view of the supplied kasut larian.",
+          "action": "Make a slight camera rise while retaining a realistic contact shadow.",
+          "detail": "Avoid floating shoes, artificial glow, or altered shape.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_running_v47",
+          "variation_number": 47,
+          "name": "Single Shoe Detail Sequence",
+          "hook": "Single Shoe Detail Sequence: show a distinct, reference-faithful view of the supplied kasut larian.",
+          "action": "Show one visible detail and then reveal the same single shoe in full.",
+          "detail": "Do not create a second shoe if only one is supplied.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_running_v48",
+          "variation_number": 48,
+          "name": "Pair Matching Frame",
+          "hook": "Pair Matching Frame: show a distinct, reference-faithful view of the supplied kasut larian.",
+          "action": "Use a slow pullback to present both supplied shoes clearly.",
+          "detail": "Keep each shoe's orientation and details consistent.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_running_v49",
+          "variation_number": 49,
+          "name": "Neutral Light Finish Pass",
+          "hook": "Neutral Light Finish Pass: show a distinct, reference-faithful view of the supplied kasut larian.",
+          "action": "Shift the camera gently to show the visible finish under neutral light.",
+          "detail": "Do not add gloss, water droplets, or claims of weather resistance.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_running_v50",
+          "variation_number": 50,
+          "name": "Final Side Profile Hold",
+          "hook": "Final Side Profile Hold: show a distinct, reference-faithful view of the supplied kasut larian.",
+          "action": "Settle into a steady side profile with the whole shoe inside safe margins.",
+          "detail": "Finish on the reference-matched design without extra accessories.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
         }
       ]
     },
@@ -16481,7 +17041,7 @@
       "subcategory_id": "shoes_kids",
       "category_id": "shoes",
       "label": "🧒 Kasut kanak-kanak",
-      "variation_count": 30,
+      "variation_count": 50,
       "variations": [
         {
           "id": "shoes_kids_v01",
@@ -16842,6 +17402,246 @@
           "lighting": "Soft, even, colour-accurate light with natural contact shadows.",
           "closing": "Finish on a steady view with the supplied shoe clearly visible.",
           "audio": "Follow selected music, speech and sound-effect settings only."
+        },
+        {
+          "id": "shoes_kids_v31",
+          "variation_number": 31,
+          "name": "Small Shoe Overhead",
+          "hook": "Small Shoe Overhead: show a distinct, reference-faithful view of the supplied kasut kanak-kanak.",
+          "action": "Use a gentle overhead drift across the supplied children's shoe or pair.",
+          "detail": "Maintain realistic child-sized proportions; do not add toys or props.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_kids_v32",
+          "variation_number": 32,
+          "name": "Fastening Detail",
+          "hook": "Fastening Detail: show a distinct, reference-faithful view of the supplied kasut kanak-kanak.",
+          "action": "If a hook-and-loop strap, lace, or buckle is visible, focus on that exact feature.",
+          "detail": "Do not invent closures or imply ease-of-use claims.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_kids_v33",
+          "variation_number": 33,
+          "name": "Toe Shape Close View",
+          "hook": "Toe Shape Close View: show a distinct, reference-faithful view of the supplied kasut kanak-kanak.",
+          "action": "Move slowly toward the visible toe shape, then return to a wider frame.",
+          "detail": "Keep the original toe shape and decoration unchanged.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_kids_v34",
+          "variation_number": 34,
+          "name": "Pair Size Context",
+          "hook": "Pair Size Context: show a distinct, reference-faithful view of the supplied kasut kanak-kanak.",
+          "action": "Show the supplied pair together in a clean, uncluttered composition.",
+          "detail": "Do not add a foot, child, or size reference unless separately requested.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_kids_v35",
+          "variation_number": 35,
+          "name": "Colour Block Transition",
+          "hook": "Colour Block Transition: show a distinct, reference-faithful view of the supplied kasut kanak-kanak.",
+          "action": "Pan gently across the actual colour areas on the shoe.",
+          "detail": "Preserve reference colours and do not add extra colour panels.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_kids_v36",
+          "variation_number": 36,
+          "name": "Sole Edge Detail",
+          "hook": "Sole Edge Detail: show a distinct, reference-faithful view of the supplied kasut kanak-kanak.",
+          "action": "Use a low angle to show the visible side edge of the sole.",
+          "detail": "Do not invent tread or safety claims.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_kids_v37",
+          "variation_number": 37,
+          "name": "Printed Motif Focus",
+          "hook": "Printed Motif Focus: show a distinct, reference-faithful view of the supplied kasut kanak-kanak.",
+          "action": "If a printed motif is visible, frame it briefly and widen to the whole shoe.",
+          "detail": "Do not add characters, patterns, or licensed designs.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_kids_v38",
+          "variation_number": 38,
+          "name": "Opening and Interior",
+          "hook": "Opening and Interior: show a distinct, reference-faithful view of the supplied kasut kanak-kanak.",
+          "action": "Tilt gently toward the visible opening only when it can be seen in the reference.",
+          "detail": "Do not fabricate padding, labels, or interior details.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_kids_v39",
+          "variation_number": 39,
+          "name": "Lightweight Visual Composition",
+          "hook": "Lightweight Visual Composition: show a distinct, reference-faithful view of the supplied kasut kanak-kanak.",
+          "action": "Use a calm side-to-three-quarter camera move without implying product weight.",
+          "detail": "Avoid unsupported lightweight, comfort, or durability claims.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_kids_v40",
+          "variation_number": 40,
+          "name": "Single Shoe Preservation",
+          "hook": "Single Shoe Preservation: show a distinct, reference-faithful view of the supplied kasut kanak-kanak.",
+          "action": "Centre the one supplied shoe and make a slow controlled push-in.",
+          "detail": "Never duplicate it to make a pair.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_kids_v41",
+          "variation_number": 41,
+          "name": "Pair Detail Pullback",
+          "hook": "Pair Detail Pullback: show a distinct, reference-faithful view of the supplied kasut kanak-kanak.",
+          "action": "Begin on one visible detail and pull back to reveal the supplied pair.",
+          "detail": "Keep the count and arrangement unchanged.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_kids_v42",
+          "variation_number": 42,
+          "name": "Seam and Edge Pass",
+          "hook": "Seam and Edge Pass: show a distinct, reference-faithful view of the supplied kasut kanak-kanak.",
+          "action": "Follow a visible seam or edge with a short, steady camera slide.",
+          "detail": "Do not invent stitching or construction details.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_kids_v43",
+          "variation_number": 43,
+          "name": "Sole-to-Upper Junction",
+          "hook": "Sole-to-Upper Junction: show a distinct, reference-faithful view of the supplied kasut kanak-kanak.",
+          "action": "Focus on the actual boundary between sole and upper, then widen.",
+          "detail": "Keep materials and colours faithful to the image.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_kids_v44",
+          "variation_number": 44,
+          "name": "Closure Layout Overhead",
+          "hook": "Closure Layout Overhead: show a distinct, reference-faithful view of the supplied kasut kanak-kanak.",
+          "action": "Use a top-down angle to show the existing fastening layout.",
+          "detail": "Do not add laces, straps, or buckles.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_kids_v45",
+          "variation_number": 45,
+          "name": "Heel Shape Reveal",
+          "hook": "Heel Shape Reveal: show a distinct, reference-faithful view of the supplied kasut kanak-kanak.",
+          "action": "Shift to a rear three-quarter view of the visible heel area.",
+          "detail": "Do not exaggerate sole height or invent heel counters.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_kids_v46",
+          "variation_number": 46,
+          "name": "Natural Light Colour Check",
+          "hook": "Natural Light Colour Check: show a distinct, reference-faithful view of the supplied kasut kanak-kanak.",
+          "action": "Use even, neutral light and a slight lateral move to show the real colours.",
+          "detail": "Avoid filters that alter the product's colour.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_kids_v47",
+          "variation_number": 47,
+          "name": "Decorative Element Context",
+          "hook": "Decorative Element Context: show a distinct, reference-faithful view of the supplied kasut kanak-kanak.",
+          "action": "Show a real decorative element only if present, then restore the whole shoe.",
+          "detail": "Do not animate or redesign the decoration.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_kids_v48",
+          "variation_number": 48,
+          "name": "Outsole Side Profile",
+          "hook": "Outsole Side Profile: show a distinct, reference-faithful view of the supplied kasut kanak-kanak.",
+          "action": "Track along the visible outer sole edge at a low angle.",
+          "detail": "Do not show hidden tread or claim slip resistance.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_kids_v49",
+          "variation_number": 49,
+          "name": "Clean Shelf-free Hero",
+          "hook": "Clean Shelf-free Hero: show a distinct, reference-faithful view of the supplied kasut kanak-kanak.",
+          "action": "Use a simple isolated product framing and a slow pullback.",
+          "detail": "Add no shelf, toy, text, or extra product unless selected elsewhere.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_kids_v50",
+          "variation_number": 50,
+          "name": "Steady Final Pair Frame",
+          "hook": "Steady Final Pair Frame: show a distinct, reference-faithful view of the supplied kasut kanak-kanak.",
+          "action": "End with the supplied shoe or pair fully visible and stationary.",
+          "detail": "Preserve every visible feature and realistic proportions.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
         }
       ]
     },
@@ -16849,7 +17649,7 @@
       "subcategory_id": "shoes_other",
       "category_id": "shoes",
       "label": "📦 Kasut lain",
-      "variation_count": 30,
+      "variation_count": 50,
       "variations": [
         {
           "id": "shoes_other_v01",
@@ -17210,6 +18010,246 @@
           "lighting": "Use neutral soft lighting, accurate colours and natural contact shadows.",
           "closing": "End on a steady view of the reference-matched shoe.",
           "audio": "Follow the selected music, voice and sound-effect settings only."
+        },
+        {
+          "id": "shoes_other_v31",
+          "variation_number": 31,
+          "name": "Reference Silhouette Study",
+          "hook": "Reference Silhouette Study: show a distinct, reference-faithful view of the supplied kasut lain.",
+          "action": "Use a three-quarter angle and a slow camera arc to clarify the visible overall silhouette.",
+          "detail": "Keep the item type and proportions consistent with the reference.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_other_v32",
+          "variation_number": 32,
+          "name": "Visible Sole Edge",
+          "hook": "Visible Sole Edge: show a distinct, reference-faithful view of the supplied kasut lain.",
+          "action": "Track along a visible sole or base edge, if present; otherwise follow the lowest visible contour.",
+          "detail": "Do not invent an underside or tread.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_other_v33",
+          "variation_number": 33,
+          "name": "Upper Surface Pass",
+          "hook": "Upper Surface Pass: show a distinct, reference-faithful view of the supplied kasut lain.",
+          "action": "Move across a real visible upper surface detail and then widen.",
+          "detail": "Do not assign materials or textures that cannot be seen.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_other_v34",
+          "variation_number": 34,
+          "name": "Closure Check",
+          "hook": "Closure Check: show a distinct, reference-faithful view of the supplied kasut lain.",
+          "action": "If a closure is visible, show its actual placement with a restrained close-up.",
+          "detail": "Do not add laces, straps, buckles, or fasteners.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_other_v35",
+          "variation_number": 35,
+          "name": "Toe Profile Sweep",
+          "hook": "Toe Profile Sweep: show a distinct, reference-faithful view of the supplied kasut lain.",
+          "action": "Begin at the visible toe region and move toward the midsection.",
+          "detail": "Preserve the exact silhouette and avoid distortion.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_other_v36",
+          "variation_number": 36,
+          "name": "Rear Contour Reveal",
+          "hook": "Rear Contour Reveal: show a distinct, reference-faithful view of the supplied kasut lain.",
+          "action": "Shift slowly toward the visible rear contour, then return to a wider view.",
+          "detail": "Do not reveal unseen parts or invent structural features.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_other_v37",
+          "variation_number": 37,
+          "name": "Single Item Frame",
+          "hook": "Single Item Frame: show a distinct, reference-faithful view of the supplied kasut lain.",
+          "action": "Centre the supplied single shoe and use a slow push-in.",
+          "detail": "Do not duplicate the product to create a pair.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_other_v38",
+          "variation_number": 38,
+          "name": "Pair Arrangement Hold",
+          "hook": "Pair Arrangement Hold: show a distinct, reference-faithful view of the supplied kasut lain.",
+          "action": "If a pair is shown, make a slight overhead move while keeping both items visible.",
+          "detail": "Do not rearrange or duplicate either shoe.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_other_v39",
+          "variation_number": 39,
+          "name": "Colour-true Detail",
+          "hook": "Colour-true Detail: show a distinct, reference-faithful view of the supplied kasut lain.",
+          "action": "Use soft neutral lighting and a short lateral move across the visible colours.",
+          "detail": "Do not recolour the product or introduce extra accents.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_other_v40",
+          "variation_number": 40,
+          "name": "Edge and Seam Tracking",
+          "hook": "Edge and Seam Tracking: show a distinct, reference-faithful view of the supplied kasut lain.",
+          "action": "Follow a seam or edge only where it is clearly visible.",
+          "detail": "Do not invent stitching, panels, or labels.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_other_v41",
+          "variation_number": 41,
+          "name": "Surface Finish Angle",
+          "hook": "Surface Finish Angle: show a distinct, reference-faithful view of the supplied kasut lain.",
+          "action": "Change camera angle slightly to show the existing finish.",
+          "detail": "No artificial gloss, metallic effects, or material claims.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_other_v42",
+          "variation_number": 42,
+          "name": "Opening Detail",
+          "hook": "Opening Detail: show a distinct, reference-faithful view of the supplied kasut lain.",
+          "action": "If the opening is visible, make a gentle elevated reframe around it.",
+          "detail": "Do not fabricate interior padding, insoles, or labels.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_other_v43",
+          "variation_number": 43,
+          "name": "Decorative Feature Context",
+          "hook": "Decorative Feature Context: show a distinct, reference-faithful view of the supplied kasut lain.",
+          "action": "Briefly frame an actual visible decorative feature, if present, then widen.",
+          "detail": "Do not add or animate decoration.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_other_v44",
+          "variation_number": 44,
+          "name": "Sole Junction Detail",
+          "hook": "Sole Junction Detail: show a distinct, reference-faithful view of the supplied kasut lain.",
+          "action": "Focus on the visible junction between the upper and sole, if present.",
+          "detail": "Do not infer construction or durability.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_other_v45",
+          "variation_number": 45,
+          "name": "Low Three-quarter View",
+          "hook": "Low Three-quarter View: show a distinct, reference-faithful view of the supplied kasut lain.",
+          "action": "Use a restrained low three-quarter angle to define the visible outline.",
+          "detail": "Keep realistic scale and avoid exaggerated perspective.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_other_v46",
+          "variation_number": 46,
+          "name": "Top View Composition",
+          "hook": "Top View Composition: show a distinct, reference-faithful view of the supplied kasut lain.",
+          "action": "Use an overhead view to show the actual visible layout of the supplied item.",
+          "detail": "Do not expose hidden features or alter arrangement.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_other_v47",
+          "variation_number": 47,
+          "name": "Detail-to-Whole Pullback",
+          "hook": "Detail-to-Whole Pullback: show a distinct, reference-faithful view of the supplied kasut lain.",
+          "action": "Start with a genuine visible detail and pull back to the full supplied product.",
+          "detail": "Keep all features reference-matched.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_other_v48",
+          "variation_number": 48,
+          "name": "Shadow Separation",
+          "hook": "Shadow Separation: show a distinct, reference-faithful view of the supplied kasut lain.",
+          "action": "Slide the camera slightly so the real silhouette separates from its natural shadow.",
+          "detail": "No floating effects or artificial glow.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_other_v49",
+          "variation_number": 49,
+          "name": "Pair-to-Single Focus",
+          "hook": "Pair-to-Single Focus: show a distinct, reference-faithful view of the supplied kasut lain.",
+          "action": "If a pair is present, briefly focus on one shoe and return to both in frame.",
+          "detail": "Do not crop out or duplicate the other shoe at the end.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
+        },
+        {
+          "id": "shoes_other_v50",
+          "variation_number": 50,
+          "name": "Balanced Final Silhouette",
+          "hook": "Balanced Final Silhouette: show a distinct, reference-faithful view of the supplied kasut lain.",
+          "action": "Finish with a steady three-quarter or side composition that matches the visible reference.",
+          "detail": "No extra props, text, or unsupported product claims.",
+          "camera": "Use a deliberate, slow camera move with realistic perspective, stable framing and safe margins.",
+          "lighting": "Use soft, neutral lighting, accurate reference colours and natural contact shadows.",
+          "closing": "End on a steady, fully readable view of the supplied product, unchanged from the reference.",
+          "audio": "Follow the user's selected audio settings only; do not add unrequested speech, music or sound effects."
         }
       ]
     },
