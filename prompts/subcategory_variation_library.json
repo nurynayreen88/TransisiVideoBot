@@ -11609,7 +11609,7 @@
       "subcategory_id": "hijab_sport",
       "category_id": "hijab",
       "label": "🏃 Tudung sukan",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "hijab_sport_v01",
@@ -11730,6 +11730,126 @@
           "lighting": "Use soft neutral key light and gentle fill, preserving natural skin tone and product colour.",
           "closing": "Hold a clean final portrait with the same styling and full visible outline in frame.",
           "audio": "Respect audio settings and generator capability; no forced narration or invented effects."
+        },
+        {
+          "id": "hijab_sport_v11",
+          "variation_number": 11,
+          "name": "Movement-Ready Portrait",
+          "hook": "Open with the sports hijab worn exactly as shown in the reference, framed to show its visible face opening and head coverage.",
+          "action": "The wearer turns slightly toward the camera and settles into a ready stance; no running or strenuous movement is needed.",
+          "detail": "Show only visible construction and coverage; do not claim sweat-wicking, breathability or secure fit without supplied evidence.",
+          "camera": "Use a stable medium close-up and a small push-in, keeping the visible silhouette in frame.",
+          "lighting": "Use soft, neutral light that preserves the real colour and visible surface.",
+          "closing": "Finish on a calm, confident portrait with the same styling intact.",
+          "audio": "Use only the selected audio settings; no default workout sound effects."
+        },
+        {
+          "id": "hijab_sport_v12",
+          "variation_number": 12,
+          "name": "Side Profile Coverage View",
+          "hook": "Begin on a three-quarter profile that shows the sports hijab's visible outline around the head and neck as referenced.",
+          "action": "The wearer makes a small head turn and pauses, keeping hands away from the hijab.",
+          "detail": "Do not infer hidden coverage or invent seams, inner layers or fasteners.",
+          "camera": "Use a fixed medium close-up and let the small turn provide the movement.",
+          "lighting": "Use gentle side light with fill so the silhouette remains clear without darkening the product.",
+          "closing": "Hold on the profile with the visible outline unobstructed.",
+          "audio": "Follow the user's audio selection; no narration unless requested."
+        },
+        {
+          "id": "hijab_sport_v13",
+          "variation_number": 13,
+          "name": "Ready-Set Pause",
+          "hook": "Open on a simple athletic setting with the sports hijab styled exactly as in the reference and the wearer standing still.",
+          "action": "The wearer takes a relaxed breath and shifts weight slightly, without starting a sport action that changes the product shape.",
+          "detail": "Keep folds and edges realistic; do not imply performance benefits from appearance alone.",
+          "camera": "Use a subtle lateral slide at eye level, with the wearer centered and the background uncluttered.",
+          "lighting": "Use even daylight and stable white balance.",
+          "closing": "End on a composed ready stance, with the sports hijab clearly visible.",
+          "audio": "Music or speech only if selected; no automatic crowd or gym sounds."
+        },
+        {
+          "id": "hijab_sport_v14",
+          "variation_number": 14,
+          "name": "Edge Detail in Context",
+          "hook": "Start with a close view of the visible face-opening edge or seam, if clearly shown, while retaining part of the face for context.",
+          "action": "The camera slowly pulls back to show the edge within the full worn style; the wearer stays still.",
+          "detail": "If no seam is visible, focus on the real edge rather than adding stitching or construction details.",
+          "camera": "Use a smooth pull-back with natural perspective and stable focus.",
+          "lighting": "Use diffused light to reveal details without false sheen or colour shift.",
+          "closing": "Finish in a head-and-shoulders portrait where the edge and overall silhouette are both legible.",
+          "audio": "Use only the chosen audio settings."
+        },
+        {
+          "id": "hijab_sport_v15",
+          "variation_number": 15,
+          "name": "Neutral Studio Sports Look",
+          "hook": "Open on a clean catalogue-style portrait of the sports hijab, with no brand logos or sporting props added.",
+          "action": "The wearer holds a relaxed posture and makes one slight head turn toward the lens.",
+          "detail": "Preserve the exact visible styling and colour; do not add logos, badges or extra layers.",
+          "camera": "Use eye-level framing with a gentle push-in and realistic proportions.",
+          "lighting": "Use broad, soft light with accurate colour and natural shadows.",
+          "closing": "End on a steady portrait suitable for a clear product showcase.",
+          "audio": "No spoken performance claims unless supplied by the user."
+        },
+        {
+          "id": "hijab_sport_v16",
+          "variation_number": 16,
+          "name": "Natural Head Turn",
+          "hook": "Begin front-facing with the sports hijab's visible face opening and silhouette clearly framed.",
+          "action": "The wearer turns their head slowly to one side and returns to center, without touching the fabric.",
+          "detail": "Keep the product from sliding, stretching or reshaping independently of the wearer.",
+          "camera": "Use a locked camera and one continuous take, avoiding jump cuts.",
+          "lighting": "Maintain consistent neutral lighting and exposure.",
+          "closing": "Finish in the original front-facing pose with unchanged folds.",
+          "audio": "Follow selected audio options; no forced whoosh effects."
+        },
+        {
+          "id": "hijab_sport_v17",
+          "variation_number": 17,
+          "name": "Light Outdoor Backdrop",
+          "hook": "Open outdoors against a simple, calm background, keeping the sports hijab's reference colour and visible shape central.",
+          "action": "The wearer stands still while the camera makes a short, smooth slide; no wind-driven fabric motion is added.",
+          "detail": "Do not imply water resistance, wind resistance or athletic performance from the scene.",
+          "camera": "Use a stable medium close-up and keep the background secondary.",
+          "lighting": "Use open shade or soft daylight to avoid harsh highlights and colour casts.",
+          "closing": "End with the wearer centered and the visible product clearly readable.",
+          "audio": "Use only selected audio; no birds, wind or sports sounds by default."
+        },
+        {
+          "id": "hijab_sport_v18",
+          "variation_number": 18,
+          "name": "Shoulder-Line Framing",
+          "hook": "Begin with a frame that includes the sports hijab's visible lower edge and shoulder area where shown in the reference.",
+          "action": "The wearer adjusts posture slightly while keeping hands away from the product.",
+          "detail": "Preserve the visible edge and fold placement; do not fabricate a longer panel or unseen rear coverage.",
+          "camera": "Use a subtle tilt from the face opening to the shoulder line, then stop.",
+          "lighting": "Use even soft light so the visible product remains clear.",
+          "closing": "Finish on a balanced medium close-up with the silhouette intact.",
+          "audio": "Audio remains as selected by the user."
+        },
+        {
+          "id": "hijab_sport_v19",
+          "variation_number": 19,
+          "name": "Slow Detail-to-Hero",
+          "hook": "Open on the clearest visible surface detail of the sports hijab, then connect it to the full worn product in one shot.",
+          "action": "Pull back slowly while the wearer holds still; no fabric movement or styling change occurs.",
+          "detail": "Keep the surface and colour faithful; do not invent technical fabric texture or material properties.",
+          "camera": "Use a continuous dolly-out with natural perspective and realistic focus.",
+          "lighting": "Use colour-neutral diffused light and stable white balance.",
+          "closing": "Hold a clean portrait that connects the detail to the full visible shape.",
+          "audio": "No default voiceover or effects."
+        },
+        {
+          "id": "hijab_sport_v20",
+          "variation_number": 20,
+          "name": "Confident Final Hold",
+          "hook": "Start with a centered portrait of the sports hijab styled exactly as the reference, against a simple background.",
+          "action": "The wearer looks toward the camera and holds a relaxed, confident stance with only natural breathing.",
+          "detail": "Keep all visible edges and folds unchanged; no text, logo or unsupported product claims.",
+          "camera": "Use a subtle stabilized push-in and no abrupt crop.",
+          "lighting": "Use soft, neutral lighting that retains accurate product colour.",
+          "closing": "End on a steady hero frame with the face opening and visible silhouette unobstructed.",
+          "audio": "Use only the user's selected audio settings."
         }
       ]
     },
