@@ -25945,7 +25945,7 @@
       "subcategory_id": "accessory_eyewear",
       "category_id": "accessory",
       "label": "🕶️ Cermin mata",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "accessory_eyewear_v01",
@@ -26066,6 +26066,126 @@
           "lighting": "LIGHTING: Warm neutral light, consistent across every beat.",
           "closing": "CTA / HERO: Return to the same product orientation and lighting for a clean close.",
           "audio": "AUDIO: Use one soft handling sound only if the handling is visible; no invented effects."
+        },
+        {
+          "id": "accessory_eyewear_v11",
+          "variation_number": 11,
+          "name": "Frame Bridge Macro",
+          "hook": "Open on the actual bridge and nearby frame contours, only if these features are visible in the supplied eyewear reference.",
+          "action": "Move slowly across the bridge toward one lens rim, keeping the glasses stationary and their geometry unchanged.",
+          "detail": "Preserve the exact bridge shape, frame thickness, lens outline and visible colour; do not invent nose pads or construction details.",
+          "camera": "Controlled macro slide from bridge to lens rim, followed by a small pullback.",
+          "lighting": "Soft frontal fill with restrained reflections that do not obscure the frame.",
+          "closing": "Hold on the genuine bridge-and-frame detail.",
+          "audio": "Quiet contemporary instrumental; no sparkle effects."
+        },
+        {
+          "id": "accessory_eyewear_v12",
+          "variation_number": 12,
+          "name": "Temple Arm Profile",
+          "hook": "Begin on a visible temple arm and hinge if the reference shows them; otherwise frame the nearest genuine side contour.",
+          "action": "Track along the arm toward the hinge without folding or flexing it unless the reference clearly depicts that movement.",
+          "detail": "Do not add hinge screws, logos, spring mechanisms or flexible-fit claims that are not visible.",
+          "camera": "Slow lateral macro pass that resolves into a side three-quarter view.",
+          "lighting": "Diffused side light defines the arm's actual edge and finish.",
+          "closing": "Finish with the visible arm and lens frame in the same composition.",
+          "audio": "Low-volume neutral instrumental; no fabricated hinge click."
+        },
+        {
+          "id": "accessory_eyewear_v13",
+          "variation_number": 13,
+          "name": "Lens Reflection Control",
+          "hook": "Open with the real lenses and frame as shown, preserving the actual lens tint and transparency.",
+          "action": "Shift the camera angle slightly so natural reflections move across the lenses without changing what is visible through them artificially.",
+          "detail": "Do not claim UV protection, blue-light filtering, prescription, anti-glare or impact resistance unless explicitly established by the source.",
+          "camera": "Small controlled arc from front to three-quarter angle with stable lens shape.",
+          "lighting": "Large diffused source creates subtle realistic reflections and avoids opaque glare.",
+          "closing": "Hold on the actual lens tint and frame outline.",
+          "audio": "Soft instrumental bed; no synthetic shimmer."
+        },
+        {
+          "id": "accessory_eyewear_v14",
+          "variation_number": 14,
+          "name": "Hinge Detail Without Folding",
+          "hook": "If the hinge is visible, begin close to that real joint; otherwise use the visible connection between the frame and side arm.",
+          "action": "Pan around the joint without folding, detaching or deforming the glasses.",
+          "detail": "Keep the hinge position, screw count and arm alignment unchanged; do not infer durability or repairability.",
+          "camera": "Steady close-up with a small focus transition to the adjoining frame.",
+          "lighting": "Soft directional fill reveals the real joint without exaggerating gaps.",
+          "closing": "End on the original assembled side profile.",
+          "audio": "Quiet modern instrumental; no mechanical sound effects."
+        },
+        {
+          "id": "accessory_eyewear_v15",
+          "variation_number": 15,
+          "name": "Front Symmetry Check",
+          "hook": "Open with a straight-on view that preserves the actual left-right frame shape and lens spacing from the reference.",
+          "action": "Make a very slow push-in while keeping both lenses and the bridge aligned; do not digitally reshape the frame for symmetry.",
+          "detail": "Do not equalize natural differences, change lens size or alter frame width from the source.",
+          "camera": "Centred frontal push-in with minimal perspective distortion.",
+          "lighting": "Balanced soft lighting across both sides with natural lens reflections.",
+          "closing": "Pause on the authentic front view with both lenses clear.",
+          "audio": "Minimal polished instrumental."
+        },
+        {
+          "id": "accessory_eyewear_v16",
+          "variation_number": 16,
+          "name": "On-Face View If Supplied",
+          "hook": "If the reference already shows a person wearing the eyewear, begin with that same fit and frame position; otherwise show the product alone.",
+          "action": "When a wearer is present, use a subtle head turn only if natural and supported; otherwise use a camera-only move around the stationary glasses.",
+          "detail": "Do not add a model, change facial features, distort the fit or imply medical or vision benefits.",
+          "camera": "Natural close-to-medium framing, keeping frame arms and lens shape stable.",
+          "lighting": "Soft natural-looking light with accurate skin and frame colour when a person is shown.",
+          "closing": "Hold on the same reference-supported wearing or tabletop arrangement.",
+          "audio": "Quiet lifestyle instrumental; no voiceover."
+        },
+        {
+          "id": "accessory_eyewear_v17",
+          "variation_number": 17,
+          "name": "Folded State Only If Shown",
+          "hook": "If the supplied eyewear is folded, preserve that exact folded state; if it is open, keep it open and begin on the visible overall shape.",
+          "action": "Use a slow overhead drift to show the existing arrangement without folding, unfolding or moving the arms.",
+          "detail": "Do not invent a folding mechanism or change the orientation of either temple arm.",
+          "camera": "Gentle overhead slide into a high three-quarter view.",
+          "lighting": "Even diffused tabletop light with natural contact shadows.",
+          "closing": "Finish on the same authentic open or folded configuration.",
+          "audio": "Soft neutral instrumental; no handling clicks."
+        },
+        {
+          "id": "accessory_eyewear_v18",
+          "variation_number": 18,
+          "name": "Frame Finish Close-Up",
+          "hook": "Choose a real visible frame surface or edge and begin close enough to show its actual finish.",
+          "action": "Let a soft reflection travel across the surface as the camera moves a few degrees, keeping colour and texture true to the reference.",
+          "detail": "Do not identify acetate, metal, coating or other materials unless confirmed; do not add scratches or decorative patterns.",
+          "camera": "Slow macro tilt and short pullback to include the adjacent lens rim.",
+          "lighting": "Controlled softbox reflection with accurate colour and no exaggerated shine.",
+          "closing": "Hold on the genuine surface and frame contour.",
+          "audio": "Low-volume refined instrumental."
+        },
+        {
+          "id": "accessory_eyewear_v19",
+          "variation_number": 19,
+          "name": "Case Included Only If Visible",
+          "hook": "If the reference includes an eyewear case or cloth, open on that exact arrangement; otherwise show only the glasses.",
+          "action": "Move from the actual supplied case or cloth toward the eyewear without adding or rearranging components.",
+          "detail": "Do not invent a case, cleaning cloth, packaging, logo or accessory, and do not imply they are included if not shown.",
+          "camera": "Slow overhead-to-three-quarter move with all visible parts remaining in place.",
+          "lighting": "Soft even studio light with realistic shadows.",
+          "closing": "Hold on the exact reference-supported item set.",
+          "audio": "Quiet instrumental; no unboxing effects."
+        },
+        {
+          "id": "accessory_eyewear_v20",
+          "variation_number": 20,
+          "name": "Full Frame Pullback",
+          "hook": "Start on a genuine visible detail such as the bridge, lens rim, temple arm or hinge, selecting only a feature present in the reference.",
+          "action": "Pull back smoothly to reveal the complete eyewear at realistic scale, preserving the frame's actual orientation and lens geometry.",
+          "detail": "No added logos, lens effects, accessories, feature claims or changes to frame shape.",
+          "camera": "Continuous macro-to-medium pullback with stable focus and natural perspective.",
+          "lighting": "Balanced diffused light with clear lens visibility and restrained reflections.",
+          "closing": "Hold a clean, unobstructed full-product view.",
+          "audio": "Soft contemporary instrumental outro; no voiceover."
         }
       ]
     },
