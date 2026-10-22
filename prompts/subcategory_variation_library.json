@@ -18753,7 +18753,7 @@
       "subcategory_id": "beauty_hair",
       "category_id": "beauty",
       "label": "💇 Penjagaan rambut",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "beauty_hair_v01",
@@ -18874,6 +18874,126 @@
           "lighting": "Use neutral, colour-accurate soft light and realistic contact shadows.",
           "closing": "Hold the complete item in sharp focus with no extra props, text or logo.",
           "audio": "Use quiet instrumental music; no unsupported sound effects or efficacy voiceover."
+        },
+        {
+          "id": "beauty_hair_v11",
+          "variation_number": 11,
+          "name": "Silhouette Against a Bright Edge",
+          "hook": "Open with the exact hair-care item outlined against a simple bright background, keeping its real silhouette and proportions faithful to the reference.",
+          "action": "Move slowly from a three-quarter view to a straight-on view without rotating or reshaping the package.",
+          "detail": "Preserve the real cap, label placement, bottle profile and any visible pump or applicator. Do not add hair strands, leaves or ingredient imagery.",
+          "camera": "Use a steady short arc with a moderate focal length; keep the entire product in frame.",
+          "lighting": "Use a soft back edge and gentle frontal fill so the label remains readable and colours stay true.",
+          "closing": "Settle into a stable full-product frame with the silhouette and label both clear.",
+          "audio": "Quiet instrumental bed only; no claims or invented product sounds."
+        },
+        {
+          "id": "beauty_hair_v12",
+          "variation_number": 12,
+          "name": "Label Typography and Print Finish",
+          "hook": "Begin on the genuine printed label or visible package markings, making the real typography and layout the visual focus.",
+          "action": "Travel slowly across the label, then pull back to reveal the full item without adding or rewriting any text.",
+          "detail": "Do not generate extra claims, ingredient lists, certification marks, logos or sharper lettering than the reference supports.",
+          "camera": "Use a controlled macro-style pass with shallow but sufficient focus to keep the visible print natural.",
+          "lighting": "Use broad diffused light from the front-side to minimise glare on printed surfaces.",
+          "closing": "Finish with the complete product facing camera and the original label unobstructed.",
+          "audio": "Soft low-volume instrumental music; no voiceover."
+        },
+        {
+          "id": "beauty_hair_v13",
+          "variation_number": 13,
+          "name": "Cap Shape and Neck Junction",
+          "hook": "Feature the actual cap, pump, lid or neck junction of the hair-care package; if no closure is visible, focus on the real upper contour instead.",
+          "action": "Make a slow tilt from the top component down to the shoulder and label, leaving the item in its original state.",
+          "detail": "Do not open, twist, pump or dispense the product unless that exact action is visible in the reference.",
+          "camera": "Begin with a tight detail shot and ease back to a medium view without cropping the item’s important features.",
+          "lighting": "Use soft side lighting to reveal contours while controlling reflections on glossy plastic or glass.",
+          "closing": "Hold on a composed view showing both the upper component and the main package.",
+          "audio": "No click or pump effect unless the action is visibly supported; music only otherwise."
+        },
+        {
+          "id": "beauty_hair_v14",
+          "variation_number": 14,
+          "name": "Material and Surface Reflection",
+          "hook": "Use the real packaging material—matte, glossy, translucent or metallic only where visible—as the opening detail, with no invented finish.",
+          "action": "Slide the camera gently across the surface so existing highlights shift naturally while the package remains still.",
+          "detail": "Keep translucency, surface texture, printed colours and reflections realistic; do not make the container appear made from another material.",
+          "camera": "Use a slow lateral macro glide followed by a wider view that restores the full product context.",
+          "lighting": "Use a large diffused source and restrained side highlights; avoid blown-out reflections or artificial sparkle.",
+          "closing": "End with a clear three-quarter product view and realistic surface detail.",
+          "audio": "Subtle instrumental music only; no synthetic sparkle sounds."
+        },
+        {
+          "id": "beauty_hair_v15",
+          "variation_number": 15,
+          "name": "True-to-Scale in One Hand",
+          "hook": "If a hand is already present in the reference, use it as the scale cue; otherwise do not introduce a hand or person solely to suggest size.",
+          "action": "Preserve the existing grip and product orientation, using a gentle camera move rather than changing how the item is held.",
+          "detail": "Do not enlarge the bottle, alter fingers, add jewellery or imply ease of use, dosage or results.",
+          "camera": "Use a steady close-to-medium framing that keeps the hand-product relationship and package shape natural.",
+          "lighting": "Use neutral soft light with natural skin tone and accurate product colour, if a hand is present.",
+          "closing": "Hold on the unchanged scale reference, with key package details visible.",
+          "audio": "Low-key music only; no handling sounds unless naturally visible and supported."
+        },
+        {
+          "id": "beauty_hair_v16",
+          "variation_number": 16,
+          "name": "Top-Down Package Layout",
+          "hook": "Show the exact hair-care item from above when the reference supports a readable top view; otherwise use a high three-quarter angle that preserves its shape.",
+          "action": "Make a slow controlled descent or tilt from the top component toward the label, without adding a second product or changing the package.",
+          "detail": "Keep cap geometry, label alignment and any visible accessories faithful. Do not invent a kit, ingredients or decorative set dressing.",
+          "camera": "Use a smooth overhead-to-oblique move with no fast spin and no extreme perspective distortion.",
+          "lighting": "Use even diffused light with soft contact shadows and no strong colour cast.",
+          "closing": "Finish at a useful angle where the whole item remains recognisable.",
+          "audio": "Gentle instrumental music; no spoken efficacy claims."
+        },
+        {
+          "id": "beauty_hair_v17",
+          "variation_number": 17,
+          "name": "Single-Product Negative Space",
+          "hook": "Place only the actual hair-care product in a spacious, minimal composition, leaving uncluttered room around its silhouette without adding promotional text.",
+          "action": "Keep the product stationary while the camera makes a subtle push-in and stops before the label or top is cropped.",
+          "detail": "No added flowers, herbs, water drops, hair strands, extra bottles or graphic badges unless they are present in the reference.",
+          "camera": "Use a centred or deliberately offset medium-wide frame with a slow, straight movement.",
+          "lighting": "Use soft neutral studio light, realistic contact shadow and accurate package colour.",
+          "closing": "Hold the quiet composition with the complete item sharply visible and no generated text.",
+          "audio": "Minimal instrumental music only; no voiceover or chimes."
+        },
+        {
+          "id": "beauty_hair_v18",
+          "variation_number": 18,
+          "name": "Visible Quantity and Package Form",
+          "hook": "Draw attention to the package’s real form and any quantity or size marking that is legible in the reference, without making the marking the sole proof of value.",
+          "action": "Move from the full container to the visible marking and back, keeping the package upright and unchanged.",
+          "detail": "Never guess capacity, servings, usage duration or contents from appearance. Show printed quantities only if genuinely legible.",
+          "camera": "Use a smooth push-in with a brief focus hold, then a clean pullback to the full item.",
+          "lighting": "Keep illumination even across the label to preserve accurate colour and avoid glare over small print.",
+          "closing": "Finish on a full package view with the marking visible only if naturally readable.",
+          "audio": "Soft instrumental bed; no value, savings or performance claims."
+        },
+        {
+          "id": "beauty_hair_v19",
+          "variation_number": 19,
+          "name": "Original Product State Reveal",
+          "hook": "Start with a close crop of a real visible feature, then reveal the entire hair-care item in its original reference state.",
+          "action": "Pull back in one continuous move; do not animate opening, pouring, spraying, squeezing or applying the product.",
+          "detail": "Maintain exact container count, closure state, label, fill visibility and any accessories shown. Do not add hair or scalp demonstrations.",
+          "camera": "Use a smooth dolly-out from detail to medium-wide framing, with no morphing transition.",
+          "lighting": "Keep light direction and white balance consistent through the reveal.",
+          "closing": "Hold the complete product centred and in focus for a clean final beat.",
+          "audio": "A quiet instrumental rise is acceptable; no fabricated dispensing sounds or treatment claims."
+        },
+        {
+          "id": "beauty_hair_v20",
+          "variation_number": 20,
+          "name": "Clean Three-Quarter Final Showcase",
+          "hook": "Present the exact hair-care product from a natural three-quarter angle, using the opening moment to establish its real shape and visible design.",
+          "action": "Make a restrained quarter-arc camera move while the product itself remains fixed and physically unchanged.",
+          "detail": "Do not invent ingredients, fragrance, hair-growth effects, anti-hair-loss benefits, dandruff treatment, repair, shine or salon endorsement.",
+          "camera": "Use a stable medium shot and a short controlled arc, keeping the label and silhouette recognisable throughout.",
+          "lighting": "Use neutral soft key light, gentle fill and realistic contact shadows; avoid artificial glow or colour shifts.",
+          "closing": "End with a sharp, complete hero frame and no added slogans, logos or extra props.",
+          "audio": "Low-volume instrumental music only; no unsupported sound effects or efficacy voiceover."
         }
       ]
     },
