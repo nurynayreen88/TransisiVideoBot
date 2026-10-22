@@ -16489,7 +16489,7 @@
       "subcategory_id": "shoes_other",
       "category_id": "shoes",
       "label": "📦 Kasut lain",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "shoes_other_v01",
@@ -16610,6 +16610,126 @@
           "lighting": "Soft even light, realistic shadows and no artificial glow.",
           "closing": "Hold on the complete unchanged product without captions or graphic CTA.",
           "audio": "Respect user-selected audio and model capability; no forced voiceover."
+        },
+        {
+          "id": "shoes_other_v11",
+          "variation_number": 11,
+          "name": "Feature-to-Full Reveal",
+          "hook": "Feature-to-Full Reveal: present a real, reference-visible detail of the shoe.",
+          "action": "Open close on one clearly visible shoe feature, then pull back to show the whole product.",
+          "detail": "Keep the shoe still; only feature details present in the reference.",
+          "camera": "Use a smooth, restrained camera move with realistic perspective and safe framing.",
+          "lighting": "Use soft, colour-accurate light and natural contact shadows.",
+          "closing": "Finish on a clear view of the supplied shoe, without cropping important visible details.",
+          "audio": "Follow selected music, speech and sound-effect settings only."
+        },
+        {
+          "id": "shoes_other_v12",
+          "variation_number": 12,
+          "name": "Side-to-Front Arc",
+          "hook": "Side-to-Front Arc: present a real, reference-visible detail of the shoe.",
+          "action": "Move a short distance from the visible side toward a front three-quarter view.",
+          "detail": "Stop before revealing any surface not supported by the reference.",
+          "camera": "Use a smooth, restrained camera move with realistic perspective and safe framing.",
+          "lighting": "Use soft, colour-accurate light and natural contact shadows.",
+          "closing": "Finish on a clear view of the supplied shoe, without cropping important visible details.",
+          "audio": "Follow selected music, speech and sound-effect settings only."
+        },
+        {
+          "id": "shoes_other_v13",
+          "variation_number": 13,
+          "name": "Seam Line Tracking",
+          "hook": "Seam Line Tracking: present a real, reference-visible detail of the shoe.",
+          "action": "Track along one visible seam or panel boundary, then widen to restore context.",
+          "detail": "Do not create extra stitching, seams or decorative parts.",
+          "camera": "Use a smooth, restrained camera move with realistic perspective and safe framing.",
+          "lighting": "Use soft, colour-accurate light and natural contact shadows.",
+          "closing": "Finish on a clear view of the supplied shoe, without cropping important visible details.",
+          "audio": "Follow selected music, speech and sound-effect settings only."
+        },
+        {
+          "id": "shoes_other_v14",
+          "variation_number": 14,
+          "name": "Sole Edge Survey",
+          "hook": "Sole Edge Survey: present a real, reference-visible detail of the shoe.",
+          "action": "Slide beside the visible sole edge while the shoe remains grounded.",
+          "detail": "Do not reveal a hidden underside or invent tread or cushioning.",
+          "camera": "Use a smooth, restrained camera move with realistic perspective and safe framing.",
+          "lighting": "Use soft, colour-accurate light and natural contact shadows.",
+          "closing": "Finish on a clear view of the supplied shoe, without cropping important visible details.",
+          "audio": "Follow selected music, speech and sound-effect settings only."
+        },
+        {
+          "id": "shoes_other_v15",
+          "variation_number": 15,
+          "name": "Overhead Shape Pass",
+          "hook": "Overhead Shape Pass: present a real, reference-visible detail of the shoe.",
+          "action": "Make a short overhead drift if that angle matches the supplied shoe.",
+          "detail": "Preserve the actual shape and do not add a second item.",
+          "camera": "Use a smooth, restrained camera move with realistic perspective and safe framing.",
+          "lighting": "Use soft, colour-accurate light and natural contact shadows.",
+          "closing": "Finish on a clear view of the supplied shoe, without cropping important visible details.",
+          "audio": "Follow selected music, speech and sound-effect settings only."
+        },
+        {
+          "id": "shoes_other_v16",
+          "variation_number": 16,
+          "name": "Panel Focus Shift",
+          "hook": "Panel Focus Shift: present a real, reference-visible detail of the shoe.",
+          "action": "Shift focus once between two visible panels or details.",
+          "detail": "Use only visible parts; do not invent logos or materials.",
+          "camera": "Use a smooth, restrained camera move with realistic perspective and safe framing.",
+          "lighting": "Use soft, colour-accurate light and natural contact shadows.",
+          "closing": "Finish on a clear view of the supplied shoe, without cropping important visible details.",
+          "audio": "Follow selected music, speech and sound-effect settings only."
+        },
+        {
+          "id": "shoes_other_v17",
+          "variation_number": 17,
+          "name": "Rear-to-Side Move",
+          "hook": "Rear-to-Side Move: present a real, reference-visible detail of the shoe.",
+          "action": "Track from the visible rear contour toward the side.",
+          "detail": "Keep the shoe fixed and do not add heel tabs or reflectors.",
+          "camera": "Use a smooth, restrained camera move with realistic perspective and safe framing.",
+          "lighting": "Use soft, colour-accurate light and natural contact shadows.",
+          "closing": "Finish on a clear view of the supplied shoe, without cropping important visible details.",
+          "audio": "Follow selected music, speech and sound-effect settings only."
+        },
+        {
+          "id": "shoes_other_v18",
+          "variation_number": 18,
+          "name": "Natural Scale Hero",
+          "hook": "Natural Scale Hero: present a real, reference-visible detail of the shoe.",
+          "action": "Make a subtle push-in on the shoe displayed on its existing surface.",
+          "detail": "Keep scale believable; add no props or sizing claims.",
+          "camera": "Use a smooth, restrained camera move with realistic perspective and safe framing.",
+          "lighting": "Use soft, colour-accurate light and natural contact shadows.",
+          "closing": "Finish on a clear view of the supplied shoe, without cropping important visible details.",
+          "audio": "Follow selected music, speech and sound-effect settings only."
+        },
+        {
+          "id": "shoes_other_v19",
+          "variation_number": 19,
+          "name": "Soft Surface Light",
+          "hook": "Soft Surface Light: present a real, reference-visible detail of the shoe.",
+          "action": "Use a small camera slide to reveal the actual visible surface finish.",
+          "detail": "Do not add gloss, glitter or texture absent from the reference.",
+          "camera": "Use a smooth, restrained camera move with realistic perspective and safe framing.",
+          "lighting": "Use soft, colour-accurate light and natural contact shadows.",
+          "closing": "Finish on a clear view of the supplied shoe, without cropping important visible details.",
+          "audio": "Follow selected music, speech and sound-effect settings only."
+        },
+        {
+          "id": "shoes_other_v20",
+          "variation_number": 20,
+          "name": "Reference-Locked Finish",
+          "hook": "Reference-Locked Finish: present a real, reference-visible detail of the shoe.",
+          "action": "Settle into a steady three-quarter hero view of the complete shoe.",
+          "detail": "Keep visible details and item count unchanged; no extra graphics.",
+          "camera": "Use a smooth, restrained camera move with realistic perspective and safe framing.",
+          "lighting": "Use soft, colour-accurate light and natural contact shadows.",
+          "closing": "Finish on a clear view of the supplied shoe, without cropping important visible details.",
+          "audio": "Follow selected music, speech and sound-effect settings only."
         }
       ]
     },
