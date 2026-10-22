@@ -18257,7 +18257,7 @@
       "subcategory_id": "beauty_skincare",
       "category_id": "beauty",
       "label": "🧴 Skincare",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "beauty_skincare_v01",
@@ -18378,6 +18378,126 @@
           "lighting": "Use warm-neutral but colour-accurate light with controlled reflections and realistic contact shadows.",
           "closing": "Hold the complete product sharply in frame with no rendered text, added logo or extra props.",
           "audio": "Use quiet instrumental music only; keep any selected speech clear and avoid unsupported sound effects."
+        },
+        {
+          "id": "beauty_skincare_v11",
+          "variation_number": 11,
+          "name": "Overhead Skincare Package Layout",
+          "hook": "Open from directly above with the exact skincare item centered on a plain surface. Keep the original package, visible label and proportions unchanged; use no extra products or decorative branding.",
+          "action": "Hold the overhead composition, then make a slow diagonal camera drift that reveals the package outline without moving or opening it.",
+          "detail": "Show only visible edges, printed information and closure details. Do not add ingredients, routine steps, efficacy claims or unshown accessories.",
+          "camera": "Begin in a true top-down view, drift diagonally a short distance, then settle with the complete item inside the frame.",
+          "lighting": "Use even, diffused light with soft shadows that preserve label legibility and the package's real colour.",
+          "closing": "Return to a centered overhead hero shot with all visible packaging details intact.",
+          "audio": "Use a restrained instrumental bed; no spoken skincare benefits or fabricated handling sounds."
+        },
+        {
+          "id": "beauty_skincare_v12",
+          "variation_number": 12,
+          "name": "Side-Profile Packaging Study",
+          "hook": "Start at a side angle that makes the skincare package's real depth and outline easy to read, without hiding or altering its label.",
+          "action": "Slide the camera slowly from the side profile toward a front three-quarter view while the package remains still.",
+          "detail": "Reveal only surfaces supported by the reference. Do not invent a back label, volume marking, material or hidden feature.",
+          "camera": "Use a controlled horizontal slider move at package height, keeping the full silhouette undistorted.",
+          "lighting": "Soft side lighting separates the package edges from the background without creating false colours or harsh glare.",
+          "closing": "Stop at a front three-quarter angle where the original product is clearly identifiable.",
+          "audio": "Quiet modern instrumental music only; no synthetic mechanical sounds."
+        },
+        {
+          "id": "beauty_skincare_v13",
+          "variation_number": 13,
+          "name": "Label Focus Pull",
+          "hook": "Frame the real skincare container so its label and package shape are both visible, with no extra copy or graphics added.",
+          "action": "Shift focus from the nearest package edge to the actual printed label, then gently return focus to the whole item.",
+          "detail": "Keep all printed wording faithful and do not sharpen it into invented text. Preserve the real label layout and colour.",
+          "camera": "Use a locked camera and a deliberate rack focus; avoid digital zoom that crops the product identity.",
+          "lighting": "Choose soft frontal illumination to reduce reflections over the label while retaining natural surface shading.",
+          "closing": "Hold focus on the label within a complete, recognisable product composition.",
+          "audio": "Minimal instrumental music; no voiceover reading or embellishing label claims."
+        },
+        {
+          "id": "beauty_skincare_v14",
+          "variation_number": 14,
+          "name": "Reflections Across a Glossy Container",
+          "hook": "If the skincare package visibly has a reflective surface, begin with a three-quarter view that shows its real finish; for a non-reflective package, use a neutral detail shot instead.",
+          "action": "Make a small camera-angle change so existing reflections shift naturally while the container stays stationary.",
+          "detail": "Do not transform the surface into glass, metal or another material. Avoid artificial sparkle, liquid effects or altered label colours.",
+          "camera": "Use a slow, short arc close to eye level, preserving the package's proportions and full outline.",
+          "lighting": "Use broad diffused studio light and controlled highlights, matching the finish actually visible in the reference.",
+          "closing": "Settle on a clear three-quarter hero view with reflections no longer obscuring the label.",
+          "audio": "Soft instrumental ambience; no sparkle chimes or exaggerated whoosh effects."
+        },
+        {
+          "id": "beauty_skincare_v15",
+          "variation_number": 15,
+          "name": "Tall Bottle Vertical Reveal",
+          "hook": "For a tall skincare bottle, start low enough to show the real base and travel upward toward its cap and label; if the item is not tall, adapt the move to its actual shape.",
+          "action": "Tilt the camera upward along the package in one continuous move, without rotating, opening or changing the product.",
+          "detail": "Keep the cap, pump and label exactly as shown. Do not add droplets, ingredients or dispensing actions.",
+          "camera": "Use a slow vertical tilt with focus held on the product, ending wide enough to show the full container.",
+          "lighting": "Use balanced vertical soft lighting so the base and top remain equally readable.",
+          "closing": "Finish with the entire bottle centered and upright, without cropping the closure.",
+          "audio": "A quiet, steady instrumental bed; no invented spray, pump or liquid sounds."
+        },
+        {
+          "id": "beauty_skincare_v16",
+          "variation_number": 16,
+          "name": "Compact Jar Scale and Form",
+          "hook": "Present a skincare jar or compact container at a natural scale against a simple surface, showing its true relationship between lid and body.",
+          "action": "Move from a medium shot to a slightly elevated close-up, then ease back to the complete container without opening it.",
+          "detail": "Do not add a hand for scale unless a hand appears in the reference. Preserve the actual lid-to-body proportions and visible seams.",
+          "camera": "Use a gentle push-in from a slightly elevated three-quarter angle, avoiding exaggerated wide-angle distortion.",
+          "lighting": "Soft overhead and frontal fill reveal the jar outline and lid edge without deep shadows.",
+          "closing": "Hold the closed container fully visible with the lid aligned as in the source.",
+          "audio": "Subtle instrumental music only; no lid twist or pop unless visibly performed."
+        },
+        {
+          "id": "beauty_skincare_v17",
+          "variation_number": 17,
+          "name": "Minimal Pedestal Product Portrait",
+          "hook": "Place the exact skincare product on a plain, understated display surface only if the surface does not obscure or alter the item; keep the package as the sole hero.",
+          "action": "Move the camera in a slow half-step from a wider portrait to a medium product view while the item remains still.",
+          "detail": "Do not create a floating product, luxury claim, extra packaging or props that imply unverified features.",
+          "camera": "Use a centered eye-level composition with a gentle forward move and natural perspective.",
+          "lighting": "Use soft studio key light with a faint, realistic shadow beneath the product; preserve the reference colour.",
+          "closing": "End on a balanced product portrait with the full label and closure visible.",
+          "audio": "Clean, understated instrumental music; no voice claims or artificial reveal effects."
+        },
+        {
+          "id": "beauty_skincare_v18",
+          "variation_number": 18,
+          "name": "Packaging Edge and Seam Macro",
+          "hook": "Open on a genuine visible seam, fold, cap edge or container join on the skincare package, then establish the full item so the detail has context.",
+          "action": "Track a short distance along the visible edge without pulling parts apart or implying a construction feature that cannot be seen.",
+          "detail": "Describe only visible geometry and finish. Do not claim leak resistance, airtight sealing or manufacturing quality.",
+          "camera": "Use a macro-style close shot with shallow depth of field, then pull focus or widen to identify the complete package.",
+          "lighting": "Use raking diffused light to reveal the real contour while keeping highlights controlled.",
+          "closing": "Finish with a medium close-up that connects the detail to the unchanged product.",
+          "audio": "Low instrumental music; no clicks, snaps or technical narration."
+        },
+        {
+          "id": "beauty_skincare_v19",
+          "variation_number": 19,
+          "name": "Front-to-Three-Quarter Showcase",
+          "hook": "Begin with the product's actual front face square to camera, with the original label visible and no added lettering.",
+          "action": "Move the camera a few degrees to one side, then return toward the front without revealing unsupported back or side details.",
+          "detail": "Preserve the exact label placement, silhouette, cap and colour. Do not generate new text on unseen surfaces.",
+          "camera": "Use a restrained front-to-three-quarter camera arc with consistent distance and no product morphing.",
+          "lighting": "Keep the front evenly lit, with a gentle edge highlight that does not wash out printed details.",
+          "closing": "Settle on the clearest front-facing angle supported by the reference.",
+          "audio": "Soft instrumental music with no exaggerated transition sounds."
+        },
+        {
+          "id": "beauty_skincare_v20",
+          "variation_number": 20,
+          "name": "Still-Life Negative Space Composition",
+          "hook": "Place the exact skincare package slightly off-center in a clean composition with generous empty space, but do not use that space for generated text or graphics.",
+          "action": "Make a slow lateral camera slide that subtly changes the negative space while keeping the product dominant and stationary.",
+          "detail": "Use no extra skincare items, ingredients, leaves, water droplets or decorative props that could imply formula contents or benefits.",
+          "camera": "Start in a wide vertical frame, slide gently, then stop before the package approaches the frame edge.",
+          "lighting": "Use soft, balanced light and a natural shadow to keep the label and outline readable.",
+          "closing": "Hold the product in a calm off-center hero composition with all packaging details unchanged.",
+          "audio": "Gentle instrumental ambience only; no voiceover or promotional claims."
         }
       ]
     },
