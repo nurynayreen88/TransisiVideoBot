@@ -12825,7 +12825,7 @@
       "subcategory_id": "hijab_accessory",
       "category_id": "hijab",
       "label": "✨ Aksesori tudung",
-      "variation_count": 20,
+      "variation_count": 30,
       "variations": [
         {
           "id": "hijab_accessory_v01",
@@ -13066,6 +13066,126 @@
           "lighting": "Use soft balanced lighting and controlled highlights.",
           "closing": "End on a steady, uncluttered hero frame with the full accessory visible.",
           "audio": "Follow the user's selected audio settings; no default narration or effects."
+        },
+        {
+          "id": "hijab_accessory_v21",
+          "variation_number": 21,
+          "name": "Fastening Mechanism Portrait",
+          "hook": "Open with the accessory's actual clasp, pin, magnet, clip or fastening area visible in the supplied reference, keeping the rest of the item recognisable.",
+          "action": "Hold the accessory steady while the camera traces the visible fastening once; do not operate it or claim how strongly it holds.",
+          "detail": "Show only components clearly present; never invent a hidden mechanism, safety lock or fabric-grip test.",
+          "camera": "Begin in a tight contextual close-up, make a slow short arc around the visible fastening, then widen to the full accessory.",
+          "lighting": "Use soft angled light to separate overlapping parts without adding fake metallic shine.",
+          "closing": "Finish on a sharp, complete view with the fastening still in its original state.",
+          "audio": "Use the selected audio setting; no added click sound unless it is genuinely recorded and visible."
+        },
+        {
+          "id": "hijab_accessory_v22",
+          "variation_number": 22,
+          "name": "Pinpoint Ornament Reveal",
+          "hook": "Start with the most distinctive visible decorative feature—such as a bead, motif, enamel area or shaped edge only if present on this exact accessory.",
+          "action": "Let the camera travel from that real feature to the surrounding design without animating, enlarging or replacing any ornament.",
+          "detail": "Preserve the exact number, placement and appearance of visible decorative elements; do not label materials or stones without evidence.",
+          "camera": "Use a macro-style slow glide across the detail, followed by a measured pull-back to show its place on the whole item.",
+          "lighting": "Use broad diffused light to retain detail and colour, with no artificial glitter effects.",
+          "closing": "Hold on the complete accessory with the highlighted detail still clearly visible.",
+          "audio": "Keep sound understated and consistent with the selected audio option; avoid fantasy sparkle effects."
+        },
+        {
+          "id": "hijab_accessory_v23",
+          "variation_number": 23,
+          "name": "Edge Profile and Silhouette",
+          "hook": "Open with the accessory's real outline against a clean contrasting background, matching its reference proportions and orientation.",
+          "action": "Move the camera around the visible perimeter while the accessory stays still; do not bend, stretch or reshape it.",
+          "detail": "Emphasise only the actual profile, curves, corners and edges that can be seen; make no claims about strength or flexibility.",
+          "camera": "Use a slow lateral orbit of no more than a partial turn, then settle into a straight-on full-product frame.",
+          "lighting": "Use gentle edge separation and neutral fill so the outline remains clear without a halo effect.",
+          "closing": "Return to the same orientation as the opening for a stable final product view.",
+          "audio": "No dramatic whooshes; follow the chosen music and sound settings."
+        },
+        {
+          "id": "hijab_accessory_v24",
+          "variation_number": 24,
+          "name": "Pair and Set Completeness",
+          "hook": "Show the complete accessory set exactly as supplied in the reference, including only the pieces visibly included.",
+          "action": "A hand may arrange the existing pieces into a neat, readable layout without adding, removing or duplicating any part.",
+          "detail": "Keep the real number of pieces and their relative sizes; do not imply that a single item includes extras not shown.",
+          "camera": "Start with the whole set in frame, move briefly to each visible piece, then return to the complete arrangement.",
+          "lighting": "Use even tabletop lighting with soft shadows so small pieces remain distinct.",
+          "closing": "Hold on the entire set with every included piece visible and unobstructed.",
+          "audio": "Use quiet, natural handling sounds only if handling is shown; otherwise use the selected audio track."
+        },
+        {
+          "id": "hijab_accessory_v25",
+          "variation_number": 25,
+          "name": "Packaging and Unboxing Context",
+          "hook": "Begin with the accessory beside its real packaging only if the packaging is present in the reference or supplied separately by the user.",
+          "action": "Reveal the accessory by moving the existing packaging aside gently; if no packaging is supplied, keep the scene as a clean tabletop showcase instead.",
+          "detail": "Do not invent brand names, certificates, inserts, labels or premium packaging; preserve all readable text exactly as shown.",
+          "camera": "Use a top-down opening composition, a slow reveal toward the accessory, then a close view of the item itself.",
+          "lighting": "Use neutral softbox-style light with legible packaging details and accurate product colour.",
+          "closing": "End with the accessory fully visible and any real packaging placed neatly behind it.",
+          "audio": "Avoid exaggerated paper or box sounds unless they match visible movement; respect the selected audio setting."
+        },
+        {
+          "id": "hijab_accessory_v26",
+          "variation_number": 26,
+          "name": "Fabric-Safe Styling Suggestion",
+          "hook": "Place the accessory beside a plain hijab fabric in a colour that does not distort the product, keeping the accessory as the clear hero.",
+          "action": "Show the fabric and accessory side by side; demonstrate attachment only if the reference clearly shows how it is used and the action is safe for that item.",
+          "detail": "Do not pierce, snag, stretch or magnetically attach fabric by assumption; do not claim suitability for every fabric type.",
+          "camera": "Begin with a balanced overhead view, drift toward the accessory, and finish with both accessory and fabric visible for context.",
+          "lighting": "Use soft natural-looking light that keeps the fabric texture subtle and the accessory's real colour intact.",
+          "closing": "Hold a tidy styling composition without implying an unverified fit or compatibility claim.",
+          "audio": "Use calm selected music or silence; no invented fabric fastening sounds."
+        },
+        {
+          "id": "hijab_accessory_v27",
+          "variation_number": 27,
+          "name": "Size Reference Without Exaggeration",
+          "hook": "Open with the accessory alone at a realistic scale, then include a plain hand or familiar neutral object only as a visual reference if appropriate.",
+          "action": "Keep the reference object beside the accessory without overlapping it; do not enlarge the product or imply exact measurements.",
+          "detail": "Do not state dimensions or scale from camera perspective; retain the item's true proportions and all visible parts.",
+          "camera": "Use a stable medium close-up with a brief pull-back to show the relative scale, avoiding wide-angle distortion.",
+          "lighting": "Use diffuse light and a simple background so the size comparison is easy to read.",
+          "closing": "Finish with the accessory alone in a centred full view.",
+          "audio": "No voice-over size claims unless verified measurements are provided; follow the selected audio option."
+        },
+        {
+          "id": "hijab_accessory_v28",
+          "variation_number": 28,
+          "name": "Colour Fidelity Under Neutral Light",
+          "hook": "Frame the complete accessory against a neutral matte background and match its visible colour as closely as possible to the supplied reference.",
+          "action": "Make a slow exposure-stable move from the whole item to one surface detail; do not shift colour grading to make it look more luxurious.",
+          "detail": "Preserve the actual shade, finish, pattern and visible marks; do not create colour variants that are not supplied.",
+          "camera": "Use a locked opening frame, a gentle push-in, then a controlled pull-back with no rapid cuts.",
+          "lighting": "Use balanced neutral lighting and restrained reflections to avoid colour casts or blown highlights.",
+          "closing": "Hold a clear final hero frame that supports honest colour comparison.",
+          "audio": "Keep audio secondary; use only the selected music or sound configuration."
+        },
+        {
+          "id": "hijab_accessory_v29",
+          "variation_number": 29,
+          "name": "Daily Carry Pouch Display",
+          "hook": "Show the accessory beside a plain pouch or organiser only when such an item is supplied or requested as a prop; otherwise use the accessory alone.",
+          "action": "If a pouch is present, open it and place the accessory beside it without implying the accessory is included with the pouch; never hide the product inside for the main reveal.",
+          "detail": "Do not suggest portability, storage capacity or included extras beyond what the scene visibly demonstrates.",
+          "camera": "Start with the accessory and pouch in a tidy overhead frame, shift focus to the accessory, then return to a complete view.",
+          "lighting": "Use soft practical light with readable edges and no busy background.",
+          "closing": "Keep the accessory foremost, with the pouch secondary and all items clearly distinguished.",
+          "audio": "Use only plausible handling sounds when the movement is visible; otherwise follow the chosen audio setting."
+        },
+        {
+          "id": "hijab_accessory_v30",
+          "variation_number": 30,
+          "name": "Three-Beat Product Story",
+          "hook": "Open with a clear hero view of the exact hijab accessory, immediately readable against a simple background.",
+          "action": "Build three deliberate beats: show the whole item, reveal one real distinguishing detail, then return to the whole item; the product itself remains unchanged throughout.",
+          "detail": "Choose a detail that genuinely exists in the reference and avoid unsupported claims about comfort, security, durability or materials.",
+          "camera": "Use one smooth push-in for the detail beat and one smooth pull-back for the final hero beat, with calm pacing and no abrupt transitions.",
+          "lighting": "Keep neutral, consistent light across all three beats so the product's colour and shape remain stable.",
+          "closing": "End on a composed, unobstructed full-product frame with enough hold time to recognise the item.",
+          "audio": "Use a restrained selected track; do not force narration, claims or decorative sound effects."
         }
       ]
     },
