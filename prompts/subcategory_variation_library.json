@@ -13433,7 +13433,7 @@
       "subcategory_id": "hijab_other",
       "category_id": "hijab",
       "label": "📦 Tudung lain",
-      "variation_count": 30,
+      "variation_count": 40,
       "variations": [
         {
           "id": "hijab_other_v01",
@@ -13794,6 +13794,126 @@
           "lighting": "Keep light direction and white balance consistent across every framing change to preserve colour and continuity.",
           "closing": "Return to the same full view and hold long enough for the complete hijab to register.",
           "audio": "Respect the selected audio and narration settings; no forced voice-over, text overlays or fabricated sound effects."
+        },
+        {
+          "id": "hijab_other_v31",
+          "variation_number": 31,
+          "name": "Drape Line Story",
+          "hook": "Open with the hijab's complete reference appearance so the viewer can understand its real drape or laid-out outline before focusing on a detail.",
+          "action": "Trace one naturally visible drape line from its starting point to where it falls or folds; do not lift, tug, or rearrange the hijab to create a new drape.",
+          "detail": "Feature only the folds and contours already present. If the hijab is flat-lay or tightly folded, trace its existing edge or fold instead of inventing a worn silhouette.",
+          "camera": "Use a slow tracking move that follows the existing line, then widen to show how the detail belongs to the whole item.",
+          "lighting": "Soft directional light gives the real folds gentle definition without adding artificial creases or changing the colour.",
+          "closing": "Return to a complete, unchanged reference-matching view.",
+          "audio": "Follow the selected audio mode; no simulated fabric movement or unrequested narration."
+        },
+        {
+          "id": "hijab_other_v32",
+          "variation_number": 32,
+          "name": "Print Scale and Repeat",
+          "hook": "Show the whole hijab first, then introduce one clearly visible printed area if the reference contains a print.",
+          "action": "Move from the overall design to a section where the motif scale and spacing can be judged, then show how that section relates to the rest of the visible pattern; for a plain hijab, use its uninterrupted colour field instead.",
+          "detail": "Keep motif size, direction, spacing and colours faithful to the source. Never extend a partial print into an unseen area or create a pattern on a plain product.",
+          "camera": "Use a measured push-in and a smooth lateral pass across the visible surface, then return to a wide view.",
+          "lighting": "Use even, neutral illumination to avoid glare and preserve the original print contrast.",
+          "closing": "Hold the full hijab with its true pattern or plain surface clearly legible.",
+          "audio": "Use selected audio settings only; no invented claims, voice-over or sound effects."
+        },
+        {
+          "id": "hijab_other_v33",
+          "variation_number": 33,
+          "name": "Face-Frame Shape Check",
+          "hook": "If a person is wearing the hijab in the reference, begin with the visible face opening and overall framing; if not, begin with the item's actual displayed shape.",
+          "action": "For a worn reference, use a subtle camera move to show the existing face-frame outline without moving the wearer's head or changing the wrap. For an unworn reference, follow a real edge or opening instead.",
+          "detail": "Do not alter the face opening, add pins, or demonstrate a different styling method. Only show what the reference actually contains.",
+          "camera": "Start at a medium view, make a slow controlled move closer to the existing outline, then return to the original framing.",
+          "lighting": "Soft frontal light preserves visible contours and true colours without smoothing away product details.",
+          "closing": "End on the same worn styling or unworn arrangement, unchanged.",
+          "audio": "Respect the selected narration and audio settings; no forced speech or added effects."
+        },
+        {
+          "id": "hijab_other_v34",
+          "variation_number": 34,
+          "name": "Border Continuity Across the Frame",
+          "hook": "Establish the complete hijab and locate a real border, hem or printed edge only if one is visible in the reference.",
+          "action": "Follow the visible border for a short continuous section, showing its path and relationship to the main surface; if no border exists, follow the actual outer silhouette instead.",
+          "detail": "Do not add stitching, piping, trim or decorative edging. Avoid implying the border continues beyond the area shown in the source.",
+          "camera": "Track along the genuine edge at a steady pace and finish with a wider composition that restores the full outline.",
+          "lighting": "Soft grazing illumination reveals visible edge definition while maintaining neutral white balance.",
+          "closing": "Hold the original shape with the selected edge clearly visible in context.",
+          "audio": "Follow selected audio settings; no fabricated sewing sounds or unsupported quality claims."
+        },
+        {
+          "id": "hijab_other_v35",
+          "variation_number": 35,
+          "name": "Fold Shadow and Surface Depth",
+          "hook": "Open with the hijab's actual arrangement and use its existing folds or overlaps as the visual starting point.",
+          "action": "Let a slow change in camera position reveal the natural shadow between existing folds without moving the fabric or creating extra creases.",
+          "detail": "Show only genuine depth and surface transitions present in the image. If the product is completely flat, feature its visible outline or print instead.",
+          "camera": "Use a restrained three-quarter slide with a short pause at the most legible existing fold, then widen to the whole product.",
+          "lighting": "Broad soft light with gentle directional shaping reveals real fold depth without dramatic shadows or false texture.",
+          "closing": "Return to the unchanged arrangement and keep the full product recognisable.",
+          "audio": "Use the user's selected audio treatment; do not add rubbing sounds or unrequested narration."
+        },
+        {
+          "id": "hijab_other_v36",
+          "variation_number": 36,
+          "name": "Plain Hijab Minimalism",
+          "hook": "When the reference shows a plain hijab, open on its complete uninterrupted colour and outline; if patterned, adapt the same restrained composition to the real overall design.",
+          "action": "Keep the product entirely still and build a calm visual sequence around its actual colour field, silhouette and any visible folds, without introducing props or extra styling.",
+          "detail": "Do not invent a print, gradient, fabric composition or performance benefit. For a patterned item, preserve the genuine motif rather than simplifying it.",
+          "camera": "Use one slow push-in across the real surface followed by a gentle pull-back to the full view; avoid unnecessary cuts.",
+          "lighting": "Neutral, diffuse lighting and stable white balance protect the reference colour from colour casts.",
+          "closing": "Hold a quiet, uncluttered hero composition of the exact hijab.",
+          "audio": "Use music only if selected; no default narration, captions or fabricated effects."
+        },
+        {
+          "id": "hijab_other_v37",
+          "variation_number": 37,
+          "name": "Edge-to-Edge Shape Read",
+          "hook": "Present the entire hijab in the reference arrangement so its true outline is visible before examining its outer perimeter.",
+          "action": "Move the camera along the visible perimeter in a continuous, unhurried pass without stretching, unfolding or changing the item's position.",
+          "detail": "Keep the original proportions and corners. If parts of the perimeter are hidden, do not reconstruct or claim to show them.",
+          "camera": "Use a steady overhead track for a flat-lay or a suitable slow side move for a worn or folded reference, then return to the original view.",
+          "lighting": "Even soft illumination keeps the edge separated from the background without artificial outlines.",
+          "closing": "Finish on the full unchanged item with its visible perimeter easy to understand.",
+          "audio": "Follow selected audio settings; no invented handling sounds or claims about dimensions."
+        },
+        {
+          "id": "hijab_other_v38",
+          "variation_number": 38,
+          "name": "Reference-Accurate Styling Continuity",
+          "hook": "Start with the exact styling or arrangement shown in the reference and make that appearance the central visual promise of the clip.",
+          "action": "Keep the wearer, mannequin or folded product in the same configuration while using a slow framing change to show its visible front, side or laid-out surface only where supported.",
+          "detail": "Do not add accessories, change the wrap, adjust the face opening or reveal a back side absent from the source. Maintain continuity across the whole clip.",
+          "camera": "Use one smooth move between two compatible views, then return to the clearest reference-matching composition.",
+          "lighting": "Keep exposure and white balance consistent so the hijab does not change colour between views.",
+          "closing": "Hold the same styling and arrangement shown at the beginning.",
+          "audio": "Follow selected audio and narration settings; no forced model movement or voice-over."
+        },
+        {
+          "id": "hijab_other_v39",
+          "variation_number": 39,
+          "name": "Product Detail With Honest Scale",
+          "hook": "Open on the complete hijab in a realistic product frame, establishing its visible size and arrangement relative to the reference scene.",
+          "action": "Move closer to one real detail, then pull back at the same scale and perspective; do not use extreme macro or wide-angle distortion that makes the product look unusually large or small.",
+          "detail": "Show the actual visible print, fold, edge or surface. Do not add hands, rulers or props unless they exist in the reference.",
+          "camera": "Use a natural focal perspective, one measured close-up and a smooth return to the original full view.",
+          "lighting": "Soft, balanced lighting retains accurate colour and natural surface detail without exaggerated contrast.",
+          "closing": "Finish with a realistic full-product composition consistent with the reference.",
+          "audio": "Use selected audio settings only; no unsupported measurements, claims or invented sound effects."
+        },
+        {
+          "id": "hijab_other_v40",
+          "variation_number": 40,
+          "name": "Quiet Three-Stage Product Reveal",
+          "hook": "Begin with the full hijab clearly visible and let the viewer register its actual shape, colour and pattern before moving closer.",
+          "action": "Build a calm three-stage sequence: establish the whole item, feature one distinctive detail that genuinely appears in the reference, then restore the full view. Keep the product itself unchanged.",
+          "detail": "Select the detail according to the actual source—print, fold, edge, colour block or worn outline—and never fabricate a feature that is absent.",
+          "camera": "Use slow, deliberate transitions with enough hold time to read each view; avoid rapid cuts, spin effects or product transformations.",
+          "lighting": "Maintain a consistent neutral setup across all stages so the product remains visually continuous.",
+          "closing": "Return to the same complete reference-matching composition and hold for a clear final impression.",
+          "audio": "Respect selected audio and narration options; no forced voice-over, text overlays or fabricated fabric sounds."
         }
       ]
     },
