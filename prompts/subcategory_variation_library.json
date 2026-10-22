@@ -15993,7 +15993,7 @@
       "subcategory_id": "shoes_running",
       "category_id": "shoes",
       "label": "🏃 Kasut larian",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "shoes_running_v01",
@@ -16114,6 +16114,126 @@
           "lighting": "Balanced neutral light and realistic shadows.",
           "closing": "Hold on the unchanged full product with no text or graphic CTA.",
           "audio": "Follow selected audio settings and actual generator capability."
+        },
+        {
+          "id": "shoes_running_v11",
+          "variation_number": 11,
+          "name": "Lateral Sole-Line Track",
+          "hook": "Follow the visible line where the running shoe's upper meets its sole.",
+          "action": "Track slowly along the visible side seam from midfoot toward the toe, keeping the shoe still and grounded.",
+          "detail": "Only show construction lines present in the reference; do not invent cushioning layers, support zones or technical features.",
+          "camera": "Low side-level tracking shot with steady distance and realistic perspective.",
+          "lighting": "Soft angled light makes the real outline readable without dramatic contrast.",
+          "closing": "Pause on a side view that keeps the full shoe recognisable.",
+          "audio": "Use the selected audio settings only, without extra narration or effects."
+        },
+        {
+          "id": "shoes_running_v12",
+          "variation_number": 12,
+          "name": "Lace-to-Toe Focus Journey",
+          "hook": "Connect the visible lacing area to the toe shape in one calm visual move.",
+          "action": "Begin focused on the laces and visible eyelets, then shift focus forward to the toe without touching or moving the shoe.",
+          "detail": "Keep lace routing, eyelet count and toe shape identical to the supplied image.",
+          "camera": "Locked three-quarter close-up with a gentle rack focus; no artificial zoom distortion.",
+          "lighting": "Even soft light keeps the lace and upper colours faithful.",
+          "closing": "End with the laces and toe both readable in a slightly wider frame.",
+          "audio": "Follow the user's chosen music, speech and SFX options."
+        },
+        {
+          "id": "shoes_running_v13",
+          "variation_number": 13,
+          "name": "Heel Profile Reveal",
+          "hook": "Make the running shoe's actual heel outline easy to inspect.",
+          "action": "Start behind the visible heel at a safe three-quarter angle, then slide toward the side profile without turning the shoe to expose unseen details.",
+          "detail": "Do not add heel counters, reflective strips, logos or sole geometry that are not visible in the reference.",
+          "camera": "Short controlled arc around the visible rear-side angle, with stable focal length.",
+          "lighting": "Soft rim separation from the background while preserving natural colours and shadows.",
+          "closing": "Hold on the real heel profile with the shoe's shape unchanged.",
+          "audio": "Use only the selected soundtrack and explicitly enabled sound options."
+        },
+        {
+          "id": "shoes_running_v14",
+          "variation_number": 14,
+          "name": "Toe-to-Heel Pullback",
+          "hook": "Reveal the whole running shoe from a close view of its front contour.",
+          "action": "Open on the visible toe and front sole edge, then pull back smoothly until the complete shoe fits comfortably in frame.",
+          "detail": "Keep the original proportions, colour and visible surface pattern; do not stretch or reshape the shoe.",
+          "camera": "Single continuous pull-back with no cuts and generous frame margins.",
+          "lighting": "Neutral diffused lighting with natural contact shadow beneath the shoe.",
+          "closing": "Settle on a complete three-quarter product view.",
+          "audio": "No unrequested sound effects; follow the selected audio settings."
+        },
+        {
+          "id": "shoes_running_v15",
+          "variation_number": 15,
+          "name": "Topline Lace Corridor",
+          "hook": "Use the shoe's natural top line to lead the eye from laces toward the opening.",
+          "action": "Make a gentle forward camera glide over the visible lace path toward the shoe opening, stopping before any interior detail not shown by the reference is implied.",
+          "detail": "Do not invent insole branding, interior padding or hidden labels; show only the visible opening and upper.",
+          "camera": "Slightly elevated close tracking angle, smooth movement and realistic scale.",
+          "lighting": "Broad soft illumination with controlled highlights and no colour shift.",
+          "closing": "Finish at a medium close-up that still identifies the running shoe.",
+          "audio": "Keep audio limited to the selected music, voice and SFX settings."
+        },
+        {
+          "id": "shoes_running_v16",
+          "variation_number": 16,
+          "name": "Pair Spacing Overview",
+          "hook": "Show the supplied running-shoe pair as a coordinated set with clear spacing.",
+          "action": "Start from a modest overhead angle and slowly rise or pull back to include both shoes, maintaining their reference arrangement.",
+          "detail": "Use exactly the number of shoes shown in the source image; do not duplicate a shoe or rearrange the pair into a different product configuration.",
+          "camera": "Smooth overhead-to-wider move with no sudden rotation.",
+          "lighting": "Even light and soft grounded shadows separate each shoe from the background.",
+          "closing": "Hold on both shoes fully visible and evenly framed.",
+          "audio": "Use only user-selected audio; no added shoe-step sounds unless requested."
+        },
+        {
+          "id": "shoes_running_v17",
+          "variation_number": 17,
+          "name": "Quiet Surface Inspection",
+          "hook": "Let the viewer inspect the visible upper without exaggerated motion.",
+          "action": "Move the camera slowly across the actual upper surface, then pause on a wider view to restore context.",
+          "detail": "Represent mesh, knit, smooth panels or other surface qualities only if they are plainly visible; never create new perforations or textures.",
+          "camera": "Controlled macro slide with a gentle transition to a medium product view.",
+          "lighting": "Large diffused source reveals existing detail without sharpening it into a false pattern.",
+          "closing": "Finish with a stable close three-quarter view.",
+          "audio": "Keep the sound bed understated and follow selected audio controls."
+        },
+        {
+          "id": "shoes_running_v18",
+          "variation_number": 18,
+          "name": "Stable Floor-Level Hero",
+          "hook": "Present the running shoe from near floor level for a grounded product look.",
+          "action": "Keep the shoe stationary while the camera makes a small forward dolly at a low three-quarter angle.",
+          "detail": "Avoid showing unseen outsole surfaces or suggesting performance, grip, speed or injury-prevention benefits.",
+          "camera": "Low dolly-in with corrected perspective and the complete shoe kept inside frame.",
+          "lighting": "Soft directional light creates a realistic contact shadow and clear outline.",
+          "closing": "Stop before the toe or heel is cropped, holding a complete hero view.",
+          "audio": "No running or impact effects unless explicitly selected."
+        },
+        {
+          "id": "shoes_running_v19",
+          "variation_number": 19,
+          "name": "Focus From Logo Area",
+          "hook": "Begin at the visible branding area only if the supplied reference clearly shows one.",
+          "action": "Use a slow focus shift from that visible area to the shoe's overall shape; if no branding is visible, focus on the nearest clear upper detail instead.",
+          "detail": "Never generate, alter or sharpen a logo, label or lettering beyond what is actually present in the reference.",
+          "camera": "Stable close framing with a subtle rack focus and no product movement.",
+          "lighting": "Soft, glare-controlled lighting keeps any visible marks true to the reference.",
+          "closing": "Return to a clean medium shot with the shoe fully identifiable.",
+          "audio": "Follow selected audio settings; no extra voice or sound cues."
+        },
+        {
+          "id": "shoes_running_v20",
+          "variation_number": 20,
+          "name": "Clean Three-Quarter Hold",
+          "hook": "Open with a clear three-quarter view that shows the running shoe's real silhouette.",
+          "action": "Make a tiny, smooth camera arc and then hold still, keeping the shoe itself fixed and unchanged.",
+          "detail": "Do not simulate running, bending, cushioning compression or any feature claim; preserve the reference's exact visible design.",
+          "camera": "Very shallow camera arc followed by a steady locked hero shot.",
+          "lighting": "Balanced neutral light, faithful colour and natural contact shadows.",
+          "closing": "End on a crisp, uncluttered full-shoe frame with safe margins.",
+          "audio": "Use the user's selected soundtrack, voice and effects only."
         }
       ]
     },
