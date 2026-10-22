@@ -18505,7 +18505,7 @@
       "subcategory_id": "beauty_makeup",
       "category_id": "beauty",
       "label": "💄 Makeup",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "beauty_makeup_v01",
@@ -18626,6 +18626,126 @@
           "lighting": "Soft neutral light maintains accurate colour and controlled reflections.",
           "closing": "Finish with the complete product sharply framed, no rendered text, no extra logo and no added props.",
           "audio": "Use low-volume instrumental music and no unsupported sound effects."
+        },
+        {
+          "id": "beauty_makeup_v11",
+          "variation_number": 11,
+          "name": "Powder Texture Detail",
+          "hook": "Begin on the actual powder product or its visible compact, with the surface and packaging exactly as shown. Keep the frame clean and avoid added cosmetic props.",
+          "action": "Make a measured close camera move toward the visible powder surface, then ease back to include the compact or container if it is present.",
+          "detail": "Show only texture and finish that are genuinely visible. Do not create powder clouds, fingerprints, swatches or claims about oil control or wear.",
+          "camera": "Use a shallow three-quarter angle and a short macro push-in, maintaining enough context to identify the item.",
+          "lighting": "Use broad, neutral diffused light to reveal visible surface detail without changing the shade or exaggerating texture.",
+          "closing": "Finish on a balanced close-up with the actual product and its visible surface clearly readable.",
+          "audio": "Low-volume instrumental music; no powder puff or tapping sounds unless the action is shown."
+        },
+        {
+          "id": "beauty_makeup_v12",
+          "variation_number": 12,
+          "name": "Palette Geometry from Above",
+          "hook": "Present the real makeup palette or multi-pan item from directly overhead, keeping its actual pan arrangement and package edges unchanged.",
+          "action": "Drift slowly across the visible pans, then settle to show the full palette without opening or rearranging anything not already visible.",
+          "detail": "Do not add missing shades, names, mirror reflections or applicators. Preserve the count, order and colours visible in the reference.",
+          "camera": "Use a steady top-down lateral slide with a consistent distance and no perspective warping.",
+          "lighting": "Use even softbox-style illumination with restrained reflections so the visible shades remain colour-accurate.",
+          "closing": "End with the complete palette centered and all visible pans in frame.",
+          "audio": "Minimal instrumental music only; no invented clicks or palette-opening sounds."
+        },
+        {
+          "id": "beauty_makeup_v13",
+          "variation_number": 13,
+          "name": "Cap and Closure Precision",
+          "hook": "Start with the makeup item's real cap, lid or closure visible in its existing state, keeping the original package shape and label intact.",
+          "action": "Make a slow close-to-medium camera arc around the closure, without opening, twisting or removing any part.",
+          "detail": "Show only the closure type and seams supported by the reference; do not invent magnetic lids, locks or applicator mechanisms.",
+          "camera": "Use a short controlled arc at product height, keeping the closure and package silhouette undistorted.",
+          "lighting": "Soft directional light defines the edges while avoiding glare across any printed details.",
+          "closing": "Return to a front three-quarter hero view of the complete item in the same state.",
+          "audio": "Quiet modern instrumental bed; no artificial snap, twist or click effects."
+        },
+        {
+          "id": "beauty_makeup_v14",
+          "variation_number": 14,
+          "name": "Minimal Editorial Negative Space",
+          "hook": "Place the exact makeup product off-centre on a plain, uncluttered background, leaving generous empty space without adding text or graphics.",
+          "action": "Make a gentle push-in while preserving the negative space, then reframe slightly to balance the product and the open area.",
+          "detail": "Keep the background plain and do not add flowers, fabric, beauty tools, decorative lettering or claims absent from the source.",
+          "camera": "Use a locked, clean composition followed by a subtle dolly-in; maintain realistic product scale.",
+          "lighting": "Use soft, colour-neutral studio lighting with a natural contact shadow and no artificial glow.",
+          "closing": "Finish in a composed editorial still with the whole product sharply visible and no added copy.",
+          "audio": "Soft understated instrumental music; no voiceover or promotional claims."
+        },
+        {
+          "id": "beauty_makeup_v15",
+          "variation_number": 15,
+          "name": "Packaging Edge and Material Study",
+          "hook": "Open on a close three-quarter view of the real makeup packaging, showing its visible corners, seams and finish without altering its form.",
+          "action": "Slide slowly along one visible edge and widen back to the whole package, keeping the product stationary.",
+          "detail": "Describe no material that cannot be inferred visually; do not turn matte surfaces glossy or add metallic details.",
+          "camera": "Use a short horizontal slider movement at package height, then settle into a medium shot.",
+          "lighting": "Use a broad side key light and gentle fill to define edges while preserving actual colours.",
+          "closing": "Hold on a full-package view where the shape and visible label remain clear.",
+          "audio": "Restrained instrumental music; no fabricated handling sounds."
+        },
+        {
+          "id": "beauty_makeup_v16",
+          "variation_number": 16,
+          "name": "Natural Handheld Scale Reference",
+          "hook": "If a hand is present in the reference, retain its natural proportion; otherwise show the makeup item alone without adding a person or hand.",
+          "action": "Use a very subtle camera drift to create a natural observational feel while the product remains in its supported position.",
+          "detail": "Do not add a hand, model, application, or size comparison absent from the reference. Never exaggerate the product's scale.",
+          "camera": "Use a stable micro-handheld movement with restrained motion and no sudden zooms.",
+          "lighting": "Use soft window-like light with neutral white balance and realistic shadows.",
+          "closing": "End on a steady shot that communicates the item's actual visible size and shape without forced perspective.",
+          "audio": "Light ambient instrumental music; no speech or invented handling sounds."
+        },
+        {
+          "id": "beauty_makeup_v17",
+          "variation_number": 17,
+          "name": "Reflective Finish Control",
+          "hook": "If the makeup package visibly reflects light, begin with a clean angle that shows its genuine finish; otherwise emphasize its real matte or textured surface.",
+          "action": "Shift the camera slightly so existing highlights move naturally, keeping the package and its label unchanged.",
+          "detail": "Do not add glitter, sparkle, mirror-like reflections or a different surface finish. Avoid inventing a product swatch.",
+          "camera": "Use a slow short orbit from front to three-quarter view, maintaining the complete product silhouette.",
+          "lighting": "Use large diffused light sources and controlled highlights; retain true shade and legible markings.",
+          "closing": "Settle where reflections do not obscure the real label or visible product surface.",
+          "audio": "Subtle instrumental music only; no sparkle chimes or exaggerated whooshes."
+        },
+        {
+          "id": "beauty_makeup_v18",
+          "variation_number": 18,
+          "name": "Applicator Detail Without Use",
+          "hook": "If an applicator is visibly included with the makeup item, frame it beside or attached to the product as shown; otherwise focus on the product's actual opening or surface.",
+          "action": "Move focus between the visible applicator and the main package only when both are present in the reference.",
+          "detail": "Do not add brushes, sponges, wands or applicators, and do not demonstrate use or create application results not shown.",
+          "camera": "Use a slow rack focus in a fixed composition, then widen enough to show the complete supported arrangement.",
+          "lighting": "Use soft frontal fill to keep both visible components readable without harsh shadows.",
+          "closing": "Finish with the real product and any reference-visible applicator together in clear focus.",
+          "audio": "Quiet instrumental music; no brush strokes or application sounds unless visibly performed."
+        },
+        {
+          "id": "beauty_makeup_v19",
+          "variation_number": 19,
+          "name": "Colour-Accurate Hero Turn",
+          "hook": "Begin with the product facing forward so its true visible colour and package identity are easy to recognise.",
+          "action": "If the item can be safely represented as stationary, move the camera in a small arc around it; do not rotate or animate the product itself.",
+          "detail": "Preserve the visible shade and finish. Do not add swatches, skin tests, colour names or performance claims that are not shown.",
+          "camera": "Use a slow, compact three-quarter camera arc with a consistent focal length and realistic proportions.",
+          "lighting": "Use neutral diffused lighting and lock white balance to prevent shade shifts during the move.",
+          "closing": "End facing the product from a clean three-quarter angle with the whole item visible.",
+          "audio": "Clean, low-volume instrumental music; no spoken shade or efficacy claims."
+        },
+        {
+          "id": "beauty_makeup_v20",
+          "variation_number": 20,
+          "name": "Quiet Final Detail to Full Product",
+          "hook": "Start with one genuine visible detail—such as a printed mark, edge, cap or product surface—chosen only if that detail exists in the reference.",
+          "action": "Pull back smoothly from the detail to reveal the complete makeup item, without adding a new object or changing its state.",
+          "detail": "Keep every visible label and feature faithful. Do not fabricate text, shade names, ingredients, results or accessories.",
+          "camera": "Use a controlled dolly-out with focus transitioning naturally from detail to the complete product.",
+          "lighting": "Use balanced soft lighting so the close-up and final wide view maintain consistent colour.",
+          "closing": "Hold a final full-product hero frame with the item centered, sharp and unobstructed.",
+          "audio": "Soft instrumental finish; no invented sound effects or unsupported voiceover."
         }
       ]
     },
