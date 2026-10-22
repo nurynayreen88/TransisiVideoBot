@@ -10393,7 +10393,7 @@
       "subcategory_id": "hijab_shawl",
       "category_id": "hijab",
       "label": "🧣 Shawl",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "hijab_shawl_v01",
@@ -10514,6 +10514,126 @@
           "lighting": "Use soft, neutral key light and gentle fill, maintaining accurate skin tones and the shawl's reference colour without over-retouching.",
           "closing": "Hold a steady final hero frame with the complete visible drape in view; no CTA text, watermark or extra accessory.",
           "audio": "Respect the user's audio settings exactly. No forced narration or sound effects; if speech is selected, keep any background music subtle."
+        },
+        {
+          "id": "hijab_shawl_v11",
+          "variation_number": 11,
+          "name": "Mirror-Ready Silhouette",
+          "hook": "Open on a clean three-quarter mirror-side portrait, with the shawl styled exactly as in the supplied reference and its visible outline immediately readable.",
+          "action": "The wearer shifts their gaze from the mirror toward the camera and makes one small shoulder turn; the wrap and every fold remain fixed.",
+          "detail": "Keep attention on the visible face-framing line and the way the shawl falls over the shoulders. Do not add pins, accessories, or coverage not shown.",
+          "camera": "Use a steady medium shot with a gentle push from the mirror-side angle to a direct three-quarter portrait; avoid showing a different reflection or impossible mirror geometry.",
+          "lighting": "Balance soft room light with neutral daylight, retaining the reference colour and avoiding mirror glare over the shawl.",
+          "closing": "Hold the final portrait with the same styling and a calm, confident expression; leave clean space around the silhouette.",
+          "audio": "Use only the user's selected audio settings. If speech is enabled, keep it brief and avoid unsupported claims about comfort or fabric."
+        },
+        {
+          "id": "hijab_shawl_v12",
+          "variation_number": 12,
+          "name": "Border Tracking Pass",
+          "hook": "Begin at the most visible end of the shawl border or hem, if one exists in the reference, with enough context to connect the detail to the worn look.",
+          "action": "The wearer stays still while the camera travels along the existing visible border and stops before reaching any area hidden from view.",
+          "detail": "Preserve the exact border width, motif, colour and placement. If no border is visible, track the plain edge and natural folds instead of inventing decoration.",
+          "camera": "Make a slow, straight lateral slide at close-up distance, then settle into a medium close-up; keep perspective realistic and the edge in focus.",
+          "lighting": "Use even diffused light that reveals the visible edge without sharpening it into a false seam or changing the hue.",
+          "closing": "Finish with the tracked edge still connected to the overall drape in frame; no labels or graphic callouts.",
+          "audio": "Follow selected audio options. Do not add artificial fabric rustles or a spoken description unless explicitly requested."
+        },
+        {
+          "id": "hijab_shawl_v13",
+          "variation_number": 13,
+          "name": "Walk-In, Gentle Stop",
+          "hook": "Open on a full upper-body portrait showing the reference-matched shawl styling, with the wearer positioned a few steps from a simple uncluttered background.",
+          "action": "The wearer takes two natural, unhurried steps forward and stops; the shawl's arrangement stays consistent and does not flutter unnaturally or rewrap itself.",
+          "detail": "Show the visible drape as it naturally rests during a small movement. Do not imply wind resistance, secure fastening, or unseen back coverage.",
+          "camera": "Track backward smoothly at walking pace, keeping head and shoulders framed with realistic body proportions and no abrupt zoom.",
+          "lighting": "Use soft daylight with consistent exposure throughout the movement; preserve the reference colour and visible pattern.",
+          "closing": "After the stop, hold a stable medium portrait for a clear product-focused finish.",
+          "audio": "Use the selected audio mode only. If music is enabled, keep it light and do not force footsteps or other sound effects."
+        },
+        {
+          "id": "hijab_shawl_v14",
+          "variation_number": 14,
+          "name": "Fold Geometry Portrait",
+          "hook": "Start with a close portrait where two or more visible shawl folds naturally overlap, preserving their exact arrangement from the reference.",
+          "action": "The wearer gently turns their chin a few degrees and pauses, allowing the existing fold geometry to remain the visual focus.",
+          "detail": "Show the real overlap, shadow and fall of the visible folds; do not create extra pleats or claim a specific fabric texture unless clearly visible.",
+          "camera": "Use a restrained close-up that slowly eases to a head-and-shoulders view; keep the same side of the shawl visible throughout.",
+          "lighting": "Place soft side light across the folds with gentle fill so shadows remain natural rather than exaggerated.",
+          "closing": "End on a still portrait with the folds clearly legible and no changes to styling.",
+          "audio": "Respect the user's audio selection. Avoid dramatic swishes or narration that makes unverified material claims."
+        },
+        {
+          "id": "hijab_shawl_v15",
+          "variation_number": 15,
+          "name": "Colour-Faithful Daylight",
+          "hook": "Reveal the shawl in a neutral daylight portrait, using the supplied reference as the sole authority for colour, pattern and styling.",
+          "action": "The wearer holds a relaxed pose while the camera makes a slow, small move from front view to a three-quarter angle; no garment adjustment occurs.",
+          "detail": "Keep colour relationships and visible print scale consistent. Do not boost saturation, recolour shadows, or invent a second colourway.",
+          "camera": "Start in a balanced medium close-up and make a subtle slider move; maintain natural skin tones and enough frame to show the shawl's fall.",
+          "lighting": "Use neutral window daylight and fixed white balance, avoiding coloured bounce light or exposure shifts that could alter the product appearance.",
+          "closing": "Return to a clean frontal composition and hold on the unchanged shawl for a clear final beat.",
+          "audio": "Use the selected audio settings. Music, if selected, should not drive a rapid montage or distract from accurate product presentation."
+        },
+        {
+          "id": "hijab_shawl_v16",
+          "variation_number": 16,
+          "name": "Shoulder Drape Comparison",
+          "hook": "Open with the wearer angled slightly to one side so the visible shawl fall over the nearer shoulder is clear, matching the reference exactly.",
+          "action": "The wearer slowly rotates their torso a small amount toward the front and pauses; do not pull, lift, or rearrange the shawl to manufacture a comparison.",
+          "detail": "Let the viewer compare the visible drape before and after the small turn. Do not imply both sides are identical if the reference does not show them.",
+          "camera": "Use a locked medium shot with the wearer movement providing the change in angle; avoid cuts that could disguise altered styling.",
+          "lighting": "Keep soft, even illumination across both positions and preserve the original colour.",
+          "closing": "Finish front-facing with the visible shoulder drape still in frame and unchanged.",
+          "audio": "Follow selected audio settings; no comparison voiceover or claims unless supplied by the user."
+        },
+        {
+          "id": "hijab_shawl_v17",
+          "variation_number": 17,
+          "name": "Minimal Studio Turntable Feel",
+          "hook": "Present a clean, studio-like portrait with the shawl worn exactly as shown in the reference, against a plain neutral background.",
+          "action": "The wearer makes one slow, limited turn from front to three-quarter view and stops before the far side becomes hidden or inferred.",
+          "detail": "Highlight only visible folds, edges and pattern. The background stays plain and no extra jewellery, pins or styling props appear.",
+          "camera": "Keep the camera stationary at eye level; use the controlled body turn for motion rather than a full orbit or artificial turntable spin.",
+          "lighting": "Use a broad soft key and gentle fill, avoiding glossy highlights or shadows that change the apparent texture.",
+          "closing": "Hold the three-quarter pose in a polished, uncluttered frame.",
+          "audio": "Use the chosen audio settings only. If music is enabled, keep it understated and instrumental unless vocals were selected."
+        },
+        {
+          "id": "hijab_shawl_v18",
+          "variation_number": 18,
+          "name": "Soft Focus-to-Clear Reveal",
+          "hook": "Begin with the shawl wearer softly out of focus in a stable head-and-shoulders composition, with no blur effect obscuring the product for long.",
+          "action": "Bring focus smoothly onto the visible shawl edge and face, while the wearer remains still and the styling stays unchanged.",
+          "detail": "Reveal the actual visible edge and folds without fabric morphing, pattern reconstruction or artificial sparkle.",
+          "camera": "Use a locked camera and a gentle rack focus from the neutral background to the wearer; do not simulate a lens effect that distorts the shawl.",
+          "lighting": "Maintain soft, even light and neutral white balance so the focus change does not also change product colour.",
+          "closing": "Hold the fully sharp portrait for the final moment, with the shawl clearly identifiable.",
+          "audio": "Respect the user's selected audio. No added focus-swoosh sound unless the sound setting explicitly calls for it."
+        },
+        {
+          "id": "hijab_shawl_v19",
+          "variation_number": 19,
+          "name": "Seated Calm Portrait",
+          "hook": "Open on a seated upper-body portrait if the reference styling can be preserved naturally; otherwise use a stable standing portrait with the same composition intent.",
+          "action": "The wearer makes a small, relaxed head turn and rests their hands outside the shawl area so no folds are altered.",
+          "detail": "Keep visible drape over the shoulders faithful to the reference. Do not let the shawl pass through the chair, arms or body, and do not invent hidden fabric.",
+          "camera": "Use an eye-level medium close-up with a slow, minimal push-in; maintain realistic posture and keep the shawl's visible outline in frame.",
+          "lighting": "Use soft window light with gentle fill and no strong colour cast.",
+          "closing": "End on a composed still portrait that gives the shawl an uninterrupted final view.",
+          "audio": "Use only the selected audio mode. Avoid scripted claims about softness, breathability or all-day wear."
+        },
+        {
+          "id": "hijab_shawl_v20",
+          "variation_number": 20,
+          "name": "Pattern Scale Integrity",
+          "hook": "Start with a close view of the most clearly visible motif or plain surface, then include enough of the shawl to establish its real scale.",
+          "action": "The camera eases back while the wearer remains still; the print, border and folds do not move independently or change size unnaturally.",
+          "detail": "Keep any visible motif count, spacing and relative size consistent with the reference. If the shawl is plain, focus on its real colour and folds instead.",
+          "camera": "Use a smooth pull-back from close detail to medium close-up with natural perspective and no extreme macro lens distortion.",
+          "lighting": "Choose diffuse, colour-neutral lighting that preserves the exact visible motif and avoids moiré or flickering patterns.",
+          "closing": "Finish on a stable frame connecting the surface detail to the worn shawl.",
+          "audio": "Follow selected audio settings. Do not add spoken claims about print quality or material composition without supplied facts."
         }
       ]
     },
