@@ -23217,7 +23217,7 @@
       "subcategory_id": "gadget_other",
       "category_id": "gadget",
       "label": "📦 Gajet lain",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "gadget_other_v01",
@@ -23338,6 +23338,126 @@
           "lighting": "Maintain balanced neutral lighting and consistent exposure with realistic contact shadows.",
           "closing": "Hold the complete device in a clear hero frame with no captions, watermark or extra logo.",
           "audio": "Follow selected audio settings and actual model support; silence is preferable to fabricated effects."
+        },
+        {
+          "id": "gadget_other_v11",
+          "variation_number": 11,
+          "name": "Edge-to-Edge Silhouette",
+          "hook": "Open on the clearest real outline of the device, using the reference's actual orientation and visible parts.",
+          "action": "Move the camera parallel to the outer edge, then ease outward until the full silhouette is visible without turning the product to expose unseen sides.",
+          "detail": "Keep the original dimensions, edge profile, controls and visible markings unchanged; do not infer the device's purpose from appearance alone.",
+          "camera": "Slow side-tracking close-up into a medium product frame, with natural perspective.",
+          "lighting": "Soft side light separates the actual outline from the background without adding a false glow.",
+          "closing": "Hold on the complete, source-faithful silhouette.",
+          "audio": "Low-volume neutral electronic instrumental; no invented beeps."
+        },
+        {
+          "id": "gadget_other_v12",
+          "variation_number": 12,
+          "name": "Port Layout Inspection",
+          "hook": "If real ports or openings are visible, begin with that exact edge; otherwise focus on the nearest visible seam or casing detail.",
+          "action": "Track slowly along the edge and stop before any hidden surface; do not insert connectors or animate the openings.",
+          "detail": "Preserve the number, shape and placement of visible ports. Do not claim charging, data, audio or network compatibility.",
+          "camera": "Stable macro slider pass with a small pullback to establish the port location on the body.",
+          "lighting": "Diffuse raking light reveals actual cut-outs without deep artificial shadows.",
+          "closing": "End with the genuine edge detail and part of the full device in view.",
+          "audio": "Minimal instrumental bed; no cable or connection sound."
+        },
+        {
+          "id": "gadget_other_v13",
+          "variation_number": 13,
+          "name": "Control Symbols Close-Up",
+          "hook": "Frame only real buttons, switches or printed symbols visible in the supplied reference.",
+          "action": "Keep all controls untouched and let the camera drift gently across their arrangement before widening slightly.",
+          "detail": "Do not guess ambiguous symbols or create a press response, illuminated indicator or new interface.",
+          "camera": "Locked macro framing with a short lateral slide and a controlled focus shift.",
+          "lighting": "Even soft fill keeps small symbols legible and casing colour accurate.",
+          "closing": "Pause on the authentic control layout.",
+          "audio": "Quiet modern instrumental without clicks or alerts."
+        },
+        {
+          "id": "gadget_other_v14",
+          "variation_number": 14,
+          "name": "Surface Reflection Pass",
+          "hook": "Choose a real visible casing surface or display and open close enough to show its existing finish.",
+          "action": "Shift the camera a few degrees so a natural studio reflection moves across the surface; leave the product and its screen state unchanged.",
+          "detail": "Do not fabricate gloss, metallic construction, protective coating, water resistance or other material claims.",
+          "camera": "Small controlled arc and a gentle pullback to include the adjacent body contours.",
+          "lighting": "Broad diffused reflection, restrained to avoid obscuring real details.",
+          "closing": "Finish on a balanced close three-quarter view.",
+          "audio": "Soft instrumental music; no synthetic shimmer effect."
+        },
+        {
+          "id": "gadget_other_v15",
+          "variation_number": 15,
+          "name": "Included Parts Inventory",
+          "hook": "If the reference contains multiple supplied components, open on that exact arrangement; otherwise show the single device alone.",
+          "action": "Make a slow overhead pass across only the visible parts without moving, connecting or rearranging them.",
+          "detail": "Maintain the exact component count and placement. Never add packaging, cables, adapters or accessories not shown.",
+          "camera": "Gentle overhead drift into a high three-quarter view.",
+          "lighting": "Even tabletop lighting with natural contact shadows under each real component.",
+          "closing": "Hold on the complete reference-supported arrangement.",
+          "audio": "Understated instrumental; no unboxing effects."
+        },
+        {
+          "id": "gadget_other_v16",
+          "variation_number": 16,
+          "name": "Screen-State Preservation",
+          "hook": "If a display exists, begin with its actual on/off state and visible content; if there is no display, use the clearest genuine front-facing feature.",
+          "action": "Make a measured push-in, then retreat slightly to include the surrounding casing without changing the device state.",
+          "detail": "Do not invent text, icons, measurements, animations, lights or notifications.",
+          "camera": "Slow straight push-in and short pullback, with screen geometry kept stable.",
+          "lighting": "Soft frontal fill controls glare while preserving the real display and casing colour.",
+          "closing": "End with the visible display or front feature unobstructed.",
+          "audio": "Low-key electronic instrumental; no notification sounds."
+        },
+        {
+          "id": "gadget_other_v17",
+          "variation_number": 17,
+          "name": "Realistic Handheld Scale",
+          "hook": "Use a hand only when a hand is present in the reference or explicitly selected; otherwise place no person into the scene.",
+          "action": "For a supported handheld view, maintain a natural steady grip and make a small camera move; otherwise perform the same move around the stationary product.",
+          "detail": "Do not alter apparent scale, invent human interaction, add fingers or imply comfort and ease-of-use claims.",
+          "camera": "Stable close-to-medium framing with realistic lens perspective and minimal movement.",
+          "lighting": "Soft natural-looking light preserves true skin and product colour when a hand is shown.",
+          "closing": "Hold on the device at its original believable scale.",
+          "audio": "Quiet neutral instrumental; no handling sounds unless clearly shown."
+        },
+        {
+          "id": "gadget_other_v18",
+          "variation_number": 18,
+          "name": "Seam and Assembly Detail",
+          "hook": "Start on a real visible seam, join or panel boundary, if present; otherwise select a genuine edge or corner.",
+          "action": "Follow the existing line with a slow macro move and widen to show its position on the device.",
+          "detail": "Do not separate panels, expose internal components or suggest repairability or build quality beyond what is visible.",
+          "camera": "Slow diagonal macro track followed by a short, steady pullback.",
+          "lighting": "Soft directional fill traces the real boundary without exaggerating gaps.",
+          "closing": "End with the actual seam or contour clearly in frame.",
+          "audio": "Minimal instrumental music; no mechanical effects."
+        },
+        {
+          "id": "gadget_other_v19",
+          "variation_number": 19,
+          "name": "Two-View Consistency Cut",
+          "hook": "When the reference supplies two genuine angles, begin with the clearer overall view; with only one angle, remain on that view.",
+          "action": "Use one simple cut between supplied angles, matching colour, scale and device state; otherwise use a restrained camera-only arc.",
+          "detail": "Never create a fictional rear, underside, display, accessory or moving component to fill a missing angle.",
+          "camera": "Two stable compatible shots or one small orbit when only one view is supported.",
+          "lighting": "Consistent neutral illumination across views, with no colour shifts.",
+          "closing": "Finish on the clearest complete view supported by the reference.",
+          "audio": "Soft musical accent at the cut; no transformation sound."
+        },
+        {
+          "id": "gadget_other_v20",
+          "variation_number": 20,
+          "name": "Uncluttered Final Hero",
+          "hook": "Open with the device at realistic scale and in its original reference-supported arrangement, with no added props.",
+          "action": "Make one smooth pullback or small camera settle that reveals the complete product while keeping it stationary and inactive.",
+          "detail": "Preserve visible identity, dimensions, controls, labels, screen state and supplied-part count; no unsupported claims or graphics.",
+          "camera": "Single continuous pullback to a clean medium-wide product composition.",
+          "lighting": "Balanced soft studio light, true colour and natural contact shadow.",
+          "closing": "Hold the full product centred and unobstructed for the final beat.",
+          "audio": "Quiet neutral electronic instrumental outro; no voiceover."
         }
       ]
     },
