@@ -16729,7 +16729,7 @@
       "subcategory_id": "shoes_other",
       "category_id": "shoes",
       "label": "📦 Kasut lain",
-      "variation_count": 20,
+      "variation_count": 30,
       "variations": [
         {
           "id": "shoes_other_v01",
@@ -16970,6 +16970,126 @@
           "lighting": "Use soft, colour-accurate light and natural contact shadows.",
           "closing": "Finish on a clear view of the supplied shoe, without cropping important visible details.",
           "audio": "Follow selected music, speech and sound-effect settings only."
+        },
+        {
+          "id": "shoes_other_v21",
+          "variation_number": 21,
+          "name": "Distinctive Detail Focus",
+          "hook": "Distinctive Detail Focus: make a real, visible feature easy to inspect.",
+          "action": "Shift focus from one clearly visible feature to the overall shoe.",
+          "detail": "Only use details present in the supplied image; add no new components.",
+          "camera": "Use smooth controlled movement, realistic perspective and safe product framing.",
+          "lighting": "Use neutral soft lighting, accurate colours and natural contact shadows.",
+          "closing": "End on a steady view of the reference-matched shoe.",
+          "audio": "Follow the selected music, voice and sound-effect settings only."
+        },
+        {
+          "id": "shoes_other_v22",
+          "variation_number": 22,
+          "name": "Side Silhouette Pullback",
+          "hook": "Side Silhouette Pullback: make a real, visible feature easy to inspect.",
+          "action": "Start close to the visible side outline, then pull back to the full shoe.",
+          "detail": "Preserve the real outline and avoid showing unseen surfaces.",
+          "camera": "Use smooth controlled movement, realistic perspective and safe product framing.",
+          "lighting": "Use neutral soft lighting, accurate colours and natural contact shadows.",
+          "closing": "End on a steady view of the reference-matched shoe.",
+          "audio": "Follow the selected music, voice and sound-effect settings only."
+        },
+        {
+          "id": "shoes_other_v23",
+          "variation_number": 23,
+          "name": "Front Contour Drift",
+          "hook": "Front Contour Drift: make a real, visible feature easy to inspect.",
+          "action": "Move slowly across the actual toe and front profile.",
+          "detail": "Do not exaggerate toe shape or alter product proportions.",
+          "camera": "Use smooth controlled movement, realistic perspective and safe product framing.",
+          "lighting": "Use neutral soft lighting, accurate colours and natural contact shadows.",
+          "closing": "End on a steady view of the reference-matched shoe.",
+          "audio": "Follow the selected music, voice and sound-effect settings only."
+        },
+        {
+          "id": "shoes_other_v24",
+          "variation_number": 24,
+          "name": "Rear Profile Hold",
+          "hook": "Rear Profile Hold: make a real, visible feature easy to inspect.",
+          "action": "Hold on the visible rear contour with a slight camera drift.",
+          "detail": "Do not invent heel tabs, labels or reflective elements.",
+          "camera": "Use smooth controlled movement, realistic perspective and safe product framing.",
+          "lighting": "Use neutral soft lighting, accurate colours and natural contact shadows.",
+          "closing": "End on a steady view of the reference-matched shoe.",
+          "audio": "Follow the selected music, voice and sound-effect settings only."
+        },
+        {
+          "id": "shoes_other_v25",
+          "variation_number": 25,
+          "name": "Surface-to-Shape Reveal",
+          "hook": "Surface-to-Shape Reveal: make a real, visible feature easy to inspect.",
+          "action": "Scan a visible surface detail, then widen to restore product context.",
+          "detail": "Do not add texture, shine or materials not visible in the reference.",
+          "camera": "Use smooth controlled movement, realistic perspective and safe product framing.",
+          "lighting": "Use neutral soft lighting, accurate colours and natural contact shadows.",
+          "closing": "End on a steady view of the reference-matched shoe.",
+          "audio": "Follow the selected music, voice and sound-effect settings only."
+        },
+        {
+          "id": "shoes_other_v26",
+          "variation_number": 26,
+          "name": "Sole Join Focus",
+          "hook": "Sole Join Focus: make a real, visible feature easy to inspect.",
+          "action": "Focus on the visible boundary between sole and upper.",
+          "detail": "Keep the shoe grounded; invent no tread or performance claims.",
+          "camera": "Use smooth controlled movement, realistic perspective and safe product framing.",
+          "lighting": "Use neutral soft lighting, accurate colours and natural contact shadows.",
+          "closing": "End on a steady view of the reference-matched shoe.",
+          "audio": "Follow the selected music, voice and sound-effect settings only."
+        },
+        {
+          "id": "shoes_other_v27",
+          "variation_number": 27,
+          "name": "Closure Path Overview",
+          "hook": "Closure Path Overview: make a real, visible feature easy to inspect.",
+          "action": "Trace the actual visible closure or, if none appears, a visible seam.",
+          "detail": "Do not operate the closure or create a missing fastening.",
+          "camera": "Use smooth controlled movement, realistic perspective and safe product framing.",
+          "lighting": "Use neutral soft lighting, accurate colours and natural contact shadows.",
+          "closing": "End on a steady view of the reference-matched shoe.",
+          "audio": "Follow the selected music, voice and sound-effect settings only."
+        },
+        {
+          "id": "shoes_other_v28",
+          "variation_number": 28,
+          "name": "Top View Reframe",
+          "hook": "Top View Reframe: make a real, visible feature easy to inspect.",
+          "action": "Use a small overhead reframe only if that view matches the reference.",
+          "detail": "Keep the same item count and visible design.",
+          "camera": "Use smooth controlled movement, realistic perspective and safe product framing.",
+          "lighting": "Use neutral soft lighting, accurate colours and natural contact shadows.",
+          "closing": "End on a steady view of the reference-matched shoe.",
+          "audio": "Follow the selected music, voice and sound-effect settings only."
+        },
+        {
+          "id": "shoes_other_v29",
+          "variation_number": 29,
+          "name": "Pair Spacing Drift",
+          "hook": "Pair Spacing Drift: make a real, visible feature easy to inspect.",
+          "action": "Move slowly across the supplied pair while maintaining its original arrangement.",
+          "detail": "If only one item is shown, do not generate a second shoe.",
+          "camera": "Use smooth controlled movement, realistic perspective and safe product framing.",
+          "lighting": "Use neutral soft lighting, accurate colours and natural contact shadows.",
+          "closing": "End on a steady view of the reference-matched shoe.",
+          "audio": "Follow the selected music, voice and sound-effect settings only."
+        },
+        {
+          "id": "shoes_other_v30",
+          "variation_number": 30,
+          "name": "Minimal Product Finish",
+          "hook": "Minimal Product Finish: make a real, visible feature easy to inspect.",
+          "action": "Make a subtle push-in and stop on the complete shoe.",
+          "detail": "No added props, text, badges or unsupported claims.",
+          "camera": "Use smooth controlled movement, realistic perspective and safe product framing.",
+          "lighting": "Use neutral soft lighting, accurate colours and natural contact shadows.",
+          "closing": "End on a steady view of the reference-matched shoe.",
+          "audio": "Follow the selected music, voice and sound-effect settings only."
         }
       ]
     },
