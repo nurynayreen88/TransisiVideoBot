@@ -13801,7 +13801,7 @@
       "subcategory_id": "shoes_sneakers",
       "category_id": "shoes",
       "label": "👟 Sneakers / Kasut sukan",
-      "variation_count": 20,
+      "variation_count": 30,
       "variations": [
         {
           "id": "shoes_sneakers_v01",
@@ -14042,6 +14042,126 @@
           "lighting": "Soft key light and subtle fill create separation from the background while retaining accurate colour and detail.",
           "closing": "Hold a stable hero frame of the same unchanged sneaker.",
           "audio": "Use selected audio settings only; restrained music if selected, with no unrequested sound effects."
+        },
+        {
+          "id": "shoes_sneakers_v21",
+          "variation_number": 21,
+          "name": "Lateral Panel Junction",
+          "hook": "Establish the full sneaker first, then draw attention to a visible junction where two upper panels meet.",
+          "action": "Track slowly along the genuine panel seam or colour boundary without touching or separating the panels.",
+          "detail": "Show only real seam lines, overlays and material boundaries visible in the reference; do not imply reinforcement or construction hidden underneath.",
+          "camera": "Move from a three-quarter view into a close lateral pass across the panel junction, then widen smoothly.",
+          "lighting": "Use a soft side key that defines the actual seam while keeping colours and shadows natural.",
+          "closing": "Return to the original overall silhouette with the featured junction still in context.",
+          "audio": "Follow the selected audio settings; no invented stitching sounds or product claims."
+        },
+        {
+          "id": "shoes_sneakers_v22",
+          "variation_number": 22,
+          "name": "Collar Opening Contour",
+          "hook": "Open with the sneaker in full view and make its visible collar opening easy to identify.",
+          "action": "Move the camera slightly above the heel to inspect the opening without pressing it down, spreading it or exposing hidden interior details.",
+          "detail": "Show only the visible collar edge and lining if present; do not claim softness, ankle support or padding quality.",
+          "camera": "Use a slow elevated three-quarter push-in, hold briefly on the collar contour, then pull back to a full view.",
+          "lighting": "Soft overhead fill keeps the opening readable without crushing dark interior areas.",
+          "closing": "Hold the same unchanged sneaker from a clear elevated angle.",
+          "audio": "Use selected audio only; no simulated squeezing or fabric handling effects."
+        },
+        {
+          "id": "shoes_sneakers_v23",
+          "variation_number": 23,
+          "name": "Logo Placement Accuracy",
+          "hook": "Frame the entire sneaker before approaching any brand mark or emblem that is genuinely visible in the reference.",
+          "action": "Make a measured push-in toward the visible mark while preserving its exact shape, orientation and placement; if no mark is visible, feature a distinctive real panel instead.",
+          "detail": "Do not redraw, sharpen into a different logo, add lettering or invent brand identity absent from the image.",
+          "camera": "Use a steady close-in move with the shoe remaining static, followed by a smooth return to the full product.",
+          "lighting": "Even neutral lighting maintains readable edges without glare or artificial contrast enhancement.",
+          "closing": "Finish with the mark or selected panel visible in the context of the complete sneaker.",
+          "audio": "Follow selected audio settings; no voice-over or claims unless explicitly selected."
+        },
+        {
+          "id": "shoes_sneakers_v24",
+          "variation_number": 24,
+          "name": "Pair Spacing Overhead",
+          "hook": "Begin with the pair exactly as arranged in the reference and establish the visible spacing, orientation and overall design.",
+          "action": "Keep both shoes fixed while the camera glides overhead; if only one shoe is shown, retain that single product and trace its outline instead.",
+          "detail": "Emphasise the genuine arrangement and matching visible details without adding a missing shoe or changing the pair's position.",
+          "camera": "Use a slow overhead drift from heel area toward toe area, then settle into a balanced top view.",
+          "lighting": "Broad, even illumination avoids hard shadows that could obscure laces, panels or colour differences.",
+          "closing": "Hold the original arrangement with both shoes or the single reference shoe fully visible.",
+          "audio": "Use selected audio settings only; no invented footsteps or handling sounds."
+        },
+        {
+          "id": "shoes_sneakers_v25",
+          "variation_number": 25,
+          "name": "Sole Edge Colour Transition",
+          "hook": "Show the full sneaker from the side, clearly establishing where the visible upper meets the sole.",
+          "action": "Track along the actual boundary between upper and sole, following any real colour transition without altering or exaggerating it.",
+          "detail": "Preserve the precise visible line, colours and proportions; do not suggest special bonding, waterproofing or sole construction.",
+          "camera": "Use a low, slow heel-to-toe tracking move and finish in a stable side profile.",
+          "lighting": "Soft grazing light reveals the real boundary while maintaining neutral colour balance.",
+          "closing": "Hold the complete side profile with the upper-to-sole transition easy to see.",
+          "audio": "Respect selected audio settings; avoid fabricated adhesive, impact or walking sounds."
+        },
+        {
+          "id": "shoes_sneakers_v26",
+          "variation_number": 26,
+          "name": "Tongue and Lace Layer Depth",
+          "hook": "Start with a clear three-quarter view that shows how the laces sit over the tongue in the supplied sneaker.",
+          "action": "Use a gentle camera shift to show the visible depth between laces, tongue and upper without lifting or rearranging any part.",
+          "detail": "Feature only observable overlaps and shadows; do not add hidden padding, labels or extra lace hardware.",
+          "camera": "Make a shallow side-to-front arc, pause on the natural overlap, then widen to the full sneaker.",
+          "lighting": "Soft directional light gives the existing layers depth without darkening the lace area excessively.",
+          "closing": "End on the unchanged three-quarter view with the lace-and-tongue arrangement clear.",
+          "audio": "Follow selected audio settings; no unrequested narration or simulated lace movement."
+        },
+        {
+          "id": "shoes_sneakers_v27",
+          "variation_number": 27,
+          "name": "Toe Detail to Full Silhouette",
+          "hook": "Open with the sneaker's full shape before guiding attention to the actual toe contour shown in the reference.",
+          "action": "Move closer to the toe and then follow the visible outline back toward the heel; keep the shoe stationary and proportionally accurate.",
+          "detail": "Show real toe shape, perforations or overlays only if present; do not invent ventilation holes or claim a roomy fit.",
+          "camera": "Use a slow push-in toward the toe, a controlled lateral tracking move, then a smooth pull-back.",
+          "lighting": "Broad soft light reveals the toe contour without over-sharpening texture or changing colour.",
+          "closing": "Hold a full three-quarter hero view that preserves the sneaker's real proportions.",
+          "audio": "Use the selected audio mode; no forced footsteps, speech or effects."
+        },
+        {
+          "id": "shoes_sneakers_v28",
+          "variation_number": 28,
+          "name": "Reflective Detail Check",
+          "hook": "Present the complete sneaker, then focus on a visible area that appears reflective only if the reference clearly supports that observation.",
+          "action": "Keep the sneaker and lighting stable while making a slight camera-angle change; if no reflective feature is evident, use an ordinary visible trim or panel detail instead.",
+          "detail": "Do not create glowing strips, sparkle effects or claims of night visibility; show only the surface response actually supported by the reference.",
+          "camera": "Use a restrained angle shift and close framing, then return to a neutral full-product view.",
+          "lighting": "Maintain consistent neutral exposure; avoid flashing lights or dramatic effects that falsely imply reflective performance.",
+          "closing": "Finish on the original sneaker appearance without added glow or effects.",
+          "audio": "Follow selected audio settings; no fabricated electronic sounds or safety claims."
+        },
+        {
+          "id": "shoes_sneakers_v29",
+          "variation_number": 29,
+          "name": "Clean Background Separation",
+          "hook": "Open on the complete sneaker against the background shown in the reference, with the full outline unobstructed.",
+          "action": "Create separation through a slow camera push and natural depth of field, without changing the background into an unsupported location or adding props.",
+          "detail": "Keep every visible product detail unchanged and avoid hiding the outsole, laces or panels with excessive blur.",
+          "camera": "Begin with a medium-wide shot, push in gently, then settle at a three-quarter angle with the shoe still fully readable.",
+          "lighting": "Use soft key and fill with subtle natural separation; retain true colour and realistic contact shadows.",
+          "closing": "Hold a clean product hero frame with no added logos, text or accessories.",
+          "audio": "Use selected audio settings only; music may remain subtle if selected."
+        },
+        {
+          "id": "shoes_sneakers_v30",
+          "variation_number": 30,
+          "name": "Four-Beat Feature Journey",
+          "hook": "Begin with the complete sneaker in its reference orientation and establish its overall design before any close-up.",
+          "action": "Guide the viewer through three distinct visible features—such as lacing, an upper panel, and the sole edge—then return to the full sneaker without moving or transforming it.",
+          "detail": "Choose only details present in the specific reference; replace any unavailable example with another visible feature and avoid material or performance claims.",
+          "camera": "Use four unhurried beats: full view, first detail, second detail, third detail, then a final full view; keep transitions smooth and measured.",
+          "lighting": "Keep the same colour balance, light direction and exposure across each beat for visual continuity.",
+          "closing": "Return to the unchanged full-product composition and hold for a clear final read.",
+          "audio": "Follow selected audio and narration choices; no forced voice-over, captions or fabricated effects."
         }
       ]
     },
