@@ -20489,7 +20489,7 @@
       "subcategory_id": "food_supplements",
       "category_id": "food",
       "label": "🥣 Makanan tambahan",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "food_supplements_v01",
@@ -20610,6 +20610,126 @@
           "lighting": "Soft neutral lighting and accurate colour reproduction.",
           "closing": "Hold the full original package for the final beat.",
           "audio": "Low-volume instrumental music only."
+        },
+        {
+          "id": "food_supplements_v11",
+          "variation_number": 11,
+          "name": "Seal Edge and Lid Profile",
+          "hook": "Begin with the real lid, seal edge or upper seam if visible; otherwise choose the clearest genuine edge of the supplied supplement package.",
+          "action": "Move the camera around the upper contour without opening, twisting or disturbing the package.",
+          "detail": "Preserve the exact seal and closure as shown. Do not imply tamper protection, freshness or safety from appearance alone.",
+          "camera": "Use a short shallow arc at lid height, then pull back to reveal the full package.",
+          "lighting": "Soft side lighting defines the seam while a gentle front fill keeps label colours accurate.",
+          "closing": "Hold on the complete unopened package with its original closure visible.",
+          "audio": "Quiet instrumental music; no opening hiss or cap-click effects."
+        },
+        {
+          "id": "food_supplements_v12",
+          "variation_number": 12,
+          "name": "Label Panel Perspective",
+          "hook": "Open front-on to the actual label panel, then reveal its real placement on the bottle, pouch, tub or box shown in the reference.",
+          "action": "Make a small camera slide toward one side while keeping the package stationary and the printed panel unchanged.",
+          "detail": "Do not add, rewrite or clarify label text. Avoid introducing ingredients, dosage, health outcomes or claims not plainly visible.",
+          "camera": "A slow front-to-three-quarter move with stable focus and no wide-angle distortion.",
+          "lighting": "Broad diffused light controls glare across print and maintains natural package colour.",
+          "closing": "End with the genuine front panel readable and the full package still in frame.",
+          "audio": "Low-volume neutral instrumental music; no promotional voiceover."
+        },
+        {
+          "id": "food_supplements_v13",
+          "variation_number": 13,
+          "name": "Pouch Gusset and Fold",
+          "hook": "If the reference shows a flexible pouch, begin on its actual gusset, folded base or sealed edge; for rigid packaging, use a real lower corner instead.",
+          "action": "Track along the visible fold or base while the package remains in its original position; do not squeeze or reshape it.",
+          "detail": "Keep folds, seams and bulges faithful to the source. Do not suggest resealability or special barrier properties unless explicitly shown.",
+          "camera": "Use a low close slider move along the base, then tilt up to the whole package.",
+          "lighting": "Soft grazing light reveals existing folds while fill preserves readable colour and print.",
+          "closing": "Hold on the original package shape with the base and front both recognisable.",
+          "audio": "Subtle instrumental bed; no plastic crinkle unless visible movement supports it."
+        },
+        {
+          "id": "food_supplements_v14",
+          "variation_number": 14,
+          "name": "Tub Rim and Shoulder Transition",
+          "hook": "For a tub or jar, frame the real transition from lid to shoulder; for another package type, adapt to its visible top-to-body transition.",
+          "action": "Move slowly down from the top edge to the main label without opening the container or inventing an interior view.",
+          "detail": "Preserve the actual lid width, neck or shoulder geometry and printed placement. Do not infer volume or material grade.",
+          "camera": "A controlled top-to-bottom tilt followed by a steady three-quarter full shot.",
+          "lighting": "Use a soft side key and front fill to reveal form without obscuring the label.",
+          "closing": "Finish with the complete container upright in its original state.",
+          "audio": "Clean instrumental music only; no lid or container handling sounds."
+        },
+        {
+          "id": "food_supplements_v15",
+          "variation_number": 15,
+          "name": "Actual Contents Boundary",
+          "hook": "If the reference already shows tablets, capsules or powder, focus on the real boundary between the contents and their container; otherwise stay on the closed exterior.",
+          "action": "Make a gentle focus transition across only the contents already visible, without pouring, stirring, counting or moving them.",
+          "detail": "Do not identify ingredients, dosage, purity, intended use or effects from appearance. Never reveal contents hidden by the package.",
+          "camera": "Use a locked close shot and a subtle focus pull, then widen to restore the product context.",
+          "lighting": "Neutral diffused light preserves the genuine colour and texture without enhancement.",
+          "closing": "End on the same visible contents or closed package, unchanged.",
+          "audio": "Quiet instrumental music; no rattling, pouring or scooping effects."
+        },
+        {
+          "id": "food_supplements_v16",
+          "variation_number": 16,
+          "name": "Lot Mark and Printed Code",
+          "hook": "If a batch code, date field or small printed mark is visible, begin with that exact existing area; otherwise select a real seam or label edge.",
+          "action": "Use a short macro move across the printed mark, then pull back enough to show its location on the package.",
+          "detail": "Keep codes and text unchanged; do not invent dates, certification marks, authenticity seals or product information.",
+          "camera": "A steady close slider move with controlled focus and a short contextual pullback.",
+          "lighting": "Even, glare-controlled lighting keeps existing marks legible without artificially rewriting or sharpening them.",
+          "closing": "Hold on the original package with the real printed area in context.",
+          "audio": "Minimal instrumental bed; no scanning beeps or synthetic interface sounds."
+        },
+        {
+          "id": "food_supplements_v17",
+          "variation_number": 17,
+          "name": "Container Base and Standing Form",
+          "hook": "Open near the actual base or bottom edge of the supplement package to show how it rests on the surface.",
+          "action": "Raise the camera gradually from the base toward the main label without lifting or sliding the item.",
+          "detail": "Keep the package's proportions and contact points accurate. Do not imply stability, capacity or a special base design.",
+          "camera": "Use a slow low-to-mid tilt with natural perspective, finishing on a full-package view.",
+          "lighting": "Soft side fill defines the base and preserves a realistic contact shadow.",
+          "closing": "End with the whole package resting naturally and unobstructed.",
+          "audio": "Quiet neutral instrumental music; no impact or placement sounds."
+        },
+        {
+          "id": "food_supplements_v18",
+          "variation_number": 18,
+          "name": "Texture and Print Finish Contrast",
+          "hook": "Show a real contrast between printed areas and the package surface only where it is visible, such as matte print beside a glossy region.",
+          "action": "Shift the camera slightly so natural highlights reveal the existing finish; keep the package still.",
+          "detail": "Do not invent metallic foil, embossing, protective coatings or premium materials. Preserve actual print and colour.",
+          "camera": "Use a slow lateral move across one genuine finish transition, then settle on a medium three-quarter view.",
+          "lighting": "Large diffused sources and restrained side light reveal real texture without false sparkle.",
+          "closing": "Hold a faithful full-package shot with the finish represented naturally.",
+          "audio": "Understated instrumental music; no shimmer or transformation effects."
+        },
+        {
+          "id": "food_supplements_v19",
+          "variation_number": 19,
+          "name": "Supplied Pack and Accessory Relationship",
+          "hook": "If the source includes a measuring scoop, sachet or accessory beside the package, begin with their real spatial relationship; otherwise focus on the package alone.",
+          "action": "Move the camera across the components without picking them up, adding pieces or rearranging the supplied layout.",
+          "detail": "Show only accessories present in the reference. Do not imply that a separate prop is included or that a particular serving amount is recommended.",
+          "camera": "Use a controlled diagonal slide that keeps every genuine component within the frame.",
+          "lighting": "Even soft lighting separates the package and accessory edges while retaining accurate colours.",
+          "closing": "Finish with the exact original set or single package clearly visible.",
+          "audio": "Low-volume instrumental music; no scooping, pouring or handling sounds."
+        },
+        {
+          "id": "food_supplements_v20",
+          "variation_number": 20,
+          "name": "Three-Angle Package Inspection",
+          "hook": "Establish the exact package in a full view, then choose two real visible features such as its closure, printed panel or surface finish.",
+          "action": "Cut between the full package, a close detail and a final three-quarter view; keep the package closed and unchanged throughout.",
+          "detail": "Do not introduce health claims, results, dosage guidance, ingredients or certification symbols not visible in the source.",
+          "camera": "Use three stable framings with matched perspective, scale and focus for continuity.",
+          "lighting": "Match white balance and exposure across shots; preserve label colours and real reflections.",
+          "closing": "Return to the original full-package view and hold without added graphics or text.",
+          "audio": "A subtle musical pulse may mark the cuts; no narration or dramatic effects."
         }
       ]
     },
