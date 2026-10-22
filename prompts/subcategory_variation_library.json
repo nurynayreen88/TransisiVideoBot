@@ -25697,7 +25697,7 @@
       "subcategory_id": "accessory_jewelry",
       "category_id": "accessory",
       "label": "💍 Barang kemas",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "accessory_jewelry_v01",
@@ -25818,6 +25818,126 @@
           "lighting": "LIGHTING: Even studio light with controlled reflections and no blown highlights.",
           "closing": "CTA / HERO: Finish with negative space for optional editing, but render no text by default.",
           "audio": "AUDIO: Respect audio settings; if the generator cannot render audio, do not claim it will."
+        },
+        {
+          "id": "accessory_jewelry_v11",
+          "variation_number": 11,
+          "name": "Contour Light Sweep",
+          "hook": "Open on the jewellery piece in its exact reference shape, framing one visible curve, edge or setting as the visual hook.",
+          "action": "Move a narrow soft reflection slowly along the real contour while the piece remains stationary.",
+          "detail": "Preserve the exact visible stone count, setting, links, shape and colour; do not identify metal or gemstone type unless confirmed.",
+          "camera": "A slow macro track following the contour, then a short pullback to reveal the whole piece.",
+          "lighting": "Controlled diffused highlight with realistic reflections and no glitter particles.",
+          "closing": "Hold on the complete piece with its real silhouette unobstructed.",
+          "audio": "Soft elegant instrumental; no sparkle sound effects."
+        },
+        {
+          "id": "accessory_jewelry_v12",
+          "variation_number": 12,
+          "name": "Clasp Construction Close-Up",
+          "hook": "If a clasp or fastening is visible, begin with that exact component; otherwise feature the nearest visible joint or edge.",
+          "action": "Pan from the fastening toward the main jewellery form without opening, stretching or changing it.",
+          "detail": "Do not invent a clasp mechanism, adjustability, chain length or fastening strength.",
+          "camera": "Stable close lateral slide followed by a three-quarter product view.",
+          "lighting": "Soft side light reveals genuine edges without exaggerated metallic shine.",
+          "closing": "Finish with the fastening and main design in one clear frame where possible.",
+          "audio": "Quiet refined instrumental; no fabricated click."
+        },
+        {
+          "id": "accessory_jewelry_v13",
+          "variation_number": 13,
+          "name": "Setting and Stone Layout",
+          "hook": "When visible stones or a setting are present, start with their actual arrangement; otherwise focus on the real central design detail.",
+          "action": "Make a tiny camera arc across the existing setting without adding sparkle, stones or moving components.",
+          "detail": "Keep the visible stone count, sizes, positions and setting unchanged; do not claim authenticity, clarity or gemstone identity.",
+          "camera": "Macro arc of a few degrees, followed by a gentle pullback.",
+          "lighting": "Broad soft source creates restrained natural reflections without starbursts.",
+          "closing": "Hold on the genuine setting or central design detail.",
+          "audio": "Minimal elegant music; no magical chimes."
+        },
+        {
+          "id": "accessory_jewelry_v14",
+          "variation_number": 14,
+          "name": "Chain Link Rhythm",
+          "hook": "If the piece contains a chain or linked sections, open on the real link pattern; otherwise use its actual repeating detail or curve.",
+          "action": "Track along the visible links while keeping their count, spacing and connection physically consistent.",
+          "detail": "Do not lengthen the chain, change link style or infer material, strength or anti-tarnish properties.",
+          "camera": "Slow macro slider move that follows the chain's natural line.",
+          "lighting": "Soft raking light defines individual visible links without harsh glints.",
+          "closing": "Ease back to show how the chain connects to the rest of the piece, if visible.",
+          "audio": "Low-volume calm instrumental; no added jingles."
+        },
+        {
+          "id": "accessory_jewelry_v15",
+          "variation_number": 15,
+          "name": "Wearable Scale Reference",
+          "hook": "Use the same wearing arrangement shown in the reference if a person or body part is already present; otherwise keep the jewellery on its supplied surface.",
+          "action": "For a supported wearing view, make a small natural movement while preserving the item's fit; otherwise use a camera-only orbit around the stationary piece.",
+          "detail": "Do not add a model, alter body features, change scale or imply comfort, hypoallergenic properties or suitability claims.",
+          "camera": "Natural close-to-medium framing with realistic proportions and a steady move.",
+          "lighting": "Soft flattering light with accurate skin and jewellery colour when a wearer is shown.",
+          "closing": "Pause on the same reference-supported wearing or tabletop arrangement.",
+          "audio": "Subtle elegant instrumental; no voiceover."
+        },
+        {
+          "id": "accessory_jewelry_v16",
+          "variation_number": 16,
+          "name": "Back and Fastener View If Supplied",
+          "hook": "If the reference shows the back of the jewellery, open on that genuine view; otherwise stay with the supplied angle and choose a visible edge detail.",
+          "action": "Transition between supplied views only when both are available; do not rotate into an unseen underside.",
+          "detail": "Do not invent hallmarks, engraving, safety catches, backing pieces or material stamps.",
+          "camera": "Two stable matching views when supplied, or a restrained close-up on the known angle.",
+          "lighting": "Neutral diffused light keeps small details visible without altering colour.",
+          "closing": "End on the clearest authentic angle provided.",
+          "audio": "Quiet instrumental bed; no transition effects."
+        },
+        {
+          "id": "accessory_jewelry_v17",
+          "variation_number": 17,
+          "name": "Natural Shadow Form",
+          "hook": "Open with the complete jewellery piece resting in its actual supplied arrangement, using its real outline as the focal point.",
+          "action": "Let the camera shift slightly so the natural contact shadow changes while the jewellery remains still.",
+          "detail": "No floating product, extra display props, fake stones or added design elements.",
+          "camera": "Slow low three-quarter slide with a realistic tabletop perspective.",
+          "lighting": "Large diffused light creates a soft natural shadow and controlled highlights.",
+          "closing": "Hold on the full shape and its authentic proportions.",
+          "audio": "Low-key refined instrumental."
+        },
+        {
+          "id": "accessory_jewelry_v18",
+          "variation_number": 18,
+          "name": "Engraving Only If Legible",
+          "hook": "If a genuine engraving or marking is visible and legible in the reference, open on it; otherwise use the clearest real surface detail.",
+          "action": "Push in gently to inspect the existing marking, then pull back without rewriting, sharpening into new text or adding symbols.",
+          "detail": "Preserve all visible markings exactly; do not invent brand names, initials, hallmarks or certification.",
+          "camera": "Careful macro push-in with a stable focus and short pullback.",
+          "lighting": "Even soft illumination avoids glare and preserves the actual surface.",
+          "closing": "Finish on the real marking only if it is genuinely present; otherwise show the full item.",
+          "audio": "Soft instrumental with no text-reveal effects."
+        },
+        {
+          "id": "accessory_jewelry_v19",
+          "variation_number": 19,
+          "name": "Composition With Supplied Box",
+          "hook": "If the reference includes a jewellery box or display case, open on that exact set; otherwise show the jewellery alone without adding packaging.",
+          "action": "Make a gentle overhead-to-three-quarter move while keeping every supplied item in its original position.",
+          "detail": "Do not invent a box, pouch, certificate, polishing cloth, extra jewellery or brand logo.",
+          "camera": "Smooth overhead drift into a close three-quarter composition.",
+          "lighting": "Soft even studio light with natural shadows around the existing pieces.",
+          "closing": "Hold on the same authentic item-and-packaging arrangement, if provided.",
+          "audio": "Quiet elegant instrumental; no unboxing sounds."
+        },
+        {
+          "id": "accessory_jewelry_v20",
+          "variation_number": 20,
+          "name": "Full Design Pullback",
+          "hook": "Begin close on a genuine visible design feature—curve, setting, link, clasp or texture—only if it exists in the reference.",
+          "action": "Pull back in one continuous move until the entire jewellery piece is visible at a believable scale, keeping its shape and orientation consistent.",
+          "detail": "No added accessories, extra stones, material claims, text, logos or unsupported quality promises.",
+          "camera": "Continuous macro-to-medium pullback with natural perspective and steady focus.",
+          "lighting": "Balanced soft lighting with true colour and restrained realistic reflections.",
+          "closing": "Hold a clean, centred full-product view for the final beat.",
+          "audio": "Soft refined instrumental outro; no voiceover."
         }
       ]
     },
