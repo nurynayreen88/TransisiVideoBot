@@ -19001,7 +19001,7 @@
       "subcategory_id": "beauty_perfume",
       "category_id": "beauty",
       "label": "🌸 Perfume / Wangian",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "beauty_perfume_v01",
@@ -19122,6 +19122,126 @@
           "lighting": "Use neutral soft light, realistic contact shadows and carefully controlled reflections.",
           "closing": "End with the complete bottle sharp in frame, no rendered text, extra logo or props.",
           "audio": "Use restrained instrumental music; no spoken claims or unsupported sound effects."
+        },
+        {
+          "id": "beauty_perfume_v11",
+          "variation_number": 11,
+          "name": "Glass Edge and Corner Detail",
+          "hook": "Open on a real edge, corner or curved shoulder of the exact perfume bottle, using only geometry visible in the reference.",
+          "action": "Glide slowly along the visible contour while the bottle remains upright and still, then widen to the full silhouette.",
+          "detail": "Preserve actual glass thickness, tint, seams and shape; do not add bevels, crystal facets or decorative engravings.",
+          "camera": "Use a macro-like lateral glide that resolves into a stable three-quarter shot.",
+          "lighting": "Use broad diffused light with a narrow, controlled highlight that does not hide the label.",
+          "closing": "Hold on the complete bottle with its distinctive outline clear.",
+          "audio": "Soft instrumental music only; no artificial glass chimes."
+        },
+        {
+          "id": "beauty_perfume_v12",
+          "variation_number": 12,
+          "name": "Label Alignment and Bottle Front",
+          "hook": "Start with the actual front label aligned in frame, showing its genuine placement on the perfume bottle.",
+          "action": "Make a small camera adjustment from straight-on to a mild three-quarter angle without moving or relabelling the bottle.",
+          "detail": "Keep all printed words, symbols, label edges and proportions faithful. Do not generate extra brand marks or fragrance descriptions.",
+          "camera": "Use a stable close-up with a gentle angle change, then pull back to the full bottle.",
+          "lighting": "Use diffuse frontal lighting to keep print readable and reflections subdued.",
+          "closing": "Finish with the full bottle facing camera and its real label unobstructed.",
+          "audio": "Low-volume instrumental music; no voiceover or claims."
+        },
+        {
+          "id": "beauty_perfume_v13",
+          "variation_number": 13,
+          "name": "Cap Texture and Finish Study",
+          "hook": "Feature the cap’s real colour, texture and finish only as shown, whether matte, glossy, transparent or metallic-looking.",
+          "action": "Let a slow camera tilt reveal the cap’s visible surfaces without removing it or changing its position.",
+          "detail": "Do not upgrade the material appearance or invent magnets, clicks, weight or premium construction.",
+          "camera": "Use a close cap detail followed by a slow pullback to the neck and full bottle.",
+          "lighting": "Use a soft side source and restrained fill to show texture without exaggerated sparkle.",
+          "closing": "Hold on the original cap fitted to the bottle, with the full silhouette visible.",
+          "audio": "Music only unless an actual visible action supports a natural sound."
+        },
+        {
+          "id": "beauty_perfume_v14",
+          "variation_number": 14,
+          "name": "Reflections Across a Dark Background",
+          "hook": "If compatible with the reference, place the exact perfume bottle against a simple darker background to make its existing outline readable; do not change the product itself.",
+          "action": "Use a slow camera slide that allows genuine reflections to shift subtly while the bottle stays fixed.",
+          "detail": "Maintain the true liquid colour, glass transparency and label. Do not make the perfume glow or add smoke, sparkles or coloured light inside the bottle.",
+          "camera": "Use a measured side-to-three-quarter move with the whole bottle visible throughout.",
+          "lighting": "Use controlled edge lighting and soft frontal fill so dark areas retain realistic detail.",
+          "closing": "End with the complete bottle outlined clearly against the plain background.",
+          "audio": "A restrained instrumental bed only; no cinematic whooshes."
+        },
+        {
+          "id": "beauty_perfume_v15",
+          "variation_number": 15,
+          "name": "Bottle Scale and Base Contact",
+          "hook": "Show the exact perfume bottle standing on a plain surface, keeping its real size, base shape and contact with the surface believable.",
+          "action": "Move from a low base-level view up to the label without lifting, tilting or rotating the bottle.",
+          "detail": "Do not exaggerate bottle scale, add a pedestal, or imply weight, durability or leak resistance.",
+          "camera": "Begin at a low three-quarter angle and tilt upward smoothly to a complete upright view.",
+          "lighting": "Use soft side light and natural contact shadows, with no floating appearance.",
+          "closing": "Hold the bottle upright with the base and cap both visible.",
+          "audio": "Quiet music only; no invented placement or clink sound."
+        },
+        {
+          "id": "beauty_perfume_v16",
+          "variation_number": 16,
+          "name": "Carton Print and Fold Detail",
+          "hook": "When the original perfume carton is visible, begin with its real printed surface, folds and edges; if no carton is shown, use a visible bottle detail instead.",
+          "action": "Slide along the existing carton face and reveal the bottle only if it is included in the reference arrangement.",
+          "detail": "Do not create new text, seals, QR codes, ingredient panels or packaging contents. Keep folds and corners physically consistent.",
+          "camera": "Use a slow straight tracking move, then settle on the supplied package or bottle-and-carton pairing.",
+          "lighting": "Use broad even light to keep carton colours and small visible print natural.",
+          "closing": "Finish with the original packaging arrangement fully accounted for.",
+          "audio": "No paper-handling effects unless the package is visibly moved; music only otherwise."
+        },
+        {
+          "id": "beauty_perfume_v17",
+          "variation_number": 17,
+          "name": "Negative-Space Fragrance Editorial",
+          "hook": "Compose the exact perfume bottle with generous clean negative space and no added slogans, scent words or decorative props.",
+          "action": "Keep the product still and use a subtle push-in that preserves the full bottle and label within frame.",
+          "detail": "Do not use visual symbols to suggest unverified notes such as flowers, citrus, wood or musk. Keep only the supplied product details.",
+          "camera": "Use an offset medium-wide composition, then move gently toward a balanced three-quarter hero frame.",
+          "lighting": "Use soft neutral studio light with natural shadows and accurate bottle colour.",
+          "closing": "Hold the quiet editorial frame with the whole bottle clearly visible.",
+          "audio": "Minimal instrumental music only; no narration."
+        },
+        {
+          "id": "beauty_perfume_v18",
+          "variation_number": 18,
+          "name": "Spray Head Geometry Close-Up",
+          "hook": "If an exposed spray head is actually visible in the reference, inspect its real shape and placement; otherwise focus on the closed top without implying a hidden nozzle.",
+          "action": "Keep all components stationary. Do not press the atomizer or create a mist cloud.",
+          "detail": "Preserve the exact visible nozzle, collar and cap state; do not add droplets, fingerprints or spray residue.",
+          "camera": "Use a steady close-up, then widen to reconnect the detail with the complete bottle.",
+          "lighting": "Use neutral soft light with controlled highlights on small components.",
+          "closing": "Finish with the top detail and the full bottle recognisable in the same composition.",
+          "audio": "No spray hiss or pump click; low-volume music only."
+        },
+        {
+          "id": "beauty_perfume_v19",
+          "variation_number": 19,
+          "name": "Bottle Profile Comparison Within One Item",
+          "hook": "Reveal the bottle’s front and side profile only through camera movement around the same stationary item, keeping every visible design feature true.",
+          "action": "Make a short, slow arc that never exposes an invented back label or unseen bottle face.",
+          "detail": "Do not mirror, duplicate or reshape the bottle. Keep liquid level, cap and label consistent across the move.",
+          "camera": "Use a restrained arc of only the visible angles, then return toward the primary front view.",
+          "lighting": "Keep light direction consistent and reflections physically plausible throughout the shot.",
+          "closing": "Settle on the clearest supported angle with the full bottle in frame.",
+          "audio": "Quiet instrumental music; no spinning or whoosh effects."
+        },
+        {
+          "id": "beauty_perfume_v20",
+          "variation_number": 20,
+          "name": "Final Bottle and Label Hold",
+          "hook": "Open with a clean, recognisable view of the exact perfume bottle, then direct attention to its real label and silhouette without making efficacy or scent claims.",
+          "action": "Use one smooth push toward the label followed by a measured return to the full bottle, with no object animation.",
+          "detail": "Preserve all visible details and do not invent fragrance notes, wear time, projection, origin or authenticity claims.",
+          "camera": "Use a stable frontal-to-three-quarter sequence with a short focus hold and a gentle pullback.",
+          "lighting": "Use colour-accurate soft light and controlled reflections that keep the label legible.",
+          "closing": "Hold on a complete, sharp bottle shot with cap and base visible.",
+          "audio": "Subtle instrumental music only; no spoken scent descriptions or added sound effects."
         }
       ]
     },
