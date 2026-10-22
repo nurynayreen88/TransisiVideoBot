@@ -11001,7 +11001,7 @@
       "subcategory_id": "hijab_instant",
       "category_id": "hijab",
       "label": "🧕 Tudung sarung / Instant",
-      "variation_count": 20,
+      "variation_count": 30,
       "variations": [
         {
           "id": "hijab_instant_v01",
@@ -11242,6 +11242,126 @@
           "lighting": "Use soft neutral lighting to retain true colour and visible detail.",
           "closing": "Hold a clean hero frame for the final beat, with no text or graphic badge.",
           "audio": "Follow selected audio settings; no default spoken CTA."
+        },
+        {
+          "id": "hijab_instant_v21",
+          "variation_number": 21,
+          "name": "Three-Quarter Framing",
+          "hook": "Open with a three-quarter portrait of the instant hijab, preserving the exact face opening and shoulder drape shown in the reference.",
+          "action": "The wearer slowly angles their shoulders toward the camera and pauses without touching the hijab.",
+          "detail": "Keep the visible contours unchanged and do not fabricate a back view or hidden panel.",
+          "camera": "Use a restrained camera arc of a few degrees, never a full orbit.",
+          "lighting": "Use soft neutral fill and consistent white balance.",
+          "closing": "Finish with a stable three-quarter portrait and clear product silhouette.",
+          "audio": "Use selected audio only; no added narration by default."
+        },
+        {
+          "id": "hijab_instant_v22",
+          "variation_number": 22,
+          "name": "Seam Detail if Visible",
+          "hook": "Begin on a naturally visible seam or edge only if it is clearly present in the reference; otherwise focus on the visible face-opening contour.",
+          "action": "The camera makes a short, slow slide along that visible line while the wearer remains still.",
+          "detail": "Do not invent seam placement, stitching, labels or construction details that cannot be seen.",
+          "camera": "Use a close framing with realistic perspective, then ease to a medium close-up.",
+          "lighting": "Use diffused light that reveals the real edge without creating false texture.",
+          "closing": "End with the detail still connected to the overall instant hijab styling.",
+          "audio": "Follow the user's audio selection and avoid material claims."
+        },
+        {
+          "id": "hijab_instant_v23",
+          "variation_number": 23,
+          "name": "Soft Background Reveal",
+          "hook": "Start with the instant hijab wearer in focus against a softly blurred, uncluttered background.",
+          "action": "Make a gentle focus transition that keeps the wearer and product consistently framed; the wearer stays still.",
+          "detail": "The hijab's colour, folds and shape must not change during the focus shift.",
+          "camera": "Use a locked camera and controlled rack focus rather than a digital zoom.",
+          "lighting": "Use soft, even lighting with accurate product colour.",
+          "closing": "Hold a sharp, centered portrait for the final beat.",
+          "audio": "No focus sound effects unless explicitly selected."
+        },
+        {
+          "id": "hijab_instant_v24",
+          "variation_number": 24,
+          "name": "Natural Smile Moment",
+          "hook": "Open on a neutral, reference-matched portrait where the instant hijab's visible edges and drape are easy to inspect.",
+          "action": "The wearer gives a small natural smile, then returns to a relaxed expression without moving the hijab.",
+          "detail": "Do not apply face reshaping, beauty filters or fabric changes; keep the visible styling authentic.",
+          "camera": "Use a stable medium close-up and a subtle push-in only near the end.",
+          "lighting": "Use gentle frontal fill and soft daylight.",
+          "closing": "Finish with the face and visible hijab shape both clearly framed.",
+          "audio": "Use selected music or speech only; no unrequested voiceover."
+        },
+        {
+          "id": "hijab_instant_v25",
+          "variation_number": 25,
+          "name": "Side-to-Front Return",
+          "hook": "Begin in a modest side angle that shows the instant hijab's visible outline, then return to the reference-like front view.",
+          "action": "The wearer turns slowly back toward the camera in one continuous movement, without adjusting the fabric.",
+          "detail": "Keep the same face opening and fold arrangement through the full turn; do not mirror or regenerate the design.",
+          "camera": "Use a fixed camera with natural motion and no cut-based transformation.",
+          "lighting": "Maintain constant exposure and neutral colour balance.",
+          "closing": "Finish facing forward with the same visible drape as the opening.",
+          "audio": "Respect the selected audio mode; no forced sound effects."
+        },
+        {
+          "id": "hijab_instant_v26",
+          "variation_number": 26,
+          "name": "Balanced Headroom Shot",
+          "hook": "Open with a carefully balanced portrait that leaves enough headroom and shows the visible instant hijab down to the shoulders.",
+          "action": "The wearer holds the pose while the camera makes a tiny vertical correction, keeping the whole visible product in frame.",
+          "detail": "Do not crop away the drape or extend fabric beyond what the reference shows.",
+          "camera": "Use a smooth, minimal tilt correction with stable perspective.",
+          "lighting": "Use soft neutral light and consistent exposure.",
+          "closing": "End on a clean, balanced portrait with the face opening and shoulder fall both visible.",
+          "audio": "Use only selected audio settings."
+        },
+        {
+          "id": "hijab_instant_v27",
+          "variation_number": 27,
+          "name": "Subtle Step Into Frame",
+          "hook": "Begin with a simple background and the wearer just outside the final centered position, with the instant hijab already styled as in the reference.",
+          "action": "The wearer steps gently into the center and stops; the fabric remains naturally attached and unchanged.",
+          "detail": "Do not imply the hijab is self-adjusting or secured by an unseen fastener.",
+          "camera": "Track a short distance to maintain a medium close-up, avoiding sudden reframing.",
+          "lighting": "Use soft daylight and neutral white balance.",
+          "closing": "Finish centered in a still portrait with the visible styling unobstructed.",
+          "audio": "No added footsteps unless the user selects appropriate audio."
+        },
+        {
+          "id": "hijab_instant_v28",
+          "variation_number": 28,
+          "name": "Texture-Free Colour Focus",
+          "hook": "Open with a medium close-up that presents the product colour faithfully without claiming or inventing fabric texture.",
+          "action": "The wearer remains still as the camera eases a little closer to the visible surface and face opening.",
+          "detail": "Do not create satin sheen, knit texture, translucency or weave detail unless clearly shown in the reference.",
+          "camera": "Use a slow push-in with realistic depth of field and no artificial sharpening.",
+          "lighting": "Use even diffused light and fixed white balance.",
+          "closing": "Hold a colour-accurate frame showing the real visible surface and drape.",
+          "audio": "Use selected audio only; no descriptive voiceover unless provided."
+        },
+        {
+          "id": "hijab_instant_v29",
+          "variation_number": 29,
+          "name": "Portrait With Natural Pause",
+          "hook": "Open on the wearer in the reference-matched instant hijab, looking slightly off camera in a quiet setting.",
+          "action": "Hold for a brief beat, then let the wearer turn their eyes toward the lens while keeping head and shoulders mostly still.",
+          "detail": "Maintain consistent facial framing and unchanged product folds; no sudden re-forming of the hijab.",
+          "camera": "Use a locked medium close-up with no unnecessary camera movement.",
+          "lighting": "Use soft, natural light and avoid strong shadows over the face opening.",
+          "closing": "End with a composed gaze and the instant hijab clearly visible.",
+          "audio": "Follow the user's audio settings and keep the scene otherwise quiet."
+        },
+        {
+          "id": "hijab_instant_v30",
+          "variation_number": 30,
+          "name": "Clean Final Silhouette",
+          "hook": "Start on a three-quarter medium portrait that shows the instant hijab's complete visible outline from crown to shoulder fall.",
+          "action": "The wearer makes one small, natural turn and settles, without touching the garment.",
+          "detail": "Preserve all reference-visible edges and folds; do not invent hidden coverage or add accessories.",
+          "camera": "Use a gentle, short push-in while keeping the silhouette inside the frame.",
+          "lighting": "Use soft side definition with neutral fill and faithful colour.",
+          "closing": "Finish on a still hero portrait, showing the full visible silhouette without text or graphics.",
+          "audio": "Use only selected audio options; no default CTA."
         }
       ]
     },
