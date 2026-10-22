@@ -14649,7 +14649,7 @@
       "subcategory_id": "shoes_formal",
       "category_id": "shoes",
       "label": "👞 Kasut formal",
-      "variation_count": 30,
+      "variation_count": 40,
       "variations": [
         {
           "id": "shoes_formal_v01",
@@ -15010,6 +15010,126 @@
           "lighting": "Keep white balance and exposure consistent across all views so finish and colour remain faithful.",
           "closing": "Hold the unchanged formal shoe or pair in a clean hero composition.",
           "audio": "Respect selected audio and narration choices; no forced voice-over, captions or fabricated sound effects."
+        },
+        {
+          "id": "shoes_formal_v31",
+          "variation_number": 31,
+          "name": "Quarter and Collar Profile",
+          "hook": "Begin with the complete formal shoe, then draw attention to the visible quarter and collar area without cropping away the overall silhouette.",
+          "action": "Make a slow side-to-rear camera move while the shoe stays fixed in its original position.",
+          "detail": "Preserve the real collar height, opening shape, seams and any visible lining; do not invent padding, lining material or comfort benefits.",
+          "camera": "Start at a medium side view, glide toward the rear quarter, and ease back to the same medium framing.",
+          "lighting": "Use broad, soft side light to keep the opening and upper legible without changing the apparent colour.",
+          "closing": "Hold on a three-quarter view that includes the quarter detail and recognisable full shoe.",
+          "audio": "Follow selected audio settings; do not add handling sounds or unsupported claims."
+        },
+        {
+          "id": "shoes_formal_v32",
+          "variation_number": 32,
+          "name": "Outsole Visibility Boundary",
+          "hook": "Open on the shoe's normal side profile and identify only the outsole edge that is already visible in the reference.",
+          "action": "Track slowly along the visible boundary between upper, midsole or outsole where those parts can actually be distinguished.",
+          "detail": "Do not flip the shoe or reveal hidden tread. Keep the boundary and apparent construction faithful; make no claims about grip, flexibility or wear resistance.",
+          "camera": "Use a low, straight lateral slide with natural perspective, then settle into a full side profile.",
+          "lighting": "Apply gentle raking light to separate visible edges without manufacturing texture or shine.",
+          "closing": "Return to the unchanged side profile and hold for a clear product read.",
+          "audio": "No simulated walking, tapping or shoe-flex sounds; respect the selected soundtrack."
+        },
+        {
+          "id": "shoes_formal_v33",
+          "variation_number": 33,
+          "name": "Fastening Close-Up Without Alteration",
+          "hook": "Establish the full shoe first, then frame its actual fastening area—laces, strap, buckle or slip-on opening, whichever is present.",
+          "action": "Move closer in one controlled push while all fastenings remain untouched and in their original arrangement.",
+          "detail": "Keep the exact number and placement of visible eyelets, straps and hardware. Do not add a buckle, change lace routing or imply an adjustable fit unless shown.",
+          "camera": "Use a gentle front-quarter push-in followed by a brief steady close-up.",
+          "lighting": "Keep the fastening evenly lit so small details remain clear without exaggerated reflections.",
+          "closing": "Pull back to show the fastening within the complete shoe design.",
+          "audio": "Do not add fastening sounds or narration unless explicitly selected and supported."
+        },
+        {
+          "id": "shoes_formal_v34",
+          "variation_number": 34,
+          "name": "Back Seam and Heel Counter",
+          "hook": "Start with a rear three-quarter view of the formal shoe, keeping the full heel and adjacent upper in frame.",
+          "action": "Make a small, smooth arc around the back of the shoe without rotating or reshaping the product.",
+          "detail": "Show only existing rear seams, panels and heel contours; do not assert reinforcement, stability or construction methods that cannot be seen.",
+          "camera": "Use a measured rear-quarter orbit of a few degrees, then pause on the actual heel profile.",
+          "lighting": "Use soft edge light to define the silhouette while preserving the reference finish.",
+          "closing": "Finish on the same rear three-quarter angle with the heel and upper still connected visually.",
+          "audio": "Use only the chosen audio; no invented heel clicks or material sounds."
+        },
+        {
+          "id": "shoes_formal_v35",
+          "variation_number": 35,
+          "name": "Surface Finish Across Angles",
+          "hook": "Show the complete shoe under neutral light before moving in on the visible surface finish.",
+          "action": "Shift the camera gently from front three-quarter to side three-quarter so the existing finish can be seen from two angles.",
+          "detail": "Preserve the reference's real gloss, matte appearance, colour and texture. Do not make a matte surface glossy or describe the material as leather unless confirmed.",
+          "camera": "Use one slow, continuous slider move with stable focus and no dramatic lens distortion.",
+          "lighting": "Use large diffused sources and controlled highlights; avoid reflections that suggest details absent from the reference.",
+          "closing": "Return to the original full-product composition with the finish unchanged.",
+          "audio": "No polishing or rubbing sound effects; follow the selected audio mode."
+        },
+        {
+          "id": "shoes_formal_v36",
+          "variation_number": 36,
+          "name": "Pair Spacing and Toe Direction",
+          "hook": "Open with both shoes exactly as arranged in the reference, showing their real toe direction and spacing.",
+          "action": "Let the camera drift slowly across the pair without moving either shoe or making the pair appear more symmetrical than it is.",
+          "detail": "Maintain the exact shoe count, left/right orientation, relative size and visible differences; add no accessories or display props.",
+          "camera": "Use a stable overhead or high three-quarter view appropriate to the source arrangement, with a short gentle drift.",
+          "lighting": "Use even, neutral illumination and soft contact shadows to retain faithful colour and shape.",
+          "closing": "Hold on the complete pair in its original arrangement.",
+          "audio": "No handling sounds while the shoes remain still; use selected audio only."
+        },
+        {
+          "id": "shoes_formal_v37",
+          "variation_number": 37,
+          "name": "Vamp-to-Toe Flow",
+          "hook": "Begin with a front three-quarter view that shows how the visible vamp meets the toe area.",
+          "action": "Move in a slow diagonal path from the vamp toward the toe, then ease back without touching the shoe.",
+          "detail": "Preserve actual seams, perforations, plain panels and toe shape as visible. Do not create a cap seam, decorative stitching or extra texture.",
+          "camera": "Use a short diagonal push-in with a natural close perspective and a smooth return to medium view.",
+          "lighting": "Keep light soft and directional enough to reveal real contours without harsh glare.",
+          "closing": "End with the toe detail framed within the full front profile.",
+          "audio": "Respect selected audio and avoid fabricated brushing or handling sounds."
+        },
+        {
+          "id": "shoes_formal_v38",
+          "variation_number": 38,
+          "name": "Opening and Insole Only If Visible",
+          "hook": "Show the shoe opening from an angle that matches what the reference actually reveals.",
+          "action": "Use a modest elevated camera move to clarify the visible opening; do not lift, turn over or open the shoe further.",
+          "detail": "Show an insole, lining or interior marking only if it is already visible. Never invent labels, cushioning, material, sizing or comfort features.",
+          "camera": "Use a slow elevated-front tilt and stop before any hidden interior would need to be generated.",
+          "lighting": "Use soft fill so the visible opening remains legible without brightening or recolouring it unnaturally.",
+          "closing": "Ease back to a recognisable three-quarter product view.",
+          "audio": "No unsupported comfort narration or interior-handling effects; follow selected settings."
+        },
+        {
+          "id": "shoes_formal_v39",
+          "variation_number": 39,
+          "name": "Formal Shoe in Quiet Negative Space",
+          "hook": "Present the unchanged formal shoe or pair against the same simple background visible in the reference, with the full outline unobstructed.",
+          "action": "Create visual movement through a slow camera push and subtle reframing only; do not add a stage, pedestal, props or new setting.",
+          "detail": "Keep the original background character, product colour, proportions and all visible details consistent. Do not add logos, text or decorative elements.",
+          "camera": "Use a restrained centred push-in followed by a slight pull-back, keeping the entire shoe within the vertical frame.",
+          "lighting": "Maintain neutral exposure and realistic contact shadows; avoid artificial glow or exaggerated reflections.",
+          "closing": "Hold a clean full-product view with clear space around the shoe.",
+          "audio": "Use the selected music or narration settings; no forced voice-over, captions or extra sound effects."
+        },
+        {
+          "id": "shoes_formal_v40",
+          "variation_number": 40,
+          "name": "Slow Three-Angle Formal Showcase",
+          "hook": "Open with a steady full view of the formal shoe or pair so its actual design is clear before any close-up.",
+          "action": "Present three calm views in sequence: front three-quarter, side profile, and rear or fastening detail only when visible; keep the product unchanged between views.",
+          "detail": "Each angle must show only source-supported features. Preserve colour, silhouette, seams, fastenings and pair orientation; do not infer material or performance.",
+          "camera": "Use slow, matched transitions between three stable framings, then return to the opening composition without fast cuts.",
+          "lighting": "Keep white balance and exposure consistent in every view so the finish remains faithful.",
+          "closing": "Finish on the same full-product view as the opening and hold long enough for clear recognition.",
+          "audio": "Respect the selected audio and narration choices; no invented footsteps, captions or unsupported claims."
         }
       ]
     },
