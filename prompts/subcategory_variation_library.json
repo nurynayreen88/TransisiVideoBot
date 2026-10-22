@@ -16241,7 +16241,7 @@
       "subcategory_id": "shoes_kids",
       "category_id": "shoes",
       "label": "🧒 Kasut kanak-kanak",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "shoes_kids_v01",
@@ -16362,6 +16362,126 @@
           "lighting": "Bright but neutral soft lighting; keep colour and pattern consistent.",
           "closing": "Hold on the complete unchanged shoe without captions or watermark.",
           "audio": "Use only user-selected audio; do not force cartoon sounds or narration."
+        },
+        {
+          "id": "shoes_kids_v11",
+          "variation_number": 11,
+          "name": "Easy Pair Identification",
+          "hook": "Make the children's shoe design immediately recognisable in a full-product view.",
+          "action": "Begin with a clean full view, then gently move closer to the most distinctive visible design area before returning to the complete shoe.",
+          "detail": "Keep the original colours, proportions and visible details; do not add cartoon characters, stickers or accessories.",
+          "camera": "Slow push-in and return to a medium-wide view with steady perspective.",
+          "lighting": "Soft bright illumination with accurate colours and natural contact shadows.",
+          "closing": "Finish with the entire shoe clearly framed.",
+          "audio": "Use only the selected music, voice and sound-effect options."
+        },
+        {
+          "id": "shoes_kids_v12",
+          "variation_number": 12,
+          "name": "Print-to-Shape Transition",
+          "hook": "Connect a real visible print or colour detail to the shoe's overall shape.",
+          "action": "Start close on an existing print or colour block; if none is visible, use a distinctive panel, then slide out to show the full shoe.",
+          "detail": "Do not animate printed characters or alter patterns; reproduce only what is actually visible in the reference.",
+          "camera": "Continuous lateral slide followed by a short pull-back.",
+          "lighting": "Even diffuse light prevents glare from obscuring printed or coloured areas.",
+          "closing": "Hold on a clear three-quarter view with the design unchanged.",
+          "audio": "Follow selected audio settings without adding unrequested speech."
+        },
+        {
+          "id": "shoes_kids_v13",
+          "variation_number": 13,
+          "name": "Opening Edge Detail",
+          "hook": "Show the visible shoe opening and its surrounding edge without inventing interior features.",
+          "action": "Make a small, careful camera move around the visible opening, then widen to a full view.",
+          "detail": "Do not add lining, padding, insole graphics or labels that cannot be seen in the reference.",
+          "camera": "Slightly elevated close-up with a shallow arc and smooth widen-out.",
+          "lighting": "Soft top fill with gentle shadows around the opening.",
+          "closing": "End with the opening detail and overall shoe shape both understandable.",
+          "audio": "Use selected soundtrack and effects only."
+        },
+        {
+          "id": "shoes_kids_v14",
+          "variation_number": 14,
+          "name": "Sole-to-Upper Line",
+          "hook": "Draw attention to the real outline where the upper meets the visible sole.",
+          "action": "Track slowly along the visible join line, keeping the shoe still and never rolling it to expose hidden surfaces.",
+          "detail": "Do not add tread, thickness, cushioning or durability claims beyond what the reference shows.",
+          "camera": "Low side-level tracking move with consistent distance from the product.",
+          "lighting": "Soft directional light defines the edge without dramatic contrast.",
+          "closing": "Pause on a balanced side three-quarter shot.",
+          "audio": "No extra impact or footstep sounds unless explicitly selected."
+        },
+        {
+          "id": "shoes_kids_v15",
+          "variation_number": 15,
+          "name": "Two-Shoe Balance",
+          "hook": "Present both children's shoes as a matching set when the reference contains a pair.",
+          "action": "Use a gentle overhead-to-front drift that keeps both shoes in view; if only one shoe is supplied, retain a single-product composition.",
+          "detail": "Do not duplicate a single shoe or change the pair's actual left-right arrangement, colour or design.",
+          "camera": "Slow diagonal drift from above toward a modest three-quarter angle.",
+          "lighting": "Balanced soft light with natural shadows beneath each item.",
+          "closing": "Hold on the complete supplied set with safe margins.",
+          "audio": "Follow the selected audio settings only."
+        },
+        {
+          "id": "shoes_kids_v16",
+          "variation_number": 16,
+          "name": "Closure Detail Without Handling",
+          "hook": "Let the viewer inspect the closure that is actually visible on the children's shoe.",
+          "action": "Use a short focus pull across the visible closure and its attachment area without opening, fastening or manipulating it.",
+          "detail": "Only reference-supported closures may appear; do not add laces, buckles, straps or hook-and-loop parts that are absent.",
+          "camera": "Locked close-up with a gentle rack focus, then a short widen-out.",
+          "lighting": "Soft glare-controlled light keeps the closure clearly visible.",
+          "closing": "Finish on a stable medium view of the shoe.",
+          "audio": "Use the chosen music and any enabled speech or effects only."
+        },
+        {
+          "id": "shoes_kids_v17",
+          "variation_number": 17,
+          "name": "Rounded Contour Study",
+          "hook": "Highlight the actual toe and heel contours without making the shoe look larger or smaller.",
+          "action": "Move slowly from the visible toe contour along the side toward the rear, stopping before unseen details would need to be shown.",
+          "detail": "Maintain the shoe's real scale and shape; no stretching, bending or exaggerated perspective.",
+          "camera": "Smooth short tracking pass with corrected perspective and stable focal length.",
+          "lighting": "Neutral soft lighting with gentle form shadows.",
+          "closing": "Return to a complete side three-quarter view.",
+          "audio": "Keep audio to the user's selected options."
+        },
+        {
+          "id": "shoes_kids_v18",
+          "variation_number": 18,
+          "name": "Surface Detail Check",
+          "hook": "Show the real upper finish clearly while keeping the shoe recognisable.",
+          "action": "Make a restrained close pass over the clearest visible surface, then shift focus back to the overall design.",
+          "detail": "Do not fabricate mesh, stitching, glitter, texture or reflective elements; include only visible features.",
+          "camera": "Controlled close slide with a soft focus transition to a wider frame.",
+          "lighting": "Broad diffused light reveals actual surface detail without artificial sparkle.",
+          "closing": "End with the full shoe sharp and centred.",
+          "audio": "No added sound cues unless selected."
+        },
+        {
+          "id": "shoes_kids_v19",
+          "variation_number": 19,
+          "name": "Child-Safe Product Hero",
+          "hook": "Keep the focus on the shoe itself in a simple, tidy product showcase.",
+          "action": "Hold the shoe stationary on a level surface while the camera makes a small, smooth push-in and settles.",
+          "detail": "Product-only by default; if a model is separately selected, use age-appropriate styling and calm movement without risky actions or unsupported fit claims.",
+          "camera": "Stable three-quarter hero framing with generous margins and realistic scale.",
+          "lighting": "Soft, even light and natural contact shadows.",
+          "closing": "Leave a clean still frame of the supplied shoe or pair.",
+          "audio": "Follow selected music, voice and SFX settings."
+        },
+        {
+          "id": "shoes_kids_v20",
+          "variation_number": 20,
+          "name": "Catalogue Detail-to-Full Reveal",
+          "hook": "Open on the clearest reference-visible feature, then reveal the complete children's shoe.",
+          "action": "Start with one recognisable detail such as the visible closure, print or toe contour, and pull back smoothly to the whole product.",
+          "detail": "Choose only a feature present in the supplied image; do not create new labels, props or product claims.",
+          "camera": "One continuous pull-back with a natural pace and no abrupt cuts.",
+          "lighting": "Neutral colour-accurate lighting with soft grounded shadows.",
+          "closing": "Finish on a centred full-product view with all visible features preserved.",
+          "audio": "Use only the user's chosen audio configuration."
         }
       ]
     },
