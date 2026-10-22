@@ -9785,7 +9785,7 @@
       "subcategory_id": "hijab_bawal",
       "category_id": "hijab",
       "label": "🧕 Tudung bawal",
-      "variation_count": 40,
+      "variation_count": 50,
       "variations": [
         {
           "id": "hijab_bawal_v01",
@@ -10266,6 +10266,126 @@
           "lighting": "Match white balance and exposure across both shots.",
           "closing": "Hold the complete original view for a calm finish.",
           "audio": "Subtle music or silence; no dramatic reveal sting."
+        },
+        {
+          "id": "hijab_bawal_v41",
+          "variation_number": 41,
+          "name": "Plain Bawal Edge and Colour Hold",
+          "hook": "For a plain bawal, open with the complete item and its actual colour; if patterned, use the same framing to establish the true print.",
+          "action": "Make a very slow move toward a visible edge, pause, then return to a full view without changing the fabric.",
+          "detail": "Do not add texture, embroidery, a border or colour grading absent from the reference.",
+          "camera": "Gentle linear push-in and return with stable framing.",
+          "lighting": "Neutral diffuse light, faithful white balance and natural shadows.",
+          "closing": "Hold the unchanged full item so its real colour and shape remain clear.",
+          "audio": "Soft instrumental or silence; no effects that imply a transformation."
+        },
+        {
+          "id": "hijab_bawal_v42",
+          "variation_number": 42,
+          "name": "Existing Fold Junction Detail",
+          "hook": "Start on a visible point where two real folds or fabric layers meet.",
+          "action": "Use a small sideways camera move to show the existing junction, then widen to reveal its position in the scarf.",
+          "detail": "Do not create extra layers, alter the fold order or infer opacity from overlapping fabric.",
+          "camera": "Short shallow slider move and controlled pullback.",
+          "lighting": "Soft side diffusion with realistic shadow depth.",
+          "closing": "Finish on the original arrangement, fully recognisable.",
+          "audio": "No fabric sounds unless a hand visibly moves the scarf."
+        },
+        {
+          "id": "hijab_bawal_v43",
+          "variation_number": 43,
+          "name": "Bawal Border Running Line",
+          "hook": "Show a longer visible run of the real border or outer edge before moving closer.",
+          "action": "Follow the line smoothly for a short distance, keeping the scarf still and the edge within frame.",
+          "detail": "Preserve any natural waviness and exact pattern repeat; do not straighten or reconstruct missing sections.",
+          "camera": "Parallel tracking move at a steady speed, no digital warp.",
+          "lighting": "Even neutral light to maintain consistent border colour.",
+          "closing": "Widen to show the border's relationship to the complete item.",
+          "audio": "Quiet music or silence; no animated line effects."
+        },
+        {
+          "id": "hijab_bawal_v44",
+          "variation_number": 44,
+          "name": "Print Detail With Surrounding Fabric",
+          "hook": "Choose a clearly visible print detail and include enough surrounding fabric to show its actual scale.",
+          "action": "Push in gently for inspection, then pull back to the same wider composition.",
+          "detail": "Do not enlarge motifs, create sharpness halos or infer fabric quality from the print alone.",
+          "camera": "Slow controlled push-in and return; no extreme macro distortion.",
+          "lighting": "Neutral light with accurate colour and restrained contrast.",
+          "closing": "Hold the complete print context without changing its layout.",
+          "audio": "Subtle instrumental or silence; no sparkle sounds."
+        },
+        {
+          "id": "hijab_bawal_v45",
+          "variation_number": 45,
+          "name": "Bawal on Hanger or Display Form",
+          "hook": "If the source already shows the bawal on a hanger or display form, begin with that exact presentation; otherwise retain the original layout.",
+          "action": "Make a slow, short camera move around the visible front while the scarf and support remain stationary.",
+          "detail": "Do not introduce a hanger, mannequin, pins or unseen reverse side that is not shown in the reference.",
+          "camera": "Small lateral move with no full orbit or product movement.",
+          "lighting": "Soft even light that preserves colour and the real drape.",
+          "closing": "Return to a front-facing view matching the original display.",
+          "audio": "Quiet background music; no hanger or fabric sounds unless visibly handled."
+        },
+        {
+          "id": "hijab_bawal_v46",
+          "variation_number": 46,
+          "name": "Worn Bawal Frame Without Retie",
+          "hook": "If the scarf is worn in the reference, establish the complete visible wrap and shoulders before showing a detail.",
+          "action": "Use a small camera push toward one existing fold near the face or shoulder, then return to the original framing.",
+          "detail": "Do not re-tie, shift the scarf, change coverage or move visible pins; keep the same wearer and styling.",
+          "camera": "Stable medium close-up with a restrained push and matched return.",
+          "lighting": "Soft, natural light with consistent skin and fabric tones.",
+          "closing": "Hold the original wrap clearly without a pose or fabric change.",
+          "audio": "Use only selected speech/music settings; no forced narration."
+        },
+        {
+          "id": "hijab_bawal_v47",
+          "variation_number": 47,
+          "name": "Bawal Silhouette on Neutral Backdrop",
+          "hook": "Frame the full visible outline of the bawal against its existing background.",
+          "action": "Slide gently sideways to separate the edge visually from the background, then settle on a complete view.",
+          "detail": "Do not add a halo, remove real folds or alter the scarf's outline to make it look more symmetrical.",
+          "camera": "Short horizontal slider move with a stable horizon.",
+          "lighting": "Balanced neutral light with realistic edge shadows.",
+          "closing": "Hold the actual silhouette with no cropping of important visible edges.",
+          "audio": "Minimal instrumental or silence; no whoosh by default."
+        },
+        {
+          "id": "hijab_bawal_v48",
+          "variation_number": 48,
+          "name": "Real Scarf Edge to Hero Match",
+          "hook": "Open with a clear full view of the actual bawal, including its visible shape and print or plain surface.",
+          "action": "Cut to one genuine edge or corner detail, then match-cut back to the same full framing and arrangement.",
+          "detail": "Keep print alignment, colour, folds and accessories consistent across both views; do not morph the fabric.",
+          "camera": "Two stable framings with matched orientation and no transition warping.",
+          "lighting": "Match exposure, white balance and shadow character across the cut.",
+          "closing": "Hold the same full view used at the opening.",
+          "audio": "A subtle transition accent is optional; avoid dramatic sound effects."
+        },
+        {
+          "id": "hijab_bawal_v49",
+          "variation_number": 49,
+          "name": "Bawal Colour and Fold Reference Check",
+          "hook": "Begin with the scarf's broadest visible area so the real colour and fold pattern can be seen together.",
+          "action": "Make a slow shallow move that reveals an existing fold, then pause on the original overall arrangement.",
+          "detail": "Do not recolour shadows, add folds or claim a particular fabric material or opacity.",
+          "camera": "Gentle oblique slide with stable exposure and realistic perspective.",
+          "lighting": "Soft neutral illumination that keeps the source colour consistent.",
+          "closing": "Return to a full, reference-faithful view and hold.",
+          "audio": "Quiet instrumental or silence; no artificial wind."
+        },
+        {
+          "id": "hijab_bawal_v50",
+          "variation_number": 50,
+          "name": "Bawal Reference-Matched Final Showcase",
+          "hook": "Open with a composition that closely matches the supplied bawal reference, including its actual layout or worn wrap.",
+          "action": "Show one restrained camera move toward a real edge, fold or print detail, then return to the opening composition without moving the scarf.",
+          "detail": "Preserve exact shape, colour, border, print placement, folds, coverage and visible accessories; add no unsupported features.",
+          "camera": "One gentle linear move followed by a matched static ending; no orbit or morph.",
+          "lighting": "Keep white balance, exposure and shadow direction consistent throughout.",
+          "closing": "Finish on the complete unchanged bawal in a clean, readable hero frame.",
+          "audio": "Understated music or silence, following the selected audio mode; no invented fabric sounds."
         }
       ]
     },
