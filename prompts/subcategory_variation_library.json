@@ -12217,7 +12217,7 @@
       "subcategory_id": "hijab_inner",
       "category_id": "hijab",
       "label": "🧢 Anak tudung",
-      "variation_count": 20,
+      "variation_count": 30,
       "variations": [
         {
           "id": "hijab_inner_v01",
@@ -12458,6 +12458,126 @@
           "lighting": "Use soft neutral light with accurate colour and gentle facial detail.",
           "closing": "Hold a calm final hero frame with the visible underscarf unobstructed.",
           "audio": "Use only the selected audio settings; no default music, narration or SFX."
+        },
+        {
+          "id": "hijab_inner_v21",
+          "variation_number": 21,
+          "name": "Front-Profile Comparison",
+          "hook": "Open with a front-facing view of the underscarf exactly as shown in the supplied reference.",
+          "action": "The wearer slowly turns to a three-quarter profile, pauses, then returns to front without touching the product.",
+          "detail": "Show only visible coverage and edges; do not infer unseen rear construction or fit performance.",
+          "camera": "Use a fixed eye-level camera with a smooth, controlled head turn as the only movement.",
+          "lighting": "Use soft neutral light with stable colour and gentle fill.",
+          "closing": "End on the original front view with the visible outline unobstructed.",
+          "audio": "No default narration or effects; follow selected audio."
+        },
+        {
+          "id": "hijab_inner_v22",
+          "variation_number": 22,
+          "name": "Simple Dressing Table Setup",
+          "hook": "Begin with the underscarf laid neatly beside a plain mirror on a clean dressing table, matching the reference product.",
+          "action": "A hand lifts the item gently by one visible edge and sets it back down in its original shape.",
+          "detail": "Do not add packaging, labels, elastic or seams not visible in the reference.",
+          "camera": "Use a top-down-to-oblique camera move, maintaining realistic scale and a clean composition.",
+          "lighting": "Use diffused daylight and soft shadows without colour cast.",
+          "closing": "Finish with the product fully visible beside the mirror, no props covering it.",
+          "audio": "Use only selected audio settings; no automatic handling sounds."
+        },
+        {
+          "id": "hijab_inner_v23",
+          "variation_number": 23,
+          "name": "Natural Head Movement",
+          "hook": "Open on a close portrait of the underscarf worn exactly as shown in the reference.",
+          "action": "The wearer looks slightly upward, then returns to a relaxed forward gaze while keeping posture natural.",
+          "detail": "Do not simulate fabric stretch, shifting grip or changes to coverage during the movement.",
+          "camera": "Use a stable medium close-up with a gentle push-in that stops before cropping visible edges.",
+          "lighting": "Use even, colour-neutral light with accurate skin and product tones.",
+          "closing": "Hold on a calm front-facing portrait with the product clearly readable.",
+          "audio": "No forced speech, music or SFX."
+        },
+        {
+          "id": "hijab_inner_v24",
+          "variation_number": 24,
+          "name": "Neutral Wardrobe Context",
+          "hook": "Begin with the wearer in a plain, unbranded top and the referenced underscarf clearly visible.",
+          "action": "The wearer turns slightly at the shoulders and settles into a front-facing stance; clothing remains secondary.",
+          "detail": "Do not add extra scarf layers or accessories that obscure the product unless shown in the reference.",
+          "camera": "Use a slow, modest lateral slide ending in a balanced head-and-shoulders frame.",
+          "lighting": "Use soft daylight with consistent white balance.",
+          "closing": "Finish with the underscarf unobstructed and centred in frame.",
+          "audio": "Use the user's selected audio only."
+        },
+        {
+          "id": "hijab_inner_v25",
+          "variation_number": 25,
+          "name": "Edge Against Clean Background",
+          "hook": "Start with the visible outline of the underscarf against a plain, contrasting neutral background.",
+          "action": "The wearer makes a small turn so the outline is seen from front and three-quarter angles.",
+          "detail": "Do not darken or brighten the edge artificially, and do not invent seams or panels.",
+          "camera": "Use a fixed medium close-up; keep the background simple and product edges clear.",
+          "lighting": "Use broad soft light with gentle fill and no dramatic rim lighting.",
+          "closing": "Hold on the angle that best shows the actual visible shape.",
+          "audio": "No default narration or effects."
+        },
+        {
+          "id": "hijab_inner_v26",
+          "variation_number": 26,
+          "name": "Product in Hand Scale",
+          "hook": "Open with the underscarf held gently in one hand at chest height, only if this handling is consistent with the reference item.",
+          "action": "The hand lowers the product onto a clean surface, giving a natural sense of scale without stretching it.",
+          "detail": "Do not make the product appear larger or smaller than its real proportions; no invented fasteners.",
+          "camera": "Use a steady medium shot followed by a subtle push-in to the product on the surface.",
+          "lighting": "Use neutral soft light and realistic shadows.",
+          "closing": "End with the product resting flat and fully inside the frame.",
+          "audio": "Follow selected audio; no automatic fabric sound."
+        },
+        {
+          "id": "hijab_inner_v27",
+          "variation_number": 27,
+          "name": "Layer Visibility Close-Up",
+          "hook": "Begin on a worn view where the underscarf is visibly distinguishable from any outer layer in the reference.",
+          "action": "The wearer turns slightly to let the camera see the real visible boundary between layers, then pauses.",
+          "detail": "Only show layers present in the reference; never add a second cap or hidden panel.",
+          "camera": "Use a restrained tilt and settle into a stable three-quarter portrait.",
+          "lighting": "Use soft directional light balanced with fill so each visible layer keeps its real colour.",
+          "closing": "Finish with the visible layer boundary unobstructed and naturally lit.",
+          "audio": "No forced voiceover or SFX."
+        },
+        {
+          "id": "hijab_inner_v28",
+          "variation_number": 28,
+          "name": "Seamless Short Loop",
+          "hook": "Open on a centered portrait with the underscarf styled exactly as the reference, against a plain background.",
+          "action": "The wearer makes one small natural head turn and returns to the starting pose at the same pace.",
+          "detail": "Keep colour, folds and visible edges consistent; no morphing, jump cuts or artificial tightening.",
+          "camera": "Lock the camera and framing for the entire loop.",
+          "lighting": "Maintain constant exposure, soft light and white balance.",
+          "closing": "Match the final frame to the opening composition for a seamless loop.",
+          "audio": "No default sound; use only selected audio."
+        },
+        {
+          "id": "hijab_inner_v29",
+          "variation_number": 29,
+          "name": "Soft Window-Light Detail",
+          "hook": "Start with soft window light falling across the underscarf's visible surface and face opening as shown in the reference.",
+          "action": "The camera eases from a close view to a head-and-shoulders portrait while the wearer remains still.",
+          "detail": "Do not invent texture, transparency, moisture control or material claims; show only what is visible.",
+          "camera": "Use one continuous, slow pull-back with natural focus and no artificial macro effects.",
+          "lighting": "Use diffused window light with neutral white balance.",
+          "closing": "Finish on a clear portrait that connects the visible surface to the overall worn style.",
+          "audio": "No default narration or effects."
+        },
+        {
+          "id": "hijab_inner_v30",
+          "variation_number": 30,
+          "name": "Ready-to-Style Finish",
+          "hook": "Begin with a clean portrait of the underscarf worn as shown in the reference, with no extra props.",
+          "action": "The wearer gives a small confident smile and turns slightly toward the camera, then holds still.",
+          "detail": "Preserve the actual visible shape and coverage; do not imply guaranteed hold or all-day comfort.",
+          "camera": "Use a subtle push-in to a polished but natural hero frame.",
+          "lighting": "Use soft neutral lighting that keeps product colour accurate.",
+          "closing": "End with the face opening and visible outline clearly framed.",
+          "audio": "Use only the user's selected audio settings."
         }
       ]
     },
