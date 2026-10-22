@@ -20737,7 +20737,7 @@
       "subcategory_id": "food_frozen",
       "category_id": "food",
       "label": "🧊 Makanan sejuk beku",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "food_frozen_v01",
@@ -20858,6 +20858,126 @@
           "lighting": "Neutral diffused light with natural shadows.",
           "closing": "Finish on the complete supplied item, steady and unobstructed.",
           "audio": "Clean instrumental close at low volume."
+        },
+        {
+          "id": "food_frozen_v11",
+          "variation_number": 11,
+          "name": "Seal Edge and Folded Corner",
+          "hook": "Open on a genuine sealed edge, folded corner or closure of the frozen-food package if visible; otherwise focus on its real outer corner.",
+          "action": "Track slowly along the edge without opening, squeezing or reshaping the package.",
+          "detail": "Preserve the actual seal, folds and printed artwork. Do not imply leak protection or storage performance.",
+          "camera": "Close lateral slide at a shallow angle, then pull back to a complete package view.",
+          "lighting": "Soft grazing light reveals folds while balanced fill keeps print legible and colours accurate.",
+          "closing": "Hold on the unchanged package with its genuine edge visible.",
+          "audio": "Quiet instrumental music; no wrapper crinkle without visible movement."
+        },
+        {
+          "id": "food_frozen_v12",
+          "variation_number": 12,
+          "name": "Tray Compartment Geometry",
+          "hook": "If a tray or divided pack is visible in the reference, begin with its real compartments and existing food layout; otherwise stay with the package exterior.",
+          "action": "Move overhead across the actual layout without shifting, adding or removing any pieces.",
+          "detail": "Do not invent dividers, extra portions or a serving count. Keep the real compartment and piece shapes unchanged.",
+          "camera": "Controlled overhead slide with a slight tilt at the end to show depth where supported.",
+          "lighting": "Even diffused top light with soft shadows, avoiding artificial frost or blue tint.",
+          "closing": "Return to the full original layout with all visible compartments in frame.",
+          "audio": "Minimal instrumental bed; no tray clatter unless movement is shown."
+        },
+        {
+          "id": "food_frozen_v13",
+          "variation_number": 13,
+          "name": "Frost Detail Only When Present",
+          "hook": "If frost or ice crystals are genuinely visible, begin on that exact detail; if not, show the real surface or packaging finish without adding frost.",
+          "action": "Use a short macro move along the existing texture while the item remains still.",
+          "detail": "Never create ice crystals, condensation, freezer haze or a colder-looking colour grade absent from the source.",
+          "camera": "Slow macro slide with a gentle focus pull, then widen to identify the item.",
+          "lighting": "Neutral soft side light reveals only existing surface detail and preserves true colour.",
+          "closing": "Finish on the unchanged item with its actual surface appearance.",
+          "audio": "Soft instrumental music; no crackling ice or freezer effects."
+        },
+        {
+          "id": "food_frozen_v14",
+          "variation_number": 14,
+          "name": "Bag Window to Printed Front",
+          "hook": "If a clear window is present, start with the actual visible contents behind it; if the bag is opaque, begin on its genuine printed front.",
+          "action": "Move from the real window or printed panel toward the package silhouette without opening or revealing hidden contents.",
+          "detail": "Do not create a transparent window, alter visible food quantity or add product artwork or claims.",
+          "camera": "A slow diagonal slide ending in a level front view, with stable geometry.",
+          "lighting": "Controlled diffuse light manages film reflections and preserves package colours.",
+          "closing": "Hold the complete bag or pack in its original condition.",
+          "audio": "Low-volume instrumental bed; no opening or pouring sounds."
+        },
+        {
+          "id": "food_frozen_v15",
+          "variation_number": 15,
+          "name": "Piece Edge and Natural Shape",
+          "hook": "When individual frozen pieces are visible, select one actual edge or contour; if only the package is shown, use its real outline instead.",
+          "action": "Make a small camera arc around the chosen detail without touching, rotating or transforming the food.",
+          "detail": "Preserve irregularities and true shape. Do not add breading, filling, frost or ingredients not visible in the reference.",
+          "camera": "Close three-quarter arc transitioning to a medium shot of the piece or package.",
+          "lighting": "Soft side light defines the contour without making the product look frosted or cooked.",
+          "closing": "End with the chosen detail in context and the overall item recognisable.",
+          "audio": "Neutral instrumental music; no crunch, sizzle or cracking effects."
+        },
+        {
+          "id": "food_frozen_v16",
+          "variation_number": 16,
+          "name": "Front Label and Storage Symbol",
+          "hook": "If storage icons or preparation wording are visible, begin on the actual printed area; otherwise focus on a genuine graphic or label edge.",
+          "action": "Slide across the existing print and widen to show the complete package, keeping all wording unchanged.",
+          "detail": "Do not rewrite instructions, invent storage guidance or add food-safety or preparation claims.",
+          "camera": "Steady horizontal macro pass followed by a smooth pullback.",
+          "lighting": "Even glare-controlled light preserves text readability and true artwork colours.",
+          "closing": "Finish on the original package front with its genuine print visible.",
+          "audio": "Quiet instrumental music only; no voiceover or notification sounds."
+        },
+        {
+          "id": "food_frozen_v17",
+          "variation_number": 17,
+          "name": "Stack Depth and Contact Points",
+          "hook": "If the supplied view shows stacked or overlapping frozen pieces, reveal their real depth; otherwise present the single item or package without building a stack.",
+          "action": "Raise the camera gently from a low angle to a shallow overhead view while all pieces remain fixed.",
+          "detail": "Do not duplicate pieces or imply a particular portion size. Preserve the exact overlaps and gaps.",
+          "camera": "Slow low-to-high tilt with natural perspective and no wide-angle distortion.",
+          "lighting": "Soft side fill separates the existing layers with realistic contact shadows.",
+          "closing": "Hold on the complete original arrangement or package.",
+          "audio": "Understated instrumental music; no clatter or movement sounds."
+        },
+        {
+          "id": "food_frozen_v18",
+          "variation_number": 18,
+          "name": "Package Material Reflection Control",
+          "hook": "Show the actual package finish—matte, glossy or reflective only where visible—without adding cold effects or redesigning the artwork.",
+          "action": "Shift the camera a few degrees so natural reflections move across the material while the package stays still.",
+          "detail": "Do not invent metallic film, special coatings, condensation or premium material claims.",
+          "camera": "Short controlled lateral move followed by a steady three-quarter view.",
+          "lighting": "Large diffused sources keep reflections broad and restrained while preserving accurate colours.",
+          "closing": "Finish with the full package clearly visible and the label unobstructed.",
+          "audio": "Soft instrumental bed; no shimmer or whoosh effects."
+        },
+        {
+          "id": "food_frozen_v19",
+          "variation_number": 19,
+          "name": "Unchanged State Detail Tour",
+          "hook": "Establish whether the reference shows a sealed package or unpackaged frozen food, then choose one real detail in that same state.",
+          "action": "Move from a full view to the selected detail and back without cooking, thawing, opening or rearranging the product.",
+          "detail": "Do not show melting, steam, browning or any state change that is not already supplied in the reference.",
+          "camera": "One smooth push-in and pullback on a stable axis with consistent focus.",
+          "lighting": "Neutral soft lighting and matched exposure preserve the original state and colour.",
+          "closing": "Return to the exact opening arrangement for a clear final frame.",
+          "audio": "Clean low-volume instrumental music; no kitchen or freezer ambience unless present."
+        },
+        {
+          "id": "food_frozen_v20",
+          "variation_number": 20,
+          "name": "Three-Beat Frozen Product Showcase",
+          "hook": "Begin with the complete package or existing food arrangement, then choose two real visible details such as a label corner, tray layout or food contour.",
+          "action": "Cut between a full view and two close details, keeping the item in the same authentic state throughout.",
+          "detail": "No invented frost, cooking comparison, ingredients, preparation results, props or on-screen text.",
+          "camera": "Three stable matched shots—full item, genuine detail, and final three-quarter view—with natural perspective.",
+          "lighting": "Match white balance and exposure across cuts; avoid blue grading and false condensation.",
+          "closing": "End on the complete original item or package, centred and unobstructed.",
+          "audio": "A subtle instrumental beat may mark cuts; no sizzle, crackle or voiceover."
         }
       ]
     },
