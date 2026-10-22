@@ -19249,7 +19249,7 @@
       "subcategory_id": "beauty_body",
       "category_id": "beauty",
       "label": "🧼 Penjagaan badan",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "beauty_body_v01",
@@ -19370,6 +19370,126 @@
           "lighting": "Use neutral soft light and realistic contact shadows, with controlled reflections.",
           "closing": "End on a crisp full-product shot with no rendered text, added logo or extra props.",
           "audio": "Use restrained instrumental music and no unsupported sound effects."
+        },
+        {
+          "id": "beauty_body_v11",
+          "variation_number": 11,
+          "name": "Sidewall Contour and Bottle Silhouette",
+          "hook": "Start with the body-care container seen from a narrow side angle, revealing its actual width, curves and shoulder shape before the front label comes into view.",
+          "action": "Arc the camera slowly from the side to a front three-quarter view while the product remains stationary and unchanged.",
+          "detail": "Keep the real contour, cap height and base width accurate; do not slim, enlarge or reshape the package.",
+          "camera": "Use a controlled short arc at product height, keeping the whole container in frame and avoiding wide-angle distortion.",
+          "lighting": "A broad side source creates a gentle contour shadow while a soft front fill keeps the label legible.",
+          "closing": "Hold the side-to-front three-quarter angle with the full container and its silhouette clear.",
+          "audio": "Use a quiet, polished instrumental bed with no invented handling sounds."
+        },
+        {
+          "id": "beauty_body_v12",
+          "variation_number": 12,
+          "name": "Cap-to-Base Vertical Scan",
+          "hook": "Open at the top edge of the actual body-care package and trace its visible construction down toward the base, keeping the product identity consistent.",
+          "action": "Make one uninterrupted vertical camera scan from the real closure to the bottom edge; do not open or manipulate the item.",
+          "detail": "Reveal only visible joins, moulded contours, printed areas and base shape; do not invent batch text or hidden underside markings.",
+          "camera": "Use a slow vertical tilt with steady focus and enough overlap to preserve the package's proportions.",
+          "lighting": "Keep a soft frontal key and restrained side fill so small contours remain visible without harsh glare.",
+          "closing": "Settle into a full-package frame after the scan, with no part cropped.",
+          "audio": "Minimal instrumental music; no whoosh unless a very soft transition sound is explicitly desired."
+        },
+        {
+          "id": "beauty_body_v13",
+          "variation_number": 13,
+          "name": "Label Edge and Print Registration",
+          "hook": "Begin where the real printed label meets the container, showing its visible edge, alignment and relationship to the package shape without changing any wording.",
+          "action": "Slide the camera parallel to the label surface, then stop before the edge leaves frame; the package itself does not move.",
+          "detail": "Preserve every legible mark as supplied and do not sharpen it into invented lettering, replace text or add certification symbols.",
+          "camera": "Use a close lateral slider move at a shallow angle, then rack focus back to the full label area.",
+          "lighting": "Use even, glare-controlled light so printed details remain readable and the original colour balance stays stable.",
+          "closing": "Finish with the actual front label facing camera, framed with enough margin to show its placement.",
+          "audio": "Soft neutral music only; no voiceover making product claims."
+        },
+        {
+          "id": "beauty_body_v14",
+          "variation_number": 14,
+          "name": "Reflections Across a Curved Container",
+          "hook": "Show the real curved surface of the body-care container, using a controlled moving reflection to reveal its shape without implying a material or quality claim.",
+          "action": "Move the camera a few centimetres sideways while the product stays fixed, allowing only natural reflections to shift.",
+          "detail": "Keep the finish exactly as seen in the reference; do not add metallic shine, water droplets, sparkle or fake texture.",
+          "camera": "Use a compact side-to-side slider move with locked exposure and a medium-close composition.",
+          "lighting": "Place a large diffused source off-axis and flag direct glare from any glossy label or curved wall.",
+          "closing": "Stop at a clean three-quarter view where the real surface and main label are both visible.",
+          "audio": "Low-volume ambient instrumental; no synthetic shimmer effects."
+        },
+        {
+          "id": "beauty_body_v15",
+          "variation_number": 15,
+          "name": "Product Footprint and Stable Base",
+          "hook": "Start low at the actual base of the body-care package to show how it meets the surface, then reveal the complete item in its natural upright position.",
+          "action": "Keep the package still; lower the camera slightly and ease backward to reveal the base and full height.",
+          "detail": "Preserve the real base shape, contact shadow and proportions. Do not add a pedestal, alter the footprint or suggest stability testing.",
+          "camera": "Use a low, straight pullback with the lens kept level enough to avoid exaggerated height.",
+          "lighting": "A soft side key creates a believable contact shadow while a gentle fill preserves the darker base details.",
+          "closing": "Hold a balanced low three-quarter hero view with the base and top both visible.",
+          "audio": "Quiet instrumental music; no impact or placement sound because no handling is shown."
+        },
+        {
+          "id": "beauty_body_v16",
+          "variation_number": 16,
+          "name": "Readable Front Panel with Depth",
+          "hook": "Frame the original front panel squarely first, then introduce a slight angle that shows the package depth while keeping the real label readable.",
+          "action": "The camera shifts from straight-on to a small three-quarter angle; the package remains in its original state.",
+          "detail": "Retain exact label placement, print, colour and proportions. Do not add ingredient callouts, benefit badges or floating graphics.",
+          "camera": "Use a smooth micro-orbit of less than a quarter turn, maintaining consistent scale and avoiding text warping.",
+          "lighting": "Use balanced frontal diffusion and subtle side separation with no glare across important printed areas.",
+          "closing": "Return to a steady front three-quarter view where both the panel and container depth are clear.",
+          "audio": "A restrained modern instrumental track, with no speech or extra effects."
+        },
+        {
+          "id": "beauty_body_v17",
+          "variation_number": 17,
+          "name": "Packaging Negative-Space Reveal",
+          "hook": "Present the exact body-care item against a plain, uncluttered background with generous negative space, letting its real outline separate clearly from the scene.",
+          "action": "Begin with the product offset in the frame and make a slow lateral camera move until it sits in a balanced composition.",
+          "detail": "Do not introduce flowers, towels, skincare props, extra products or graphic elements; preserve the actual package and label.",
+          "camera": "Use a steady lateral slide and finish with deliberate empty space around the complete item.",
+          "lighting": "Use soft, even light and a subtle background gradient created by lighting only, not a digitally added halo.",
+          "closing": "Hold the product cleanly composed with every edge visible and no added text.",
+          "audio": "Gentle minimalist music with no environmental ambience."
+        },
+        {
+          "id": "beauty_body_v18",
+          "variation_number": 18,
+          "name": "Front and Side Colour Continuity",
+          "hook": "Reveal the front and side panels of the same body-care package in one continuous view, preserving the true colour and print across both surfaces.",
+          "action": "Move the camera from front to side without rotating or morphing the container; use only the angles physically visible from the reference.",
+          "detail": "Do not invent side-panel copy, ingredients or icons when they are not readable in the supplied reference.",
+          "camera": "Use a measured quarter-arc at constant distance and focus, keeping package edges straight and proportions realistic.",
+          "lighting": "Maintain fixed white balance and broad diffusion so the front and side do not appear to be different colours.",
+          "closing": "Stop at a three-quarter angle that clearly connects the front panel to the visible side.",
+          "audio": "Soft instrumental music only; no label-reading voiceover."
+        },
+        {
+          "id": "beauty_body_v19",
+          "variation_number": 19,
+          "name": "Natural Shadow Shape Study",
+          "hook": "Begin with the body's real shadow beside the package, then shift focus onto the exact product that casts it, without creating a dramatic or impossible silhouette.",
+          "action": "Perform a slow focus pull from the natural contact shadow to the front of the stationary item.",
+          "detail": "Keep the shadow consistent with the visible light direction and the package shape; do not add extra objects or imply a specific material.",
+          "camera": "Lock the framing and change focus smoothly from foreground shadow to the full product, keeping both within a realistic depth of field.",
+          "lighting": "Use one soft directional source with gentle fill, retaining a natural shadow rather than a hard artificial outline.",
+          "closing": "Finish with the package in crisp focus and its natural shadow grounding it on the surface.",
+          "audio": "Calm, low-volume instrumental music; no artificial swoosh or sparkle."
+        },
+        {
+          "id": "beauty_body_v20",
+          "variation_number": 20,
+          "name": "Reference-Matched Shelf-Level Showcase",
+          "hook": "Place the exact body-care item at shelf level only when the supplied reference supports that setting; otherwise retain its original plain surface and background.",
+          "action": "Track horizontally at the product's mid-height, revealing the front and one visible side without moving or duplicating the item.",
+          "detail": "Do not add other toiletries, labels, decorative objects or a multi-step routine; keep the package count and contents faithful to the reference.",
+          "camera": "Use a steady shelf-height tracking shot with a moderate focal length and a clear view of the complete package.",
+          "lighting": "Use soft practical-looking illumination with controlled reflections and unchanged package colour.",
+          "closing": "Stop on a clean front three-quarter view with the item unobstructed and its original details preserved.",
+          "audio": "Subtle lifestyle instrumental only; no bathroom ambience unless it is visibly supported."
         }
       ]
     },
