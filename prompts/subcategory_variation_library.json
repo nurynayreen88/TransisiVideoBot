@@ -21233,7 +21233,7 @@
       "subcategory_id": "food_bakery",
       "category_id": "food",
       "label": "🍰 Biskut / Bakeri",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "food_bakery_v01",
@@ -21354,6 +21354,126 @@
           "lighting": "Soft directional key and fill preserve the item's true colour and visible detail.",
           "closing": "Hold a clean hero frame with the whole item unobstructed.",
           "audio": "Understated instrumental music at low volume."
+        },
+        {
+          "id": "food_bakery_v11",
+          "variation_number": 11,
+          "name": "Crust Edge and Baked Surface",
+          "hook": "Open on the real crust or baked surface visible in the reference, using the package front instead if the bakery item is sealed.",
+          "action": "Track slowly along the existing edge and pull back to show the whole item without cutting or reshaping it.",
+          "detail": "Preserve the actual crust, crumb, toppings and browning; do not add flakes, seeds or ingredients that are not visible.",
+          "camera": "Macro lateral slide into a steady three-quarter hero view.",
+          "lighting": "Soft side light reveals real texture while keeping the original colour natural.",
+          "closing": "Hold on the complete unchanged bakery item or package.",
+          "audio": "Quiet instrumental music; no crunch sound unless a bite is visibly shown."
+        },
+        {
+          "id": "food_bakery_v12",
+          "variation_number": 12,
+          "name": "Layer Profile Reveal",
+          "hook": "If the reference genuinely shows pastry or cake layers, begin at the visible cross-section; otherwise use the item's real side profile.",
+          "action": "Move horizontally along the existing profile without slicing, separating or exposing hidden layers.",
+          "detail": "Do not invent fillings, cream, fruit or extra layers; preserve the supplied cross-section exactly.",
+          "camera": "Level close-up slide followed by a short pullback.",
+          "lighting": "Diffuse side lighting defines visible layers without oversaturating them.",
+          "closing": "Finish with the original item fully recognisable.",
+          "audio": "Soft instrumental bed; no cutting or utensil sounds."
+        },
+        {
+          "id": "food_bakery_v13",
+          "variation_number": 13,
+          "name": "Crumb Detail Only When Visible",
+          "hook": "If a cut surface or loose crumb is visible in the source, begin on that real detail; otherwise focus on the exterior texture.",
+          "action": "Use a restrained macro push-in and pull back while keeping the bakery item stationary.",
+          "detail": "Do not create a cut, expose an unseen interior or add crumbs and flakes that are absent from the reference.",
+          "camera": "Slow macro push-pull with stable focus and natural perspective.",
+          "lighting": "Neutral diffused light keeps crumb colour and texture authentic.",
+          "closing": "Return to a clean full-item view with no added debris.",
+          "audio": "Low-volume instrumental music only."
+        },
+        {
+          "id": "food_bakery_v14",
+          "variation_number": 14,
+          "name": "Glaze Reflection Pass",
+          "hook": "If glaze or icing is genuinely visible, start with its existing highlight; otherwise show the natural surface finish without adding shine.",
+          "action": "Shift the camera slightly so existing reflections move naturally across the surface.",
+          "detail": "Do not add syrup, icing, glaze, moisture or decorative toppings that are not present.",
+          "camera": "Short controlled arc ending in a front three-quarter view.",
+          "lighting": "Broad soft light controls highlights and preserves the real surface colour.",
+          "closing": "Hold on the unchanged bakery item.",
+          "audio": "Subtle instrumental music; no sparkle or magical effects."
+        },
+        {
+          "id": "food_bakery_v15",
+          "variation_number": 15,
+          "name": "Pastry Fold and Seam Study",
+          "hook": "Begin with a real fold, seam or crimp if visible; if not, select an authentic edge or contour of the bakery item.",
+          "action": "Trace the camera along the existing fold or edge without pressing, opening or deforming the product.",
+          "detail": "Keep folds, seams and shape unchanged; do not imply a filling or construction detail hidden from view.",
+          "camera": "Close diagonal slide with a gentle rack focus where appropriate.",
+          "lighting": "Soft grazing light reveals existing form without harsh shadows.",
+          "closing": "Widen to show the whole item in its original arrangement.",
+          "audio": "Quiet instrumental bed with no handling foley."
+        },
+        {
+          "id": "food_bakery_v16",
+          "variation_number": 16,
+          "name": "Bakery Pack Window and Label",
+          "hook": "If the packaging has a clear window, begin with the actual visible product through it; otherwise frame the genuine printed front.",
+          "action": "Move from the visible window or label detail to the complete package without opening it.",
+          "detail": "Do not invent transparency, hidden contents, shelf-life details, ingredients or promotional claims; keep all print unchanged.",
+          "camera": "Slow diagonal slide followed by a level full-package shot.",
+          "lighting": "Glare-controlled diffused light keeps packaging artwork and visible contents true to source.",
+          "closing": "Finish with the complete original package unobstructed.",
+          "audio": "Soft instrumental music; no wrapper sounds without visible handling."
+        },
+        {
+          "id": "food_bakery_v17",
+          "variation_number": 17,
+          "name": "Single Item Scale and Silhouette",
+          "hook": "Establish the real size and silhouette of the supplied bakery item or package before moving closer to one visible contour.",
+          "action": "Make a small camera arc while the item remains fixed in place.",
+          "detail": "Do not enlarge the product, duplicate pieces or add props for scale; preserve realistic proportions and quantity.",
+          "camera": "Natural three-quarter arc with no wide-angle distortion.",
+          "lighting": "Balanced soft light provides gentle contact shadows and accurate colour.",
+          "closing": "Return to the full item at its original scale.",
+          "audio": "Minimal instrumental music; no exaggerated whoosh."
+        },
+        {
+          "id": "food_bakery_v18",
+          "variation_number": 18,
+          "name": "Top Pattern and Decoration Pass",
+          "hook": "If seeds, scoring, piping or decoration are visible on top, begin with that exact pattern; otherwise show the real upper surface as supplied.",
+          "action": "Drift overhead across the existing pattern and tilt slightly to restore the item's full shape.",
+          "detail": "Do not add sesame, seeds, sugar, icing lines or decorative marks; keep spacing and count authentic.",
+          "camera": "Controlled overhead drift with a small tilt to a three-quarter view.",
+          "lighting": "Even top light with soft shadows keeps details readable and colour neutral.",
+          "closing": "Hold on the original full arrangement.",
+          "audio": "Low-key instrumental bed; no sprinkle or pouring sounds."
+        },
+        {
+          "id": "food_bakery_v19",
+          "variation_number": 19,
+          "name": "Serving Arrangement Without Re-styling",
+          "hook": "Begin with the bakery item exactly as arranged in the reference, whether individually presented, stacked or inside packaging.",
+          "action": "Move from the overall arrangement to one genuine visible detail, then return without moving any pieces.",
+          "detail": "Do not add plates, napkins, drinks, garnish, extra portions or serving props absent from the source.",
+          "camera": "One smooth push-in and pullback along a stable axis.",
+          "lighting": "Consistent soft lighting preserves the original arrangement and realistic shadows.",
+          "closing": "Match the opening composition for a clean final frame.",
+          "audio": "Understated instrumental music; no tableware sounds."
+        },
+        {
+          "id": "food_bakery_v20",
+          "variation_number": 20,
+          "name": "Three-Beat Bakery Showcase",
+          "hook": "Start with the complete supplied bakery item, then choose two distinct details that are genuinely visible, such as crust, fold, topping or package label.",
+          "action": "Cut between a full view and two close details, keeping the product unchanged throughout.",
+          "detail": "No invented ingredients, cut-open views, melting, steam, added text or product transformation.",
+          "camera": "Three stable matched shots—full item, authentic detail, and final three-quarter view—with natural perspective.",
+          "lighting": "Match white balance and exposure across cuts and preserve the true bakery colours.",
+          "closing": "End on the complete original item or package, centred and unobstructed.",
+          "audio": "A subtle instrumental beat may mark the cuts; no bite, crunch or kitchen effects unless shown."
         }
       ]
     },
