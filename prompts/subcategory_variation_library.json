@@ -20241,7 +20241,7 @@
       "subcategory_id": "food_drinks",
       "category_id": "food",
       "label": "🥤 Minuman",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "food_drinks_v01",
@@ -20362,6 +20362,126 @@
           "lighting": "Broad diffused light and accurate colour; keep highlights away from key printed information.",
           "closing": "Hold the full container centred and unobstructed for the final beat.",
           "audio": "Understated instrumental close; no speech or unsupported foley."
+        },
+        {
+          "id": "food_drinks_v11",
+          "variation_number": 11,
+          "name": "Glass Rim and Pouring Vessel",
+          "hook": "If the reference includes a drinking glass or serving vessel, open on its actual rim and the visible drink; otherwise frame the container's own opening or top edge without inventing a glass.",
+          "action": "Move the camera in a small controlled arc around the visible rim or top contour; do not pour, tilt or add liquid.",
+          "detail": "Preserve the actual vessel shape, liquid level and visible contents. Do not invent ice, garnish, foam or a second serving.",
+          "camera": "Use a close three-quarter view and a short arc, then widen to show the vessel or complete container.",
+          "lighting": "Soft side-backlight defines transparent edges while a gentle front fill preserves real colour and detail.",
+          "closing": "Hold the original arrangement with every visible vessel fully recognisable.",
+          "audio": "Quiet instrumental music; no clinks or pouring sounds unless the action is shown."
+        },
+        {
+          "id": "food_drinks_v12",
+          "variation_number": 12,
+          "name": "Liquid Surface at Rest",
+          "hook": "If the reference shows an open vessel with the liquid surface visible, begin at a shallow angle to that real surface; otherwise use the container's top contour.",
+          "action": "Keep the drink still and use a slow focus shift across the existing surface; do not stir, ripple, pour or create bubbles.",
+          "detail": "Do not fabricate foam, pulp, carbonation, layers or a meniscus that is not visible. Preserve the real fill level.",
+          "camera": "Use a locked close-up with a slight downward tilt, followed by a gentle pullback for context.",
+          "lighting": "Broad diffused light with a restrained side highlight; avoid making the liquid glow or changing its colour.",
+          "closing": "Finish with the visible surface in context with the real vessel.",
+          "audio": "Soft instrumental bed only; no bubbling or liquid movement effects."
+        },
+        {
+          "id": "food_drinks_v13",
+          "variation_number": 13,
+          "name": "Bottle Shoulder to Base Trace",
+          "hook": "Open on the actual transition from the bottle shoulder or upper body into its main form, adapting to the real shape of the drink package.",
+          "action": "Track slowly down the container from shoulder to base without rotating, squeezing or moving it.",
+          "detail": "Keep the package profile, seams and proportions unchanged; do not imply a grip feature or special bottle design unless visible.",
+          "camera": "A steady vertical tracking move with minimal perspective distortion, ending on a full-item frame.",
+          "lighting": "Use soft side fill to reveal curvature and a neutral key to preserve label colours.",
+          "closing": "Hold the full container standing naturally, with the shoulder and base both visible.",
+          "audio": "Low-volume instrumental music; no handling or bottle sounds."
+        },
+        {
+          "id": "food_drinks_v14",
+          "variation_number": 14,
+          "name": "Can Top and Pull Tab",
+          "hook": "If the drink is in a can and its top is visible, begin on the actual rim and pull tab; for other packaging, focus on its real top closure instead.",
+          "action": "Keep the package unopened and stationary while the camera slides across the top surface, then widens to the complete item.",
+          "detail": "Do not lift the tab, open the can, add droplets or imply a hiss. Preserve the genuine opening geometry and printed design.",
+          "camera": "Use a shallow overhead macro slide followed by a smooth pullback to a three-quarter view.",
+          "lighting": "Diffuse top light controls metallic reflections and a soft fill keeps markings and edges visible.",
+          "closing": "End on the unopened package in its original condition.",
+          "audio": "Quiet instrumental music only; no can-opening sound or fizz."
+        },
+        {
+          "id": "food_drinks_v15",
+          "variation_number": 15,
+          "name": "Label Wrap and Side Seam",
+          "hook": "Begin at the real edge where the label or printed sleeve meets the side or back of the container, if that seam is visible; otherwise follow a genuine side contour.",
+          "action": "Slide across the existing seam or print transition, revealing only areas actually visible in the reference.",
+          "detail": "Do not invent a barcode, ingredients list, nutrition facts or hidden copy. Keep artwork, alignment and colours unchanged.",
+          "camera": "Use a close horizontal track with stable focus, then ease out to include the front label and container outline.",
+          "lighting": "Broad diffused light with controlled reflections keeps the print legible without recolouring it.",
+          "closing": "Hold a three-quarter package view with the genuine seam or label edge visible.",
+          "audio": "Restrained instrumental music; no scanning beeps or voiceover."
+        },
+        {
+          "id": "food_drinks_v16",
+          "variation_number": 16,
+          "name": "Transparent Wall and Liquid Line",
+          "hook": "For a transparent container, begin where the visible liquid meets the container wall; if the package is opaque, use the real edge or surface finish instead.",
+          "action": "Move the camera a few degrees to show the existing liquid line through the wall, without changing the level or tilting the container.",
+          "detail": "Do not alter the fill amount, add bubbles or create a gradient that suggests unseen layers. Keep refraction plausible.",
+          "camera": "Use a close lateral move along the container wall followed by a medium shot showing the whole package.",
+          "lighting": "Soft side-backlight reveals genuine transparency, balanced with front fill to preserve the actual liquid colour.",
+          "closing": "End on the unchanged container with the visible liquid line only if it exists.",
+          "audio": "Soft instrumental bed; no pouring, sloshing or fizz effects."
+        },
+        {
+          "id": "food_drinks_v17",
+          "variation_number": 17,
+          "name": "Cap Texture and Grip Ridges",
+          "hook": "If the closure has visible ridges, grooves or texture, start with those real details; otherwise focus on a genuine seam or top edge.",
+          "action": "Make a short macro slide across the closure while it remains closed and untouched.",
+          "detail": "Do not invent tamper bands, child-safe mechanisms, grip performance or a particular seal type. Preserve the exact ridge pattern.",
+          "camera": "Use a close side angle with a slow focus pull across the visible texture, then pull back slightly.",
+          "lighting": "Soft grazing light reveals the real relief while avoiding harsh specular hotspots.",
+          "closing": "Finish with the closure in context with the full container.",
+          "audio": "Low-key instrumental music; no twisting or clicking sounds."
+        },
+        {
+          "id": "food_drinks_v18",
+          "variation_number": 18,
+          "name": "Reflections on Clear Drinkware",
+          "hook": "If clear drinkware appears in the reference, open on a genuine reflection along its rim or wall; if not, use the actual highlight on the drink package.",
+          "action": "Shift the camera subtly so reflections move naturally while all objects remain stationary.",
+          "detail": "Do not add ice, condensation, bubbles or decorative garnishes. Keep transparent edges and the liquid appearance faithful to the source.",
+          "camera": "Use a short side-to-front camera move and a stable close-medium composition.",
+          "lighting": "Large diffused sources create broad natural reflections; avoid glitter, lens flare or artificial glow.",
+          "closing": "Hold a clean view of the real vessel or container and its unchanged contents.",
+          "audio": "Soft contemporary instrumental music; no glass chimes or ice clinks."
+        },
+        {
+          "id": "food_drinks_v19",
+          "variation_number": 19,
+          "name": "Package Footprint and Standing Form",
+          "hook": "Start at table height to show how the actual drink container meets the surface, keeping its real base and outline visible.",
+          "action": "Raise the camera slowly from the base to the label and top, without sliding or lifting the container.",
+          "detail": "Do not distort the base, change the package height or imply capacity or stability specifications.",
+          "camera": "Use a low-to-mid vertical tilt with a natural lens perspective, finishing in a centred full view.",
+          "lighting": "Soft side lighting defines the base and body with realistic contact shadow and accurate colour.",
+          "closing": "End with the complete container resting naturally on its original surface.",
+          "audio": "Minimal instrumental bed; no placement or impact sounds."
+        },
+        {
+          "id": "food_drinks_v20",
+          "variation_number": 20,
+          "name": "Three-Stage Drink Package Tour",
+          "hook": "Establish the exact drink container first, then select two genuine visible features—such as the closure, printed artwork or visible liquid—only when present.",
+          "action": "Use three deliberate shots: full package, close detail of one real feature, and a final three-quarter full view. Keep the container unopened and unchanged.",
+          "detail": "Do not invent taste, ingredients, health benefits, temperature, serving suggestions or hidden label information.",
+          "camera": "Use stable matched framings with consistent scale, focus and perspective across all three shots.",
+          "lighting": "Match white balance and exposure between shots; retain accurate package colours and realistic highlights.",
+          "closing": "Return to the original full-container view and hold without added text or logos.",
+          "audio": "A subtle instrumental beat may mark the cuts; no speech, pour or opening effects."
         }
       ]
     },
