@@ -22225,7 +22225,7 @@
       "subcategory_id": "gadget_computer",
       "category_id": "gadget",
       "label": "💻 Komputer / Aksesori",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "gadget_computer_v01",
@@ -22346,6 +22346,126 @@
           "lighting": "Balanced soft studio light, controlled reflections and accurate colour.",
           "closing": "Hold the complete device centred and unobstructed.",
           "audio": "Soft modern instrumental close; no voiceover or system sounds."
+        },
+        {
+          "id": "gadget_computer_v11",
+          "variation_number": 11,
+          "name": "Laptop Screen Reflection Control",
+          "hook": "Open with the screen and bezel exactly as shown, keeping any visible screen content unchanged and legible.",
+          "action": "Make a gentle camera-angle shift to reveal the real bezel and screen surface; do not change apps, add windows or animate the display.",
+          "detail": "Preserve the source screen state, bezel thickness and visible camera or sensor placement. Do not infer resolution, refresh rate or panel type.",
+          "camera": "Use a slow shallow arc from three-quarter view to near-front view, keeping screen geometry rectangular and undistorted.",
+          "lighting": "Use broad diffused light to manage glare while retaining natural screen reflections and true colours.",
+          "closing": "Hold on the complete laptop with its screen state unchanged.",
+          "audio": "No typing sounds, notification tones or simulated interface audio."
+        },
+        {
+          "id": "gadget_computer_v12",
+          "variation_number": 12,
+          "name": "Keyboard Backlight Only If Visible",
+          "hook": "If keyboard illumination is visibly present in the reference, open on the lit keys; otherwise feature the unlit key layout without adding glow.",
+          "action": "Keep the keyboard static while the camera glides across the rows; never switch lighting on or off artificially.",
+          "detail": "Preserve exact legends, key spacing and the source lighting state. Do not add RGB effects or change keyboard layout.",
+          "camera": "Use a controlled macro slide across the keys, then widen to show the keyboard in context.",
+          "lighting": "Keep exposure balanced so any existing illumination remains realistic and key labels are not blown out.",
+          "closing": "End on a clear keyboard-and-palm-rest view faithful to the reference.",
+          "audio": "No typing foley or keyboard clicks unless a person visibly types and the audio setting supports it."
+        },
+        {
+          "id": "gadget_computer_v13",
+          "variation_number": 13,
+          "name": "Thin Edge and Chassis Profile",
+          "hook": "Begin with the actual side profile of the laptop or computer accessory, showing only the edges visible in the reference.",
+          "action": "Move the camera parallel to the edge without rotating or flexing the product.",
+          "detail": "Maintain real thickness, corner radius, seams and finish. Do not describe it as ultra-thin or lightweight without verified specifications.",
+          "camera": "Use a low, smooth lateral tracking move followed by a three-quarter pullback.",
+          "lighting": "Use soft edge lighting to define the silhouette without exaggerating thickness or reflections.",
+          "closing": "Finish with the side profile connected to a recognisable full-product view.",
+          "audio": "Keep the audio neutral; no fabricated hinge or chassis sounds."
+        },
+        {
+          "id": "gadget_computer_v14",
+          "variation_number": 14,
+          "name": "Webcam and Upper Bezel Detail",
+          "hook": "If a webcam or sensor is visible, begin with the actual upper bezel and its visible openings; otherwise focus on the real upper screen edge.",
+          "action": "Make a slow push-in and slight lateral shift without adding a camera indicator or changing screen content.",
+          "detail": "Preserve the number and placement of visible lenses, sensors and openings. Do not infer privacy shutter, face recognition or camera quality.",
+          "camera": "Use a steady close-up with a small parallax move, then widen to include the screen corners.",
+          "lighting": "Use even front fill to retain fine detail without producing a false glow in the lens.",
+          "closing": "Hold on the bezel detail with the screen and device still recognisable.",
+          "audio": "No shutter sounds, recording indicators or interface effects unless genuinely shown."
+        },
+        {
+          "id": "gadget_computer_v15",
+          "variation_number": 15,
+          "name": "Laptop Stand or Dock Only When Supplied",
+          "hook": "If a stand or dock appears in the reference, open with the computer and that exact support; otherwise show the computer in its original resting position.",
+          "action": "Keep the setup stationary; do not add a stand, raise the screen or connect cables not present in the source.",
+          "detail": "Preserve the actual support geometry and contact points. Do not imply docking compatibility or ports beyond visible evidence.",
+          "camera": "Use a slow three-quarter orbit that reveals the supported arrangement without changing the laptop angle.",
+          "lighting": "Use soft studio light with realistic contact shadows beneath the computer and any supplied stand.",
+          "closing": "End with the full original setup and all source-visible pieces in frame.",
+          "audio": "No connection tones or mechanical setup sounds."
+        },
+        {
+          "id": "gadget_computer_v16",
+          "variation_number": 16,
+          "name": "Mouse and Computer Pair",
+          "hook": "If a mouse is visible beside the computer, frame both exactly as supplied; otherwise do not introduce a mouse or another peripheral.",
+          "action": "Keep both items still and preserve their relative scale and placement throughout the camera move.",
+          "detail": "Do not animate a cursor, scroll wheel or mouse light. Do not imply a wireless connection or bundle inclusion unless shown.",
+          "camera": "Use an overhead-to-three-quarter drift that briefly highlights the peripheral, then restores the complete pair.",
+          "lighting": "Use neutral diffused light so small controls and surface finishes remain true to the reference.",
+          "closing": "Hold on the computer and only those peripherals actually shown.",
+          "audio": "No clicking or scrolling sounds unless the action is visibly performed and audio is supported."
+        },
+        {
+          "id": "gadget_computer_v17",
+          "variation_number": 17,
+          "name": "Laptop Lid Finish Sweep",
+          "hook": "Open on the actual lid finish and any visible branding, keeping the device in the same open or closed state as the source.",
+          "action": "Let a soft highlight travel across the lid through camera movement only; do not rotate the lid or make the logo glow.",
+          "detail": "Retain exact colour, texture, seams and branding. Do not invent metal, carbon fibre or fingerprint-resistant coatings.",
+          "camera": "Use a slow diagonal glide across the lid, then pull back to a clean three-quarter product view.",
+          "lighting": "Use controlled soft reflections that reveal the surface without shifting its colour or adding gloss.",
+          "closing": "Finish with the lid and overall computer shape clearly visible.",
+          "audio": "No brand jingle, logo animation or unsupported sound effects."
+        },
+        {
+          "id": "gadget_computer_v18",
+          "variation_number": 18,
+          "name": "Vent Pattern and Base Edge",
+          "hook": "If the underside or ventilation openings are visible, begin on that exact area; otherwise use a real lower chassis edge shown in the reference.",
+          "action": "Move along the visible pattern without flipping the computer or exposing unseen internal components.",
+          "detail": "Keep the number, shape and spacing of vents accurate. Do not add fan motion, heat haze or cooling claims.",
+          "camera": "Use a measured close lateral track followed by a wider edge view.",
+          "lighting": "Use gentle raking light to reveal existing openings without making them appear deeper or more numerous.",
+          "closing": "Hold on the original visible base or edge detail.",
+          "audio": "No fan noise or thermal effects unless directly supported by the source."
+        },
+        {
+          "id": "gadget_computer_v19",
+          "variation_number": 19,
+          "name": "Power Button and Fingerprint Area",
+          "hook": "Start on a visible power button or fingerprint reader only if present; otherwise feature the actual nearby control or keyboard corner.",
+          "action": "Keep the device powered state unchanged and do not press any control or simulate authentication.",
+          "detail": "Preserve the exact button shape, location and markings. Do not invent fingerprint, facial-recognition or power status indicators.",
+          "camera": "Use a steady macro push with a short lateral move, then widen to show the control in context.",
+          "lighting": "Use soft directional light to separate the control from the surrounding surface without adding a glow.",
+          "closing": "Finish with the control and nearby keyboard or chassis visible together.",
+          "audio": "No boot sounds, unlock effects or button clicks unless visibly supported."
+        },
+        {
+          "id": "gadget_computer_v20",
+          "variation_number": 20,
+          "name": "Computer and Original Packaging",
+          "hook": "If the reference includes the original box, sleeve or inserts, open with those exact items beside the computer; otherwise use only the computer and source-visible accessories.",
+          "action": "Keep all objects stationary; do not stage an unboxing or reveal unseen contents.",
+          "detail": "Preserve package text and graphics as supplied. Do not add a charger, manual, adapter or warranty badge not visible in the reference.",
+          "camera": "Begin with a clean wide composition, then slowly push toward the computer while keeping the packaging partly in frame.",
+          "lighting": "Use balanced studio lighting so packaging print stays undistorted and the computer finish remains accurate.",
+          "closing": "Pull back to the original complete arrangement and hold.",
+          "audio": "No paper rustle or unboxing sounds unless movement is visible and supported."
         }
       ]
     },
