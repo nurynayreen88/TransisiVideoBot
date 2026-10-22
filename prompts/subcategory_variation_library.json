@@ -19497,7 +19497,7 @@
       "subcategory_id": "beauty_tools",
       "category_id": "beauty",
       "label": "🪞 Alat kecantikan",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "beauty_tools_v01",
@@ -19618,6 +19618,126 @@
           "lighting": "Use neutral diffused lighting with realistic contact shadows and controlled reflections.",
           "closing": "End on a sharp full-product composition with no extra props, text or logo.",
           "audio": "Use low-volume instrumental music and no unsupported sound effects."
+        },
+        {
+          "id": "beauty_tools_v11",
+          "variation_number": 11,
+          "name": "Light Across the Working Surface",
+          "hook": "Open at a shallow angle to the tool's actual working surface—such as a roller, file, brush face or metal tip—choosing only the detail present in the reference. Keep the entire item identifiable and add no labels.",
+          "action": "Keep the tool still while the light and camera angle shift gently; do not simulate a treatment or make a moving part operate.",
+          "detail": "Reveal the genuine contours and surface marks that are visible. Do not infer a material, coating, hygiene benefit or performance result.",
+          "camera": "Use a slow quarter-arc of no more than a few degrees around the working end, then settle into a close three-quarter view.",
+          "lighting": "Move a broad diffused key slightly across the surface to reveal contour without harsh glare or a false metallic shine.",
+          "closing": "Hold a clear close view of the working end with part of the handle still visible.",
+          "audio": "Quiet instrumental bed; no scraping, buzzing or contact sounds without visible action."
+        },
+        {
+          "id": "beauty_tools_v12",
+          "variation_number": 12,
+          "name": "Scale and Form in the Hand",
+          "hook": "If a hand-held scale reference is appropriate, show the actual tool resting naturally in an adult hand; otherwise place it beside a plain, neutral object already present in the reference. Do not imply a size specification.",
+          "action": "The hand gently rotates the tool once to show its visible profile, without pressing buttons, opening compartments or demonstrating it on skin.",
+          "detail": "Keep the handle length, head size and all controls consistent. Do not add fingers over important details or suggest a fit claim.",
+          "camera": "Use a steady close-medium frame with a small tilt following the hand, then return to the full tool.",
+          "lighting": "Use soft front-side fill so the tool and hand remain evenly exposed and the product colour stays accurate.",
+          "closing": "Finish with the tool held still and its complete outline unobstructed.",
+          "audio": "Natural room tone and soft music; no artificial handling clicks."
+        },
+        {
+          "id": "beauty_tools_v13",
+          "variation_number": 13,
+          "name": "Control Markings in Focus",
+          "hook": "Begin on the real printed symbols, switch, dial or button layout if one is visible; if the tool has no controls, focus instead on a genuine seam or joining point.",
+          "action": "Keep the device switched off and stationary. Rack focus between adjacent visible markings without pressing anything or inventing a lit display.",
+          "detail": "Preserve every visible symbol and its position; do not add numbers, settings, certification marks or explanatory text.",
+          "camera": "Use a locked macro composition with a gentle focus pull, followed by a short pullback that reveals where the control sits on the tool.",
+          "lighting": "Use a broad reflection-free source to keep small markings legible without washing out their edges.",
+          "closing": "End with the real control area in focus and enough of the product visible for context.",
+          "audio": "Low instrumental music only; no beeps or power-on sounds."
+        },
+        {
+          "id": "beauty_tools_v14",
+          "variation_number": 14,
+          "name": "Folded Stand or Resting Position",
+          "hook": "If the reference visibly includes a stand, foldable handle, cap or resting position, start with the tool arranged exactly that way; otherwise show its natural resting position without adding a support.",
+          "action": "When a visible hinge or stand clearly allows it, show one small, plausible repositioning; otherwise keep the product still and let the camera do the reveal.",
+          "detail": "Do not invent foldability, locking mechanisms, storage functions or included stands. Keep all joints and components faithful to the source.",
+          "camera": "Start at table height, rise slowly to a slightly elevated three-quarter view, and keep the full tool in frame.",
+          "lighting": "Use soft side fill to define the resting contact points and avoid hard shadows that hide the product shape.",
+          "closing": "Hold on the stable resting arrangement, with no part cropped or floating.",
+          "audio": "Use a faint contact sound only if a real repositioning is visible; otherwise music only."
+        },
+        {
+          "id": "beauty_tools_v15",
+          "variation_number": 15,
+          "name": "Tip Alignment and Edge Profile",
+          "hook": "Frame the tool's genuine tip, edge, teeth or contact points from the front so their alignment is clear. Adapt the shot to the actual design rather than assuming every tool has a sharp or moving end.",
+          "action": "Keep the item stationary; make no cutting, squeezing, scraping or skin-contact demonstration.",
+          "detail": "Preserve the real spacing and outline of visible teeth, tips or rollers. Do not sharpen, multiply or reshape any component.",
+          "camera": "Move from a straight-on detail to a shallow side profile with a controlled slider move, then widen slightly for context.",
+          "lighting": "Use a soft strip of side light to define the outline while keeping reflective edges from clipping to white.",
+          "closing": "Finish on the actual end profile in crisp focus, with the handle connection visible.",
+          "audio": "No scraping or mechanical sounds; restrained instrumental music."
+        },
+        {
+          "id": "beauty_tools_v16",
+          "variation_number": 16,
+          "name": "Product Silhouette on a Quiet Surface",
+          "hook": "Show the complete beauty tool against a matte, neutral surface with enough separation to read its real outline. Use no decorative cosmetics, flowers or accessories unless they are part of the supplied reference.",
+          "action": "Keep the tool fixed while the camera makes a slow diagonal move from its handle toward its head; do not rotate or transform the item.",
+          "detail": "Let the visible silhouette, junctions and genuine details carry the shot; make no claims about durability, comfort or results.",
+          "camera": "Use a low three-quarter starting angle and a measured diagonal slide, finishing at a level view of the complete item.",
+          "lighting": "Use a large soft source and a gentle fill card effect; retain realistic contact shadows and accurate colour.",
+          "closing": "Leave the product fully visible in a clean, balanced composition.",
+          "audio": "A soft modern instrumental layer only, with no whoosh unless an actual transition is shown."
+        },
+        {
+          "id": "beauty_tools_v17",
+          "variation_number": 17,
+          "name": "Supplied Parts by Their Real Layout",
+          "hook": "If the reference shows a cable, cap, guard or additional head, begin with the exact supplied arrangement; if it shows a single tool, make the visible head and handle the focus instead.",
+          "action": "Use a slow camera pass between the actual components without moving, detaching or assembling them.",
+          "detail": "Keep the number, orientation and shape of supplied parts exact. Do not imply that an unshown accessory is included or compatible.",
+          "camera": "Use a top-down composition for clearly separated parts, then tilt gently to a low angle that shows the main tool's depth.",
+          "lighting": "Use even overhead diffusion and subtle side fill so parts remain distinct without heavy shadows.",
+          "closing": "Return to a single composed view containing the main tool and every genuinely supplied part.",
+          "audio": "Quiet music; no connector clicks or unboxing sounds unless that exact action is shown."
+        },
+        {
+          "id": "beauty_tools_v18",
+          "variation_number": 18,
+          "name": "Reflections Without Colour Shift",
+          "hook": "Open on the real finish of the tool—matte, glossy or reflective as shown—under neutral conditions. Preserve the reference colour and do not add glow, sparkle or a premium material effect.",
+          "action": "Move the camera a short distance sideways so natural reflections change while the product itself remains still.",
+          "detail": "Show only the finish and texture that are visible; do not identify an alloy, coating, waterproof rating or skin-safe property from appearance.",
+          "camera": "Use a controlled lateral slide at a shallow angle, ending in a stable three-quarter product view.",
+          "lighting": "Use large diffused sources and flags to manage reflections; avoid bright hotspots and dramatic coloured rim lights.",
+          "closing": "Hold a faithful view of the finish with the entire tool recognisable.",
+          "audio": "Soft instrumental music; no sparkle chimes or transformation effects."
+        },
+        {
+          "id": "beauty_tools_v19",
+          "variation_number": 19,
+          "name": "Head-to-Handle Continuity",
+          "hook": "Start close where the tool's head or working end meets its handle, following the actual shape of that connection without assuming it detaches.",
+          "action": "Track along the tool from the head to the handle in one continuous reveal; do not twist joints or demonstrate unsupported adjustments.",
+          "detail": "Maintain the true proportions and visible connection points. Do not add seams, detachable parts or ergonomic claims.",
+          "camera": "Use a smooth, slow longitudinal pan that ends in a full-product composition, keeping perspective distortion minimal.",
+          "lighting": "Use soft directional fill along the length of the tool so the head and handle remain equally readable.",
+          "closing": "Finish with the full tool laid or positioned as in the reference, sharp from end to end.",
+          "audio": "Clean low-volume instrumental music; no invented mechanism sounds."
+        },
+        {
+          "id": "beauty_tools_v20",
+          "variation_number": 20,
+          "name": "Quiet Final Inspection",
+          "hook": "Present the tool as it actually appears in the reference, then invite a closer visual inspection through framing alone—no slogans, text or added branding.",
+          "action": "Make one deliberate camera move from the overall form to the most distinctive visible feature, then pause without operating the tool.",
+          "detail": "Choose a real differentiating detail visible in the source, such as a head shape, grip pattern or control layout. Avoid unsupported claims and invented functions.",
+          "camera": "Begin with a centred full-product shot, execute one smooth push-in, and stop on a detail that remains recognisable.",
+          "lighting": "Use neutral, even illumination with realistic shadows and consistent white balance throughout.",
+          "closing": "Hold the detail for a beat, then cut back to the unchanged full tool for a clean end frame.",
+          "audio": "Use a subtle musical accent on the cut if needed; no voiceover or effects unless selected by the user."
         }
       ]
     },
