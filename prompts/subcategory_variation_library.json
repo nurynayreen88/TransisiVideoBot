@@ -9177,7 +9177,7 @@
       "subcategory_id": "bag_other",
       "category_id": "bag",
       "label": "📦 Beg lain",
-      "variation_count": 30,
+      "variation_count": 40,
       "variations": [
         {
           "id": "bag_other_v01",
@@ -9538,6 +9538,126 @@
           "lighting": "Keep white balance, shadows and brightness consistent across the cut.",
           "closing": "Hold the complete bag in the original frame for a calm, clear finish.",
           "audio": "One subtle musical accent is optional; avoid stacked sound effects."
+        },
+        {
+          "id": "bag_other_v31",
+          "variation_number": 31,
+          "name": "Silhouette Against a Plain Background",
+          "hook": "Let the bag's actual outline read clearly before showing any small details.",
+          "action": "Place the camera at a level, front three-quarter view and make a slow, shallow lateral move while the bag remains completely still.",
+          "detail": "Keep the outline faithful to the reference; do not widen, lengthen or reshape the bag.",
+          "camera": "Slow lateral move at product height with minimal perspective change.",
+          "lighting": "Use soft, even light that separates the outline without creating a fake rim or glow.",
+          "closing": "Finish on a steady three-quarter view with the full silhouette visible.",
+          "audio": "Low-key instrumental bed or clean silence; no dramatic whoosh."
+        },
+        {
+          "id": "bag_other_v32",
+          "variation_number": 32,
+          "name": "Seam Path Visual Inspection",
+          "hook": "Begin with the most clearly visible seam or stitched boundary in the reference.",
+          "action": "Track a short section of that existing seam, pause, then widen the view enough to show where the detail sits on the bag.",
+          "detail": "Do not add stitches, reinforce seams digitally or claim construction strength from appearance alone.",
+          "camera": "Controlled close tracking shot followed by a gentle pullback.",
+          "lighting": "Soft directional light reveals the real boundary without exaggerating thread or texture.",
+          "closing": "Hold the seam in context within the complete product design.",
+          "audio": "Quiet room tone or subtle music; no stitching sound effects."
+        },
+        {
+          "id": "bag_other_v33",
+          "variation_number": 33,
+          "name": "Top View Without Opening the Bag",
+          "hook": "Show the bag from a slightly elevated angle while keeping its visible form unchanged.",
+          "action": "Raise the camera gently from front view to a modest top-down angle, revealing only surfaces and openings already visible in the reference.",
+          "detail": "Do not open, unzip, fill or expose an unseen interior; maintain the exact product geometry.",
+          "camera": "Small controlled tilt from eye level to a modest elevated view, no orbit.",
+          "lighting": "Maintain consistent exposure so the top surface is not artificially brightened.",
+          "closing": "Return to a balanced elevated three-quarter composition.",
+          "audio": "Soft instrumental only; avoid transition effects."
+        },
+        {
+          "id": "bag_other_v34",
+          "variation_number": 34,
+          "name": "Visible Pocket Boundary Check",
+          "hook": "Frame a pocket or compartment only if it is clearly visible on the supplied bag.",
+          "action": "Hold on the visible pocket outline, then slowly widen to show its position relative to the bag body without opening it.",
+          "detail": "Never invent pocket count, storage capacity, hidden compartments or closure mechanisms.",
+          "camera": "Locked close framing followed by a slow, short pullback.",
+          "lighting": "Keep shadows natural so pocket edges remain legible but not artificially deep.",
+          "closing": "End with the visible pocket and the surrounding bag panel in one frame.",
+          "audio": "Minimal background music; no zipper or snap sounds unless actually shown."
+        },
+        {
+          "id": "bag_other_v35",
+          "variation_number": 35,
+          "name": "Handle Shape in Resting Position",
+          "hook": "Introduce the handles or carry points exactly as they rest in the reference image.",
+          "action": "Make a gentle camera arc of only a few degrees to reveal their visible shape while the bag and handles remain still.",
+          "detail": "Do not lift, flex, stretch or attach a handle unless the reference explicitly shows that action.",
+          "camera": "Tiny controlled arc around a stationary product; keep the handle geometry consistent.",
+          "lighting": "Use broad soft light to show shape without inventing material shine.",
+          "closing": "Settle into a full view where the carry points remain clearly visible.",
+          "audio": "Quiet instrumental or silence; no handling noises."
+        },
+        {
+          "id": "bag_other_v36",
+          "variation_number": 36,
+          "name": "Front-to-Side Proportion Comparison",
+          "hook": "Start with the clearest front view of the bag, keeping its complete outline in frame.",
+          "action": "Cut to a side view only if the side is represented in the reference; compare the two static views without morphing between them.",
+          "detail": "Do not infer exact dimensions or thickness from perspective, and do not create an unseen side panel.",
+          "camera": "Two stable cuts with natural perspective; no spinning product animation.",
+          "lighting": "Match brightness and white balance between both views.",
+          "closing": "Return to the clearest reference-supported view and hold.",
+          "audio": "A restrained transition tick is optional; no swoosh-heavy edit."
+        },
+        {
+          "id": "bag_other_v37",
+          "variation_number": 37,
+          "name": "Colour Blocks in Natural Light",
+          "hook": "Draw attention to the real colours or colour panels visible on the bag.",
+          "action": "Move slowly across the visible colour areas, then pause on a balanced full-product shot so the colours can be read together.",
+          "detail": "Preserve the original hue and pattern; do not recolour, boost saturation or add colour panels.",
+          "camera": "Slow, steady pan across existing visible areas, then a locked full view.",
+          "lighting": "Neutral, consistent light with accurate white balance and no dramatic colour gels.",
+          "closing": "Hold the whole bag with its original colour relationships intact.",
+          "audio": "Soft, unobtrusive music; no colour-change or magical effects."
+        },
+        {
+          "id": "bag_other_v38",
+          "variation_number": 38,
+          "name": "Product Scale With Neutral Reference",
+          "hook": "Show the bag alone first, using a stable camera distance and natural perspective.",
+          "action": "If a neutral scale reference is already present in the supplied image, keep it fixed in frame; otherwise continue with the bag alone and use no added props.",
+          "detail": "Never add a hand, person, ruler or everyday object solely to imply a size that has not been provided.",
+          "camera": "Locked medium product shot; avoid wide-angle distortion.",
+          "lighting": "Even light and realistic shadows, with no forced miniature or oversized look.",
+          "closing": "Finish on the undistorted full product view.",
+          "audio": "Clean silence or low-volume instrumental; no extra effects."
+        },
+        {
+          "id": "bag_other_v39",
+          "variation_number": 39,
+          "name": "Natural Shadow Consistency",
+          "hook": "Establish the bag with its existing shadow and surrounding background visible.",
+          "action": "Make a slow camera push-in while preserving the original shadow direction and shape; stop before the product is cropped.",
+          "detail": "Do not animate the shadow independently, add a floating effect or imply that the bag is levitating.",
+          "camera": "Gentle straight push-in with no orbit or artificial depth effect.",
+          "lighting": "Keep the source direction and shadow softness consistent throughout.",
+          "closing": "Hold a medium-wide composition with both bag and natural shadow visible.",
+          "audio": "Low-key music only; no cinematic impact sound."
+        },
+        {
+          "id": "bag_other_v40",
+          "variation_number": 40,
+          "name": "Reference-Framed Hero Hold",
+          "hook": "Open with a clean, complete view that closely matches the supplied product reference.",
+          "action": "Use a very slow push-in, then stop and hold long enough for viewers to inspect the bag's actual design without adding movement to the item.",
+          "detail": "Preserve all visible proportions, colour, labels and accessories; do not introduce extra contents or claims.",
+          "camera": "Subtle linear push-in with a stable horizon and no product morphing.",
+          "lighting": "Match the reference appearance and keep exposure steady from start to finish.",
+          "closing": "End on a composed hero frame with the full bag still visible.",
+          "audio": "Gentle, understated instrumental or silence; no loud reveal sting."
         }
       ]
     },
