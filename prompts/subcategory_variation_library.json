@@ -15257,7 +15257,7 @@
       "subcategory_id": "shoes_heels",
       "category_id": "shoes",
       "label": "👠 Kasut tumit",
-      "variation_count": 20,
+      "variation_count": 30,
       "variations": [
         {
           "id": "shoes_heels_v01",
@@ -15498,6 +15498,126 @@
           "lighting": "Use soft, neutral lighting and realistic shadows with no artificial glow.",
           "closing": "Finish on the same full-product composition as the opening.",
           "audio": "Respect selected music and narration choices; no invented sound effects or claims."
+        },
+        {
+          "id": "shoes_heels_v21",
+          "variation_number": 21,
+          "name": "Strap Path and Fastening Reveal",
+          "hook": "Open on the complete shoe at a three-quarter angle, with any visible strap and fastening clearly readable.",
+          "action": "Make a slow camera move toward the visible strap path, then pause on the fastening without opening, stretching or changing it.",
+          "detail": "Show only straps, buckles, loops or closures actually present. Do not add a fastening or claim adjustability if it is not evident.",
+          "camera": "Use a steady three-quarter product view followed by one close detail shot and a return to the full shoe.",
+          "lighting": "Keep soft even light so the shoe colour and small hardware remain true to the reference.",
+          "closing": "Finish with the unchanged complete shoe centred in frame.",
+          "audio": "Follow the selected audio setting; do not add buckle clicks or spoken product claims."
+        },
+        {
+          "id": "shoes_heels_v22",
+          "variation_number": 22,
+          "name": "Toe Shape Front Approach",
+          "hook": "Begin with a clear front view of the full shoe so its actual toe shape is immediately visible.",
+          "action": "Move the camera gently from the front toward a front three-quarter angle, revealing the toe outline without touching or reshaping the shoe.",
+          "detail": "Preserve the visible toe profile, opening, seams and decorations exactly. Do not label it pointed, square or rounded unless the shape is visibly clear.",
+          "camera": "Use a slow low-height push-in, then ease back to a stable full-shoe view.",
+          "lighting": "Use diffused frontal light with mild side fill and no glare that hides the toe edge.",
+          "closing": "Hold on the front three-quarter view with the whole shoe still visible.",
+          "audio": "Use only the chosen music or voice settings; no invented footsteps or claims."
+        },
+        {
+          "id": "shoes_heels_v23",
+          "variation_number": 23,
+          "name": "Heel Profile and Floor Contact",
+          "hook": "Show the whole shoe in side profile on a plain stable surface, making the visible heel outline easy to inspect.",
+          "action": "Slide the camera slowly along the side and lower slightly to show the heel's visible relationship to the sole and surface.",
+          "detail": "Keep the real heel shape and apparent proportions unchanged. Do not imply non-slip grip, balance or comfort from appearance alone.",
+          "camera": "Use a controlled side-level tracking move, ending with the heel and full shoe in one frame.",
+          "lighting": "Soft directional light should define the heel edge while keeping natural contact shadows.",
+          "closing": "End on a clean side profile with the shoe stationary.",
+          "audio": "Respect selected audio options; avoid fabricated heel taps or performance statements."
+        },
+        {
+          "id": "shoes_heels_v24",
+          "variation_number": 24,
+          "name": "Pair Alignment and Shape Match",
+          "hook": "Open with the actual pair arranged naturally, showing both shoes and their visible differences in angle.",
+          "action": "Make a slow lateral camera move across the pair, keeping both shoes in frame and avoiding any rearrangement that changes their presentation.",
+          "detail": "Preserve matching colour, visible design, heel type and all included components. Do not create a second shoe if only one is supplied in the reference.",
+          "camera": "Use a gentle horizontal slide with a brief centred full-pair hold.",
+          "lighting": "Maintain consistent soft light across both shoes so colour and finish appear uniform without artificial shine.",
+          "closing": "Hold the pair in a balanced composition, unchanged from the reference.",
+          "audio": "Use the selected audio settings only; no extra sound effects or spoken claims."
+        },
+        {
+          "id": "shoes_heels_v25",
+          "variation_number": 25,
+          "name": "Visible Surface Finish Study",
+          "hook": "Start with the full shoe under soft light, then let the camera approach one clearly visible surface area.",
+          "action": "Move slowly across the visible upper surface to reveal its real finish and reflections without rubbing, spraying or altering it.",
+          "detail": "Describe no material type unless confirmed. Preserve actual texture, sheen, colour and marks; never manufacture glitter, gloss or stitching.",
+          "camera": "Use a stable close pass with shallow but sufficient focus, then return to a full three-quarter view.",
+          "lighting": "Use broad controlled lighting that reveals existing texture without recolouring or over-polishing the product.",
+          "closing": "Finish with the complete shoe sharply visible and unchanged.",
+          "audio": "Follow chosen audio settings; no invented polishing sounds or material claims."
+        },
+        {
+          "id": "shoes_heels_v26",
+          "variation_number": 26,
+          "name": "Sole Edge and Heel Junction",
+          "hook": "Frame the whole shoe first, then draw attention to the visible side edge of the sole near the heel.",
+          "action": "Use a gradual camera tilt and short close-up to show the actual sole edge and heel junction; keep the product fixed in place.",
+          "detail": "Show only construction details visible from this angle. Do not invent tread, cushioning, reinforcement or hidden sole layers.",
+          "camera": "Use a controlled low-angle tilt with a short close-up, then a smooth return to the original composition.",
+          "lighting": "Soft side lighting should separate the sole edge from the background without deep artificial shadows.",
+          "closing": "Hold the full shoe at the original angle.",
+          "audio": "Use the selected soundtrack or voice settings; do not add artificial impact sounds."
+        },
+        {
+          "id": "shoes_heels_v27",
+          "variation_number": 27,
+          "name": "Opening Shape and Footbed View",
+          "hook": "Begin at a high three-quarter angle that shows the shoe opening and any visible footbed while retaining the overall silhouette.",
+          "action": "Raise the camera slightly and move closer to reveal the visible opening, then slowly restore the wider view.",
+          "detail": "Do not insert a foot or hand, pull the shoe open, or claim padding and fit. Show only the visible interior area supplied by the reference.",
+          "camera": "Use a gentle elevated push-in with stable focus, followed by a wide hero framing.",
+          "lighting": "Use soft overhead fill so the interior remains visible without brightening it unnaturally.",
+          "closing": "Return to a complete shoe view with the opening still unobstructed.",
+          "audio": "Follow selected audio settings and avoid invented comfort claims or handling sounds."
+        },
+        {
+          "id": "shoes_heels_v28",
+          "variation_number": 28,
+          "name": "Decorative Detail Close Pass",
+          "hook": "Reveal the complete shoe, then identify one decorative feature that is clearly visible in the reference.",
+          "action": "Make a slow close pass across that existing decoration and stop before the camera crops away the shoe's context.",
+          "detail": "Only feature an actual bow, gem, trim, cut-out or ornament if present. If none is visible, use a genuine seam or edge instead; never add decoration.",
+          "camera": "Use one stable close-up and a restrained pull-back to the full shoe.",
+          "lighting": "Keep reflections controlled so decorative elements remain realistic and retain their original colour.",
+          "closing": "Hold on the unchanged shoe in a three-quarter view.",
+          "audio": "Use the selected audio settings only; no sparkling effects unless explicitly chosen by the user."
+        },
+        {
+          "id": "shoes_heels_v29",
+          "variation_number": 29,
+          "name": "Minimal Studio Rotation Illusion",
+          "hook": "Start with the full shoe against a clean neutral background, showing its real front and side proportions.",
+          "action": "Create a gentle camera arc around the stationary shoe to reveal another visible angle; the shoe itself must not morph or rotate unnaturally.",
+          "detail": "Maintain the same heel height, toe profile, straps and surface details throughout. Do not reveal unseen features by inventing them.",
+          "camera": "Use a slow shallow arc from front three-quarter to side three-quarter, keeping the shoe centred and grounded.",
+          "lighting": "Use a consistent studio setup with soft shadows and stable white balance throughout the move.",
+          "closing": "Settle on a clear full-shoe hero angle without added graphics.",
+          "audio": "Respect the chosen soundtrack and speech settings; no extra transition sounds or claims."
+        },
+        {
+          "id": "shoes_heels_v30",
+          "variation_number": 30,
+          "name": "Quiet Luxury Final Hero Hold",
+          "hook": "Open with a composed full-shoe shot and a small amount of clean negative space around the product.",
+          "action": "Make a very slow push-in while keeping the entire shoe visible, then pause long enough for its actual silhouette and design to register.",
+          "detail": "Preserve the reference exactly, including visible colour, finish, heel form and decoration. Avoid unsupported luxury, quality or comfort claims.",
+          "camera": "Use a stable centred push-in with no fast cuts, dramatic spins or perspective distortion.",
+          "lighting": "Apply soft premium-style studio lighting while retaining realistic colour, texture and natural contact shadow.",
+          "closing": "Hold the complete shoe in a polished but realistic hero composition.",
+          "audio": "Use only selected audio settings; keep the ending clean without invented chimes or voiceover."
         }
       ]
     },
