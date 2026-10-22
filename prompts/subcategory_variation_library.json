@@ -22473,7 +22473,7 @@
       "subcategory_id": "gadget_smart",
       "category_id": "gadget",
       "label": "⌚ Jam pintar / Wearable",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "gadget_smart_v01",
@@ -22594,6 +22594,126 @@
           "lighting": "Balanced soft studio lighting with controlled reflections and true colour.",
           "closing": "Hold the complete wearable centred and unobstructed.",
           "audio": "Low-volume electronic instrumental close; no voiceover."
+        },
+        {
+          "id": "gadget_smart_v11",
+          "variation_number": 11,
+          "name": "Reflective glass edge reveal",
+          "hook": "Open on the real boundary between the display glass and case, choosing the visible edge that is clearest in the reference.",
+          "action": "Let a narrow reflection travel across the existing glass as the camera shifts slightly; keep the display content unchanged.",
+          "detail": "Preserve the actual bezel thickness, screen state, case shape and visible finish. Do not create extra rings, lights or markings.",
+          "camera": "Slow close-up tilt across the glass edge into a three-quarter view, with no geometry warping.",
+          "lighting": "A restrained moving softbox reflection, with glare controlled so the true display remains readable.",
+          "closing": "Pause on the authentic front-and-edge view.",
+          "audio": "Clean, quiet electronic instrumental; no digital chimes."
+        },
+        {
+          "id": "gadget_smart_v12",
+          "variation_number": 12,
+          "name": "Button press only when shown",
+          "hook": "If a finger and physical control are visible in the reference, begin with that same control; otherwise open on the control-free case profile.",
+          "action": "When a press is visibly supported, show one gentle realistic press and release; otherwise make a camera-only pass along the case.",
+          "detail": "Do not invent a response screen, menu, vibration, sound or function after the press.",
+          "camera": "Locked macro framing for any visible press, followed by a short lateral move.",
+          "lighting": "Soft side fill makes the genuine button shape clear without exaggerated highlights.",
+          "closing": "Return to the unchanged device at a clean three-quarter angle.",
+          "audio": "Low-volume instrumental music; no fabricated click or alert."
+        },
+        {
+          "id": "gadget_smart_v13",
+          "variation_number": 13,
+          "name": "Crown or rotating control detail",
+          "hook": "Feature a crown or rotating control only if that exact component is visible; if not, focus on the real side contour instead.",
+          "action": "Track a small arc around the visible control without turning or moving it unless the reference clearly depicts interaction.",
+          "detail": "Do not add a crown, dial markings, extra buttons or implied functions.",
+          "camera": "Tight controlled orbit of a few degrees, then a short pullback.",
+          "lighting": "Diffused edge light defines the existing control and case seam.",
+          "closing": "Hold on the true side detail, with the full device partly visible.",
+          "audio": "Subtle instrumental bed without mechanical sound effects."
+        },
+        {
+          "id": "gadget_smart_v14",
+          "variation_number": 14,
+          "name": "Screen-off premium stillness",
+          "hook": "When the reference display is off, begin with its genuine dark reflective surface; when it is on, preserve the supplied screen exactly.",
+          "action": "Use a slow push-in and a slight angle change to reveal the existing glass and bezel, with no screen activation.",
+          "detail": "Never switch screen state, add a watch face, or fabricate notifications and metrics.",
+          "camera": "Measured push-in from front view to close three-quarter detail.",
+          "lighting": "Broad soft reflection with a controlled highlight along the display edge.",
+          "closing": "End on the same real screen state and case proportions.",
+          "audio": "Minimal ambient instrumental; no startup tones."
+        },
+        {
+          "id": "gadget_smart_v15",
+          "variation_number": 15,
+          "name": "Link or strap texture pass",
+          "hook": "Start on the actual link pattern, perforations or strap surface that is visible; if no texture is evident, feature the band outline.",
+          "action": "Move parallel to the band surface at a consistent distance, then widen to show how it joins the device.",
+          "detail": "Keep every link, hole, seam and colour aligned with the reference; do not claim waterproofing or material type.",
+          "camera": "Low-angle macro tracking move with a natural focus transition to the case.",
+          "lighting": "Soft raking light brings out only real surface relief and texture.",
+          "closing": "Hold on the genuine band-to-case composition.",
+          "audio": "Quiet modern instrumental, without added handling sounds."
+        },
+        {
+          "id": "gadget_smart_v16",
+          "variation_number": 16,
+          "name": "Supplied packaging composition",
+          "hook": "If original packaging appears in the reference, begin with the wearable in that exact arrangement; if not, create no packaging and frame the device alone.",
+          "action": "Make a slow overhead-to-three-quarter camera move while keeping all supplied items stationary and in the same count.",
+          "detail": "Do not invent a box, manual, cable, warranty card, brand mark or accessory.",
+          "camera": "Gentle overhead drift into a stable three-quarter composition.",
+          "lighting": "Even diffused tabletop light with realistic contact shadows.",
+          "closing": "Finish with the same authentic product-and-packaging arrangement, if supplied.",
+          "audio": "Soft restrained instrumental; no unboxing sound effects."
+        },
+        {
+          "id": "gadget_smart_v17",
+          "variation_number": 17,
+          "name": "Scale-preserving tabletop orbit",
+          "hook": "Show the wearable resting on its actual supplied surface or stand, with its real proportions immediately apparent.",
+          "action": "Circle only a short distance around the stationary device; keep the band and case in contact with the surface as shown.",
+          "detail": "No floating product, oversized screen, unsupported accessories or changing strap geometry.",
+          "camera": "Low tabletop quarter-orbit followed by a gentle push-in.",
+          "lighting": "Soft studio key and a subtle natural contact shadow under the product.",
+          "closing": "Settle on a balanced three-quarter hero view with the full wearable in frame.",
+          "audio": "Low-key electronic instrumental, no voiceover."
+        },
+        {
+          "id": "gadget_smart_v18",
+          "variation_number": 18,
+          "name": "Band closure overview",
+          "hook": "When the clasp, buckle or fastening is visible, frame that exact closure first; otherwise begin at the band end that is actually shown.",
+          "action": "Pan from the closure toward the case without opening, fastening or resizing it.",
+          "detail": "Do not alter the closure type, number of holes, band length or fit; show only what the reference supports.",
+          "camera": "Slow close lateral pan that resolves into a wider full-product shot.",
+          "lighting": "Soft directional light preserves small edges without harsh metallic glints.",
+          "closing": "Finish with the real closure and device visible in one composition where possible.",
+          "audio": "Gentle instrumental bed; no invented clasp click."
+        },
+        {
+          "id": "gadget_smart_v19",
+          "variation_number": 19,
+          "name": "Two-angle continuity showcase",
+          "hook": "Use the clearest authentic front and side views available in the supplied reference; if only one view exists, stay with that view.",
+          "action": "Cut once between compatible genuine angles, matching orientation and scale so the wearable feels like the same physical item.",
+          "detail": "No morphing, spinning transformation, added features or changes to screen content between angles.",
+          "camera": "Two clean locked shots with a subtle push-in in the second shot, or a single restrained move when only one view exists.",
+          "lighting": "Consistent neutral lighting and colour balance across both angles.",
+          "closing": "Finish on the strongest reference-supported angle without cropping key parts.",
+          "audio": "A quiet musical accent at the cut; no synthetic transformation effect."
+        },
+        {
+          "id": "gadget_smart_v20",
+          "variation_number": 20,
+          "name": "Final detail-to-full-product reveal",
+          "hook": "Select one genuinely visible signature detail—display edge, band join, button, clasp or case curve—and open close on it.",
+          "action": "Pull back smoothly until the entire wearable and all reference-supplied parts are visible, keeping their arrangement and proportions intact.",
+          "detail": "Use only the selected visible detail; never add sensors, metrics, accessories, logos or feature claims.",
+          "camera": "One continuous macro-to-medium pullback with stable perspective and natural focus.",
+          "lighting": "Balanced soft light, accurate colour and controlled reflections across the display.",
+          "closing": "Hold a clear unobstructed full-product view for the final beat.",
+          "audio": "Soft modern instrumental outro; no alerts or voiceover."
         }
       ]
     },
