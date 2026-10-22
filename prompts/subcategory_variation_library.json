@@ -15257,7 +15257,7 @@
       "subcategory_id": "shoes_heels",
       "category_id": "shoes",
       "label": "👠 Kasut tumit",
-      "variation_count": 30,
+      "variation_count": 40,
       "variations": [
         {
           "id": "shoes_heels_v01",
@@ -15618,6 +15618,126 @@
           "lighting": "Apply soft premium-style studio lighting while retaining realistic colour, texture and natural contact shadow.",
           "closing": "Hold the complete shoe in a polished but realistic hero composition.",
           "audio": "Use only selected audio settings; keep the ending clean without invented chimes or voiceover."
+        },
+        {
+          "id": "shoes_heels_v31",
+          "variation_number": 31,
+          "name": "Toe Shape and Vamp Line",
+          "hook": "Toe Shape and Vamp Line: present the visible heel shoe design clearly and accurately.",
+          "action": "Begin at the visible toe shape and glide back toward the vamp.",
+          "detail": "Preserve the actual toe silhouette and visible upper design; add no decorative elements.",
+          "camera": "Use a slow controlled camera move, realistic perspective and safe margins.",
+          "lighting": "Use soft, neutral light with accurate colours and natural contact shadows.",
+          "closing": "End on a clear, steady view of the reference-matched shoe or pair.",
+          "audio": "Follow selected music, speech and sound-effect settings only."
+        },
+        {
+          "id": "shoes_heels_v32",
+          "variation_number": 32,
+          "name": "Heel Height Perspective",
+          "hook": "Heel Height Perspective: present the visible heel shoe design clearly and accurately.",
+          "action": "Use a restrained side-level move to show the heel profile that is visible in the reference.",
+          "detail": "Do not exaggerate heel height or reveal an unseen underside.",
+          "camera": "Use a slow controlled camera move, realistic perspective and safe margins.",
+          "lighting": "Use soft, neutral light with accurate colours and natural contact shadows.",
+          "closing": "End on a clear, steady view of the reference-matched shoe or pair.",
+          "audio": "Follow selected music, speech and sound-effect settings only."
+        },
+        {
+          "id": "shoes_heels_v33",
+          "variation_number": 33,
+          "name": "Strap Path Focus",
+          "hook": "Strap Path Focus: present the visible heel shoe design clearly and accurately.",
+          "action": "If a strap is visible, shift focus along its real path; otherwise focus on a visible seam or edge.",
+          "detail": "Do not add buckles, straps or fastenings absent from the reference.",
+          "camera": "Use a slow controlled camera move, realistic perspective and safe margins.",
+          "lighting": "Use soft, neutral light with accurate colours and natural contact shadows.",
+          "closing": "End on a clear, steady view of the reference-matched shoe or pair.",
+          "audio": "Follow selected music, speech and sound-effect settings only."
+        },
+        {
+          "id": "shoes_heels_v34",
+          "variation_number": 34,
+          "name": "Pair Detail-to-Whole",
+          "hook": "Pair Detail-to-Whole: present the visible heel shoe design clearly and accurately.",
+          "action": "Start close on one visible detail and pull back to reveal the supplied shoe or pair.",
+          "detail": "Do not duplicate a shoe or alter the pair arrangement.",
+          "camera": "Use a slow controlled camera move, realistic perspective and safe margins.",
+          "lighting": "Use soft, neutral light with accurate colours and natural contact shadows.",
+          "closing": "End on a clear, steady view of the reference-matched shoe or pair.",
+          "audio": "Follow selected music, speech and sound-effect settings only."
+        },
+        {
+          "id": "shoes_heels_v35",
+          "variation_number": 35,
+          "name": "Side Contour Sweep",
+          "hook": "Side Contour Sweep: present the visible heel shoe design clearly and accurately.",
+          "action": "Track slowly along the visible side profile from toe toward heel.",
+          "detail": "Keep the shoe stationary and maintain realistic proportions.",
+          "camera": "Use a slow controlled camera move, realistic perspective and safe margins.",
+          "lighting": "Use soft, neutral light with accurate colours and natural contact shadows.",
+          "closing": "End on a clear, steady view of the reference-matched shoe or pair.",
+          "audio": "Follow selected music, speech and sound-effect settings only."
+        },
+        {
+          "id": "shoes_heels_v36",
+          "variation_number": 36,
+          "name": "Surface Reflection Control",
+          "hook": "Surface Reflection Control: present the visible heel shoe design clearly and accurately.",
+          "action": "Use a small camera move to show the surface finish under soft light.",
+          "detail": "Only reproduce visible finish; do not add metallic shine, glitter or gloss.",
+          "camera": "Use a slow controlled camera move, realistic perspective and safe margins.",
+          "lighting": "Use soft, neutral light with accurate colours and natural contact shadows.",
+          "closing": "End on a clear, steady view of the reference-matched shoe or pair.",
+          "audio": "Follow selected music, speech and sound-effect settings only."
+        },
+        {
+          "id": "shoes_heels_v37",
+          "variation_number": 37,
+          "name": "Heel-to-Sole Junction",
+          "hook": "Heel-to-Sole Junction: present the visible heel shoe design clearly and accurately.",
+          "action": "Focus on the visible junction between heel and sole, then widen slightly.",
+          "detail": "Do not invent internal structure, grip or material claims.",
+          "camera": "Use a slow controlled camera move, realistic perspective and safe margins.",
+          "lighting": "Use soft, neutral light with accurate colours and natural contact shadows.",
+          "closing": "End on a clear, steady view of the reference-matched shoe or pair.",
+          "audio": "Follow selected music, speech and sound-effect settings only."
+        },
+        {
+          "id": "shoes_heels_v38",
+          "variation_number": 38,
+          "name": "Top Opening Reframe",
+          "hook": "Top Opening Reframe: present the visible heel shoe design clearly and accurately.",
+          "action": "Make a gentle elevated reframe of the visible opening and nearby upper.",
+          "detail": "Do not fabricate interior padding, insole marks or hidden labels.",
+          "camera": "Use a slow controlled camera move, realistic perspective and safe margins.",
+          "lighting": "Use soft, neutral light with accurate colours and natural contact shadows.",
+          "closing": "End on a clear, steady view of the reference-matched shoe or pair.",
+          "audio": "Follow selected music, speech and sound-effect settings only."
+        },
+        {
+          "id": "shoes_heels_v39",
+          "variation_number": 39,
+          "name": "Decorative Detail Context",
+          "hook": "Decorative Detail Context: present the visible heel shoe design clearly and accurately.",
+          "action": "Show a real decorative detail only if it is present, then restore the full shoe in frame.",
+          "detail": "Do not animate or change the actual decoration.",
+          "camera": "Use a slow controlled camera move, realistic perspective and safe margins.",
+          "lighting": "Use soft, neutral light with accurate colours and natural contact shadows.",
+          "closing": "End on a clear, steady view of the reference-matched shoe or pair.",
+          "audio": "Follow selected music, speech and sound-effect settings only."
+        },
+        {
+          "id": "shoes_heels_v40",
+          "variation_number": 40,
+          "name": "Balanced Final Silhouette",
+          "hook": "Balanced Final Silhouette: present the visible heel shoe design clearly and accurately.",
+          "action": "Hold a clean three-quarter silhouette with a tiny camera arc and steady finish.",
+          "detail": "Keep all visible product features unchanged and avoid unsupported claims.",
+          "camera": "Use a slow controlled camera move, realistic perspective and safe margins.",
+          "lighting": "Use soft, neutral light with accurate colours and natural contact shadows.",
+          "closing": "End on a clear, steady view of the reference-matched shoe or pair.",
+          "audio": "Follow selected music, speech and sound-effect settings only."
         }
       ]
     },
