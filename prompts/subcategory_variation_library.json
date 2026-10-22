@@ -21977,7 +21977,7 @@
       "subcategory_id": "gadget_audio",
       "category_id": "gadget",
       "label": "🎧 Audio / Earbuds",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "gadget_audio_v01",
@@ -22098,6 +22098,126 @@
           "lighting": "Use balanced neutral light with controlled reflections and consistent exposure.",
           "closing": "Hold a clear final product view with no text, watermark or extra logo.",
           "audio": "Respect the user's audio selection and actual generator support; do not claim the product is playing sound."
+        },
+        {
+          "id": "gadget_audio_v11",
+          "variation_number": 11,
+          "name": "Earbud Case Open-and-Closed Reveal",
+          "hook": "Open with the earbuds and case in the exact closed or open state shown in the reference, making the real product silhouette immediately clear.",
+          "action": "Keep the case state unchanged throughout the shot; do not animate a lid opening or closing unless that movement is explicitly shown in the source.",
+          "detail": "Preserve the actual hinge, case shape, earbud count and arrangement. Do not invent battery LEDs, magnets, charging status or hidden compartments.",
+          "camera": "Begin with a steady three-quarter view, then make a slow short push toward the case seam before easing back to the full set.",
+          "lighting": "Use broad soft light with restrained highlights on the case, retaining the reference colour and finish.",
+          "closing": "Hold on the complete case-and-earbuds arrangement exactly as supplied.",
+          "audio": "No lid click, pairing tone or status beep unless the action and audio are genuinely supported."
+        },
+        {
+          "id": "gadget_audio_v12",
+          "variation_number": 12,
+          "name": "Ear Cushion Texture Pass",
+          "hook": "For over-ear headphones, begin with the visible cushion and ear cup together; for another audio product, use its clearest visible soft or textured component only if present.",
+          "action": "Do not press, stretch, rotate or deform the product; let the camera movement reveal the surface detail.",
+          "detail": "Show only source-visible seams, perforations and texture. Do not claim memory foam, skin-friendly materials, comfort or noise isolation without verified evidence.",
+          "camera": "Use a slow macro glide across the real texture, then rack focus to the adjacent housing while keeping perspective natural.",
+          "lighting": "Use gentle side light to reveal texture without creating artificial shine or changing the material appearance.",
+          "closing": "Widen enough to reconnect the detail to the recognisable whole product.",
+          "audio": "Keep foley minimal; do not imply a touch or squeeze when none occurs."
+        },
+        {
+          "id": "gadget_audio_v13",
+          "variation_number": 13,
+          "name": "Cable Route and Connector",
+          "hook": "If the reference shows wired earphones, a speaker cable or a charging lead included with the product, start where the visible cable meets the device; otherwise use the actual visible connector area.",
+          "action": "Keep cable routing and connector position fixed; do not plug, unplug, coil or extend anything beyond the source image.",
+          "detail": "Preserve the exact connector shape and visible cable length. Never infer connector standards, compatibility or included accessories that are not shown.",
+          "camera": "Track slowly along the existing cable path toward the connector, then pull back to show how it belongs to the product.",
+          "lighting": "Use even neutral light so connector edges and cable contours remain clear without glare.",
+          "closing": "Finish with the connector and main device both readable in one composition.",
+          "audio": "No plugging clicks, electrical effects or charging sounds unless visibly supported."
+        },
+        {
+          "id": "gadget_audio_v14",
+          "variation_number": 14,
+          "name": "Speaker Port and Control Tour",
+          "hook": "Open on the speaker's real visible controls or port area, including enough of the enclosure to identify the product.",
+          "action": "Make a measured camera sweep across the existing controls without pressing buttons, lighting indicators or changing device state.",
+          "detail": "Keep button labels, port openings and grille placement faithful to the reference. Do not invent waterproof covers, extra ports or control functions.",
+          "camera": "Use a slow horizontal slider move, pause briefly on visible controls, then widen to the complete speaker.",
+          "lighting": "Use soft angled light to separate port edges from the casing while preserving realistic shadows.",
+          "closing": "Show the control area in context with the full enclosure, unchanged.",
+          "audio": "Do not add button sounds, power-up tones or music as if emitted by the speaker."
+        },
+        {
+          "id": "gadget_audio_v15",
+          "variation_number": 15,
+          "name": "Earbud Pair Symmetry",
+          "hook": "If two earbuds are visible, open with their exact real arrangement; if the product has a different form, compose its source-visible paired components without adding anything.",
+          "action": "Keep each component stationary and maintain its relative position; do not duplicate, flip or reposition an earbud.",
+          "detail": "Preserve left-right differences, markings and the true number of pieces. Do not add labels such as L/R unless they are visible in the source.",
+          "camera": "Use a restrained overhead drift into a shallow three-quarter angle, keeping both components in focus where possible.",
+          "lighting": "Use balanced diffuse light and soft contact shadows so small shapes remain legible.",
+          "closing": "Return to a clear view of the original pair or component arrangement.",
+          "audio": "No pairing chime or synthetic connection animation; follow the selected audio settings."
+        },
+        {
+          "id": "gadget_audio_v16",
+          "variation_number": 16,
+          "name": "Portable Speaker Scale in Hand",
+          "hook": "If a hand model is selected, introduce the speaker in a natural, secure hold; otherwise begin with the product resting on a plain surface at realistic scale.",
+          "action": "Keep the hand pose simple and anatomically plausible, with fingers supporting only the visible device; do not squeeze buttons or imply water exposure.",
+          "detail": "Maintain the product's true proportions relative to the hand. Do not add straps, clips or accessories absent from the reference.",
+          "camera": "Use a steady medium close-up with a subtle push-in, avoiding wide-angle distortion that makes the speaker appear larger.",
+          "lighting": "Use soft daylight with natural skin tones and accurate product colour.",
+          "closing": "Hold on the speaker at believable scale with its visible design unobstructed.",
+          "audio": "Do not simulate playback or claim volume, bass or battery performance."
+        },
+        {
+          "id": "gadget_audio_v17",
+          "variation_number": 17,
+          "name": "Charging Case Surface Reflection",
+          "hook": "Begin with the closed charging case or compact audio device as actually shown, using its real outline as the hero subject.",
+          "action": "Keep the device still on a clean reflective or matte surface chosen to suit the reference finish; never add a reflection that suggests a different shape or extra component.",
+          "detail": "Maintain exact seams, lid line, finish and markings. Do not create indicator lights or alter the case's open/closed state.",
+          "camera": "Make a slow low-angle slide across the front edge, then settle into a three-quarter view of the complete product.",
+          "lighting": "Use a broad soft source and restrained surface reflection, avoiding mirror-like effects unless the reference supports them.",
+          "closing": "Finish with the actual silhouette and surface finish clearly visible.",
+          "audio": "Use only selected background audio; no artificial lid or charging sounds."
+        },
+        {
+          "id": "gadget_audio_v18",
+          "variation_number": 18,
+          "name": "Headband Arc and Joint Detail",
+          "hook": "For over-ear headphones, open with the headband arc and its visible joint in the same frame; if this feature is absent, focus on the product's real structural connection instead.",
+          "action": "Keep the headband in its natural resting shape; do not fold, extend or flex the structure.",
+          "detail": "Show only visible joints, seams and adjustment notches. Do not imply metal construction, reinforced hinges or durability without evidence.",
+          "camera": "Follow the natural arc in a smooth short camera move and end with both the structural detail and ear cups identifiable.",
+          "lighting": "Use soft rim light to separate the outline from the background without changing the product colour.",
+          "closing": "Hold on the unchanged full headphone silhouette.",
+          "audio": "No hinge creaks or mechanical sounds unless an actual supported movement occurs."
+        },
+        {
+          "id": "gadget_audio_v19",
+          "variation_number": 19,
+          "name": "Original Box and Audio Set",
+          "hook": "If the original packaging appears in the reference, open with the box and audio product arranged exactly as shown; if packaging is absent, create a clean composition using only the supplied product pieces.",
+          "action": "Keep box, inserts and product still; do not create an unboxing action or reveal unseen contents.",
+          "detail": "Retain packaging text and graphics without rewriting them. Do not add manuals, adapters, cables or accessories that are not visible.",
+          "camera": "Start with the complete composition, then make one slow push toward the product while leaving enough packaging in frame for context.",
+          "lighting": "Use even soft studio light that keeps small packaging text undistorted and the product colour accurate.",
+          "closing": "Pull back to the original complete arrangement with every visible item accounted for.",
+          "audio": "No paper rustle, box opening or accessory handling sounds unless shown and supported."
+        },
+        {
+          "id": "gadget_audio_v20",
+          "variation_number": 20,
+          "name": "Matte-versus-Gloss Finish Contrast",
+          "hook": "Open on the real boundary between two visibly different finishes on the audio product, only if that contrast exists in the reference.",
+          "action": "Keep the product unchanged while the camera shifts slightly so light naturally reveals the existing surfaces.",
+          "detail": "Do not invent a material split or recolour matte areas as glossy. Preserve the actual finish, texture and seam placement.",
+          "camera": "Use a slow controlled angle change and a close-to-medium transition that makes the real finish contrast readable.",
+          "lighting": "Move a soft highlight gently across the surface without adding artificial glow or blown-out reflections.",
+          "closing": "End on a balanced product view where both visible finishes remain in context.",
+          "audio": "No unsupported feature claims or device sounds; respect selected audio and generator limits."
         }
       ]
     },
