@@ -15993,7 +15993,7 @@
       "subcategory_id": "shoes_running",
       "category_id": "shoes",
       "label": "🏃 Kasut larian",
-      "variation_count": 20,
+      "variation_count": 30,
       "variations": [
         {
           "id": "shoes_running_v01",
@@ -16234,6 +16234,126 @@
           "lighting": "Balanced neutral light, faithful colour and natural contact shadows.",
           "closing": "End on a crisp, uncluttered full-shoe frame with safe margins.",
           "audio": "Use the user's selected soundtrack, voice and effects only."
+        },
+        {
+          "id": "shoes_running_v21",
+          "variation_number": 21,
+          "name": "Rear Detail to Full Shoe",
+          "hook": "Rear Detail to Full Shoe: make the running shoe's real, visible design easy to read.",
+          "action": "Open on a clearly visible rear detail, then pull back to show the whole running shoe.",
+          "detail": "Do not invent heel structures, reflectors or labels.",
+          "camera": "Use a smooth controlled camera move, realistic perspective and full-product framing.",
+          "lighting": "Use soft, colour-accurate light and natural contact shadows.",
+          "closing": "Finish on a clear, steady view of the reference-matched shoe.",
+          "audio": "Follow the selected music, speech and sound-effect settings only."
+        },
+        {
+          "id": "shoes_running_v22",
+          "variation_number": 22,
+          "name": "Lace Rhythm Track",
+          "hook": "Lace Rhythm Track: make the running shoe's real, visible design easy to read.",
+          "action": "Track slowly along the existing lace path from the lower visible laces toward the top.",
+          "detail": "Keep lace layout and eyelets unchanged; do not retie or tug the laces.",
+          "camera": "Use a smooth controlled camera move, realistic perspective and full-product framing.",
+          "lighting": "Use soft, colour-accurate light and natural contact shadows.",
+          "closing": "Finish on a clear, steady view of the reference-matched shoe.",
+          "audio": "Follow the selected music, speech and sound-effect settings only."
+        },
+        {
+          "id": "shoes_running_v23",
+          "variation_number": 23,
+          "name": "Sole Edge Profile",
+          "hook": "Sole Edge Profile: make the running shoe's real, visible design easy to read.",
+          "action": "Follow the visible sole edge in a low side view.",
+          "detail": "Show only the visible edge; do not reveal hidden tread or make performance claims.",
+          "camera": "Use a smooth controlled camera move, realistic perspective and full-product framing.",
+          "lighting": "Use soft, colour-accurate light and natural contact shadows.",
+          "closing": "Finish on a clear, steady view of the reference-matched shoe.",
+          "audio": "Follow the selected music, speech and sound-effect settings only."
+        },
+        {
+          "id": "shoes_running_v24",
+          "variation_number": 24,
+          "name": "Toe Volume Perspective",
+          "hook": "Toe Volume Perspective: make the running shoe's real, visible design easy to read.",
+          "action": "Begin at a front three-quarter angle and move a little sideways to clarify the real toe shape.",
+          "detail": "Keep proportions faithful and avoid wide-angle distortion.",
+          "camera": "Use a smooth controlled camera move, realistic perspective and full-product framing.",
+          "lighting": "Use soft, colour-accurate light and natural contact shadows.",
+          "closing": "Finish on a clear, steady view of the reference-matched shoe.",
+          "audio": "Follow the selected music, speech and sound-effect settings only."
+        },
+        {
+          "id": "shoes_running_v25",
+          "variation_number": 25,
+          "name": "Upper-to-Heel Glide",
+          "hook": "Upper-to-Heel Glide: make the running shoe's real, visible design easy to read.",
+          "action": "Move from the visible upper toward the heel area in one calm camera glide.",
+          "detail": "Do not invent panels, materials or support features.",
+          "camera": "Use a smooth controlled camera move, realistic perspective and full-product framing.",
+          "lighting": "Use soft, colour-accurate light and natural contact shadows.",
+          "closing": "Finish on a clear, steady view of the reference-matched shoe.",
+          "audio": "Follow the selected music, speech and sound-effect settings only."
+        },
+        {
+          "id": "shoes_running_v26",
+          "variation_number": 26,
+          "name": "Pair Lead-In",
+          "hook": "Pair Lead-In: make the running shoe's real, visible design easy to read.",
+          "action": "If the reference shows a pair, glide from the nearer shoe to the second; otherwise frame the single shoe.",
+          "detail": "Do not duplicate a shoe or change the supplied arrangement.",
+          "camera": "Use a smooth controlled camera move, realistic perspective and full-product framing.",
+          "lighting": "Use soft, colour-accurate light and natural contact shadows.",
+          "closing": "Finish on a clear, steady view of the reference-matched shoe.",
+          "audio": "Follow the selected music, speech and sound-effect settings only."
+        },
+        {
+          "id": "shoes_running_v27",
+          "variation_number": 27,
+          "name": "Side Profile Lock",
+          "hook": "Side Profile Lock: make the running shoe's real, visible design easy to read.",
+          "action": "Hold the complete side profile while the camera makes a very small push-in.",
+          "detail": "Keep the shoe stationary and preserve its visible sole geometry.",
+          "camera": "Use a smooth controlled camera move, realistic perspective and full-product framing.",
+          "lighting": "Use soft, colour-accurate light and natural contact shadows.",
+          "closing": "Finish on a clear, steady view of the reference-matched shoe.",
+          "audio": "Follow the selected music, speech and sound-effect settings only."
+        },
+        {
+          "id": "shoes_running_v28",
+          "variation_number": 28,
+          "name": "Surface Focus Return",
+          "hook": "Surface Focus Return: make the running shoe's real, visible design easy to read.",
+          "action": "Shift focus from a real visible surface detail back to the complete shoe.",
+          "detail": "Do not create mesh, stitching or texture absent from the reference.",
+          "camera": "Use a smooth controlled camera move, realistic perspective and full-product framing.",
+          "lighting": "Use soft, colour-accurate light and natural contact shadows.",
+          "closing": "Finish on a clear, steady view of the reference-matched shoe.",
+          "audio": "Follow the selected music, speech and sound-effect settings only."
+        },
+        {
+          "id": "shoes_running_v29",
+          "variation_number": 29,
+          "name": "Grounded Three-Quarter Slide",
+          "hook": "Grounded Three-Quarter Slide: make the running shoe's real, visible design easy to read.",
+          "action": "Slide the camera a short distance at floor level around the visible three-quarter angle.",
+          "detail": "Do not bend the shoe, compress the sole or show an unseen underside.",
+          "camera": "Use a smooth controlled camera move, realistic perspective and full-product framing.",
+          "lighting": "Use soft, colour-accurate light and natural contact shadows.",
+          "closing": "Finish on a clear, steady view of the reference-matched shoe.",
+          "audio": "Follow the selected music, speech and sound-effect settings only."
+        },
+        {
+          "id": "shoes_running_v30",
+          "variation_number": 30,
+          "name": "Still Hero with Breathing Room",
+          "hook": "Still Hero with Breathing Room: make the running shoe's real, visible design easy to read.",
+          "action": "Start with the complete shoe and make a subtle pull-back for a spacious final composition.",
+          "detail": "Maintain the exact product identity and add no props, text or unverified claims.",
+          "camera": "Use a smooth controlled camera move, realistic perspective and full-product framing.",
+          "lighting": "Use soft, colour-accurate light and natural contact shadows.",
+          "closing": "Finish on a clear, steady view of the reference-matched shoe.",
+          "audio": "Follow the selected music, speech and sound-effect settings only."
         }
       ]
     },
