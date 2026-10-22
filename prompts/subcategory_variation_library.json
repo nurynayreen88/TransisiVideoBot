@@ -20985,7 +20985,7 @@
       "subcategory_id": "food_cooking",
       "category_id": "food",
       "label": "🍳 Bahan masakan / Sos",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "food_cooking_v01",
@@ -21106,6 +21106,126 @@
           "lighting": "Neutral soft light and accurate colour reproduction.",
           "closing": "Hold on the full original item, unobstructed.",
           "audio": "Low-volume instrumental close."
+        },
+        {
+          "id": "food_cooking_v11",
+          "variation_number": 11,
+          "name": "Pour Spout and Neck Profile",
+          "hook": "If the container has a visible pouring spout or shaped neck, begin with its actual outline; otherwise frame the genuine top edge or closure.",
+          "action": "Track from the spout or neck down to the main body without pouring, opening or tilting the container.",
+          "detail": "Do not invent a spout, pump, seal or dispensing function. Preserve the exact opening geometry and visible print.",
+          "camera": "Use a close diagonal slide followed by a steady full-item view.",
+          "lighting": "Soft side lighting defines the neck while front fill keeps labels legible.",
+          "closing": "Hold on the complete container with its original closure state preserved.",
+          "audio": "Quiet instrumental music; no pouring or cap sounds."
+        },
+        {
+          "id": "food_cooking_v12",
+          "variation_number": 12,
+          "name": "Jar Rim and Contents Boundary",
+          "hook": "If the reference shows an open jar with contents visible, start at the real rim and visible boundary; if sealed, use the actual lid-to-body seam instead.",
+          "action": "Make a small camera tilt around the rim or lid seam while the container remains untouched.",
+          "detail": "Do not invent inner seals, fill level, texture or ingredients hidden from view; do not open a sealed container.",
+          "camera": "A shallow overhead close-up transitioning into a three-quarter product frame.",
+          "lighting": "Diffused top-side light reveals the real edge without altering the appearance of the contents.",
+          "closing": "End in exactly the same open or closed state as the source.",
+          "audio": "Soft instrumental bed; no opening, stirring or pouring effects."
+        },
+        {
+          "id": "food_cooking_v13",
+          "variation_number": 13,
+          "name": "Label Curve and Container Shape",
+          "hook": "Open on the genuine label as it follows the container's curve, if visible; for an unlabelled or loose ingredient, trace its actual outline instead.",
+          "action": "Slide from the front panel toward the visible side without rotating or deforming the product.",
+          "detail": "Keep label text, artwork and proportions unchanged. Do not create hidden back-panel information or recipe claims.",
+          "camera": "Slow lateral move with constant focal length, ending at a natural three-quarter angle.",
+          "lighting": "Broad diffused light limits glare and keeps print and package colours accurate.",
+          "closing": "Hold on the real front panel with the container's side shape visible.",
+          "audio": "Low-volume neutral instrumental music; no voiceover."
+        },
+        {
+          "id": "food_cooking_v14",
+          "variation_number": 14,
+          "name": "Surface Level in Transparent Container",
+          "hook": "If the contents are visible through a transparent bottle or jar, frame the real level line; otherwise use the package's visible side contour.",
+          "action": "Move the camera a few degrees along the side while the container stays upright and stationary.",
+          "detail": "Do not alter the amount, colour, layering or texture of contents. Never create transparency in an opaque package.",
+          "camera": "Short side-to-front arc followed by a medium shot of the complete item.",
+          "lighting": "Soft back-side light only where plausible, balanced by front fill for accurate label colour.",
+          "closing": "End with the true visible level or exterior contour in context.",
+          "audio": "Quiet instrumental music; no sloshing or bubbling."
+        },
+        {
+          "id": "food_cooking_v15",
+          "variation_number": 15,
+          "name": "Dry Ingredient Grain Detail",
+          "hook": "If loose dry ingredients or spices are visible in the reference, begin on their actual grains or pieces; otherwise focus on the supplied package surface.",
+          "action": "Make a slow macro pass across the existing arrangement without stirring, sprinkling or adding ingredients.",
+          "detail": "Do not infer exact ingredient identity, purity, freshness or flavour from appearance. Keep the original quantity and shape unchanged.",
+          "camera": "Use a shallow macro track and gentle pullback to show the whole arrangement or package.",
+          "lighting": "Soft raking light reveals existing texture with natural colour and no over-saturation.",
+          "closing": "Hold on the genuine texture in context with the item.",
+          "audio": "Minimal instrumental music; no grinding, sprinkling or kitchen effects."
+        },
+        {
+          "id": "food_cooking_v16",
+          "variation_number": 16,
+          "name": "Bottle Base and Standing Form",
+          "hook": "Start at the real base of the cooking ingredient container, showing how it meets the existing surface.",
+          "action": "Raise the camera gradually from the base toward the label and top without lifting or sliding the item.",
+          "detail": "Preserve the exact base and package proportions. Do not imply volume, stability or material specifications.",
+          "camera": "A smooth low-to-mid tilt with a natural lens perspective and steady horizon.",
+          "lighting": "Soft side fill defines the base and retains a believable contact shadow.",
+          "closing": "Finish on the full container upright and unobstructed.",
+          "audio": "Soft instrumental bed; no placement or impact sounds."
+        },
+        {
+          "id": "food_cooking_v17",
+          "variation_number": 17,
+          "name": "Closure Texture and Seam",
+          "hook": "If a lid, cap, seal or spout is visible, begin with its genuine texture and seam; otherwise choose an actual package edge.",
+          "action": "Slide slowly across the existing detail without twisting, peeling, pressing or opening it.",
+          "detail": "Do not add safety bands, tamper seals, grooves or mechanisms that are not visible.",
+          "camera": "A close horizontal move followed by a small pullback to identify the full product.",
+          "lighting": "Grazing soft light defines the seam while fill prevents the label from falling into shadow.",
+          "closing": "Hold the detail with the package clearly identifiable and unchanged.",
+          "audio": "Quiet instrumental music; no click, peel or opening sounds."
+        },
+        {
+          "id": "food_cooking_v18",
+          "variation_number": 18,
+          "name": "Real Reflection and Surface Finish",
+          "hook": "Show the genuine finish of the bottle, jar, pouch or box, using only reflections and textures that are actually present.",
+          "action": "Shift the camera a few degrees so natural reflections move across the surface while the item stays still.",
+          "detail": "Do not infer material grade, freshness protection or durability from appearance. Avoid artificial shine and recolouring.",
+          "camera": "Use a controlled lateral slide into a three-quarter hero view.",
+          "lighting": "Large diffused sources and restrained side fill create natural highlights without obscuring text.",
+          "closing": "Finish with the full product visible and the real surface finish preserved.",
+          "audio": "Understated instrumental music; no sparkle or transformation effects."
+        },
+        {
+          "id": "food_cooking_v19",
+          "variation_number": 19,
+          "name": "Supplied Ingredient Set Layout",
+          "hook": "If the reference contains multiple cooking products or loose ingredients, begin with their exact arrangement; if only one item is shown, keep it as a single-product showcase.",
+          "action": "Track slowly across the supplied set without adding, removing or rearranging any components.",
+          "detail": "Do not invent recipe pairings, utensils, garnishes or ingredient relationships. Preserve the exact count and spacing.",
+          "camera": "Use a measured overhead or diagonal slide matched to the source angle.",
+          "lighting": "Even diffused light separates item edges and maintains realistic colour.",
+          "closing": "Return to the complete original arrangement with every supplied item visible.",
+          "audio": "Soft instrumental music; no kitchen ambience or handling sounds."
+        },
+        {
+          "id": "food_cooking_v20",
+          "variation_number": 20,
+          "name": "Three-Beat Ingredient Package Tour",
+          "hook": "Establish the exact cooking product in a full view, then select two real visible features such as a closure, printed panel, transparent wall or surface texture.",
+          "action": "Cut between a full view and two genuine close details while the product remains in its original state.",
+          "detail": "Do not add recipes, ingredients, taste claims, health claims, text overlays or a cooking demonstration.",
+          "camera": "Three stable framings with matched scale, natural perspective and consistent focus.",
+          "lighting": "Match white balance and exposure across the shots; preserve label colours and actual contents.",
+          "closing": "Return to the full original item and hold without added graphics.",
+          "audio": "A subtle musical pulse may mark the cuts; no narration or unsupported foley."
         }
       ]
     },
