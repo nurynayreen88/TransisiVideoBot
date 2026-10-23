@@ -1,7 +1,16 @@
 import unittest
-from prompt_engine import _category_specific_scenes
+from prompt_engine import _category_specific_scenes, build_prompt
 
 class SubtypeTests(unittest.TestCase):
+    def test_concise_split_continuity(self):
+        prompt = build_prompt('storyboard', 'Product name: BONIA', 'studio', 'slow dolly-in',
+                              'cinematic', 20, product_type='bag', product_subtype='bag_handbag',
+                              split=True, concise=True)
+        self.assertIn("PART 1 (10 SECONDS)", prompt)
+        self.assertIn("PART 2 (10 SECONDS)", prompt)
+        self.assertIn("Continue directly from Part 1's final frame", prompt)
+        self.assertNotIn("REUSABLE COMPONENT RULES", prompt)
+
     def test_handbag(self):
         scenes = _category_specific_scenes('bag', 'BONIA', 'bag_handbag')
         self.assertNotIn('WALLET', scenes[0][0])
