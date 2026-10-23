@@ -43,4 +43,8 @@ for source,r in records:
 summary={"master":sum(len(c["variations"]) for c in cats),"staging_files":len(files),"staging_records":len(records)-sum(len(c["variations"]) for c in cats),"unique_ids":len(seen),"errors":errors,"warnings":warnings}
 Path("klippo_audit_report.json").write_text(json.dumps(summary,indent=2,ensure_ascii=False),encoding="utf-8")
 print(json.dumps({"master":summary["master"],"staging_files":len(files),"staging_records":summary["staging_records"],"unique_ids":len(seen),"errors_count":len(errors),"warnings_count":len(warnings),"errors":errors[:120],"warnings":warnings[:100]},ensure_ascii=False))
+
+# Coverage audit: count distinct variations in master + all staging by subcategory.
+coverage=[{"subcategory_id":cat,"count":len(nums[cat]),"shortfall":max(0,50-len(nums[cat]))} for cat in order]
+print("COVERAGE_50_JSON="+json.dumps({"categories":len(coverage),"ready":sum(x["count"]>=50 for x in coverage),"below_50":[x for x in coverage if x["count"]<50],"total_shortfall":sum(x["shortfall"] for x in coverage),"distribution":coverage},ensure_ascii=False))
 if errors or warnings:raise SystemExit(1)
