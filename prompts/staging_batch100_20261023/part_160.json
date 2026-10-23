@@ -163,26 +163,26 @@
     {
       "id": "bag_sling_v96",
       "variation_number": 96,
-      "name": "Sling bag — Soft Motion 96",
-      "hook": "Let a soft lighting transition reveal the exact reference item; preserve all source-visible colours, markings and proportions.",
-      "action": "Use a measured lateral slider move; never animate unseen hardware, straps, compartments or features.",
-      "detail": "Highlight only the sling bag's reference-visible construction, seams, shape and supplied components; do not infer material, capacity or performance.",
-      "camera": "Stable waist-height perspective; avoid distortion and invented reverse views.",
-      "lighting": "Apply soft frontal key light with believable contact shadow and faithful product colour.",
-      "closing": "Resolve on the complete identical sling bag in a clean hero frame; no text, watermark, added branding or invented accessories.",
-      "audio": "Quiet atmospheric music; no unsupported spoken claims or artificial product sounds."
+      "name": "Editorial centering — bag_sling_v96",
+      "hook": "0–2s: Show the complete actual bag sling item with the precise source-visible shape, colour and supplied components. Begin a subtle horizontal camera translation; no text.",
+      "action": "2–6s: Use a subtle horizontal camera translation with camera motion only. Keep the item in its original stationary arrangement; do not invent styling, a model, handling or unseen sides.",
+      "detail": "6–8s: Emphasize only actually pictured straps, seams, zip, handle or surface finish where present. Do not invent storage capacity, interior, device fit, material, load rating or hidden compartments.",
+      "camera": "Film the bag sling item using a subtle horizontal camera translation at natural scale, limited to reference-supported planes.",
+      "lighting": "Balanced frontal soft fill without synthetic shine.",
+      "closing": "8–10s: Resolve to a balanced complete-product finish of the same exact original item. No added logo, caption or watermark.",
+      "audio": "Quiet tasteful instrumental; no invented zip sounds, footsteps, fabric handling, speech or unsupported product promises."
     },
     {
       "id": "bag_sling_v97",
       "variation_number": 97,
-      "name": "Sling bag — Studio Hero 97",
-      "hook": "Reveal the authentic silhouette through a gentle foreground shift; preserve all source-visible colours, markings and proportions.",
-      "action": "Use a stationary shot with a soft light sweep; never animate unseen hardware, straps, compartments or features.",
-      "detail": "Highlight only the sling bag's reference-visible construction, seams, shape and supplied components; do not infer material, capacity or performance.",
-      "camera": "Controlled overhead framing; avoid distortion and invented reverse views.",
-      "lighting": "Apply cool neutral ambient fill with believable contact shadow and faithful product colour.",
-      "closing": "Resolve on the complete identical sling bag in a clean hero frame; no text, watermark, added branding or invented accessories.",
-      "audio": "Gentle unobtrusive melody; no unsupported spoken claims or artificial product sounds."
+      "name": "Daylight study — bag_sling_v97",
+      "hook": "0–2s: Show the complete actual bag sling item with the precise source-visible shape, colour and supplied components. Begin a limited side-to-front drift; no text.",
+      "action": "2–6s: Use a limited side-to-front drift with camera motion only. Keep the item in its original stationary arrangement; do not invent styling, a model, handling or unseen sides.",
+      "detail": "6–8s: Emphasize only actually pictured straps, seams, zip, handle or surface finish where present. Do not invent storage capacity, interior, device fit, material, load rating or hidden compartments.",
+      "camera": "Film the bag sling item using a limited side-to-front drift at natural scale, limited to reference-supported planes.",
+      "lighting": "Soft overhead bounce and grounded shadow.",
+      "closing": "8–10s: Resolve to a true-colour whole product of the same exact original item. No added logo, caption or watermark.",
+      "audio": "Quiet tasteful instrumental; no invented zip sounds, footsteps, fabric handling, speech or unsupported product promises."
     },
     {
       "id": "bag_sling_v98",
@@ -223,26 +223,26 @@
     {
       "id": "bag_backpack_v51",
       "variation_number": 51,
-      "name": "Backpack — Daylight Frame 51",
-      "hook": "Frame the reference product in an uncluttered overhead composition; preserve all source-visible colours, markings and proportions.",
-      "action": "Use a short diagonal dolly with grounded parallax; never animate unseen hardware, straps, compartments or features.",
-      "detail": "Highlight only the backpack's reference-visible construction, seams, shape and supplied components; do not infer material, capacity or performance.",
-      "camera": "Stable waist-height perspective; avoid distortion and invented reverse views.",
-      "lighting": "Apply diffused studio daylight with believable contact shadow and faithful product colour.",
-      "closing": "Resolve on the complete identical backpack in a clean hero frame; no text, watermark, added branding or invented accessories.",
-      "audio": "Quiet atmospheric music; no unsupported spoken claims or artificial product sounds."
+      "name": "Original arrangement — bag_backpack_v51",
+      "hook": "0–2s: Show the complete actual bag backpack item with the precise source-visible shape, colour and supplied components. Begin a shallow supported front-to-high move; no text.",
+      "action": "2–6s: Use a shallow supported front-to-high move with camera motion only. Keep the item in its original stationary arrangement; do not invent styling, a model, handling or unseen sides.",
+      "detail": "6–8s: Emphasize only actually pictured straps, seams, zip, handle or surface finish where present. Do not invent storage capacity, interior, device fit, material, load rating or hidden compartments.",
+      "camera": "Film the bag backpack item using a shallow supported front-to-high move at natural scale, limited to reference-supported planes.",
+      "lighting": "Balanced frontal soft fill without synthetic shine.",
+      "closing": "8–10s: Resolve to a entire original configuration of the same exact original item. No added logo, caption or watermark.",
+      "audio": "Quiet tasteful instrumental; no invented zip sounds, footsteps, fabric handling, speech or unsupported product promises."
     },
     {
       "id": "bag_backpack_v52",
       "variation_number": 52,
-      "name": "Backpack — Clean Finish 52",
-      "hook": "Open on the reference item's actual profile and natural shadow; preserve all source-visible colours, markings and proportions.",
-      "action": "Use a slow pullback to the complete item; never animate unseen hardware, straps, compartments or features.",
-      "detail": "Highlight only the backpack's reference-visible construction, seams, shape and supplied components; do not infer material, capacity or performance.",
-      "camera": "Controlled overhead framing; avoid distortion and invented reverse views.",
-      "lighting": "Apply soft window illumination with believable contact shadow and faithful product colour.",
-      "closing": "Resolve on the complete identical backpack in a clean hero frame; no text, watermark, added branding or invented accessories.",
-      "audio": "Gentle unobtrusive melody; no unsupported spoken claims or artificial product sounds."
+      "name": "Clean finish — bag_backpack_v52",
+      "hook": "0–2s: Show the complete actual bag backpack item with the precise source-visible shape, colour and supplied components. Begin a stable medium-to-wide retreat; no text.",
+      "action": "2–6s: Use a stable medium-to-wide retreat with camera motion only. Keep the item in its original stationary arrangement; do not invent styling, a model, handling or unseen sides.",
+      "detail": "6–8s: Emphasize only actually pictured straps, seams, zip, handle or surface finish where present. Do not invent storage capacity, interior, device fit, material, load rating or hidden compartments.",
+      "camera": "Film the bag backpack item using a stable medium-to-wide retreat at natural scale, limited to reference-supported planes.",
+      "lighting": "Soft overhead bounce and grounded shadow.",
+      "closing": "8–10s: Resolve to a clean full-item hero of the same exact original item. No added logo, caption or watermark.",
+      "audio": "Quiet tasteful instrumental; no invented zip sounds, footsteps, fabric handling, speech or unsupported product promises."
     }
   ]
 }
