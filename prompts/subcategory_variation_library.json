@@ -26801,7 +26801,7 @@
       "subcategory_id": "accessory_hair",
       "category_id": "accessory",
       "label": "🎀 Aksesori rambut",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "accessory_hair_v01",
@@ -26922,6 +26922,126 @@
           "lighting": "LIGHTING: Subtle rim light only if it does not alter the visible product colour.",
           "closing": "CTA / HERO: End with the complete product in realistic scale and no visual transformation.",
           "audio": "AUDIO: Use a quiet transition accent only if it matches a visible camera or graphic movement."
+        },
+        {
+          "id": "accessory_hair_v11",
+          "variation_number": 11,
+          "name": "Clip Spring and Grip Detail",
+          "hook": "Open on the actual clip opening or fastening edge if visible; otherwise frame the clearest genuine curve or join of the hair accessory.",
+          "action": "Make a slow close pass across the visible fastening while the item remains still; do not open or flex it unless the supplied reference clearly shows that action.",
+          "detail": "Keep the real number and shape of clip parts, teeth, loops or joins exactly as shown. Do not invent a spring mechanism, grip strength or hidden component.",
+          "camera": "Locked macro framing with a short lateral slide, then a measured pullback to show the whole accessory.",
+          "lighting": "Soft side fill reveals real edges without creating false metallic shine or changing the item's colour.",
+          "closing": "Hold the full accessory with the fastening detail still visible and unobstructed.",
+          "audio": "Quiet light instrumental; no fabricated click or snapping sound."
+        },
+        {
+          "id": "accessory_hair_v12",
+          "variation_number": 12,
+          "name": "Ribbon or Loop Shape Study",
+          "hook": "If the accessory visibly includes a ribbon, bow, loop or curved band, begin with its real outline; otherwise feature the most distinctive visible shape.",
+          "action": "Let the camera trace one contour without moving or reshaping the accessory; no fluttering, tying or re-forming unless shown in the reference.",
+          "detail": "Preserve the exact loop count, folds, ends, pattern and proportions that are visible. Do not add ribbon tails, decorations or fabric claims.",
+          "camera": "Slow overhead-to-three-quarter drift with the entire item kept in frame.",
+          "lighting": "Broad diffused light shows the real folds and edges with natural shadows and true colour.",
+          "closing": "Settle on a complete view that makes the original silhouette easy to recognize.",
+          "audio": "Gentle instrumental bed; no magical sparkle effects."
+        },
+        {
+          "id": "accessory_hair_v13",
+          "variation_number": 13,
+          "name": "Teeth and Edge Inspection",
+          "hook": "When visible teeth, prongs or a comb-like edge are present, open close on that real edge; otherwise use a visible seam or outer contour.",
+          "action": "Track parallel to the edge and stop before any hidden side, keeping the accessory stationary.",
+          "detail": "Do not add teeth, prongs, grip pads or fastening parts, and do not claim that the item prevents slipping or damages less hair.",
+          "camera": "Controlled macro tracking move followed by a small pullback to locate the edge on the full product.",
+          "lighting": "Soft raking light defines the genuine edge without exaggerated shadows.",
+          "closing": "End with both the edge detail and enough of the whole item visible to establish scale.",
+          "audio": "Low-volume clean instrumental; no handling sounds when no handling is shown."
+        },
+        {
+          "id": "accessory_hair_v14",
+          "variation_number": 14,
+          "name": "Colour and Pattern Fidelity",
+          "hook": "Begin with the most readable real colour area or print on the accessory, then reveal its full shape without adding graphic overlays.",
+          "action": "Shift the camera gently across the surface while keeping the accessory and pattern unchanged.",
+          "detail": "Preserve actual motif placement, colour boundaries, spots, stripes or decoration only where present; do not create extra motifs or infer material.",
+          "camera": "Short horizontal slide from surface detail to a balanced full-product view.",
+          "lighting": "Neutral soft daylight with fixed white balance so the visible colour and pattern remain consistent.",
+          "closing": "Hold on the complete accessory with its genuine colour arrangement clearly readable.",
+          "audio": "Light modern instrumental; no synthetic colour-change or reveal effects."
+        },
+        {
+          "id": "accessory_hair_v15",
+          "variation_number": 15,
+          "name": "Wear Placement Only If Supported",
+          "hook": "If the reference already shows the accessory worn in hair, begin with that same placement; otherwise present the product alone on its supplied surface.",
+          "action": "For a reference-supported wearing view, show only a small natural head movement without changing the accessory's placement; otherwise use a camera-only move around the stationary item.",
+          "detail": "Do not add a person unless explicitly selected, invent a hairstyle, change the fastening, or imply comfort, hold strength or all-day performance.",
+          "camera": "Use a steady close-to-medium view for a worn reference, or a slow three-quarter slide for a standalone product.",
+          "lighting": "Soft natural-looking light preserves the accessory's real colour and, when present, natural skin tones.",
+          "closing": "Finish on the same reference-supported placement or the complete product alone.",
+          "audio": "Soft restrained instrumental; no voiceover unless separately selected by the user."
+        },
+        {
+          "id": "accessory_hair_v16",
+          "variation_number": 16,
+          "name": "Supplied Set Count Reveal",
+          "hook": "If the reference contains multiple matching hair accessories, begin with that exact arrangement; if only one item is shown, keep the scene focused on that single item.",
+          "action": "Move slowly across the supplied pieces without rearranging, duplicating or removing any item.",
+          "detail": "Maintain the exact visible count, size differences, colours and layout. Do not invent matching pieces, storage pouches or packaging.",
+          "camera": "Gentle overhead drift resolving into a high three-quarter composition.",
+          "lighting": "Even tabletop lighting with realistic contact shadows beneath the existing pieces.",
+          "closing": "Hold the full authentic set or single product clearly in frame.",
+          "audio": "Understated instrumental; no unboxing or object-drop effects."
+        },
+        {
+          "id": "accessory_hair_v17",
+          "variation_number": 17,
+          "name": "Thickness and Side Profile",
+          "hook": "Open at the real side profile or thickness of the accessory if visible; otherwise choose a genuine edge that can be seen without rotating into an unseen side.",
+          "action": "Make a small camera arc around the known profile, preserving the product's original position and shape.",
+          "detail": "Do not exaggerate thickness, add layered construction or claim durability, flexibility or material composition.",
+          "camera": "Low three-quarter macro move followed by a steady pullback to a recognizable full view.",
+          "lighting": "Diffused side light separates the actual profile from the background without a false rim glow.",
+          "closing": "Finish on the same authentic profile with the complete outline readable.",
+          "audio": "Quiet contemporary instrumental; no mechanical effects."
+        },
+        {
+          "id": "accessory_hair_v18",
+          "variation_number": 18,
+          "name": "Surface Texture Without Material Claims",
+          "hook": "Begin with a genuinely visible surface detail—such as a pattern, ridged area or smooth contour—only if the reference shows it clearly.",
+          "action": "Use a slow focus transition across the existing surface while the accessory remains still.",
+          "detail": "Show texture only as visible; do not label it as silk, metal, acetate, velvet or any other material unless confirmed by the reference.",
+          "camera": "Stable macro push-in and short pullback, with realistic focus and no artificial texture enhancement.",
+          "lighting": "Large diffused source keeps highlights controlled and avoids making a matte surface look glossy.",
+          "closing": "Hold on a balanced close view that still identifies the item as the same accessory.",
+          "audio": "Minimal soft instrumental; no artificial brushing or fabric sounds."
+        },
+        {
+          "id": "accessory_hair_v19",
+          "variation_number": 19,
+          "name": "Shadow Outline Reveal",
+          "hook": "Show the complete accessory in its original resting arrangement, letting its real outline create the opening composition.",
+          "action": "Shift the camera slightly so the natural contact shadow changes; do not make the accessory float, rotate by itself or change shape.",
+          "detail": "Preserve the original silhouette, visible fastener and supplied parts; add no props, decorative elements or text.",
+          "camera": "Slow low tabletop slide into a centred three-quarter product view.",
+          "lighting": "A broad soft source creates a natural shadow while retaining detail in both light and dark areas.",
+          "closing": "Pause on the complete product with a clean, uncluttered background.",
+          "audio": "Calm instrumental only; no whoosh unless a matching visible transition is selected."
+        },
+        {
+          "id": "accessory_hair_v20",
+          "variation_number": 20,
+          "name": "Detail-to-Full Accessory Finale",
+          "hook": "Choose one distinctive visible feature—the fastening, curve, loop, teeth, pattern or edge—and open close on that feature only when present.",
+          "action": "Pull back in one continuous move until the whole accessory is visible at realistic scale, keeping its orientation and all details consistent.",
+          "detail": "Do not add stones, charms, extra clips, branding or claims; preserve only features supported by the supplied reference.",
+          "camera": "Continuous macro-to-medium pullback with stable focus and natural perspective.",
+          "lighting": "Balanced soft studio light, accurate colour and realistic contact shadow.",
+          "closing": "Hold a clean full-product hero view for the final beat, with no captions or watermark.",
+          "audio": "Soft polished instrumental outro; no voiceover or invented handling sounds."
         }
       ]
     },
