@@ -409,7 +409,7 @@ def _category_specific_scenes(product_type, product, product_subtype=""):
             ("PLAUSIBLE BACKPACK HANDLING", "Show one natural lift or carry using existing straps; if the scene does not support it, move the camera only."),
             ("CTA / BACKPACK HERO", "Finish on the complete unchanged backpack with straps visible and no invented pockets or capacity claims.")
         ]
-    if product_type in {"home", "furniture", "baby"} and any(
+    if product_type in {"home", "furniture", "baby"} and (not subtype or subtype in {"home_furniture", "baby_sleep"}) and any(
         term in words for term in ("bed", "katil", "bedframe", "bed frame", "headboard")
     ):
         return [
