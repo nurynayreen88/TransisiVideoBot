@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - staging/klippo-part156-165-20261024
+      - audit/klippo-50-per-subcategory-20261024
   workflow_dispatch:
 jobs:
   full-audit:
