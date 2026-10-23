@@ -29281,7 +29281,7 @@
       "subcategory_id": "stationery_books",
       "category_id": "book_stationery",
       "label": "📚 Buku",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "stationery_books_v01",
@@ -29402,6 +29402,126 @@
           "lighting": "LIGHTING: Subtle rim light only if it does not alter the visible product colour.",
           "closing": "CTA / HERO: End with the complete product in realistic scale and no visual transformation.",
           "audio": "AUDIO: Use a quiet transition accent only if it matches a visible camera or graphic movement."
+        },
+        {
+          "id": "stationery_books_v11",
+          "variation_number": 11,
+          "name": "Cover-First Shelf Pull",
+          "hook": "Open on the book's actual front cover, framed squarely so its real title, artwork and colour are preserved without adding or rewriting any printed content.",
+          "action": "The camera eases away from the cover to reveal the whole book, including its visible spine and page block; the book itself stays still.",
+          "detail": "Keep the cover design, title lettering, illustration placement, spine width and page edges faithful to the reference. Do not invent awards, editions or endorsements.",
+          "camera": "Begin with a straight-on close view and make a slow, level dolly backward into a three-quarter product frame; avoid keystone distortion.",
+          "lighting": "Use soft, even studio light with a gentle side fill so cover print remains clear and glare-free.",
+          "closing": "Hold a steady three-quarter view of the complete book with the front cover unobstructed.",
+          "audio": "Quiet, polished instrumental bed; no page-turn or handling sound because the book does not move."
+        },
+        {
+          "id": "stationery_books_v12",
+          "variation_number": 12,
+          "name": "Page-Block Edge Detail",
+          "hook": "Start at the real outer page edges, showing their natural alignment and any visible colour or markings exactly as supplied.",
+          "action": "Slide slowly along the page block toward the cover corner, then widen just enough to identify the item as the same book.",
+          "detail": "Show only page edges, corners and cover layers that are actually visible. Keep pages closed and do not imply paper quality or thickness beyond what the image shows.",
+          "camera": "Use a controlled macro lateral slide parallel to the page block, followed by a short pullback; keep the edges in focus.",
+          "lighting": "A soft raking light reveals the page-edge contours without creating harsh shadows or changing the paper's apparent colour.",
+          "closing": "End with the page block and part of the original cover together in a crisp close-up.",
+          "audio": "Minimal ambient instrumental music, with no added page flutter or exaggerated effects."
+        },
+        {
+          "id": "stationery_books_v13",
+          "variation_number": 13,
+          "name": "Spine-to-Front Turn",
+          "hook": "Frame the book at a natural three-quarter angle where its real spine and front cover are both visible; preserve all printed lettering.",
+          "action": "If the book can stand safely, rotate the whole book a small amount on the surface from spine view toward the front cover; otherwise keep it fixed and let the camera make the arc.",
+          "detail": "Feature only the existing spine text, cover edges and binding visible in the reference; do not add publisher marks or decorative elements.",
+          "camera": "Make a slow, short orbit at book height, keeping the product centred and its proportions natural.",
+          "lighting": "Use broad diffused key light and soft fill to keep the spine readable and the cover free of blown highlights.",
+          "closing": "Settle on a front three-quarter hero angle showing the real spine and cover together.",
+          "audio": "Soft instrumental music with one subtle transition accent as the angle changes."
+        },
+        {
+          "id": "stationery_books_v14",
+          "variation_number": 14,
+          "name": "Overhead Cover Geometry",
+          "hook": "Begin in a clean top-down view of the original cover, keeping its full outline, artwork and text within frame.",
+          "action": "The camera glides diagonally a short distance across the cover, then stops without moving or opening the book.",
+          "detail": "Reveal the actual layout and visible corner condition only; do not add props, stickers, notes or imagined contents.",
+          "camera": "Use a true overhead angle with a smooth diagonal slider move and a gentle settle; keep lines straight and the cover fully visible.",
+          "lighting": "Even overhead diffusion prevents glare and maintains consistent colour across the cover.",
+          "closing": "Finish on a centred overhead composition with the complete cover and edges visible.",
+          "audio": "Light, unobtrusive instrumental music; no voice-over or fabricated handling sounds."
+        },
+        {
+          "id": "stationery_books_v15",
+          "variation_number": 15,
+          "name": "Open-Page Continuity",
+          "hook": "When the supplied reference shows the book open, begin with the real visible spread and preserve its printed layout; if it is closed, begin on the cover and do not open it.",
+          "action": "For an already-open book, let the camera move gently from the page margin toward the centre fold without turning pages; for a closed book, use a slow cover detail push-in instead.",
+          "detail": "Keep all visible text, diagrams and illustrations unchanged and undistorted. Never generate readable content that is absent from the reference.",
+          "camera": "Use a shallow, controlled push-in along the page plane, keeping the spine or centre fold natural and avoiding extreme macro distortion.",
+          "lighting": "Soft cross-lighting reduces page glare and retains legibility without flattening the printed detail.",
+          "closing": "Hold on the original page spread or cover, matching the starting state of the product.",
+          "audio": "Low-volume calm instrumental music; no narration or artificial page-turn sound."
+        },
+        {
+          "id": "stationery_books_v16",
+          "variation_number": 16,
+          "name": "Corner and Finish Inspection",
+          "hook": "Open on one genuine cover corner, showing its actual cut, edge and visible finish before revealing more of the book.",
+          "action": "The camera tracks from the corner along one cover edge and eases out to show the full item; do not bend or press the cover.",
+          "detail": "Show only real corners, seams, wear or surface details present in the reference. Do not claim durability, waterproofing or premium materials.",
+          "camera": "Start with a close-up and make a measured edge-following slide into a medium product shot, maintaining realistic perspective.",
+          "lighting": "Use a soft side light to define the edge while retaining accurate cover colour and surface appearance.",
+          "closing": "Finish with the complete book in view and the inspected corner still visible.",
+          "audio": "Clean, restrained instrumental bed with no added tactile sound effects."
+        },
+        {
+          "id": "stationery_books_v17",
+          "variation_number": 17,
+          "name": "Stack Height and Scale",
+          "hook": "If the reference contains a stack of books, open at the real stack profile; if it shows one book, frame that single item alone without duplicating it.",
+          "action": "Move laterally across the visible page blocks or book edges, then reveal the original arrangement in full without adding or removing books.",
+          "detail": "Preserve the exact number of items, relative sizes, cover designs and stack order shown. Do not imply a bundle or quantity that the reference does not support.",
+          "camera": "Use a low three-quarter slider move at the height of the page blocks, ending in a wider view of the unchanged arrangement.",
+          "lighting": "Soft directional light separates the visible layers with natural shadows and consistent colour.",
+          "closing": "Hold on the complete original arrangement so each visible book remains identifiable.",
+          "audio": "Gentle instrumental music; avoid impacts or stacking sounds because no items are handled."
+        },
+        {
+          "id": "stationery_books_v18",
+          "variation_number": 18,
+          "name": "Natural Desk Context",
+          "hook": "Place the original book as the clear subject in a tidy, neutral desk setting while keeping its cover and proportions faithful to the reference.",
+          "action": "The camera glides in from a slightly wider desk view to the book; any background objects must remain minimal and must not suggest included accessories.",
+          "detail": "Do not place pens, bookmarks, glasses or other props against the book unless they are present in the supplied reference. Keep the real cover artwork unchanged.",
+          "camera": "Begin with a restrained environmental frame and make a smooth forward dolly to a clean three-quarter product view.",
+          "lighting": "Soft window-style light creates a natural desk shadow while keeping the printed cover evenly exposed.",
+          "closing": "End with the book dominant in frame and the surrounding desk kept secondary.",
+          "audio": "Warm, subtle instrumental music without speech, page sounds or promotional claims."
+        },
+        {
+          "id": "stationery_books_v19",
+          "variation_number": 19,
+          "name": "Title-to-Whole Reveal",
+          "hook": "Begin close enough to show a genuine portion of the printed title or cover artwork, without cropping letters into misleading fragments.",
+          "action": "Pull back slowly until the complete cover is visible, preserving the exact wording and illustration rather than replacing or embellishing them.",
+          "detail": "Keep all printed text and artwork faithful to the reference. If the title is not readable in the source, focus on the visible artwork instead of inventing text.",
+          "camera": "Use a straight, stable pullback from close detail to a full-cover frame, with focus shifting gently to keep the design clear.",
+          "lighting": "Use neutral diffused lighting to preserve ink colours and prevent specular glare across the cover.",
+          "closing": "Hold on the full front cover, square to camera and entirely inside the frame.",
+          "audio": "Soft modern instrumental music at low volume; no voice-over or added sound effects."
+        },
+        {
+          "id": "stationery_books_v20",
+          "variation_number": 20,
+          "name": "Quiet Hero Rotation",
+          "hook": "Present the book as a complete hero product from a front three-quarter angle, with its real cover and visible page edges clearly established.",
+          "action": "The camera makes a small, slow arc around the stationary book, revealing the cover depth without changing the book's shape or inventing unseen features.",
+          "detail": "Keep the original cover, spine, page block and proportions consistent throughout; do not reveal a fabricated back cover or printed details that are not shown.",
+          "camera": "Perform a subtle 10–15 degree camera arc at product height, then settle into a locked hero frame with natural perspective.",
+          "lighting": "Balanced soft key and fill light maintain readable cover detail and a gentle contact shadow throughout the move.",
+          "closing": "Finish on a composed, still three-quarter view with the front cover as the focal point.",
+          "audio": "A restrained instrumental finish with a soft chime at the final hold; no spoken claims."
         }
       ]
     },
