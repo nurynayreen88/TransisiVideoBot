@@ -28041,7 +28041,7 @@
       "subcategory_id": "toy_building",
       "category_id": "toy",
       "label": "🧱 Blok binaan",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "toy_building_v01",
@@ -28162,6 +28162,126 @@
           "lighting": "LIGHTING: Soft window light with natural shadows; preserve the reference colour.",
           "closing": "CTA / HERO: End on a clear three-quarter product view without revealing unseen surfaces.",
           "audio": "AUDIO: Use a quiet transition accent only if it matches a visible camera or graphic movement."
+        },
+        {
+          "id": "toy_building_v11",
+          "variation_number": 11,
+          "name": "Build Sequence Overview",
+          "hook": "HOOK: Open with the complete supplied building set and its visible pieces arranged clearly, without adding parts.",
+          "action": "Show a short, orderly sequence of assembling only the connections visibly supported by the set, then return to the completed arrangement if one is shown in the reference.",
+          "detail": "DETAIL: Keep piece shapes, colours and quantities faithful to the reference; do not invent connectors, instructions or extra components.",
+          "camera": "CAMERA: Use a locked three-quarter tabletop view for the sequence, with one close-up only when a real connection is visible.",
+          "lighting": "LIGHTING: Use even diffused light so piece edges and colours remain clear.",
+          "closing": "CTA / HERO: End on the actual assembled form or the original supplied arrangement, whichever is supported by the reference.",
+          "audio": "AUDIO: Use light handling sounds only for visible handling; follow the selected voice and music options."
+        },
+        {
+          "id": "toy_building_v12",
+          "variation_number": 12,
+          "name": "Colour Grouping Layout",
+          "hook": "HOOK: Reveal the full set first, with its visible colours easy to distinguish.",
+          "action": "Arrange only the supplied pieces into simple colour groups if the pieces can be separated without implying a new included accessory.",
+          "detail": "DETAIL: Do not change colour, count or piece design; if grouping would misrepresent the set, show the original layout instead.",
+          "camera": "CAMERA: Use a top-down view for the layout, then cut to a low three-quarter view of the same pieces.",
+          "lighting": "LIGHTING: Keep white balance neutral so colours remain true to the reference.",
+          "closing": "CTA / HERO: Finish with all pieces visible in a tidy, accurate layout.",
+          "audio": "AUDIO: Keep music subtle; no sorting sounds unless the movements are shown."
+        },
+        {
+          "id": "toy_building_v13",
+          "variation_number": 13,
+          "name": "Connection Detail Close-Up",
+          "hook": "HOOK: Start with the complete building set, then guide attention to one visible piece connection.",
+          "action": "Demonstrate one simple joining or separation motion only if the piece design clearly supports it.",
+          "detail": "DETAIL: Show real edges and connection geometry; do not claim compatibility, strength or a special locking mechanism without evidence.",
+          "camera": "CAMERA: Push in slowly to the visible connection, hold briefly, then pull back to show the set in context.",
+          "lighting": "LIGHTING: Use soft angled light to make the real contours readable without harsh glare.",
+          "closing": "CTA / HERO: Return to the full product view with the piece arrangement unchanged except for the demonstrated supported action.",
+          "audio": "AUDIO: A quiet click is permitted only if the visible connection naturally supports that sound and audio is enabled."
+        },
+        {
+          "id": "toy_building_v14",
+          "variation_number": 14,
+          "name": "Footprint and Shape Reveal",
+          "hook": "HOOK: Show the overall outline of the supplied build or set from a slightly elevated angle.",
+          "action": "Move around the visible outer edge of the build, revealing its footprint and major shapes without adding or removing structures.",
+          "detail": "DETAIL: Keep the actual dimensions and proportions visually plausible; do not invent interior rooms, hidden levels or unseen sections.",
+          "camera": "CAMERA: Make a slow, shallow arc around the visible build while keeping its whole silhouette in frame.",
+          "lighting": "LIGHTING: Soft overhead fill with natural grounding shadows.",
+          "closing": "CTA / HERO: Settle into the clearest angle that shows the complete visible structure.",
+          "audio": "AUDIO: Use no forced sound effects; apply selected background audio only."
+        },
+        {
+          "id": "toy_building_v15",
+          "variation_number": 15,
+          "name": "Piece-to-Structure Match",
+          "hook": "HOOK: Begin with the visible pieces and the completed structure together only if both are present in the reference.",
+          "action": "Cut between a real piece detail and the corresponding visible area of the build, without implying that unseen steps or extra pieces were included.",
+          "detail": "DETAIL: Match each close-up to a clearly corresponding visible piece; do not fabricate an assembly demonstration.",
+          "camera": "CAMERA: Use two or three matched framings at consistent scale, avoiding rapid edits or artificial transformation.",
+          "lighting": "LIGHTING: Maintain consistent exposure across each cut so the product appearance does not shift.",
+          "closing": "CTA / HERO: Hold on the supplied build or set in its original accurate state.",
+          "audio": "AUDIO: Add a subtle transition accent only if selected and suitable; no exaggerated construction effects."
+        },
+        {
+          "id": "toy_building_v16",
+          "variation_number": 16,
+          "name": "Low-Angle Structure Showcase",
+          "hook": "HOOK: Present the complete visible build from a low but undistorted angle.",
+          "action": "Make a gentle camera slide past the structure to reveal its real height and silhouette; keep the pieces stationary.",
+          "detail": "DETAIL: Do not exaggerate height, scale or stability, and do not reveal hidden sides as confirmed details.",
+          "camera": "CAMERA: Use a slow low-angle lateral move, then settle into a three-quarter view that keeps the entire build visible.",
+          "lighting": "LIGHTING: Broad soft light defines the structure without deep shadows obscuring connections.",
+          "closing": "CTA / HERO: Finish with the complete build centred and in realistic scale.",
+          "audio": "AUDIO: Keep the scene quiet unless selected audio settings specify otherwise."
+        },
+        {
+          "id": "toy_building_v17",
+          "variation_number": 17,
+          "name": "Pattern and Repetition Study",
+          "hook": "HOOK: Open on the complete set, then show the repeating shapes or visible pattern within the pieces.",
+          "action": "Track across repeated blocks or sections without adding new repetitions or changing the layout.",
+          "detail": "DETAIL: Highlight only patterns and colours that actually appear in the reference; avoid claims about educational outcomes or skill development.",
+          "camera": "CAMERA: Use a steady lateral macro pass, then widen to restore the complete set.",
+          "lighting": "LIGHTING: Use even light to preserve the separation between adjacent pieces.",
+          "closing": "CTA / HERO: End on the original arrangement with the full product readable.",
+          "audio": "AUDIO: Soft background music only if selected; avoid invented mechanical sounds."
+        },
+        {
+          "id": "toy_building_v18",
+          "variation_number": 18,
+          "name": "Hands-On Assembly Moment",
+          "hook": "HOOK: Establish the supplied building pieces and the intended assembly area before interaction.",
+          "action": "If a model is selected, show one safe, age-appropriate hand interaction using only visible pieces and plausible connections; otherwise use a product-only shot.",
+          "detail": "DETAIL: Never show unsafe small-piece use by a young child; do not introduce hands, tools or parts that are not selected or supplied.",
+          "camera": "CAMERA: Keep the camera at tabletop height with the active connection in focus and the rest of the set visible.",
+          "lighting": "LIGHTING: Soft daylight with clear hand and piece visibility and no dramatic colour cast.",
+          "closing": "CTA / HERO: Return to the assembled form or original set layout, whichever the reference supports.",
+          "audio": "AUDIO: Include only natural handling sounds if visible and allowed by the chosen audio settings."
+        },
+        {
+          "id": "toy_building_v19",
+          "variation_number": 19,
+          "name": "Stable Frame Hero Hold",
+          "hook": "HOOK: Reveal the full supplied structure in a clean, uncluttered composition.",
+          "action": "Keep the build stationary while the camera makes a restrained push-in to the most distinctive visible section.",
+          "detail": "DETAIL: Do not test, shake or claim stability; preserve the structure and all visible connections as shown.",
+          "camera": "CAMERA: Use a slow centred push-in with no dramatic tilt, spin or forced perspective.",
+          "lighting": "LIGHTING: Balanced studio light with realistic contact shadows and accurate colours.",
+          "closing": "CTA / HERO: Ease back to a complete view and hold on the unchanged structure.",
+          "audio": "AUDIO: No impact or building sound effects for a stationary product; respect selected music and speech."
+        },
+        {
+          "id": "toy_building_v20",
+          "variation_number": 20,
+          "name": "Three-Beat Build Showcase",
+          "hook": "HOOK: Start with the complete building set or structure clearly visible before any close-up.",
+          "action": "Use three distinct visual beats: full set, a genuine visible piece or connection detail, and the complete set again.",
+          "detail": "DETAIL: Keep the same pieces and configuration consistent across all beats; do not add decorative scenery or unsupported features.",
+          "camera": "CAMERA: Use a steady opening shot, one controlled detail push-in and a clean return to the original framing.",
+          "lighting": "LIGHTING: Maintain matching soft light and colour balance across all three beats.",
+          "closing": "CTA / HERO: Finish with the whole supplied set clearly framed and held steady.",
+          "audio": "AUDIO: Use voiceover, music and SFX only as specified by the user's selections."
         }
       ]
     },
