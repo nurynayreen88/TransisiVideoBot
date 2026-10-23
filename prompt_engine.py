@@ -244,9 +244,9 @@ def _creative_variation(product_type, product, part, product_subtype=''):
     words = " ".join(str(value or "") for value in (product_type, product_subtype, product)).casefold()
     type_key = str(product_type or "").casefold()
     subtype_key = str(product_subtype or "").casefold()
-    if type_key in {"fashion", "hijab"} or any(w in words for w in ("dress", "clothing", "fashion", "apparel", "outfit", "garment", "pakaian", "baju", "skirt", "shirt", "t-shirt", "hijab", "tudung", "blouse")):
+    if type_key in {"fashion", "hijab"} or (type_key == "other" and not subtype_key and any(w in words for w in ("dress", "clothing", "fashion", "apparel", "outfit", "garment", "pakaian", "baju", "skirt", "shirt", "t-shirt", "hijab", "tudung", "blouse"))):
         group = "fashion"
-    elif type_key == "wallet" or (type_key == "bag" and (subtype_key in {"bag_wallet", "wallet", "card_holder"} or any(w in words for w in ("wallet", "dompet", "card holder", "cardholder", "coin purse")))):
+    elif type_key == "wallet" or (type_key == "bag" and (subtype_key in {"bag_wallet", "wallet", "card_holder"} or (not subtype_key and any(w in words for w in ("wallet", "dompet", "card holder", "cardholder", "coin purse"))))):
         group = "wallet"
     elif type_key == "travel":
         group = "travel"
@@ -379,9 +379,17 @@ def _category_specific_scenes(product_type, product, product_subtype=""):
     """Build visual beats that suit the product category without assuming unseen features."""
     words = str(product or "").casefold()
     subtype = str(product_subtype or "").casefold()
+    if product_type == "bag" and subtype in {"bag_handbag", "handbag"}:
+        return [
+            ("HANDBAG REVEAL", "Show the full handbag and its visible handles."),
+            ("FULL VIEW", "Show the same handbag at realistic scale."),
+            ("DETAIL", "Highlight one visible design detail."),
+            ("HANDLING", "Use one natural hold or placement."),
+            ("HERO", "Hold a full view of the unchanged handbag.")
+        ]
     if product_type == "bag" and (
         subtype in {"bag_wallet", "wallet", "card_holder"}
-        or any(term in words for term in ("wallet", "dompet", "card holder", "cardholder", "coin purse"))
+        or (not subtype and any(term in words for term in ("wallet", "dompet", "card holder", "cardholder", "coin purse")))
     ):
         return [
             ("HOOK / WALLET SILHOUETTE", "Open on the wallet or card holder itself, with its complete outline visible; do not frame it as a handbag."),
@@ -392,7 +400,7 @@ def _category_specific_scenes(product_type, product, product_subtype=""):
         ]
     if product_type == "bag" and (
         subtype in {"bag_backpack", "bag_laptop", "backpack"}
-        or any(term in words for term in ("backpack", "rucksack", "beg galas", "beg sekolah", "beg laptop"))
+        or (not subtype and any(term in words for term in ("backpack", "rucksack", "beg galas", "beg sekolah", "beg laptop")))
     ):
         return [
             ("HOOK / BACKPACK SILHOUETTE", "Open on the complete backpack with its visible shoulder straps and body clearly framed."),
@@ -401,7 +409,7 @@ def _category_specific_scenes(product_type, product, product_subtype=""):
             ("PLAUSIBLE BACKPACK HANDLING", "Show one natural lift or carry using existing straps; if the scene does not support it, move the camera only."),
             ("CTA / BACKPACK HERO", "Finish on the complete unchanged backpack with straps visible and no invented pockets or capacity claims.")
         ]
-    if product_type in {"home", "furniture", "baby"} and any(
+    if product_type in {"home", "furniture", "baby"} and (not subtype or subtype in {"home_furniture", "baby_sleep"}) and any(
         term in words for term in ("bed", "katil", "bedframe", "bed frame", "headboard")
     ):
         return [
@@ -411,7 +419,7 @@ def _category_specific_scenes(product_type, product, product_subtype=""):
             ("ROOM CONTEXT", "Use one restrained camera move to show how the unchanged bed sits in the room; keep all parts grounded and do not demonstrate unsupported storage or functions."),
             ("CTA / HERO HOLD", "Return to a clear full-bed composition and hold it steadily, leaving uncluttered negative space; no on-screen text unless explicitly selected.")
         ]
-    if product_type in {"home", "kitchen", "equipment", "gadget"} and any(
+    if product_type in {"home", "kitchen", "equipment", "gadget"} and (not subtype or subtype in {"home_kitchen"}) and any(
         term in words for term in ("cookware", "quickchef", "pan set", "pot set", "kitchen set", "7pcs", "7 pcs", "cookware set", "saucepan", "frying pan")
     ):
         return [
@@ -728,17 +736,57 @@ def _presentation_variation(style_key, product_type, product_subtype=""):
         "PRESENTATION VARIATION: Keep the selected visual style recognizably consistent, but for this generation use "
         + _PRESENTATION_PROFILES[index] + ". This profile varies composition, lighting, shot order and pacing; "
         "do not change product identity, invent features or accessories, replace a user-selected location, "
-        "or contradict category-specific safety and realism rules. For connected clips, preserve the same setting, "
+        "or override the selected camera movement, music, voice, model or category-specific realism rules. For connected clips, preserve the same setting, "
         "lighting direction, product orientation and final-frame handoff."
     )
 
 
-def build_prompt(mode, product, scene, motion, style='auto', duration=10, concept='', product_type='other', storyboard_override=None, split=None, universal_custom=False, product_subtype='', prompt_language='Malay'):
+
+def _compact_storyboard(product, scene, motion, style, product_type, subtype):
+    _, style_name, _ = resolve(style)
+    scenes = _category_specific_scenes(product_type, product, subtype)
+    times = ('0–2s', '2–4s', '4–6s', '6–8s', '8–10s')
+    lines = ['VIDEO PROMPT — 10 SECONDS', 'Vertical 9:16. Style: ' + style_name,
+             'PRODUCT: ' + str(product).strip(), 'SETTING: ' + str(scene).strip(),
+             'CAMERA: ' + str(motion).strip()]
+    lines.extend(t + ': ' + direction for t, (_, direction) in zip(times, scenes))
+    return '\n'.join(lines)
+
+
+def _concise_video_prompt(product, scene, motion, style, product_type, subtype, part=0):
+    """One clear visual brief; selected audio and text are appended by the bot."""
+    _, style_name, _ = resolve(style)
+    scenes = _category_specific_scenes(product_type, product, subtype)
+    actions = [str(item[1]).strip() for item in scenes[:3]]
+    while len(actions) < 3:
+        actions.append("Keep the product naturally visible.")
+    label = "VIDEO PROMPT — 10 SECONDS" if not part else "VIDEO PROMPT — PART " + str(part) + " (10 SECONDS)"
+    continuity = (" Continue directly from Part 1's final frame, with the same product, setting and camera position; finish with a natural closing view." if part > 1 else
+                  " End on a steady product view ready for Part 2 to continue." if part == 1 else "")
+    return "\n\n".join((
+        label + "\nVertical 9:16, realistic footage. " + str(style_name) + "." + continuity,
+        "Use the uploaded product image as the master reference. " + str(product).strip(),
+        "SETTING: " + str(scene or "A natural setting suited to the product").strip() + ".",
+        "ACTION: 0–3s: " + actions[0] + " 3–7s: " + actions[1] + " 7–10s: " + actions[2],
+        "CAMERA: " + str(motion).strip(),
+        "Keep the product's visible design, colour, details and proportions identical to the reference."
+    ))
+
+
+def build_prompt(mode, product, scene, motion, style='auto', duration=10, concept='', product_type='other', storyboard_override=None, split=None, universal_custom=False, product_subtype='', prompt_language='Malay', concise=False):
     # Preserve the historical API behavior: a 20-second call without an explicit
     # split choice still returns two connected 10-second prompts.
     if split is None:
         split = duration in (20, 30)
     style = _resolve_auto_style(style, product_type, product, product_subtype) if mode == 'storyboard' else style
+    if concise and mode == 'storyboard':
+        if split and duration > 10:
+            return "\n\n".join(
+                _concise_video_prompt(product, scene, motion, style, product_type, product_subtype, part=index)
+                for index in range(1, duration // 10 + 1)
+            )
+        if duration == 10:
+            return _concise_video_prompt(product, scene, motion, style, product_type, product_subtype)
     if split and duration > 10:
         # Generate connected 10-second prompts while retaining the same style and product context.
         presentation_variation = _presentation_variation(style, product_type, product_subtype)
@@ -782,7 +830,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
         camera = CAMERAS.get(motion, CAMERAS["push"])
     product_type_directions = {
         'fashion': "PRODUCT CATEGORY DIRECTION: Treat this as clothing/fashion. Favor natural fabric movement and visible garment details; never alter cut, print, color or pattern.",
-        'bag': "PRODUCT CATEGORY DIRECTION: Treat this as a bag subtype inferred from the product name. Choose a matching presentation (handbag hero, crossbody lifestyle or backpack upright showcase). Do not assume exact materials, compartments, hardware or accessories unless stated in the name.",
+        'bag': "PRODUCT CATEGORY DIRECTION: Treat this as the explicitly selected bag subtype, when supplied. Do not reinterpret a handbag as a wallet, backpack, tote or sling from brand or name keywords. Choose only the matching presentation. Do not assume exact materials, compartments, hardware or accessories unless stated in the name.",
         'wallet': "PRODUCT CATEGORY DIRECTION: Treat this as a wallet inferred from the product name. Favor a luxury macro, simple open-close presentation or clean flat lay. Do not assume exact materials, card slots, coin pockets, compartments or capacity.",
         'hijab': "PRODUCT CATEGORY DIRECTION: Treat this as a hijab/tudung. Emphasize the exact drape, folds, texture and visible styling; do not change the wrap, color or fabric pattern.",
         'shoes': "PRODUCT CATEGORY DIRECTION: Treat this as footwear. Favor grounded placement and visible upper/outsole details; do not invent soles or unseen angles.",

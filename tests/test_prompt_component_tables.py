@@ -152,7 +152,7 @@ class PromptComponentTableTests(unittest.TestCase):
         self.assertIn("do not add spoken lines or an extra spoken CTA", bot_source)
         self.assertIn("audio_fields = ('music', 'sfx') if voiceover_mode == 'script' else ('voice', 'music', 'sfx')", bot_source)
         self.assertIn("if on_screen_text == 'yes':", bot_source)
-        self.assertIn("REUSABLE COMPONENT RULES:", bot_source)
+        self.assertNotIn("prompt = prompt.rstrip() + '\\n\\nREUSABLE COMPONENT RULES:", bot_source)
 
     def test_optional_audio_and_cta_rules_respect_user_choices(self):
         audio = {item["id"]: item for item in self.tables["audio_profiles"]}
