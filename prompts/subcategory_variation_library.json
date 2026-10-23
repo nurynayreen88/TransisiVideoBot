@@ -30025,7 +30025,7 @@
       "subcategory_id": "stationery_art",
       "category_id": "book_stationery",
       "label": "🎨 Alat seni",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "stationery_art_v01",
@@ -30146,6 +30146,126 @@
           "lighting": "LIGHTING: Balanced light with no artificial glow or invented sparkle.",
           "closing": "CTA / HERO: Finish with the product centred and fully recognizable; no added text.",
           "audio": "AUDIO: Use one soft handling sound only if the handling is visible; no invented effects."
+        },
+        {
+          "id": "stationery_art_v11",
+          "variation_number": 11,
+          "name": "Pencil Tip and Barrel Detail",
+          "hook": "HOOK: Start tightly on the visible point and barrel of the art pencil, keeping the actual product in focus.",
+          "action": "Ease the camera along the pencil from its tip toward the body, then reveal the whole pencil in one continuous move.",
+          "detail": "DETAIL: Show only visible tip condition, printed markings and body shape; do not claim lead grade or performance unless clearly stated on the product.",
+          "camera": "CAMERA: Slow macro-to-medium slide parallel to the pencil; avoid making its proportions look distorted.",
+          "lighting": "LIGHTING: Soft side light reveals the real edges without glare over printed markings.",
+          "closing": "CTA / HERO: Place the pencil in a clean, full-length view matching the opening item's appearance.",
+          "audio": "AUDIO: Quiet pencil-on-paper sound only if writing is shown; otherwise use restrained background music."
+        },
+        {
+          "id": "stationery_art_v12",
+          "variation_number": 12,
+          "name": "Marker Cap and Nib Reveal",
+          "hook": "HOOK: Open on the marker's existing cap and body, with the product fully recognizable.",
+          "action": "If the cap is removable in the reference setup, show a careful cap-off reveal and bring the visible nib into focus; otherwise keep the marker closed and rotate it gently.",
+          "detail": "DETAIL: Do not imply dual tips, refillability or ink properties unless those features are visibly confirmed.",
+          "camera": "CAMERA: Controlled close-up, then a small pullback to show the marker's full length.",
+          "lighting": "LIGHTING: Even diffuse light keeps the barrel colour and any printed label faithful to the reference.",
+          "closing": "CTA / HERO: Hold a clear view of the marker and any genuinely shown cap or nib, without adding accessories.",
+          "audio": "AUDIO: Use a soft cap click only when the cap is visibly removed or replaced; no exaggerated sound."
+        },
+        {
+          "id": "stationery_art_v13",
+          "variation_number": 13,
+          "name": "Paintbrush Bristle Profile",
+          "hook": "HOOK: Begin with the brush tip in sharp focus, showing its real silhouette against a simple background.",
+          "action": "Track from the bristles down the ferrule and handle, then return to a full brush view.",
+          "detail": "DETAIL: Preserve the actual bristle shape, ferrule finish and handle colour; do not show paint application unless paint and paper are present.",
+          "camera": "CAMERA: Slow vertical tracking shot with a brief macro pause at the brush tip.",
+          "lighting": "LIGHTING: Soft angled light defines the bristle edge without creating a false metallic shine.",
+          "closing": "CTA / HERO: Lay or hold the brush in its original form and end on a stable full-product frame.",
+          "audio": "AUDIO: Gentle brush-on-paper sound only if brushing is shown; keep other audio minimal."
+        },
+        {
+          "id": "stationery_art_v14",
+          "variation_number": 14,
+          "name": "Palette Wells and Surface Scan",
+          "hook": "HOOK: Start with the visible palette surface and its actual wells or colour areas, if present.",
+          "action": "Glide across the palette surface at a measured pace, then pull back to reveal the full palette without adding paint or colours.",
+          "detail": "DETAIL: Show only the wells, compartments and colours that exist in the reference; never fill empty spaces with invented paint.",
+          "camera": "CAMERA: Top-down slow scan followed by a steady wider composition.",
+          "lighting": "LIGHTING: Diffused overhead light reduces reflections and keeps the real surface colours accurate.",
+          "closing": "CTA / HERO: Centre the complete palette with its original layout unchanged.",
+          "audio": "AUDIO: Soft tabletop handling sounds only when movement is visible; no splash or painting effects unless shown."
+        },
+        {
+          "id": "stationery_art_v15",
+          "variation_number": 15,
+          "name": "Crayon Colour Row",
+          "hook": "HOOK: Reveal the visible crayon ends or wrappers in a neat close-up, without changing their order.",
+          "action": "Move slowly along the row and widen to show the complete set exactly as presented.",
+          "detail": "DETAIL: Keep every visible wrapper, tip shape and colour faithful; do not add extra crayons or suggest a count that cannot be verified.",
+          "camera": "CAMERA: Low, level tracking pass followed by a brief overhead view if the arrangement permits.",
+          "lighting": "LIGHTING: Bright, soft lighting preserves the real colours and readable wrapper details.",
+          "closing": "CTA / HERO: Finish with the complete original arrangement in focus, with no extra props.",
+          "audio": "AUDIO: Light paper-wrapper rustle only if the crayons are handled; otherwise use quiet music."
+        },
+        {
+          "id": "stationery_art_v16",
+          "variation_number": 16,
+          "name": "Coloured Pencil Set Arrangement",
+          "hook": "HOOK: Open on the actual set arrangement, showing the visible pencil colours without rearranging them.",
+          "action": "Pan across the pencils at a consistent pace, then pull back to show the set and its existing packaging if included.",
+          "detail": "DETAIL: Do not add missing colours, change the number of pencils or make claims about pigment quality; show only what is present.",
+          "camera": "CAMERA: Smooth overhead pan with a short pause on the visible sharpened ends, where present.",
+          "lighting": "LIGHTING: Neutral diffused light keeps colour differences natural and avoids glossy hotspots.",
+          "closing": "CTA / HERO: Hold on the complete set as originally arranged, packaging included only if visible.",
+          "audio": "AUDIO: Subtle pencil movement sounds only when the items move; avoid artificial drawing sounds."
+        },
+        {
+          "id": "stationery_art_v17",
+          "variation_number": 17,
+          "name": "Sketchbook Paper Texture",
+          "hook": "HOOK: Begin at the visible paper edge and surface, with texture in focus and no exaggerated magnification.",
+          "action": "Move from the paper surface to the page edge, then open or turn a page only if the sketchbook is designed to do so in the reference.",
+          "detail": "DETAIL: Do not draw on blank pages or claim paper weight, archival quality or suitability for a medium unless the product states it.",
+          "camera": "CAMERA: Close focus on the real paper surface, followed by a gentle pullback to show the sketchbook.",
+          "lighting": "LIGHTING: Soft grazing light reveals natural texture without inventing grain or changing the paper colour.",
+          "closing": "CTA / HERO: End with the sketchbook and visible page area presented cleanly and unchanged.",
+          "audio": "AUDIO: Natural page-turn sound only when a page is actually turned; no voice required."
+        },
+        {
+          "id": "stationery_art_v18",
+          "variation_number": 18,
+          "name": "Eraser Edge and Shape Check",
+          "hook": "HOOK: Open with a close view of the eraser's real corners and outer shape against a plain surface.",
+          "action": "Rotate the eraser slowly to show its sides, then settle it in a clear three-quarter view.",
+          "detail": "DETAIL: Do not demonstrate erasing, claim dust-free performance or show wear unless that action or feature is genuinely supported.",
+          "camera": "CAMERA: Slow tabletop orbit with a stable focus and realistic scale.",
+          "lighting": "LIGHTING: Soft neutral light keeps the eraser's actual colour and edges accurate.",
+          "closing": "CTA / HERO: Hold on the complete eraser with no extra marks or props added.",
+          "audio": "AUDIO: Minimal tabletop contact sound if the eraser is moved; otherwise soft background music only."
+        },
+        {
+          "id": "stationery_art_v19",
+          "variation_number": 19,
+          "name": "Ruler Markings Pass",
+          "hook": "HOOK: Start close on the ruler's existing scale markings and edge, keeping the printed graduations legible where possible.",
+          "action": "Track along the ruler from one end to the other, then widen to show its full length and shape.",
+          "detail": "DETAIL: Preserve the real units and markings; do not alter scale, invent measurements or imply precision beyond what is printed.",
+          "camera": "CAMERA: Straight parallel tracking shot with minimal perspective distortion, followed by a full-length frame.",
+          "lighting": "LIGHTING: Even light avoids glare and shadows across the measurement marks.",
+          "closing": "CTA / HERO: Finish with the entire ruler visible, straight and aligned naturally in frame.",
+          "audio": "AUDIO: A light surface-slide sound only if the ruler moves; keep music subtle."
+        },
+        {
+          "id": "stationery_art_v20",
+          "variation_number": 20,
+          "name": "Art Tool Set Contents Overview",
+          "hook": "HOOK: Begin with the art set exactly as supplied and reveal its real contents at a glance.",
+          "action": "Use a slow top-down sweep across the visible items, then pull back to include the complete set and packaging if present.",
+          "detail": "DETAIL: Include only the tools actually shown; do not fill empty spaces, add accessories or infer a piece count from hidden contents.",
+          "camera": "CAMERA: Smooth overhead sweep with a final locked wide shot; maintain consistent scale and layout.",
+          "lighting": "LIGHTING: Balanced diffuse lighting keeps each item distinguishable and colours faithful.",
+          "closing": "CTA / HERO: Present the full visible set in its original arrangement for a clean final frame.",
+          "audio": "AUDIO: Gentle handling sounds only for visible movement; no unsupported action sounds or claims."
         }
       ]
     },
