@@ -9,6 +9,14 @@ class SubtypeTests(unittest.TestCase):
         scenes = _category_specific_scenes('bag', 'BONIA wallet collection', 'bag_handbag')
         self.assertIn('HANDBAG', scenes[0][0])
 
+    def test_tote_not_forced_to_handbag(self):
+        scenes = _category_specific_scenes('bag', 'Tote bag', 'bag_tote')
+        self.assertNotIn('HANDBAG', scenes[0][0])
+
+    def test_kitchen_keyword_does_not_override_other_home_subtype(self):
+        scenes = _category_specific_scenes('home', 'Pan set organizer', 'home_storage')
+        self.assertNotIn('COMPLETE SET', scenes[0][0])
+
     def test_wallet(self):
         scenes = _category_specific_scenes('bag', 'BONIA', 'bag_wallet')
         self.assertIn('WALLET', scenes[0][0])
