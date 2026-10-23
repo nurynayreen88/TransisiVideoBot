@@ -736,7 +736,7 @@ def _presentation_variation(style_key, product_type, product_subtype=""):
         "PRESENTATION VARIATION: Keep the selected visual style recognizably consistent, but for this generation use "
         + _PRESENTATION_PROFILES[index] + ". This profile varies composition, lighting, shot order and pacing; "
         "do not change product identity, invent features or accessories, replace a user-selected location, "
-        "or contradict category-specific safety and realism rules. For connected clips, preserve the same setting, "
+        "or override the selected camera movement, music, voice, model or category-specific realism rules. For connected clips, preserve the same setting, "
         "lighting direction, product orientation and final-frame handoff."
     )
 
