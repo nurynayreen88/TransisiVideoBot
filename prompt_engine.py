@@ -753,12 +753,38 @@ def _compact_storyboard(product, scene, motion, style, product_type, subtype):
     return '\n'.join(lines)
 
 
-def build_prompt(mode, product, scene, motion, style='auto', duration=10, concept='', product_type='other', storyboard_override=None, split=None, universal_custom=False, product_subtype='', prompt_language='Malay'):
+def _concise_video_prompt(product, scene, motion, style, product_type, subtype, part=0):
+    """One clear visual brief; selected audio and text are appended by the bot."""
+    _, style_name, _ = resolve(style)
+    scenes = _category_specific_scenes(product_type, product, subtype)
+    actions = [str(item[1]).strip() for item in scenes[:3]]
+    while len(actions) < 3:
+        actions.append("Keep the product naturally visible.")
+    label = "VIDEO PROMPT — 10 SECONDS" if not part else "VIDEO PROMPT — PART " + str(part) + " (10 SECONDS)"
+    return "\n\n".join((
+        label + "\nVertical 9:16, realistic footage. " + str(style_name) + ".",
+        "Use the uploaded product image as the master reference. " + str(product).strip(),
+        "SETTING: " + str(scene or "A natural setting suited to the product").strip() + ".",
+        "ACTION: 0–3s: " + actions[0] + " 3–7s: " + actions[1] + " 7–10s: " + actions[2],
+        "CAMERA: " + str(motion).strip(),
+        "Keep the product's visible design, colour, details and proportions identical to the reference."
+    ))
+
+
+def build_prompt(mode, product, scene, motion, style='auto', duration=10, concept='', product_type='other', storyboard_override=None, split=None, universal_custom=False, product_subtype='', prompt_language='Malay', concise=False):
     # Preserve the historical API behavior: a 20-second call without an explicit
     # split choice still returns two connected 10-second prompts.
     if split is None:
         split = duration in (20, 30)
     style = _resolve_auto_style(style, product_type, product, product_subtype) if mode == 'storyboard' else style
+    if concise and mode == 'storyboard':
+        if split and duration > 10:
+            return "\n\n".join(
+                _concise_video_prompt(product, scene, motion, style, product_type, product_subtype, part=index)
+                for index in range(1, duration // 10 + 1)
+            )
+        if duration == 10:
+            return _concise_video_prompt(product, scene, motion, style, product_type, product_subtype)
     if split and duration > 10:
         # Generate connected 10-second prompts while retaining the same style and product context.
         presentation_variation = _presentation_variation(style, product_type, product_subtype)
