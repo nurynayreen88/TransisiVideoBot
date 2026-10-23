@@ -1,0 +1,21 @@
+name: Full Klippo staging audit
+on:
+  push:
+    branches:
+      - staging/klippo-part156-165-20261024
+  workflow_dispatch:
+jobs:
+  full-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Audit master and all staging files
+        run: python scripts/audit_klippo_full_staging.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: klippo-full-audit-report
+          path: klippo_audit_report.json

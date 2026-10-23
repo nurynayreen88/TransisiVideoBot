@@ -223,26 +223,26 @@
     {
       "id": "travel_toiletry_v31",
       "variation_number": 31,
-      "name": "Measured Push-In — travel toiletry",
-      "hook": "HOOK: Begin on the supplied travel toiletry in a complete front-facing view; preserve exact reference-visible colour, geometry, labels and quantity.",
-      "action": "ACTION: Measured Push-In presents the actual travel toiletry through a restrained camera or focus transition; show handling only if supported by the reference and do not invent functions, contents or performance.",
-      "detail": "DETAIL: Emphasize only source-visible surfaces, contours, joins and supplied parts of this travel toiletry; avoid fabricated reverse sides, accessories or specifications.",
-      "camera": "CAMERA: measured push-in using a short front-facing dolly; maintain true scale and continuous product identity.",
-      "lighting": "LIGHTING: diffused daylight, faithful colours and realistic contact shadows.",
-      "closing": "CTA / HERO: Settle on the complete unchanged travel toiletry, clearly framed without generated captions, logos or watermark.",
-      "audio": "AUDIO: Quiet instrumental bed only; no invented product sounds or unverified spoken claims."
+      "name": "Actual contour — travel_toiletry_v31",
+      "hook": "0–2s: Establish the entire actual travel toiletry item with original reference-visible shape, colour and supplied components. Start a short low-front lateral track; no text.",
+      "action": "2–6s: Continue a short low-front lateral track using camera movement alone, keeping product and supplied parts stationary in their genuine pictured positions. No fabricated handling or unseen faces.",
+      "detail": "6–8s: Highlight only a genuinely pictured seam, zip, container edge or compartment outline where present. Do not invent liquid contents, leakproof claims, TSA compliance, internal capacity or unpictured open views.",
+      "camera": "Use a short low-front lateral track at realistic product scale within source-supported geometry; no unsupported rotation.",
+      "lighting": "Broad soft studio key with credible contact shadow.",
+      "closing": "8–10s: Resolve to the authentic complete outline, preserving the same complete original product. No added logos, captions or watermark.",
+      "audio": "Subtle unobtrusive instrumental; no invented zips, liquid pours, outdoor action, voiceover claims or distracting effects."
     },
     {
       "id": "travel_toiletry_v32",
       "variation_number": 32,
-      "name": "Visible Seam Trace — travel toiletry",
-      "hook": "HOOK: Begin on the supplied travel toiletry in a reference-visible seam or fitting; preserve exact reference-visible colour, geometry, labels and quantity.",
-      "action": "ACTION: Visible Seam Trace presents the actual travel toiletry through a restrained camera or focus transition; show handling only if supported by the reference and do not invent functions, contents or performance.",
-      "detail": "DETAIL: Emphasize only source-visible surfaces, contours, joins and supplied parts of this travel toiletry; avoid fabricated reverse sides, accessories or specifications.",
-      "camera": "CAMERA: visible seam trace using a shallow lateral move; maintain true scale and continuous product identity.",
-      "lighting": "LIGHTING: soft neutral studio fill, faithful colours and realistic contact shadows.",
-      "closing": "CTA / HERO: Settle on the complete unchanged travel toiletry, clearly framed without generated captions, logos or watermark.",
-      "audio": "AUDIO: Quiet instrumental bed only; no invented product sounds or unverified spoken claims."
+      "name": "Editorial centering — travel_toiletry_v32",
+      "hook": "0–2s: Establish the entire actual travel toiletry item with original reference-visible shape, colour and supplied components. Start a subtle horizontal camera translation; no text.",
+      "action": "2–6s: Continue a subtle horizontal camera translation using camera movement alone, keeping product and supplied parts stationary in their genuine pictured positions. No fabricated handling or unseen faces.",
+      "detail": "6–8s: Highlight only a genuinely pictured seam, zip, container edge or compartment outline where present. Do not invent liquid contents, leakproof claims, TSA compliance, internal capacity or unpictured open views.",
+      "camera": "Use a subtle horizontal camera translation at realistic product scale within source-supported geometry; no unsupported rotation.",
+      "lighting": "Neutral diffused daylight preserving true source colours.",
+      "closing": "8–10s: Resolve to a balanced whole-item finish, preserving the same complete original product. No added logos, captions or watermark.",
+      "audio": "Subtle unobtrusive instrumental; no invented zips, liquid pours, outdoor action, voiceover claims or distracting effects."
     }
   ]
 }
