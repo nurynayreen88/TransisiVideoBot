@@ -907,8 +907,8 @@ def prompt_creative_settings(user_data, include_audio=True):
         lines.append(music_directions.get(music_choice, music_directions['auto']))
     style_key = str(user_data.get('prompt_style', '')).casefold()
     if user_data.get('prompt_audio_enabled', True) is False:
-        return '\n'.join(lines)
-    if style_key in ('white_doodle', 'doodle_style'):
+        pass  # Preserve subsequent non-audio options, including custom background.
+    elif style_key in ('white_doodle', 'doodle_style'):
         lines.append(
             'SFX: Only for visible Doodle Style animation, sync a soft drawing/scribble or whoosh to moving lines, '
             'a light chime to a visible highlight and a gentle pop to a visible circle. Keep effects sparse, brief, '
