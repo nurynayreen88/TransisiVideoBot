@@ -223,26 +223,26 @@
     {
       "id": "baby_gear_v31",
       "variation_number": 31,
-      "name": "Grounded Hero Hold — baby gear item",
-      "hook": "HOOK: Begin with an unobstructed view of the supplied baby gear item; retain its actual colours, dimensions, quantity and existing markings. No invented props, captions or branding.",
-      "action": "ACTION: Grounded Hero Hold reveals the intact reference-visible baby gear item through restrained camera or focus movement only. Do not imply unsupported operation, certification, safety, performance or usage; do not depict an infant using baby products.",
-      "detail": "DETAIL: Keep the actual visible baby gear item shape, texture, attachments and packaging unchanged; no fabricated accessories, hidden faces or claims.",
-      "camera": "CAMERA: grounded hero hold with a shallow front-facing dolly; consistent perspective, no morphing or unseen reverse views.",
-      "lighting": "LIGHTING: broad wraparound light with natural contact shadow, restrained reflections and source-faithful surface colour.",
-      "closing": "CTA / HERO: End with a steady reference-supported three-quarter composition; no added text, logos or watermark.",
-      "audio": "AUDIO: quiet instrumental ambience; no fabricated product sounds or unsupported voice claims."
+      "name": "Neutral light study — baby_gear_v31",
+      "hook": "0–2s: Introduce the entire actual baby gear with its reference-visible outline, true colour and supplied components. Use a restricted side-to-front camera drift; no on-screen text.",
+      "action": "2–6s: Continue a restricted side-to-front camera drift with camera movement only, leaving the product stationary and in its original pictured configuration. No added model, baby, pet or invented operation.",
+      "detail": "6–8s: Show only real pictured seams, straps, wheels, frame or accessories where actually present; do not invent certifications, age ranges, attachment systems or child-use demonstrations.",
+      "camera": "Use a restricted side-to-front camera drift at natural product scale; stay within the pictured planes and do not synthesize unseen sides.",
+      "lighting": "Neutral diffuse daylight preserving true source colours.",
+      "closing": "8–10s: Settle into a true-colour whole-product hero, preserving the supplied original item. No added logos, captions or watermark.",
+      "audio": "Unobtrusive instrumental only; no invented pet or infant sounds, mechanical operation, voiceover promises or intrusive effects."
     },
     {
       "id": "baby_gear_v32",
       "variation_number": 32,
-      "name": "Controlled Lateral Slide — baby gear item",
-      "hook": "HOOK: Begin with a clearly visible detail of the supplied baby gear item; retain its actual colours, dimensions, quantity and existing markings. No invented props, captions or branding.",
-      "action": "ACTION: Controlled Lateral Slide reveals the intact reference-visible baby gear item through restrained camera or focus movement only. Do not imply unsupported operation, certification, safety, performance or usage; do not depict an infant using baby products.",
-      "detail": "DETAIL: Keep the actual visible baby gear item shape, texture, attachments and packaging unchanged; no fabricated accessories, hidden faces or claims.",
-      "camera": "CAMERA: controlled lateral slide with a restrained high-to-level adjustment; consistent perspective, no morphing or unseen reverse views.",
-      "lighting": "LIGHTING: restrained edge separation with natural contact shadow, restrained reflections and source-faithful surface colour.",
-      "closing": "CTA / HERO: End with a clean full-item frame and balanced negative space; no added text, logos or watermark.",
-      "audio": "AUDIO: quiet instrumental ambience; no fabricated product sounds or unsupported voice claims."
+      "name": "Reference front view — baby_gear_v32",
+      "hook": "0–2s: Introduce the entire actual baby gear with its reference-visible outline, true colour and supplied components. Use a limited front-quarter reverse dolly; no on-screen text.",
+      "action": "2–6s: Continue a limited front-quarter reverse dolly with camera movement only, leaving the product stationary and in its original pictured configuration. No added model, baby, pet or invented operation.",
+      "detail": "6–8s: Show only real pictured seams, straps, wheels, frame or accessories where actually present; do not invent certifications, age ranges, attachment systems or child-use demonstrations.",
+      "camera": "Use a limited front-quarter reverse dolly at natural product scale; stay within the pictured planes and do not synthesize unseen sides.",
+      "lighting": "Gentle side diffusion with natural edge separation.",
+      "closing": "8–10s: Settle into the source-faithful entire product, preserving the supplied original item. No added logos, captions or watermark.",
+      "audio": "Unobtrusive instrumental only; no invented pet or infant sounds, mechanical operation, voiceover promises or intrusive effects."
     }
   ]
 }
