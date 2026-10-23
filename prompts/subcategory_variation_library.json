@@ -28289,7 +28289,7 @@
       "subcategory_id": "toy_outdoor",
       "category_id": "toy",
       "label": "🪁 Mainan luar",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "toy_outdoor_v01",
@@ -28410,6 +28410,126 @@
           "lighting": "LIGHTING: Gentle side light reveals shape without changing material or finish.",
           "closing": "CTA / HERO: Keep the original item and supplied parts visible in a calm final composition.",
           "audio": "AUDIO: Keep speech clear if selected, with low background music and no stacked SFX."
+        },
+        {
+          "id": "toy_outdoor_v11",
+          "variation_number": 11,
+          "name": "Backyard Play Invitation",
+          "hook": "HOOK: Open on the actual outdoor toy ready for play in a tidy, believable backyard; no generic text overlay.",
+          "action": "Reveal the complete item first, then show one clear, age-appropriate play action using only its visible parts.",
+          "detail": "DETAIL: Keep the toy's scale, construction and accessories faithful to the reference; do not add children or features unless requested.",
+          "camera": "CAMERA: Establish the play area in a wide shot, then cut to one steady medium view of the interaction.",
+          "lighting": "LIGHTING: Natural late-morning daylight with soft ground shadows and consistent exposure.",
+          "closing": "CTA / HERO: End with the toy fully visible in its real play setting, held in a clean stable frame.",
+          "audio": "AUDIO: Use gentle outdoor ambience; sync any short effect to a visible action and avoid invented results."
+        },
+        {
+          "id": "toy_outdoor_v12",
+          "variation_number": 12,
+          "name": "Sunny Park Setup",
+          "hook": "HOOK: Start with a bright, uncluttered park setting that frames the complete outdoor toy immediately.",
+          "action": "Show the toy being placed on a suitable flat surface, followed by a single demonstration of its visible use.",
+          "detail": "DETAIL: Preserve every visible component and realistic proportions; avoid implying that public play areas or surfaces are included.",
+          "camera": "CAMERA: Use a low, child-eye-level establishing angle followed by a controlled side view; no rapid orbit.",
+          "lighting": "LIGHTING: Clear natural daylight, with highlights kept below clipping and colors true to the reference.",
+          "closing": "CTA / HERO: Finish on a composed three-quarter hero view with the surroundings softly out of focus.",
+          "audio": "AUDIO: Light park ambience only; keep sound effects subtle and tied to movement shown."
+        },
+        {
+          "id": "toy_outdoor_v13",
+          "variation_number": 13,
+          "name": "Water-Play Moment",
+          "hook": "HOOK: Begin with the outdoor water-play toy clearly framed before any water action starts.",
+          "action": "If the reference supports water use, demonstrate a small controlled splash or flow; otherwise show the toy dry and ready for play.",
+          "detail": "DETAIL: Never invent water jets, seals, moving parts or waterproof claims; keep the scene safe and the item unchanged.",
+          "camera": "CAMERA: Start with a locked medium shot, then capture one close detail of the real water interaction only when applicable.",
+          "lighting": "LIGHTING: Soft daylight with realistic reflections and no artificial glitter effects.",
+          "closing": "CTA / HERO: Return to a full-product view, with any water kept secondary to the toy.",
+          "audio": "AUDIO: Add a quiet splash only if water is visibly moving; otherwise use restrained ambient sound."
+        },
+        {
+          "id": "toy_outdoor_v14",
+          "variation_number": 14,
+          "name": "Rolling Path Demonstration",
+          "hook": "HOOK: Show the actual outdoor toy on a smooth, suitable path, with its full shape readable at first glance.",
+          "action": "Demonstrate one short, continuous roll or movement that matches the toy's visible design, then stop it naturally.",
+          "detail": "DETAIL: Keep wheels, handles and attachments unchanged; do not suggest speed, range or durability not shown.",
+          "camera": "CAMERA: Track parallel to the toy for a brief distance and settle into a stationary product view.",
+          "lighting": "LIGHTING: Even open-shade daylight with natural contact shadows and no exaggerated motion blur.",
+          "closing": "CTA / HERO: Hold a crisp final frame with the toy stationary and fully in view.",
+          "audio": "AUDIO: Use a soft rolling sound only while movement is visible; no dramatic engine or impact effects."
+        },
+        {
+          "id": "toy_outdoor_v15",
+          "variation_number": 15,
+          "name": "Garden Explorer Scene",
+          "hook": "HOOK: Reveal the outdoor toy beside a neat garden area, keeping the product as the unmistakable focal point.",
+          "action": "Show a simple pretend-exploration action around the garden, using only the toy's actual pieces and intended visible function.",
+          "detail": "DETAIL: Plants and garden objects remain background context; do not attach accessories or imply included extras.",
+          "camera": "CAMERA: Compose a wide garden establishing frame, then use one gentle push-in toward the product in use.",
+          "lighting": "LIGHTING: Diffused daylight with natural greens and neutral product color.",
+          "closing": "CTA / HERO: End with the toy neatly arranged in the same garden location, complete and unobstructed.",
+          "audio": "AUDIO: Quiet birds or garden ambience are acceptable; avoid sound effects that imply unseen action."
+        },
+        {
+          "id": "toy_outdoor_v16",
+          "variation_number": 16,
+          "name": "Sandpit Play Sequence",
+          "hook": "HOOK: Open with the outdoor toy arranged beside a clean sandpit, showing all supplied visible pieces together.",
+          "action": "Demonstrate one realistic scoop, build or sand-play motion only if the product design supports it.",
+          "detail": "DETAIL: Keep sand interaction physically plausible and avoid changing the toy's shape or adding unshown tools.",
+          "camera": "CAMERA: Use a stable overhead detail for the real action, then cut to a medium hero shot at sandpit level.",
+          "lighting": "LIGHTING: Warm but neutral sunlight with readable texture and no blown sand highlights.",
+          "closing": "CTA / HERO: Finish with the toy and its actual pieces arranged clearly at the edge of the play area.",
+          "audio": "AUDIO: Add a light sand rustle only if the movement is visible; keep music understated."
+        },
+        {
+          "id": "toy_outdoor_v17",
+          "variation_number": 17,
+          "name": "Wind-and-Motion Test",
+          "hook": "HOOK: Frame the outdoor toy in an open space with the product fully visible before movement begins.",
+          "action": "If designed for wind or flight, show a brief, plausible movement in a safe open area; otherwise show a gentle manual movement suited to the item.",
+          "detail": "DETAIL: Do not invent flight, floating, powered motion or wind response for toys that do not support it.",
+          "camera": "CAMERA: Keep the product in frame with a steady follow shot; avoid impossible aerial angles or sudden jumps.",
+          "lighting": "LIGHTING: Bright overcast daylight for even detail and natural color.",
+          "closing": "CTA / HERO: End with the toy returned to a clear, stable display position.",
+          "audio": "AUDIO: Use natural wind only when appropriate; no exaggerated whooshes or unsupported mechanical sounds."
+        },
+        {
+          "id": "toy_outdoor_v18",
+          "variation_number": 18,
+          "name": "Family Picnic Play Break",
+          "hook": "HOOK: Start with the outdoor toy placed on a picnic blanket or beside a picnic area, fully visible and undistorted.",
+          "action": "Show a short play break with one simple interaction; keep people optional and secondary if they appear at all.",
+          "detail": "DETAIL: Picnic props are background dressing, not product inclusions; avoid food contact if unsuitable for the toy.",
+          "camera": "CAMERA: Open in a balanced wide composition, then cut to a close view of the genuine play feature.",
+          "lighting": "LIGHTING: Soft afternoon light with consistent white balance and realistic shadows.",
+          "closing": "CTA / HERO: Close on the complete toy against a tidy picnic setting, leaving clean negative space.",
+          "audio": "AUDIO: Low picnic ambience and one relevant soft SFX at most; no dialogue unless selected separately."
+        },
+        {
+          "id": "toy_outdoor_v19",
+          "variation_number": 19,
+          "name": "Obstacle-Course Preview",
+          "hook": "HOOK: Show the outdoor toy beside a simple, safe play route, with its intended use immediately understandable.",
+          "action": "Demonstrate one short course step or obstacle interaction only if the toy is made for that use; otherwise stage a simple straight-line play action.",
+          "detail": "DETAIL: Obstacles must be low, stable and appropriate; never imply stunts, unsafe jumps or features absent from the reference.",
+          "camera": "CAMERA: Use a low tracking shot for the single action, then a wide locked shot showing the complete toy.",
+          "lighting": "LIGHTING: Balanced daylight with clear separation between toy and background.",
+          "closing": "CTA / HERO: Finish with the toy stationary at the start of the route, all real parts visible.",
+          "audio": "AUDIO: Sync a mild movement cue to the demonstrated action; avoid dramatic impact sounds."
+        },
+        {
+          "id": "toy_outdoor_v20",
+          "variation_number": 20,
+          "name": "Golden-Hour Outdoor Hero",
+          "hook": "HOOK: Present the complete outdoor toy against a softly sunlit outdoor backdrop before any movement.",
+          "action": "Make a slow, natural reveal around the front and one visible side, without showing unseen or fabricated features.",
+          "detail": "DETAIL: Keep the item identical across cuts; preserve colors, dimensions, surface details and included pieces.",
+          "camera": "CAMERA: Use one slow slider move and a final locked three-quarter angle; no fast spin or extreme macro.",
+          "lighting": "LIGHTING: Gentle golden-hour edge light balanced with fill so product details remain accurate.",
+          "closing": "CTA / HERO: Hold the final hero composition long enough to inspect the whole toy; no rendered text by default.",
+          "audio": "AUDIO: Use a light upbeat instrumental bed with no extra SFX unless a visible beat warrants one."
         }
       ]
     },
