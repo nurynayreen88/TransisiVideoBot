@@ -3962,7 +3962,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                         or context.user_data.get('prompt_custom_subcategory_name')
                     ),
                     product_subtype=context.user_data.get('prompt_product_subcategory', ''),
-                    prompt_language=context.user_data.get('prompt_language', 'Malay')
+                    prompt_language=context.user_data.get('prompt_language', 'Malay'),
+                    concise=True,
                 )
                 component_rules = _prompt_library_component_rules(
                     context.user_data.get('prompt_library_id'),
@@ -3972,8 +3973,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     on_screen_text=context.user_data.get('prompt_on_screen_text', 'no'),
                     camera_choice=motion,
                 )
-                if component_rules:
-                    prompt = prompt.rstrip() + '\n\nREUSABLE COMPONENT RULES:\n' + component_rules
+                # Concise visual briefs already include their essential product and camera directions.
+                # Avoid appending the full reusable rule library to the user-facing prompt.
                 if context.user_data.get('prompt_model_presence') == 'yes' and int(context.user_data.get('prompt_model_count',1)) == 2:
                     prompt += ('\n\nTWO-MODEL CAST: Model 1 is ' + str(context.user_data.get('prompt_model_gender','female')) + ', appearance ' + str(context.user_data.get('prompt_model_ethnicity','random_malaysia')) + ', age ' + str(context.user_data.get('prompt_model_age','26-40')) + ', hijab ' + str(context.user_data.get('prompt_model_hijab','na')) + '. Model 2 is ' + str(context.user_data.get('prompt_model_gender_2','male')) + ', appearance ' + str(context.user_data.get('prompt_model_ethnicity_2','random_malaysia')) + ', age ' + str(context.user_data.get('prompt_model_age_2','26-40')) + ', hijab ' + str(context.user_data.get('prompt_model_hijab_2','na')) + '. Keep identities distinct and consistent.')
                 # Text and audio options are added once by prompt_creative_settings below.
