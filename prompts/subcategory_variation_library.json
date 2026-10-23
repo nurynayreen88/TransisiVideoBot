@@ -27049,7 +27049,7 @@
       "subcategory_id": "accessory_scarf",
       "category_id": "accessory",
       "label": "🧣 Skaf / Aksesori fesyen",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "accessory_scarf_v01",
@@ -27170,6 +27170,126 @@
           "lighting": "LIGHTING: Diffused daylight with a clean, uncluttered background.",
           "closing": "CTA / HERO: Finish with a clean, steady view of the unchanged product.",
           "audio": "AUDIO: Keep speech clear if selected, with low background music and no stacked SFX."
+        },
+        {
+          "id": "accessory_scarf_v11",
+          "variation_number": 11,
+          "name": "Folded Edge Unfold Reveal",
+          "hook": "Begin with the scarf or fashion accessory in the exact folded arrangement shown in the reference, keeping its real print and edge visible.",
+          "action": "If the reference supports an unfolded view, make a clean cut to that same item opened out; otherwise keep it folded and reveal more detail with the camera only.",
+          "detail": "Preserve the actual border, hem, print placement and visible folds. Do not invent a second side, extra length or fabric properties.",
+          "camera": "Start in a close overhead view and drift outward to a wider view without stretching or morphing the item.",
+          "lighting": "Soft neutral daylight with stable white balance to preserve the reference colours.",
+          "closing": "Hold on the clearest full view supported by the reference, with no added text.",
+          "audio": "Gentle understated instrumental; no artificial fabric swoosh."
+        },
+        {
+          "id": "accessory_scarf_v12",
+          "variation_number": 12,
+          "name": "Border and Hem Tracking",
+          "hook": "Open on a genuine visible border, hem or edge detail; if no finished edge is clear, use the most distinctive visible pattern area.",
+          "action": "Track parallel to the real edge, following its existing line without pulling, trimming or reshaping the scarf.",
+          "detail": "Do not add tassels, stitching, fringe or decorative trim unless clearly visible in the reference.",
+          "camera": "A slow close lateral slide that eases back to show where the detail sits on the whole item.",
+          "lighting": "Soft raking light reveals real folds and edge definition without changing the apparent material.",
+          "closing": "End with the actual edge detail and enough of the product visible for context.",
+          "audio": "Quiet modern instrumental; no invented handling sounds."
+        },
+        {
+          "id": "accessory_scarf_v13",
+          "variation_number": 13,
+          "name": "Print Placement Panorama",
+          "hook": "Begin on the most readable real motif, stripe or colour block in the scarf, then reveal how the pattern is arranged across the visible area.",
+          "action": "Move the camera smoothly across the existing print while the item remains still and flat or folded as supplied.",
+          "detail": "Keep motif scale, spacing, orientation and colours consistent. Do not duplicate or mirror motifs to fill unseen areas.",
+          "camera": "A controlled top-down pan across the known visible surface, finishing in a balanced overhead composition.",
+          "lighting": "Even diffused light and locked colour balance; avoid glare and artificial saturation.",
+          "closing": "Hold on the authentic print arrangement without overlays or graphics.",
+          "audio": "Light instrumental with no reveal chime."
+        },
+        {
+          "id": "accessory_scarf_v14",
+          "variation_number": 14,
+          "name": "Natural Drape in Supported View",
+          "hook": "If the reference shows the scarf draped or worn, begin with that same arrangement; otherwise show it resting on its supplied surface.",
+          "action": "For an already-supported draped view, allow only a small natural settling movement; if no wearer or drape is shown, keep the item stationary and use a camera-only move.",
+          "detail": "Do not introduce a model unless explicitly selected, invent a knot or styling method, or imply warmth, softness or material composition.",
+          "camera": "Use a steady medium close-up for the supported drape, or a slow three-quarter slide for a tabletop product.",
+          "lighting": "Soft natural-looking light that preserves true colour and realistic shadows.",
+          "closing": "Return to a stable view of the original arrangement, keeping the item recognizable.",
+          "audio": "Low-volume calm instrumental; no voiceover unless selected."
+        },
+        {
+          "id": "accessory_scarf_v15",
+          "variation_number": 15,
+          "name": "Texture Focus Without Claims",
+          "hook": "Choose a genuinely visible weave, rib, print or surface detail for the opening; if texture cannot be verified, focus on the visible outline instead.",
+          "action": "Use a short focus pull across the existing surface while the product remains motionless.",
+          "detail": "Describe only what can be seen; do not claim silk, cotton, wool, cooling, stretch, softness or other material/performance qualities without evidence.",
+          "camera": "Locked macro shot followed by a gradual pullback to establish the item's scale.",
+          "lighting": "Broad soft light with restrained shadows so surface detail remains natural rather than exaggerated.",
+          "closing": "Finish on a clear close-to-medium view with the original surface intact.",
+          "audio": "Subtle instrumental only; no brushing or fabric sounds unless the action is visible."
+        },
+        {
+          "id": "accessory_scarf_v16",
+          "variation_number": 16,
+          "name": "Corner and Tip Geometry",
+          "hook": "Open on a real corner, pointed end or rounded edge if one is visible; otherwise use a distinct turn in the product's outline.",
+          "action": "Make a slow camera move around the visible corner while preserving its shape and position.",
+          "detail": "Do not sharpen rounded corners, lengthen pointed ends or invent tassels, loops or attached hardware.",
+          "camera": "Close three-quarter angle with a small arc, then pull back to show the corner's place in the whole item.",
+          "lighting": "Diffused side light reveals the genuine contour with natural contact shadows.",
+          "closing": "Hold on the authentic shape and nearby pattern or border if visible.",
+          "audio": "Clean quiet instrumental; no transition effects."
+        },
+        {
+          "id": "accessory_scarf_v17",
+          "variation_number": 17,
+          "name": "Colourway Fidelity Hero",
+          "hook": "Present the complete visible scarf or fashion accessory first so its actual colour arrangement reads clearly.",
+          "action": "Make one slow push-in toward a prominent colour area, then return to the same full composition without changing the print.",
+          "detail": "Keep all colour boundaries and patterns faithful; no extra accents, recolouring or unsupported claims about colourfastness.",
+          "camera": "Single smooth push-in and pullback with stable orientation and realistic perspective.",
+          "lighting": "Neutral balanced illumination with fixed exposure so colour does not shift between beats.",
+          "closing": "End with the entire reference-supported item centred and unobstructed.",
+          "audio": "Soft polished instrumental; no synthetic colour-change effect."
+        },
+        {
+          "id": "accessory_scarf_v18",
+          "variation_number": 18,
+          "name": "Supplied Set and Pairing Layout",
+          "hook": "If the reference includes multiple scarves or matching accessories, open on that exact set; if only one item appears, show that item alone.",
+          "action": "Make a slow overhead pass across the existing arrangement without moving, duplicating or removing any supplied piece.",
+          "detail": "Maintain the exact item count, colours, folds and placement. Do not add a matching bag, jewellery, packaging or other styling props.",
+          "camera": "Gentle overhead drift into a high three-quarter view, keeping every supplied item in frame.",
+          "lighting": "Even tabletop light with realistic contact shadows and accurate colour.",
+          "closing": "Hold on the complete authentic set or single item as shown.",
+          "audio": "Understated instrumental; no unboxing effects."
+        },
+        {
+          "id": "accessory_scarf_v19",
+          "variation_number": 19,
+          "name": "Shadow and Fold Contour",
+          "hook": "Start with the real folds and their natural shadow in the supplied arrangement, without creating new creases or reshaping the item.",
+          "action": "Shift the camera slightly so the existing folds and shadows gain depth while the scarf stays still.",
+          "detail": "Preserve the original fold pattern and visible edges; do not create wind, floating fabric or a dramatic billowing effect.",
+          "camera": "Low three-quarter slide with a short pullback to reveal the larger silhouette.",
+          "lighting": "Large diffused source produces soft realistic shadows and avoids deep artificial contrast.",
+          "closing": "Finish on a calm complete view with the natural fold structure visible.",
+          "audio": "Quiet ambient-style instrumental; no wind or fabric effects."
+        },
+        {
+          "id": "accessory_scarf_v20",
+          "variation_number": 20,
+          "name": "Detail-to-Complete Scarf Reveal",
+          "hook": "Choose one genuine visible feature—border, motif, corner, fold or surface detail—and open close on it only if present.",
+          "action": "Pull back in one continuous move to reveal the complete scarf or accessory at realistic scale, keeping all visible geometry and pattern placement consistent.",
+          "detail": "Do not invent hidden sides, labels, stitching, material composition or included accessories; preserve only details supported by the reference.",
+          "camera": "Stable macro-to-medium pullback with natural perspective and no morphing.",
+          "lighting": "Balanced soft light, true colour and realistic contact shadows.",
+          "closing": "Hold a clean full-product hero frame for the final beat with no captions or watermark.",
+          "audio": "Soft instrumental outro; no voiceover or invented handling sounds."
         }
       ]
     },
