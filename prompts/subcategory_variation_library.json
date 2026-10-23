@@ -28785,7 +28785,7 @@
       "subcategory_id": "toy_game",
       "category_id": "toy",
       "label": "🎲 Permainan / Board game",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "toy_game_v01",
@@ -28906,6 +28906,126 @@
           "lighting": "LIGHTING: Warm neutral light, consistent across every beat.",
           "closing": "CTA / HERO: Return to the same product orientation and lighting for a clean close.",
           "audio": "AUDIO: Use one soft handling sound only if the handling is visible; no invented effects."
+        },
+        {
+          "id": "toy_game_v11",
+          "variation_number": 11,
+          "name": "Rulebook-Free First Look",
+          "hook": "HOOK: Start on the actual game set arranged as supplied, giving viewers a clear first look before play begins.",
+          "action": "Make one deliberate move with a visible piece only when the reference clearly shows how it is used; do not invent rules or outcomes.",
+          "detail": "DETAIL: Keep the board layout, printed markings, piece count and colours faithful to the reference; do not add instructions or claim how the game works.",
+          "camera": "CAMERA: Use a slow push from the full set to the single piece being handled, then return to the complete layout.",
+          "lighting": "LIGHTING: Soft neutral tabletop lighting with legible printed details and natural contact shadows.",
+          "closing": "CTA / HERO: Hold on the complete set as supplied, with no fabricated score, winner or text overlay.",
+          "audio": "AUDIO: Use quiet room tone or restrained music; add a piece-click only when contact is visible."
+        },
+        {
+          "id": "toy_game_v12",
+          "variation_number": 12,
+          "name": "Piece-by-Piece Inventory",
+          "hook": "HOOK: Open with the full board game set in frame so viewers can understand the overall contents at a glance.",
+          "action": "Pan across the pieces that are actually visible, without counting or displaying components hidden from view.",
+          "detail": "DETAIL: Focus on real shapes, colours and printed artwork; never duplicate, replace or recolour pieces.",
+          "camera": "CAMERA: Make a measured left-to-right tabletop pass, finishing on the complete set in the same arrangement.",
+          "lighting": "LIGHTING: Even diffused light that avoids glare on cards, boards or glossy pieces.",
+          "closing": "CTA / HERO: End with a balanced overhead composition of the visible components only.",
+          "audio": "AUDIO: Keep sound minimal; no dice roll, shuffle or click unless that action is shown."
+        },
+        {
+          "id": "toy_game_v13",
+          "variation_number": 13,
+          "name": "One-Move Demonstration",
+          "hook": "HOOK: Begin with the real game board and the relevant visible playing piece clearly in view.",
+          "action": "Show one simple, plausible move using only the supplied piece and visible board; do not imply official rules or a guaranteed result.",
+          "detail": "DETAIL: Preserve the exact board graphics and piece design, and do not generate extra hands, pieces or markings.",
+          "camera": "CAMERA: Hold a steady three-quarter tabletop angle through the move, then briefly widen to show the board again.",
+          "lighting": "LIGHTING: Soft side lighting with stable exposure and accurate colours.",
+          "closing": "CTA / HERO: Leave the piece in its demonstrated position and finish on the unchanged real game set.",
+          "audio": "AUDIO: A faint contact sound may accompany the visible move; no dramatic win or fail effects."
+        },
+        {
+          "id": "toy_game_v14",
+          "variation_number": 14,
+          "name": "Card Artwork Close-Up",
+          "hook": "HOOK: Show the actual cards or printed game surfaces from the supplied set before moving closer.",
+          "action": "Reveal a few visible card designs one at a time only if the cards are present and can be handled naturally.",
+          "detail": "DETAIL: Do not invent card faces, readable wording, symbols, scores or additional cards; keep all artwork faithful to the reference.",
+          "camera": "CAMERA: Use a gentle macro-style push-in with focus on one visible card, then pull back to the full product.",
+          "lighting": "LIGHTING: Broad soft light that reduces reflections while keeping printed artwork true to colour.",
+          "closing": "CTA / HERO: Finish with the cards returned to their original arrangement beside the rest of the set.",
+          "audio": "AUDIO: Use a soft paper movement sound only when a card visibly moves; avoid exaggerated shuffling."
+        },
+        {
+          "id": "toy_game_v15",
+          "variation_number": 15,
+          "name": "Hands-On Tabletop Moment",
+          "hook": "HOOK: Frame the real game set ready on a clean table, with all visible components remaining easy to identify.",
+          "action": "Show a pair of hands gently placing or moving one supplied piece; keep the interaction simple and physically plausible.",
+          "detail": "DETAIL: Hands must not obscure important artwork for long, and no new pieces or unshown accessories may appear.",
+          "camera": "CAMERA: Use a stable over-the-shoulder or elevated tabletop view, selected to match the reference layout.",
+          "lighting": "LIGHTING: Natural window-like illumination with soft shadows and no sudden colour shifts.",
+          "closing": "CTA / HERO: Hands move away to reveal the original game layout clearly.",
+          "audio": "AUDIO: Low-level music only; add a quiet tabletop tap only if the piece visibly touches the surface."
+        },
+        {
+          "id": "toy_game_v16",
+          "variation_number": 16,
+          "name": "Compact-to-Full Reveal",
+          "hook": "HOOK: Start close on a distinctive visible feature of the game, then reveal the complete product within the opening beat.",
+          "action": "Transition from the detail to the entire set without rearranging or transforming any component.",
+          "detail": "DETAIL: Feature only a genuine element such as a visible token, board edge or card illustration; do not assume hidden functions.",
+          "camera": "CAMERA: Perform one smooth pull-back with realistic perspective and no spinning or impossible camera movement.",
+          "lighting": "LIGHTING: Clean studio light with subtle depth and accurate printed colours.",
+          "closing": "CTA / HERO: Keep the full set centred and at a believable tabletop scale for the final hold.",
+          "audio": "AUDIO: A single gentle transition accent is acceptable if selected; avoid magical or arcade effects."
+        },
+        {
+          "id": "toy_game_v17",
+          "variation_number": 17,
+          "name": "Texture and Finish Pass",
+          "hook": "HOOK: Present the actual game pieces and board under calm light, with the overall set still recognisable.",
+          "action": "Move across visible surface details such as printed artwork, edges or texture only where they can truly be seen.",
+          "detail": "DETAIL: Do not claim material, durability, educational benefits or special finishes unless the reference explicitly supports them.",
+          "camera": "CAMERA: Use a slow close-range lateral glide and finish at a medium view of the complete product.",
+          "lighting": "LIGHTING: Raking soft light may reveal real texture but must not create fake gloss, sparkle or material changes.",
+          "closing": "CTA / HERO: End with a crisp, natural product view and no added badges or promotional text.",
+          "audio": "AUDIO: Keep music understated; no synthetic sparkle sounds or unsupported mechanical effects."
+        },
+        {
+          "id": "toy_game_v18",
+          "variation_number": 18,
+          "name": "Two-Player Ready Setup",
+          "hook": "HOOK: Open with the supplied game set laid out neatly, suggesting a play-ready moment without inventing a match.",
+          "action": "If the reference supports it, show two players' hands taking positions near the existing pieces; otherwise keep the set untouched.",
+          "detail": "DETAIL: Do not create extra components, declare a winner, invent rules or depict unsafe small-piece use by young children.",
+          "camera": "CAMERA: Begin with a wide tabletop composition and make one restrained move toward the central playing area.",
+          "lighting": "LIGHTING: Friendly, balanced daylight with consistent shadows across the table.",
+          "closing": "CTA / HERO: Finish on the full layout ready for play, with all visible pieces preserved.",
+          "audio": "AUDIO: Natural soft room ambience is enough; no crowd, victory or competitive sound effects."
+        },
+        {
+          "id": "toy_game_v19",
+          "variation_number": 19,
+          "name": "Organised Storage Return",
+          "hook": "HOOK: Show the actual board game and its visible components neatly arranged before the closing setup.",
+          "action": "Only if the reference includes a real box or tray, place visible pieces back into it slowly; otherwise show a tidy tabletop arrangement.",
+          "detail": "DETAIL: Never invent packaging, compartments, lids or storage capacity that are not shown in the supplied reference.",
+          "camera": "CAMERA: Use a locked tabletop shot during the simple action, then a short push-in on the final arrangement.",
+          "lighting": "LIGHTING: Soft, practical lighting with no dramatic before-and-after transformation.",
+          "closing": "CTA / HERO: End with the actual game set and any supplied packaging clearly visible, unchanged in design.",
+          "audio": "AUDIO: Include gentle handling sounds only when movement is shown; keep any music quiet."
+        },
+        {
+          "id": "toy_game_v20",
+          "variation_number": 20,
+          "name": "Playful Pause Hero",
+          "hook": "HOOK: Open with a clear, attractive view of the real game set, using its own colours and layout as the visual hook.",
+          "action": "Create a brief moment of anticipation with a slow camera move toward the board; do not animate pieces or fabricate gameplay.",
+          "detail": "DETAIL: Maintain the original piece count, artwork and layout throughout; no invented glow, scores, labels or game results.",
+          "camera": "CAMERA: Combine a slow diagonal slide with a subtle push-in, then stop for a clean final hero frame.",
+          "lighting": "LIGHTING: Warm-neutral softbox-style light with realistic shadows and no colour cast on the product.",
+          "closing": "CTA / HERO: Hold the complete game set in a confident final composition with space for optional post-editing, but no rendered text.",
+          "audio": "AUDIO: Use restrained upbeat music if requested; keep SFX absent unless a matching visible action occurs."
         }
       ]
     },
