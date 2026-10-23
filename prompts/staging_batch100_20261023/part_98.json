@@ -223,26 +223,26 @@
     {
       "id": "travel_pillow_v31",
       "variation_number": 31,
-      "name": "Measured Push-In — travel pillow",
-      "hook": "HOOK: Begin on the supplied travel pillow in a complete front-facing view; preserve exact reference-visible colour, geometry, labels and quantity.",
-      "action": "ACTION: Measured Push-In presents the actual travel pillow through a restrained camera or focus transition; show handling only if supported by the reference and do not invent functions, contents or performance.",
-      "detail": "DETAIL: Emphasize only source-visible surfaces, contours, joins and supplied parts of this travel pillow; avoid fabricated reverse sides, accessories or specifications.",
-      "camera": "CAMERA: measured push-in using a short front-facing dolly; maintain true scale and continuous product identity.",
-      "lighting": "LIGHTING: diffused daylight, faithful colours and realistic contact shadows.",
-      "closing": "CTA / HERO: Settle on the complete unchanged travel pillow, clearly framed without generated captions, logos or watermark.",
-      "audio": "AUDIO: Quiet instrumental bed only; no invented product sounds or unverified spoken claims."
+      "name": "Balanced framing — travel_pillow_v31",
+      "hook": "0–2s: Introduce the entire actual travel pillow with reference-visible shape, colour and supplied parts. Begin with a gentle camera-only lateral reframe; no text.",
+      "action": "2–6s: Continue a gentle camera-only lateral reframe with camera movement alone, preserving stationary product, genuine source folds and original pictured orientation. Do not invent hands, models or unseen product views.",
+      "detail": "6–8s: Highlight only a genuinely pictured curve, seam, cover edge or closure if visible. Do not invent neck support performance, memory foam, washable cover, fit, material or hidden fastener.",
+      "camera": "Use a gentle camera-only lateral reframe at realistic accessory scale; remain within source-supported surfaces and avoid unsupported rotation.",
+      "lighting": "Neutral diffuse daylight preserving source colours.",
+      "closing": "8–10s: Resolve to a centered whole-product hero, keeping the same complete source-faithful product. No added logos, captions or watermark.",
+      "audio": "Soft unobtrusive instrumental; no invented zips, fabric rustles, voiceover promises or distracting sound effects."
     },
     {
       "id": "travel_pillow_v32",
       "variation_number": 32,
-      "name": "Visible Seam Trace — travel pillow",
-      "hook": "HOOK: Begin on the supplied travel pillow in a reference-visible seam or fitting; preserve exact reference-visible colour, geometry, labels and quantity.",
-      "action": "ACTION: Visible Seam Trace presents the actual travel pillow through a restrained camera or focus transition; show handling only if supported by the reference and do not invent functions, contents or performance.",
-      "detail": "DETAIL: Emphasize only source-visible surfaces, contours, joins and supplied parts of this travel pillow; avoid fabricated reverse sides, accessories or specifications.",
-      "camera": "CAMERA: visible seam trace using a shallow lateral move; maintain true scale and continuous product identity.",
-      "lighting": "LIGHTING: soft neutral studio fill, faithful colours and realistic contact shadows.",
-      "closing": "CTA / HERO: Settle on the complete unchanged travel pillow, clearly framed without generated captions, logos or watermark.",
-      "audio": "AUDIO: Quiet instrumental bed only; no invented product sounds or unverified spoken claims."
+      "name": "Real surface study — travel_pillow_v32",
+      "hook": "0–2s: Introduce the entire actual travel pillow with reference-visible shape, colour and supplied parts. Begin with a controlled close-to-medium reverse dolly; no text.",
+      "action": "2–6s: Continue a controlled close-to-medium reverse dolly with camera movement alone, preserving stationary product, genuine source folds and original pictured orientation. Do not invent hands, models or unseen product views.",
+      "detail": "6–8s: Highlight only a genuinely pictured curve, seam, cover edge or closure if visible. Do not invent neck support performance, memory foam, washable cover, fit, material or hidden fastener.",
+      "camera": "Use a controlled close-to-medium reverse dolly at realistic accessory scale; remain within source-supported surfaces and avoid unsupported rotation.",
+      "lighting": "Gentle side diffusion with natural contours.",
+      "closing": "8–10s: Resolve to a true-colour complete-item portrait, keeping the same complete source-faithful product. No added logos, captions or watermark.",
+      "audio": "Soft unobtrusive instrumental; no invented zips, fabric rustles, voiceover promises or distracting sound effects."
     }
   ]
 }
