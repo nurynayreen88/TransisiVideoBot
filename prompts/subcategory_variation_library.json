@@ -29777,7 +29777,7 @@
       "subcategory_id": "stationery_notebook",
       "category_id": "book_stationery",
       "label": "📓 Buku nota / Planner",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "stationery_notebook_v01",
@@ -29898,6 +29898,126 @@
           "lighting": "LIGHTING: Low-contrast premium light; keep labels and details readable.",
           "closing": "CTA / HERO: Return to the complete unchanged product and hold a clean final frame.",
           "audio": "AUDIO: Respect audio settings; if the generator cannot render audio, do not claim it will."
+        },
+        {
+          "id": "stationery_notebook_v11",
+          "variation_number": 11,
+          "name": "Cover-to-Page Corner Reveal",
+          "hook": "Open on the exact notebook cover from the reference, with its real title, illustration, colour and edge details unchanged. Do not create new lettering or extra branding.",
+          "action": "The notebook opens just enough to reveal the first visible page corner, only if it is a normally opening notebook; otherwise keep it closed and slide the camera along the cover edge.",
+          "detail": "Show the actual cover finish, page block and binding edge only where visible. Preserve printed artwork and any legible marks without inventing page layouts.",
+          "camera": "Begin in a close three-quarter cover view, then make a slow diagonal move toward the exposed page corner while keeping the notebook at realistic scale.",
+          "lighting": "Use broad soft light to show the cover and paper edges without glare or colour shifts.",
+          "closing": "Hold a clean view linking the original cover to the real page edge, with no added props or text.",
+          "audio": "Use restrained instrumental music and a faint page sound only if the notebook is visibly opened."
+        },
+        {
+          "id": "stationery_notebook_v12",
+          "variation_number": 12,
+          "name": "Binding Edge Inspection",
+          "hook": "Start with the notebook standing or lying in the orientation supported by the reference, framing the actual binding edge and full cover shape.",
+          "action": "Keep the notebook still while the camera tracks slowly along the binding; do not flex, bend or force the spine.",
+          "detail": "Show only the real spiral, stitched, glued or other binding that is actually visible. Do not infer durability, lay-flat performance or page count.",
+          "camera": "Use a precise side-on slider move, then ease into a three-quarter view that includes the binding and cover together.",
+          "lighting": "Apply soft side light that separates the page block from the cover while retaining accurate colour and natural shadows.",
+          "closing": "Finish on a steady composition with the binding clearly visible and the complete notebook recognizable.",
+          "audio": "Quiet instrumental bed only; no invented creaks, snaps or page-turn effects."
+        },
+        {
+          "id": "stationery_notebook_v13",
+          "variation_number": 13,
+          "name": "Page-Thickness Side Profile",
+          "hook": "Open with a low side profile of the actual notebook, making its visible cover and page block easy to distinguish.",
+          "action": "A hand may lift one cover edge slightly if the construction supports it; otherwise leave the notebook untouched and move the camera parallel to the page edges.",
+          "detail": "Show the real thickness and visible page edges without claiming a specific page count or paper weight. Do not add dividers or inserts that are not shown.",
+          "camera": "Use a low macro slide from one corner along the page block, then widen enough to establish the whole notebook.",
+          "lighting": "Use diffuse side lighting to reveal separate page edges without exaggerating thickness or adding a glossy finish.",
+          "closing": "Hold a clean side-profile hero frame with the notebook's true proportions preserved.",
+          "audio": "Use low-volume music; add a soft paper movement sound only when a page or cover visibly moves."
+        },
+        {
+          "id": "stationery_notebook_v14",
+          "variation_number": 14,
+          "name": "Single-Page Turn",
+          "hook": "Begin with the notebook open only if the reference supports an open view, keeping the visible page design and any printed content faithful to the original.",
+          "action": "Turn one page slowly from its existing edge and let it settle naturally. If the notebook is shown closed or the page cannot be turned plausibly, substitute a camera-only reveal without inventing pages.",
+          "detail": "Preserve all visible lines, grids, dates, diagrams and writing exactly; never fill a blank page with generated handwriting or new printed content.",
+          "camera": "Use a stable overhead shot that follows the page edge gently, without cuts during the turn or distortion of the page shape.",
+          "lighting": "Use even daylight to keep paper white balance consistent and prevent hand shadows from hiding the page.",
+          "closing": "End with the real open spread or original closed cover fully readable as a product, without added text.",
+          "audio": "A subtle page-turn sound is appropriate only when the page visibly turns; keep music quiet."
+        },
+        {
+          "id": "stationery_notebook_v15",
+          "variation_number": 15,
+          "name": "Elastic Band and Closure Check",
+          "hook": "If the reference notebook visibly has an elastic band, strap or closure, begin with that exact feature in clear view; if not, frame the actual cover edge without inventing a closure.",
+          "action": "Only when a visible band or closure is present and its movement is clear, a hand gently moves it aside and returns it to its resting position. Otherwise keep the item still.",
+          "detail": "Show the actual attachment and placement of the visible closure. Do not add a pen loop, pocket, clasp or magnetic feature that the reference does not show.",
+          "camera": "Use a close, locked three-quarter composition and a small push-in toward the real closure, keeping the notebook edge in frame.",
+          "lighting": "Use soft directional light to separate the band or edge from the cover without changing the material appearance.",
+          "closing": "Hold the original notebook closed with the visible closure unobstructed, or finish on the plain cover if no closure exists.",
+          "audio": "Use a quiet instrumental bed; no snap or magnetic click unless that exact sound is visibly supported."
+        },
+        {
+          "id": "stationery_notebook_v16",
+          "variation_number": 16,
+          "name": "Planner Layout Scan",
+          "hook": "For a planner with visible printed sections, open on the real page layout; for a blank notebook, show its actual blank or ruled page instead. Do not generate dates, schedules or headings.",
+          "action": "Move a finger or the camera along one existing section of the page without writing or altering its contents; if no page is open, slowly reveal the cover and edge.",
+          "detail": "Keep all printed grids, dates, lines and labels faithful and undistorted. Do not claim a planner format or organisational feature unless it is visibly present.",
+          "camera": "Use a controlled overhead pan across the existing page layout, followed by a slight pullback to show the notebook context.",
+          "lighting": "Use broad neutral light with even exposure across the page so the original print remains legible and unchanged.",
+          "closing": "Finish with the authentic page layout centred and the notebook edges visible, with no added overlays.",
+          "audio": "Soft unobtrusive instrumental music; no keyboard, ticking-clock or productivity-themed effects."
+        },
+        {
+          "id": "stationery_notebook_v17",
+          "variation_number": 17,
+          "name": "Corner Wear-Free Detail",
+          "hook": "Frame one real corner of the notebook cover and its adjacent page edges, using the supplied reference as the sole guide to colour, shape and condition.",
+          "action": "Keep the product stationary and make a slow camera arc of only a few degrees around that corner; do not bend the cover or simulate wear.",
+          "detail": "Reveal only visible corner construction, rounded or square edges, and actual cover-to-page alignment. Do not claim waterproofing, scratch resistance or reinforced corners.",
+          "camera": "Use a close macro shot with a tiny controlled arc, then pull back enough to show where the corner sits on the complete notebook.",
+          "lighting": "Use soft raking light to define the edge without adding artificial shine or making the item appear damaged.",
+          "closing": "Hold a crisp three-quarter view of the unchanged corner and notebook silhouette.",
+          "audio": "Minimal instrumental bed only; no scratching or tapping sounds when no contact occurs."
+        },
+        {
+          "id": "stationery_notebook_v18",
+          "variation_number": 18,
+          "name": "Stacked Notebook Separation",
+          "hook": "If the reference includes multiple notebooks, begin with that exact set and preserve each cover design and relative size; if only one is shown, do not create a stack.",
+          "action": "For a visible stack, slide only the top notebook a short distance to separate its cover edge, then stop. For a single notebook, keep it still and use a camera slide instead.",
+          "detail": "Show the actual cover designs and page edges of the items present. Do not imply that extra notebooks are included when the reference shows only one.",
+          "camera": "Use a slightly elevated three-quarter view and a short lateral move that keeps the real number of notebooks clear.",
+          "lighting": "Use soft even studio light so overlapping edges remain distinct and cover colours stay accurate.",
+          "closing": "End with the original set or single notebook neatly arranged and fully recognizable.",
+          "audio": "Quiet instrumental music; a light paperboard contact sound only if notebooks visibly touch or slide."
+        },
+        {
+          "id": "stationery_notebook_v19",
+          "variation_number": 19,
+          "name": "Bookmark and Ribbon Detail",
+          "hook": "If a ribbon bookmark or built-in marker is visible in the reference, open with its real position against the notebook; if none is visible, begin on a genuine page edge or binding detail instead.",
+          "action": "When the ribbon is present, a hand lays it gently along the page without pulling it out or changing its length. Otherwise use a slow camera move across the actual edge detail.",
+          "detail": "Show only the visible ribbon, attachment and page relationship if present. Do not invent a bookmark, pocket, tab or accessory.",
+          "camera": "Use a close overhead composition and a gentle pullback to connect the small detail to the full notebook.",
+          "lighting": "Use diffuse light to keep the ribbon and paper colours accurate, with natural shadows and no artificial sparkle.",
+          "closing": "Hold a clear final view of the visible bookmark detail or actual page edge within the original notebook.",
+          "audio": "Use soft music and a faint paper sound only if the hand visibly moves the page or ribbon."
+        },
+        {
+          "id": "stationery_notebook_v20",
+          "variation_number": 20,
+          "name": "Closed-to-Open Shape Match",
+          "hook": "Open with the exact closed notebook cover, clearly showing its real proportions and visible artwork. Only use an opening transition if the supplied notebook construction supports it.",
+          "action": "A hand opens the cover in one continuous natural motion to reveal the actual first visible spread; if opening is unsupported or no interior reference exists, use a clean cut to another supplied view rather than inventing page contents.",
+          "detail": "Keep cover art, binding, page layout and any visible marks consistent. Do not add handwriting, stickers, pockets or inserts that are not in the reference.",
+          "camera": "Use a stable overhead three-quarter shot with enough room for the cover to open without leaving the vertical 9:16 frame.",
+          "lighting": "Maintain the same soft neutral light through the movement so paper and cover colours do not shift.",
+          "closing": "Finish with either the authentic open view or the original closed notebook fully visible, with no text overlays or watermark.",
+          "audio": "Use restrained instrumental music and a subtle page sound only if the cover visibly opens."
         }
       ]
     },
