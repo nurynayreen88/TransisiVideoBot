@@ -381,7 +381,7 @@ def _category_specific_scenes(product_type, product, product_subtype=""):
     subtype = str(product_subtype or "").casefold()
     if product_type == "bag" and (
         subtype in {"bag_wallet", "wallet", "card_holder"}
-        or any(term in words for term in ("wallet", "dompet", "card holder", "cardholder", "coin purse"))
+        or (not subtype and any(term in words for term in ("wallet", "dompet", "card holder", "cardholder", "coin purse")))
     ):
         return [
             ("HOOK / WALLET SILHOUETTE", "Open on the wallet or card holder itself, with its complete outline visible; do not frame it as a handbag."),
@@ -392,7 +392,7 @@ def _category_specific_scenes(product_type, product, product_subtype=""):
         ]
     if product_type == "bag" and (
         subtype in {"bag_backpack", "bag_laptop", "backpack"}
-        or any(term in words for term in ("backpack", "rucksack", "beg galas", "beg sekolah", "beg laptop"))
+        or (not subtype and any(term in words for term in ("backpack", "rucksack", "beg galas", "beg sekolah", "beg laptop")))
     ):
         return [
             ("HOOK / BACKPACK SILHOUETTE", "Open on the complete backpack with its visible shoulder straps and body clearly framed."),
