@@ -43,4 +43,4 @@ for source,r in records:
 summary={"master":sum(len(c["variations"]) for c in cats),"staging_files":len(files),"staging_records":len(records)-sum(len(c["variations"]) for c in cats),"unique_ids":len(seen),"errors":errors,"warnings":warnings}
 Path("klippo_audit_report.json").write_text(json.dumps(summary,indent=2,ensure_ascii=False),encoding="utf-8")
 print(json.dumps({"master":summary["master"],"staging_files":len(files),"staging_records":summary["staging_records"],"unique_ids":len(seen),"errors_count":len(errors),"warnings_count":len(warnings),"errors":errors[:120],"warnings":warnings[:100]},ensure_ascii=False))
-if errors:raise SystemExit(1)
+if errors or warnings:raise SystemExit(1)
