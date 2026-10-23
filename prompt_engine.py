@@ -244,7 +244,7 @@ def _creative_variation(product_type, product, part, product_subtype=''):
     words = " ".join(str(value or "") for value in (product_type, product_subtype, product)).casefold()
     type_key = str(product_type or "").casefold()
     subtype_key = str(product_subtype or "").casefold()
-    if type_key in {"fashion", "hijab"} or any(w in words for w in ("dress", "clothing", "fashion", "apparel", "outfit", "garment", "pakaian", "baju", "skirt", "shirt", "t-shirt", "hijab", "tudung", "blouse")):
+    if type_key in {"fashion", "hijab"} or (type_key == "other" and not subtype_key and any(w in words for w in ("dress", "clothing", "fashion", "apparel", "outfit", "garment", "pakaian", "baju", "skirt", "shirt", "t-shirt", "hijab", "tudung", "blouse"))):
         group = "fashion"
     elif type_key == "wallet" or (type_key == "bag" and (subtype_key in {"bag_wallet", "wallet", "card_holder"} or (not subtype_key and any(w in words for w in ("wallet", "dompet", "card holder", "cardholder", "coin purse"))))):
         group = "wallet"
