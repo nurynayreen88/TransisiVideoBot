@@ -27793,7 +27793,7 @@
       "subcategory_id": "toy_figure",
       "category_id": "toy",
       "label": "🧸 Patung / Figure",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "toy_figure_v01",
@@ -27914,6 +27914,126 @@
           "lighting": "LIGHTING: Natural-looking light that remains consistent through the final frame.",
           "closing": "CTA / HERO: Let movement settle, then hold a steady full-product view.",
           "audio": "AUDIO: Use a brief natural contact sound only when physically supported by the scene."
+        },
+        {
+          "id": "toy_figure_v11",
+          "variation_number": 11,
+          "name": "Silhouette-to-Detail Reveal",
+          "hook": "HOOK: Begin with the figure's recognisable outline against a simple neutral background, then reveal its actual visible details.",
+          "action": "Move from the full figure silhouette to a clear view of its face, pose and sculpted features only where visible in the reference.",
+          "detail": "DETAIL: Keep the exact character identity, pose, colours and proportions; do not add facial expressions or sculpted parts that are not present.",
+          "camera": "CAMERA: Start with a gentle backlit outline, then use one controlled push-in to a front three-quarter view without changing the figure.",
+          "lighting": "LIGHTING: Use soft edge separation and balanced fill so the true product colours remain accurate.",
+          "closing": "CTA / HERO: Pull back to a complete, well-lit view of the unchanged figure and hold it steady.",
+          "audio": "AUDIO: Use a restrained reveal accent only if supported by the selected audio settings; no invented character sounds."
+        },
+        {
+          "id": "toy_figure_v12",
+          "variation_number": 12,
+          "name": "Pose-and-Profile Study",
+          "hook": "HOOK: Show the full figure immediately in its supplied pose, with enough space around it to read its shape.",
+          "action": "Present the existing pose, then shift framing to a side profile only if that profile is visible or can be shown without fabricating hidden details.",
+          "detail": "DETAIL: Focus on the visible stance, outline and surface details; do not imply articulation or pose-changing ability unless clearly supported.",
+          "camera": "CAMERA: Make a slow lateral camera move from front three-quarter to profile, keeping the figure at realistic scale.",
+          "lighting": "LIGHTING: Use soft directional studio light to define the outline without exaggerated shadows.",
+          "closing": "CTA / HERO: Settle back on the original front three-quarter angle with the entire figure in frame.",
+          "audio": "AUDIO: Keep music subtle and omit movement sounds unless a real physical movement is shown."
+        },
+        {
+          "id": "toy_figure_v13",
+          "variation_number": 13,
+          "name": "Sculpted Feature Close-Up",
+          "hook": "HOOK: Open on one clearly visible sculpted feature, then reveal the complete figure so the detail has context.",
+          "action": "Use two deliberate close-ups of different visible details, returning to the whole figure between or after them.",
+          "detail": "DETAIL: Magnify only real markings, facial details, clothing details or textures that can be seen in the supplied image.",
+          "camera": "CAMERA: Use a controlled macro-style push-in with shallow depth of field, then refocus on the complete product.",
+          "lighting": "LIGHTING: Soft angled light should reveal real contours while preserving colour and finish.",
+          "closing": "CTA / HERO: End on a crisp full-product shot; do not add labels, callouts or invented text.",
+          "audio": "AUDIO: No forced narration; follow the user's selected voice and music settings."
+        },
+        {
+          "id": "toy_figure_v14",
+          "variation_number": 14,
+          "name": "Minimal Collector Display",
+          "hook": "HOOK: Reveal the figure centred in a clean display composition, showing its full outline from the first beat.",
+          "action": "Keep the figure still while the camera slowly changes perspective; add no display stand or accessories unless supplied.",
+          "detail": "DETAIL: Emphasise the visible design and finish without claiming rarity, collectability, authenticity or edition status.",
+          "camera": "CAMERA: Use a smooth, short arc of no more than a subtle three-quarter shift; never reveal unseen surfaces as if confirmed.",
+          "lighting": "LIGHTING: Controlled studio highlights with realistic grounding shadow and no artificial glow.",
+          "closing": "CTA / HERO: Hold a quiet, centred hero frame with the original figure unchanged.",
+          "audio": "AUDIO: Use low-key background music only if selected; avoid dramatic effects that imply a special feature."
+        },
+        {
+          "id": "toy_figure_v15",
+          "variation_number": 15,
+          "name": "Scale-Consistent Tabletop Pass",
+          "hook": "HOOK: Start with the complete figure on a plain surface so viewers can immediately understand its overall size and shape.",
+          "action": "Move the camera past the front and visible side while keeping the figure stationary and the surrounding set simple.",
+          "detail": "DETAIL: Maintain believable scale and show only details supported by the reference; do not introduce hands or objects as size comparisons unless selected and appropriate.",
+          "camera": "CAMERA: Perform a slow tabletop slider move at figure height, avoiding wide-angle distortion or exaggerated size.",
+          "lighting": "LIGHTING: Broad diffused light keeps the figure readable from head to base, with natural contact shadows.",
+          "closing": "CTA / HERO: Stop at a balanced three-quarter view with the complete figure visible.",
+          "audio": "AUDIO: Keep the soundscape clean; add no footsteps, mechanical sounds or handling sounds to a static shot."
+        },
+        {
+          "id": "toy_figure_v16",
+          "variation_number": 16,
+          "name": "Focus-Shift Character Reveal",
+          "hook": "HOOK: Begin with the figure softly out of focus while its outline is still recognisable, then bring the product into clear focus.",
+          "action": "After the focus settles, make a gentle reframing move that reveals the full figure without altering its pose.",
+          "detail": "DETAIL: Keep all visible character details faithful to the source; do not animate the eyes, mouth or limbs unless that movement is genuinely supported.",
+          "camera": "CAMERA: Lock the camera position and use one gradual focus pull from foreground to the figure, followed by a slight push-in.",
+          "lighting": "LIGHTING: Even neutral lighting with enough separation from the background; no coloured beams or fabricated glow.",
+          "closing": "CTA / HERO: Hold the fully focused, complete figure for a clean final product view.",
+          "audio": "AUDIO: A soft focus-transition accent is optional only when consistent with the chosen audio settings."
+        },
+        {
+          "id": "toy_figure_v17",
+          "variation_number": 17,
+          "name": "Base-to-Top Reveal",
+          "hook": "HOOK: Start low on the visible base or lowest part of the figure, then reveal the full design in one smooth upward move.",
+          "action": "Travel upward along the figure's visible form, ending with the complete figure framed clearly.",
+          "detail": "DETAIL: Mention or highlight a base only if one is visibly included; otherwise begin at the lowest visible part of the figure.",
+          "camera": "CAMERA: Use a slow vertical tilt or tilt-and-rise, keeping perspective realistic and avoiding cropped details for too long.",
+          "lighting": "LIGHTING: Soft front fill and gentle side definition keep lower and upper details equally readable.",
+          "closing": "CTA / HERO: Finish at eye level with the whole figure and any supplied base visible together.",
+          "audio": "AUDIO: Match any transition sound to the camera movement only; do not invent footsteps or object sounds."
+        },
+        {
+          "id": "toy_figure_v18",
+          "variation_number": 18,
+          "name": "Clean Angle Comparison",
+          "hook": "HOOK: Open on the main view of the figure, then transition to one additional angle to make its shape easier to inspect.",
+          "action": "Show a front view and a second supported visible angle; keep the figure and its pose consistent across the cuts.",
+          "detail": "DETAIL: Compare only visible contours and details; do not imply hidden features or changes in construction.",
+          "camera": "CAMERA: Use two clean cuts with matched scale and lighting, not a fast spin or a fabricated 360-degree reveal.",
+          "lighting": "LIGHTING: Match exposure and white balance across both angles so the product appearance remains consistent.",
+          "closing": "CTA / HERO: Return to the strongest full-figure angle and hold for a readable finish.",
+          "audio": "AUDIO: Keep transitions quiet and clean; no extra SFX unless selected and appropriate."
+        },
+        {
+          "id": "toy_figure_v19",
+          "variation_number": 19,
+          "name": "Foreground-Free Hero",
+          "hook": "HOOK: Present the full figure against an uncluttered background, with no foreground object blocking its shape.",
+          "action": "Let a gentle camera push-in guide attention from the complete figure to its most distinctive visible feature.",
+          "detail": "DETAIL: Preserve the original expression, markings, colours and proportions; do not add dust, sparkles or fantasy effects.",
+          "camera": "CAMERA: Use a centred push-in with steady framing and no sudden zoom or exaggerated perspective.",
+          "lighting": "LIGHTING: Soft, neutral illumination and realistic shadow; keep all visible colours faithful to the reference.",
+          "closing": "CTA / HERO: Ease back slightly to restore the complete figure in a clean final frame.",
+          "audio": "AUDIO: Use restrained music if selected, leaving any selected speech clear and dominant."
+        },
+        {
+          "id": "toy_figure_v20",
+          "variation_number": 20,
+          "name": "Three-Beat Figure Showcase",
+          "hook": "HOOK: Establish the complete figure in a clear hero shot before moving into any close detail.",
+          "action": "Build three visual beats: full figure, one genuine visible detail, then the complete figure again; no extra characters or parts.",
+          "detail": "DETAIL: Choose a feature that is clearly present in the reference and keep its shape and colour unchanged in the close-up.",
+          "camera": "CAMERA: Use a steady opening frame, one smooth detail push-in and a clean return to the original composition.",
+          "lighting": "LIGHTING: Maintain the same soft, consistent lighting through all three beats to avoid visual mismatches.",
+          "closing": "CTA / HERO: End on the original full-figure view, centred and held long enough to register clearly.",
+          "audio": "AUDIO: Keep transitions subtle; apply voiceover, music and SFX only according to the user's selected options."
         }
       ]
     },
