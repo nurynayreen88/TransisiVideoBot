@@ -903,7 +903,8 @@ def prompt_creative_settings(user_data, include_audio=True):
         'cinematic': 'BACKGROUND MUSIC: Use a polished cinematic instrumental bed with controlled build and no overpowering hits.',
         'none': 'BACKGROUND MUSIC: No music; use no musical bed.',
     }
-    lines.append(music_directions.get(music_choice, music_directions['auto']))
+    if user_data.get('prompt_audio_enabled', True) is not False:
+        lines.append(music_directions.get(music_choice, music_directions['auto']))
     style_key = str(user_data.get('prompt_style', '')).casefold()
     if style_key in ('white_doodle', 'doodle_style'):
         lines.append(
