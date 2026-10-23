@@ -773,8 +773,6 @@ def build_prompt(mode, product, scene, motion, style='auto', duration=10, concep
             ("=== KLIPPO PART " + str(index + 1) + " ===\n\n" + part) if index else part
             for index, part in enumerate(parts)
         )
-    if mode == 'storyboard' and duration == 10:
-        return _compact_storyboard(product, scene, motion, style, product_type, product_subtype)
     presentation_variation = _presentation_variation(style, product_type, product_subtype)
     return (_build_single_prompt(mode, product, scene, motion, style, part=0, duration=duration,
                                 concept=concept, product_type=product_type, storyboard_override=storyboard_override, universal_custom=universal_custom, product_subtype=product_subtype, prompt_language=prompt_language)
