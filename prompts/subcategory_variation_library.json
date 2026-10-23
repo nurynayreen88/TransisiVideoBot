@@ -29529,7 +29529,7 @@
       "subcategory_id": "stationery_pen",
       "category_id": "book_stationery",
       "label": "🖊️ Pen / Pensel",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "stationery_pen_v01",
@@ -29650,6 +29650,126 @@
           "lighting": "LIGHTING: Diffused daylight with a clean, uncluttered background.",
           "closing": "CTA / HERO: Finish with a clean, steady view of the unchanged product.",
           "audio": "AUDIO: Keep speech clear if selected, with low background music and no stacked SFX."
+        },
+        {
+          "id": "stationery_pen_v11",
+          "variation_number": 11,
+          "name": "Cap-Off Writing Test",
+          "hook": "Open with the exact pen from the reference resting beside a clean, unmarked sheet of paper. Keep its barrel, cap, clip, tip, colour and proportions unchanged; do not add branding or on-screen text.",
+          "action": "If the visible pen tip and construction support writing, a hand removes the cap only when it is a separate cap, then draws one short simple line on the paper. If the cap cannot be removed from the reference, keep the pen still and use a camera move instead.",
+          "detail": "Show the actual tip and the resulting line only if writing is physically plausible. Do not invent ink colour, refill type, click mechanism or performance claims.",
+          "camera": "Start in a close three-quarter view, then make a slow push toward the tip and paper; keep the pen at realistic scale and in focus.",
+          "lighting": "Use soft side light with a natural shadow beneath the pen; preserve the reference colour and avoid glare that hides the tip.",
+          "closing": "Hold a clear close-up of the unchanged pen beside the simple line, with no readable words or added graphics.",
+          "audio": "Use quiet instrumental music and a faint paper contact sound only when the hand visibly touches the paper; no exaggerated writing SFX."
+        },
+        {
+          "id": "stationery_pen_v12",
+          "variation_number": 12,
+          "name": "Clip and Barrel Detail Pass",
+          "hook": "Begin with the complete pen lying diagonally on a plain neutral surface so its overall shape is immediately clear. Match the supplied pen exactly and add no stationery accessories.",
+          "action": "Keep the pen stationary while the camera travels slowly from the clip along the barrel toward the grip and tip, following only parts visible in the reference.",
+          "detail": "Emphasize the real clip attachment, barrel shape, seams and grip texture if visible. Do not invent a pocket clip, rubber grip, metal finish or hidden components.",
+          "camera": "Use one controlled macro slider move along the pen's length, with gentle focus transitions and no orbit that reveals unseen sides.",
+          "lighting": "Use broad diffused light and restrained highlights to reveal contours without making plastic look like metal or changing the finish.",
+          "closing": "End on a balanced three-quarter product view with the whole pen visible and its tip unobstructed.",
+          "audio": "Use a minimal soft instrumental bed; no clicks or mechanical sounds unless a matching mechanism is visibly operated."
+        },
+        {
+          "id": "stationery_pen_v13",
+          "variation_number": 13,
+          "name": "Notebook Margin Scale",
+          "hook": "Show the reference pen beside an ordinary blank notebook page, using the page only as a familiar scale cue. Preserve the pen's real dimensions, colour and visible markings.",
+          "action": "A hand places the pen parallel to the notebook edge and withdraws, leaving the product still. Do not write in the notebook or add unrelated objects.",
+          "detail": "Reveal the pen's length and the visible tip, clip or cap as present. Do not imply the notebook is included with the product.",
+          "camera": "Start in a medium overhead view, then lower into a gentle angled close-up while keeping both the pen and page edge in frame.",
+          "lighting": "Use even daylight with soft paper shadows and accurate white balance; keep the pen's original colour stable.",
+          "closing": "Hold a neat overhead composition with the pen and a small area of blank page visible.",
+          "audio": "Quiet desk ambience and a subtle paper sound only if the hand moves the notebook; no spoken claims."
+        },
+        {
+          "id": "stationery_pen_v14",
+          "variation_number": 14,
+          "name": "Natural Handheld Presentation",
+          "hook": "Open on the exact pen held naturally between the fingers against a plain uncluttered background. Keep the hand realistic and do not enlarge the pen or alter its design.",
+          "action": "The hand slowly rotates the pen a small amount to show its visible sides, then pauses with the tip angled away from the camera for safety and clarity.",
+          "detail": "Show only the clip, cap, barrel, grip or tip features actually visible. Do not create a click action or remove a cap unless the reference clearly supports it.",
+          "camera": "Use a steady close-to-medium vertical shot with a gentle focus adjustment as the pen turns; avoid fast spins and distorted fingers.",
+          "lighting": "Soft frontal fill with a mild side highlight; maintain realistic skin tones and the pen's true colour.",
+          "closing": "Finish with the hand holding the pen still at a three-quarter angle, with the complete product in frame.",
+          "audio": "Use restrained modern instrumental music; no artificial spin whoosh or unsupported mechanism sounds."
+        },
+        {
+          "id": "stationery_pen_v15",
+          "variation_number": 15,
+          "name": "Tip-to-Silhouette Reveal",
+          "hook": "Start with a sharply focused view of the pen's actual writing tip, if it is visible in the reference, then reveal enough of the barrel to establish the complete item.",
+          "action": "The pen remains still as the camera slowly pulls back from the tip to the full length; do not simulate writing or alter the tip shape.",
+          "detail": "Keep the real tip geometry and any visible junctions faithful. Do not claim a fine-point size, smooth ink flow or refill compatibility unless explicitly shown.",
+          "camera": "Use a straight, controlled pullback along the pen axis with a smooth rack focus from tip to barrel; keep the item undistorted.",
+          "lighting": "Use soft grazing light to define the tip edge without metallic sparkle or artificial glow.",
+          "closing": "Hold a full-pen composition with the tip and opposite end both visible.",
+          "audio": "Minimal instrumental music only; no ink, scratching or clicking effects because no such action occurs."
+        },
+        {
+          "id": "stationery_pen_v16",
+          "variation_number": 16,
+          "name": "Desk-Edge Hero Frame",
+          "hook": "Present the complete reference pen near the edge of a clean desk, with ample uncluttered negative space and no extra objects. Keep the product's original shape and colour unchanged.",
+          "action": "Make a slow lateral camera move parallel to the desk edge while the pen stays in place; use background parallax rather than moving or transforming the pen.",
+          "detail": "Let the visible silhouette, cap, clip and barrel carry the shot. Do not add a notebook, ruler, packaging or accessories not present in the reference.",
+          "camera": "Begin in a low three-quarter view and slide gently from left to right, ending with the entire pen inside the vertical frame.",
+          "lighting": "Use natural-looking window light with soft contact shadow and controlled reflections; no dramatic colour grading.",
+          "closing": "Settle into a clean, steady hero frame that clearly shows the whole pen at realistic scale.",
+          "audio": "Soft background instrumental only; no desk taps or handling sounds when the product remains untouched."
+        },
+        {
+          "id": "stationery_pen_v17",
+          "variation_number": 17,
+          "name": "Cap and Body Alignment",
+          "hook": "If the supplied pen has a separate cap, begin with the cap and pen body arranged neatly in the same orientation as the reference. If no separate cap is visible, show the complete pen alone without inventing a part.",
+          "action": "When a separate cap is visible and its fit is clear, a hand aligns it with the pen and gently places it beside the body; otherwise keep the pen still and reveal it with a camera move.",
+          "detail": "Show the real cap edge, barrel end and clip only where visible. Do not imply a magnetic closure, twist mechanism or snap fit unless the reference supports it.",
+          "camera": "Use a locked overhead composition followed by a small push-in to the meeting edges; avoid morphing, snapping transitions or hidden-side reveals.",
+          "lighting": "Use even diffuse light so the cap and barrel colours remain consistent and the edges are easy to distinguish.",
+          "closing": "End with the visible components neatly arranged and fully recognizable, without suggesting extra parts are included.",
+          "audio": "Use quiet instrumental music; add a soft contact sound only if the cap is visibly set down."
+        },
+        {
+          "id": "stationery_pen_v18",
+          "variation_number": 18,
+          "name": "Colour-Accurate Rotating Light",
+          "hook": "Open with the full pen resting horizontally on a matte neutral surface. The reference image is the authority for colour, finish, markings and proportions; do not enhance or recolour the product.",
+          "action": "Keep the pen stationary while a soft highlight shifts across the scene through a gentle lighting change, not by changing the pen's material or finish.",
+          "detail": "Reveal the real barrel contour and visible surface finish without describing it as premium, metallic, glossy or textured unless that property is clearly visible.",
+          "camera": "Use a very slow push-in with a slight side-to-side parallax; no full 360-degree orbit or unseen-side invention.",
+          "lighting": "Maintain neutral white balance and a restrained moving highlight, preserving the reference colour and avoiding artificial glow.",
+          "closing": "Hold a close three-quarter view that still includes the complete pen and its visible design details.",
+          "audio": "Use a subtle ambient instrumental bed; no magical shimmer or sparkle SFX."
+        },
+        {
+          "id": "stationery_pen_v19",
+          "variation_number": 19,
+          "name": "Two-Plane Focus Reveal",
+          "hook": "Place the exact pen diagonally across a plain surface with the near tip and far end both visible. Keep the scene minimal and do not add text, labels or decorative props.",
+          "action": "The camera stays locked while focus shifts gradually from the near end to the far end, then returns to a balanced focus on the whole pen.",
+          "detail": "Reveal only actual visible construction and markings as focus moves. Do not fabricate engraved text, brand names, ink windows or internal ink levels.",
+          "camera": "Use a stable close-up with a shallow but realistic depth of field; avoid focus breathing that changes the pen's apparent size.",
+          "lighting": "Use soft, even studio light and natural contact shadows; prevent reflections from obscuring printed details.",
+          "closing": "Finish with the full pen in clear focus, centred and unchanged.",
+          "audio": "Quiet instrumental music only; no artificial focus-swish sound."
+        },
+        {
+          "id": "stationery_pen_v20",
+          "variation_number": 20,
+          "name": "Clean Final-Beat Showcase",
+          "hook": "Open on a simple close shot of one genuine visible pen detail, then quickly establish the complete pen on a clean neutral background. No added branding, text or extra stationery.",
+          "action": "Make one smooth camera pullback and let the product remain motionless; the reveal comes from framing, not a transformation or unsupported demonstration.",
+          "detail": "Feature only the pen's real visible clip, cap, barrel, grip and tip as applicable. Preserve exact proportions and do not make claims about durability, ink quality or writing comfort.",
+          "camera": "Use one continuous controlled pullback from detail to a balanced three-quarter full-product shot, keeping the pen inside the 9:16 frame.",
+          "lighting": "Use soft directional studio light with natural shadows and stable colour; no artificial glow, exaggerated reflections or colour shifts.",
+          "closing": "Hold the complete pen in a clean hero frame for the final beat, with no on-screen text or watermark.",
+          "audio": "Use polished low-volume instrumental music; no voiceover or sound effects unless separately selected by the user."
         }
       ]
     },
