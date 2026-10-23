@@ -387,8 +387,8 @@ class PromptQualityTests(unittest.TestCase):
         audio_end = source.index("    if user_data.get('prompt_custom_background'):", audio_start)
         sfx_rules = source[audio_start:audio_end]
         self.assertIn("if user_data.get('prompt_audio_enabled', True) is not False and style_key in ('white_doodle', 'doodle_style'):", sfx_rules)
-        self.assertIn("elif user_data.get('prompt_audio_enabled', True) is not False:", sfx_rules)
-        self.assertIn("Do not add doodle-specific", sfx_rules)
+        self.assertNotIn("elif user_data.get('prompt_audio_enabled', True) is not False:", sfx_rules)
+        self.assertIn("Subtle drawing sounds", sfx_rules)
 
 
 
