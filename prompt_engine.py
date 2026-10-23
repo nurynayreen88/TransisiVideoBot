@@ -199,10 +199,40 @@ try:
     with _SUBCATEGORY_VARIATION_PATH.open("r", encoding="utf-8") as _variation_handle:
         _subcategory_variation_data = json.load(_variation_handle)
     _SUBCATEGORY_VARIATIONS_BY_ID = {
-        str(item.get("subcategory_id")): item.get("variations", [])
+        str(item.get("subcategory_id")): list(item.get("variations", []))
         for item in _subcategory_variation_data.get("subcategories", [])
         if isinstance(item, dict) and item.get("subcategory_id")
     }
+    # Load split additions without replacing or deleting the master catalog.
+    _variation_ids = {
+        str(v.get("id")) for values in _SUBCATEGORY_VARIATIONS_BY_ID.values()
+        for v in values if isinstance(v, dict)
+    }
+    _batch_dir = _SUBCATEGORY_VARIATION_PATH.parent / "staging_batch100_20261023"
+    for _batch_path in sorted(_batch_dir.glob("part_*.json")):
+        try:
+            with _batch_path.open("r", encoding="utf-8") as _batch_handle:
+                _batch = json.load(_batch_handle)
+            _entries = _batch.get("variations", [])
+            if not isinstance(_entries, list) or len(_entries) != _batch.get("variation_count"):
+                continue
+            for _entry in _entries:
+                if not isinstance(_entry, dict):
+                    continue
+                _entry_id = str(_entry.get("id", ""))
+                _subcategory_id, _sep, _number = _entry_id.rpartition("_v")
+                if (not _sep or not _number.isdigit() or
+                        _entry.get("variation_number") != int(_number) or
+                        _entry_id in _variation_ids or
+                        _subcategory_id not in _SUBCATEGORY_VARIATIONS_BY_ID):
+                    continue
+                if any(not _entry.get(field) for field in
+                       ("name", "hook", "action", "detail", "camera", "lighting", "closing", "audio")):
+                    continue
+                _SUBCATEGORY_VARIATIONS_BY_ID[_subcategory_id].append(_entry)
+                _variation_ids.add(_entry_id)
+        except (OSError, ValueError, TypeError, AttributeError):
+            continue
 except (OSError, json.JSONDecodeError):
     _SUBCATEGORY_VARIATIONS_BY_ID = {}
 
