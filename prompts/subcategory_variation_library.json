@@ -27545,7 +27545,7 @@
       "subcategory_id": "toy_educational",
       "category_id": "toy",
       "label": "🧩 Mainan pendidikan",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "toy_educational_v01",
@@ -27666,6 +27666,126 @@
           "lighting": "LIGHTING: Use soft, neutral light and keep colours consistent from beginning to end.",
           "closing": "CTA / HERO: Hold the complete original arrangement in a steady final frame with no text or added props.",
           "audio": "AUDIO: Keep the audio restrained and follow the user's chosen settings; avoid invented toy sounds."
+        },
+        {
+          "id": "toy_educational_v11",
+          "variation_number": 11,
+          "name": "Pieces-to-Whole Learning Reveal",
+          "hook": "Open on the actual educational toy in its supplied arrangement, showing the real pieces and overall form without adding props.",
+          "action": "If the reference shows a supported assembly, make one simple cut from the existing pieces to the same completed arrangement; otherwise use a camera-only reveal of the item as supplied.",
+          "detail": "Preserve the exact piece count, colours, shapes and printed markings. Do not invent learning outcomes, included pieces or age suitability.",
+          "camera": "Begin with a close overhead view and drift outward to a complete, stable product frame.",
+          "lighting": "Even soft tabletop light with accurate colour and natural contact shadows.",
+          "closing": "Hold the original toy and all supplied pieces clearly visible.",
+          "audio": "Light playful instrumental; no spoken educational claims."
+        },
+        {
+          "id": "toy_educational_v12",
+          "variation_number": 12,
+          "name": "Shape and Colour Sorting View",
+          "hook": "Choose the actual shapes or colours visible in the toy and frame them clearly at the start.",
+          "action": "Pan across the existing pieces in their original arrangement; move or sort them only if the reference clearly supports that interaction.",
+          "detail": "Do not add new shapes, colours, labels, numbers or matching pieces, and do not imply a learning result.",
+          "camera": "A measured top-down slide with a short pause on the most distinctive visible pieces.",
+          "lighting": "Bright diffused light that keeps colours consistent without oversaturation.",
+          "closing": "Finish on a clear overview of the genuine shapes and components.",
+          "audio": "Gentle upbeat instrumental; no artificial correct-answer sounds."
+        },
+        {
+          "id": "toy_educational_v13",
+          "variation_number": 13,
+          "name": "Letters or Numbers Fidelity",
+          "hook": "If letters, numbers or symbols are visibly printed on the toy, open on the actual printed details; otherwise focus on its real educational components.",
+          "action": "Move the camera slowly across the existing markings without rewriting, animating or rearranging them.",
+          "detail": "Preserve every legible character and its position; do not invent text, correct uncertain markings or add instructional overlays.",
+          "camera": "Stable macro pass followed by a controlled pullback to show the markings in context.",
+          "lighting": "Soft frontal fill avoids glare and keeps the printed details legible.",
+          "closing": "Hold on the authentic markings with the complete item partly or fully in frame.",
+          "audio": "Quiet playful instrumental; no synthetic spelling or counting voice."
+        },
+        {
+          "id": "toy_educational_v14",
+          "variation_number": 14,
+          "name": "Hands-On Interaction If Shown",
+          "hook": "If hands interacting with the educational toy are present in the reference or a model is explicitly selected, begin with that supported interaction; otherwise show the toy alone.",
+          "action": "For a supported interaction, show one simple, physically plausible movement using only visible pieces; if unsupported, keep the toy still and move the camera instead.",
+          "detail": "Do not add fingers, pieces, buttons or functions. Avoid claims about intelligence, concentration, motor skills or guaranteed learning benefits.",
+          "camera": "Close-to-medium framing with stable focus on the real interaction, or a gentle three-quarter slide for a static item.",
+          "lighting": "Soft natural light with realistic shadows and accurate toy colours.",
+          "closing": "End on the unchanged toy with all visible parts accounted for.",
+          "audio": "Light instrumental; no forced voiceover or fabricated sound effects."
+        },
+        {
+          "id": "toy_educational_v15",
+          "variation_number": 15,
+          "name": "Texture and Component Detail",
+          "hook": "Open on a real visible component edge, surface pattern or connection point; if no texture is clear, frame the toy's most distinctive shape.",
+          "action": "Make a slow macro move along the actual surface without flexing, dismantling or changing the item.",
+          "detail": "Describe only what is visible; do not infer wood, silicone, safety certification, durability or other material claims.",
+          "camera": "Controlled macro track into a short pullback showing where the detail sits on the toy.",
+          "lighting": "Broad diffused light reveals genuine surface detail without artificial sharpening or shine.",
+          "closing": "Hold on the detail and its surrounding form for clear product recognition.",
+          "audio": "Minimal playful instrumental; no handling sounds unless shown."
+        },
+        {
+          "id": "toy_educational_v16",
+          "variation_number": 16,
+          "name": "Board and Layout Overview",
+          "hook": "If the toy includes a board, mat, tray or printed play surface, begin with that exact layout; otherwise show the complete product as supplied.",
+          "action": "Drift across the existing layout without changing piece positions or inventing a game sequence.",
+          "detail": "Keep all visible spaces, symbols, tracks and component counts unchanged. Do not create rules, scoring or educational claims.",
+          "camera": "Slow overhead glide into a high three-quarter view with the whole layout visible.",
+          "lighting": "Even tabletop lighting with low glare and stable colour balance.",
+          "closing": "Finish on the full original layout, uncluttered and easy to inspect.",
+          "audio": "Soft upbeat instrumental; no game-show sounds."
+        },
+        {
+          "id": "toy_educational_v17",
+          "variation_number": 17,
+          "name": "Size and Realistic Scale",
+          "hook": "Show the toy at a believable scale using the supplied arrangement or a scale reference already present in the image.",
+          "action": "Make a gentle pullback to reveal the full item and any reference-visible pieces; do not introduce a child or hand by default.",
+          "detail": "Maintain actual proportions and piece sizes. Do not claim age range, portability or suitability unless supported by the product information.",
+          "camera": "Straight, slow pullback with natural perspective and no oversized close-up distortion.",
+          "lighting": "Balanced neutral light and natural contact shadows under the toy.",
+          "closing": "Hold on the complete product at a realistic scale.",
+          "audio": "Low-volume playful instrumental; no voiceover."
+        },
+        {
+          "id": "toy_educational_v18",
+          "variation_number": 18,
+          "name": "Matching Pair or Set Count",
+          "hook": "If the reference shows a matching set, open on that exact group; if it shows a single educational toy, keep the single item as the subject.",
+          "action": "Use a slow overhead pass across the existing pieces without duplicating, removing or rearranging any component.",
+          "detail": "Preserve the exact set count, colours, shapes and visible labels. Do not add a storage box or spare parts.",
+          "camera": "Gentle overhead drift followed by a stable full-set composition.",
+          "lighting": "Soft even light with realistic shadows and no colour shifts.",
+          "closing": "Keep every supplied component visible in the final frame where the reference permits.",
+          "audio": "Light instrumental; no unboxing or object-drop effects."
+        },
+        {
+          "id": "toy_educational_v19",
+          "variation_number": 19,
+          "name": "Quiet Focus and Discovery Detail",
+          "hook": "Select one genuine feature that draws attention—an existing slot, shape, dial, matching area or printed mark—only if visible.",
+          "action": "Let the camera approach that feature slowly, then widen to reveal the whole toy without demonstrating an unsupported function.",
+          "detail": "Do not create moving parts, lights, sounds, answers or feedback that are absent from the reference.",
+          "camera": "A measured push-in and pullback with stable focus and consistent perspective.",
+          "lighting": "Soft side fill adds depth to the actual form without creating a false glow.",
+          "closing": "End with the feature visible within the complete product view.",
+          "audio": "Calm playful instrumental; no success chimes."
+        },
+        {
+          "id": "toy_educational_v20",
+          "variation_number": 20,
+          "name": "Complete Toy Hero Finale",
+          "hook": "Begin close on a genuine visible feature—shape, piece, marking or connection—then make the product identity clear immediately.",
+          "action": "Pull back in one continuous move to show the full educational toy and every reference-supplied component at realistic scale.",
+          "detail": "Preserve exact appearance, printed content, piece count and arrangement. Add no text, logos, props or unsupported learning claims.",
+          "camera": "Smooth macro-to-medium pullback with natural perspective and steady focus.",
+          "lighting": "Balanced soft studio light with true colours and realistic contact shadows.",
+          "closing": "Hold a clean, centred full-product view for the final beat without captions or watermark.",
+          "audio": "Soft upbeat instrumental outro; no voiceover unless selected."
         }
       ]
     },
