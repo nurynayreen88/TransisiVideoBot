@@ -5,6 +5,10 @@ class SubtypeTests(unittest.TestCase):
     def test_handbag(self):
         scenes = _category_specific_scenes('bag', 'BONIA', 'bag_handbag')
         self.assertNotIn('WALLET', scenes[0][0])
+    def test_selected_handbag_is_handbag(self):
+        scenes = _category_specific_scenes('bag', 'BONIA wallet collection', 'bag_handbag')
+        self.assertIn('HANDBAG', scenes[0][0])
+
     def test_wallet(self):
         scenes = _category_specific_scenes('bag', 'BONIA', 'bag_wallet')
         self.assertIn('WALLET', scenes[0][0])
