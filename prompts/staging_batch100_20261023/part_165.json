@@ -163,26 +163,26 @@
     {
       "id": "bag_laptop_v96",
       "variation_number": 96,
-      "name": "Laptop bag — Soft Motion 96",
-      "hook": "Let a soft lighting transition reveal the exact reference item; preserve all source-visible colours, markings and proportions.",
-      "action": "Use a measured lateral slider move; never animate unseen hardware, straps, compartments or features.",
-      "detail": "Highlight only the laptop bag's reference-visible construction, seams, shape and supplied components; do not infer material, capacity or performance.",
-      "camera": "Stable waist-height perspective; avoid distortion and invented reverse views.",
-      "lighting": "Apply soft frontal key light with believable contact shadow and faithful product colour.",
-      "closing": "Resolve on the complete identical laptop bag in a clean hero frame; no text, watermark, added branding or invented accessories.",
-      "audio": "Quiet atmospheric music; no unsupported spoken claims or artificial product sounds."
+      "name": "Micro parallax — bag_laptop_v96",
+      "hook": "0–2s: Show the complete actual bag laptop item with the precise source-visible shape, colour and supplied components. Begin a tiny supported front-quarter slide; no text.",
+      "action": "2–6s: Use a tiny supported front-quarter slide with camera motion only. Keep the item in its original stationary arrangement; do not invent styling, a model, handling or unseen sides.",
+      "detail": "6–8s: Emphasize only actually pictured straps, seams, zip, handle or surface finish where present. Do not invent storage capacity, interior, device fit, material, load rating or hidden compartments.",
+      "camera": "Film the bag laptop item using a tiny supported front-quarter slide at natural scale, limited to reference-supported planes.",
+      "lighting": "Balanced frontal soft fill without synthetic shine.",
+      "closing": "8–10s: Resolve to a full unchanged product of the same exact original item. No added logo, caption or watermark.",
+      "audio": "Quiet tasteful instrumental; no invented zip sounds, footsteps, fabric handling, speech or unsupported product promises."
     },
     {
       "id": "bag_laptop_v97",
       "variation_number": 97,
-      "name": "Laptop bag — Studio Hero 97",
-      "hook": "Reveal the authentic silhouette through a gentle foreground shift; preserve all source-visible colours, markings and proportions.",
-      "action": "Use a stationary shot with a soft light sweep; never animate unseen hardware, straps, compartments or features.",
-      "detail": "Highlight only the laptop bag's reference-visible construction, seams, shape and supplied components; do not infer material, capacity or performance.",
-      "camera": "Controlled overhead framing; avoid distortion and invented reverse views.",
-      "lighting": "Apply cool neutral ambient fill with believable contact shadow and faithful product colour.",
-      "closing": "Resolve on the complete identical laptop bag in a clean hero frame; no text, watermark, added branding or invented accessories.",
-      "audio": "Gentle unobtrusive melody; no unsupported spoken claims or artificial product sounds."
+      "name": "Spacious composition — bag_laptop_v97",
+      "hook": "0–2s: Show the complete actual bag laptop item with the precise source-visible shape, colour and supplied components. Begin a medium-to-wide retreat; no text.",
+      "action": "2–6s: Use a medium-to-wide retreat with camera motion only. Keep the item in its original stationary arrangement; do not invent styling, a model, handling or unseen sides.",
+      "detail": "6–8s: Emphasize only actually pictured straps, seams, zip, handle or surface finish where present. Do not invent storage capacity, interior, device fit, material, load rating or hidden compartments.",
+      "camera": "Film the bag laptop item using a medium-to-wide retreat at natural scale, limited to reference-supported planes.",
+      "lighting": "Soft overhead bounce and grounded shadow.",
+      "closing": "8–10s: Resolve to a spacious full-item hero of the same exact original item. No added logo, caption or watermark.",
+      "audio": "Quiet tasteful instrumental; no invented zip sounds, footsteps, fabric handling, speech or unsupported product promises."
     },
     {
       "id": "bag_laptop_v98",
