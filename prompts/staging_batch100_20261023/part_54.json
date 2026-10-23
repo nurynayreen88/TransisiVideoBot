@@ -187,26 +187,26 @@
     {
       "id": "pet_grooming_v28",
       "variation_number": 28,
-      "name": "Height Contrast — pet grooming item",
-      "hook": "HOOK: Establish the supplied pet grooming item immediately in a clear reference-faithful composition; show a supported low angle then settle at a neutral height.",
-      "action": "ACTION: show a supported low angle then settle at a neutral height; keep the actual item and its supplied arrangement physically consistent, without inventing demonstrations or product functions.",
-      "detail": "DETAIL: Preserve exact colour, proportions, piece count, typography and visible handle, head and packaging; show only reference-visible construction, never unverified claims or accessories.",
-      "camera": "CAMERA: gentle vertical camera move; stable realistic perspective, no morphing, impossible rotation or hidden-side fabrication.",
-      "lighting": "LIGHTING: soft overhead bounce; accurate colour and natural contact shadows without false material finish.",
-      "closing": "CTA / HERO: Hold the complete unchanged pet grooming item clearly in the final frame; no captions, added logos or watermark.",
-      "audio": "AUDIO: Restrained instrumental rhythm suited to height contrast; no fabricated product sounds or voiceover unless selected."
+      "name": "Focus return — pet_grooming_v28",
+      "hook": "0–2s: Introduce the complete actual pet grooming product in its source-visible configuration, true colours and supplied parts. Start with a fixed focus pull between pictured planes; no text.",
+      "action": "2–6s: Continue a fixed focus pull between pictured planes with camera-only movement, retaining the stationary product and actual pictured arrangement. No fabricated handling, extra props or unseen surfaces.",
+      "detail": "6–8s: Highlight only an actual pictured head, edge, handle or finish. Do not invent a pet, grooming outcome, blade, power mode or safety promise.",
+      "camera": "Use a fixed focus pull between pictured planes at believable product scale; never rotate beyond reference-supported planes.",
+      "lighting": "Soft overhead bounce with grounded shadow.",
+      "closing": "8–10s: Resolve to the complete unchanged item, with the same complete source-faithful product. No added logos, captions or watermark.",
+      "audio": "Unobtrusive light instrumental; no invented zipping, rolling, animal sounds, voiceover claims or distracting effects."
     },
     {
       "id": "pet_grooming_v29",
       "variation_number": 29,
-      "name": "Diagonal Reveal — pet grooming item",
-      "hook": "HOOK: Establish the supplied pet grooming item immediately in a clear reference-faithful composition; slide from a diagonal offset into a centred hero composition.",
-      "action": "ACTION: slide from a diagonal offset into a centred hero composition; keep the actual item and its supplied arrangement physically consistent, without inventing demonstrations or product functions.",
-      "detail": "DETAIL: Preserve exact colour, proportions, piece count, typography and visible handle, head and packaging; show only reference-visible construction, never unverified claims or accessories.",
-      "camera": "CAMERA: slow diagonal dolly; stable realistic perspective, no morphing, impossible rotation or hidden-side fabrication.",
-      "lighting": "LIGHTING: soft overhead fill; accurate colour and natural contact shadows without false material finish.",
-      "closing": "CTA / HERO: Hold the complete unchanged pet grooming item clearly in the final frame; no captions, added logos or watermark.",
-      "audio": "AUDIO: Restrained instrumental rhythm suited to diagonal reveal; no fabricated product sounds or voiceover unless selected."
+      "name": "Source arrangement — pet_grooming_v29",
+      "hook": "0–2s: Introduce the complete actual pet grooming product in its source-visible configuration, true colours and supplied parts. Start with a shallow front-to-high move within visible geometry; no text.",
+      "action": "2–6s: Continue a shallow front-to-high move within visible geometry with camera-only movement, retaining the stationary product and actual pictured arrangement. No fabricated handling, extra props or unseen surfaces.",
+      "detail": "6–8s: Highlight only an actual pictured head, edge, handle or finish. Do not invent a pet, grooming outcome, blade, power mode or safety promise.",
+      "camera": "Use a shallow front-to-high move within visible geometry at believable product scale; never rotate beyond reference-supported planes.",
+      "lighting": "Broad soft studio key and realistic contact shadow.",
+      "closing": "8–10s: Resolve to the original full arrangement, with the same complete source-faithful product. No added logos, captions or watermark.",
+      "audio": "Unobtrusive light instrumental; no invented zipping, rolling, animal sounds, voiceover claims or distracting effects."
     },
     {
       "id": "pet_grooming_v30",
