@@ -761,8 +761,10 @@ def _concise_video_prompt(product, scene, motion, style, product_type, subtype, 
     while len(actions) < 3:
         actions.append("Keep the product naturally visible.")
     label = "VIDEO PROMPT — 10 SECONDS" if not part else "VIDEO PROMPT — PART " + str(part) + " (10 SECONDS)"
+    continuity = (" Continue directly from Part 1's final frame, with the same product, setting and camera position; finish with a natural closing view." if part > 1 else
+                  " End on a steady product view ready for Part 2 to continue." if part == 1 else "")
     return "\n\n".join((
-        label + "\nVertical 9:16, realistic footage. " + str(style_name) + ".",
+        label + "\nVertical 9:16, realistic footage. " + str(style_name) + "." + continuity,
         "Use the uploaded product image as the master reference. " + str(product).strip(),
         "SETTING: " + str(scene or "A natural setting suited to the product").strip() + ".",
         "ACTION: 0–3s: " + actions[0] + " 3–7s: " + actions[1] + " 7–10s: " + actions[2],
