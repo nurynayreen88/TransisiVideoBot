@@ -379,6 +379,14 @@ def _category_specific_scenes(product_type, product, product_subtype=""):
     """Build visual beats that suit the product category without assuming unseen features."""
     words = str(product or "").casefold()
     subtype = str(product_subtype or "").casefold()
+    if product_type == "bag" and subtype in {"bag_handbag", "handbag", "bag_tote", "bag_sling", "sling_bag"}:
+        return [
+            ("HANDBAG REVEAL", "Show the full handbag and its visible handles."),
+            ("FULL VIEW", "Show the same handbag at realistic scale."),
+            ("DETAIL", "Highlight one visible design detail."),
+            ("HANDLING", "Use one natural hold or placement."),
+            ("HERO", "Hold a full view of the unchanged handbag.")
+        ]
     if product_type == "bag" and (
         subtype in {"bag_wallet", "wallet", "card_holder"}
         or (not subtype and any(term in words for term in ("wallet", "dompet", "card holder", "cardholder", "coin purse")))
