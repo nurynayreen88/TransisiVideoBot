@@ -878,21 +878,15 @@ def prompt_creative_settings(user_data, include_audio=True):
         elif voiceover_mode == 'script':
             script = ' '.join((user_data.get('prompt_voiceover_script') or '').split())
             lines.append('Use this exact spoken script: ' + script)
-        else:
-            lines.append('NO SPEECH: no dialogue, voice-over or narration. Do not animate speech-like lip movement. Mark every scene “Tanpa dialog/voice-over”. Convey the hook and CTA visually only; keep music and sound effects according to the separate user settings.')
+        # No voice selected: omit a redundant negative instruction.
     if user_data.get('prompt_on_screen_text') == 'yes':
         if user_data.get('prompt_text_mode') == 'manual' and user_data.get('prompt_text_content'):
             lines.append('On-screen text, exactly as supplied: ' + str(user_data['prompt_text_content']))
         else:
             text_language = 'English' if user_data.get('prompt_language') == 'English' else 'Bahasa Melayu Malaysia'
             lines.append(
-                f'ON-SCREEN COPY ({text_language}): Create at most two short overlays: a distinctive product-specific hook near the opening and a clear, varied CTA at the end. '
-                'Make the wording match the actual product and storyboard; do not repeat generic phrases such as “Kenali produk ini”. '
-                'Use only supplied or verified product details. Never invent prices, discounts, stock urgency, popularity, specifications or results. '
-                'Keep spelling exact, readable and uncluttered; do not duplicate the voice-over word for word.'
+                f'ON-SCREEN TEXT ({text_language}): Up to two short, product-specific overlays using verified details; place clear of the product.'
             )
-    elif user_data.get('prompt_on_screen_text') == 'no':
-        lines.append('No on-screen text.')
     music_choice = str(user_data.get('prompt_music_choice', 'auto')).casefold()
     music_directions = {
         'auto': 'BACKGROUND MUSIC: Choose a suitable genre, mood and tempo for this exact product and selected visual style. Keep it subtle and below any voice.',
@@ -903,20 +897,12 @@ def prompt_creative_settings(user_data, include_audio=True):
         'cinematic': 'BACKGROUND MUSIC: Use a polished cinematic instrumental bed with controlled build and no overpowering hits.',
         'none': 'BACKGROUND MUSIC: No music; use no musical bed.',
     }
-    if user_data.get('prompt_audio_enabled', True) is not False:
+    if user_data.get('prompt_audio_enabled', True) is not False and music_choice != 'none':
         lines.append(music_directions.get(music_choice, music_directions['auto']))
     style_key = str(user_data.get('prompt_style', '')).casefold()
     if user_data.get('prompt_audio_enabled', True) is not False and style_key in ('white_doodle', 'doodle_style'):
         lines.append(
-            'SFX: Only for visible Doodle Style animation, sync a soft drawing/scribble or whoosh to moving lines, '
-            'a light chime to a visible highlight and a gentle pop to a visible circle. Keep effects sparse, brief, '
-            'timed to the animation and below any voice/music. Do not add doodle SFX to any other style.'
-        )
-    elif user_data.get('prompt_audio_enabled', True) is not False:
-        lines.append(
-            'SFX: Add subtle, natural handling, movement or environmental sounds only when the matching action is visibly shown. '
-            'These may coexist with background music, but must stay clear, restrained and below speech. Do not add doodle-specific '
-            'scribble, whoosh, chime or pop effects unless Doodle Style is selected; never invent product sounds.'
+            'SFX: Subtle drawing sounds, synced only to visible doodle animation.'
         )
     if user_data.get('prompt_custom_background'):
         lines.append('Use the separately uploaded background image as the scene and match its perspective and lighting.')
