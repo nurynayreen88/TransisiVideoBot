@@ -2,7 +2,7 @@ import json,re,collections,hashlib
 from pathlib import Path
 root=Path("prompts"); master=json.loads((root/"subcategory_variation_library.json").read_text(encoding="utf-8"))
 cats=master["subcategories"]; order=[x["subcategory_id"] for x in cats]; required=("id","variation_number","name","hook","action","detail","camera","lighting","closing","audio")
-files=sorted((root/"staging_batch100_20261023").glob("part_*.json"),key=lambda p:int(re.search(r"part_(\\d+)",p.name).group(1)))
+files=sorted((root/"staging_batch100_20261023").glob("part_*.json"),key=lambda p:int(re.search(r"part_(\d+)",p.name).group(1)))
 errors=[]; warnings=[]; seen={}; nums=collections.defaultdict(list); bodies=collections.defaultdict(list); records=[]
 def check(r,source):
  if not isinstance(r,dict): errors.append([source,"not object"]);return
@@ -11,7 +11,7 @@ def check(r,source):
  ident=r.get("id","")
  if ident in seen:errors.append([source,"duplicate ID",ident,seen[ident]])
  else:seen[ident]=source
- match=re.fullmatch(r"(.+)_v(\\d+)",str(ident))
+ match=re.fullmatch(r"(.+)_v(\d+)",str(ident))
  if not match or match.group(1) not in order or r.get("variation_number")!=int(match.group(2)):errors.append([source,"ID/number/category mismatch",ident])
  else:nums[match.group(1)].append((int(match.group(2)),source))
  body=tuple(str(r.get(k,"")).strip().casefold() for k in required[3:])
@@ -22,7 +22,7 @@ for c in cats:
 if len(cats)!=130:errors.append(["master","subcategory count",len(cats)])
 if len(files)!=165:errors.append(["staging","file count",len(files)])
 for n,p in enumerate(files,1):
- part=int(re.search(r"part_(\\d+)",p.name).group(1))
+ part=int(re.search(r"part_(\d+)",p.name).group(1))
  if part!=n:errors.append([p.name,"part gap",n])
  try:d=json.loads(p.read_text(encoding="utf-8"))
  except Exception as e:errors.append([p.name,"invalid JSON",str(e)]);continue
