@@ -383,6 +383,9 @@ _PRODUCT_USAGE_SCENES = {
     "shoes": ("ON-FOOT DEMO", "Show the shoes being worn for two natural steps on a safe, level surface, with believable foot contact and unchanged shoe design."),
     "bag": ("CARRYING DEMO", "Show one natural lift and carry using only an existing visible handle or strap; do not open unseen compartments or add contents."),
     "wallet": ("HANDLING DEMO", "Show a natural pick-up and, only if its opening is visible, a brief open-close action; do not invent card slots or capacity."),
+    "accessory": ("WEAR / HANDLING DEMO", "Show one natural wear or handling action only if the item and reference support it; do not add matching accessories."),
+    "furniture": ("PRACTICAL FURNITURE USE", "Show a person naturally interacting with the furniture in its intended ordinary way, only when the visible design supports it; preserve room layout and do not invent storage or mechanisms."),
+    "book_stationery": ("WORKING DEMO", "Show the item performing its ordinary function, such as a page turn or a short pen mark, only when suitable; do not fabricate readable text."),
     "beauty": ("USE DEMO", "Show one small, hygienic application or dispensing action only if the product type and visible packaging support it; otherwise demonstrate handling and packaging clearly."),
     "food": ("SERVING / POURING DEMO", "Show one plausible serving, opening or pouring action only when the product format supports it; preserve the actual food and package."),
     "gadget": ("FUNCTION DEMO", "Show one simple operation using a visible control or port only when the named product clearly supports it; keep screen content and connections truthful."),
@@ -1191,10 +1194,6 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
         if part == 0 and duration in (10, 20, 30):
             scene_length = duration / 5
             generic_scenes = _category_specific_scenes(product_type, product, product_subtype)
-            # Ensure functional categories show one actual use beat, not only camera movement.
-            usage_scene = _PRODUCT_USAGE_SCENES.get(str(product_type or "").casefold())
-            if usage_scene and len(generic_scenes) >= 4:
-                generic_scenes[3] = usage_scene
             if storyboard_override and isinstance(storyboard_override, (list, tuple)) and len(storyboard_override) == 4:
                 curated_items = list(storyboard_override)
                 generic_scenes = [
@@ -1204,6 +1203,10 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
                     (str(curated_items[2].get("shot", "CREATIVE BEAT 3")), str(curated_items[2].get("direction", ""))),
                     ("CREATIVE FINISH / HERO HOLD", str(curated_items[3].get("direction", "")) + " Finish on a stable, full-product hero frame."),
                 ]
+            # Enforce this after curated storyboard selection too, so style libraries cannot suppress real product use.
+            usage_scene = _PRODUCT_USAGE_SCENES.get(str(product_type or "").casefold())
+            if usage_scene and len(generic_scenes) >= 4:
+                generic_scenes[3] = usage_scene
             blocks = []
             for index, (shot_name, shot_direction) in enumerate(generic_scenes):
                 start = index * scene_length
