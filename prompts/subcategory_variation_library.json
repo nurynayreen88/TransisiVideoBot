@@ -29033,7 +29033,7 @@
       "subcategory_id": "toy_other",
       "category_id": "toy",
       "label": "📦 Mainan lain",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "toy_other_v01",
@@ -29154,6 +29154,126 @@
           "lighting": "LIGHTING: Soft top light with realistic contact shadows.",
           "closing": "CTA / HERO: Hold a stable hero shot; do not add props, labels or accessories.",
           "audio": "AUDIO: Use a brief natural contact sound only when physically supported by the scene."
+        },
+        {
+          "id": "toy_other_v11",
+          "variation_number": 11,
+          "name": "Play Pattern Tease",
+          "hook": "HOOK: Open on the complete toy exactly as supplied, then reveal one distinctive visible feature that invites curiosity.",
+          "action": "Show one plausible interaction supported by the reference design, keeping the toy's shape and scale consistent.",
+          "detail": "DETAIL: Feature only visible parts and real functions; do not invent accessories, effects, materials or performance claims.",
+          "camera": "CAMERA: Start with a close detail, then ease back into a medium hero shot without rotating to unseen sides.",
+          "lighting": "LIGHTING: Soft directional light with natural shadows and reference-accurate colour.",
+          "closing": "CTA / HERO: End with the entire unchanged toy centred against a simple background.",
+          "audio": "AUDIO: Use a light playful music bed only if selected; any click or pop must match a visible action."
+        },
+        {
+          "id": "toy_other_v12",
+          "variation_number": 12,
+          "name": "Shape Silhouette Reveal",
+          "hook": "HOOK: Begin with the toy's real outline against a clean, softly lit background, keeping its identity recognisable.",
+          "action": "Gradually increase the light or widen the framing to reveal the actual toy without transforming its design.",
+          "detail": "DETAIL: Preserve exact proportions, colours and visible markings; no fantasy glow, extra parts or altered silhouette.",
+          "camera": "CAMERA: Use a slow, straight push-in and settle into a stable three-quarter view if that angle is supported.",
+          "lighting": "LIGHTING: Controlled backlight with enough fill to retain real product detail and colour.",
+          "closing": "CTA / HERO: Hold a clear, fully lit product view for the final beat.",
+          "audio": "AUDIO: A restrained soft reveal accent is optional; avoid magical sound effects unless explicitly requested."
+        },
+        {
+          "id": "toy_other_v13",
+          "variation_number": 13,
+          "name": "Single-Feature Spotlight",
+          "hook": "HOOK: Frame the complete toy first, then guide attention toward one distinctive feature that is genuinely visible.",
+          "action": "Use a hand or gentle camera move to point out the feature without hiding the rest of the product for long.",
+          "detail": "DETAIL: Do not claim the feature is unique, educational, durable or multifunctional unless verified by the supplied reference.",
+          "camera": "CAMERA: Make one smooth rack focus from the full toy to the selected feature, then return to a medium view.",
+          "lighting": "LIGHTING: Soft key light and mild fill; keep reflections realistic and labels undistorted.",
+          "closing": "CTA / HERO: Show the feature in context with the complete toy visible behind it.",
+          "audio": "AUDIO: Keep effects minimal and synced to the focus change only if a matching sound is desired."
+        },
+        {
+          "id": "toy_other_v14",
+          "variation_number": 14,
+          "name": "Natural Hand-Scale Check",
+          "hook": "HOOK: Show the toy at its real, believable size beside a hand only when the reference supports that scale comparison.",
+          "action": "Let a hand pick up, turn or set down the toy in one natural movement if it is suitable to handle.",
+          "detail": "DETAIL: Do not exaggerate the product size, add fingers or change the object geometry; avoid scale comparisons when size is unknown.",
+          "camera": "CAMERA: Use a steady medium close-up with realistic perspective and no wide-angle distortion.",
+          "lighting": "LIGHTING: Neutral daylight with clear edges and accurate skin and product tones.",
+          "closing": "CTA / HERO: Set the toy down and finish with the full product in frame.",
+          "audio": "AUDIO: Use quiet handling sounds only when movement is visible; no exaggerated impacts."
+        },
+        {
+          "id": "toy_other_v15",
+          "variation_number": 15,
+          "name": "Colour-True Studio Turn",
+          "hook": "HOOK: Open with a crisp front view of the toy and its actual colour palette clearly visible.",
+          "action": "Show a small, controlled change in viewing angle only if it can be achieved without revealing unsupported surfaces.",
+          "detail": "DETAIL: Maintain reference colours and markings throughout; do not recolour, animate or add glossy finishes.",
+          "camera": "CAMERA: Make a short, smooth side arc of no more than a modest angle, then stop at a clear front three-quarter view.",
+          "lighting": "LIGHTING: High-CRI-style neutral studio illumination, with no coloured gels or artificial shine.",
+          "closing": "CTA / HERO: Hold a clean product frame with the same proportions and finish as the reference.",
+          "audio": "AUDIO: Quiet background music is sufficient; avoid synthetic whooshes for a subtle camera move."
+        },
+        {
+          "id": "toy_other_v16",
+          "variation_number": 16,
+          "name": "Unbox Only If Supplied",
+          "hook": "HOOK: If the reference includes original packaging, begin with the real package and toy together; otherwise begin with the toy itself.",
+          "action": "When packaging is present, reveal only the visible toy by opening the existing package naturally; never create a new box or seal.",
+          "detail": "DETAIL: Keep package graphics and contents faithful to the reference and do not imply that unseen extras are included.",
+          "camera": "CAMERA: Use a fixed tabletop angle during the reveal, followed by one gentle push toward the actual product.",
+          "lighting": "LIGHTING: Soft overhead fill and realistic package shadows; preserve printed artwork.",
+          "closing": "CTA / HERO: Finish with the toy and only the packaging or components actually supplied.",
+          "audio": "AUDIO: Add light paper or package handling sounds only when the corresponding movement appears."
+        },
+        {
+          "id": "toy_other_v17",
+          "variation_number": 17,
+          "name": "Desk-to-Play Corner",
+          "hook": "HOOK: Present the toy in a tidy, everyday setting that suits its visible size and type, without distracting props.",
+          "action": "Move the toy from a neutral tabletop to a simple display position only if the move is physically plausible.",
+          "detail": "DETAIL: Do not add themed accessories or imply a use case that the product design does not support.",
+          "camera": "CAMERA: Start with a wider contextual view and slide smoothly into a closer product-focused composition.",
+          "lighting": "LIGHTING: Natural-looking ambient light with consistent direction and believable contact shadows.",
+          "closing": "CTA / HERO: Keep the toy clearly recognisable and let the background remain secondary.",
+          "audio": "AUDIO: Use gentle room ambience or restrained music; no invented environmental sounds."
+        },
+        {
+          "id": "toy_other_v18",
+          "variation_number": 18,
+          "name": "Real Detail, No Effects",
+          "hook": "HOOK: Start with a clear hero view and choose one real detail—such as an edge, printed graphic or moving part—visible in the reference.",
+          "action": "Hold on that detail long enough to inspect it, then return to the full toy without adding visual effects.",
+          "detail": "DETAIL: Never invent lights, motion, texture, sounds or hidden features; keep any printed wording unchanged and legible only if actually readable.",
+          "camera": "CAMERA: Use a controlled macro-style move with a natural focus transition and no artificial digital warping.",
+          "lighting": "LIGHTING: Diffused close-up lighting that reveals the real surface without glare or fake texture.",
+          "closing": "CTA / HERO: Finish on the complete product in a stable, uncluttered composition.",
+          "audio": "AUDIO: Avoid exaggerated whooshes or sparkle sounds; use only a subtle bed if selected."
+        },
+        {
+          "id": "toy_other_v19",
+          "variation_number": 19,
+          "name": "Three-Beat Product Story",
+          "hook": "HOOK: Beat one shows the whole toy clearly; beat two highlights one visible feature; beat three returns to the whole item.",
+          "action": "Use three simple continuous-feeling shots with no invented gameplay, transformation or added accessories.",
+          "detail": "DETAIL: Preserve the same product identity, shape, markings and component count across all three beats.",
+          "camera": "CAMERA: Cut between wide, close and medium framing with matching perspective and consistent product orientation.",
+          "lighting": "LIGHTING: Keep colour temperature and exposure matched across each shot for a coherent sequence.",
+          "closing": "CTA / HERO: End on the original full-product view, leaving clear space for optional post-edit text but rendering none.",
+          "audio": "AUDIO: If music is selected, keep it even across the three beats; sync any accent only to a visible cut."
+        },
+        {
+          "id": "toy_other_v20",
+          "variation_number": 20,
+          "name": "Quiet Premium Finish",
+          "hook": "HOOK: Open with the toy presented neatly in its real form, using clean composition rather than exaggerated effects.",
+          "action": "Make a slow, deliberate camera move that reveals its visible form and finishes with the toy undisturbed.",
+          "detail": "DETAIL: Do not add brand marks, claims, packaging, accessories or surface details absent from the reference.",
+          "camera": "CAMERA: Use a gentle diagonal dolly-in and a stable final frame; avoid spinning or impossible perspective shifts.",
+          "lighting": "LIGHTING: Soft premium studio lighting with natural reflections and faithful product colours.",
+          "closing": "CTA / HERO: Hold the complete toy at realistic scale, centred and sharply recognisable.",
+          "audio": "AUDIO: Use understated music if requested, with no forced SFX or unselected voiceover."
         }
       ]
     },
