@@ -733,6 +733,18 @@ def _presentation_variation(style_key, product_type, product_subtype=""):
     )
 
 
+
+def _compact_storyboard(product, scene, motion, style, product_type, subtype):
+    _, style_name, _ = resolve(style)
+    scenes = _category_specific_scenes(product_type, product, subtype)
+    times = ('0–2s', '2–4s', '4–6s', '6–8s', '8–10s')
+    lines = ['VIDEO PROMPT — 10 SECONDS', 'Vertical 9:16. Style: ' + style_name,
+             'PRODUCT: ' + str(product).strip(), 'SETTING: ' + str(scene).strip(),
+             'CAMERA: ' + str(motion).strip()]
+    lines.extend(t + ': ' + direction for t, (_, direction) in zip(times, scenes))
+    return '\n'.join(lines)
+
+
 def build_prompt(mode, product, scene, motion, style='auto', duration=10, concept='', product_type='other', storyboard_override=None, split=None, universal_custom=False, product_subtype='', prompt_language='Malay'):
     # Preserve the historical API behavior: a 20-second call without an explicit
     # split choice still returns two connected 10-second prompts.
@@ -753,6 +765,8 @@ def build_prompt(mode, product, scene, motion, style='auto', duration=10, concep
             ("=== KLIPPO PART " + str(index + 1) + " ===\n\n" + part) if index else part
             for index, part in enumerate(parts)
         )
+    if mode == 'storyboard' and duration == 10:
+        return _compact_storyboard(product, scene, motion, style, product_type, product_subtype)
     presentation_variation = _presentation_variation(style, product_type, product_subtype)
     return (_build_single_prompt(mode, product, scene, motion, style, part=0, duration=duration,
                                 concept=concept, product_type=product_type, storyboard_override=storyboard_override, universal_custom=universal_custom, product_subtype=product_subtype, prompt_language=prompt_language)
