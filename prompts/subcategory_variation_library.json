@@ -31401,7 +31401,7 @@
       "subcategory_id": "sports_fitness",
       "category_id": "sports",
       "label": "🏋️ Kecergasan / Gym",
-      "variation_count": 32,
+      "variation_count": 30,
       "variations": [
         {
           "id": "sports_fitness_v01",
@@ -31762,30 +31762,6 @@
           "audio": "Use a quiet rhythmic instrumental bed; avoid amplified spring sounds or claims about results.",
           "id": "sports_fitness_v30",
           "variation_number": 30
-        },
-        {
-          "name": "Equipment Lineup Overhead",
-          "hook": "Arrange only the actual fitness items shown in the reference into a clear overhead composition, preserving each item's colour, size and supplied accessories.",
-          "action": "If multiple items are supplied, a hand nudges one item slightly to create clean spacing; if only one item is shown, keep it alone and unchanged.",
-          "detail": "Let the layout clarify the visible components without implying that separate items are included in a purchase unless the reference confirms it.",
-          "camera": "Use a locked overhead frame followed by a slow, straight push-in across the actual items.",
-          "lighting": "Use uniform soft lighting so every product remains recognisable and colours stay consistent.",
-          "closing": "Hold on the complete arrangement with all included items visible and no added props.",
-          "audio": "Use a clean upbeat instrumental bed; no spoken bundle or value claims.",
-          "id": "sports_fitness_v31",
-          "variation_number": 31
-        },
-        {
-          "name": "Floor-Level Training Gear Orbit",
-          "hook": "Open with the actual gym accessory on a clean, level floor, fully visible and at a realistic scale relative to the room.",
-          "action": "Keep the item stationary and let a slow camera arc provide movement; do not add a model or demonstrate a use that the reference does not support.",
-          "detail": "Reveal one real design feature per camera angle, without inventing materials, functions or technical performance.",
-          "camera": "Make a short, smooth floor-level orbit of no more than a quarter turn, then settle into a front three-quarter view.",
-          "lighting": "Use soft directional light and natural shadows, preserving the original colour and surface appearance.",
-          "closing": "Hold the unchanged product in a clear hero frame with space around its outline.",
-          "audio": "Use a modern, low-volume training beat with no dramatic whooshes or unverified spoken claims.",
-          "id": "sports_fitness_v32",
-          "variation_number": 32
         }
       ]
     },
