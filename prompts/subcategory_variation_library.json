@@ -28537,7 +28537,7 @@
       "subcategory_id": "toy_baby",
       "category_id": "toy",
       "label": "🪇 Mainan bayi",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "toy_baby_v01",
@@ -28658,6 +28658,126 @@
           "lighting": "LIGHTING: Even studio light with controlled reflections and no blown highlights.",
           "closing": "CTA / HERO: Finish with negative space for optional editing, but render no text by default.",
           "audio": "AUDIO: Respect audio settings; if the generator cannot render audio, do not claim it will."
+        },
+        {
+          "id": "toy_baby_v11",
+          "variation_number": 11,
+          "name": "Gentle First Discovery",
+          "hook": "HOOK: Open with the complete baby toy centered on a clean, soft play mat; no generic text overlay.",
+          "action": "Reveal the toy and its visible features, then show one gentle, age-appropriate interaction with a caregiver's hand only if needed.",
+          "detail": "DETAIL: Keep the toy's exact shape, colors and visible parts; do not invent developmental benefits, safety certifications or included accessories.",
+          "camera": "CAMERA: Begin with a calm overhead view, then make one slow push-in while keeping the whole toy recognizable.",
+          "lighting": "LIGHTING: Soft diffused daylight with accurate colors and gentle shadows.",
+          "closing": "CTA / HERO: End on the complete toy resting clearly on the mat, with no extra props touching it.",
+          "audio": "AUDIO: Quiet, warm instrumental music; use a soft chime only if it matches a visible interaction."
+        },
+        {
+          "id": "toy_baby_v12",
+          "variation_number": 12,
+          "name": "Texture Detail Tour",
+          "hook": "HOOK: Show the entire baby toy first, then invite attention to its real visible textures and surfaces.",
+          "action": "Move slowly across the actual surface details before returning to the full product; do not simulate a baby biting or mouthing it.",
+          "detail": "DETAIL: Describe only visible texture and construction; do not claim the material is non-toxic, washable or chew-safe unless verified separately.",
+          "camera": "CAMERA: Use a controlled close-up glide followed by a stable full-product shot; no extreme macro that distorts scale.",
+          "lighting": "LIGHTING: Broad, soft studio light that reveals texture without harsh glare.",
+          "closing": "CTA / HERO: Finish with a clear three-quarter view showing the toy's overall form and visible details.",
+          "audio": "AUDIO: Minimal soft ambience; no exaggerated squeaks or sounds not supported by visible interaction."
+        },
+        {
+          "id": "toy_baby_v13",
+          "variation_number": 13,
+          "name": "Quiet Nursery Shelf",
+          "hook": "HOOK: Present the baby toy on a tidy nursery shelf or safe display surface, fully visible at the opening.",
+          "action": "Make a slow reveal from the surrounding neutral setting to the toy, keeping décor secondary and the product untouched.",
+          "detail": "DETAIL: Nursery objects are set dressing only; do not suggest they are included with the toy or add unshown parts.",
+          "camera": "CAMERA: Start with a medium composition and gently push in, maintaining realistic perspective and scale.",
+          "lighting": "LIGHTING: Warm, soft window light with balanced white tones and no dramatic shadows.",
+          "closing": "CTA / HERO: Hold a clean product hero shot with the full toy unobstructed.",
+          "audio": "AUDIO: Soft lullaby-style instrumental at low volume; no speech unless selected separately."
+        },
+        {
+          "id": "toy_baby_v14",
+          "variation_number": 14,
+          "name": "Caregiver Hand Scale",
+          "hook": "HOOK: Frame the complete baby toy beside an adult hand for a simple, realistic sense of scale.",
+          "action": "A caregiver gently picks up or turns the toy once, only if its visible construction supports that handling, then places it back.",
+          "detail": "DETAIL: Do not change dimensions or imply a weight, grip or age suitability that is not established by the reference.",
+          "camera": "CAMERA: Keep a steady medium close-up, with the hand and entire toy in focus during the single movement.",
+          "lighting": "LIGHTING: Neutral daylight, preserving the toy's real colors and surface finish.",
+          "closing": "CTA / HERO: Finish with the toy resting in its original position, fully visible and undamaged.",
+          "audio": "AUDIO: Use a subtle handling sound only when contact is visible; keep music quiet."
+        },
+        {
+          "id": "toy_baby_v15",
+          "variation_number": 15,
+          "name": "Mobile Toy, Static Frame",
+          "hook": "HOOK: Open on the complete baby toy in a calm, uncluttered frame with its moving parts, if any, visible.",
+          "action": "If the reference clearly shows a mobile or moving toy, demonstrate one slow, plausible movement; otherwise keep the toy stationary and reveal its details.",
+          "detail": "DETAIL: Do not invent spinning, lights, music or motorized movement absent from the reference.",
+          "camera": "CAMERA: Lock the camera and let only the verified toy movement occur; avoid artificial floating or looping motion.",
+          "lighting": "LIGHTING: Soft ambient nursery light with realistic highlights and no flashing effects.",
+          "closing": "CTA / HERO: Return to a still, complete product view and hold it long enough to inspect.",
+          "audio": "AUDIO: Add a quiet mechanical or musical sound only if the product visibly produces it; otherwise use gentle ambience."
+        },
+        {
+          "id": "toy_baby_v16",
+          "variation_number": 16,
+          "name": "Play-Mat Flat Lay",
+          "hook": "HOOK: Reveal the baby toy from directly above on a plain play mat, with every visible component in frame.",
+          "action": "Use a slow overhead move to show the toy's layout and actual features, then settle into a static flat lay.",
+          "detail": "DETAIL: Keep any pieces arranged exactly as supplied; never duplicate pieces or add decorative parts to the product.",
+          "camera": "CAMERA: Use a smooth top-down drift and a clean stop, without rotating the product unnaturally.",
+          "lighting": "LIGHTING: Even, soft overhead illumination with minimal shadows and true-to-life color.",
+          "closing": "CTA / HERO: End with a centered flat lay of the complete toy and ample clear space around it.",
+          "audio": "AUDIO: Gentle, unobtrusive music; no sound effects needed unless a visible action calls for one."
+        },
+        {
+          "id": "toy_baby_v17",
+          "variation_number": 17,
+          "name": "Soft Color Contrast",
+          "hook": "HOOK: Start with the baby toy against a simple, neutral background so its actual colors stand out immediately.",
+          "action": "Shift focus gently from the whole product to one or two real color or shape details, then return to the full view.",
+          "detail": "DETAIL: Do not recolor, beautify, add patterns or exaggerate contrast beyond what the reference shows.",
+          "camera": "CAMERA: Use a subtle focus transition and a slow lateral move; keep edges and proportions stable.",
+          "lighting": "LIGHTING: Diffused studio lighting with accurate white balance and no saturated color casts.",
+          "closing": "CTA / HERO: Finish on a crisp, front-facing product view with its original colors preserved.",
+          "audio": "AUDIO: Light, calm instrumental music at low volume; no decorative sound bursts."
+        },
+        {
+          "id": "toy_baby_v18",
+          "variation_number": 18,
+          "name": "Unboxing Without Extras",
+          "hook": "HOOK: Begin with the baby toy and only the packaging that is actually visible in the supplied reference.",
+          "action": "If packaging is shown, reveal the toy once without inventing inserts or accessories; if none is shown, simply reveal the product in place.",
+          "detail": "DETAIL: Never fabricate packaging, labels, manuals, included pieces or safety claims; preserve all visible branding accurately without adding text.",
+          "camera": "CAMERA: Use one controlled reveal and a stable close view, then widen to show the complete toy.",
+          "lighting": "LIGHTING: Soft neutral lighting with readable package and product details.",
+          "closing": "CTA / HERO: End with the toy fully visible and any actual packaging neatly beside it.",
+          "audio": "AUDIO: Use a soft paper rustle only if packaging is visibly handled; otherwise keep audio minimal."
+        },
+        {
+          "id": "toy_baby_v19",
+          "variation_number": 19,
+          "name": "One Feature, Clearly Shown",
+          "hook": "HOOK: Open with the complete baby toy, then guide attention to one genuine feature visible in the reference.",
+          "action": "Demonstrate that single feature once with slow, careful movement; keep all other features unchanged and in view when possible.",
+          "detail": "DETAIL: Do not infer educational outcomes, sensory benefits or safety properties; show only what the product visibly does.",
+          "camera": "CAMERA: Move from a full shot to one close detail, then return to the same full-shot angle for continuity.",
+          "lighting": "LIGHTING: Soft balanced light that makes the selected feature easy to see without glare.",
+          "closing": "CTA / HERO: Close with a steady full-product frame that matches the opening composition.",
+          "audio": "AUDIO: One subtle sound cue may mark the visible feature; no invented beeps, voices or effects."
+        },
+        {
+          "id": "toy_baby_v20",
+          "variation_number": 20,
+          "name": "Calm Bedtime Wind-Down",
+          "hook": "HOOK: Show the complete baby toy on a tidy, softly lit nursery surface, with a calm bedtime mood.",
+          "action": "Create a slow visual reveal with minimal movement; demonstrate lights or sound only if they are clearly supported by the reference.",
+          "detail": "DETAIL: Do not imply that the toy helps a baby sleep or has features not shown; keep the scene safe and the product unchanged.",
+          "camera": "CAMERA: Use a gentle push-in and settle into a still hero shot; no fast cuts or dramatic orbit.",
+          "lighting": "LIGHTING: Warm low-contrast ambient light while retaining clear detail and accurate product color.",
+          "closing": "CTA / HERO: Finish on the toy fully visible against the peaceful background, with no overlay text by default.",
+          "audio": "AUDIO: Soft lullaby-style music only; no claims, startling effects or unverified toy sounds."
         }
       ]
     },
