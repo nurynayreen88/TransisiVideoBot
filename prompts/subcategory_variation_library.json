@@ -27297,7 +27297,7 @@
       "subcategory_id": "accessory_other",
       "category_id": "accessory",
       "label": "📦 Aksesori lain",
-      "variation_count": 10,
+      "variation_count": 20,
       "variations": [
         {
           "id": "accessory_other_v01",
@@ -27418,6 +27418,126 @@
           "lighting": "LIGHTING: Low-contrast premium light; keep labels and details readable.",
           "closing": "CTA / HERO: Return to the complete unchanged product and hold a clean final frame.",
           "audio": "AUDIO: Respect audio settings; if the generator cannot render audio, do not claim it will."
+        },
+        {
+          "id": "accessory_other_v11",
+          "variation_number": 11,
+          "name": "Distinctive Shape Outline",
+          "hook": "Open on the accessory's most distinctive visible outline, preserving its exact shape, colour and supplied arrangement.",
+          "action": "Move the camera slowly along one outer contour, then ease back to reveal the complete item without rotating into unseen sides.",
+          "detail": "Do not infer the item's purpose, material, compatibility or included parts from appearance alone.",
+          "camera": "A measured close lateral track into a stable three-quarter product frame.",
+          "lighting": "Soft side light separates the true outline from the background without a false glow.",
+          "closing": "Hold the complete accessory at realistic scale and with no added text.",
+          "audio": "Neutral low-volume instrumental; no invented mechanical sounds."
+        },
+        {
+          "id": "accessory_other_v12",
+          "variation_number": 12,
+          "name": "Fastening or Join Inspection",
+          "hook": "If a fastening, hinge, buckle, clasp or join is visible, begin on that exact component; otherwise use the clearest real seam or edge.",
+          "action": "Track from the visible join to the main body without opening, connecting or flexing the product unless that action is clearly supported.",
+          "detail": "Keep the actual component count and geometry. Do not invent a mechanism, extra hardware or performance claim.",
+          "camera": "Stable macro slide with a short pullback to show the detail's position on the whole accessory.",
+          "lighting": "Diffused side fill reveals real edges without exaggerated metallic reflections.",
+          "closing": "Finish with the genuine join and main shape visible together where possible.",
+          "audio": "Soft restrained instrumental; no fabricated clicks."
+        },
+        {
+          "id": "accessory_other_v13",
+          "variation_number": 13,
+          "name": "Surface Mark and Pattern Fidelity",
+          "hook": "Choose a real visible pattern, colour block, printed mark or surface feature as the opening focus, only where present.",
+          "action": "Slide the camera across the existing surface while the product remains still and its markings stay unchanged.",
+          "detail": "Preserve visible marks and pattern placement exactly; do not add logos, text, symbols or unverified material descriptions.",
+          "camera": "Short controlled horizontal move followed by a balanced full-product composition.",
+          "lighting": "Neutral even illumination with fixed white balance and realistic shadows.",
+          "closing": "Hold on the unchanged product with its genuine surface detail readable.",
+          "audio": "Clean light instrumental; no artificial reveal sound."
+        },
+        {
+          "id": "accessory_other_v14",
+          "variation_number": 14,
+          "name": "Handheld Scale If Supported",
+          "hook": "If the supplied reference already includes a hand or the user explicitly selected a model, begin with the same supported scale reference; otherwise show the accessory alone.",
+          "action": "For a supported handheld view, keep a natural steady hold and make a small camera move; otherwise circle the stationary product with the camera only.",
+          "detail": "Do not add a person by default, alter hand anatomy, change product scale or imply ease-of-use claims.",
+          "camera": "Stable close-to-medium framing with realistic perspective and restrained motion.",
+          "lighting": "Soft natural-looking light preserves true product colour and natural skin tone when a hand is present.",
+          "closing": "Finish with the accessory at believable scale and fully recognizable.",
+          "audio": "Quiet instrumental; no handling sounds unless handling is visible."
+        },
+        {
+          "id": "accessory_other_v15",
+          "variation_number": 15,
+          "name": "Component Count and Layout",
+          "hook": "If the reference includes several accessory parts, open on that exact arrangement; if it shows one item, keep the frame focused on that item alone.",
+          "action": "Make a slow overhead pass across only the supplied components without rearranging or duplicating them.",
+          "detail": "Maintain the exact visible count and placement. Do not add pouches, packaging, matching items or spare parts.",
+          "camera": "Gentle overhead drift into a high three-quarter view with all visible parts kept in frame.",
+          "lighting": "Even tabletop light with natural contact shadows beneath the original items.",
+          "closing": "Hold the complete reference-supported arrangement without graphics or captions.",
+          "audio": "Understated instrumental; no unboxing effects."
+        },
+        {
+          "id": "accessory_other_v16",
+          "variation_number": 16,
+          "name": "Edge Profile and Thickness",
+          "hook": "Begin with a genuine side profile, edge or thickness detail that is visible in the reference; if none is clear, use the nearest known outer contour.",
+          "action": "Make a small camera arc around the visible profile while the accessory remains stationary and unchanged.",
+          "detail": "Do not exaggerate thickness, create layers or infer durability, flexibility or construction quality.",
+          "camera": "Low three-quarter close-up followed by a smooth pullback to the full silhouette.",
+          "lighting": "Soft directional light defines the actual profile without a harsh artificial rim.",
+          "closing": "End with the authentic side profile and complete outline readable.",
+          "audio": "Minimal modern instrumental; no mechanical effects."
+        },
+        {
+          "id": "accessory_other_v17",
+          "variation_number": 17,
+          "name": "Functional Interaction Only If Shown",
+          "hook": "Open on the product's clearest visible control or interaction point if present; otherwise choose a distinctive shape or surface detail.",
+          "action": "Show an interaction only if the reference or selected product type clearly supports it; when uncertain, keep the item still and use a camera-only reveal.",
+          "detail": "Do not invent operation, compatibility, results or hidden features; preserve the original state throughout.",
+          "camera": "Locked close framing for a supported interaction, or a slow push-in and pullback for a static product.",
+          "lighting": "Balanced soft light keeps the genuine detail visible without changing colour.",
+          "closing": "Return to an unobstructed full-product view in its original state.",
+          "audio": "Respect selected audio settings; no fabricated beeps, clicks or confirmation sounds."
+        },
+        {
+          "id": "accessory_other_v18",
+          "variation_number": 18,
+          "name": "Natural Reflection and Shadow",
+          "hook": "Show the accessory in its actual supplied arrangement, using its real contour and contact shadow for the opening composition.",
+          "action": "Shift the camera slightly so natural reflections or shadows change; do not make the item float or move by itself.",
+          "detail": "No invented gloss, metallic finish, coating or material claim; preserve visible shape and supplied parts.",
+          "camera": "Slow tabletop slide into a steady three-quarter view, maintaining natural perspective.",
+          "lighting": "Broad diffused source creates controlled reflections and realistic contact shadows.",
+          "closing": "Hold on the whole item against an uncluttered background.",
+          "audio": "Quiet instrumental; no whoosh or shimmer effects."
+        },
+        {
+          "id": "accessory_other_v19",
+          "variation_number": 19,
+          "name": "Two-View Continuity",
+          "hook": "Use the clearest authentic front and side views provided by the reference; if only one view exists, stay with that view.",
+          "action": "Cut once between compatible supplied angles, or make a small camera-only arc when no second angle is available.",
+          "detail": "Do not invent a rear surface, underside, accessory, label or component to complete the view.",
+          "camera": "Two steady matching shots or one restrained orbit with consistent scale and colour.",
+          "lighting": "Consistent neutral illumination across the available views, without exposure jumps.",
+          "closing": "Finish on the clearest complete view supported by the reference.",
+          "audio": "A soft musical accent at the cut; no transformation sound."
+        },
+        {
+          "id": "accessory_other_v20",
+          "variation_number": 20,
+          "name": "Full Accessory Hero Pullback",
+          "hook": "Select one genuinely visible feature—outline, fastening, pattern, edge or surface—and open close on it only if present.",
+          "action": "Pull back in one continuous move until the complete accessory and all reference-supplied parts are visible at realistic scale.",
+          "detail": "Preserve exact identity, colour, dimensions, markings and part count. Add no claims, logos, props or unseen details.",
+          "camera": "Stable macro-to-medium pullback with natural perspective and consistent focus.",
+          "lighting": "Balanced soft studio lighting with true colour and natural contact shadows.",
+          "closing": "Hold a clean full-product hero frame for the final beat, with no captions or watermark.",
+          "audio": "Soft neutral instrumental outro; no voiceover or invented handling sounds."
         }
       ]
     },
