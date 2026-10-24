@@ -3,7 +3,7 @@ import subprocess
 import tempfile
 from pathlib import Path
 
-ALLOWED = {"fade", "smoothleft", "slideleft", "zoomin"}
+ALLOWED = {"none", "fade", "smoothleft", "slideleft", "zoomin"}
 
 def run(args, timeout=180):
     subprocess.run(args, check=True, timeout=timeout, capture_output=True)
@@ -22,7 +22,7 @@ def has_audio(path):
         capture_output=True, text=True, check=True, timeout=20)
     return bool(result.stdout.strip())
 
-def merge_videos(sources, destination, transition="fade"):
+def merge_videos(sources, destination, transition="none"):
     if transition not in ALLOWED or not 2 <= len(sources) <= 5:
         raise ValueError("Invalid merge request")
     with tempfile.TemporaryDirectory(prefix="merge_clips_") as folder:
@@ -46,6 +46,17 @@ def merge_videos(sources, destination, transition="fade"):
             run(cmd)
             clips.append(clip)
             durations.append(duration(clip))
+        if transition == "none":
+            # All clips were normalized to matching video and audio streams.
+            listing = Path(folder) / "concat.txt"
+            listing.write_text(
+                "".join(f"file '{clip.as_posix()}'\\n" for clip in clips),
+                encoding="utf-8",
+            )
+            run(["ffmpeg", "-y", "-v", "error", "-f", "concat", "-safe", "0",
+                 "-i", str(listing), "-map", "0:v:0", "-map", "0:a:0",
+                 "-c", "copy", "-movflags", "+faststart", str(destination)], timeout=240)
+            return
         args = ["ffmpeg", "-y", "-v", "error"]
         for clip in clips:
             args.extend(["-i", str(clip)])
