@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "batch": "v9_curated_twelfth_batch_20261024",
+  "variation_count": 6,
+  "notes": "Three distinct complete 10s and continuous 20s concepts. Draft pending real render and product-input compatibility QA.",
+  "variations": [
+    {
+      "id": "v9_curated12_bag_luggage_10s_01",
+      "subcategory_id": "bag_luggage",
+      "visual_category": "PARTIAL_MODEL",
+      "concept": "Hotel check-in arrival",
+      "duration_seconds": 10,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Vertical 9:16 photorealistic hotel lobby. Exact reference luggage, preserving its visible shell, handle, wheels, colour, dimensions and actual fittings; no invented compartments or durability claims. One adult Universal Malaysian traveller framed shoulders-down, polished level lobby floor, soft daylight. Natural rolling resistance and scale, steady low-to-mid tracking.\nUse the supplied reference product as the sole visual master. Preserve realistic scale, anatomy, gravity and contact. No on-screen text, captions, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Establish the exact luggage upright beside the traveller, all visible original wheels grounded.\n2–5s: Traveller grips its existing handle and rolls it three measured steps across the level floor.\n5–8s: Traveller stops beside an unbranded check-in counter and brings the luggage upright.\n8–10s: Hold an unobstructed three-quarter hero view of the unchanged luggage.\nAUDIO: Off-camera Malaysian Malay narrator, traveller silent: 'Sampai hotel, terus menuju ke kaunter daftar masuk.' Subtle lobby ambience and rolling-wheel sound."
+    },
+    {
+      "id": "v9_curated12_bag_luggage_20s_01",
+      "subcategory_id": "bag_luggage",
+      "visual_category": "PARTIAL_MODEL",
+      "concept": "Hotel check-in arrival",
+      "duration_seconds": 20,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic hotel lobby. Exact reference luggage, preserving its visible shell, handle, wheels, colour, dimensions and actual fittings; no invented compartments or durability claims. One adult Universal Malaysian traveller framed shoulders-down, polished level lobby floor, soft daylight. Natural rolling resistance and scale, steady low-to-mid tracking.\nUse the supplied reference product as the sole visual master. Preserve realistic scale, anatomy, gravity and contact. No on-screen text, captions, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–3s: Show the exact luggage upright beside the traveller near the lobby entrance.\n3–7s: Traveller rolls it three natural steps toward the check-in counter.\n7–10s: Traveller stops with luggage upright, hand still on the existing handle.\nAUDIO: Off-camera Malaysian Malay narrator, traveller silent: 'Sampai hotel, terus menuju ke kaunter daftar masuk.' Subtle lobby ambience and rolling-wheel sound.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic hotel lobby. Exact reference luggage, preserving its visible shell, handle, wheels, colour, dimensions and actual fittings; no invented compartments or durability claims. One adult Universal Malaysian traveller framed shoulders-down, polished level lobby floor, soft daylight. Natural rolling resistance and scale, steady low-to-mid tracking.\nUse the supplied reference product as the sole visual master. Preserve realistic scale, anatomy, gravity and contact. No on-screen text, captions, extra logos or watermark.\nCONTINUITY: Match the final Part 1 frame exactly in subject, product, pose, props, lighting and camera axis; continue without replaying finished actions.\nEXACTLY 10 SECONDS:\n0–3s: Resume from the same stopped stance; traveller releases the existing handle naturally.\n3–7s: Camera makes a restrained lateral slide around the stationary luggage, revealing its original side profile and wheels.\n7–10s: Finish on a stable full-product frame beside the counter.\nAUDIO: Off-camera Malaysian Malay narrator, traveller silent: 'Beg dah sampai, masa untuk daftar masuk.' Subtle lobby ambience."
+    },
+    {
+      "id": "v9_curated12_home_cleaning_10s_01",
+      "subcategory_id": "home_cleaning",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Kitchen counter wipe",
+      "duration_seconds": 10,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Vertical 9:16 photorealistic kitchen counter. Exact reference reusable cleaning cloth, preserving visible colour, size, weave appearance and edge; no invented antimicrobial or cleaning-performance claims. One adult Malaysian hand and forearm only. A small harmless water spill on a smooth plain counter; steady close camera, realistic cloth contact, soft morning light.\nUse the supplied reference product as the sole visual master. Preserve realistic scale, anatomy, gravity and contact. No on-screen text, captions, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Establish the exact cloth folded beside a small water spill.\n2–5s: Hand unfolds the cloth once, revealing its actual size and edge.\n5–8s: Hand makes one slow wiping pass across the water with realistic contact.\n8–10s: Hand sets the cloth flat beside the cleared area, product fully visible.\nAUDIO: Off-camera Malaysian Malay narrator, hands-only subject silent: 'Air tertumpah sikit, lap terus supaya kaunter kemas.' Natural kitchen ambience."
+    },
+    {
+      "id": "v9_curated12_home_cleaning_20s_01",
+      "subcategory_id": "home_cleaning",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Kitchen counter wipe",
+      "duration_seconds": 20,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic kitchen counter. Exact reference reusable cleaning cloth, preserving visible colour, size, weave appearance and edge; no invented antimicrobial or cleaning-performance claims. One adult Malaysian hand and forearm only. A small harmless water spill on a smooth plain counter; steady close camera, realistic cloth contact, soft morning light.\nUse the supplied reference product as the sole visual master. Preserve realistic scale, anatomy, gravity and contact. No on-screen text, captions, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–3s: Establish the folded reference cloth beside a small water spill on the counter.\n3–7s: Hand unfolds it naturally, showing its authentic surface and original edge.\n7–10s: Hand places it flat against the spill, ready for a wipe.\nAUDIO: Off-camera Malaysian Malay narrator, hands-only subject silent: 'Air tertumpah sikit, lap terus supaya kaunter kemas.' Natural kitchen ambience.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic kitchen counter. Exact reference reusable cleaning cloth, preserving visible colour, size, weave appearance and edge; no invented antimicrobial or cleaning-performance claims. One adult Malaysian hand and forearm only. A small harmless water spill on a smooth plain counter; steady close camera, realistic cloth contact, soft morning light.\nUse the supplied reference product as the sole visual master. Preserve realistic scale, anatomy, gravity and contact. No on-screen text, captions, extra logos or watermark.\nCONTINUITY: Match the final Part 1 frame exactly in subject, product, pose, props, lighting and camera axis; continue without replaying finished actions.\nEXACTLY 10 SECONDS:\n0–3s: Continue from the same cloth-on-counter contact position; hand makes one controlled wiping pass.\n3–7s: Hand lifts and folds the same cloth once, without changing its dimensions or texture.\n7–10s: Place it neatly beside the wiped area in a stable close hero frame.\nAUDIO: Off-camera Malaysian Malay narrator, hands-only subject silent: 'Selesai lap, kain disusun semula.' Natural kitchen ambience."
+    },
+    {
+      "id": "v9_curated12_pet_leash_10s_01",
+      "subcategory_id": "pet_leash",
+      "visual_category": "ANIMAL_ONLY",
+      "concept": "Gentle garden walk",
+      "duration_seconds": 10,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Vertical 9:16 photorealistic quiet enclosed garden path. Exact reference dog leash attached through its actual visible connector to a suitable plain well-fitted dog harness; preserve leash colour, length appearance, handle and fittings without inventing retractable mechanisms. One calm healthy medium-sized dog remains clearly visible; the adult handler is outside frame with only the leash extending naturally to frame edge. Safe loose-leash walking on dry level ground, low tracking camera, natural canine gait and no forced pulling.\nUse the supplied reference product as the sole visual master. Preserve realistic scale, anatomy, gravity and contact. No on-screen text, captions, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Show the calm dog standing on the path, exact leash hanging in a gentle relaxed curve.\n2–5s: Dog takes three easy steps forward with natural harness and leash contact.\n5–8s: Dog pauses to sniff a safe patch beside the path, leash remaining slack.\n8–10s: Hold a steady frame showing dog and the reference leash clearly.\nAUDIO: No speech, narration or music; only gentle pawsteps, garden birds and natural ambience."
+    },
+    {
+      "id": "v9_curated12_pet_leash_20s_01",
+      "subcategory_id": "pet_leash",
+      "visual_category": "ANIMAL_ONLY",
+      "concept": "Gentle garden walk",
+      "duration_seconds": 20,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic quiet enclosed garden path. Exact reference dog leash attached through its actual visible connector to a suitable plain well-fitted dog harness; preserve leash colour, length appearance, handle and fittings without inventing retractable mechanisms. One calm healthy medium-sized dog remains clearly visible; the adult handler is outside frame with only the leash extending naturally to frame edge. Safe loose-leash walking on dry level ground, low tracking camera, natural canine gait and no forced pulling.\nUse the supplied reference product as the sole visual master. Preserve realistic scale, anatomy, gravity and contact. No on-screen text, captions, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–3s: Establish the dog standing calmly, original leash connected securely to the harness.\n3–7s: Dog walks three measured steps along the level path; leash remains relaxed.\n7–10s: Dog stops near a low patch of grass, nose angled down.\nAUDIO: No speech, narration or music; only gentle pawsteps, garden birds and natural ambience.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic quiet enclosed garden path. Exact reference dog leash attached through its actual visible connector to a suitable plain well-fitted dog harness; preserve leash colour, length appearance, handle and fittings without inventing retractable mechanisms. One calm healthy medium-sized dog remains clearly visible; the adult handler is outside frame with only the leash extending naturally to frame edge. Safe loose-leash walking on dry level ground, low tracking camera, natural canine gait and no forced pulling.\nUse the supplied reference product as the sole visual master. Preserve realistic scale, anatomy, gravity and contact. No on-screen text, captions, extra logos or watermark.\nCONTINUITY: Match the final Part 1 frame exactly in subject, product, pose, props, lighting and camera axis; continue without replaying finished actions.\nEXACTLY 10 SECONDS:\n0–3s: Resume from the exact stopped sniffing stance; dog briefly sniffs the safe grass.\n3–7s: Dog lifts its head and takes two unhurried steps, leash following naturally without tension.\n7–10s: Dog stops and looks ahead, original leash and connector unobstructed.\nAUDIO: No speech, narration or music; only gentle pawsteps, garden birds and natural ambience."
+    }
+  ]
+}
