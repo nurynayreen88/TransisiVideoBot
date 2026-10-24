@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "batch": "v9_curated_twenty_fourth_batch_20261024",
+  "variation_count": 6,
+  "notes": "Three individually authored reference-dependent concepts, complete 10s and continuous two-part 20s. Draft pending render and runtime input compatibility QA.",
+  "variations": [
+    {
+      "id": "v9_curated24_fashion_heels_10s_01",
+      "subcategory_id": "fashion_heels",
+      "visual_category": "PARTIAL_MODEL",
+      "concept": "Gallery entrance",
+      "duration_seconds": 10,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Photorealistic vertical 9:16. One adult Malaysian model wearing the exact reference pair of heeled shoes, framed from knees down at a quiet indoor art gallery. Preserve original heel height and shape, toe, strap, colour and surface detail. Smooth dry level floor, diffuse daylight, low tracking camera, realistic balanced steps; no comfort or grip claims.\nUse the supplied product reference as the sole visual master. Preserve authentic design, scale, anatomy, physical contact and continuity. No fabricated features, claims, captions, overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Both original shoes stand planted side by side, full heel profile visible.\n2–5s: Model takes two measured steps with natural heel-to-toe contact.\n5–8s: Model pauses and pivots gently a quarter turn to show the actual side profile.\n8–10s: Hold a stable three-quarter frame of both unchanged shoes.\nAUDIO: No voice, narration or music; restrained gallery ambience and natural footsteps."
+    },
+    {
+      "id": "v9_curated24_fashion_heels_20s_01",
+      "subcategory_id": "fashion_heels",
+      "visual_category": "PARTIAL_MODEL",
+      "concept": "Gallery entrance",
+      "duration_seconds": 20,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. One adult Malaysian model wearing the exact reference pair of heeled shoes, framed from knees down at a quiet indoor art gallery. Preserve original heel height and shape, toe, strap, colour and surface detail. Smooth dry level floor, diffuse daylight, low tracking camera, realistic balanced steps; no comfort or grip claims.\nUse the supplied product reference as the sole visual master. Preserve authentic design, scale, anatomy, physical contact and continuity. No fabricated features, claims, captions, overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–3s: Establish both reference shoes planted on the gallery floor.\n3–7s: Model takes two balanced, measured steps forward.\n7–10s: Model stops with both feet planted, shoes unobstructed.\nAUDIO: No voice, narration or music; restrained gallery ambience and natural footsteps.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. One adult Malaysian model wearing the exact reference pair of heeled shoes, framed from knees down at a quiet indoor art gallery. Preserve original heel height and shape, toe, strap, colour and surface detail. Smooth dry level floor, diffuse daylight, low tracking camera, realistic balanced steps; no comfort or grip claims.\nUse the supplied product reference as the sole visual master. Preserve authentic design, scale, anatomy, physical contact and continuity. No fabricated features, claims, captions, overlays, extra logos or watermark.\nCONTINUITY: Match the final Part 1 frame exactly in product, pose, props, lighting and camera axis. Continue without replaying completed action.\nEXACTLY 10 SECONDS:\n0–3s: Continue from the exact stopped position and gently pivot a quarter turn.\n3–7s: Camera slides laterally at ankle height to reveal original heel and toe profile.\n7–10s: Hold a steady clear view of both shoes.\nAUDIO: No voice, narration or music; restrained gallery ambience and natural footsteps."
+    },
+    {
+      "id": "v9_curated24_office_stationery_10s_01",
+      "subcategory_id": "office_stationery",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Notebook meeting prep",
+      "duration_seconds": 10,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Photorealistic vertical 9:16. Exact reference paper notebook with its authentic cover, binding, page dimensions, colour and visible markings; no invented page features. A bright uncluttered work desk with a separate plain pen. Adult Malaysian hands and forearms only, stable close overhead three-quarter camera, realistic paper movement.\nUse the supplied product reference as the sole visual master. Preserve authentic design, scale, anatomy, physical contact and continuity. No fabricated features, claims, captions, overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Show the original closed notebook and separate pen on the desk.\n2–5s: Hands open the actual front cover to a blank page.\n5–8s: One hand writes a short simple heading with the pen while the other steadies the notebook.\n8–10s: Pen is set down; hold the original notebook open, binding clearly visible.\nAUDIO: Off-camera Malaysian Malay narrator, hands silent: 'Buka buku nota, catat perkara penting dulu.' Quiet office ambience and paper rustle."
+    },
+    {
+      "id": "v9_curated24_office_stationery_20s_01",
+      "subcategory_id": "office_stationery",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Notebook meeting prep",
+      "duration_seconds": 20,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. Exact reference paper notebook with its authentic cover, binding, page dimensions, colour and visible markings; no invented page features. A bright uncluttered work desk with a separate plain pen. Adult Malaysian hands and forearms only, stable close overhead three-quarter camera, realistic paper movement.\nUse the supplied product reference as the sole visual master. Preserve authentic design, scale, anatomy, physical contact and continuity. No fabricated features, claims, captions, overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–3s: Establish the exact closed notebook with a separate pen beside it.\n3–7s: Hands open the front cover to a blank page without changing its binding.\n7–10s: One hand steadies the open notebook as the other picks up the pen.\nAUDIO: Off-camera Malaysian Malay narrator, hands silent: 'Buka buku nota, catat perkara penting dulu.' Quiet office ambience and paper rustle.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. Exact reference paper notebook with its authentic cover, binding, page dimensions, colour and visible markings; no invented page features. A bright uncluttered work desk with a separate plain pen. Adult Malaysian hands and forearms only, stable close overhead three-quarter camera, realistic paper movement.\nUse the supplied product reference as the sole visual master. Preserve authentic design, scale, anatomy, physical contact and continuity. No fabricated features, claims, captions, overlays, extra logos or watermark.\nCONTINUITY: Match the final Part 1 frame exactly in product, pose, props, lighting and camera axis. Continue without replaying completed action.\nEXACTLY 10 SECONDS:\n0–3s: Resume with the same notebook open and pen poised over the blank page.\n3–7s: Write a short simple heading with natural hand movement, then set down the pen.\n7–10s: Hold a clear overhead view of the authentic open notebook.\nAUDIO: Off-camera Malaysian Malay narrator, hands silent: 'Catatan ringkas dah siap untuk mesyuarat.' Quiet office ambience."
+    },
+    {
+      "id": "v9_curated24_baby_bag_10s_01",
+      "subcategory_id": "baby_bag",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Nursery packing",
+      "duration_seconds": 10,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Photorealistic vertical 9:16. Exact reference baby essentials bag with its actual body, strap, opening, colour, visible seams and closure only. Bright tidy nursery changing counter with a single plain folded baby cloth sized for the bag's visible main opening; no infant on screen. Adult Malaysian hands and forearms only. Soft daylight, stable three-quarter close camera; no invented insulated pockets or capacity claims.\nUse the supplied product reference as the sole visual master. Preserve authentic design, scale, anatomy, physical contact and continuity. No fabricated features, claims, captions, overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Establish the exact bag open and upright on the stable counter.\n2–5s: Hands fold one plain baby cloth neatly and lower it into the actual main opening.\n5–8s: Hands close the bag using its original existing closure, without forcing it.\n8–10s: Hold a full unobstructed view of the original closed bag.\nAUDIO: Off-camera Malaysian Malay narrator, hands silent: 'Kain bayi dilipat kemas, kemudian simpan dalam beg.' Soft nursery ambience."
+    },
+    {
+      "id": "v9_curated24_baby_bag_20s_01",
+      "subcategory_id": "baby_bag",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Nursery packing",
+      "duration_seconds": 20,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. Exact reference baby essentials bag with its actual body, strap, opening, colour, visible seams and closure only. Bright tidy nursery changing counter with a single plain folded baby cloth sized for the bag's visible main opening; no infant on screen. Adult Malaysian hands and forearms only. Soft daylight, stable three-quarter close camera; no invented insulated pockets or capacity claims.\nUse the supplied product reference as the sole visual master. Preserve authentic design, scale, anatomy, physical contact and continuity. No fabricated features, claims, captions, overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–3s: Establish the exact bag open on the nursery counter with one plain folded cloth beside it.\n3–7s: Hands lift the cloth and place it through the bag's real main opening.\n7–10s: Hands settle the cloth inside and pause at the opening.\nAUDIO: Off-camera Malaysian Malay narrator, hands silent: 'Kain bayi dilipat kemas, kemudian simpan dalam beg.' Soft nursery ambience.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. Exact reference baby essentials bag with its actual body, strap, opening, colour, visible seams and closure only. Bright tidy nursery changing counter with a single plain folded baby cloth sized for the bag's visible main opening; no infant on screen. Adult Malaysian hands and forearms only. Soft daylight, stable three-quarter close camera; no invented insulated pockets or capacity claims.\nUse the supplied product reference as the sole visual master. Preserve authentic design, scale, anatomy, physical contact and continuity. No fabricated features, claims, captions, overlays, extra logos or watermark.\nCONTINUITY: Match the final Part 1 frame exactly in product, pose, props, lighting and camera axis. Continue without replaying completed action.\nEXACTLY 10 SECONDS:\n0–3s: Resume with the same cloth inside and hands at the unchanged bag opening.\n3–7s: Hands close the original closure smoothly and release the bag.\n7–10s: Hold a steady complete three-quarter product view.\nAUDIO: Off-camera Malaysian Malay narrator, hands silent: 'Barang dah tersusun, tutup beg dan siap.' Soft nursery ambience."
+    }
+  ]
+}
