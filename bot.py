@@ -2269,6 +2269,9 @@ def render_video(images: list[Path], output: Path, music: Path | None = None, st
 
 
 def reset(context):
+    # Release large transient buffers when a user exits or restarts a workflow.
+    for key in ('affiliate_images', 'remove_bg_foreground', 'merge_files'):
+        context.user_data.pop(key, None)
     context.user_data['photos'] = []
     context.user_data['music'] = None
     context.user_data['music_choice'] = 'auto'
