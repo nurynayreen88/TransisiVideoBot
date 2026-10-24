@@ -1524,7 +1524,7 @@ async def record_prompt_trial_success(context, user_id):
 def main_menu(user_id=None):
     rows = [
         [InlineKeyboardButton('✍️ Jana Prompt', callback_data='prompt')],
-        [InlineKeyboardButton('🖼️ Remove BG', callback_data='crop_image')],
+        [InlineKeyboardButton('🖼️ Remove BG', callback_data='remove_bg')],
         [InlineKeyboardButton('🎞️ Gabung Video', callback_data='merge')],
         [InlineKeyboardButton('🔄 Tukar Format Video', callback_data='convert')],
         [InlineKeyboardButton('💎 Langganan', callback_data='subscription'), InlineKeyboardButton('👤 Akaun Saya', callback_data='account')],
