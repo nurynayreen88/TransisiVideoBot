@@ -26,18 +26,24 @@ def compose_review_prompt(record: dict, *, product_name: str, human_model: bool,
         raise PromptChoiceError("Product name is required")
     if voice_type not in VOICE_TYPES:
         raise PromptChoiceError("Unknown voice selection")
-    if human_model != (record.get("model") != "none"):
+    if human_model != (record.get("model") not in ("none", None, "")):
         raise PromptChoiceError("Select a concept with matching human-model setting")
     if human_model and age_range not in AGE_RANGES:
         raise PromptChoiceError("Select an age range for the human model")
+    if not human_model and age_range not in (None, ""):
+        raise PromptChoiceError("Age range requires a human model")
     if not human_model and voice_type == "model_speech":
         raise PromptChoiceError("Model speech requires a visible human model")
     if voice_type != record.get("voice_type"):
         raise PromptChoiceError("Select a concept with matching voice type")
     if animal is not None and animal not in PET_SPECIES:
         raise PromptChoiceError("Unsupported animal category")
-    if record.get("subcategory_id", "").startswith("pet_") and animal is None:
-        raise PromptChoiceError("Pet product requires an animal")
+    if record.get("subcategory_id", "").startswith("pet_"):
+        required = record.get("animal_required")
+        if required not in PET_SPECIES or animal != required:
+            raise PromptChoiceError("Animal must match the pet product")
+    elif animal is not None:
+        raise PromptChoiceError("Animal choice requires a pet product")
     duration = record.get("duration_seconds")
     if duration not in (10, 20):
         raise PromptChoiceError("Duration must be 10 or 20 seconds")
@@ -49,11 +55,6 @@ def compose_review_prompt(record: dict, *, product_name: str, human_model: bool,
             raise PromptChoiceError("Missing standalone prompt part: " + field)
         rendered = raw.replace("{{PRODUCT_NAME}}", product_name.strip())
         rendered = rendered.replace("{{MODEL_AGE_RANGE}}", age_range.replace("_", " ") if human_model else "")
-        if animal is not None:
-            rendered += (" ANIMAL: A real " + animal + " is clearly visible, "
-                         "safely and naturally using the reference pet product; "
-                         "species-appropriate behavior and realistic scale. "
-                         "A human presenter never replaces the animal.")
         if re.search(r"\{\{[^}]+\}\}", rendered):
             raise PromptChoiceError("Unresolved template placeholder")
         prompts.append(rendered)
