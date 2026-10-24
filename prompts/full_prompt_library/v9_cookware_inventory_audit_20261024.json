@@ -2,7 +2,7 @@
   "schema_version": 1,
   "audit": "cookware_v9_inventory_20261024",
   "subcategory_id": "home_kitchen_cookware",
-  "scope": "14 dedicated V9 cookware batch files plus all 27 v9_curated_*_batch_20261024.json files on staging branch. Does not claim audit of every other legacy or pilot file.",
+  "scope": "All 14 dedicated V9 cookware batch files, all 27 curated batch files, and 18 additional V9 pilot/rewrite/quality files on staging. Legacy files outside these V9 groups are not activation-approved or globally deduplicated.",
   "summary": {
     "dedicated_files": 14,
     "dedicated_physical_records": 134,
@@ -14,7 +14,13 @@
     "curated_additional_concepts": 2,
     "identified_unique_concepts": 64,
     "identified_duration_records_excluding_rejected": 128,
-    "activation_approved": 0
+    "activation_approved": 0,
+    "additional_v9_pilot_rewrite_files_reviewed": 18,
+    "additional_v9_pilot_rewrite_records": 18,
+    "additional_v9_pilot_rewrite_distinct_base_concepts": 6,
+    "additional_v9_pilot_rewrite_unlabeled_pair": 1,
+    "additional_v9_pilot_rewrite_replacement_or_continuation_records": 4,
+    "identifiable_base_concepts_across_v9": 70
   },
   "files": [
     {
@@ -122,7 +128,59 @@
     "Two curated concepts are distinct but require product-type eligibility, not automatic activation.",
     "40 Malaysian-menu candidates are not the same as 40 render-approved prompts. 22 earlier focus concepts remain preserved for fit review.",
     "All candidate records remain DRAFT_RENDER_QA. Actual runtime product input must be reconciled with the image-reference requirement before activation.",
-    "No legacy or source file has been deleted, merged, or deployed."
+    "No legacy or source file has been deleted, merged, or deployed.",
+    "The 18 additional pilot/rewrite files contribute six named distinct base concepts (Lunch Portion, Vegetable Saute, Pan to Plate, Dinner Is Underway, Dinner Portion, Stir and Serve) and one unlabeled pilot; revised variants are not new concepts. Earlier 64 plus six named = 70 named identified V9 concepts, with one unlabeled pilot separately held. No global activation claim."
   ],
-  "next_action": "Review product compatibility and content quality of the 40 Malaysian candidates; shortlist 50 across cooking actions and product types rather than generating more dishes. Then audit remaining pilot/rewrite files before final global unique count."
+  "next_action": "Do not generate more cookware menu concepts. Audit product-type eligibility and candidate quality, resolve legacy product-name-only versus image-master input, and build a 50-concept shortlist without counting rewrites as new concepts.",
+  "pilot_rewrite_findings": [
+    {
+      "concept": "Lunch Portion",
+      "file": "v9_batch30_20261024.json",
+      "records": 2,
+      "status": "DRAFT_REVIEW"
+    },
+    {
+      "concept": "Vegetable Saute",
+      "files": [
+        "v9_batch60_20261024.json",
+        "v9_quality_revision_20261024.json"
+      ],
+      "records": 4,
+      "note": "Same concept appears in original and quality revision; count one base concept, not two."
+    },
+    {
+      "concept": "Pan to Plate",
+      "files": [
+        "v9_continuity_01.json",
+        "v9_continuity_part2_rewrite_02.json"
+      ],
+      "records": 2,
+      "note": "20s original and rewrite; not two concepts and not a complete 10s/20s pair."
+    },
+    {
+      "concept": "Dinner Is Underway",
+      "file": "v9_creative_rewrite_01.json",
+      "records": 2
+    },
+    {
+      "concept": "Dinner Portion",
+      "files": [
+        "v9_no_voice_03.json",
+        "v9_no_voice_part2_rewrite_04.json"
+      ],
+      "records": 3,
+      "note": "Original duration pair and one 20s continuation rewrite; count one concept."
+    },
+    {
+      "concept": "Unlabeled hands-only cookware pilot",
+      "file": "v9_partial_model_pilot_01.json",
+      "records": 2,
+      "note": "Do not count as uniquely named concept until reviewed."
+    },
+    {
+      "concept": "Stir and Serve",
+      "file": "v9_voice_diversity_01.json",
+      "records": 2
+    }
+  ]
 }
