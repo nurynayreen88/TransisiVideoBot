@@ -52,6 +52,20 @@ class CookwareShortlistValidation(unittest.TestCase):
                 self.assertNotIn("{{", record["full_prompt"])
                 self.assertTrue(record["full_prompt"].strip())
 
+    def test_legacy_catalog_alias_is_review_only(self):
+        alias = json.loads(ALIAS.read_text(encoding="utf-8"))
+        self.assertEqual(alias["master_id"], "home_kitchen")
+        self.assertEqual(alias["v9_id"], "home_kitchen_cookware")
+        self.assertEqual(alias["status"], "REVIEW_ONLY")
+
+    def test_no_duplicate_durations_per_concept(self):
+        manifest = json.loads(SHORTLIST.read_text(encoding="utf-8"))
+        for entry in manifest["selected"]:
+            source = json.loads((LIB / entry["source_file"]).read_text(encoding="utf-8"))
+            index = {record["id"]: record for record in source["variations"]}
+            durations = [index[record_id]["duration_seconds"] for record_id in entry["record_ids"]]
+            self.assertEqual(durations, [10, 20])
+
 
 if __name__ == "__main__":
     unittest.main()
