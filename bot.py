@@ -1524,7 +1524,7 @@ async def record_prompt_trial_success(context, user_id):
 def main_menu(user_id=None):
     rows = [
         [InlineKeyboardButton('✍️ Jana Prompt', callback_data='prompt')],
-        [InlineKeyboardButton('🖼️ Crop Gambar', callback_data='crop_image')],
+        [InlineKeyboardButton('🖼️ Remove BG', callback_data='crop_image')],
         [InlineKeyboardButton('🎞️ Gabung Video', callback_data='merge')],
         [InlineKeyboardButton('🔄 Tukar Format Video', callback_data='convert')],
         [InlineKeyboardButton('💎 Langganan', callback_data='subscription'), InlineKeyboardButton('👤 Akaun Saya', callback_data='account')],
@@ -2451,7 +2451,7 @@ async def receive_receipt(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def handle_image_or_receipt_document(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Route uploaded image documents to the active flow, without breaking receipt PDFs."""
-    if context.user_data.get('stage') in ('prompt_upload', 'background_custom_upload', 'crop_upload'):
+    if context.user_data.get('stage') in ('prompt_upload', 'background_custom_upload', 'remove_bg_upload'):
         await photo(update, context)
         return
     await receive_receipt(update, context)
@@ -2482,7 +2482,7 @@ async def photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if context.user_data.get('stage') == 'receipt_upload':
         await receive_receipt(update, context)
         return
-    if context.user_data.get('stage') == 'crop_upload':
+    if context.user_data.get('stage') == 'remove_bg_upload':
         item = update.message.photo[-1] if update.message.photo else update.message.document
         if not item or (update.message.document and not (item.mime_type or '').startswith('image/')):
             await update.message.reply_text('Hantar gambar JPG, PNG atau WebP.')
@@ -2490,15 +2490,42 @@ async def photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if (item.file_size or 0) > 12 * 1024 * 1024:
             await update.message.reply_text('Gambar terlalu besar. Maksimum 12 MB.')
             return
-        context.user_data['crop_file_id'] = item.file_id
-        context.user_data['stage'] = 'crop_ratio'
-        await update.message.reply_text('Pilih nisbah crop tengah (bahagian luar akan dipotong):',
-            reply_markup=InlineKeyboardMarkup([
-                [InlineKeyboardButton('1:1 Persegi', callback_data='crop_ratio:1:1'),
-                 InlineKeyboardButton('4:5 Potret', callback_data='crop_ratio:4:5')],
-                [InlineKeyboardButton('9:16 Story/Reels', callback_data='crop_ratio:9:16'),
-                 InlineKeyboardButton('16:9 Landskap', callback_data='crop_ratio:16:9')],
-                [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
+        if not os.environ.get('REMOVE_BG_API_KEY', '').strip():
+            await update.message.reply_text('Remove BG belum dikonfigurasi. Hubungi admin.', reply_markup=main_menu())
+            return
+        lock = context.application.bot_data.setdefault('render_lock', asyncio.Lock())
+        if lock.locked():
+            await update.message.reply_text('Server sedang memproses fail lain. Cuba sebentar lagi.')
+            return
+        async with lock:
+            context.user_data['busy'] = True
+            try:
+                tg_file = await context.bot.get_file(item.file_id)
+                raw = bytes(await tg_file.download_as_bytearray())
+                if not raw or len(raw) > 12 * 1024 * 1024:
+                    raise ValueError('Invalid image input')
+                def remove_background():
+                    with Image.open(BytesIO(raw)) as opened:
+                        source = ImageOps.exif_transpose(opened)
+                        if source.width * source.height > 40_000_000:
+                            raise ValueError('Image exceeds pixel limit')
+                        foreground = _remove_bg_api(source.convert('RGB'))
+                        if foreground is None:
+                            raise ValueError('Remove BG API key missing')
+                        output = BytesIO()
+                        foreground.save(output, format='PNG')
+                        output.seek(0)
+                        output.name = 'Klippo_Remove_BG.png'
+                        return output
+                output = await asyncio.to_thread(remove_background)
+                await update.message.reply_document(document=output, filename=output.name,
+                    caption='✅ Latar belakang berjaya dibuang (PNG transparent).', reply_markup=main_menu())
+            except Exception:
+                logging.exception('Remove BG failed')
+                await update.message.reply_text('Remove BG gagal. Semak kuota API atau cuba lagi.', reply_markup=main_menu())
+            finally:
+                context.user_data['busy'] = False
+                reset(context)
         return
     if context.user_data.get('stage') == 'fal_beta_photo':
         if not update.message.photo:
@@ -2995,53 +3022,10 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data['storyboard_mode'] = True
         context.user_data['stage'] = 'photos'
         await query.message.reply_text('🎞️ STORYBOARD V1 — Hantar 1–5 gambar produk. Bot akan susun enam babak sinematik. Tekan Selesai apabila cukup.', reply_markup=photos_menu())
-    elif action == 'crop_image':
+    elif action == 'remove_bg':
         reset(context)
-        context.user_data['stage'] = 'crop_upload'
-        await query.message.reply_text('🖼️ CROP GAMBAR\n\nHantar satu gambar JPG, PNG atau WebP (maksimum 12 MB). Hantar sebagai File untuk mengekalkan kualiti asal.')
-    elif action.startswith('crop_ratio:') and stage == 'crop_ratio':
-        ratios = {'1:1': (1, 1), '4:5': (4, 5), '9:16': (9, 16), '16:9': (16, 9)}
-        selected = action.split(':', 1)[1]
-        if selected not in ratios or not context.user_data.get('crop_file_id'):
-            await query.message.reply_text('Pilihan crop tidak sah. Cuba semula.', reply_markup=main_menu())
-            return
-        lock = context.application.bot_data.setdefault('render_lock', asyncio.Lock())
-        if lock.locked():
-            await query.message.reply_text('Server sedang memproses fail lain. Cuba sebentar lagi.')
-            return
-        async with lock:
-            context.user_data['busy'] = True
-            try:
-                source = await context.bot.get_file(context.user_data['crop_file_id'])
-                raw = bytes(await source.download_as_bytearray())
-                if not raw or len(raw) > 12 * 1024 * 1024:
-                    raise ValueError('Invalid crop input')
-                def crop_center():
-                    with Image.open(BytesIO(raw)) as original:
-                        original = ImageOps.exif_transpose(original)
-                        width, height = original.size
-                        if width * height > 40_000_000:
-                            raise ValueError('Image exceeds crop pixel limit')
-                        rw, rh = ratios[selected]
-                        crop_w = min(width, height * rw // rh)
-                        crop_h = min(height, width * rh // rw)
-                        left = (width - crop_w) // 2
-                        top = (height - crop_h) // 2
-                        result = original.crop((left, top, left + crop_w, top + crop_h)).convert('RGB')
-                        output = BytesIO()
-                        result.save(output, format='JPEG', quality=94, optimize=True)
-                        output.seek(0)
-                        output.name = 'Klippo_Crop_' + selected.replace(':', 'x') + '.jpg'
-                        return output
-                output = await asyncio.to_thread(crop_center)
-                await query.message.reply_document(document=output, filename=output.name,
-                    caption='✅ Gambar siap dicrop (' + selected + ').', reply_markup=main_menu())
-            except Exception:
-                logging.exception('Image crop failed')
-                await query.message.reply_text('Crop gagal. Cuba gambar JPG/PNG/WebP yang lebih kecil.', reply_markup=main_menu())
-            finally:
-                context.user_data['busy'] = False
-                reset(context)
+        context.user_data['stage'] = 'remove_bg_upload'
+        await query.message.reply_text('🖼️ REMOVE BG\n\nHantar satu gambar JPG, PNG atau WebP (maksimum 12 MB). Latar belakang akan dibuang secara automatik. Hasil PNG transparent dihantar sebagai fail.')
     elif action == 'make':
         reset(context)
         context.user_data['stage'] = 'video_input'
@@ -4440,7 +4424,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif action == 'confirm' and stage == 'confirm':
         await generate(update, context)
     elif action == 'subscription':
-        await query.message.reply_text('💎 LANGGANAN KLIPPO\n\nPelan Penyokong Awal: RM2 / 30 hari.\n\nKlippo membantu menyediakan prompt untuk digunakan pada platform video AI pilihan anda, crop gambar, menggabungkan klip dan menukar format video. Penjanaan video AI penuh dibuat pada platform luaran.\n\nBayar melalui QR DuitNow. Selepas pembayaran, hantar resit untuk semakan admin.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📱 Papar QR DuitNow', callback_data='subscription_qr')], [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
+        await query.message.reply_text('💎 LANGGANAN KLIPPO\n\nPelan Penyokong Awal: RM2 / 30 hari.\n\nKlippo membantu menyediakan prompt untuk digunakan pada platform video AI pilihan anda, membuang latar belakang gambar, menggabungkan klip dan menukar format video. Penjanaan video AI penuh dibuat pada platform luaran.\n\nBayar melalui QR DuitNow. Selepas pembayaran, hantar resit untuk semakan admin.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📱 Papar QR DuitNow', callback_data='subscription_qr')], [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
     elif action == 'subscription_qr':
         qr_path = Path(__file__).resolve().parent / 'klippo_qr.jpg'
         if not qr_path.is_file():
