@@ -1,0 +1,374 @@
+{
+  "schema_version": 8,
+  "review_only": true,
+  "blocked_count": 44,
+  "mapped_count": 44,
+  "missing_count": 0,
+  "warning": "Candidate mapping only. Old variants remain intact; no engine routing or automatic activation.",
+  "mappings": [
+    {
+      "blocked_variant_id": "kitchen_pan_v7_b08_10s_product_background",
+      "subcategory_id": "kitchen_pan",
+      "replacement_ids": [
+        "kitchen_pan_v8_hands_10s_background",
+        "kitchen_pan_v8_repair_10s_background"
+      ],
+      "status": "REPLACEMENT_CANDIDATE_REVIEW"
+    },
+    {
+      "blocked_variant_id": "kitchen_pan_v7_b08_20s_product_background",
+      "subcategory_id": "kitchen_pan",
+      "replacement_ids": [
+        "kitchen_pan_v8_hands_20s_background",
+        "kitchen_pan_v8_repair_20s_background"
+      ],
+      "status": "REPLACEMENT_CANDIDATE_REVIEW"
+    },
+    {
+      "blocked_variant_id": "kitchen_pan_v7_b08_10s_product_none",
+      "subcategory_id": "kitchen_pan",
+      "replacement_ids": [
+        "kitchen_pan_v8_hands_10s_music",
+        "kitchen_pan_v8_repair_10s_music"
+      ],
+      "status": "REPLACEMENT_CANDIDATE_REVIEW"
+    },
+    {
+      "blocked_variant_id": "kitchen_pan_v7_b08_20s_product_none",
+      "subcategory_id": "kitchen_pan",
+      "replacement_ids": [
+        "kitchen_pan_v8_hands_20s_music",
+        "kitchen_pan_v8_repair_20s_music"
+      ],
+      "status": "REPLACEMENT_CANDIDATE_REVIEW"
+    },
+    {
+      "blocked_variant_id": "kitchen_kettle_v7_b08_10s_product_background",
+      "subcategory_id": "kitchen_kettle",
+      "replacement_ids": [
+        "kitchen_kettle_v8_repair_10s_background"
+      ],
+      "status": "REPLACEMENT_CANDIDATE_REVIEW"
+    },
+    {
+      "blocked_variant_id": "kitchen_kettle_v7_b08_20s_product_background",
+      "subcategory_id": "kitchen_kettle",
+      "replacement_ids": [
+        "kitchen_kettle_v8_repair_20s_background"
+      ],
+      "status": "REPLACEMENT_CANDIDATE_REVIEW"
+    },
+    {
+      "blocked_variant_id": "kitchen_kettle_v7_b08_10s_product_none",
+      "subcategory_id": "kitchen_kettle",
+      "replacement_ids": [
+        "kitchen_kettle_v8_repair_10s_music"
+      ],
+      "status": "REPLACEMENT_CANDIDATE_REVIEW"
+    },
+    {
+      "blocked_variant_id": "kitchen_kettle_v7_b08_20s_product_none",
+      "subcategory_id": "kitchen_kettle",
+      "replacement_ids": [
+        "kitchen_kettle_v8_repair_20s_music"
+      ],
+      "status": "REPLACEMENT_CANDIDATE_REVIEW"
+    },
+    {
+      "blocked_variant_id": "travel_bottle_v7_b08_10s_product_background",
+      "subcategory_id": "travel_bottle",
+      "replacement_ids": [
+        "travel_bottle_v8_hands_10s_background",
+        "travel_bottle_v8_repair_10s_background"
+      ],
+      "status": "REPLACEMENT_CANDIDATE_REVIEW"
+    },
+    {
+      "blocked_variant_id": "travel_bottle_v7_b08_20s_product_background",
+      "subcategory_id": "travel_bottle",
+      "replacement_ids": [
+        "travel_bottle_v8_hands_20s_background",
+        "travel_bottle_v8_repair_20s_background"
+      ],
+      "status": "REPLACEMENT_CANDIDATE_REVIEW"
+    },
+    {
+      "blocked_variant_id": "travel_bottle_v7_b08_10s_product_none",
+      "subcategory_id": "travel_bottle",
+      "replacement_ids": [
+        "travel_bottle_v8_hands_10s_music",
+        "travel_bottle_v8_repair_10s_music"
+      ],
+      "status": "REPLACEMENT_CANDIDATE_REVIEW"
+    },
+    {
+      "blocked_variant_id": "travel_bottle_v7_b08_20s_product_none",
+      "subcategory_id": "travel_bottle",
+      "replacement_ids": [
+        "travel_bottle_v8_hands_20s_music",
+        "travel_bottle_v8_repair_20s_music"
+      ],
+      "status": "REPLACEMENT_CANDIDATE_REVIEW"
+    },
+    {
+      "blocked_variant_id": "office_notebook_v7_b09_10s_product_background",
+      "subcategory_id": "office_notebook",
+      "replacement_ids": [
+        "office_notebook_v8_hands_10s_background",
+        "office_notebook_v8_repair_10s_background"
+      ],
+      "status": "REPLACEMENT_CANDIDATE_REVIEW"
+    },
+    {
+      "blocked_variant_id": "office_notebook_v7_b09_20s_product_background",
+      "subcategory_id": "office_notebook",
+      "replacement_ids": [
+        "office_notebook_v8_hands_20s_background",
+        "office_notebook_v8_repair_20s_background"
+      ],
+      "status": "REPLACEMENT_CANDIDATE_REVIEW"
+    },
+    {
+      "blocked_variant_id": "office_notebook_v7_b09_10s_product_none",
+      "subcategory_id": "office_notebook",
+      "replacement_ids": [
+        "office_notebook_v8_hands_10s_music",
+        "office_notebook_v8_repair_10s_music"
+      ],
+      "status": "REPLACEMENT_CANDIDATE_REVIEW"
+    },
+    {
+      "blocked_variant_id": "office_notebook_v7_b09_20s_product_none",
+      "subcategory_id": "office_notebook",
+      "replacement_ids": [
+        "office_notebook_v8_hands_20s_music",
+        "office_notebook_v8_repair_20s_music"
+      ],
+      "status": "REPLACEMENT_CANDIDATE_REVIEW"
+    },
+    {
+      "blocked_variant_id": "office_bag_v7_b09_10s_product_background",
+      "subcategory_id": "office_bag",
+      "replacement_ids": [
+        "office_bag_v8_partial_b15_10s_background"
+      ],
+      "status": "REPLACEMENT_CANDIDATE_REVIEW"
+    },
+    {
+      "blocked_variant_id": "office_bag_v7_b09_20s_product_background",
+      "subcategory_id": "office_bag",
+      "replacement_ids": [
+        "office_bag_v8_partial_b15_20s_background"
+      ],
+      "status": "REPLACEMENT_CANDIDATE_REVIEW"
+    },
+    {
+      "blocked_variant_id": "office_bag_v7_b09_10s_product_none",
+      "subcategory_id": "office_bag",
+      "replacement_ids": [
+        "office_bag_v8_partial_b15_10s_music"
+      ],
+      "status": "REPLACEMENT_CANDIDATE_REVIEW"
+    },
+    {
+      "blocked_variant_id": "office_bag_v7_b09_20s_product_none",
+      "subcategory_id": "office_bag",
+      "replacement_ids": [
+        "office_bag_v8_partial_b15_20s_music"
+      ],
+      "status": "REPLACEMENT_CANDIDATE_REVIEW"
+    },
+    {
+      "blocked_variant_id": "travel_luggage_v7_b09_10s_product_background",
+      "subcategory_id": "travel_luggage",
+      "replacement_ids": [
+        "travel_luggage_v8_partial_b15_10s_background"
+      ],
+      "status": "REPLACEMENT_CANDIDATE_REVIEW"
+    },
+    {
+      "blocked_variant_id": "travel_luggage_v7_b09_20s_product_background",
+      "subcategory_id": "travel_luggage",
+      "replacement_ids": [
+        "travel_luggage_v8_partial_b15_20s_background"
+      ],
+      "status": "REPLACEMENT_CANDIDATE_REVIEW"
+    },
+    {
+      "blocked_variant_id": "travel_luggage_v7_b09_10s_product_none",
+      "subcategory_id": "travel_luggage",
+      "replacement_ids": [
+        "travel_luggage_v8_partial_b15_10s_music"
+      ],
+      "status": "REPLACEMENT_CANDIDATE_REVIEW"
+    },
+    {
+      "blocked_variant_id": "travel_luggage_v7_b09_20s_product_none",
+      "subcategory_id": "travel_luggage",
+      "replacement_ids": [
+        "travel_luggage_v8_partial_b15_20s_music"
+      ],
+      "status": "REPLACEMENT_CANDIDATE_REVIEW"
+    },
+    {
+      "blocked_variant_id": "beauty_brush_v7_b10_10s_product_background",
+      "subcategory_id": "beauty_brush",
+      "replacement_ids": [
+        "beauty_brush_v8_partial_b15_10s_background"
+      ],
+      "status": "REPLACEMENT_CANDIDATE_REVIEW"
+    },
+    {
+      "blocked_variant_id": "beauty_brush_v7_b10_20s_product_background",
+      "subcategory_id": "beauty_brush",
+      "replacement_ids": [
+        "beauty_brush_v8_partial_b15_20s_background"
+      ],
+      "status": "REPLACEMENT_CANDIDATE_REVIEW"
+    },
+    {
+      "blocked_variant_id": "beauty_brush_v7_b10_10s_product_none",
+      "subcategory_id": "beauty_brush",
+      "replacement_ids": [
+        "beauty_brush_v8_partial_b15_10s_music"
+      ],
+      "status": "REPLACEMENT_CANDIDATE_REVIEW"
+    },
+    {
+      "blocked_variant_id": "beauty_brush_v7_b10_20s_product_none",
+      "subcategory_id": "beauty_brush",
+      "replacement_ids": [
+        "beauty_brush_v8_partial_b15_20s_music"
+      ],
+      "status": "REPLACEMENT_CANDIDATE_REVIEW"
+    },
+    {
+      "blocked_variant_id": "fashion_women_v7_b10_10s_product_background",
+      "subcategory_id": "fashion_women",
+      "replacement_ids": [
+        "fashion_women_v8_partial_b15_10s_background"
+      ],
+      "status": "REPLACEMENT_CANDIDATE_REVIEW"
+    },
+    {
+      "blocked_variant_id": "fashion_women_v7_b10_20s_product_background",
+      "subcategory_id": "fashion_women",
+      "replacement_ids": [
+        "fashion_women_v8_partial_b15_20s_background"
+      ],
+      "status": "REPLACEMENT_CANDIDATE_REVIEW"
+    },
+    {
+      "blocked_variant_id": "fashion_women_v7_b10_10s_product_none",
+      "subcategory_id": "fashion_women",
+      "replacement_ids": [
+        "fashion_women_v8_partial_b15_10s_music"
+      ],
+      "status": "REPLACEMENT_CANDIDATE_REVIEW"
+    },
+    {
+      "blocked_variant_id": "fashion_women_v7_b10_20s_product_none",
+      "subcategory_id": "fashion_women",
+      "replacement_ids": [
+        "fashion_women_v8_partial_b15_20s_music"
+      ],
+      "status": "REPLACEMENT_CANDIDATE_REVIEW"
+    },
+    {
+      "blocked_variant_id": "fashion_men_v7_b10_10s_product_background",
+      "subcategory_id": "fashion_men",
+      "replacement_ids": [
+        "fashion_men_v8_partial_b15_10s_background"
+      ],
+      "status": "REPLACEMENT_CANDIDATE_REVIEW"
+    },
+    {
+      "blocked_variant_id": "fashion_men_v7_b10_20s_product_background",
+      "subcategory_id": "fashion_men",
+      "replacement_ids": [
+        "fashion_men_v8_partial_b15_20s_background"
+      ],
+      "status": "REPLACEMENT_CANDIDATE_REVIEW"
+    },
+    {
+      "blocked_variant_id": "fashion_men_v7_b10_10s_product_none",
+      "subcategory_id": "fashion_men",
+      "replacement_ids": [
+        "fashion_men_v8_partial_b15_10s_music"
+      ],
+      "status": "REPLACEMENT_CANDIDATE_REVIEW"
+    },
+    {
+      "blocked_variant_id": "fashion_men_v7_b10_20s_product_none",
+      "subcategory_id": "fashion_men",
+      "replacement_ids": [
+        "fashion_men_v8_partial_b15_20s_music"
+      ],
+      "status": "REPLACEMENT_CANDIDATE_REVIEW"
+    },
+    {
+      "blocked_variant_id": "fashion_women_v7_b11_10s_pb",
+      "subcategory_id": "fashion_women",
+      "replacement_ids": [
+        "fashion_women_v8_partial_b15_10s_background"
+      ],
+      "status": "REPLACEMENT_CANDIDATE_REVIEW"
+    },
+    {
+      "blocked_variant_id": "fashion_women_v7_b11_20s_pb",
+      "subcategory_id": "fashion_women",
+      "replacement_ids": [
+        "fashion_women_v8_partial_b15_20s_background"
+      ],
+      "status": "REPLACEMENT_CANDIDATE_REVIEW"
+    },
+    {
+      "blocked_variant_id": "fashion_women_v7_b11_10s_pn",
+      "subcategory_id": "fashion_women",
+      "replacement_ids": [
+        "fashion_women_v8_partial_b15_10s_music"
+      ],
+      "status": "REPLACEMENT_CANDIDATE_REVIEW"
+    },
+    {
+      "blocked_variant_id": "fashion_women_v7_b11_20s_pn",
+      "subcategory_id": "fashion_women",
+      "replacement_ids": [
+        "fashion_women_v8_partial_b15_20s_music"
+      ],
+      "status": "REPLACEMENT_CANDIDATE_REVIEW"
+    },
+    {
+      "blocked_variant_id": "fashion_men_v7_b11_10s_pb",
+      "subcategory_id": "fashion_men",
+      "replacement_ids": [
+        "fashion_men_v8_partial_b15_10s_background"
+      ],
+      "status": "REPLACEMENT_CANDIDATE_REVIEW"
+    },
+    {
+      "blocked_variant_id": "fashion_men_v7_b11_20s_pb",
+      "subcategory_id": "fashion_men",
+      "replacement_ids": [
+        "fashion_men_v8_partial_b15_20s_background"
+      ],
+      "status": "REPLACEMENT_CANDIDATE_REVIEW"
+    },
+    {
+      "blocked_variant_id": "fashion_men_v7_b11_10s_pn",
+      "subcategory_id": "fashion_men",
+      "replacement_ids": [
+        "fashion_men_v8_partial_b15_10s_music"
+      ],
+      "status": "REPLACEMENT_CANDIDATE_REVIEW"
+    },
+    {
+      "blocked_variant_id": "fashion_men_v7_b11_20s_pn",
+      "subcategory_id": "fashion_men",
+      "replacement_ids": [
+        "fashion_men_v8_partial_b15_20s_music"
+      ],
+      "status": "REPLACEMENT_CANDIDATE_REVIEW"
+    }
+  ]
+}
