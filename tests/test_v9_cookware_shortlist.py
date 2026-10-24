@@ -41,6 +41,17 @@ class CookwareShortlistValidation(unittest.TestCase):
     def test_staged_shortlist(self):
         self.assertEqual(validate()["duration_records"], 100)
 
+    def test_all_shortlisted_prompts_are_original_drafts(self):
+        manifest = json.loads(SHORTLIST.read_text(encoding="utf-8"))
+        for entry in manifest["selected"]:
+            source = json.loads((LIB / entry["source_file"]).read_text(encoding="utf-8"))
+            index = {record["id"]: record for record in source["variations"]}
+            for record_id in entry["record_ids"]:
+                record = index[record_id]
+                self.assertEqual(record["status"], "DRAFT_RENDER_QA")
+                self.assertNotIn("{{", record["full_prompt"])
+                self.assertTrue(record["full_prompt"].strip())
+
 
 if __name__ == "__main__":
     unittest.main()
