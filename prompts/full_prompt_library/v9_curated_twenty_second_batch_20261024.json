@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "batch": "v9_curated_twenty_second_batch_20261024",
+  "variation_count": 6,
+  "notes": "Three individually authored reference-dependent concepts, each complete 10s and continuous two-part 20s. Draft pending actual render and runtime reference-input compatibility QA.",
+  "variations": [
+    {
+      "id": "v9_curated22_bag_backpack_10s_01",
+      "subcategory_id": "bag_backpack",
+      "visual_category": "PARTIAL_MODEL",
+      "concept": "Library arrival",
+      "duration_seconds": 10,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Photorealistic vertical 9:16. Exact reference backpack worn by one adult Universal Malaysian model, framed neck to thighs with face outside shot. Preserve authentic shoulder straps, body, colour, seams, visible zippers and size; no invented compartments or capacity claims. Bright university library entrance with plain bench, level dry floor, soft daylight; believable loaded weight and movement.\nUse the supplied product reference as the sole visual master. Preserve actual product identity, realistic anatomy, scale, physical contact and spatial continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Establish the original backpack on both shoulders, rear and side silhouette visible.\n2–5s: Model takes two measured steps toward the plain bench.\n5–8s: Model carefully slips one shoulder strap off and lowers the backpack onto the bench without opening it.\n8–10s: Hold a clear stationary three-quarter view of the exact backpack.\nAUDIO: Off-camera Malaysian Malay narrator, model silent: 'Sampai perpustakaan, letak beg dulu.' Quiet library entrance ambience."
+    },
+    {
+      "id": "v9_curated22_bag_backpack_20s_01",
+      "subcategory_id": "bag_backpack",
+      "visual_category": "PARTIAL_MODEL",
+      "concept": "Library arrival",
+      "duration_seconds": 20,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. Exact reference backpack worn by one adult Universal Malaysian model, framed neck to thighs with face outside shot. Preserve authentic shoulder straps, body, colour, seams, visible zippers and size; no invented compartments or capacity claims. Bright university library entrance with plain bench, level dry floor, soft daylight; believable loaded weight and movement.\nUse the supplied product reference as the sole visual master. Preserve actual product identity, realistic anatomy, scale, physical contact and spatial continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–3s: Establish the original backpack worn correctly on both shoulders at the library entrance.\n3–7s: Model takes two natural steps toward the nearby bench.\n7–10s: Model pauses beside the bench with the same backpack on both shoulders.\nAUDIO: Off-camera Malaysian Malay narrator, model silent: 'Sampai perpustakaan, letak beg dulu.' Quiet library entrance ambience.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. Exact reference backpack worn by one adult Universal Malaysian model, framed neck to thighs with face outside shot. Preserve authentic shoulder straps, body, colour, seams, visible zippers and size; no invented compartments or capacity claims. Bright university library entrance with plain bench, level dry floor, soft daylight; believable loaded weight and movement.\nUse the supplied product reference as the sole visual master. Preserve actual product identity, realistic anatomy, scale, physical contact and spatial continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nCONTINUITY: Match the final Part 1 frame exactly in subject, product, pose, props, light and camera axis. Continue without replaying completed action.\nEXACTLY 10 SECONDS:\n0–3s: Resume beside the same bench; model slips one original strap off the shoulder.\n3–7s: Model supports the backpack by its existing strap and lowers it gently onto the bench.\n7–10s: Hold a stable unobstructed three-quarter product view, no opening or extra contents.\nAUDIO: Off-camera Malaysian Malay narrator, model silent: 'Beg dah diletak, barulah mula cari buku.' Quiet library entrance ambience."
+    },
+    {
+      "id": "v9_curated22_home_living_rug_10s_01",
+      "subcategory_id": "home_living_rug",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Living room placement",
+      "duration_seconds": 10,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Photorealistic vertical 9:16. Exact reference small area rug with authentic outline, colour, pattern, edge and proportions, placed on a clean dry flat living-room floor. Adult Malaysian hands and forearms only; no faces or feet stepping on it. Wide-to-close stable camera, soft window daylight, natural fabric weight. No invented anti-slip, washability or material claims.\nUse the supplied product reference as the sole visual master. Preserve actual product identity, realistic anatomy, scale, physical contact and spatial continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Establish the original rug partially rolled on the clear floor, visible pattern matching the reference.\n2–5s: Hands unroll it slowly across the floor, keeping its authentic dimensions.\n5–8s: Hands gently flatten the two nearest corners without stretching or changing the edge.\n8–10s: Hold a complete overhead three-quarter hero frame of the original rug.\nAUDIO: No dialogue, narration or music; subtle fabric movement and quiet room ambience."
+    },
+    {
+      "id": "v9_curated22_home_living_rug_20s_01",
+      "subcategory_id": "home_living_rug",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Living room placement",
+      "duration_seconds": 20,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. Exact reference small area rug with authentic outline, colour, pattern, edge and proportions, placed on a clean dry flat living-room floor. Adult Malaysian hands and forearms only; no faces or feet stepping on it. Wide-to-close stable camera, soft window daylight, natural fabric weight. No invented anti-slip, washability or material claims.\nUse the supplied product reference as the sole visual master. Preserve actual product identity, realistic anatomy, scale, physical contact and spatial continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–3s: Establish the exact rug partially rolled on the clear floor.\n3–7s: Hands slowly unroll the rug along the floor, revealing its original pattern.\n7–10s: Hands finish unrolling and pause at its near corners.\nAUDIO: No dialogue, narration or music; subtle fabric movement and quiet room ambience.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. Exact reference small area rug with authentic outline, colour, pattern, edge and proportions, placed on a clean dry flat living-room floor. Adult Malaysian hands and forearms only; no faces or feet stepping on it. Wide-to-close stable camera, soft window daylight, natural fabric weight. No invented anti-slip, washability or material claims.\nUse the supplied product reference as the sole visual master. Preserve actual product identity, realistic anatomy, scale, physical contact and spatial continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nCONTINUITY: Match the final Part 1 frame exactly in subject, product, pose, props, light and camera axis. Continue without replaying completed action.\nEXACTLY 10 SECONDS:\n0–3s: Resume with the same rug fully unrolled and hands at the near corners.\n3–7s: Hands smooth the two corners gently without changing the rug's shape.\n7–10s: Hands withdraw; hold a complete stable frame of the unchanged rug.\nAUDIO: No dialogue, narration or music; subtle fabric movement and quiet room ambience."
+    },
+    {
+      "id": "v9_curated22_pet_grooming_10s_01",
+      "subcategory_id": "pet_grooming",
+      "visual_category": "ANIMAL_ONLY",
+      "concept": "Gentle coat brushing",
+      "duration_seconds": 10,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Photorealistic vertical 9:16. Exact reference pet grooming brush, preserving actual handle, bristle/head shape, colour and proportions; no invented self-cleaning function or medical claims. One calm adult domestic cat sits voluntarily on a stable low mat in a bright quiet living room. Only an adult hand and forearm enter frame to use the brush gently along the cat's back, avoiding face and sensitive areas. Cat remains clearly visible and free to move; low stable camera, soft daylight.\nUse the supplied product reference as the sole visual master. Preserve actual product identity, realistic anatomy, scale, physical contact and spatial continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Establish the calm cat on the mat with the original brush resting beside it.\n2–5s: Hand picks up the brush and makes one slow gentle stroke along the cat's upper back.\n5–8s: Hand makes a second light stroke in the same natural fur direction, cat remaining relaxed.\n8–10s: Hand withdraws the brush; hold a clear frame of the cat and exact brush.\nAUDIO: Off-camera Malaysian Malay narrator, cat and hand silent: 'Sikat perlahan ikut arah bulu, jangan tergesa-gesa.' Quiet room and soft brushing ambience."
+    },
+    {
+      "id": "v9_curated22_pet_grooming_20s_01",
+      "subcategory_id": "pet_grooming",
+      "visual_category": "ANIMAL_ONLY",
+      "concept": "Gentle coat brushing",
+      "duration_seconds": 20,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. Exact reference pet grooming brush, preserving actual handle, bristle/head shape, colour and proportions; no invented self-cleaning function or medical claims. One calm adult domestic cat sits voluntarily on a stable low mat in a bright quiet living room. Only an adult hand and forearm enter frame to use the brush gently along the cat's back, avoiding face and sensitive areas. Cat remains clearly visible and free to move; low stable camera, soft daylight.\nUse the supplied product reference as the sole visual master. Preserve actual product identity, realistic anatomy, scale, physical contact and spatial continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–3s: Establish the calm cat on the mat and original brush beside it.\n3–7s: Hand lifts the exact brush and makes one gentle stroke along the cat's upper back.\n7–10s: Hand pauses with the brush lifted clear of the cat; cat remains free and relaxed.\nAUDIO: Off-camera Malaysian Malay narrator, cat and hand silent: 'Sikat perlahan ikut arah bulu, jangan tergesa-gesa.' Quiet room and soft brushing ambience.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. Exact reference pet grooming brush, preserving actual handle, bristle/head shape, colour and proportions; no invented self-cleaning function or medical claims. One calm adult domestic cat sits voluntarily on a stable low mat in a bright quiet living room. Only an adult hand and forearm enter frame to use the brush gently along the cat's back, avoiding face and sensitive areas. Cat remains clearly visible and free to move; low stable camera, soft daylight.\nUse the supplied product reference as the sole visual master. Preserve actual product identity, realistic anatomy, scale, physical contact and spatial continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nCONTINUITY: Match the final Part 1 frame exactly in subject, product, pose, props, light and camera axis. Continue without replaying completed action.\nEXACTLY 10 SECONDS:\n0–3s: Resume with the brush lifted clear in the same position and cat calmly seated.\n3–7s: Hand makes one more light stroke along the same fur direction, then lifts the brush away.\n7–10s: Hand sets the original brush beside the mat and withdraws; cat remains visible.\nAUDIO: Off-camera Malaysian Malay narrator, cat and hand silent: 'Dua sapuan lembut, kemudian beri si bulus berehat.' Quiet room ambience."
+    }
+  ]
+}
