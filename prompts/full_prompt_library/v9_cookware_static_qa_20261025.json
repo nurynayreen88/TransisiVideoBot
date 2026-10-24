@@ -14,9 +14,9 @@
     "reference_product_language_missing": 0,
     "render_tested": 0
   },
-  "critical_blocker": "Prompt text references a supplied/uploaded product image or exact reference pot while the current product-name-only bot flow may not supply such an image. Verify actual runtime input before activating; do not silently drop identity lock.",
+  "critical_blocker": "RESOLVED AS TWO-STAGE INPUT CONTRACT FOR DESIGN REVIEW, NOT RUNTIME-VERIFIED: Klippo Jana Prompt accepts product name without an image (bot.py prompt action near line 2994 and prompt_input:photo near 3533). User uploads the original product image separately to the target AI video generator (bot.py output near 4100; prompt_engine.py identity near 933). The final user-facing instructions and any V9 selection integration must preserve this distinction. No image is automatically sent by Klippo.",
   "other_gates": [
-    "Map reference pot/pan/lid to real selected product; negative clauses mentioning lid do not prove lid requirement.",
+    "Map actual product photo supplied to the external video generator to the pot/pan/lid actions; do not assume all cookware has a lid.",
     "Human-review culinary distinctiveness and physical cooking sequence.",
     "Render-test each 10s and both 20s parts for product fidelity, motion, timing, continuity, audio and lip sync.",
     "Keep all draft statuses until real runtime tests pass."
@@ -1022,5 +1022,18 @@
       "product_eligibility": "REQUIRES_REFERENCE_PRODUCT_TYPE_REVIEW",
       "render_status": "NOT_RENDER_TESTED"
     }
-  ]
+  ],
+  "input_contract_audit": {
+    "status": "DESIGN_CONTRACT_IDENTIFIED_RUNTIME_INTEGRATION_UNTESTED",
+    "bot_name_only_entrypoints": [
+      "bot.py prompt action near lines 2994-3006",
+      "bot.py prompt_input:photo near lines 3533-3535"
+    ],
+    "external_image_instructions": [
+      "bot.py prompt output near lines 4099-4101",
+      "prompt_engine.py product identity near lines 932-937"
+    ],
+    "required_behavior": "User enters product name in Klippo; user supplies original product photo to external video generator; V9 text may refer to that externally supplied image. Do not claim Klippo uploaded or analyzed it.",
+    "followup": "Check whether shortlisted V9 prompt files are actually loaded and selected by current runtime; static library existence is not integration proof."
+  }
 }
