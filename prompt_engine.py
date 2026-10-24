@@ -419,7 +419,7 @@ def _category_specific_scenes(product_type, product, product_subtype=""):
             ("PREPARE TO COOK", "Demonstrate one physically plausible kitchen action: if a human model is selected, show that person placing plausible food into the pot or pan using ordinary ingredients and a suitable utensil; otherwise show the cookware in a credible cooking context without introducing a person. Do not present utensils or ingredients as included accessories."),
             ("ACTIVE COOKING DEMONSTRATION", "Clearly show the pot or pan being used: if a model is selected, their hand stirs or turns the food naturally while the cookware remains stable on the hob; do not invent a human model when none was selected. Use believable contact, heat and steam only where physically plausible."),
             ("FUNCTION IN CONTEXT", "Continue the same cooking action or lift the existing lid naturally only if the reference product has one. Keep the cookware visible; do not claim non-stick, material, capacity or compatibility properties."),
-            ("FOOD + PRODUCT FINISH", "Show the food in the same pot or pan, then settle on a clear view of the complete unchanged product in use. No invented accessories, product claims or on-screen text.")
+            ("FOOD + PRODUCT FINISH", "Show the food in the same pot or pan, then settle on a clear view of the complete unchanged product in use. No invented accessories, product claims, invented savings or on-screen text.")
         ]
     if product_type == "bag" and subtype in {"bag_handbag", "handbag"}:
         return [
