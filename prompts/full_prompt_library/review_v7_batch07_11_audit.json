@@ -1,0 +1,34 @@
+{
+  "schema_version": 7,
+  "source": "V7 review batches 07–11",
+  "total": 200,
+  "unique_ids": 200,
+  "subcategories": [
+    "pet_cat_toy",
+    "pet_dog_bed",
+    "pet_cat_bowl",
+    "pet_dog_toy",
+    "kitchen_cookware",
+    "kitchen_pan",
+    "kitchen_kettle",
+    "travel_bottle",
+    "home_storage",
+    "office_notebook",
+    "office_bag",
+    "travel_luggage",
+    "home_lamp",
+    "beauty_brush",
+    "fashion_women",
+    "fashion_men"
+  ],
+  "ten_seconds": 100,
+  "twenty_seconds": 100,
+  "missing_audio": [],
+  "conditional_language": [],
+  "generic_phrasing_remaining": [],
+  "limitations": [
+    "Review-only. Product-specific human review remains required.",
+    "Cross-check against entire master catalog and older review batches not yet complete.",
+    "Product-only presentations in certain categories require further feasibility review before activation."
+  ]
+}
