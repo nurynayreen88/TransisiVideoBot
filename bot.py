@@ -4223,10 +4223,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if stage not in ('merge_upload', 'merge_wait_next') or len(context.user_data.get('merge_files', [])) < 2:
             await query.message.reply_text('Hantar sekurang-kurangnya 2 video dahulu.')
             return
-        context.user_data['stage'] = 'merge_style'
-        await query.message.reply_text('Pilih kaedah gabungan:', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('✂️ Gabung Biasa (Tanpa Transisi)', callback_data='merge_style:none')], [InlineKeyboardButton('✨ Fade', callback_data='merge_style:fade'), InlineKeyboardButton('🌊 Smooth', callback_data='merge_style:smoothleft')], [InlineKeyboardButton('⚡ Slide', callback_data='merge_style:slideleft'), InlineKeyboardButton('🔍 Zoom', callback_data='merge_style:zoomin')]]))
-    elif action.startswith('merge_style:') and stage == 'merge_style':
-        await generate_merge(update, context, action.split(':', 1)[1])
+        await generate_merge(update, context, 'none')
     elif action == 'convert':
         reset(context)
         context.user_data['stage'] = 'convert'
