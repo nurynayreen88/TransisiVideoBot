@@ -4,7 +4,7 @@
   "count": 20,
   "variations": [
     {
-      "variant_id": "office_notebook_standalone_b05_1",
+      "variant_id": "office_notebook_standalone_b05_01",
       "subcategory_id": "office_notebook",
       "product_type": "buku nota",
       "model": "Universal Malaysian adult",
@@ -18,7 +18,7 @@
       "part_2": null
     },
     {
-      "variant_id": "office_notebook_standalone_b05_2",
+      "variant_id": "office_notebook_standalone_b05_02",
       "subcategory_id": "office_notebook",
       "product_type": "buku nota",
       "model": "none",
@@ -32,7 +32,7 @@
       "part_2": "Vertical 9:16 realistic 4K. Product: {{PRODUCT_NAME}} (buku nota). CONCEPT: Product Detail Study. LOCATION: meja kerja kayu. SUBJECT: The exact reference buku nota is displayed without any human, hands or silhouette. ACTION: Show the complete buku nota in a believable static display; demonstrate its visible design using camera movement without invisible interaction.. CAMERA: overhead stabil. LIGHTING: natural soft light with faithful reference colour. Keep the product's visible design, shape, details and proportions identical to the uploaded image. No invented accessories, captions, logos, watermark or unsupported claims. STORYBOARD PART 2, 0–3s: Resume the exact final frame from Part 1 at helaian dan tulisan sebenar. 3–7s: Show a distinct, believable angle of the actual buku nota. 7–10s: Finish on a clear unobstructed full-product hero frame. AUDIO: Off-camera Malaysian Malay narrator says: “Ini paparan penuh buku nota dari sudut yang berbeza.” No human appears. Low instrumental music beneath narration."
     },
     {
-      "variant_id": "office_bag_standalone_b05_1",
+      "variant_id": "office_bag_standalone_b05_03",
       "subcategory_id": "office_bag",
       "product_type": "beg kerja",
       "model": "Universal Malaysian adult",
@@ -46,7 +46,7 @@
       "part_2": null
     },
     {
-      "variant_id": "office_bag_standalone_b05_2",
+      "variant_id": "office_bag_standalone_b05_04",
       "subcategory_id": "office_bag",
       "product_type": "beg kerja",
       "model": "none",
@@ -60,7 +60,7 @@
       "part_2": "Vertical 9:16 realistic 4K. Product: {{PRODUCT_NAME}} (beg kerja). CONCEPT: Product Detail Study. LOCATION: meja kerja pejabat. SUBJECT: The exact reference beg kerja is displayed without any human, hands or silhouette. ACTION: Show the complete beg kerja in a believable static display; demonstrate its visible design using camera movement without invisible interaction.. CAMERA: tracking sederhana. LIGHTING: natural soft light with faithful reference colour. Keep the product's visible design, shape, details and proportions identical to the uploaded image. No invented accessories, captions, logos, watermark or unsupported claims. STORYBOARD PART 2, 0–3s: Resume the exact final frame from Part 1 at ruang beg yang kelihatan pada rujukan. 3–7s: Show a distinct, believable angle of the actual beg kerja. 7–10s: Finish on a clear unobstructed full-product hero frame. AUDIO: Off-camera Malaysian Malay narrator says: “Ini paparan penuh beg kerja dari sudut yang berbeza.” No human appears. Low instrumental music beneath narration."
     },
     {
-      "variant_id": "travel_luggage_standalone_b05_1",
+      "variant_id": "travel_luggage_standalone_b05_05",
       "subcategory_id": "travel_luggage",
       "product_type": "beg bagasi",
       "model": "Universal Malaysian adult",
@@ -74,7 +74,7 @@
       "part_2": null
     },
     {
-      "variant_id": "travel_luggage_standalone_b05_2",
+      "variant_id": "travel_luggage_standalone_b05_06",
       "subcategory_id": "travel_luggage",
       "product_type": "beg bagasi",
       "model": "none",
@@ -88,7 +88,7 @@
       "part_2": "Vertical 9:16 realistic 4K. Product: {{PRODUCT_NAME}} (beg bagasi). CONCEPT: Product Detail Study. LOCATION: lobi hotel. SUBJECT: The exact reference beg bagasi is displayed without any human, hands or silhouette. ACTION: Show the complete beg bagasi in a believable static display; demonstrate its visible design using camera movement without invisible interaction.. CAMERA: tracking sisi perlahan. LIGHTING: natural soft light with faithful reference colour. Keep the product's visible design, shape, details and proportions identical to the uploaded image. No invented accessories, captions, logos, watermark or unsupported claims. STORYBOARD PART 2, 0–3s: Resume the exact final frame from Part 1 at roda dan pemegang yang kelihatan. 3–7s: Show a distinct, believable angle of the actual beg bagasi. 7–10s: Finish on a clear unobstructed full-product hero frame. AUDIO: Off-camera Malaysian Malay narrator says: “Ini paparan penuh beg bagasi dari sudut yang berbeza.” No human appears. Low instrumental music beneath narration."
     },
     {
-      "variant_id": "travel_bottle_standalone_b05_1",
+      "variant_id": "travel_bottle_standalone_b05_07",
       "subcategory_id": "travel_bottle",
       "product_type": "botol minuman",
       "model": "Universal Malaysian adult",
@@ -102,7 +102,7 @@
       "part_2": null
     },
     {
-      "variant_id": "travel_bottle_standalone_b05_2",
+      "variant_id": "travel_bottle_standalone_b05_08",
       "subcategory_id": "travel_bottle",
       "product_type": "botol minuman",
       "model": "none",
@@ -116,7 +116,7 @@
       "part_2": "Vertical 9:16 realistic 4K. Product: {{PRODUCT_NAME}} (botol minuman). CONCEPT: Product Detail Study. LOCATION: meja rehat taman. SUBJECT: The exact reference botol minuman is displayed without any human, hands or silhouette. ACTION: Show the complete botol minuman in a believable static display; demonstrate its visible design using camera movement without invisible interaction.. CAMERA: medium ke close-up. LIGHTING: natural soft light with faithful reference colour. Keep the product's visible design, shape, details and proportions identical to the uploaded image. No invented accessories, captions, logos, watermark or unsupported claims. STORYBOARD PART 2, 0–3s: Resume the exact final frame from Part 1 at penutup dan bentuk sebenar. 3–7s: Show a distinct, believable angle of the actual botol minuman. 7–10s: Finish on a clear unobstructed full-product hero frame. AUDIO: Off-camera Malaysian Malay narrator says: “Ini paparan penuh botol minuman dari sudut yang berbeza.” No human appears. Low instrumental music beneath narration."
     },
     {
-      "variant_id": "beauty_brush_standalone_b05_1",
+      "variant_id": "beauty_brush_standalone_b05_09",
       "subcategory_id": "beauty_brush",
       "product_type": "berus solekan",
       "model": "Universal Malaysian adult",
@@ -130,7 +130,7 @@
       "part_2": null
     },
     {
-      "variant_id": "beauty_brush_standalone_b05_2",
+      "variant_id": "beauty_brush_standalone_b05_10",
       "subcategory_id": "beauty_brush",
       "product_type": "berus solekan",
       "model": "none",
@@ -144,7 +144,7 @@
       "part_2": "Vertical 9:16 realistic 4K. Product: {{PRODUCT_NAME}} (berus solekan). CONCEPT: Product Detail Study. LOCATION: meja solek terang. SUBJECT: The exact reference berus solekan is displayed without any human, hands or silhouette. ACTION: Show the complete berus solekan in a believable static display; demonstrate its visible design using camera movement without invisible interaction.. CAMERA: close-up ke medium. LIGHTING: natural soft light with faithful reference colour. Keep the product's visible design, shape, details and proportions identical to the uploaded image. No invented accessories, captions, logos, watermark or unsupported claims. STORYBOARD PART 2, 0–3s: Resume the exact final frame from Part 1 at bulu berus yang kelihatan. 3–7s: Show a distinct, believable angle of the actual berus solekan. 7–10s: Finish on a clear unobstructed full-product hero frame. AUDIO: Off-camera Malaysian Malay narrator says: “Ini paparan penuh berus solekan dari sudut yang berbeza.” No human appears. Low instrumental music beneath narration."
     },
     {
-      "variant_id": "office_notebook_standalone_b05_1",
+      "variant_id": "office_notebook_standalone_b05_11",
       "subcategory_id": "office_notebook",
       "product_type": "buku nota",
       "model": "Universal Malaysian adult",
@@ -158,7 +158,7 @@
       "part_2": null
     },
     {
-      "variant_id": "office_notebook_standalone_b05_2",
+      "variant_id": "office_notebook_standalone_b05_12",
       "subcategory_id": "office_notebook",
       "product_type": "buku nota",
       "model": "none",
@@ -172,7 +172,7 @@
       "part_2": "Vertical 9:16 realistic 4K. Product: {{PRODUCT_NAME}} (buku nota). CONCEPT: Product Detail Study. LOCATION: meja kerja kayu. SUBJECT: The exact reference buku nota is displayed without any human, hands or silhouette. ACTION: Show the complete buku nota in a believable static display; demonstrate its visible design using camera movement without invisible interaction.. CAMERA: overhead stabil. LIGHTING: natural soft light with faithful reference colour. Keep the product's visible design, shape, details and proportions identical to the uploaded image. No invented accessories, captions, logos, watermark or unsupported claims. STORYBOARD PART 2, 0–3s: Resume the exact final frame from Part 1 at helaian dan tulisan sebenar. 3–7s: Show a distinct, believable angle of the actual buku nota. 7–10s: Finish on a clear unobstructed full-product hero frame. AUDIO: Off-camera Malaysian Malay narrator says: “Ini paparan penuh buku nota dari sudut yang berbeza.” No human appears. Low instrumental music beneath narration."
     },
     {
-      "variant_id": "office_bag_standalone_b05_1",
+      "variant_id": "office_bag_standalone_b05_13",
       "subcategory_id": "office_bag",
       "product_type": "beg kerja",
       "model": "Universal Malaysian adult",
@@ -186,7 +186,7 @@
       "part_2": null
     },
     {
-      "variant_id": "office_bag_standalone_b05_2",
+      "variant_id": "office_bag_standalone_b05_14",
       "subcategory_id": "office_bag",
       "product_type": "beg kerja",
       "model": "none",
@@ -200,7 +200,7 @@
       "part_2": "Vertical 9:16 realistic 4K. Product: {{PRODUCT_NAME}} (beg kerja). CONCEPT: Product Detail Study. LOCATION: meja kerja pejabat. SUBJECT: The exact reference beg kerja is displayed without any human, hands or silhouette. ACTION: Show the complete beg kerja in a believable static display; demonstrate its visible design using camera movement without invisible interaction.. CAMERA: tracking sederhana. LIGHTING: natural soft light with faithful reference colour. Keep the product's visible design, shape, details and proportions identical to the uploaded image. No invented accessories, captions, logos, watermark or unsupported claims. STORYBOARD PART 2, 0–3s: Resume the exact final frame from Part 1 at ruang beg yang kelihatan pada rujukan. 3–7s: Show a distinct, believable angle of the actual beg kerja. 7–10s: Finish on a clear unobstructed full-product hero frame. AUDIO: Off-camera Malaysian Malay narrator says: “Ini paparan penuh beg kerja dari sudut yang berbeza.” No human appears. Low instrumental music beneath narration."
     },
     {
-      "variant_id": "travel_luggage_standalone_b05_1",
+      "variant_id": "travel_luggage_standalone_b05_15",
       "subcategory_id": "travel_luggage",
       "product_type": "beg bagasi",
       "model": "Universal Malaysian adult",
@@ -214,7 +214,7 @@
       "part_2": null
     },
     {
-      "variant_id": "travel_luggage_standalone_b05_2",
+      "variant_id": "travel_luggage_standalone_b05_16",
       "subcategory_id": "travel_luggage",
       "product_type": "beg bagasi",
       "model": "none",
@@ -228,7 +228,7 @@
       "part_2": "Vertical 9:16 realistic 4K. Product: {{PRODUCT_NAME}} (beg bagasi). CONCEPT: Product Detail Study. LOCATION: lobi hotel. SUBJECT: The exact reference beg bagasi is displayed without any human, hands or silhouette. ACTION: Show the complete beg bagasi in a believable static display; demonstrate its visible design using camera movement without invisible interaction.. CAMERA: tracking sisi perlahan. LIGHTING: natural soft light with faithful reference colour. Keep the product's visible design, shape, details and proportions identical to the uploaded image. No invented accessories, captions, logos, watermark or unsupported claims. STORYBOARD PART 2, 0–3s: Resume the exact final frame from Part 1 at roda dan pemegang yang kelihatan. 3–7s: Show a distinct, believable angle of the actual beg bagasi. 7–10s: Finish on a clear unobstructed full-product hero frame. AUDIO: Off-camera Malaysian Malay narrator says: “Ini paparan penuh beg bagasi dari sudut yang berbeza.” No human appears. Low instrumental music beneath narration."
     },
     {
-      "variant_id": "travel_bottle_standalone_b05_1",
+      "variant_id": "travel_bottle_standalone_b05_17",
       "subcategory_id": "travel_bottle",
       "product_type": "botol minuman",
       "model": "Universal Malaysian adult",
@@ -242,7 +242,7 @@
       "part_2": null
     },
     {
-      "variant_id": "travel_bottle_standalone_b05_2",
+      "variant_id": "travel_bottle_standalone_b05_18",
       "subcategory_id": "travel_bottle",
       "product_type": "botol minuman",
       "model": "none",
@@ -256,7 +256,7 @@
       "part_2": "Vertical 9:16 realistic 4K. Product: {{PRODUCT_NAME}} (botol minuman). CONCEPT: Product Detail Study. LOCATION: meja rehat taman. SUBJECT: The exact reference botol minuman is displayed without any human, hands or silhouette. ACTION: Show the complete botol minuman in a believable static display; demonstrate its visible design using camera movement without invisible interaction.. CAMERA: medium ke close-up. LIGHTING: natural soft light with faithful reference colour. Keep the product's visible design, shape, details and proportions identical to the uploaded image. No invented accessories, captions, logos, watermark or unsupported claims. STORYBOARD PART 2, 0–3s: Resume the exact final frame from Part 1 at penutup dan bentuk sebenar. 3–7s: Show a distinct, believable angle of the actual botol minuman. 7–10s: Finish on a clear unobstructed full-product hero frame. AUDIO: Off-camera Malaysian Malay narrator says: “Ini paparan penuh botol minuman dari sudut yang berbeza.” No human appears. Low instrumental music beneath narration."
     },
     {
-      "variant_id": "beauty_brush_standalone_b05_1",
+      "variant_id": "beauty_brush_standalone_b05_19",
       "subcategory_id": "beauty_brush",
       "product_type": "berus solekan",
       "model": "Universal Malaysian adult",
@@ -270,7 +270,7 @@
       "part_2": null
     },
     {
-      "variant_id": "beauty_brush_standalone_b05_2",
+      "variant_id": "beauty_brush_standalone_b05_20",
       "subcategory_id": "beauty_brush",
       "product_type": "berus solekan",
       "model": "none",
