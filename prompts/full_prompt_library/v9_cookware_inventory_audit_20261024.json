@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "audit": "cookware_v9_inventory_20261024",
+  "subcategory_id": "home_kitchen_cookware",
+  "scope": "14 dedicated V9 cookware batch files plus all 27 v9_curated_*_batch_20261024.json files on staging branch. Does not claim audit of every other legacy or pilot file.",
+  "summary": {
+    "dedicated_files": 14,
+    "dedicated_physical_records": 134,
+    "dedicated_accepted_status_records": 124,
+    "dedicated_rejected_records": 10,
+    "dedicated_unique_concepts": 62,
+    "malaysian_menu_candidate_concepts": 40,
+    "focus_menu_fit_review_concepts": 22,
+    "curated_additional_concepts": 2,
+    "identified_unique_concepts": 64,
+    "identified_duration_records_excluding_rejected": 128,
+    "activation_approved": 0
+  },
+  "files": [
+    {
+      "file": "v9_cookware_focus_01_20261024.json",
+      "concepts": 3,
+      "records": 6,
+      "classification": "REVIEW_MENU_FIT"
+    },
+    {
+      "file": "v9_cookware_focus_02_20261024.json",
+      "concepts": 4,
+      "records": 8,
+      "classification": "REVIEW_MENU_FIT"
+    },
+    {
+      "file": "v9_cookware_focus_03_20261024.json",
+      "concepts": 5,
+      "records": 10,
+      "classification": "REVIEW_MENU_FIT"
+    },
+    {
+      "file": "v9_cookware_focus_04_20261024.json",
+      "concepts": 5,
+      "records": 10,
+      "classification": "REVIEW_MENU_FIT"
+    },
+    {
+      "file": "v9_cookware_focus_05_20261024.json",
+      "concepts": 5,
+      "records": 10,
+      "classification": "REVIEW_MENU_FIT"
+    },
+    {
+      "file": "v9_cookware_malaysian_menu_01_20261024.json",
+      "concepts": 5,
+      "records": 10,
+      "classification": "MALAYSIAN_MENU_CANDIDATE"
+    },
+    {
+      "file": "v9_cookware_malaysian_regional_02_20261024.json",
+      "concepts": 5,
+      "records": 10,
+      "classification": "MALAYSIAN_MENU_CANDIDATE"
+    },
+    {
+      "file": "v9_cookware_malaysian_everyday_03_20261024.json",
+      "concepts": 5,
+      "records": 10,
+      "classification": "MALAYSIAN_MENU_CANDIDATE"
+    },
+    {
+      "file": "v9_cookware_malaysian_everyday_04_20261024.json",
+      "concepts": 5,
+      "records": 10,
+      "classification": "MALAYSIAN_MENU_CANDIDATE"
+    },
+    {
+      "file": "v9_cookware_malaysian_everyday_05_20261024.json",
+      "concepts": 5,
+      "records": 10,
+      "classification": "MALAYSIAN_MENU_CANDIDATE"
+    },
+    {
+      "file": "v9_cookware_malaysian_everyday_06_20261024.json",
+      "concepts": 5,
+      "records": 10,
+      "classification": "MALAYSIAN_MENU_CANDIDATE"
+    },
+    {
+      "file": "v9_cookware_malaysian_everyday_07_20261024.json",
+      "concepts": 5,
+      "records": 10,
+      "classification": "MALAYSIAN_MENU_CANDIDATE"
+    },
+    {
+      "file": "v9_cookware_malaysian_everyday_08_20261024.json",
+      "concepts": 5,
+      "records": 10,
+      "classification": "MALAYSIAN_MENU_CANDIDATE"
+    },
+    {
+      "file": "v9_cookware_focus_06_20261024.json",
+      "concepts": 5,
+      "records": 10,
+      "classification": "REJECTED_MENU_FIT",
+      "note": "Retain for audit only; do not activate or count accepted."
+    },
+    {
+      "file": "v9_curated_second_batch_20261024.json",
+      "concepts": 1,
+      "records": 2,
+      "classification": "REVIEW_PRODUCT_TYPE",
+      "note": "Dinner sauté assumes a pan; incompatible with arbitrary cookware pot reference."
+    },
+    {
+      "file": "v9_curated_sixteenth_batch_20261024.json",
+      "concepts": 1,
+      "records": 2,
+      "classification": "REVIEW_PRODUCT_TYPE",
+      "note": "Simmering supper requires an actual lid visible in reference; not universal."
+    }
+  ],
+  "findings": [
+    "Dedicated accepted concepts have one 10s and one 20s record each; no duplicate concept labels within the 14 dedicated files.",
+    "Two curated concepts are distinct but require product-type eligibility, not automatic activation.",
+    "40 Malaysian-menu candidates are not the same as 40 render-approved prompts. 22 earlier focus concepts remain preserved for fit review.",
+    "All candidate records remain DRAFT_RENDER_QA. Actual runtime product input must be reconciled with the image-reference requirement before activation.",
+    "No legacy or source file has been deleted, merged, or deployed."
+  ],
+  "next_action": "Review product compatibility and content quality of the 40 Malaysian candidates; shortlist 50 across cooking actions and product types rather than generating more dishes. Then audit remaining pilot/rewrite files before final global unique count."
+}
