@@ -1209,9 +1209,10 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
                     (str(curated_items[2].get("shot", "CREATIVE BEAT 3")), str(curated_items[2].get("direction", ""))),
                     ("CREATIVE FINISH / HERO HOLD", str(curated_items[3].get("direction", "")) + " Finish on a stable, full-product hero frame."),
                 ]
-            # Enforce this after curated storyboard selection too, so style libraries cannot suppress real product use.
+            # Preserve approved, saved storyboard beats verbatim. Category usage is a fallback
+            # only when no curated storyboard was supplied; never replace a library action.
             usage_scene = _PRODUCT_USAGE_SCENES.get(str(product_type or "").casefold())
-            if usage_scene and len(generic_scenes) >= 4:
+            if usage_scene and not (storyboard_override and isinstance(storyboard_override, (list, tuple)) and len(storyboard_override) == 4) and len(generic_scenes) >= 4:
                 generic_scenes[3] = usage_scene
             blocks = []
             for index, (shot_name, shot_direction) in enumerate(generic_scenes):
