@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "batch": "v9_curated_thirteenth_batch_20261024",
+  "variation_count": 6,
+  "notes": "Three product-specific complete 10s and continuous 20s concepts. Draft pending real render and runtime reference-input compatibility QA.",
+  "variations": [
+    {
+      "id": "v9_curated13_hijab_inner_10s_01",
+      "subcategory_id": "hijab_inner",
+      "visual_category": "FULL_MODEL",
+      "concept": "Getting ready at vanity",
+      "duration_seconds": 10,
+      "voice_type": "MODEL_SPEECH",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Vertical 9:16 photorealistic footage. One adult Universal Malaysian woman wearing the exact reference hijab inner with a modest plain outfit at a tidy bedroom vanity, soft morning window light. Preserve the original inner shape, opening, coverage, colour, seam and fit; no added pins or accessories. Eye-level medium close-up with face and product fully visible for accurate Malaysian Malay lip sync. Natural hand motion and fabric physics.\nUse the supplied product reference as the sole visual master. Preserve actual visible design, colour, proportions and realistic physics. No fabricated product claims, captions, text overlays, added logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Establish the model facing the vanity mirror, original inner framing her face clearly.\n2–5s: She lightly smooths its existing front edge once without changing its fit.\n5–8s: Facing camera, she says with precise lip sync: 'Saya mula dengan inner yang kemas.'\n8–10s: Hold a relaxed front portrait with the unchanged inner visible.\nAUDIO: Only visible adult model speech in natural Malaysian Malay with precise lip sync; soft room ambience, no narrator or music."
+    },
+    {
+      "id": "v9_curated13_hijab_inner_20s_01",
+      "subcategory_id": "hijab_inner",
+      "visual_category": "FULL_MODEL",
+      "concept": "Getting ready at vanity",
+      "duration_seconds": 20,
+      "voice_type": "MODEL_SPEECH",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic footage. One adult Universal Malaysian woman wearing the exact reference hijab inner with a modest plain outfit at a tidy bedroom vanity, soft morning window light. Preserve the original inner shape, opening, coverage, colour, seam and fit; no added pins or accessories. Eye-level medium close-up with face and product fully visible for accurate Malaysian Malay lip sync. Natural hand motion and fabric physics.\nUse the supplied product reference as the sole visual master. Preserve actual visible design, colour, proportions and realistic physics. No fabricated product claims, captions, text overlays, added logos or watermark.\nEXACTLY 10 SECONDS:\n0–3s: Establish the model facing the mirror with the exact reference inner fully visible.\n3–7s: She gently smooths the original front edge once and lowers her hand.\n7–10s: Facing camera, she says with precise lip sync: 'Saya mula dengan inner yang kemas.'\nAUDIO: Only visible adult model speech in natural Malaysian Malay with precise lip sync; soft room ambience, no narrator or music.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic footage. One adult Universal Malaysian woman wearing the exact reference hijab inner with a modest plain outfit at a tidy bedroom vanity, soft morning window light. Preserve the original inner shape, opening, coverage, colour, seam and fit; no added pins or accessories. Eye-level medium close-up with face and product fully visible for accurate Malaysian Malay lip sync. Natural hand motion and fabric physics.\nUse the supplied product reference as the sole visual master. Preserve actual visible design, colour, proportions and realistic physics. No fabricated product claims, captions, text overlays, added logos or watermark.\nCONTINUITY: Begin at the exact final Part 1 frame with matching product, subject, pose, props, lighting and camera axis; do not replay completed action.\nEXACTLY 10 SECONDS:\n0–3s: Continue from the same front-facing stance and unchanged inner; she turns slightly toward the vanity mirror.\n3–7s: She looks back to camera and says with accurate lip sync: 'Lepas ni, senang saya padankan gaya hari ni.'\n7–10s: Hold a clear three-quarter portrait showing the original side fit and coverage.\nAUDIO: Only visible adult model speech in natural Malaysian Malay with precise lip sync; soft room ambience, no narrator or music."
+    },
+    {
+      "id": "v9_curated13_office_stationery_10s_01",
+      "subcategory_id": "office_stationery",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Meeting notes preparation",
+      "duration_seconds": 10,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Vertical 9:16 photorealistic overhead-to-three-quarter view of an uncluttered office desk. Exact reference notebook, preserving actual cover, size, binding, page appearance and markings; no invented pockets or features. One adult Malaysian hand and forearm only, plain pen placed beside the notebook. Soft diffuse office daylight, realistic paper and hand contact, no face.\nUse the supplied product reference as the sole visual master. Preserve actual visible design, colour, proportions and realistic physics. No fabricated product claims, captions, text overlays, added logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Establish the closed reference notebook and plain pen on the desk.\n2–5s: Hand opens the notebook using its actual binding and turns to a blank visible page.\n5–8s: Hand writes a short neutral heading, 'Nota Mesyuarat', on the page in natural pen strokes.\n8–10s: Hand rests the pen beside the open notebook, original binding visible.\nAUDIO: Off-camera Malaysian Malay narrator, hands-only subject silent: 'Sebelum mesyuarat, saya sediakan nota dulu.' Quiet office ambience."
+    },
+    {
+      "id": "v9_curated13_office_stationery_20s_01",
+      "subcategory_id": "office_stationery",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Meeting notes preparation",
+      "duration_seconds": 20,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic overhead-to-three-quarter view of an uncluttered office desk. Exact reference notebook, preserving actual cover, size, binding, page appearance and markings; no invented pockets or features. One adult Malaysian hand and forearm only, plain pen placed beside the notebook. Soft diffuse office daylight, realistic paper and hand contact, no face.\nUse the supplied product reference as the sole visual master. Preserve actual visible design, colour, proportions and realistic physics. No fabricated product claims, captions, text overlays, added logos or watermark.\nEXACTLY 10 SECONDS:\n0–3s: Establish the exact closed notebook and pen on the clean desk.\n3–7s: Hand opens the notebook naturally using its real binding and settles on a blank page.\n7–10s: Hand places the pen tip at the top of the page, ready to write.\nAUDIO: Off-camera Malaysian Malay narrator, hands-only subject silent: 'Sebelum mesyuarat, saya sediakan nota dulu.' Quiet office ambience.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic overhead-to-three-quarter view of an uncluttered office desk. Exact reference notebook, preserving actual cover, size, binding, page appearance and markings; no invented pockets or features. One adult Malaysian hand and forearm only, plain pen placed beside the notebook. Soft diffuse office daylight, realistic paper and hand contact, no face.\nUse the supplied product reference as the sole visual master. Preserve actual visible design, colour, proportions and realistic physics. No fabricated product claims, captions, text overlays, added logos or watermark.\nCONTINUITY: Begin at the exact final Part 1 frame with matching product, subject, pose, props, lighting and camera axis; do not replay completed action.\nEXACTLY 10 SECONDS:\n0–3s: Resume with the pen poised at the same blank page; hand writes the heading 'Nota Mesyuarat' in natural strokes.\n3–7s: Hand adds two short simple horizontal note lines without fabricated printed content.\n7–10s: Pen is placed beside the open notebook; hold a clear view of the authentic binding and cover edge.\nAUDIO: Off-camera Malaysian Malay narrator, hands-only subject silent: 'Isi penting nanti boleh terus dicatat.' Quiet office ambience."
+    },
+    {
+      "id": "v9_curated13_pet_grooming_10s_01",
+      "subcategory_id": "pet_grooming",
+      "visual_category": "ANIMAL_ONLY",
+      "concept": "Gentle coat brushing",
+      "duration_seconds": 10,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Vertical 9:16 photorealistic pet grooming scene. Exact reference pet brush preserving its visible handle, bristle shape, colour and size; no invented motor, accessories or health claims. One calm healthy adult domestic cat resting comfortably on a stable low grooming mat in a quiet bright home. A responsible adult's single hand holds the brush, face and body outside frame. Safe gentle strokes along the cat's back, avoiding face and sensitive areas; cat remains visible throughout, realistic contact and fur response.\nUse the supplied product reference as the sole visual master. Preserve actual visible design, colour, proportions and realistic physics. No fabricated product claims, captions, text overlays, added logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Establish the relaxed cat lying on the mat beside the exact reference brush.\n2–5s: Hand picks up the actual brush and makes one short gentle stroke along the cat's back.\n5–8s: Cat remains relaxed as the hand makes a second gentle stroke in the same direction.\n8–10s: Hand pauses with brush beside the mat; hold cat and brush together.\nAUDIO: No speech, narration or music; only soft room and natural pet ambience."
+    },
+    {
+      "id": "v9_curated13_pet_grooming_20s_01",
+      "subcategory_id": "pet_grooming",
+      "visual_category": "ANIMAL_ONLY",
+      "concept": "Gentle coat brushing",
+      "duration_seconds": 20,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic pet grooming scene. Exact reference pet brush preserving its visible handle, bristle shape, colour and size; no invented motor, accessories or health claims. One calm healthy adult domestic cat resting comfortably on a stable low grooming mat in a quiet bright home. A responsible adult's single hand holds the brush, face and body outside frame. Safe gentle strokes along the cat's back, avoiding face and sensitive areas; cat remains visible throughout, realistic contact and fur response.\nUse the supplied product reference as the sole visual master. Preserve actual visible design, colour, proportions and realistic physics. No fabricated product claims, captions, text overlays, added logos or watermark.\nEXACTLY 10 SECONDS:\n0–3s: Establish the calm cat resting on the mat and original brush beside it.\n3–7s: Hand lifts the brush and makes one slow gentle stroke along the cat's back.\n7–10s: Hand pauses just above the back while the cat remains relaxed.\nAUDIO: No speech, narration or music; only soft room and natural pet ambience.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic pet grooming scene. Exact reference pet brush preserving its visible handle, bristle shape, colour and size; no invented motor, accessories or health claims. One calm healthy adult domestic cat resting comfortably on a stable low grooming mat in a quiet bright home. A responsible adult's single hand holds the brush, face and body outside frame. Safe gentle strokes along the cat's back, avoiding face and sensitive areas; cat remains visible throughout, realistic contact and fur response.\nUse the supplied product reference as the sole visual master. Preserve actual visible design, colour, proportions and realistic physics. No fabricated product claims, captions, text overlays, added logos or watermark.\nCONTINUITY: Begin at the exact final Part 1 frame with matching product, subject, pose, props, lighting and camera axis; do not replay completed action.\nEXACTLY 10 SECONDS:\n0–3s: Continue from the same paused brush position and relaxed cat posture; make one additional gentle stroke.\n3–7s: Hand withdraws the brush and places it flat beside the mat without startling the cat.\n7–10s: Hold a stable low frame showing the calm cat and exact reference brush.\nAUDIO: No speech, narration or music; only soft room and natural pet ambience."
+    }
+  ]
+}
