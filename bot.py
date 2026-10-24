@@ -2998,7 +2998,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif action == 'crop_image':
         reset(context)
         context.user_data['stage'] = 'crop_upload'
-        await query.message.reply_text('🖼️ CROP GAMBAR\\n\\nHantar satu gambar JPG, PNG atau WebP (maksimum 12 MB). Hantar sebagai File untuk mengekalkan kualiti asal.')
+        await query.message.reply_text('🖼️ CROP GAMBAR\n\nHantar satu gambar JPG, PNG atau WebP (maksimum 12 MB). Hantar sebagai File untuk mengekalkan kualiti asal.')
     elif action.startswith('crop_ratio:') and stage == 'crop_ratio':
         ratios = {'1:1': (1, 1), '4:5': (4, 5), '9:16': (9, 16), '16:9': (16, 9)}
         selected = action.split(':', 1)[1]
@@ -4440,7 +4440,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif action == 'confirm' and stage == 'confirm':
         await generate(update, context)
     elif action == 'subscription':
-        await query.message.reply_text('💎 LANGGANAN KLIPPO\n\nPelan Penyokong Awal: RM2 / 30 hari.\n\nKlippo membantu menyediakan prompt untuk digunakan pada platform video AI pilihan anda, menggerakkan foto dengan transisi, menggabungkan klip dan menukar format video. Penjanaan video AI penuh dibuat pada platform luaran.\n\nBayar melalui QR DuitNow. Selepas pembayaran, hantar resit untuk semakan admin.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📱 Papar QR DuitNow', callback_data='subscription_qr')], [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
+        await query.message.reply_text('💎 LANGGANAN KLIPPO\n\nPelan Penyokong Awal: RM2 / 30 hari.\n\nKlippo membantu menyediakan prompt untuk digunakan pada platform video AI pilihan anda, crop gambar, menggabungkan klip dan menukar format video. Penjanaan video AI penuh dibuat pada platform luaran.\n\nBayar melalui QR DuitNow. Selepas pembayaran, hantar resit untuk semakan admin.', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('📱 Papar QR DuitNow', callback_data='subscription_qr')], [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
     elif action == 'subscription_qr':
         qr_path = Path(__file__).resolve().parent / 'klippo_qr.jpg'
         if not qr_path.is_file():
