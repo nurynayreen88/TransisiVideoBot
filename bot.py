@@ -255,6 +255,41 @@ def _plain_background_mask(image):
     return mask.resize(image.size, Image.Resampling.LANCZOS).filter(ImageFilter.GaussianBlur(0.65))
 
 
+def remove_bg_background_menu():
+    colors = [('Putih', 'white'), ('Hitam', 'black'), ('Kelabu', 'gray'), ('Biru', 'blue'), ('Merah', 'red'), ('Hijau', 'green'), ('Kuning', 'yellow'), ('Pink', 'pink'), ('Krim', 'cream')]
+    rows = [[InlineKeyboardButton(name, callback_data='rbg_color:' + key) for name, key in colors[i:i+3]] for i in range(0, len(colors), 3)]
+    rows.append([InlineKeyboardButton('🖼️ Upload Background Sendiri', callback_data='rbg_custom')])
+    rows.append([InlineKeyboardButton('✅ Kekalkan Transparent', callback_data='rbg_done')])
+    return InlineKeyboardMarkup(rows)
+
+
+REMOVE_BG_COLORS = {
+    'white': (255, 255, 255), 'black': (0, 0, 0), 'gray': (180, 180, 180),
+    'blue': (62, 137, 221), 'red': (215, 63, 63), 'green': (67, 166, 103),
+    'yellow': (255, 222, 76), 'pink': (246, 174, 200), 'cream': (248, 239, 219),
+}
+
+
+def composite_removed_background(foreground_bytes, color=None, background_bytes=None):
+    with Image.open(BytesIO(foreground_bytes)) as opened:
+        foreground = opened.convert('RGBA')
+        foreground.load()
+    if background_bytes is not None:
+        with Image.open(BytesIO(background_bytes)) as opened:
+            bg = ImageOps.exif_transpose(opened).convert('RGB')
+            if bg.width * bg.height > 40_000_000:
+                raise ValueError('Background exceeds pixel limit')
+            background = ImageOps.fit(bg, foreground.size, method=Image.Resampling.LANCZOS).convert('RGBA')
+    else:
+        background = Image.new('RGBA', foreground.size, REMOVE_BG_COLORS[color] + (255,))
+    background.alpha_composite(foreground)
+    output = BytesIO()
+    background.convert('RGB').save(output, format='PNG', optimize=True)
+    output.seek(0)
+    output.name = 'Klippo_Ganti_Background.png'
+    return output
+
+
 def _remove_bg_api(image):
     """Use the optional remove.bg API key, never store it in source control."""
     import requests
@@ -2451,7 +2486,7 @@ async def receive_receipt(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def handle_image_or_receipt_document(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Route uploaded image documents to the active flow, without breaking receipt PDFs."""
-    if context.user_data.get('stage') in ('prompt_upload', 'background_custom_upload', 'remove_bg_upload'):
+    if context.user_data.get('stage') in ('prompt_upload', 'background_custom_upload', 'remove_bg_upload', 'remove_bg_custom_upload'):
         await photo(update, context)
         return
     await receive_receipt(update, context)
@@ -2481,6 +2516,40 @@ async def photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
     if context.user_data.get('stage') == 'receipt_upload':
         await receive_receipt(update, context)
+        return
+    if context.user_data.get('stage') == 'remove_bg_custom_upload':
+        item = update.message.photo[-1] if update.message.photo else update.message.document
+        if not item or (update.message.document and not (item.mime_type or '').startswith('image/')):
+            await update.message.reply_text('Hantar gambar latar JPG, PNG atau WebP.')
+            return
+        if (item.file_size or 0) > 12 * 1024 * 1024:
+            await update.message.reply_text('Gambar latar terlalu besar (maksimum 12 MB).')
+            return
+        foreground = context.user_data.get('remove_bg_foreground')
+        if not foreground:
+            reset(context)
+            await update.message.reply_text('Sesi Remove BG tamat. Sila mula semula.', reply_markup=main_menu())
+            return
+        lock = context.application.bot_data.setdefault('render_lock', asyncio.Lock())
+        if lock.locked():
+            await update.message.reply_text('Server sedang memproses fail lain. Cuba sebentar lagi.')
+            return
+        async with lock:
+            context.user_data['busy'] = True
+            try:
+                raw = bytes(await (await context.bot.get_file(item.file_id)).download_as_bytearray())
+                if not raw or len(raw) > 12 * 1024 * 1024:
+                    raise ValueError('Invalid background image')
+                output = await asyncio.to_thread(composite_removed_background, foreground, background_bytes=raw)
+                await update.message.reply_document(document=output, filename=output.name,
+                    caption='✅ Background sendiri berjaya dipasang.', reply_markup=main_menu())
+                reset(context)
+                context.user_data.pop('remove_bg_foreground', None)
+            except Exception:
+                logging.exception('Custom Remove BG background failed')
+                await update.message.reply_text('Gagal memasang gambar latar. Cuba gambar lain.', reply_markup=remove_bg_background_menu())
+            finally:
+                context.user_data['busy'] = False
         return
     if context.user_data.get('stage') == 'remove_bg_upload':
         item = update.message.photo[-1] if update.message.photo else update.message.document
@@ -2518,14 +2587,19 @@ async def photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
                         output.name = 'Klippo_Remove_BG.png'
                         return output
                 output = await asyncio.to_thread(remove_background)
+                context.user_data['remove_bg_foreground'] = output.getvalue()
+                context.user_data['stage'] = 'remove_bg_options'
                 await update.message.reply_document(document=output, filename=output.name,
-                    caption='✅ Latar belakang berjaya dibuang (PNG transparent).', reply_markup=main_menu())
+                    caption='✅ Background dibuang. Ini gambar PNG transparent.')
+                await update.message.reply_text('Mahu ganti background? Pilih warna, upload gambar latar sendiri, atau kekalkan transparent.', reply_markup=remove_bg_background_menu())
             except Exception:
                 logging.exception('Remove BG failed')
                 await update.message.reply_text('Remove BG gagal. Semak kuota API atau cuba lagi.', reply_markup=main_menu())
             finally:
                 context.user_data['busy'] = False
-                reset(context)
+                if context.user_data.get('stage') != 'remove_bg_options':
+                    reset(context)
+                    context.user_data.pop('remove_bg_foreground', None)
         return
     if context.user_data.get('stage') == 'fal_beta_photo':
         if not update.message.photo:
@@ -2787,6 +2861,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     logging.info('KLIPPO callback action=%r stage=%r user=%s', action, context.user_data.get('stage'), update.effective_user.id)
     if action == 'home':
         if not context.user_data.get('busy'):
+            context.user_data.pop('remove_bg_foreground', None)
             reset(context)
         await query.message.reply_text(
             '🎬 KLIPPO | Prompt Video Menarik, Semudah Klik\n\n'
@@ -3022,7 +3097,41 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data['storyboard_mode'] = True
         context.user_data['stage'] = 'photos'
         await query.message.reply_text('🎞️ STORYBOARD V1 — Hantar 1–5 gambar produk. Bot akan susun enam babak sinematik. Tekan Selesai apabila cukup.', reply_markup=photos_menu())
+    elif action == 'rbg_done':
+        context.user_data.pop('remove_bg_foreground', None)
+        reset(context)
+        await query.message.reply_text('✅ Gambar transparent dikekalkan.', reply_markup=main_menu())
+    elif action == 'rbg_custom':
+        if not context.user_data.get('remove_bg_foreground'):
+            await query.message.reply_text('Sesi Remove BG tamat. Sila mula semula.', reply_markup=main_menu())
+        else:
+            context.user_data['stage'] = 'remove_bg_custom_upload'
+            await query.message.reply_text('Hantar satu gambar untuk dijadikan background (JPG, PNG atau WebP; maksimum 12 MB). Gambar akan dipadankan ke saiz asal secara center-fit.')
+    elif action.startswith('rbg_color:'):
+        color = action.split(':', 1)[1]
+        foreground = context.user_data.get('remove_bg_foreground')
+        if not foreground or color not in REMOVE_BG_COLORS:
+            await query.message.reply_text('Pilihan tidak sah atau sesi tamat. Sila mula semula.', reply_markup=main_menu())
+        else:
+            lock = context.application.bot_data.setdefault('render_lock', asyncio.Lock())
+            if lock.locked():
+                await query.message.reply_text('Server sedang memproses fail lain. Cuba sebentar lagi.')
+            else:
+                async with lock:
+                    context.user_data['busy'] = True
+                    try:
+                        output = await asyncio.to_thread(composite_removed_background, foreground, color=color)
+                        await query.message.reply_document(document=output, filename=output.name,
+                            caption='✅ Background warna berjaya dipasang.', reply_markup=main_menu())
+                        context.user_data.pop('remove_bg_foreground', None)
+                        reset(context)
+                    except Exception:
+                        logging.exception('Remove BG color composite failed')
+                        await query.message.reply_text('Gagal memasang warna latar. Cuba lagi.', reply_markup=remove_bg_background_menu())
+                    finally:
+                        context.user_data['busy'] = False
     elif action == 'remove_bg':
+        context.user_data.pop('remove_bg_foreground', None)
         reset(context)
         context.user_data['stage'] = 'remove_bg_upload'
         await query.message.reply_text('🖼️ REMOVE BG\n\nHantar satu gambar JPG, PNG atau WebP (maksimum 12 MB). Latar belakang akan dibuang secara automatik. Hasil PNG transparent dihantar sebagai fail.')
