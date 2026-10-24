@@ -50,7 +50,7 @@ def merge_videos(sources, destination, transition="none"):
             # All clips were normalized to matching video and audio streams.
             listing = Path(folder) / "concat.txt"
             listing.write_text(
-                "".join(f"file '{clip.as_posix()}'\\n" for clip in clips),
+                "".join(f"file '{clip.as_posix()}'\n" for clip in clips),
                 encoding="utf-8",
             )
             run(["ffmpeg", "-y", "-v", "error", "-f", "concat", "-safe", "0",
