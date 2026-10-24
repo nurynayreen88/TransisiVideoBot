@@ -2800,7 +2800,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await query.message.reply_text('Video sedang diproses. Sila tunggu.')
         return
     stage = context.user_data.get('stage', 'home')
-    paid_actions = action in ('make', 'merge', 'convert', 'storyboard', 'falbeta')
+    paid_actions = action in ('make', 'merge', 'convert', 'storyboard', 'falbeta', 'remove_bg')
     paid_actions = paid_actions or action.startswith(('merge_', 'video_input:'))
     if paid_actions and not await require_paid_feature(query.message, update.effective_user.id):
         return
