@@ -415,7 +415,7 @@ def _category_specific_scenes(product_type, product, product_subtype=""):
     )
     if (not subtype or subtype in {"home_kitchen", "kitchen", "kitchen_cookware"}) and any(term in words for term in cookware_terms):
         return [
-            ("COMPLETE SET / COOKING CONTEXT", "Show the complete supplied cookware set if the reference depicts a set, without adding pieces; for a single pot or pan show only that product on a suitable kitchen hob at realistic scale. Keep shape, colour, handles and lid unchanged."),
+            ("COMPLETE SET / COOKING CONTEXT", "Show the complete supplied cookware set if the reference depicts a set; do not add pieces; for a single pot or pan show only that product on a suitable kitchen hob at realistic scale. Keep shape, colour, handles and lid unchanged."),
             ("PREPARE TO COOK", "Demonstrate one physically plausible kitchen action: if a human model is selected, show that person placing plausible food into the pot or pan using ordinary ingredients and a suitable utensil; otherwise show the cookware in a credible cooking context without introducing a person. Do not present utensils or ingredients as included accessories."),
             ("ACTIVE COOKING DEMONSTRATION", "Clearly show the pot or pan being used: if a model is selected, their hand stirs or turns the food naturally while the cookware remains stable on the hob; do not invent a human model when none was selected. Use believable contact, heat and steam only where physically plausible."),
             ("FUNCTION IN CONTEXT", "Continue the same cooking action or lift the existing lid naturally only if the reference product has one. Keep the cookware visible; do not claim non-stick, material, capacity or compatibility properties."),
