@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "batch": "v9_curated_fourteenth_batch_20261024",
+  "variation_count": 6,
+  "notes": "Three distinct reference-dependent concepts, each complete 10s and continuous 20s. Draft pending real render and runtime reference-input compatibility QA.",
+  "variations": [
+    {
+      "id": "v9_curated14_fashion_men_10s_01",
+      "subcategory_id": "fashion_men",
+      "visual_category": "FULL_MODEL",
+      "concept": "Morning café arrival",
+      "duration_seconds": 10,
+      "voice_type": "MODEL_SPEECH",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Photorealistic vertical 9:16. One adult Universal Malaysian male model wears the exact reference men's outfit, preserving actual cut, colour, pattern, sleeve and hem proportions; no invented buttons, pockets or fabric claims. A shaded outdoor café terrace, dry level floor and soft morning light. Medium-full camera keeps face and full outfit visible for accurate natural Malaysian Malay lip sync; natural movement.\nUse the supplied product reference as sole visual master. Preserve authentic design, proportions, anatomy and physical continuity. No fabricated features, claims, captions, text overlays, added logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Establish the model beside a plain café table with the original outfit unobstructed.\n2–5s: He pulls out a simple chair and sits naturally, keeping the garment silhouette visible.\n5–8s: Looking at camera, he says with precise lip sync: 'Pagi ni, saya pilih gaya yang ringkas.'\n8–10s: He smiles lightly and rests one hand on the table, outfit unchanged.\nAUDIO: Only visible adult male model speech in natural Malaysian Malay with precise lip sync; quiet café ambience, no narrator or music."
+    },
+    {
+      "id": "v9_curated14_fashion_men_20s_01",
+      "subcategory_id": "fashion_men",
+      "visual_category": "FULL_MODEL",
+      "concept": "Morning café arrival",
+      "duration_seconds": 20,
+      "voice_type": "MODEL_SPEECH",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. One adult Universal Malaysian male model wears the exact reference men's outfit, preserving actual cut, colour, pattern, sleeve and hem proportions; no invented buttons, pockets or fabric claims. A shaded outdoor café terrace, dry level floor and soft morning light. Medium-full camera keeps face and full outfit visible for accurate natural Malaysian Malay lip sync; natural movement.\nUse the supplied product reference as sole visual master. Preserve authentic design, proportions, anatomy and physical continuity. No fabricated features, claims, captions, text overlays, added logos or watermark.\nEXACTLY 10 SECONDS:\n0–3s: Establish the model standing beside the café table, full reference outfit visible.\n3–7s: He pulls out the chair and sits in one smooth natural movement.\n7–10s: Facing camera, he says with precise lip sync: 'Pagi ni, saya pilih gaya yang ringkas.'\nAUDIO: Only visible adult male model speech in natural Malaysian Malay with precise lip sync; quiet café ambience, no narrator or music.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. One adult Universal Malaysian male model wears the exact reference men's outfit, preserving actual cut, colour, pattern, sleeve and hem proportions; no invented buttons, pockets or fabric claims. A shaded outdoor café terrace, dry level floor and soft morning light. Medium-full camera keeps face and full outfit visible for accurate natural Malaysian Malay lip sync; natural movement.\nUse the supplied product reference as sole visual master. Preserve authentic design, proportions, anatomy and physical continuity. No fabricated features, claims, captions, text overlays, added logos or watermark.\nCONTINUITY: Match the last Part 1 frame exactly in subject, product, pose, props, light and camera axis. Continue without replaying completed action.\nEXACTLY 10 SECONDS:\n0–3s: Continue from the same seated pose, table position and garment folds; he places his hand naturally on the table.\n3–7s: Facing camera, he says with accurate lip sync: 'Sesuai untuk singgah minum sebelum mula hari.'\n7–10s: Camera eases to a steady medium-full three-quarter view of the original outfit.\nAUDIO: Only visible adult male model speech in natural Malaysian Malay with precise lip sync; quiet café ambience, no narrator or music."
+    },
+    {
+      "id": "v9_curated14_home_kitchen_storage_10s_01",
+      "subcategory_id": "home_kitchen_storage",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Pantry shelf tidy-up",
+      "duration_seconds": 10,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Photorealistic vertical 9:16. Exact reference kitchen storage container, retaining its actual body, lid, shape, colour, visible markings and closure; no invented airtight or food-safety claims. A clean home pantry counter with a small portion of dry uncooked pasta in a plain bowl. Adult Malaysian hands and forearms only; soft daylight and stable close three-quarter camera, natural contact and scale.\nUse the supplied product reference as sole visual master. Preserve authentic design, proportions, anatomy and physical continuity. No fabricated features, claims, captions, text overlays, added logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Establish the reference container closed beside a small bowl of dry pasta.\n2–5s: Hand opens its existing lid and sets the lid safely beside the container.\n5–8s: Hand pours the dry pasta into the actual main opening and replaces the original lid.\n8–10s: Place the closed container upright on a clear pantry shelf, full original silhouette visible.\nAUDIO: Off-camera Malaysian Malay narrator, hands-only subject silent: 'Pasta kering ni, saya susun dalam bekas dulu.' Subtle home kitchen ambience."
+    },
+    {
+      "id": "v9_curated14_home_kitchen_storage_20s_01",
+      "subcategory_id": "home_kitchen_storage",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Pantry shelf tidy-up",
+      "duration_seconds": 20,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. Exact reference kitchen storage container, retaining its actual body, lid, shape, colour, visible markings and closure; no invented airtight or food-safety claims. A clean home pantry counter with a small portion of dry uncooked pasta in a plain bowl. Adult Malaysian hands and forearms only; soft daylight and stable close three-quarter camera, natural contact and scale.\nUse the supplied product reference as sole visual master. Preserve authentic design, proportions, anatomy and physical continuity. No fabricated features, claims, captions, text overlays, added logos or watermark.\nEXACTLY 10 SECONDS:\n0–3s: Show the exact container closed beside the small bowl of dry pasta.\n3–7s: Hand removes its actual lid and places it on the counter.\n7–10s: Hand pours the pasta carefully through the real main opening; container stays upright.\nAUDIO: Off-camera Malaysian Malay narrator, hands-only subject silent: 'Pasta kering ni, saya susun dalam bekas dulu.' Subtle home kitchen ambience.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. Exact reference kitchen storage container, retaining its actual body, lid, shape, colour, visible markings and closure; no invented airtight or food-safety claims. A clean home pantry counter with a small portion of dry uncooked pasta in a plain bowl. Adult Malaysian hands and forearms only; soft daylight and stable close three-quarter camera, natural contact and scale.\nUse the supplied product reference as sole visual master. Preserve authentic design, proportions, anatomy and physical continuity. No fabricated features, claims, captions, text overlays, added logos or watermark.\nCONTINUITY: Match the last Part 1 frame exactly in subject, product, pose, props, light and camera axis. Continue without replaying completed action.\nEXACTLY 10 SECONDS:\n0–3s: Resume with pasta already inside the same open container; hand picks up the original lid from its unchanged position.\n3–7s: Hand closes the container using its actual lid and lifts it with realistic weight.\n7–10s: Set the closed container upright on a clear pantry shelf, original shape and colour unobstructed.\nAUDIO: Off-camera Malaysian Malay narrator, hands-only subject silent: 'Dah bertutup, terus letak semula di rak.' Subtle home kitchen ambience."
+    },
+    {
+      "id": "v9_curated14_accessory_earring_10s_01",
+      "subcategory_id": "accessory_earring",
+      "visual_category": "FULL_MODEL",
+      "concept": "Mirror-side finishing touch",
+      "duration_seconds": 10,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Photorealistic vertical 9:16. Exact reference pair of earrings worn by one adult Universal Malaysian woman with an appropriate existing ear piercing; preserve their true size, design, colour and fastening without adding stones or hardware. A softly lit dressing-table mirror in a tidy room, hair tucked behind one ear, eye-level close portrait includes face and both earrings. Natural anatomy and hand movement; model silent.\nUse the supplied product reference as sole visual master. Preserve authentic design, proportions, anatomy and physical continuity. No fabricated features, claims, captions, text overlays, added logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Establish the model already wearing the original pair, both earrings clearly visible.\n2–5s: She tucks one loose hair strand behind her ear without touching or changing the earrings.\n5–8s: She turns her head gently toward the mirror, revealing the authentic side profile and scale.\n8–10s: She faces three-quarter camera and holds a natural still portrait.\nAUDIO: Off-camera Malaysian Malay female narrator, model silent: 'Sentuhan kecil untuk lengkapkan gaya hari ni.' Soft dressing-room ambience."
+    },
+    {
+      "id": "v9_curated14_accessory_earring_20s_01",
+      "subcategory_id": "accessory_earring",
+      "visual_category": "FULL_MODEL",
+      "concept": "Mirror-side finishing touch",
+      "duration_seconds": 20,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. Exact reference pair of earrings worn by one adult Universal Malaysian woman with an appropriate existing ear piercing; preserve their true size, design, colour and fastening without adding stones or hardware. A softly lit dressing-table mirror in a tidy room, hair tucked behind one ear, eye-level close portrait includes face and both earrings. Natural anatomy and hand movement; model silent.\nUse the supplied product reference as sole visual master. Preserve authentic design, proportions, anatomy and physical continuity. No fabricated features, claims, captions, text overlays, added logos or watermark.\nEXACTLY 10 SECONDS:\n0–3s: Establish the model at the mirror wearing the exact pair, both earrings visible.\n3–7s: She tucks one hair strand behind her ear and lowers her hand.\n7–10s: She pauses in a front three-quarter portrait, earrings unchanged.\nAUDIO: Off-camera Malaysian Malay female narrator, model silent: 'Sentuhan kecil untuk lengkapkan gaya hari ni.' Soft dressing-room ambience.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. Exact reference pair of earrings worn by one adult Universal Malaysian woman with an appropriate existing ear piercing; preserve their true size, design, colour and fastening without adding stones or hardware. A softly lit dressing-table mirror in a tidy room, hair tucked behind one ear, eye-level close portrait includes face and both earrings. Natural anatomy and hand movement; model silent.\nUse the supplied product reference as sole visual master. Preserve authentic design, proportions, anatomy and physical continuity. No fabricated features, claims, captions, text overlays, added logos or watermark.\nCONTINUITY: Match the last Part 1 frame exactly in subject, product, pose, props, light and camera axis. Continue without replaying completed action.\nEXACTLY 10 SECONDS:\n0–3s: From the same paused portrait, she turns her head slightly toward the mirror.\n3–7s: Camera makes a restrained close lateral move showing the true earring side profile and natural movement.\n7–10s: She returns to a relaxed three-quarter portrait, both earrings clearly visible.\nAUDIO: Off-camera Malaysian Malay female narrator, model silent: 'Dari sisi pun, bentuk asalnya tetap jelas.' Soft dressing-room ambience."
+    }
+  ]
+}
