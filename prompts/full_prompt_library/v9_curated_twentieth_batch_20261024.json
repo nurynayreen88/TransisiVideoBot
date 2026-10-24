@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "batch": "v9_curated_twentieth_batch_20261024",
+  "variation_count": 6,
+  "notes": "Three distinct reference-dependent product concepts, each complete 10s and continuous two-part 20s. Draft pending actual render and runtime reference-input compatibility QA.",
+  "variations": [
+    {
+      "id": "v9_curated20_hijab_instant_10s_01",
+      "subcategory_id": "hijab_instant",
+      "visual_category": "FULL_MODEL",
+      "concept": "Morning commute ready",
+      "duration_seconds": 10,
+      "voice_type": "MODEL_SPEECH",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Vertical 9:16 photorealistic. One adult Universal Malaysian woman wears the exact reference instant hijab with its authentic face opening, front length, silhouette, colour and visible stitching over a plain modest outfit. Bright sheltered apartment lobby, soft morning daylight. Eye-level medium portrait includes her visible face and full hijab front; accurate natural Malaysian Malay lip sync. No invented pin, fastening, fabric or performance claim.\nUse the supplied product reference as the sole visual master. Preserve product identity, realistic anatomy, physical contact, proportions and continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Establish her by the lobby wall wearing the original instant hijab, front drape fully visible.\n2–5s: She adjusts only the shoulder-level drape gently, preserving its original shape.\n5–8s: Facing camera, she says with precise lip sync: 'Pagi ni, siap dengan gaya yang ringkas.'\n8–10s: She smiles naturally and holds a clear three-quarter portrait.\nAUDIO: Only visible adult female speech in natural Malaysian Malay with accurate lip sync; quiet lobby ambience, no narrator or music."
+    },
+    {
+      "id": "v9_curated20_hijab_instant_20s_01",
+      "subcategory_id": "hijab_instant",
+      "visual_category": "FULL_MODEL",
+      "concept": "Morning commute ready",
+      "duration_seconds": 20,
+      "voice_type": "MODEL_SPEECH",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic. One adult Universal Malaysian woman wears the exact reference instant hijab with its authentic face opening, front length, silhouette, colour and visible stitching over a plain modest outfit. Bright sheltered apartment lobby, soft morning daylight. Eye-level medium portrait includes her visible face and full hijab front; accurate natural Malaysian Malay lip sync. No invented pin, fastening, fabric or performance claim.\nUse the supplied product reference as the sole visual master. Preserve product identity, realistic anatomy, physical contact, proportions and continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–3s: Establish the model wearing the exact instant hijab by the sheltered lobby wall.\n3–7s: She smooths its existing shoulder drape once without changing the face opening or front length.\n7–10s: Facing camera, she says with precise lip sync: 'Pagi ni, siap dengan gaya yang ringkas.'\nAUDIO: Only visible adult female speech in natural Malaysian Malay with accurate lip sync; quiet lobby ambience, no narrator or music.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic. One adult Universal Malaysian woman wears the exact reference instant hijab with its authentic face opening, front length, silhouette, colour and visible stitching over a plain modest outfit. Bright sheltered apartment lobby, soft morning daylight. Eye-level medium portrait includes her visible face and full hijab front; accurate natural Malaysian Malay lip sync. No invented pin, fastening, fabric or performance claim.\nUse the supplied product reference as the sole visual master. Preserve product identity, realistic anatomy, physical contact, proportions and continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nCONTINUITY: Match the final Part 1 frame exactly in subject, product, pose, props, lighting and camera axis. Continue without replaying completed action.\nEXACTLY 10 SECONDS:\n0–3s: Resume from the same front-facing stance and unchanged hijab folds; she lowers her hand naturally.\n3–7s: She says with precise visible lip sync: 'Jom mula hari, kita gerak dulu.'\n7–10s: She takes one small natural step and pauses in a clear medium portrait.\nAUDIO: Only visible adult female speech in natural Malaysian Malay with accurate lip sync; quiet lobby ambience, no narrator or music."
+    },
+    {
+      "id": "v9_curated20_travel_organizer_10s_01",
+      "subcategory_id": "travel_organizer",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Packing for a short trip",
+      "duration_seconds": 10,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Vertical 9:16 photorealistic. Exact reference travel organizer with its real shape, visible compartments, actual closure, colour, dimensions and markings only; no invented pockets or capacity claims. A tidy bedroom desk beside a small stack of folded plain clothing sized to fit the visible opening. Adult Malaysian hands and forearms only, soft daylight and steady overhead three-quarter camera, realistic fabric movement.\nUse the supplied product reference as the sole visual master. Preserve product identity, realistic anatomy, physical contact, proportions and continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Establish the exact organizer open on the desk, actual interior visible.\n2–5s: Hands place one small folded plain shirt inside the real main compartment.\n5–8s: Hands close the organizer using its actual existing closure without forcing it.\n8–10s: Hold a clear full-product frame of the closed original organizer.\nAUDIO: Off-camera Malaysian Malay narrator; hands silent: 'Lipat baju kecil dan susun dalam organizer.' Soft room ambience."
+    },
+    {
+      "id": "v9_curated20_travel_organizer_20s_01",
+      "subcategory_id": "travel_organizer",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Packing for a short trip",
+      "duration_seconds": 20,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic. Exact reference travel organizer with its real shape, visible compartments, actual closure, colour, dimensions and markings only; no invented pockets or capacity claims. A tidy bedroom desk beside a small stack of folded plain clothing sized to fit the visible opening. Adult Malaysian hands and forearms only, soft daylight and steady overhead three-quarter camera, realistic fabric movement.\nUse the supplied product reference as the sole visual master. Preserve product identity, realistic anatomy, physical contact, proportions and continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–3s: Establish the original organizer open and empty on the tidy desk.\n3–7s: Hands lower one realistically sized folded shirt into its actual main opening.\n7–10s: Hands settle the shirt flat without adding other contents or changing the organizer.\nAUDIO: Off-camera Malaysian Malay narrator; hands silent: 'Lipat baju kecil dan susun dalam organizer.' Soft room ambience.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic. Exact reference travel organizer with its real shape, visible compartments, actual closure, colour, dimensions and markings only; no invented pockets or capacity claims. A tidy bedroom desk beside a small stack of folded plain clothing sized to fit the visible opening. Adult Malaysian hands and forearms only, soft daylight and steady overhead three-quarter camera, realistic fabric movement.\nUse the supplied product reference as the sole visual master. Preserve product identity, realistic anatomy, physical contact, proportions and continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nCONTINUITY: Match the final Part 1 frame exactly in subject, product, pose, props, lighting and camera axis. Continue without replaying completed action.\nEXACTLY 10 SECONDS:\n0–3s: Resume with the same shirt inside the same open organizer; hands align the existing opening edges.\n3–7s: Hands secure its actual closure smoothly without strain.\n7–10s: Hold a complete hero view of the closed organizer, authentic profile and markings visible.\nAUDIO: Off-camera Malaysian Malay narrator; hands silent: 'Dah tersusun, tutup dan sedia untuk dibawa.' Soft room ambience."
+    },
+    {
+      "id": "v9_curated20_pet_bowl_10s_01",
+      "subcategory_id": "pet_bowl",
+      "visual_category": "ANIMAL_ONLY",
+      "concept": "Calm mealtime",
+      "duration_seconds": 10,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Vertical 9:16 photorealistic. Exact reference pet bowl with its actual shape, rim, base, colour and visible markings, placed stably on a clean non-slip kitchen mat. One calm adult domestic cat, a modest portion of appropriate dry cat food already in the bowl. Preserve original bowl identity and realistic scale; low steady camera, soft daylight. Natural voluntary feline eating; no human face, forced behavior, fabricated nutrition or anti-slip claims.\nUse the supplied product reference as the sole visual master. Preserve product identity, realistic anatomy, physical contact, proportions and continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Establish the exact bowl with modest dry food on the mat; cat visible beside it.\n2–5s: Cat approaches calmly and sniffs the actual rim.\n5–8s: Cat voluntarily eats a few small bites without moving or tipping the bowl.\n8–10s: Cat pauses beside the unchanged bowl, full profile visible.\nAUDIO: No dialogue, narration or music; subtle natural cat and room ambience."
+    },
+    {
+      "id": "v9_curated20_pet_bowl_20s_01",
+      "subcategory_id": "pet_bowl",
+      "visual_category": "ANIMAL_ONLY",
+      "concept": "Calm mealtime",
+      "duration_seconds": 20,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic. Exact reference pet bowl with its actual shape, rim, base, colour and visible markings, placed stably on a clean non-slip kitchen mat. One calm adult domestic cat, a modest portion of appropriate dry cat food already in the bowl. Preserve original bowl identity and realistic scale; low steady camera, soft daylight. Natural voluntary feline eating; no human face, forced behavior, fabricated nutrition or anti-slip claims.\nUse the supplied product reference as the sole visual master. Preserve product identity, realistic anatomy, physical contact, proportions and continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–3s: Establish the original bowl with modest dry food on the mat and cat nearby.\n3–7s: Cat walks calmly to the bowl and sniffs the real rim.\n7–10s: Cat lowers its head toward the food, bowl remains stationary.\nAUDIO: No dialogue, narration or music; subtle natural cat and room ambience.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic. Exact reference pet bowl with its actual shape, rim, base, colour and visible markings, placed stably on a clean non-slip kitchen mat. One calm adult domestic cat, a modest portion of appropriate dry cat food already in the bowl. Preserve original bowl identity and realistic scale; low steady camera, soft daylight. Natural voluntary feline eating; no human face, forced behavior, fabricated nutrition or anti-slip claims.\nUse the supplied product reference as the sole visual master. Preserve product identity, realistic anatomy, physical contact, proportions and continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nCONTINUITY: Match the final Part 1 frame exactly in subject, product, pose, props, lighting and camera axis. Continue without replaying completed action.\nEXACTLY 10 SECONDS:\n0–3s: Resume with the cat's head at the same bowl; cat takes a few natural bites.\n3–7s: Cat pauses and lifts its head gently; bowl stays on the same mat.\n7–10s: Hold a clear low view of the calm cat and exact bowl.\nAUDIO: No dialogue, narration or music; subtle natural cat and room ambience."
+    }
+  ]
+}
