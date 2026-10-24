@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "batch": "v9_curated_twenty_third_batch_20261024",
+  "variation_count": 6,
+  "notes": "Three distinct product-specific reference-dependent concepts, each complete 10s and continuous two-part 20s. Draft pending real render and runtime reference-input compatibility QA.",
+  "variations": [
+    {
+      "id": "v9_curated23_fashion_sport_10s_01",
+      "subcategory_id": "fashion_sport",
+      "visual_category": "FULL_MODEL",
+      "concept": "Park warm-up",
+      "duration_seconds": 10,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Photorealistic vertical 9:16. One adult Universal Malaysian model wears the exact reference sports outfit with actual neckline, sleeves, waistband, hem, colour, print and fit preserved. A quiet shaded public park path in soft morning daylight, dry level ground, full-body steady camera. Natural light warm-up movement; no invented stretch, sweat-wicking or performance claims. Model silent.\nUse the supplied product reference as the sole visual master. Preserve original product identity, scale, anatomy, physical contact and spatial continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Establish model standing on the path with full original sports outfit unobstructed.\n2–5s: Model rolls shoulders gently and shifts weight naturally from foot to foot.\n5–8s: Model takes two relaxed walking steps, revealing true garment drape and fit.\n8–10s: Hold a stable full-body three-quarter pose, original outfit unchanged.\nAUDIO: Off-camera Malaysian Malay narrator; model silent: 'Mulakan pagi dengan gerakan ringan dulu.' Quiet park and natural footsteps ambience."
+    },
+    {
+      "id": "v9_curated23_fashion_sport_20s_01",
+      "subcategory_id": "fashion_sport",
+      "visual_category": "FULL_MODEL",
+      "concept": "Park warm-up",
+      "duration_seconds": 20,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. One adult Universal Malaysian model wears the exact reference sports outfit with actual neckline, sleeves, waistband, hem, colour, print and fit preserved. A quiet shaded public park path in soft morning daylight, dry level ground, full-body steady camera. Natural light warm-up movement; no invented stretch, sweat-wicking or performance claims. Model silent.\nUse the supplied product reference as the sole visual master. Preserve original product identity, scale, anatomy, physical contact and spatial continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–3s: Establish the full original sports outfit on the model at the shaded park path.\n3–7s: Model performs one gentle shoulder roll and a natural weight shift.\n7–10s: Model settles in a balanced standing pose, full outfit visible.\nAUDIO: Off-camera Malaysian Malay narrator; model silent: 'Mulakan pagi dengan gerakan ringan dulu.' Quiet park and natural footsteps ambience.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. One adult Universal Malaysian model wears the exact reference sports outfit with actual neckline, sleeves, waistband, hem, colour, print and fit preserved. A quiet shaded public park path in soft morning daylight, dry level ground, full-body steady camera. Natural light warm-up movement; no invented stretch, sweat-wicking or performance claims. Model silent.\nUse the supplied product reference as the sole visual master. Preserve original product identity, scale, anatomy, physical contact and spatial continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nCONTINUITY: Match the final Part 1 frame exactly in subject, product, pose, props, light and camera axis. Continue without replaying completed action.\nEXACTLY 10 SECONDS:\n0–3s: Resume from the same standing pose; model takes the first relaxed walking step.\n3–7s: Model completes a second measured step while the camera tracks smoothly at full-body height.\n7–10s: Model pauses in a clear three-quarter pose showing the authentic outfit silhouette.\nAUDIO: Off-camera Malaysian Malay narrator; model silent: 'Jalan santai sekejap, kemudian sambung rutin.' Quiet park ambience."
+    },
+    {
+      "id": "v9_curated23_home_kitchen_utensil_10s_01",
+      "subcategory_id": "home_kitchen_utensil",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Serving vegetable soup",
+      "duration_seconds": 10,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Photorealistic vertical 9:16. Exact reference soup ladle, preserving its real bowl shape, handle length, colour, finish and proportions, with no invented material or heat-resistance claims. A safe home kitchen counter with a plain separate pot of warm vegetable soup and a plain serving bowl. Adult Malaysian hands and forearms only. Stable close three-quarter camera, realistic liquid flow, careful movements, no face.\nUse the supplied product reference as the sole visual master. Preserve original product identity, scale, anatomy, physical contact and spatial continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Establish the original ladle resting beside the plain soup pot and empty bowl.\n2–5s: Hand grips the actual handle and lowers the ladle bowl into the warm soup.\n5–8s: Hand lifts one modest scoop and pours it carefully into the serving bowl.\n8–10s: Hand rests the ladle on a plain separate spoon rest, authentic profile visible.\nAUDIO: Off-camera Malaysian Malay narrator; hands silent: 'Cedok sup perlahan, kemudian tuang ke mangkuk.' Soft kitchen ambience and natural liquid sounds."
+    },
+    {
+      "id": "v9_curated23_home_kitchen_utensil_20s_01",
+      "subcategory_id": "home_kitchen_utensil",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Serving vegetable soup",
+      "duration_seconds": 20,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. Exact reference soup ladle, preserving its real bowl shape, handle length, colour, finish and proportions, with no invented material or heat-resistance claims. A safe home kitchen counter with a plain separate pot of warm vegetable soup and a plain serving bowl. Adult Malaysian hands and forearms only. Stable close three-quarter camera, realistic liquid flow, careful movements, no face.\nUse the supplied product reference as the sole visual master. Preserve original product identity, scale, anatomy, physical contact and spatial continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–3s: Establish the exact ladle beside the soup pot and empty serving bowl.\n3–7s: Hand picks up the ladle by its actual handle and lowers its bowl into the soup.\n7–10s: Hand lifts one modest scoop above the pot, holding it steadily.\nAUDIO: Off-camera Malaysian Malay narrator; hands silent: 'Cedok sup perlahan, kemudian tuang ke mangkuk.' Soft kitchen ambience and natural liquid sounds.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. Exact reference soup ladle, preserving its real bowl shape, handle length, colour, finish and proportions, with no invented material or heat-resistance claims. A safe home kitchen counter with a plain separate pot of warm vegetable soup and a plain serving bowl. Adult Malaysian hands and forearms only. Stable close three-quarter camera, realistic liquid flow, careful movements, no face.\nUse the supplied product reference as the sole visual master. Preserve original product identity, scale, anatomy, physical contact and spatial continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nCONTINUITY: Match the final Part 1 frame exactly in subject, product, pose, props, light and camera axis. Continue without replaying completed action.\nEXACTLY 10 SECONDS:\n0–3s: Resume with the same filled ladle held above the pot; hand moves it over the waiting bowl.\n3–7s: Hand pours the soup into the serving bowl in one natural stream.\n7–10s: Hand sets the original ladle on a plain separate spoon rest, full design visible.\nAUDIO: Off-camera Malaysian Malay narrator; hands silent: 'Dah siap hidang, letak senduk di tempatnya.' Soft kitchen ambience."
+    },
+    {
+      "id": "v9_curated23_accessory_hair_10s_01",
+      "subcategory_id": "accessory_hair",
+      "visual_category": "PARTIAL_MODEL",
+      "concept": "Low ponytail finish",
+      "duration_seconds": 10,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Photorealistic vertical 9:16. Exact reference hair accessory, a single visible hair tie, preserving its real colour, width, texture appearance and proportions; no invented decoration or hair-care claims. One adult Universal Malaysian model shown from shoulders to back of head in a bright dressing room, face outside shot. Hair already gathered in a low ponytail, with an adult hand applying the reference tie using its actual flexible loop. Stable rear close camera, natural hair movement and anatomy.\nUse the supplied product reference as the sole visual master. Preserve original product identity, scale, anatomy, physical contact and spatial continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Establish the gathered low ponytail and original hair tie held clearly beside it.\n2–5s: Hand loops the actual tie around the gathered hair with gentle realistic tension.\n5–8s: Hand completes a secure natural wrap without adding clips or extra accessories.\n8–10s: Hand withdraws; hold a clear rear close frame of the original tie in place.\nAUDIO: No speech, narration or music; subtle hair and room ambience."
+    },
+    {
+      "id": "v9_curated23_accessory_hair_20s_01",
+      "subcategory_id": "accessory_hair",
+      "visual_category": "PARTIAL_MODEL",
+      "concept": "Low ponytail finish",
+      "duration_seconds": 20,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. Exact reference hair accessory, a single visible hair tie, preserving its real colour, width, texture appearance and proportions; no invented decoration or hair-care claims. One adult Universal Malaysian model shown from shoulders to back of head in a bright dressing room, face outside shot. Hair already gathered in a low ponytail, with an adult hand applying the reference tie using its actual flexible loop. Stable rear close camera, natural hair movement and anatomy.\nUse the supplied product reference as the sole visual master. Preserve original product identity, scale, anatomy, physical contact and spatial continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–3s: Establish the gathered ponytail and exact hair tie in hand, true size visible.\n3–7s: Hand passes the original flexible tie around the gathered hair once.\n7–10s: Hand begins a natural second wrap, hair and tie remaining aligned.\nAUDIO: No speech, narration or music; subtle hair and room ambience.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. Exact reference hair accessory, a single visible hair tie, preserving its real colour, width, texture appearance and proportions; no invented decoration or hair-care claims. One adult Universal Malaysian model shown from shoulders to back of head in a bright dressing room, face outside shot. Hair already gathered in a low ponytail, with an adult hand applying the reference tie using its actual flexible loop. Stable rear close camera, natural hair movement and anatomy.\nUse the supplied product reference as the sole visual master. Preserve original product identity, scale, anatomy, physical contact and spatial continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nCONTINUITY: Match the final Part 1 frame exactly in subject, product, pose, props, light and camera axis. Continue without replaying completed action.\nEXACTLY 10 SECONDS:\n0–3s: Resume from the same partly completed wrap; hand finishes the existing tie placement gently.\n3–7s: Hand releases and smooths one stray hair strand without changing the tie.\n7–10s: Hold a steady rear portrait of the original hair accessory securing the low ponytail.\nAUDIO: No speech, narration or music; subtle hair and room ambience."
+    }
+  ]
+}
