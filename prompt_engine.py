@@ -375,10 +375,52 @@ def _universal_prompt_rules():
     return " ".join(str(rule).strip() for rule in UNIVERSAL_PROMPT_GLOBAL_RULES if str(rule).strip())
 
 
+# Product-use audit: practical actions by product category. These are guidance only;
+# they must never override the uploaded reference or invent product capabilities.
+_PRODUCT_USAGE_SCENES = {
+    "fashion": ("NATURAL WEAR DEMO", "Show the model wearing the exact garment and taking one or two natural steps or a gentle turn so its actual fit and drape are visible."),
+    "hijab": ("WEARING DEMO", "Show a small natural head or shoulder movement that demonstrates the existing drape; do not re-wrap or change the styling."),
+    "shoes": ("ON-FOOT DEMO", "Show the shoes being worn for two natural steps on a safe, level surface, with believable foot contact and unchanged shoe design."),
+    "bag": ("CARRYING DEMO", "Show one natural lift and carry using only an existing visible handle or strap; do not open unseen compartments or add contents."),
+    "wallet": ("HANDLING DEMO", "Show a natural pick-up and, only if its opening is visible, a brief open-close action; do not invent card slots or capacity."),
+    "accessory": ("WEAR / HANDLING DEMO", "Show one natural wear or handling action only if the item and reference support it; do not add matching accessories."),
+    "furniture": ("PRACTICAL FURNITURE USE", "Show a person naturally interacting with the furniture in its intended ordinary way, only when the visible design supports it; preserve room layout and do not invent storage or mechanisms."),
+    "book_stationery": ("WORKING DEMO", "Show the item performing its ordinary function, such as a page turn or a short pen mark, only when suitable; do not fabricate readable text."),
+    "beauty": ("USE DEMO", "Show one small, hygienic application or dispensing action only if the product type and visible packaging support it; otherwise demonstrate handling and packaging clearly."),
+    "food": ("SERVING / POURING DEMO", "Show one plausible serving, opening or pouring action only when the product format supports it; preserve the actual food and package."),
+    "gadget": ("FUNCTION DEMO", "Show one simple operation using a visible control or port only when the named product clearly supports it; keep screen content and connections truthful."),
+    "equipment": ("OPERATION DEMO", "Show one safe, simple operation appropriate to the named tool or appliance; keep hands clear of hazardous moving parts and invent no performance results."),
+    "home": ("PRACTICAL USE", "Show one ordinary, physically plausible interaction that demonstrates the product's evident purpose; if its function is unclear, show safe placement or handling without inventing a function."),
+    "kitchen": ("KITCHEN USE", "Show the product performing one plausible kitchen task, with realistic hand contact and scale; do not imply unverified heating, coating or compatibility features."),
+    "pet": ("SAFE PET INTERACTION", "Show a calm, species-appropriate interaction with the product only when safe and obvious; do not force a trick or show unsafe use."),
+    "toy": ("PLAY DEMO", "Show one simple, safe interaction with an existing supplied toy piece; keep every piece consistent and do not add pieces."),
+    "stationery": ("WORKING DEMO", "Show the item performing its ordinary function, such as a pen making a short mark or a page being turned, only when suitable; do not fabricate readable text."),
+    "sports": ("PRACTICAL DEMO", "Show one controlled, safe use of the sports item at realistic intensity; no stunts or unsupported performance claims."),
+    "automotive": ("FIT / HANDLING DEMO", "Show installation or operation only if the reference and product identity clearly support it; otherwise demonstrate a visible connector or safe handling without compatibility claims."),
+    "baby": ("CAREGIVER DEMO", "Show calm adult handling only where appropriate and safe; do not place a baby in a product or imply safety certification or medical benefit."),
+    "travel": ("TRAVEL USE DEMO", "Show one natural carry, roll, or zip action only when the product visibly supports it; preserve existing handles, straps and wheels."),
+    "office": ("WORK USE DEMO", "Show the product doing one ordinary desk task when supported, without adding unprovided accessories or fabricated screen/text content."),
+    "crafts": ("CRAFT USE DEMO", "Show one safe, plausible craft action using only tools or materials actually supplied or clearly ordinary to the task; do not invent kit contents."),
+    "garden": ("GARDEN USE DEMO", "Show one safe outdoor use suited to the product's evident purpose; do not invent attachments, results or environmental claims.")
+}
+
+
 def _category_specific_scenes(product_type, product, product_subtype=""):
     """Build visual beats that suit the product category without assuming unseen features."""
     words = str(product or "").casefold()
     subtype = str(product_subtype or "").casefold()
+    cookware_terms = (
+        "periuk", "kuali", "wok", "saucepan", "stockpot", "frying pan", "cooking pot",
+        "cookware", "pot set", "pan set", "periuk nasi", "periuk tekanan", "dutch oven"
+    )
+    if (not subtype or subtype in {"home_kitchen", "kitchen", "kitchen_cookware"}) and any(term in words for term in cookware_terms):
+        return [
+            ("COMPLETE SET / COOKING CONTEXT", "Show the complete supplied cookware set if the reference depicts a set; do not add pieces; for a single pot or pan show only that product on a suitable kitchen hob at realistic scale. Keep shape, colour, handles and lid unchanged."),
+            ("PREPARE TO COOK", "Demonstrate one physically plausible kitchen action: if a human model is selected, show that person placing plausible food into the pot or pan using ordinary ingredients and a suitable utensil; otherwise show the cookware in a credible cooking context without introducing a person. Do not present utensils or ingredients as included accessories."),
+            ("ACTIVE COOKING DEMONSTRATION", "Clearly show the pot or pan being used: if a model is selected, their hand stirs or turns the food naturally while the cookware remains stable on the hob; do not invent a human model when none was selected. Use believable contact, heat and steam only where physically plausible."),
+            ("FUNCTION IN CONTEXT", "Continue the same cooking action or lift the existing lid naturally only if the reference product has one. Keep the cookware visible; do not claim non-stick, material, capacity or compatibility properties."),
+            ("FOOD + PRODUCT FINISH", "Show the food in the same pot or pan, then settle on a clear view of the complete unchanged product in use. No invented accessories, product claims, invented savings or on-screen text.")
+        ]
     if product_type == "bag" and subtype in {"bag_handbag", "handbag"}:
         return [
             ("HANDBAG REVEAL", "Show the full handbag and its visible handles."),
@@ -882,6 +924,12 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
             " CAR SCENE — SHOE DETAIL: Show the model seated in a stationary parked car, with the camera aimed down toward the shoes being worn and the lower legs. Keep the shoes as the clear subject; the face and full body stay outside the frame. The model may gently reposition one foot or angle the shoes naturally toward the camera. Keep the vehicle stationary, hands away from driving controls, and never show unsafe filming while driving. Do not turn this into a mirror selfie or show a phone in the model's hand. " 
         )
     category_direction += " NATURAL HUMAN MOVEMENT: " + natural_motion_by_type.get(product_type, natural_motion_by_type['other']) + " "
+    category_direction += (
+        " MODEL–PRODUCT USE PRIORITY: If the user selected a human model, that model MUST visibly use, wear, operate, carry, serve or otherwise demonstrate the named product's actual intended purpose, as appropriate to the product category. "
+        "The model must not merely stand beside it, point at it, hold it motionless, pose, or rotate it for the camera. Show believable hand/body contact and the product remaining identifiable during the action. "
+        "Do not add a model when the user selected product-only/no model; use reference-safe product-focused presentation instead. "
+        "Never invent unseen functions, included accessories, performance results or unsafe actions. "
+    )
     scene_action_directions = [
         (('mirror' in scene_text or 'vanity' in scene_text or 'dressing table' in scene_text or 'cermin' in scene_text),
          "SCENE ACTION — MIRROR: If a model is present, let them look at their reflection, make one small practical adjustment to the outfit or hijab if relevant, and optionally turn naturally once to check the side view. The reflection and body movement must remain physically consistent; no repeated spinning."),
@@ -1161,6 +1209,11 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
                     (str(curated_items[2].get("shot", "CREATIVE BEAT 3")), str(curated_items[2].get("direction", ""))),
                     ("CREATIVE FINISH / HERO HOLD", str(curated_items[3].get("direction", "")) + " Finish on a stable, full-product hero frame."),
                 ]
+            # Preserve approved, saved storyboard beats verbatim. Category usage is a fallback
+            # only when no curated storyboard was supplied; never replace a library action.
+            usage_scene = _PRODUCT_USAGE_SCENES.get(str(product_type or "").casefold())
+            if usage_scene and not (storyboard_override and isinstance(storyboard_override, (list, tuple)) and len(storyboard_override) == 4) and len(generic_scenes) >= 4:
+                generic_scenes[3] = usage_scene
             blocks = []
             for index, (shot_name, shot_direction) in enumerate(generic_scenes):
                 start = index * scene_length
@@ -1172,7 +1225,7 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
                 "No unrequested text, captions, added logos, dialogue, voice-over, claims or watermarks. "
                 "Preserve exact product identity, packaging, colour, scale and coherent lighting.\n\n"
                 + "\n\n".join(blocks)
-                + "\n\nKeep transitions natural, camera movement restrained and product geometry stable throughout."
+                + "\n\nKeep transitions natural, camera movement restrained and product geometry stable throughout. For functional products, visibly demonstrate one genuine, category-appropriate use action; camera movement or a static hero shot alone does not count. If the function is unclear, show safe handling or placement without inventing a use."
             )
             if storyboard_override and isinstance(storyboard_override, (list, tuple)) and len(storyboard_override) == 4:
                 curated_direction = storyboard_text
