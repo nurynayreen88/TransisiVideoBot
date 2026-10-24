@@ -1,0 +1,65 @@
+{
+  "schema_version": 8,
+  "review_only": true,
+  "scope": "V6-V8 review files listed explicitly",
+  "files": [
+    {
+      "file": "review_v6_batch06_part_01.json",
+      "count": 50
+    },
+    {
+      "file": "review_v6_batch06_part_02.json",
+      "count": 50
+    },
+    {
+      "file": "review_v7_pet_batch07_part_01.json",
+      "count": 40
+    },
+    {
+      "file": "review_v7_batch08_part_01.json",
+      "count": 40
+    },
+    {
+      "file": "review_v7_batch09_part_01.json",
+      "count": 40
+    },
+    {
+      "file": "review_v7_batch10_part_01.json",
+      "count": 40
+    },
+    {
+      "file": "review_v7_batch11_part_01.json",
+      "count": 40
+    },
+    {
+      "file": "review_v8_hands_only_batch12_part_01.json",
+      "count": 16
+    },
+    {
+      "file": "review_v8_repair_batch13_part_01.json",
+      "count": 16
+    },
+    {
+      "file": "review_v8_partial_model_batch14_part_01.json",
+      "count": 16
+    },
+    {
+      "file": "review_v8_partial_model_batch15_part_01.json",
+      "count": 20
+    }
+  ],
+  "records": 368,
+  "unique_ids": 368,
+  "duplicate_ids": [],
+  "durations": {
+    "10": 184,
+    "20": 184
+  },
+  "missing_audio": [],
+  "invalid_20s_parts": [],
+  "notes": [
+    "This does not yet verify uniqueness against the large master catalog or all earlier review versions.",
+    "V6 creative issues and product-specific manual review remain.",
+    "V7 blocker replacement map is a candidate mapping, not engine activation."
+  ]
+}
