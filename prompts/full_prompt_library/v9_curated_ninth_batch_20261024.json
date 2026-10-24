@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "batch": "v9_curated_ninth_batch_20261024",
+  "variation_count": 6,
+  "notes": "Three distinct product-specific concepts, 10s and 20s each. Reference-dependent draft; real render and runtime input QA pending.",
+  "variations": [
+    {
+      "id": "v9_curated9_fashion_heels_10s_01",
+      "subcategory_id": "fashion_heels",
+      "visual_category": "PARTIAL_MODEL",
+      "concept": "Gallery arrival",
+      "duration_seconds": 10,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Vertical 9:16 realistic footwear footage. Exact reference heels on one adult Universal Malaysian model, framed from knees down; retain the original heel height, shape, upper, sole and colour. A level dry gallery entrance with a smooth matte floor, soft indoor daylight. Low ankle-height tracking; realistic heel-to-toe contact and balance. No exaggerated walking, unsupported comfort claims, text, logos or watermark.\nUse the supplied product reference as the sole master; realistic anatomy, scale and contact. No invented product details.\nEXACTLY 10 SECONDS:\n0–2s: Both original heels stand together on the level entrance floor, true side profiles visible.\n2–5s: The wearer takes one natural step toward the gallery doorway with balanced weight transfer.\n5–8s: The trailing foot follows and the wearer stops beside a plain wall.\n8–10s: A restrained low camera slide shows both heels settled naturally.\nAUDIO: Off-camera Malaysian Malay female narrator, model silent: 'Melangkah masuk, gaya kasut terus menyerlah.' Subtle indoor footsteps and gallery ambience."
+    },
+    {
+      "id": "v9_curated9_fashion_heels_20s_01",
+      "subcategory_id": "fashion_heels",
+      "visual_category": "PARTIAL_MODEL",
+      "concept": "Gallery arrival",
+      "duration_seconds": 20,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nVertical 9:16 realistic footwear footage. Exact reference heels on one adult Universal Malaysian model, framed from knees down; retain the original heel height, shape, upper, sole and colour. A level dry gallery entrance with a smooth matte floor, soft indoor daylight. Low ankle-height tracking; realistic heel-to-toe contact and balance. No exaggerated walking, unsupported comfort claims, text, logos or watermark.\nUse the supplied product reference as the sole master; realistic anatomy, scale and contact. No invented product details.\nEXACTLY 10 SECONDS:\n0–3s: Both reference heels stand together on the dry level entrance floor.\n3–7s: The wearer takes one controlled step toward the doorway; the trailing heel follows.\n7–10s: Both feet settle beside the plain wall in a balanced stance.\nAUDIO: Off-camera Malaysian Malay female narrator, model silent: 'Melangkah masuk, gaya kasut terus menyerlah.' Subtle indoor footsteps and gallery ambience.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nVertical 9:16 realistic footwear footage. Exact reference heels on one adult Universal Malaysian model, framed from knees down; retain the original heel height, shape, upper, sole and colour. A level dry gallery entrance with a smooth matte floor, soft indoor daylight. Low ankle-height tracking; realistic heel-to-toe contact and balance. No exaggerated walking, unsupported comfort claims, text, logos or watermark.\nUse the supplied product reference as the sole master; realistic anatomy, scale and contact. No invented product details.\nCONTINUITY: Begin at the exact final Part 1 frame with matching subject, product, pose, props, light and camera axis; do not replay completed actions.\nEXACTLY 10 SECONDS:\n0–3s: Resume from the exact balanced stance beside the wall; the lead foot pivots slightly toward the gallery interior.\n3–7s: The wearer takes two measured steps across the same level floor, both heels visible.\n7–10s: Stop in a natural parallel stance as a low camera slide reveals the authentic outer profiles.\nAUDIO: Off-camera Malaysian Malay female narrator, model silent: 'Setiap langkah, padanan nampak lebih kemas.' Subtle indoor footsteps and gallery ambience."
+    },
+    {
+      "id": "v9_curated9_gadget_audio_10s_01",
+      "subcategory_id": "gadget_audio",
+      "visual_category": "FULL_MODEL",
+      "concept": "Listening desk",
+      "duration_seconds": 10,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Vertical 9:16 realistic everyday gadget film. Exact reference headphones worn by one adult Universal Malaysian model at a tidy home desk; preserve original earcups, headband, cable only where visible, colour and proportions. Natural soft morning light; medium portrait and gentle side camera arc. Model remains silent and uses only visible physical controls; no invented noise cancellation, connectivity, battery or audio-performance claims. No captions, logos or watermark.\nUse the supplied product reference as the sole master; realistic anatomy, scale and contact. No invented product details.\nEXACTLY 10 SECONDS:\n0–2s: Show the model seated with the exact headphones already worn correctly, original headband and earcups unobstructed.\n2–5s: The model adjusts one earcup gently using the existing outer shell, then releases it.\n5–8s: The model looks toward the open unbranded notebook and taps a relaxed rhythm with one fingertip on the desk.\n8–10s: Hold a quiet side portrait revealing the original headphone silhouette.\nAUDIO: No dialogue, narration or music; quiet desk and room ambience only."
+    },
+    {
+      "id": "v9_curated9_gadget_audio_20s_01",
+      "subcategory_id": "gadget_audio",
+      "visual_category": "FULL_MODEL",
+      "concept": "Listening desk",
+      "duration_seconds": 20,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nVertical 9:16 realistic everyday gadget film. Exact reference headphones worn by one adult Universal Malaysian model at a tidy home desk; preserve original earcups, headband, cable only where visible, colour and proportions. Natural soft morning light; medium portrait and gentle side camera arc. Model remains silent and uses only visible physical controls; no invented noise cancellation, connectivity, battery or audio-performance claims. No captions, logos or watermark.\nUse the supplied product reference as the sole master; realistic anatomy, scale and contact. No invented product details.\nEXACTLY 10 SECONDS:\n0–3s: Establish the seated model wearing the original headphones in a clear medium portrait.\n3–7s: The model makes one gentle earcup adjustment and lowers the hand.\n7–10s: The model pauses looking toward the notebook, headphones unchanged.\nAUDIO: No dialogue, narration or music; quiet desk and room ambience only.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nVertical 9:16 realistic everyday gadget film. Exact reference headphones worn by one adult Universal Malaysian model at a tidy home desk; preserve original earcups, headband, cable only where visible, colour and proportions. Natural soft morning light; medium portrait and gentle side camera arc. Model remains silent and uses only visible physical controls; no invented noise cancellation, connectivity, battery or audio-performance claims. No captions, logos or watermark.\nUse the supplied product reference as the sole master; realistic anatomy, scale and contact. No invented product details.\nCONTINUITY: Begin at the exact final Part 1 frame with matching subject, product, pose, props, light and camera axis; do not replay completed actions.\nEXACTLY 10 SECONDS:\n0–3s: From the same paused seated pose, the model turns slightly toward the window without touching the headphones again.\n3–7s: The model taps a relaxed rhythm once on the desk while the camera arcs gently to the side.\n7–10s: Hold a stable side portrait of the exact earcup and headband design.\nAUDIO: No dialogue, narration or music; quiet desk and room ambience only."
+    },
+    {
+      "id": "v9_curated9_auto_interior_10s_01",
+      "subcategory_id": "auto_interior",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Parked-car organizer",
+      "duration_seconds": 10,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Vertical 9:16 realistic parked-car interior film. The exact reference car organizer is secured in its reference-consistent visible position; preserve its original body, colour, size, mounting and existing openings without inventing straps, pockets or compatibility claims. Vehicle parked safely with engine off, no driving. One adult Malaysian hand and forearm only; stable close camera from passenger side, soft daylight, realistic contact and weight. One plain small notebook. No captions, logos or watermark.\nUse the supplied product reference as the sole master; realistic anatomy, scale and contact. No invented product details.\nEXACTLY 10 SECONDS:\n0–2s: Establish the actual organizer in the parked car, its original opening unobstructed.\n2–5s: The hand brings a small plain notebook into frame and places it gently into the visible main opening.\n5–8s: The hand straightens the notebook without changing the organizer's mounting.\n8–10s: Withdraw the hand; hold a steady hero view of the organizer in use.\nAUDIO: Off-camera Malaysian Malay narrator, hand-only subject silent: 'Buku kecil ni, terus letak di tempatnya.' Quiet parked-car ambience."
+    },
+    {
+      "id": "v9_curated9_auto_interior_20s_01",
+      "subcategory_id": "auto_interior",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Parked-car organizer",
+      "duration_seconds": 20,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nVertical 9:16 realistic parked-car interior film. The exact reference car organizer is secured in its reference-consistent visible position; preserve its original body, colour, size, mounting and existing openings without inventing straps, pockets or compatibility claims. Vehicle parked safely with engine off, no driving. One adult Malaysian hand and forearm only; stable close camera from passenger side, soft daylight, realistic contact and weight. One plain small notebook. No captions, logos or watermark.\nUse the supplied product reference as the sole master; realistic anatomy, scale and contact. No invented product details.\nEXACTLY 10 SECONDS:\n0–3s: Establish the exact organizer mounted in its reference-consistent position in the parked car.\n3–7s: The hand places the plain notebook into the organizer's visible main opening.\n7–10s: The hand straightens the notebook once and pauses beside the opening.\nAUDIO: Off-camera Malaysian Malay narrator, hand-only subject silent: 'Buku kecil ni, terus letak di tempatnya.' Quiet parked-car ambience.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nVertical 9:16 realistic parked-car interior film. The exact reference car organizer is secured in its reference-consistent visible position; preserve its original body, colour, size, mounting and existing openings without inventing straps, pockets or compatibility claims. Vehicle parked safely with engine off, no driving. One adult Malaysian hand and forearm only; stable close camera from passenger side, soft daylight, realistic contact and weight. One plain small notebook. No captions, logos or watermark.\nUse the supplied product reference as the sole master; realistic anatomy, scale and contact. No invented product details.\nCONTINUITY: Begin at the exact final Part 1 frame with matching subject, product, pose, props, light and camera axis; do not replay completed actions.\nEXACTLY 10 SECONDS:\n0–3s: Resume with the notebook already placed and the hand paused beside the opening; withdraw the hand without repeating the placement.\n3–7s: A restrained passenger-side camera move reveals the organizer's true silhouette and its position relative to the seat.\n7–10s: Hold a stable unobstructed close view of the unchanged organizer and notebook.\nAUDIO: Off-camera Malaysian Malay narrator, hand-only subject silent: 'Bila tersusun, mudah nampak barang yang dibawa.' Quiet parked-car ambience."
+    }
+  ]
+}

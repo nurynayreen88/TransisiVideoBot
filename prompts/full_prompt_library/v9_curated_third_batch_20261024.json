@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "batch": "v9_curated_third_batch_20261024",
+  "variation_count": 6,
+  "notes": "Six complete product-reference prompts, three original concepts, no unresolved placeholders or conditional language. 20-second variants have two self-contained continuous parts. Draft pending actual video render QA.",
+  "variations": [
+    {
+      "id": "v9_curated3_bag_sling_10s_01",
+      "subcategory_id": "bag_sling",
+      "visual_category": "PARTIAL_MODEL",
+      "concept": "Station platform arrival",
+      "duration_seconds": 10,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Vertical 9:16, realistic Malaysian lifestyle footage. Product: the exact sling bag in the uploaded reference image; retain its actual colour, body shape, visible strap, seams and proportions, without adding compartments or closures. Covered urban rail-station concourse in natural morning light. One adult Universal Malaysian model cropped from shoulders to mid-thigh, bag worn using its original visible strap; face never enters frame. Camera tracks at waist height, realistic strap tension, walking pace and bag swing. No invented branding, claims, subtitles, captions, overlays or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Establish the original sling resting at the model's hip, strap lying naturally across the torso.\n2–5s: The model walks toward the platform entrance at an unhurried pace, the bag moving subtly with each step.\n5–8s: The model stops by a clear wall, steadies the existing strap once and turns a quarter angle.\n8–10s: Hold a clean three-quarter view of the bag against the model's hip.\nAUDIO: Off-camera Malaysian Malay female narrator; model silent: \"Nak bergerak pun mudah, beg sentiasa dekat dengan kita.\" Natural quiet station ambience."
+    },
+    {
+      "id": "v9_curated3_bag_sling_20s_01",
+      "subcategory_id": "bag_sling",
+      "visual_category": "PARTIAL_MODEL",
+      "concept": "Station platform arrival",
+      "duration_seconds": 20,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nVertical 9:16, realistic Malaysian lifestyle footage. Product: the exact sling bag in the uploaded reference image; retain its actual colour, body shape, visible strap, seams and proportions, without adding compartments or closures. Covered urban rail-station concourse in natural morning light. One adult Universal Malaysian model cropped from shoulders to mid-thigh, bag worn using its original visible strap; face never enters frame. Camera tracks at waist height, realistic strap tension, walking pace and bag swing. No invented branding, claims, subtitles, captions, overlays or watermark.\n0–3s: Establish the original sling resting at the model's hip, strap lying naturally across the torso.\n3–7s: The model walks toward the platform entrance at an unhurried pace, the bag moving subtly with each step.\n7–10s: The model completes the quarter turn beside the clear wall and pauses with the bag resting at the hip, strap unchanged.\nAUDIO: Off-camera Malaysian Malay female narrator; model silent: \"Nak bergerak pun mudah, beg sentiasa dekat dengan kita.\" Natural quiet station ambience.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nVertical 9:16, realistic Malaysian lifestyle footage. Product: the exact sling bag in the uploaded reference image; retain its actual colour, body shape, visible strap, seams and proportions, without adding compartments or closures. Covered urban rail-station concourse in natural morning light. One adult Universal Malaysian model cropped from shoulders to mid-thigh, bag worn using its original visible strap; face never enters frame. Camera tracks at waist height, realistic strap tension, walking pace and bag swing. No invented branding, claims, subtitles, captions, overlays or watermark.\nCONTINUITY: The opening frame exactly matches the final Part 1 frame: same subject, reference product, outfit, props, physical positions, lighting and camera axis. Continue forward without replaying an action.\n0–3s: From the same paused stance by the wall, the model shifts weight naturally and lowers the hand away from the already-adjusted strap.\n3–7s: The model takes two slow steps along the concourse; the bag follows with a small realistic swing and remains unobstructed.\n7–10s: A short waist-height lateral camera glide settles on the exact front and side silhouette of the sling.\nAUDIO: Off-camera Malaysian Malay female narrator; model silent: \"Ringkas dibawa, kemas dipandang sepanjang perjalanan.\" Natural quiet station ambience."
+    },
+    {
+      "id": "v9_curated3_home_kitchen_bottle_10s_01",
+      "subcategory_id": "home_kitchen_bottle",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Water before picnic",
+      "duration_seconds": 10,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Vertical 9:16 photorealistic practical product film. Product: the exact reusable bottle in the uploaded reference image; retain its original body, cap, proportions, finish and markings. Bright home kitchen counter by a window with a plain water jug and folded picnic cloth. Only one adult Malaysian pair of hands and forearms appears. The existing cap is shown and used exactly as visibly supplied; no added straw, spout, handle, insulation claim or accessories. Stable counter-height close camera, real fluid behaviour and gentle daylight. No human face, dialogue, narration, music, text, logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Show the empty reference bottle upright beside the plain water jug, its existing cap resting next to it.\n2–5s: One hand steadies the bottle while the other pours water carefully from the jug into its actual opening.\n5–8s: The jug is returned to the counter and the original cap is secured onto the bottle.\n8–10s: The hand wipes a small exterior droplet and leaves the capped bottle upright.\nAUDIO: No speech, narration or music; subtle pouring, cap-contact and natural room sounds only."
+    },
+    {
+      "id": "v9_curated3_home_kitchen_bottle_20s_01",
+      "subcategory_id": "home_kitchen_bottle",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Water before picnic",
+      "duration_seconds": 20,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic practical product film. Product: the exact reusable bottle in the uploaded reference image; retain its original body, cap, proportions, finish and markings. Bright home kitchen counter by a window with a plain water jug and folded picnic cloth. Only one adult Malaysian pair of hands and forearms appears. The existing cap is shown and used exactly as visibly supplied; no added straw, spout, handle, insulation claim or accessories. Stable counter-height close camera, real fluid behaviour and gentle daylight. No human face, dialogue, narration, music, text, logos or watermark.\n0–3s: Show the empty reference bottle upright beside the plain water jug, its existing cap resting next to it.\n3–7s: One hand steadies the bottle while the other pours water carefully from the jug into its actual opening.\n7–10s: The hand completes a single wipe of the bottle exterior and pauses beside the fully capped, upright bottle.\nAUDIO: No speech, narration or music; subtle pouring, cap-contact and natural room sounds only.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic practical product film. Product: the exact reusable bottle in the uploaded reference image; retain its original body, cap, proportions, finish and markings. Bright home kitchen counter by a window with a plain water jug and folded picnic cloth. Only one adult Malaysian pair of hands and forearms appears. The existing cap is shown and used exactly as visibly supplied; no added straw, spout, handle, insulation claim or accessories. Stable counter-height close camera, real fluid behaviour and gentle daylight. No human face, dialogue, narration, music, text, logos or watermark.\nCONTINUITY: The opening frame exactly matches the final Part 1 frame: same subject, reference product, outfit, props, physical positions, lighting and camera axis. Continue forward without replaying an action.\n0–3s: Begin with the same fully capped bottle upright and the wiping hand paused beside it; the hand sets the cloth down without reopening the cap.\n3–7s: The hand lifts the bottle by its body and places it carefully beside the folded picnic cloth.\n7–10s: A gentle close camera tilt follows the authentic bottle silhouette and settles on the cap and full product.\nAUDIO: No speech, narration or music; subtle cloth and bottle-contact sounds with natural room ambience only."
+    },
+    {
+      "id": "v9_curated3_fashion_kids_10s_01",
+      "subcategory_id": "fashion_kids",
+      "visual_category": "FULL_MODEL",
+      "concept": "Garden book moment",
+      "duration_seconds": 10,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Vertical 9:16 photorealistic, tasteful children's clothing film. Product: the exact children's outfit shown in the uploaded reference image, retaining visible colour, pattern, cut, sleeve and hem details without inventing pockets, closures or claims. Shaded private home garden with a low stable table, safe chair and plain picture book. One age-appropriate child Universal Malaysian model wearing the actual reference outfit, naturally supervised off camera; no other person on screen. Child-height medium-to-full-body camera, gentle natural daylight, unforced safe movement. Child remains silent, no lip sync, captions, overlays, logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: The child sits comfortably at the garden table with the closed book, complete reference outfit clearly framed.\n2–5s: The child stands at a natural pace and opens the book on the stable tabletop.\n5–8s: The child looks at one illustrated page and gently turns it, sleeves and hem visible.\n8–10s: The child steps away from the table toward the adjacent chair.\nAUDIO: Off-camera adult Malaysian Malay narrator, child silent: \"Petang santai, masa untuk cerita kegemaran.\" Soft garden ambience."
+    },
+    {
+      "id": "v9_curated3_fashion_kids_20s_01",
+      "subcategory_id": "fashion_kids",
+      "visual_category": "FULL_MODEL",
+      "concept": "Garden book moment",
+      "duration_seconds": 20,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic, tasteful children's clothing film. Product: the exact children's outfit shown in the uploaded reference image, retaining visible colour, pattern, cut, sleeve and hem details without inventing pockets, closures or claims. Shaded private home garden with a low stable table, safe chair and plain picture book. One age-appropriate child Universal Malaysian model wearing the actual reference outfit, naturally supervised off camera; no other person on screen. Child-height medium-to-full-body camera, gentle natural daylight, unforced safe movement. Child remains silent, no lip sync, captions, overlays, logos or watermark.\n0–3s: The child sits comfortably at the garden table with the closed book, complete reference outfit clearly framed.\n3–7s: The child stands at a natural pace and opens the book on the stable tabletop.\n7–10s: The child finishes the page turn, takes one natural step toward the adjacent chair and pauses, with the open book remaining on the table.\nAUDIO: Off-camera adult Malaysian Malay narrator, child silent: \"Petang santai, masa untuk cerita kegemaran.\" Soft garden ambience.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic, tasteful children's clothing film. Product: the exact children's outfit shown in the uploaded reference image, retaining visible colour, pattern, cut, sleeve and hem details without inventing pockets, closures or claims. Shaded private home garden with a low stable table, safe chair and plain picture book. One age-appropriate child Universal Malaysian model wearing the actual reference outfit, naturally supervised off camera; no other person on screen. Child-height medium-to-full-body camera, gentle natural daylight, unforced safe movement. Child remains silent, no lip sync, captions, overlays, logos or watermark.\nCONTINUITY: The opening frame exactly matches the final Part 1 frame: same subject, reference product, outfit, props, physical positions, lighting and camera axis. Continue forward without replaying an action.\n0–3s: Resume from the child's exact paused position one step from the table; the child takes the remaining short step to the adjacent chair.\n3–7s: The child sits naturally and looks back at the already-open picture book, keeping the outfit's front and hem visible.\n7–10s: The child-height camera holds a steady front-and-side view of the unchanged outfit while the child smiles at the illustration.\nAUDIO: Off-camera adult Malaysian Malay narrator, child silent: \"Biar si kecil selesa bergerak dan menikmati harinya.\" Soft garden ambience."
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "schema_version": 7,
+  "review_only": true,
+  "status": "DRAFT_CREATIVE_AUDIT",
+  "source_commit": "8d98e1ba4f7e2ba1548765e3ae3c48b95eb35303",
+  "source_files": [
+    "review_v6_batch06_part_01.json",
+    "review_v6_batch06_part_02.json"
+  ],
+  "records_checked": 100,
+  "unique_ids": 100,
+  "findings": [
+    {
+      "severity": "high",
+      "count": 10,
+      "issue": "Generic repeated model dialogue in part 2"
+    },
+    {
+      "severity": "high",
+      "count": 20,
+      "issue": "Generic repeated narrator dialogue in part 2"
+    },
+    {
+      "severity": "medium",
+      "issue": "Product-only scenes show angles rather than specific credible product use; narrator can incorrectly imply demonstrated use"
+    },
+    {
+      "severity": "medium",
+      "issue": "Age selection metadata absent from V6 model records"
+    }
+  ],
+  "decision": "Preserve original V6 as immutable review evidence. New replacement candidates require distinct product-specific actions and speech, pet animal visibility, and complete audio-last prompts. Do not activate engine, merge or deploy."
+}

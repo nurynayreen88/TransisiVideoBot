@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "batch": "v9_curated_tenth_batch_20261024",
+  "variation_count": 6,
+  "notes": "Three distinct reference-dependent concepts with 10s and continuous 20s versions; draft pending real render and product-input compatibility QA.",
+  "variations": [
+    {
+      "id": "v9_curated10_fashion_kids_shoes_10s_01",
+      "subcategory_id": "fashion_kids_shoes",
+      "visual_category": "PARTIAL_MODEL",
+      "concept": "Library corner steps",
+      "duration_seconds": 10,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Photorealistic vertical 9:16. Exact reference children's shoes worn by an age-appropriate child, framed from knees down. Preserve actual colour, sole, upper, fastening and scale. A dry level children's library reading corner, warm diffused daylight. Low fixed-to-slow-track camera; safe natural gait, no running or claims.\nUse the supplied product image as the sole visual master. No invented details, captions, text overlays, added logos or watermark. Preserve realistic anatomy, contact and continuity.\nEXACTLY 10 SECONDS:\n0–2s: Establish both reference shoes beside a low bookshelf.\n2–5s: The child walks two small steps toward the reading mat.\n5–8s: The child pivots naturally toward a low chair.\n8–10s: Stop with both shoes clearly visible beside the chair.\nAUDIO: No speech, narration or music; gentle natural footsteps and quiet library ambience."
+    },
+    {
+      "id": "v9_curated10_fashion_kids_shoes_20s_01",
+      "subcategory_id": "fashion_kids_shoes",
+      "visual_category": "PARTIAL_MODEL",
+      "concept": "Library corner steps",
+      "duration_seconds": 20,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. Exact reference children's shoes worn by an age-appropriate child, framed from knees down. Preserve actual colour, sole, upper, fastening and scale. A dry level children's library reading corner, warm diffused daylight. Low fixed-to-slow-track camera; safe natural gait, no running or claims.\nUse the supplied product image as the sole visual master. No invented details, captions, text overlays, added logos or watermark. Preserve realistic anatomy, contact and continuity.\nEXACTLY 10 SECONDS:\n0–3s: Both reference shoes stand together on the level floor beside a low bookshelf.\n3–7s: The child takes two small natural steps toward a reading mat, each sole contacting the floor properly.\n7–10s: Both feet settle together at the mat edge, balanced and still.\nAUDIO: No speech, narration or music; gentle natural footsteps and quiet library ambience.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. Exact reference children's shoes worn by an age-appropriate child, framed from knees down. Preserve actual colour, sole, upper, fastening and scale. A dry level children's library reading corner, warm diffused daylight. Low fixed-to-slow-track camera; safe natural gait, no running or claims.\nUse the supplied product image as the sole visual master. No invented details, captions, text overlays, added logos or watermark. Preserve realistic anatomy, contact and continuity.\nCONTINUITY: Match the final Part 1 frame exactly in product, pose, props, setting, light and camera axis. Continue without replaying completed action.\nEXACTLY 10 SECONDS:\n0–3s: From the same balanced stance at the mat edge, the child pivots slightly toward a low chair.\n3–7s: The child takes two measured steps to the chair, showing the shoes' authentic side profiles.\n7–10s: Both feet pause parallel beside the chair in a steady low hero frame.\nAUDIO: No speech, narration or music; gentle natural footsteps and quiet library ambience."
+    },
+    {
+      "id": "v9_curated10_home_kitchen_utensil_10s_01",
+      "subcategory_id": "home_kitchen_utensil",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Breakfast preparation",
+      "duration_seconds": 10,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Photorealistic vertical 9:16. Exact reference kitchen utensil, preserving its visible head, handle, colour, proportions and original function without inventing materials or attachments. Bright home breakfast counter, a plain mixing bowl containing prepared batter. Adult Malaysian hands and forearms only. Close three-quarter camera, safe grip, believable utensil-to-food contact, soft window daylight.\nUse the supplied product image as the sole visual master. No invented details, captions, text overlays, added logos or watermark. Preserve realistic anatomy, contact and continuity.\nEXACTLY 10 SECONDS:\n0–2s: Show the actual utensil beside a plain mixing bowl.\n2–5s: The cook takes its original handle and makes one controlled appropriate mixing motion.\n5–8s: The cook lifts the working end briefly, then rests it securely across the bowl.\n8–10s: Hold a clear product-focused close view.\nAUDIO: Off-camera Malaysian Malay narrator, hands-only cook silent: 'Sediakan adunan, kemudian gaul perlahan-lahan.' Natural kitchen ambience."
+    },
+    {
+      "id": "v9_curated10_home_kitchen_utensil_20s_01",
+      "subcategory_id": "home_kitchen_utensil",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Breakfast preparation",
+      "duration_seconds": 20,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. Exact reference kitchen utensil, preserving its visible head, handle, colour, proportions and original function without inventing materials or attachments. Bright home breakfast counter, a plain mixing bowl containing prepared batter. Adult Malaysian hands and forearms only. Close three-quarter camera, safe grip, believable utensil-to-food contact, soft window daylight.\nUse the supplied product image as the sole visual master. No invented details, captions, text overlays, added logos or watermark. Preserve realistic anatomy, contact and continuity.\nEXACTLY 10 SECONDS:\n0–3s: Establish the exact utensil beside a plain bowl of batter, complete product visible.\n3–7s: The cook grips its actual handle and uses the visible working end for one slow appropriate mixing motion.\n7–10s: The utensil pauses above the same bowl with a small natural trace of batter on its working end.\nAUDIO: Off-camera Malaysian Malay narrator, hands-only cook silent: 'Sediakan adunan, kemudian gaul perlahan-lahan.' Natural kitchen ambience.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. Exact reference kitchen utensil, preserving its visible head, handle, colour, proportions and original function without inventing materials or attachments. Bright home breakfast counter, a plain mixing bowl containing prepared batter. Adult Malaysian hands and forearms only. Close three-quarter camera, safe grip, believable utensil-to-food contact, soft window daylight.\nUse the supplied product image as the sole visual master. No invented details, captions, text overlays, added logos or watermark. Preserve realistic anatomy, contact and continuity.\nCONTINUITY: Match the final Part 1 frame exactly in product, pose, props, setting, light and camera axis. Continue without replaying completed action.\nEXACTLY 10 SECONDS:\n0–3s: Begin with the same utensil paused over the bowl; the cook lowers it without repeating the previous stir.\n3–7s: The cook makes one gentle final mixing motion, then rests the utensil across the bowl's rim securely.\n7–10s: A stable close view reveals the utensil's authentic head and handle beside the prepared mixture.\nAUDIO: Off-camera Malaysian Malay narrator, hands-only cook silent: 'Dah sebati, boleh teruskan penyediaan sarapan.' Natural kitchen ambience."
+    },
+    {
+      "id": "v9_curated10_fashion_cap_10s_01",
+      "subcategory_id": "fashion_cap",
+      "visual_category": "FULL_MODEL",
+      "concept": "Weekend garden walk",
+      "duration_seconds": 10,
+      "voice_type": "MODEL_SPEECH",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Photorealistic vertical 9:16. Exact reference cap worn by one adult Universal Malaysian model, preserving visible crown, brim, colour, markings and fit without adding features. Shaded botanical garden path, dry level surface, soft morning daylight. Eye-level medium shot includes cap and clearly visible face for natural Malaysian Malay lip sync; restrained lateral camera movement. No fabricated sun-protection claims.\nUse the supplied product image as the sole visual master. No invented details, captions, text overlays, added logos or watermark. Preserve realistic anatomy, contact and continuity.\nEXACTLY 10 SECONDS:\n0–2s: Establish the model in the exact reference cap at the garden entrance.\n2–5s: The model lightly touches the existing brim and lowers the hand.\n5–8s: Facing camera, the model says with accurate lip sync: 'Jalan santai hari ni, gaya pun ringkas.'\n8–10s: Hold a clear portrait showing the unchanged cap.\nAUDIO: Only on-camera adult model speaks natural Malaysian Malay with precise visible lip sync; soft garden ambience, no narrator or music."
+    },
+    {
+      "id": "v9_curated10_fashion_cap_20s_01",
+      "subcategory_id": "fashion_cap",
+      "visual_category": "FULL_MODEL",
+      "concept": "Weekend garden walk",
+      "duration_seconds": 20,
+      "voice_type": "MODEL_SPEECH",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. Exact reference cap worn by one adult Universal Malaysian model, preserving visible crown, brim, colour, markings and fit without adding features. Shaded botanical garden path, dry level surface, soft morning daylight. Eye-level medium shot includes cap and clearly visible face for natural Malaysian Malay lip sync; restrained lateral camera movement. No fabricated sun-protection claims.\nUse the supplied product image as the sole visual master. No invented details, captions, text overlays, added logos or watermark. Preserve realistic anatomy, contact and continuity.\nEXACTLY 10 SECONDS:\n0–3s: Establish the model at the garden entrance, reference cap clearly visible from front and side.\n3–7s: The model lightly touches the cap's existing brim once and lowers the hand without altering its shape.\n7–10s: Facing camera, the model says with accurate lip sync: 'Hujung minggu, saya keluar jalan santai.' Then pauses.\nAUDIO: Only on-camera adult model speaks natural Malaysian Malay with precise visible lip sync; soft garden ambience, no narrator or music.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. Exact reference cap worn by one adult Universal Malaysian model, preserving visible crown, brim, colour, markings and fit without adding features. Shaded botanical garden path, dry level surface, soft morning daylight. Eye-level medium shot includes cap and clearly visible face for natural Malaysian Malay lip sync; restrained lateral camera movement. No fabricated sun-protection claims.\nUse the supplied product image as the sole visual master. No invented details, captions, text overlays, added logos or watermark. Preserve realistic anatomy, contact and continuity.\nCONTINUITY: Match the final Part 1 frame exactly in product, pose, props, setting, light and camera axis. Continue without replaying completed action.\nEXACTLY 10 SECONDS:\n0–3s: Continue from the same paused stance and cap orientation; the model takes one unhurried step along the dry path.\n3–7s: The model stops and says with precise visible lip sync: 'Topi ni melengkapkan gaya saya hari ini.'\n7–10s: A small camera slide reveals the original cap side silhouette while the model smiles naturally.\nAUDIO: Only on-camera adult model speaks natural Malaysian Malay with precise visible lip sync; soft garden ambience, no narrator or music."
+    }
+  ]
+}

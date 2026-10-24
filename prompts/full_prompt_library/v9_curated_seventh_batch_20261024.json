@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "batch": "v9_curated_seventh_batch_20261024",
+  "variation_count": 6,
+  "notes": "Three authored concepts in 10s and continuous 20s versions. Draft pending real render QA.",
+  "variations": [
+    {
+      "id": "v9_curated7_fashion_outerwear_10s_01",
+      "subcategory_id": "fashion_outerwear",
+      "visual_category": "FULL_MODEL",
+      "concept": "Rain-cleared walkway",
+      "duration_seconds": 10,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Vertical 9:16, photorealistic. Use the supplied reference as the sole product master. Preserve actual visible design, colour, proportions and markings. No invented product features, claims, on-screen text, logos or watermark. SETTING: One adult Universal Malaysian model wears the exact reference outerwear on a dry sheltered walkway after rain, soft overcast daylight. Preserve actual cut, colour, collar, length and fastening. Full-body lateral tracking. Model silent.\nEXACTLY 10 SECONDS:\n0–2s: Establish full outfit beside a pillar.\n2–5s: Model smooths the existing front edge once.\n5–8s: Model takes three natural steps along the shelter.\n8–10s: Stop at the next pillar, outerwear clearly visible.\nAUDIO: Off-camera Malaysian Malay narrator: 'Bila keluar, saya suka padanan yang nampak kemas.' Model silent; quiet walkway ambience."
+    },
+    {
+      "id": "v9_curated7_fashion_outerwear_20s_01",
+      "subcategory_id": "fashion_outerwear",
+      "visual_category": "FULL_MODEL",
+      "concept": "Rain-cleared walkway",
+      "duration_seconds": 20,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nVertical 9:16, photorealistic. Use the supplied reference as the sole product master. Preserve actual visible design, colour, proportions and markings. No invented product features, claims, on-screen text, logos or watermark. SETTING: One adult Universal Malaysian model wears the exact reference outerwear on a dry sheltered walkway after rain, soft overcast daylight. Preserve actual cut, colour, collar, length and fastening. Full-body lateral tracking. Model silent.\n0–3s: Establish full outfit beside a pillar.\n3–7s: Model smooths the existing front edge once.\n7–10s: Stop at the next pillar, outerwear clearly visible.\nAUDIO: Off-camera Malaysian Malay narrator: 'Bila keluar, saya suka padanan yang nampak kemas.' Model silent; quiet walkway ambience.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nVertical 9:16, photorealistic. Use the supplied reference as the sole product master. Preserve actual visible design, colour, proportions and markings. No invented product features, claims, on-screen text, logos or watermark. SETTING: One adult Universal Malaysian model wears the exact reference outerwear on a dry sheltered walkway after rain, soft overcast daylight. Preserve actual cut, colour, collar, length and fastening. Full-body lateral tracking. Model silent.\nCONTINUITY: Match final Part 1 frame exactly in product, subject, pose, props, light and camera axis. No replay of completed action.\n0–3s: Same pillar-side stance; model turns slightly toward the path.\n3–7s: Take two further steps; track authentic side silhouette.\n7–10s: Stop in a clear three-quarter full-body pose.\nAUDIO: Off-camera Malaysian Malay narrator: 'Dari depan ke sisi, gayanya kekal tersusun.' Model silent; quiet walkway ambience."
+    },
+    {
+      "id": "v9_curated7_home_living_lamp_10s_01",
+      "subcategory_id": "home_living_lamp",
+      "visual_category": "PRODUCT_ONLY",
+      "concept": "Evening reading corner",
+      "duration_seconds": 10,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Vertical 9:16, photorealistic. Use the supplied reference as the sole product master. Preserve actual visible design, colour, proportions and markings. No invented product features, claims, on-screen text, logos or watermark. SETTING: Exact reference table lamp remains motionless on a plain side table beside a closed book at dusk. Preserve its original shade, base and proportions. Stable gentle lateral camera movement; same visible operating state throughout. No person, hands or unexplained movement.\nEXACTLY 10 SECONDS:\n0–2s: Establish the complete lamp and book.\n2–5s: Short camera slide reveals authentic shade and base.\n5–8s: Hold a closer view of original edges and surface.\n8–10s: Settle on a complete three-quarter hero frame.\nAUDIO: No speech, narration or music; quiet room ambience."
+    },
+    {
+      "id": "v9_curated7_home_living_lamp_20s_01",
+      "subcategory_id": "home_living_lamp",
+      "visual_category": "PRODUCT_ONLY",
+      "concept": "Evening reading corner",
+      "duration_seconds": 20,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nVertical 9:16, photorealistic. Use the supplied reference as the sole product master. Preserve actual visible design, colour, proportions and markings. No invented product features, claims, on-screen text, logos or watermark. SETTING: Exact reference table lamp remains motionless on a plain side table beside a closed book at dusk. Preserve its original shade, base and proportions. Stable gentle lateral camera movement; same visible operating state throughout. No person, hands or unexplained movement.\n0–3s: Establish the complete lamp and book.\n3–7s: Short camera slide reveals authentic shade and base.\n7–10s: Settle on a complete three-quarter hero frame.\nAUDIO: No speech, narration or music; quiet room ambience.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nVertical 9:16, photorealistic. Use the supplied reference as the sole product master. Preserve actual visible design, colour, proportions and markings. No invented product features, claims, on-screen text, logos or watermark. SETTING: Exact reference table lamp remains motionless on a plain side table beside a closed book at dusk. Preserve its original shade, base and proportions. Stable gentle lateral camera movement; same visible operating state throughout. No person, hands or unexplained movement.\nCONTINUITY: Match final Part 1 frame exactly in product, subject, pose, props, light and camera axis. No replay of completed action.\n0–3s: Continue from the same three-quarter frame; lamp stationary.\n3–7s: Slowly push toward original shade and base.\n7–10s: Ease back to a complete product frame.\nAUDIO: No speech, narration or music; quiet room ambience."
+    },
+    {
+      "id": "v9_curated7_pet_bowl_10s_01",
+      "subcategory_id": "pet_bowl",
+      "visual_category": "ANIMAL_ONLY",
+      "concept": "Calm mealtime",
+      "duration_seconds": 10,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Vertical 9:16, photorealistic. Use the supplied reference as the sole product master. Preserve actual visible design, colour, proportions and markings. No invented product features, claims, on-screen text, logos or watermark. SETTING: The exact reference pet bowl rests flat on a stable kitchen mat in soft morning light, containing a small portion of ordinary cat food. Preserve its actual rim, shape, colour and scale. One healthy domestic cat present throughout. Ground-level steady camera, natural species-appropriate behaviour; no humans.\nEXACTLY 10 SECONDS:\n0–2s: Cat approaches the stationary bowl.\n2–5s: Cat sniffs the food without shifting the bowl.\n5–8s: Cat takes a few natural bites.\n8–10s: Cat lifts its head and pauses beside the bowl.\nAUDIO: No speech, narration or music; quiet pet and room ambience."
+    },
+    {
+      "id": "v9_curated7_pet_bowl_20s_01",
+      "subcategory_id": "pet_bowl",
+      "visual_category": "ANIMAL_ONLY",
+      "concept": "Calm mealtime",
+      "duration_seconds": 20,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nVertical 9:16, photorealistic. Use the supplied reference as the sole product master. Preserve actual visible design, colour, proportions and markings. No invented product features, claims, on-screen text, logos or watermark. SETTING: The exact reference pet bowl rests flat on a stable kitchen mat in soft morning light, containing a small portion of ordinary cat food. Preserve its actual rim, shape, colour and scale. One healthy domestic cat present throughout. Ground-level steady camera, natural species-appropriate behaviour; no humans.\n0–3s: Cat approaches the stationary bowl.\n3–7s: Cat sniffs the food without shifting the bowl.\n7–10s: Cat lifts its head and pauses beside the bowl.\nAUDIO: No speech, narration or music; quiet pet and room ambience.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nVertical 9:16, photorealistic. Use the supplied reference as the sole product master. Preserve actual visible design, colour, proportions and markings. No invented product features, claims, on-screen text, logos or watermark. SETTING: The exact reference pet bowl rests flat on a stable kitchen mat in soft morning light, containing a small portion of ordinary cat food. Preserve its actual rim, shape, colour and scale. One healthy domestic cat present throughout. Ground-level steady camera, natural species-appropriate behaviour; no humans.\nCONTINUITY: Match final Part 1 frame exactly in product, subject, pose, props, light and camera axis. No replay of completed action.\n0–3s: Resume from the same pause; cat lowers its head again.\n3–7s: Cat takes another small bite and then sits beside the bowl.\n7–10s: Hold cat and unchanged bowl in a steady low frame.\nAUDIO: No speech, narration or music; quiet pet and room ambience."
+    }
+  ]
+}

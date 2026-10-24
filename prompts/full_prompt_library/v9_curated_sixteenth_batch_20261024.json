@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "batch": "v9_curated_sixteenth_batch_20261024",
+  "variation_count": 6,
+  "notes": "Three individually authored reference-dependent concepts, each 10s and continuous two-part 20s. Draft pending real render and runtime reference-input compatibility QA.",
+  "variations": [
+    {
+      "id": "v9_curated16_fashion_outerwear_10s_01",
+      "subcategory_id": "fashion_outerwear",
+      "visual_category": "FULL_MODEL",
+      "concept": "Bookshop afternoon layering",
+      "duration_seconds": 10,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Photorealistic vertical 9:16. One adult Universal Malaysian model wears the exact reference outerwear over a plain neutral outfit inside a quiet independent bookshop. Preserve actual collar, closure, hem, silhouette, pattern and colour; no invented lining, pockets or weatherproof claims. Warm indirect afternoon daylight, medium-full steady camera, realistic garment drape. Model silent.\nUse the supplied product image as the sole visual master. Preserve realistic anatomy, product identity, physical contact and spatial continuity. No invented details, captions, on-screen text, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Establish the model beside a low book display, full reference outerwear visible.\n2–5s: Model reaches naturally for a plain unbranded book without obscuring the garment.\n5–8s: Model turns a quarter angle with the book held low, revealing the true side silhouette.\n8–10s: Hold a composed full-outfit frame with original collar and hem unobstructed.\nAUDIO: Off-camera Malaysian Malay narrator, model silent: 'Singgah cari bacaan, gaya pun tetap ringkas.' Soft bookshop ambience."
+    },
+    {
+      "id": "v9_curated16_fashion_outerwear_20s_01",
+      "subcategory_id": "fashion_outerwear",
+      "visual_category": "FULL_MODEL",
+      "concept": "Bookshop afternoon layering",
+      "duration_seconds": 20,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. One adult Universal Malaysian model wears the exact reference outerwear over a plain neutral outfit inside a quiet independent bookshop. Preserve actual collar, closure, hem, silhouette, pattern and colour; no invented lining, pockets or weatherproof claims. Warm indirect afternoon daylight, medium-full steady camera, realistic garment drape. Model silent.\nUse the supplied product image as the sole visual master. Preserve realistic anatomy, product identity, physical contact and spatial continuity. No invented details, captions, on-screen text, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–3s: Establish the model beside the book display, original outerwear fully visible.\n3–7s: Model lifts a plain book from the display and holds it naturally at waist height.\n7–10s: Model pauses in a front three-quarter stance, book held low.\nAUDIO: Off-camera Malaysian Malay narrator, model silent: 'Singgah cari bacaan, gaya pun tetap ringkas.' Soft bookshop ambience.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. One adult Universal Malaysian model wears the exact reference outerwear over a plain neutral outfit inside a quiet independent bookshop. Preserve actual collar, closure, hem, silhouette, pattern and colour; no invented lining, pockets or weatherproof claims. Warm indirect afternoon daylight, medium-full steady camera, realistic garment drape. Model silent.\nUse the supplied product image as the sole visual master. Preserve realistic anatomy, product identity, physical contact and spatial continuity. No invented details, captions, on-screen text, extra logos or watermark.\nCONTINUITY: Match the final Part 1 frame exactly in product, subject, pose, props, light and camera axis; continue without replaying completed action.\nEXACTLY 10 SECONDS:\n0–3s: Resume with the same book and front three-quarter pose; model turns slightly toward the adjacent aisle.\n3–7s: Model takes two slow steps along the aisle while the camera reveals the true side drape.\n7–10s: Stop at the end of the display in a steady full-outfit portrait.\nAUDIO: Off-camera Malaysian Malay narrator, model silent: 'Dari depan ke sisi, padanannya nampak tersusun.' Soft bookshop ambience."
+    },
+    {
+      "id": "v9_curated16_home_kitchen_cookware_10s_01",
+      "subcategory_id": "home_kitchen_cookware",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Simmering supper",
+      "duration_seconds": 10,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Photorealistic vertical 9:16. Exact reference cooking pot, preserving actual lid, handles, shape, finish, proportions and markings; no invented coating, included accessories or performance claims. Safe home kitchen hob at low heat, modest amount of prepared vegetable broth gently simmering. Adult Malaysian hands and forearms only; stable three-quarter close camera, realistic steam and heat-safe handling. No face.\nUse the supplied product image as the sole visual master. Preserve realistic anatomy, product identity, physical contact and spatial continuity. No invented details, captions, on-screen text, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Establish the original pot on the hob with lid resting correctly and low gentle steam.\n2–5s: Hand uses a dry cloth to lift the actual lid safely away from steam, revealing a modest simmer.\n5–8s: Hand stirs the broth once with a plain separate wooden spoon, without scraping or changing the pot.\n8–10s: Spoon is withdrawn; hold the original pot and gentle simmer in a clear hero frame.\nAUDIO: Off-camera Malaysian Malay narrator, hands-only cook silent: 'Kuah dah mula mereneh, buka penutup dengan berhati-hati.' Gentle kitchen and simmer ambience."
+    },
+    {
+      "id": "v9_curated16_home_kitchen_cookware_20s_01",
+      "subcategory_id": "home_kitchen_cookware",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Simmering supper",
+      "duration_seconds": 20,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. Exact reference cooking pot, preserving actual lid, handles, shape, finish, proportions and markings; no invented coating, included accessories or performance claims. Safe home kitchen hob at low heat, modest amount of prepared vegetable broth gently simmering. Adult Malaysian hands and forearms only; stable three-quarter close camera, realistic steam and heat-safe handling. No face.\nUse the supplied product image as the sole visual master. Preserve realistic anatomy, product identity, physical contact and spatial continuity. No invented details, captions, on-screen text, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–3s: Establish the exact lidded pot on a low-heat hob, gentle steam visible.\n3–7s: Hand grips the original lid safely using a dry cloth and lifts it away from the steam.\n7–10s: Hand places the lid securely on a nearby heat-safe surface; the pot remains gently simmering.\nAUDIO: Off-camera Malaysian Malay narrator, hands-only cook silent: 'Kuah dah mula mereneh, buka penutup dengan berhati-hati.' Gentle kitchen and simmer ambience.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. Exact reference cooking pot, preserving actual lid, handles, shape, finish, proportions and markings; no invented coating, included accessories or performance claims. Safe home kitchen hob at low heat, modest amount of prepared vegetable broth gently simmering. Adult Malaysian hands and forearms only; stable three-quarter close camera, realistic steam and heat-safe handling. No face.\nUse the supplied product image as the sole visual master. Preserve realistic anatomy, product identity, physical contact and spatial continuity. No invented details, captions, on-screen text, extra logos or watermark.\nCONTINUITY: Match the final Part 1 frame exactly in product, subject, pose, props, light and camera axis; continue without replaying completed action.\nEXACTLY 10 SECONDS:\n0–3s: Resume with the same uncovered pot gently simmering and lid on the nearby surface.\n3–7s: Hand gives the broth one slow stir using a plain separate wooden spoon, then withdraws it.\n7–10s: Camera settles on the original pot's true handles, rim and silhouette, with realistic light steam.\nAUDIO: Off-camera Malaysian Malay narrator, hands-only cook silent: 'Kacau perlahan, kemudian biarkan masak seketika.' Gentle kitchen and simmer ambience."
+    },
+    {
+      "id": "v9_curated16_bag_sling_10s_01",
+      "subcategory_id": "bag_sling",
+      "visual_category": "PARTIAL_MODEL",
+      "concept": "Weekend art market",
+      "duration_seconds": 10,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Photorealistic vertical 9:16. Exact reference sling bag worn crossbody by one adult Universal Malaysian model, framed shoulders to hips with face outside shot. Preserve its original strap, length, body, closure, colour and markings; no invented compartments or hardware. Shaded weekend craft market aisle, dry level walkway, soft daylight. Natural bag weight and sway, restrained torso-height tracking.\nUse the supplied product image as the sole visual master. Preserve realistic anatomy, product identity, physical contact and spatial continuity. No invented details, captions, on-screen text, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Establish the original sling bag resting naturally against the model's hip.\n2–5s: Model takes three measured steps along the shaded aisle; strap and bag move naturally.\n5–8s: Model pauses at a plain stall and steadies the bag lightly with one hand.\n8–10s: Hold a clear three-quarter close frame of the unchanged bag.\nAUDIO: Off-camera Malaysian Malay narrator, model silent: 'Pusing pasar hujung minggu, beg ni saya bawa silang.' Soft outdoor market ambience."
+    },
+    {
+      "id": "v9_curated16_bag_sling_20s_01",
+      "subcategory_id": "bag_sling",
+      "visual_category": "PARTIAL_MODEL",
+      "concept": "Weekend art market",
+      "duration_seconds": 20,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. Exact reference sling bag worn crossbody by one adult Universal Malaysian model, framed shoulders to hips with face outside shot. Preserve its original strap, length, body, closure, colour and markings; no invented compartments or hardware. Shaded weekend craft market aisle, dry level walkway, soft daylight. Natural bag weight and sway, restrained torso-height tracking.\nUse the supplied product image as the sole visual master. Preserve realistic anatomy, product identity, physical contact and spatial continuity. No invented details, captions, on-screen text, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–3s: Establish the reference sling bag correctly worn crossbody in the shaded aisle.\n3–7s: Model takes three natural steps toward a plain craft stall.\n7–10s: Model stops at the stall with bag resting against the hip.\nAUDIO: Off-camera Malaysian Malay narrator, model silent: 'Pusing pasar hujung minggu, beg ni saya bawa silang.' Soft outdoor market ambience.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. Exact reference sling bag worn crossbody by one adult Universal Malaysian model, framed shoulders to hips with face outside shot. Preserve its original strap, length, body, closure, colour and markings; no invented compartments or hardware. Shaded weekend craft market aisle, dry level walkway, soft daylight. Natural bag weight and sway, restrained torso-height tracking.\nUse the supplied product image as the sole visual master. Preserve realistic anatomy, product identity, physical contact and spatial continuity. No invented details, captions, on-screen text, extra logos or watermark.\nCONTINUITY: Match the final Part 1 frame exactly in product, subject, pose, props, light and camera axis; continue without replaying completed action.\nEXACTLY 10 SECONDS:\n0–3s: Resume from the same stopped stance and hip-level bag position; model steadies the bag once.\n3–7s: Camera makes a restrained side slide showing the exact strap connection and original body profile.\n7–10s: Model turns slightly away from the stall and pauses, bag still clearly visible.\nAUDIO: Off-camera Malaysian Malay narrator, model silent: 'Senang nampak bentuknya bila dipakai begini.' Soft outdoor market ambience."
+    }
+  ]
+}
