@@ -1524,7 +1524,7 @@ async def record_prompt_trial_success(context, user_id):
 def main_menu(user_id=None):
     rows = [
         [InlineKeyboardButton('✍️ Jana Prompt', callback_data='prompt')],
-        [InlineKeyboardButton('🎞️ Gerakkan Foto (Transisi)', callback_data='make')],
+        [InlineKeyboardButton('🖼️ Crop Gambar', callback_data='crop_image')],
         [InlineKeyboardButton('🎞️ Gabung Video', callback_data='merge')],
         [InlineKeyboardButton('🔄 Tukar Format Video', callback_data='convert')],
         [InlineKeyboardButton('💎 Langganan', callback_data='subscription'), InlineKeyboardButton('👤 Akaun Saya', callback_data='account')],
@@ -2451,7 +2451,7 @@ async def receive_receipt(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def handle_image_or_receipt_document(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Route uploaded image documents to the active flow, without breaking receipt PDFs."""
-    if context.user_data.get('stage') in ('prompt_upload', 'background_custom_upload'):
+    if context.user_data.get('stage') in ('prompt_upload', 'background_custom_upload', 'crop_upload'):
         await photo(update, context)
         return
     await receive_receipt(update, context)
@@ -2481,6 +2481,24 @@ async def photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
     if context.user_data.get('stage') == 'receipt_upload':
         await receive_receipt(update, context)
+        return
+    if context.user_data.get('stage') == 'crop_upload':
+        item = update.message.photo[-1] if update.message.photo else update.message.document
+        if not item or (update.message.document and not (item.mime_type or '').startswith('image/')):
+            await update.message.reply_text('Hantar gambar JPG, PNG atau WebP.')
+            return
+        if (item.file_size or 0) > 12 * 1024 * 1024:
+            await update.message.reply_text('Gambar terlalu besar. Maksimum 12 MB.')
+            return
+        context.user_data['crop_file_id'] = item.file_id
+        context.user_data['stage'] = 'crop_ratio'
+        await update.message.reply_text('Pilih nisbah crop tengah (bahagian luar akan dipotong):',
+            reply_markup=InlineKeyboardMarkup([
+                [InlineKeyboardButton('1:1 Persegi', callback_data='crop_ratio:1:1'),
+                 InlineKeyboardButton('4:5 Potret', callback_data='crop_ratio:4:5')],
+                [InlineKeyboardButton('9:16 Story/Reels', callback_data='crop_ratio:9:16'),
+                 InlineKeyboardButton('16:9 Landskap', callback_data='crop_ratio:16:9')],
+                [InlineKeyboardButton('↩️ Menu Utama', callback_data='home')]]))
         return
     if context.user_data.get('stage') == 'fal_beta_photo':
         if not update.message.photo:
@@ -2635,11 +2653,11 @@ async def convert_upload(update: Update, context: ContextTypes.DEFAULT_TYPE):
         clips.append(item.file_id)
         rows = []
         if len(clips) >= 2:
-            rows.append([InlineKeyboardButton('✅ Selesai & Pilih Transisi', callback_data='merge_done')])
+            rows.append([InlineKeyboardButton('✅ Selesai & Gabung Video', callback_data='merge_done')])
         if len(clips) < 5:
             message = f'✅ Video {len(clips)} diterima (urutan #{len(clips)}).\n\n📤 Terus hantar Video {len(clips) + 1} sebagai File / Document.'
         else:
-            message = '✅ Video 5 diterima. Maksimum 5 video. Tekan Selesai untuk pilih transisi.'
+            message = '✅ Video 5 diterima. Maksimum 5 video. Tekan Selesai untuk gabung video.'
         await update.message.reply_text(message, reply_markup=InlineKeyboardMarkup(rows) if rows else None)
         return
     if context.user_data.get('stage') != 'convert':
@@ -2977,6 +2995,53 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data['storyboard_mode'] = True
         context.user_data['stage'] = 'photos'
         await query.message.reply_text('🎞️ STORYBOARD V1 — Hantar 1–5 gambar produk. Bot akan susun enam babak sinematik. Tekan Selesai apabila cukup.', reply_markup=photos_menu())
+    elif action == 'crop_image':
+        reset(context)
+        context.user_data['stage'] = 'crop_upload'
+        await query.message.reply_text('🖼️ CROP GAMBAR\\n\\nHantar satu gambar JPG, PNG atau WebP (maksimum 12 MB). Hantar sebagai File untuk mengekalkan kualiti asal.')
+    elif action.startswith('crop_ratio:') and stage == 'crop_ratio':
+        ratios = {'1:1': (1, 1), '4:5': (4, 5), '9:16': (9, 16), '16:9': (16, 9)}
+        selected = action.split(':', 1)[1]
+        if selected not in ratios or not context.user_data.get('crop_file_id'):
+            await query.message.reply_text('Pilihan crop tidak sah. Cuba semula.', reply_markup=main_menu())
+            return
+        lock = context.application.bot_data.setdefault('render_lock', asyncio.Lock())
+        if lock.locked():
+            await query.message.reply_text('Server sedang memproses fail lain. Cuba sebentar lagi.')
+            return
+        async with lock:
+            context.user_data['busy'] = True
+            try:
+                source = await context.bot.get_file(context.user_data['crop_file_id'])
+                raw = bytes(await source.download_as_bytearray())
+                if not raw or len(raw) > 12 * 1024 * 1024:
+                    raise ValueError('Invalid crop input')
+                def crop_center():
+                    with Image.open(BytesIO(raw)) as original:
+                        original = ImageOps.exif_transpose(original)
+                        width, height = original.size
+                        if width * height > 40_000_000:
+                            raise ValueError('Image exceeds crop pixel limit')
+                        rw, rh = ratios[selected]
+                        crop_w = min(width, height * rw // rh)
+                        crop_h = min(height, width * rh // rw)
+                        left = (width - crop_w) // 2
+                        top = (height - crop_h) // 2
+                        result = original.crop((left, top, left + crop_w, top + crop_h)).convert('RGB')
+                        output = BytesIO()
+                        result.save(output, format='JPEG', quality=94, optimize=True)
+                        output.seek(0)
+                        output.name = 'Klippo_Crop_' + selected.replace(':', 'x') + '.jpg'
+                        return output
+                output = await asyncio.to_thread(crop_center)
+                await query.message.reply_document(document=output, filename=output.name,
+                    caption='✅ Gambar siap dicrop (' + selected + ').', reply_markup=main_menu())
+            except Exception:
+                logging.exception('Image crop failed')
+                await query.message.reply_text('Crop gagal. Cuba gambar JPG/PNG/WebP yang lebih kecil.', reply_markup=main_menu())
+            finally:
+                context.user_data['busy'] = False
+                reset(context)
     elif action == 'make':
         reset(context)
         context.user_data['stage'] = 'video_input'
