@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "batch": "v9_curated_twenty_fifth_batch_20261024",
+  "variation_count": 6,
+  "notes": "Three individually authored reference-dependent concepts, complete 10s and continuous two-part 20s. Draft pending real render and runtime input compatibility QA.",
+  "variations": [
+    {
+      "id": "v9_curated25_hijab_bawal_10s_01",
+      "subcategory_id": "hijab_bawal",
+      "visual_category": "FULL_MODEL",
+      "concept": "Morning garden terrace",
+      "duration_seconds": 10,
+      "voice_type": "MODEL_SPEECH",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Photorealistic vertical 9:16. One adult Universal Malaysian woman wears the exact reference square hijab in its original colour, print, dimensions and visible folds over a plain modest outfit. A sheltered garden terrace with soft morning daylight. Medium portrait keeps her mouth and full front drape visible for accurate natural Malaysian Malay lip sync. No invented pins, accessories or fabric claims.\nUse the supplied product reference as sole visual master. Preserve authentic product identity, anatomy, scale, physical contact and continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Establish the model by a plain terrace railing, original bawal front drape visible.\n2–5s: She gently straightens an existing front edge without changing the wrapping.\n5–8s: Facing camera, she says with precise lip sync: 'Pagi ni, saya pilih gaya tudung yang ringkas.'\n8–10s: She holds a relaxed three-quarter portrait, original print clearly visible.\nAUDIO: Only on-camera adult female speech in natural Malaysian Malay with precise lip sync; quiet garden ambience, no narrator."
+    },
+    {
+      "id": "v9_curated25_hijab_bawal_20s_01",
+      "subcategory_id": "hijab_bawal",
+      "visual_category": "FULL_MODEL",
+      "concept": "Morning garden terrace",
+      "duration_seconds": 20,
+      "voice_type": "MODEL_SPEECH",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. One adult Universal Malaysian woman wears the exact reference square hijab in its original colour, print, dimensions and visible folds over a plain modest outfit. A sheltered garden terrace with soft morning daylight. Medium portrait keeps her mouth and full front drape visible for accurate natural Malaysian Malay lip sync. No invented pins, accessories or fabric claims.\nUse the supplied product reference as sole visual master. Preserve authentic product identity, anatomy, scale, physical contact and continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–3s: Establish the model wearing the exact bawal beside the terrace railing.\n3–7s: She gently smooths one existing front fold and lowers her hand.\n7–10s: Facing camera, she says with precise lip sync: 'Pagi ni, saya pilih gaya tudung yang ringkas.'\nAUDIO: Only on-camera adult female speech in natural Malaysian Malay with precise lip sync; quiet garden ambience, no narrator.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. One adult Universal Malaysian woman wears the exact reference square hijab in its original colour, print, dimensions and visible folds over a plain modest outfit. A sheltered garden terrace with soft morning daylight. Medium portrait keeps her mouth and full front drape visible for accurate natural Malaysian Malay lip sync. No invented pins, accessories or fabric claims.\nUse the supplied product reference as sole visual master. Preserve authentic product identity, anatomy, scale, physical contact and continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nCONTINUITY: Match final Part 1 frame exactly in product, subject, pose, props, lighting and camera axis; continue without replaying completed action.\nEXACTLY 10 SECONDS:\n0–3s: Resume from the same front-facing pose and unchanged hijab folds; she glances toward the garden.\n3–7s: She looks back to camera and says with precise lip sync: 'Sesuai untuk keluar santai hari ni.'\n7–10s: Hold a steady three-quarter portrait with original print and drape unobstructed.\nAUDIO: Only on-camera adult female speech in natural Malaysian Malay with precise lip sync; quiet garden ambience, no narrator."
+    },
+    {
+      "id": "v9_curated25_gadget_audio_10s_01",
+      "subcategory_id": "gadget_audio",
+      "visual_category": "FULL_MODEL",
+      "concept": "Headphones at study desk",
+      "duration_seconds": 10,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Photorealistic vertical 9:16. One adult Universal Malaysian model wears the exact reference over-ear headphones, preserving original earcup shape, headband, colour, visible markings and scale; no invented wireless, cancellation or sound-quality claims. A quiet study desk with a plain closed notebook, soft window daylight. Medium portrait, face visible, model remains silent; natural hand placement and head movement.\nUse the supplied product reference as sole visual master. Preserve authentic product identity, anatomy, scale, physical contact and continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Establish the model seated with the exact headphones resting around the neck.\n2–5s: Model lifts both actual earcups and places the headphones naturally over the ears.\n5–8s: Model turns slightly toward the desk and opens the plain notebook.\n8–10s: Hold a clear medium three-quarter frame of the unchanged headphones in use.\nAUDIO: Off-camera Malaysian Malay narrator; on-screen model silent: 'Pakai fon kepala, kemudian sediakan nota di meja.' Soft room ambience, no music playback claims."
+    },
+    {
+      "id": "v9_curated25_gadget_audio_20s_01",
+      "subcategory_id": "gadget_audio",
+      "visual_category": "FULL_MODEL",
+      "concept": "Headphones at study desk",
+      "duration_seconds": 20,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. One adult Universal Malaysian model wears the exact reference over-ear headphones, preserving original earcup shape, headband, colour, visible markings and scale; no invented wireless, cancellation or sound-quality claims. A quiet study desk with a plain closed notebook, soft window daylight. Medium portrait, face visible, model remains silent; natural hand placement and head movement.\nUse the supplied product reference as sole visual master. Preserve authentic product identity, anatomy, scale, physical contact and continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–3s: Establish the model seated at the study desk, original headphones around the neck.\n3–7s: Model raises the real earcups carefully and settles them over both ears.\n7–10s: Model releases the headband and pauses, exact headphone profile visible.\nAUDIO: Off-camera Malaysian Malay narrator; on-screen model silent: 'Pakai fon kepala, kemudian sediakan nota di meja.' Soft room ambience, no music playback claims.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. One adult Universal Malaysian model wears the exact reference over-ear headphones, preserving original earcup shape, headband, colour, visible markings and scale; no invented wireless, cancellation or sound-quality claims. A quiet study desk with a plain closed notebook, soft window daylight. Medium portrait, face visible, model remains silent; natural hand placement and head movement.\nUse the supplied product reference as sole visual master. Preserve authentic product identity, anatomy, scale, physical contact and continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nCONTINUITY: Match final Part 1 frame exactly in product, subject, pose, props, lighting and camera axis; continue without replaying completed action.\nEXACTLY 10 SECONDS:\n0–3s: Resume from the same seated pose with headphones correctly worn; model turns gently toward the desk.\n3–7s: Model opens the plain notebook and rests one hand beside it, remaining silent.\n7–10s: Camera settles into a clear medium portrait showing the original earcup and headband.\nAUDIO: Off-camera Malaysian Malay narrator; on-screen model silent: 'Ruang belajar dah tersusun, masa untuk fokus.' Soft room ambience."
+    },
+    {
+      "id": "v9_curated25_pet_bed_10s_01",
+      "subcategory_id": "pet_bed",
+      "visual_category": "ANIMAL_ONLY",
+      "concept": "Cat's quiet afternoon rest",
+      "duration_seconds": 10,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Photorealistic vertical 9:16. Exact reference pet bed with its original outline, cushion appearance, size, colour, seams and visible details on a quiet living-room floor. One calm adult domestic cat is clearly visible throughout and free to enter or leave voluntarily. Soft afternoon daylight, stable low camera, realistic feline scale and natural resting behavior; no invented orthopedic or health claims.\nUse the supplied product reference as sole visual master. Preserve authentic product identity, anatomy, scale, physical contact and continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Establish the original bed on the floor with the cat standing calmly nearby.\n2–5s: Cat approaches and sniffs the actual bed edge.\n5–8s: Cat voluntarily steps into the bed and turns once at a natural pace.\n8–10s: Cat settles into a relaxed resting pose, original bed silhouette visible.\nAUDIO: No dialogue, narration or music; quiet room ambience and subtle natural cat movement."
+    },
+    {
+      "id": "v9_curated25_pet_bed_20s_01",
+      "subcategory_id": "pet_bed",
+      "visual_category": "ANIMAL_ONLY",
+      "concept": "Cat's quiet afternoon rest",
+      "duration_seconds": 20,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. Exact reference pet bed with its original outline, cushion appearance, size, colour, seams and visible details on a quiet living-room floor. One calm adult domestic cat is clearly visible throughout and free to enter or leave voluntarily. Soft afternoon daylight, stable low camera, realistic feline scale and natural resting behavior; no invented orthopedic or health claims.\nUse the supplied product reference as sole visual master. Preserve authentic product identity, anatomy, scale, physical contact and continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–3s: Establish the exact bed and calm cat nearby in the quiet room.\n3–7s: Cat approaches at its own pace and sniffs the original bed edge.\n7–10s: Cat places its front paws inside the bed and pauses.\nAUDIO: No dialogue, narration or music; quiet room ambience and subtle natural cat movement.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. Exact reference pet bed with its original outline, cushion appearance, size, colour, seams and visible details on a quiet living-room floor. One calm adult domestic cat is clearly visible throughout and free to enter or leave voluntarily. Soft afternoon daylight, stable low camera, realistic feline scale and natural resting behavior; no invented orthopedic or health claims.\nUse the supplied product reference as sole visual master. Preserve authentic product identity, anatomy, scale, physical contact and continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nCONTINUITY: Match final Part 1 frame exactly in product, subject, pose, props, lighting and camera axis; continue without replaying completed action.\nEXACTLY 10 SECONDS:\n0–3s: Resume with cat's front paws inside the same bed, back paws outside; cat steps fully inside voluntarily.\n3–7s: Cat makes one natural small turn and lowers its body into a resting pose.\n7–10s: Hold a stable low frame showing relaxed cat and original bed shape.\nAUDIO: No dialogue, narration or music; quiet room ambience and subtle natural cat movement."
+    }
+  ]
+}
