@@ -16,7 +16,7 @@
     "identified_duration_records_excluding_rejected": 128,
     "activation_approved": 0,
     "additional_v9_pilot_rewrite_files_reviewed": 18,
-    "additional_v9_pilot_rewrite_records": 18,
+    "additional_v9_pilot_rewrite_records": 17,
     "additional_v9_pilot_rewrite_distinct_base_concepts": 6,
     "additional_v9_pilot_rewrite_unlabeled_pair": 1,
     "additional_v9_pilot_rewrite_replacement_or_continuation_records": 4,
@@ -129,7 +129,8 @@
     "40 Malaysian-menu candidates are not the same as 40 render-approved prompts. 22 earlier focus concepts remain preserved for fit review.",
     "All candidate records remain DRAFT_RENDER_QA. Actual runtime product input must be reconciled with the image-reference requirement before activation.",
     "No legacy or source file has been deleted, merged, or deployed.",
-    "The 18 additional pilot/rewrite files contribute six named distinct base concepts (Lunch Portion, Vegetable Saute, Pan to Plate, Dinner Is Underway, Dinner Portion, Stir and Serve) and one unlabeled pilot; revised variants are not new concepts. Earlier 64 plus six named = 70 named identified V9 concepts, with one unlabeled pilot separately held. No global activation claim."
+    "The 18 additional pilot/rewrite files contribute six named distinct base concepts (Lunch Portion, Vegetable Saute, Pan to Plate, Dinner Is Underway, Dinner Portion, Stir and Serve) and one unlabeled pilot; revised variants are not new concepts. Earlier 64 plus six named = 70 named identified V9 concepts, with one unlabeled pilot separately held. No global activation claim.",
+    "17 additional cookware records in the 18 pilot/rewrite/quality files: 2 Lunch Portion, 2 original Vegetable Saute, 1 Pan to Plate, 1 Pan to Plate rewrite, 2 Dinner Is Underway, 2 Dinner Portion, 1 Dinner Portion rewrite, 2 unlabeled hands-only pilot, 2 Vegetable Saute quality revision, 2 Stir and Serve."
   ],
   "next_action": "Do not generate more cookware menu concepts. Audit product-type eligibility and candidate quality, resolve legacy product-name-only versus image-master input, and build a 50-concept shortlist without counting rewrites as new concepts.",
   "pilot_rewrite_findings": [
