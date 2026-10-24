@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "batch": "v9_partial_model_pilot",
+  "variation_count": 10,
+  "notes": "Additive review-only pilot; no engine activation. Distinct fully authored 10s and continuous 20s records.",
+  "variations": [
+    {
+      "id": "v9_review_bag_handbag_partial_model_10s_01",
+      "subcategory_id": "bag_handbag",
+      "visual_category": "PARTIAL_MODEL",
+      "preset": "Lifestyle",
+      "duration_seconds": 10,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "KLIPPO | {{PRODUCT_NAME}}\nFORMAT: Vertical 9:16, realistic footage, 10 seconds. Preset: Lifestyle.\nMASTER REFERENCE: Use the uploaded product image as the authoritative reference. Preserve its exact visible design, colour, pattern, shape, scale and proportions; do not invent features, included accessories or claims.\nSETTING: Apartment entryway.\nMODEL: PARTIAL_MODEL. A Malaysian adult woman, framed from shoulder to hip with no face visible, places the reference handbag on her shoulder, walks two natural steps and steadies its actual strap.\nCAMERA: Medium shoulder-to-hip tracking, then a stable side view. Natural physics and spatial continuity.\nLIGHTING: Soft daylight. Preserve the product's true colour.\nSTORYBOARD: 0–2s establish the product in its stated setting; 2–6s perform the specified practical action in one continuous take; 6–9s show the real product detail during use; 9–10s hold the product clearly in frame.\nAUDIO: Off-camera voiceover in natural Malaysian Malay, with no Indonesian accent: \"Beg pilihan saya, senang dibawa untuk keluar hari ini.\" The visible model remains silent. Subtle background music. No logos, captions or watermark."
+    },
+    {
+      "id": "v9_review_bag_handbag_partial_model_20s_01",
+      "subcategory_id": "bag_handbag",
+      "visual_category": "PARTIAL_MODEL",
+      "preset": "Lifestyle",
+      "duration_seconds": 20,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "PART 1 — 10 seconds\nKLIPPO | {{PRODUCT_NAME}}\nFORMAT: Vertical 9:16, realistic footage, 20 seconds. Preset: Lifestyle.\nMASTER REFERENCE: Use the uploaded product image as the authoritative reference. Preserve its exact visible design, colour, pattern, shape, scale and proportions; do not invent features, included accessories or claims.\nSETTING: Apartment entryway.\nMODEL: PARTIAL_MODEL. A Malaysian adult woman, framed from shoulder to hip with no face visible, places the reference handbag on her shoulder, walks two natural steps and steadies its actual strap.\nCAMERA: Medium shoulder-to-hip tracking, then a stable side view. Natural physics and spatial continuity.\nLIGHTING: Soft daylight. Preserve the product's true colour.\nSTORYBOARD: 0–2s establish the product and setting; 2–7s begin the specified practical action; 7–10s continue the same action and hold a natural match point.\nAUDIO: Off-camera voiceover in natural Malaysian Malay, with no Indonesian accent: \"Beg pilihan saya, senang dibawa untuk keluar hari ini.\" The visible model remains silent. Subtle background music. No logos, captions or watermark.\n\nPART 2 — 10 seconds, continuous with Part 1\nKLIPPO | {{PRODUCT_NAME}}\nFORMAT: Vertical 9:16, realistic footage, 20 seconds. Preset: Lifestyle.\nMASTER REFERENCE: Use the uploaded product image as the authoritative reference. Preserve its exact visible design, colour, pattern, shape, scale and proportions; do not invent features, included accessories or claims.\nSETTING: Apartment entryway.\nMODEL: PARTIAL_MODEL. A Malaysian adult woman, framed from shoulder to hip with no face visible, places the reference handbag on her shoulder, walks two natural steps and steadies its actual strap.\nCAMERA: Medium shoulder-to-hip tracking, then a stable side view. Natural physics and spatial continuity.\nLIGHTING: Soft daylight. Preserve the product's true colour.\nCONTINUITY: Same product, person/body crop, clothing, setting, lighting and action position from the final frame of Part 1; no reset.\nSTORYBOARD: 0–3s continue the ongoing practical action; 3–7s reveal the actual visible product detail with the stated camera move; 7–10s settle into a clear product hero frame.\nAUDIO: Off-camera Malaysian Malay voiceover: \"Ini pilihan saya untuk kegunaan harian.\" Visible model remains silent; continue subtle music. No logos, captions or watermark."
+    },
+    {
+      "id": "v9_review_fashion_shoes_partial_model_10s_01",
+      "subcategory_id": "fashion_shoes",
+      "visual_category": "PARTIAL_MODEL",
+      "preset": "Dynamic",
+      "duration_seconds": 10,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "KLIPPO | {{PRODUCT_NAME}}\nFORMAT: Vertical 9:16, realistic footage, 10 seconds. Preset: Dynamic.\nMASTER REFERENCE: Use the uploaded product image as the authoritative reference. Preserve its exact visible design, colour, pattern, shape, scale and proportions; do not invent features, included accessories or claims.\nSETTING: Covered pedestrian walkway.\nMODEL: PARTIAL_MODEL. A Malaysian adult model shown only from knees down wears the reference shoes, takes three grounded walking steps and stops with both shoes fully visible.\nCAMERA: Low tracking beside feet, then front three-quarter hold. Natural physics and spatial continuity.\nLIGHTING: Even outdoor shade. Preserve the product's true colour.\nSTORYBOARD: 0–2s establish the product in its stated setting; 2–6s perform the specified practical action in one continuous take; 6–9s show the real product detail during use; 9–10s hold the product clearly in frame.\nAUDIO: Off-camera voiceover in natural Malaysian Malay, with no Indonesian accent: \"Langkah harian nampak kemas dengan kasut pilihan ini.\" The visible model remains silent. Subtle background music. No logos, captions or watermark."
+    },
+    {
+      "id": "v9_review_fashion_shoes_partial_model_20s_01",
+      "subcategory_id": "fashion_shoes",
+      "visual_category": "PARTIAL_MODEL",
+      "preset": "Dynamic",
+      "duration_seconds": 20,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "PART 1 — 10 seconds\nKLIPPO | {{PRODUCT_NAME}}\nFORMAT: Vertical 9:16, realistic footage, 20 seconds. Preset: Dynamic.\nMASTER REFERENCE: Use the uploaded product image as the authoritative reference. Preserve its exact visible design, colour, pattern, shape, scale and proportions; do not invent features, included accessories or claims.\nSETTING: Covered pedestrian walkway.\nMODEL: PARTIAL_MODEL. A Malaysian adult model shown only from knees down wears the reference shoes, takes three grounded walking steps and stops with both shoes fully visible.\nCAMERA: Low tracking beside feet, then front three-quarter hold. Natural physics and spatial continuity.\nLIGHTING: Even outdoor shade. Preserve the product's true colour.\nSTORYBOARD: 0–2s establish the product and setting; 2–7s begin the specified practical action; 7–10s continue the same action and hold a natural match point.\nAUDIO: Off-camera voiceover in natural Malaysian Malay, with no Indonesian accent: \"Langkah harian nampak kemas dengan kasut pilihan ini.\" The visible model remains silent. Subtle background music. No logos, captions or watermark.\n\nPART 2 — 10 seconds, continuous with Part 1\nKLIPPO | {{PRODUCT_NAME}}\nFORMAT: Vertical 9:16, realistic footage, 20 seconds. Preset: Dynamic.\nMASTER REFERENCE: Use the uploaded product image as the authoritative reference. Preserve its exact visible design, colour, pattern, shape, scale and proportions; do not invent features, included accessories or claims.\nSETTING: Covered pedestrian walkway.\nMODEL: PARTIAL_MODEL. A Malaysian adult model shown only from knees down wears the reference shoes, takes three grounded walking steps and stops with both shoes fully visible.\nCAMERA: Low tracking beside feet, then front three-quarter hold. Natural physics and spatial continuity.\nLIGHTING: Even outdoor shade. Preserve the product's true colour.\nCONTINUITY: Same product, person/body crop, clothing, setting, lighting and action position from the final frame of Part 1; no reset.\nSTORYBOARD: 0–3s continue the ongoing practical action; 3–7s reveal the actual visible product detail with the stated camera move; 7–10s settle into a clear product hero frame.\nAUDIO: Off-camera Malaysian Malay voiceover: \"Ini pilihan saya untuk kegunaan harian.\" Visible model remains silent; continue subtle music. No logos, captions or watermark."
+    },
+    {
+      "id": "v9_review_accessory_ring_partial_model_10s_01",
+      "subcategory_id": "accessory_ring",
+      "visual_category": "PARTIAL_MODEL",
+      "preset": "Luxury",
+      "duration_seconds": 10,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "KLIPPO | {{PRODUCT_NAME}}\nFORMAT: Vertical 9:16, realistic footage, 10 seconds. Preset: Luxury.\nMASTER REFERENCE: Use the uploaded product image as the authoritative reference. Preserve its exact visible design, colour, pattern, shape, scale and proportions; do not invent features, included accessories or claims.\nSETTING: Quiet dressing table.\nMODEL: PARTIAL_MODEL. Only the hand and fingers of an adult model are shown wearing the exact reference ring; the hand slowly rotates to reveal its actual visible profile and fit.\nCAMERA: Macro hand-level arc then stable ring close-up. Natural physics and spatial continuity.\nLIGHTING: Diffused window light. Preserve the product's true colour.\nSTORYBOARD: 0–2s establish the product in its stated setting; 2–6s perform the specified practical action in one continuous take; 6–9s show the real product detail during use; 9–10s hold the product clearly in frame.\nAUDIO: Off-camera voiceover in natural Malaysian Malay, with no Indonesian accent: \"Cincin ini jadi sentuhan akhir gaya saya.\" The visible model remains silent. Subtle background music. No logos, captions or watermark."
+    },
+    {
+      "id": "v9_review_accessory_ring_partial_model_20s_01",
+      "subcategory_id": "accessory_ring",
+      "visual_category": "PARTIAL_MODEL",
+      "preset": "Luxury",
+      "duration_seconds": 20,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "PART 1 — 10 seconds\nKLIPPO | {{PRODUCT_NAME}}\nFORMAT: Vertical 9:16, realistic footage, 20 seconds. Preset: Luxury.\nMASTER REFERENCE: Use the uploaded product image as the authoritative reference. Preserve its exact visible design, colour, pattern, shape, scale and proportions; do not invent features, included accessories or claims.\nSETTING: Quiet dressing table.\nMODEL: PARTIAL_MODEL. Only the hand and fingers of an adult model are shown wearing the exact reference ring; the hand slowly rotates to reveal its actual visible profile and fit.\nCAMERA: Macro hand-level arc then stable ring close-up. Natural physics and spatial continuity.\nLIGHTING: Diffused window light. Preserve the product's true colour.\nSTORYBOARD: 0–2s establish the product and setting; 2–7s begin the specified practical action; 7–10s continue the same action and hold a natural match point.\nAUDIO: Off-camera voiceover in natural Malaysian Malay, with no Indonesian accent: \"Cincin ini jadi sentuhan akhir gaya saya.\" The visible model remains silent. Subtle background music. No logos, captions or watermark.\n\nPART 2 — 10 seconds, continuous with Part 1\nKLIPPO | {{PRODUCT_NAME}}\nFORMAT: Vertical 9:16, realistic footage, 20 seconds. Preset: Luxury.\nMASTER REFERENCE: Use the uploaded product image as the authoritative reference. Preserve its exact visible design, colour, pattern, shape, scale and proportions; do not invent features, included accessories or claims.\nSETTING: Quiet dressing table.\nMODEL: PARTIAL_MODEL. Only the hand and fingers of an adult model are shown wearing the exact reference ring; the hand slowly rotates to reveal its actual visible profile and fit.\nCAMERA: Macro hand-level arc then stable ring close-up. Natural physics and spatial continuity.\nLIGHTING: Diffused window light. Preserve the product's true colour.\nCONTINUITY: Same product, person/body crop, clothing, setting, lighting and action position from the final frame of Part 1; no reset.\nSTORYBOARD: 0–3s continue the ongoing practical action; 3–7s reveal the actual visible product detail with the stated camera move; 7–10s settle into a clear product hero frame.\nAUDIO: Off-camera Malaysian Malay voiceover: \"Ini pilihan saya untuk kegunaan harian.\" Visible model remains silent; continue subtle music. No logos, captions or watermark."
+    },
+    {
+      "id": "v9_review_accessory_watch_partial_model_10s_01",
+      "subcategory_id": "accessory_watch",
+      "visual_category": "PARTIAL_MODEL",
+      "preset": "Minimal",
+      "duration_seconds": 10,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "KLIPPO | {{PRODUCT_NAME}}\nFORMAT: Vertical 9:16, realistic footage, 10 seconds. Preset: Minimal.\nMASTER REFERENCE: Use the uploaded product image as the authoritative reference. Preserve its exact visible design, colour, pattern, shape, scale and proportions; do not invent features, included accessories or claims.\nSETTING: Office desk.\nMODEL: PARTIAL_MODEL. Only an adult model's wrist and forearm are shown wearing the reference watch; the wrist turns naturally while reaching for a notebook, showing the actual watch face and fit.\nCAMERA: Wrist-level medium close-up then steady face detail. Natural physics and spatial continuity.\nLIGHTING: Neutral desk daylight. Preserve the product's true colour.\nSTORYBOARD: 0–2s establish the product in its stated setting; 2–6s perform the specified practical action in one continuous take; 6–9s show the real product detail during use; 9–10s hold the product clearly in frame.\nAUDIO: Off-camera voiceover in natural Malaysian Malay, with no Indonesian accent: \"Jam pilihan saya untuk melengkapkan gaya kerja.\" The visible model remains silent. Subtle background music. No logos, captions or watermark."
+    },
+    {
+      "id": "v9_review_accessory_watch_partial_model_20s_01",
+      "subcategory_id": "accessory_watch",
+      "visual_category": "PARTIAL_MODEL",
+      "preset": "Minimal",
+      "duration_seconds": 20,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "PART 1 — 10 seconds\nKLIPPO | {{PRODUCT_NAME}}\nFORMAT: Vertical 9:16, realistic footage, 20 seconds. Preset: Minimal.\nMASTER REFERENCE: Use the uploaded product image as the authoritative reference. Preserve its exact visible design, colour, pattern, shape, scale and proportions; do not invent features, included accessories or claims.\nSETTING: Office desk.\nMODEL: PARTIAL_MODEL. Only an adult model's wrist and forearm are shown wearing the reference watch; the wrist turns naturally while reaching for a notebook, showing the actual watch face and fit.\nCAMERA: Wrist-level medium close-up then steady face detail. Natural physics and spatial continuity.\nLIGHTING: Neutral desk daylight. Preserve the product's true colour.\nSTORYBOARD: 0–2s establish the product and setting; 2–7s begin the specified practical action; 7–10s continue the same action and hold a natural match point.\nAUDIO: Off-camera voiceover in natural Malaysian Malay, with no Indonesian accent: \"Jam pilihan saya untuk melengkapkan gaya kerja.\" The visible model remains silent. Subtle background music. No logos, captions or watermark.\n\nPART 2 — 10 seconds, continuous with Part 1\nKLIPPO | {{PRODUCT_NAME}}\nFORMAT: Vertical 9:16, realistic footage, 20 seconds. Preset: Minimal.\nMASTER REFERENCE: Use the uploaded product image as the authoritative reference. Preserve its exact visible design, colour, pattern, shape, scale and proportions; do not invent features, included accessories or claims.\nSETTING: Office desk.\nMODEL: PARTIAL_MODEL. Only an adult model's wrist and forearm are shown wearing the reference watch; the wrist turns naturally while reaching for a notebook, showing the actual watch face and fit.\nCAMERA: Wrist-level medium close-up then steady face detail. Natural physics and spatial continuity.\nLIGHTING: Neutral desk daylight. Preserve the product's true colour.\nCONTINUITY: Same product, person/body crop, clothing, setting, lighting and action position from the final frame of Part 1; no reset.\nSTORYBOARD: 0–3s continue the ongoing practical action; 3–7s reveal the actual visible product detail with the stated camera move; 7–10s settle into a clear product hero frame.\nAUDIO: Off-camera Malaysian Malay voiceover: \"Ini pilihan saya untuk kegunaan harian.\" Visible model remains silent; continue subtle music. No logos, captions or watermark."
+    },
+    {
+      "id": "v9_review_home_kitchen_cookware_hands_only_10s_01",
+      "subcategory_id": "home_kitchen_cookware",
+      "visual_category": "HANDS_ONLY",
+      "preset": "Product Demo",
+      "duration_seconds": 10,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "KLIPPO | {{PRODUCT_NAME}}\nFORMAT: Vertical 9:16, realistic footage, 10 seconds. Preset: Product Demo.\nMASTER REFERENCE: Use the uploaded product image as the authoritative reference. Preserve its exact visible design, colour, pattern, shape, scale and proportions; do not invent features, included accessories or claims.\nSETTING: Real home kitchen counter.\nMODEL: HANDS_ONLY. Only adult hands and limited forearms appear; one hand holds the reference pan securely on a stable stovetop while the other stirs food using an ordinary utensil, without asserting unverified performance or included accessories.\nCAMERA: Stable medium cooking view then close-up of visible pan rim and actual food interaction. Natural physics and spatial continuity.\nLIGHTING: Natural kitchen lighting. Preserve the product's true colour.\nSTORYBOARD: 0–2s establish the product in its stated setting; 2–6s perform the specified practical action in one continuous take; 6–9s show the real product detail during use; 9–10s hold the product clearly in frame.\nAUDIO: Off-camera voiceover in natural Malaysian Malay, with no Indonesian accent: \"Tengok cara saya gunakan kuali ini semasa memasak.\" The visible model remains silent. Subtle background music. No logos, captions or watermark."
+    },
+    {
+      "id": "v9_review_home_kitchen_cookware_hands_only_20s_01",
+      "subcategory_id": "home_kitchen_cookware",
+      "visual_category": "HANDS_ONLY",
+      "preset": "Product Demo",
+      "duration_seconds": 20,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "PART 1 — 10 seconds\nKLIPPO | {{PRODUCT_NAME}}\nFORMAT: Vertical 9:16, realistic footage, 20 seconds. Preset: Product Demo.\nMASTER REFERENCE: Use the uploaded product image as the authoritative reference. Preserve its exact visible design, colour, pattern, shape, scale and proportions; do not invent features, included accessories or claims.\nSETTING: Real home kitchen counter.\nMODEL: HANDS_ONLY. Only adult hands and limited forearms appear; one hand holds the reference pan securely on a stable stovetop while the other stirs food using an ordinary utensil, without asserting unverified performance or included accessories.\nCAMERA: Stable medium cooking view then close-up of visible pan rim and actual food interaction. Natural physics and spatial continuity.\nLIGHTING: Natural kitchen lighting. Preserve the product's true colour.\nSTORYBOARD: 0–2s establish the product and setting; 2–7s begin the specified practical action; 7–10s continue the same action and hold a natural match point.\nAUDIO: Off-camera voiceover in natural Malaysian Malay, with no Indonesian accent: \"Tengok cara saya gunakan kuali ini semasa memasak.\" The visible model remains silent. Subtle background music. No logos, captions or watermark.\n\nPART 2 — 10 seconds, continuous with Part 1\nKLIPPO | {{PRODUCT_NAME}}\nFORMAT: Vertical 9:16, realistic footage, 20 seconds. Preset: Product Demo.\nMASTER REFERENCE: Use the uploaded product image as the authoritative reference. Preserve its exact visible design, colour, pattern, shape, scale and proportions; do not invent features, included accessories or claims.\nSETTING: Real home kitchen counter.\nMODEL: HANDS_ONLY. Only adult hands and limited forearms appear; one hand holds the reference pan securely on a stable stovetop while the other stirs food using an ordinary utensil, without asserting unverified performance or included accessories.\nCAMERA: Stable medium cooking view then close-up of visible pan rim and actual food interaction. Natural physics and spatial continuity.\nLIGHTING: Natural kitchen lighting. Preserve the product's true colour.\nCONTINUITY: Same product, person/body crop, clothing, setting, lighting and action position from the final frame of Part 1; no reset.\nSTORYBOARD: 0–3s continue the ongoing practical action; 3–7s reveal the actual visible product detail with the stated camera move; 7–10s settle into a clear product hero frame.\nAUDIO: Off-camera Malaysian Malay voiceover: \"Ini pilihan saya untuk kegunaan harian.\" Visible model remains silent; continue subtle music. No logos, captions or watermark."
+    }
+  ]
+}
