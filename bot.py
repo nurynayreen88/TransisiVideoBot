@@ -1581,7 +1581,6 @@ def main_menu(user_id=None):
         [InlineKeyboardButton('🖼️ Remove BG', callback_data='remove_bg')],
         [InlineKeyboardButton('🧰 Tools Affiliate', callback_data='affiliate_tools')],
         [InlineKeyboardButton('🎞️ Gabung Video', callback_data='merge')],
-        [InlineKeyboardButton('🔄 Tukar Format Video', callback_data='convert')],
         [InlineKeyboardButton('💎 Langganan', callback_data='subscription'), InlineKeyboardButton('👤 Akaun Saya', callback_data='account')],
         [InlineKeyboardButton('💬 Komen & Cadangan', callback_data='feedback')],
     ]
@@ -2922,7 +2921,10 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await query.message.reply_text('Video sedang diproses. Sila tunggu.')
         return
     stage = context.user_data.get('stage', 'home')
-    paid_actions = action in ('make', 'merge', 'convert', 'storyboard', 'falbeta', 'remove_bg', 'affiliate_tools')
+    if action == 'convert':
+        await query.message.reply_text('Fungsi Tukar Format Video telah dinyahaktifkan untuk menjaga kestabilan Klippo.', reply_markup=main_menu(update.effective_user.id))
+        return
+    paid_actions = action in ('make', 'merge', 'storyboard', 'falbeta', 'remove_bg', 'affiliate_tools')
     paid_actions = paid_actions or action.startswith(('aff:', 'affratio:'))
     paid_actions = paid_actions or action.startswith(('merge_', 'video_input:'))
     if paid_actions and not await require_paid_feature(query.message, update.effective_user.id):
@@ -4850,7 +4852,6 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
         '🎬 Jana Video Transisi': 'make',
         '🎞️ Gerakkan Foto (Transisi)': 'make',
         '✍️ Jana Prompt': 'prompt',
-        '🔄 Tukar Format Video': 'convert',
         '✍️ Sediakan Prompt Video': 'prompt',
         '✍️ Hasilkan Prompt': 'prompt',
         '✍️ Prompt': 'prompt',
