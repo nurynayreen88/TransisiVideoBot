@@ -12,6 +12,7 @@ import tempfile
 from pathlib import Path
 
 from PIL import Image, ImageOps, ImageDraw, ImageFont
+from affiliate_image_tools import render as render_affiliate_image, MAX_BYTES as AFFILIATE_MAX_BYTES
 from video_merge import merge_videos
 from fusion_animation import fusion_gif
 import klippo_db
@@ -253,6 +254,24 @@ def _plain_background_mask(image):
     if not .025 <= area <= .85:
         raise ValueError('Uncertain product area')
     return mask.resize(image.size, Image.Resampling.LANCZOS).filter(ImageFilter.GaussianBlur(0.65))
+
+
+def affiliate_tools_menu():
+    return InlineKeyboardMarkup([
+        [InlineKeyboardButton('🖼️ Jana Cover Video', callback_data='aff:cover')],
+        [InlineKeyboardButton('🏷️ Sticker Harga', callback_data='aff:sticker')],
+        [InlineKeyboardButton('📐 Resize Gambar', callback_data='aff:resize')],
+        [InlineKeyboardButton('🖼️ Gambar Perbandingan', callback_data='aff:compare')],
+        [InlineKeyboardButton('🏠 Menu Utama', callback_data='home')],
+    ])
+
+
+def affiliate_ratio_menu():
+    return InlineKeyboardMarkup([
+        [InlineKeyboardButton('1:1', callback_data='affratio:square'), InlineKeyboardButton('4:5', callback_data='affratio:portrait')],
+        [InlineKeyboardButton('9:16', callback_data='affratio:story'), InlineKeyboardButton('16:9', callback_data='affratio:wide')],
+        [InlineKeyboardButton('🏠 Menu Utama', callback_data='home')],
+    ])
 
 
 def remove_bg_background_menu():
@@ -1560,6 +1579,7 @@ def main_menu(user_id=None):
     rows = [
         [InlineKeyboardButton('✍️ Jana Prompt', callback_data='prompt')],
         [InlineKeyboardButton('🖼️ Remove BG', callback_data='remove_bg')],
+        [InlineKeyboardButton('🧰 Tools Affiliate', callback_data='affiliate_tools')],
         [InlineKeyboardButton('🎞️ Gabung Video', callback_data='merge')],
         [InlineKeyboardButton('🔄 Tukar Format Video', callback_data='convert')],
         [InlineKeyboardButton('💎 Langganan', callback_data='subscription'), InlineKeyboardButton('👤 Akaun Saya', callback_data='account')],
@@ -2486,7 +2506,7 @@ async def receive_receipt(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def handle_image_or_receipt_document(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Route uploaded image documents to the active flow, without breaking receipt PDFs."""
-    if context.user_data.get('stage') in ('prompt_upload', 'background_custom_upload', 'remove_bg_upload', 'remove_bg_custom_upload'):
+    if context.user_data.get('stage') in ('prompt_upload', 'background_custom_upload', 'remove_bg_upload', 'remove_bg_custom_upload', 'affiliate_upload'):
         await photo(update, context)
         return
     await receive_receipt(update, context)
@@ -2516,6 +2536,32 @@ async def photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
     if context.user_data.get('stage') == 'receipt_upload':
         await receive_receipt(update, context)
+        return
+    if context.user_data.get('stage') == 'affiliate_upload':
+        item = update.message.photo[-1] if update.message.photo else update.message.document
+        if not item or (update.message.document and (item.mime_type or '') not in ('image/jpeg', 'image/png', 'image/webp')):
+            await update.message.reply_text('Hantar gambar JPG, PNG atau WebP.')
+            return
+        if (item.file_size or 0) > AFFILIATE_MAX_BYTES:
+            await update.message.reply_text('Gambar maksimum 5 MB.')
+            return
+        try:
+            raw = bytes(await (await context.bot.get_file(item.file_id)).download_as_bytearray())
+            if not raw or len(raw) > AFFILIATE_MAX_BYTES:
+                raise ValueError('Image too large')
+            with Image.open(BytesIO(raw)) as im:
+                if im.format not in ('JPEG', 'PNG', 'WEBP') or im.width * im.height > 12_000_000:
+                    raise ValueError('Invalid image')
+            images = context.user_data.setdefault('affiliate_images', [])
+            images.append(raw)
+            if context.user_data.get('affiliate_tool') == 'compare' and len(images) == 1:
+                await update.message.reply_text('Gambar pertama diterima. Hantar gambar kedua.')
+            else:
+                context.user_data['stage'] = 'affiliate_ratio'
+                await update.message.reply_text('Pilih nisbah hasil:', reply_markup=affiliate_ratio_menu())
+        except Exception:
+            logging.exception('Affiliate image upload failed')
+            await update.message.reply_text('Gambar tidak sah. Gunakan JPG, PNG atau WebP sehingga 5 MB dan 12 MP.')
         return
     if context.user_data.get('stage') == 'remove_bg_custom_upload':
         item = update.message.photo[-1] if update.message.photo else update.message.document
@@ -2875,7 +2921,8 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await query.message.reply_text('Video sedang diproses. Sila tunggu.')
         return
     stage = context.user_data.get('stage', 'home')
-    paid_actions = action in ('make', 'merge', 'convert', 'storyboard', 'falbeta', 'remove_bg')
+    paid_actions = action in ('make', 'merge', 'convert', 'storyboard', 'falbeta', 'remove_bg', 'affiliate_tools')
+    paid_actions = paid_actions or action.startswith(('aff:', 'affratio:'))
     paid_actions = paid_actions or action.startswith(('merge_', 'video_input:'))
     if paid_actions and not await require_paid_feature(query.message, update.effective_user.id):
         return
@@ -3097,6 +3144,47 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         context.user_data['storyboard_mode'] = True
         context.user_data['stage'] = 'photos'
         await query.message.reply_text('🎞️ STORYBOARD V1 — Hantar 1–5 gambar produk. Bot akan susun enam babak sinematik. Tekan Selesai apabila cukup.', reply_markup=photos_menu())
+    elif action == 'affiliate_tools':
+        context.user_data.pop('affiliate_images', None)
+        reset(context)
+        await query.message.reply_text('🧰 Tools Affiliate Ringan — pilih fungsi:', reply_markup=affiliate_tools_menu())
+    elif action.startswith('aff:'):
+        tool = action.split(':', 1)[1]
+        if tool not in ('cover', 'sticker', 'resize', 'compare'):
+            await query.message.reply_text('Pilihan tidak sah.', reply_markup=affiliate_tools_menu())
+        else:
+            reset(context)
+            context.user_data['affiliate_tool'] = tool
+            context.user_data['affiliate_images'] = []
+            context.user_data['affiliate_value'] = ''
+            context.user_data['stage'] = 'affiliate_text' if tool in ('cover', 'sticker') else 'affiliate_upload'
+            message = ('Masukkan tajuk cover (maksimum 80 aksara):' if tool == 'cover' else
+                       'Masukkan teks sticker/harga (maksimum 80 aksara):' if tool == 'sticker' else
+                       'Hantar gambar pertama (JPG, PNG atau WebP; maksimum 5 MB, 12 MP).')
+            await query.message.reply_text(message)
+    elif action.startswith('affratio:'):
+        ratio = action.split(':', 1)[1]
+        tool = context.user_data.get('affiliate_tool')
+        images = context.user_data.get('affiliate_images', [])
+        if context.user_data.get('stage') != 'affiliate_ratio' or tool not in ('cover', 'sticker', 'resize', 'compare') or ratio not in ('square', 'portrait', 'story', 'wide') or len(images) != (2 if tool == 'compare' else 1):
+            await query.message.reply_text('Sesi tidak lengkap. Sila mula semula.', reply_markup=affiliate_tools_menu())
+        else:
+            lock = context.application.bot_data.setdefault('render_lock', asyncio.Lock())
+            if lock.locked():
+                await query.message.reply_text('Server sedang memproses fail lain. Cuba sebentar lagi.')
+            else:
+                async with lock:
+                    context.user_data['busy'] = True
+                    try:
+                        output = await asyncio.to_thread(render_affiliate_image, tool, images, context.user_data.get('affiliate_value', ''), ratio)
+                        await query.message.reply_document(document=output, filename=output.name, caption='✅ Hasil Tools Affiliate siap.', reply_markup=main_menu())
+                        context.user_data.pop('affiliate_images', None)
+                        reset(context)
+                    except Exception:
+                        logging.exception('Affiliate image render failed')
+                        await query.message.reply_text('Gagal memproses gambar. Cuba gambar lain.', reply_markup=affiliate_tools_menu())
+                    finally:
+                        context.user_data['busy'] = False
     elif action == 'rbg_done':
         context.user_data.pop('remove_bg_foreground', None)
         reset(context)
@@ -4588,6 +4676,15 @@ async def menu_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
     value = update.message.text.strip()
     if value in ('🏠 Menu Utama', 'Menu Utama', 'menu', 'MENU', '/menu'):
         await start(update, context)
+        return
+    if stage == 'affiliate_text':
+        if not value or len(value) > 80:
+            await update.message.reply_text('Masukkan teks antara 1 hingga 80 aksara.')
+            return
+        context.user_data['affiliate_value'] = value
+        context.user_data['affiliate_images'] = []
+        context.user_data['stage'] = 'affiliate_upload'
+        await update.message.reply_text('Hantar gambar produk (JPG, PNG atau WebP; maksimum 5 MB, 12 MP).')
         return
     if stage == 'feedback':
         feedback = value[:1800]
