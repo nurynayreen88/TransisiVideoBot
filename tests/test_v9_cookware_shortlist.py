@@ -66,6 +66,17 @@ class CookwareShortlistValidation(unittest.TestCase):
             durations = [index[record_id]["duration_seconds"] for record_id in entry["record_ids"]]
             self.assertEqual(durations, [10, 20])
 
+    def test_staged_prompts_are_not_runtime_catalog(self):
+        bot = (ROOT / "bot.py").read_text(encoding="utf-8")
+        self.assertIn("PROMPT_LIBRARY_PATH", bot)
+        self.assertIn("prompt_library.json", bot)
+        self.assertNotIn("v9_cookware_shortlist_50_20261025.json", bot)
+
+    def test_prompt_reference_handoff_is_external(self):
+        bot = (ROOT / "bot.py").read_text(encoding="utf-8")
+        self.assertIn("Gambar produk tidak perlu dimuat naik ke bot", bot)
+        self.assertIn("Muat naik gambar produk asal yang sama ke platform AI pilihan", bot)
+
 
 if __name__ == "__main__":
     unittest.main()
