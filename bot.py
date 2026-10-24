@@ -2908,6 +2908,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if action == 'home':
         if not context.user_data.get('busy'):
             context.user_data.pop('remove_bg_foreground', None)
+            context.user_data.pop('affiliate_images', None)
             reset(context)
         await query.message.reply_text(
             '🎬 KLIPPO | Prompt Video Menarik, Semudah Klik\n\n'
@@ -3153,6 +3154,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
         if tool not in ('cover', 'sticker', 'resize', 'compare'):
             await query.message.reply_text('Pilihan tidak sah.', reply_markup=affiliate_tools_menu())
         else:
+            context.user_data.pop('affiliate_images', None)
             reset(context)
             context.user_data['affiliate_tool'] = tool
             context.user_data['affiliate_images'] = []
