@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "batch": "v9_curated_fifteenth_batch_20261024",
+  "variation_count": 6,
+  "notes": "Three distinct reference-dependent concepts, each a complete 10s and continuous 20s. Draft pending actual render and runtime product-input compatibility QA.",
+  "variations": [
+    {
+      "id": "v9_curated15_hijab_accessory_10s_01",
+      "subcategory_id": "hijab_accessory",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Brooch at dressing mirror",
+      "duration_seconds": 10,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Vertical 9:16 photorealistic. Exact reference hijab brooch with original shape, colour, scale and visible fastening, on a plain modest shawl draped over a stationary dress form at a bright dressing table. Adult Malaysian hands and forearms only. Show safe use of the actual fastening, with fingers clear of its point; no invented gems, magnets or claims. Soft morning light, close steady camera.\nUse supplied reference as the sole visual master. Preserve realistic physics, product identity, proportions and spatial continuity. No captions, text overlays, extra logos, watermark or fabricated product features.\nEXACTLY 10 SECONDS:\n0–2s: Show the exact brooch resting beside the shawl on the dress form.\n2–5s: Hands lift it carefully and position it against two overlapping shawl edges.\n5–8s: Hands secure its existing fastening safely, then release.\n8–10s: Hold a close view of the unchanged brooch and neatly joined shawl.\nAUDIO: Off-camera Malaysian Malay narrator, hands silent: 'Kemaskan lipatan, kemudian sematkan kerongsang.' Soft room ambience."
+    },
+    {
+      "id": "v9_curated15_hijab_accessory_20s_01",
+      "subcategory_id": "hijab_accessory",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Brooch at dressing mirror",
+      "duration_seconds": 20,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic. Exact reference hijab brooch with original shape, colour, scale and visible fastening, on a plain modest shawl draped over a stationary dress form at a bright dressing table. Adult Malaysian hands and forearms only. Show safe use of the actual fastening, with fingers clear of its point; no invented gems, magnets or claims. Soft morning light, close steady camera.\nUse supplied reference as the sole visual master. Preserve realistic physics, product identity, proportions and spatial continuity. No captions, text overlays, extra logos, watermark or fabricated product features.\nEXACTLY 10 SECONDS:\n0–3s: Establish the original brooch beside the draped shawl.\n3–7s: Hands lift the brooch and align it with two overlapping shawl edges.\n7–10s: Hands pause with the original fastening positioned for secure attachment.\nAUDIO: Off-camera Malaysian Malay narrator, hands silent: 'Kemaskan lipatan, kemudian sematkan kerongsang.' Soft room ambience.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic. Exact reference hijab brooch with original shape, colour, scale and visible fastening, on a plain modest shawl draped over a stationary dress form at a bright dressing table. Adult Malaysian hands and forearms only. Show safe use of the actual fastening, with fingers clear of its point; no invented gems, magnets or claims. Soft morning light, close steady camera.\nUse supplied reference as the sole visual master. Preserve realistic physics, product identity, proportions and spatial continuity. No captions, text overlays, extra logos, watermark or fabricated product features.\nCONTINUITY: Match the final Part 1 frame exactly in subject, product, pose, props, light and camera axis; continue without replaying finished action.\nEXACTLY 10 SECONDS:\n0–3s: Resume with the brooch aligned at the same shawl edges; hands engage its actual fastening carefully.\n3–7s: Hands release and smooth the nearby shawl without changing the brooch design.\n7–10s: Stable close view of the attached original brooch and drape.\nAUDIO: Off-camera Malaysian Malay narrator, hands silent: 'Dah terletak, terus nampak kemas pada tudung.' Soft room ambience."
+    },
+    {
+      "id": "v9_curated15_fashion_socks_10s_01",
+      "subcategory_id": "fashion_socks",
+      "visual_category": "PARTIAL_MODEL",
+      "concept": "Getting ready for a walk",
+      "duration_seconds": 10,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Vertical 9:16 photorealistic. Exact reference pair of socks worn by one adult Universal Malaysian model, framed from knees down in a tidy home entryway. Preserve actual colour, pattern, length, cuff and fit, no compression or performance claims. Plain low bench and dry level floor, diffuse daylight; believable fabric stretch and anatomy.\nUse supplied reference as the sole visual master. Preserve realistic physics, product identity, proportions and spatial continuity. No captions, text overlays, extra logos, watermark or fabricated product features.\nEXACTLY 10 SECONDS:\n0–2s: Establish both reference socks worn correctly with original cuffs fully visible.\n2–5s: Seated model gently smooths one existing sock cuff once.\n5–8s: Model stands naturally from the bench, both sock silhouettes unobstructed.\n8–10s: Hold a steady knee-down view of both feet side by side.\nAUDIO: No speech, narration or music; only natural fabric rustle and quiet entryway ambience."
+    },
+    {
+      "id": "v9_curated15_fashion_socks_20s_01",
+      "subcategory_id": "fashion_socks",
+      "visual_category": "PARTIAL_MODEL",
+      "concept": "Getting ready for a walk",
+      "duration_seconds": 20,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic. Exact reference pair of socks worn by one adult Universal Malaysian model, framed from knees down in a tidy home entryway. Preserve actual colour, pattern, length, cuff and fit, no compression or performance claims. Plain low bench and dry level floor, diffuse daylight; believable fabric stretch and anatomy.\nUse supplied reference as the sole visual master. Preserve realistic physics, product identity, proportions and spatial continuity. No captions, text overlays, extra logos, watermark or fabricated product features.\nEXACTLY 10 SECONDS:\n0–3s: Show both reference socks on the seated model, actual patterns and cuffs visible.\n3–7s: Model gently smooths one sock cuff once and lowers the hand.\n7–10s: Model plants both feet flat, preparing to stand.\nAUDIO: No speech, narration or music; only natural fabric rustle and quiet entryway ambience.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic. Exact reference pair of socks worn by one adult Universal Malaysian model, framed from knees down in a tidy home entryway. Preserve actual colour, pattern, length, cuff and fit, no compression or performance claims. Plain low bench and dry level floor, diffuse daylight; believable fabric stretch and anatomy.\nUse supplied reference as the sole visual master. Preserve realistic physics, product identity, proportions and spatial continuity. No captions, text overlays, extra logos, watermark or fabricated product features.\nCONTINUITY: Match the final Part 1 frame exactly in subject, product, pose, props, light and camera axis; continue without replaying finished action.\nEXACTLY 10 SECONDS:\n0–3s: Resume with both feet planted in the same position; model stands from the bench naturally.\n3–7s: Model takes two measured steps across the level floor, keeping both socks visible.\n7–10s: Stop in a balanced parallel stance, original sock length and pattern clear.\nAUDIO: No speech, narration or music; only natural footsteps and quiet entryway ambience."
+    },
+    {
+      "id": "v9_curated15_gadget_computer_10s_01",
+      "subcategory_id": "gadget_computer",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Desk setup before work",
+      "duration_seconds": 10,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Vertical 9:16 photorealistic. Exact reference computer keyboard on a clean desk beside a plain unbranded monitor showing a neutral blank screen. Preserve actual key layout, dimensions, markings, cable only where visible, colour and original design. Adult Malaysian hands and forearms only; soft window light, stable desk-level camera. No invented backlighting, wireless connection, software or performance claims.\nUse supplied reference as the sole visual master. Preserve realistic physics, product identity, proportions and spatial continuity. No captions, text overlays, extra logos, watermark or fabricated product features.\nEXACTLY 10 SECONDS:\n0–2s: Establish the complete reference keyboard resting flat on the desk.\n2–5s: Hands settle naturally over its actual keys, wrists relaxed.\n5–8s: Fingers type one brief natural sequence without changing any key or device detail.\n8–10s: Hands pause beside the keyboard as camera holds its authentic silhouette.\nAUDIO: Off-camera Malaysian Malay narrator, hands silent: 'Sebelum mula kerja, susun ruang meja dulu.' Subtle office ambience and natural key taps."
+    },
+    {
+      "id": "v9_curated15_gadget_computer_20s_01",
+      "subcategory_id": "gadget_computer",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Desk setup before work",
+      "duration_seconds": 20,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic. Exact reference computer keyboard on a clean desk beside a plain unbranded monitor showing a neutral blank screen. Preserve actual key layout, dimensions, markings, cable only where visible, colour and original design. Adult Malaysian hands and forearms only; soft window light, stable desk-level camera. No invented backlighting, wireless connection, software or performance claims.\nUse supplied reference as the sole visual master. Preserve realistic physics, product identity, proportions and spatial continuity. No captions, text overlays, extra logos, watermark or fabricated product features.\nEXACTLY 10 SECONDS:\n0–3s: Establish the original keyboard on the desk, its actual key layout visible.\n3–7s: Hands move into a comfortable typing position without shifting the device.\n7–10s: Fingers type a brief natural sequence and pause above the same keys.\nAUDIO: Off-camera Malaysian Malay narrator, hands silent: 'Sebelum mula kerja, susun ruang meja dulu.' Subtle office ambience and natural key taps.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic. Exact reference computer keyboard on a clean desk beside a plain unbranded monitor showing a neutral blank screen. Preserve actual key layout, dimensions, markings, cable only where visible, colour and original design. Adult Malaysian hands and forearms only; soft window light, stable desk-level camera. No invented backlighting, wireless connection, software or performance claims.\nUse supplied reference as the sole visual master. Preserve realistic physics, product identity, proportions and spatial continuity. No captions, text overlays, extra logos, watermark or fabricated product features.\nCONTINUITY: Match the final Part 1 frame exactly in subject, product, pose, props, light and camera axis; continue without replaying finished action.\nEXACTLY 10 SECONDS:\n0–3s: Resume from the same paused typing position; fingers finish a short final sequence.\n3–7s: Hands withdraw gently while the camera makes a restrained lateral move along the original key profile.\n7–10s: Hold a full-product three-quarter frame of the stationary keyboard.\nAUDIO: Off-camera Malaysian Malay narrator, hands silent: 'Dah sedia, barulah fokus pada tugasan.' Subtle office ambience and natural key taps."
+    }
+  ]
+}
