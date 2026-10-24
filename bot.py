@@ -2719,7 +2719,7 @@ async def generate_merge(update: Update, context: ContextTypes.DEFAULT_TYPE, sty
                 except Exception:
                     logging.exception('Fusion completion display failed')
                 with output.open('rb') as file:
-                    await query.message.reply_document(document=file, filename='Klippo_Gabungan.mp4', caption='✅ Video siap digabung. Audio asal dikekalkan dan dipadankan dengan transisi.', reply_markup=main_menu(), write_timeout=240, read_timeout=120, connect_timeout=30)
+                    await query.message.reply_document(document=file, filename='Klippo_Gabungan.mp4', caption=('✅ Video siap digabung tanpa transisi. Audio asal dikekalkan.' if style == 'none' else '✅ Video siap digabung. Audio asal dikekalkan dan dipadankan dengan transisi.'), reply_markup=main_menu(), write_timeout=240, read_timeout=120, connect_timeout=30)
                 await progress_update(progress, 100, 'Video gabungan berjaya dihantar.')
         except Exception:
             logging.exception('Video merge failed')
@@ -4224,7 +4224,7 @@ async def buttons(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await query.message.reply_text('Hantar sekurang-kurangnya 2 video dahulu.')
             return
         context.user_data['stage'] = 'merge_style'
-        await query.message.reply_text('Pilih transisi:', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('✨ Fade', callback_data='merge_style:fade'), InlineKeyboardButton('🌊 Smooth', callback_data='merge_style:smoothleft')], [InlineKeyboardButton('⚡ Slide', callback_data='merge_style:slideleft'), InlineKeyboardButton('🔍 Zoom', callback_data='merge_style:zoomin')]]))
+        await query.message.reply_text('Pilih kaedah gabungan:', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('✂️ Gabung Biasa (Tanpa Transisi)', callback_data='merge_style:none')], [InlineKeyboardButton('✨ Fade', callback_data='merge_style:fade'), InlineKeyboardButton('🌊 Smooth', callback_data='merge_style:smoothleft')], [InlineKeyboardButton('⚡ Slide', callback_data='merge_style:slideleft'), InlineKeyboardButton('🔍 Zoom', callback_data='merge_style:zoomin')]]))
     elif action.startswith('merge_style:') and stage == 'merge_style':
         await generate_merge(update, context, action.split(':', 1)[1])
     elif action == 'convert':
