@@ -416,8 +416,8 @@ def _category_specific_scenes(product_type, product, product_subtype=""):
     if any(term in words for term in cookware_terms):
         return [
             ("COMPLETE SET / COOKING CONTEXT", "Show the complete supplied cookware set if the reference depicts a set, without adding pieces; for a single pot or pan show only that product on a suitable kitchen hob at realistic scale. Keep shape, colour, handles and lid unchanged."),
-            ("PREPARE TO COOK", "Show an adult placing plausible food into the pot or pan using ordinary ingredients and a suitable utensil. Do not present utensils or ingredients as included accessories."),
-            ("ACTIVE COOKING DEMONSTRATION", "Clearly show the pot or pan being used: a hand stirs or turns the food naturally while the cookware remains stable on the hob. Use believable contact, heat and steam only where physically plausible."),
+            ("PREPARE TO COOK", "If a human model is selected, show that person placing plausible food into the pot or pan using ordinary ingredients and a suitable utensil; otherwise show the cookware in a credible cooking context without introducing a person. Do not present utensils or ingredients as included accessories."),
+            ("ACTIVE COOKING DEMONSTRATION", "Clearly show the pot or pan being used: if a model is selected, their hand stirs or turns the food naturally while the cookware remains stable on the hob; do not invent a human model when none was selected. Use believable contact, heat and steam only where physically plausible."),
             ("FUNCTION IN CONTEXT", "Continue the same cooking action or lift the existing lid naturally only if the reference product has one. Keep the cookware visible; do not claim non-stick, material, capacity or compatibility properties."),
             ("FOOD + PRODUCT FINISH", "Show the food in the same pot or pan, then settle on a clear view of the complete unchanged product in use. No invented accessories, product claims or on-screen text.")
         ]
@@ -924,6 +924,12 @@ def _build_single_prompt(mode, product, scene, motion, style='auto', part=0, dur
             " CAR SCENE — SHOE DETAIL: Show the model seated in a stationary parked car, with the camera aimed down toward the shoes being worn and the lower legs. Keep the shoes as the clear subject; the face and full body stay outside the frame. The model may gently reposition one foot or angle the shoes naturally toward the camera. Keep the vehicle stationary, hands away from driving controls, and never show unsafe filming while driving. Do not turn this into a mirror selfie or show a phone in the model's hand. " 
         )
     category_direction += " NATURAL HUMAN MOVEMENT: " + natural_motion_by_type.get(product_type, natural_motion_by_type['other']) + " "
+    category_direction += (
+        " MODEL–PRODUCT USE PRIORITY: If the user selected a human model, that model MUST visibly use, wear, operate, carry, serve or otherwise demonstrate the named product's actual intended purpose, as appropriate to the product category. "
+        "The model must not merely stand beside it, point at it, hold it motionless, pose, or rotate it for the camera. Show believable hand/body contact and the product remaining identifiable during the action. "
+        "Do not add a model when the user selected product-only/no model; use reference-safe product-focused presentation instead. "
+        "Never invent unseen functions, included accessories, performance results or unsafe actions. "
+    )
     scene_action_directions = [
         (('mirror' in scene_text or 'vanity' in scene_text or 'dressing table' in scene_text or 'cermin' in scene_text),
          "SCENE ACTION — MIRROR: If a model is present, let them look at their reflection, make one small practical adjustment to the outfit or hijab if relevant, and optionally turn naturally once to check the side view. The reflection and body movement must remain physically consistent; no repeated spinning."),
