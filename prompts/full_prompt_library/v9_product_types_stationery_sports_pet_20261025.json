@@ -1,0 +1,173 @@
+{
+  "schema_version": 1,
+  "status": "DRAFT_TYPE_TAXONOMY_REVIEW",
+  "groups": {
+    "stationery_books": [
+      "novel",
+      "textbook",
+      "activity book",
+      "comic",
+      "reference book",
+      "children picture book"
+    ],
+    "stationery_pen": [
+      "ballpoint pen",
+      "gel pen",
+      "fountain pen",
+      "mechanical pencil",
+      "marker",
+      "highlighter"
+    ],
+    "stationery_notebook": [
+      "notebook",
+      "planner",
+      "journal",
+      "sketchbook",
+      "notepad",
+      "sticky notes"
+    ],
+    "stationery_art": [
+      "watercolor",
+      "acrylic paint",
+      "brush",
+      "canvas",
+      "colored pencil",
+      "pastel"
+    ],
+    "stationery_school": [
+      "pencil case",
+      "eraser",
+      "ruler",
+      "sharpener",
+      "geometry set",
+      "school scissors"
+    ],
+    "stationery_office": [
+      "document file",
+      "binder",
+      "stapler",
+      "paper clips",
+      "hole punch",
+      "desk organizer"
+    ],
+    "stationery_other": [
+      "label sticker",
+      "bookmark",
+      "envelope",
+      "wrapping paper",
+      "craft paper"
+    ],
+    "sports_fitness": [
+      "dumbbell",
+      "kettlebell",
+      "resistance band",
+      "yoga mat",
+      "foam roller",
+      "pull up bar"
+    ],
+    "sports_running": [
+      "running belt",
+      "hydration vest",
+      "running cap",
+      "running socks",
+      "armband",
+      "reflective vest"
+    ],
+    "sports_ball": [
+      "football",
+      "futsal ball",
+      "basketball",
+      "volleyball",
+      "ball pump",
+      "goal net"
+    ],
+    "sports_racket": [
+      "badminton racket",
+      "tennis racket",
+      "shuttlecock",
+      "grip tape",
+      "racket bag"
+    ],
+    "sports_cycling": [
+      "cycling helmet",
+      "bike light",
+      "bike lock",
+      "cycling gloves",
+      "bike pump",
+      "bottle cage"
+    ],
+    "sports_outdoor": [
+      "camping tent",
+      "sleeping bag",
+      "hiking pole",
+      "camping stove",
+      "headlamp"
+    ],
+    "sports_bottle": [
+      "insulated bottle",
+      "sports shaker",
+      "squeeze bottle",
+      "hydration bladder",
+      "bottle carrier"
+    ],
+    "sports_other": [
+      "swim goggles",
+      "swim cap",
+      "boxing gloves",
+      "martial arts gear",
+      "sports towel"
+    ],
+    "pet_food": [
+      "dry kibble",
+      "wet food",
+      "pet treats",
+      "freeze dried food",
+      "bird seed",
+      "fish pellets"
+    ],
+    "pet_grooming": [
+      "pet shampoo",
+      "pet brush",
+      "nail clipper",
+      "grooming scissors",
+      "pet comb"
+    ],
+    "pet_toy": [
+      "chew toy",
+      "cat wand",
+      "ball toy",
+      "puzzle feeder",
+      "scratching toy"
+    ],
+    "pet_bed": [
+      "pet cushion",
+      "cat cave",
+      "pet mat",
+      "crate bed",
+      "hammock"
+    ],
+    "pet_accessory": [
+      "collar",
+      "harness",
+      "leash",
+      "pet carrier",
+      "ID tag",
+      "pet clothing"
+    ],
+    "pet_cleaning": [
+      "litter box",
+      "litter scoop",
+      "pee pad",
+      "waste bag",
+      "odor remover"
+    ],
+    "pet_other": [
+      "pet bowl",
+      "automatic feeder",
+      "water fountain",
+      "aquarium accessory",
+      "pet gate"
+    ]
+  },
+  "activation": false
+}
