@@ -1,0 +1,385 @@
+{
+  "schema_version": 1,
+  "status": "DRAFT_PRODUCT_FIT_RULES",
+  "runtime_enabled": false,
+  "category": "fashion",
+  "taxonomy_aligned": true,
+  "groups": {
+    "fashion_women": {
+      "baju kurung": {
+        "action": "Adult model wears the garment and takes two natural steps, showing the garment's actual fit and drape",
+        "camera": "Full-length front and side silhouette, with a gentle turn",
+        "avoid": [
+          "Do not invent fabric, closures, pattern or sizing"
+        ],
+        "setting": "Bright Malaysian lifestyle setting"
+      },
+      "kebaya": {
+        "action": "Adult model wears the garment and takes two natural steps, showing the garment's actual fit and drape",
+        "camera": "Full-length front and side silhouette, with a gentle turn",
+        "avoid": [
+          "Do not invent fabric, closures, pattern or sizing"
+        ],
+        "setting": "Bright Malaysian lifestyle setting"
+      },
+      "blouse": {
+        "action": "Adult model wears the garment and takes two natural steps, showing the garment's actual fit and drape",
+        "camera": "Medium full-body front and side view",
+        "avoid": [
+          "Do not invent fabric, closures, pattern or sizing"
+        ],
+        "setting": "Bright Malaysian lifestyle setting"
+      },
+      "tunik": {
+        "action": "Adult model wears the garment and takes two natural steps, showing the garment's actual fit and drape",
+        "camera": "Medium full-body front and side view",
+        "avoid": [
+          "Do not invent fabric, closures, pattern or sizing"
+        ],
+        "setting": "Bright Malaysian lifestyle setting"
+      },
+      "kemeja wanita": {
+        "action": "Adult model wears the garment and takes two natural steps, showing the garment's actual fit and drape",
+        "camera": "Medium full-body front and side view",
+        "avoid": [
+          "Do not invent fabric, closures, pattern or sizing"
+        ],
+        "setting": "Bright Malaysian lifestyle setting"
+      },
+      "skirt": {
+        "action": "Adult model wears the garment and takes two natural steps, showing the garment's actual fit and drape",
+        "camera": "Medium full-body front and side view",
+        "avoid": [
+          "Do not invent fabric, closures, pattern or sizing"
+        ],
+        "setting": "Bright Malaysian lifestyle setting"
+      },
+      "seluar wanita": {
+        "action": "Adult model wears the garment and takes two natural steps, showing the garment's actual fit and drape",
+        "camera": "Waist-to-ankle framing for outerwear; flat-lay only for intimate items",
+        "avoid": [
+          "Do not invent fabric, closures, pattern or sizing"
+        ],
+        "setting": "Bright Malaysian lifestyle setting"
+      }
+    },
+    "fashion_men": {
+      "kemeja lelaki": {
+        "action": "Adult model wears the garment and takes two natural steps, showing the garment's actual fit and drape",
+        "camera": "Medium full-body front and side view",
+        "avoid": [
+          "Do not invent fabric, closures, pattern or sizing"
+        ],
+        "setting": "Bright Malaysian lifestyle setting"
+      },
+      "polo": {
+        "action": "Adult model wears the garment and takes two natural steps, showing the garment's actual fit and drape",
+        "camera": "Medium full-body front and side view",
+        "avoid": [
+          "Do not invent fabric, closures, pattern or sizing"
+        ],
+        "setting": "Bright Malaysian lifestyle setting"
+      },
+      "tshirt": {
+        "action": "Adult model wears the garment and takes two natural steps, showing the garment's actual fit and drape",
+        "camera": "Medium full-body front and side view",
+        "avoid": [
+          "Do not invent fabric, closures, pattern or sizing"
+        ],
+        "setting": "Bright Malaysian lifestyle setting"
+      },
+      "baju melayu": {
+        "action": "Adult model wears the garment and takes two natural steps, showing the garment's actual fit and drape",
+        "camera": "Medium full-body front and side view",
+        "avoid": [
+          "Do not invent fabric, closures, pattern or sizing"
+        ],
+        "setting": "Bright Malaysian lifestyle setting"
+      },
+      "kurta": {
+        "action": "Adult model wears the garment and takes two natural steps, showing the garment's actual fit and drape",
+        "camera": "Medium full-body front and side view",
+        "avoid": [
+          "Do not invent fabric, closures, pattern or sizing"
+        ],
+        "setting": "Bright Malaysian lifestyle setting"
+      },
+      "seluar slack": {
+        "action": "Adult model wears the garment and takes two natural steps, showing the garment's actual fit and drape",
+        "camera": "Waist-to-ankle framing for outerwear; flat-lay only for intimate items",
+        "avoid": [
+          "Do not invent fabric, closures, pattern or sizing"
+        ],
+        "setting": "Bright Malaysian lifestyle setting"
+      },
+      "seluar jeans": {
+        "action": "Adult model wears the garment and takes two natural steps, showing the garment's actual fit and drape",
+        "camera": "Waist-to-ankle framing for outerwear; flat-lay only for intimate items",
+        "avoid": [
+          "Do not invent fabric, closures, pattern or sizing"
+        ],
+        "setting": "Bright Malaysian lifestyle setting"
+      }
+    },
+    "fashion_dress": {
+      "dress maxi": {
+        "action": "Adult model wears the garment and takes two natural steps, showing the garment's actual fit and drape",
+        "camera": "Full-length front and side silhouette, with a gentle turn",
+        "avoid": [
+          "Do not invent fabric, closures, pattern or sizing"
+        ],
+        "setting": "Bright Malaysian lifestyle setting"
+      },
+      "dress midi": {
+        "action": "Adult model wears the garment and takes two natural steps, showing the garment's actual fit and drape",
+        "camera": "Full-length front and side silhouette, with a gentle turn",
+        "avoid": [
+          "Do not invent fabric, closures, pattern or sizing"
+        ],
+        "setting": "Bright Malaysian lifestyle setting"
+      },
+      "abaya": {
+        "action": "Adult model wears the garment and takes two natural steps, showing the garment's actual fit and drape",
+        "camera": "Full-length front and side silhouette, with a gentle turn",
+        "avoid": [
+          "Do not invent fabric, closures, pattern or sizing"
+        ],
+        "setting": "Bright Malaysian lifestyle setting"
+      },
+      "jubah": {
+        "action": "Adult model wears the garment and takes two natural steps, showing the garment's actual fit and drape",
+        "camera": "Full-length front and side silhouette, with a gentle turn",
+        "avoid": [
+          "Do not invent fabric, closures, pattern or sizing"
+        ],
+        "setting": "Bright Malaysian lifestyle setting"
+      },
+      "dress mini": {
+        "action": "Adult model wears the garment and takes two natural steps, showing the garment's actual fit and drape",
+        "camera": "Full-length front and side silhouette, with a gentle turn",
+        "avoid": [
+          "Do not invent fabric, closures, pattern or sizing"
+        ],
+        "setting": "Bright Malaysian lifestyle setting"
+      },
+      "dress formal": {
+        "action": "Adult model wears the garment and takes two natural steps, showing the garment's actual fit and drape",
+        "camera": "Full-length front and side silhouette, with a gentle turn",
+        "avoid": [
+          "Do not invent fabric, closures, pattern or sizing"
+        ],
+        "setting": "Bright Malaysian lifestyle setting"
+      }
+    },
+    "fashion_sport": {
+      "jersey": {
+        "action": "Adult model demonstrates a gentle sport-appropriate warm-up while wearing the garment",
+        "camera": "Medium movement shot emphasizing actual fit",
+        "avoid": [
+          "Do not claim performance, sweat resistance or compression"
+        ],
+        "setting": "Clean indoor sports space"
+      },
+      "legging": {
+        "action": "Adult model demonstrates a gentle sport-appropriate warm-up while wearing the garment",
+        "camera": "Waist-to-ankle framing for outerwear; flat-lay only for intimate items",
+        "avoid": [
+          "Do not claim performance, sweat resistance or compression"
+        ],
+        "setting": "Clean indoor sports space"
+      },
+      "tracksuit": {
+        "action": "Adult model demonstrates a gentle sport-appropriate warm-up while wearing the garment",
+        "camera": "Medium movement shot emphasizing actual fit",
+        "avoid": [
+          "Do not claim performance, sweat resistance or compression"
+        ],
+        "setting": "Clean indoor sports space"
+      },
+      "rashguard": {
+        "action": "Adult model demonstrates a gentle sport-appropriate warm-up while wearing the garment",
+        "camera": "Medium movement shot emphasizing actual fit",
+        "avoid": [
+          "Do not claim performance, sweat resistance or compression"
+        ],
+        "setting": "Clean indoor sports space"
+      },
+      "sports bra": {
+        "action": "Show garment on hanger or flat-lay, with a close-up of visible straps and seams",
+        "camera": "Tasteful product-only close-up",
+        "avoid": [
+          "Do not claim performance, sweat resistance or compression"
+        ],
+        "setting": "Clean indoor sports space"
+      }
+    },
+    "fashion_outerwear": {
+      "blazer": {
+        "action": "Adult model puts on the outer layer over simple clothing, then shows the actual closure and silhouette",
+        "camera": "Torso-to-knee front and side shot",
+        "avoid": [
+          "Do not invent fabric, closures, pattern or sizing"
+        ],
+        "setting": "Bright Malaysian lifestyle setting"
+      },
+      "cardigan": {
+        "action": "Adult model puts on the outer layer over simple clothing, then shows the actual closure and silhouette",
+        "camera": "Torso-to-knee front and side shot",
+        "avoid": [
+          "Do not invent fabric, closures, pattern or sizing"
+        ],
+        "setting": "Bright Malaysian lifestyle setting"
+      },
+      "hoodie": {
+        "action": "Adult model puts on the outer layer over simple clothing, then shows the actual closure and silhouette",
+        "camera": "Torso-to-knee front and side shot",
+        "avoid": [
+          "Do not invent fabric, closures, pattern or sizing"
+        ],
+        "setting": "Bright Malaysian lifestyle setting"
+      },
+      "jaket denim": {
+        "action": "Adult model puts on the outer layer over simple clothing, then shows the actual closure and silhouette",
+        "camera": "Torso-to-knee front and side shot",
+        "avoid": [
+          "Do not invent fabric, closures, pattern or sizing"
+        ],
+        "setting": "Bright Malaysian lifestyle setting"
+      },
+      "windbreaker": {
+        "action": "Adult model puts on the outer layer over simple clothing, then shows the actual closure and silhouette",
+        "camera": "Torso-to-knee front and side shot",
+        "avoid": [
+          "Do not invent fabric, closures, pattern or sizing"
+        ],
+        "setting": "Bright Malaysian lifestyle setting"
+      },
+      "coat": {
+        "action": "Adult model puts on the outer layer over simple clothing, then shows the actual closure and silhouette",
+        "camera": "Torso-to-knee front and side shot",
+        "avoid": [
+          "Do not invent fabric, closures, pattern or sizing"
+        ],
+        "setting": "Bright Malaysian lifestyle setting"
+      }
+    },
+    "fashion_kids": {
+      "romper": {
+        "action": "Child model wears the age-appropriate garment, walks naturally with guardian nearby",
+        "camera": "Full-body child-height framing",
+        "avoid": [
+          "Do not invent fabric, closures, pattern or sizing"
+        ],
+        "setting": "Bright family living room"
+      },
+      "dress kanak": {
+        "action": "Child model wears the age-appropriate garment, walks naturally with guardian nearby",
+        "camera": "Full-length front and side silhouette, with a gentle turn",
+        "avoid": [
+          "Do not invent fabric, closures, pattern or sizing"
+        ],
+        "setting": "Bright family living room"
+      },
+      "uniform sekolah": {
+        "action": "Child model wears the age-appropriate garment, walks naturally with guardian nearby",
+        "camera": "Full-body child-height framing",
+        "avoid": [
+          "Do not invent fabric, closures, pattern or sizing"
+        ],
+        "setting": "Bright family living room"
+      },
+      "baju kurung kanak": {
+        "action": "Child model wears the age-appropriate garment, walks naturally with guardian nearby",
+        "camera": "Full-body child-height framing",
+        "avoid": [
+          "Do not invent fabric, closures, pattern or sizing"
+        ],
+        "setting": "Bright family living room"
+      },
+      "tshirt kanak": {
+        "action": "Child model wears the age-appropriate garment, walks naturally with guardian nearby",
+        "camera": "Full-body child-height framing",
+        "avoid": [
+          "Do not invent fabric, closures, pattern or sizing"
+        ],
+        "setting": "Bright family living room"
+      }
+    },
+    "fashion_innerwear": {
+      "bra": {
+        "action": "Show garment on hanger or flat-lay, with a close-up of visible straps and seams",
+        "camera": "Tasteful product-only close-up",
+        "avoid": [
+          "Do not use intimate body close-ups or invent support claims"
+        ],
+        "setting": "Bright Malaysian lifestyle setting"
+      },
+      "boxer": {
+        "action": "Show garment neatly laid flat on a clean neutral surface, then demonstrate its visible seams and cut without a person",
+        "camera": "Waist-to-ankle framing for outerwear; flat-lay only for intimate items",
+        "avoid": [
+          "Do not use intimate body close-ups or invent support claims"
+        ],
+        "setting": "Bright Malaysian lifestyle setting"
+      },
+      "singlet": {
+        "action": "Show garment neatly laid flat on a clean neutral surface, then demonstrate its visible seams and cut without a person",
+        "camera": "Tasteful overhead and fabric close-up",
+        "avoid": [
+          "Do not use intimate body close-ups or invent support claims"
+        ],
+        "setting": "Bright Malaysian lifestyle setting"
+      },
+      "shapewear": {
+        "action": "Show garment neatly laid flat on a clean neutral surface, then demonstrate its visible seams and cut without a person",
+        "camera": "Tasteful overhead and fabric close-up",
+        "avoid": [
+          "Do not use intimate body close-ups or invent support claims"
+        ],
+        "setting": "Bright Malaysian lifestyle setting"
+      },
+      "panties": {
+        "action": "Show garment neatly laid flat on a clean neutral surface, then demonstrate its visible seams and cut without a person",
+        "camera": "Waist-to-ankle framing for outerwear; flat-lay only for intimate items",
+        "avoid": [
+          "Do not use intimate body close-ups or invent support claims"
+        ],
+        "setting": "Bright Malaysian lifestyle setting"
+      }
+    },
+    "fashion_other": {
+      "uniform": {
+        "action": "Adult model wears the garment and takes two natural steps, showing the garment's actual fit and drape",
+        "camera": "Medium full-body front and side view",
+        "avoid": [
+          "Do not invent fabric, closures, pattern or sizing"
+        ],
+        "setting": "Bright Malaysian lifestyle setting"
+      },
+      "pakaian tidur": {
+        "action": "Adult model wears the garment and takes two natural steps, showing the garment's actual fit and drape",
+        "camera": "Medium full-body front and side view",
+        "avoid": [
+          "Do not invent fabric, closures, pattern or sizing"
+        ],
+        "setting": "Bright Malaysian lifestyle setting"
+      },
+      "pakaian kerja": {
+        "action": "Adult model wears the garment and takes two natural steps, showing the garment's actual fit and drape",
+        "camera": "Medium full-body front and side view",
+        "avoid": [
+          "Do not invent fabric, closures, pattern or sizing"
+        ],
+        "setting": "Bright Malaysian lifestyle setting"
+      },
+      "pakaian tradisional": {
+        "action": "Adult model wears the garment and takes two natural steps, showing the garment's actual fit and drape",
+        "camera": "Medium full-body front and side view",
+        "avoid": [
+          "Do not invent fabric, closures, pattern or sizing"
+        ],
+        "setting": "Bright Malaysian lifestyle setting"
+      }
+    }
+  }
+}

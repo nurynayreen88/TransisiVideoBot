@@ -1,0 +1,160 @@
+{
+  "schema_version": 1,
+  "status": "DRAFT_TYPE_TAXONOMY_REVIEW",
+  "groups": {
+    "auto_car": [
+      "car sunshade",
+      "car phone holder",
+      "car cover",
+      "car organizer",
+      "car mat"
+    ],
+    "auto_motorcycle": [
+      "motorcycle helmet",
+      "motorcycle gloves",
+      "phone mount",
+      "rain cover",
+      "motorcycle top box"
+    ],
+    "auto_care": [
+      "car shampoo",
+      "wax",
+      "polish",
+      "microfiber cloth",
+      "tire cleaner",
+      "interior cleaner"
+    ],
+    "auto_electronic": [
+      "dashcam",
+      "reverse camera",
+      "car charger",
+      "GPS",
+      "tire pressure monitor"
+    ],
+    "auto_interior": [
+      "seat cushion",
+      "steering wheel cover",
+      "dashboard mat",
+      "headrest hook",
+      "seat organizer"
+    ],
+    "auto_exterior": [
+      "wiper",
+      "mudguard",
+      "number plate frame",
+      "exterior trim",
+      "roof rack"
+    ],
+    "auto_other": [
+      "jump starter",
+      "air compressor",
+      "emergency kit",
+      "car vacuum",
+      "tire inflator"
+    ],
+    "baby_clothing": [
+      "baby bodysuit",
+      "baby romper",
+      "baby sleepwear",
+      "baby mittens",
+      "baby socks",
+      "baby bib"
+    ],
+    "baby_feeding": [
+      "feeding bottle",
+      "sippy cup",
+      "bottle warmer",
+      "sterilizer",
+      "baby plate",
+      "breast pump"
+    ],
+    "baby_bath": [
+      "baby shampoo",
+      "baby wash",
+      "baby lotion",
+      "baby towel",
+      "baby bath tub",
+      "diaper cream"
+    ],
+    "baby_toy": [
+      "baby rattle",
+      "teether",
+      "sensory toy",
+      "soft blocks",
+      "baby play mat"
+    ],
+    "baby_gear": [
+      "stroller",
+      "baby carrier",
+      "car seat",
+      "high chair",
+      "diaper bag",
+      "baby gate"
+    ],
+    "baby_sleep": [
+      "baby cot",
+      "swaddle",
+      "sleep sack",
+      "baby monitor",
+      "mosquito net",
+      "cot sheet"
+    ],
+    "baby_other": [
+      "diaper",
+      "wet wipes",
+      "changing mat",
+      "baby nail kit",
+      "pacifier"
+    ],
+    "travel_luggage": [
+      "hard shell luggage",
+      "soft luggage",
+      "cabin luggage",
+      "travel duffel",
+      "luggage cover"
+    ],
+    "travel_organizer": [
+      "packing cubes",
+      "compression bag",
+      "shoe pouch",
+      "passport organizer",
+      "cable pouch"
+    ],
+    "travel_pillow": [
+      "neck pillow",
+      "inflatable pillow",
+      "memory foam pillow",
+      "travel blanket",
+      "eye mask"
+    ],
+    "travel_accessory": [
+      "passport holder",
+      "luggage tag",
+      "travel adapter",
+      "travel lock",
+      "portable scale"
+    ],
+    "travel_toiletry": [
+      "toiletry bag",
+      "hanging toiletry bag",
+      "cosmetic travel case",
+      "travel bottles",
+      "wet bag"
+    ],
+    "travel_outdoor": [
+      "backpacking tent",
+      "hiking backpack",
+      "sleeping pad",
+      "camping cookware",
+      "dry bag"
+    ],
+    "travel_other": [
+      "umbrella",
+      "rain poncho",
+      "portable fan",
+      "folding bag",
+      "travel wallet"
+    ]
+  },
+  "activation": false
+}

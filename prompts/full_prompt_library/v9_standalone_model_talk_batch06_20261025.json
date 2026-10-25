@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "status": "DRAFT_MODEL_TALK_QA",
+  "runtime_enabled": false,
+  "variations": [
+    {
+      "id": "v9_full10_modeltalk_092",
+      "base_prompt_id": "v9_full10_product_003",
+      "subcategory_id": "fashion_kids",
+      "product_type": "dress kanak",
+      "duration_seconds": 10,
+      "voice_type": "on_camera_model",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_MODEL_TALK_QA",
+      "full_prompt": "Generate exactly one photorealistic 10-second vertical 9:16 Malaysian affiliate product video. Product: dress kanak. Use the supplied product reference image as the sole source for the product's exact appearance; preserve visible color, pattern, proportions, shape and components. LOCATION: A bright Malaysian family living room. 0–2s HOOK: An adult Malaysian presenter faces the camera and introduces the genuine product with a friendly expression. 2–6s DEMONSTRATION: An adult Malaysian woman stands beside a child wearing the exact dress, gently straightens its sleeve and allows the child to take two natural steps. Only the adult speaks. Any child or pet is treated calmly and respectfully, with safe natural movement. 6–8s DETAIL: Cut to a close-up of an authentic visible product feature; maintain product continuity and real-world scale. 8–10s CTA: Return to the adult presenter's face and the product as the invitation finishes. EXACT ON-CAMERA MALAY MALAYSIA DIALOGUE: “Comelnya dress ini bila dipakai. Jom tengok!” Deliver this exact line naturally, with accurate lip sync and a Malaysian Malay accent. No Indonesian accent, separate narrator or extra dialogue. Natural ambience with subtle instrumental music. No subtitles, text overlay, added logo, watermark, invented specifications or accessories."
+    },
+    {
+      "id": "v9_full10_modeltalk_093",
+      "base_prompt_id": "v9_full10_product_014",
+      "subcategory_id": "pet_accessory",
+      "product_type": "harness",
+      "duration_seconds": 10,
+      "voice_type": "on_camera_model",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_MODEL_TALK_QA",
+      "full_prompt": "Generate exactly one photorealistic 10-second vertical 9:16 Malaysian affiliate product video. Product: harness. Use the supplied product reference image as the sole source for the product's exact appearance; preserve visible color, pattern, proportions, shape and components. LOCATION: A shaded Malaysian park path. 0–2s HOOK: An adult Malaysian presenter faces the camera and introduces the genuine product with a friendly expression. 2–6s DEMONSTRATION: An adult Malaysian presenter gently adjusts the visible harness on a calm dog and demonstrates a short controlled walk. Only the adult speaks. Any child or pet is treated calmly and respectfully, with safe natural movement. 6–8s DETAIL: Cut to a close-up of an authentic visible product feature; maintain product continuity and real-world scale. 8–10s CTA: Return to the adult presenter's face and the product as the invitation finishes. EXACT ON-CAMERA MALAY MALAYSIA DIALOGUE: “Saya pasang harness ini pada si bulus. Jom tengok!” Deliver this exact line naturally, with accurate lip sync and a Malaysian Malay accent. No Indonesian accent, separate narrator or extra dialogue. Natural ambience with subtle instrumental music. No subtitles, text overlay, added logo, watermark, invented specifications or accessories."
+    },
+    {
+      "id": "v9_full10_modeltalk_094",
+      "base_prompt_id": "v9_full10_product_015",
+      "subcategory_id": "baby_gear",
+      "product_type": "stroller",
+      "duration_seconds": 10,
+      "voice_type": "on_camera_model",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_MODEL_TALK_QA",
+      "full_prompt": "Generate exactly one photorealistic 10-second vertical 9:16 Malaysian affiliate product video. Product: stroller. Use the supplied product reference image as the sole source for the product's exact appearance; preserve visible color, pattern, proportions, shape and components. LOCATION: A level Malaysian park walkway. 0–2s HOOK: An adult Malaysian presenter faces the camera and introduces the genuine product with a friendly expression. 2–6s DEMONSTRATION: An adult Malaysian presenter shows the actual stroller and slowly pushes it along a clear path with both hands on its real handle. Only the adult speaks. Any child or pet is treated calmly and respectfully, with safe natural movement. 6–8s DETAIL: Cut to a close-up of an authentic visible product feature; maintain product continuity and real-world scale. 8–10s CTA: Return to the adult presenter's face and the product as the invitation finishes. EXACT ON-CAMERA MALAY MALAYSIA DIALOGUE: “Jom tengok stroller ini bila ditolak!” Deliver this exact line naturally, with accurate lip sync and a Malaysian Malay accent. No Indonesian accent, separate narrator or extra dialogue. Natural ambience with subtle instrumental music. No subtitles, text overlay, added logo, watermark, invented specifications or accessories."
+    },
+    {
+      "id": "v9_full10_modeltalk_095",
+      "base_prompt_id": "v9_full10_product_016",
+      "subcategory_id": "auto_electronic",
+      "product_type": "dashcam",
+      "duration_seconds": 10,
+      "voice_type": "on_camera_model",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_MODEL_TALK_QA",
+      "full_prompt": "Generate exactly one photorealistic 10-second vertical 9:16 Malaysian affiliate product video. Product: dashcam. Use the supplied product reference image as the sole source for the product's exact appearance; preserve visible color, pattern, proportions, shape and components. LOCATION: A parked car in a shaded driveway. 0–2s HOOK: An adult Malaysian presenter faces the camera and introduces the genuine product with a friendly expression. 2–6s DEMONSTRATION: An adult Malaysian presenter sits in a stationary car, points to the dashcam already mounted near the windscreen and shows its actual exterior. Only the adult speaks. Any child or pet is treated calmly and respectfully, with safe natural movement. 6–8s DETAIL: Cut to a close-up of an authentic visible product feature; maintain product continuity and real-world scale. 8–10s CTA: Return to the adult presenter's face and the product as the invitation finishes. EXACT ON-CAMERA MALAY MALAYSIA DIALOGUE: “Ini dashcam dalam kereta saya. Jom tengok!” Deliver this exact line naturally, with accurate lip sync and a Malaysian Malay accent. No Indonesian accent, separate narrator or extra dialogue. Natural ambience with subtle instrumental music. No subtitles, text overlay, added logo, watermark, invented specifications or accessories."
+    },
+    {
+      "id": "v9_full10_modeltalk_096",
+      "base_prompt_id": "v9_full10_product_018",
+      "subcategory_id": "toy_building",
+      "product_type": "building bricks",
+      "duration_seconds": 10,
+      "voice_type": "on_camera_model",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_MODEL_TALK_QA",
+      "full_prompt": "Generate exactly one photorealistic 10-second vertical 9:16 Malaysian affiliate product video. Product: building bricks. Use the supplied product reference image as the sole source for the product's exact appearance; preserve visible color, pattern, proportions, shape and components. LOCATION: A bright family playroom. 0–2s HOOK: An adult Malaysian presenter faces the camera and introduces the genuine product with a friendly expression. 2–6s DEMONSTRATION: An adult Malaysian presenter joins a seated child to connect two of the actual visible bricks on a table. Only the adult speaks. Any child or pet is treated calmly and respectfully, with safe natural movement. 6–8s DETAIL: Cut to a close-up of an authentic visible product feature; maintain product continuity and real-world scale. 8–10s CTA: Return to the adult presenter's face and the product as the invitation finishes. EXACT ON-CAMERA MALAY MALAYSIA DIALOGUE: “Jom tengok permainan blok ini bersama-sama!” Deliver this exact line naturally, with accurate lip sync and a Malaysian Malay accent. No Indonesian accent, separate narrator or extra dialogue. Natural ambience with subtle instrumental music. No subtitles, text overlay, added logo, watermark, invented specifications or accessories."
+    },
+    {
+      "id": "v9_full10_modeltalk_097",
+      "base_prompt_id": "v9_full10_product_034",
+      "subcategory_id": "toy_figure",
+      "product_type": "plush toy",
+      "duration_seconds": 10,
+      "voice_type": "on_camera_model",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_MODEL_TALK_QA",
+      "full_prompt": "Generate exactly one photorealistic 10-second vertical 9:16 Malaysian affiliate product video. Product: plush toy. Use the supplied product reference image as the sole source for the product's exact appearance; preserve visible color, pattern, proportions, shape and components. LOCATION: A cozy Malaysian family playroom. 0–2s HOOK: An adult Malaysian presenter faces the camera and introduces the genuine product with a friendly expression. 2–6s DEMONSTRATION: An adult Malaysian presenter sits beside a child holding the actual plush toy, then shows its visible shape to camera. Only the adult speaks. Any child or pet is treated calmly and respectfully, with safe natural movement. 6–8s DETAIL: Cut to a close-up of an authentic visible product feature; maintain product continuity and real-world scale. 8–10s CTA: Return to the adult presenter's face and the product as the invitation finishes. EXACT ON-CAMERA MALAY MALAYSIA DIALOGUE: “Comelnya patung ini. Jom tengok dekat-dekat!” Deliver this exact line naturally, with accurate lip sync and a Malaysian Malay accent. No Indonesian accent, separate narrator or extra dialogue. Natural ambience with subtle instrumental music. No subtitles, text overlay, added logo, watermark, invented specifications or accessories."
+    },
+    {
+      "id": "v9_full10_modeltalk_098",
+      "base_prompt_id": "v9_full10_product_045",
+      "subcategory_id": "fashion_kids",
+      "product_type": "romper",
+      "duration_seconds": 10,
+      "voice_type": "on_camera_model",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_MODEL_TALK_QA",
+      "full_prompt": "Generate exactly one photorealistic 10-second vertical 9:16 Malaysian affiliate product video. Product: romper. Use the supplied product reference image as the sole source for the product's exact appearance; preserve visible color, pattern, proportions, shape and components. LOCATION: A bright family playroom. 0–2s HOOK: An adult Malaysian presenter faces the camera and introduces the genuine product with a friendly expression. 2–6s DEMONSTRATION: An adult Malaysian presenter stands beside a young child wearing the exact romper and gently points out its visible design. Only the adult speaks. Any child or pet is treated calmly and respectfully, with safe natural movement. 6–8s DETAIL: Cut to a close-up of an authentic visible product feature; maintain product continuity and real-world scale. 8–10s CTA: Return to the adult presenter's face and the product as the invitation finishes. EXACT ON-CAMERA MALAY MALAYSIA DIALOGUE: “Romper ini comel bila dipakai. Jom tengok!” Deliver this exact line naturally, with accurate lip sync and a Malaysian Malay accent. No Indonesian accent, separate narrator or extra dialogue. Natural ambience with subtle instrumental music. No subtitles, text overlay, added logo, watermark, invented specifications or accessories."
+    },
+    {
+      "id": "v9_full10_modeltalk_099",
+      "base_prompt_id": "v9_full10_product_069",
+      "subcategory_id": "pet_toy",
+      "product_type": "ball toy",
+      "duration_seconds": 10,
+      "voice_type": "on_camera_model",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_MODEL_TALK_QA",
+      "full_prompt": "Generate exactly one photorealistic 10-second vertical 9:16 Malaysian affiliate product video. Product: ball toy. Use the supplied product reference image as the sole source for the product's exact appearance; preserve visible color, pattern, proportions, shape and components. LOCATION: A shaded backyard. 0–2s HOOK: An adult Malaysian presenter faces the camera and introduces the genuine product with a friendly expression. 2–6s DEMONSTRATION: An adult Malaysian presenter rolls the exact ball toy gently to a calm dog and watches the dog play. Only the adult speaks. Any child or pet is treated calmly and respectfully, with safe natural movement. 6–8s DETAIL: Cut to a close-up of an authentic visible product feature; maintain product continuity and real-world scale. 8–10s CTA: Return to the adult presenter's face and the product as the invitation finishes. EXACT ON-CAMERA MALAY MALAYSIA DIALOGUE: “Jom tengok si bulus main bola ini!” Deliver this exact line naturally, with accurate lip sync and a Malaysian Malay accent. No Indonesian accent, separate narrator or extra dialogue. Natural ambience with subtle instrumental music. No subtitles, text overlay, added logo, watermark, invented specifications or accessories."
+    },
+    {
+      "id": "v9_full10_modeltalk_100",
+      "base_prompt_id": "v9_full10_product_086",
+      "subcategory_id": "hijab_other",
+      "product_type": "tudung sekolah",
+      "duration_seconds": 10,
+      "voice_type": "on_camera_model",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_MODEL_TALK_QA",
+      "full_prompt": "Generate exactly one photorealistic 10-second vertical 9:16 Malaysian affiliate product video. Product: tudung sekolah. Use the supplied product reference image as the sole source for the product's exact appearance; preserve visible color, pattern, proportions, shape and components. LOCATION: A bright school corridor. 0–2s HOOK: An adult Malaysian presenter faces the camera and introduces the genuine product with a friendly expression. 2–6s DEMONSTRATION: An adult Malaysian presenter stands beside a school-age girl wearing the exact school hijab and shows its real drape. Only the adult speaks. Any child or pet is treated calmly and respectfully, with safe natural movement. 6–8s DETAIL: Cut to a close-up of an authentic visible product feature; maintain product continuity and real-world scale. 8–10s CTA: Return to the adult presenter's face and the product as the invitation finishes. EXACT ON-CAMERA MALAY MALAYSIA DIALOGUE: “Tudung sekolah ini nampak kemas. Jom tengok!” Deliver this exact line naturally, with accurate lip sync and a Malaysian Malay accent. No Indonesian accent, separate narrator or extra dialogue. Natural ambience with subtle instrumental music. No subtitles, text overlay, added logo, watermark, invented specifications or accessories."
+    }
+  ]
+}

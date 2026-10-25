@@ -1,0 +1,28 @@
+name: V9 cookware draft integrity
+on:
+  push:
+    branches:
+      - staging/klippo-full-prompt-standalone-v2-20261024
+    paths:
+      - 'tests/test_v9_cookware_shortlist.py'
+      - 'tests/test_v9_product_type_taxonomy.py'
+      - 'prompts/full_prompt_library/v9_product_types_*.json'
+      - 'prompts/full_prompt_library/v9_cookware_*.json'
+      - '.github/workflows/v9-cookware-draft-check.yml'
+  pull_request:
+    paths:
+      - 'tests/test_v9_cookware_shortlist.py'
+      - 'prompts/full_prompt_library/v9_cookware_*.json'
+  workflow_dispatch:
+jobs:
+  validate-staged-cookware:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Validate staged cookware shortlist without activation
+        run: |
+          python -m unittest discover -s tests -p 'test_v9_cookware_shortlist.py' -v
+          python -m unittest discover -s tests -p 'test_v9_product_type_taxonomy.py' -v

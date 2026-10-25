@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "status": "DRAFT_TAXONOMY_OVERLAY",
+  "runtime_enabled": false,
+  "original_records_preserved": true,
+  "overrides": {
+    "v9_creative_modeltalk_026": {
+      "subcategory_id": "pet_other",
+      "product_type": "pet bowl",
+      "full_prompt_source": "original_draft_with_canonical_metadata_only"
+    },
+    "v9_creative_modeltalk_027": {
+      "subcategory_id": "baby_clothing",
+      "product_type": "baby bib",
+      "full_prompt_source": "original_draft_with_canonical_metadata_only"
+    },
+    "v9_creative_modeltalk_028": {
+      "subcategory_id": "auto_care",
+      "product_type": "microfiber cloth",
+      "full_prompt_source": "original_draft_with_canonical_metadata_only"
+    },
+    "v9_creative_modeltalk_041": {
+      "subcategory_id": "gadget_computer",
+      "product_type": "mouse",
+      "full_prompt_source": "original_draft_with_canonical_metadata_only"
+    },
+    "v9_creative_modeltalk_047": {
+      "subcategory_id": "stationery_pen",
+      "product_type": "gel pen",
+      "full_prompt_source": "original_draft_with_canonical_metadata_only"
+    },
+    "v9_creative_modeltalk_048": {
+      "subcategory_id": "sports_outdoor",
+      "product_type": "camping tent",
+      "full_prompt_source": "v9_corrected_three_full_prompts_20261025.json"
+    },
+    "v9_creative_modeltalk_049": {
+      "subcategory_id": "auto_car",
+      "product_type": "car phone holder",
+      "full_prompt_source": "original_draft_with_canonical_metadata_only"
+    },
+    "v9_creative_modeltalk_050": {
+      "subcategory_id": "stationery_office",
+      "product_type": "desk organizer",
+      "full_prompt_source": "v9_corrected_three_full_prompts_20261025.json"
+    },
+    "v9_creative_modeltalk_056": {
+      "subcategory_id": "hijab_sport",
+      "product_type": "running",
+      "full_prompt_source": "original_draft_with_canonical_metadata_only"
+    },
+    "v9_creative_modeltalk_064": {
+      "subcategory_id": "gadget_other",
+      "product_type": "projector",
+      "full_prompt_source": "original_draft_with_canonical_metadata_only"
+    },
+    "v9_creative_modeltalk_073": {
+      "subcategory_id": "hijab_inner",
+      "product_type": "ninja",
+      "full_prompt_source": "original_draft_with_canonical_metadata_only"
+    },
+    "v9_creative_modeltalk_088": {
+      "subcategory_id": "office_storage",
+      "product_type": "document tray",
+      "full_prompt_source": "v9_corrected_three_full_prompts_20261025.json"
+    }
+  }
+}

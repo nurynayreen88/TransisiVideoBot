@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "status": "DRAFT_CREATIVE_STATIC_AUDIT",
+  "runtime_enabled": false,
+  "total": 70,
+  "unique_ids": 70,
+  "unique_concepts": 69,
+  "unique_product_type_pairs": 70,
+  "issues": [],
+  "render_tested": false,
+  "limitations": [
+    "Static checks do not validate realism, creative quality or spoken timing.",
+    "Some category labels may need exact taxonomy reconciliation."
+  ]
+}

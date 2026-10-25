@@ -1,0 +1,223 @@
+{
+  "schema_version": 1,
+  "status": "DRAFT_PRODUCT_FIT_RULES",
+  "runtime_enabled": false,
+  "category": "beauty",
+  "rules": {
+    "cleanser": [
+      "Show cleanser dispensed into palm at sink",
+      "Hands and bottle close-up",
+      "No skin treatment claims"
+    ],
+    "toner": [
+      "Apply toner to cotton pad",
+      "Vanity tabletop",
+      "No pore reduction claims"
+    ],
+    "serum": [
+      "Apply a small drop from visible dispenser",
+      "Face and bottle detail",
+      "No anti-aging claims"
+    ],
+    "moisturizer": [
+      "Apply small amount to cheek",
+      "Face close-up",
+      "No clinical hydration claims"
+    ],
+    "sunscreen": [
+      "Show application on forearm",
+      "Hand close-up",
+      "No invented SPF rating"
+    ],
+    "face_mask": [
+      "Show sealed product then gentle face application",
+      "Face and pack",
+      "No instant skin transformation"
+    ],
+    "exfoliant": [
+      "Show product texture on palm",
+      "Macro texture",
+      "No medical claims"
+    ],
+    "lipstick": [
+      "Apply lipstick to adult lips",
+      "Lip close-up",
+      "No invented shade"
+    ],
+    "lip_tint": [
+      "Apply lip tint",
+      "Lip close-up",
+      "No unverified transfer-proof claim"
+    ],
+    "foundation": [
+      "Blend foundation on cheek",
+      "Face close-up",
+      "No coverage exaggeration"
+    ],
+    "concealer": [
+      "Blend small amount under eye",
+      "Face close-up",
+      "No skin transformation"
+    ],
+    "powder": [
+      "Use puff or brush if provided",
+      "Vanity close-up",
+      "No invented accessory"
+    ],
+    "blusher": [
+      "Apply blush to cheek",
+      "Face close-up",
+      "No altered shade"
+    ],
+    "eyeshadow": [
+      "Apply eyeshadow on eyelid",
+      "Eye close-up",
+      "No invented palette colors"
+    ],
+    "mascara": [
+      "Apply mascara to lashes",
+      "Eye close-up",
+      "No lash growth claims"
+    ],
+    "shampoo": [
+      "Dispense shampoo into palm near shower",
+      "Bottle and hands",
+      "No hair regrowth claims"
+    ],
+    "conditioner": [
+      "Apply conditioner to hair lengths",
+      "Hair close-up",
+      "No repair claims"
+    ],
+    "hair_oil": [
+      "Apply a small amount to hair ends",
+      "Hair close-up",
+      "No growth claims"
+    ],
+    "hair_mask": [
+      "Show hair mask texture and application",
+      "Hands and hair",
+      "No repair claims"
+    ],
+    "hair_serum": [
+      "Apply hair serum to ends",
+      "Hair close-up",
+      "No hair regrowth claims"
+    ],
+    "scalp_tonic": [
+      "Show tonic application near hair parting",
+      "Scalp close-up",
+      "No medical claims"
+    ],
+    "hair_spray": [
+      "Show careful mist away from eyes",
+      "Upper-body shot",
+      "No hold-duration claim"
+    ],
+    "eau_de_parfum": [
+      "Spray perfume on wrist",
+      "Wrist and bottle close-up",
+      "No longevity claims"
+    ],
+    "eau_de_toilette": [
+      "Spray perfume on wrist",
+      "Bottle close-up",
+      "No longevity claims"
+    ],
+    "body_mist": [
+      "Spray mist on forearm",
+      "Bottle and arm",
+      "No longevity claims"
+    ],
+    "solid_perfume": [
+      "Apply solid perfume to wrist",
+      "Hand close-up",
+      "No invented applicator"
+    ],
+    "roll_on_perfume": [
+      "Roll applicator on wrist",
+      "Macro detail",
+      "No longevity claims"
+    ],
+    "body_wash": [
+      "Dispense body wash onto washcloth",
+      "Hands and bottle",
+      "No antibacterial claims"
+    ],
+    "body_lotion": [
+      "Apply lotion on forearm",
+      "Skin close-up",
+      "No medical claims"
+    ],
+    "hand_cream": [
+      "Rub hand cream onto hands",
+      "Hand close-up",
+      "No treatment claims"
+    ],
+    "deodorant": [
+      "Show closed pack then appropriate underarm application",
+      "Upper torso crop",
+      "No 48-hour claim"
+    ],
+    "body_scrub": [
+      "Show texture on palm",
+      "Macro texture",
+      "No skin whitening claims"
+    ],
+    "foot_cream": [
+      "Apply cream to heel",
+      "Foot close-up",
+      "No healing claims"
+    ],
+    "makeup_brush": [
+      "Blend powder with brush",
+      "Brush detail",
+      "No invented bristle material"
+    ],
+    "beauty_sponge": [
+      "Blend foundation using sponge",
+      "Face close-up",
+      "No invented antimicrobial feature"
+    ],
+    "eyelash_curler": [
+      "Use curler carefully on lashes",
+      "Eye close-up",
+      "No lash growth claims"
+    ],
+    "facial_roller": [
+      "Roll gently across cheek",
+      "Face close-up",
+      "No slimming claims"
+    ],
+    "hair_dryer": [
+      "Dry hair using actual nozzle",
+      "Hair and dryer",
+      "No invented heat setting"
+    ],
+    "hair_straightener": [
+      "Straighten small hair section",
+      "Hair and tool",
+      "No temperature claim"
+    ],
+    "nail_care_kit": [
+      "Arrange and use visible nail tools",
+      "Hands close-up",
+      "No invented attachments"
+    ],
+    "lip_balm": [
+      "Apply balm to lips",
+      "Lip close-up",
+      "No medical claims"
+    ],
+    "grooming_kit": [
+      "Display and use a visible grooming tool",
+      "Tabletop and hands",
+      "No invented blades"
+    ],
+    "beauty_travel_kit": [
+      "Pack visible beauty containers in pouch",
+      "Vanity overhead",
+      "No unverified capacity"
+    ]
+  }
+}

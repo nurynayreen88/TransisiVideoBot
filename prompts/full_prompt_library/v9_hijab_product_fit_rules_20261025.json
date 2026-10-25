@@ -1,0 +1,163 @@
+{
+  "schema_version": 1,
+  "status": "DRAFT_PRODUCT_FIT_RULES",
+  "runtime_enabled": false,
+  "category": "hijab",
+  "rules": {
+    "bawal_cotton": [
+      "Adult model folds and styles square cotton hijab",
+      "Head and shoulders",
+      "Do not invent fabric print"
+    ],
+    "bawal_satin": [
+      "Adult model drapes square satin hijab",
+      "Head and shoulders",
+      "Do not change sheen"
+    ],
+    "bawal_chiffon": [
+      "Adult model drapes lightweight square hijab",
+      "Head and shoulders",
+      "Do not add opaque lining"
+    ],
+    "bawal_voile": [
+      "Adult model pins square voile hijab",
+      "Head and shoulders",
+      "Do not invent embellishments"
+    ],
+    "bawal_printed": [
+      "Adult model shows visible printed pattern",
+      "Head and shoulders",
+      "Do not alter pattern"
+    ],
+    "shawl_chiffon": [
+      "Adult model wraps chiffon shawl once",
+      "Head and shoulders",
+      "Do not add prints"
+    ],
+    "shawl_satin": [
+      "Adult model drapes satin shawl",
+      "Head and shoulders",
+      "Do not change sheen"
+    ],
+    "shawl_jersey": [
+      "Adult model styles jersey shawl",
+      "Head and shoulders",
+      "Do not invent pins"
+    ],
+    "shawl_crinkle": [
+      "Adult model arranges crinkle texture",
+      "Head and shoulders",
+      "Do not smooth texture"
+    ],
+    "shawl_pashmina": [
+      "Adult model drapes long pashmina",
+      "Head and shoulders",
+      "Do not change length"
+    ],
+    "instant_one_piece": [
+      "Adult model puts on one-piece instant hijab",
+      "Head and shoulders",
+      "Do not invent layers"
+    ],
+    "instant_two_piece": [
+      "Adult model adjusts two visible pieces",
+      "Head and shoulders",
+      "Do not add pieces"
+    ],
+    "instant_awning": [
+      "Adult model adjusts existing awning",
+      "Head close-up",
+      "Do not invent stiff brim"
+    ],
+    "instant_khimar": [
+      "Adult model shows khimar drape",
+      "Upper body",
+      "Do not shorten coverage"
+    ],
+    "sport_running": [
+      "Adult model walks or jogs lightly in sport hijab",
+      "Head and torso",
+      "Do not claim sweat resistance"
+    ],
+    "sport_swim": [
+      "Adult model stands poolside wearing swim hijab",
+      "Upper body",
+      "Do not claim UV protection"
+    ],
+    "sport_gym": [
+      "Adult model does gentle gym warmup",
+      "Upper body",
+      "Do not invent stretch specification"
+    ],
+    "sport_cycling": [
+      "Adult model wears hijab with bicycle helmet if compatible",
+      "Upper body",
+      "Do not claim helmet compatibility"
+    ],
+    "inner_ninja": [
+      "Adult model shows ninja inner under hijab",
+      "Head and neck",
+      "Do not expose more than product styling requires"
+    ],
+    "inner_neck": [
+      "Adult model adjusts neck-cover inner",
+      "Head and neck",
+      "Do not change coverage"
+    ],
+    "inner_awning": [
+      "Adult model shows inner awning shape",
+      "Head close-up",
+      "Do not add rigid brim"
+    ],
+    "inner_tube": [
+      "Adult model wears tube inner",
+      "Head close-up",
+      "Do not invent ties"
+    ],
+    "inner_tieback": [
+      "Adult model ties existing straps",
+      "Back-of-head close-up",
+      "Do not add straps"
+    ],
+    "accessory_pin": [
+      "Hands fasten pin to fabric carefully",
+      "Macro close-up",
+      "Do not invent gemstones"
+    ],
+    "accessory_magnet": [
+      "Hands position matching magnets on hijab",
+      "Macro close-up",
+      "Do not invent magnetic strength"
+    ],
+    "accessory_brooch": [
+      "Hands attach visible brooch",
+      "Macro close-up",
+      "Do not add ornaments"
+    ],
+    "accessory_clip": [
+      "Hands secure visible clip",
+      "Macro close-up",
+      "Do not invent spring type"
+    ],
+    "accessory_ring": [
+      "Hands thread scarf through ring",
+      "Macro close-up",
+      "Do not change ring size"
+    ],
+    "other_school": [
+      "Student wears school hijab in age-appropriate setting",
+      "Head and shoulders",
+      "Do not invent school badge"
+    ],
+    "other_long": [
+      "Adult model shows full long-hijab drape",
+      "Upper body",
+      "Do not shorten garment"
+    ],
+    "other_telekung": [
+      "Adult model arranges prayer garment respectfully",
+      "Upper body",
+      "Do not change coverage"
+    ]
+  }
+}

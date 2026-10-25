@@ -1,0 +1,227 @@
+{
+  "schema_version": 1,
+  "status": "DRAFT_VOICE_QA",
+  "runtime_enabled": false,
+  "variations": [
+    {
+      "id": "v9_full10_vo_061",
+      "base_prompt_id": "v9_full10_product_061",
+      "subcategory_id": "stationery_books",
+      "product_type": "activity book",
+      "duration_seconds": 10,
+      "voice_type": "background_voiceover",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_VOICE_QA",
+      "full_prompt": "Generate a single photorealistic 10-second vertical 9:16 Malaysian affiliate product video. Product type: activity book. Treat the supplied reference image as authoritative; reproduce its exact shape, design, visible color, print, components and scale. SETTING: Family study table. 0–2s HOOK: Begin on the actual product in a natural compelling close-up. 2–6s DEMONSTRATION: A school-age child with adult nearby turns to a visible activity page and traces a simple exercise. 6–8s FEATURE: Highlight a real visible detail using top-down page detail; retain continuity and physically plausible motion. 8–10s CTA ENDING: Finish with an inviting steady hero shot of the unchanged product, no sales text. AUDIO: One adult Malaysian Malay female background narrator says exactly: “Jom tengok buku aktiviti untuk si kecil!” in natural Bahasa Melayu Malaysia, with a calm pace that fits 10 seconds. Subtle instrumental and real ambient sound stay quiet under the voice. The spoken invitation ends with the final hero product shot. No other dialogue. No subtitles, overlay, invented logos or watermark. Do not invent book contents. Never add unverified accessories, specifications or capabilities."
+    },
+    {
+      "id": "v9_full10_vo_062",
+      "base_prompt_id": "v9_full10_product_062",
+      "subcategory_id": "stationery_art",
+      "product_type": "watercolor",
+      "duration_seconds": 10,
+      "voice_type": "background_voiceover",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_VOICE_QA",
+      "full_prompt": "Generate a single photorealistic 10-second vertical 9:16 Malaysian affiliate product video. Product type: watercolor. Treat the supplied reference image as authoritative; reproduce its exact shape, design, visible color, print, components and scale. SETTING: Bright art desk. 0–2s HOOK: Begin on the actual product in a natural compelling close-up. 2–6s DEMONSTRATION: Adult wets a brush and paints a small swatch with the actual watercolor palette. 6–8s FEATURE: Highlight a real visible detail using hand-and-palette macro; retain continuity and physically plausible motion. 8–10s CTA ENDING: Finish with an inviting steady hero shot of the unchanged product, no sales text. AUDIO: One adult Malaysian Malay female background narrator says exactly: “Warna air ini menarik. Jom tengok!” in natural Bahasa Melayu Malaysia, with a calm pace that fits 10 seconds. Subtle instrumental and real ambient sound stay quiet under the voice. The spoken invitation ends with the final hero product shot. No other dialogue. No subtitles, overlay, invented logos or watermark. Do not invent palette colors. Never add unverified accessories, specifications or capabilities."
+    },
+    {
+      "id": "v9_full10_vo_063",
+      "base_prompt_id": "v9_full10_product_063",
+      "subcategory_id": "stationery_school",
+      "product_type": "pencil case",
+      "duration_seconds": 10,
+      "voice_type": "background_voiceover",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_VOICE_QA",
+      "full_prompt": "Generate a single photorealistic 10-second vertical 9:16 Malaysian affiliate product video. Product type: pencil case. Treat the supplied reference image as authoritative; reproduce its exact shape, design, visible color, print, components and scale. SETTING: School desk. 0–2s HOOK: Begin on the actual product in a natural compelling close-up. 2–6s DEMONSTRATION: Student places two pencils into the visible pencil case and closes its real fastener. 6–8s FEATURE: Highlight a real visible detail using overhead school desk; retain continuity and physically plausible motion. 8–10s CTA ENDING: Finish with an inviting steady hero shot of the unchanged product, no sales text. AUDIO: One adult Malaysian Malay female background narrator says exactly: “Pensel lebih tersusun. Jom tengok!” in natural Bahasa Melayu Malaysia, with a calm pace that fits 10 seconds. Subtle instrumental and real ambient sound stay quiet under the voice. The spoken invitation ends with the final hero product shot. No other dialogue. No subtitles, overlay, invented logos or watermark. Do not invent pockets. Never add unverified accessories, specifications or capabilities."
+    },
+    {
+      "id": "v9_full10_vo_064",
+      "base_prompt_id": "v9_full10_product_064",
+      "subcategory_id": "sports_running",
+      "product_type": "running belt",
+      "duration_seconds": 10,
+      "voice_type": "background_voiceover",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_VOICE_QA",
+      "full_prompt": "Generate a single photorealistic 10-second vertical 9:16 Malaysian affiliate product video. Product type: running belt. Treat the supplied reference image as authoritative; reproduce its exact shape, design, visible color, print, components and scale. SETTING: Shaded jogging track. 0–2s HOOK: Begin on the actual product in a natural compelling close-up. 2–6s DEMONSTRATION: Adult fits running belt around waist and walks briskly. 6–8s FEATURE: Highlight a real visible detail using waist-level tracking; retain continuity and physically plausible motion. 8–10s CTA ENDING: Finish with an inviting steady hero shot of the unchanged product, no sales text. AUDIO: One adult Malaysian Malay female background narrator says exactly: “Jom tengok tali pinggang larian ini!” in natural Bahasa Melayu Malaysia, with a calm pace that fits 10 seconds. Subtle instrumental and real ambient sound stay quiet under the voice. The spoken invitation ends with the final hero product shot. No other dialogue. No subtitles, overlay, invented logos or watermark. Do not invent bottle holder. Never add unverified accessories, specifications or capabilities."
+    },
+    {
+      "id": "v9_full10_vo_065",
+      "base_prompt_id": "v9_full10_product_065",
+      "subcategory_id": "sports_cycling",
+      "product_type": "bike light",
+      "duration_seconds": 10,
+      "voice_type": "background_voiceover",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_VOICE_QA",
+      "full_prompt": "Generate a single photorealistic 10-second vertical 9:16 Malaysian affiliate product video. Product type: bike light. Treat the supplied reference image as authoritative; reproduce its exact shape, design, visible color, print, components and scale. SETTING: Stationary bicycle at park. 0–2s HOOK: Begin on the actual product in a natural compelling close-up. 2–6s DEMONSTRATION: Adult attaches the bike light to its visible mounting position. 6–8s FEATURE: Highlight a real visible detail using handlebar close-up; retain continuity and physically plausible motion. 8–10s CTA ENDING: Finish with an inviting steady hero shot of the unchanged product, no sales text. AUDIO: One adult Malaysian Malay female background narrator says exactly: “Lampu basikal ini nampak kemas. Jom tengok!” in natural Bahasa Melayu Malaysia, with a calm pace that fits 10 seconds. Subtle instrumental and real ambient sound stay quiet under the voice. The spoken invitation ends with the final hero product shot. No other dialogue. No subtitles, overlay, invented logos or watermark. Do not invent lumen rating. Never add unverified accessories, specifications or capabilities."
+    },
+    {
+      "id": "v9_full10_vo_066",
+      "base_prompt_id": "v9_full10_product_066",
+      "subcategory_id": "sports_outdoor",
+      "product_type": "camping tent",
+      "duration_seconds": 10,
+      "voice_type": "background_voiceover",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_VOICE_QA",
+      "full_prompt": "Generate a single photorealistic 10-second vertical 9:16 Malaysian affiliate product video. Product type: camping tent. Treat the supplied reference image as authoritative; reproduce its exact shape, design, visible color, print, components and scale. SETTING: Open campsite in daylight. 0–2s HOOK: Begin on the actual product in a natural compelling close-up. 2–6s DEMONSTRATION: Two adults finish securing an already pitched tent and show its real door. 6–8s FEATURE: Highlight a real visible detail using wide campsite and seam detail; retain continuity and physically plausible motion. 8–10s CTA ENDING: Finish with an inviting steady hero shot of the unchanged product, no sales text. AUDIO: One adult Malaysian Malay female background narrator says exactly: “Jom tengok khemah ini dari dekat!” in natural Bahasa Melayu Malaysia, with a calm pace that fits 10 seconds. Subtle instrumental and real ambient sound stay quiet under the voice. The spoken invitation ends with the final hero product shot. No other dialogue. No subtitles, overlay, invented logos or watermark. Do not invent weatherproofing. Never add unverified accessories, specifications or capabilities."
+    },
+    {
+      "id": "v9_full10_vo_067",
+      "base_prompt_id": "v9_full10_product_067",
+      "subcategory_id": "sports_bottle",
+      "product_type": "sports shaker",
+      "duration_seconds": 10,
+      "voice_type": "background_voiceover",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_VOICE_QA",
+      "full_prompt": "Generate a single photorealistic 10-second vertical 9:16 Malaysian affiliate product video. Product type: sports shaker. Treat the supplied reference image as authoritative; reproduce its exact shape, design, visible color, print, components and scale. SETTING: Gym hydration station. 0–2s HOOK: Begin on the actual product in a natural compelling close-up. 2–6s DEMONSTRATION: Adult adds water to shaker, closes the visible lid and shakes briefly. 6–8s FEATURE: Highlight a real visible detail using hands-and-bottle close-up; retain continuity and physically plausible motion. 8–10s CTA ENDING: Finish with an inviting steady hero shot of the unchanged product, no sales text. AUDIO: One adult Malaysian Malay female background narrator says exactly: “Botol shaker ini mudah dibawa. Jom tengok!” in natural Bahasa Melayu Malaysia, with a calm pace that fits 10 seconds. Subtle instrumental and real ambient sound stay quiet under the voice. The spoken invitation ends with the final hero product shot. No other dialogue. No subtitles, overlay, invented logos or watermark. Do not invent mixing mechanism. Never add unverified accessories, specifications or capabilities."
+    },
+    {
+      "id": "v9_full10_vo_068",
+      "base_prompt_id": "v9_full10_product_068",
+      "subcategory_id": "pet_grooming",
+      "product_type": "pet brush",
+      "duration_seconds": 10,
+      "voice_type": "background_voiceover",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_VOICE_QA",
+      "full_prompt": "Generate a single photorealistic 10-second vertical 9:16 Malaysian affiliate product video. Product type: pet brush. Treat the supplied reference image as authoritative; reproduce its exact shape, design, visible color, print, components and scale. SETTING: Bright pet grooming corner. 0–2s HOOK: Begin on the actual product in a natural compelling close-up. 2–6s DEMONSTRATION: Adult gently brushes a calm cat with the actual brush. 6–8s FEATURE: Highlight a real visible detail using fur-level close-up; retain continuity and physically plausible motion. 8–10s CTA ENDING: Finish with an inviting steady hero shot of the unchanged product, no sales text. AUDIO: One adult Malaysian Malay female background narrator says exactly: “Jom tengok cara sikat bulu si bulus!” in natural Bahasa Melayu Malaysia, with a calm pace that fits 10 seconds. Subtle instrumental and real ambient sound stay quiet under the voice. The spoken invitation ends with the final hero product shot. No other dialogue. No subtitles, overlay, invented logos or watermark. No guaranteed shedding reduction. Never add unverified accessories, specifications or capabilities."
+    },
+    {
+      "id": "v9_full10_vo_069",
+      "base_prompt_id": "v9_full10_product_069",
+      "subcategory_id": "pet_toy",
+      "product_type": "ball toy",
+      "duration_seconds": 10,
+      "voice_type": "background_voiceover",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_VOICE_QA",
+      "full_prompt": "Generate a single photorealistic 10-second vertical 9:16 Malaysian affiliate product video. Product type: ball toy. Treat the supplied reference image as authoritative; reproduce its exact shape, design, visible color, print, components and scale. SETTING: Shaded backyard. 0–2s HOOK: Begin on the actual product in a natural compelling close-up. 2–6s DEMONSTRATION: Dog rolls the ball across a clear lawn under supervision. 6–8s FEATURE: Highlight a real visible detail using low tracking; retain continuity and physically plausible motion. 8–10s CTA ENDING: Finish with an inviting steady hero shot of the unchanged product, no sales text. AUDIO: One adult Malaysian Malay female background narrator says exactly: “Seronok si comel bermain. Jom tengok!” in natural Bahasa Melayu Malaysia, with a calm pace that fits 10 seconds. Subtle instrumental and real ambient sound stay quiet under the voice. The spoken invitation ends with the final hero product shot. No other dialogue. No subtitles, overlay, invented logos or watermark. Do not invent chew resistance. Never add unverified accessories, specifications or capabilities."
+    },
+    {
+      "id": "v9_full10_vo_070",
+      "base_prompt_id": "v9_full10_product_070",
+      "subcategory_id": "pet_bed",
+      "product_type": "pet cushion",
+      "duration_seconds": 10,
+      "voice_type": "background_voiceover",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_VOICE_QA",
+      "full_prompt": "Generate a single photorealistic 10-second vertical 9:16 Malaysian affiliate product video. Product type: pet cushion. Treat the supplied reference image as authoritative; reproduce its exact shape, design, visible color, print, components and scale. SETTING: Quiet living room corner. 0–2s HOOK: Begin on the actual product in a natural compelling close-up. 2–6s DEMONSTRATION: Calm cat settles on pet cushion naturally. 6–8s FEATURE: Highlight a real visible detail using pet-height side shot; retain continuity and physically plausible motion. 8–10s CTA ENDING: Finish with an inviting steady hero shot of the unchanged product, no sales text. AUDIO: One adult Malaysian Malay female background narrator says exactly: “Tempat rehat si bulus nampak nyaman. Jom tengok!” in natural Bahasa Melayu Malaysia, with a calm pace that fits 10 seconds. Subtle instrumental and real ambient sound stay quiet under the voice. The spoken invitation ends with the final hero product shot. No other dialogue. No subtitles, overlay, invented logos or watermark. No orthopedic claims. Never add unverified accessories, specifications or capabilities."
+    },
+    {
+      "id": "v9_full10_vo_071",
+      "base_prompt_id": "v9_full10_product_071",
+      "subcategory_id": "baby_feeding",
+      "product_type": "feeding bottle",
+      "duration_seconds": 10,
+      "voice_type": "background_voiceover",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_VOICE_QA",
+      "full_prompt": "Generate a single photorealistic 10-second vertical 9:16 Malaysian affiliate product video. Product type: feeding bottle. Treat the supplied reference image as authoritative; reproduce its exact shape, design, visible color, print, components and scale. SETTING: Clean kitchen counter. 0–2s HOOK: Begin on the actual product in a natural compelling close-up. 2–6s DEMONSTRATION: Adult prepares the clean baby bottle and closes its visible cap. 6–8s FEATURE: Highlight a real visible detail using bottle close-up; retain continuity and physically plausible motion. 8–10s CTA ENDING: Finish with an inviting steady hero shot of the unchanged product, no sales text. AUDIO: One adult Malaysian Malay female background narrator says exactly: “Jom tengok botol susu ini dari dekat!” in natural Bahasa Melayu Malaysia, with a calm pace that fits 10 seconds. Subtle instrumental and real ambient sound stay quiet under the voice. The spoken invitation ends with the final hero product shot. No other dialogue. No subtitles, overlay, invented logos or watermark. No anti-colic claim. Never add unverified accessories, specifications or capabilities."
+    },
+    {
+      "id": "v9_full10_vo_072",
+      "base_prompt_id": "v9_full10_product_072",
+      "subcategory_id": "baby_bath",
+      "product_type": "baby towel",
+      "duration_seconds": 10,
+      "voice_type": "background_voiceover",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_VOICE_QA",
+      "full_prompt": "Generate a single photorealistic 10-second vertical 9:16 Malaysian affiliate product video. Product type: baby towel. Treat the supplied reference image as authoritative; reproduce its exact shape, design, visible color, print, components and scale. SETTING: Bright nursery. 0–2s HOOK: Begin on the actual product in a natural compelling close-up. 2–6s DEMONSTRATION: Adult gently wraps a baby doll in the towel to show size and texture. 6–8s FEATURE: Highlight a real visible detail using hands-and-towel detail; retain continuity and physically plausible motion. 8–10s CTA ENDING: Finish with an inviting steady hero shot of the unchanged product, no sales text. AUDIO: One adult Malaysian Malay female background narrator says exactly: “Tuala bayi ini nampak lembut. Jom tengok!” in natural Bahasa Melayu Malaysia, with a calm pace that fits 10 seconds. Subtle instrumental and real ambient sound stay quiet under the voice. The spoken invitation ends with the final hero product shot. No other dialogue. No subtitles, overlay, invented logos or watermark. No hypoallergenic claims. Never add unverified accessories, specifications or capabilities."
+    },
+    {
+      "id": "v9_full10_vo_073",
+      "base_prompt_id": "v9_full10_product_073",
+      "subcategory_id": "baby_sleep",
+      "product_type": "swaddle",
+      "duration_seconds": 10,
+      "voice_type": "background_voiceover",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_VOICE_QA",
+      "full_prompt": "Generate a single photorealistic 10-second vertical 9:16 Malaysian affiliate product video. Product type: swaddle. Treat the supplied reference image as authoritative; reproduce its exact shape, design, visible color, print, components and scale. SETTING: Bright nursery. 0–2s HOOK: Begin on the actual product in a natural compelling close-up. 2–6s DEMONSTRATION: Adult demonstrates swaddle folding on a doll on a safe flat surface. 6–8s FEATURE: Highlight a real visible detail using overhead textile detail; retain continuity and physically plausible motion. 8–10s CTA ENDING: Finish with an inviting steady hero shot of the unchanged product, no sales text. AUDIO: One adult Malaysian Malay female background narrator says exactly: “Jom tengok cara lipat bedung ini!” in natural Bahasa Melayu Malaysia, with a calm pace that fits 10 seconds. Subtle instrumental and real ambient sound stay quiet under the voice. The spoken invitation ends with the final hero product shot. No other dialogue. No subtitles, overlay, invented logos or watermark. No sleep-safety claims. Never add unverified accessories, specifications or capabilities."
+    },
+    {
+      "id": "v9_full10_vo_074",
+      "base_prompt_id": "v9_full10_product_074",
+      "subcategory_id": "travel_pillow",
+      "product_type": "neck pillow",
+      "duration_seconds": 10,
+      "voice_type": "background_voiceover",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_VOICE_QA",
+      "full_prompt": "Generate a single photorealistic 10-second vertical 9:16 Malaysian affiliate product video. Product type: neck pillow. Treat the supplied reference image as authoritative; reproduce its exact shape, design, visible color, print, components and scale. SETTING: Airport waiting area. 0–2s HOOK: Begin on the actual product in a natural compelling close-up. 2–6s DEMONSTRATION: Adult traveler places the neck pillow around neck while seated. 6–8s FEATURE: Highlight a real visible detail using shoulder-level side shot; retain continuity and physically plausible motion. 8–10s CTA ENDING: Finish with an inviting steady hero shot of the unchanged product, no sales text. AUDIO: One adult Malaysian Malay female background narrator says exactly: “Bantal leher untuk perjalanan. Jom tengok!” in natural Bahasa Melayu Malaysia, with a calm pace that fits 10 seconds. Subtle instrumental and real ambient sound stay quiet under the voice. The spoken invitation ends with the final hero product shot. No other dialogue. No subtitles, overlay, invented logos or watermark. No medical support claim. Never add unverified accessories, specifications or capabilities."
+    },
+    {
+      "id": "v9_full10_vo_075",
+      "base_prompt_id": "v9_full10_product_075",
+      "subcategory_id": "travel_accessory",
+      "product_type": "luggage tag",
+      "duration_seconds": 10,
+      "voice_type": "background_voiceover",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_VOICE_QA",
+      "full_prompt": "Generate a single photorealistic 10-second vertical 9:16 Malaysian affiliate product video. Product type: luggage tag. Treat the supplied reference image as authoritative; reproduce its exact shape, design, visible color, print, components and scale. SETTING: Hotel lobby. 0–2s HOOK: Begin on the actual product in a natural compelling close-up. 2–6s DEMONSTRATION: Adult attaches luggage tag to suitcase handle and turns it to show its visible design. 6–8s FEATURE: Highlight a real visible detail using handle macro; retain continuity and physically plausible motion. 8–10s CTA ENDING: Finish with an inviting steady hero shot of the unchanged product, no sales text. AUDIO: One adult Malaysian Malay female background narrator says exactly: “Tag bagasi ini senang dikenal. Jom tengok!” in natural Bahasa Melayu Malaysia, with a calm pace that fits 10 seconds. Subtle instrumental and real ambient sound stay quiet under the voice. The spoken invitation ends with the final hero product shot. No other dialogue. No subtitles, overlay, invented logos or watermark. Do not invent tracking. Never add unverified accessories, specifications or capabilities."
+    },
+    {
+      "id": "v9_full10_vo_076",
+      "base_prompt_id": "v9_full10_product_076",
+      "subcategory_id": "auto_motorcycle",
+      "product_type": "motorcycle gloves",
+      "duration_seconds": 10,
+      "voice_type": "background_voiceover",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_VOICE_QA",
+      "full_prompt": "Generate a single photorealistic 10-second vertical 9:16 Malaysian affiliate product video. Product type: motorcycle gloves. Treat the supplied reference image as authoritative; reproduce its exact shape, design, visible color, print, components and scale. SETTING: Parked motorcycle in shaded area. 0–2s HOOK: Begin on the actual product in a natural compelling close-up. 2–6s DEMONSTRATION: Adult rider puts on the gloves and closes any visible fastening. 6–8s FEATURE: Highlight a real visible detail using hand and handlebar close-up; retain continuity and physically plausible motion. 8–10s CTA ENDING: Finish with an inviting steady hero shot of the unchanged product, no sales text. AUDIO: One adult Malaysian Malay female background narrator says exactly: “Sarung tangan ini nampak kemas. Jom tengok!” in natural Bahasa Melayu Malaysia, with a calm pace that fits 10 seconds. Subtle instrumental and real ambient sound stay quiet under the voice. The spoken invitation ends with the final hero product shot. No other dialogue. No subtitles, overlay, invented logos or watermark. No safety certification claim. Never add unverified accessories, specifications or capabilities."
+    },
+    {
+      "id": "v9_full10_vo_077",
+      "base_prompt_id": "v9_full10_product_077",
+      "subcategory_id": "auto_care",
+      "product_type": "car shampoo",
+      "duration_seconds": 10,
+      "voice_type": "background_voiceover",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_VOICE_QA",
+      "full_prompt": "Generate a single photorealistic 10-second vertical 9:16 Malaysian affiliate product video. Product type: car shampoo. Treat the supplied reference image as authoritative; reproduce its exact shape, design, visible color, print, components and scale. SETTING: Parked car wash area. 0–2s HOOK: Begin on the actual product in a natural compelling close-up. 2–6s DEMONSTRATION: Adult dilutes the product only as indicated on its visible label and washes a small car panel. 6–8s FEATURE: Highlight a real visible detail using panel and bottle close-up; retain continuity and physically plausible motion. 8–10s CTA ENDING: Finish with an inviting steady hero shot of the unchanged product, no sales text. AUDIO: One adult Malaysian Malay female background narrator says exactly: “Jom tengok cara cuci kereta ini!” in natural Bahasa Melayu Malaysia, with a calm pace that fits 10 seconds. Subtle instrumental and real ambient sound stay quiet under the voice. The spoken invitation ends with the final hero product shot. No other dialogue. No subtitles, overlay, invented logos or watermark. No ceramic coating claim. Never add unverified accessories, specifications or capabilities."
+    },
+    {
+      "id": "v9_full10_vo_078",
+      "base_prompt_id": "v9_full10_product_078",
+      "subcategory_id": "office_storage",
+      "product_type": "document tray",
+      "duration_seconds": 10,
+      "voice_type": "background_voiceover",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_VOICE_QA",
+      "full_prompt": "Generate a single photorealistic 10-second vertical 9:16 Malaysian affiliate product video. Product type: document tray. Treat the supplied reference image as authoritative; reproduce its exact shape, design, visible color, print, components and scale. SETTING: Bright office desk. 0–2s HOOK: Begin on the actual product in a natural compelling close-up. 2–6s DEMONSTRATION: Adult sorts three sheets into the visible tray sections. 6–8s FEATURE: Highlight a real visible detail using top-down desk shot; retain continuity and physically plausible motion. 8–10s CTA ENDING: Finish with an inviting steady hero shot of the unchanged product, no sales text. AUDIO: One adult Malaysian Malay female background narrator says exactly: “Dokumen lebih tersusun. Jom tengok!” in natural Bahasa Melayu Malaysia, with a calm pace that fits 10 seconds. Subtle instrumental and real ambient sound stay quiet under the voice. The spoken invitation ends with the final hero product shot. No other dialogue. No subtitles, overlay, invented logos or watermark. Do not invent tiers. Never add unverified accessories, specifications or capabilities."
+    },
+    {
+      "id": "v9_full10_vo_079",
+      "base_prompt_id": "v9_full10_product_079",
+      "subcategory_id": "other_garden",
+      "product_type": "watering can",
+      "duration_seconds": 10,
+      "voice_type": "background_voiceover",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_VOICE_QA",
+      "full_prompt": "Generate a single photorealistic 10-second vertical 9:16 Malaysian affiliate product video. Product type: watering can. Treat the supplied reference image as authoritative; reproduce its exact shape, design, visible color, print, components and scale. SETTING: Home garden patio. 0–2s HOOK: Begin on the actual product in a natural compelling close-up. 2–6s DEMONSTRATION: Adult waters potted herbs with the actual watering can. 6–8s FEATURE: Highlight a real visible detail using watering spout close-up; retain continuity and physically plausible motion. 8–10s CTA ENDING: Finish with an inviting steady hero shot of the unchanged product, no sales text. AUDIO: One adult Malaysian Malay female background narrator says exactly: “Jom siram pokok dengan bekas ini!” in natural Bahasa Melayu Malaysia, with a calm pace that fits 10 seconds. Subtle instrumental and real ambient sound stay quiet under the voice. The spoken invitation ends with the final hero product shot. No other dialogue. No subtitles, overlay, invented logos or watermark. Do not invent capacity. Never add unverified accessories, specifications or capabilities."
+    },
+    {
+      "id": "v9_full10_vo_080",
+      "base_prompt_id": "v9_full10_product_080",
+      "subcategory_id": "other_gift",
+      "product_type": "gift box",
+      "duration_seconds": 10,
+      "voice_type": "background_voiceover",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_VOICE_QA",
+      "full_prompt": "Generate a single photorealistic 10-second vertical 9:16 Malaysian affiliate product video. Product type: gift box. Treat the supplied reference image as authoritative; reproduce its exact shape, design, visible color, print, components and scale. SETTING: Festive Malaysian living room. 0–2s HOOK: Begin on the actual product in a natural compelling close-up. 2–6s DEMONSTRATION: Adult gently opens the actual gift box and closes it for a neat presentation. 6–8s FEATURE: Highlight a real visible detail using tabletop product macro; retain continuity and physically plausible motion. 8–10s CTA ENDING: Finish with an inviting steady hero shot of the unchanged product, no sales text. AUDIO: One adult Malaysian Malay female background narrator says exactly: “Kotak hadiah ini cantik dipandang. Jom tengok!” in natural Bahasa Melayu Malaysia, with a calm pace that fits 10 seconds. Subtle instrumental and real ambient sound stay quiet under the voice. The spoken invitation ends with the final hero product shot. No other dialogue. No subtitles, overlay, invented logos or watermark. Do not invent contents. Never add unverified accessories, specifications or capabilities."
+    }
+  ]
+}

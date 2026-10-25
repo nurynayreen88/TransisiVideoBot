@@ -1,0 +1,882 @@
+{
+  "schema_version": 1,
+  "subcategory_id": "home_kitchen_cookware",
+  "selection_policy": "50 concept shortlist: all 40 Malaysia-specific menu concepts and 10 diverse practical cookware demonstrations. Shortlist is not an active runtime catalog and does not certify actual render quality.",
+  "selection_count": 50,
+  "duration_record_count": 100,
+  "status": "SHORTLIST_PENDING_PRODUCT_FIT_AND_RENDER_QA",
+  "required_gates": [
+    "Resolve product-name-only flow versus prompts requiring an uploaded image master.",
+    "Match each prompt to a suitable cookware type; pot/pan/lid requirements are not universal.",
+    "Check physical realism, voice and lip sync, continuity across 20s segments, exact product fidelity and actual render.",
+    "Check menu appropriateness and distinctiveness; do not activate by count alone."
+  ],
+  "selected": [
+    {
+      "slot": 1,
+      "concept": "Rendang ayam",
+      "source_file": "v9_cookware_malaysian_menu_01_20261024.json",
+      "record_ids": [
+        "v9_cookware_malaysia01_01_10s",
+        "v9_cookware_malaysia01_01_20s"
+      ],
+      "duration_seconds": [
+        10,
+        20
+      ],
+      "voice_types": [
+        "MODEL_SPEECH"
+      ],
+      "selection_status": "SHORTLIST_PENDING_PRODUCT_FIT_AND_RENDER_QA"
+    },
+    {
+      "slot": 2,
+      "concept": "Asam pedas ikan",
+      "source_file": "v9_cookware_malaysian_menu_01_20261024.json",
+      "record_ids": [
+        "v9_cookware_malaysia01_02_10s",
+        "v9_cookware_malaysia01_02_20s"
+      ],
+      "duration_seconds": [
+        10,
+        20
+      ],
+      "voice_types": [
+        "BACKGROUND_NARRATION"
+      ],
+      "selection_status": "SHORTLIST_PENDING_PRODUCT_FIT_AND_RENDER_QA"
+    },
+    {
+      "slot": 3,
+      "concept": "Kari ikan",
+      "source_file": "v9_cookware_malaysian_menu_01_20261024.json",
+      "record_ids": [
+        "v9_cookware_malaysia01_03_10s",
+        "v9_cookware_malaysia01_03_20s"
+      ],
+      "duration_seconds": [
+        10,
+        20
+      ],
+      "voice_types": [
+        "BACKGROUND_NARRATION"
+      ],
+      "selection_status": "SHORTLIST_PENDING_PRODUCT_FIT_AND_RENDER_QA"
+    },
+    {
+      "slot": 4,
+      "concept": "Bubur lambuk",
+      "source_file": "v9_cookware_malaysian_menu_01_20261024.json",
+      "record_ids": [
+        "v9_cookware_malaysia01_04_10s",
+        "v9_cookware_malaysia01_04_20s"
+      ],
+      "duration_seconds": [
+        10,
+        20
+      ],
+      "voice_types": [
+        "MODEL_SPEECH"
+      ],
+      "selection_status": "SHORTLIST_PENDING_PRODUCT_FIT_AND_RENDER_QA"
+    },
+    {
+      "slot": 5,
+      "concept": "Pengat pisang",
+      "source_file": "v9_cookware_malaysian_menu_01_20261024.json",
+      "record_ids": [
+        "v9_cookware_malaysia01_05_10s",
+        "v9_cookware_malaysia01_05_20s"
+      ],
+      "duration_seconds": [
+        10,
+        20
+      ],
+      "voice_types": [
+        "NO_VOICE"
+      ],
+      "selection_status": "SHORTLIST_PENDING_PRODUCT_FIT_AND_RENDER_QA"
+    },
+    {
+      "slot": 6,
+      "concept": "Masak lemak cili api Negeri Sembilan",
+      "source_file": "v9_cookware_malaysian_regional_02_20261024.json",
+      "record_ids": [
+        "v9_cookware_myregional02_01_10s",
+        "v9_cookware_myregional02_01_20s"
+      ],
+      "duration_seconds": [
+        10,
+        20
+      ],
+      "voice_types": [
+        "MODEL_SPEECH"
+      ],
+      "selection_status": "SHORTLIST_PENDING_PRODUCT_FIT_AND_RENDER_QA"
+    },
+    {
+      "slot": 7,
+      "concept": "Singgang ikan Terengganu",
+      "source_file": "v9_cookware_malaysian_regional_02_20261024.json",
+      "record_ids": [
+        "v9_cookware_myregional02_02_10s",
+        "v9_cookware_myregional02_02_20s"
+      ],
+      "duration_seconds": [
+        10,
+        20
+      ],
+      "voice_types": [
+        "BACKGROUND_NARRATION"
+      ],
+      "selection_status": "SHORTLIST_PENDING_PRODUCT_FIT_AND_RENDER_QA"
+    },
+    {
+      "slot": 8,
+      "concept": "Kuah laksa Johor",
+      "source_file": "v9_cookware_malaysian_regional_02_20261024.json",
+      "record_ids": [
+        "v9_cookware_myregional02_03_10s",
+        "v9_cookware_myregional02_03_20s"
+      ],
+      "duration_seconds": [
+        10,
+        20
+      ],
+      "voice_types": [
+        "BACKGROUND_NARRATION"
+      ],
+      "selection_status": "SHORTLIST_PENDING_PRODUCT_FIT_AND_RENDER_QA"
+    },
+    {
+      "slot": 9,
+      "concept": "Kari kepala ikan gaya Malaysia",
+      "source_file": "v9_cookware_malaysian_regional_02_20261024.json",
+      "record_ids": [
+        "v9_cookware_myregional02_04_10s",
+        "v9_cookware_myregional02_04_20s"
+      ],
+      "duration_seconds": [
+        10,
+        20
+      ],
+      "voice_types": [
+        "NO_VOICE"
+      ],
+      "selection_status": "SHORTLIST_PENDING_PRODUCT_FIT_AND_RENDER_QA"
+    },
+    {
+      "slot": 10,
+      "concept": "Asam pedas Melaka ikan pari",
+      "source_file": "v9_cookware_malaysian_regional_02_20261024.json",
+      "record_ids": [
+        "v9_cookware_myregional02_05_10s",
+        "v9_cookware_myregional02_05_20s"
+      ],
+      "duration_seconds": [
+        10,
+        20
+      ],
+      "voice_types": [
+        "MODEL_SPEECH"
+      ],
+      "selection_status": "SHORTLIST_PENDING_PRODUCT_FIT_AND_RENDER_QA"
+    },
+    {
+      "slot": 11,
+      "concept": "Sambal tumis ikan bilis",
+      "source_file": "v9_cookware_malaysian_everyday_03_20261024.json",
+      "record_ids": [
+        "v9_cookware_myeveryday03_01_10s",
+        "v9_cookware_myeveryday03_01_20s"
+      ],
+      "duration_seconds": [
+        10,
+        20
+      ],
+      "voice_types": [
+        "BACKGROUND_NARRATION"
+      ],
+      "selection_status": "SHORTLIST_PENDING_PRODUCT_FIT_AND_RENDER_QA"
+    },
+    {
+      "slot": 12,
+      "concept": "Ayam masak merah",
+      "source_file": "v9_cookware_malaysian_everyday_03_20261024.json",
+      "record_ids": [
+        "v9_cookware_myeveryday03_02_10s",
+        "v9_cookware_myeveryday03_02_20s"
+      ],
+      "duration_seconds": [
+        10,
+        20
+      ],
+      "voice_types": [
+        "MODEL_SPEECH"
+      ],
+      "selection_status": "SHORTLIST_PENDING_PRODUCT_FIT_AND_RENDER_QA"
+    },
+    {
+      "slot": 13,
+      "concept": "Sambal sotong",
+      "source_file": "v9_cookware_malaysian_everyday_03_20261024.json",
+      "record_ids": [
+        "v9_cookware_myeveryday03_03_10s",
+        "v9_cookware_myeveryday03_03_20s"
+      ],
+      "duration_seconds": [
+        10,
+        20
+      ],
+      "voice_types": [
+        "BACKGROUND_NARRATION"
+      ],
+      "selection_status": "SHORTLIST_PENDING_PRODUCT_FIT_AND_RENDER_QA"
+    },
+    {
+      "slot": 14,
+      "concept": "Gulai ayam kampung",
+      "source_file": "v9_cookware_malaysian_everyday_03_20261024.json",
+      "record_ids": [
+        "v9_cookware_myeveryday03_04_10s",
+        "v9_cookware_myeveryday03_04_20s"
+      ],
+      "duration_seconds": [
+        10,
+        20
+      ],
+      "voice_types": [
+        "NO_VOICE"
+      ],
+      "selection_status": "SHORTLIST_PENDING_PRODUCT_FIT_AND_RENDER_QA"
+    },
+    {
+      "slot": 15,
+      "concept": "Bubur nasi ayam",
+      "source_file": "v9_cookware_malaysian_everyday_03_20261024.json",
+      "record_ids": [
+        "v9_cookware_myeveryday03_05_10s",
+        "v9_cookware_myeveryday03_05_20s"
+      ],
+      "duration_seconds": [
+        10,
+        20
+      ],
+      "voice_types": [
+        "MODEL_SPEECH"
+      ],
+      "selection_status": "SHORTLIST_PENDING_PRODUCT_FIT_AND_RENDER_QA"
+    },
+    {
+      "slot": 16,
+      "concept": "Daging masak kicap",
+      "source_file": "v9_cookware_malaysian_everyday_04_20261024.json",
+      "record_ids": [
+        "v9_cookware_myeveryday04_01_10s",
+        "v9_cookware_myeveryday04_01_20s"
+      ],
+      "duration_seconds": [
+        10,
+        20
+      ],
+      "voice_types": [
+        "MODEL_SPEECH"
+      ],
+      "selection_status": "SHORTLIST_PENDING_PRODUCT_FIT_AND_RENDER_QA"
+    },
+    {
+      "slot": 17,
+      "concept": "Sambal telur",
+      "source_file": "v9_cookware_malaysian_everyday_04_20261024.json",
+      "record_ids": [
+        "v9_cookware_myeveryday04_02_10s",
+        "v9_cookware_myeveryday04_02_20s"
+      ],
+      "duration_seconds": [
+        10,
+        20
+      ],
+      "voice_types": [
+        "BACKGROUND_NARRATION"
+      ],
+      "selection_status": "SHORTLIST_PENDING_PRODUCT_FIT_AND_RENDER_QA"
+    },
+    {
+      "slot": 18,
+      "concept": "Ayam masak kurma",
+      "source_file": "v9_cookware_malaysian_everyday_04_20261024.json",
+      "record_ids": [
+        "v9_cookware_myeveryday04_03_10s",
+        "v9_cookware_myeveryday04_03_20s"
+      ],
+      "duration_seconds": [
+        10,
+        20
+      ],
+      "voice_types": [
+        "BACKGROUND_NARRATION"
+      ],
+      "selection_status": "SHORTLIST_PENDING_PRODUCT_FIT_AND_RENDER_QA"
+    },
+    {
+      "slot": 19,
+      "concept": "Masak lemak labu",
+      "source_file": "v9_cookware_malaysian_everyday_04_20261024.json",
+      "record_ids": [
+        "v9_cookware_myeveryday04_04_10s",
+        "v9_cookware_myeveryday04_04_20s"
+      ],
+      "duration_seconds": [
+        10,
+        20
+      ],
+      "voice_types": [
+        "NO_VOICE"
+      ],
+      "selection_status": "SHORTLIST_PENDING_PRODUCT_FIT_AND_RENDER_QA"
+    },
+    {
+      "slot": 20,
+      "concept": "Sup tulang ala Malaysia",
+      "source_file": "v9_cookware_malaysian_everyday_04_20261024.json",
+      "record_ids": [
+        "v9_cookware_myeveryday04_05_10s",
+        "v9_cookware_myeveryday04_05_20s"
+      ],
+      "duration_seconds": [
+        10,
+        20
+      ],
+      "voice_types": [
+        "MODEL_SPEECH"
+      ],
+      "selection_status": "SHORTLIST_PENDING_PRODUCT_FIT_AND_RENDER_QA"
+    },
+    {
+      "slot": 21,
+      "concept": "Ayam masak halia",
+      "source_file": "v9_cookware_malaysian_everyday_05_20261024.json",
+      "record_ids": [
+        "v9_cookware_myeveryday05_01_10s",
+        "v9_cookware_myeveryday05_01_20s"
+      ],
+      "duration_seconds": [
+        10,
+        20
+      ],
+      "voice_types": [
+        "MODEL_SPEECH"
+      ],
+      "selection_status": "SHORTLIST_PENDING_PRODUCT_FIT_AND_RENDER_QA"
+    },
+    {
+      "slot": 22,
+      "concept": "Sambal udang petai",
+      "source_file": "v9_cookware_malaysian_everyday_05_20261024.json",
+      "record_ids": [
+        "v9_cookware_myeveryday05_02_10s",
+        "v9_cookware_myeveryday05_02_20s"
+      ],
+      "duration_seconds": [
+        10,
+        20
+      ],
+      "voice_types": [
+        "BACKGROUND_NARRATION"
+      ],
+      "selection_status": "SHORTLIST_PENDING_PRODUCT_FIT_AND_RENDER_QA"
+    },
+    {
+      "slot": 23,
+      "concept": "Ikan masak tiga rasa",
+      "source_file": "v9_cookware_malaysian_everyday_05_20261024.json",
+      "record_ids": [
+        "v9_cookware_myeveryday05_03_10s",
+        "v9_cookware_myeveryday05_03_20s"
+      ],
+      "duration_seconds": [
+        10,
+        20
+      ],
+      "voice_types": [
+        "BACKGROUND_NARRATION"
+      ],
+      "selection_status": "SHORTLIST_PENDING_PRODUCT_FIT_AND_RENDER_QA"
+    },
+    {
+      "slot": 24,
+      "concept": "Gulai ikan tongkol",
+      "source_file": "v9_cookware_malaysian_everyday_05_20261024.json",
+      "record_ids": [
+        "v9_cookware_myeveryday05_04_10s",
+        "v9_cookware_myeveryday05_04_20s"
+      ],
+      "duration_seconds": [
+        10,
+        20
+      ],
+      "voice_types": [
+        "NO_VOICE"
+      ],
+      "selection_status": "SHORTLIST_PENDING_PRODUCT_FIT_AND_RENDER_QA"
+    },
+    {
+      "slot": 25,
+      "concept": "Sambal tumis kerang",
+      "source_file": "v9_cookware_malaysian_everyday_05_20261024.json",
+      "record_ids": [
+        "v9_cookware_myeveryday05_05_10s",
+        "v9_cookware_myeveryday05_05_20s"
+      ],
+      "duration_seconds": [
+        10,
+        20
+      ],
+      "voice_types": [
+        "MODEL_SPEECH"
+      ],
+      "selection_status": "SHORTLIST_PENDING_PRODUCT_FIT_AND_RENDER_QA"
+    },
+    {
+      "slot": 26,
+      "concept": "Sambal tumis paru",
+      "source_file": "v9_cookware_malaysian_everyday_06_20261024.json",
+      "record_ids": [
+        "v9_cookware_myeveryday06_01_10s",
+        "v9_cookware_myeveryday06_01_20s"
+      ],
+      "duration_seconds": [
+        10,
+        20
+      ],
+      "voice_types": [
+        "BACKGROUND_NARRATION"
+      ],
+      "selection_status": "SHORTLIST_PENDING_PRODUCT_FIT_AND_RENDER_QA"
+    },
+    {
+      "slot": 27,
+      "concept": "Ayam masak paprik",
+      "source_file": "v9_cookware_malaysian_everyday_06_20261024.json",
+      "record_ids": [
+        "v9_cookware_myeveryday06_02_10s",
+        "v9_cookware_myeveryday06_02_20s"
+      ],
+      "duration_seconds": [
+        10,
+        20
+      ],
+      "voice_types": [
+        "MODEL_SPEECH"
+      ],
+      "selection_status": "SHORTLIST_PENDING_PRODUCT_FIT_AND_RENDER_QA"
+    },
+    {
+      "slot": 28,
+      "concept": "Masak lemak pucuk ubi",
+      "source_file": "v9_cookware_malaysian_everyday_06_20261024.json",
+      "record_ids": [
+        "v9_cookware_myeveryday06_03_10s",
+        "v9_cookware_myeveryday06_03_20s"
+      ],
+      "duration_seconds": [
+        10,
+        20
+      ],
+      "voice_types": [
+        "BACKGROUND_NARRATION"
+      ],
+      "selection_status": "SHORTLIST_PENDING_PRODUCT_FIT_AND_RENDER_QA"
+    },
+    {
+      "slot": 29,
+      "concept": "Kari daging dan kentang",
+      "source_file": "v9_cookware_malaysian_everyday_06_20261024.json",
+      "record_ids": [
+        "v9_cookware_myeveryday06_04_10s",
+        "v9_cookware_myeveryday06_04_20s"
+      ],
+      "duration_seconds": [
+        10,
+        20
+      ],
+      "voice_types": [
+        "NO_VOICE"
+      ],
+      "selection_status": "SHORTLIST_PENDING_PRODUCT_FIT_AND_RENDER_QA"
+    },
+    {
+      "slot": 30,
+      "concept": "Sambal tumis tempe dan kentang",
+      "source_file": "v9_cookware_malaysian_everyday_06_20261024.json",
+      "record_ids": [
+        "v9_cookware_myeveryday06_05_10s",
+        "v9_cookware_myeveryday06_05_20s"
+      ],
+      "duration_seconds": [
+        10,
+        20
+      ],
+      "voice_types": [
+        "MODEL_SPEECH"
+      ],
+      "selection_status": "SHORTLIST_PENDING_PRODUCT_FIT_AND_RENDER_QA"
+    },
+    {
+      "slot": 31,
+      "concept": "Sambal hijau ikan bilis",
+      "source_file": "v9_cookware_malaysian_everyday_07_20261024.json",
+      "record_ids": [
+        "v9_cookware_myeveryday07_01_10s",
+        "v9_cookware_myeveryday07_01_20s"
+      ],
+      "duration_seconds": [
+        10,
+        20
+      ],
+      "voice_types": [
+        "BACKGROUND_NARRATION"
+      ],
+      "selection_status": "SHORTLIST_PENDING_PRODUCT_FIT_AND_RENDER_QA"
+    },
+    {
+      "slot": 32,
+      "concept": "Ayam masak serai",
+      "source_file": "v9_cookware_malaysian_everyday_07_20261024.json",
+      "record_ids": [
+        "v9_cookware_myeveryday07_02_10s",
+        "v9_cookware_myeveryday07_02_20s"
+      ],
+      "duration_seconds": [
+        10,
+        20
+      ],
+      "voice_types": [
+        "MODEL_SPEECH"
+      ],
+      "selection_status": "SHORTLIST_PENDING_PRODUCT_FIT_AND_RENDER_QA"
+    },
+    {
+      "slot": 33,
+      "concept": "Masak lemak rebung",
+      "source_file": "v9_cookware_malaysian_everyday_07_20261024.json",
+      "record_ids": [
+        "v9_cookware_myeveryday07_03_10s",
+        "v9_cookware_myeveryday07_03_20s"
+      ],
+      "duration_seconds": [
+        10,
+        20
+      ],
+      "voice_types": [
+        "BACKGROUND_NARRATION"
+      ],
+      "selection_status": "SHORTLIST_PENDING_PRODUCT_FIT_AND_RENDER_QA"
+    },
+    {
+      "slot": 34,
+      "concept": "Sambal ikan sardin",
+      "source_file": "v9_cookware_malaysian_everyday_07_20261024.json",
+      "record_ids": [
+        "v9_cookware_myeveryday07_04_10s",
+        "v9_cookware_myeveryday07_04_20s"
+      ],
+      "duration_seconds": [
+        10,
+        20
+      ],
+      "voice_types": [
+        "NO_VOICE"
+      ],
+      "selection_status": "SHORTLIST_PENDING_PRODUCT_FIT_AND_RENDER_QA"
+    },
+    {
+      "slot": 35,
+      "concept": "Gulai lemak ikan masin dan nanas",
+      "source_file": "v9_cookware_malaysian_everyday_07_20261024.json",
+      "record_ids": [
+        "v9_cookware_myeveryday07_05_10s",
+        "v9_cookware_myeveryday07_05_20s"
+      ],
+      "duration_seconds": [
+        10,
+        20
+      ],
+      "voice_types": [
+        "MODEL_SPEECH"
+      ],
+      "selection_status": "SHORTLIST_PENDING_PRODUCT_FIT_AND_RENDER_QA"
+    },
+    {
+      "slot": 36,
+      "concept": "Sambal tumis kupang",
+      "source_file": "v9_cookware_malaysian_everyday_08_20261024.json",
+      "record_ids": [
+        "v9_cookware_myeveryday08_01_10s",
+        "v9_cookware_myeveryday08_01_20s"
+      ],
+      "duration_seconds": [
+        10,
+        20
+      ],
+      "voice_types": [
+        "BACKGROUND_NARRATION"
+      ],
+      "selection_status": "SHORTLIST_PENDING_PRODUCT_FIT_AND_RENDER_QA"
+    },
+    {
+      "slot": 37,
+      "concept": "Ayam masak kunyit berkuah",
+      "source_file": "v9_cookware_malaysian_everyday_08_20261024.json",
+      "record_ids": [
+        "v9_cookware_myeveryday08_02_10s",
+        "v9_cookware_myeveryday08_02_20s"
+      ],
+      "duration_seconds": [
+        10,
+        20
+      ],
+      "voice_types": [
+        "MODEL_SPEECH"
+      ],
+      "selection_status": "SHORTLIST_PENDING_PRODUCT_FIT_AND_RENDER_QA"
+    },
+    {
+      "slot": 38,
+      "concept": "Pajeri terung",
+      "source_file": "v9_cookware_malaysian_everyday_08_20261024.json",
+      "record_ids": [
+        "v9_cookware_myeveryday08_03_10s",
+        "v9_cookware_myeveryday08_03_20s"
+      ],
+      "duration_seconds": [
+        10,
+        20
+      ],
+      "voice_types": [
+        "BACKGROUND_NARRATION"
+      ],
+      "selection_status": "SHORTLIST_PENDING_PRODUCT_FIT_AND_RENDER_QA"
+    },
+    {
+      "slot": 39,
+      "concept": "Gulai tempoyak ikan patin",
+      "source_file": "v9_cookware_malaysian_everyday_08_20261024.json",
+      "record_ids": [
+        "v9_cookware_myeveryday08_04_10s",
+        "v9_cookware_myeveryday08_04_20s"
+      ],
+      "duration_seconds": [
+        10,
+        20
+      ],
+      "voice_types": [
+        "NO_VOICE"
+      ],
+      "selection_status": "SHORTLIST_PENDING_PRODUCT_FIT_AND_RENDER_QA"
+    },
+    {
+      "slot": 40,
+      "concept": "Sambal tumis tauhu",
+      "source_file": "v9_cookware_malaysian_everyday_08_20261024.json",
+      "record_ids": [
+        "v9_cookware_myeveryday08_05_10s",
+        "v9_cookware_myeveryday08_05_20s"
+      ],
+      "duration_seconds": [
+        10,
+        20
+      ],
+      "voice_types": [
+        "MODEL_SPEECH"
+      ],
+      "selection_status": "SHORTLIST_PENDING_PRODUCT_FIT_AND_RENDER_QA"
+    },
+    {
+      "slot": 41,
+      "concept": "One-pot tomato pasta",
+      "source_file": "v9_cookware_focus_01_20261024.json",
+      "record_ids": [
+        "v9_cookware_focus01_01_10s",
+        "v9_cookware_focus01_01_20s"
+      ],
+      "duration_seconds": [
+        10,
+        20
+      ],
+      "voice_types": [
+        "MODEL_SPEECH"
+      ],
+      "selection_status": "SHORTLIST_PENDING_PRODUCT_FIT_AND_RENDER_QA"
+    },
+    {
+      "slot": 42,
+      "concept": "Steamed sweetcorn",
+      "source_file": "v9_cookware_focus_01_20261024.json",
+      "record_ids": [
+        "v9_cookware_focus01_03_10s",
+        "v9_cookware_focus01_03_20s"
+      ],
+      "duration_seconds": [
+        10,
+        20
+      ],
+      "voice_types": [
+        "NO_VOICE"
+      ],
+      "selection_status": "SHORTLIST_PENDING_PRODUCT_FIT_AND_RENDER_QA"
+    },
+    {
+      "slot": 43,
+      "concept": "Ginger chicken soup",
+      "source_file": "v9_cookware_focus_02_20261024.json",
+      "record_ids": [
+        "v9_cookware_focus02_01_ginger_chicken_soup_10s",
+        "v9_cookware_focus02_01_ginger_chicken_soup_20s"
+      ],
+      "duration_seconds": [
+        10,
+        20
+      ],
+      "voice_types": [
+        "BACKGROUND_NARRATION"
+      ],
+      "selection_status": "SHORTLIST_PENDING_PRODUCT_FIT_AND_RENDER_QA"
+    },
+    {
+      "slot": 44,
+      "concept": "Boiled eggs breakfast",
+      "source_file": "v9_cookware_focus_02_20261024.json",
+      "record_ids": [
+        "v9_cookware_focus02_02_boiled_eggs_10s",
+        "v9_cookware_focus02_02_boiled_eggs_20s"
+      ],
+      "duration_seconds": [
+        10,
+        20
+      ],
+      "voice_types": [
+        "NO_VOICE"
+      ],
+      "selection_status": "SHORTLIST_PENDING_PRODUCT_FIT_AND_RENDER_QA"
+    },
+    {
+      "slot": 45,
+      "concept": "Vegetable broth prep",
+      "source_file": "v9_cookware_focus_02_20261024.json",
+      "record_ids": [
+        "v9_cookware_focus02_03_vegetable_broth_10s",
+        "v9_cookware_focus02_03_vegetable_broth_20s"
+      ],
+      "duration_seconds": [
+        10,
+        20
+      ],
+      "voice_types": [
+        "MODEL_SPEECH"
+      ],
+      "selection_status": "SHORTLIST_PENDING_PRODUCT_FIT_AND_RENDER_QA"
+    },
+    {
+      "slot": 46,
+      "concept": "Turmeric fish simmer",
+      "source_file": "v9_cookware_focus_03_20261024.json",
+      "record_ids": [
+        "v9_cookware_focus03_01_10s",
+        "v9_cookware_focus03_01_20s"
+      ],
+      "duration_seconds": [
+        10,
+        20
+      ],
+      "voice_types": [
+        "BACKGROUND_NARRATION"
+      ],
+      "selection_status": "SHORTLIST_PENDING_PRODUCT_FIT_AND_RENDER_QA"
+    },
+    {
+      "slot": 47,
+      "concept": "Sweet potato boiling",
+      "source_file": "v9_cookware_focus_03_20261024.json",
+      "record_ids": [
+        "v9_cookware_focus03_03_10s",
+        "v9_cookware_focus03_03_20s"
+      ],
+      "duration_seconds": [
+        10,
+        20
+      ],
+      "voice_types": [
+        "NO_VOICE"
+      ],
+      "selection_status": "SHORTLIST_PENDING_PRODUCT_FIT_AND_RENDER_QA"
+    },
+    {
+      "slot": 48,
+      "concept": "Blanched leafy greens",
+      "source_file": "v9_cookware_focus_04_20261024.json",
+      "record_ids": [
+        "v9_cookware_focus04_02_10s",
+        "v9_cookware_focus04_02_20s"
+      ],
+      "duration_seconds": [
+        10,
+        20
+      ],
+      "voice_types": [
+        "NO_VOICE"
+      ],
+      "selection_status": "SHORTLIST_PENDING_PRODUCT_FIT_AND_RENDER_QA"
+    },
+    {
+      "slot": 49,
+      "concept": "Pandan rice cooking",
+      "source_file": "v9_cookware_focus_05_20261024.json",
+      "record_ids": [
+        "v9_cookware_focus05_03_10s",
+        "v9_cookware_focus05_03_20s"
+      ],
+      "duration_seconds": [
+        10,
+        20
+      ],
+      "voice_types": [
+        "NO_VOICE"
+      ],
+      "selection_status": "SHORTLIST_PENDING_PRODUCT_FIT_AND_RENDER_QA"
+    },
+    {
+      "slot": 50,
+      "concept": "Warm chocolate sauce",
+      "source_file": "v9_cookware_focus_04_20261024.json",
+      "record_ids": [
+        "v9_cookware_focus04_05_10s",
+        "v9_cookware_focus04_05_20s"
+      ],
+      "duration_seconds": [
+        10,
+        20
+      ],
+      "voice_types": [
+        "NO_VOICE"
+      ],
+      "selection_status": "SHORTLIST_PENDING_PRODUCT_FIT_AND_RENDER_QA"
+    }
+  ],
+  "withheld_dedicated_concepts": [
+    "Evening rice porridge",
+    "Coconut sago dessert",
+    "Weekend noodle broth",
+    "Mushroom cream soup",
+    "Red bean dessert",
+    "Chicken curry simmer",
+    "Lemongrass herbal broth",
+    "Pumpkin coconut stew",
+    "Beef stew slow simmer",
+    "Corn and carrot soup",
+    "Sago gula melaka syrup",
+    "Tomato egg drop soup"
+  ],
+  "excluded_rejected_file": "v9_cookware_focus_06_20261024.json",
+  "notes": "All originals preserved. Two additional curated concepts and six named pilot concepts remain outside this dedicated shortlist for separate eligibility review. No merge or deployment."
+}

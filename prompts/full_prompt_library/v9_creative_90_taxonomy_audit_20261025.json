@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "status": "DRAFT_TAXONOMY_AUDIT",
+  "runtime_enabled": false,
+  "creative_records_checked": 90,
+  "exact_matches": 78,
+  "mismatches": 12,
+  "mismatch_ids": [
+    "v9_creative_modeltalk_026",
+    "v9_creative_modeltalk_027",
+    "v9_creative_modeltalk_028",
+    "v9_creative_modeltalk_041",
+    "v9_creative_modeltalk_047",
+    "v9_creative_modeltalk_048",
+    "v9_creative_modeltalk_049",
+    "v9_creative_modeltalk_050",
+    "v9_creative_modeltalk_056",
+    "v9_creative_modeltalk_064",
+    "v9_creative_modeltalk_073",
+    "v9_creative_modeltalk_088"
+  ],
+  "next_action": "Reconcile product types and subcategory IDs against the 130-subcategory taxonomy; preserve original draft records and avoid activation until corrected.",
+  "limitations": [
+    "Exact string matching may flag valid synonyms.",
+    "No render QA performed."
+  ]
+}

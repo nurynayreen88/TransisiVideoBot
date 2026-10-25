@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "batch": "v9_curated_fifth_batch_20261024",
+  "variation_count": 6,
+  "notes": "Six fully specified product-reference prompt concepts. Draft pending actual render QA.",
+  "variations": [
+    {
+      "id": "v9_curated5_accessory_bracelet_10s_01",
+      "subcategory_id": "accessory_bracelet",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Afternoon tea",
+      "duration_seconds": 10,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Vertical 9:16 photorealistic. Use the exact uploaded reference product as sole master; preserve its actual visible design, colour, proportions and markings. Realistic anatomy, contact, lighting and gravity. No invented features, claims, text overlays, captions, logos or watermark.\nSETTING AND SUBJECT: A quiet home tea table by a window. One adult Malaysian wrist wearing the exact reference bracelet, a plain cup and teapot; face and torso absent. Wrist-height macro camera, soft afternoon daylight.\nEXACTLY 10 SECONDS:\n0–2s: The bracelet-wearing hand rests beside an empty cup, the original bracelet clearly visible.\n2–5s: The hand pours tea steadily from a plain teapot into the cup.\n5–10s: The teapot returns to the table; the hand pauses beside it with bracelet naturally settled.\nAUDIO: No speech, narration or music; gentle pouring, ceramic contact and natural room ambience only."
+    },
+    {
+      "id": "v9_curated5_accessory_bracelet_20s_01",
+      "subcategory_id": "accessory_bracelet",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Afternoon tea",
+      "duration_seconds": 20,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic. Use the exact uploaded reference product as sole master; preserve its actual visible design, colour, proportions and markings. Realistic anatomy, contact, lighting and gravity. No invented features, claims, text overlays, captions, logos or watermark.\nSETTING AND SUBJECT: A quiet home tea table by a window. One adult Malaysian wrist wearing the exact reference bracelet, a plain cup and teapot; face and torso absent. Wrist-height macro camera, soft afternoon daylight.\n0–3s: The bracelet-wearing hand rests beside an empty cup, the original bracelet clearly visible.\n3–7s: The hand pours tea steadily from a plain teapot into the cup.\n7–10s: The teapot returns to the table; the hand pauses beside it with bracelet naturally settled.\nAUDIO: No speech, narration or music; gentle pouring, ceramic contact and natural room ambience only.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic. Use the exact uploaded reference product as sole master; preserve its actual visible design, colour, proportions and markings. Realistic anatomy, contact, lighting and gravity. No invented features, claims, text overlays, captions, logos or watermark.\nSETTING AND SUBJECT: A quiet home tea table by a window. One adult Malaysian wrist wearing the exact reference bracelet, a plain cup and teapot; face and torso absent. Wrist-height macro camera, soft afternoon daylight.\nCONTINUITY: First frame exactly matches the final Part 1 frame: same product, subject, pose, props, light and camera axis. Do not replay completed action.\n0–3s: From the same paused wrist position, the hand moves toward the filled cup without repeating the pour.\n3–7s: The hand slides the cup onto its saucer and relaxes beside it.\n7–10s: A restrained macro focus settles on the unchanged bracelet and original clasp.\nAUDIO: No speech, narration or music; gentle pouring, ceramic contact and natural room ambience only."
+    },
+    {
+      "id": "v9_curated5_office_stationery_10s_01",
+      "subcategory_id": "office_stationery",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Desk notes",
+      "duration_seconds": 10,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Vertical 9:16 photorealistic. Use the exact uploaded reference product as sole master; preserve its actual visible design, colour, proportions and markings. Realistic anatomy, contact, lighting and gravity. No invented features, claims, text overlays, captions, logos or watermark.\nSETTING AND SUBJECT: The product is the exact reference writing pen; no invented cap, button or refill. Daylit desk with blank notebook. One adult Malaysian hand and forearm only. Steady close overhead-to-three-quarter camera; natural writing grip.\nEXACTLY 10 SECONDS:\n0–2s: The reference pen lies beside the open blank notebook, original barrel and tip unobstructed.\n2–5s: The hand lifts the pen and adopts a natural writing grip.\n5–10s: The tip makes three short non-legible marks; the hand pauses with the tip lifted above the paper.\nAUDIO: No speech, narration or music; subtle pen contact, paper movement and room ambience only."
+    },
+    {
+      "id": "v9_curated5_office_stationery_20s_01",
+      "subcategory_id": "office_stationery",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Desk notes",
+      "duration_seconds": 20,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic. Use the exact uploaded reference product as sole master; preserve its actual visible design, colour, proportions and markings. Realistic anatomy, contact, lighting and gravity. No invented features, claims, text overlays, captions, logos or watermark.\nSETTING AND SUBJECT: The product is the exact reference writing pen; no invented cap, button or refill. Daylit desk with blank notebook. One adult Malaysian hand and forearm only. Steady close overhead-to-three-quarter camera; natural writing grip.\n0–3s: The reference pen lies beside the open blank notebook, original barrel and tip unobstructed.\n3–7s: The hand lifts the pen and adopts a natural writing grip.\n7–10s: The tip makes three short non-legible marks; the hand pauses with the tip lifted above the paper.\nAUDIO: No speech, narration or music; subtle pen contact, paper movement and room ambience only.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic. Use the exact uploaded reference product as sole master; preserve its actual visible design, colour, proportions and markings. Realistic anatomy, contact, lighting and gravity. No invented features, claims, text overlays, captions, logos or watermark.\nSETTING AND SUBJECT: The product is the exact reference writing pen; no invented cap, button or refill. Daylit desk with blank notebook. One adult Malaysian hand and forearm only. Steady close overhead-to-three-quarter camera; natural writing grip.\nCONTINUITY: First frame exactly matches the final Part 1 frame: same product, subject, pose, props, light and camera axis. Do not replay completed action.\n0–3s: From the same lifted-tip position, the wrist rotates slightly to reveal the pen barrel without writing again.\n3–7s: The hand places the pen parallel to the notebook and withdraws.\n7–10s: A controlled close camera hold reveals the authentic pen tip, barrel and visible markings.\nAUDIO: No speech, narration or music; subtle pen contact, paper movement and room ambience only."
+    },
+    {
+      "id": "v9_curated5_fashion_sport_10s_01",
+      "subcategory_id": "fashion_sport",
+      "visual_category": "FULL_MODEL",
+      "concept": "Park warmup",
+      "duration_seconds": 10,
+      "voice_type": "MODEL_SPEECH",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Vertical 9:16 photorealistic. Use the exact uploaded reference product as sole master; preserve its actual visible design, colour, proportions and markings. Realistic anatomy, contact, lighting and gravity. No invented features, claims, text overlays, captions, logos or watermark.\nSETTING AND SUBJECT: One adult Universal Malaysian model wears the exact reference sports outfit at a quiet park bench in soft morning daylight. Full-body camera, then eye-level medium-full view with face and mouth clearly visible for natural Malaysian Malay lip sync. Safe low-intensity movement, no performance claims or voiceover.\nEXACTLY 10 SECONDS:\n0–2s: The model stands beside an empty dry bench, full original outfit clearly framed.\n2–5s: The model makes one gentle shoulder roll and controlled step in place, showing natural garment folds.\n5–10s: The model faces camera and says, with precise visible lip sync: 'Pagi ni saya mula dengan gerakan ringan.' Then pauses beside the bench.\nAUDIO: Only the on-camera model speaks natural Malaysian Malay, with precise lip sync; subtle park ambience, no narrator or subtitles."
+    },
+    {
+      "id": "v9_curated5_fashion_sport_20s_01",
+      "subcategory_id": "fashion_sport",
+      "visual_category": "FULL_MODEL",
+      "concept": "Park warmup",
+      "duration_seconds": 20,
+      "voice_type": "MODEL_SPEECH",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic. Use the exact uploaded reference product as sole master; preserve its actual visible design, colour, proportions and markings. Realistic anatomy, contact, lighting and gravity. No invented features, claims, text overlays, captions, logos or watermark.\nSETTING AND SUBJECT: One adult Universal Malaysian model wears the exact reference sports outfit at a quiet park bench in soft morning daylight. Full-body camera, then eye-level medium-full view with face and mouth clearly visible for natural Malaysian Malay lip sync. Safe low-intensity movement, no performance claims or voiceover.\n0–3s: The model stands beside an empty dry bench, full original outfit clearly framed.\n3–7s: The model makes one gentle shoulder roll and controlled step in place, showing natural garment folds.\n7–10s: The model faces camera and says, with precise visible lip sync: 'Pagi ni saya mula dengan gerakan ringan.' Then pauses beside the bench.\nAUDIO: Only the on-camera model speaks natural Malaysian Malay, with precise lip sync; subtle park ambience, no narrator or subtitles.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic. Use the exact uploaded reference product as sole master; preserve its actual visible design, colour, proportions and markings. Realistic anatomy, contact, lighting and gravity. No invented features, claims, text overlays, captions, logos or watermark.\nSETTING AND SUBJECT: One adult Universal Malaysian model wears the exact reference sports outfit at a quiet park bench in soft morning daylight. Full-body camera, then eye-level medium-full view with face and mouth clearly visible for natural Malaysian Malay lip sync. Safe low-intensity movement, no performance claims or voiceover.\nCONTINUITY: First frame exactly matches the final Part 1 frame: same product, subject, pose, props, light and camera axis. Do not replay completed action.\n0–3s: From the same paused stance, the model takes one unhurried step onto the park path.\n3–7s: Facing camera while standing still, the model says with precise visible lip sync: 'Dah bersedia, jom teruskan aktiviti hari ini.'\n7–10s: The model makes a natural half-turn to show the authentic outfit side profile and settles in a stable full-body finish.\nAUDIO: Only the on-camera model speaks natural Malaysian Malay, with precise lip sync; subtle park ambience, no narrator or subtitles."
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "status": "DRAFT_STATIC_AUDIT",
+  "runtime_enabled": false,
+  "model_talk_records": 34,
+  "unique_ids": 34,
+  "unique_subcategories": 34,
+  "issues": [],
+  "limitations": [
+    "Not rendered or lip-sync tested.",
+    "Spoken scripts require native-language review for naturalness and timing.",
+    "No claim of production readiness or 130-subcategory completion."
+  ],
+  "duration_check": "Both '10-second' and '10 seconds' are accepted; all 34 specify exactly 10 seconds."
+}

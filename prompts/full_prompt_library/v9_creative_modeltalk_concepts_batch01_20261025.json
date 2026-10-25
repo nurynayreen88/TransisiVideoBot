@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "status": "DRAFT_CREATIVE_QA",
+  "runtime_enabled": false,
+  "variations": [
+    {
+      "id": "v9_creative_modeltalk_001",
+      "subcategory_id": "fashion_women",
+      "product_type": "baju kurung",
+      "concept": "Morning-ready mirror",
+      "duration_seconds": 10,
+      "voice_language": "ms-MY",
+      "voice_type": "on_camera_model",
+      "status": "DRAFT_CREATIVE_QA",
+      "full_prompt": "Create a single photorealistic vertical 9:16 Malaysian affiliate video lasting exactly 10 seconds. Use the uploaded baju kurung product image as the authoritative visual reference: preserve its exact visible design, color, print, proportions and hardware; never invent functions or change its appearance. CONCEPT: Morning-ready mirror. 0–2s HOOK: Begin in the middle of the real action, showing the product prominently with an adult Malaysian presenter already in frame; no intro card. 2–7s REAL PRODUCT DEMO: An adult Malaysian woman checks her full outfit in a bright bedroom mirror, smooths the visible sleeve once, then steps into daylight. Keep movement physically believable, product scale accurate, camera naturally handheld and lighting consistent. 7–10s CTA: Close with her smiling beside the mirror and the full baju kurung clearly visible. EXACT ON-CAMERA SPOKEN DIALOGUE in natural Bahasa Melayu Malaysia: “Baju kurung ini terus nampak kemas. Jom tengok!” Deliver this short line across the action, with the final invitation synchronized to the closing shot; accurate lip sync and no Indonesian accent. No separate voiceover. Low natural ambience and soft instrumental music. No subtitles, added text, watermark, new logos, fabricated specifications or unverified accessories."
+    },
+    {
+      "id": "v9_creative_modeltalk_002",
+      "subcategory_id": "bag_handbag",
+      "product_type": "top handle",
+      "concept": "Cafe arrival",
+      "duration_seconds": 10,
+      "voice_language": "ms-MY",
+      "voice_type": "on_camera_model",
+      "status": "DRAFT_CREATIVE_QA",
+      "full_prompt": "Create a single photorealistic vertical 9:16 Malaysian affiliate video lasting exactly 10 seconds. Use the uploaded top handle product image as the authoritative visual reference: preserve its exact visible design, color, print, proportions and hardware; never invent functions or change its appearance. CONCEPT: Cafe arrival. 0–2s HOOK: Begin in the middle of the real action, showing the product prominently with an adult Malaysian presenter already in frame; no intro card. 2–7s REAL PRODUCT DEMO: An adult Malaysian woman arrives at a cafe, places the handbag gently beside her drink and lifts it again by its actual handles. Keep movement physically believable, product scale accurate, camera naturally handheld and lighting consistent. 7–10s CTA: Finish with the bag held at waist height and her friendly glance to camera. EXACT ON-CAMERA SPOKEN DIALOGUE in natural Bahasa Melayu Malaysia: “Beg ini cantik dibawa ke mana-mana. Jom tengok!” Deliver this short line across the action, with the final invitation synchronized to the closing shot; accurate lip sync and no Indonesian accent. No separate voiceover. Low natural ambience and soft instrumental music. No subtitles, added text, watermark, new logos, fabricated specifications or unverified accessories."
+    },
+    {
+      "id": "v9_creative_modeltalk_003",
+      "subcategory_id": "home_kitchen",
+      "product_type": "wok",
+      "concept": "Dinner sizzle",
+      "duration_seconds": 10,
+      "voice_language": "ms-MY",
+      "voice_type": "on_camera_model",
+      "status": "DRAFT_CREATIVE_QA",
+      "full_prompt": "Create a single photorealistic vertical 9:16 Malaysian affiliate video lasting exactly 10 seconds. Use the uploaded wok product image as the authoritative visual reference: preserve its exact visible design, color, print, proportions and hardware; never invent functions or change its appearance. CONCEPT: Dinner sizzle. 0–2s HOOK: Begin in the middle of the real action, showing the product prominently with an adult Malaysian presenter already in frame; no intro card. 2–7s REAL PRODUCT DEMO: An adult Malaysian home cook stirs vegetables in the wok over a stable stove, then tilts the wok slightly to show its authentic rim. Keep movement physically believable, product scale accurate, camera naturally handheld and lighting consistent. 7–10s CTA: Finish on the wok with cooked vegetables as the cook smiles. EXACT ON-CAMERA SPOKEN DIALOGUE in natural Bahasa Melayu Malaysia: “Jom tengok cara saya guna kuali ini!” Deliver this short line across the action, with the final invitation synchronized to the closing shot; accurate lip sync and no Indonesian accent. No separate voiceover. Low natural ambience and soft instrumental music. No subtitles, added text, watermark, new logos, fabricated specifications or unverified accessories."
+    },
+    {
+      "id": "v9_creative_modeltalk_004",
+      "subcategory_id": "food_cooking",
+      "product_type": "sambal",
+      "concept": "Lunch plate reveal",
+      "duration_seconds": 10,
+      "voice_language": "ms-MY",
+      "voice_type": "on_camera_model",
+      "status": "DRAFT_CREATIVE_QA",
+      "full_prompt": "Create a single photorealistic vertical 9:16 Malaysian affiliate video lasting exactly 10 seconds. Use the uploaded sambal product image as the authoritative visual reference: preserve its exact visible design, color, print, proportions and hardware; never invent functions or change its appearance. CONCEPT: Lunch plate reveal. 0–2s HOOK: Begin in the middle of the real action, showing the product prominently with an adult Malaysian presenter already in frame; no intro card. 2–7s REAL PRODUCT DEMO: An adult Malaysian cook spoons the sambal from its actual container beside a plate of rice, then brings the container next to the plate. Keep movement physically believable, product scale accurate, camera naturally handheld and lighting consistent. 7–10s CTA: Finish on the actual packaging and plated serving. EXACT ON-CAMERA SPOKEN DIALOGUE in natural Bahasa Melayu Malaysia: “Sambal ini nampak menyelerakan. Jom tengok!” Deliver this short line across the action, with the final invitation synchronized to the closing shot; accurate lip sync and no Indonesian accent. No separate voiceover. Low natural ambience and soft instrumental music. No subtitles, added text, watermark, new logos, fabricated specifications or unverified accessories."
+    },
+    {
+      "id": "v9_creative_modeltalk_005",
+      "subcategory_id": "shoes_running",
+      "product_type": "road",
+      "concept": "Before the jog",
+      "duration_seconds": 10,
+      "voice_language": "ms-MY",
+      "voice_type": "on_camera_model",
+      "status": "DRAFT_CREATIVE_QA",
+      "full_prompt": "Create a single photorealistic vertical 9:16 Malaysian affiliate video lasting exactly 10 seconds. Use the uploaded road product image as the authoritative visual reference: preserve its exact visible design, color, print, proportions and hardware; never invent functions or change its appearance. CONCEPT: Before the jog. 0–2s HOOK: Begin in the middle of the real action, showing the product prominently with an adult Malaysian presenter already in frame; no intro card. 2–7s REAL PRODUCT DEMO: An adult runner ties the actual shoe laces while seated, stands, then takes two natural steps on a dry jogging path. Keep movement physically believable, product scale accurate, camera naturally handheld and lighting consistent. 7–10s CTA: Finish on both shoes in a grounded side profile. EXACT ON-CAMERA SPOKEN DIALOGUE in natural Bahasa Melayu Malaysia: “Tengok kasut ini bila dipakai. Jom pilih!” Deliver this short line across the action, with the final invitation synchronized to the closing shot; accurate lip sync and no Indonesian accent. No separate voiceover. Low natural ambience and soft instrumental music. No subtitles, added text, watermark, new logos, fabricated specifications or unverified accessories."
+    },
+    {
+      "id": "v9_creative_modeltalk_006",
+      "subcategory_id": "beauty_skincare",
+      "product_type": "serum",
+      "concept": "Vanity ritual",
+      "duration_seconds": 10,
+      "voice_language": "ms-MY",
+      "voice_type": "on_camera_model",
+      "status": "DRAFT_CREATIVE_QA",
+      "full_prompt": "Create a single photorealistic vertical 9:16 Malaysian affiliate video lasting exactly 10 seconds. Use the uploaded serum product image as the authoritative visual reference: preserve its exact visible design, color, print, proportions and hardware; never invent functions or change its appearance. CONCEPT: Vanity ritual. 0–2s HOOK: Begin in the middle of the real action, showing the product prominently with an adult Malaysian presenter already in frame; no intro card. 2–7s REAL PRODUCT DEMO: An adult Malaysian woman places the actual serum bottle on a clean vanity, dispenses one small drop using its visible dispenser and applies it gently. Keep movement physically believable, product scale accurate, camera naturally handheld and lighting consistent. 7–10s CTA: Finish with the unchanged bottle beside her hand. EXACT ON-CAMERA SPOKEN DIALOGUE in natural Bahasa Melayu Malaysia: “Ini rutin serum saya hari ini. Jom tengok!” Deliver this short line across the action, with the final invitation synchronized to the closing shot; accurate lip sync and no Indonesian accent. No separate voiceover. Low natural ambience and soft instrumental music. No subtitles, added text, watermark, new logos, fabricated specifications or unverified accessories."
+    },
+    {
+      "id": "v9_creative_modeltalk_007",
+      "subcategory_id": "gadget_phone",
+      "product_type": "power bank",
+      "concept": "Study desk rescue",
+      "duration_seconds": 10,
+      "voice_language": "ms-MY",
+      "voice_type": "on_camera_model",
+      "status": "DRAFT_CREATIVE_QA",
+      "full_prompt": "Create a single photorealistic vertical 9:16 Malaysian affiliate video lasting exactly 10 seconds. Use the uploaded power bank product image as the authoritative visual reference: preserve its exact visible design, color, print, proportions and hardware; never invent functions or change its appearance. CONCEPT: Study desk rescue. 0–2s HOOK: Begin in the middle of the real action, showing the product prominently with an adult Malaysian presenter already in frame; no intro card. 2–7s REAL PRODUCT DEMO: An adult Malaysian student notices a phone beside the actual power bank, connects a compatible cable to a visible port and sets both neatly on the desk. Keep movement physically believable, product scale accurate, camera naturally handheld and lighting consistent. 7–10s CTA: Finish on the real power bank and connected phone without any screen graphics. EXACT ON-CAMERA SPOKEN DIALOGUE in natural Bahasa Melayu Malaysia: “Saya bawa power bank ini ke mana-mana. Jom tengok!” Deliver this short line across the action, with the final invitation synchronized to the closing shot; accurate lip sync and no Indonesian accent. No separate voiceover. Low natural ambience and soft instrumental music. No subtitles, added text, watermark, new logos, fabricated specifications or unverified accessories."
+    },
+    {
+      "id": "v9_creative_modeltalk_008",
+      "subcategory_id": "home_storage",
+      "product_type": "storage box",
+      "concept": "Ten-second tidy",
+      "duration_seconds": 10,
+      "voice_language": "ms-MY",
+      "voice_type": "on_camera_model",
+      "status": "DRAFT_CREATIVE_QA",
+      "full_prompt": "Create a single photorealistic vertical 9:16 Malaysian affiliate video lasting exactly 10 seconds. Use the uploaded storage box product image as the authoritative visual reference: preserve its exact visible design, color, print, proportions and hardware; never invent functions or change its appearance. CONCEPT: Ten-second tidy. 0–2s HOOK: Begin in the middle of the real action, showing the product prominently with an adult Malaysian presenter already in frame; no intro card. 2–7s REAL PRODUCT DEMO: An adult Malaysian presenter gathers two folded shirts, places them inside the real box and slides the box into an open shelf. Keep movement physically believable, product scale accurate, camera naturally handheld and lighting consistent. 7–10s CTA: Finish on the tidy shelf with the box clearly visible. EXACT ON-CAMERA SPOKEN DIALOGUE in natural Bahasa Melayu Malaysia: “Barang terus tersusun. Jom tengok kotak ini!” Deliver this short line across the action, with the final invitation synchronized to the closing shot; accurate lip sync and no Indonesian accent. No separate voiceover. Low natural ambience and soft instrumental music. No subtitles, added text, watermark, new logos, fabricated specifications or unverified accessories."
+    },
+    {
+      "id": "v9_creative_modeltalk_009",
+      "subcategory_id": "bag_sling",
+      "product_type": "crossbody",
+      "concept": "Weekend street style",
+      "duration_seconds": 10,
+      "voice_language": "ms-MY",
+      "voice_type": "on_camera_model",
+      "status": "DRAFT_CREATIVE_QA",
+      "full_prompt": "Create a single photorealistic vertical 9:16 Malaysian affiliate video lasting exactly 10 seconds. Use the uploaded crossbody product image as the authoritative visual reference: preserve its exact visible design, color, print, proportions and hardware; never invent functions or change its appearance. CONCEPT: Weekend street style. 0–2s HOOK: Begin in the middle of the real action, showing the product prominently with an adult Malaysian presenter already in frame; no intro card. 2–7s REAL PRODUCT DEMO: An adult Malaysian presenter adjusts the bag's real strap over a shoulder, walks past a shaded storefront and turns to show its profile. Keep movement physically believable, product scale accurate, camera naturally handheld and lighting consistent. 7–10s CTA: Finish with the bag resting naturally at hip height. EXACT ON-CAMERA SPOKEN DIALOGUE in natural Bahasa Melayu Malaysia: “Beg silang ini memang nampak bergaya. Jom tengok!” Deliver this short line across the action, with the final invitation synchronized to the closing shot; accurate lip sync and no Indonesian accent. No separate voiceover. Low natural ambience and soft instrumental music. No subtitles, added text, watermark, new logos, fabricated specifications or unverified accessories."
+    },
+    {
+      "id": "v9_creative_modeltalk_010",
+      "subcategory_id": "hijab_bawal",
+      "product_type": "cotton",
+      "concept": "Final fold",
+      "duration_seconds": 10,
+      "voice_language": "ms-MY",
+      "voice_type": "on_camera_model",
+      "status": "DRAFT_CREATIVE_QA",
+      "full_prompt": "Create a single photorealistic vertical 9:16 Malaysian affiliate video lasting exactly 10 seconds. Use the uploaded cotton product image as the authoritative visual reference: preserve its exact visible design, color, print, proportions and hardware; never invent functions or change its appearance. CONCEPT: Final fold. 0–2s HOOK: Begin in the middle of the real action, showing the product prominently with an adult Malaysian presenter already in frame; no intro card. 2–7s REAL PRODUCT DEMO: An adult Malaysian woman adjusts the actual bawal edge beside a mirror, then turns from front to side to show the genuine drape. Keep movement physically believable, product scale accurate, camera naturally handheld and lighting consistent. 7–10s CTA: Finish with her looking at camera while the hijab remains fully visible. EXACT ON-CAMERA SPOKEN DIALOGUE in natural Bahasa Melayu Malaysia: “Tudung bawal ini kemas dan manis. Jom tengok!” Deliver this short line across the action, with the final invitation synchronized to the closing shot; accurate lip sync and no Indonesian accent. No separate voiceover. Low natural ambience and soft instrumental music. No subtitles, added text, watermark, new logos, fabricated specifications or unverified accessories."
+    }
+  ]
+}

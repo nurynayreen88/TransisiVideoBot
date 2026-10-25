@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "batch": "v9_curated_twenty_sixth_batch_20261024",
+  "variation_count": 6,
+  "notes": "Three individually authored reference-dependent concepts, complete 10s and continuous two-part 20s. Draft pending real render and runtime input compatibility QA.",
+  "variations": [
+    {
+      "id": "v9_curated26_bag_handbag_10s_01",
+      "subcategory_id": "bag_handbag",
+      "visual_category": "PARTIAL_MODEL",
+      "concept": "Hotel lobby departure",
+      "duration_seconds": 10,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Photorealistic vertical 9:16. One adult Universal Malaysian woman, framed shoulders to knees with face outside shot, carries the exact reference handbag by its actual handle. Preserve authentic handle, body, closure, colour, size and visible markings; no invented pockets or hardware. Quiet bright hotel lobby with a plain bench, dry floor and soft daylight; realistic bag weight and natural walking.\nUse the supplied product reference as the sole visual master. Preserve product identity, anatomy, scale, physical contact and continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Establish the original handbag upright on the plain bench, full silhouette visible.\n2–5s: Model grips its actual handle and lifts it naturally from the bench.\n5–8s: Model takes two measured steps toward the lobby exit, bag swaying with realistic weight.\n8–10s: Model pauses, holding the exact bag clearly beside the hip.\nAUDIO: Off-camera Malaysian Malay narrator; on-screen model silent: 'Ambil beg, dah sedia untuk bergerak.' Soft lobby ambience."
+    },
+    {
+      "id": "v9_curated26_bag_handbag_20s_01",
+      "subcategory_id": "bag_handbag",
+      "visual_category": "PARTIAL_MODEL",
+      "concept": "Hotel lobby departure",
+      "duration_seconds": 20,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. One adult Universal Malaysian woman, framed shoulders to knees with face outside shot, carries the exact reference handbag by its actual handle. Preserve authentic handle, body, closure, colour, size and visible markings; no invented pockets or hardware. Quiet bright hotel lobby with a plain bench, dry floor and soft daylight; realistic bag weight and natural walking.\nUse the supplied product reference as the sole visual master. Preserve product identity, anatomy, scale, physical contact and continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–3s: Establish the original handbag upright on the lobby bench.\n3–7s: Model takes its actual handle and lifts it smoothly without changing the bag shape.\n7–10s: Model pauses beside the bench, holding the bag at the hip.\nAUDIO: Off-camera Malaysian Malay narrator; on-screen model silent: 'Ambil beg, dah sedia untuk bergerak.' Soft lobby ambience.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. One adult Universal Malaysian woman, framed shoulders to knees with face outside shot, carries the exact reference handbag by its actual handle. Preserve authentic handle, body, closure, colour, size and visible markings; no invented pockets or hardware. Quiet bright hotel lobby with a plain bench, dry floor and soft daylight; realistic bag weight and natural walking.\nUse the supplied product reference as the sole visual master. Preserve product identity, anatomy, scale, physical contact and continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nCONTINUITY: Match final Part 1 frame exactly in product, subject, pose, props, lighting and camera axis; continue without replaying completed action.\nEXACTLY 10 SECONDS:\n0–3s: Resume with the same bag held at the hip; model begins walking away from the bench.\n3–7s: Model takes two natural steps, authentic handle and body movement visible.\n7–10s: Hold a steady three-quarter close view of the original handbag beside the model.\nAUDIO: Off-camera Malaysian Malay narrator; on-screen model silent: 'Selesai urusan, terus sambung perjalanan.' Soft lobby ambience."
+    },
+    {
+      "id": "v9_curated26_home_cleaning_10s_01",
+      "subcategory_id": "home_cleaning",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Tabletop dusting",
+      "duration_seconds": 10,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Photorealistic vertical 9:16. Exact reference reusable cleaning cloth, retaining its actual shape, colour, edge and visible texture; no invented absorbency, antibacterial or material claims. Bright home study desk with a small amount of ordinary dry dust, no electronics or liquids. Adult Malaysian hands and forearms only. Steady close three-quarter camera, believable cloth folds and hand pressure.\nUse the supplied product reference as the sole visual master. Preserve product identity, anatomy, scale, physical contact and continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Establish the original cloth folded beside the lightly dusty desk surface.\n2–5s: Hand unfolds the cloth once, keeping its actual edges and colour visible.\n5–8s: Hand makes two gentle continuous wiping passes across the dry surface.\n8–10s: Hand rests the original cloth neatly at the desk edge, complete profile visible.\nAUDIO: No speech, narration or music; natural cloth rustle and quiet room ambience."
+    },
+    {
+      "id": "v9_curated26_home_cleaning_20s_01",
+      "subcategory_id": "home_cleaning",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Tabletop dusting",
+      "duration_seconds": 20,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. Exact reference reusable cleaning cloth, retaining its actual shape, colour, edge and visible texture; no invented absorbency, antibacterial or material claims. Bright home study desk with a small amount of ordinary dry dust, no electronics or liquids. Adult Malaysian hands and forearms only. Steady close three-quarter camera, believable cloth folds and hand pressure.\nUse the supplied product reference as the sole visual master. Preserve product identity, anatomy, scale, physical contact and continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–3s: Establish the original folded cloth beside the dry dusty desk area.\n3–7s: Hand opens the cloth to its actual size and places it flat on the surface.\n7–10s: Hand begins one gentle wiping pass across the dry desk.\nAUDIO: No speech, narration or music; natural cloth rustle and quiet room ambience.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. Exact reference reusable cleaning cloth, retaining its actual shape, colour, edge and visible texture; no invented absorbency, antibacterial or material claims. Bright home study desk with a small amount of ordinary dry dust, no electronics or liquids. Adult Malaysian hands and forearms only. Steady close three-quarter camera, believable cloth folds and hand pressure.\nUse the supplied product reference as the sole visual master. Preserve product identity, anatomy, scale, physical contact and continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nCONTINUITY: Match final Part 1 frame exactly in product, subject, pose, props, lighting and camera axis; continue without replaying completed action.\nEXACTLY 10 SECONDS:\n0–3s: Resume from the same wiping position and complete the first pass without resetting.\n3–7s: Hand makes one further natural pass, then lifts the cloth gently.\n7–10s: Hand rests the exact cloth at the desk edge in a stable close frame.\nAUDIO: No speech, narration or music; natural cloth rustle and quiet room ambience."
+    },
+    {
+      "id": "v9_curated26_pet_leash_10s_01",
+      "subcategory_id": "pet_leash",
+      "visual_category": "ANIMAL_ONLY",
+      "concept": "Quiet garden walk",
+      "duration_seconds": 10,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Photorealistic vertical 9:16. Exact reference dog leash attached using its real visible clip to a separate properly fitted plain dog harness. Preserve leash length appearance, colour, handle, clip and markings; no invented reflective or strength claims. One calm adult domestic dog remains clearly visible on a quiet shaded garden path, adult handler's hand and forearm only at frame edge. Leash remains loose, dog walks voluntarily at a natural pace, dry level path and soft morning light.\nUse the supplied product reference as the sole visual master. Preserve product identity, anatomy, scale, physical contact and continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Establish the calm dog beside the handler with the exact leash clipped to the harness, loose and visible.\n2–5s: Dog starts walking two natural steps along the path with the leash slack.\n5–8s: Dog pauses to sniff the ground briefly while the handler keeps a relaxed hold.\n8–10s: Hold a clear low three-quarter frame of the dog and unchanged leash.\nAUDIO: Off-camera Malaysian Malay narrator; handler and dog silent: 'Jalan perlahan, beri ruang untuk si bulus menghidu.' Soft garden ambience."
+    },
+    {
+      "id": "v9_curated26_pet_leash_20s_01",
+      "subcategory_id": "pet_leash",
+      "visual_category": "ANIMAL_ONLY",
+      "concept": "Quiet garden walk",
+      "duration_seconds": 20,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. Exact reference dog leash attached using its real visible clip to a separate properly fitted plain dog harness. Preserve leash length appearance, colour, handle, clip and markings; no invented reflective or strength claims. One calm adult domestic dog remains clearly visible on a quiet shaded garden path, adult handler's hand and forearm only at frame edge. Leash remains loose, dog walks voluntarily at a natural pace, dry level path and soft morning light.\nUse the supplied product reference as the sole visual master. Preserve product identity, anatomy, scale, physical contact and continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–3s: Establish the exact leash connected to the dog's properly fitted plain harness, with dog calm and leash slack.\n3–7s: Dog takes two voluntary measured steps along the shaded path.\n7–10s: Dog pauses naturally beside a clear patch of ground.\nAUDIO: Off-camera Malaysian Malay narrator; handler and dog silent: 'Jalan perlahan, beri ruang untuk si bulus menghidu.' Soft garden ambience.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. Exact reference dog leash attached using its real visible clip to a separate properly fitted plain dog harness. Preserve leash length appearance, colour, handle, clip and markings; no invented reflective or strength claims. One calm adult domestic dog remains clearly visible on a quiet shaded garden path, adult handler's hand and forearm only at frame edge. Leash remains loose, dog walks voluntarily at a natural pace, dry level path and soft morning light.\nUse the supplied product reference as the sole visual master. Preserve product identity, anatomy, scale, physical contact and continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nCONTINUITY: Match final Part 1 frame exactly in product, subject, pose, props, lighting and camera axis; continue without replaying completed action.\nEXACTLY 10 SECONDS:\n0–3s: Resume with the same paused dog and slack leash; dog lowers its nose briefly to sniff the ground.\n3–7s: Dog lifts its head and takes one natural step, handler's grip remains relaxed.\n7–10s: Hold a stable low frame of the calm dog and authentic leash connection.\nAUDIO: Off-camera Malaysian Malay narrator; handler and dog silent: 'Tali kekal longgar, jalan pun lebih tenang.' Soft garden ambience."
+    }
+  ]
+}

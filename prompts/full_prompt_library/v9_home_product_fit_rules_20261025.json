@@ -1,0 +1,248 @@
+{
+  "schema_version": 1,
+  "status": "DRAFT_PRODUCT_FIT_RULES",
+  "runtime_enabled": false,
+  "category": "home_non_cookware",
+  "rule_format": [
+    "demonstration",
+    "camera",
+    "prohibited_assumption"
+  ],
+  "rules": {
+    "storage_box": [
+      "Place household items in open box",
+      "Overhead organizer shot",
+      "Do not invent capacity"
+    ],
+    "drawer_organizer": [
+      "Arrange stationery in drawer sections",
+      "Top-down drawer shot",
+      "Do not invent dividers"
+    ],
+    "rack": [
+      "Place light objects on assembled rack",
+      "Medium product shot",
+      "Do not claim load capacity"
+    ],
+    "food_container": [
+      "Transfer dry snacks to container",
+      "Kitchen counter close-up",
+      "Do not claim airtight seal"
+    ],
+    "vacuum_bag": [
+      "Place folded clothes into bag and show visible valve",
+      "Bedside overhead",
+      "Do not invent pump"
+    ],
+    "shoe_rack": [
+      "Arrange shoes on rack",
+      "Entryway wide shot",
+      "Do not invent shelf count"
+    ],
+    "wardrobe_organizer": [
+      "Arrange folded garments in wardrobe organizer",
+      "Wardrobe close-up",
+      "Do not invent compartments"
+    ],
+    "mop": [
+      "Mop clean tiled floor",
+      "Low floor tracking",
+      "Do not invent steam mode"
+    ],
+    "broom": [
+      "Sweep dry debris into dustpan",
+      "Floor close-up",
+      "Do not invent included dustpan"
+    ],
+    "vacuum_cleaner": [
+      "Vacuum rug with visible nozzle",
+      "Low tracking",
+      "Do not invent suction power"
+    ],
+    "brush": [
+      "Scrub suitable surface with brush",
+      "Hand close-up",
+      "Do not invent bristle material"
+    ],
+    "squeegee": [
+      "Pull water across smooth glass",
+      "Side close-up",
+      "Do not claim streak-free"
+    ],
+    "microfiber_cloth": [
+      "Wipe tabletop gently",
+      "Hand close-up",
+      "Do not claim antibacterial"
+    ],
+    "cleaning_spray": [
+      "Spray onto appropriate cloth",
+      "Product and cloth close-up",
+      "Do not invent chemical claims"
+    ],
+    "vase": [
+      "Place flowers in vase",
+      "Tabletop close-up",
+      "Do not invent included flowers"
+    ],
+    "wall_art": [
+      "Hang framed art on wall using existing mount",
+      "Room medium shot",
+      "Do not invent frame"
+    ],
+    "mirror": [
+      "Show mirror placed or mounted safely",
+      "Room wide and edge detail",
+      "Do not alter reflection"
+    ],
+    "artificial_plant": [
+      "Arrange plant on shelf",
+      "Shelf medium shot",
+      "Do not present as real plant"
+    ],
+    "clock": [
+      "Show clock on wall or desk",
+      "Clock-face close-up",
+      "Do not invent smart features"
+    ],
+    "decor_tray": [
+      "Arrange keys on tray",
+      "Top-down decor shot",
+      "Do not invent material"
+    ],
+    "carpet": [
+      "Unroll carpet on floor",
+      "Low room angle",
+      "Do not claim anti-slip"
+    ],
+    "bedsheet": [
+      "Spread sheet smoothly over bed",
+      "Bedroom wide and fabric detail",
+      "Do not invent thread count"
+    ],
+    "pillowcase": [
+      "Slide pillow into case",
+      "Bed close-up",
+      "Do not invent zipper"
+    ],
+    "duvet": [
+      "Spread duvet on bed",
+      "Bedroom wide shot",
+      "Do not invent filling"
+    ],
+    "comforter": [
+      "Arrange comforter on bed",
+      "Bed detail",
+      "Do not invent warmth rating"
+    ],
+    "pillow": [
+      "Place pillow at bedhead",
+      "Side close-up",
+      "Do not claim neck support"
+    ],
+    "mattress_topper": [
+      "Lay topper flat on mattress",
+      "Bedroom side shot",
+      "Do not invent thickness"
+    ],
+    "blanket": [
+      "Fold blanket on sofa",
+      "Fabric macro",
+      "Do not invent fabric"
+    ],
+    "table_lamp": [
+      "Turn lamp on using visible control",
+      "Desk side shot",
+      "Do not invent dimming"
+    ],
+    "floor_lamp": [
+      "Position lamp beside sofa",
+      "Living room wide",
+      "Do not invent color changing"
+    ],
+    "ceiling_light": [
+      "Show installed ceiling fixture",
+      "Upward room shot",
+      "Do not invent remote"
+    ],
+    "LED_strip": [
+      "Show strip installed under shelf",
+      "Close-up and room context",
+      "Do not invent RGB colors"
+    ],
+    "night_light": [
+      "Place night light near bed",
+      "Low light bedside shot",
+      "Do not invent sensor"
+    ],
+    "outdoor_light": [
+      "Show fixture at porch",
+      "Evening porch shot",
+      "Do not invent weather rating"
+    ],
+    "sofa": [
+      "Adult sits naturally on sofa",
+      "Living room wide",
+      "Do not invent recliner"
+    ],
+    "chair": [
+      "Adult sits on chair",
+      "Side profile",
+      "Do not invent ergonomic claims"
+    ],
+    "dining_table": [
+      "Set plates on dining table",
+      "Dining room wide",
+      "Do not invent extension"
+    ],
+    "shelf": [
+      "Arrange light books on shelf",
+      "Medium front view",
+      "Do not claim load rating"
+    ],
+    "cabinet": [
+      "Open existing cabinet door",
+      "Front medium shot",
+      "Do not invent drawers"
+    ],
+    "coffee_table": [
+      "Place cup on coffee table",
+      "Living room low angle",
+      "Do not invent storage"
+    ],
+    "bed_frame": [
+      "Show assembled bed frame with bedding",
+      "Bedroom wide",
+      "Do not invent material"
+    ],
+    "curtain": [
+      "Draw curtain across window",
+      "Window medium shot",
+      "Do not invent blackout rating"
+    ],
+    "doormat": [
+      "Step onto doormat at entrance",
+      "Low doorway shot",
+      "Do not claim anti-slip"
+    ],
+    "bath_mat": [
+      "Place mat on dry bathroom floor",
+      "Bathroom low shot",
+      "Do not claim absorbency"
+    ],
+    "bathroom_accessory": [
+      "Use accessory according to visible form",
+      "Bathroom close-up",
+      "Do not invent attachment"
+    ],
+    "laundry_basket": [
+      "Place clothes in basket",
+      "Laundry room shot",
+      "Do not invent folding"
+    ],
+    "wall_hook": [
+      "Hang light keys or towel on installed hook",
+      "Wall close-up",
+      "Do not claim load rating"
+    ]
+  }
+}

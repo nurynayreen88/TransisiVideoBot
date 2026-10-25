@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "audit": "v9_cookware_runtime_integration_20261025",
+  "scope": "Read-only inspection of bot.py, prompt_engine.py and V9 cookware static QA on staging branch.",
+  "status": "INTEGRATION_NOT_VERIFIED",
+  "observations": [
+    {
+      "file": "bot.py",
+      "location": "near lines 2994-3006 and 3533-3535",
+      "finding": "Jana Prompt takes category and product name; product image upload to Klippo is not required."
+    },
+    {
+      "file": "bot.py",
+      "location": "near lines 4099-4101",
+      "finding": "User is told to upload original product image to the external AI generator; Klippo does not automatically send it."
+    },
+    {
+      "file": "prompt_engine.py",
+      "location": "near lines 932-937",
+      "finding": "Identity rule explicitly expects original product photo(s) to be supplied to the target generator."
+    },
+    {
+      "file": "bot.py",
+      "location": "near lines 3938-3953",
+      "finding": "Prompt-generation path invokes build_prompt() with current user selections and optional storyboard override; this is not evidence that the V9 shortlist is directly loaded."
+    },
+    {
+      "file": "bot.py",
+      "location": "near line 180",
+      "finding": "PROMPTS_BY_ID is constructed from PROMPT_LIBRARY; need trace its source and selection mapping before claiming V9 active."
+    }
+  ],
+  "decisions": [
+    "Retain name-only Klippo flow and external-generator photo instruction.",
+    "Keep V9 shortlist as staging-only; do not activate or merge.",
+    "Do not remove product reference lock or replace it with fabricated product details.",
+    "Before integration, trace PROMPT_LIBRARY source and category/subcategory mapping, identify how standalone V9 prompts will be selected without generic recomposition, and add tests for 10s/20s and voice selection."
+  ],
+  "required_tests": [
+    "Product name only in Klippo, original photo attached externally",
+    "50 shortlist concepts selectable without duplicate/rejected entries",
+    "Standalone prompt text not overwritten by generic build_prompt clauses",
+    "10s exact and 20s contiguous two-part output",
+    "MODEL_SPEECH, BACKGROUND_NARRATION and NO_VOICE retained",
+    "No deployment or activation of DRAFT_RENDER_QA records"
+  ]
+}

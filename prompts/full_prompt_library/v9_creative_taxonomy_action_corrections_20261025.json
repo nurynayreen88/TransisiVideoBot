@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "status": "DRAFT_CORRECTED_ACTION_QA",
+  "runtime_enabled": false,
+  "original_records_preserved": true,
+  "variations": [
+    {
+      "id": "v9_creative_modeltalk_048",
+      "subcategory_id": "sports_outdoor",
+      "product_type": "camping tent",
+      "action": "Adult camper unfolds the reference tent on level ground and shows its real visible structure.",
+      "dialogue": "Khemah ini saya bawa berkhemah. Jom tengok!"
+    },
+    {
+      "id": "v9_creative_modeltalk_050",
+      "subcategory_id": "stationery_office",
+      "product_type": "desk organizer",
+      "action": "Adult presenter places pens and clips into the actual desk organizer.",
+      "dialogue": "Meja terus nampak tersusun. Jom tengok!"
+    },
+    {
+      "id": "v9_creative_modeltalk_088",
+      "subcategory_id": "office_storage",
+      "product_type": "document tray",
+      "action": "Adult office worker stacks printed papers in the actual document tray.",
+      "dialogue": "Dokumen tersusun dalam dulang ini. Jom tengok!"
+    }
+  ]
+}

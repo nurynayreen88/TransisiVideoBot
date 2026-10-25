@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "status": "DRAFT_STATIC_AUDIT",
+  "runtime_enabled": false,
+  "source_files": [
+    "v9_standalone_product_prompts_batch01_20261025.json",
+    "v9_standalone_product_prompts_batch02_20261025.json",
+    "v9_standalone_product_prompts_batch03_20261025.json",
+    "v9_standalone_product_prompts_batch04_20261025.json",
+    "v9_standalone_product_prompts_batch05_20261025.json"
+  ],
+  "checks": {
+    "total_records": 100,
+    "unique_ids": 100,
+    "unique_subcategories": 96,
+    "all_have_cta": true,
+    "issues": [],
+    "duration_phrase_accepted": [
+      "10-second",
+      "10 seconds"
+    ],
+    "all_have_duration": true,
+    "note": "20 entries use '10 seconds' rather than '10-second'; both explicitly specify ten seconds. Previous lexical-only audit falsely flagged them."
+  },
+  "limitations": [
+    "No video generator renders have been executed.",
+    "Visual CTA without text or voice may not meet desired sales conversion goals.",
+    "All 100 drafts use instrumental-only audio and lack Malay spoken variations.",
+    "Product-type taxonomy matching remains unverified for every draft.",
+    "A prompt being standalone does not establish render success."
+  ]
+}

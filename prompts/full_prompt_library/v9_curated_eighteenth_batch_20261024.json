@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "batch": "v9_curated_eighteenth_batch_20261024",
+  "variation_count": 6,
+  "notes": "Three distinct product-specific reference-dependent concepts, each complete 10s and continuous 20s. Draft pending real render and runtime input compatibility QA.",
+  "variations": [
+    {
+      "id": "v9_curated18_bag_tote_10s_01",
+      "subcategory_id": "bag_tote",
+      "visual_category": "PARTIAL_MODEL",
+      "concept": "Weekend flower stall",
+      "duration_seconds": 10,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Vertical 9:16 photorealistic. Exact reference tote bag carried by one adult Universal Malaysian model, framed shoulders to knees with face outside shot. Preserve true strap length, body, silhouette, print and original openings. A shaded flower-market walkway with a small plain paper-wrapped bouquet, dry level ground and natural morning light. Natural weight and fabric movement; no invented pockets or capacity claims.\nUse the supplied product reference as the sole visual master. Preserve actual design, scale, anatomy, contact and spatial continuity. No fabricated features, claims, on-screen text, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Show the original tote hanging naturally from the model's shoulder, complete front visible.\n2–5s: The model accepts a small paper-wrapped bouquet from just outside frame and places it gently through the tote's actual main opening.\n5–8s: The model walks two measured steps, tote and bouquet moving with realistic weight.\n8–10s: Pause at the stall edge with the tote's original front unobstructed.\nAUDIO: Off-camera Malaysian Malay narrator; model silent: 'Singgah beli bunga, terus bawa dalam tote.' Soft market ambience."
+    },
+    {
+      "id": "v9_curated18_bag_tote_20s_01",
+      "subcategory_id": "bag_tote",
+      "visual_category": "PARTIAL_MODEL",
+      "concept": "Weekend flower stall",
+      "duration_seconds": 20,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic. Exact reference tote bag carried by one adult Universal Malaysian model, framed shoulders to knees with face outside shot. Preserve true strap length, body, silhouette, print and original openings. A shaded flower-market walkway with a small plain paper-wrapped bouquet, dry level ground and natural morning light. Natural weight and fabric movement; no invented pockets or capacity claims.\nUse the supplied product reference as the sole visual master. Preserve actual design, scale, anatomy, contact and spatial continuity. No fabricated features, claims, on-screen text, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–3s: Establish the original tote on the model's shoulder at the shaded flower stall.\n3–7s: The model receives a small paper-wrapped bouquet and lowers it through the bag's actual main opening.\n7–10s: The model settles the bouquet gently and pauses with one hand near the tote rim.\nAUDIO: Off-camera Malaysian Malay narrator; model silent: 'Singgah beli bunga, terus bawa dalam tote.' Soft market ambience.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic. Exact reference tote bag carried by one adult Universal Malaysian model, framed shoulders to knees with face outside shot. Preserve true strap length, body, silhouette, print and original openings. A shaded flower-market walkway with a small plain paper-wrapped bouquet, dry level ground and natural morning light. Natural weight and fabric movement; no invented pockets or capacity claims.\nUse the supplied product reference as the sole visual master. Preserve actual design, scale, anatomy, contact and spatial continuity. No fabricated features, claims, on-screen text, extra logos or watermark.\nCONTINUITY: Match the final Part 1 frame exactly in product, subject, pose, props, light and camera axis. Continue without replaying completed action.\nEXACTLY 10 SECONDS:\n0–3s: Resume with the bouquet already inside the same tote; the model releases the rim without repeating placement.\n3–7s: The model walks two measured steps along the dry walkway, tote swaying naturally.\n7–10s: Stop in a steady three-quarter composition showing the exact bag body and straps.\nAUDIO: Off-camera Malaysian Malay narrator; model silent: 'Selesai membeli, sambung jalan santai.' Soft market ambience."
+    },
+    {
+      "id": "v9_curated18_accessory_sunglasses_10s_01",
+      "subcategory_id": "accessory_sunglasses",
+      "visual_category": "FULL_MODEL",
+      "concept": "Courtyard coffee pause",
+      "duration_seconds": 10,
+      "voice_type": "MODEL_SPEECH",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Vertical 9:16 photorealistic. One adult Universal Malaysian model wears the exact reference sunglasses in a shaded open-air courtyard café. Preserve authentic frame shape, lens appearance, temples, colour and scale; no invented UV or lens-performance claims. Medium portrait keeps the visible mouth unobstructed for accurate Malaysian Malay lip sync, soft indirect daylight, restrained eye-level camera.\nUse the supplied product reference as the sole visual master. Preserve actual design, scale, anatomy, contact and spatial continuity. No fabricated features, claims, on-screen text, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Establish the model seated at a plain courtyard table wearing the exact sunglasses.\n2–5s: The model turns slightly toward the camera, revealing the original frame profile.\n5–8s: With visible accurate lip sync, the model says: 'Singgah minum sekejap, gaya pun santai.'\n8–10s: Hold a relaxed three-quarter portrait with sunglasses unchanged.\nAUDIO: Only visible adult model speech in natural Malaysian Malay with precise lip sync; subtle courtyard ambience, no narrator or music."
+    },
+    {
+      "id": "v9_curated18_accessory_sunglasses_20s_01",
+      "subcategory_id": "accessory_sunglasses",
+      "visual_category": "FULL_MODEL",
+      "concept": "Courtyard coffee pause",
+      "duration_seconds": 20,
+      "voice_type": "MODEL_SPEECH",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic. One adult Universal Malaysian model wears the exact reference sunglasses in a shaded open-air courtyard café. Preserve authentic frame shape, lens appearance, temples, colour and scale; no invented UV or lens-performance claims. Medium portrait keeps the visible mouth unobstructed for accurate Malaysian Malay lip sync, soft indirect daylight, restrained eye-level camera.\nUse the supplied product reference as the sole visual master. Preserve actual design, scale, anatomy, contact and spatial continuity. No fabricated features, claims, on-screen text, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–3s: Establish the model at the courtyard table with the original sunglasses worn correctly.\n3–7s: The model turns gently toward the camera, revealing the authentic frame profile.\n7–10s: Facing camera, the model says with precise lip sync: 'Singgah minum sekejap, gaya pun santai.'\nAUDIO: Only visible adult model speech in natural Malaysian Malay with precise lip sync; subtle courtyard ambience, no narrator or music.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic. One adult Universal Malaysian model wears the exact reference sunglasses in a shaded open-air courtyard café. Preserve authentic frame shape, lens appearance, temples, colour and scale; no invented UV or lens-performance claims. Medium portrait keeps the visible mouth unobstructed for accurate Malaysian Malay lip sync, soft indirect daylight, restrained eye-level camera.\nUse the supplied product reference as the sole visual master. Preserve actual design, scale, anatomy, contact and spatial continuity. No fabricated features, claims, on-screen text, extra logos or watermark.\nCONTINUITY: Match the final Part 1 frame exactly in product, subject, pose, props, light and camera axis. Continue without replaying completed action.\nEXACTLY 10 SECONDS:\n0–3s: Resume from the same seated three-quarter pose; the model rests a hand naturally on the table.\n3–7s: The model says with accurate visible lip sync: 'Saya suka padankan aksesori yang ringkas.'\n7–10s: Camera settles into a clear portrait showing the exact frame front and temple.\nAUDIO: Only visible adult model speech in natural Malaysian Malay with precise lip sync; subtle courtyard ambience, no narrator or music."
+    },
+    {
+      "id": "v9_curated18_home_bathroom_10s_01",
+      "subcategory_id": "home_bathroom",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Sink-side dispenser",
+      "duration_seconds": 10,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Vertical 9:16 photorealistic. Exact reference manual soap dispenser, preserving its actual pump, bottle shape, colour, proportions and markings without inventing refill or material claims. A clean bathroom sink counter, gentle morning window light, adult Malaysian hands and forearms only. Close steady three-quarter camera, realistic pump travel and contact; no face.\nUse the supplied product reference as the sole visual master. Preserve actual design, scale, anatomy, contact and spatial continuity. No fabricated features, claims, on-screen text, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Establish the original dispenser standing beside the dry sink, pump clearly visible.\n2–5s: One hand holds the other open beneath the actual nozzle and presses the pump once naturally.\n5–8s: A small realistic amount of liquid soap lands in the waiting palm; hands withdraw without moving the bottle.\n8–10s: Hold a stable full-product frame of the unchanged dispenser.\nAUDIO: Off-camera Malaysian Malay narrator; hands silent: 'Tekan sekali, ambil sabun sebelum cuci tangan.' Quiet bathroom ambience."
+    },
+    {
+      "id": "v9_curated18_home_bathroom_20s_01",
+      "subcategory_id": "home_bathroom",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Sink-side dispenser",
+      "duration_seconds": 20,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic. Exact reference manual soap dispenser, preserving its actual pump, bottle shape, colour, proportions and markings without inventing refill or material claims. A clean bathroom sink counter, gentle morning window light, adult Malaysian hands and forearms only. Close steady three-quarter camera, realistic pump travel and contact; no face.\nUse the supplied product reference as the sole visual master. Preserve actual design, scale, anatomy, contact and spatial continuity. No fabricated features, claims, on-screen text, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–3s: Establish the reference dispenser upright on the counter beside the sink.\n3–7s: One hand positions an open palm beneath the actual nozzle while the other approaches the original pump.\n7–10s: The upper hand presses the pump once, releasing a small amount of soap into the waiting palm.\nAUDIO: Off-camera Malaysian Malay narrator; hands silent: 'Tekan sekali, ambil sabun sebelum cuci tangan.' Quiet bathroom ambience.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic. Exact reference manual soap dispenser, preserving its actual pump, bottle shape, colour, proportions and markings without inventing refill or material claims. A clean bathroom sink counter, gentle morning window light, adult Malaysian hands and forearms only. Close steady three-quarter camera, realistic pump travel and contact; no face.\nUse the supplied product reference as the sole visual master. Preserve actual design, scale, anatomy, contact and spatial continuity. No fabricated features, claims, on-screen text, extra logos or watermark.\nCONTINUITY: Match the final Part 1 frame exactly in product, subject, pose, props, light and camera axis. Continue without replaying completed action.\nEXACTLY 10 SECONDS:\n0–3s: Resume immediately after the same single pump press; the upper hand releases the pump and both hands withdraw naturally.\n3–7s: Camera makes a gentle lateral slide revealing the dispenser's original nozzle and bottle silhouette, with no further pumping.\n7–10s: Hold a complete stationary hero view of the exact reference dispenser.\nAUDIO: Off-camera Malaysian Malay narrator; hands silent: 'Lepas guna, biarkan botol kemas di tepi sinki.' Quiet bathroom ambience."
+    }
+  ]
+}

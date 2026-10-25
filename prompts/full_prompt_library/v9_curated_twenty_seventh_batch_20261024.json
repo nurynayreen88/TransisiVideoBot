@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "batch": "v9_curated_twenty_seventh_batch_20261024",
+  "variation_count": 6,
+  "notes": "Three individually authored reference-dependent concepts, complete 10s and continuous two-part 20s. Draft pending real render and runtime input compatibility QA.",
+  "variations": [
+    {
+      "id": "v9_curated27_fashion_women_10s_01",
+      "subcategory_id": "fashion_women",
+      "visual_category": "FULL_MODEL",
+      "concept": "Weekend gallery browsing",
+      "duration_seconds": 10,
+      "voice_type": "MODEL_SPEECH",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Photorealistic vertical 9:16. One adult Universal Malaysian woman wears the exact reference women's outfit, retaining its actual neckline, sleeve length, silhouette, colour, print and hem. Quiet indoor art gallery with neutral walls, soft diffuse lighting and level floor. Eye-level medium-full framing keeps face and complete outfit visible for natural Malaysian Malay lip sync. No invented buttons, pockets, fabric or performance claims.\nUse the supplied product reference as the sole visual master. Preserve authentic product identity, scale, anatomy, physical contact and spatial continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Establish her beside a plain gallery wall, complete original outfit visible.\n2–5s: She walks two relaxed steps and turns toward a framed abstract artwork.\n5–8s: Facing camera, she says with accurate visible lip sync: 'Hari ni saya pilih gaya yang ringkas.'\n8–10s: Hold a relaxed three-quarter full-outfit portrait.\nAUDIO: Only visible adult female speech in natural Malaysian Malay with precise lip sync; subtle gallery ambience, no narrator."
+    },
+    {
+      "id": "v9_curated27_fashion_women_20s_01",
+      "subcategory_id": "fashion_women",
+      "visual_category": "FULL_MODEL",
+      "concept": "Weekend gallery browsing",
+      "duration_seconds": 20,
+      "voice_type": "MODEL_SPEECH",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. One adult Universal Malaysian woman wears the exact reference women's outfit, retaining its actual neckline, sleeve length, silhouette, colour, print and hem. Quiet indoor art gallery with neutral walls, soft diffuse lighting and level floor. Eye-level medium-full framing keeps face and complete outfit visible for natural Malaysian Malay lip sync. No invented buttons, pockets, fabric or performance claims.\nUse the supplied product reference as the sole visual master. Preserve authentic product identity, scale, anatomy, physical contact and spatial continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–3s: Establish the model in the exact outfit beside the gallery wall.\n3–7s: She walks two natural steps and pauses near the abstract artwork.\n7–10s: Facing camera, she says with precise lip sync: 'Hari ni saya pilih gaya yang ringkas.'\nAUDIO: Only visible adult female speech in natural Malaysian Malay with precise lip sync; subtle gallery ambience, no narrator.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. One adult Universal Malaysian woman wears the exact reference women's outfit, retaining its actual neckline, sleeve length, silhouette, colour, print and hem. Quiet indoor art gallery with neutral walls, soft diffuse lighting and level floor. Eye-level medium-full framing keeps face and complete outfit visible for natural Malaysian Malay lip sync. No invented buttons, pockets, fabric or performance claims.\nUse the supplied product reference as the sole visual master. Preserve authentic product identity, scale, anatomy, physical contact and spatial continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nCONTINUITY: Match the final Part 1 frame exactly in product, subject, pose, props, lighting and camera axis. Continue without replaying completed action.\nEXACTLY 10 SECONDS:\n0–3s: Resume from the same paused stance and unchanged garment folds; she turns gently toward the artwork.\n3–7s: She looks back at camera and says with precise lip sync: 'Sesuai untuk jalan santai hujung minggu.'\n7–10s: Camera holds a steady medium-full three-quarter view of the complete outfit.\nAUDIO: Only visible adult female speech in natural Malaysian Malay with precise lip sync; subtle gallery ambience, no narrator."
+    },
+    {
+      "id": "v9_curated27_auto_interior_10s_01",
+      "subcategory_id": "auto_interior",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Car seat organizer setup",
+      "duration_seconds": 10,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Photorealistic vertical 9:16. Exact reference car seat-back organizer with its real shape, visible attachment, colour, seams and actual compartments; no invented pockets or compatibility claims. Stationary parked car with engine off, safe clear rear passenger area and soft daylight. Adult Malaysian hands and forearms only, camera from rear seat. Show attachment solely through the reference's visible existing strap and fastening, no modification to vehicle safety equipment.\nUse the supplied product reference as the sole visual master. Preserve authentic product identity, scale, anatomy, physical contact and spatial continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Establish the exact organizer held beside the back of the front passenger seat.\n2–5s: Hands position its existing attachment around the appropriate seat-back area without obstructing the seat belt.\n5–8s: Hands secure the organizer using its actual visible fastening and gently straighten its body.\n8–10s: Hold a clear full view of the original organizer fitted against the seat back.\nAUDIO: Off-camera Malaysian Malay narrator; hands silent: 'Susun organizer pada belakang kerusi dengan kemas.' Quiet parked-car ambience."
+    },
+    {
+      "id": "v9_curated27_auto_interior_20s_01",
+      "subcategory_id": "auto_interior",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Car seat organizer setup",
+      "duration_seconds": 20,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. Exact reference car seat-back organizer with its real shape, visible attachment, colour, seams and actual compartments; no invented pockets or compatibility claims. Stationary parked car with engine off, safe clear rear passenger area and soft daylight. Adult Malaysian hands and forearms only, camera from rear seat. Show attachment solely through the reference's visible existing strap and fastening, no modification to vehicle safety equipment.\nUse the supplied product reference as the sole visual master. Preserve authentic product identity, scale, anatomy, physical contact and spatial continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–3s: Establish the reference organizer beside the stationary car's front passenger seat back.\n3–7s: Hands align the existing strap and position the organizer against the seat back, clear of seat-belt hardware.\n7–10s: Hands begin securing its real visible fastening without adding any attachment.\nAUDIO: Off-camera Malaysian Malay narrator; hands silent: 'Susun organizer pada belakang kerusi dengan kemas.' Quiet parked-car ambience.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. Exact reference car seat-back organizer with its real shape, visible attachment, colour, seams and actual compartments; no invented pockets or compatibility claims. Stationary parked car with engine off, safe clear rear passenger area and soft daylight. Adult Malaysian hands and forearms only, camera from rear seat. Show attachment solely through the reference's visible existing strap and fastening, no modification to vehicle safety equipment.\nUse the supplied product reference as the sole visual master. Preserve authentic product identity, scale, anatomy, physical contact and spatial continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nCONTINUITY: Match the final Part 1 frame exactly in product, subject, pose, props, lighting and camera axis. Continue without replaying completed action.\nEXACTLY 10 SECONDS:\n0–3s: Resume from the same partly secured position; hands finish fastening the actual strap.\n3–7s: Hands gently straighten the organizer and release it, preserving original dimensions.\n7–10s: Hold a stable complete frame of the fitted original organizer with seat belt unobstructed.\nAUDIO: Off-camera Malaysian Malay narrator; hands silent: 'Pastikan tali dipasang pada tempatnya dan ruang kekal lapang.' Quiet parked-car ambience."
+    },
+    {
+      "id": "v9_curated27_accessory_wallet_10s_01",
+      "subcategory_id": "accessory_wallet",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Cafe checkout",
+      "duration_seconds": 10,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Photorealistic vertical 9:16. Exact reference wallet with original exterior, opening, colour, stitching, proportions and visible closure; no invented card slots or material claims. Bright quiet café table, a single plain bank card and paper receipt, adult Malaysian hands and forearms only. Stable close three-quarter camera, believable hand scale and natural opening action; no readable personal information.\nUse the supplied product reference as the sole visual master. Preserve authentic product identity, scale, anatomy, physical contact and spatial continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Establish the original wallet closed beside a plain card and receipt.\n2–5s: Hands open the wallet using its actual existing closure and opening.\n5–8s: Hands place the plain card into a genuinely visible existing section, then close the wallet.\n8–10s: Hold a clear stationary hero frame of the original closed wallet.\nAUDIO: No dialogue, narration or music; natural wallet movement and quiet café ambience."
+    },
+    {
+      "id": "v9_curated27_accessory_wallet_20s_01",
+      "subcategory_id": "accessory_wallet",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Cafe checkout",
+      "duration_seconds": 20,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. Exact reference wallet with original exterior, opening, colour, stitching, proportions and visible closure; no invented card slots or material claims. Bright quiet café table, a single plain bank card and paper receipt, adult Malaysian hands and forearms only. Stable close three-quarter camera, believable hand scale and natural opening action; no readable personal information.\nUse the supplied product reference as the sole visual master. Preserve authentic product identity, scale, anatomy, physical contact and spatial continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–3s: Establish the reference wallet closed on the café table with a plain card beside it.\n3–7s: Hands open the wallet using its real closure and reveal only the authentic visible interior.\n7–10s: Hands position the card at a visible existing section, wallet held steady.\nAUDIO: No dialogue, narration or music; natural wallet movement and quiet café ambience.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. Exact reference wallet with original exterior, opening, colour, stitching, proportions and visible closure; no invented card slots or material claims. Bright quiet café table, a single plain bank card and paper receipt, adult Malaysian hands and forearms only. Stable close three-quarter camera, believable hand scale and natural opening action; no readable personal information.\nUse the supplied product reference as the sole visual master. Preserve authentic product identity, scale, anatomy, physical contact and spatial continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nCONTINUITY: Match the final Part 1 frame exactly in product, subject, pose, props, lighting and camera axis. Continue without replaying completed action.\nEXACTLY 10 SECONDS:\n0–3s: Resume with the same card at the same visible section; hands finish placing it gently.\n3–7s: Hands close the wallet using its actual closure and set it flat on the table.\n7–10s: Hold a steady complete three-quarter frame of the original wallet.\nAUDIO: No dialogue, narration or music; natural wallet movement and quiet café ambience."
+    }
+  ]
+}

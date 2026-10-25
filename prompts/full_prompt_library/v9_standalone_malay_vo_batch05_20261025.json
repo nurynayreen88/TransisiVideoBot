@@ -1,0 +1,227 @@
+{
+  "schema_version": 1,
+  "status": "DRAFT_VOICE_QA",
+  "runtime_enabled": false,
+  "variations": [
+    {
+      "id": "v9_full10_vo_081",
+      "base_prompt_id": "v9_full10_product_081",
+      "subcategory_id": "fashion_innerwear",
+      "product_type": "singlet",
+      "duration_seconds": 10,
+      "voice_type": "background_voiceover",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_VOICE_QA",
+      "full_prompt": "Create one complete photorealistic 10-second vertical 9:16 affiliate video for Malaysian viewers. The exact singlet from the supplied product reference image is the hero; preserve its visible colors, design, markings, proportions, fabric or material appearance and existing components. SETTING: Clean dressing room. 0–2s HOOK: Start immediately with an appealing close-up of the authentic product in context, no title card. 2–6s ACTION: An adult model wears the singlet under an open plain overshirt, showing its actual neckline and hem. 6–8s DETAIL: Use torso crop to reveal one actually visible feature with realistic movement and consistent scale. 8–10s CTA: End on an inviting steady hero view of the unchanged product, without written sales copy. AUDIO: A single adult female background narrator speaks natural Bahasa Melayu Malaysia, saying exactly: “Singlet ini nampak kemas digayakan. Jom tengok!” at a comfortable pace within 10 seconds. Keep soft instrumental and natural ambience below the speech. Align the spoken invitation with the closing product shot; no other dialogue. Keep lighting plausible, camera smooth and actions natural. Do not invent compression. No invented specifications, additional logos, subtitles, overlays, watermark or unsupported accessories."
+    },
+    {
+      "id": "v9_full10_vo_082",
+      "base_prompt_id": "v9_full10_product_082",
+      "subcategory_id": "fashion_other",
+      "product_type": "pakaian tidur",
+      "duration_seconds": 10,
+      "voice_type": "background_voiceover",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_VOICE_QA",
+      "full_prompt": "Create one complete photorealistic 10-second vertical 9:16 affiliate video for Malaysian viewers. The exact pakaian tidur from the supplied product reference image is the hero; preserve its visible colors, design, markings, proportions, fabric or material appearance and existing components. SETTING: Cozy bedroom. 0–2s HOOK: Start immediately with an appealing close-up of the authentic product in context, no title card. 2–6s ACTION: Adult model sits comfortably on bed in the sleepwear, then stands to show natural drape. 6–8s DETAIL: Use full-body and fabric detail to reveal one actually visible feature with realistic movement and consistent scale. 8–10s CTA: End on an inviting steady hero view of the unchanged product, without written sales copy. AUDIO: A single adult female background narrator speaks natural Bahasa Melayu Malaysia, saying exactly: “Pakaian tidur ini cantik dan ringkas. Jom tengok!” at a comfortable pace within 10 seconds. Keep soft instrumental and natural ambience below the speech. Align the spoken invitation with the closing product shot; no other dialogue. Keep lighting plausible, camera smooth and actions natural. No invented fabric. No invented specifications, additional logos, subtitles, overlays, watermark or unsupported accessories."
+    },
+    {
+      "id": "v9_full10_vo_083",
+      "base_prompt_id": "v9_full10_product_083",
+      "subcategory_id": "bag_other",
+      "product_type": "clutch",
+      "duration_seconds": 10,
+      "voice_type": "background_voiceover",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_VOICE_QA",
+      "full_prompt": "Create one complete photorealistic 10-second vertical 9:16 affiliate video for Malaysian viewers. The exact clutch from the supplied product reference image is the hero; preserve its visible colors, design, markings, proportions, fabric or material appearance and existing components. SETTING: Evening event foyer. 0–2s HOOK: Start immediately with an appealing close-up of the authentic product in context, no title card. 2–6s ACTION: Adult carries clutch in one hand and places it on a small table. 6–8s DETAIL: Use hand-to-waist detail to reveal one actually visible feature with realistic movement and consistent scale. 8–10s CTA: End on an inviting steady hero view of the unchanged product, without written sales copy. AUDIO: A single adult female background narrator speaks natural Bahasa Melayu Malaysia, saying exactly: “Clutch ini menarik untuk majlis. Jom tengok!” at a comfortable pace within 10 seconds. Keep soft instrumental and natural ambience below the speech. Align the spoken invitation with the closing product shot; no other dialogue. Keep lighting plausible, camera smooth and actions natural. Do not invent chain. No invented specifications, additional logos, subtitles, overlays, watermark or unsupported accessories."
+    },
+    {
+      "id": "v9_full10_vo_084",
+      "base_prompt_id": "v9_full10_product_084",
+      "subcategory_id": "hijab_sport",
+      "product_type": "running",
+      "duration_seconds": 10,
+      "voice_type": "background_voiceover",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_VOICE_QA",
+      "full_prompt": "Create one complete photorealistic 10-second vertical 9:16 affiliate video for Malaysian viewers. The exact running from the supplied product reference image is the hero; preserve its visible colors, design, markings, proportions, fabric or material appearance and existing components. SETTING: Shaded park path. 0–2s HOOK: Start immediately with an appealing close-up of the authentic product in context, no title card. 2–6s ACTION: Adult Malaysian woman wearing the exact sports hijab walks briskly then jogs lightly. 6–8s DETAIL: Use head-and-shoulders moving shot to reveal one actually visible feature with realistic movement and consistent scale. 8–10s CTA: End on an inviting steady hero view of the unchanged product, without written sales copy. AUDIO: A single adult female background narrator speaks natural Bahasa Melayu Malaysia, saying exactly: “Jom tengok gaya tudung sukan ini!” at a comfortable pace within 10 seconds. Keep soft instrumental and natural ambience below the speech. Align the spoken invitation with the closing product shot; no other dialogue. Keep lighting plausible, camera smooth and actions natural. Do not claim sweat-proof. No invented specifications, additional logos, subtitles, overlays, watermark or unsupported accessories."
+    },
+    {
+      "id": "v9_full10_vo_085",
+      "base_prompt_id": "v9_full10_product_085",
+      "subcategory_id": "hijab_inner",
+      "product_type": "ninja",
+      "duration_seconds": 10,
+      "voice_type": "background_voiceover",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_VOICE_QA",
+      "full_prompt": "Create one complete photorealistic 10-second vertical 9:16 affiliate video for Malaysian viewers. The exact ninja from the supplied product reference image is the hero; preserve its visible colors, design, markings, proportions, fabric or material appearance and existing components. SETTING: Bright dressing room. 0–2s HOOK: Start immediately with an appealing close-up of the authentic product in context, no title card. 2–6s ACTION: Adult woman shows the actual ninja inner under a neatly draped plain outer hijab. 6–8s DETAIL: Use head-and-neck close-up to reveal one actually visible feature with realistic movement and consistent scale. 8–10s CTA: End on an inviting steady hero view of the unchanged product, without written sales copy. AUDIO: A single adult female background narrator speaks natural Bahasa Melayu Malaysia, saying exactly: “Anak tudung ini nampak kemas. Jom tengok!” at a comfortable pace within 10 seconds. Keep soft instrumental and natural ambience below the speech. Align the spoken invitation with the closing product shot; no other dialogue. Keep lighting plausible, camera smooth and actions natural. Do not alter coverage. No invented specifications, additional logos, subtitles, overlays, watermark or unsupported accessories."
+    },
+    {
+      "id": "v9_full10_vo_086",
+      "base_prompt_id": "v9_full10_product_086",
+      "subcategory_id": "hijab_other",
+      "product_type": "tudung sekolah",
+      "duration_seconds": 10,
+      "voice_type": "background_voiceover",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_VOICE_QA",
+      "full_prompt": "Create one complete photorealistic 10-second vertical 9:16 affiliate video for Malaysian viewers. The exact tudung sekolah from the supplied product reference image is the hero; preserve its visible colors, design, markings, proportions, fabric or material appearance and existing components. SETTING: School corridor. 0–2s HOOK: Start immediately with an appealing close-up of the authentic product in context, no title card. 2–6s ACTION: School-age girl wearing the exact school hijab walks with her bag naturally. 6–8s DETAIL: Use child-height head-and-shoulders to reveal one actually visible feature with realistic movement and consistent scale. 8–10s CTA: End on an inviting steady hero view of the unchanged product, without written sales copy. AUDIO: A single adult female background narrator speaks natural Bahasa Melayu Malaysia, saying exactly: “Tudung sekolah ini cantik dipakai. Jom tengok!” at a comfortable pace within 10 seconds. Keep soft instrumental and natural ambience below the speech. Align the spoken invitation with the closing product shot; no other dialogue. Keep lighting plausible, camera smooth and actions natural. Do not invent school badge. No invented specifications, additional logos, subtitles, overlays, watermark or unsupported accessories."
+    },
+    {
+      "id": "v9_full10_vo_087",
+      "base_prompt_id": "v9_full10_product_087",
+      "subcategory_id": "shoes_sneakers",
+      "product_type": "high top",
+      "duration_seconds": 10,
+      "voice_type": "background_voiceover",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_VOICE_QA",
+      "full_prompt": "Create one complete photorealistic 10-second vertical 9:16 affiliate video for Malaysian viewers. The exact high top from the supplied product reference image is the hero; preserve its visible colors, design, markings, proportions, fabric or material appearance and existing components. SETTING: Covered city walkway. 0–2s HOOK: Start immediately with an appealing close-up of the authentic product in context, no title card. 2–6s ACTION: Adult model walks naturally and pauses to show the shoe's real ankle-height silhouette. 6–8s DETAIL: Use foot-to-calf side tracking to reveal one actually visible feature with realistic movement and consistent scale. 8–10s CTA: End on an inviting steady hero view of the unchanged product, without written sales copy. AUDIO: A single adult female background narrator speaks natural Bahasa Melayu Malaysia, saying exactly: “Sneakers ini nampak bergaya. Jom tengok!” at a comfortable pace within 10 seconds. Keep soft instrumental and natural ambience below the speech. Align the spoken invitation with the closing product shot; no other dialogue. Keep lighting plausible, camera smooth and actions natural. Do not change sole height. No invented specifications, additional logos, subtitles, overlays, watermark or unsupported accessories."
+    },
+    {
+      "id": "v9_full10_vo_088",
+      "base_prompt_id": "v9_full10_product_088",
+      "subcategory_id": "shoes_kids",
+      "product_type": "kids sandals",
+      "duration_seconds": 10,
+      "voice_type": "background_voiceover",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_VOICE_QA",
+      "full_prompt": "Create one complete photorealistic 10-second vertical 9:16 affiliate video for Malaysian viewers. The exact kids sandals from the supplied product reference image is the hero; preserve its visible colors, design, markings, proportions, fabric or material appearance and existing components. SETTING: Safe playground path. 0–2s HOOK: Start immediately with an appealing close-up of the authentic product in context, no title card. 2–6s ACTION: Child walks two steps wearing the sandals with a guardian nearby. 6–8s DETAIL: Use foot-level tracking to reveal one actually visible feature with realistic movement and consistent scale. 8–10s CTA: End on an inviting steady hero view of the unchanged product, without written sales copy. AUDIO: A single adult female background narrator speaks natural Bahasa Melayu Malaysia, saying exactly: “Sandal si kecil ini comel. Jom tengok!” at a comfortable pace within 10 seconds. Keep soft instrumental and natural ambience below the speech. Align the spoken invitation with the closing product shot; no other dialogue. Keep lighting plausible, camera smooth and actions natural. Do not invent buckles. No invented specifications, additional logos, subtitles, overlays, watermark or unsupported accessories."
+    },
+    {
+      "id": "v9_full10_vo_089",
+      "base_prompt_id": "v9_full10_product_089",
+      "subcategory_id": "shoes_other",
+      "product_type": "rain boots",
+      "duration_seconds": 10,
+      "voice_type": "background_voiceover",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_VOICE_QA",
+      "full_prompt": "Create one complete photorealistic 10-second vertical 9:16 affiliate video for Malaysian viewers. The exact rain boots from the supplied product reference image is the hero; preserve its visible colors, design, markings, proportions, fabric or material appearance and existing components. SETTING: Dry covered porch. 0–2s HOOK: Start immediately with an appealing close-up of the authentic product in context, no title card. 2–6s ACTION: Adult steps into the rain boots and walks a few steps. 6–8s DETAIL: Use lower-leg side view to reveal one actually visible feature with realistic movement and consistent scale. 8–10s CTA: End on an inviting steady hero view of the unchanged product, without written sales copy. AUDIO: A single adult female background narrator speaks natural Bahasa Melayu Malaysia, saying exactly: “But hujan ini nampak kemas. Jom tengok!” at a comfortable pace within 10 seconds. Keep soft instrumental and natural ambience below the speech. Align the spoken invitation with the closing product shot; no other dialogue. Keep lighting plausible, camera smooth and actions natural. No waterproof certification claim. No invented specifications, additional logos, subtitles, overlays, watermark or unsupported accessories."
+    },
+    {
+      "id": "v9_full10_vo_090",
+      "base_prompt_id": "v9_full10_product_090",
+      "subcategory_id": "beauty_tools",
+      "product_type": "makeup brush",
+      "duration_seconds": 10,
+      "voice_type": "background_voiceover",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_VOICE_QA",
+      "full_prompt": "Create one complete photorealistic 10-second vertical 9:16 affiliate video for Malaysian viewers. The exact makeup brush from the supplied product reference image is the hero; preserve its visible colors, design, markings, proportions, fabric or material appearance and existing components. SETTING: Clean vanity. 0–2s HOOK: Start immediately with an appealing close-up of the authentic product in context, no title card. 2–6s ACTION: Adult gently applies visible makeup using the brush, then rotates it to show its bristles. 6–8s DETAIL: Use hand and brush macro to reveal one actually visible feature with realistic movement and consistent scale. 8–10s CTA: End on an inviting steady hero view of the unchanged product, without written sales copy. AUDIO: A single adult female background narrator speaks natural Bahasa Melayu Malaysia, saying exactly: “Jom tengok berus solekan ini dari dekat!” at a comfortable pace within 10 seconds. Keep soft instrumental and natural ambience below the speech. Align the spoken invitation with the closing product shot; no other dialogue. Keep lighting plausible, camera smooth and actions natural. Do not invent brush material. No invented specifications, additional logos, subtitles, overlays, watermark or unsupported accessories."
+    },
+    {
+      "id": "v9_full10_vo_091",
+      "base_prompt_id": "v9_full10_product_091",
+      "subcategory_id": "beauty_other",
+      "product_type": "nail care kit",
+      "duration_seconds": 10,
+      "voice_type": "background_voiceover",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_VOICE_QA",
+      "full_prompt": "Create one complete photorealistic 10-second vertical 9:16 affiliate video for Malaysian viewers. The exact nail care kit from the supplied product reference image is the hero; preserve its visible colors, design, markings, proportions, fabric or material appearance and existing components. SETTING: Clean manicure table. 0–2s HOOK: Start immediately with an appealing close-up of the authentic product in context, no title card. 2–6s ACTION: Adult lays out only visible tools and files one fingernail carefully. 6–8s DETAIL: Use hands top-down to reveal one actually visible feature with realistic movement and consistent scale. 8–10s CTA: End on an inviting steady hero view of the unchanged product, without written sales copy. AUDIO: A single adult female background narrator speaks natural Bahasa Melayu Malaysia, saying exactly: “Set penjagaan kuku ini menarik. Jom tengok!” at a comfortable pace within 10 seconds. Keep soft instrumental and natural ambience below the speech. Align the spoken invitation with the closing product shot; no other dialogue. Keep lighting plausible, camera smooth and actions natural. Do not invent attachments. No invented specifications, additional logos, subtitles, overlays, watermark or unsupported accessories."
+    },
+    {
+      "id": "v9_full10_vo_092",
+      "base_prompt_id": "v9_full10_product_092",
+      "subcategory_id": "food_supplements",
+      "product_type": "oat mix",
+      "duration_seconds": 10,
+      "voice_type": "background_voiceover",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_VOICE_QA",
+      "full_prompt": "Create one complete photorealistic 10-second vertical 9:16 affiliate video for Malaysian viewers. The exact oat mix from the supplied product reference image is the hero; preserve its visible colors, design, markings, proportions, fabric or material appearance and existing components. SETTING: Bright breakfast kitchen. 0–2s HOOK: Start immediately with an appealing close-up of the authentic product in context, no title card. 2–6s ACTION: Adult pours oat mix into a bowl and prepares a simple breakfast. 6–8s DETAIL: Use bowl and pack macro to reveal one actually visible feature with realistic movement and consistent scale. 8–10s CTA: End on an inviting steady hero view of the unchanged product, without written sales copy. AUDIO: A single adult female background narrator speaks natural Bahasa Melayu Malaysia, saying exactly: “Sarapan oat nampak menyelerakan. Jom tengok!” at a comfortable pace within 10 seconds. Keep soft instrumental and natural ambience below the speech. Align the spoken invitation with the closing product shot; no other dialogue. Keep lighting plausible, camera smooth and actions natural. No health claims. No invented specifications, additional logos, subtitles, overlays, watermark or unsupported accessories."
+    },
+    {
+      "id": "v9_full10_vo_093",
+      "base_prompt_id": "v9_full10_product_093",
+      "subcategory_id": "food_other",
+      "product_type": "rice",
+      "duration_seconds": 10,
+      "voice_type": "background_voiceover",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_VOICE_QA",
+      "full_prompt": "Create one complete photorealistic 10-second vertical 9:16 affiliate video for Malaysian viewers. The exact rice from the supplied product reference image is the hero; preserve its visible colors, design, markings, proportions, fabric or material appearance and existing components. SETTING: Malaysian home kitchen. 0–2s HOOK: Start immediately with an appealing close-up of the authentic product in context, no title card. 2–6s ACTION: Adult measures uncooked rice and reveals a separate cooked rice serving. 6–8s DETAIL: Use grain macro and plated shot to reveal one actually visible feature with realistic movement and consistent scale. 8–10s CTA: End on an inviting steady hero view of the unchanged product, without written sales copy. AUDIO: A single adult female background narrator speaks natural Bahasa Melayu Malaysia, saying exactly: “Jom tengok beras ini sebelum dimasak!” at a comfortable pace within 10 seconds. Keep soft instrumental and natural ambience below the speech. Align the spoken invitation with the closing product shot; no other dialogue. Keep lighting plausible, camera smooth and actions natural. Do not invent rice variety. No invented specifications, additional logos, subtitles, overlays, watermark or unsupported accessories."
+    },
+    {
+      "id": "v9_full10_vo_094",
+      "base_prompt_id": "v9_full10_product_094",
+      "subcategory_id": "gadget_home",
+      "product_type": "air purifier",
+      "duration_seconds": 10,
+      "voice_type": "background_voiceover",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_VOICE_QA",
+      "full_prompt": "Create one complete photorealistic 10-second vertical 9:16 affiliate video for Malaysian viewers. The exact air purifier from the supplied product reference image is the hero; preserve its visible colors, design, markings, proportions, fabric or material appearance and existing components. SETTING: Modern living room. 0–2s HOOK: Start immediately with an appealing close-up of the authentic product in context, no title card. 2–6s ACTION: Adult places the purifier in a clear spot and turns on its visible control. 6–8s DETAIL: Use full product and control close-up to reveal one actually visible feature with realistic movement and consistent scale. 8–10s CTA: End on an inviting steady hero view of the unchanged product, without written sales copy. AUDIO: A single adult female background narrator speaks natural Bahasa Melayu Malaysia, saying exactly: “Penapis udara ini nampak kemas. Jom tengok!” at a comfortable pace within 10 seconds. Keep soft instrumental and natural ambience below the speech. Align the spoken invitation with the closing product shot; no other dialogue. Keep lighting plausible, camera smooth and actions natural. No filtration rate claim. No invented specifications, additional logos, subtitles, overlays, watermark or unsupported accessories."
+    },
+    {
+      "id": "v9_full10_vo_095",
+      "base_prompt_id": "v9_full10_product_095",
+      "subcategory_id": "gadget_other",
+      "product_type": "projector",
+      "duration_seconds": 10,
+      "voice_type": "background_voiceover",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_VOICE_QA",
+      "full_prompt": "Create one complete photorealistic 10-second vertical 9:16 affiliate video for Malaysian viewers. The exact projector from the supplied product reference image is the hero; preserve its visible colors, design, markings, proportions, fabric or material appearance and existing components. SETTING: Dim family room. 0–2s HOOK: Start immediately with an appealing close-up of the authentic product in context, no title card. 2–6s ACTION: Adult positions projector toward a blank wall and shows its projected light. 6–8s DETAIL: Use projector side and wall to reveal one actually visible feature with realistic movement and consistent scale. 8–10s CTA: End on an inviting steady hero view of the unchanged product, without written sales copy. AUDIO: A single adult female background narrator speaks natural Bahasa Melayu Malaysia, saying exactly: “Jom tengok projektor ini di ruang tamu!” at a comfortable pace within 10 seconds. Keep soft instrumental and natural ambience below the speech. Align the spoken invitation with the closing product shot; no other dialogue. Keep lighting plausible, camera smooth and actions natural. Do not invent brightness. No invented specifications, additional logos, subtitles, overlays, watermark or unsupported accessories."
+    },
+    {
+      "id": "v9_full10_vo_096",
+      "base_prompt_id": "v9_full10_product_096",
+      "subcategory_id": "home_furniture",
+      "product_type": "chair",
+      "duration_seconds": 10,
+      "voice_type": "background_voiceover",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_VOICE_QA",
+      "full_prompt": "Create one complete photorealistic 10-second vertical 9:16 affiliate video for Malaysian viewers. The exact chair from the supplied product reference image is the hero; preserve its visible colors, design, markings, proportions, fabric or material appearance and existing components. SETTING: Bright home dining space. 0–2s HOOK: Start immediately with an appealing close-up of the authentic product in context, no title card. 2–6s ACTION: Adult gently pulls out the chair and sits naturally. 6–8s DETAIL: Use medium side profile to reveal one actually visible feature with realistic movement and consistent scale. 8–10s CTA: End on an inviting steady hero view of the unchanged product, without written sales copy. AUDIO: A single adult female background narrator speaks natural Bahasa Melayu Malaysia, saying exactly: “Kerusi ini cantik untuk ruang makan. Jom tengok!” at a comfortable pace within 10 seconds. Keep soft instrumental and natural ambience below the speech. Align the spoken invitation with the closing product shot; no other dialogue. Keep lighting plausible, camera smooth and actions natural. No ergonomic claims. No invented specifications, additional logos, subtitles, overlays, watermark or unsupported accessories."
+    },
+    {
+      "id": "v9_full10_vo_097",
+      "base_prompt_id": "v9_full10_product_097",
+      "subcategory_id": "home_other",
+      "product_type": "curtain",
+      "duration_seconds": 10,
+      "voice_type": "background_voiceover",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_VOICE_QA",
+      "full_prompt": "Create one complete photorealistic 10-second vertical 9:16 affiliate video for Malaysian viewers. The exact curtain from the supplied product reference image is the hero; preserve its visible colors, design, markings, proportions, fabric or material appearance and existing components. SETTING: Sunlit living room. 0–2s HOOK: Start immediately with an appealing close-up of the authentic product in context, no title card. 2–6s ACTION: Adult draws the curtain across the window showing its true drape. 6–8s DETAIL: Use window medium shot to reveal one actually visible feature with realistic movement and consistent scale. 8–10s CTA: End on an inviting steady hero view of the unchanged product, without written sales copy. AUDIO: A single adult female background narrator speaks natural Bahasa Melayu Malaysia, saying exactly: “Langsir ini menyerikan ruang. Jom tengok!” at a comfortable pace within 10 seconds. Keep soft instrumental and natural ambience below the speech. Align the spoken invitation with the closing product shot; no other dialogue. Keep lighting plausible, camera smooth and actions natural. No blackout claim. No invented specifications, additional logos, subtitles, overlays, watermark or unsupported accessories."
+    },
+    {
+      "id": "v9_full10_vo_098",
+      "base_prompt_id": "v9_full10_product_098",
+      "subcategory_id": "accessory_watch",
+      "product_type": "analog watch",
+      "duration_seconds": 10,
+      "voice_type": "background_voiceover",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_VOICE_QA",
+      "full_prompt": "Create one complete photorealistic 10-second vertical 9:16 affiliate video for Malaysian viewers. The exact analog watch from the supplied product reference image is the hero; preserve its visible colors, design, markings, proportions, fabric or material appearance and existing components. SETTING: Bright cafe table. 0–2s HOOK: Start immediately with an appealing close-up of the authentic product in context, no title card. 2–6s ACTION: Adult fastens the analog watch on wrist and checks its visible dial. 6–8s DETAIL: Use wrist and dial macro to reveal one actually visible feature with realistic movement and consistent scale. 8–10s CTA: End on an inviting steady hero view of the unchanged product, without written sales copy. AUDIO: A single adult female background narrator speaks natural Bahasa Melayu Malaysia, saying exactly: “Jam ini nampak segak dipakai. Jom tengok!” at a comfortable pace within 10 seconds. Keep soft instrumental and natural ambience below the speech. Align the spoken invitation with the closing product shot; no other dialogue. Keep lighting plausible, camera smooth and actions natural. No invented functions. No invented specifications, additional logos, subtitles, overlays, watermark or unsupported accessories."
+    },
+    {
+      "id": "v9_full10_vo_099",
+      "base_prompt_id": "v9_full10_product_099",
+      "subcategory_id": "toy_educational",
+      "product_type": "shape sorter",
+      "duration_seconds": 10,
+      "voice_type": "background_voiceover",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_VOICE_QA",
+      "full_prompt": "Create one complete photorealistic 10-second vertical 9:16 affiliate video for Malaysian viewers. The exact shape sorter from the supplied product reference image is the hero; preserve its visible colors, design, markings, proportions, fabric or material appearance and existing components. SETTING: Family playroom. 0–2s HOOK: Start immediately with an appealing close-up of the authentic product in context, no title card. 2–6s ACTION: Child places a matching shape into the sorter with an adult nearby. 6–8s DETAIL: Use hands top-down to reveal one actually visible feature with realistic movement and consistent scale. 8–10s CTA: End on an inviting steady hero view of the unchanged product, without written sales copy. AUDIO: A single adult female background narrator speaks natural Bahasa Melayu Malaysia, saying exactly: “Seronok si kecil menyusun bentuk. Jom tengok!” at a comfortable pace within 10 seconds. Keep soft instrumental and natural ambience below the speech. Align the spoken invitation with the closing product shot; no other dialogue. Keep lighting plausible, camera smooth and actions natural. No learning guarantee. No invented specifications, additional logos, subtitles, overlays, watermark or unsupported accessories."
+    },
+    {
+      "id": "v9_full10_vo_100",
+      "base_prompt_id": "v9_full10_product_100",
+      "subcategory_id": "other_hobby",
+      "product_type": "crochet kit",
+      "duration_seconds": 10,
+      "voice_type": "background_voiceover",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_VOICE_QA",
+      "full_prompt": "Create one complete photorealistic 10-second vertical 9:16 affiliate video for Malaysian viewers. The exact crochet kit from the supplied product reference image is the hero; preserve its visible colors, design, markings, proportions, fabric or material appearance and existing components. SETTING: Cozy craft desk. 0–2s HOOK: Start immediately with an appealing close-up of the authentic product in context, no title card. 2–6s ACTION: Adult works a few stitches using only the visible crochet kit components. 6–8s DETAIL: Use hands macro to reveal one actually visible feature with realistic movement and consistent scale. 8–10s CTA: End on an inviting steady hero view of the unchanged product, without written sales copy. AUDIO: A single adult female background narrator speaks natural Bahasa Melayu Malaysia, saying exactly: “Jom tengok kit kait ini untuk hobi kreatif!” at a comfortable pace within 10 seconds. Keep soft instrumental and natural ambience below the speech. Align the spoken invitation with the closing product shot; no other dialogue. Keep lighting plausible, camera smooth and actions natural. Do not invent kit contents. No invented specifications, additional logos, subtitles, overlays, watermark or unsupported accessories."
+    }
+  ]
+}

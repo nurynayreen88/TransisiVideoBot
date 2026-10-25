@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "batch": "v9_cookware_focus_03_20261024",
+  "subcategory_id": "home_kitchen_cookware",
+  "variation_count": 10,
+  "notes": "Five cookware-specific concepts with standalone 10s and continuous two-part 20s. Legacy preserved; render and runtime reference compatibility pending.",
+  "variations": [
+    {
+      "id": "v9_cookware_focus03_01_10s",
+      "subcategory_id": "home_kitchen_cookware",
+      "visual_category": "FULL_MODEL",
+      "concept": "Turmeric fish simmer",
+      "duration_seconds": 10,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Photorealistic vertical 9:16. A bright Malaysian home kitchen, late morning. One adult Malaysian cook silently tends the exact reference pot on a suitable hob. Fish portions and turmeric-tinted broth are already gently simmering; a separate ordinary ladle rests in the cook's hand. Stable hob-height three-quarter camera and accurate daylight colour.\nUse the supplied product reference as the sole visual master. Preserve exact pot shape, colour, scale, handles, visible lid only where pictured, markings and spatial continuity. Ingredients and ordinary utensils are contextual props, not included accessories. No fabricated features, materials, coating, capacity, performance claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Establish the complete reference pot and fish in the gentle broth.\n2–5s: Cook carefully moves broth around the fish using the separate ladle without breaking the portions.\n5–8s: Cook raises the ladle briefly and lets broth return naturally.\n8–10s: Hold the unchanged pot with the fish clearly visible.\nAUDIO: Off-camera Malaysian Malay narrator: 'Ikan dimasak perlahan dalam kuah kunyit.' The on-screen cook is silent; gentle simmering ambience."
+    },
+    {
+      "id": "v9_cookware_focus03_01_20s",
+      "subcategory_id": "home_kitchen_cookware",
+      "visual_category": "FULL_MODEL",
+      "concept": "Turmeric fish simmer",
+      "duration_seconds": 20,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. A bright Malaysian home kitchen, late morning. One adult Malaysian cook silently tends the exact reference pot on a suitable hob. Fish portions and turmeric-tinted broth are already gently simmering; a separate ordinary ladle rests in the cook's hand. Stable hob-height three-quarter camera and accurate daylight colour.\nUse the supplied product reference as the sole visual master. Preserve exact pot shape, colour, scale, handles, visible lid only where pictured, markings and spatial continuity. Ingredients and ordinary utensils are contextual props, not included accessories. No fabricated features, materials, coating, capacity, performance claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–3s: Establish the same pot and simmering fish.\n3–7s: Cook moves broth carefully around the fish with a separate ladle.\n7–10s: Cook pauses with the ladle just above the pot.\nAUDIO: Off-camera Malaysian Malay narrator: 'Ikan dimasak perlahan dalam kuah kunyit.' The on-screen cook is silent; gentle simmering ambience.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. A bright Malaysian home kitchen, late morning. One adult Malaysian cook silently tends the exact reference pot on a suitable hob. Fish portions and turmeric-tinted broth are already gently simmering; a separate ordinary ladle rests in the cook's hand. Stable hob-height three-quarter camera and accurate daylight colour.\nUse the supplied product reference as the sole visual master. Preserve exact pot shape, colour, scale, handles, visible lid only where pictured, markings and spatial continuity. Ingredients and ordinary utensils are contextual props, not included accessories. No fabricated features, materials, coating, capacity, performance claims, captions, text overlays, extra logos or watermark.\nCONTINUITY: Match the final Part 1 frame exactly in product, food, pose, utensils, lighting and camera axis. Continue the action without replaying it.\nEXACTLY 10 SECONDS:\n0–3s: Continue the exact raised-ladle position and let broth drip back.\n3–7s: Cook lowers the ladle and stands clear of the pot.\n7–10s: Hold the complete original pot and fish in a stable frame.\nAUDIO: Off-camera Malaysian Malay narrator: 'Kuah direnihkan tanpa mengganggu isi ikan.' The on-screen cook is silent; gentle simmering ambience."
+    },
+    {
+      "id": "v9_cookware_focus03_02_10s",
+      "subcategory_id": "home_kitchen_cookware",
+      "visual_category": "FULL_MODEL",
+      "concept": "Weekend noodle broth",
+      "duration_seconds": 10,
+      "voice_type": "MODEL_SPEECH",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Photorealistic vertical 9:16. A compact contemporary Malaysian kitchen at weekend lunchtime. One adult Malaysian cook with face and mouth clearly visible stands beside the exact reference pot on a suitable hob. Noodles and greens are already cooking in broth; a separate ordinary spoon is held naturally. Eye-to-counter medium camera, soft daylight.\nUse the supplied product reference as the sole visual master. Preserve exact pot shape, colour, scale, handles, visible lid only where pictured, markings and spatial continuity. Ingredients and ordinary utensils are contextual props, not included accessories. No fabricated features, materials, coating, capacity, performance claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Establish the unchanged pot with noodles and greens simmering.\n2–5s: Cook stirs once, keeping noodles inside the same pot.\n5–8s: Cook looks to camera and says with accurate Malaysian Malay lip sync: 'Mi ni saya masak terus dalam kuah.'\n8–10s: Cook lowers the spoon and presents a clear view of the complete pot.\nAUDIO: On-camera Malaysian Malay speech only with precise lip sync; no narrator, subtle kitchen ambience."
+    },
+    {
+      "id": "v9_cookware_focus03_02_20s",
+      "subcategory_id": "home_kitchen_cookware",
+      "visual_category": "FULL_MODEL",
+      "concept": "Weekend noodle broth",
+      "duration_seconds": 20,
+      "voice_type": "MODEL_SPEECH",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. A compact contemporary Malaysian kitchen at weekend lunchtime. One adult Malaysian cook with face and mouth clearly visible stands beside the exact reference pot on a suitable hob. Noodles and greens are already cooking in broth; a separate ordinary spoon is held naturally. Eye-to-counter medium camera, soft daylight.\nUse the supplied product reference as the sole visual master. Preserve exact pot shape, colour, scale, handles, visible lid only where pictured, markings and spatial continuity. Ingredients and ordinary utensils are contextual props, not included accessories. No fabricated features, materials, coating, capacity, performance claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–3s: Establish the original pot and cooking noodles.\n3–7s: Cook gently separates noodles with the separate spoon.\n7–10s: Cook looks to camera and says with precise lip sync: 'Mi ni saya masak terus dalam kuah.'\nAUDIO: On-camera Malaysian Malay speech only with precise lip sync; no narrator, subtle kitchen ambience.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. A compact contemporary Malaysian kitchen at weekend lunchtime. One adult Malaysian cook with face and mouth clearly visible stands beside the exact reference pot on a suitable hob. Noodles and greens are already cooking in broth; a separate ordinary spoon is held naturally. Eye-to-counter medium camera, soft daylight.\nUse the supplied product reference as the sole visual master. Preserve exact pot shape, colour, scale, handles, visible lid only where pictured, markings and spatial continuity. Ingredients and ordinary utensils are contextual props, not included accessories. No fabricated features, materials, coating, capacity, performance claims, captions, text overlays, extra logos or watermark.\nCONTINUITY: Match the final Part 1 frame exactly in product, food, pose, utensils, lighting and camera axis. Continue the action without replaying it.\nEXACTLY 10 SECONDS:\n0–3s: Resume from the exact final pose; cook lowers the same spoon.\n3–7s: Cook says with precise lip sync: 'Dah elok, boleh terus hidang.'\n7–10s: Hold the full original pot and noodles with cook beside it.\nAUDIO: On-camera Malaysian Malay speech only with precise lip sync; no narrator, subtle kitchen ambience."
+    },
+    {
+      "id": "v9_cookware_focus03_03_10s",
+      "subcategory_id": "home_kitchen_cookware",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Sweet potato boiling",
+      "duration_seconds": 10,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Photorealistic vertical 9:16. A rustic sunlit kitchen, early morning. The exact reference pot sits on a suitable hob with cut sweet potato pieces already in gently moving hot water. Only adult hands and forearms visible, using a separate ordinary slotted spoon. Close three-quarter counter-height camera, real liquid physics and safe hand position.\nUse the supplied product reference as the sole visual master. Preserve exact pot shape, colour, scale, handles, visible lid only where pictured, markings and spatial continuity. Ingredients and ordinary utensils are contextual props, not included accessories. No fabricated features, materials, coating, capacity, performance claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Establish the full original pot with sweet potato pieces in water.\n2–5s: Hand lowers the separate slotted spoon and gently moves one piece.\n5–8s: Hand lifts that piece just above the water; droplets fall back into the pot.\n8–10s: Hold the supported piece over the complete unchanged pot.\nAUDIO: No speech, narration or music; restrained natural kitchen ambience."
+    },
+    {
+      "id": "v9_cookware_focus03_03_20s",
+      "subcategory_id": "home_kitchen_cookware",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Sweet potato boiling",
+      "duration_seconds": 20,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. A rustic sunlit kitchen, early morning. The exact reference pot sits on a suitable hob with cut sweet potato pieces already in gently moving hot water. Only adult hands and forearms visible, using a separate ordinary slotted spoon. Close three-quarter counter-height camera, real liquid physics and safe hand position.\nUse the supplied product reference as the sole visual master. Preserve exact pot shape, colour, scale, handles, visible lid only where pictured, markings and spatial continuity. Ingredients and ordinary utensils are contextual props, not included accessories. No fabricated features, materials, coating, capacity, performance claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–3s: Establish the same pot with sweet potato in gently moving water.\n3–7s: Hand uses the separate slotted spoon to support one piece.\n7–10s: Hand begins raising the supported piece toward the water surface.\nAUDIO: No speech, narration or music; restrained natural kitchen ambience.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. A rustic sunlit kitchen, early morning. The exact reference pot sits on a suitable hob with cut sweet potato pieces already in gently moving hot water. Only adult hands and forearms visible, using a separate ordinary slotted spoon. Close three-quarter counter-height camera, real liquid physics and safe hand position.\nUse the supplied product reference as the sole visual master. Preserve exact pot shape, colour, scale, handles, visible lid only where pictured, markings and spatial continuity. Ingredients and ordinary utensils are contextual props, not included accessories. No fabricated features, materials, coating, capacity, performance claims, captions, text overlays, extra logos or watermark.\nCONTINUITY: Match the final Part 1 frame exactly in product, food, pose, utensils, lighting and camera axis. Continue the action without replaying it.\nEXACTLY 10 SECONDS:\n0–3s: Resume with the same piece at the water surface and raise it just above the pot.\n3–7s: Let water drip back naturally while holding it over the pot.\n7–10s: Hold a clear view of the original pot and supported sweet potato.\nAUDIO: No speech, narration or music; restrained natural kitchen ambience."
+    },
+    {
+      "id": "v9_cookware_focus03_04_10s",
+      "subcategory_id": "home_kitchen_cookware",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Mushroom cream soup",
+      "duration_seconds": 10,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Photorealistic vertical 9:16. A minimalist apartment kitchen in overcast afternoon daylight. The exact reference pot is on a suitable hob with already prepared mushroom soup at a gentle simmer. Only adult hands and forearms appear, using a separate ordinary spoon. Stable close side-angle camera, realistic soup viscosity and safe stirring.\nUse the supplied product reference as the sole visual master. Preserve exact pot shape, colour, scale, handles, visible lid only where pictured, markings and spatial continuity. Ingredients and ordinary utensils are contextual props, not included accessories. No fabricated features, materials, coating, capacity, performance claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Establish the unchanged pot and gently moving mushroom soup.\n2–5s: Hand stirs slowly with genuine spoon-to-soup contact.\n5–8s: Hand lifts the spoon slightly and soup falls naturally back.\n8–10s: Hold the complete pot and visible soup surface.\nAUDIO: Off-camera Malaysian Malay narrator: 'Sup cendawan dikacau perlahan.' Hands remain silent; natural kitchen ambience."
+    },
+    {
+      "id": "v9_cookware_focus03_04_20s",
+      "subcategory_id": "home_kitchen_cookware",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Mushroom cream soup",
+      "duration_seconds": 20,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. A minimalist apartment kitchen in overcast afternoon daylight. The exact reference pot is on a suitable hob with already prepared mushroom soup at a gentle simmer. Only adult hands and forearms appear, using a separate ordinary spoon. Stable close side-angle camera, realistic soup viscosity and safe stirring.\nUse the supplied product reference as the sole visual master. Preserve exact pot shape, colour, scale, handles, visible lid only where pictured, markings and spatial continuity. Ingredients and ordinary utensils are contextual props, not included accessories. No fabricated features, materials, coating, capacity, performance claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–3s: Establish the original pot and mushroom soup.\n3–7s: Hand makes one continuous slow stir.\n7–10s: Hand raises the spoon just above the soup surface.\nAUDIO: Off-camera Malaysian Malay narrator: 'Sup cendawan dikacau perlahan.' Hands remain silent; natural kitchen ambience.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. A minimalist apartment kitchen in overcast afternoon daylight. The exact reference pot is on a suitable hob with already prepared mushroom soup at a gentle simmer. Only adult hands and forearms appear, using a separate ordinary spoon. Stable close side-angle camera, realistic soup viscosity and safe stirring.\nUse the supplied product reference as the sole visual master. Preserve exact pot shape, colour, scale, handles, visible lid only where pictured, markings and spatial continuity. Ingredients and ordinary utensils are contextual props, not included accessories. No fabricated features, materials, coating, capacity, performance claims, captions, text overlays, extra logos or watermark.\nCONTINUITY: Match the final Part 1 frame exactly in product, food, pose, utensils, lighting and camera axis. Continue the action without replaying it.\nEXACTLY 10 SECONDS:\n0–3s: Resume from the identical raised spoon pose; soup falls back naturally.\n3–7s: Hand lowers the spoon and completes a final slow stir.\n7–10s: Hand withdraws safely and camera holds the complete original pot.\nAUDIO: Off-camera Malaysian Malay narrator: 'Teksturnya nampak sebati, sedia untuk dihidang.' Hands remain silent; natural kitchen ambience."
+    },
+    {
+      "id": "v9_cookware_focus03_05_10s",
+      "subcategory_id": "home_kitchen_cookware",
+      "visual_category": "PRODUCT_ONLY",
+      "concept": "Red bean dessert",
+      "duration_seconds": 10,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Photorealistic vertical 9:16. A warm evening kitchen with a stable close three-quarter camera. The exact reference pot rests on a suitable hob containing red beans already simmering gently in liquid. No person, hands, animated utensils or invisible interactions appear. Soft practical kitchen light shows the true product colour and authentic scale.\nUse the supplied product reference as the sole visual master. Preserve exact pot shape, colour, scale, handles, visible lid only where pictured, markings and spatial continuity. Ingredients and ordinary utensils are contextual props, not included accessories. No fabricated features, materials, coating, capacity, performance claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Establish the complete reference pot with red beans at a natural gentle simmer.\n2–5s: Hold on the liquid's physically plausible small surface movement.\n5–8s: Make a restrained camera slide revealing the pot's reference-visible handle and bean surface.\n8–10s: Settle into a stable complete-pot hero frame.\nAUDIO: No speech, narration or music; only subtle natural simmering and room ambience."
+    },
+    {
+      "id": "v9_cookware_focus03_05_20s",
+      "subcategory_id": "home_kitchen_cookware",
+      "visual_category": "PRODUCT_ONLY",
+      "concept": "Red bean dessert",
+      "duration_seconds": 20,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. A warm evening kitchen with a stable close three-quarter camera. The exact reference pot rests on a suitable hob containing red beans already simmering gently in liquid. No person, hands, animated utensils or invisible interactions appear. Soft practical kitchen light shows the true product colour and authentic scale.\nUse the supplied product reference as the sole visual master. Preserve exact pot shape, colour, scale, handles, visible lid only where pictured, markings and spatial continuity. Ingredients and ordinary utensils are contextual props, not included accessories. No fabricated features, materials, coating, capacity, performance claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–3s: Establish the original pot and gently simmering red beans.\n3–7s: Camera slowly moves laterally while the liquid naturally bubbles.\n7–10s: Settle into a three-quarter view of the same pot.\nAUDIO: No speech, narration or music; only subtle natural simmering and room ambience.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. A warm evening kitchen with a stable close three-quarter camera. The exact reference pot rests on a suitable hob containing red beans already simmering gently in liquid. No person, hands, animated utensils or invisible interactions appear. Soft practical kitchen light shows the true product colour and authentic scale.\nUse the supplied product reference as the sole visual master. Preserve exact pot shape, colour, scale, handles, visible lid only where pictured, markings and spatial continuity. Ingredients and ordinary utensils are contextual props, not included accessories. No fabricated features, materials, coating, capacity, performance claims, captions, text overlays, extra logos or watermark.\nCONTINUITY: Match the final Part 1 frame exactly in product, food, pose, utensils, lighting and camera axis. Continue the action without replaying it.\nEXACTLY 10 SECONDS:\n0–3s: Continue from the identical camera axis and unchanged simmering beans.\n3–7s: Make a restrained slow push toward the authentic pot rim and visible contents.\n7–10s: Finish with a complete, stable view of the same pot.\nAUDIO: No speech, narration or music; only subtle natural simmering and room ambience."
+    }
+  ]
+}

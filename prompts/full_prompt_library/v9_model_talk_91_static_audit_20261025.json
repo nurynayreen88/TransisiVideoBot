@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "status": "DRAFT_STATIC_AUDIT",
+  "runtime_enabled": false,
+  "records": 91,
+  "unique_ids": 91,
+  "unique_base_pairs": 91,
+  "distinct_subcategories": 88,
+  "issues": [],
+  "limitations": [
+    "Text checks do not prove model lip-sync quality or natural 10-second delivery.",
+    "Nine base prompts have no on-camera variation, intentionally including certain child- or animal-focused scenes.",
+    "Render testing remains outstanding."
+  ]
+}

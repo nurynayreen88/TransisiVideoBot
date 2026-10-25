@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "status": "DRAFT_CORRECTED_FULL_PROMPT_QA",
+  "runtime_enabled": false,
+  "variations": [
+    {
+      "id": "v9_creative_modeltalk_048",
+      "subcategory_id": "sports_outdoor",
+      "product_type": "camping tent",
+      "full_prompt": "Create a realistic vertical 9:16 video, exactly 10 seconds. Preserve the tent's exact appearance from the supplied image. 0–2s: An adult Malaysian presenter introduces the tent on level ground. 2–7s: The presenter unfolds the tent and shows only its real visible structure. 7–10s: Show the complete tent while the presenter finishes speaking. Spoken Malay Malaysia: 'Khemah ini saya bawa berkhemah. Jom tengok!' Natural lip sync, realistic movement, no invented parts, captions or watermark."
+    },
+    {
+      "id": "v9_creative_modeltalk_050",
+      "subcategory_id": "stationery_office",
+      "product_type": "desk organizer",
+      "full_prompt": "Create a realistic vertical 9:16 video, exactly 10 seconds. Preserve the desk organizer's appearance from the supplied image. 0–2s: An adult Malaysian presenter shows the organizer at a desk. 2–7s: Place pens and clips into the real organizer. 7–10s: Show the tidy desk and the organizer clearly. Spoken Malay Malaysia: 'Meja terus nampak tersusun. Jom tengok!' Natural lip sync, no invented features, captions or watermark."
+    },
+    {
+      "id": "v9_creative_modeltalk_088",
+      "subcategory_id": "office_storage",
+      "product_type": "document tray",
+      "full_prompt": "Create a realistic vertical 9:16 video, exactly 10 seconds. Preserve the document tray's appearance from the supplied image. 0–2s: An adult Malaysian office worker introduces the tray. 2–7s: Place printed documents in the actual tray and straighten the stack. 7–10s: Show the complete tray and presenter. Spoken Malay Malaysia: 'Dokumen tersusun dalam dulang ini. Jom tengok!' Natural lip sync, no invented features, captions or watermark."
+    }
+  ]
+}

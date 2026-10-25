@@ -1,0 +1,1039 @@
+{
+  "schema_version": 1,
+  "subcategory_id": "home_kitchen_cookware",
+  "source_shortlist": "v9_cookware_shortlist_50_20261025.json",
+  "qa_type": "STATIC_STRUCTURE_ONLY",
+  "summary": {
+    "shortlisted_concepts": 50,
+    "duration_records": 100,
+    "missing_records": 0,
+    "invalid_pairs": 0,
+    "missing_part2": 0,
+    "template_tokens": 0,
+    "conditional_user_choice": 0,
+    "reference_product_language_missing": 0,
+    "render_tested": 0
+  },
+  "critical_blocker": "RESOLVED AS TWO-STAGE INPUT CONTRACT FOR DESIGN REVIEW, NOT RUNTIME-VERIFIED: Klippo Jana Prompt accepts product name without an image (bot.py prompt action near line 2994 and prompt_input:photo near 3533). User uploads the original product image separately to the target AI video generator (bot.py output near 4100; prompt_engine.py identity near 933). The final user-facing instructions and any V9 selection integration must preserve this distinction. No image is automatically sent by Klippo.",
+  "other_gates": [
+    "Map actual product photo supplied to the external video generator to the pot/pan/lid actions; do not assume all cookware has a lid.",
+    "Human-review culinary distinctiveness and physical cooking sequence.",
+    "Render-test each 10s and both 20s parts for product fidelity, motion, timing, continuity, audio and lip sync.",
+    "Keep all draft statuses until real runtime tests pass."
+  ],
+  "matrix": [
+    {
+      "slot": 1,
+      "concept": "Rendang ayam",
+      "record_ids": [
+        "v9_cookware_malaysia01_01_10s",
+        "v9_cookware_malaysia01_01_20s"
+      ],
+      "static_checks": {
+        "both_records_exist": true,
+        "duration_pair": true,
+        "nonempty_prompts": true,
+        "part2_present": true,
+        "unresolved_template_tokens": false,
+        "conditional_user_choice": false,
+        "reference_product_language": true,
+        "no_unsupported_performance_claim_detected": "NOT_AUTOMATICALLY_VERIFIED"
+      },
+      "product_eligibility": "REQUIRES_REFERENCE_PRODUCT_TYPE_REVIEW",
+      "render_status": "NOT_RENDER_TESTED"
+    },
+    {
+      "slot": 2,
+      "concept": "Asam pedas ikan",
+      "record_ids": [
+        "v9_cookware_malaysia01_02_10s",
+        "v9_cookware_malaysia01_02_20s"
+      ],
+      "static_checks": {
+        "both_records_exist": true,
+        "duration_pair": true,
+        "nonempty_prompts": true,
+        "part2_present": true,
+        "unresolved_template_tokens": false,
+        "conditional_user_choice": false,
+        "reference_product_language": true,
+        "no_unsupported_performance_claim_detected": "NOT_AUTOMATICALLY_VERIFIED"
+      },
+      "product_eligibility": "REQUIRES_REFERENCE_PRODUCT_TYPE_REVIEW",
+      "render_status": "NOT_RENDER_TESTED"
+    },
+    {
+      "slot": 3,
+      "concept": "Kari ikan",
+      "record_ids": [
+        "v9_cookware_malaysia01_03_10s",
+        "v9_cookware_malaysia01_03_20s"
+      ],
+      "static_checks": {
+        "both_records_exist": true,
+        "duration_pair": true,
+        "nonempty_prompts": true,
+        "part2_present": true,
+        "unresolved_template_tokens": false,
+        "conditional_user_choice": false,
+        "reference_product_language": true,
+        "no_unsupported_performance_claim_detected": "NOT_AUTOMATICALLY_VERIFIED"
+      },
+      "product_eligibility": "REQUIRES_REFERENCE_PRODUCT_TYPE_REVIEW",
+      "render_status": "NOT_RENDER_TESTED"
+    },
+    {
+      "slot": 4,
+      "concept": "Bubur lambuk",
+      "record_ids": [
+        "v9_cookware_malaysia01_04_10s",
+        "v9_cookware_malaysia01_04_20s"
+      ],
+      "static_checks": {
+        "both_records_exist": true,
+        "duration_pair": true,
+        "nonempty_prompts": true,
+        "part2_present": true,
+        "unresolved_template_tokens": false,
+        "conditional_user_choice": false,
+        "reference_product_language": true,
+        "no_unsupported_performance_claim_detected": "NOT_AUTOMATICALLY_VERIFIED"
+      },
+      "product_eligibility": "REQUIRES_REFERENCE_PRODUCT_TYPE_REVIEW",
+      "render_status": "NOT_RENDER_TESTED"
+    },
+    {
+      "slot": 5,
+      "concept": "Pengat pisang",
+      "record_ids": [
+        "v9_cookware_malaysia01_05_10s",
+        "v9_cookware_malaysia01_05_20s"
+      ],
+      "static_checks": {
+        "both_records_exist": true,
+        "duration_pair": true,
+        "nonempty_prompts": true,
+        "part2_present": true,
+        "unresolved_template_tokens": false,
+        "conditional_user_choice": false,
+        "reference_product_language": true,
+        "no_unsupported_performance_claim_detected": "NOT_AUTOMATICALLY_VERIFIED"
+      },
+      "product_eligibility": "REQUIRES_REFERENCE_PRODUCT_TYPE_REVIEW",
+      "render_status": "NOT_RENDER_TESTED"
+    },
+    {
+      "slot": 6,
+      "concept": "Masak lemak cili api Negeri Sembilan",
+      "record_ids": [
+        "v9_cookware_myregional02_01_10s",
+        "v9_cookware_myregional02_01_20s"
+      ],
+      "static_checks": {
+        "both_records_exist": true,
+        "duration_pair": true,
+        "nonempty_prompts": true,
+        "part2_present": true,
+        "unresolved_template_tokens": false,
+        "conditional_user_choice": false,
+        "reference_product_language": true,
+        "no_unsupported_performance_claim_detected": "NOT_AUTOMATICALLY_VERIFIED"
+      },
+      "product_eligibility": "REQUIRES_REFERENCE_PRODUCT_TYPE_REVIEW",
+      "render_status": "NOT_RENDER_TESTED"
+    },
+    {
+      "slot": 7,
+      "concept": "Singgang ikan Terengganu",
+      "record_ids": [
+        "v9_cookware_myregional02_02_10s",
+        "v9_cookware_myregional02_02_20s"
+      ],
+      "static_checks": {
+        "both_records_exist": true,
+        "duration_pair": true,
+        "nonempty_prompts": true,
+        "part2_present": true,
+        "unresolved_template_tokens": false,
+        "conditional_user_choice": false,
+        "reference_product_language": true,
+        "no_unsupported_performance_claim_detected": "NOT_AUTOMATICALLY_VERIFIED"
+      },
+      "product_eligibility": "REQUIRES_REFERENCE_PRODUCT_TYPE_REVIEW",
+      "render_status": "NOT_RENDER_TESTED"
+    },
+    {
+      "slot": 8,
+      "concept": "Kuah laksa Johor",
+      "record_ids": [
+        "v9_cookware_myregional02_03_10s",
+        "v9_cookware_myregional02_03_20s"
+      ],
+      "static_checks": {
+        "both_records_exist": true,
+        "duration_pair": true,
+        "nonempty_prompts": true,
+        "part2_present": true,
+        "unresolved_template_tokens": false,
+        "conditional_user_choice": false,
+        "reference_product_language": true,
+        "no_unsupported_performance_claim_detected": "NOT_AUTOMATICALLY_VERIFIED"
+      },
+      "product_eligibility": "REQUIRES_REFERENCE_PRODUCT_TYPE_REVIEW",
+      "render_status": "NOT_RENDER_TESTED"
+    },
+    {
+      "slot": 9,
+      "concept": "Kari kepala ikan gaya Malaysia",
+      "record_ids": [
+        "v9_cookware_myregional02_04_10s",
+        "v9_cookware_myregional02_04_20s"
+      ],
+      "static_checks": {
+        "both_records_exist": true,
+        "duration_pair": true,
+        "nonempty_prompts": true,
+        "part2_present": true,
+        "unresolved_template_tokens": false,
+        "conditional_user_choice": false,
+        "reference_product_language": true,
+        "no_unsupported_performance_claim_detected": "NOT_AUTOMATICALLY_VERIFIED"
+      },
+      "product_eligibility": "REQUIRES_REFERENCE_PRODUCT_TYPE_REVIEW",
+      "render_status": "NOT_RENDER_TESTED"
+    },
+    {
+      "slot": 10,
+      "concept": "Asam pedas Melaka ikan pari",
+      "record_ids": [
+        "v9_cookware_myregional02_05_10s",
+        "v9_cookware_myregional02_05_20s"
+      ],
+      "static_checks": {
+        "both_records_exist": true,
+        "duration_pair": true,
+        "nonempty_prompts": true,
+        "part2_present": true,
+        "unresolved_template_tokens": false,
+        "conditional_user_choice": false,
+        "reference_product_language": true,
+        "no_unsupported_performance_claim_detected": "NOT_AUTOMATICALLY_VERIFIED"
+      },
+      "product_eligibility": "REQUIRES_REFERENCE_PRODUCT_TYPE_REVIEW",
+      "render_status": "NOT_RENDER_TESTED"
+    },
+    {
+      "slot": 11,
+      "concept": "Sambal tumis ikan bilis",
+      "record_ids": [
+        "v9_cookware_myeveryday03_01_10s",
+        "v9_cookware_myeveryday03_01_20s"
+      ],
+      "static_checks": {
+        "both_records_exist": true,
+        "duration_pair": true,
+        "nonempty_prompts": true,
+        "part2_present": true,
+        "unresolved_template_tokens": false,
+        "conditional_user_choice": false,
+        "reference_product_language": true,
+        "no_unsupported_performance_claim_detected": "NOT_AUTOMATICALLY_VERIFIED"
+      },
+      "product_eligibility": "REQUIRES_REFERENCE_PRODUCT_TYPE_REVIEW",
+      "render_status": "NOT_RENDER_TESTED"
+    },
+    {
+      "slot": 12,
+      "concept": "Ayam masak merah",
+      "record_ids": [
+        "v9_cookware_myeveryday03_02_10s",
+        "v9_cookware_myeveryday03_02_20s"
+      ],
+      "static_checks": {
+        "both_records_exist": true,
+        "duration_pair": true,
+        "nonempty_prompts": true,
+        "part2_present": true,
+        "unresolved_template_tokens": false,
+        "conditional_user_choice": false,
+        "reference_product_language": true,
+        "no_unsupported_performance_claim_detected": "NOT_AUTOMATICALLY_VERIFIED"
+      },
+      "product_eligibility": "REQUIRES_REFERENCE_PRODUCT_TYPE_REVIEW",
+      "render_status": "NOT_RENDER_TESTED"
+    },
+    {
+      "slot": 13,
+      "concept": "Sambal sotong",
+      "record_ids": [
+        "v9_cookware_myeveryday03_03_10s",
+        "v9_cookware_myeveryday03_03_20s"
+      ],
+      "static_checks": {
+        "both_records_exist": true,
+        "duration_pair": true,
+        "nonempty_prompts": true,
+        "part2_present": true,
+        "unresolved_template_tokens": false,
+        "conditional_user_choice": false,
+        "reference_product_language": true,
+        "no_unsupported_performance_claim_detected": "NOT_AUTOMATICALLY_VERIFIED"
+      },
+      "product_eligibility": "REQUIRES_REFERENCE_PRODUCT_TYPE_REVIEW",
+      "render_status": "NOT_RENDER_TESTED"
+    },
+    {
+      "slot": 14,
+      "concept": "Gulai ayam kampung",
+      "record_ids": [
+        "v9_cookware_myeveryday03_04_10s",
+        "v9_cookware_myeveryday03_04_20s"
+      ],
+      "static_checks": {
+        "both_records_exist": true,
+        "duration_pair": true,
+        "nonempty_prompts": true,
+        "part2_present": true,
+        "unresolved_template_tokens": false,
+        "conditional_user_choice": false,
+        "reference_product_language": true,
+        "no_unsupported_performance_claim_detected": "NOT_AUTOMATICALLY_VERIFIED"
+      },
+      "product_eligibility": "REQUIRES_REFERENCE_PRODUCT_TYPE_REVIEW",
+      "render_status": "NOT_RENDER_TESTED"
+    },
+    {
+      "slot": 15,
+      "concept": "Bubur nasi ayam",
+      "record_ids": [
+        "v9_cookware_myeveryday03_05_10s",
+        "v9_cookware_myeveryday03_05_20s"
+      ],
+      "static_checks": {
+        "both_records_exist": true,
+        "duration_pair": true,
+        "nonempty_prompts": true,
+        "part2_present": true,
+        "unresolved_template_tokens": false,
+        "conditional_user_choice": false,
+        "reference_product_language": true,
+        "no_unsupported_performance_claim_detected": "NOT_AUTOMATICALLY_VERIFIED"
+      },
+      "product_eligibility": "REQUIRES_REFERENCE_PRODUCT_TYPE_REVIEW",
+      "render_status": "NOT_RENDER_TESTED"
+    },
+    {
+      "slot": 16,
+      "concept": "Daging masak kicap",
+      "record_ids": [
+        "v9_cookware_myeveryday04_01_10s",
+        "v9_cookware_myeveryday04_01_20s"
+      ],
+      "static_checks": {
+        "both_records_exist": true,
+        "duration_pair": true,
+        "nonempty_prompts": true,
+        "part2_present": true,
+        "unresolved_template_tokens": false,
+        "conditional_user_choice": false,
+        "reference_product_language": true,
+        "no_unsupported_performance_claim_detected": "NOT_AUTOMATICALLY_VERIFIED"
+      },
+      "product_eligibility": "REQUIRES_REFERENCE_PRODUCT_TYPE_REVIEW",
+      "render_status": "NOT_RENDER_TESTED"
+    },
+    {
+      "slot": 17,
+      "concept": "Sambal telur",
+      "record_ids": [
+        "v9_cookware_myeveryday04_02_10s",
+        "v9_cookware_myeveryday04_02_20s"
+      ],
+      "static_checks": {
+        "both_records_exist": true,
+        "duration_pair": true,
+        "nonempty_prompts": true,
+        "part2_present": true,
+        "unresolved_template_tokens": false,
+        "conditional_user_choice": false,
+        "reference_product_language": true,
+        "no_unsupported_performance_claim_detected": "NOT_AUTOMATICALLY_VERIFIED"
+      },
+      "product_eligibility": "REQUIRES_REFERENCE_PRODUCT_TYPE_REVIEW",
+      "render_status": "NOT_RENDER_TESTED"
+    },
+    {
+      "slot": 18,
+      "concept": "Ayam masak kurma",
+      "record_ids": [
+        "v9_cookware_myeveryday04_03_10s",
+        "v9_cookware_myeveryday04_03_20s"
+      ],
+      "static_checks": {
+        "both_records_exist": true,
+        "duration_pair": true,
+        "nonempty_prompts": true,
+        "part2_present": true,
+        "unresolved_template_tokens": false,
+        "conditional_user_choice": false,
+        "reference_product_language": true,
+        "no_unsupported_performance_claim_detected": "NOT_AUTOMATICALLY_VERIFIED"
+      },
+      "product_eligibility": "REQUIRES_REFERENCE_PRODUCT_TYPE_REVIEW",
+      "render_status": "NOT_RENDER_TESTED"
+    },
+    {
+      "slot": 19,
+      "concept": "Masak lemak labu",
+      "record_ids": [
+        "v9_cookware_myeveryday04_04_10s",
+        "v9_cookware_myeveryday04_04_20s"
+      ],
+      "static_checks": {
+        "both_records_exist": true,
+        "duration_pair": true,
+        "nonempty_prompts": true,
+        "part2_present": true,
+        "unresolved_template_tokens": false,
+        "conditional_user_choice": false,
+        "reference_product_language": true,
+        "no_unsupported_performance_claim_detected": "NOT_AUTOMATICALLY_VERIFIED"
+      },
+      "product_eligibility": "REQUIRES_REFERENCE_PRODUCT_TYPE_REVIEW",
+      "render_status": "NOT_RENDER_TESTED"
+    },
+    {
+      "slot": 20,
+      "concept": "Sup tulang ala Malaysia",
+      "record_ids": [
+        "v9_cookware_myeveryday04_05_10s",
+        "v9_cookware_myeveryday04_05_20s"
+      ],
+      "static_checks": {
+        "both_records_exist": true,
+        "duration_pair": true,
+        "nonempty_prompts": true,
+        "part2_present": true,
+        "unresolved_template_tokens": false,
+        "conditional_user_choice": false,
+        "reference_product_language": true,
+        "no_unsupported_performance_claim_detected": "NOT_AUTOMATICALLY_VERIFIED"
+      },
+      "product_eligibility": "REQUIRES_REFERENCE_PRODUCT_TYPE_REVIEW",
+      "render_status": "NOT_RENDER_TESTED"
+    },
+    {
+      "slot": 21,
+      "concept": "Ayam masak halia",
+      "record_ids": [
+        "v9_cookware_myeveryday05_01_10s",
+        "v9_cookware_myeveryday05_01_20s"
+      ],
+      "static_checks": {
+        "both_records_exist": true,
+        "duration_pair": true,
+        "nonempty_prompts": true,
+        "part2_present": true,
+        "unresolved_template_tokens": false,
+        "conditional_user_choice": false,
+        "reference_product_language": true,
+        "no_unsupported_performance_claim_detected": "NOT_AUTOMATICALLY_VERIFIED"
+      },
+      "product_eligibility": "REQUIRES_REFERENCE_PRODUCT_TYPE_REVIEW",
+      "render_status": "NOT_RENDER_TESTED"
+    },
+    {
+      "slot": 22,
+      "concept": "Sambal udang petai",
+      "record_ids": [
+        "v9_cookware_myeveryday05_02_10s",
+        "v9_cookware_myeveryday05_02_20s"
+      ],
+      "static_checks": {
+        "both_records_exist": true,
+        "duration_pair": true,
+        "nonempty_prompts": true,
+        "part2_present": true,
+        "unresolved_template_tokens": false,
+        "conditional_user_choice": false,
+        "reference_product_language": true,
+        "no_unsupported_performance_claim_detected": "NOT_AUTOMATICALLY_VERIFIED"
+      },
+      "product_eligibility": "REQUIRES_REFERENCE_PRODUCT_TYPE_REVIEW",
+      "render_status": "NOT_RENDER_TESTED"
+    },
+    {
+      "slot": 23,
+      "concept": "Ikan masak tiga rasa",
+      "record_ids": [
+        "v9_cookware_myeveryday05_03_10s",
+        "v9_cookware_myeveryday05_03_20s"
+      ],
+      "static_checks": {
+        "both_records_exist": true,
+        "duration_pair": true,
+        "nonempty_prompts": true,
+        "part2_present": true,
+        "unresolved_template_tokens": false,
+        "conditional_user_choice": false,
+        "reference_product_language": true,
+        "no_unsupported_performance_claim_detected": "NOT_AUTOMATICALLY_VERIFIED"
+      },
+      "product_eligibility": "REQUIRES_REFERENCE_PRODUCT_TYPE_REVIEW",
+      "render_status": "NOT_RENDER_TESTED"
+    },
+    {
+      "slot": 24,
+      "concept": "Gulai ikan tongkol",
+      "record_ids": [
+        "v9_cookware_myeveryday05_04_10s",
+        "v9_cookware_myeveryday05_04_20s"
+      ],
+      "static_checks": {
+        "both_records_exist": true,
+        "duration_pair": true,
+        "nonempty_prompts": true,
+        "part2_present": true,
+        "unresolved_template_tokens": false,
+        "conditional_user_choice": false,
+        "reference_product_language": true,
+        "no_unsupported_performance_claim_detected": "NOT_AUTOMATICALLY_VERIFIED"
+      },
+      "product_eligibility": "REQUIRES_REFERENCE_PRODUCT_TYPE_REVIEW",
+      "render_status": "NOT_RENDER_TESTED"
+    },
+    {
+      "slot": 25,
+      "concept": "Sambal tumis kerang",
+      "record_ids": [
+        "v9_cookware_myeveryday05_05_10s",
+        "v9_cookware_myeveryday05_05_20s"
+      ],
+      "static_checks": {
+        "both_records_exist": true,
+        "duration_pair": true,
+        "nonempty_prompts": true,
+        "part2_present": true,
+        "unresolved_template_tokens": false,
+        "conditional_user_choice": false,
+        "reference_product_language": true,
+        "no_unsupported_performance_claim_detected": "NOT_AUTOMATICALLY_VERIFIED"
+      },
+      "product_eligibility": "REQUIRES_REFERENCE_PRODUCT_TYPE_REVIEW",
+      "render_status": "NOT_RENDER_TESTED"
+    },
+    {
+      "slot": 26,
+      "concept": "Sambal tumis paru",
+      "record_ids": [
+        "v9_cookware_myeveryday06_01_10s",
+        "v9_cookware_myeveryday06_01_20s"
+      ],
+      "static_checks": {
+        "both_records_exist": true,
+        "duration_pair": true,
+        "nonempty_prompts": true,
+        "part2_present": true,
+        "unresolved_template_tokens": false,
+        "conditional_user_choice": false,
+        "reference_product_language": true,
+        "no_unsupported_performance_claim_detected": "NOT_AUTOMATICALLY_VERIFIED"
+      },
+      "product_eligibility": "REQUIRES_REFERENCE_PRODUCT_TYPE_REVIEW",
+      "render_status": "NOT_RENDER_TESTED"
+    },
+    {
+      "slot": 27,
+      "concept": "Ayam masak paprik",
+      "record_ids": [
+        "v9_cookware_myeveryday06_02_10s",
+        "v9_cookware_myeveryday06_02_20s"
+      ],
+      "static_checks": {
+        "both_records_exist": true,
+        "duration_pair": true,
+        "nonempty_prompts": true,
+        "part2_present": true,
+        "unresolved_template_tokens": false,
+        "conditional_user_choice": false,
+        "reference_product_language": true,
+        "no_unsupported_performance_claim_detected": "NOT_AUTOMATICALLY_VERIFIED"
+      },
+      "product_eligibility": "REQUIRES_REFERENCE_PRODUCT_TYPE_REVIEW",
+      "render_status": "NOT_RENDER_TESTED"
+    },
+    {
+      "slot": 28,
+      "concept": "Masak lemak pucuk ubi",
+      "record_ids": [
+        "v9_cookware_myeveryday06_03_10s",
+        "v9_cookware_myeveryday06_03_20s"
+      ],
+      "static_checks": {
+        "both_records_exist": true,
+        "duration_pair": true,
+        "nonempty_prompts": true,
+        "part2_present": true,
+        "unresolved_template_tokens": false,
+        "conditional_user_choice": false,
+        "reference_product_language": true,
+        "no_unsupported_performance_claim_detected": "NOT_AUTOMATICALLY_VERIFIED"
+      },
+      "product_eligibility": "REQUIRES_REFERENCE_PRODUCT_TYPE_REVIEW",
+      "render_status": "NOT_RENDER_TESTED"
+    },
+    {
+      "slot": 29,
+      "concept": "Kari daging dan kentang",
+      "record_ids": [
+        "v9_cookware_myeveryday06_04_10s",
+        "v9_cookware_myeveryday06_04_20s"
+      ],
+      "static_checks": {
+        "both_records_exist": true,
+        "duration_pair": true,
+        "nonempty_prompts": true,
+        "part2_present": true,
+        "unresolved_template_tokens": false,
+        "conditional_user_choice": false,
+        "reference_product_language": true,
+        "no_unsupported_performance_claim_detected": "NOT_AUTOMATICALLY_VERIFIED"
+      },
+      "product_eligibility": "REQUIRES_REFERENCE_PRODUCT_TYPE_REVIEW",
+      "render_status": "NOT_RENDER_TESTED"
+    },
+    {
+      "slot": 30,
+      "concept": "Sambal tumis tempe dan kentang",
+      "record_ids": [
+        "v9_cookware_myeveryday06_05_10s",
+        "v9_cookware_myeveryday06_05_20s"
+      ],
+      "static_checks": {
+        "both_records_exist": true,
+        "duration_pair": true,
+        "nonempty_prompts": true,
+        "part2_present": true,
+        "unresolved_template_tokens": false,
+        "conditional_user_choice": false,
+        "reference_product_language": true,
+        "no_unsupported_performance_claim_detected": "NOT_AUTOMATICALLY_VERIFIED"
+      },
+      "product_eligibility": "REQUIRES_REFERENCE_PRODUCT_TYPE_REVIEW",
+      "render_status": "NOT_RENDER_TESTED"
+    },
+    {
+      "slot": 31,
+      "concept": "Sambal hijau ikan bilis",
+      "record_ids": [
+        "v9_cookware_myeveryday07_01_10s",
+        "v9_cookware_myeveryday07_01_20s"
+      ],
+      "static_checks": {
+        "both_records_exist": true,
+        "duration_pair": true,
+        "nonempty_prompts": true,
+        "part2_present": true,
+        "unresolved_template_tokens": false,
+        "conditional_user_choice": false,
+        "reference_product_language": true,
+        "no_unsupported_performance_claim_detected": "NOT_AUTOMATICALLY_VERIFIED"
+      },
+      "product_eligibility": "REQUIRES_REFERENCE_PRODUCT_TYPE_REVIEW",
+      "render_status": "NOT_RENDER_TESTED"
+    },
+    {
+      "slot": 32,
+      "concept": "Ayam masak serai",
+      "record_ids": [
+        "v9_cookware_myeveryday07_02_10s",
+        "v9_cookware_myeveryday07_02_20s"
+      ],
+      "static_checks": {
+        "both_records_exist": true,
+        "duration_pair": true,
+        "nonempty_prompts": true,
+        "part2_present": true,
+        "unresolved_template_tokens": false,
+        "conditional_user_choice": false,
+        "reference_product_language": true,
+        "no_unsupported_performance_claim_detected": "NOT_AUTOMATICALLY_VERIFIED"
+      },
+      "product_eligibility": "REQUIRES_REFERENCE_PRODUCT_TYPE_REVIEW",
+      "render_status": "NOT_RENDER_TESTED"
+    },
+    {
+      "slot": 33,
+      "concept": "Masak lemak rebung",
+      "record_ids": [
+        "v9_cookware_myeveryday07_03_10s",
+        "v9_cookware_myeveryday07_03_20s"
+      ],
+      "static_checks": {
+        "both_records_exist": true,
+        "duration_pair": true,
+        "nonempty_prompts": true,
+        "part2_present": true,
+        "unresolved_template_tokens": false,
+        "conditional_user_choice": false,
+        "reference_product_language": true,
+        "no_unsupported_performance_claim_detected": "NOT_AUTOMATICALLY_VERIFIED"
+      },
+      "product_eligibility": "REQUIRES_REFERENCE_PRODUCT_TYPE_REVIEW",
+      "render_status": "NOT_RENDER_TESTED"
+    },
+    {
+      "slot": 34,
+      "concept": "Sambal ikan sardin",
+      "record_ids": [
+        "v9_cookware_myeveryday07_04_10s",
+        "v9_cookware_myeveryday07_04_20s"
+      ],
+      "static_checks": {
+        "both_records_exist": true,
+        "duration_pair": true,
+        "nonempty_prompts": true,
+        "part2_present": true,
+        "unresolved_template_tokens": false,
+        "conditional_user_choice": false,
+        "reference_product_language": true,
+        "no_unsupported_performance_claim_detected": "NOT_AUTOMATICALLY_VERIFIED"
+      },
+      "product_eligibility": "REQUIRES_REFERENCE_PRODUCT_TYPE_REVIEW",
+      "render_status": "NOT_RENDER_TESTED"
+    },
+    {
+      "slot": 35,
+      "concept": "Gulai lemak ikan masin dan nanas",
+      "record_ids": [
+        "v9_cookware_myeveryday07_05_10s",
+        "v9_cookware_myeveryday07_05_20s"
+      ],
+      "static_checks": {
+        "both_records_exist": true,
+        "duration_pair": true,
+        "nonempty_prompts": true,
+        "part2_present": true,
+        "unresolved_template_tokens": false,
+        "conditional_user_choice": false,
+        "reference_product_language": true,
+        "no_unsupported_performance_claim_detected": "NOT_AUTOMATICALLY_VERIFIED"
+      },
+      "product_eligibility": "REQUIRES_REFERENCE_PRODUCT_TYPE_REVIEW",
+      "render_status": "NOT_RENDER_TESTED"
+    },
+    {
+      "slot": 36,
+      "concept": "Sambal tumis kupang",
+      "record_ids": [
+        "v9_cookware_myeveryday08_01_10s",
+        "v9_cookware_myeveryday08_01_20s"
+      ],
+      "static_checks": {
+        "both_records_exist": true,
+        "duration_pair": true,
+        "nonempty_prompts": true,
+        "part2_present": true,
+        "unresolved_template_tokens": false,
+        "conditional_user_choice": false,
+        "reference_product_language": true,
+        "no_unsupported_performance_claim_detected": "NOT_AUTOMATICALLY_VERIFIED"
+      },
+      "product_eligibility": "REQUIRES_REFERENCE_PRODUCT_TYPE_REVIEW",
+      "render_status": "NOT_RENDER_TESTED"
+    },
+    {
+      "slot": 37,
+      "concept": "Ayam masak kunyit berkuah",
+      "record_ids": [
+        "v9_cookware_myeveryday08_02_10s",
+        "v9_cookware_myeveryday08_02_20s"
+      ],
+      "static_checks": {
+        "both_records_exist": true,
+        "duration_pair": true,
+        "nonempty_prompts": true,
+        "part2_present": true,
+        "unresolved_template_tokens": false,
+        "conditional_user_choice": false,
+        "reference_product_language": true,
+        "no_unsupported_performance_claim_detected": "NOT_AUTOMATICALLY_VERIFIED"
+      },
+      "product_eligibility": "REQUIRES_REFERENCE_PRODUCT_TYPE_REVIEW",
+      "render_status": "NOT_RENDER_TESTED"
+    },
+    {
+      "slot": 38,
+      "concept": "Pajeri terung",
+      "record_ids": [
+        "v9_cookware_myeveryday08_03_10s",
+        "v9_cookware_myeveryday08_03_20s"
+      ],
+      "static_checks": {
+        "both_records_exist": true,
+        "duration_pair": true,
+        "nonempty_prompts": true,
+        "part2_present": true,
+        "unresolved_template_tokens": false,
+        "conditional_user_choice": false,
+        "reference_product_language": true,
+        "no_unsupported_performance_claim_detected": "NOT_AUTOMATICALLY_VERIFIED"
+      },
+      "product_eligibility": "REQUIRES_REFERENCE_PRODUCT_TYPE_REVIEW",
+      "render_status": "NOT_RENDER_TESTED"
+    },
+    {
+      "slot": 39,
+      "concept": "Gulai tempoyak ikan patin",
+      "record_ids": [
+        "v9_cookware_myeveryday08_04_10s",
+        "v9_cookware_myeveryday08_04_20s"
+      ],
+      "static_checks": {
+        "both_records_exist": true,
+        "duration_pair": true,
+        "nonempty_prompts": true,
+        "part2_present": true,
+        "unresolved_template_tokens": false,
+        "conditional_user_choice": false,
+        "reference_product_language": true,
+        "no_unsupported_performance_claim_detected": "NOT_AUTOMATICALLY_VERIFIED"
+      },
+      "product_eligibility": "REQUIRES_REFERENCE_PRODUCT_TYPE_REVIEW",
+      "render_status": "NOT_RENDER_TESTED"
+    },
+    {
+      "slot": 40,
+      "concept": "Sambal tumis tauhu",
+      "record_ids": [
+        "v9_cookware_myeveryday08_05_10s",
+        "v9_cookware_myeveryday08_05_20s"
+      ],
+      "static_checks": {
+        "both_records_exist": true,
+        "duration_pair": true,
+        "nonempty_prompts": true,
+        "part2_present": true,
+        "unresolved_template_tokens": false,
+        "conditional_user_choice": false,
+        "reference_product_language": true,
+        "no_unsupported_performance_claim_detected": "NOT_AUTOMATICALLY_VERIFIED"
+      },
+      "product_eligibility": "REQUIRES_REFERENCE_PRODUCT_TYPE_REVIEW",
+      "render_status": "NOT_RENDER_TESTED"
+    },
+    {
+      "slot": 41,
+      "concept": "One-pot tomato pasta",
+      "record_ids": [
+        "v9_cookware_focus01_01_10s",
+        "v9_cookware_focus01_01_20s"
+      ],
+      "static_checks": {
+        "both_records_exist": true,
+        "duration_pair": true,
+        "nonempty_prompts": true,
+        "part2_present": true,
+        "unresolved_template_tokens": false,
+        "conditional_user_choice": false,
+        "reference_product_language": true,
+        "no_unsupported_performance_claim_detected": "NOT_AUTOMATICALLY_VERIFIED"
+      },
+      "product_eligibility": "REQUIRES_REFERENCE_PRODUCT_TYPE_REVIEW",
+      "render_status": "NOT_RENDER_TESTED"
+    },
+    {
+      "slot": 42,
+      "concept": "Steamed sweetcorn",
+      "record_ids": [
+        "v9_cookware_focus01_03_10s",
+        "v9_cookware_focus01_03_20s"
+      ],
+      "static_checks": {
+        "both_records_exist": true,
+        "duration_pair": true,
+        "nonempty_prompts": true,
+        "part2_present": true,
+        "unresolved_template_tokens": false,
+        "conditional_user_choice": false,
+        "reference_product_language": true,
+        "no_unsupported_performance_claim_detected": "NOT_AUTOMATICALLY_VERIFIED"
+      },
+      "product_eligibility": "REQUIRES_REFERENCE_PRODUCT_TYPE_REVIEW",
+      "render_status": "NOT_RENDER_TESTED"
+    },
+    {
+      "slot": 43,
+      "concept": "Ginger chicken soup",
+      "record_ids": [
+        "v9_cookware_focus02_01_ginger_chicken_soup_10s",
+        "v9_cookware_focus02_01_ginger_chicken_soup_20s"
+      ],
+      "static_checks": {
+        "both_records_exist": true,
+        "duration_pair": true,
+        "nonempty_prompts": true,
+        "part2_present": true,
+        "unresolved_template_tokens": false,
+        "conditional_user_choice": false,
+        "reference_product_language": true,
+        "no_unsupported_performance_claim_detected": "NOT_AUTOMATICALLY_VERIFIED"
+      },
+      "product_eligibility": "REQUIRES_REFERENCE_PRODUCT_TYPE_REVIEW",
+      "render_status": "NOT_RENDER_TESTED"
+    },
+    {
+      "slot": 44,
+      "concept": "Boiled eggs breakfast",
+      "record_ids": [
+        "v9_cookware_focus02_02_boiled_eggs_10s",
+        "v9_cookware_focus02_02_boiled_eggs_20s"
+      ],
+      "static_checks": {
+        "both_records_exist": true,
+        "duration_pair": true,
+        "nonempty_prompts": true,
+        "part2_present": true,
+        "unresolved_template_tokens": false,
+        "conditional_user_choice": false,
+        "reference_product_language": true,
+        "no_unsupported_performance_claim_detected": "NOT_AUTOMATICALLY_VERIFIED"
+      },
+      "product_eligibility": "REQUIRES_REFERENCE_PRODUCT_TYPE_REVIEW",
+      "render_status": "NOT_RENDER_TESTED"
+    },
+    {
+      "slot": 45,
+      "concept": "Vegetable broth prep",
+      "record_ids": [
+        "v9_cookware_focus02_03_vegetable_broth_10s",
+        "v9_cookware_focus02_03_vegetable_broth_20s"
+      ],
+      "static_checks": {
+        "both_records_exist": true,
+        "duration_pair": true,
+        "nonempty_prompts": true,
+        "part2_present": true,
+        "unresolved_template_tokens": false,
+        "conditional_user_choice": false,
+        "reference_product_language": true,
+        "no_unsupported_performance_claim_detected": "NOT_AUTOMATICALLY_VERIFIED"
+      },
+      "product_eligibility": "REQUIRES_REFERENCE_PRODUCT_TYPE_REVIEW",
+      "render_status": "NOT_RENDER_TESTED"
+    },
+    {
+      "slot": 46,
+      "concept": "Turmeric fish simmer",
+      "record_ids": [
+        "v9_cookware_focus03_01_10s",
+        "v9_cookware_focus03_01_20s"
+      ],
+      "static_checks": {
+        "both_records_exist": true,
+        "duration_pair": true,
+        "nonempty_prompts": true,
+        "part2_present": true,
+        "unresolved_template_tokens": false,
+        "conditional_user_choice": false,
+        "reference_product_language": true,
+        "no_unsupported_performance_claim_detected": "NOT_AUTOMATICALLY_VERIFIED"
+      },
+      "product_eligibility": "REQUIRES_REFERENCE_PRODUCT_TYPE_REVIEW",
+      "render_status": "NOT_RENDER_TESTED"
+    },
+    {
+      "slot": 47,
+      "concept": "Sweet potato boiling",
+      "record_ids": [
+        "v9_cookware_focus03_03_10s",
+        "v9_cookware_focus03_03_20s"
+      ],
+      "static_checks": {
+        "both_records_exist": true,
+        "duration_pair": true,
+        "nonempty_prompts": true,
+        "part2_present": true,
+        "unresolved_template_tokens": false,
+        "conditional_user_choice": false,
+        "reference_product_language": true,
+        "no_unsupported_performance_claim_detected": "NOT_AUTOMATICALLY_VERIFIED"
+      },
+      "product_eligibility": "REQUIRES_REFERENCE_PRODUCT_TYPE_REVIEW",
+      "render_status": "NOT_RENDER_TESTED"
+    },
+    {
+      "slot": 48,
+      "concept": "Blanched leafy greens",
+      "record_ids": [
+        "v9_cookware_focus04_02_10s",
+        "v9_cookware_focus04_02_20s"
+      ],
+      "static_checks": {
+        "both_records_exist": true,
+        "duration_pair": true,
+        "nonempty_prompts": true,
+        "part2_present": true,
+        "unresolved_template_tokens": false,
+        "conditional_user_choice": false,
+        "reference_product_language": true,
+        "no_unsupported_performance_claim_detected": "NOT_AUTOMATICALLY_VERIFIED"
+      },
+      "product_eligibility": "REQUIRES_REFERENCE_PRODUCT_TYPE_REVIEW",
+      "render_status": "NOT_RENDER_TESTED"
+    },
+    {
+      "slot": 49,
+      "concept": "Pandan rice cooking",
+      "record_ids": [
+        "v9_cookware_focus05_03_10s",
+        "v9_cookware_focus05_03_20s"
+      ],
+      "static_checks": {
+        "both_records_exist": true,
+        "duration_pair": true,
+        "nonempty_prompts": true,
+        "part2_present": true,
+        "unresolved_template_tokens": false,
+        "conditional_user_choice": false,
+        "reference_product_language": true,
+        "no_unsupported_performance_claim_detected": "NOT_AUTOMATICALLY_VERIFIED"
+      },
+      "product_eligibility": "REQUIRES_REFERENCE_PRODUCT_TYPE_REVIEW",
+      "render_status": "NOT_RENDER_TESTED"
+    },
+    {
+      "slot": 50,
+      "concept": "Warm chocolate sauce",
+      "record_ids": [
+        "v9_cookware_focus04_05_10s",
+        "v9_cookware_focus04_05_20s"
+      ],
+      "static_checks": {
+        "both_records_exist": true,
+        "duration_pair": true,
+        "nonempty_prompts": true,
+        "part2_present": true,
+        "unresolved_template_tokens": false,
+        "conditional_user_choice": false,
+        "reference_product_language": true,
+        "no_unsupported_performance_claim_detected": "NOT_AUTOMATICALLY_VERIFIED"
+      },
+      "product_eligibility": "REQUIRES_REFERENCE_PRODUCT_TYPE_REVIEW",
+      "render_status": "NOT_RENDER_TESTED"
+    }
+  ],
+  "input_contract_audit": {
+    "status": "DESIGN_CONTRACT_IDENTIFIED_RUNTIME_INTEGRATION_UNTESTED",
+    "bot_name_only_entrypoints": [
+      "bot.py prompt action near lines 2994-3006",
+      "bot.py prompt_input:photo near lines 3533-3535"
+    ],
+    "external_image_instructions": [
+      "bot.py prompt output near lines 4099-4101",
+      "prompt_engine.py product identity near lines 932-937"
+    ],
+    "required_behavior": "User enters product name in Klippo; user supplies original product photo to external video generator; V9 text may refer to that externally supplied image. Do not claim Klippo uploaded or analyzed it.",
+    "followup": "Check whether shortlisted V9 prompt files are actually loaded and selected by current runtime; static library existence is not integration proof."
+  }
+}

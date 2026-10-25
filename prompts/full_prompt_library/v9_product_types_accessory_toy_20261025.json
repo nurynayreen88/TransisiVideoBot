@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "status": "DRAFT_TYPE_TAXONOMY_REVIEW",
+  "groups": {
+    "accessory_watch": [
+      "analog watch",
+      "digital watch",
+      "chronograph",
+      "dress watch",
+      "sport watch",
+      "watch strap"
+    ],
+    "accessory_jewelry": [
+      "ring",
+      "necklace",
+      "bracelet",
+      "earrings",
+      "pendant",
+      "brooch",
+      "anklet"
+    ],
+    "accessory_eyewear": [
+      "sunglasses",
+      "reading glasses",
+      "blue light glasses",
+      "eyeglass frame",
+      "eyeglass case"
+    ],
+    "accessory_belt": [
+      "leather belt",
+      "canvas belt",
+      "formal belt",
+      "fashion waist belt",
+      "kids belt"
+    ],
+    "accessory_hair": [
+      "hair clip",
+      "scrunchie",
+      "headband",
+      "hair claw",
+      "hairpin",
+      "hair bow"
+    ],
+    "accessory_scarf": [
+      "silk scarf",
+      "neck scarf",
+      "bandana",
+      "shawl accessory",
+      "tie",
+      "pocket square"
+    ],
+    "accessory_other": [
+      "keychain",
+      "lanyard",
+      "phone charm",
+      "badge holder",
+      "fashion gloves"
+    ],
+    "toy_educational": [
+      "alphabet puzzle",
+      "shape sorter",
+      "flashcards",
+      "counting beads",
+      "STEM kit",
+      "learning board"
+    ],
+    "toy_figure": [
+      "action figure",
+      "doll",
+      "plush toy",
+      "collectible figure",
+      "miniature figure"
+    ],
+    "toy_building": [
+      "building bricks",
+      "magnetic tiles",
+      "wooden blocks",
+      "construction kit",
+      "model kit"
+    ],
+    "toy_outdoor": [
+      "kite",
+      "bubble toy",
+      "water toy",
+      "sand play set",
+      "outdoor play ball"
+    ],
+    "toy_baby": [
+      "rattle",
+      "teether toy",
+      "soft book",
+      "sensory ball",
+      "baby play gym"
+    ],
+    "toy_game": [
+      "board game",
+      "card game",
+      "puzzle game",
+      "strategy game",
+      "party game"
+    ],
+    "toy_other": [
+      "remote control car",
+      "musical toy",
+      "roleplay kitchen",
+      "craft toy",
+      "fidget toy"
+    ]
+  },
+  "activation": false
+}

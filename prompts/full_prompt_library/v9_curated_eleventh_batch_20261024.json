@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "batch": "v9_curated_eleventh_batch_20261024",
+  "variation_count": 6,
+  "notes": "Three distinct reference-dependent concepts, each complete 10s and continuous two-part 20s. Draft pending actual render and runtime product-input compatibility QA.",
+  "variations": [
+    {
+      "id": "v9_curated11_hijab_sport_10s_01",
+      "subcategory_id": "hijab_sport",
+      "visual_category": "FULL_MODEL",
+      "concept": "Morning park circuit",
+      "duration_seconds": 10,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Photorealistic vertical 9:16, one adult Universal Malaysian woman in modest activewear wearing the exact reference sports hijab. Preserve its original opening, length, colour, seams and drape; no added pins or claimed performance. A dry flat shaded park path at sunrise. Medium portrait through full-body tracking; model silent and natural movement.\nUse the supplied reference image as sole product master. Preserve realistic anatomy, scale, contact and continuity. No invented features, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Establish the complete original hijab and model standing on the path.\n2–5s: She starts a comfortable brisk walk, hands swinging naturally.\n5–8s: Track a gentle side angle as she takes three measured steps; fabric moves with gravity.\n8–10s: She stops and faces three-quarter camera, full front drape visible.\nAUDIO: Off-camera Malaysian Malay narrator, model silent: 'Pagi ni saya mulakan dengan jalan santai.' Subtle park ambience and footsteps."
+    },
+    {
+      "id": "v9_curated11_hijab_sport_20s_01",
+      "subcategory_id": "hijab_sport",
+      "visual_category": "FULL_MODEL",
+      "concept": "Morning park circuit",
+      "duration_seconds": 20,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16, one adult Universal Malaysian woman in modest activewear wearing the exact reference sports hijab. Preserve its original opening, length, colour, seams and drape; no added pins or claimed performance. A dry flat shaded park path at sunrise. Medium portrait through full-body tracking; model silent and natural movement.\nUse the supplied reference image as sole product master. Preserve realistic anatomy, scale, contact and continuity. No invented features, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–3s: Establish the model in the reference hijab at the park path entrance.\n3–7s: She begins a comfortable brisk walk with natural arm swing.\n7–10s: She stops near a plain bench, facing three-quarter camera.\nAUDIO: Off-camera Malaysian Malay narrator, model silent: 'Pagi ni saya mulakan dengan jalan santai.' Subtle park ambience and footsteps.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16, one adult Universal Malaysian woman in modest activewear wearing the exact reference sports hijab. Preserve its original opening, length, colour, seams and drape; no added pins or claimed performance. A dry flat shaded park path at sunrise. Medium portrait through full-body tracking; model silent and natural movement.\nUse the supplied reference image as sole product master. Preserve realistic anatomy, scale, contact and continuity. No invented features, captions, text overlays, extra logos or watermark.\nCONTINUITY: Match the last Part 1 frame exactly in product, pose, props, setting, lighting and camera axis; continue without repeating completed action.\nEXACTLY 10 SECONDS:\n0–3s: From the same paused bench-side stance, she turns gently toward the continuing path.\n3–7s: She takes three measured steps as the camera tracks the true side drape.\n7–10s: She pauses in a full-front view with the original hijab unobstructed.\nAUDIO: Off-camera Malaysian Malay narrator, model silent: 'Terus bergerak, dengan padanan yang saya suka.' Subtle park ambience and footsteps."
+    },
+    {
+      "id": "v9_curated11_bag_backpack_10s_01",
+      "subcategory_id": "bag_backpack",
+      "visual_category": "PARTIAL_MODEL",
+      "concept": "Campus study arrival",
+      "duration_seconds": 10,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Photorealistic vertical 9:16. Exact reference backpack worn by one adult Universal Malaysian student, framed from shoulders to hips, face out of shot. Preserve visible straps, silhouette, compartments, colour and markings; no fabricated laptop sleeve or capacity claim. Bright covered campus walkway and a plain study table, natural late morning light. Realistic weight and shoulder contact; camera follows from rear three-quarter.\nUse the supplied reference image as sole product master. Preserve realistic anatomy, scale, contact and continuity. No invented features, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Show the reference backpack resting naturally on both shoulders.\n2–5s: Student walks three relaxed steps along the sheltered walkway.\n5–8s: Student stops beside the study table and removes the backpack using its existing shoulder straps.\n8–10s: Place it upright on the table, original front visible.\nAUDIO: Off-camera Malaysian Malay narrator, student silent: 'Sampai tempat belajar, beg masih tersusun elok.' Quiet campus ambience."
+    },
+    {
+      "id": "v9_curated11_bag_backpack_20s_01",
+      "subcategory_id": "bag_backpack",
+      "visual_category": "PARTIAL_MODEL",
+      "concept": "Campus study arrival",
+      "duration_seconds": 20,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. Exact reference backpack worn by one adult Universal Malaysian student, framed from shoulders to hips, face out of shot. Preserve visible straps, silhouette, compartments, colour and markings; no fabricated laptop sleeve or capacity claim. Bright covered campus walkway and a plain study table, natural late morning light. Realistic weight and shoulder contact; camera follows from rear three-quarter.\nUse the supplied reference image as sole product master. Preserve realistic anatomy, scale, contact and continuity. No invented features, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–3s: Establish the backpack worn correctly on both shoulders under the covered walkway.\n3–7s: Student walks three natural steps toward a plain study table.\n7–10s: Student stops at the table with the backpack still worn.\nAUDIO: Off-camera Malaysian Malay narrator, student silent: 'Sampai tempat belajar, beg masih tersusun elok.' Quiet campus ambience.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. Exact reference backpack worn by one adult Universal Malaysian student, framed from shoulders to hips, face out of shot. Preserve visible straps, silhouette, compartments, colour and markings; no fabricated laptop sleeve or capacity claim. Bright covered campus walkway and a plain study table, natural late morning light. Realistic weight and shoulder contact; camera follows from rear three-quarter.\nUse the supplied reference image as sole product master. Preserve realistic anatomy, scale, contact and continuity. No invented features, captions, text overlays, extra logos or watermark.\nCONTINUITY: Match the last Part 1 frame exactly in product, pose, props, setting, lighting and camera axis; continue without repeating completed action.\nEXACTLY 10 SECONDS:\n0–3s: Resume at the same stopped stance; student gently slips off the actual shoulder straps.\n3–7s: Student lifts the backpack using its visible existing handle or body support and places it securely on the table.\n7–10s: Hold a stable front three-quarter view of the upright backpack, no extra items appearing.\nAUDIO: Off-camera Malaysian Malay narrator, student silent: 'Letak dulu beg, kemudian baru mula belajar.' Quiet campus ambience."
+    },
+    {
+      "id": "v9_curated11_home_bedding_10s_01",
+      "subcategory_id": "home_bedding",
+      "visual_category": "PRODUCT_ONLY",
+      "concept": "Freshly made bed",
+      "duration_seconds": 10,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Photorealistic vertical 9:16. Exact reference bedding set displayed already arranged on a simple bed, preserving its true visible colour, pattern, texture appearance and supplied pieces only. A sunlit neutral bedroom, consistent morning light. Product-only scene, no people, hands, invisible arranging or changing bedding; slow stable camera slide, authentic folds and gravity. No fabricated fabric or cooling claims.\nUse the supplied reference image as sole product master. Preserve realistic anatomy, scale, contact and continuity. No invented features, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Establish the complete original bedding arrangement from the foot of the bed.\n2–5s: Slow lateral camera slide reveals the actual visible pattern and edge.\n5–8s: A gentle closer view shows the original surface and natural folds without moving the bedding.\n8–10s: Settle into a stable full-bed hero composition.\nAUDIO: No speech, narration or music; quiet bedroom ambience only."
+    },
+    {
+      "id": "v9_curated11_home_bedding_20s_01",
+      "subcategory_id": "home_bedding",
+      "visual_category": "PRODUCT_ONLY",
+      "concept": "Freshly made bed",
+      "duration_seconds": 20,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. Exact reference bedding set displayed already arranged on a simple bed, preserving its true visible colour, pattern, texture appearance and supplied pieces only. A sunlit neutral bedroom, consistent morning light. Product-only scene, no people, hands, invisible arranging or changing bedding; slow stable camera slide, authentic folds and gravity. No fabricated fabric or cooling claims.\nUse the supplied reference image as sole product master. Preserve realistic anatomy, scale, contact and continuity. No invented features, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–3s: Establish the complete bed and exact reference bedding from a foot-end three-quarter view.\n3–7s: A restrained camera slide reveals the true visible pattern and original edge.\n7–10s: Hold a steady side three-quarter view, bedding unchanged.\nAUDIO: No speech, narration or music; quiet bedroom ambience only.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nPhotorealistic vertical 9:16. Exact reference bedding set displayed already arranged on a simple bed, preserving its true visible colour, pattern, texture appearance and supplied pieces only. A sunlit neutral bedroom, consistent morning light. Product-only scene, no people, hands, invisible arranging or changing bedding; slow stable camera slide, authentic folds and gravity. No fabricated fabric or cooling claims.\nUse the supplied reference image as sole product master. Preserve realistic anatomy, scale, contact and continuity. No invented features, captions, text overlays, extra logos or watermark.\nCONTINUITY: Match the last Part 1 frame exactly in product, pose, props, setting, lighting and camera axis; continue without repeating completed action.\nEXACTLY 10 SECONDS:\n0–3s: Resume from the exact side three-quarter camera axis; the bedding stays completely still.\n3–7s: A gentle push-in highlights the reference pattern and existing natural folds.\n7–10s: Ease back to the full-bed view, all original pieces in their initial positions.\nAUDIO: No speech, narration or music; quiet bedroom ambience only."
+    }
+  ]
+}

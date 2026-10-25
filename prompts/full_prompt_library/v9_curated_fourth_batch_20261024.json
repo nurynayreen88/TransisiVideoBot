@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "batch": "v9_curated_fourth_batch_20261024",
+  "variation_count": 6,
+  "notes": "Six fully authored first-pass reference-image prompts across three product-specific concepts. 20s split into two independently specified continuous 10s scenes. Draft pending real render QA.",
+  "variations": [
+    {
+      "id": "v9_curated4_bag_tote_10s_01",
+      "subcategory_id": "bag_tote",
+      "visual_category": "PARTIAL_MODEL",
+      "concept": "Flower market carry",
+      "duration_seconds": 10,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Vertical 9:16 photorealistic lifestyle footage. Use the uploaded reference tote as the sole product master: preserve exact visible colour, shape, handles, seams, print and proportions. A shaded Malaysian flower-market stall in gentle morning daylight, one paper-wrapped bouquet and a clear nearby wooden bench. One adult Universal Malaysian woman cropped shoulders-to-thigh, face never shown, wearing a plain neutral outfit. Waist-height smooth lateral camera; physically realistic hand grip, handle tension and fabric gravity. Use only the tote's visibly existing opening and handles. No invented pockets, zips, materials, capacity claims, captions, logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: The reference tote stands upright on the stall counter beside a small paper-wrapped bouquet.\n2–5s: She guides the bouquet into the tote's visible opening, leaving the flower heads naturally above the rim.\n5–8s: She gathers both existing handles and lifts the tote clear of the counter, allowing its base to settle under the bouquet's weight.\n8–10s: She takes one step toward the bench and pauses, the tote hanging beside her hip.\nAUDIO: Off-camera Malaysian Malay woman, visible model silent: \"Singgah beli bunga, terus bawa dengan kemas.\" Quiet market ambience."
+    },
+    {
+      "id": "v9_curated4_bag_tote_20s_01",
+      "subcategory_id": "bag_tote",
+      "visual_category": "PARTIAL_MODEL",
+      "concept": "Flower market carry",
+      "duration_seconds": 20,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic lifestyle footage. Use the uploaded reference tote as the sole product master: preserve exact visible colour, shape, handles, seams, print and proportions. A shaded Malaysian flower-market stall in gentle morning daylight, one paper-wrapped bouquet and a clear nearby wooden bench. One adult Universal Malaysian woman cropped shoulders-to-thigh, face never shown, wearing a plain neutral outfit. Waist-height smooth lateral camera; physically realistic hand grip, handle tension and fabric gravity. Use only the tote's visibly existing opening and handles. No invented pockets, zips, materials, capacity claims, captions, logos or watermark.\n0–3s: The tote stands upright beside the paper-wrapped bouquet; the actual handles and opening are unobstructed.\n3–7s: She guides the bouquet into the opening, leaving the flower heads above the rim.\n7–10s: She gathers both existing handles, lifts the tote and pauses with it hanging beside her hip, bouquet upright.\nAUDIO: Off-camera Malaysian Malay woman, visible model silent: \"Singgah beli bunga, terus bawa dengan kemas.\" Quiet market ambience.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic lifestyle footage. Use the uploaded reference tote as the sole product master: preserve exact visible colour, shape, handles, seams, print and proportions. A shaded Malaysian flower-market stall in gentle morning daylight, one paper-wrapped bouquet and a clear nearby wooden bench. One adult Universal Malaysian woman cropped shoulders-to-thigh, face never shown, wearing a plain neutral outfit. Waist-height smooth lateral camera; physically realistic hand grip, handle tension and fabric gravity. Use only the tote's visibly existing opening and handles. No invented pockets, zips, materials, capacity claims, captions, logos or watermark.\nCONTINUITY: First frame matches the final Part 1 frame exactly: same subject, product, hand positions, props, lighting and camera axis. Continue the story without replaying a completed action.\n0–3s: Begin with the tote already hanging from both handles beside the same hip; she takes two calm steps toward the adjacent bench.\n3–7s: She lowers the tote onto the bench with the base flat, then releases the handles without disturbing the bouquet.\n7–10s: The camera settles at bench height on the authentic tote silhouette, visible handles and flowers above its opening.\nAUDIO: Off-camera Malaysian Malay woman, visible model silent: \"Dari gerai sampai ke rumah, nampak ringkas dan cantik.\" Quiet market ambience."
+    },
+    {
+      "id": "v9_curated4_accessory_ring_10s_01",
+      "subcategory_id": "accessory_ring",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Quiet reading hour",
+      "duration_seconds": 10,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Vertical 9:16 photorealistic close-up. The ring in the uploaded reference image is the only jewellery product: preserve its exact band, visible setting, colour, stone arrangement and realistic scale, without inventing gemstones, engravings or claims. A quiet home reading desk with a plain unbranded book, soft side-window light and natural shadows. Only one adult Malaysian hand and wrist wearing the actual ring, no face or torso. Restrained macro camera with natural focus and physically correct finger anatomy. No speech, voiceover, music, captions, text overlays, logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: The ring-wearing hand rests beside an open book, the original ring visible in natural window light.\n2–5s: The index finger gently follows a line on the page without revealing readable text.\n5–8s: The hand turns one page, keeping the ring's orientation and actual setting consistent.\n8–10s: The hand rests on the newly opened page as the camera settles on the unchanged ring.\nAUDIO: No speech, narration or music; subtle page movement and natural room ambience only."
+    },
+    {
+      "id": "v9_curated4_accessory_ring_20s_01",
+      "subcategory_id": "accessory_ring",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Quiet reading hour",
+      "duration_seconds": 20,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic close-up. The ring in the uploaded reference image is the only jewellery product: preserve its exact band, visible setting, colour, stone arrangement and realistic scale, without inventing gemstones, engravings or claims. A quiet home reading desk with a plain unbranded book, soft side-window light and natural shadows. Only one adult Malaysian hand and wrist wearing the actual ring, no face or torso. Restrained macro camera with natural focus and physically correct finger anatomy. No speech, voiceover, music, captions, text overlays, logos or watermark.\n0–3s: The ring-wearing hand rests beside an open unbranded book; the original ring is clearly framed.\n3–7s: The index finger follows one line of the page at a relaxed reading pace.\n7–10s: The hand turns one page fully and pauses on the newly opened spread, ring still visible.\nAUDIO: No speech, narration or music; subtle page movement and natural room ambience only.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic close-up. The ring in the uploaded reference image is the only jewellery product: preserve its exact band, visible setting, colour, stone arrangement and realistic scale, without inventing gemstones, engravings or claims. A quiet home reading desk with a plain unbranded book, soft side-window light and natural shadows. Only one adult Malaysian hand and wrist wearing the actual ring, no face or torso. Restrained macro camera with natural focus and physically correct finger anatomy. No speech, voiceover, music, captions, text overlays, logos or watermark.\nCONTINUITY: First frame matches the final Part 1 frame exactly: same subject, product, hand positions, props, lighting and camera axis. Continue the story without replaying a completed action.\n0–3s: Resume with the page already turned and the same hand paused on the new spread; the fingers relax naturally.\n3–7s: The hand gently closes the book and rests across its plain cover without removing or rotating the ring.\n7–10s: A short macro focus shift settles on the ring's actual band and setting in the same soft window light.\nAUDIO: No speech, narration or music; subtle book-cover movement and natural room ambience only."
+    },
+    {
+      "id": "v9_curated4_hijab_bawal_10s_01",
+      "subcategory_id": "hijab_bawal",
+      "visual_category": "FULL_MODEL",
+      "concept": "Hallway ready",
+      "duration_seconds": 10,
+      "voice_type": "MODEL_SPEECH",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Vertical 9:16 photorealistic modest fashion footage. Use the uploaded reference bawal as the sole product master; preserve its exact visible colour, pattern, triangular front fold, edges and natural drape, with no invented pins, trims, claims or redesign. Bright uncluttered home hallway, full-length mirror positioned safely outside camera reflection, diffuse morning daylight. One adult Universal Malaysian woman in a plain modest outfit, face and mouth clearly visible for natural Malaysian Malay lip sync. Medium eye-level framing includes head, shoulders and shawl front; gentle steady camera. No background narrator, subtitles, captions, logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: She faces the camera in a three-quarter stance, original bawal front fold and shoulder drape fully visible.\n2–5s: She gently smooths one existing fabric edge without changing the original triangular fold.\n5–8s: She looks directly into camera and speaks the short Malay line with accurate visible lip sync.\n8–10s: She smiles softly, holding the unchanged drape in a steady portrait.\nAUDIO: The on-camera woman speaks natural Malaysian Malay with precise visible lip sync: \"Bawal hari ini saya gayakan ringkas, terus nampak kemas.\" No narrator; quiet room ambience."
+    },
+    {
+      "id": "v9_curated4_hijab_bawal_20s_01",
+      "subcategory_id": "hijab_bawal",
+      "visual_category": "FULL_MODEL",
+      "concept": "Hallway ready",
+      "duration_seconds": 20,
+      "voice_type": "MODEL_SPEECH",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic modest fashion footage. Use the uploaded reference bawal as the sole product master; preserve its exact visible colour, pattern, triangular front fold, edges and natural drape, with no invented pins, trims, claims or redesign. Bright uncluttered home hallway, full-length mirror positioned safely outside camera reflection, diffuse morning daylight. One adult Universal Malaysian woman in a plain modest outfit, face and mouth clearly visible for natural Malaysian Malay lip sync. Medium eye-level framing includes head, shoulders and shawl front; gentle steady camera. No background narrator, subtitles, captions, logos or watermark.\n0–3s: She stands three-quarter to camera with the exact original bawal front fold and shoulder drape visible.\n3–7s: She smooths one existing fabric edge once, then lowers her hand without changing the fold.\n7–10s: Facing camera, she delivers the first short line with accurate visible lip sync and ends in a relaxed medium portrait.\nAUDIO: The on-camera woman speaks natural Malaysian Malay with precise visible lip sync: \"Bawal hari ini saya gayakan ringkas, terus nampak kemas.\" No narrator; quiet room ambience.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic modest fashion footage. Use the uploaded reference bawal as the sole product master; preserve its exact visible colour, pattern, triangular front fold, edges and natural drape, with no invented pins, trims, claims or redesign. Bright uncluttered home hallway, full-length mirror positioned safely outside camera reflection, diffuse morning daylight. One adult Universal Malaysian woman in a plain modest outfit, face and mouth clearly visible for natural Malaysian Malay lip sync. Medium eye-level framing includes head, shoulders and shawl front; gentle steady camera. No background narrator, subtitles, captions, logos or watermark.\nCONTINUITY: First frame matches the final Part 1 frame exactly: same subject, product, hand positions, props, lighting and camera axis. Continue the story without replaying a completed action.\n0–3s: Begin on the same relaxed portrait, matching the unchanged fold, outfit, lighting and eye-level camera axis; she turns her shoulders slightly toward the hallway.\n3–7s: She faces camera again and delivers the second short line with accurate visible mouth movement; hands remain lowered.\n7–10s: She smiles and holds a three-quarter pose while the camera makes a small lateral glide to show the original side drape.\nAUDIO: The on-camera woman speaks natural Malaysian Malay with precise visible lip sync: \"Dari depan sampai ke sisi, gaya ini memang saya suka.\" No narrator; quiet room ambience."
+    }
+  ]
+}

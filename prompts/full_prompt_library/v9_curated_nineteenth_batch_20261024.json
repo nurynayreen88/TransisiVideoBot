@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "batch": "v9_curated_nineteenth_batch_20261024",
+  "variation_count": 6,
+  "notes": "Three individually authored reference-dependent concepts, each a complete 10s and continuous two-part 20s. Draft pending actual render and runtime product-input compatibility QA.",
+  "variations": [
+    {
+      "id": "v9_curated19_fashion_shoes_10s_01",
+      "subcategory_id": "fashion_shoes",
+      "visual_category": "PARTIAL_MODEL",
+      "concept": "Station platform walk",
+      "duration_seconds": 10,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Vertical 9:16 photorealistic. Exact reference pair of adult casual shoes worn by one adult Universal Malaysian model, framed knee down. Preserve actual silhouette, sole profile, colour, laces and visible markings; no invented comfort or grip claims. Quiet covered pedestrian station concourse, clean dry level floor, soft diffuse daylight, low smooth tracking camera. No face or dialogue.\nUse the supplied product reference as the sole visual master. Preserve actual product identity, anatomy, scale, physical contact and spatial continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Establish both reference shoes stationary and fully visible on the dry floor.\n2–5s: Model takes two measured natural steps, with correct alternating foot contact.\n5–8s: Model pauses and turns slightly, revealing the authentic side profile of both shoes.\n8–10s: Hold a steady low three-quarter product frame.\nAUDIO: No speech, narration or music; quiet concourse ambience and natural footsteps."
+    },
+    {
+      "id": "v9_curated19_fashion_shoes_20s_01",
+      "subcategory_id": "fashion_shoes",
+      "visual_category": "PARTIAL_MODEL",
+      "concept": "Station platform walk",
+      "duration_seconds": 20,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic. Exact reference pair of adult casual shoes worn by one adult Universal Malaysian model, framed knee down. Preserve actual silhouette, sole profile, colour, laces and visible markings; no invented comfort or grip claims. Quiet covered pedestrian station concourse, clean dry level floor, soft diffuse daylight, low smooth tracking camera. No face or dialogue.\nUse the supplied product reference as the sole visual master. Preserve actual product identity, anatomy, scale, physical contact and spatial continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–3s: Establish both original shoes side by side, actual laces and toe shape visible.\n3–7s: Model takes two natural steps forward across the dry level floor.\n7–10s: Model stops with both feet planted, keeping shoe identity consistent.\nAUDIO: No speech, narration or music; quiet concourse ambience and natural footsteps.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic. Exact reference pair of adult casual shoes worn by one adult Universal Malaysian model, framed knee down. Preserve actual silhouette, sole profile, colour, laces and visible markings; no invented comfort or grip claims. Quiet covered pedestrian station concourse, clean dry level floor, soft diffuse daylight, low smooth tracking camera. No face or dialogue.\nUse the supplied product reference as the sole visual master. Preserve actual product identity, anatomy, scale, physical contact and spatial continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nCONTINUITY: Match the final Part 1 frame exactly in subject, product, pose, props, light and camera axis. Continue without replaying completed action.\nEXACTLY 10 SECONDS:\n0–3s: Continue from the same planted stance; model pivots a quarter turn naturally.\n3–7s: Camera slides gently at ankle height to reveal the original sole edge and side profile.\n7–10s: Hold a stable three-quarter view of both unchanged shoes.\nAUDIO: No speech, narration or music; quiet concourse ambience and natural footsteps."
+    },
+    {
+      "id": "v9_curated19_home_living_cushion_10s_01",
+      "subcategory_id": "home_living_cushion",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Reading corner refresh",
+      "duration_seconds": 10,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Vertical 9:16 photorealistic. Exact reference decorative cushion with its original shape, colour, pattern, seams and visible texture; no invented removable cover or material claims. A simple sofa in a softly lit home reading corner, plain book resting on a side table. Adult Malaysian hands and forearms only, steady eye-level close camera and believable cushion deformation.\nUse the supplied product reference as the sole visual master. Preserve actual product identity, anatomy, scale, physical contact and spatial continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Establish the original cushion resting on the sofa with complete front visible.\n2–5s: Hands lift the cushion gently from its lower edges and rotate it once.\n5–8s: Hands settle it upright against the sofa back and smooth its existing front lightly.\n8–10s: Hold the original cushion in a clear undistorted hero frame.\nAUDIO: Off-camera Malaysian Malay narrator, hands silent: 'Susun semula kusyen, sudut membaca nampak kemas.' Soft indoor ambience."
+    },
+    {
+      "id": "v9_curated19_home_living_cushion_20s_01",
+      "subcategory_id": "home_living_cushion",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Reading corner refresh",
+      "duration_seconds": 20,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic. Exact reference decorative cushion with its original shape, colour, pattern, seams and visible texture; no invented removable cover or material claims. A simple sofa in a softly lit home reading corner, plain book resting on a side table. Adult Malaysian hands and forearms only, steady eye-level close camera and believable cushion deformation.\nUse the supplied product reference as the sole visual master. Preserve actual product identity, anatomy, scale, physical contact and spatial continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–3s: Establish the exact cushion resting on the sofa, full original pattern visible.\n3–7s: Hands lift it by its lower edges and turn it gently to face the camera.\n7–10s: Hands position the cushion upright against the sofa back.\nAUDIO: Off-camera Malaysian Malay narrator, hands silent: 'Susun semula kusyen, sudut membaca nampak kemas.' Soft indoor ambience.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic. Exact reference decorative cushion with its original shape, colour, pattern, seams and visible texture; no invented removable cover or material claims. A simple sofa in a softly lit home reading corner, plain book resting on a side table. Adult Malaysian hands and forearms only, steady eye-level close camera and believable cushion deformation.\nUse the supplied product reference as the sole visual master. Preserve actual product identity, anatomy, scale, physical contact and spatial continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nCONTINUITY: Match the final Part 1 frame exactly in subject, product, pose, props, light and camera axis. Continue without replaying completed action.\nEXACTLY 10 SECONDS:\n0–3s: Resume with the same cushion upright; hands release and lightly smooth its front once.\n3–7s: Hands withdraw; camera eases slightly closer while retaining its true shape and seams.\n7–10s: Hold the stationary original cushion in the reading corner.\nAUDIO: Off-camera Malaysian Malay narrator, hands silent: 'Sentuhan kecil pun cukup untuk kemaskan ruang.' Soft indoor ambience."
+    },
+    {
+      "id": "v9_curated19_pet_toy_10s_01",
+      "subcategory_id": "pet_toy",
+      "visual_category": "ANIMAL_ONLY",
+      "concept": "Cat wand play",
+      "duration_seconds": 10,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Vertical 9:16 photorealistic. Exact reference cat wand toy, preserving its real handle, cord, attachment, size and colour, manipulated gently by an adult hand entering from the frame edge. One healthy adult domestic cat in a quiet living room on a non-slip rug. Cat remains clearly visible, voluntary short playful movement only; no forced jumping, tangling, ingestion or unsafe whipping. Low stable camera, natural feline physics.\nUse the supplied product reference as the sole visual master. Preserve actual product identity, anatomy, scale, physical contact and spatial continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Establish the exact toy attachment resting on the rug near the curious cat.\n2–5s: Hand moves the wand slowly along the rug; cat watches and follows with its head.\n5–8s: Cat makes one short gentle paw tap at the toy attachment, cord remaining clear.\n8–10s: Toy rests on the rug and cat pauses beside it, original design visible.\nAUDIO: No narration, dialogue or music; only gentle toy movement and natural room ambience."
+    },
+    {
+      "id": "v9_curated19_pet_toy_20s_01",
+      "subcategory_id": "pet_toy",
+      "visual_category": "ANIMAL_ONLY",
+      "concept": "Cat wand play",
+      "duration_seconds": 20,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic. Exact reference cat wand toy, preserving its real handle, cord, attachment, size and colour, manipulated gently by an adult hand entering from the frame edge. One healthy adult domestic cat in a quiet living room on a non-slip rug. Cat remains clearly visible, voluntary short playful movement only; no forced jumping, tangling, ingestion or unsafe whipping. Low stable camera, natural feline physics.\nUse the supplied product reference as the sole visual master. Preserve actual product identity, anatomy, scale, physical contact and spatial continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–3s: Show the original wand attachment on the rug, cat watching from a comfortable distance.\n3–7s: Hand draws the attachment slowly across the rug with the cord clear of the cat.\n7–10s: Cat approaches and pauses with one paw near the attachment.\nAUDIO: No narration, dialogue or music; only gentle toy movement and natural room ambience.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic. Exact reference cat wand toy, preserving its real handle, cord, attachment, size and colour, manipulated gently by an adult hand entering from the frame edge. One healthy adult domestic cat in a quiet living room on a non-slip rug. Cat remains clearly visible, voluntary short playful movement only; no forced jumping, tangling, ingestion or unsafe whipping. Low stable camera, natural feline physics.\nUse the supplied product reference as the sole visual master. Preserve actual product identity, anatomy, scale, physical contact and spatial continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nCONTINUITY: Match the final Part 1 frame exactly in subject, product, pose, props, light and camera axis. Continue without replaying completed action.\nEXACTLY 10 SECONDS:\n0–3s: Resume with the cat paused beside the same attachment; hand holds the wand low and steady.\n3–7s: Cat voluntarily taps the attachment once, then lowers its paw; cord stays untangled.\n7–10s: Hand lets the attachment settle on the rug; cat sits calmly next to it.\nAUDIO: No narration, dialogue or music; only gentle toy movement and natural room ambience."
+    }
+  ]
+}

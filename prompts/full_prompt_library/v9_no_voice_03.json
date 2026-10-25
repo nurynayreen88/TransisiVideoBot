@@ -1,0 +1,208 @@
+{
+  "schema_version": 1,
+  "batch": "v9_no_voice_03",
+  "variation_count": 20,
+  "notes": "Additive twenty silent, product-use-specific prompt variants for review; no original records altered.",
+  "variations": [
+    {
+      "id": "v9_no_voice_accessory_ring_10s_03",
+      "subcategory_id": "accessory_ring",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Gift Box Glimpse",
+      "duration_seconds": 10,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "KLIPPO | {{PRODUCT_NAME}}\nCONCEPT: Gift Box Glimpse.\nFORMAT: Vertical 9:16, realistic footage, exactly 10 seconds.\nREFERENCE LOCK: Uploaded image is the master. Preserve the product's actual visible design, shape, colour, print, dimensions and parts. No invented features, materials, accessories, logos or claims.\nSETTING: Quiet dressing table with an open plain jewellery box.\nSUBJECT: HANDS_ONLY. One adult hand wearing the exact reference ring, fingers and wrist only. Realistic physical contact, anatomy and spatial continuity.\nSTORYBOARD:\n0–2s: The ring is shown on the finger beside the plain open box, matching its actual setting and shape.\n2–5s: The hand turns slowly in window light, showing its real side profile without artificial sparkle.\n5–8s: The fingers gently close the plain box while the ring stays clearly in focus.\n8–10s: The hand rests beside the closed box, ring unobstructed in a steady close-up.\nCAMERA: Stable product-first composition, purposeful movement and real-world scale.\nLIGHTING: Natural consistent exposure preserving reference colours.\nAUDIO: Soft room ambience and delicate instrumental music, no voice. No dialogue, off-camera narration, subtitles, added logos or watermark."
+    },
+    {
+      "id": "v9_no_voice_accessory_ring_20s_03",
+      "subcategory_id": "accessory_ring",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Gift Box Glimpse",
+      "duration_seconds": 20,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND PROMPT\nKLIPPO | {{PRODUCT_NAME}}\nCONCEPT: Gift Box Glimpse.\nFORMAT: Vertical 9:16, realistic footage, exactly 10 seconds.\nREFERENCE LOCK: Uploaded image is the master. Preserve the product's actual visible design, shape, colour, print, dimensions and parts. No invented features, materials, accessories, logos or claims.\nSETTING: Quiet dressing table with an open plain jewellery box.\nSUBJECT: HANDS_ONLY. One adult hand wearing the exact reference ring, fingers and wrist only. Realistic physical contact, anatomy and spatial continuity.\nSTORYBOARD:\n0–3s: The ring is shown on the finger beside the plain open box, matching its actual setting and shape.\n3–7s: The hand turns slowly in window light, showing its real side profile without artificial sparkle.\n7–10s: The fingers gently close the plain box while the ring stays clearly in focus. End at a natural action match point.\nCAMERA: Follow the product with a coherent screen axis and true geometry.\nLIGHTING: Natural consistent exposure preserving reference colours.\nAUDIO: Soft room ambience and delicate instrumental music, no voice. No dialogue, off-camera narration, subtitles, added logos or watermark.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND PROMPT\nKLIPPO | {{PRODUCT_NAME}}\nCONCEPT: Gift Box Glimpse.\nFORMAT: Vertical 9:16, realistic footage, exactly 10 seconds.\nREFERENCE LOCK: Uploaded image is the master. Preserve the product's actual visible design, shape, colour, print, dimensions and parts. No invented features, materials, accessories, logos or claims.\nSETTING: Quiet dressing table with an open plain jewellery box.\nSUBJECT: HANDS_ONLY. One adult hand wearing the exact reference ring, fingers and wrist only. Realistic physical contact, anatomy and spatial continuity.\nCONTINUITY: Begin at the exact last frame of Part 1; same subject, product, scene, light, axis and movement. No reset.\nSTORYBOARD:\n0–3s: Continue the exact ongoing movement from Part 1's match frame.\n3–8s: The hand rests beside the closed box, ring unobstructed in a steady close-up.\n8–10s: Settle into a clear product view with the practical action completed.\nCAMERA: Preserve reference proportions and spatial axis from Part 1.\nLIGHTING: Match Part 1 exactly.\nAUDIO: Soft room ambience and delicate instrumental music, no voice. No dialogue, off-camera narration, subtitles, added logos or watermark."
+    },
+    {
+      "id": "v9_no_voice_accessory_watch_10s_03",
+      "subcategory_id": "accessory_watch",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Before the Meeting",
+      "duration_seconds": 10,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "KLIPPO | {{PRODUCT_NAME}}\nCONCEPT: Before the Meeting.\nFORMAT: Vertical 9:16, realistic footage, exactly 10 seconds.\nREFERENCE LOCK: Uploaded image is the master. Preserve the product's actual visible design, shape, colour, print, dimensions and parts. No invented features, materials, accessories, logos or claims.\nSETTING: Simple desk with a closed notebook.\nSUBJECT: HANDS_ONLY. Adult wrist and forearm wearing the exact reference watch, no face. Realistic physical contact, anatomy and spatial continuity.\nSTORYBOARD:\n0–2s: The watch rests near the notebook; show its actual dial and strap without inventing functions.\n2–5s: The wrist turns naturally toward the wearer to glance at the visible watch face.\n5–8s: The other hand picks up the closed notebook; the watch remains correctly fitted.\n8–10s: The wrist and notebook move toward the edge of the desk, ending with a clear watch profile.\nCAMERA: Stable product-first composition, purposeful movement and real-world scale.\nLIGHTING: Natural consistent exposure preserving reference colours.\nAUDIO: Quiet desk ambience with restrained instrumental beat, no voice. No dialogue, off-camera narration, subtitles, added logos or watermark."
+    },
+    {
+      "id": "v9_no_voice_accessory_watch_20s_03",
+      "subcategory_id": "accessory_watch",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Before the Meeting",
+      "duration_seconds": 20,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND PROMPT\nKLIPPO | {{PRODUCT_NAME}}\nCONCEPT: Before the Meeting.\nFORMAT: Vertical 9:16, realistic footage, exactly 10 seconds.\nREFERENCE LOCK: Uploaded image is the master. Preserve the product's actual visible design, shape, colour, print, dimensions and parts. No invented features, materials, accessories, logos or claims.\nSETTING: Simple desk with a closed notebook.\nSUBJECT: HANDS_ONLY. Adult wrist and forearm wearing the exact reference watch, no face. Realistic physical contact, anatomy and spatial continuity.\nSTORYBOARD:\n0–3s: The watch rests near the notebook; show its actual dial and strap without inventing functions.\n3–7s: The wrist turns naturally toward the wearer to glance at the visible watch face.\n7–10s: The other hand picks up the closed notebook; the watch remains correctly fitted. End at a natural action match point.\nCAMERA: Follow the product with a coherent screen axis and true geometry.\nLIGHTING: Natural consistent exposure preserving reference colours.\nAUDIO: Quiet desk ambience with restrained instrumental beat, no voice. No dialogue, off-camera narration, subtitles, added logos or watermark.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND PROMPT\nKLIPPO | {{PRODUCT_NAME}}\nCONCEPT: Before the Meeting.\nFORMAT: Vertical 9:16, realistic footage, exactly 10 seconds.\nREFERENCE LOCK: Uploaded image is the master. Preserve the product's actual visible design, shape, colour, print, dimensions and parts. No invented features, materials, accessories, logos or claims.\nSETTING: Simple desk with a closed notebook.\nSUBJECT: HANDS_ONLY. Adult wrist and forearm wearing the exact reference watch, no face. Realistic physical contact, anatomy and spatial continuity.\nCONTINUITY: Begin at the exact last frame of Part 1; same subject, product, scene, light, axis and movement. No reset.\nSTORYBOARD:\n0–3s: Continue the exact ongoing movement from Part 1's match frame.\n3–8s: The wrist and notebook move toward the edge of the desk, ending with a clear watch profile.\n8–10s: Settle into a clear product view with the practical action completed.\nCAMERA: Preserve reference proportions and spatial axis from Part 1.\nLIGHTING: Match Part 1 exactly.\nAUDIO: Quiet desk ambience with restrained instrumental beat, no voice. No dialogue, off-camera narration, subtitles, added logos or watermark."
+    },
+    {
+      "id": "v9_no_voice_accessory_bracelet_10s_03",
+      "subcategory_id": "accessory_bracelet",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Window Light Detail",
+      "duration_seconds": 10,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "KLIPPO | {{PRODUCT_NAME}}\nCONCEPT: Window Light Detail.\nFORMAT: Vertical 9:16, realistic footage, exactly 10 seconds.\nREFERENCE LOCK: Uploaded image is the master. Preserve the product's actual visible design, shape, colour, print, dimensions and parts. No invented features, materials, accessories, logos or claims.\nSETTING: Daylit cafe table with an ordinary empty saucer.\nSUBJECT: HANDS_ONLY. Adult wrist and forearm wearing the exact reference bracelet. Realistic physical contact, anatomy and spatial continuity.\nSTORYBOARD:\n0–2s: The wrist rests near the saucer, bracelet fully visible at true scale.\n2–5s: The hand reaches for a plain cup beside the saucer; bracelet moves naturally with the wrist.\n5–8s: The hand sets the cup onto the saucer, preserving real bracelet shape and fit.\n8–10s: The wrist rotates once in window light and settles beside the cup.\nCAMERA: Stable product-first composition, purposeful movement and real-world scale.\nLIGHTING: Natural consistent exposure preserving reference colours.\nAUDIO: Subtle cafe ambience and music only, no voice. No dialogue, off-camera narration, subtitles, added logos or watermark."
+    },
+    {
+      "id": "v9_no_voice_accessory_bracelet_20s_03",
+      "subcategory_id": "accessory_bracelet",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Window Light Detail",
+      "duration_seconds": 20,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND PROMPT\nKLIPPO | {{PRODUCT_NAME}}\nCONCEPT: Window Light Detail.\nFORMAT: Vertical 9:16, realistic footage, exactly 10 seconds.\nREFERENCE LOCK: Uploaded image is the master. Preserve the product's actual visible design, shape, colour, print, dimensions and parts. No invented features, materials, accessories, logos or claims.\nSETTING: Daylit cafe table with an ordinary empty saucer.\nSUBJECT: HANDS_ONLY. Adult wrist and forearm wearing the exact reference bracelet. Realistic physical contact, anatomy and spatial continuity.\nSTORYBOARD:\n0–3s: The wrist rests near the saucer, bracelet fully visible at true scale.\n3–7s: The hand reaches for a plain cup beside the saucer; bracelet moves naturally with the wrist.\n7–10s: The hand sets the cup onto the saucer, preserving real bracelet shape and fit. End at a natural action match point.\nCAMERA: Follow the product with a coherent screen axis and true geometry.\nLIGHTING: Natural consistent exposure preserving reference colours.\nAUDIO: Subtle cafe ambience and music only, no voice. No dialogue, off-camera narration, subtitles, added logos or watermark.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND PROMPT\nKLIPPO | {{PRODUCT_NAME}}\nCONCEPT: Window Light Detail.\nFORMAT: Vertical 9:16, realistic footage, exactly 10 seconds.\nREFERENCE LOCK: Uploaded image is the master. Preserve the product's actual visible design, shape, colour, print, dimensions and parts. No invented features, materials, accessories, logos or claims.\nSETTING: Daylit cafe table with an ordinary empty saucer.\nSUBJECT: HANDS_ONLY. Adult wrist and forearm wearing the exact reference bracelet. Realistic physical contact, anatomy and spatial continuity.\nCONTINUITY: Begin at the exact last frame of Part 1; same subject, product, scene, light, axis and movement. No reset.\nSTORYBOARD:\n0–3s: Continue the exact ongoing movement from Part 1's match frame.\n3–8s: The wrist rotates once in window light and settles beside the cup.\n8–10s: Settle into a clear product view with the practical action completed.\nCAMERA: Preserve reference proportions and spatial axis from Part 1.\nLIGHTING: Match Part 1 exactly.\nAUDIO: Subtle cafe ambience and music only, no voice. No dialogue, off-camera narration, subtitles, added logos or watermark."
+    },
+    {
+      "id": "v9_no_voice_fashion_shoes_10s_03",
+      "subcategory_id": "fashion_shoes",
+      "visual_category": "PARTIAL_MODEL",
+      "concept": "Across the Courtyard",
+      "duration_seconds": 10,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "KLIPPO | {{PRODUCT_NAME}}\nCONCEPT: Across the Courtyard.\nFORMAT: Vertical 9:16, realistic footage, exactly 10 seconds.\nREFERENCE LOCK: Uploaded image is the master. Preserve the product's actual visible design, shape, colour, print, dimensions and parts. No invented features, materials, accessories, logos or claims.\nSETTING: Dry sheltered courtyard with textured pavement.\nSUBJECT: PARTIAL_MODEL. Adult model visible only from knees down wearing exact reference shoes. Realistic physical contact, anatomy and spatial continuity.\nSTORYBOARD:\n0–2s: Both shoes stand still, displaying their real toe profile and silhouette.\n2–5s: The model takes a short step forward with plausible foot and sole contact.\n5–8s: A low side-tracking camera follows three unhurried steps on the dry path.\n8–10s: The feet stop in a natural stance; camera holds the shoes' actual side profile.\nCAMERA: Stable product-first composition, purposeful movement and real-world scale.\nLIGHTING: Natural consistent exposure preserving reference colours.\nAUDIO: Realistic footsteps and light instrumental rhythm, no voice. No dialogue, off-camera narration, subtitles, added logos or watermark."
+    },
+    {
+      "id": "v9_no_voice_fashion_shoes_20s_03",
+      "subcategory_id": "fashion_shoes",
+      "visual_category": "PARTIAL_MODEL",
+      "concept": "Across the Courtyard",
+      "duration_seconds": 20,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND PROMPT\nKLIPPO | {{PRODUCT_NAME}}\nCONCEPT: Across the Courtyard.\nFORMAT: Vertical 9:16, realistic footage, exactly 10 seconds.\nREFERENCE LOCK: Uploaded image is the master. Preserve the product's actual visible design, shape, colour, print, dimensions and parts. No invented features, materials, accessories, logos or claims.\nSETTING: Dry sheltered courtyard with textured pavement.\nSUBJECT: PARTIAL_MODEL. Adult model visible only from knees down wearing exact reference shoes. Realistic physical contact, anatomy and spatial continuity.\nSTORYBOARD:\n0–3s: Both shoes stand still, displaying their real toe profile and silhouette.\n3–7s: The model takes a short step forward with plausible foot and sole contact.\n7–10s: A low side-tracking camera follows three unhurried steps on the dry path. End at a natural action match point.\nCAMERA: Follow the product with a coherent screen axis and true geometry.\nLIGHTING: Natural consistent exposure preserving reference colours.\nAUDIO: Realistic footsteps and light instrumental rhythm, no voice. No dialogue, off-camera narration, subtitles, added logos or watermark.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND PROMPT\nKLIPPO | {{PRODUCT_NAME}}\nCONCEPT: Across the Courtyard.\nFORMAT: Vertical 9:16, realistic footage, exactly 10 seconds.\nREFERENCE LOCK: Uploaded image is the master. Preserve the product's actual visible design, shape, colour, print, dimensions and parts. No invented features, materials, accessories, logos or claims.\nSETTING: Dry sheltered courtyard with textured pavement.\nSUBJECT: PARTIAL_MODEL. Adult model visible only from knees down wearing exact reference shoes. Realistic physical contact, anatomy and spatial continuity.\nCONTINUITY: Begin at the exact last frame of Part 1; same subject, product, scene, light, axis and movement. No reset.\nSTORYBOARD:\n0–3s: Continue the exact ongoing movement from Part 1's match frame.\n3–8s: The feet stop in a natural stance; camera holds the shoes' actual side profile.\n8–10s: Settle into a clear product view with the practical action completed.\nCAMERA: Preserve reference proportions and spatial axis from Part 1.\nLIGHTING: Match Part 1 exactly.\nAUDIO: Realistic footsteps and light instrumental rhythm, no voice. No dialogue, off-camera narration, subtitles, added logos or watermark."
+    },
+    {
+      "id": "v9_no_voice_bag_sling_10s_03",
+      "subcategory_id": "bag_sling",
+      "visual_category": "PARTIAL_MODEL",
+      "concept": "Station Walk",
+      "duration_seconds": 10,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "KLIPPO | {{PRODUCT_NAME}}\nCONCEPT: Station Walk.\nFORMAT: Vertical 9:16, realistic footage, exactly 10 seconds.\nREFERENCE LOCK: Uploaded image is the master. Preserve the product's actual visible design, shape, colour, print, dimensions and parts. No invented features, materials, accessories, logos or claims.\nSETTING: Covered pedestrian concourse.\nSUBJECT: PARTIAL_MODEL. Adult model cropped from shoulder to hip, exact reference sling bag worn across torso, no face. Realistic physical contact, anatomy and spatial continuity.\nSTORYBOARD:\n0–2s: The sling bag sits against the torso, showing its real strap attachment and proportions.\n2–5s: The model lightly adjusts the existing strap at the shoulder without changing hardware.\n5–8s: The model walks a few steps, the bag moving naturally against the hip.\n8–10s: The model pauses near a wall, with the bag's complete shape unobstructed.\nCAMERA: Stable product-first composition, purposeful movement and real-world scale.\nLIGHTING: Natural consistent exposure preserving reference colours.\nAUDIO: Soft location footsteps and understated instrumental music, no voice. No dialogue, off-camera narration, subtitles, added logos or watermark."
+    },
+    {
+      "id": "v9_no_voice_bag_sling_20s_03",
+      "subcategory_id": "bag_sling",
+      "visual_category": "PARTIAL_MODEL",
+      "concept": "Station Walk",
+      "duration_seconds": 20,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND PROMPT\nKLIPPO | {{PRODUCT_NAME}}\nCONCEPT: Station Walk.\nFORMAT: Vertical 9:16, realistic footage, exactly 10 seconds.\nREFERENCE LOCK: Uploaded image is the master. Preserve the product's actual visible design, shape, colour, print, dimensions and parts. No invented features, materials, accessories, logos or claims.\nSETTING: Covered pedestrian concourse.\nSUBJECT: PARTIAL_MODEL. Adult model cropped from shoulder to hip, exact reference sling bag worn across torso, no face. Realistic physical contact, anatomy and spatial continuity.\nSTORYBOARD:\n0–3s: The sling bag sits against the torso, showing its real strap attachment and proportions.\n3–7s: The model lightly adjusts the existing strap at the shoulder without changing hardware.\n7–10s: The model walks a few steps, the bag moving naturally against the hip. End at a natural action match point.\nCAMERA: Follow the product with a coherent screen axis and true geometry.\nLIGHTING: Natural consistent exposure preserving reference colours.\nAUDIO: Soft location footsteps and understated instrumental music, no voice. No dialogue, off-camera narration, subtitles, added logos or watermark.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND PROMPT\nKLIPPO | {{PRODUCT_NAME}}\nCONCEPT: Station Walk.\nFORMAT: Vertical 9:16, realistic footage, exactly 10 seconds.\nREFERENCE LOCK: Uploaded image is the master. Preserve the product's actual visible design, shape, colour, print, dimensions and parts. No invented features, materials, accessories, logos or claims.\nSETTING: Covered pedestrian concourse.\nSUBJECT: PARTIAL_MODEL. Adult model cropped from shoulder to hip, exact reference sling bag worn across torso, no face. Realistic physical contact, anatomy and spatial continuity.\nCONTINUITY: Begin at the exact last frame of Part 1; same subject, product, scene, light, axis and movement. No reset.\nSTORYBOARD:\n0–3s: Continue the exact ongoing movement from Part 1's match frame.\n3–8s: The model pauses near a wall, with the bag's complete shape unobstructed.\n8–10s: Settle into a clear product view with the practical action completed.\nCAMERA: Preserve reference proportions and spatial axis from Part 1.\nLIGHTING: Match Part 1 exactly.\nAUDIO: Soft location footsteps and understated instrumental music, no voice. No dialogue, off-camera narration, subtitles, added logos or watermark."
+    },
+    {
+      "id": "v9_no_voice_home_kitchen_bottle_10s_03",
+      "subcategory_id": "home_kitchen_bottle",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Refill Routine",
+      "duration_seconds": 10,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "KLIPPO | {{PRODUCT_NAME}}\nCONCEPT: Refill Routine.\nFORMAT: Vertical 9:16, realistic footage, exactly 10 seconds.\nREFERENCE LOCK: Uploaded image is the master. Preserve the product's actual visible design, shape, colour, print, dimensions and parts. No invented features, materials, accessories, logos or claims.\nSETTING: Clean kitchen sink and counter.\nSUBJECT: HANDS_ONLY. Adult hands and limited forearms with exact reference bottle. Realistic physical contact, anatomy and spatial continuity.\nSTORYBOARD:\n0–2s: The reference bottle stands by the sink; show only its actual visible lid and opening.\n2–5s: Hands open the supported closure, keeping the bottle stable.\n5–8s: Water enters through the real opening in a controlled stream.\n8–10s: Hands close the real closure and set the bottle upright in a clear hero frame.\nCAMERA: Stable product-first composition, purposeful movement and real-world scale.\nLIGHTING: Natural consistent exposure preserving reference colours.\nAUDIO: Natural water and closure sounds, no speech or narration. No dialogue, off-camera narration, subtitles, added logos or watermark."
+    },
+    {
+      "id": "v9_no_voice_home_kitchen_bottle_20s_03",
+      "subcategory_id": "home_kitchen_bottle",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Refill Routine",
+      "duration_seconds": 20,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND PROMPT\nKLIPPO | {{PRODUCT_NAME}}\nCONCEPT: Refill Routine.\nFORMAT: Vertical 9:16, realistic footage, exactly 10 seconds.\nREFERENCE LOCK: Uploaded image is the master. Preserve the product's actual visible design, shape, colour, print, dimensions and parts. No invented features, materials, accessories, logos or claims.\nSETTING: Clean kitchen sink and counter.\nSUBJECT: HANDS_ONLY. Adult hands and limited forearms with exact reference bottle. Realistic physical contact, anatomy and spatial continuity.\nSTORYBOARD:\n0–3s: The reference bottle stands by the sink; show only its actual visible lid and opening.\n3–7s: Hands open the supported closure, keeping the bottle stable.\n7–10s: Water enters through the real opening in a controlled stream. End at a natural action match point.\nCAMERA: Follow the product with a coherent screen axis and true geometry.\nLIGHTING: Natural consistent exposure preserving reference colours.\nAUDIO: Natural water and closure sounds, no speech or narration. No dialogue, off-camera narration, subtitles, added logos or watermark.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND PROMPT\nKLIPPO | {{PRODUCT_NAME}}\nCONCEPT: Refill Routine.\nFORMAT: Vertical 9:16, realistic footage, exactly 10 seconds.\nREFERENCE LOCK: Uploaded image is the master. Preserve the product's actual visible design, shape, colour, print, dimensions and parts. No invented features, materials, accessories, logos or claims.\nSETTING: Clean kitchen sink and counter.\nSUBJECT: HANDS_ONLY. Adult hands and limited forearms with exact reference bottle. Realistic physical contact, anatomy and spatial continuity.\nCONTINUITY: Begin at the exact last frame of Part 1; same subject, product, scene, light, axis and movement. No reset.\nSTORYBOARD:\n0–3s: Continue the exact ongoing movement from Part 1's match frame.\n3–8s: Hands close the real closure and set the bottle upright in a clear hero frame.\n8–10s: Settle into a clear product view with the practical action completed.\nCAMERA: Preserve reference proportions and spatial axis from Part 1.\nLIGHTING: Match Part 1 exactly.\nAUDIO: Natural water and closure sounds, no speech or narration. No dialogue, off-camera narration, subtitles, added logos or watermark."
+    },
+    {
+      "id": "v9_no_voice_office_stationery_10s_03",
+      "subcategory_id": "office_stationery",
+      "visual_category": "HANDS_ONLY",
+      "concept": "A Small Reminder",
+      "duration_seconds": 10,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "KLIPPO | {{PRODUCT_NAME}}\nCONCEPT: A Small Reminder.\nFORMAT: Vertical 9:16, realistic footage, exactly 10 seconds.\nREFERENCE LOCK: Uploaded image is the master. Preserve the product's actual visible design, shape, colour, print, dimensions and parts. No invented features, materials, accessories, logos or claims.\nSETTING: Quiet desk with blank notebook.\nSUBJECT: HANDS_ONLY. Adult hands and limited forearms using the exact reference pen. Realistic physical contact, anatomy and spatial continuity.\nSTORYBOARD:\n0–2s: The reference pen lies beside the open blank notebook, its real tip visible.\n2–5s: One hand picks up the pen and writes a short reminder with believable ink contact.\n5–8s: The hand underlines the reminder once, keeping the pen in view.\n8–10s: The pen is placed beside the written note for a steady product close-up.\nCAMERA: Stable product-first composition, purposeful movement and real-world scale.\nLIGHTING: Natural consistent exposure preserving reference colours.\nAUDIO: Realistic pen-on-paper sound and low instrumental ambience, no voice. No dialogue, off-camera narration, subtitles, added logos or watermark."
+    },
+    {
+      "id": "v9_no_voice_office_stationery_20s_03",
+      "subcategory_id": "office_stationery",
+      "visual_category": "HANDS_ONLY",
+      "concept": "A Small Reminder",
+      "duration_seconds": 20,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND PROMPT\nKLIPPO | {{PRODUCT_NAME}}\nCONCEPT: A Small Reminder.\nFORMAT: Vertical 9:16, realistic footage, exactly 10 seconds.\nREFERENCE LOCK: Uploaded image is the master. Preserve the product's actual visible design, shape, colour, print, dimensions and parts. No invented features, materials, accessories, logos or claims.\nSETTING: Quiet desk with blank notebook.\nSUBJECT: HANDS_ONLY. Adult hands and limited forearms using the exact reference pen. Realistic physical contact, anatomy and spatial continuity.\nSTORYBOARD:\n0–3s: The reference pen lies beside the open blank notebook, its real tip visible.\n3–7s: One hand picks up the pen and writes a short reminder with believable ink contact.\n7–10s: The hand underlines the reminder once, keeping the pen in view. End at a natural action match point.\nCAMERA: Follow the product with a coherent screen axis and true geometry.\nLIGHTING: Natural consistent exposure preserving reference colours.\nAUDIO: Realistic pen-on-paper sound and low instrumental ambience, no voice. No dialogue, off-camera narration, subtitles, added logos or watermark.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND PROMPT\nKLIPPO | {{PRODUCT_NAME}}\nCONCEPT: A Small Reminder.\nFORMAT: Vertical 9:16, realistic footage, exactly 10 seconds.\nREFERENCE LOCK: Uploaded image is the master. Preserve the product's actual visible design, shape, colour, print, dimensions and parts. No invented features, materials, accessories, logos or claims.\nSETTING: Quiet desk with blank notebook.\nSUBJECT: HANDS_ONLY. Adult hands and limited forearms using the exact reference pen. Realistic physical contact, anatomy and spatial continuity.\nCONTINUITY: Begin at the exact last frame of Part 1; same subject, product, scene, light, axis and movement. No reset.\nSTORYBOARD:\n0–3s: Continue the exact ongoing movement from Part 1's match frame.\n3–8s: The pen is placed beside the written note for a steady product close-up.\n8–10s: Settle into a clear product view with the practical action completed.\nCAMERA: Preserve reference proportions and spatial axis from Part 1.\nLIGHTING: Match Part 1 exactly.\nAUDIO: Realistic pen-on-paper sound and low instrumental ambience, no voice. No dialogue, off-camera narration, subtitles, added logos or watermark."
+    },
+    {
+      "id": "v9_no_voice_pet_toy_10s_03",
+      "subcategory_id": "pet_toy",
+      "visual_category": "ANIMAL_ONLY",
+      "concept": "Paw Discovery",
+      "duration_seconds": 10,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "KLIPPO | {{PRODUCT_NAME}}\nCONCEPT: Paw Discovery.\nFORMAT: Vertical 9:16, realistic footage, exactly 10 seconds.\nREFERENCE LOCK: Uploaded image is the master. Preserve the product's actual visible design, shape, colour, print, dimensions and parts. No invented features, materials, accessories, logos or claims.\nSETTING: Safe indoor cat play mat.\nSUBJECT: ANIMAL_ONLY. One domestic cat and exact reference toy; no humans or hands. Realistic physical contact, anatomy and spatial continuity.\nSTORYBOARD:\n0–2s: The cat notices the stationary toy and approaches at a natural pace.\n2–5s: It sniffs the toy and pauses, with realistic ear and tail motion.\n5–8s: One gentle paw tap moves the toy through visible contact only.\n8–10s: The cat follows it and pauses beside the toy as it settles.\nCAMERA: Stable product-first composition, purposeful movement and real-world scale.\nLIGHTING: Natural consistent exposure preserving reference colours.\nAUDIO: Natural room ambience and gentle toy-contact sounds, no speech. No dialogue, off-camera narration, subtitles, added logos or watermark."
+    },
+    {
+      "id": "v9_no_voice_pet_toy_20s_03",
+      "subcategory_id": "pet_toy",
+      "visual_category": "ANIMAL_ONLY",
+      "concept": "Paw Discovery",
+      "duration_seconds": 20,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND PROMPT\nKLIPPO | {{PRODUCT_NAME}}\nCONCEPT: Paw Discovery.\nFORMAT: Vertical 9:16, realistic footage, exactly 10 seconds.\nREFERENCE LOCK: Uploaded image is the master. Preserve the product's actual visible design, shape, colour, print, dimensions and parts. No invented features, materials, accessories, logos or claims.\nSETTING: Safe indoor cat play mat.\nSUBJECT: ANIMAL_ONLY. One domestic cat and exact reference toy; no humans or hands. Realistic physical contact, anatomy and spatial continuity.\nSTORYBOARD:\n0–3s: The cat notices the stationary toy and approaches at a natural pace.\n3–7s: It sniffs the toy and pauses, with realistic ear and tail motion.\n7–10s: One gentle paw tap moves the toy through visible contact only. End at a natural action match point.\nCAMERA: Follow the product with a coherent screen axis and true geometry.\nLIGHTING: Natural consistent exposure preserving reference colours.\nAUDIO: Natural room ambience and gentle toy-contact sounds, no speech. No dialogue, off-camera narration, subtitles, added logos or watermark.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND PROMPT\nKLIPPO | {{PRODUCT_NAME}}\nCONCEPT: Paw Discovery.\nFORMAT: Vertical 9:16, realistic footage, exactly 10 seconds.\nREFERENCE LOCK: Uploaded image is the master. Preserve the product's actual visible design, shape, colour, print, dimensions and parts. No invented features, materials, accessories, logos or claims.\nSETTING: Safe indoor cat play mat.\nSUBJECT: ANIMAL_ONLY. One domestic cat and exact reference toy; no humans or hands. Realistic physical contact, anatomy and spatial continuity.\nCONTINUITY: Begin at the exact last frame of Part 1; same subject, product, scene, light, axis and movement. No reset.\nSTORYBOARD:\n0–3s: Continue the exact ongoing movement from Part 1's match frame.\n3–8s: The cat follows it and pauses beside the toy as it settles.\n8–10s: Settle into a clear product view with the practical action completed.\nCAMERA: Preserve reference proportions and spatial axis from Part 1.\nLIGHTING: Match Part 1 exactly.\nAUDIO: Natural room ambience and gentle toy-contact sounds, no speech. No dialogue, off-camera narration, subtitles, added logos or watermark."
+    },
+    {
+      "id": "v9_no_voice_home_kitchen_cookware_10s_03",
+      "subcategory_id": "home_kitchen_cookware",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Dinner Portion",
+      "duration_seconds": 10,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "KLIPPO | {{PRODUCT_NAME}}\nCONCEPT: Dinner Portion.\nFORMAT: Vertical 9:16, realistic footage, exactly 10 seconds.\nREFERENCE LOCK: Uploaded image is the master. Preserve the product's actual visible design, shape, colour, print, dimensions and parts. No invented features, materials, accessories, logos or claims.\nSETTING: Ordinary home kitchen, stable suitable hob and nearby plate.\nSUBJECT: HANDS_ONLY. Adult hands and limited forearms; exact reference pan with a modest portion of food. Realistic physical contact, anatomy and spatial continuity.\nSTORYBOARD:\n0–2s: A utensil gently stirs food in the real pan with stable contact.\n2–5s: The hand gathers a small cooked portion with the separate utensil.\n5–8s: The portion is lifted and moved toward the adjacent plate with believable gravity.\n8–10s: The food is placed onto the plate, leaving the unchanged pan visible behind.\nCAMERA: Stable product-first composition, purposeful movement and real-world scale.\nLIGHTING: Natural consistent exposure preserving reference colours.\nAUDIO: Natural utensil and kitchen ambience only, no voice. No dialogue, off-camera narration, subtitles, added logos or watermark."
+    },
+    {
+      "id": "v9_no_voice_home_kitchen_cookware_20s_03",
+      "subcategory_id": "home_kitchen_cookware",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Dinner Portion",
+      "duration_seconds": 20,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND PROMPT\nKLIPPO | {{PRODUCT_NAME}}\nCONCEPT: Dinner Portion.\nFORMAT: Vertical 9:16, realistic footage, exactly 10 seconds.\nREFERENCE LOCK: Uploaded image is the master. Preserve the product's actual visible design, shape, colour, print, dimensions and parts. No invented features, materials, accessories, logos or claims.\nSETTING: Ordinary home kitchen, stable suitable hob and nearby plate.\nSUBJECT: HANDS_ONLY. Adult hands and limited forearms; exact reference pan with a modest portion of food. Realistic physical contact, anatomy and spatial continuity.\nSTORYBOARD:\n0–3s: A utensil gently stirs food in the real pan with stable contact.\n3–7s: The hand gathers a small cooked portion with the separate utensil.\n7–10s: The portion is lifted and moved toward the adjacent plate with believable gravity. End at a natural action match point.\nCAMERA: Follow the product with a coherent screen axis and true geometry.\nLIGHTING: Natural consistent exposure preserving reference colours.\nAUDIO: Natural utensil and kitchen ambience only, no voice. No dialogue, off-camera narration, subtitles, added logos or watermark.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND PROMPT\nKLIPPO | {{PRODUCT_NAME}}\nCONCEPT: Dinner Portion.\nFORMAT: Vertical 9:16, realistic footage, exactly 10 seconds.\nREFERENCE LOCK: Uploaded image is the master. Preserve the product's actual visible design, shape, colour, print, dimensions and parts. No invented features, materials, accessories, logos or claims.\nSETTING: Ordinary home kitchen, stable suitable hob and nearby plate.\nSUBJECT: HANDS_ONLY. Adult hands and limited forearms; exact reference pan with a modest portion of food. Realistic physical contact, anatomy and spatial continuity.\nCONTINUITY: Begin at the exact last frame of Part 1; same subject, product, scene, light, axis and movement. No reset.\nSTORYBOARD:\n0–3s: Continue the exact ongoing movement from Part 1's match frame.\n3–8s: The food is placed onto the plate, leaving the unchanged pan visible behind.\n8–10s: Settle into a clear product view with the practical action completed.\nCAMERA: Preserve reference proportions and spatial axis from Part 1.\nLIGHTING: Match Part 1 exactly.\nAUDIO: Natural utensil and kitchen ambience only, no voice. No dialogue, off-camera narration, subtitles, added logos or watermark."
+    },
+    {
+      "id": "v9_no_voice_bag_tote_10s_03",
+      "subcategory_id": "bag_tote",
+      "visual_category": "PARTIAL_MODEL",
+      "concept": "Books for the Afternoon",
+      "duration_seconds": 10,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "KLIPPO | {{PRODUCT_NAME}}\nCONCEPT: Books for the Afternoon.\nFORMAT: Vertical 9:16, realistic footage, exactly 10 seconds.\nREFERENCE LOCK: Uploaded image is the master. Preserve the product's actual visible design, shape, colour, print, dimensions and parts. No invented features, materials, accessories, logos or claims.\nSETTING: Home reading nook near a doorway.\nSUBJECT: PARTIAL_MODEL. Adult model visible from shoulder to hip only, exact reference tote. Realistic physical contact, anatomy and spatial continuity.\nSTORYBOARD:\n0–2s: The reference tote stands open on a low bench beside one ordinary paperback.\n2–5s: The model puts the paperback through the tote's visibly open top without inventing pockets.\n5–8s: The model lifts the bag using its actual handles, keeping it at realistic scale.\n8–10s: The model walks toward the doorway, tote settling naturally at the side.\nCAMERA: Stable product-first composition, purposeful movement and real-world scale.\nLIGHTING: Natural consistent exposure preserving reference colours.\nAUDIO: Subtle room and footsteps ambience with soft instrumental music, no voice. No dialogue, off-camera narration, subtitles, added logos or watermark."
+    },
+    {
+      "id": "v9_no_voice_bag_tote_20s_03",
+      "subcategory_id": "bag_tote",
+      "visual_category": "PARTIAL_MODEL",
+      "concept": "Books for the Afternoon",
+      "duration_seconds": 20,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND PROMPT\nKLIPPO | {{PRODUCT_NAME}}\nCONCEPT: Books for the Afternoon.\nFORMAT: Vertical 9:16, realistic footage, exactly 10 seconds.\nREFERENCE LOCK: Uploaded image is the master. Preserve the product's actual visible design, shape, colour, print, dimensions and parts. No invented features, materials, accessories, logos or claims.\nSETTING: Home reading nook near a doorway.\nSUBJECT: PARTIAL_MODEL. Adult model visible from shoulder to hip only, exact reference tote. Realistic physical contact, anatomy and spatial continuity.\nSTORYBOARD:\n0–3s: The reference tote stands open on a low bench beside one ordinary paperback.\n3–7s: The model puts the paperback through the tote's visibly open top without inventing pockets.\n7–10s: The model lifts the bag using its actual handles, keeping it at realistic scale. End at a natural action match point.\nCAMERA: Follow the product with a coherent screen axis and true geometry.\nLIGHTING: Natural consistent exposure preserving reference colours.\nAUDIO: Subtle room and footsteps ambience with soft instrumental music, no voice. No dialogue, off-camera narration, subtitles, added logos or watermark.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND PROMPT\nKLIPPO | {{PRODUCT_NAME}}\nCONCEPT: Books for the Afternoon.\nFORMAT: Vertical 9:16, realistic footage, exactly 10 seconds.\nREFERENCE LOCK: Uploaded image is the master. Preserve the product's actual visible design, shape, colour, print, dimensions and parts. No invented features, materials, accessories, logos or claims.\nSETTING: Home reading nook near a doorway.\nSUBJECT: PARTIAL_MODEL. Adult model visible from shoulder to hip only, exact reference tote. Realistic physical contact, anatomy and spatial continuity.\nCONTINUITY: Begin at the exact last frame of Part 1; same subject, product, scene, light, axis and movement. No reset.\nSTORYBOARD:\n0–3s: Continue the exact ongoing movement from Part 1's match frame.\n3–8s: The model walks toward the doorway, tote settling naturally at the side.\n8–10s: Settle into a clear product view with the practical action completed.\nCAMERA: Preserve reference proportions and spatial axis from Part 1.\nLIGHTING: Match Part 1 exactly.\nAUDIO: Subtle room and footsteps ambience with soft instrumental music, no voice. No dialogue, off-camera narration, subtitles, added logos or watermark."
+    }
+  ]
+}

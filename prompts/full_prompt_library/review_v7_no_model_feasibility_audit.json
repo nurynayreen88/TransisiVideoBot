@@ -1,0 +1,17 @@
+{
+  "schema_version": 7,
+  "status": "REVIEW_BLOCKER",
+  "scope": "200 V7 records, targeted heuristic review",
+  "flagged_records": 44,
+  "findings": [
+    "Some no-model fashion prompts retain wearing instructions despite forbidding people and hands.",
+    "Some no-model household and office prompts describe filling, packing, writing or handling actions without a visible actor.",
+    "These are heuristic flags, not a complete manual creative review."
+  ],
+  "release_rule": "Do not activate flagged records. Rewrite no-model variants as credible product-only scenes with no invisible manipulation, or use animal-only interaction for pet products.",
+  "next_steps": [
+    "Correct 44 flagged records in existing V7 files without deleting prior versions.",
+    "Audit all 130 master subcategory IDs and earlier standalone review batches.",
+    "Run creative and structural QA before enabling engine."
+  ]
+}

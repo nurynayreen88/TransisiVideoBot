@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "status": "DRAFT_STATIC_AUDIT",
+  "runtime_enabled": false,
+  "counts": {
+    "base_prompts": 100,
+    "voiceover_prompts": 100,
+    "paired_voiceover_prompts": 100,
+    "distinct_subcategories": 96
+  },
+  "issues": [],
+  "limitations": [
+    "Text-only checks do not validate generated video quality, voice duration or product fidelity.",
+    "The prompts have not been tested with a video generation provider.",
+    "No talking-to-camera model variations are included in this 200-record set.",
+    "Voiceover scripts and hooks need human language and creative review."
+  ]
+}

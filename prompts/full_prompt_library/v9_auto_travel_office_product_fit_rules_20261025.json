@@ -1,0 +1,323 @@
+{
+  "schema_version": 1,
+  "status": "DRAFT_PRODUCT_FIT_RULES",
+  "runtime_enabled": false,
+  "category": "automotive_travel_office",
+  "rule_format": [
+    "demonstration",
+    "camera",
+    "prohibited_assumption"
+  ],
+  "rules": {
+    "car_phone_holder": [
+      "Mount phone holder in safe parked vehicle",
+      "Dashboard close-up",
+      "No invented magnetic attachment"
+    ],
+    "car_charger": [
+      "Connect charger to vehicle power port while parked",
+      "Port macro",
+      "No fast-charge claim"
+    ],
+    "dashcam": [
+      "Show dashcam mounted with clear forward view",
+      "Windshield product close-up",
+      "No resolution claim"
+    ],
+    "car_seat_cover": [
+      "Fit cover over compatible seat",
+      "Seat medium shot",
+      "No universal fit claim"
+    ],
+    "steering_cover": [
+      "Fit cover over compatible steering wheel while parked",
+      "Hand close-up",
+      "No grip safety claim"
+    ],
+    "car_floor_mat": [
+      "Place mat in matching footwell while parked",
+      "Footwell close-up",
+      "No universal fit claim"
+    ],
+    "car_vacuum": [
+      "Vacuum crumbs in parked car",
+      "Low interior shot",
+      "No suction claim"
+    ],
+    "car_air_freshener": [
+      "Place freshener in appropriate holder",
+      "Interior macro",
+      "No lasting-duration claim"
+    ],
+    "car_sunshade": [
+      "Position sunshade in parked car",
+      "Windshield medium shot",
+      "No UV rating claim"
+    ],
+    "car_wiper": [
+      "Show wiper next to compatible arm",
+      "Product close-up",
+      "No universal compatibility"
+    ],
+    "car_polish": [
+      "Apply polish to small painted area as directed",
+      "Panel macro",
+      "No scratch removal guarantee"
+    ],
+    "car_wash_shampoo": [
+      "Wash exterior panel with suitable sponge",
+      "Exterior medium shot",
+      "No ceramic coating claim"
+    ],
+    "tire_inflator": [
+      "Connect inflator to tyre valve on parked car",
+      "Wheel close-up",
+      "No pressure rating"
+    ],
+    "jump_starter": [
+      "Display jump starter and visible connectors without live jump-start",
+      "Product macro",
+      "No capacity or safety claim"
+    ],
+    "motorcycle_helmet": [
+      "Adult adjusts helmet strap while stationary",
+      "Head close-up",
+      "No certification claim"
+    ],
+    "motorcycle_gloves": [
+      "Rider puts on gloves before ride",
+      "Hands close-up",
+      "No protection rating"
+    ],
+    "motorcycle_phone_mount": [
+      "Show mount on parked motorcycle",
+      "Handlebar close-up",
+      "No vibration rating"
+    ],
+    "motorcycle_raincoat": [
+      "Adult wears raincoat beside parked motorcycle",
+      "Full-body shot",
+      "No waterproof rating"
+    ],
+    "motorcycle_top_box": [
+      "Show box on parked motorcycle",
+      "Rear three-quarter",
+      "No invented capacity"
+    ],
+    "motorcycle_cover": [
+      "Drape cover over cool parked motorcycle",
+      "Wide side shot",
+      "No weather rating"
+    ],
+    "luggage_suitcase": [
+      "Traveler rolls suitcase across hotel lobby",
+      "Full luggage tracking",
+      "No airline size claim"
+    ],
+    "carry_on_bag": [
+      "Traveler lifts carry-on bag",
+      "Waist crop",
+      "No airline compliance claim"
+    ],
+    "packing_cube": [
+      "Fold clothes into cube",
+      "Top-down",
+      "No compression claim"
+    ],
+    "travel_pillow": [
+      "Adult wears pillow while seated",
+      "Neck close-up",
+      "No orthopedic claim"
+    ],
+    "passport_holder": [
+      "Slide passport into visible slot",
+      "Hands macro",
+      "No RFID claim"
+    ],
+    "luggage_tag": [
+      "Attach tag to suitcase handle",
+      "Handle macro",
+      "No tracking claim"
+    ],
+    "travel_adapter": [
+      "Show adapter plugs without connecting to live socket",
+      "Product macro",
+      "No country compatibility claim"
+    ],
+    "toiletry_bag": [
+      "Arrange bottles in visible compartments",
+      "Top-down",
+      "No liquid capacity claim"
+    ],
+    "travel_bottle": [
+      "Fill travel bottle with suitable liquid",
+      "Bottle close-up",
+      "No leakproof claim"
+    ],
+    "luggage_scale": [
+      "Hang bag on scale carefully",
+      "Hand close-up",
+      "No accuracy rating"
+    ],
+    "umbrella": [
+      "Open umbrella outdoors in calm weather",
+      "Full-body shot",
+      "No windproof claim"
+    ],
+    "raincoat": [
+      "Adult puts on raincoat",
+      "Upper-body shot",
+      "No waterproof rating"
+    ],
+    "neck_pouch": [
+      "Adult wears pouch beneath outer layer",
+      "Torso crop",
+      "No anti-theft claim"
+    ],
+    "travel_document_wallet": [
+      "Arrange travel papers in wallet",
+      "Tabletop",
+      "No RFID claim"
+    ],
+    "notebook": [
+      "Write a short note in notebook",
+      "Desk top-down",
+      "No paper quality claim"
+    ],
+    "planner": [
+      "Mark an appointment in planner",
+      "Page close-up",
+      "No invented date layout"
+    ],
+    "ballpoint_pen": [
+      "Write on paper",
+      "Nib macro",
+      "No ink longevity claim"
+    ],
+    "gel_pen": [
+      "Write sample line on paper",
+      "Nib macro",
+      "No quick-dry claim"
+    ],
+    "highlighter": [
+      "Highlight printed sentence",
+      "Desk top-down",
+      "No bleedproof claim"
+    ],
+    "marker_pen": [
+      "Write on suitable board",
+      "Hand close-up",
+      "No permanent ink claim"
+    ],
+    "pencil": [
+      "Sketch simple shape",
+      "Nib close-up",
+      "No lead grade claim"
+    ],
+    "eraser": [
+      "Erase pencil mark",
+      "Paper macro",
+      "No dust-free claim"
+    ],
+    "ruler": [
+      "Measure a short line",
+      "Desk top-down",
+      "No invented scale"
+    ],
+    "stapler": [
+      "Staple small paper stack",
+      "Hands close-up",
+      "No capacity claim"
+    ],
+    "hole_punch": [
+      "Punch a few sheets",
+      "Desk close-up",
+      "No sheet capacity claim"
+    ],
+    "tape_dispenser": [
+      "Cut tape using visible cutter",
+      "Desk close-up",
+      "No included tape claim"
+    ],
+    "scissors": [
+      "Cut paper safely",
+      "Hands close-up",
+      "No material grade claim"
+    ],
+    "paper_clips": [
+      "Organize papers with clips",
+      "Desk macro",
+      "No corrosion claim"
+    ],
+    "file_folder": [
+      "Insert documents into folder",
+      "Desk top-down",
+      "No archival claim"
+    ],
+    "document_binder": [
+      "Place pages in binder",
+      "Ring mechanism close-up",
+      "No invented ring count"
+    ],
+    "desk_organizer": [
+      "Arrange pens in organizer",
+      "Desk top-down",
+      "No invented slots"
+    ],
+    "whiteboard": [
+      "Write and wipe a simple note",
+      "Board medium shot",
+      "No stainproof claim"
+    ],
+    "office_chair": [
+      "Adult adjusts visible chair control",
+      "Desk side shot",
+      "No ergonomic certification"
+    ],
+    "desk_lamp": [
+      "Switch on lamp using actual switch",
+      "Desk side shot",
+      "No dimming claim"
+    ],
+    "laptop_stand": [
+      "Place compatible laptop on stand",
+      "Desk side profile",
+      "No load rating"
+    ],
+    "mouse_pad": [
+      "Move mouse across pad",
+      "Desk macro",
+      "No precision improvement claim"
+    ],
+    "document_tray": [
+      "Place paper in tray",
+      "Desk top-down",
+      "No invented tiers"
+    ],
+    "printer_paper": [
+      "Print one sheet using compatible printer",
+      "Paper feed close-up",
+      "No paper weight claim"
+    ],
+    "label_sticker": [
+      "Write or print label and attach to container",
+      "Hand close-up",
+      "No waterproof claim"
+    ],
+    "desk_calendar": [
+      "Flip calendar page",
+      "Desk macro",
+      "No invented date layout"
+    ],
+    "name_tag": [
+      "Clip tag to shirt",
+      "Chest close-up",
+      "No invented fastening"
+    ],
+    "lanyard_id": [
+      "Insert ID card into holder",
+      "Upper torso shot",
+      "No RFID claim"
+    ]
+  }
+}

@@ -1,0 +1,308 @@
+{
+  "schema_version": 1,
+  "batch": "v9_batch60_20261024",
+  "variation_count": 30,
+  "notes": "Additive creative alternatives; prior records retained. Review-only.",
+  "variations": [
+    {
+      "id": "v9_batch60_bag_handbag_10s_02",
+      "subcategory_id": "bag_handbag",
+      "visual_category": "PARTIAL_MODEL",
+      "concept": "Cafe Arrival",
+      "duration_seconds": 10,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "VERTICAL 9:16 | PHOTOREALISTIC | Cafe Arrival\nPRODUCT: {{PRODUCT_NAME}}\nREFERENCE: Uploaded product image is the sole product master. Preserve visible colour, dimensions, markings, construction and supplied parts exactly. No invented attachments, materials, claims or logos.\nSETTING: covered cafe entrance.\nSUBJECT: PARTIAL_MODEL; adult Malaysian model cropped shoulders to hips, carrying the reference handbag.\nCAMERA: camera tracks bag at waist height, then settles at shelf. Natural lighting and real anatomy, contact, gravity and scale. No on-screen text, captions, invented logo or watermark.\nEXACTLY 10 SECONDS:\n0–2s: bag rests on chair beside her.\n2–5s: she lifts the actual handles and rises.\n5–8s: she walks toward cafe counter with bag beside hip.\n8–10s: she stops at counter, places bag upright on clear shelf.\nAUDIO: No speech or voiceover; subtle authentic location ambience only."
+    },
+    {
+      "id": "v9_batch60_bag_handbag_20s_02",
+      "subcategory_id": "bag_handbag",
+      "visual_category": "PARTIAL_MODEL",
+      "concept": "Cafe Arrival",
+      "duration_seconds": 20,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nVERTICAL 9:16 | PHOTOREALISTIC | Cafe Arrival\nPRODUCT: {{PRODUCT_NAME}}\nREFERENCE: Uploaded product image is the sole product master. Preserve visible colour, dimensions, markings, construction and supplied parts exactly. No invented attachments, materials, claims or logos.\nSETTING: covered cafe entrance.\nSUBJECT: PARTIAL_MODEL; adult Malaysian model cropped shoulders to hips, carrying the reference handbag.\nCAMERA: camera tracks bag at waist height, then settles at shelf. Natural lighting and real anatomy, contact, gravity and scale. No on-screen text, captions, invented logo or watermark.\n0–3s: bag rests on chair beside her.\n3–7s: she lifts the actual handles and rises.\n7–10s: she walks toward cafe counter with bag beside hip. End at the precise physical midpoint of this action, keeping product and subject clearly visible.\nAUDIO: No speech or voiceover; subtle authentic location ambience only.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nVERTICAL 9:16 | PHOTOREALISTIC | Cafe Arrival\nPRODUCT: {{PRODUCT_NAME}}\nREFERENCE: Uploaded product image is the sole product master. Preserve visible colour, dimensions, markings, construction and supplied parts exactly. No invented attachments, materials, claims or logos.\nSETTING: covered cafe entrance.\nSUBJECT: PARTIAL_MODEL; adult Malaysian model cropped shoulders to hips, carrying the reference handbag.\nCAMERA: camera tracks bag at waist height, then settles at shelf. Natural lighting and real anatomy, contact, gravity and scale. No on-screen text, captions, invented logo or watermark.\nCONTINUITY: First frame exactly matches the final Part 1 frame: same product, subject, outfit, positions, lighting and camera axis. Continue the movement without replaying the previous action.\n0–3s: Complete the ongoing movement: she walks toward cafe counter with bag beside hip, starting from its Part 1 midpoint.\n3–7s: she stops at counter, places bag upright on clear shelf.\n7–10s: Show the actual product from a complementary grounded angle as the subject finishes the action in covered cafe entrance; maintain its final physical position and the established scene. Camera: camera tracks bag at waist height, then settles at shelf.\nAUDIO: No speech or voiceover; subtle authentic location ambience only."
+    },
+    {
+      "id": "v9_batch60_bag_tote_10s_02",
+      "subcategory_id": "bag_tote",
+      "visual_category": "PARTIAL_MODEL",
+      "concept": "Market Flowers",
+      "duration_seconds": 10,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "VERTICAL 9:16 | PHOTOREALISTIC | Market Flowers\nPRODUCT: {{PRODUCT_NAME}}\nREFERENCE: Uploaded product image is the sole product master. Preserve visible colour, dimensions, markings, construction and supplied parts exactly. No invented attachments, materials, claims or logos.\nSETTING: shaded flower stall.\nSUBJECT: PARTIAL_MODEL; adult Malaysian model cropped shoulder to thigh, holding reference tote.\nCAMERA: camera moves from open top to hanging side profile. Natural lighting and real anatomy, contact, gravity and scale. No on-screen text, captions, invented logo or watermark.\nEXACTLY 10 SECONDS:\n0–2s: tote rests open beside a single paper-wrapped bouquet.\n2–5s: she guides bouquet into actual tote opening.\n5–8s: she lifts both handles with bouquet protruding naturally.\n8–10s: she walks past stall and rests tote on nearby bench.\nAUDIO: Off-camera Malaysian Malay narrator says naturally: \"Tengok cara guna yang sebenar. Ringkas dan kemas.\" Visible subjects remain silent."
+    },
+    {
+      "id": "v9_batch60_bag_tote_20s_02",
+      "subcategory_id": "bag_tote",
+      "visual_category": "PARTIAL_MODEL",
+      "concept": "Market Flowers",
+      "duration_seconds": 20,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nVERTICAL 9:16 | PHOTOREALISTIC | Market Flowers\nPRODUCT: {{PRODUCT_NAME}}\nREFERENCE: Uploaded product image is the sole product master. Preserve visible colour, dimensions, markings, construction and supplied parts exactly. No invented attachments, materials, claims or logos.\nSETTING: shaded flower stall.\nSUBJECT: PARTIAL_MODEL; adult Malaysian model cropped shoulder to thigh, holding reference tote.\nCAMERA: camera moves from open top to hanging side profile. Natural lighting and real anatomy, contact, gravity and scale. No on-screen text, captions, invented logo or watermark.\n0–3s: tote rests open beside a single paper-wrapped bouquet.\n3–7s: she guides bouquet into actual tote opening.\n7–10s: she lifts both handles with bouquet protruding naturally. End at the precise physical midpoint of this action, keeping product and subject clearly visible.\nAUDIO: Off-camera Malaysian Malay narrator says naturally: \"Tengok cara guna yang sebenar. Ringkas dan kemas.\" Visible subjects remain silent.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nVERTICAL 9:16 | PHOTOREALISTIC | Market Flowers\nPRODUCT: {{PRODUCT_NAME}}\nREFERENCE: Uploaded product image is the sole product master. Preserve visible colour, dimensions, markings, construction and supplied parts exactly. No invented attachments, materials, claims or logos.\nSETTING: shaded flower stall.\nSUBJECT: PARTIAL_MODEL; adult Malaysian model cropped shoulder to thigh, holding reference tote.\nCAMERA: camera moves from open top to hanging side profile. Natural lighting and real anatomy, contact, gravity and scale. No on-screen text, captions, invented logo or watermark.\nCONTINUITY: First frame exactly matches the final Part 1 frame: same product, subject, outfit, positions, lighting and camera axis. Continue the movement without replaying the previous action.\n0–3s: Complete the ongoing movement: she lifts both handles with bouquet protruding naturally, starting from its Part 1 midpoint.\n3–7s: she walks past stall and rests tote on nearby bench.\n7–10s: Show the actual product from a complementary grounded angle as the subject finishes the action in shaded flower stall; maintain its final physical position and the established scene. Camera: camera moves from open top to hanging side profile.\nAUDIO: Off-camera Malaysian Malay narrator says naturally: \"Tengok cara guna yang sebenar. Ringkas dan kemas.\" Visible subjects remain silent."
+    },
+    {
+      "id": "v9_batch60_bag_sling_10s_02",
+      "subcategory_id": "bag_sling",
+      "visual_category": "PARTIAL_MODEL",
+      "concept": "Ticket Check",
+      "duration_seconds": 10,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "VERTICAL 9:16 | PHOTOREALISTIC | Ticket Check\nPRODUCT: {{PRODUCT_NAME}}\nREFERENCE: Uploaded product image is the sole product master. Preserve visible colour, dimensions, markings, construction and supplied parts exactly. No invented attachments, materials, claims or logos.\nSETTING: covered station concourse.\nSUBJECT: PARTIAL_MODEL; adult Malaysian model cropped neck to thigh with reference sling.\nCAMERA: lateral tracking keeps bag in frame. Natural lighting and real anatomy, contact, gravity and scale. No on-screen text, captions, invented logo or watermark.\nEXACTLY 10 SECONDS:\n0–2s: strap lies diagonally across chest, bag at hip.\n2–5s: she retrieves a plain card from her pocket, not the bag.\n5–8s: she taps card at gate while sling remains in view.\n8–10s: she passes gate and settles strap on shoulder.\nAUDIO: No speech or voiceover; subtle authentic location ambience only."
+    },
+    {
+      "id": "v9_batch60_bag_sling_20s_02",
+      "subcategory_id": "bag_sling",
+      "visual_category": "PARTIAL_MODEL",
+      "concept": "Ticket Check",
+      "duration_seconds": 20,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nVERTICAL 9:16 | PHOTOREALISTIC | Ticket Check\nPRODUCT: {{PRODUCT_NAME}}\nREFERENCE: Uploaded product image is the sole product master. Preserve visible colour, dimensions, markings, construction and supplied parts exactly. No invented attachments, materials, claims or logos.\nSETTING: covered station concourse.\nSUBJECT: PARTIAL_MODEL; adult Malaysian model cropped neck to thigh with reference sling.\nCAMERA: lateral tracking keeps bag in frame. Natural lighting and real anatomy, contact, gravity and scale. No on-screen text, captions, invented logo or watermark.\n0–3s: strap lies diagonally across chest, bag at hip.\n3–7s: she retrieves a plain card from her pocket, not the bag.\n7–10s: she taps card at gate while sling remains in view. End at the precise physical midpoint of this action, keeping product and subject clearly visible.\nAUDIO: No speech or voiceover; subtle authentic location ambience only.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nVERTICAL 9:16 | PHOTOREALISTIC | Ticket Check\nPRODUCT: {{PRODUCT_NAME}}\nREFERENCE: Uploaded product image is the sole product master. Preserve visible colour, dimensions, markings, construction and supplied parts exactly. No invented attachments, materials, claims or logos.\nSETTING: covered station concourse.\nSUBJECT: PARTIAL_MODEL; adult Malaysian model cropped neck to thigh with reference sling.\nCAMERA: lateral tracking keeps bag in frame. Natural lighting and real anatomy, contact, gravity and scale. No on-screen text, captions, invented logo or watermark.\nCONTINUITY: First frame exactly matches the final Part 1 frame: same product, subject, outfit, positions, lighting and camera axis. Continue the movement without replaying the previous action.\n0–3s: Complete the ongoing movement: she taps card at gate while sling remains in view, starting from its Part 1 midpoint.\n3–7s: she passes gate and settles strap on shoulder.\n7–10s: Show the actual product from a complementary grounded angle as the subject finishes the action in covered station concourse; maintain its final physical position and the established scene. Camera: lateral tracking keeps bag in frame.\nAUDIO: No speech or voiceover; subtle authentic location ambience only."
+    },
+    {
+      "id": "v9_batch60_fashion_shoes_10s_02",
+      "subcategory_id": "fashion_shoes",
+      "visual_category": "PARTIAL_MODEL",
+      "concept": "Stair Landing",
+      "duration_seconds": 10,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "VERTICAL 9:16 | PHOTOREALISTIC | Stair Landing\nPRODUCT: {{PRODUCT_NAME}}\nREFERENCE: Uploaded product image is the sole product master. Preserve visible colour, dimensions, markings, construction and supplied parts exactly. No invented attachments, materials, claims or logos.\nSETTING: dry indoor stairway.\nSUBJECT: PARTIAL_MODEL; adult Malaysian wearer shown knees down in reference shoes.\nCAMERA: low-angle tracking follows footfall without floating. Natural lighting and real anatomy, contact, gravity and scale. No on-screen text, captions, invented logo or watermark.\nEXACTLY 10 SECONDS:\n0–2s: both shoes flat at bottom step.\n2–5s: one foot lands on first step followed by other.\n5–8s: wearer climbs two steps, heels and sole contact visible.\n8–10s: wearer reaches landing and turns to reveal outer profile.\nAUDIO: No speech or voiceover; subtle authentic location ambience only."
+    },
+    {
+      "id": "v9_batch60_fashion_shoes_20s_02",
+      "subcategory_id": "fashion_shoes",
+      "visual_category": "PARTIAL_MODEL",
+      "concept": "Stair Landing",
+      "duration_seconds": 20,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nVERTICAL 9:16 | PHOTOREALISTIC | Stair Landing\nPRODUCT: {{PRODUCT_NAME}}\nREFERENCE: Uploaded product image is the sole product master. Preserve visible colour, dimensions, markings, construction and supplied parts exactly. No invented attachments, materials, claims or logos.\nSETTING: dry indoor stairway.\nSUBJECT: PARTIAL_MODEL; adult Malaysian wearer shown knees down in reference shoes.\nCAMERA: low-angle tracking follows footfall without floating. Natural lighting and real anatomy, contact, gravity and scale. No on-screen text, captions, invented logo or watermark.\n0–3s: both shoes flat at bottom step.\n3–7s: one foot lands on first step followed by other.\n7–10s: wearer climbs two steps, heels and sole contact visible. End at the precise physical midpoint of this action, keeping product and subject clearly visible.\nAUDIO: No speech or voiceover; subtle authentic location ambience only.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nVERTICAL 9:16 | PHOTOREALISTIC | Stair Landing\nPRODUCT: {{PRODUCT_NAME}}\nREFERENCE: Uploaded product image is the sole product master. Preserve visible colour, dimensions, markings, construction and supplied parts exactly. No invented attachments, materials, claims or logos.\nSETTING: dry indoor stairway.\nSUBJECT: PARTIAL_MODEL; adult Malaysian wearer shown knees down in reference shoes.\nCAMERA: low-angle tracking follows footfall without floating. Natural lighting and real anatomy, contact, gravity and scale. No on-screen text, captions, invented logo or watermark.\nCONTINUITY: First frame exactly matches the final Part 1 frame: same product, subject, outfit, positions, lighting and camera axis. Continue the movement without replaying the previous action.\n0–3s: Complete the ongoing movement: wearer climbs two steps, heels and sole contact visible, starting from its Part 1 midpoint.\n3–7s: wearer reaches landing and turns to reveal outer profile.\n7–10s: Show the actual product from a complementary grounded angle as the subject finishes the action in dry indoor stairway; maintain its final physical position and the established scene. Camera: low-angle tracking follows footfall without floating.\nAUDIO: No speech or voiceover; subtle authentic location ambience only."
+    },
+    {
+      "id": "v9_batch60_fashion_sport_10s_02",
+      "subcategory_id": "fashion_sport",
+      "visual_category": "FULL_MODEL",
+      "concept": "Warmup Bench",
+      "duration_seconds": 10,
+      "voice_type": "MODEL_SPEECH",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "VERTICAL 9:16 | PHOTOREALISTIC | Warmup Bench\nPRODUCT: {{PRODUCT_NAME}}\nREFERENCE: Uploaded product image is the sole product master. Preserve visible colour, dimensions, markings, construction and supplied parts exactly. No invented attachments, materials, claims or logos.\nSETTING: quiet park exercise area.\nSUBJECT: FULL_MODEL; one adult universal Malaysian model wearing reference sports outfit, face visible.\nCAMERA: stable full-body camera with slight side track. Natural lighting and real anatomy, contact, gravity and scale. No on-screen text, captions, invented logo or watermark.\nEXACTLY 10 SECONDS:\n0–2s: model stands beside bench facing camera.\n2–5s: model bends knees in controlled warmup then straightens.\n5–8s: model walks around bench, showing actual outfit in motion.\n8–10s: model faces camera, says a short line, then stands relaxed.\nAUDIO: The visible model says in natural Malaysian Malay, with synchronized lips: \"Okay, dah kemas. Jom kita gerak.\""
+    },
+    {
+      "id": "v9_batch60_fashion_sport_20s_02",
+      "subcategory_id": "fashion_sport",
+      "visual_category": "FULL_MODEL",
+      "concept": "Warmup Bench",
+      "duration_seconds": 20,
+      "voice_type": "MODEL_SPEECH",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nVERTICAL 9:16 | PHOTOREALISTIC | Warmup Bench\nPRODUCT: {{PRODUCT_NAME}}\nREFERENCE: Uploaded product image is the sole product master. Preserve visible colour, dimensions, markings, construction and supplied parts exactly. No invented attachments, materials, claims or logos.\nSETTING: quiet park exercise area.\nSUBJECT: FULL_MODEL; one adult universal Malaysian model wearing reference sports outfit, face visible.\nCAMERA: stable full-body camera with slight side track. Natural lighting and real anatomy, contact, gravity and scale. No on-screen text, captions, invented logo or watermark.\n0–3s: model stands beside bench facing camera.\n3–7s: model bends knees in controlled warmup then straightens.\n7–10s: model walks around bench, showing actual outfit in motion. End at the precise physical midpoint of this action, keeping product and subject clearly visible.\nAUDIO: The visible model says in natural Malaysian Malay, with synchronized lips: \"Okay, dah kemas. Jom kita gerak.\"\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nVERTICAL 9:16 | PHOTOREALISTIC | Warmup Bench\nPRODUCT: {{PRODUCT_NAME}}\nREFERENCE: Uploaded product image is the sole product master. Preserve visible colour, dimensions, markings, construction and supplied parts exactly. No invented attachments, materials, claims or logos.\nSETTING: quiet park exercise area.\nSUBJECT: FULL_MODEL; one adult universal Malaysian model wearing reference sports outfit, face visible.\nCAMERA: stable full-body camera with slight side track. Natural lighting and real anatomy, contact, gravity and scale. No on-screen text, captions, invented logo or watermark.\nCONTINUITY: First frame exactly matches the final Part 1 frame: same product, subject, outfit, positions, lighting and camera axis. Continue the movement without replaying the previous action.\n0–3s: Complete the ongoing movement: model walks around bench, showing actual outfit in motion, starting from its Part 1 midpoint.\n3–7s: model faces camera, says a short line, then stands relaxed.\n7–10s: Show the actual product from a complementary grounded angle as the subject finishes the action in quiet park exercise area; maintain its final physical position and the established scene. Camera: stable full-body camera with slight side track.\nAUDIO: The visible model says in natural Malaysian Malay, with synchronized lips: \"Okay, dah kemas. Jom kita gerak.\""
+    },
+    {
+      "id": "v9_batch60_hijab_shawl_10s_02",
+      "subcategory_id": "hijab_shawl",
+      "visual_category": "FULL_MODEL",
+      "concept": "Window Drape",
+      "duration_seconds": 10,
+      "voice_type": "MODEL_SPEECH",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "VERTICAL 9:16 | PHOTOREALISTIC | Window Drape\nPRODUCT: {{PRODUCT_NAME}}\nREFERENCE: Uploaded product image is the sole product master. Preserve visible colour, dimensions, markings, construction and supplied parts exactly. No invented attachments, materials, claims or logos.\nSETTING: daylit home window.\nSUBJECT: FULL_MODEL; adult universal Malaysian woman wearing reference shawl, mouth visible.\nCAMERA: medium shot follows fabric edge without inventing pins. Natural lighting and real anatomy, contact, gravity and scale. No on-screen text, captions, invented logo or watermark.\nEXACTLY 10 SECONDS:\n0–2s: she faces window, shawl front and shoulder drape clear.\n2–5s: she smooths existing front fabric with fingertips.\n5–8s: she turns toward camera while keeping drape unchanged.\n8–10s: she says a short line and shows side silhouette.\nAUDIO: The visible model says in natural Malaysian Malay, with synchronized lips: \"Okay, dah kemas. Jom kita gerak.\""
+    },
+    {
+      "id": "v9_batch60_hijab_shawl_20s_02",
+      "subcategory_id": "hijab_shawl",
+      "visual_category": "FULL_MODEL",
+      "concept": "Window Drape",
+      "duration_seconds": 20,
+      "voice_type": "MODEL_SPEECH",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nVERTICAL 9:16 | PHOTOREALISTIC | Window Drape\nPRODUCT: {{PRODUCT_NAME}}\nREFERENCE: Uploaded product image is the sole product master. Preserve visible colour, dimensions, markings, construction and supplied parts exactly. No invented attachments, materials, claims or logos.\nSETTING: daylit home window.\nSUBJECT: FULL_MODEL; adult universal Malaysian woman wearing reference shawl, mouth visible.\nCAMERA: medium shot follows fabric edge without inventing pins. Natural lighting and real anatomy, contact, gravity and scale. No on-screen text, captions, invented logo or watermark.\n0–3s: she faces window, shawl front and shoulder drape clear.\n3–7s: she smooths existing front fabric with fingertips.\n7–10s: she turns toward camera while keeping drape unchanged. End at the precise physical midpoint of this action, keeping product and subject clearly visible.\nAUDIO: The visible model says in natural Malaysian Malay, with synchronized lips: \"Okay, dah kemas. Jom kita gerak.\"\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nVERTICAL 9:16 | PHOTOREALISTIC | Window Drape\nPRODUCT: {{PRODUCT_NAME}}\nREFERENCE: Uploaded product image is the sole product master. Preserve visible colour, dimensions, markings, construction and supplied parts exactly. No invented attachments, materials, claims or logos.\nSETTING: daylit home window.\nSUBJECT: FULL_MODEL; adult universal Malaysian woman wearing reference shawl, mouth visible.\nCAMERA: medium shot follows fabric edge without inventing pins. Natural lighting and real anatomy, contact, gravity and scale. No on-screen text, captions, invented logo or watermark.\nCONTINUITY: First frame exactly matches the final Part 1 frame: same product, subject, outfit, positions, lighting and camera axis. Continue the movement without replaying the previous action.\n0–3s: Complete the ongoing movement: she turns toward camera while keeping drape unchanged, starting from its Part 1 midpoint.\n3–7s: she says a short line and shows side silhouette.\n7–10s: Show the actual product from a complementary grounded angle as the subject finishes the action in daylit home window; maintain its final physical position and the established scene. Camera: medium shot follows fabric edge without inventing pins.\nAUDIO: The visible model says in natural Malaysian Malay, with synchronized lips: \"Okay, dah kemas. Jom kita gerak.\""
+    },
+    {
+      "id": "v9_batch60_hijab_bawal_10s_02",
+      "subcategory_id": "hijab_bawal",
+      "visual_category": "FULL_MODEL",
+      "concept": "Hallway Mirror",
+      "duration_seconds": 10,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "VERTICAL 9:16 | PHOTOREALISTIC | Hallway Mirror\nPRODUCT: {{PRODUCT_NAME}}\nREFERENCE: Uploaded product image is the sole product master. Preserve visible colour, dimensions, markings, construction and supplied parts exactly. No invented attachments, materials, claims or logos.\nSETTING: plain apartment hallway mirror.\nSUBJECT: FULL_MODEL; adult universal Malaysian woman wearing reference bawal.\nCAMERA: mirror reflection stays physically consistent. Natural lighting and real anatomy, contact, gravity and scale. No on-screen text, captions, invented logo or watermark.\nEXACTLY 10 SECONDS:\n0–2s: she checks existing triangular front fold.\n2–5s: she adjusts visible fabric edge gently.\n5–8s: she takes two steps away from mirror and turns.\n8–10s: she pauses in three-quarter profile with actual hem visible.\nAUDIO: No speech or voiceover; subtle authentic location ambience only."
+    },
+    {
+      "id": "v9_batch60_hijab_bawal_20s_02",
+      "subcategory_id": "hijab_bawal",
+      "visual_category": "FULL_MODEL",
+      "concept": "Hallway Mirror",
+      "duration_seconds": 20,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nVERTICAL 9:16 | PHOTOREALISTIC | Hallway Mirror\nPRODUCT: {{PRODUCT_NAME}}\nREFERENCE: Uploaded product image is the sole product master. Preserve visible colour, dimensions, markings, construction and supplied parts exactly. No invented attachments, materials, claims or logos.\nSETTING: plain apartment hallway mirror.\nSUBJECT: FULL_MODEL; adult universal Malaysian woman wearing reference bawal.\nCAMERA: mirror reflection stays physically consistent. Natural lighting and real anatomy, contact, gravity and scale. No on-screen text, captions, invented logo or watermark.\n0–3s: she checks existing triangular front fold.\n3–7s: she adjusts visible fabric edge gently.\n7–10s: she takes two steps away from mirror and turns. End at the precise physical midpoint of this action, keeping product and subject clearly visible.\nAUDIO: No speech or voiceover; subtle authentic location ambience only.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nVERTICAL 9:16 | PHOTOREALISTIC | Hallway Mirror\nPRODUCT: {{PRODUCT_NAME}}\nREFERENCE: Uploaded product image is the sole product master. Preserve visible colour, dimensions, markings, construction and supplied parts exactly. No invented attachments, materials, claims or logos.\nSETTING: plain apartment hallway mirror.\nSUBJECT: FULL_MODEL; adult universal Malaysian woman wearing reference bawal.\nCAMERA: mirror reflection stays physically consistent. Natural lighting and real anatomy, contact, gravity and scale. No on-screen text, captions, invented logo or watermark.\nCONTINUITY: First frame exactly matches the final Part 1 frame: same product, subject, outfit, positions, lighting and camera axis. Continue the movement without replaying the previous action.\n0–3s: Complete the ongoing movement: she takes two steps away from mirror and turns, starting from its Part 1 midpoint.\n3–7s: she pauses in three-quarter profile with actual hem visible.\n7–10s: Show the actual product from a complementary grounded angle as the subject finishes the action in plain apartment hallway mirror; maintain its final physical position and the established scene. Camera: mirror reflection stays physically consistent.\nAUDIO: No speech or voiceover; subtle authentic location ambience only."
+    },
+    {
+      "id": "v9_batch60_accessory_ring_10s_02",
+      "subcategory_id": "accessory_ring",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Book Page",
+      "duration_seconds": 10,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "VERTICAL 9:16 | PHOTOREALISTIC | Book Page\nPRODUCT: {{PRODUCT_NAME}}\nREFERENCE: Uploaded product image is the sole product master. Preserve visible colour, dimensions, markings, construction and supplied parts exactly. No invented attachments, materials, claims or logos.\nSETTING: wooden reading desk.\nSUBJECT: HANDS_ONLY; adult Malaysian hands wearing exact reference ring.\nCAMERA: macro follows knuckle and ring, no altered stones. Natural lighting and real anatomy, contact, gravity and scale. No on-screen text, captions, invented logo or watermark.\nEXACTLY 10 SECONDS:\n0–2s: ring hand rests on open unmarked book.\n2–5s: index finger traces a single printed line without legible text.\n5–8s: hand turns one page while ring catches natural light.\n8–10s: hand closes book and rests on cover, ring fully visible.\nAUDIO: No speech or voiceover; subtle authentic location ambience only."
+    },
+    {
+      "id": "v9_batch60_accessory_ring_20s_02",
+      "subcategory_id": "accessory_ring",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Book Page",
+      "duration_seconds": 20,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nVERTICAL 9:16 | PHOTOREALISTIC | Book Page\nPRODUCT: {{PRODUCT_NAME}}\nREFERENCE: Uploaded product image is the sole product master. Preserve visible colour, dimensions, markings, construction and supplied parts exactly. No invented attachments, materials, claims or logos.\nSETTING: wooden reading desk.\nSUBJECT: HANDS_ONLY; adult Malaysian hands wearing exact reference ring.\nCAMERA: macro follows knuckle and ring, no altered stones. Natural lighting and real anatomy, contact, gravity and scale. No on-screen text, captions, invented logo or watermark.\n0–3s: ring hand rests on open unmarked book.\n3–7s: index finger traces a single printed line without legible text.\n7–10s: hand turns one page while ring catches natural light. End at the precise physical midpoint of this action, keeping product and subject clearly visible.\nAUDIO: No speech or voiceover; subtle authentic location ambience only.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nVERTICAL 9:16 | PHOTOREALISTIC | Book Page\nPRODUCT: {{PRODUCT_NAME}}\nREFERENCE: Uploaded product image is the sole product master. Preserve visible colour, dimensions, markings, construction and supplied parts exactly. No invented attachments, materials, claims or logos.\nSETTING: wooden reading desk.\nSUBJECT: HANDS_ONLY; adult Malaysian hands wearing exact reference ring.\nCAMERA: macro follows knuckle and ring, no altered stones. Natural lighting and real anatomy, contact, gravity and scale. No on-screen text, captions, invented logo or watermark.\nCONTINUITY: First frame exactly matches the final Part 1 frame: same product, subject, outfit, positions, lighting and camera axis. Continue the movement without replaying the previous action.\n0–3s: Complete the ongoing movement: hand turns one page while ring catches natural light, starting from its Part 1 midpoint.\n3–7s: hand closes book and rests on cover, ring fully visible.\n7–10s: Show the actual product from a complementary grounded angle as the subject finishes the action in wooden reading desk; maintain its final physical position and the established scene. Camera: macro follows knuckle and ring, no altered stones.\nAUDIO: No speech or voiceover; subtle authentic location ambience only."
+    },
+    {
+      "id": "v9_batch60_accessory_watch_10s_02",
+      "subcategory_id": "accessory_watch",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Desk Departure",
+      "duration_seconds": 10,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "VERTICAL 9:16 | PHOTOREALISTIC | Desk Departure\nPRODUCT: {{PRODUCT_NAME}}\nREFERENCE: Uploaded product image is the sole product master. Preserve visible colour, dimensions, markings, construction and supplied parts exactly. No invented attachments, materials, claims or logos.\nSETTING: sunlit home desk.\nSUBJECT: HANDS_ONLY; adult Malaysian wrist wearing exact reference watch.\nCAMERA: macro to medium wrist shot, no invented dial functions. Natural lighting and real anatomy, contact, gravity and scale. No on-screen text, captions, invented logo or watermark.\nEXACTLY 10 SECONDS:\n0–2s: wrist rests beside closed notebook.\n2–5s: hand picks up notebook, watch face angled naturally.\n5–8s: wrist rotates while placing notebook into plain bag.\n8–10s: hand grasps bag handle, watch shown in profile.\nAUDIO: No speech or voiceover; subtle authentic location ambience only."
+    },
+    {
+      "id": "v9_batch60_accessory_watch_20s_02",
+      "subcategory_id": "accessory_watch",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Desk Departure",
+      "duration_seconds": 20,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nVERTICAL 9:16 | PHOTOREALISTIC | Desk Departure\nPRODUCT: {{PRODUCT_NAME}}\nREFERENCE: Uploaded product image is the sole product master. Preserve visible colour, dimensions, markings, construction and supplied parts exactly. No invented attachments, materials, claims or logos.\nSETTING: sunlit home desk.\nSUBJECT: HANDS_ONLY; adult Malaysian wrist wearing exact reference watch.\nCAMERA: macro to medium wrist shot, no invented dial functions. Natural lighting and real anatomy, contact, gravity and scale. No on-screen text, captions, invented logo or watermark.\n0–3s: wrist rests beside closed notebook.\n3–7s: hand picks up notebook, watch face angled naturally.\n7–10s: wrist rotates while placing notebook into plain bag. End at the precise physical midpoint of this action, keeping product and subject clearly visible.\nAUDIO: No speech or voiceover; subtle authentic location ambience only.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nVERTICAL 9:16 | PHOTOREALISTIC | Desk Departure\nPRODUCT: {{PRODUCT_NAME}}\nREFERENCE: Uploaded product image is the sole product master. Preserve visible colour, dimensions, markings, construction and supplied parts exactly. No invented attachments, materials, claims or logos.\nSETTING: sunlit home desk.\nSUBJECT: HANDS_ONLY; adult Malaysian wrist wearing exact reference watch.\nCAMERA: macro to medium wrist shot, no invented dial functions. Natural lighting and real anatomy, contact, gravity and scale. No on-screen text, captions, invented logo or watermark.\nCONTINUITY: First frame exactly matches the final Part 1 frame: same product, subject, outfit, positions, lighting and camera axis. Continue the movement without replaying the previous action.\n0–3s: Complete the ongoing movement: wrist rotates while placing notebook into plain bag, starting from its Part 1 midpoint.\n3–7s: hand grasps bag handle, watch shown in profile.\n7–10s: Show the actual product from a complementary grounded angle as the subject finishes the action in sunlit home desk; maintain its final physical position and the established scene. Camera: macro to medium wrist shot, no invented dial functions.\nAUDIO: No speech or voiceover; subtle authentic location ambience only."
+    },
+    {
+      "id": "v9_batch60_accessory_bracelet_10s_02",
+      "subcategory_id": "accessory_bracelet",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Tea Pour",
+      "duration_seconds": 10,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "VERTICAL 9:16 | PHOTOREALISTIC | Tea Pour\nPRODUCT: {{PRODUCT_NAME}}\nREFERENCE: Uploaded product image is the sole product master. Preserve visible colour, dimensions, markings, construction and supplied parts exactly. No invented attachments, materials, claims or logos.\nSETTING: quiet kitchen table.\nSUBJECT: HANDS_ONLY; adult Malaysian hands wearing reference bracelet.\nCAMERA: side macro tracks actual bracelet links. Natural lighting and real anatomy, contact, gravity and scale. No on-screen text, captions, invented logo or watermark.\nEXACTLY 10 SECONDS:\n0–2s: bracelet wrist beside empty ceramic cup.\n2–5s: hand lifts plain teapot and pours tea steadily.\n5–8s: hand returns pot, bracelet shifts with gravity.\n8–10s: hand slides cup toward edge of placemat.\nAUDIO: No speech or voiceover; subtle authentic location ambience only."
+    },
+    {
+      "id": "v9_batch60_accessory_bracelet_20s_02",
+      "subcategory_id": "accessory_bracelet",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Tea Pour",
+      "duration_seconds": 20,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nVERTICAL 9:16 | PHOTOREALISTIC | Tea Pour\nPRODUCT: {{PRODUCT_NAME}}\nREFERENCE: Uploaded product image is the sole product master. Preserve visible colour, dimensions, markings, construction and supplied parts exactly. No invented attachments, materials, claims or logos.\nSETTING: quiet kitchen table.\nSUBJECT: HANDS_ONLY; adult Malaysian hands wearing reference bracelet.\nCAMERA: side macro tracks actual bracelet links. Natural lighting and real anatomy, contact, gravity and scale. No on-screen text, captions, invented logo or watermark.\n0–3s: bracelet wrist beside empty ceramic cup.\n3–7s: hand lifts plain teapot and pours tea steadily.\n7–10s: hand returns pot, bracelet shifts with gravity. End at the precise physical midpoint of this action, keeping product and subject clearly visible.\nAUDIO: No speech or voiceover; subtle authentic location ambience only.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nVERTICAL 9:16 | PHOTOREALISTIC | Tea Pour\nPRODUCT: {{PRODUCT_NAME}}\nREFERENCE: Uploaded product image is the sole product master. Preserve visible colour, dimensions, markings, construction and supplied parts exactly. No invented attachments, materials, claims or logos.\nSETTING: quiet kitchen table.\nSUBJECT: HANDS_ONLY; adult Malaysian hands wearing reference bracelet.\nCAMERA: side macro tracks actual bracelet links. Natural lighting and real anatomy, contact, gravity and scale. No on-screen text, captions, invented logo or watermark.\nCONTINUITY: First frame exactly matches the final Part 1 frame: same product, subject, outfit, positions, lighting and camera axis. Continue the movement without replaying the previous action.\n0–3s: Complete the ongoing movement: hand returns pot, bracelet shifts with gravity, starting from its Part 1 midpoint.\n3–7s: hand slides cup toward edge of placemat.\n7–10s: Show the actual product from a complementary grounded angle as the subject finishes the action in quiet kitchen table; maintain its final physical position and the established scene. Camera: side macro tracks actual bracelet links.\nAUDIO: No speech or voiceover; subtle authentic location ambience only."
+    },
+    {
+      "id": "v9_batch60_home_kitchen_cookware_10s_02",
+      "subcategory_id": "home_kitchen_cookware",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Vegetable Saute",
+      "duration_seconds": 10,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "VERTICAL 9:16 | PHOTOREALISTIC | Vegetable Saute\nPRODUCT: {{PRODUCT_NAME}}\nREFERENCE: Uploaded product image is the sole product master. Preserve visible colour, dimensions, markings, construction and supplied parts exactly. No invented attachments, materials, claims or logos.\nSETTING: ordinary home kitchen hob.\nSUBJECT: HANDS_ONLY; adult Malaysian hands operating exact reference cookware.\nCAMERA: overhead to three-quarter angle reveals pan interior and real use. Natural lighting and real anatomy, contact, gravity and scale. No on-screen text, captions, invented logo or watermark.\nEXACTLY 10 SECONDS:\n0–2s: reference pan sits level on unlit hob with chopped vegetables nearby.\n2–5s: hands add vegetables then turn hob on and stir using plain wooden spatula.\n5–8s: hands toss vegetables gently without changing pan geometry.\n8–10s: heat turns off and hands portion vegetables onto plate.\nAUDIO: Off-camera Malaysian Malay narrator says naturally: \"Tengok cara guna yang sebenar. Ringkas dan kemas.\" Visible subjects remain silent."
+    },
+    {
+      "id": "v9_batch60_home_kitchen_cookware_20s_02",
+      "subcategory_id": "home_kitchen_cookware",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Vegetable Saute",
+      "duration_seconds": 20,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nVERTICAL 9:16 | PHOTOREALISTIC | Vegetable Saute\nPRODUCT: {{PRODUCT_NAME}}\nREFERENCE: Uploaded product image is the sole product master. Preserve visible colour, dimensions, markings, construction and supplied parts exactly. No invented attachments, materials, claims or logos.\nSETTING: ordinary home kitchen hob.\nSUBJECT: HANDS_ONLY; adult Malaysian hands operating exact reference cookware.\nCAMERA: overhead to three-quarter angle reveals pan interior and real use. Natural lighting and real anatomy, contact, gravity and scale. No on-screen text, captions, invented logo or watermark.\n0–3s: reference pan sits level on unlit hob with chopped vegetables nearby.\n3–7s: hands add vegetables then turn hob on and stir using plain wooden spatula.\n7–10s: hands toss vegetables gently without changing pan geometry. End at the precise physical midpoint of this action, keeping product and subject clearly visible.\nAUDIO: Off-camera Malaysian Malay narrator says naturally: \"Tengok cara guna yang sebenar. Ringkas dan kemas.\" Visible subjects remain silent.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nVERTICAL 9:16 | PHOTOREALISTIC | Vegetable Saute\nPRODUCT: {{PRODUCT_NAME}}\nREFERENCE: Uploaded product image is the sole product master. Preserve visible colour, dimensions, markings, construction and supplied parts exactly. No invented attachments, materials, claims or logos.\nSETTING: ordinary home kitchen hob.\nSUBJECT: HANDS_ONLY; adult Malaysian hands operating exact reference cookware.\nCAMERA: overhead to three-quarter angle reveals pan interior and real use. Natural lighting and real anatomy, contact, gravity and scale. No on-screen text, captions, invented logo or watermark.\nCONTINUITY: First frame exactly matches the final Part 1 frame: same product, subject, outfit, positions, lighting and camera axis. Continue the movement without replaying the previous action.\n0–3s: Complete the ongoing movement: hands toss vegetables gently without changing pan geometry, starting from its Part 1 midpoint.\n3–7s: heat turns off and hands portion vegetables onto plate.\n7–10s: Show the actual product from a complementary grounded angle as the subject finishes the action in ordinary home kitchen hob; maintain its final physical position and the established scene. Camera: overhead to three-quarter angle reveals pan interior and real use.\nAUDIO: Off-camera Malaysian Malay narrator says naturally: \"Tengok cara guna yang sebenar. Ringkas dan kemas.\" Visible subjects remain silent."
+    },
+    {
+      "id": "v9_batch60_home_kitchen_bottle_10s_02",
+      "subcategory_id": "home_kitchen_bottle",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Picnic Fill",
+      "duration_seconds": 10,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "VERTICAL 9:16 | PHOTOREALISTIC | Picnic Fill\nPRODUCT: {{PRODUCT_NAME}}\nREFERENCE: Uploaded product image is the sole product master. Preserve visible colour, dimensions, markings, construction and supplied parts exactly. No invented attachments, materials, claims or logos.\nSETTING: kitchen counter by window.\nSUBJECT: HANDS_ONLY; adult Malaysian hands with reference bottle.\nCAMERA: close-up tracks opening, cap and actual silhouette. Natural lighting and real anatomy, contact, gravity and scale. No on-screen text, captions, invented logo or watermark.\nEXACTLY 10 SECONDS:\n0–2s: bottle upright beside water jug.\n2–5s: hands remove existing cap and pour water carefully.\n5–8s: hands replace same cap and wipe outer surface.\n8–10s: hands place bottle upright beside folded picnic cloth.\nAUDIO: No speech or voiceover; subtle authentic location ambience only."
+    },
+    {
+      "id": "v9_batch60_home_kitchen_bottle_20s_02",
+      "subcategory_id": "home_kitchen_bottle",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Picnic Fill",
+      "duration_seconds": 20,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nVERTICAL 9:16 | PHOTOREALISTIC | Picnic Fill\nPRODUCT: {{PRODUCT_NAME}}\nREFERENCE: Uploaded product image is the sole product master. Preserve visible colour, dimensions, markings, construction and supplied parts exactly. No invented attachments, materials, claims or logos.\nSETTING: kitchen counter by window.\nSUBJECT: HANDS_ONLY; adult Malaysian hands with reference bottle.\nCAMERA: close-up tracks opening, cap and actual silhouette. Natural lighting and real anatomy, contact, gravity and scale. No on-screen text, captions, invented logo or watermark.\n0–3s: bottle upright beside water jug.\n3–7s: hands remove existing cap and pour water carefully.\n7–10s: hands replace same cap and wipe outer surface. End at the precise physical midpoint of this action, keeping product and subject clearly visible.\nAUDIO: No speech or voiceover; subtle authentic location ambience only.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nVERTICAL 9:16 | PHOTOREALISTIC | Picnic Fill\nPRODUCT: {{PRODUCT_NAME}}\nREFERENCE: Uploaded product image is the sole product master. Preserve visible colour, dimensions, markings, construction and supplied parts exactly. No invented attachments, materials, claims or logos.\nSETTING: kitchen counter by window.\nSUBJECT: HANDS_ONLY; adult Malaysian hands with reference bottle.\nCAMERA: close-up tracks opening, cap and actual silhouette. Natural lighting and real anatomy, contact, gravity and scale. No on-screen text, captions, invented logo or watermark.\nCONTINUITY: First frame exactly matches the final Part 1 frame: same product, subject, outfit, positions, lighting and camera axis. Continue the movement without replaying the previous action.\n0–3s: Complete the ongoing movement: hands replace same cap and wipe outer surface, starting from its Part 1 midpoint.\n3–7s: hands place bottle upright beside folded picnic cloth.\n7–10s: Show the actual product from a complementary grounded angle as the subject finishes the action in kitchen counter by window; maintain its final physical position and the established scene. Camera: close-up tracks opening, cap and actual silhouette.\nAUDIO: No speech or voiceover; subtle authentic location ambience only."
+    },
+    {
+      "id": "v9_batch60_office_stationery_10s_02",
+      "subcategory_id": "office_stationery",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Daily Notes",
+      "duration_seconds": 10,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "VERTICAL 9:16 | PHOTOREALISTIC | Daily Notes\nPRODUCT: {{PRODUCT_NAME}}\nREFERENCE: Uploaded product image is the sole product master. Preserve visible colour, dimensions, markings, construction and supplied parts exactly. No invented attachments, materials, claims or logos.\nSETTING: minimal work desk.\nSUBJECT: HANDS_ONLY; adult Malaysian hands using exact reference stationery item.\nCAMERA: overhead close-up maintains reference shape and scale. Natural lighting and real anatomy, contact, gravity and scale. No on-screen text, captions, invented logo or watermark.\nEXACTLY 10 SECONDS:\n0–2s: item lies beside blank paper on desk.\n2–5s: hand grips item in its intended ordinary writing or marking position.\n5–8s: hand makes a short series of simple marks on paper.\n8–10s: hand places item parallel to page, clear final product view.\nAUDIO: No speech or voiceover; subtle authentic location ambience only."
+    },
+    {
+      "id": "v9_batch60_office_stationery_20s_02",
+      "subcategory_id": "office_stationery",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Daily Notes",
+      "duration_seconds": 20,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nVERTICAL 9:16 | PHOTOREALISTIC | Daily Notes\nPRODUCT: {{PRODUCT_NAME}}\nREFERENCE: Uploaded product image is the sole product master. Preserve visible colour, dimensions, markings, construction and supplied parts exactly. No invented attachments, materials, claims or logos.\nSETTING: minimal work desk.\nSUBJECT: HANDS_ONLY; adult Malaysian hands using exact reference stationery item.\nCAMERA: overhead close-up maintains reference shape and scale. Natural lighting and real anatomy, contact, gravity and scale. No on-screen text, captions, invented logo or watermark.\n0–3s: item lies beside blank paper on desk.\n3–7s: hand grips item in its intended ordinary writing or marking position.\n7–10s: hand makes a short series of simple marks on paper. End at the precise physical midpoint of this action, keeping product and subject clearly visible.\nAUDIO: No speech or voiceover; subtle authentic location ambience only.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nVERTICAL 9:16 | PHOTOREALISTIC | Daily Notes\nPRODUCT: {{PRODUCT_NAME}}\nREFERENCE: Uploaded product image is the sole product master. Preserve visible colour, dimensions, markings, construction and supplied parts exactly. No invented attachments, materials, claims or logos.\nSETTING: minimal work desk.\nSUBJECT: HANDS_ONLY; adult Malaysian hands using exact reference stationery item.\nCAMERA: overhead close-up maintains reference shape and scale. Natural lighting and real anatomy, contact, gravity and scale. No on-screen text, captions, invented logo or watermark.\nCONTINUITY: First frame exactly matches the final Part 1 frame: same product, subject, outfit, positions, lighting and camera axis. Continue the movement without replaying the previous action.\n0–3s: Complete the ongoing movement: hand makes a short series of simple marks on paper, starting from its Part 1 midpoint.\n3–7s: hand places item parallel to page, clear final product view.\n7–10s: Show the actual product from a complementary grounded angle as the subject finishes the action in minimal work desk; maintain its final physical position and the established scene. Camera: overhead close-up maintains reference shape and scale.\nAUDIO: No speech or voiceover; subtle authentic location ambience only."
+    },
+    {
+      "id": "v9_batch60_fashion_kids_10s_02",
+      "subcategory_id": "fashion_kids",
+      "visual_category": "FULL_MODEL",
+      "concept": "Garden Story",
+      "duration_seconds": 10,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "VERTICAL 9:16 | PHOTOREALISTIC | Garden Story\nPRODUCT: {{PRODUCT_NAME}}\nREFERENCE: Uploaded product image is the sole product master. Preserve visible colour, dimensions, markings, construction and supplied parts exactly. No invented attachments, materials, claims or logos.\nSETTING: shaded home garden seating.\nSUBJECT: FULL_MODEL; one child model wearing exact reference outfit, supervised scene with no adult on screen.\nCAMERA: child-height camera, natural unforced motion. Natural lighting and real anatomy, contact, gravity and scale. No on-screen text, captions, invented logo or watermark.\nEXACTLY 10 SECONDS:\n0–2s: child sits with closed picture book, outfit visible.\n2–5s: child stands and opens book on garden table.\n5–8s: child turns one page then walks around table.\n8–10s: child sits again, outfit front and side visible.\nAUDIO: Off-camera Malaysian Malay narrator says naturally: \"Tengok cara guna yang sebenar. Ringkas dan kemas.\" Visible subjects remain silent."
+    },
+    {
+      "id": "v9_batch60_fashion_kids_20s_02",
+      "subcategory_id": "fashion_kids",
+      "visual_category": "FULL_MODEL",
+      "concept": "Garden Story",
+      "duration_seconds": 20,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nVERTICAL 9:16 | PHOTOREALISTIC | Garden Story\nPRODUCT: {{PRODUCT_NAME}}\nREFERENCE: Uploaded product image is the sole product master. Preserve visible colour, dimensions, markings, construction and supplied parts exactly. No invented attachments, materials, claims or logos.\nSETTING: shaded home garden seating.\nSUBJECT: FULL_MODEL; one child model wearing exact reference outfit, supervised scene with no adult on screen.\nCAMERA: child-height camera, natural unforced motion. Natural lighting and real anatomy, contact, gravity and scale. No on-screen text, captions, invented logo or watermark.\n0–3s: child sits with closed picture book, outfit visible.\n3–7s: child stands and opens book on garden table.\n7–10s: child turns one page then walks around table. End at the precise physical midpoint of this action, keeping product and subject clearly visible.\nAUDIO: Off-camera Malaysian Malay narrator says naturally: \"Tengok cara guna yang sebenar. Ringkas dan kemas.\" Visible subjects remain silent.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nVERTICAL 9:16 | PHOTOREALISTIC | Garden Story\nPRODUCT: {{PRODUCT_NAME}}\nREFERENCE: Uploaded product image is the sole product master. Preserve visible colour, dimensions, markings, construction and supplied parts exactly. No invented attachments, materials, claims or logos.\nSETTING: shaded home garden seating.\nSUBJECT: FULL_MODEL; one child model wearing exact reference outfit, supervised scene with no adult on screen.\nCAMERA: child-height camera, natural unforced motion. Natural lighting and real anatomy, contact, gravity and scale. No on-screen text, captions, invented logo or watermark.\nCONTINUITY: First frame exactly matches the final Part 1 frame: same product, subject, outfit, positions, lighting and camera axis. Continue the movement without replaying the previous action.\n0–3s: Complete the ongoing movement: child turns one page then walks around table, starting from its Part 1 midpoint.\n3–7s: child sits again, outfit front and side visible.\n7–10s: Show the actual product from a complementary grounded angle as the subject finishes the action in shaded home garden seating; maintain its final physical position and the established scene. Camera: child-height camera, natural unforced motion.\nAUDIO: Off-camera Malaysian Malay narrator says naturally: \"Tengok cara guna yang sebenar. Ringkas dan kemas.\" Visible subjects remain silent."
+    },
+    {
+      "id": "v9_batch60_pet_toy_10s_02",
+      "subcategory_id": "pet_toy",
+      "visual_category": "ANIMAL_ONLY",
+      "concept": "Play Mat",
+      "duration_seconds": 10,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "VERTICAL 9:16 | PHOTOREALISTIC | Play Mat\nPRODUCT: {{PRODUCT_NAME}}\nREFERENCE: Uploaded product image is the sole product master. Preserve visible colour, dimensions, markings, construction and supplied parts exactly. No invented attachments, materials, claims or logos.\nSETTING: bright quiet living room pet mat.\nSUBJECT: ANIMAL_ONLY; one domestic cat interacting with exact reference pet toy.\nCAMERA: floor-level camera follows real paw contact. Natural lighting and real anatomy, contact, gravity and scale. No on-screen text, captions, invented logo or watermark.\nEXACTLY 10 SECONDS:\n0–2s: toy lies on mat beside alert cat.\n2–5s: cat approaches, sniffs and gently taps toy with paw.\n5–8s: cat nudges toy across mat and follows it.\n8–10s: cat sits beside toy and touches it once more.\nAUDIO: No speech or voiceover; subtle authentic location ambience only."
+    },
+    {
+      "id": "v9_batch60_pet_toy_20s_02",
+      "subcategory_id": "pet_toy",
+      "visual_category": "ANIMAL_ONLY",
+      "concept": "Play Mat",
+      "duration_seconds": 20,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_REVIEW",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nVERTICAL 9:16 | PHOTOREALISTIC | Play Mat\nPRODUCT: {{PRODUCT_NAME}}\nREFERENCE: Uploaded product image is the sole product master. Preserve visible colour, dimensions, markings, construction and supplied parts exactly. No invented attachments, materials, claims or logos.\nSETTING: bright quiet living room pet mat.\nSUBJECT: ANIMAL_ONLY; one domestic cat interacting with exact reference pet toy.\nCAMERA: floor-level camera follows real paw contact. Natural lighting and real anatomy, contact, gravity and scale. No on-screen text, captions, invented logo or watermark.\n0–3s: toy lies on mat beside alert cat.\n3–7s: cat approaches, sniffs and gently taps toy with paw.\n7–10s: cat nudges toy across mat and follows it. End at the precise physical midpoint of this action, keeping product and subject clearly visible.\nAUDIO: No speech or voiceover; subtle authentic location ambience only.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nVERTICAL 9:16 | PHOTOREALISTIC | Play Mat\nPRODUCT: {{PRODUCT_NAME}}\nREFERENCE: Uploaded product image is the sole product master. Preserve visible colour, dimensions, markings, construction and supplied parts exactly. No invented attachments, materials, claims or logos.\nSETTING: bright quiet living room pet mat.\nSUBJECT: ANIMAL_ONLY; one domestic cat interacting with exact reference pet toy.\nCAMERA: floor-level camera follows real paw contact. Natural lighting and real anatomy, contact, gravity and scale. No on-screen text, captions, invented logo or watermark.\nCONTINUITY: First frame exactly matches the final Part 1 frame: same product, subject, outfit, positions, lighting and camera axis. Continue the movement without replaying the previous action.\n0–3s: Complete the ongoing movement: cat nudges toy across mat and follows it, starting from its Part 1 midpoint.\n3–7s: cat sits beside toy and touches it once more.\n7–10s: Show the actual product from a complementary grounded angle as the subject finishes the action in bright quiet living room pet mat; maintain its final physical position and the established scene. Camera: floor-level camera follows real paw contact.\nAUDIO: No speech or voiceover; subtle authentic location ambience only."
+    }
+  ]
+}

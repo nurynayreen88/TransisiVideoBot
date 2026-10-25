@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "status": "DRAFT_PRODUCT_FIT_RULES",
+  "runtime_enabled": false,
+  "principles": [
+    "Match the physical product type before choosing action, setting and camera.",
+    "Use product name only as identity; preserve visible design from the image provided to the video generator.",
+    "Never invent electric operation, materials, safety claims, accessories or included features.",
+    "Show realistic hands or model only when appropriate to the selected product type.",
+    "One standalone English prompt per concept and duration, with Malay Malaysia speech only when chosen."
+  ],
+  "rules": {
+    "stockpot": {
+      "setting": "Malaysian home kitchen",
+      "action": "place the pot on a stable hob and stir a simmering soup with a ladle",
+      "camera": "medium cooking shot then close-up of pot rim and soup",
+      "avoid": [
+        "shallow pan tossing",
+        "pressure locking"
+      ]
+    },
+    "saucepan": {
+      "setting": "home kitchen hob",
+      "action": "gently heat and stir a small quantity of sauce",
+      "camera": "side close-up showing handle and sauce",
+      "avoid": [
+        "large batch cooking",
+        "wok tossing"
+      ]
+    },
+    "wok": {
+      "setting": "Malaysian kitchen hob",
+      "action": "stir-fry vegetables with a spatula in the curved wok",
+      "camera": "three-quarter angle capturing tossing and wok shape",
+      "avoid": [
+        "pressure cooking",
+        "oven baking"
+      ]
+    },
+    "frying_pan": {
+      "setting": "home kitchen hob",
+      "action": "pan-fry food in a shallow pan with believable utensil contact",
+      "camera": "overhead cooking detail and side profile",
+      "avoid": [
+        "deep soup simmering",
+        "steam basket"
+      ]
+    },
+    "pressure_cooker": {
+      "setting": "home kitchen counter",
+      "action": "show ingredients placed inside the unpowered cooker and the lid being positioned",
+      "camera": "clear full product and lid detail",
+      "avoid": [
+        "opening under pressure",
+        "invented valves",
+        "unverified digital controls"
+      ]
+    },
+    "electric_cooker": {
+      "setting": "home kitchen counter",
+      "action": "show ingredients being added to the removable cooking vessel and a finished dish presented",
+      "camera": "wide counter shot and product close-up",
+      "avoid": [
+        "invented presets",
+        "unverified heating mode"
+      ]
+    },
+    "steamer": {
+      "setting": "home kitchen counter",
+      "action": "place food onto a steamer tray and reveal steamed food after cooking",
+      "camera": "tray close-up and full unit",
+      "avoid": [
+        "stir-frying",
+        "deep frying"
+      ]
+    },
+    "grill_pan": {
+      "setting": "home kitchen hob",
+      "action": "turn food with tongs on the grill pan surface",
+      "camera": "low angle showing grill surface and cooking action",
+      "avoid": [
+        "soup boiling",
+        "unverified grill ridges"
+      ]
+    },
+    "rice_cooker": {
+      "setting": "Malaysian kitchen counter",
+      "action": "measure rice into the inner pot and show a cooked rice serving",
+      "camera": "top-down rice detail and full appliance",
+      "avoid": [
+        "invented menu modes",
+        "pressure cooking"
+      ]
+    },
+    "baking_tray": {
+      "setting": "home kitchen prep counter",
+      "action": "arrange pastry on a baking tray and present baked result",
+      "camera": "overhead tray detail and oven-safe placement only when confirmed",
+      "avoid": [
+        "stovetop frying",
+        "unverified oven-safe claims"
+      ]
+    }
+  }
+}

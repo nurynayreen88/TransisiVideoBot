@@ -1,0 +1,227 @@
+{
+  "schema_version": 1,
+  "status": "DRAFT_CREATIVE_QA",
+  "runtime_enabled": false,
+  "variations": [
+    {
+      "id": "v9_creative_modeltalk_071",
+      "subcategory_id": "bag_sling",
+      "product_type": "phone sling",
+      "concept": "Quick coffee pickup",
+      "duration_seconds": 10,
+      "voice_type": "on_camera_model",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_CREATIVE_QA",
+      "full_prompt": "Create exactly one photorealistic 10-second vertical 9:16 Malaysian affiliate video. Product: phone sling. Use the supplied product image as the only visual authority for the product's true color, pattern, form, proportions and visible parts. CONCEPT: Quick coffee pickup. 0–2s HOOK: Open immediately with the real product in a natural Malaysian setting, adult Malaysian presenter visible. 2–7s PRODUCT ACTION: An adult Malaysian presenter slips a phone into the actual sling, closes its visible fastening and walks to a cafe counter. Show realistic physical contact, safe movement and stable product identity. 7–10s CTA: End with the unchanged product clearly visible and the adult presenter facing the camera. EXACT SPOKEN MALAY MALAYSIA LINE: “Beg telefon ini mudah saya bawa. Jom tengok!” Speak naturally with accurate on-camera lip sync, finishing the invitation during the closing shot. Only the adult presenter speaks; no Indonesian accent or background narration. Subtle music and natural ambient audio. No subtitles, overlays, watermark, invented product details, unsupported claims or added accessories."
+    },
+    {
+      "id": "v9_creative_modeltalk_072",
+      "subcategory_id": "bag_other",
+      "product_type": "makeup pouch",
+      "concept": "Vanity packing",
+      "duration_seconds": 10,
+      "voice_type": "on_camera_model",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_CREATIVE_QA",
+      "full_prompt": "Create exactly one photorealistic 10-second vertical 9:16 Malaysian affiliate video. Product: makeup pouch. Use the supplied product image as the only visual authority for the product's true color, pattern, form, proportions and visible parts. CONCEPT: Vanity packing. 0–2s HOOK: Open immediately with the real product in a natural Malaysian setting, adult Malaysian presenter visible. 2–7s PRODUCT ACTION: An adult woman places a lipstick and brush into the actual pouch, closes its visible opening and slips it into a handbag. Show realistic physical contact, safe movement and stable product identity. 7–10s CTA: End with the unchanged product clearly visible and the adult presenter facing the camera. EXACT SPOKEN MALAY MALAYSIA LINE: “Saya simpan alat solek dalam pouch ini. Jom tengok!” Speak naturally with accurate on-camera lip sync, finishing the invitation during the closing shot. Only the adult presenter speaks; no Indonesian accent or background narration. Subtle music and natural ambient audio. No subtitles, overlays, watermark, invented product details, unsupported claims or added accessories."
+    },
+    {
+      "id": "v9_creative_modeltalk_073",
+      "subcategory_id": "hijab_inner",
+      "product_type": "ninja inner",
+      "concept": "Layering ready",
+      "duration_seconds": 10,
+      "voice_type": "on_camera_model",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_CREATIVE_QA",
+      "full_prompt": "Create exactly one photorealistic 10-second vertical 9:16 Malaysian affiliate video. Product: ninja inner. Use the supplied product image as the only visual authority for the product's true color, pattern, form, proportions and visible parts. CONCEPT: Layering ready. 0–2s HOOK: Open immediately with the real product in a natural Malaysian setting, adult Malaysian presenter visible. 2–7s PRODUCT ACTION: An adult Malaysian woman puts on the actual inner hijab at a mirror, then gently drapes her outer shawl over it. Show realistic physical contact, safe movement and stable product identity. 7–10s CTA: End with the unchanged product clearly visible and the adult presenter facing the camera. EXACT SPOKEN MALAY MALAYSIA LINE: “Anak tudung ini saya pakai dulu. Jom tengok!” Speak naturally with accurate on-camera lip sync, finishing the invitation during the closing shot. Only the adult presenter speaks; no Indonesian accent or background narration. Subtle music and natural ambient audio. No subtitles, overlays, watermark, invented product details, unsupported claims or added accessories."
+    },
+    {
+      "id": "v9_creative_modeltalk_074",
+      "subcategory_id": "hijab_other",
+      "product_type": "telekung",
+      "concept": "Prayer corner preparation",
+      "duration_seconds": 10,
+      "voice_type": "on_camera_model",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_CREATIVE_QA",
+      "full_prompt": "Create exactly one photorealistic 10-second vertical 9:16 Malaysian affiliate video. Product: telekung. Use the supplied product image as the only visual authority for the product's true color, pattern, form, proportions and visible parts. CONCEPT: Prayer corner preparation. 0–2s HOOK: Open immediately with the real product in a natural Malaysian setting, adult Malaysian presenter visible. 2–7s PRODUCT ACTION: An adult Malaysian woman unfolds the actual telekung neatly on a clean prayer mat and shows its true drape respectfully. Show realistic physical contact, safe movement and stable product identity. 7–10s CTA: End with the unchanged product clearly visible and the adult presenter facing the camera. EXACT SPOKEN MALAY MALAYSIA LINE: “Telekung ini nampak kemas bila dipakai. Jom tengok!” Speak naturally with accurate on-camera lip sync, finishing the invitation during the closing shot. Only the adult presenter speaks; no Indonesian accent or background narration. Subtle music and natural ambient audio. No subtitles, overlays, watermark, invented product details, unsupported claims or added accessories."
+    },
+    {
+      "id": "v9_creative_modeltalk_075",
+      "subcategory_id": "shoes_kids",
+      "product_type": "school shoes",
+      "concept": "School morning",
+      "duration_seconds": 10,
+      "voice_type": "on_camera_model",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_CREATIVE_QA",
+      "full_prompt": "Create exactly one photorealistic 10-second vertical 9:16 Malaysian affiliate video. Product: school shoes. Use the supplied product image as the only visual authority for the product's true color, pattern, form, proportions and visible parts. CONCEPT: School morning. 0–2s HOOK: Open immediately with the real product in a natural Malaysian setting, adult Malaysian presenter visible. 2–7s PRODUCT ACTION: An adult caregiver helps a school-age child fasten the actual school shoes while seated, then the child stands naturally. Show realistic physical contact, safe movement and stable product identity. 7–10s CTA: End with the unchanged product clearly visible and the adult presenter facing the camera. EXACT SPOKEN MALAY MALAYSIA LINE: “Kasut sekolah ini nampak kemas. Jom tengok!” Speak naturally with accurate on-camera lip sync, finishing the invitation during the closing shot. Only the adult presenter speaks; no Indonesian accent or background narration. Subtle music and natural ambient audio. No subtitles, overlays, watermark, invented product details, unsupported claims or added accessories."
+    },
+    {
+      "id": "v9_creative_modeltalk_076",
+      "subcategory_id": "beauty_skincare",
+      "product_type": "cleanser",
+      "concept": "Sink-side routine",
+      "duration_seconds": 10,
+      "voice_type": "on_camera_model",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_CREATIVE_QA",
+      "full_prompt": "Create exactly one photorealistic 10-second vertical 9:16 Malaysian affiliate video. Product: cleanser. Use the supplied product image as the only visual authority for the product's true color, pattern, form, proportions and visible parts. CONCEPT: Sink-side routine. 0–2s HOOK: Open immediately with the real product in a natural Malaysian setting, adult Malaysian presenter visible. 2–7s PRODUCT ACTION: An adult presenter shows the actual cleanser beside a sink, dispenses a small amount into wet hands and gently washes the face. Show realistic physical contact, safe movement and stable product identity. 7–10s CTA: End with the unchanged product clearly visible and the adult presenter facing the camera. EXACT SPOKEN MALAY MALAYSIA LINE: “Ini pencuci muka dalam rutin saya. Jom tengok!” Speak naturally with accurate on-camera lip sync, finishing the invitation during the closing shot. Only the adult presenter speaks; no Indonesian accent or background narration. Subtle music and natural ambient audio. No subtitles, overlays, watermark, invented product details, unsupported claims or added accessories."
+    },
+    {
+      "id": "v9_creative_modeltalk_077",
+      "subcategory_id": "food_other",
+      "product_type": "pasta",
+      "concept": "Dinner preparation",
+      "duration_seconds": 10,
+      "voice_type": "on_camera_model",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_CREATIVE_QA",
+      "full_prompt": "Create exactly one photorealistic 10-second vertical 9:16 Malaysian affiliate video. Product: pasta. Use the supplied product image as the only visual authority for the product's true color, pattern, form, proportions and visible parts. CONCEPT: Dinner preparation. 0–2s HOOK: Open immediately with the real product in a natural Malaysian setting, adult Malaysian presenter visible. 2–7s PRODUCT ACTION: An adult Malaysian cook adds the actual pasta from its authentic package to a pot of boiling water and stirs carefully. Show realistic physical contact, safe movement and stable product identity. 7–10s CTA: End with the unchanged product clearly visible and the adult presenter facing the camera. EXACT SPOKEN MALAY MALAYSIA LINE: “Jom tengok pasta untuk makan malam!” Speak naturally with accurate on-camera lip sync, finishing the invitation during the closing shot. Only the adult presenter speaks; no Indonesian accent or background narration. Subtle music and natural ambient audio. No subtitles, overlays, watermark, invented product details, unsupported claims or added accessories."
+    },
+    {
+      "id": "v9_creative_modeltalk_078",
+      "subcategory_id": "gadget_phone",
+      "product_type": "phone stand",
+      "concept": "Video-call setup",
+      "duration_seconds": 10,
+      "voice_type": "on_camera_model",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_CREATIVE_QA",
+      "full_prompt": "Create exactly one photorealistic 10-second vertical 9:16 Malaysian affiliate video. Product: phone stand. Use the supplied product image as the only visual authority for the product's true color, pattern, form, proportions and visible parts. CONCEPT: Video-call setup. 0–2s HOOK: Open immediately with the real product in a natural Malaysian setting, adult Malaysian presenter visible. 2–7s PRODUCT ACTION: An adult presenter opens the actual phone stand on a flat desk, places a phone on it and adjusts only visible hinges. Show realistic physical contact, safe movement and stable product identity. 7–10s CTA: End with the unchanged product clearly visible and the adult presenter facing the camera. EXACT SPOKEN MALAY MALAYSIA LINE: “Saya letak telefon pada stand ini. Jom tengok!” Speak naturally with accurate on-camera lip sync, finishing the invitation during the closing shot. Only the adult presenter speaks; no Indonesian accent or background narration. Subtle music and natural ambient audio. No subtitles, overlays, watermark, invented product details, unsupported claims or added accessories."
+    },
+    {
+      "id": "v9_creative_modeltalk_079",
+      "subcategory_id": "home_storage",
+      "product_type": "drawer organizer",
+      "concept": "Drawer makeover",
+      "duration_seconds": 10,
+      "voice_type": "on_camera_model",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_CREATIVE_QA",
+      "full_prompt": "Create exactly one photorealistic 10-second vertical 9:16 Malaysian affiliate video. Product: drawer organizer. Use the supplied product image as the only visual authority for the product's true color, pattern, form, proportions and visible parts. CONCEPT: Drawer makeover. 0–2s HOOK: Open immediately with the real product in a natural Malaysian setting, adult Malaysian presenter visible. 2–7s PRODUCT ACTION: An adult presenter places pens and clips into the actual drawer organizer, then slides the drawer closed. Show realistic physical contact, safe movement and stable product identity. 7–10s CTA: End with the unchanged product clearly visible and the adult presenter facing the camera. EXACT SPOKEN MALAY MALAYSIA LINE: “Laci nampak kemas dengan ini. Jom tengok!” Speak naturally with accurate on-camera lip sync, finishing the invitation during the closing shot. Only the adult presenter speaks; no Indonesian accent or background narration. Subtle music and natural ambient audio. No subtitles, overlays, watermark, invented product details, unsupported claims or added accessories."
+    },
+    {
+      "id": "v9_creative_modeltalk_080",
+      "subcategory_id": "home_other",
+      "product_type": "bath mat",
+      "concept": "Bathroom refresh",
+      "duration_seconds": 10,
+      "voice_type": "on_camera_model",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_CREATIVE_QA",
+      "full_prompt": "Create exactly one photorealistic 10-second vertical 9:16 Malaysian affiliate video. Product: bath mat. Use the supplied product image as the only visual authority for the product's true color, pattern, form, proportions and visible parts. CONCEPT: Bathroom refresh. 0–2s HOOK: Open immediately with the real product in a natural Malaysian setting, adult Malaysian presenter visible. 2–7s PRODUCT ACTION: An adult presenter lays the actual bath mat flat on a dry bathroom floor and steps beside it to show scale. Show realistic physical contact, safe movement and stable product identity. 7–10s CTA: End with the unchanged product clearly visible and the adult presenter facing the camera. EXACT SPOKEN MALAY MALAYSIA LINE: “Alas kaki ini cantik di bilik air. Jom tengok!” Speak naturally with accurate on-camera lip sync, finishing the invitation during the closing shot. Only the adult presenter speaks; no Indonesian accent or background narration. Subtle music and natural ambient audio. No subtitles, overlays, watermark, invented product details, unsupported claims or added accessories."
+    },
+    {
+      "id": "v9_creative_modeltalk_081",
+      "subcategory_id": "accessory_scarf",
+      "product_type": "neck scarf",
+      "concept": "Outfit finishing",
+      "duration_seconds": 10,
+      "voice_type": "on_camera_model",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_CREATIVE_QA",
+      "full_prompt": "Create exactly one photorealistic 10-second vertical 9:16 Malaysian affiliate video. Product: neck scarf. Use the supplied product image as the only visual authority for the product's true color, pattern, form, proportions and visible parts. CONCEPT: Outfit finishing. 0–2s HOOK: Open immediately with the real product in a natural Malaysian setting, adult Malaysian presenter visible. 2–7s PRODUCT ACTION: An adult presenter ties the actual scarf around the neck in front of a mirror, then turns slightly to show the knot. Show realistic physical contact, safe movement and stable product identity. 7–10s CTA: End with the unchanged product clearly visible and the adult presenter facing the camera. EXACT SPOKEN MALAY MALAYSIA LINE: “Skaf ini melengkapkan gaya saya. Jom tengok!” Speak naturally with accurate on-camera lip sync, finishing the invitation during the closing shot. Only the adult presenter speaks; no Indonesian accent or background narration. Subtle music and natural ambient audio. No subtitles, overlays, watermark, invented product details, unsupported claims or added accessories."
+    },
+    {
+      "id": "v9_creative_modeltalk_082",
+      "subcategory_id": "accessory_other",
+      "product_type": "keychain",
+      "concept": "Keys before leaving",
+      "duration_seconds": 10,
+      "voice_type": "on_camera_model",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_CREATIVE_QA",
+      "full_prompt": "Create exactly one photorealistic 10-second vertical 9:16 Malaysian affiliate video. Product: keychain. Use the supplied product image as the only visual authority for the product's true color, pattern, form, proportions and visible parts. CONCEPT: Keys before leaving. 0–2s HOOK: Open immediately with the real product in a natural Malaysian setting, adult Malaysian presenter visible. 2–7s PRODUCT ACTION: An adult presenter attaches the actual keychain to a set of keys and lifts them beside the doorway. Show realistic physical contact, safe movement and stable product identity. 7–10s CTA: End with the unchanged product clearly visible and the adult presenter facing the camera. EXACT SPOKEN MALAY MALAYSIA LINE: “Rantai kunci ini comel. Jom tengok!” Speak naturally with accurate on-camera lip sync, finishing the invitation during the closing shot. Only the adult presenter speaks; no Indonesian accent or background narration. Subtle music and natural ambient audio. No subtitles, overlays, watermark, invented product details, unsupported claims or added accessories."
+    },
+    {
+      "id": "v9_creative_modeltalk_083",
+      "subcategory_id": "toy_outdoor",
+      "product_type": "bubble toy",
+      "concept": "Garden play",
+      "duration_seconds": 10,
+      "voice_type": "on_camera_model",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_CREATIVE_QA",
+      "full_prompt": "Create exactly one photorealistic 10-second vertical 9:16 Malaysian affiliate video. Product: bubble toy. Use the supplied product image as the only visual authority for the product's true color, pattern, form, proportions and visible parts. CONCEPT: Garden play. 0–2s HOOK: Open immediately with the real product in a natural Malaysian setting, adult Malaysian presenter visible. 2–7s PRODUCT ACTION: An adult caregiver operates the actual bubble toy in a clear garden space while a child watches at a safe distance. Show realistic physical contact, safe movement and stable product identity. 7–10s CTA: End with the unchanged product clearly visible and the adult presenter facing the camera. EXACT SPOKEN MALAY MALAYSIA LINE: “Jom tengok permainan buih ini!” Speak naturally with accurate on-camera lip sync, finishing the invitation during the closing shot. Only the adult presenter speaks; no Indonesian accent or background narration. Subtle music and natural ambient audio. No subtitles, overlays, watermark, invented product details, unsupported claims or added accessories."
+    },
+    {
+      "id": "v9_creative_modeltalk_084",
+      "subcategory_id": "toy_baby",
+      "product_type": "soft book",
+      "concept": "Quiet playtime",
+      "duration_seconds": 10,
+      "voice_type": "on_camera_model",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_CREATIVE_QA",
+      "full_prompt": "Create exactly one photorealistic 10-second vertical 9:16 Malaysian affiliate video. Product: soft book. Use the supplied product image as the only visual authority for the product's true color, pattern, form, proportions and visible parts. CONCEPT: Quiet playtime. 0–2s HOOK: Open immediately with the real product in a natural Malaysian setting, adult Malaysian presenter visible. 2–7s PRODUCT ACTION: An adult caregiver opens the actual soft book for a baby seated safely on a mat, turning one page slowly. Show realistic physical contact, safe movement and stable product identity. 7–10s CTA: End with the unchanged product clearly visible and the adult presenter facing the camera. EXACT SPOKEN MALAY MALAYSIA LINE: “Buku kain ini untuk si kecil. Jom tengok!” Speak naturally with accurate on-camera lip sync, finishing the invitation during the closing shot. Only the adult presenter speaks; no Indonesian accent or background narration. Subtle music and natural ambient audio. No subtitles, overlays, watermark, invented product details, unsupported claims or added accessories."
+    },
+    {
+      "id": "v9_creative_modeltalk_085",
+      "subcategory_id": "pet_grooming",
+      "product_type": "pet brush",
+      "concept": "Gentle grooming",
+      "duration_seconds": 10,
+      "voice_type": "on_camera_model",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_CREATIVE_QA",
+      "full_prompt": "Create exactly one photorealistic 10-second vertical 9:16 Malaysian affiliate video. Product: pet brush. Use the supplied product image as the only visual authority for the product's true color, pattern, form, proportions and visible parts. CONCEPT: Gentle grooming. 0–2s HOOK: Open immediately with the real product in a natural Malaysian setting, adult Malaysian presenter visible. 2–7s PRODUCT ACTION: An adult presenter gently brushes a calm cat with the actual pet brush, keeping movements slow and visible. Show realistic physical contact, safe movement and stable product identity. 7–10s CTA: End with the unchanged product clearly visible and the adult presenter facing the camera. EXACT SPOKEN MALAY MALAYSIA LINE: “Saya sikat bulu si bulus guna ini. Jom tengok!” Speak naturally with accurate on-camera lip sync, finishing the invitation during the closing shot. Only the adult presenter speaks; no Indonesian accent or background narration. Subtle music and natural ambient audio. No subtitles, overlays, watermark, invented product details, unsupported claims or added accessories."
+    },
+    {
+      "id": "v9_creative_modeltalk_086",
+      "subcategory_id": "baby_gear",
+      "product_type": "stroller",
+      "concept": "Park stroll",
+      "duration_seconds": 10,
+      "voice_type": "on_camera_model",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_CREATIVE_QA",
+      "full_prompt": "Create exactly one photorealistic 10-second vertical 9:16 Malaysian affiliate video. Product: stroller. Use the supplied product image as the only visual authority for the product's true color, pattern, form, proportions and visible parts. CONCEPT: Park stroll. 0–2s HOOK: Open immediately with the real product in a natural Malaysian setting, adult Malaysian presenter visible. 2–7s PRODUCT ACTION: An adult caregiver checks the stroller's actual handle, then pushes it slowly on a level shaded walkway. Show realistic physical contact, safe movement and stable product identity. 7–10s CTA: End with the unchanged product clearly visible and the adult presenter facing the camera. EXACT SPOKEN MALAY MALAYSIA LINE: “Jom tengok stroller ini untuk berjalan!” Speak naturally with accurate on-camera lip sync, finishing the invitation during the closing shot. Only the adult presenter speaks; no Indonesian accent or background narration. Subtle music and natural ambient audio. No subtitles, overlays, watermark, invented product details, unsupported claims or added accessories."
+    },
+    {
+      "id": "v9_creative_modeltalk_087",
+      "subcategory_id": "auto_interior",
+      "product_type": "seat organizer",
+      "concept": "Car seat tidy",
+      "duration_seconds": 10,
+      "voice_type": "on_camera_model",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_CREATIVE_QA",
+      "full_prompt": "Create exactly one photorealistic 10-second vertical 9:16 Malaysian affiliate video. Product: seat organizer. Use the supplied product image as the only visual authority for the product's true color, pattern, form, proportions and visible parts. CONCEPT: Car seat tidy. 0–2s HOOK: Open immediately with the real product in a natural Malaysian setting, adult Malaysian presenter visible. 2–7s PRODUCT ACTION: An adult presenter secures the actual organizer to the back of a parked car seat and places a small book inside. Show realistic physical contact, safe movement and stable product identity. 7–10s CTA: End with the unchanged product clearly visible and the adult presenter facing the camera. EXACT SPOKEN MALAY MALAYSIA LINE: “Kereta nampak tersusun dengan ini. Jom tengok!” Speak naturally with accurate on-camera lip sync, finishing the invitation during the closing shot. Only the adult presenter speaks; no Indonesian accent or background narration. Subtle music and natural ambient audio. No subtitles, overlays, watermark, invented product details, unsupported claims or added accessories."
+    },
+    {
+      "id": "v9_creative_modeltalk_088",
+      "subcategory_id": "office_accessory",
+      "product_type": "document holder",
+      "concept": "Meeting prep",
+      "duration_seconds": 10,
+      "voice_type": "on_camera_model",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_CREATIVE_QA",
+      "full_prompt": "Create exactly one photorealistic 10-second vertical 9:16 Malaysian affiliate video. Product: document holder. Use the supplied product image as the only visual authority for the product's true color, pattern, form, proportions and visible parts. CONCEPT: Meeting prep. 0–2s HOOK: Open immediately with the real product in a natural Malaysian setting, adult Malaysian presenter visible. 2–7s PRODUCT ACTION: An adult office worker slides printed pages into the actual document holder, closes it and picks it up for a meeting. Show realistic physical contact, safe movement and stable product identity. 7–10s CTA: End with the unchanged product clearly visible and the adult presenter facing the camera. EXACT SPOKEN MALAY MALAYSIA LINE: “Saya susun dokumen dalam fail ini. Jom tengok!” Speak naturally with accurate on-camera lip sync, finishing the invitation during the closing shot. Only the adult presenter speaks; no Indonesian accent or background narration. Subtle music and natural ambient audio. No subtitles, overlays, watermark, invented product details, unsupported claims or added accessories."
+    },
+    {
+      "id": "v9_creative_modeltalk_089",
+      "subcategory_id": "sports_ball",
+      "product_type": "football",
+      "concept": "Evening kickabout",
+      "duration_seconds": 10,
+      "voice_type": "on_camera_model",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_CREATIVE_QA",
+      "full_prompt": "Create exactly one photorealistic 10-second vertical 9:16 Malaysian affiliate video. Product: football. Use the supplied product image as the only visual authority for the product's true color, pattern, form, proportions and visible parts. CONCEPT: Evening kickabout. 0–2s HOOK: Open immediately with the real product in a natural Malaysian setting, adult Malaysian presenter visible. 2–7s PRODUCT ACTION: An adult presenter gently rolls the actual football across a flat field, stops it with one foot and lifts it toward camera. Show realistic physical contact, safe movement and stable product identity. 7–10s CTA: End with the unchanged product clearly visible and the adult presenter facing the camera. EXACT SPOKEN MALAY MALAYSIA LINE: “Jom tengok bola ini di padang!” Speak naturally with accurate on-camera lip sync, finishing the invitation during the closing shot. Only the adult presenter speaks; no Indonesian accent or background narration. Subtle music and natural ambient audio. No subtitles, overlays, watermark, invented product details, unsupported claims or added accessories."
+    },
+    {
+      "id": "v9_creative_modeltalk_090",
+      "subcategory_id": "other_gift",
+      "product_type": "gift box",
+      "concept": "Gift wrapping",
+      "duration_seconds": 10,
+      "voice_type": "on_camera_model",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_CREATIVE_QA",
+      "full_prompt": "Create exactly one photorealistic 10-second vertical 9:16 Malaysian affiliate video. Product: gift box. Use the supplied product image as the only visual authority for the product's true color, pattern, form, proportions and visible parts. CONCEPT: Gift wrapping. 0–2s HOOK: Open immediately with the real product in a natural Malaysian setting, adult Malaysian presenter visible. 2–7s PRODUCT ACTION: An adult presenter places a small wrapped gift into the actual box, closes its visible lid and sets it on a table. Show realistic physical contact, safe movement and stable product identity. 7–10s CTA: End with the unchanged product clearly visible and the adult presenter facing the camera. EXACT SPOKEN MALAY MALAYSIA LINE: “Kotak hadiah ini nampak cantik. Jom tengok!” Speak naturally with accurate on-camera lip sync, finishing the invitation during the closing shot. Only the adult presenter speaks; no Indonesian accent or background narration. Subtle music and natural ambient audio. No subtitles, overlays, watermark, invented product details, unsupported claims or added accessories."
+    }
+  ]
+}

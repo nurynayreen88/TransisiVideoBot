@@ -1,0 +1,120 @@
+{
+  "schema_version": 1,
+  "status": "DRAFT_TYPE_TAXONOMY_REVIEW",
+  "groups": {
+    "fashion_women": [
+      "baju kurung",
+      "kebaya",
+      "blouse",
+      "tunik",
+      "kemeja wanita",
+      "skirt",
+      "seluar wanita"
+    ],
+    "fashion_men": [
+      "kemeja lelaki",
+      "polo",
+      "tshirt",
+      "baju melayu",
+      "kurta",
+      "jeans",
+      "slack"
+    ],
+    "fashion_dress": [
+      "dress maxi",
+      "dress midi",
+      "abaya",
+      "jubah",
+      "kaftan",
+      "gamis"
+    ],
+    "fashion_sport": [
+      "jersey",
+      "legging",
+      "tracksuit",
+      "rashguard",
+      "compression wear"
+    ],
+    "fashion_outerwear": [
+      "blazer",
+      "cardigan",
+      "hoodie",
+      "jaket denim",
+      "windbreaker",
+      "vest"
+    ],
+    "fashion_kids": [
+      "romper",
+      "dress kanak",
+      "uniform sekolah",
+      "baju kurung kanak",
+      "baju melayu kanak"
+    ],
+    "fashion_innerwear": [
+      "bra",
+      "boxer",
+      "singlet",
+      "shapewear",
+      "thermal wear"
+    ],
+    "fashion_other": [
+      "uniform",
+      "pakaian tidur",
+      "pakaian kerja",
+      "pakaian tradisional"
+    ],
+    "bag_handbag": [
+      "top handle",
+      "satchel",
+      "hobo",
+      "bucket",
+      "mini handbag"
+    ],
+    "bag_sling": [
+      "crossbody",
+      "chest sling",
+      "messenger",
+      "phone sling",
+      "waist bag"
+    ],
+    "bag_backpack": [
+      "school backpack",
+      "hiking backpack",
+      "laptop backpack",
+      "drawstring bag"
+    ],
+    "bag_laptop": [
+      "laptop sleeve",
+      "briefcase",
+      "tablet sleeve",
+      "laptop messenger"
+    ],
+    "bag_travel": [
+      "duffel",
+      "weekender",
+      "garment bag",
+      "foldable bag"
+    ],
+    "bag_wallet": [
+      "bifold",
+      "long wallet",
+      "zip wallet",
+      "card holder",
+      "coin purse"
+    ],
+    "bag_tote": [
+      "canvas tote",
+      "nylon tote",
+      "shopping tote",
+      "beach tote"
+    ],
+    "bag_other": [
+      "clutch",
+      "evening bag",
+      "lunch bag",
+      "makeup pouch",
+      "dry bag"
+    ]
+  },
+  "activation": false
+}

@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "batch": "v9_curated_twenty_first_batch_20261024",
+  "variation_count": 6,
+  "notes": "Three individually authored reference-dependent concepts, each complete 10s and continuous two-part 20s. Draft pending actual render and runtime product-input compatibility QA.",
+  "variations": [
+    {
+      "id": "v9_curated21_accessory_watch_10s_01",
+      "subcategory_id": "accessory_watch",
+      "visual_category": "FULL_MODEL",
+      "concept": "Leaving the studio",
+      "duration_seconds": 10,
+      "voice_type": "MODEL_SPEECH",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Vertical 9:16 photorealistic. One adult Universal Malaysian model wearing the exact reference wristwatch on the wrist, preserving actual case, dial, strap, colour, proportions and visible markings; no invented functions, materials or water resistance. Quiet daylight photography studio with a plain table. Medium portrait includes model's mouth and watch clearly for accurate Malaysian Malay lip sync; natural wrist movement.\nUse the supplied product reference as the sole visual master. Preserve original product identity, anatomy, scale, physical contact and continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Establish the model beside the table, original watch visible at waist level.\n2–5s: Model lifts the wrist naturally to glance at the actual dial, without pressing controls.\n5–8s: Facing camera, model says with accurate visible lip sync: 'Dah siap, masa untuk gerak.'\n8–10s: Hold a natural three-quarter portrait with original watch clearly visible.\nAUDIO: Only visible adult model speech in natural Malaysian Malay with precise lip sync; subtle studio ambience, no narrator or music."
+    },
+    {
+      "id": "v9_curated21_accessory_watch_20s_01",
+      "subcategory_id": "accessory_watch",
+      "visual_category": "FULL_MODEL",
+      "concept": "Leaving the studio",
+      "duration_seconds": 20,
+      "voice_type": "MODEL_SPEECH",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic. One adult Universal Malaysian model wearing the exact reference wristwatch on the wrist, preserving actual case, dial, strap, colour, proportions and visible markings; no invented functions, materials or water resistance. Quiet daylight photography studio with a plain table. Medium portrait includes model's mouth and watch clearly for accurate Malaysian Malay lip sync; natural wrist movement.\nUse the supplied product reference as the sole visual master. Preserve original product identity, anatomy, scale, physical contact and continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–3s: Establish model beside the studio table wearing the exact watch.\n3–7s: Model raises wrist naturally and glances at the actual dial.\n7–10s: Facing camera, model says with precise lip sync: 'Dah siap, masa untuk gerak.'\nAUDIO: Only visible adult model speech in natural Malaysian Malay with precise lip sync; subtle studio ambience, no narrator or music.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic. One adult Universal Malaysian model wearing the exact reference wristwatch on the wrist, preserving actual case, dial, strap, colour, proportions and visible markings; no invented functions, materials or water resistance. Quiet daylight photography studio with a plain table. Medium portrait includes model's mouth and watch clearly for accurate Malaysian Malay lip sync; natural wrist movement.\nUse the supplied product reference as the sole visual master. Preserve original product identity, anatomy, scale, physical contact and continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nCONTINUITY: Match the final Part 1 frame exactly in subject, product, pose, props, lighting and camera axis. Continue without replaying completed action.\nEXACTLY 10 SECONDS:\n0–3s: Resume from the same wrist-raised pose; model lowers arm naturally.\n3–7s: Facing camera, model says with precise lip sync: 'Saya suka padankan jam ni dengan gaya ringkas.'\n7–10s: Camera settles into a steady medium portrait showing the original watch and model's face.\nAUDIO: Only visible adult model speech in natural Malaysian Malay with precise lip sync; subtle studio ambience, no narrator or music."
+    },
+    {
+      "id": "v9_curated21_home_kitchen_bottle_10s_01",
+      "subcategory_id": "home_kitchen_bottle",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Refill before leaving",
+      "duration_seconds": 10,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Vertical 9:16 photorealistic. Exact reference reusable drinking bottle with original cap, mouth, body, colour, proportions and visible markings; no invented insulation, leakproof or material claims. Bright home kitchen counter beside a plain water jug, adult Malaysian hands and forearms only. Stable three-quarter close camera, natural water flow and realistic grip.\nUse the supplied product reference as the sole visual master. Preserve original product identity, anatomy, scale, physical contact and continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Establish the exact bottle upright beside the plain water jug.\n2–5s: Hands open the bottle using its actual existing cap and set the cap on the counter.\n5–8s: Hands pour a modest amount of clean drinking water through the real bottle mouth, then stop.\n8–10s: Hands replace the original cap and hold a clear full-product frame.\nAUDIO: Off-camera Malaysian Malay narrator, hands silent: 'Isi air dulu sebelum keluar rumah.' Quiet kitchen and gentle water ambience."
+    },
+    {
+      "id": "v9_curated21_home_kitchen_bottle_20s_01",
+      "subcategory_id": "home_kitchen_bottle",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Refill before leaving",
+      "duration_seconds": 20,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic. Exact reference reusable drinking bottle with original cap, mouth, body, colour, proportions and visible markings; no invented insulation, leakproof or material claims. Bright home kitchen counter beside a plain water jug, adult Malaysian hands and forearms only. Stable three-quarter close camera, natural water flow and realistic grip.\nUse the supplied product reference as the sole visual master. Preserve original product identity, anatomy, scale, physical contact and continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–3s: Establish the original bottle and water jug on the counter.\n3–7s: Hands remove the actual cap and place it safely beside the bottle.\n7–10s: Hands begin pouring clean water carefully through the bottle's real opening.\nAUDIO: Off-camera Malaysian Malay narrator, hands silent: 'Isi air dulu sebelum keluar rumah.' Quiet kitchen and gentle water ambience.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic. Exact reference reusable drinking bottle with original cap, mouth, body, colour, proportions and visible markings; no invented insulation, leakproof or material claims. Bright home kitchen counter beside a plain water jug, adult Malaysian hands and forearms only. Stable three-quarter close camera, natural water flow and realistic grip.\nUse the supplied product reference as the sole visual master. Preserve original product identity, anatomy, scale, physical contact and continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nCONTINUITY: Match the final Part 1 frame exactly in subject, product, pose, props, lighting and camera axis. Continue without replaying completed action.\nEXACTLY 10 SECONDS:\n0–3s: Resume from the same pouring position; hands finish the modest pour and set down the jug.\n3–7s: Hands pick up and replace the original cap using its actual closure, without invented mechanisms.\n7–10s: Hold a steady complete hero frame of the closed bottle.\nAUDIO: Off-camera Malaysian Malay narrator, hands silent: 'Dah isi, tutup semula botol dan siap.' Quiet kitchen ambience."
+    },
+    {
+      "id": "v9_curated21_fashion_kids_10s_01",
+      "subcategory_id": "fashion_kids",
+      "visual_category": "FULL_MODEL",
+      "concept": "Playroom book choice",
+      "duration_seconds": 10,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Vertical 9:16 photorealistic. One appropriately aged child model wears the exact reference children's outfit with actual neckline, sleeves, hem, print, colour and fit preserved. Bright safe playroom with a low bookshelf, dry clear floor and soft daylight. Respectful full-body framing, age-appropriate natural movement, no appearance or performance claims; child does not speak.\nUse the supplied product reference as the sole visual master. Preserve original product identity, anatomy, scale, physical contact and continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Establish the child standing beside a low bookshelf in the complete original outfit.\n2–5s: Child selects one plain picture book from an accessible shelf.\n5–8s: Child walks two small natural steps to a low reading mat, holding the book safely.\n8–10s: Child sits comfortably with the book, full original outfit still visible.\nAUDIO: Off-camera adult Malaysian Malay narrator; child silent: 'Pilih buku cerita, kemudian duduk membaca.' Gentle playroom ambience."
+    },
+    {
+      "id": "v9_curated21_fashion_kids_20s_01",
+      "subcategory_id": "fashion_kids",
+      "visual_category": "FULL_MODEL",
+      "concept": "Playroom book choice",
+      "duration_seconds": 20,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic. One appropriately aged child model wears the exact reference children's outfit with actual neckline, sleeves, hem, print, colour and fit preserved. Bright safe playroom with a low bookshelf, dry clear floor and soft daylight. Respectful full-body framing, age-appropriate natural movement, no appearance or performance claims; child does not speak.\nUse the supplied product reference as the sole visual master. Preserve original product identity, anatomy, scale, physical contact and continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nEXACTLY 10 SECONDS:\n0–3s: Establish the child beside the low bookshelf, original outfit fully visible.\n3–7s: Child chooses one plain picture book from the accessible shelf.\n7–10s: Child turns toward the nearby reading mat with the book held securely.\nAUDIO: Off-camera adult Malaysian Malay narrator; child silent: 'Pilih buku cerita, kemudian duduk membaca.' Gentle playroom ambience.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic. One appropriately aged child model wears the exact reference children's outfit with actual neckline, sleeves, hem, print, colour and fit preserved. Bright safe playroom with a low bookshelf, dry clear floor and soft daylight. Respectful full-body framing, age-appropriate natural movement, no appearance or performance claims; child does not speak.\nUse the supplied product reference as the sole visual master. Preserve original product identity, anatomy, scale, physical contact and continuity. No fabricated features, claims, captions, text overlays, extra logos or watermark.\nCONTINUITY: Match the final Part 1 frame exactly in subject, product, pose, props, lighting and camera axis. Continue without replaying completed action.\nEXACTLY 10 SECONDS:\n0–3s: Resume from the same turning stance with the same book; child takes two natural small steps.\n3–7s: Child sits comfortably on the low reading mat and opens the book.\n7–10s: Hold a respectful full-body frame with the original outfit visible and child calmly reading.\nAUDIO: Off-camera adult Malaysian Malay narrator; child silent: 'Masa santai pun boleh nampak kemas dan selesa.' Gentle playroom ambience."
+    }
+  ]
+}

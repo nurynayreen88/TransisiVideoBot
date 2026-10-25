@@ -1,0 +1,233 @@
+{
+  "schema_version": 1,
+  "status": "DRAFT_PRODUCT_FIT_RULES",
+  "runtime_enabled": false,
+  "category": "food",
+  "rules": {
+    "potato_chips": [
+      "Open packet and show chips in bowl",
+      "Pack-to-bowl close-up",
+      "Do not invent flavor"
+    ],
+    "kerepek_pisang": [
+      "Serve banana chips on plate",
+      "Texture close-up",
+      "Do not invent ingredients"
+    ],
+    "kacang": [
+      "Pour nuts into small bowl",
+      "Overhead macro",
+      "Do not invent nutritional claims"
+    ],
+    "popcorn": [
+      "Serve popcorn in cinema-style bowl",
+      "Pack and bowl",
+      "Do not invent flavor"
+    ],
+    "keropok": [
+      "Serve keropok with suitable dip",
+      "Plate close-up",
+      "Do not invent included dip"
+    ],
+    "granola_bar": [
+      "Unwrap and show bar texture",
+      "Hand close-up",
+      "Do not invent protein content"
+    ],
+    "chocolate": [
+      "Break a piece and show surface",
+      "Macro close-up",
+      "Do not invent filling"
+    ],
+    "coffee": [
+      "Prepare drink using actual coffee format",
+      "Cup and pack",
+      "Do not invent caffeine level"
+    ],
+    "tea": [
+      "Steep tea if tea bag or loose leaves are verified",
+      "Cup close-up",
+      "Do not invent tea form"
+    ],
+    "juice": [
+      "Pour juice into glass",
+      "Glass and pack",
+      "Do not claim fresh pressed"
+    ],
+    "powdered_drink": [
+      "Mix measured powder with water",
+      "Overhead cup",
+      "Do not invent serving ratio"
+    ],
+    "milk": [
+      "Pour milk into glass",
+      "Pack and glass",
+      "Do not invent fortification"
+    ],
+    "canned_drink": [
+      "Open can and pour into glass",
+      "Can macro",
+      "Do not invent carbonation"
+    ],
+    "syrup": [
+      "Dilute syrup in water",
+      "Glass overhead",
+      "Do not invent concentration"
+    ],
+    "protein_powder": [
+      "Mix powder in shaker",
+      "Hands and shaker",
+      "Do not invent muscle claims"
+    ],
+    "oat_mix": [
+      "Prepare oats in bowl",
+      "Overhead prep",
+      "Do not invent health claims"
+    ],
+    "meal_replacement": [
+      "Show preparation according to verified form",
+      "Pack and serving",
+      "Do not promise weight loss"
+    ],
+    "fiber_food": [
+      "Serve product in appropriate bowl",
+      "Pack and serving",
+      "Do not claim digestive treatment"
+    ],
+    "cereal": [
+      "Pour cereal into bowl",
+      "Overhead breakfast",
+      "Do not invent ingredients"
+    ],
+    "nugget": [
+      "Cook frozen nuggets safely and present plated result",
+      "Kitchen prep",
+      "Do not show raw product as ready-to-eat"
+    ],
+    "dumpling": [
+      "Steam or boil dumplings as verified",
+      "Cooking close-up",
+      "Do not invent filling"
+    ],
+    "frozen_roti_canai": [
+      "Cook roti on flat pan",
+      "Pan close-up",
+      "Do not invent texture"
+    ],
+    "frozen_karipap": [
+      "Cook karipap using verified method",
+      "Plate detail",
+      "Do not invent filling"
+    ],
+    "frozen_seafood": [
+      "Show safely prepared seafood dish",
+      "Kitchen detail",
+      "Do not imply raw consumption"
+    ],
+    "frozen_meat": [
+      "Show cooked serving",
+      "Kitchen detail",
+      "Do not imply raw consumption"
+    ],
+    "sambal": [
+      "Spoon sambal onto cooked dish",
+      "Jar and plate",
+      "Do not invent spiciness"
+    ],
+    "chili_sauce": [
+      "Drizzle sauce onto snack",
+      "Bottle close-up",
+      "Do not invent ingredients"
+    ],
+    "curry_paste": [
+      "Stir paste into cooking pot",
+      "Pan close-up",
+      "Do not invent recipe"
+    ],
+    "spice_mix": [
+      "Sprinkle spice mix onto prepared ingredients",
+      "Hand close-up",
+      "Do not invent spice composition"
+    ],
+    "soy_sauce": [
+      "Pour small amount into stir-fry",
+      "Bottle and pan",
+      "Do not invent sodium claims"
+    ],
+    "cooking_oil": [
+      "Pour measured oil into pan",
+      "Pan close-up",
+      "Do not invent smoke point"
+    ],
+    "pasta_sauce": [
+      "Stir sauce through cooked pasta",
+      "Plate detail",
+      "Do not invent recipe"
+    ],
+    "cookies": [
+      "Arrange cookies on plate",
+      "Macro texture",
+      "Do not invent fillings"
+    ],
+    "cake": [
+      "Slice cake and show crumb",
+      "Cake close-up",
+      "Do not invent flavors"
+    ],
+    "brownies": [
+      "Cut brownie square",
+      "Macro texture",
+      "Do not invent toppings"
+    ],
+    "bread": [
+      "Slice and serve bread",
+      "Bread close-up",
+      "Do not invent ingredients"
+    ],
+    "pastry": [
+      "Serve pastry on plate",
+      "Pastry macro",
+      "Do not invent fillings"
+    ],
+    "tart": [
+      "Cut tart carefully",
+      "Macro detail",
+      "Do not invent fruit toppings"
+    ],
+    "biskut_raya": [
+      "Arrange festive biscuits in tray",
+      "Festive tabletop",
+      "Do not invent type"
+    ],
+    "rice": [
+      "Measure uncooked rice and show cooked serving",
+      "Kitchen close-up",
+      "Do not invent rice variety"
+    ],
+    "noodles": [
+      "Prepare noodle dish appropriate to package",
+      "Bowl close-up",
+      "Do not invent seasoning"
+    ],
+    "pasta": [
+      "Boil pasta and plate serving",
+      "Pot and plate",
+      "Do not invent pasta shape"
+    ],
+    "canned_food": [
+      "Open can and transfer to serving bowl",
+      "Pack and bowl",
+      "Do not invent contents"
+    ],
+    "pickles": [
+      "Serve pickles with meal",
+      "Jar close-up",
+      "Do not invent fermentation"
+    ],
+    "dried_fruit": [
+      "Pour dried fruit into bowl",
+      "Macro texture",
+      "Do not invent sugar-free claim"
+    ]
+  }
+}

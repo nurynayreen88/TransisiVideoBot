@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "batch": "v9_curated_eighth_batch_20261024",
+  "variation_count": 6,
+  "notes": "Three product-specific standalone concepts, each 10s and continuous 20s. Draft; actual video render and runtime compatibility QA pending.",
+  "variations": [
+    {
+      "id": "v9_curated8_wallet_10s_01",
+      "subcategory_id": "wallet",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Lunch receipt",
+      "duration_seconds": 10,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "VERTICAL 9:16 | PHOTOREALISTIC\nPRODUCT AND SETTING: Realistic 9:16. The exact reference wallet, preserving its visible colour, silhouette, seams and actual opening; no invented card slots, closures or material claims. A quiet café table in diffuse midday light with one plain receipt. Adult Malaysian hands and forearms only. Close table-height camera, natural contact and wallet scale.\nPreserve the exact supplied reference product identity and realistic physics. No captions, on-screen text, invented logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Establish the reference wallet closed beside a plain receipt.\n2–5s: The hand opens its actual visible opening and places the receipt inside.\n5–8s: The hand closes the wallet and sets it flat on the table.\n8–10s: Finish on the unchanged wallet's authentic front and silhouette.\nAUDIO: Off-camera Malaysian Malay narrator, no visible speaker: 'Resit makan tengah hari, simpan terus dalam dompet.' Quiet café ambience."
+    },
+    {
+      "id": "v9_curated8_wallet_20s_01",
+      "subcategory_id": "wallet",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Lunch receipt",
+      "duration_seconds": 20,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nVERTICAL 9:16 | PHOTOREALISTIC\nPRODUCT AND SETTING: Realistic 9:16. The exact reference wallet, preserving its visible colour, silhouette, seams and actual opening; no invented card slots, closures or material claims. A quiet café table in diffuse midday light with one plain receipt. Adult Malaysian hands and forearms only. Close table-height camera, natural contact and wallet scale.\nPreserve the exact supplied reference product identity and realistic physics. No captions, on-screen text, invented logos or watermark.\nEXACTLY 10 SECONDS:\n0–3s: Establish the wallet resting closed beside the plain receipt, authentic front clearly visible.\n3–7s: One hand lifts the wallet and opens only its existing visible opening, without exposing invented compartments.\n7–10s: The hand places the receipt into the actual opening and pauses with the wallet still open.\nAUDIO: Off-camera Malaysian Malay narrator, no visible speaker: 'Resit makan tengah hari, simpan terus dalam dompet.' Quiet café ambience.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nVERTICAL 9:16 | PHOTOREALISTIC\nPRODUCT AND SETTING: Realistic 9:16. The exact reference wallet, preserving its visible colour, silhouette, seams and actual opening; no invented card slots, closures or material claims. A quiet café table in diffuse midday light with one plain receipt. Adult Malaysian hands and forearms only. Close table-height camera, natural contact and wallet scale.\nPreserve the exact supplied reference product identity and realistic physics. No captions, on-screen text, invented logos or watermark.\nCONTINUITY: Match the final frame of Part 1 exactly in subject pose, product, props, lighting and camera axis; continue without repeating an action.\nEXACTLY 10 SECONDS:\n0–3s: Resume with the same receipt placed and wallet open; the hand gently closes it using its actual construction.\n3–7s: The hand sets the closed wallet flat on the café table and withdraws.\n7–10s: A restrained close lateral slide finishes on the exact front silhouette and original edges.\nAUDIO: Off-camera Malaysian Malay narrator, no visible speaker: 'Dah selesai, kemas semula sebelum bergerak.' Quiet café ambience."
+    },
+    {
+      "id": "v9_curated8_baby_toy_10s_01",
+      "subcategory_id": "baby_toy",
+      "visual_category": "FULL_MODEL",
+      "concept": "Soft floor discovery",
+      "duration_seconds": 10,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "VERTICAL 9:16 | PHOTOREALISTIC\nPRODUCT AND SETTING: Realistic 9:16. Exact age-appropriate reference baby toy, preserving all visible parts, colour, dimensions and markings; no added lights, sound, detachable pieces or developmental claims. Clean padded play mat in a bright family room, one supervised age-appropriate seated toddler, with a responsible adult just outside frame. Eye-level child-safe static camera; safe natural grasp and no mouthing of small parts.\nPreserve the exact supplied reference product identity and realistic physics. No captions, on-screen text, invented logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Show the seated toddler noticing the reference toy on the padded mat.\n2–5s: The toddler reaches and touches its visible main body.\n5–8s: The toddler lifts it briefly with both hands, then sets it down safely.\n8–10s: Hold toddler and unchanged toy together in a calm complete frame.\nAUDIO: No speech, narration or music; quiet natural family-room ambience only."
+    },
+    {
+      "id": "v9_curated8_baby_toy_20s_01",
+      "subcategory_id": "baby_toy",
+      "visual_category": "FULL_MODEL",
+      "concept": "Soft floor discovery",
+      "duration_seconds": 20,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nVERTICAL 9:16 | PHOTOREALISTIC\nPRODUCT AND SETTING: Realistic 9:16. Exact age-appropriate reference baby toy, preserving all visible parts, colour, dimensions and markings; no added lights, sound, detachable pieces or developmental claims. Clean padded play mat in a bright family room, one supervised age-appropriate seated toddler, with a responsible adult just outside frame. Eye-level child-safe static camera; safe natural grasp and no mouthing of small parts.\nPreserve the exact supplied reference product identity and realistic physics. No captions, on-screen text, invented logos or watermark.\nEXACTLY 10 SECONDS:\n0–3s: The toddler sits stably on the padded mat, looking at the exact toy placed within easy reach.\n3–7s: The toddler reaches with one hand and makes gentle contact with the toy's visible main body.\n7–10s: The toddler lifts the toy a short safe distance and pauses holding it with both hands.\nAUDIO: No speech, narration or music; quiet natural family-room ambience only.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nVERTICAL 9:16 | PHOTOREALISTIC\nPRODUCT AND SETTING: Realistic 9:16. Exact age-appropriate reference baby toy, preserving all visible parts, colour, dimensions and markings; no added lights, sound, detachable pieces or developmental claims. Clean padded play mat in a bright family room, one supervised age-appropriate seated toddler, with a responsible adult just outside frame. Eye-level child-safe static camera; safe natural grasp and no mouthing of small parts.\nPreserve the exact supplied reference product identity and realistic physics. No captions, on-screen text, invented logos or watermark.\nCONTINUITY: Match the final frame of Part 1 exactly in subject pose, product, props, lighting and camera axis; continue without repeating an action.\nEXACTLY 10 SECONDS:\n0–3s: Continue from the same seated pose, with the toy already held in both hands; the toddler looks down at it.\n3–7s: The toddler lowers the toy carefully back onto the mat, then gives it one gentle touch.\n7–10s: Hold a stable shot of the seated toddler and original toy side by side, both fully visible.\nAUDIO: No speech, narration or music; quiet natural family-room ambience only."
+    },
+    {
+      "id": "v9_curated8_travel_organizer_10s_01",
+      "subcategory_id": "travel_organizer",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Packing before departure",
+      "duration_seconds": 10,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "VERTICAL 9:16 | PHOTOREALISTIC\nPRODUCT AND SETTING: Realistic 9:16. The exact reference travel organizer, retaining its visible shape, size, colour and existing opening and fastening only. A bright bedroom packing surface with two plain folded shirts and an open unbranded suitcase. Adult Malaysian hands and forearms only, no face or torso. Steady overhead-to-three-quarter camera, realistic textile compression and scale; no invented pockets, dividers or capacity claims.\nPreserve the exact supplied reference product identity and realistic physics. No captions, on-screen text, invented logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Show the organizer open beside two neatly folded shirts.\n2–5s: Place both shirts through its actual main opening without forcing its shape.\n5–8s: Close it using the reference-consistent fastening and lift it.\n8–10s: Set it flat in the open suitcase, showing its authentic silhouette.\nAUDIO: Off-camera Malaysian Malay narrator, hands-only subject silent: 'Baju disusun dulu, baru masukkan dalam organizer.' Soft bedroom ambience."
+    },
+    {
+      "id": "v9_curated8_travel_organizer_20s_01",
+      "subcategory_id": "travel_organizer",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Packing before departure",
+      "duration_seconds": 20,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nVERTICAL 9:16 | PHOTOREALISTIC\nPRODUCT AND SETTING: Realistic 9:16. The exact reference travel organizer, retaining its visible shape, size, colour and existing opening and fastening only. A bright bedroom packing surface with two plain folded shirts and an open unbranded suitcase. Adult Malaysian hands and forearms only, no face or torso. Steady overhead-to-three-quarter camera, realistic textile compression and scale; no invented pockets, dividers or capacity claims.\nPreserve the exact supplied reference product identity and realistic physics. No captions, on-screen text, invented logos or watermark.\nEXACTLY 10 SECONDS:\n0–3s: Establish the organizer open on the bed with its actual opening visible, two folded shirts beside it.\n3–7s: The hands place one folded shirt into the actual main opening without forcing the shape.\n7–10s: The hands arrange the second folded shirt inside and pause with the organizer still open.\nAUDIO: Off-camera Malaysian Malay narrator, hands-only subject silent: 'Baju disusun dulu, baru masukkan dalam organizer.' Soft bedroom ambience.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nVERTICAL 9:16 | PHOTOREALISTIC\nPRODUCT AND SETTING: Realistic 9:16. The exact reference travel organizer, retaining its visible shape, size, colour and existing opening and fastening only. A bright bedroom packing surface with two plain folded shirts and an open unbranded suitcase. Adult Malaysian hands and forearms only, no face or torso. Steady overhead-to-three-quarter camera, realistic textile compression and scale; no invented pockets, dividers or capacity claims.\nPreserve the exact supplied reference product identity and realistic physics. No captions, on-screen text, invented logos or watermark.\nCONTINUITY: Match the final frame of Part 1 exactly in subject pose, product, props, lighting and camera axis; continue without repeating an action.\nEXACTLY 10 SECONDS:\n0–3s: Resume with both shirts already arranged in the same open organizer; hands align its existing edges.\n3–7s: The hands close the organizer using only its visible actual fastening, then lift it carefully.\n7–10s: The hands place it flat into the waiting suitcase and finish on the unchanged organizer.\nAUDIO: Off-camera Malaysian Malay narrator, hands-only subject silent: 'Dah kemas, terus letak dalam beg perjalanan.' Soft bedroom ambience."
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "batch": "v9_curated_seventeenth_batch_20261024",
+  "variation_count": 6,
+  "notes": "Three distinct product-specific reference-dependent concepts, each complete 10s and continuous 20s. Draft pending real render and runtime reference-input compatibility QA.",
+  "variations": [
+    {
+      "id": "v9_curated17_hijab_shawl_10s_01",
+      "subcategory_id": "hijab_shawl",
+      "visual_category": "FULL_MODEL",
+      "concept": "Museum foyer drape",
+      "duration_seconds": 10,
+      "voice_type": "MODEL_SPEECH",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Vertical 9:16 photorealistic. One adult Universal Malaysian woman wears the exact reference shawl over a plain modest outfit in a quiet museum foyer, diffuse skylight. Preserve actual shawl colour, print, length, texture appearance and existing drape; no extra pins, fabricated fabric claims or altered wrapping. Eye-level medium portrait with face and full front drape visible for precise natural Malaysian Malay lip sync.\nUse the supplied reference image as the sole visual master. Preserve original product identity, realistic anatomy, scale, contact and continuity. No fabricated details, claims, captions, on-screen text, added logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Establish her standing beside a plain foyer wall, original shawl fully visible.\n2–5s: She turns a gentle quarter angle, allowing the authentic shawl edge to move naturally.\n5–8s: Facing camera, she says with visible accurate lip sync: 'Hari ni saya pilih lilitan yang ringkas.'\n8–10s: Hold a relaxed front portrait, original shawl unchanged.\nAUDIO: Only on-camera adult female speech in natural Malaysian Malay with accurate visible lip sync; quiet foyer ambience, no narrator or music."
+    },
+    {
+      "id": "v9_curated17_hijab_shawl_20s_01",
+      "subcategory_id": "hijab_shawl",
+      "visual_category": "FULL_MODEL",
+      "concept": "Museum foyer drape",
+      "duration_seconds": 20,
+      "voice_type": "MODEL_SPEECH",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic. One adult Universal Malaysian woman wears the exact reference shawl over a plain modest outfit in a quiet museum foyer, diffuse skylight. Preserve actual shawl colour, print, length, texture appearance and existing drape; no extra pins, fabricated fabric claims or altered wrapping. Eye-level medium portrait with face and full front drape visible for precise natural Malaysian Malay lip sync.\nUse the supplied reference image as the sole visual master. Preserve original product identity, realistic anatomy, scale, contact and continuity. No fabricated details, claims, captions, on-screen text, added logos or watermark.\nEXACTLY 10 SECONDS:\n0–3s: Establish the original shawl's full front drape as she stands beside the foyer wall.\n3–7s: She makes a gentle quarter turn, showing the actual side drape without adjusting it.\n7–10s: Facing camera, she says with precise lip sync: 'Hari ni saya pilih lilitan yang ringkas.'\nAUDIO: Only on-camera adult female speech in natural Malaysian Malay with accurate visible lip sync; quiet foyer ambience, no narrator or music.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic. One adult Universal Malaysian woman wears the exact reference shawl over a plain modest outfit in a quiet museum foyer, diffuse skylight. Preserve actual shawl colour, print, length, texture appearance and existing drape; no extra pins, fabricated fabric claims or altered wrapping. Eye-level medium portrait with face and full front drape visible for precise natural Malaysian Malay lip sync.\nUse the supplied reference image as the sole visual master. Preserve original product identity, realistic anatomy, scale, contact and continuity. No fabricated details, claims, captions, on-screen text, added logos or watermark.\nCONTINUITY: Match the final Part 1 frame exactly in subject, product, pose, props, lighting and camera axis; continue without replaying completed action.\nEXACTLY 10 SECONDS:\n0–3s: Continue from the same front-facing pose and shawl drape; she looks toward the gallery entrance.\n3–7s: She looks back to camera and says with precise lip sync: 'Jom tengok pameran, kita jalan santai.'\n7–10s: She takes one natural step, then pauses in a clear medium portrait with the original shawl visible.\nAUDIO: Only on-camera adult female speech in natural Malaysian Malay with accurate visible lip sync; quiet foyer ambience, no narrator or music."
+    },
+    {
+      "id": "v9_curated17_gadget_phone_accessory_10s_01",
+      "subcategory_id": "gadget_phone_accessory",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Desk phone stand",
+      "duration_seconds": 10,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Vertical 9:16 photorealistic. Exact reference phone stand with original geometry, hinge and visible support surfaces only; no invented charging, magnet or angle-adjustment claims. Bright uncluttered study desk, one plain unbranded phone sized realistically for the actual stand. Adult Malaysian hands and forearms only. Soft morning window light; stable three-quarter close camera and believable device weight.\nUse the supplied reference image as the sole visual master. Preserve original product identity, realistic anatomy, scale, contact and continuity. No fabricated details, claims, captions, on-screen text, added logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Establish the exact stand resting on the desk with the phone beside it.\n2–5s: Hand places the phone carefully against the stand's actual visible support surface.\n5–8s: Hand releases slowly, confirming the phone rests securely without changing the stand.\n8–10s: Hold a steady side hero frame showing original stand profile and supported phone.\nAUDIO: Off-camera Malaysian Malay narrator, hands silent: 'Telefon diletak pada pemegang, meja pun nampak tersusun.' Quiet desk ambience."
+    },
+    {
+      "id": "v9_curated17_gadget_phone_accessory_20s_01",
+      "subcategory_id": "gadget_phone_accessory",
+      "visual_category": "HANDS_ONLY",
+      "concept": "Desk phone stand",
+      "duration_seconds": 20,
+      "voice_type": "BACKGROUND_NARRATION",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic. Exact reference phone stand with original geometry, hinge and visible support surfaces only; no invented charging, magnet or angle-adjustment claims. Bright uncluttered study desk, one plain unbranded phone sized realistically for the actual stand. Adult Malaysian hands and forearms only. Soft morning window light; stable three-quarter close camera and believable device weight.\nUse the supplied reference image as the sole visual master. Preserve original product identity, realistic anatomy, scale, contact and continuity. No fabricated details, claims, captions, on-screen text, added logos or watermark.\nEXACTLY 10 SECONDS:\n0–3s: Establish the reference stand stationary on the desk with the plain phone beside it.\n3–7s: Hand lifts the phone and aligns it naturally with the stand's actual support surface.\n7–10s: Hand seats the phone securely and pauses while still lightly supporting it.\nAUDIO: Off-camera Malaysian Malay narrator, hands silent: 'Telefon diletak pada pemegang, meja pun nampak tersusun.' Quiet desk ambience.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic. Exact reference phone stand with original geometry, hinge and visible support surfaces only; no invented charging, magnet or angle-adjustment claims. Bright uncluttered study desk, one plain unbranded phone sized realistically for the actual stand. Adult Malaysian hands and forearms only. Soft morning window light; stable three-quarter close camera and believable device weight.\nUse the supplied reference image as the sole visual master. Preserve original product identity, realistic anatomy, scale, contact and continuity. No fabricated details, claims, captions, on-screen text, added logos or watermark.\nCONTINUITY: Match the final Part 1 frame exactly in subject, product, pose, props, lighting and camera axis; continue without replaying completed action.\nEXACTLY 10 SECONDS:\n0–3s: Resume with the phone already seated in the same stand and the hand lightly supporting it; hand releases gradually.\n3–7s: A restrained camera slide shows the real stand geometry and phone's stable resting position.\n7–10s: Hold a complete unobstructed three-quarter product view, no device movement.\nAUDIO: Off-camera Malaysian Malay narrator, hands silent: 'Dah terletak, senang tengok skrin di meja.' Quiet desk ambience."
+    },
+    {
+      "id": "v9_curated17_pet_carrier_10s_01",
+      "subcategory_id": "pet_carrier",
+      "visual_category": "ANIMAL_ONLY",
+      "concept": "Calm carrier introduction",
+      "duration_seconds": 10,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Vertical 9:16 photorealistic. Exact reference pet carrier with original opening, size, colour, ventilation and fastenings only; no invented features or travel-safety claims. Quiet bright living-room floor with the carrier stationary, its existing door held safely open. One calm adult domestic cat visible throughout; no forcing, confinement or abrupt motion. Low stable camera, natural curious feline movement, authentic scale.\nUse the supplied reference image as the sole visual master. Preserve original product identity, realistic anatomy, scale, contact and continuity. No fabricated details, claims, captions, on-screen text, added logos or watermark.\nEXACTLY 10 SECONDS:\n0–2s: Establish the original open carrier on the floor with the cat standing nearby.\n2–5s: The cat approaches and sniffs the real entrance calmly.\n5–8s: The cat voluntarily places its front paws inside while its body remains partly visible.\n8–10s: Hold a low stable frame of the curious cat and unchanged open carrier.\nAUDIO: No dialogue, narration or music; only subtle natural cat and room ambience."
+    },
+    {
+      "id": "v9_curated17_pet_carrier_20s_01",
+      "subcategory_id": "pet_carrier",
+      "visual_category": "ANIMAL_ONLY",
+      "concept": "Calm carrier introduction",
+      "duration_seconds": 20,
+      "voice_type": "NO_VOICE",
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "PART 1 — COMPLETE 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic. Exact reference pet carrier with original opening, size, colour, ventilation and fastenings only; no invented features or travel-safety claims. Quiet bright living-room floor with the carrier stationary, its existing door held safely open. One calm adult domestic cat visible throughout; no forcing, confinement or abrupt motion. Low stable camera, natural curious feline movement, authentic scale.\nUse the supplied reference image as the sole visual master. Preserve original product identity, realistic anatomy, scale, contact and continuity. No fabricated details, claims, captions, on-screen text, added logos or watermark.\nEXACTLY 10 SECONDS:\n0–3s: Show the original carrier resting flat with its existing door safely open; cat nearby.\n3–7s: Cat approaches at its own pace and sniffs the actual entrance.\n7–10s: Cat pauses with its nose near the entrance, body fully visible.\nAUDIO: No dialogue, narration or music; only subtle natural cat and room ambience.\n\nPART 2 — COMPLETE CONTINUOUS 10-SECOND VIDEO PROMPT\nVertical 9:16 photorealistic. Exact reference pet carrier with original opening, size, colour, ventilation and fastenings only; no invented features or travel-safety claims. Quiet bright living-room floor with the carrier stationary, its existing door held safely open. One calm adult domestic cat visible throughout; no forcing, confinement or abrupt motion. Low stable camera, natural curious feline movement, authentic scale.\nUse the supplied reference image as the sole visual master. Preserve original product identity, realistic anatomy, scale, contact and continuity. No fabricated details, claims, captions, on-screen text, added logos or watermark.\nCONTINUITY: Match the final Part 1 frame exactly in subject, product, pose, props, lighting and camera axis; continue without replaying completed action.\nEXACTLY 10 SECONDS:\n0–3s: Resume from the same sniffing position with carrier door unchanged and open.\n3–7s: Cat voluntarily places its front paws just inside the entrance, remaining calm.\n7–10s: Hold the open carrier and cat in a stable low frame; no door closure.\nAUDIO: No dialogue, narration or music; only subtle natural cat and room ambience."
+    }
+  ]
+}

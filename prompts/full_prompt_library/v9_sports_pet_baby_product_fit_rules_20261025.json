@@ -1,0 +1,348 @@
+{
+  "schema_version": 1,
+  "status": "DRAFT_PRODUCT_FIT_RULES",
+  "runtime_enabled": false,
+  "category": "sports_pets_baby",
+  "rule_format": [
+    "demonstration",
+    "camera",
+    "prohibited_assumption"
+  ],
+  "rules": {
+    "yoga_mat": [
+      "Unroll mat and perform gentle stretch",
+      "Wide floor shot",
+      "No anti-slip claim"
+    ],
+    "dumbbell": [
+      "Adult performs controlled curl",
+      "Upper-body shot",
+      "No invented weight"
+    ],
+    "resistance_band": [
+      "Adult performs gentle band pull",
+      "Mid shot",
+      "No resistance rating"
+    ],
+    "jump_rope": [
+      "Adult skips on clear flat ground",
+      "Full-body shot",
+      "No calorie claim"
+    ],
+    "foam_roller": [
+      "Adult rolls upper leg gently",
+      "Low side shot",
+      "No injury-treatment claim"
+    ],
+    "exercise_ball": [
+      "Adult sits on ball with stable posture",
+      "Full-body shot",
+      "No load rating"
+    ],
+    "kettlebell": [
+      "Adult performs safe deadlift",
+      "Full-body shot",
+      "No invented weight"
+    ],
+    "pushup_bar": [
+      "Adult demonstrates controlled push-up",
+      "Low side shot",
+      "No ergonomic claim"
+    ],
+    "boxing_gloves": [
+      "Adult wears gloves during light pad work",
+      "Hands close-up",
+      "No safety certification"
+    ],
+    "gym_bag": [
+      "Adult carries bag into gym",
+      "Waist crop",
+      "No invented compartments"
+    ],
+    "football": [
+      "Players pass ball on field",
+      "Low tracking",
+      "No official certification"
+    ],
+    "basketball": [
+      "Adult dribbles ball on court",
+      "Low tracking",
+      "No invented grip"
+    ],
+    "badminton_racket": [
+      "Adult swings racket on court",
+      "Racket detail",
+      "No invented string tension"
+    ],
+    "shuttlecock": [
+      "Show shuttlecock during short rally",
+      "Macro then court",
+      "No feather composition claim"
+    ],
+    "tennis_racket": [
+      "Adult practices controlled forehand",
+      "Court medium",
+      "No invented racket specifications"
+    ],
+    "table_tennis_bat": [
+      "Adult returns slow table-tennis ball",
+      "Hand close-up",
+      "No spin performance claim"
+    ],
+    "swimming_goggles": [
+      "Adult adjusts goggles poolside",
+      "Face crop",
+      "No anti-fog claim"
+    ],
+    "swim_cap": [
+      "Adult puts on cap poolside",
+      "Head crop",
+      "No waterproof hair claim"
+    ],
+    "swim_fins": [
+      "Adult demonstrates fins at pool edge",
+      "Foot close-up",
+      "No speed claim"
+    ],
+    "water_bottle_sports": [
+      "Adult drinks from bottle after workout",
+      "Hand close-up",
+      "No insulation claim"
+    ],
+    "cycling_helmet": [
+      "Adult fastens helmet strap",
+      "Head crop",
+      "No safety rating claim"
+    ],
+    "bike_light": [
+      "Show light attached to bike",
+      "Bike close-up",
+      "No lumen rating"
+    ],
+    "cycling_gloves": [
+      "Adult puts on gloves before ride",
+      "Hands macro",
+      "No impact protection claim"
+    ],
+    "bike_bell": [
+      "Adult rings visible bell",
+      "Handlebar close-up",
+      "No sound rating"
+    ],
+    "bike_pump": [
+      "Adult pumps bicycle tyre using compatible valve",
+      "Wheel close-up",
+      "No pressure rating"
+    ],
+    "hiking_pole": [
+      "Adult plants pole on stable trail",
+      "Hand and trail shot",
+      "No load rating"
+    ],
+    "camping_tent": [
+      "Show tent pitched on safe campsite",
+      "Wide then seam close-up",
+      "No weatherproof rating"
+    ],
+    "sleeping_bag": [
+      "Adult lays bag on camping mat",
+      "Overhead",
+      "No temperature rating"
+    ],
+    "camping_chair": [
+      "Adult sits naturally in chair",
+      "Side shot",
+      "No weight rating"
+    ],
+    "camping_lantern": [
+      "Place lantern on camping table",
+      "Evening medium",
+      "No runtime claim"
+    ],
+    "camping_stove": [
+      "Adult uses stove safely outdoors where permitted",
+      "Medium cooking shot",
+      "No invented fuel type"
+    ],
+    "fishing_rod": [
+      "Adult casts rod in open area",
+      "Wide side shot",
+      "No casting distance claim"
+    ],
+    "fishing_reel": [
+      "Adult turns reel handle",
+      "Hand macro",
+      "No gear ratio claim"
+    ],
+    "fishing_lure": [
+      "Display lure and attachment point",
+      "Macro detail",
+      "No guaranteed catch"
+    ],
+    "tackle_box": [
+      "Organize visible fishing items",
+      "Top-down",
+      "No invented trays"
+    ],
+    "pet_dry_food": [
+      "Pour measured pet kibble into bowl",
+      "Bowl close-up",
+      "No veterinary claim"
+    ],
+    "pet_wet_food": [
+      "Spoon food into pet bowl",
+      "Bowl close-up",
+      "No health claims"
+    ],
+    "pet_treat": [
+      "Offer small treat to suitable pet",
+      "Hand and pet crop",
+      "No training guarantee"
+    ],
+    "pet_bowl": [
+      "Place food or water in bowl",
+      "Low close-up",
+      "No anti-slip claim"
+    ],
+    "pet_water_fountain": [
+      "Show water flowing in fountain",
+      "Product close-up",
+      "No filtration claim"
+    ],
+    "pet_leash": [
+      "Attach leash to pet harness",
+      "Clip macro",
+      "No strength rating"
+    ],
+    "pet_harness": [
+      "Fit harness gently to appropriate pet",
+      "Pet torso close-up",
+      "No escape-proof claim"
+    ],
+    "pet_collar": [
+      "Adjust collar with comfortable fit",
+      "Neck close-up",
+      "No flea protection claim"
+    ],
+    "pet_carrier": [
+      "Show pet entering carrier calmly",
+      "Side shot",
+      "No airline compliance claim"
+    ],
+    "pet_bed": [
+      "Pet rests on bed naturally",
+      "Low medium",
+      "No orthopedic claim"
+    ],
+    "pet_litter_box": [
+      "Show clean litter box setup",
+      "Top-down",
+      "No odor elimination claim"
+    ],
+    "pet_grooming_brush": [
+      "Brush pet gently",
+      "Fur close-up",
+      "No shedding reduction guarantee"
+    ],
+    "pet_shampoo": [
+      "Show bottle and gentle pet bathing",
+      "Pet-safe close-up",
+      "No medicated claim"
+    ],
+    "pet_toy_ball": [
+      "Pet plays with ball under supervision",
+      "Low tracking",
+      "No chew-proof claim"
+    ],
+    "pet_scratch_post": [
+      "Cat scratches post naturally",
+      "Low side shot",
+      "No material claim"
+    ],
+    "pet_aquarium_accessory": [
+      "Install visible accessory in suitable aquarium",
+      "Tank close-up",
+      "No compatibility claim"
+    ],
+    "baby_bottle": [
+      "Adult prepares clean bottle",
+      "Counter close-up",
+      "No anti-colic claim"
+    ],
+    "baby_bib": [
+      "Adult fastens bib on seated baby",
+      "Chest close-up",
+      "No stain-proof claim"
+    ],
+    "baby_stroller": [
+      "Adult pushes stroller on level path",
+      "Side tracking",
+      "No safety certification"
+    ],
+    "baby_carrier": [
+      "Adult fits carrier following visible straps",
+      "Torso shot",
+      "No hip-health claim"
+    ],
+    "baby_diaper_bag": [
+      "Adult packs baby essentials in visible compartments",
+      "Overhead",
+      "No invented capacity"
+    ],
+    "baby_blanket": [
+      "Adult gently covers baby below shoulders",
+      "Nursery medium",
+      "No sleep safety claim"
+    ],
+    "baby_clothing": [
+      "Adult dresses baby gently",
+      "Clothing detail",
+      "No fabric certification"
+    ],
+    "baby_socks": [
+      "Adult places socks on baby feet",
+      "Feet close-up",
+      "No non-slip claim"
+    ],
+    "baby_bath_tub": [
+      "Adult prepares empty tub and bathing essentials",
+      "Bathroom medium",
+      "No safety certification"
+    ],
+    "baby_wipes": [
+      "Adult pulls wipe from pack",
+      "Hand macro",
+      "No hypoallergenic claim"
+    ],
+    "baby_diaper": [
+      "Show folded diaper and fastening on doll",
+      "Tabletop",
+      "No leak-proof claim"
+    ],
+    "baby_high_chair": [
+      "Show baby seated with adult supervision",
+      "Dining wide",
+      "No safety certification"
+    ],
+    "baby_playpen": [
+      "Show playpen in nursery with adult nearby",
+      "Wide shot",
+      "No safety certification"
+    ],
+    "baby_monitor": [
+      "Show device placed outside baby's reach",
+      "Nursery medium",
+      "No invented camera function"
+    ],
+    "baby_pacifier": [
+      "Adult displays pacifier hygienically",
+      "Hand macro",
+      "No medical claim"
+    ],
+    "baby_bottle_warmer": [
+      "Show bottle placed in warmer as designed",
+      "Counter close-up",
+      "No temperature precision claim"
+    ]
+  }
+}
