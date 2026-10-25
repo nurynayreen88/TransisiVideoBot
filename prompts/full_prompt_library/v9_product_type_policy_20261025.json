@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "status": "PRODUCT_TYPE_CLASSIFICATION_REQUIRED",
+  "scope": "ALL_130_SUBCATEGORIES",
+  "rule": "Select actual product type before choosing a product-specific storyboard; never assume product capabilities from category alone.",
+  "cookware": {
+    "legacy_id": "home_kitchen",
+    "v9_id": "home_kitchen_cookware",
+    "product_types": [
+      "periuk",
+      "kuali",
+      "periuk_tekanan",
+      "periuk_elektrik",
+      "pengukus",
+      "pemanggang",
+      "rice_cooker",
+      "other_verified_cookware"
+    ],
+    "policy": "Treat existing 50 dish-based concepts as an unassigned draft pool, not 50 type-validated prompts. Match recipes to verified cookware capability, dimensions and user-supplied product identity."
+  },
+  "global_policy": [
+    "Every subcategory must define real purchasable product types before prompt assignment.",
+    "Product name and selected type determine plausible actions, scale, camera and setting.",
+    "Do not invent materials, attachments, electric features or cooking functions.",
+    "No generic if clauses in final prompt. Produce standalone prompts for the selected type.",
+    "Do not activate drafts without type-fit review and render QA."
+  ],
+  "activation": false
+}
