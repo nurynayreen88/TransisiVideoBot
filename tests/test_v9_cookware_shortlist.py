@@ -90,6 +90,25 @@ class CookwareShortlistValidation(unittest.TestCase):
         self.assertIn("Gambar produk tidak perlu dimuat naik ke bot", bot)
         self.assertIn("Muat naik gambar produk asal yang sama ke platform AI pilihan", bot)
 
+    def test_review_preview_returns_exact_draft(self):
+        from v9_cookware_preview import preview_cookware_prompt
+        manifest = json.loads(SHORTLIST.read_text(encoding="utf-8"))
+        for entry in manifest["selected"]:
+            source = json.loads((LIB / entry["source_file"]).read_text(encoding="utf-8"))
+            index = {item["id"]: item for item in source["variations"]}
+            for duration, record_id in zip((10, 20), entry["record_ids"]):
+                preview = preview_cookware_prompt(entry["concept"], duration)
+                self.assertEqual(preview["id"], record_id)
+                self.assertEqual(preview["full_prompt"], index[record_id]["full_prompt"])
+                self.assertFalse(preview["runtime_activated"])
+
+    def test_review_preview_rejects_invalid_requests(self):
+        from v9_cookware_preview import preview_cookware_prompt
+        with self.assertRaises(ValueError):
+            preview_cookware_prompt("Nonexistent cookware concept", 10)
+        with self.assertRaises(ValueError):
+            preview_cookware_prompt("Rendang ayam", 30)
+
 
 if __name__ == "__main__":
     unittest.main()
