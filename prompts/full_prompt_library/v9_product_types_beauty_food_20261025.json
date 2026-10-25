@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "status": "DRAFT_TYPE_TAXONOMY_REVIEW",
+  "groups": {
+    "beauty_skincare": [
+      "cleanser",
+      "toner",
+      "serum",
+      "moisturizer",
+      "sunscreen",
+      "face mask",
+      "exfoliant"
+    ],
+    "beauty_makeup": [
+      "lipstick",
+      "lip tint",
+      "foundation",
+      "concealer",
+      "powder",
+      "blusher",
+      "eyeshadow",
+      "mascara"
+    ],
+    "beauty_hair": [
+      "shampoo",
+      "conditioner",
+      "hair oil",
+      "hair mask",
+      "hair serum",
+      "scalp tonic",
+      "hair spray"
+    ],
+    "beauty_perfume": [
+      "eau de parfum",
+      "eau de toilette",
+      "body mist",
+      "solid perfume",
+      "roll on perfume"
+    ],
+    "beauty_body": [
+      "body wash",
+      "body lotion",
+      "hand cream",
+      "deodorant",
+      "body scrub",
+      "foot cream"
+    ],
+    "beauty_tools": [
+      "makeup brush",
+      "beauty sponge",
+      "eyelash curler",
+      "facial roller",
+      "hair dryer",
+      "hair straightener"
+    ],
+    "beauty_other": [
+      "nail care kit",
+      "lip balm",
+      "grooming kit",
+      "beauty travel kit"
+    ],
+    "food_snacks": [
+      "potato chips",
+      "kerepek pisang",
+      "kacang",
+      "popcorn",
+      "keropok",
+      "granola bar",
+      "chocolate"
+    ],
+    "food_drinks": [
+      "coffee",
+      "tea",
+      "juice",
+      "powdered drink",
+      "milk",
+      "canned drink",
+      "syrup"
+    ],
+    "food_supplements": [
+      "protein powder",
+      "oat mix",
+      "meal replacement",
+      "fiber food",
+      "cereal"
+    ],
+    "food_frozen": [
+      "nugget",
+      "dumpling",
+      "frozen roti canai",
+      "frozen karipap",
+      "frozen seafood",
+      "frozen meat"
+    ],
+    "food_cooking": [
+      "sambal",
+      "chili sauce",
+      "curry paste",
+      "spice mix",
+      "soy sauce",
+      "cooking oil",
+      "pasta sauce"
+    ],
+    "food_bakery": [
+      "cookies",
+      "cake",
+      "brownies",
+      "bread",
+      "pastry",
+      "tart",
+      "biskut raya"
+    ],
+    "food_other": [
+      "rice",
+      "noodles",
+      "pasta",
+      "canned food",
+      "pickles",
+      "dried fruit"
+    ]
+  },
+  "activation": false
+}
