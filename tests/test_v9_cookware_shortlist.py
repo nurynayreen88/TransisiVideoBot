@@ -77,6 +77,19 @@ class CookwareShortlistValidation(unittest.TestCase):
         self.assertIn("Gambar produk tidak perlu dimuat naik ke bot", bot)
         self.assertIn("Muat naik gambar produk asal yang sama ke platform AI pilihan", bot)
 
+    def test_shortlist_sources_are_confined_to_library(self):
+        manifest = json.loads(SHORTLIST.read_text(encoding="utf-8"))
+        for entry in manifest["selected"]:
+            source_file = entry["source_file"]
+            self.assertEqual(Path(source_file).name, source_file)
+            self.assertTrue(source_file.endswith(".json"))
+            self.assertTrue((LIB / source_file).is_file())
+
+    def test_original_product_handoff_is_not_a_bot_upload(self):
+        bot = (ROOT / "bot.py").read_text(encoding="utf-8")
+        self.assertIn("Gambar produk tidak perlu dimuat naik ke bot", bot)
+        self.assertIn("Muat naik gambar produk asal yang sama ke platform AI pilihan", bot)
+
 
 if __name__ == "__main__":
     unittest.main()
