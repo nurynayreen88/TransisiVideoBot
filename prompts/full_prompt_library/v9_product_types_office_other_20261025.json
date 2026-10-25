@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "status": "DRAFT_TYPE_TAXONOMY_REVIEW",
+  "groups": {
+    "office_desk": [
+      "desk mat",
+      "monitor stand",
+      "desk lamp",
+      "pen holder",
+      "cable organizer",
+      "footrest"
+    ],
+    "office_storage": [
+      "file cabinet",
+      "document tray",
+      "archive box",
+      "binder rack",
+      "desktop drawer"
+    ],
+    "office_electronics": [
+      "printer",
+      "scanner",
+      "shredder",
+      "laminator",
+      "label printer",
+      "conference webcam"
+    ],
+    "office_furniture": [
+      "office chair",
+      "standing desk",
+      "meeting table",
+      "filing cabinet",
+      "bookcase"
+    ],
+    "office_stationery": [
+      "office pen",
+      "paper",
+      "sticky notes",
+      "stamp",
+      "stapler",
+      "binder clip"
+    ],
+    "office_cleaning": [
+      "keyboard cleaner",
+      "desk wipes",
+      "mini vacuum",
+      "screen cleaner",
+      "trash bin"
+    ],
+    "office_other": [
+      "whiteboard",
+      "noticeboard",
+      "presentation remote",
+      "nameplate",
+      "office clock"
+    ],
+    "other_health": [
+      "first aid kit",
+      "thermometer",
+      "hot cold pack",
+      "personal care organizer",
+      "support cushion"
+    ],
+    "other_garden": [
+      "plant pot",
+      "watering can",
+      "pruning shears",
+      "garden gloves",
+      "plant mister",
+      "garden hose"
+    ],
+    "other_hobby": [
+      "crochet kit",
+      "sewing kit",
+      "embroidery hoop",
+      "model paint",
+      "craft tools",
+      "bead kit"
+    ],
+    "other_car": [
+      "car organizer",
+      "motorcycle phone mount",
+      "vehicle sunshade",
+      "car cleaning brush"
+    ],
+    "other_daily": [
+      "umbrella",
+      "reusable shopping bag",
+      "laundry hamper",
+      "door stopper",
+      "portable stool"
+    ],
+    "other_gift": [
+      "gift box",
+      "hamper basket",
+      "greeting card",
+      "gift wrapping set",
+      "souvenir"
+    ],
+    "other_other": [
+      "custom verified product",
+      "miscellaneous product requiring classification"
+    ]
+  },
+  "activation": false
+}
