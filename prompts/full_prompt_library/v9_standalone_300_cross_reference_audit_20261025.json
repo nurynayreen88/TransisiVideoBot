@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "status": "DRAFT_STATIC_AUDIT",
+  "runtime_enabled": false,
+  "counts": {
+    "base": 100,
+    "voice": 100,
+    "talk": 100,
+    "total": 300,
+    "unique_ids": 300,
+    "unique_subcategories": 96
+  },
+  "cross_reference_errors": [],
+  "render_tested": false,
+  "notes": [
+    "Static pair validation only",
+    "No runtime activation",
+    "Render, lip sync, Malay speech timing and creative differentiation require further review"
+  ]
+}
