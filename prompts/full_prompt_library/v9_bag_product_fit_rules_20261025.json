@@ -1,0 +1,163 @@
+{
+  "schema_version": 1,
+  "status": "DRAFT_PRODUCT_FIT_RULES",
+  "runtime_enabled": false,
+  "category": "bag",
+  "rules": {
+    "top_handle": [
+      "Carry by visible handles",
+      "Shoulder-to-hip shot",
+      "Do not invent shoulder strap"
+    ],
+    "satchel": [
+      "Lift using actual handles",
+      "Desk then waist shot",
+      "Do not invent compartments"
+    ],
+    "hobo": [
+      "Carry against side",
+      "Side silhouette",
+      "Do not force rigid shape"
+    ],
+    "bucket": [
+      "Hold at realistic scale",
+      "Opening and side view",
+      "Do not invent drawstring"
+    ],
+    "mini_handbag": [
+      "Carry by existing handle",
+      "Hand-to-waist close-up",
+      "Do not enlarge scale"
+    ],
+    "crossbody": [
+      "Wear using visible strap",
+      "Torso tracking",
+      "Do not invent strap"
+    ],
+    "chest_sling": [
+      "Wear across chest",
+      "Upper torso",
+      "Do not invent buckle"
+    ],
+    "messenger": [
+      "Carry across shoulder",
+      "Side profile",
+      "Do not claim laptop capacity"
+    ],
+    "phone_sling": [
+      "Show alongside phone for scale",
+      "Torso close-up",
+      "Do not promise phone fit"
+    ],
+    "waist_bag": [
+      "Wear at waist",
+      "Waist framing",
+      "Do not invent pockets"
+    ],
+    "school_backpack": [
+      "Carry on both shoulders",
+      "Rear three-quarter",
+      "Do not invent reflective material"
+    ],
+    "hiking_backpack": [
+      "Adjust existing shoulder straps",
+      "Trail medium shot",
+      "Do not invent hydration system"
+    ],
+    "laptop_backpack": [
+      "Carry to desk",
+      "Rear and desk shot",
+      "Do not claim laptop size"
+    ],
+    "drawstring_bag": [
+      "Pull existing drawcord",
+      "Upper-body shot",
+      "Do not invent zipper"
+    ],
+    "laptop_sleeve": [
+      "Show alongside laptop",
+      "Desk top-down",
+      "Do not assert size compatibility"
+    ],
+    "briefcase": [
+      "Lift by visible handle",
+      "Office waist shot",
+      "Do not invent wheels"
+    ],
+    "tablet_sleeve": [
+      "Show beside tablet",
+      "Top-down",
+      "Do not assert size compatibility"
+    ],
+    "laptop_messenger": [
+      "Carry by visible strap",
+      "Office side shot",
+      "Do not invent compartments"
+    ],
+    "duffel": [
+      "Carry to travel counter",
+      "Waist-to-knee",
+      "Do not invent wheels"
+    ],
+    "weekender": [
+      "Set on luggage bench",
+      "Hotel medium shot",
+      "Do not invent capacity"
+    ],
+    "garment_bag": [
+      "Hang carefully on hook",
+      "Full-length",
+      "Do not invent hanger"
+    ],
+    "foldable_bag": [
+      "Show folded and unfolded",
+      "Tabletop",
+      "Do not invent folding hardware"
+    ],
+    "bifold": [
+      "Open and close",
+      "Macro tabletop",
+      "Do not invent slots"
+    ],
+    "long_wallet": [
+      "Hold and rotate",
+      "Tabletop",
+      "Do not invent zipper"
+    ],
+    "zip_wallet": [
+      "Use visible zipper",
+      "Macro zipper",
+      "Do not invent slots"
+    ],
+    "card_holder": [
+      "Use a visible slot",
+      "Macro detail",
+      "Do not claim RFID"
+    ],
+    "coin_purse": [
+      "Place coin in opening",
+      "Macro detail",
+      "Do not invent closure"
+    ],
+    "canvas_tote": [
+      "Carry by handles",
+      "Shoulder-to-hip",
+      "Do not invent zipper"
+    ],
+    "nylon_tote": [
+      "Carry on commute",
+      "Mid-body",
+      "Do not claim waterproof"
+    ],
+    "shopping_tote": [
+      "Place light grocery inside",
+      "Overhead and shoulder",
+      "Do not claim load rating"
+    ],
+    "beach_tote": [
+      "Carry at boardwalk",
+      "Full bag shot",
+      "Do not invent lining"
+    ]
+  }
+}
