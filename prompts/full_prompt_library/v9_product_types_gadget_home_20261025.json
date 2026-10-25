@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "status": "DRAFT_TYPE_TAXONOMY_REVIEW",
+  "groups": {
+    "gadget_phone": [
+      "smartphone",
+      "phone case",
+      "screen protector",
+      "phone stand",
+      "charger",
+      "power bank",
+      "charging cable"
+    ],
+    "gadget_audio": [
+      "earbuds",
+      "headphones",
+      "bluetooth speaker",
+      "soundbar",
+      "microphone",
+      "audio adapter"
+    ],
+    "gadget_computer": [
+      "laptop",
+      "desktop",
+      "keyboard",
+      "mouse",
+      "monitor",
+      "USB hub",
+      "external SSD"
+    ],
+    "gadget_smart": [
+      "smartwatch",
+      "fitness band",
+      "smart ring",
+      "wearable tracker",
+      "watch strap"
+    ],
+    "gadget_camera": [
+      "mirrorless camera",
+      "action camera",
+      "webcam",
+      "tripod",
+      "gimbal",
+      "camera bag"
+    ],
+    "gadget_home": [
+      "smart plug",
+      "air purifier",
+      "robot vacuum",
+      "security camera",
+      "smart bulb",
+      "portable fan"
+    ],
+    "gadget_other": [
+      "drone",
+      "projector",
+      "portable printer",
+      "gaming controller",
+      "GPS tracker"
+    ],
+    "home_kitchen": [
+      "stockpot",
+      "saucepan",
+      "wok",
+      "frying pan",
+      "pressure cooker",
+      "electric cooker",
+      "steamer",
+      "grill pan",
+      "rice cooker",
+      "baking tray"
+    ],
+    "home_storage": [
+      "storage box",
+      "drawer organizer",
+      "rack",
+      "food container",
+      "vacuum bag",
+      "shoe rack",
+      "wardrobe organizer"
+    ],
+    "home_cleaning": [
+      "mop",
+      "broom",
+      "vacuum cleaner",
+      "brush",
+      "squeegee",
+      "microfiber cloth",
+      "cleaning spray"
+    ],
+    "home_decor": [
+      "vase",
+      "wall art",
+      "mirror",
+      "artificial plant",
+      "clock",
+      "decor tray",
+      "carpet"
+    ],
+    "home_bedding": [
+      "bedsheet",
+      "pillowcase",
+      "duvet",
+      "comforter",
+      "pillow",
+      "mattress topper",
+      "blanket"
+    ],
+    "home_lighting": [
+      "table lamp",
+      "floor lamp",
+      "ceiling light",
+      "LED strip",
+      "night light",
+      "outdoor light"
+    ],
+    "home_furniture": [
+      "sofa",
+      "chair",
+      "dining table",
+      "shelf",
+      "cabinet",
+      "coffee table",
+      "bed frame"
+    ],
+    "home_other": [
+      "curtain",
+      "doormat",
+      "bath mat",
+      "bathroom accessory",
+      "laundry basket",
+      "wall hook"
+    ]
+  },
+  "activation": false
+}
