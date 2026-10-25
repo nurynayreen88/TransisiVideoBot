@@ -1,0 +1,98 @@
+{
+  "status": "DRAFT_TYPE_TAXONOMY_REVIEW",
+  "groups": {
+    "hijab_bawal": [
+      "cotton",
+      "satin",
+      "chiffon",
+      "voile",
+      "printed"
+    ],
+    "hijab_shawl": [
+      "chiffon",
+      "satin",
+      "jersey",
+      "crinkle",
+      "pashmina"
+    ],
+    "hijab_instant": [
+      "one piece",
+      "two piece",
+      "awning",
+      "khimar"
+    ],
+    "hijab_sport": [
+      "running",
+      "swim",
+      "gym",
+      "cycling"
+    ],
+    "hijab_inner": [
+      "ninja",
+      "neck",
+      "awning",
+      "tube",
+      "tieback"
+    ],
+    "hijab_accessory": [
+      "pin",
+      "magnet",
+      "brooch",
+      "clip",
+      "ring"
+    ],
+    "hijab_other": [
+      "tudung sekolah",
+      "tudung labuh",
+      "telekung"
+    ],
+    "shoes_sneakers": [
+      "low top",
+      "high top",
+      "slip on",
+      "canvas",
+      "training"
+    ],
+    "shoes_formal": [
+      "oxford",
+      "derby",
+      "loafer",
+      "monk strap",
+      "formal flats"
+    ],
+    "shoes_heels": [
+      "stiletto",
+      "block heels",
+      "kitten heels",
+      "wedges",
+      "platform"
+    ],
+    "shoes_sandals": [
+      "slides",
+      "flip flops",
+      "strappy sandals",
+      "sport sandals",
+      "clogs"
+    ],
+    "shoes_running": [
+      "road",
+      "trail",
+      "racing",
+      "walking",
+      "stability"
+    ],
+    "shoes_kids": [
+      "school shoes",
+      "kids sneakers",
+      "kids sandals",
+      "baby booties"
+    ],
+    "shoes_other": [
+      "boots",
+      "safety shoes",
+      "rain boots",
+      "water shoes"
+    ]
+  },
+  "activation": false
+}
