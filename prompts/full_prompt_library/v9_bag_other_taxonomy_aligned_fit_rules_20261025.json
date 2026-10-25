@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "status": "DRAFT_PRODUCT_FIT_RULES",
+  "runtime_enabled": false,
+  "category": "bag_other",
+  "taxonomy_aligned": true,
+  "groups": {
+    "bag_other": {
+      "clutch": {
+        "action": "Adult model holds clutch in one hand at a formal event",
+        "camera": "Hand-to-waist close-up",
+        "avoid": [
+          "Do not invent a shoulder strap"
+        ]
+      },
+      "evening bag": {
+        "action": "Adult model carries evening bag with its visible handle or chain",
+        "camera": "Torso crop and bag macro",
+        "avoid": [
+          "Do not invent detachable chain"
+        ]
+      },
+      "lunch bag": {
+        "action": "Adult places a closed food container beside lunch bag to demonstrate scale",
+        "camera": "Tabletop overhead",
+        "avoid": [
+          "Do not invent thermal insulation"
+        ]
+      },
+      "makeup pouch": {
+        "action": "Adult places makeup items into an already visible opening",
+        "camera": "Vanity top-down",
+        "avoid": [
+          "Do not invent compartments"
+        ]
+      },
+      "drawstring pouch": {
+        "action": "Hands open and close the existing drawstring pouch",
+        "camera": "Macro tabletop",
+        "avoid": [
+          "Do not invent a zipper"
+        ]
+      }
+    }
+  }
+}
