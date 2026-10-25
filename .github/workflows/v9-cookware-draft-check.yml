@@ -5,6 +5,8 @@ on:
       - staging/klippo-full-prompt-standalone-v2-20261024
     paths:
       - 'tests/test_v9_cookware_shortlist.py'
+      - 'tests/test_v9_product_type_taxonomy.py'
+      - 'prompts/full_prompt_library/v9_product_types_*.json'
       - 'prompts/full_prompt_library/v9_cookware_*.json'
       - '.github/workflows/v9-cookware-draft-check.yml'
   pull_request:
@@ -21,4 +23,6 @@ jobs:
         with:
           python-version: '3.11'
       - name: Validate staged cookware shortlist without activation
-        run: python -m unittest discover -s tests -p 'test_v9_cookware_shortlist.py' -v
+        run: |
+          python -m unittest discover -s tests -p 'test_v9_cookware_shortlist.py' -v
+          python -m unittest discover -s tests -p 'test_v9_product_type_taxonomy.py' -v
