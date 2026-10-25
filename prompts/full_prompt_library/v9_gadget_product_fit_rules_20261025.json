@@ -1,0 +1,223 @@
+{
+  "schema_version": 1,
+  "status": "DRAFT_PRODUCT_FIT_RULES",
+  "runtime_enabled": false,
+  "category": "gadget",
+  "rule_format": [
+    "demonstration",
+    "camera",
+    "prohibited_assumption"
+  ],
+  "rules": {
+    "smartphone": [
+      "Model holds phone and navigates visible screen",
+      "Hand and screen close-up",
+      "Do not invent interface"
+    ],
+    "phone_case": [
+      "Fit case to matching phone only when dimensions verified",
+      "Back and edge close-up",
+      "Do not invent MagSafe"
+    ],
+    "screen_protector": [
+      "Align protector over compatible screen",
+      "Top-down detail",
+      "Do not promise scratch rating"
+    ],
+    "phone_stand": [
+      "Place phone on stand at natural angle",
+      "Desk side profile",
+      "Do not invent rotation"
+    ],
+    "charger": [
+      "Connect visible charging cable to device",
+      "Plug and connector detail",
+      "Do not claim charging speed"
+    ],
+    "power_bank": [
+      "Connect bank to phone using visible port",
+      "Desk close-up",
+      "Do not invent capacity"
+    ],
+    "charging_cable": [
+      "Connect matching plugs to devices",
+      "Connector macro",
+      "Do not invent fast charge"
+    ],
+    "earbuds": [
+      "Adult places earbuds in ears",
+      "Head close-up",
+      "Do not claim noise cancellation"
+    ],
+    "headphones": [
+      "Adult wears headphones at desk",
+      "Head and product profile",
+      "Do not invent wireless mode"
+    ],
+    "bluetooth_speaker": [
+      "Show speaker playing on desk",
+      "Product hero and speaker detail",
+      "Do not invent light effects"
+    ],
+    "soundbar": [
+      "Place soundbar below television",
+      "Living room wide and detail",
+      "Do not invent surround channels"
+    ],
+    "microphone": [
+      "Adult speaks into microphone",
+      "Desk or studio medium shot",
+      "Do not invent sound processing"
+    ],
+    "audio_adapter": [
+      "Connect visible compatible plugs",
+      "Connector macro",
+      "Do not invent compatibility"
+    ],
+    "laptop": [
+      "Adult types on laptop at desk",
+      "Screen and keyboard angle",
+      "Do not invent software"
+    ],
+    "desktop": [
+      "Adult uses desktop computer",
+      "Desk wide and tower detail",
+      "Do not invent specifications"
+    ],
+    "keyboard": [
+      "Hands type naturally",
+      "Top-down key close-up",
+      "Do not invent RGB lighting"
+    ],
+    "mouse": [
+      "Hand clicks and scrolls mouse",
+      "Desk close-up",
+      "Do not invent programmable buttons"
+    ],
+    "monitor": [
+      "Adult works at monitor",
+      "Desk side and screen shot",
+      "Do not invent refresh rate"
+    ],
+    "USB_hub": [
+      "Connect verified plug and peripherals",
+      "Port macro",
+      "Do not invent port types"
+    ],
+    "external_SSD": [
+      "Place portable SSD next to laptop and connect compatible cable",
+      "Desk close-up",
+      "Do not claim transfer speed"
+    ],
+    "smartwatch": [
+      "Adult checks smartwatch on wrist",
+      "Wrist close-up",
+      "Do not invent health metrics"
+    ],
+    "fitness_band": [
+      "Adult wears band on walk",
+      "Wrist tracking",
+      "Do not invent medical readings"
+    ],
+    "smart_ring": [
+      "Adult wears ring on finger",
+      "Hand macro",
+      "Do not invent sensors"
+    ],
+    "wearable_tracker": [
+      "Show tracker attached as designed",
+      "Product close-up",
+      "Do not invent GPS"
+    ],
+    "watch_strap": [
+      "Attach strap to compatible watch only if fit verified",
+      "Wrist and clasp macro",
+      "Do not invent compatibility"
+    ],
+    "mirrorless_camera": [
+      "Photographer holds camera and frames shot",
+      "Camera and hands close-up",
+      "Do not invent lens included"
+    ],
+    "action_camera": [
+      "Mount camera on verified accessory",
+      "Product macro",
+      "Do not invent waterproof rating"
+    ],
+    "webcam": [
+      "Place webcam on monitor",
+      "Desk medium shot",
+      "Do not invent resolution"
+    ],
+    "tripod": [
+      "Open legs and mount compatible camera",
+      "Full tripod and joint close-up",
+      "Do not invent load capacity"
+    ],
+    "gimbal": [
+      "Balance compatible camera on gimbal",
+      "Medium movement shot",
+      "Do not invent stabilization modes"
+    ],
+    "camera_bag": [
+      "Photographer carries bag",
+      "Shoulder and bag profile",
+      "Do not invent padded compartments"
+    ],
+    "smart_plug": [
+      "Plug appliance into socket with power off during setup",
+      "Plug close-up",
+      "Do not invent app UI"
+    ],
+    "air_purifier": [
+      "Show purifier standing in living room",
+      "Full unit and intake detail",
+      "Do not claim filtration rate"
+    ],
+    "robot_vacuum": [
+      "Show robot moving on clear floor",
+      "Low tracking shot",
+      "Do not invent mapping"
+    ],
+    "security_camera": [
+      "Show camera installed in permitted home location",
+      "Mount and product detail",
+      "Do not invent night vision"
+    ],
+    "smart_bulb": [
+      "Show bulb in suitable lamp",
+      "Lamp close-up",
+      "Do not invent colors"
+    ],
+    "portable_fan": [
+      "Show fan running on desk",
+      "Product and airflow context",
+      "Do not invent battery life"
+    ],
+    "drone": [
+      "Show drone on ground then safe outdoor hover where permitted",
+      "Wide outdoor and drone close-up",
+      "Do not invent range"
+    ],
+    "projector": [
+      "Project onto wall in dim room",
+      "Projector and screen view",
+      "Do not invent brightness"
+    ],
+    "portable_printer": [
+      "Show paper feeding through printer",
+      "Desk close-up",
+      "Do not invent wireless connection"
+    ],
+    "gaming_controller": [
+      "Adult holds controller during play",
+      "Hands and controller detail",
+      "Do not invent console compatibility"
+    ],
+    "GPS_tracker": [
+      "Show tracker attached to appropriate item",
+      "Product macro",
+      "Do not invent live tracking screen"
+    ]
+  }
+}
