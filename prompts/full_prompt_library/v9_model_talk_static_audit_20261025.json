@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "status": "DRAFT_STATIC_AUDIT",
+  "runtime_enabled": false,
+  "model_talk_records": 34,
+  "unique_ids": 34,
+  "unique_subcategories": 34,
+  "issues": [
+    "v9_full10_modeltalk_001: duration",
+    "v9_full10_modeltalk_002: duration",
+    "v9_full10_modeltalk_003: duration",
+    "v9_full10_modeltalk_004: duration",
+    "v9_full10_modeltalk_005: duration",
+    "v9_full10_modeltalk_006: duration",
+    "v9_full10_modeltalk_007: duration",
+    "v9_full10_modeltalk_008: duration",
+    "v9_full10_modeltalk_009: duration",
+    "v9_full10_modeltalk_010: duration",
+    "v9_full10_modeltalk_011: duration",
+    "v9_full10_modeltalk_012: duration",
+    "v9_full10_modeltalk_013: duration",
+    "v9_full10_modeltalk_014: duration",
+    "v9_full10_modeltalk_015: duration"
+  ],
+  "limitations": [
+    "Not rendered or lip-sync tested.",
+    "Spoken scripts require native-language review for naturalness and timing.",
+    "No claim of production readiness or 130-subcategory completion."
+  ]
+}
