@@ -1,0 +1,388 @@
+{
+  "schema_version": 1,
+  "status": "DRAFT_PRODUCT_FIT_RULES",
+  "runtime_enabled": false,
+  "category": "accessories_and_toys",
+  "rule_format": [
+    "demonstration",
+    "camera",
+    "prohibited_assumption"
+  ],
+  "rules": {
+    "analog_watch": [
+      "Show watch worn on adult wrist",
+      "Wrist close-up",
+      "No invented water resistance"
+    ],
+    "digital_watch": [
+      "Adult checks visible display",
+      "Wrist close-up",
+      "No invented functions"
+    ],
+    "chronograph": [
+      "Show dial and existing subdials",
+      "Macro dial",
+      "No invented stopwatch operation"
+    ],
+    "dress_watch": [
+      "Adult adjusts watch cuff",
+      "Wrist and sleeve",
+      "No invented materials"
+    ],
+    "sport_watch": [
+      "Adult wears watch on walk",
+      "Wrist tracking",
+      "No invented sensors"
+    ],
+    "watch_strap": [
+      "Show strap and compatible watch side by side",
+      "Clasp close-up",
+      "No unverified compatibility"
+    ],
+    "ring": [
+      "Adult wears ring on finger",
+      "Hand macro",
+      "No invented gemstones"
+    ],
+    "necklace": [
+      "Adult wears necklace naturally",
+      "Neck and pendant crop",
+      "No invented chain length"
+    ],
+    "bracelet": [
+      "Adult fastens bracelet",
+      "Wrist macro",
+      "No invented clasp"
+    ],
+    "earrings": [
+      "Adult displays earrings worn",
+      "Ear close-up",
+      "No invented gemstones"
+    ],
+    "pendant": [
+      "Show pendant resting against clothing",
+      "Neck close-up",
+      "No invented chain"
+    ],
+    "brooch": [
+      "Pin brooch on suitable fabric",
+      "Fabric macro",
+      "No invented attachment"
+    ],
+    "anklet": [
+      "Show anklet around ankle",
+      "Ankle close-up",
+      "No invented clasp"
+    ],
+    "sunglasses": [
+      "Adult puts on sunglasses outdoors",
+      "Face close-up",
+      "No UV rating claim"
+    ],
+    "reading_glasses": [
+      "Adult reads with glasses",
+      "Face and book",
+      "No prescription claims"
+    ],
+    "blue_light_glasses": [
+      "Adult wears glasses at desk",
+      "Face side profile",
+      "No blue-light efficacy claims"
+    ],
+    "eyeglass_frame": [
+      "Adult tries on empty frame",
+      "Face close-up",
+      "No lens prescription"
+    ],
+    "eyeglass_case": [
+      "Place glasses in appropriately sized case",
+      "Tabletop",
+      "No invented lining"
+    ],
+    "leather_belt": [
+      "Adult threads belt through trouser loops",
+      "Waist crop",
+      "No invented leather grade"
+    ],
+    "canvas_belt": [
+      "Adult fastens canvas belt",
+      "Waist crop",
+      "No invented buckle"
+    ],
+    "formal_belt": [
+      "Adult fastens belt with formal trousers",
+      "Waist crop",
+      "No invented material"
+    ],
+    "fashion_waist_belt": [
+      "Adult styles belt over dress",
+      "Waist crop",
+      "No invented fastening"
+    ],
+    "kids_belt": [
+      "Show belt on clothing laid flat",
+      "Tabletop",
+      "No invented safety claim"
+    ],
+    "hair_clip": [
+      "Adult clips hair section",
+      "Hair close-up",
+      "No invented grip strength"
+    ],
+    "scrunchie": [
+      "Adult ties ponytail",
+      "Hair close-up",
+      "No invented fabric"
+    ],
+    "headband": [
+      "Adult positions headband",
+      "Head close-up",
+      "No invented padding"
+    ],
+    "hair_claw": [
+      "Adult secures twist with claw",
+      "Back of head",
+      "No invented teeth count"
+    ],
+    "hairpin": [
+      "Adult pins small hair section",
+      "Hair macro",
+      "No invented ornament"
+    ],
+    "hair_bow": [
+      "Adult styles bow in hair",
+      "Head crop",
+      "No invented clasp"
+    ],
+    "silk_scarf": [
+      "Adult drapes scarf around neck",
+      "Shoulder crop",
+      "No invented silk composition"
+    ],
+    "neck_scarf": [
+      "Adult ties scarf loosely",
+      "Neck crop",
+      "No invented fabric"
+    ],
+    "bandana": [
+      "Adult ties bandana",
+      "Head and shoulder",
+      "No invented print"
+    ],
+    "tie": [
+      "Adult adjusts necktie",
+      "Torso crop",
+      "No invented fabric"
+    ],
+    "pocket_square": [
+      "Adult places square in jacket pocket",
+      "Chest crop",
+      "No invented stitching"
+    ],
+    "keychain": [
+      "Attach keys to visible ring",
+      "Hand macro",
+      "No invented tracker"
+    ],
+    "lanyard": [
+      "Wear lanyard with visible attachment",
+      "Upper torso",
+      "No invented safety breakaway"
+    ],
+    "phone_charm": [
+      "Attach charm to compatible phone case",
+      "Hand macro",
+      "No invented connector"
+    ],
+    "badge_holder": [
+      "Insert card in holder",
+      "Chest and hand",
+      "No invented RFID"
+    ],
+    "fashion_gloves": [
+      "Adult puts on gloves",
+      "Hands macro",
+      "No warmth claims"
+    ],
+    "alphabet_puzzle": [
+      "Child assembles alphabet pieces on table",
+      "Hands top-down",
+      "No educational outcome claim"
+    ],
+    "shape_sorter": [
+      "Child fits shapes into sorter",
+      "Hands close-up",
+      "No age certification"
+    ],
+    "flashcards": [
+      "Adult flips cards for child",
+      "Tabletop",
+      "No guaranteed learning"
+    ],
+    "counting_beads": [
+      "Child moves beads with supervision",
+      "Hands close-up",
+      "No age certification"
+    ],
+    "STEM_kit": [
+      "Show verified kit components being assembled",
+      "Tabletop",
+      "No invented electronics"
+    ],
+    "learning_board": [
+      "Child interacts with board",
+      "Tabletop",
+      "No guaranteed learning"
+    ],
+    "action_figure": [
+      "Rotate figure to show articulation if visible",
+      "Product close-up",
+      "No invented joints"
+    ],
+    "doll": [
+      "Child holds doll gently",
+      "Waist crop",
+      "No invented sound feature"
+    ],
+    "plush_toy": [
+      "Child hugs plush toy",
+      "Mid shot",
+      "No hypoallergenic claim"
+    ],
+    "collectible_figure": [
+      "Display figure on shelf",
+      "Product macro",
+      "No invented accessories"
+    ],
+    "miniature_figure": [
+      "Display miniature beside scale reference",
+      "Macro shot",
+      "No invented scale ratio"
+    ],
+    "building_bricks": [
+      "Assemble visible bricks into simple form",
+      "Hands overhead",
+      "No invented brick shapes"
+    ],
+    "magnetic_tiles": [
+      "Arrange visible tiles into structure",
+      "Tabletop",
+      "No magnet strength claim"
+    ],
+    "wooden_blocks": [
+      "Stack blocks",
+      "Hands close-up",
+      "No wood species claim"
+    ],
+    "construction_kit": [
+      "Assemble actual kit pieces",
+      "Tabletop",
+      "No invented motor"
+    ],
+    "model_kit": [
+      "Show model parts being joined",
+      "Macro hands",
+      "No invented glue"
+    ],
+    "kite": [
+      "Fly kite in open safe area",
+      "Wide outdoor",
+      "No wind-rating claim"
+    ],
+    "bubble_toy": [
+      "Demonstrate bubbles outdoors",
+      "Medium shot",
+      "No included solution claim"
+    ],
+    "water_toy": [
+      "Use toy in supervised shallow play",
+      "Outdoor medium",
+      "No safety certification"
+    ],
+    "sand_play_set": [
+      "Use scoop and bucket in sand",
+      "Hands low angle",
+      "No invented pieces"
+    ],
+    "outdoor_play_ball": [
+      "Roll ball on grass",
+      "Low tracking",
+      "No invented bounce rating"
+    ],
+    "rattle": [
+      "Adult shakes rattle gently near baby",
+      "Hand close-up",
+      "No age suitability claim"
+    ],
+    "teether_toy": [
+      "Adult displays teether",
+      "Hand macro",
+      "No medical teething claim"
+    ],
+    "soft_book": [
+      "Adult turns soft book pages with baby",
+      "Hands close-up",
+      "No material claim"
+    ],
+    "sensory_ball": [
+      "Baby reaches for ball with supervision",
+      "Floor close-up",
+      "No developmental guarantee"
+    ],
+    "baby_play_gym": [
+      "Baby lies under gym with adult nearby",
+      "Wide nursery",
+      "No safety certification"
+    ],
+    "board_game": [
+      "Family moves pieces on board",
+      "Top-down",
+      "No invented rules"
+    ],
+    "card_game": [
+      "Hands deal cards",
+      "Tabletop",
+      "No invented deck content"
+    ],
+    "puzzle_game": [
+      "Hands fit puzzle pieces",
+      "Top-down",
+      "No invented piece count"
+    ],
+    "strategy_game": [
+      "Adults consider game board",
+      "Overhead",
+      "No invented rules"
+    ],
+    "party_game": [
+      "Friends interact with provided pieces",
+      "Tabletop",
+      "No invented components"
+    ],
+    "remote_control_car": [
+      "Drive toy car across clear floor",
+      "Low tracking",
+      "No invented speed"
+    ],
+    "musical_toy": [
+      "Press visible control on musical toy",
+      "Product close-up",
+      "No invented melody"
+    ],
+    "roleplay_kitchen": [
+      "Child plays with toy kitchen under supervision",
+      "Medium shot",
+      "No invented appliances"
+    ],
+    "craft_toy": [
+      "Assemble visible craft components",
+      "Hands close-up",
+      "No invented materials"
+    ],
+    "fidget_toy": [
+      "Hands manipulate toy as designed",
+      "Hand macro",
+      "No therapeutic claims"
+    ]
+  }
+}
