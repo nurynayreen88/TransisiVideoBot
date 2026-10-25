@@ -1,0 +1,227 @@
+{
+  "schema_version": 1,
+  "status": "DRAFT_CREATIVE_QA",
+  "runtime_enabled": false,
+  "variations": [
+    {
+      "id": "v9_creative_modeltalk_051",
+      "subcategory_id": "fashion_dress",
+      "product_type": "dress maxi",
+      "concept": "Staircase flow",
+      "duration_seconds": 10,
+      "voice_type": "on_camera_model",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_CREATIVE_QA",
+      "full_prompt": "Create exactly one 10-second photorealistic vertical 9:16 Malaysian affiliate product video. Product: dress maxi. Match the supplied product image exactly for visible design, color, pattern, proportions and components; never invent details. STORY CONCEPT: Staircase flow. 0–2s HOOK: Start mid-action with the genuine product already prominent and an adult Malaysian presenter in view. 2–7s PRODUCT USE: An adult woman descends two broad indoor steps slowly while holding the actual maxi dress clear of her feet; the camera follows its real drape. Keep believable physics, camera continuity, safe interaction and natural Malaysian setting. 7–10s CTA: End on a clear product-and-presenter composition, with a friendly direct-to-camera invitation. EXACT SPOKEN MALAY MALAYSIA DIALOGUE: “Dress ini nampak cantik bila bergerak. Jom tengok!” The presenter delivers this short line naturally with accurate lip sync; finish the invitation during the closing shot. No narrator, Indonesian accent, extra speech, subtitles, text overlay, watermark, unsupported performance claims or fabricated accessories. Low background music and natural ambience."
+    },
+    {
+      "id": "v9_creative_modeltalk_052",
+      "subcategory_id": "fashion_men",
+      "product_type": "kemeja lelaki",
+      "concept": "Before the meeting",
+      "duration_seconds": 10,
+      "voice_type": "on_camera_model",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_CREATIVE_QA",
+      "full_prompt": "Create exactly one 10-second photorealistic vertical 9:16 Malaysian affiliate product video. Product: kemeja lelaki. Match the supplied product image exactly for visible design, color, pattern, proportions and components; never invent details. STORY CONCEPT: Before the meeting. 0–2s HOOK: Start mid-action with the genuine product already prominent and an adult Malaysian presenter in view. 2–7s PRODUCT USE: An adult man buttons the real shirt at a mirror, smooths the collar and picks up a folder before leaving. Keep believable physics, camera continuity, safe interaction and natural Malaysian setting. 7–10s CTA: End on a clear product-and-presenter composition, with a friendly direct-to-camera invitation. EXACT SPOKEN MALAY MALAYSIA DIALOGUE: “Kemeja ini nampak kemas untuk kerja. Jom tengok!” The presenter delivers this short line naturally with accurate lip sync; finish the invitation during the closing shot. No narrator, Indonesian accent, extra speech, subtitles, text overlay, watermark, unsupported performance claims or fabricated accessories. Low background music and natural ambience."
+    },
+    {
+      "id": "v9_creative_modeltalk_053",
+      "subcategory_id": "fashion_sport",
+      "product_type": "tracksuit",
+      "concept": "Warm-up lap",
+      "duration_seconds": 10,
+      "voice_type": "on_camera_model",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_CREATIVE_QA",
+      "full_prompt": "Create exactly one 10-second photorealistic vertical 9:16 Malaysian affiliate product video. Product: tracksuit. Match the supplied product image exactly for visible design, color, pattern, proportions and components; never invent details. STORY CONCEPT: Warm-up lap. 0–2s HOOK: Start mid-action with the genuine product already prominent and an adult Malaysian presenter in view. 2–7s PRODUCT USE: An adult athlete zips the actual tracksuit jacket, stretches arms gently and walks a few steps on a shaded track. Keep believable physics, camera continuity, safe interaction and natural Malaysian setting. 7–10s CTA: End on a clear product-and-presenter composition, with a friendly direct-to-camera invitation. EXACT SPOKEN MALAY MALAYSIA DIALOGUE: “Tracksuit ini nampak bergaya. Jom tengok!” The presenter delivers this short line naturally with accurate lip sync; finish the invitation during the closing shot. No narrator, Indonesian accent, extra speech, subtitles, text overlay, watermark, unsupported performance claims or fabricated accessories. Low background music and natural ambience."
+    },
+    {
+      "id": "v9_creative_modeltalk_054",
+      "subcategory_id": "fashion_other",
+      "product_type": "pakaian tidur",
+      "concept": "Evening wind-down",
+      "duration_seconds": 10,
+      "voice_type": "on_camera_model",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_CREATIVE_QA",
+      "full_prompt": "Create exactly one 10-second photorealistic vertical 9:16 Malaysian affiliate product video. Product: pakaian tidur. Match the supplied product image exactly for visible design, color, pattern, proportions and components; never invent details. STORY CONCEPT: Evening wind-down. 0–2s HOOK: Start mid-action with the genuine product already prominent and an adult Malaysian presenter in view. 2–7s PRODUCT USE: An adult presenter folds a blanket on a sofa while wearing the exact sleepwear, then sits down with a book. Keep believable physics, camera continuity, safe interaction and natural Malaysian setting. 7–10s CTA: End on a clear product-and-presenter composition, with a friendly direct-to-camera invitation. EXACT SPOKEN MALAY MALAYSIA DIALOGUE: “Baju tidur ini pilihan saya malam ini. Jom tengok!” The presenter delivers this short line naturally with accurate lip sync; finish the invitation during the closing shot. No narrator, Indonesian accent, extra speech, subtitles, text overlay, watermark, unsupported performance claims or fabricated accessories. Low background music and natural ambience."
+    },
+    {
+      "id": "v9_creative_modeltalk_055",
+      "subcategory_id": "bag_laptop",
+      "product_type": "laptop sleeve",
+      "concept": "Work bag switch",
+      "duration_seconds": 10,
+      "voice_type": "on_camera_model",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_CREATIVE_QA",
+      "full_prompt": "Create exactly one 10-second photorealistic vertical 9:16 Malaysian affiliate product video. Product: laptop sleeve. Match the supplied product image exactly for visible design, color, pattern, proportions and components; never invent details. STORY CONCEPT: Work bag switch. 0–2s HOOK: Start mid-action with the genuine product already prominent and an adult Malaysian presenter in view. 2–7s PRODUCT USE: An adult presenter slides a laptop into the real sleeve at a desk, closes the visible opening and places it into a work bag. Keep believable physics, camera continuity, safe interaction and natural Malaysian setting. 7–10s CTA: End on a clear product-and-presenter composition, with a friendly direct-to-camera invitation. EXACT SPOKEN MALAY MALAYSIA DIALOGUE: “Sarung laptop ini saya bawa ke pejabat. Jom tengok!” The presenter delivers this short line naturally with accurate lip sync; finish the invitation during the closing shot. No narrator, Indonesian accent, extra speech, subtitles, text overlay, watermark, unsupported performance claims or fabricated accessories. Low background music and natural ambience."
+    },
+    {
+      "id": "v9_creative_modeltalk_056",
+      "subcategory_id": "hijab_sport",
+      "product_type": "running hijab",
+      "concept": "Track preparation",
+      "duration_seconds": 10,
+      "voice_type": "on_camera_model",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_CREATIVE_QA",
+      "full_prompt": "Create exactly one 10-second photorealistic vertical 9:16 Malaysian affiliate product video. Product: running hijab. Match the supplied product image exactly for visible design, color, pattern, proportions and components; never invent details. STORY CONCEPT: Track preparation. 0–2s HOOK: Start mid-action with the genuine product already prominent and an adult Malaysian presenter in view. 2–7s PRODUCT USE: An adult Malaysian woman adjusts the actual sports hijab at a trackside mirror and performs a gentle warm-up. Keep believable physics, camera continuity, safe interaction and natural Malaysian setting. 7–10s CTA: End on a clear product-and-presenter composition, with a friendly direct-to-camera invitation. EXACT SPOKEN MALAY MALAYSIA DIALOGUE: “Tudung sukan ini nampak kemas. Jom tengok!” The presenter delivers this short line naturally with accurate lip sync; finish the invitation during the closing shot. No narrator, Indonesian accent, extra speech, subtitles, text overlay, watermark, unsupported performance claims or fabricated accessories. Low background music and natural ambience."
+    },
+    {
+      "id": "v9_creative_modeltalk_057",
+      "subcategory_id": "shoes_sneakers",
+      "product_type": "low top",
+      "concept": "Weekend outfit",
+      "duration_seconds": 10,
+      "voice_type": "on_camera_model",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_CREATIVE_QA",
+      "full_prompt": "Create exactly one 10-second photorealistic vertical 9:16 Malaysian affiliate product video. Product: low top. Match the supplied product image exactly for visible design, color, pattern, proportions and components; never invent details. STORY CONCEPT: Weekend outfit. 0–2s HOOK: Start mid-action with the genuine product already prominent and an adult Malaysian presenter in view. 2–7s PRODUCT USE: An adult presenter ties the real low-top sneakers while seated, stands and walks across a dry courtyard. Keep believable physics, camera continuity, safe interaction and natural Malaysian setting. 7–10s CTA: End on a clear product-and-presenter composition, with a friendly direct-to-camera invitation. EXACT SPOKEN MALAY MALAYSIA DIALOGUE: “Sneakers ini melengkapkan gaya saya. Jom tengok!” The presenter delivers this short line naturally with accurate lip sync; finish the invitation during the closing shot. No narrator, Indonesian accent, extra speech, subtitles, text overlay, watermark, unsupported performance claims or fabricated accessories. Low background music and natural ambience."
+    },
+    {
+      "id": "v9_creative_modeltalk_058",
+      "subcategory_id": "shoes_other",
+      "product_type": "rain boots",
+      "concept": "After-rain doorstep",
+      "duration_seconds": 10,
+      "voice_type": "on_camera_model",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_CREATIVE_QA",
+      "full_prompt": "Create exactly one 10-second photorealistic vertical 9:16 Malaysian affiliate product video. Product: rain boots. Match the supplied product image exactly for visible design, color, pattern, proportions and components; never invent details. STORY CONCEPT: After-rain doorstep. 0–2s HOOK: Start mid-action with the genuine product already prominent and an adult Malaysian presenter in view. 2–7s PRODUCT USE: An adult presenter pulls on the actual rain boots on a covered porch and steps onto a damp but safe path. Keep believable physics, camera continuity, safe interaction and natural Malaysian setting. 7–10s CTA: End on a clear product-and-presenter composition, with a friendly direct-to-camera invitation. EXACT SPOKEN MALAY MALAYSIA DIALOGUE: “But hujan ini nampak menarik. Jom tengok!” The presenter delivers this short line naturally with accurate lip sync; finish the invitation during the closing shot. No narrator, Indonesian accent, extra speech, subtitles, text overlay, watermark, unsupported performance claims or fabricated accessories. Low background music and natural ambience."
+    },
+    {
+      "id": "v9_creative_modeltalk_059",
+      "subcategory_id": "beauty_perfume",
+      "product_type": "body mist",
+      "concept": "Final ready-up",
+      "duration_seconds": 10,
+      "voice_type": "on_camera_model",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_CREATIVE_QA",
+      "full_prompt": "Create exactly one 10-second photorealistic vertical 9:16 Malaysian affiliate product video. Product: body mist. Match the supplied product image exactly for visible design, color, pattern, proportions and components; never invent details. STORY CONCEPT: Final ready-up. 0–2s HOOK: Start mid-action with the genuine product already prominent and an adult Malaysian presenter in view. 2–7s PRODUCT USE: An adult woman holds the authentic body mist bottle at a vanity, sprays once away from her face and replaces it on the table. Keep believable physics, camera continuity, safe interaction and natural Malaysian setting. 7–10s CTA: End on a clear product-and-presenter composition, with a friendly direct-to-camera invitation. EXACT SPOKEN MALAY MALAYSIA DIALOGUE: “Ini body mist pilihan saya hari ini. Jom tengok!” The presenter delivers this short line naturally with accurate lip sync; finish the invitation during the closing shot. No narrator, Indonesian accent, extra speech, subtitles, text overlay, watermark, unsupported performance claims or fabricated accessories. Low background music and natural ambience."
+    },
+    {
+      "id": "v9_creative_modeltalk_060",
+      "subcategory_id": "beauty_tools",
+      "product_type": "makeup brush",
+      "concept": "Blush finishing",
+      "duration_seconds": 10,
+      "voice_type": "on_camera_model",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_CREATIVE_QA",
+      "full_prompt": "Create exactly one 10-second photorealistic vertical 9:16 Malaysian affiliate product video. Product: makeup brush. Match the supplied product image exactly for visible design, color, pattern, proportions and components; never invent details. STORY CONCEPT: Blush finishing. 0–2s HOOK: Start mid-action with the genuine product already prominent and an adult Malaysian presenter in view. 2–7s PRODUCT USE: An adult presenter gently sweeps the actual brush across a cheek, sets it down and shows its visible bristles. Keep believable physics, camera continuity, safe interaction and natural Malaysian setting. 7–10s CTA: End on a clear product-and-presenter composition, with a friendly direct-to-camera invitation. EXACT SPOKEN MALAY MALAYSIA DIALOGUE: “Saya guna berus ini untuk solekan. Jom tengok!” The presenter delivers this short line naturally with accurate lip sync; finish the invitation during the closing shot. No narrator, Indonesian accent, extra speech, subtitles, text overlay, watermark, unsupported performance claims or fabricated accessories. Low background music and natural ambience."
+    },
+    {
+      "id": "v9_creative_modeltalk_061",
+      "subcategory_id": "food_snacks",
+      "product_type": "popcorn",
+      "concept": "Movie night bowl",
+      "duration_seconds": 10,
+      "voice_type": "on_camera_model",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_CREATIVE_QA",
+      "full_prompt": "Create exactly one 10-second photorealistic vertical 9:16 Malaysian affiliate product video. Product: popcorn. Match the supplied product image exactly for visible design, color, pattern, proportions and components; never invent details. STORY CONCEPT: Movie night bowl. 0–2s HOOK: Start mid-action with the genuine product already prominent and an adult Malaysian presenter in view. 2–7s PRODUCT USE: An adult presenter pours the actual packaged popcorn into a bowl beside a television, then holds the unchanged pack near the bowl. Keep believable physics, camera continuity, safe interaction and natural Malaysian setting. 7–10s CTA: End on a clear product-and-presenter composition, with a friendly direct-to-camera invitation. EXACT SPOKEN MALAY MALAYSIA DIALOGUE: “Popcorn ini teman saya tengok filem. Jom tengok!” The presenter delivers this short line naturally with accurate lip sync; finish the invitation during the closing shot. No narrator, Indonesian accent, extra speech, subtitles, text overlay, watermark, unsupported performance claims or fabricated accessories. Low background music and natural ambience."
+    },
+    {
+      "id": "v9_creative_modeltalk_062",
+      "subcategory_id": "food_supplements",
+      "product_type": "oat mix",
+      "concept": "Breakfast prep",
+      "duration_seconds": 10,
+      "voice_type": "on_camera_model",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_CREATIVE_QA",
+      "full_prompt": "Create exactly one 10-second photorealistic vertical 9:16 Malaysian affiliate product video. Product: oat mix. Match the supplied product image exactly for visible design, color, pattern, proportions and components; never invent details. STORY CONCEPT: Breakfast prep. 0–2s HOOK: Start mid-action with the genuine product already prominent and an adult Malaysian presenter in view. 2–7s PRODUCT USE: An adult presenter spoons the actual oat mix into a bowl, adds milk and stirs naturally without claiming health effects. Keep believable physics, camera continuity, safe interaction and natural Malaysian setting. 7–10s CTA: End on a clear product-and-presenter composition, with a friendly direct-to-camera invitation. EXACT SPOKEN MALAY MALAYSIA DIALOGUE: “Saya sediakan oat untuk sarapan. Jom tengok!” The presenter delivers this short line naturally with accurate lip sync; finish the invitation during the closing shot. No narrator, Indonesian accent, extra speech, subtitles, text overlay, watermark, unsupported performance claims or fabricated accessories. Low background music and natural ambience."
+    },
+    {
+      "id": "v9_creative_modeltalk_063",
+      "subcategory_id": "gadget_home",
+      "product_type": "portable fan",
+      "concept": "Desk refresh",
+      "duration_seconds": 10,
+      "voice_type": "on_camera_model",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_CREATIVE_QA",
+      "full_prompt": "Create exactly one 10-second photorealistic vertical 9:16 Malaysian affiliate product video. Product: portable fan. Match the supplied product image exactly for visible design, color, pattern, proportions and components; never invent details. STORY CONCEPT: Desk refresh. 0–2s HOOK: Start mid-action with the genuine product already prominent and an adult Malaysian presenter in view. 2–7s PRODUCT USE: An adult presenter places the actual portable fan on a desk, uses only a visible control and points its head toward the workspace. Keep believable physics, camera continuity, safe interaction and natural Malaysian setting. 7–10s CTA: End on a clear product-and-presenter composition, with a friendly direct-to-camera invitation. EXACT SPOKEN MALAY MALAYSIA DIALOGUE: “Kipas ini saya letak di meja. Jom tengok!” The presenter delivers this short line naturally with accurate lip sync; finish the invitation during the closing shot. No narrator, Indonesian accent, extra speech, subtitles, text overlay, watermark, unsupported performance claims or fabricated accessories. Low background music and natural ambience."
+    },
+    {
+      "id": "v9_creative_modeltalk_064",
+      "subcategory_id": "gadget_other",
+      "product_type": "portable projector",
+      "concept": "Movie corner",
+      "duration_seconds": 10,
+      "voice_type": "on_camera_model",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_CREATIVE_QA",
+      "full_prompt": "Create exactly one 10-second photorealistic vertical 9:16 Malaysian affiliate product video. Product: portable projector. Match the supplied product image exactly for visible design, color, pattern, proportions and components; never invent details. STORY CONCEPT: Movie corner. 0–2s HOOK: Start mid-action with the genuine product already prominent and an adult Malaysian presenter in view. 2–7s PRODUCT USE: An adult presenter positions the actual projector on a stable table, switches it on using a visible control and watches its projection. Keep believable physics, camera continuity, safe interaction and natural Malaysian setting. 7–10s CTA: End on a clear product-and-presenter composition, with a friendly direct-to-camera invitation. EXACT SPOKEN MALAY MALAYSIA DIALOGUE: “Saya sediakan projektor untuk malam filem. Jom tengok!” The presenter delivers this short line naturally with accurate lip sync; finish the invitation during the closing shot. No narrator, Indonesian accent, extra speech, subtitles, text overlay, watermark, unsupported performance claims or fabricated accessories. Low background music and natural ambience."
+    },
+    {
+      "id": "v9_creative_modeltalk_065",
+      "subcategory_id": "home_decor",
+      "product_type": "mirror",
+      "concept": "Entryway styling",
+      "duration_seconds": 10,
+      "voice_type": "on_camera_model",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_CREATIVE_QA",
+      "full_prompt": "Create exactly one 10-second photorealistic vertical 9:16 Malaysian affiliate product video. Product: mirror. Match the supplied product image exactly for visible design, color, pattern, proportions and components; never invent details. STORY CONCEPT: Entryway styling. 0–2s HOOK: Start mid-action with the genuine product already prominent and an adult Malaysian presenter in view. 2–7s PRODUCT USE: An adult presenter places the actual mirror safely against a secured wall, straightens a nearby plant and checks the reflection. Keep believable physics, camera continuity, safe interaction and natural Malaysian setting. 7–10s CTA: End on a clear product-and-presenter composition, with a friendly direct-to-camera invitation. EXACT SPOKEN MALAY MALAYSIA DIALOGUE: “Cermin ini cantik untuk ruang rumah. Jom tengok!” The presenter delivers this short line naturally with accurate lip sync; finish the invitation during the closing shot. No narrator, Indonesian accent, extra speech, subtitles, text overlay, watermark, unsupported performance claims or fabricated accessories. Low background music and natural ambience."
+    },
+    {
+      "id": "v9_creative_modeltalk_066",
+      "subcategory_id": "home_furniture",
+      "product_type": "coffee table",
+      "concept": "Living room reset",
+      "duration_seconds": 10,
+      "voice_type": "on_camera_model",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_CREATIVE_QA",
+      "full_prompt": "Create exactly one 10-second photorealistic vertical 9:16 Malaysian affiliate product video. Product: coffee table. Match the supplied product image exactly for visible design, color, pattern, proportions and components; never invent details. STORY CONCEPT: Living room reset. 0–2s HOOK: Start mid-action with the genuine product already prominent and an adult Malaysian presenter in view. 2–7s PRODUCT USE: An adult presenter places a book and cup on the actual coffee table, then sits on the sofa beside it. Keep believable physics, camera continuity, safe interaction and natural Malaysian setting. 7–10s CTA: End on a clear product-and-presenter composition, with a friendly direct-to-camera invitation. EXACT SPOKEN MALAY MALAYSIA DIALOGUE: “Meja ini melengkapkan ruang tamu. Jom tengok!” The presenter delivers this short line naturally with accurate lip sync; finish the invitation during the closing shot. No narrator, Indonesian accent, extra speech, subtitles, text overlay, watermark, unsupported performance claims or fabricated accessories. Low background music and natural ambience."
+    },
+    {
+      "id": "v9_creative_modeltalk_067",
+      "subcategory_id": "accessory_watch",
+      "product_type": "analog watch",
+      "concept": "Time to leave",
+      "duration_seconds": 10,
+      "voice_type": "on_camera_model",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_CREATIVE_QA",
+      "full_prompt": "Create exactly one 10-second photorealistic vertical 9:16 Malaysian affiliate product video. Product: analog watch. Match the supplied product image exactly for visible design, color, pattern, proportions and components; never invent details. STORY CONCEPT: Time to leave. 0–2s HOOK: Start mid-action with the genuine product already prominent and an adult Malaysian presenter in view. 2–7s PRODUCT USE: An adult presenter fastens the real analog watch, checks its actual dial and picks up keys to leave. Keep believable physics, camera continuity, safe interaction and natural Malaysian setting. 7–10s CTA: End on a clear product-and-presenter composition, with a friendly direct-to-camera invitation. EXACT SPOKEN MALAY MALAYSIA DIALOGUE: “Jam ini nampak kemas di tangan. Jom tengok!” The presenter delivers this short line naturally with accurate lip sync; finish the invitation during the closing shot. No narrator, Indonesian accent, extra speech, subtitles, text overlay, watermark, unsupported performance claims or fabricated accessories. Low background music and natural ambience."
+    },
+    {
+      "id": "v9_creative_modeltalk_068",
+      "subcategory_id": "accessory_hair",
+      "product_type": "scrunchie",
+      "concept": "Quick hairstyle",
+      "duration_seconds": 10,
+      "voice_type": "on_camera_model",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_CREATIVE_QA",
+      "full_prompt": "Create exactly one 10-second photorealistic vertical 9:16 Malaysian affiliate product video. Product: scrunchie. Match the supplied product image exactly for visible design, color, pattern, proportions and components; never invent details. STORY CONCEPT: Quick hairstyle. 0–2s HOOK: Start mid-action with the genuine product already prominent and an adult Malaysian presenter in view. 2–7s PRODUCT USE: An adult woman gathers her hair and ties it with the exact scrunchie, then turns to show the finished hairstyle. Keep believable physics, camera continuity, safe interaction and natural Malaysian setting. 7–10s CTA: End on a clear product-and-presenter composition, with a friendly direct-to-camera invitation. EXACT SPOKEN MALAY MALAYSIA DIALOGUE: “Saya ikat rambut guna scrunchie ini. Jom tengok!” The presenter delivers this short line naturally with accurate lip sync; finish the invitation during the closing shot. No narrator, Indonesian accent, extra speech, subtitles, text overlay, watermark, unsupported performance claims or fabricated accessories. Low background music and natural ambience."
+    },
+    {
+      "id": "v9_creative_modeltalk_069",
+      "subcategory_id": "toy_game",
+      "product_type": "board game",
+      "concept": "Family game start",
+      "duration_seconds": 10,
+      "voice_type": "on_camera_model",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_CREATIVE_QA",
+      "full_prompt": "Create exactly one 10-second photorealistic vertical 9:16 Malaysian affiliate product video. Product: board game. Match the supplied product image exactly for visible design, color, pattern, proportions and components; never invent details. STORY CONCEPT: Family game start. 0–2s HOOK: Start mid-action with the genuine product already prominent and an adult Malaysian presenter in view. 2–7s PRODUCT USE: An adult presenter places the actual board game on a table, arranges only pieces visible in the product reference and invites family members to sit. Keep believable physics, camera continuity, safe interaction and natural Malaysian setting. 7–10s CTA: End on a clear product-and-presenter composition, with a friendly direct-to-camera invitation. EXACT SPOKEN MALAY MALAYSIA DIALOGUE: “Jom mula permainan keluarga ini!” The presenter delivers this short line naturally with accurate lip sync; finish the invitation during the closing shot. No narrator, Indonesian accent, extra speech, subtitles, text overlay, watermark, unsupported performance claims or fabricated accessories. Low background music and natural ambience."
+    },
+    {
+      "id": "v9_creative_modeltalk_070",
+      "subcategory_id": "travel_accessory",
+      "product_type": "luggage tag",
+      "concept": "Airport preparation",
+      "duration_seconds": 10,
+      "voice_type": "on_camera_model",
+      "voice_language": "ms-MY",
+      "status": "DRAFT_CREATIVE_QA",
+      "full_prompt": "Create exactly one 10-second photorealistic vertical 9:16 Malaysian affiliate product video. Product: luggage tag. Match the supplied product image exactly for visible design, color, pattern, proportions and components; never invent details. STORY CONCEPT: Airport preparation. 0–2s HOOK: Start mid-action with the genuine product already prominent and an adult Malaysian presenter in view. 2–7s PRODUCT USE: An adult traveler attaches the actual luggage tag to a suitcase handle, checks it is secure and rolls the suitcase forward. Keep believable physics, camera continuity, safe interaction and natural Malaysian setting. 7–10s CTA: End on a clear product-and-presenter composition, with a friendly direct-to-camera invitation. EXACT SPOKEN MALAY MALAYSIA DIALOGUE: “Tag bagasi ini saya pasang dulu. Jom tengok!” The presenter delivers this short line naturally with accurate lip sync; finish the invitation during the closing shot. No narrator, Indonesian accent, extra speech, subtitles, text overlay, watermark, unsupported performance claims or fabricated accessories. Low background music and natural ambience."
+    }
+  ]
+}
