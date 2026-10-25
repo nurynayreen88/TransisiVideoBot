@@ -1,0 +1,168 @@
+{
+  "schema_version": 1,
+  "status": "DRAFT_RENDER_QA",
+  "runtime_enabled": false,
+  "notes": "Standalone 10-second drafts for render testing; product image provided to external generator. No spoken VO or overlay in this batch.",
+  "variations": [
+    {
+      "id": "v9_full10_product_001",
+      "subcategory_id": "fashion_women",
+      "product_type": "baju kurung",
+      "duration_seconds": 10,
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Create exactly one 10-second photorealistic vertical 9:16 Malaysian affiliate product video. Product: the baju kurung named by the user. Use the product image supplied to the video generator as the only visual reference. Preserve its exact visible design, color, pattern, shape, proportions, markings and hardware. Never replace or redesign the product. SETTING: Bright Malaysian home entrance. 0.0–2.0s HOOK: Open immediately with the real product clearly visible and a natural, visually engaging close-up; no title card. 2.0–6.5s DEMONSTRATION: An adult Malaysian woman wearing the exact baju kurung takes two natural steps and turns slightly to reveal its authentic cut and drape. 6.5–8.5s DETAIL: Show a genuine visible feature using a full-length front-to-side tracking shot; preserve continuity and believable human movement. 8.5–10.0s CLOSING: End on a steady, attractive hero view of the unchanged product. AUDIO: Natural Malaysian ambience and soft upbeat instrumental background music only; no spoken dialogue, no subtitles, no on-screen text. CTA: Convey a clear purchase invitation through the closing product-focused visual, without added text. Camera movement must be smooth and purposeful, lighting natural, real-world physics accurate. Never change the garment's motif, hem, sleeves, or silhouette. No logos added, no watermark, no fictional features, no extra products or accessories not already present in the reference."
+    },
+    {
+      "id": "v9_full10_product_002",
+      "subcategory_id": "fashion_men",
+      "product_type": "baju melayu",
+      "duration_seconds": 10,
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Create exactly one 10-second photorealistic vertical 9:16 Malaysian affiliate product video. Product: the baju melayu named by the user. Use the product image supplied to the video generator as the only visual reference. Preserve its exact visible design, color, pattern, shape, proportions, markings and hardware. Never replace or redesign the product. SETTING: Warm festive Malaysian living room. 0.0–2.0s HOOK: Open immediately with the real product clearly visible and a natural, visually engaging close-up; no title card. 2.0–6.5s DEMONSTRATION: An adult Malaysian man wearing the exact baju Melayu walks naturally and adjusts only the visible garment elements. 6.5–8.5s DETAIL: Show a genuine visible feature using a full-length medium tracking then cuff detail; preserve continuity and believable human movement. 8.5–10.0s CLOSING: End on a steady, attractive hero view of the unchanged product. AUDIO: Natural Malaysian ambience and soft upbeat instrumental background music only; no spoken dialogue, no subtitles, no on-screen text. CTA: Convey a clear purchase invitation through the closing product-focused visual, without added text. Camera movement must be smooth and purposeful, lighting natural, real-world physics accurate. Do not invent sampin, buttons, or accessories. No logos added, no watermark, no fictional features, no extra products or accessories not already present in the reference."
+    },
+    {
+      "id": "v9_full10_product_003",
+      "subcategory_id": "fashion_kids",
+      "product_type": "dress kanak",
+      "duration_seconds": 10,
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Create exactly one 10-second photorealistic vertical 9:16 Malaysian affiliate product video. Product: the dress kanak named by the user. Use the product image supplied to the video generator as the only visual reference. Preserve its exact visible design, color, pattern, shape, proportions, markings and hardware. Never replace or redesign the product. SETTING: Bright family living room. 0.0–2.0s HOOK: Open immediately with the real product clearly visible and a natural, visually engaging close-up; no title card. 2.0–6.5s DEMONSTRATION: A child model wearing the exact dress walks two steps and makes a gentle turn with a guardian nearby. 6.5–8.5s DETAIL: Show a genuine visible feature using a child-height full-body tracking; preserve continuity and believable human movement. 8.5–10.0s CLOSING: End on a steady, attractive hero view of the unchanged product. AUDIO: Natural Malaysian ambience and soft upbeat instrumental background music only; no spoken dialogue, no subtitles, no on-screen text. CTA: Convey a clear purchase invitation through the closing product-focused visual, without added text. Camera movement must be smooth and purposeful, lighting natural, real-world physics accurate. No adult styling or invented garment details. No logos added, no watermark, no fictional features, no extra products or accessories not already present in the reference."
+    },
+    {
+      "id": "v9_full10_product_004",
+      "subcategory_id": "fashion_outerwear",
+      "product_type": "blazer",
+      "duration_seconds": 10,
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Create exactly one 10-second photorealistic vertical 9:16 Malaysian affiliate product video. Product: the blazer named by the user. Use the product image supplied to the video generator as the only visual reference. Preserve its exact visible design, color, pattern, shape, proportions, markings and hardware. Never replace or redesign the product. SETTING: Contemporary Malaysian office lobby. 0.0–2.0s HOOK: Open immediately with the real product clearly visible and a natural, visually engaging close-up; no title card. 2.0–6.5s DEMONSTRATION: An adult model wears the exact blazer over plain clothing, straightens the lapels and walks confidently. 6.5–8.5s DETAIL: Show a genuine visible feature using a mid-body follow shot then lapel close-up; preserve continuity and believable human movement. 8.5–10.0s CLOSING: End on a steady, attractive hero view of the unchanged product. AUDIO: Natural Malaysian ambience and soft upbeat instrumental background music only; no spoken dialogue, no subtitles, no on-screen text. CTA: Convey a clear purchase invitation through the closing product-focused visual, without added text. Camera movement must be smooth and purposeful, lighting natural, real-world physics accurate. Do not invent buttons or pocket construction. No logos added, no watermark, no fictional features, no extra products or accessories not already present in the reference."
+    },
+    {
+      "id": "v9_full10_product_005",
+      "subcategory_id": "bag_handbag",
+      "product_type": "top handle",
+      "duration_seconds": 10,
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Create exactly one 10-second photorealistic vertical 9:16 Malaysian affiliate product video. Product: the top handle named by the user. Use the product image supplied to the video generator as the only visual reference. Preserve its exact visible design, color, pattern, shape, proportions, markings and hardware. Never replace or redesign the product. SETTING: Modern Malaysian cafe. 0.0–2.0s HOOK: Open immediately with the real product clearly visible and a natural, visually engaging close-up; no title card. 2.0–6.5s DEMONSTRATION: An adult woman lifts the handbag by its existing top handles and carries it naturally beside her waist. 6.5–8.5s DETAIL: Show a genuine visible feature using a waist-level tracking and handle detail; preserve continuity and believable human movement. 8.5–10.0s CLOSING: End on a steady, attractive hero view of the unchanged product. AUDIO: Natural Malaysian ambience and soft upbeat instrumental background music only; no spoken dialogue, no subtitles, no on-screen text. CTA: Convey a clear purchase invitation through the closing product-focused visual, without added text. Camera movement must be smooth and purposeful, lighting natural, real-world physics accurate. Do not invent straps, compartments or hardware. No logos added, no watermark, no fictional features, no extra products or accessories not already present in the reference."
+    },
+    {
+      "id": "v9_full10_product_006",
+      "subcategory_id": "bag_sling",
+      "product_type": "crossbody",
+      "duration_seconds": 10,
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Create exactly one 10-second photorealistic vertical 9:16 Malaysian affiliate product video. Product: the crossbody named by the user. Use the product image supplied to the video generator as the only visual reference. Preserve its exact visible design, color, pattern, shape, proportions, markings and hardware. Never replace or redesign the product. SETTING: Covered city walkway in Malaysia. 0.0–2.0s HOOK: Open immediately with the real product clearly visible and a natural, visually engaging close-up; no title card. 2.0–6.5s DEMONSTRATION: An adult model wears the bag using only its visible strap and walks past a shopfront. 6.5–8.5s DETAIL: Show a genuine visible feature using a shoulder-to-hip tracking and bag close-up; preserve continuity and believable human movement. 8.5–10.0s CLOSING: End on a steady, attractive hero view of the unchanged product. AUDIO: Natural Malaysian ambience and soft upbeat instrumental background music only; no spoken dialogue, no subtitles, no on-screen text. CTA: Convey a clear purchase invitation through the closing product-focused visual, without added text. Camera movement must be smooth and purposeful, lighting natural, real-world physics accurate. Do not invent detachable straps or pockets. No logos added, no watermark, no fictional features, no extra products or accessories not already present in the reference."
+    },
+    {
+      "id": "v9_full10_product_007",
+      "subcategory_id": "shoes_running",
+      "product_type": "road",
+      "duration_seconds": 10,
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Create exactly one 10-second photorealistic vertical 9:16 Malaysian affiliate product video. Product: the road named by the user. Use the product image supplied to the video generator as the only visual reference. Preserve its exact visible design, color, pattern, shape, proportions, markings and hardware. Never replace or redesign the product. SETTING: Dry urban jogging path. 0.0–2.0s HOOK: Open immediately with the real product clearly visible and a natural, visually engaging close-up; no title card. 2.0–6.5s DEMONSTRATION: An adult model jogs gently with natural foot strikes, displaying the actual shoe silhouette. 6.5–8.5s DETAIL: Show a genuine visible feature using a ground-level side tracking and sole detail; preserve continuity and believable human movement. 8.5–10.0s CLOSING: End on a steady, attractive hero view of the unchanged product. AUDIO: Natural Malaysian ambience and soft upbeat instrumental background music only; no spoken dialogue, no subtitles, no on-screen text. CTA: Convey a clear purchase invitation through the closing product-focused visual, without added text. Camera movement must be smooth and purposeful, lighting natural, real-world physics accurate. No performance, cushioning or injury-prevention claims. No logos added, no watermark, no fictional features, no extra products or accessories not already present in the reference."
+    },
+    {
+      "id": "v9_full10_product_008",
+      "subcategory_id": "hijab_bawal",
+      "product_type": "cotton",
+      "duration_seconds": 10,
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Create exactly one 10-second photorealistic vertical 9:16 Malaysian affiliate product video. Product: the cotton named by the user. Use the product image supplied to the video generator as the only visual reference. Preserve its exact visible design, color, pattern, shape, proportions, markings and hardware. Never replace or redesign the product. SETTING: Bright Malaysian home hallway. 0.0–2.0s HOOK: Open immediately with the real product clearly visible and a natural, visually engaging close-up; no title card. 2.0–6.5s DEMONSTRATION: An adult Malaysian woman styles the exact square hijab with a simple neat fold, then turns slightly to show its drape. 6.5–8.5s DETAIL: Show a genuine visible feature using a head-and-shoulders front and side view; preserve continuity and believable human movement. 8.5–10.0s CLOSING: End on a steady, attractive hero view of the unchanged product. AUDIO: Natural Malaysian ambience and soft upbeat instrumental background music only; no spoken dialogue, no subtitles, no on-screen text. CTA: Convey a clear purchase invitation through the closing product-focused visual, without added text. Camera movement must be smooth and purposeful, lighting natural, real-world physics accurate. Do not invent prints, pins, or fabric embellishments. No logos added, no watermark, no fictional features, no extra products or accessories not already present in the reference."
+    },
+    {
+      "id": "v9_full10_product_009",
+      "subcategory_id": "beauty_skincare",
+      "product_type": "serum",
+      "duration_seconds": 10,
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Create exactly one 10-second photorealistic vertical 9:16 Malaysian affiliate product video. Product: the serum named by the user. Use the product image supplied to the video generator as the only visual reference. Preserve its exact visible design, color, pattern, shape, proportions, markings and hardware. Never replace or redesign the product. SETTING: Clean bathroom vanity. 0.0–2.0s HOOK: Open immediately with the real product clearly visible and a natural, visually engaging close-up; no title card. 2.0–6.5s DEMONSTRATION: An adult woman holds the bottle, dispenses a small drop using only the visible dispenser and gently applies it to her cheek. 6.5–8.5s DETAIL: Show a genuine visible feature using a bottle macro followed by natural face close-up; preserve continuity and believable human movement. 8.5–10.0s CLOSING: End on a steady, attractive hero view of the unchanged product. AUDIO: Natural Malaysian ambience and soft upbeat instrumental background music only; no spoken dialogue, no subtitles, no on-screen text. CTA: Convey a clear purchase invitation through the closing product-focused visual, without added text. Camera movement must be smooth and purposeful, lighting natural, real-world physics accurate. No skin transformation or unverified efficacy claims. No logos added, no watermark, no fictional features, no extra products or accessories not already present in the reference."
+    },
+    {
+      "id": "v9_full10_product_010",
+      "subcategory_id": "food_cooking",
+      "product_type": "sambal",
+      "duration_seconds": 10,
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Create exactly one 10-second photorealistic vertical 9:16 Malaysian affiliate product video. Product: the sambal named by the user. Use the product image supplied to the video generator as the only visual reference. Preserve its exact visible design, color, pattern, shape, proportions, markings and hardware. Never replace or redesign the product. SETTING: Malaysian home kitchen. 0.0–2.0s HOOK: Open immediately with the real product clearly visible and a natural, visually engaging close-up; no title card. 2.0–6.5s DEMONSTRATION: An adult cook opens the actual sambal packaging and spoons a small portion beside a freshly prepared Malaysian dish. 6.5–8.5s DETAIL: Show a genuine visible feature using a jar-and-spoon macro followed by plated food; preserve continuity and believable human movement. 8.5–10.0s CLOSING: End on a steady, attractive hero view of the unchanged product. AUDIO: Natural Malaysian ambience and soft upbeat instrumental background music only; no spoken dialogue, no subtitles, no on-screen text. CTA: Convey a clear purchase invitation through the closing product-focused visual, without added text. Camera movement must be smooth and purposeful, lighting natural, real-world physics accurate. Do not invent ingredients, flavor or included food. No logos added, no watermark, no fictional features, no extra products or accessories not already present in the reference."
+    },
+    {
+      "id": "v9_full10_product_011",
+      "subcategory_id": "gadget_phone",
+      "product_type": "power bank",
+      "duration_seconds": 10,
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Create exactly one 10-second photorealistic vertical 9:16 Malaysian affiliate product video. Product: the power bank named by the user. Use the product image supplied to the video generator as the only visual reference. Preserve its exact visible design, color, pattern, shape, proportions, markings and hardware. Never replace or redesign the product. SETTING: Neat Malaysian study desk. 0.0–2.0s HOOK: Open immediately with the real product clearly visible and a natural, visually engaging close-up; no title card. 2.0–6.5s DEMONSTRATION: An adult places the exact power bank next to a phone and connects a compatible cable to a visible port. 6.5–8.5s DETAIL: Show a genuine visible feature using a tabletop close-up of connector and product; preserve continuity and believable human movement. 8.5–10.0s CLOSING: End on a steady, attractive hero view of the unchanged product. AUDIO: Natural Malaysian ambience and soft upbeat instrumental background music only; no spoken dialogue, no subtitles, no on-screen text. CTA: Convey a clear purchase invitation through the closing product-focused visual, without added text. Camera movement must be smooth and purposeful, lighting natural, real-world physics accurate. No invented capacity, charging speed, ports or screen. No logos added, no watermark, no fictional features, no extra products or accessories not already present in the reference."
+    },
+    {
+      "id": "v9_full10_product_012",
+      "subcategory_id": "home_kitchen",
+      "product_type": "wok",
+      "duration_seconds": 10,
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Create exactly one 10-second photorealistic vertical 9:16 Malaysian affiliate product video. Product: the wok named by the user. Use the product image supplied to the video generator as the only visual reference. Preserve its exact visible design, color, pattern, shape, proportions, markings and hardware. Never replace or redesign the product. SETTING: Realistic Malaysian home kitchen. 0.0–2.0s HOOK: Open immediately with the real product clearly visible and a natural, visually engaging close-up; no title card. 2.0–6.5s DEMONSTRATION: An adult cook stirs vegetables in the wok using a wooden spatula over a stable hob. 6.5–8.5s DETAIL: Show a genuine visible feature using a medium cooking view followed by rim-and-food detail; preserve continuity and believable human movement. 8.5–10.0s CLOSING: End on a steady, attractive hero view of the unchanged product. AUDIO: Natural Malaysian ambience and soft upbeat instrumental background music only; no spoken dialogue, no subtitles, no on-screen text. CTA: Convey a clear purchase invitation through the closing product-focused visual, without added text. Camera movement must be smooth and purposeful, lighting natural, real-world physics accurate. Do not invent nonstick coating, lid or special features. No logos added, no watermark, no fictional features, no extra products or accessories not already present in the reference."
+    },
+    {
+      "id": "v9_full10_product_013",
+      "subcategory_id": "home_storage",
+      "product_type": "storage box",
+      "duration_seconds": 10,
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Create exactly one 10-second photorealistic vertical 9:16 Malaysian affiliate product video. Product: the storage box named by the user. Use the product image supplied to the video generator as the only visual reference. Preserve its exact visible design, color, pattern, shape, proportions, markings and hardware. Never replace or redesign the product. SETTING: Tidy Malaysian bedroom. 0.0–2.0s HOOK: Open immediately with the real product clearly visible and a natural, visually engaging close-up; no title card. 2.0–6.5s DEMONSTRATION: An adult places folded clothing into the open storage box and slides it onto a shelf. 6.5–8.5s DETAIL: Show a genuine visible feature using a overhead placement and box profile; preserve continuity and believable human movement. 8.5–10.0s CLOSING: End on a steady, attractive hero view of the unchanged product. AUDIO: Natural Malaysian ambience and soft upbeat instrumental background music only; no spoken dialogue, no subtitles, no on-screen text. CTA: Convey a clear purchase invitation through the closing product-focused visual, without added text. Camera movement must be smooth and purposeful, lighting natural, real-world physics accurate. Do not invent locking lids or volume. No logos added, no watermark, no fictional features, no extra products or accessories not already present in the reference."
+    },
+    {
+      "id": "v9_full10_product_014",
+      "subcategory_id": "pet_accessory",
+      "product_type": "harness",
+      "duration_seconds": 10,
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Create exactly one 10-second photorealistic vertical 9:16 Malaysian affiliate product video. Product: the harness named by the user. Use the product image supplied to the video generator as the only visual reference. Preserve its exact visible design, color, pattern, shape, proportions, markings and hardware. Never replace or redesign the product. SETTING: Shaded Malaysian park path. 0.0–2.0s HOOK: Open immediately with the real product clearly visible and a natural, visually engaging close-up; no title card. 2.0–6.5s DEMONSTRATION: An adult gently fits the visible harness onto a calm dog and walks slowly with the dog on a leash. 6.5–8.5s DETAIL: Show a genuine visible feature using a pet torso detail followed by low walking shot; preserve continuity and believable human movement. 8.5–10.0s CLOSING: End on a steady, attractive hero view of the unchanged product. AUDIO: Natural Malaysian ambience and soft upbeat instrumental background music only; no spoken dialogue, no subtitles, no on-screen text. CTA: Convey a clear purchase invitation through the closing product-focused visual, without added text. Camera movement must be smooth and purposeful, lighting natural, real-world physics accurate. Do not claim escape-proof design or invent buckles. No logos added, no watermark, no fictional features, no extra products or accessories not already present in the reference."
+    },
+    {
+      "id": "v9_full10_product_015",
+      "subcategory_id": "baby_gear",
+      "product_type": "stroller",
+      "duration_seconds": 10,
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Create exactly one 10-second photorealistic vertical 9:16 Malaysian affiliate product video. Product: the stroller named by the user. Use the product image supplied to the video generator as the only visual reference. Preserve its exact visible design, color, pattern, shape, proportions, markings and hardware. Never replace or redesign the product. SETTING: Level park walkway in Malaysia. 0.0–2.0s HOOK: Open immediately with the real product clearly visible and a natural, visually engaging close-up; no title card. 2.0–6.5s DEMONSTRATION: An adult guardian pushes the exact stroller slowly on a clear flat path with a securely seated child. 6.5–8.5s DETAIL: Show a genuine visible feature using a side tracking and stroller profile; preserve continuity and believable human movement. 8.5–10.0s CLOSING: End on a steady, attractive hero view of the unchanged product. AUDIO: Natural Malaysian ambience and soft upbeat instrumental background music only; no spoken dialogue, no subtitles, no on-screen text. CTA: Convey a clear purchase invitation through the closing product-focused visual, without added text. Camera movement must be smooth and purposeful, lighting natural, real-world physics accurate. No safety certification or invented folding function. No logos added, no watermark, no fictional features, no extra products or accessories not already present in the reference."
+    },
+    {
+      "id": "v9_full10_product_016",
+      "subcategory_id": "auto_electronic",
+      "product_type": "dashcam",
+      "duration_seconds": 10,
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Create exactly one 10-second photorealistic vertical 9:16 Malaysian affiliate product video. Product: the dashcam named by the user. Use the product image supplied to the video generator as the only visual reference. Preserve its exact visible design, color, pattern, shape, proportions, markings and hardware. Never replace or redesign the product. SETTING: Parked car in shaded driveway. 0.0–2.0s HOOK: Open immediately with the real product clearly visible and a natural, visually engaging close-up; no title card. 2.0–6.5s DEMONSTRATION: An adult points to the actual dashcam installed near the windscreen, then shows its external profile without manipulating it while driving. 6.5–8.5s DETAIL: Show a genuine visible feature using a dashboard close-up and static exterior angle; preserve continuity and believable human movement. 8.5–10.0s CLOSING: End on a steady, attractive hero view of the unchanged product. AUDIO: Natural Malaysian ambience and soft upbeat instrumental background music only; no spoken dialogue, no subtitles, no on-screen text. CTA: Convey a clear purchase invitation through the closing product-focused visual, without added text. Camera movement must be smooth and purposeful, lighting natural, real-world physics accurate. No invented resolution, screen interface or night vision. No logos added, no watermark, no fictional features, no extra products or accessories not already present in the reference."
+    },
+    {
+      "id": "v9_full10_product_017",
+      "subcategory_id": "office_desk",
+      "product_type": "desk mat",
+      "duration_seconds": 10,
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Create exactly one 10-second photorealistic vertical 9:16 Malaysian affiliate product video. Product: the desk mat named by the user. Use the product image supplied to the video generator as the only visual reference. Preserve its exact visible design, color, pattern, shape, proportions, markings and hardware. Never replace or redesign the product. SETTING: Bright home office desk. 0.0–2.0s HOOK: Open immediately with the real product clearly visible and a natural, visually engaging close-up; no title card. 2.0–6.5s DEMONSTRATION: An adult lays the desk mat flat and arranges a keyboard and mouse on it. 6.5–8.5s DETAIL: Show a genuine visible feature using a top-down placement and edge macro; preserve continuity and believable human movement. 8.5–10.0s CLOSING: End on a steady, attractive hero view of the unchanged product. AUDIO: Natural Malaysian ambience and soft upbeat instrumental background music only; no spoken dialogue, no subtitles, no on-screen text. CTA: Convey a clear purchase invitation through the closing product-focused visual, without added text. Camera movement must be smooth and purposeful, lighting natural, real-world physics accurate. No invented material or waterproof claim. No logos added, no watermark, no fictional features, no extra products or accessories not already present in the reference."
+    },
+    {
+      "id": "v9_full10_product_018",
+      "subcategory_id": "toy_building",
+      "product_type": "building bricks",
+      "duration_seconds": 10,
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Create exactly one 10-second photorealistic vertical 9:16 Malaysian affiliate product video. Product: the building bricks named by the user. Use the product image supplied to the video generator as the only visual reference. Preserve its exact visible design, color, pattern, shape, proportions, markings and hardware. Never replace or redesign the product. SETTING: Bright family playroom. 0.0–2.0s HOOK: Open immediately with the real product clearly visible and a natural, visually engaging close-up; no title card. 2.0–6.5s DEMONSTRATION: A child with adult supervision connects the visible toy bricks into a simple small structure. 6.5–8.5s DETAIL: Show a genuine visible feature using a hand-height overhead and finished toy close-up; preserve continuity and believable human movement. 8.5–10.0s CLOSING: End on a steady, attractive hero view of the unchanged product. AUDIO: Natural Malaysian ambience and soft upbeat instrumental background music only; no spoken dialogue, no subtitles, no on-screen text. CTA: Convey a clear purchase invitation through the closing product-focused visual, without added text. Camera movement must be smooth and purposeful, lighting natural, real-world physics accurate. Do not invent brick shapes or included parts. No logos added, no watermark, no fictional features, no extra products or accessories not already present in the reference."
+    },
+    {
+      "id": "v9_full10_product_019",
+      "subcategory_id": "travel_luggage",
+      "product_type": "hard shell luggage",
+      "duration_seconds": 10,
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Create exactly one 10-second photorealistic vertical 9:16 Malaysian affiliate product video. Product: the hard shell luggage named by the user. Use the product image supplied to the video generator as the only visual reference. Preserve its exact visible design, color, pattern, shape, proportions, markings and hardware. Never replace or redesign the product. SETTING: Modern hotel lobby. 0.0–2.0s HOOK: Open immediately with the real product clearly visible and a natural, visually engaging close-up; no title card. 2.0–6.5s DEMONSTRATION: An adult traveler rolls the exact suitcase naturally by its visible handle across a smooth floor. 6.5–8.5s DETAIL: Show a genuine visible feature using a full suitcase tracking and wheel close-up; preserve continuity and believable human movement. 8.5–10.0s CLOSING: End on a steady, attractive hero view of the unchanged product. AUDIO: Natural Malaysian ambience and soft upbeat instrumental background music only; no spoken dialogue, no subtitles, no on-screen text. CTA: Convey a clear purchase invitation through the closing product-focused visual, without added text. Camera movement must be smooth and purposeful, lighting natural, real-world physics accurate. Do not invent dimensions or airline compliance. No logos added, no watermark, no fictional features, no extra products or accessories not already present in the reference."
+    },
+    {
+      "id": "v9_full10_product_020",
+      "subcategory_id": "sports_fitness",
+      "product_type": "yoga mat",
+      "duration_seconds": 10,
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Create exactly one 10-second photorealistic vertical 9:16 Malaysian affiliate product video. Product: the yoga mat named by the user. Use the product image supplied to the video generator as the only visual reference. Preserve its exact visible design, color, pattern, shape, proportions, markings and hardware. Never replace or redesign the product. SETTING: Clean indoor exercise room. 0.0–2.0s HOOK: Open immediately with the real product clearly visible and a natural, visually engaging close-up; no title card. 2.0–6.5s DEMONSTRATION: An adult unrolls the mat on a clear floor and performs a gentle seated stretch. 6.5–8.5s DETAIL: Show a genuine visible feature using a wide side view followed by surface detail; preserve continuity and believable human movement. 8.5–10.0s CLOSING: End on a steady, attractive hero view of the unchanged product. AUDIO: Natural Malaysian ambience and soft upbeat instrumental background music only; no spoken dialogue, no subtitles, no on-screen text. CTA: Convey a clear purchase invitation through the closing product-focused visual, without added text. Camera movement must be smooth and purposeful, lighting natural, real-world physics accurate. Do not invent grip, thickness or therapeutic claims. No logos added, no watermark, no fictional features, no extra products or accessories not already present in the reference."
+    }
+  ]
+}
