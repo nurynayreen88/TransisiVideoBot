@@ -1,0 +1,173 @@
+{
+  "schema_version": 1,
+  "status": "DRAFT_PRODUCT_FIT_RULES",
+  "runtime_enabled": false,
+  "category": "footwear",
+  "rules": {
+    "low_top": [
+      "Model walks naturally in low-top sneakers",
+      "Frame feet and ankles",
+      "Do not invent cushioning"
+    ],
+    "high_top": [
+      "Model walks showing ankle-height silhouette",
+      "Frame shoes and lower calves",
+      "Do not change shaft height"
+    ],
+    "slip_on": [
+      "Model slides foot into shoe",
+      "Side close-up",
+      "Do not invent laces"
+    ],
+    "canvas": [
+      "Model walks on clean pavement",
+      "Low tracking shot",
+      "Do not claim water resistance"
+    ],
+    "training": [
+      "Model performs light gym footwork",
+      "Low gym shot",
+      "Do not claim performance metrics"
+    ],
+    "oxford": [
+      "Model walks into office",
+      "Shoe-to-knee tracking",
+      "Do not invent brogue pattern"
+    ],
+    "derby": [
+      "Model walks across office lobby",
+      "Side close-up",
+      "Do not change lacing construction"
+    ],
+    "loafer": [
+      "Model steps into loafer",
+      "Foot close-up",
+      "Do not invent buckles"
+    ],
+    "monk_strap": [
+      "Show visible buckle fastening",
+      "Shoe detail",
+      "Do not add buckles"
+    ],
+    "formal_flats": [
+      "Model walks in formal flats",
+      "Ankle crop",
+      "Do not add heel height"
+    ],
+    "stiletto": [
+      "Adult model walks carefully on stable floor",
+      "Foot-to-knee crop",
+      "Do not change heel shape"
+    ],
+    "block_heels": [
+      "Model walks with stable steps",
+      "Side heel close-up",
+      "Do not alter heel thickness"
+    ],
+    "kitten_heels": [
+      "Model turns to show short heel",
+      "Ankle close-up",
+      "Do not enlarge heel"
+    ],
+    "wedges": [
+      "Model walks showing continuous wedge profile",
+      "Low side shot",
+      "Do not split heel"
+    ],
+    "platform": [
+      "Model walks showing platform sole",
+      "Side profile",
+      "Do not exaggerate sole height"
+    ],
+    "slides": [
+      "Model slips feet into slides",
+      "Foot close-up",
+      "Do not add toe strap"
+    ],
+    "flip_flops": [
+      "Model walks naturally on dry walkway",
+      "Low tracking",
+      "Do not invent back strap"
+    ],
+    "strappy_sandals": [
+      "Model fastens existing straps",
+      "Ankle close-up",
+      "Do not invent buckles"
+    ],
+    "sport_sandals": [
+      "Model walks on park path",
+      "Low outdoor shot",
+      "Do not claim trekking safety"
+    ],
+    "clogs": [
+      "Model steps into clogs",
+      "Foot-level shot",
+      "Do not invent heel strap"
+    ],
+    "road": [
+      "Model jogs on dry paved path",
+      "Low tracking",
+      "Do not claim injury prevention"
+    ],
+    "trail": [
+      "Model walks on stable nature trail",
+      "Shoe-to-knee shot",
+      "Do not invent grip specification"
+    ],
+    "racing": [
+      "Model jogs briefly on track",
+      "Low dynamic shot",
+      "Do not invent carbon plate"
+    ],
+    "walking": [
+      "Model walks on pedestrian path",
+      "Natural side tracking",
+      "Do not claim orthopedic benefits"
+    ],
+    "stability": [
+      "Model walks naturally",
+      "Side close-up",
+      "Do not claim medical support"
+    ],
+    "school_shoes": [
+      "School-aged model walks with school bag",
+      "Foot-to-knee crop",
+      "Do not invent uniform branding"
+    ],
+    "kids_sneakers": [
+      "Child walks and hops lightly",
+      "Foot-level shot",
+      "Do not change product sizing"
+    ],
+    "kids_sandals": [
+      "Child walks on playground path",
+      "Foot-level shot",
+      "Do not invent fasteners"
+    ],
+    "baby_booties": [
+      "Show booties on baby feet while seated",
+      "Gentle close-up",
+      "Do not show unsupported walking"
+    ],
+    "boots": [
+      "Adult model walks on dry walkway",
+      "Lower leg profile",
+      "Do not claim protection"
+    ],
+    "safety_shoes": [
+      "Adult worker stands and walks in safe workspace",
+      "Shoe detail",
+      "Do not invent safety certification"
+    ],
+    "rain_boots": [
+      "Adult walks on damp path",
+      "Low side shot",
+      "Do not claim waterproof without evidence"
+    ],
+    "water_shoes": [
+      "Adult walks on dry beach access",
+      "Foot detail",
+      "Do not claim water protection"
+    ]
+  }
+}
