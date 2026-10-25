@@ -1,0 +1,167 @@
+{
+  "schema_version": 1,
+  "status": "DRAFT_RENDER_QA",
+  "runtime_enabled": false,
+  "variations": [
+    {
+      "id": "v9_full10_product_041",
+      "subcategory_id": "fashion_women",
+      "product_type": "kebaya",
+      "duration_seconds": 10,
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Create exactly 10 seconds of photorealistic vertical 9:16 Malaysian affiliate footage. The supplied product image is the authoritative reference for the kebaya. Preserve the actual product's design, color, pattern, dimensions, markings and hardware exactly. LOCATION: Heritage Malaysian home. 0–2s HOOK: Immediately show the real product in a visually engaging, context-appropriate close-up; no intro card. 2–6s USE: An adult woman takes a slow step in the kebaya, adjusts the real sleeve and turns to show its silhouette. 6–8s DETAIL: Show a genuine visible feature through full-body front and side, with smooth realistic movement and continuity. 8–10s CTA: End with a confident, inviting hero shot that clearly features the same product. AUDIO: natural Malaysian ambience and subtle upbeat instrumental only, no dialogue. No text overlay, subtitles, added logos or watermark. Keep camera steady, scale believable and model behavior natural. Do not invent embroidery. Do not invent features or accessories."
+    },
+    {
+      "id": "v9_full10_product_042",
+      "subcategory_id": "fashion_men",
+      "product_type": "polo",
+      "duration_seconds": 10,
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Create exactly 10 seconds of photorealistic vertical 9:16 Malaysian affiliate footage. The supplied product image is the authoritative reference for the polo. Preserve the actual product's design, color, pattern, dimensions, markings and hardware exactly. LOCATION: Outdoor cafe walkway. 0–2s HOOK: Immediately show the real product in a visually engaging, context-appropriate close-up; no intro card. 2–6s USE: An adult man straightens the actual polo collar and walks naturally. 6–8s DETAIL: Show a genuine visible feature through chest-to-hip tracking, with smooth realistic movement and continuity. 8–10s CTA: End with a confident, inviting hero shot that clearly features the same product. AUDIO: natural Malaysian ambience and subtle upbeat instrumental only, no dialogue. No text overlay, subtitles, added logos or watermark. Keep camera steady, scale believable and model behavior natural. Do not invent brand crest. Do not invent features or accessories."
+    },
+    {
+      "id": "v9_full10_product_043",
+      "subcategory_id": "fashion_dress",
+      "product_type": "dress maxi",
+      "duration_seconds": 10,
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Create exactly 10 seconds of photorealistic vertical 9:16 Malaysian affiliate footage. The supplied product image is the authoritative reference for the dress maxi. Preserve the actual product's design, color, pattern, dimensions, markings and hardware exactly. LOCATION: Garden veranda. 0–2s HOOK: Immediately show the real product in a visually engaging, context-appropriate close-up; no intro card. 2–6s USE: An adult model turns gently so the maxi dress moves naturally. 6–8s DETAIL: Show a genuine visible feature through full-length tracking, with smooth realistic movement and continuity. 8–10s CTA: End with a confident, inviting hero shot that clearly features the same product. AUDIO: natural Malaysian ambience and subtle upbeat instrumental only, no dialogue. No text overlay, subtitles, added logos or watermark. Keep camera steady, scale believable and model behavior natural. Do not change hem length. Do not invent features or accessories."
+    },
+    {
+      "id": "v9_full10_product_044",
+      "subcategory_id": "fashion_outerwear",
+      "product_type": "hoodie",
+      "duration_seconds": 10,
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Create exactly 10 seconds of photorealistic vertical 9:16 Malaysian affiliate footage. The supplied product image is the authoritative reference for the hoodie. Preserve the actual product's design, color, pattern, dimensions, markings and hardware exactly. LOCATION: Shaded urban walkway. 0–2s HOOK: Immediately show the real product in a visually engaging, context-appropriate close-up; no intro card. 2–6s USE: An adult pulls on the hoodie and adjusts the visible hood. 6–8s DETAIL: Show a genuine visible feature through upper-body then full-length, with smooth realistic movement and continuity. 8–10s CTA: End with a confident, inviting hero shot that clearly features the same product. AUDIO: natural Malaysian ambience and subtle upbeat instrumental only, no dialogue. No text overlay, subtitles, added logos or watermark. Keep camera steady, scale believable and model behavior natural. Do not invent drawstrings. Do not invent features or accessories."
+    },
+    {
+      "id": "v9_full10_product_045",
+      "subcategory_id": "fashion_kids",
+      "product_type": "romper",
+      "duration_seconds": 10,
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Create exactly 10 seconds of photorealistic vertical 9:16 Malaysian affiliate footage. The supplied product image is the authoritative reference for the romper. Preserve the actual product's design, color, pattern, dimensions, markings and hardware exactly. LOCATION: Bright family playroom. 0–2s HOOK: Immediately show the real product in a visually engaging, context-appropriate close-up; no intro card. 2–6s USE: A young child wearing the romper takes two steps with a guardian nearby. 6–8s DETAIL: Show a genuine visible feature through child-height full-body, with smooth realistic movement and continuity. 8–10s CTA: End with a confident, inviting hero shot that clearly features the same product. AUDIO: natural Malaysian ambience and subtle upbeat instrumental only, no dialogue. No text overlay, subtitles, added logos or watermark. Keep camera steady, scale believable and model behavior natural. Do not invent fasteners. Do not invent features or accessories."
+    },
+    {
+      "id": "v9_full10_product_046",
+      "subcategory_id": "bag_backpack",
+      "product_type": "school backpack",
+      "duration_seconds": 10,
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Create exactly 10 seconds of photorealistic vertical 9:16 Malaysian affiliate footage. The supplied product image is the authoritative reference for the school backpack. Preserve the actual product's design, color, pattern, dimensions, markings and hardware exactly. LOCATION: School entrance walkway. 0–2s HOOK: Immediately show the real product in a visually engaging, context-appropriate close-up; no intro card. 2–6s USE: A school-age student wears the backpack on both shoulders and walks naturally. 6–8s DETAIL: Show a genuine visible feature through rear three-quarter and strap close-up, with smooth realistic movement and continuity. 8–10s CTA: End with a confident, inviting hero shot that clearly features the same product. AUDIO: natural Malaysian ambience and subtle upbeat instrumental only, no dialogue. No text overlay, subtitles, added logos or watermark. Keep camera steady, scale believable and model behavior natural. Do not invent reflective details. Do not invent features or accessories."
+    },
+    {
+      "id": "v9_full10_product_047",
+      "subcategory_id": "bag_wallet",
+      "product_type": "card holder",
+      "duration_seconds": 10,
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Create exactly 10 seconds of photorealistic vertical 9:16 Malaysian affiliate footage. The supplied product image is the authoritative reference for the card holder. Preserve the actual product's design, color, pattern, dimensions, markings and hardware exactly. LOCATION: Minimal cafe table. 0–2s HOOK: Immediately show the real product in a visually engaging, context-appropriate close-up; no intro card. 2–6s USE: Adult hands slide one card into a verified visible slot and hold the card holder at true scale. 6–8s DETAIL: Show a genuine visible feature through macro overhead, with smooth realistic movement and continuity. 8–10s CTA: End with a confident, inviting hero shot that clearly features the same product. AUDIO: natural Malaysian ambience and subtle upbeat instrumental only, no dialogue. No text overlay, subtitles, added logos or watermark. Keep camera steady, scale believable and model behavior natural. Do not invent RFID protection. Do not invent features or accessories."
+    },
+    {
+      "id": "v9_full10_product_048",
+      "subcategory_id": "bag_laptop",
+      "product_type": "laptop sleeve",
+      "duration_seconds": 10,
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Create exactly 10 seconds of photorealistic vertical 9:16 Malaysian affiliate footage. The supplied product image is the authoritative reference for the laptop sleeve. Preserve the actual product's design, color, pattern, dimensions, markings and hardware exactly. LOCATION: Home office desk. 0–2s HOOK: Immediately show the real product in a visually engaging, context-appropriate close-up; no intro card. 2–6s USE: Adult places a closed laptop beside the sleeve for scale and lifts the sleeve. 6–8s DETAIL: Show a genuine visible feature through top-down desk and edge close-up, with smooth realistic movement and continuity. 8–10s CTA: End with a confident, inviting hero shot that clearly features the same product. AUDIO: natural Malaysian ambience and subtle upbeat instrumental only, no dialogue. No text overlay, subtitles, added logos or watermark. Keep camera steady, scale believable and model behavior natural. Do not promise compatibility. Do not invent features or accessories."
+    },
+    {
+      "id": "v9_full10_product_049",
+      "subcategory_id": "hijab_instant",
+      "product_type": "khimar",
+      "duration_seconds": 10,
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Create exactly 10 seconds of photorealistic vertical 9:16 Malaysian affiliate footage. The supplied product image is the authoritative reference for the khimar. Preserve the actual product's design, color, pattern, dimensions, markings and hardware exactly. LOCATION: Bright Malaysian home hallway. 0–2s HOOK: Immediately show the real product in a visually engaging, context-appropriate close-up; no intro card. 2–6s USE: An adult woman puts on the khimar and turns slightly to show its actual coverage. 6–8s DETAIL: Show a genuine visible feature through head-to-waist framing, with smooth realistic movement and continuity. 8–10s CTA: End with a confident, inviting hero shot that clearly features the same product. AUDIO: natural Malaysian ambience and subtle upbeat instrumental only, no dialogue. No text overlay, subtitles, added logos or watermark. Keep camera steady, scale believable and model behavior natural. Do not shorten coverage. Do not invent features or accessories."
+    },
+    {
+      "id": "v9_full10_product_050",
+      "subcategory_id": "hijab_accessory",
+      "product_type": "brooch",
+      "duration_seconds": 10,
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Create exactly 10 seconds of photorealistic vertical 9:16 Malaysian affiliate footage. The supplied product image is the authoritative reference for the brooch. Preserve the actual product's design, color, pattern, dimensions, markings and hardware exactly. LOCATION: Clean vanity. 0–2s HOOK: Immediately show the real product in a visually engaging, context-appropriate close-up; no intro card. 2–6s USE: Adult hands attach the visible brooch to a matching scarf without changing its hardware. 6–8s DETAIL: Show a genuine visible feature through macro hand shot, with smooth realistic movement and continuity. 8–10s CTA: End with a confident, inviting hero shot that clearly features the same product. AUDIO: natural Malaysian ambience and subtle upbeat instrumental only, no dialogue. No text overlay, subtitles, added logos or watermark. Keep camera steady, scale believable and model behavior natural. Do not invent gems. Do not invent features or accessories."
+    },
+    {
+      "id": "v9_full10_product_051",
+      "subcategory_id": "shoes_formal",
+      "product_type": "loafer",
+      "duration_seconds": 10,
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Create exactly 10 seconds of photorealistic vertical 9:16 Malaysian affiliate footage. The supplied product image is the authoritative reference for the loafer. Preserve the actual product's design, color, pattern, dimensions, markings and hardware exactly. LOCATION: Modern office lobby. 0–2s HOOK: Immediately show the real product in a visually engaging, context-appropriate close-up; no intro card. 2–6s USE: Adult model steps into the loafers and walks across a smooth floor. 6–8s DETAIL: Show a genuine visible feature through ankle-level side tracking, with smooth realistic movement and continuity. 8–10s CTA: End with a confident, inviting hero shot that clearly features the same product. AUDIO: natural Malaysian ambience and subtle upbeat instrumental only, no dialogue. No text overlay, subtitles, added logos or watermark. Keep camera steady, scale believable and model behavior natural. Do not invent buckles. Do not invent features or accessories."
+    },
+    {
+      "id": "v9_full10_product_052",
+      "subcategory_id": "shoes_sandals",
+      "product_type": "slides",
+      "duration_seconds": 10,
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Create exactly 10 seconds of photorealistic vertical 9:16 Malaysian affiliate footage. The supplied product image is the authoritative reference for the slides. Preserve the actual product's design, color, pattern, dimensions, markings and hardware exactly. LOCATION: Dry resort boardwalk. 0–2s HOOK: Immediately show the real product in a visually engaging, context-appropriate close-up; no intro card. 2–6s USE: Adult slips into the slides and takes two natural steps. 6–8s DETAIL: Show a genuine visible feature through foot-level tracking, with smooth realistic movement and continuity. 8–10s CTA: End with a confident, inviting hero shot that clearly features the same product. AUDIO: natural Malaysian ambience and subtle upbeat instrumental only, no dialogue. No text overlay, subtitles, added logos or watermark. Keep camera steady, scale believable and model behavior natural. Do not add heel strap. Do not invent features or accessories."
+    },
+    {
+      "id": "v9_full10_product_053",
+      "subcategory_id": "beauty_body",
+      "product_type": "hand cream",
+      "duration_seconds": 10,
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Create exactly 10 seconds of photorealistic vertical 9:16 Malaysian affiliate footage. The supplied product image is the authoritative reference for the hand cream. Preserve the actual product's design, color, pattern, dimensions, markings and hardware exactly. LOCATION: Sunlit dressing table. 0–2s HOOK: Immediately show the real product in a visually engaging, context-appropriate close-up; no intro card. 2–6s USE: Adult dispenses a small amount of cream and rubs it into both hands. 6–8s DETAIL: Show a genuine visible feature through hand close-up, with smooth realistic movement and continuity. 8–10s CTA: End with a confident, inviting hero shot that clearly features the same product. AUDIO: natural Malaysian ambience and subtle upbeat instrumental only, no dialogue. No text overlay, subtitles, added logos or watermark. Keep camera steady, scale believable and model behavior natural. No treatment claims. Do not invent features or accessories."
+    },
+    {
+      "id": "v9_full10_product_054",
+      "subcategory_id": "beauty_perfume",
+      "product_type": "body mist",
+      "duration_seconds": 10,
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Create exactly 10 seconds of photorealistic vertical 9:16 Malaysian affiliate footage. The supplied product image is the authoritative reference for the body mist. Preserve the actual product's design, color, pattern, dimensions, markings and hardware exactly. LOCATION: Bright dressing area. 0–2s HOOK: Immediately show the real product in a visually engaging, context-appropriate close-up; no intro card. 2–6s USE: Adult holds bottle and sprays a light mist toward forearm using actual nozzle. 6–8s DETAIL: Show a genuine visible feature through bottle macro and forearm, with smooth realistic movement and continuity. 8–10s CTA: End with a confident, inviting hero shot that clearly features the same product. AUDIO: natural Malaysian ambience and subtle upbeat instrumental only, no dialogue. No text overlay, subtitles, added logos or watermark. Keep camera steady, scale believable and model behavior natural. No longevity claims. Do not invent features or accessories."
+    },
+    {
+      "id": "v9_full10_product_055",
+      "subcategory_id": "food_frozen",
+      "product_type": "frozen roti canai",
+      "duration_seconds": 10,
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Create exactly 10 seconds of photorealistic vertical 9:16 Malaysian affiliate footage. The supplied product image is the authoritative reference for the frozen roti canai. Preserve the actual product's design, color, pattern, dimensions, markings and hardware exactly. LOCATION: Malaysian kitchen hob. 0–2s HOOK: Immediately show the real product in a visually engaging, context-appropriate close-up; no intro card. 2–6s USE: Adult cooks the roti canai on a flat pan, then serves it on a plate. 6–8s DETAIL: Show a genuine visible feature through pan close-up then plate, with smooth realistic movement and continuity. 8–10s CTA: End with a confident, inviting hero shot that clearly features the same product. AUDIO: natural Malaysian ambience and subtle upbeat instrumental only, no dialogue. No text overlay, subtitles, added logos or watermark. Keep camera steady, scale believable and model behavior natural. No invented filling. Do not invent features or accessories."
+    },
+    {
+      "id": "v9_full10_product_056",
+      "subcategory_id": "food_bakery",
+      "product_type": "brownies",
+      "duration_seconds": 10,
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Create exactly 10 seconds of photorealistic vertical 9:16 Malaysian affiliate footage. The supplied product image is the authoritative reference for the brownies. Preserve the actual product's design, color, pattern, dimensions, markings and hardware exactly. LOCATION: Malaysian cafe dessert counter. 0–2s HOOK: Immediately show the real product in a visually engaging, context-appropriate close-up; no intro card. 2–6s USE: Hands cut a brownie square and lift it onto a small plate. 6–8s DETAIL: Show a genuine visible feature through texture macro, with smooth realistic movement and continuity. 8–10s CTA: End with a confident, inviting hero shot that clearly features the same product. AUDIO: natural Malaysian ambience and subtle upbeat instrumental only, no dialogue. No text overlay, subtitles, added logos or watermark. Keep camera steady, scale believable and model behavior natural. No invented toppings. Do not invent features or accessories."
+    },
+    {
+      "id": "v9_full10_product_057",
+      "subcategory_id": "gadget_camera",
+      "product_type": "tripod",
+      "duration_seconds": 10,
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Create exactly 10 seconds of photorealistic vertical 9:16 Malaysian affiliate footage. The supplied product image is the authoritative reference for the tripod. Preserve the actual product's design, color, pattern, dimensions, markings and hardware exactly. LOCATION: Home creator studio. 0–2s HOOK: Immediately show the real product in a visually engaging, context-appropriate close-up; no intro card. 2–6s USE: Adult opens tripod legs and mounts a compatible camera if visible. 6–8s DETAIL: Show a genuine visible feature through tripod wide then joint macro, with smooth realistic movement and continuity. 8–10s CTA: End with a confident, inviting hero shot that clearly features the same product. AUDIO: natural Malaysian ambience and subtle upbeat instrumental only, no dialogue. No text overlay, subtitles, added logos or watermark. Keep camera steady, scale believable and model behavior natural. No invented load capacity. Do not invent features or accessories."
+    },
+    {
+      "id": "v9_full10_product_058",
+      "subcategory_id": "gadget_smart",
+      "product_type": "smartwatch",
+      "duration_seconds": 10,
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Create exactly 10 seconds of photorealistic vertical 9:16 Malaysian affiliate footage. The supplied product image is the authoritative reference for the smartwatch. Preserve the actual product's design, color, pattern, dimensions, markings and hardware exactly. LOCATION: Park walking path. 0–2s HOOK: Immediately show the real product in a visually engaging, context-appropriate close-up; no intro card. 2–6s USE: Adult checks smartwatch on wrist during a relaxed walk. 6–8s DETAIL: Show a genuine visible feature through wrist close-up, with smooth realistic movement and continuity. 8–10s CTA: End with a confident, inviting hero shot that clearly features the same product. AUDIO: natural Malaysian ambience and subtle upbeat instrumental only, no dialogue. No text overlay, subtitles, added logos or watermark. Keep camera steady, scale believable and model behavior natural. No invented health metrics. Do not invent features or accessories."
+    },
+    {
+      "id": "v9_full10_product_059",
+      "subcategory_id": "home_lighting",
+      "product_type": "table lamp",
+      "duration_seconds": 10,
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Create exactly 10 seconds of photorealistic vertical 9:16 Malaysian affiliate footage. The supplied product image is the authoritative reference for the table lamp. Preserve the actual product's design, color, pattern, dimensions, markings and hardware exactly. LOCATION: Cozy reading nook. 0–2s HOOK: Immediately show the real product in a visually engaging, context-appropriate close-up; no intro card. 2–6s USE: Adult turns on the lamp using its actual visible switch and sets a book beside it. 6–8s DETAIL: Show a genuine visible feature through side lamp shot, with smooth realistic movement and continuity. 8–10s CTA: End with a confident, inviting hero shot that clearly features the same product. AUDIO: natural Malaysian ambience and subtle upbeat instrumental only, no dialogue. No text overlay, subtitles, added logos or watermark. Keep camera steady, scale believable and model behavior natural. No invented dimming. Do not invent features or accessories."
+    },
+    {
+      "id": "v9_full10_product_060",
+      "subcategory_id": "home_decor",
+      "product_type": "vase",
+      "duration_seconds": 10,
+      "status": "DRAFT_RENDER_QA",
+      "full_prompt": "Create exactly 10 seconds of photorealistic vertical 9:16 Malaysian affiliate footage. The supplied product image is the authoritative reference for the vase. Preserve the actual product's design, color, pattern, dimensions, markings and hardware exactly. LOCATION: Bright living room console. 0–2s HOOK: Immediately show the real product in a visually engaging, context-appropriate close-up; no intro card. 2–6s USE: Adult places a few flowers into the vase and turns it slightly. 6–8s DETAIL: Show a genuine visible feature through tabletop medium and rim macro, with smooth realistic movement and continuity. 8–10s CTA: End with a confident, inviting hero shot that clearly features the same product. AUDIO: natural Malaysian ambience and subtle upbeat instrumental only, no dialogue. No text overlay, subtitles, added logos or watermark. Keep camera steady, scale believable and model behavior natural. No invented included flowers. Do not invent features or accessories."
+    }
+  ]
+}
