@@ -14,28 +14,13 @@
     "unique_ids": 100,
     "unique_subcategories": 96,
     "all_have_cta": true,
-    "issues": [
-      "duration wording v9_full10_product_041",
-      "duration wording v9_full10_product_042",
-      "duration wording v9_full10_product_043",
-      "duration wording v9_full10_product_044",
-      "duration wording v9_full10_product_045",
-      "duration wording v9_full10_product_046",
-      "duration wording v9_full10_product_047",
-      "duration wording v9_full10_product_048",
-      "duration wording v9_full10_product_049",
-      "duration wording v9_full10_product_050",
-      "duration wording v9_full10_product_051",
-      "duration wording v9_full10_product_052",
-      "duration wording v9_full10_product_053",
-      "duration wording v9_full10_product_054",
-      "duration wording v9_full10_product_055",
-      "duration wording v9_full10_product_056",
-      "duration wording v9_full10_product_057",
-      "duration wording v9_full10_product_058",
-      "duration wording v9_full10_product_059",
-      "duration wording v9_full10_product_060"
-    ]
+    "issues": [],
+    "duration_phrase_accepted": [
+      "10-second",
+      "10 seconds"
+    ],
+    "all_have_duration": true,
+    "note": "20 entries use '10 seconds' rather than '10-second'; both explicitly specify ten seconds. Previous lexical-only audit falsely flagged them."
   },
   "limitations": [
     "No video generator renders have been executed.",
